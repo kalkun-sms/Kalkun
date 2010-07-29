@@ -1,0 +1,47 @@
+/* Kalkun CSS - Blue Theme */
+
+body { background-color: #cae8f0; } 
+a { color: #86C0D2; } 
+a:hover, h3 { color: #86C0D2; }
+
+
+#top_link { }
+#login { background-color: #86C0D2; }
+#menu a:hover { color: #000; }
+#menu ul { border-color: #84AEBB; }
+#menu li { border-color: #ADD8E6; background-color: #86C0D2;}
+#menu li a.current { color:#000; }
+#bigcontent { background-color: #FFF; }
+.tabbing span.currenttab { background-color: #86C0D2; border-color: #EEE; }
+#paging a { color: #FFF; background-color: #86C0D2; }
+#current { color: #000; background: #86C0D2; }
+#dash_box_titlebar { background-color: #86C0D2; color: #FFF; }
+#dash_box { background-color: #F5F5F5;; color: #333; }
+#dash_box a { color: #FFF; }
+.search_form { background-color: #ADD8E6; }
+.simplebutton { background-color: #86C0D2; }
+.simplebutton:hover { background-color: #ADD8E6; }
+.simpleform { background-color: #FFF; }
+.simpleform a:hover { color: #000; }
+.box { background-color: #86C0D2; }
+.ui-widget-header { background-color: #86C0D2; color: #222222; }
+.primaryColor { background-color: #86C0D2; }
+.header_section { background-color: #ADD8E6; }
+.hover_color { background: #F1F1F1; color: #000;}
+.checked { background: #ADD8E6; color: #FFF; }
+
+#two_column_container {	border-left: 5px solid #86C0D2;	border-right: 5px solid #86C0D2; border-top: 1px solid #000; background: #86C0D2; }
+
+.messagelist { border-bottom: 1px solid #CCC; }
+.globalmenu	{ background: #86C0D2; }
+#content { border: 2px solid #84AEBB; }
+
+.nice-table th { background: #86C0D2; color: #FFF; }
+.notif { background: #FFFFCC; border: 1px solid #ECDF3D; }
+
+#clock { border: 1px solid #000; background-color: #86C0D2; color: #FFF; padding: 5px;}
+
+
+#about { background-color: #EEE; }
+#about a { color: #333333; }
+#about a:hover { color:#000000; }

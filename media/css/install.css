@@ -1,0 +1,173 @@
+/* Kalkun CSS - Install CSS */
+
+body {
+	margin: 0px 0px 50px 0px;
+	background: url('../images/background.jpg') repeat-x;
+	font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+	font-size: 12px;
+	background-color: #cce9f2;
+	line-height: 1.5em;
+}
+
+p {
+	line-height: 1.5em;
+}
+
+a {
+	text-decoration: none;
+}
+
+#logo_only {
+	width: 775px;
+	overflow: hidden;
+	text-align: left;
+	margin-top: 40px;
+}
+
+#arrow {
+	width: 675px;
+	text-align: left;
+	padding-left: 50px;
+	margin: 0;
+	background: url('../images/arrow.png') no-repeat;
+}
+
+
+/* Container */
+
+#container {
+	width: 775px;
+	overflow: hidden;	
+	text-align: left;		
+	background: transparent;
+}
+
+#left-container {
+	width: 520px;
+	float: left;
+	color: #000;	
+	padding: 20px;	
+	margin: 0;	
+	min-height: 300px;
+	background-color: #FFF;  
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 0px;	
+}
+
+#right-container {
+	width: 215px;
+	float: right;
+	background-color: #86C0D2;
+	padding: 20px 0px;
+	min-height: 300px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-bottomleft: 0px;	
+}
+
+#right-container ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#right-container li {
+	margin: 0px;
+	padding: 10px 20px;
+}
+
+#right-container li.active {
+	background-color: #FFF;
+	font-weight: bold;
+	border: 1px solid #999;
+	border-right: none;
+	border-left: none;
+}
+
+#footer {
+	width: 775px;
+	margin-top: 10px;
+	margin-right: 20px;
+	text-align: right;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.button {
+	background: #EEE;
+	cursor: pointer;
+	padding: 5px 10px;
+	font-size: 13px;
+	border: 1px solid #D5D5D5;
+	color: #333;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
+}
+
+.button:hover {
+	border: 1px solid #999;
+}
+
+.simpletable {
+	width: 100%;
+}
+
+.simpletable th {
+	background-color: #cce9f2;
+	padding: 5px;
+	border: 1px solid #CCC;
+	border-right: none;
+	border-bottom: none;
+}
+
+.simpletable th.right, .simpletable td.right {
+	border-right: 1px solid #CCC;
+}
+
+.simpletable td.bottom {
+	border-bottom: 1px solid #CCC;
+}
+
+.simpletable td {
+	background-color: #FFF;
+	padding: 5px;
+	border: 1px solid #CCC;
+	border-right: none;
+	border-bottom: none;	
+}
+
+.formtable {
+	width: 100%;
+	background-color: #EEE;
+	border: 1px solid #CCC;
+	padding: 10px;
+}
+
+.formtable td {
+	padding: 5px;
+}
+
+.formtable input {
+	border: 1px solid #CCC;
+	padding: 3px;
+	font-size: 14px;
+}
+
+.formtable select {
+	border: 1px solid #CCC;
+	padding: 3px;
+	font-size: 12px;	
+}
+
+.green {
+	color: green;
+	font-weight: bold;
+}
+
+.red {
+	color: red;
+	font-weight: bold;
+}

@@ -1,0 +1,102 @@
+.jquerycssmenu{
+background: #86C0D2;
+font-size: 11px;
+margin: 0px;
+padding: 5px;
+height: 25px;
+color: #444;
+}
+
+.jquerycssmenu ul{
+margin: 1px;
+padding: 0;
+list-style-type: none;
+}
+
+/*Top level list items*/
+.jquerycssmenu ul li{
+position: relative;
+display: inline;
+float: left;
+}
+
+.jquerycssmenu ul li.paging{
+text-align: right;
+float: right;
+}
+
+/*Top level menu link items style*/
+.jquerycssmenu ul li a.button {
+display: block;
+/*margin-right: 2px; */ /*spacing between tabs*/
+/*border: 1px solid #778;*/
+color: #2d2b2b;
+text-decoration: none;
+
+/* me */
+background: url("../../images/bg-button.gif") repeat-x;
+color: #000;
+padding: 1px 8px;
+border: 1px outset #F0F0F0;
+}
+
+
+.jquerycssmenu ul li div#paging {
+	display: inline;
+	background: none;	
+} 
+
+
+.jquerycssmenu ul li a:hover{
+	
+}
+	
+/*1st sub level menu*/
+.jquerycssmenu ul li ul{
+position: absolute;
+left: 0;
+display: block;
+visibility: hidden;
+border-top: 1px solid black;
+}
+
+/*Sub level menu list items (undo style from Top level List Items)*/
+.jquerycssmenu ul li ul li{
+display: list-item;
+float: none;
+}
+
+/*All subsequent sub menu levels vertical offset after 1st level sub menu */
+.jquerycssmenu ul li ul li ul{
+top: 0;
+}
+
+/* Sub level menu links style */
+.jquerycssmenu ul li ul li a{
+width: 160px; /*width of sub menus*/
+background: #86C0D2;
+color: #FFF;
+padding: 4px 5px;
+margin: 0;
+border-top-width: 0;
+border-bottom: 1px solid black;
+}
+
+.jquerycssmenu ul li ul li a:hover{ /*sub menus hover style*/
+background: #FFFFCC;
+color: black;
+}
+
+/* ######### CSS classes applied to down and right arrow images  ######### */
+
+.downarrowclass{
+position: absolute;
+top: 7px;
+right: 5px;
+}
+
+.rightarrowclass{
+position: absolute;
+top: 5px;
+right: 5px;
+}

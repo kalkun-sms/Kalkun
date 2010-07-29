@@ -1,0 +1,39 @@
+Kalkun - Open Source Web-based SMS Management
+Version : 0.2
+
+You need to install and configure this first :
+	- apache 2.x.x
+	- PHP 5.x.x (with mysql, session, hash, json extension)
+	- MySQL 5.x.x
+	- or you can just install xampp for linux (http://www.apachefriends.org/en/xampp-linux.html)
+	- gammu, make sure smsd is configured
+
+INSTALL :
+	- extract to web root folder (eq: /var/www/html => Ubuntu)
+	- Create database named kalkun
+		# mysql
+		> CREATE DATABASE kalkun;
+		> quit
+	- edit database config (system/application/config/database.php)
+		change database value to 'kalkun', username and password is depend on your mysql configuration
+		
+	There are 2 way to install:	
+	1. Graphic Install	
+	- launch http://your-location/kalkun/index.php/install, and follow instruction there
+	
+	2. Manual Install
+	- import sql file (media/db/install.sql) to the kalkun database (you can do it with phpmyadmin)
+	
+	- or if you don't have phpmyadmin, you might want to try this	
+		# mysql kalkun - u username -p < media/db/install.sql
+	
+	IMPORTANT: After install you need to remove install folder.
+		
+	- open up your browser and go to http://your-location/kalkun
+	- Default account : username = kalkun, password = kalkun (you can change it after you login)
+	- enjoy...:)
+	
+	
+CONTACT : 
+Feel free to contact me if you having problem...
+azhari.harahap@yahoo.com
