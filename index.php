@@ -14,7 +14,7 @@
 	
 	// Change this to your timezone
 	// Available timezone: http://www.php.net/manual/en/timezones.php
-	date_default_timezone_set('Asia/Jakarta');  
+	//date_default_timezone_set('Asia/Jakarta');  
 /*
 |---------------------------------------------------------------
 | SYSTEM FOLDER NAME
