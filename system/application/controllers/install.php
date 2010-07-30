@@ -69,6 +69,9 @@ function _upgrade()
 		$this->Kalkun_model->db->insert('user_inbox', $data);
 	endforeach;
 	
+	// update processed
+	$this->Kalkun_model->db->query("update inbox set Processed='true'");
+	
 	// get all outbox ID
 	$sql = "select ID from outbox";
 	$inbox = $this->Kalkun_model->db->query($sql);
@@ -88,10 +91,11 @@ function _upgrade()
 	endforeach;		
 	
 	// get current password
-	$sql = "select value from settings where where id='2'";
+	$sql = "select value from settings where id='2'";
 	$pass = $this->Kalkun_model->db->query($sql)->row('value');
 	
-	$data = array('username' => 'kalkun',
+	$data = array('id_user' => '1',
+				'username' => 'kalkun',
 				'realname' => 'Kalkun SMS',
 				'password' => $pass,
 				'phone_number' => '123456',
