@@ -30,7 +30,7 @@ $config['inbox_owner_id'] = '1';
 | Send message repeatedly
 |
 */
-$config['sms_bomber'] = FALSE;
+$config['sms_bomber'] = TRUE;
 
 
 /*
@@ -63,7 +63,7 @@ $config['sms_bomber'] = FALSE;
 | ... is a feature that let your member register first before get updates from you.
 |
 */
-$config['sms_content'] = FALSE;
+$config['sms_content'] = TRUE;
 
 // Registration code (Don't use space)
 $config['sms_content_reg_code'] = 'REG';
