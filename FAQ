@@ -1,21 +1,3 @@
-FAQ
-====
+Freqently Asked Questions (FAQ)
 
-Q : Is my modem/phone supported ?
-A : This is gammu issue. Please check gammu phone database (http://wammu.eu/phones/). 
-	If you can't find your phone, try to report it on the gammu mailing list (http://wammu.eu/support/lists/).
-
-Q : What about performance, how much SMS kalkun can handle?
-A : This is gammu issue. I think it's depend on your resource (GSM network, phone, configuration, etc).
-
-Q : How do i know my smsd is working ?
-A : On dashboard, in the Notification area you can see "Status". 
-	If your smsd is down, it will shown in red text. 
-	Note: 
-		- Notification area is auto-refresh, you don't need refresh it manually.
-		- Default modem tolerant is 10 minutes, you can change it on /system/application/config/kalkun_settings.php
-
-Q : I got "Database structures are from older Gammu version", or some kind of it?
-A : Kalkun use the lastest db schema from gammu, current is 11, you can try to change the value (it's between 7 to 11).
-	You can do it with phpMyAdmin, go to table named "gammu", edit the Version field.
-
+See http://sourceforge.net/apps/trac/kalkun/wiki/FAQ

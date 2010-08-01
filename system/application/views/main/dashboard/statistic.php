@@ -5,7 +5,7 @@
 swfobject.embedSWF(
 "<?php echo $this->config->item('swf_path');?>open-flash-chart.swf", "test_chart", "525", "200",
 "9.0.0", "expressInstall.swf",
-{"data-file":"<?php echo urlencode($data_url);?>"}
+{"data-file":"<?php echo urlencode($data_url);?>"},{"wmode":"transparent"}
 );
 </script>
 

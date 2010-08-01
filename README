@@ -1,5 +1,7 @@
 Kalkun - Open Source Web-based SMS Management
-Version : 0.2
+Version : 0.2.1
+
+(For complete instruction, see http://sourceforge.net/apps/trac/kalkun/wiki/Installation)
 
 You need to install and configure this first :
 	- apache 2.x.x

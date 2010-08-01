@@ -1,6 +1,20 @@
 CHANGELOG 
 ==========
 
+See http://sourceforge.net/apps/trac/kalkun/wiki/Changelog
+
+=======================================================================
+== 0.2.1
+== released : 2010-08-01
+=======================================================================
+
+Bugs fixed:
+	- Bad timezone value (Ticket: #1)
+	- Flash chart override compose windows on dashboard
+	
+Upgrade from 0.1.4
+
+
 =======================================================================
 == 0.2
 == released : 2010-07-21
