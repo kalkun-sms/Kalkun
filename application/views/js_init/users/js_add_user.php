@@ -24,14 +24,14 @@ $(document).ready(function(){
 		},
 		messages: {
 			realname: {
-				required: "Enter a name"	
+				required: "<?php echo lang('tni_error_enter_name');?>"	
 			},
 			password: {
-				required: "Enter user password",
-				minlength: "Too short"
+				required: "<?php echo lang('tni_error_enter_password');?>",
+				minlength: "<?php echo lang('tni_error_toshort');?>"
 			},
 			confirm_password: { 
-				equalTo: "Passwords don't match"
+				equalTo: "<?php echo lang('tni_error_password_nomatch');?>"
 			}
 		}
 	});

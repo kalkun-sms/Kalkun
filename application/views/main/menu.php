@@ -21,7 +21,7 @@
 </li>
 <li>
 	<div style="float: left"><span style="color: #FFF;"><?php echo lang('kalkun_myfolder');?></span></div>
-	<div style="float: right"><sup><a id="addfolder" href="#" title="Add a new folder">Add</a></sup></div>
+	<div style="float: right"><sup><a id="addfolder" href="#" title="Add a new folder"><?php echo lang('kalkun_add'); ?></a></sup></div>
 	<div class="clear">&nbsp;</div>
 	<div id="mf_child_menu">
 	<ul>
@@ -39,7 +39,7 @@
 <?php 
 $level = $this->session->userdata('level');
 if($level=='admin'):?>
-	<li><?php echo anchor('users','Users'); ?></li>
+	<li><?php echo anchor('users',lang('tni_user_wordp')); ?></li>
 	<?php if($this->config->item('sms_content')): ?> 
 	<li id="bottom"><?php echo anchor('member','Member'); ?></li>
 	<?php endif; ?>

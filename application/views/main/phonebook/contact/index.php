@@ -4,14 +4,15 @@
 	
 <div id="window_container">
 <div id="window_title">
-	<div id="window_title_left">Contacts</div>
+	<div id="window_title_left"><? echo lang('tni_contacts'); ?></div>
 	<div id="window_title_right">
 	<?php echo form_open('phonebook', array('class' => 'search_form')); ?>
 	<input type="text" name="search_name" size="20" class="search_name" value="" />
 	<?php echo form_close(); ?>	
 	&nbsp;
-	<a href="#" id="addpbkcontact" class="addpbkcontact nicebutton">&#43; Add Contact</a>	
-	<a href="<?php echo site_url('phonebook/group');?>" id="addpbkgroup" class="nicebutton">&#43; Manage Group</a>
+	<a href="#" id="addpbkcontact" class="addpbkcontact nicebutton">&#43; <?php echo lang('tni_contact_add'); ?></a>	
+	<!--<a href="#" id="importpbk" class="nicebutton">&#43; Import</a>-->
+	<a href="<?php echo site_url('phonebook/group');?>" id="addpbkgroup" class="nicebutton">&#43; <?php echo lang('tni_groups_manage'); ?></a>
 	</div>
 </div>
 

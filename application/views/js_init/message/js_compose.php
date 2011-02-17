@@ -11,9 +11,9 @@ $(document).ready(function(){
 	//$("input#sms_loop").attr("disabled", true);
 	
 	$("#personvalue").tokenInput("<?php echo site_url('messages/getphonebook');?>", {
-		hintText:"Type name from your contacts",
+		hintText:"<?php echo lang('tni_name_search')?>",
 		noResultsText:"No results",
-		searchingText: "Searching...",	
+		searchingText: "<?php echo lang('tni_compose_searching'); ?>...",	
 		method: "POST",
             classes: {
                 tokenList: "token-input-list-facebook",
@@ -51,11 +51,11 @@ $(document).ready(function(){
 			}
 		},
 		messages: {
-			personvalue: "Please enter your destination",
-			manualvalue: "Please enter your destination",
-			groupvalue: "Please enter your destination",
-			message: "Please enter your message",
-			datevalue: "Please enter sending date"
+			personvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
+			manualvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
+			groupvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
+			message: "<?php echo lang('tni_compose_enter_msg'); ?>",
+			datevalue: "<?php echo lang('tni_compose_enter_sendate'); ?>"
 		}
 	});
 	

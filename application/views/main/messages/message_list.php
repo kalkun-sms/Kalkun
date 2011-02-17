@@ -4,7 +4,7 @@ if($messages->num_rows()==0)
 	if($this->uri->segment(2)=='my_folder') 
 	{
 		if($this->uri->segment(4)=='5') 
-		echo "<p class=\"no_content\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>There is no messages in your Trash</i></p>";
+		echo "<p class=\"no_content\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('tni_msglist_trash_empty')."</i></p>";
 		else echo "<p class=\"no_content\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message_in_folder').".</i></p>";
 	}
 	else echo "<p class=\"no_content\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message')." ".lang('kalkun_'.$this->uri->segment(3)).".</i></p>";

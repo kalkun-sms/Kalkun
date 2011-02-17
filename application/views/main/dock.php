@@ -12,7 +12,7 @@
 
 	<div id="top_navigation_right">
 		<?php echo $this->session->userdata('username');?> | 
-		<a href="<?php echo site_url('settings/general');?>" id="setting">Settings</a> | 
-		<a href="<?php echo site_url('logout');?>" id="logout">Logout</a>
+		<a href="<?php echo site_url('settings/general');?>" id="setting"><?php echo lang('tni_settings'); ?></a> | 
+		<a href="<?php echo site_url('logout');?>" id="logout"><?php echo lang('kalkun_logout');?></a>
 	</div>
 </div>

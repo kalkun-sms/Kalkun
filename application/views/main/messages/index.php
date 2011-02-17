@@ -2,7 +2,7 @@
 <?php if($this->uri->segment(2)!='conversation') $this->load->view('js_init/message/js_function'); ?>
 
 <!-- Move To Dialog -->
-<div id="movetodialog" title="Select Folder" class="dialog" style="background: #cce9f2;">
+<div id="movetodialog" title="<?php echo lang('kalkun_select_folder');?>" class="dialog" style="background: #cce9f2;">
 <?php 
 if($this->uri->segment(2)=='my_folder') $folder = $this->Kalkun_model->getFolders('exclude', $this->uri->segment(4)); 
 else $folder = $this->Kalkun_model->getFolders('all');

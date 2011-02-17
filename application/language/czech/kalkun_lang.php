@@ -1,129 +1,129 @@
 <?php
-// Bahasa Translation
-// Author: Azhari Harahap <blackarazi@gmail.com>
+// Czech Translation
+// Author: Michal Čihař <michal@cihar.com>
 
 // Global
-$lang['kalkun_title'] = "Kalkun: Manajemen SMS Berbasis Web";
-$lang['kalkun_dashboard'] = "Dasbor";
-$lang['kalkun_folder'] = "Berkas";
-$lang['kalkun_myfolder'] = "Berkas Pribadi";
+$lang['kalkun_title'] = "Kalkun: Správa SMS přes web";
+$lang['kalkun_dashboard'] = "Tabule";
+$lang['kalkun_folder'] = "Složky";
+$lang['kalkun_myfolder'] = "Moje složky";
 
-$lang['kalkun_compose'] = "Tulis pesan";
-$lang['kalkun_inbox'] = "Kotak Masuk";
-$lang['kalkun_outbox'] = "Kotak Keluar";
-$lang['kalkun_sentitems'] = "Pesan Terkirim";
-$lang['kalkun_trash'] = "Sampah";
-$lang['kalkun_add'] = "Tambah";
+$lang['kalkun_compose'] = "Vytvořit";
+$lang['kalkun_inbox'] = "Přijaté";
+$lang['kalkun_outbox'] = "Odchozí";
+$lang['kalkun_sentitems'] = "Odeslané";
+$lang['kalkun_trash'] = "Koš";
+$lang['kalkun_add'] = "Přidat";
 
-$lang['kalkun_phonebook'] = "Daftar Kontak";
-$lang['kalkun_setting'] = "Pengaturan";
-$lang['kalkun_about'] = "Tentang";
-$lang['kalkun_logout'] = "Keluar";
+$lang['kalkun_phonebook'] = "Adresář";
+$lang['kalkun_setting'] = "Nastavení";
+$lang['kalkun_about'] = "O programu";
+$lang['kalkun_logout'] = "Odhlásit";
 
-$lang['kalkun_year'] = "tahun";
-$lang['kalkun_month'] = "bulan";
-$lang['kalkun_week'] = "minggu";
-$lang['kalkun_day'] = "hari";
-$lang['kalkun_hour'] = "jam";
-$lang['kalkun_minute'] = "menit";
-$lang['kalkun_second'] = "detik";
-$lang['kalkun_ago'] = "yang lalu";
+$lang['kalkun_year'] = "rok";
+$lang['kalkun_month'] = "měsíc";
+$lang['kalkun_week'] = "týden";
+$lang['kalkun_day'] = "den";
+$lang['kalkun_hour'] = "hodina";
+$lang['kalkun_minute'] = "minuta";
+$lang['kalkun_second'] = "sekunda";
+$lang['kalkun_ago'] = "před";
 
 // Dashboard
-$lang['kalkun_notification'] = "Pemberitahuan";
-$lang['kalkun_statistic'] = "Statistik";
-$lang['kalkun_system_information'] = "Informasi Sistem";
-$lang['kalkun_operating_system'] = "Sistem Operasi";
-$lang['kalkun_gammu_version'] = "Versi Gammu";
-$lang['kalkun_gammu_db_schema'] = "Skema DB Gammu";
-$lang['kalkun_phone_imei'] = "IMEI Modem";
-$lang['kalkun_you_have'] = "Anda memiliki";
-$lang['kalkun_new_message'] = "pesan baru";
-$lang['kalkun_last_phone_activity'] = "Aktivitas modem terakhir";
-$lang['kalkun_battery'] = "Baterai";
-$lang['kalkun_signal'] = "Sinyal";
+$lang['kalkun_notification'] = "Upozornění";
+$lang['kalkun_statistic'] = "Statistiky";
+$lang['kalkun_system_information'] = "Systémové informace";
+$lang['kalkun_operating_system'] = "Operační systém";
+$lang['kalkun_gammu_version'] = "Verze Gammu";
+$lang['kalkun_gammu_db_schema'] = "Verze databáze Gammu";
+$lang['kalkun_phone_imei'] = "IMEI modemu";
+$lang['kalkun_you_have'] = "Máte";
+$lang['kalkun_new_message'] = "nových zpráv";
+$lang['kalkun_last_phone_activity'] = "Poslední aktivita modemu";
+$lang['kalkun_battery'] = "Baterie";
+$lang['kalkun_signal'] = "Signál";
 
 
 // Phonebook
-$lang['kalkun_contact'] = "Kontak";
-$lang['kalkun_group'] = "Grup";
+$lang['kalkun_contact'] = "Kontakt";
+$lang['kalkun_group'] = "Skupina";
 
 // Message
-$lang['kalkun_message'] = "Pesan";
-$lang['kalkun_send'] = "Kirim";
-$lang['kalkun_send_to'] = "Kirim ke";
-$lang['kalkun_reply'] = "Balas";
-$lang['kalkun_reply_to'] = "Balas ke";
-$lang['kalkun_reply_title'] = "Klik untuk membalas pesan ini";
-$lang['kalkun_quick_reply'] = "Balas cepat";
-$lang['kalkun_quick_reply_title'] = "Klik untuk membalas pesan ini secara cepat";
-$lang['kalkun_forward'] = "Teruskan";
-$lang['kalkun_forward_to'] = "Teruskan ke";
-$lang['kalkun_forward_title'] = "Klik untuk meneruskan pesan ini";
-$lang['kalkun_move_to'] = "Pindahkan ke";
-$lang['kalkun_select_folder'] = "Pilih berkas";
-$lang['kalkun_delete'] = "Hapus";
-$lang['kalkun_delete_message_title'] = "Klik untuk menghapus pesan ini";
-$lang['kalkun_delete_folder'] = "Hapus berkas ini";
-$lang['kalkun_delete_folder_title'] = "Klik untuk menghapus berkas ini";
-$lang['kalkun_permanently'] = "selamanya";
+$lang['kalkun_message'] = "Zpráva";
+$lang['kalkun_send'] = "Odeslat";
+$lang['kalkun_send_to'] = "Adresát";
+$lang['kalkun_reply'] = "Odpověď";
+$lang['kalkun_reply_to'] = "Adresát";
+$lang['kalkun_reply_title'] = "Klikněte pro odpovězení na tuto zprávu";
+$lang['kalkun_quick_reply'] = "Rychlá odpověď";
+$lang['kalkun_quick_reply_title'] = "Klikněte pro odpovězení na zprávu v rychlém režimu";
+$lang['kalkun_forward'] = "Přeposlat";
+$lang['kalkun_forward_to'] = "Adresát";
+$lang['kalkun_forward_title'] = "Klikněte pro přeposlání zprávy";
+$lang['kalkun_move_to'] = "Přesunout";
+$lang['kalkun_select_folder'] = "Vyberte složku";
+$lang['kalkun_delete'] = "Odstranit";
+$lang['kalkun_delete_message_title'] = "Klitněte pro odstranění zprávy";
+$lang['kalkun_delete_folder'] = "Odstranit tuto složku";
+$lang['kalkun_delete_folder_title'] = "Klikněte pro odstranění složky";
+$lang['kalkun_permanently'] = "permanently";
 
-$lang['kalkun_send_date'] = "Tanggal kirim";
-$lang['kalkun_sms_mode'] = "Modus SMS";
-$lang['kalkun_now'] = "Sekarang";
-$lang['kalkun_now_note'] = "Pesan akan dikirim secepatnya";
-$lang['kalkun_at_date_time'] = "Pada tanggal/waktu";
-$lang['kalkun_after_a_delay'] = "Setelah penundaan";
+$lang['kalkun_send_date'] = "Datum odesláni";
+$lang['kalkun_sms_mode'] = "Režim SMS";
+$lang['kalkun_now'] = "Teď";
+$lang['kalkun_now_note'] = "Zpráva bude odeslána okamžitě";
+$lang['kalkun_at_date_time'] = "V zadaný datum a čas";
+$lang['kalkun_after_a_delay'] = "Po prodlevě";
 
-$lang['kalkun_person'] = "Kontak";
-$lang['kalkun_group'] = "Grup";
-$lang['kalkun_input_manually'] = "Masukkan secara manual";
+$lang['kalkun_person'] = "Osoba";
+$lang['kalkun_group'] = "Skupina";
+$lang['kalkun_input_manually'] = "Zadat ručně";
 
-$lang['kalkun_show_hide_option'] = "Tampilkan/sembunyikan pilihan";
-$lang['kalkun_add_folder'] = "Tambah berkas";
-$lang['kalkun_folder_name'] = "Nama berkas";
-$lang['kalkun_cancel'] = "Batal";
-$lang['kalkun_save'] = "Simpan";
-$lang['kalkun_rename'] = "Ganti nama";
-$lang['kalkun_rename_folder'] = "Ganti nama folder";
-$lang['kalkun_rename_folder_title'] = "Klik untuk mengganti nama berkas ini";
+$lang['kalkun_show_hide_option'] = "Skrýt/zobrazit volbu";
+$lang['kalkun_add_folder'] = "Přidat složku";
+$lang['kalkun_folder_name'] = "Jméno složky";
+$lang['kalkun_cancel'] = "Zrušit";
+$lang['kalkun_save'] = "Uložit";
+$lang['kalkun_rename'] = "Přejmenovat";
+$lang['kalkun_rename_folder'] = "Přejmenovat složku";
+$lang['kalkun_rename_folder_title'] = "Klikněte pro přejmenování složky";
 
-$lang['kalkun_delete_folder_confirmation_header'] = "Konfirmasi hapus berkas";
-$lang['kalkun_delete_folder_confirmation'] = "Berkas ini dan semua pesan di dalamnya akan dihapus selamanya dan tidak bisa di kembalikan lagi. Anda yakin?";
+$lang['kalkun_delete_folder_confirmation_header'] = "Potvrzení vymazání složky";
+$lang['kalkun_delete_folder_confirmation'] = "Tato složka a všechny zprávyv ní uložené budou trvale odstraněny. Chcete je opravdu odstranit?";
 
-$lang['kalkun_no_message'] = "Tidak ada pesan dalam ";
-$lang['kalkun_no_message_in_folder'] = "Tidak ada pesan dalam berkas ini";
+$lang['kalkun_no_message'] = "Žádné zprávy ve složce ";
+$lang['kalkun_no_message_in_folder'] = "Žádné zprávy v této složce";
 
-$lang['kalkun_select_all'] = "Pilih Semua";
-$lang['kalkun_select_all_title'] = "Klik untuk memilih semua pesan";
-$lang['kalkun_clear_all'] = "Bersihkan Semua";
-$lang['kalkun_clear_all_title'] = "Klik untuk membersihkan semua pesan terpilih";
-$lang['kalkun_refresh'] = "Segarkan";
-$lang['kalkun_global_delete_title'] = "Klik untuk menghapus pesan terpilih";
+$lang['kalkun_select_all'] = "Označit vše";
+$lang['kalkun_select_all_title'] = "Klikněte pro označeni všech zpráv";
+$lang['kalkun_clear_all'] = "Zrušit označení všech";
+$lang['kalkun_clear_all_title'] = "Klikněte pro zrušení označení všech zpráv";
+$lang['kalkun_refresh'] = "Obnovit";
+$lang['kalkun_global_delete_title'] = "Klikněte pro odstranění vybraných zpráv";
 
-$lang['kalkun_first'] = "Awal";
-$lang['kalkun_last'] = "Akhir";
+$lang['kalkun_first'] = "První";
+$lang['kalkun_last'] = "Poslední";
 
 
 // Others
-$lang['kalkun_compose_amount'] = "Jumlah";
-$lang['kalkun_compose_send_as_flash'] = "Kirim sebagai Flash SMS";
-$lang['kalkun_compose_send_as_unicode'] = "Kirim sebagai Unicode";
-$lang['kalkun_compose_times'] = "kali";
-$lang['kalkun_compose_hour'] = "Jam";
-$lang['kalkun_compose_minutes'] = "Menit";
+$lang['kalkun_compose_amount'] = "Amount";
+$lang['kalkun_compose_send_as_flash'] = "Send as Flash SMS";
+$lang['kalkun_compose_send_as_unicode'] = "Send as Unicode";
+$lang['kalkun_compose_times'] = "times";
+$lang['kalkun_compose_hour'] = "Hour";
+$lang['kalkun_compose_minutes'] = "Minutes";
 
 
 // tni contribution
-$lang['tni_contact_add'] = "Tambah Kontak";
-$lang['tni_send_message'] = "Kirim Pesan";
-$lang['tni_folders_sms'] = "Berkas SMS";
+$lang['tni_contact_add'] = "Add Contact";
+$lang['tni_send_message'] = "Send Message";
+$lang['tni_folders_sms'] = "SMS Folders";
 $lang['tni_name_search'] = "Insert Name from Contact List";
 $lang['tni_group_del_title'] = "Delete Group(s) Confirmation";
 $lang['tni_group_delete'] = "Delete Gruop(s)?<br>All conaycys in this Group(s) will also be eliminated.";
 $lang['tni_group_del_button'] = "Yes, delete selected group(s).";
-$lang['tni_group_add'] = "Grup Baru";
-$lang['tni_group_name'] = "Nama Grup";
+$lang['tni_group_add'] = "Create Group";
+$lang['tni_group_name'] = "Group Name";
 $lang['tni_group_show_contacts'] = "Show Contacts in this Group";
 $lang['tni_group_field_num'] = "Number Of Fields";
 $lang['tni_group_field_string'] = "Field Values";
@@ -131,7 +131,7 @@ $lang['tni_group_field_title'] = "Group SMS Field Values";
 $lang['tni_groups'] = "Groups";
 $lang['tni_groups_manage'] = "Manage Groups";   
 $lang['tni_group_manage'] = "Manage Group";  
-$lang['tni_groups_edit_contacts'] = "Edit Contact";
+$lang['tni_groups_edit_contacts'] = "Manage Contact";
 $lang['tni_group_select'] = "Select Group";
 $lang['tni_msglist_trash_empty'] = "There is no messages in your Trash";  
 $lang['tni_msg_no_conv_selected'] = "No Item selected";  
@@ -142,7 +142,7 @@ $lang['tni_settings_saved'] = "Your settings has been saved...";
 $lang['tni_settings_wrong_pword'] = "You entered wrong password";  
 $lang['tni_settings_uname_exists'] = "Username already exist";  
 $lang['tni_settings_unamepass_wrong'] = "Wrong Username or Password";   
-$lang['tni_back_to'] = "Kembali ke";   
+$lang['tni_back_to'] = "Back to";   
 $lang['tni_show_details'] = "Show Details";   
 $lang['tni_hide_details'] = "Hide Details";  
 $lang['tni_search_contacts'] = "Search Contact";  
@@ -163,7 +163,7 @@ $lang['tni_user_add'] = "Add/Edit Users";
 $lang['tni_user_addp'] = "Add Users";  
 $lang['tni_user_edit'] = "Edit/Add User";  
 $lang['tni_user_word'] = "User";  
-$lang['tni_user_wordp'] = "Pengguna";  
+$lang['tni_user_wordp'] = "Users";  
 $lang['tni_user_confirm_delete'] = "Delete users confirmation";  
 $lang['tni_user_delete_body'] = "Delete User?<br>This includes all records from this user (messages and contacts).";  
 $lang['tni_user_not_found'] = "User not found";  
@@ -183,10 +183,10 @@ $lang['tni_error_toshort'] = "Too Short";
 $lang['tni_error_nouser_sel'] = "No user Selected";  
 $lang['tni_level'] = "Level";  
 $lang['tni_delete_folder'] = "Delete this folder";  
-$lang['tni_loading'] = "Memuat";  
+$lang['tni_loading'] = "Loading";  
 $lang['tni_status'] = "Status";  
-$lang['tni_connected'] = "Tersambung";  
-$lang['tni_disconnected'] = "Terputus";  
+$lang['tni_connected'] = "Connected";  
+$lang['tni_disconnected'] = "Disconnected";  
 $lang['tni_user_enter_login'] = "Please enter your username and password";  
 $lang['tni_group_no_group'] = "No group detected, add one first";  
 $lang['tni_group_no_selected'] = "No group selected";  
@@ -220,9 +220,9 @@ $lang['tni_set_perm_deloff'] = "Permanent delete Off";
 $lang['tni_set_perm_deloff_hint'] = " - Always move to Trash first";   
 $lang['tni_set_perm_delon'] = "Permanent delete On";  
 
-$lang['tni_set_title'] = "Setelan Pengguna";  
-$lang['tni_set_general'] = "Umum";  
-$lang['tni_set_personal'] = "Pribadi";  
+$lang['tni_set_title'] = "User's settings";  
+$lang['tni_set_general'] = "General";  
+$lang['tni_set_personal'] = "Personal";  
 $lang['tni_set_appearance'] = "Appearance";  
 
 
@@ -231,12 +231,13 @@ $lang['tni_signature_off']  = "Signature Off";
 $lang['tni_signature_on']  = "Signature On";  
 $lang['tni_signature_hint']  = "Max. 50 characters";  
 $lang['tni_signature_hintb']  = "Signature will take place at the end of your message";   
-$lang['tni_language']  = "Bahasa";   
-$lang['tni_settings']  = "Setelan";  
-$lang['tni_yes']  = "Ya";   
-$lang['tni_no'] = "Tidak";   
+$lang['tni_language']  = "Language";   
+$lang['tni_settings']  = "Settings";  
+$lang['tni_yes']  = "Yes";   
+$lang['tni_no'] = "No";   
 $lang['tni_default'] = "Default";   
-$lang['tni_set_deliv_report'] = "Laporan Pengiriman"; 
+$lang['tni_set_deliv_report'] = "Delivery Report"; 
+
 
 /* End of file kalkun_lang.php */
-/* Location: ./system/application/language/bahasa/kalkun_lang.php */
+/* Location: ./application/language/czech/kalkun_lang.php */

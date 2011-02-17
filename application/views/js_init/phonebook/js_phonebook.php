@@ -8,18 +8,18 @@ $('.addpbkcontact, .editpbkcontact').bind('click', function() {
 var group = '<?php echo count($pbkgroup);?>';
 if(group==0)
 {
-	$('.notification_area').text("No group detected, add one first");
+	$('.notification_area').text("<?php echo lang('tni_group_no_group'); ?>");
 	$('.notification_area').show();	
 }
 else
 {
 	if($(this).hasClass('addpbkcontact')) {
-		var pbk_title = 'Add Contact';
+		var pbk_title = '<?php echo lang('tni_contact_add'); ?>';
 		var type = 'normal';
 		var param1 = '';
 	}	
 	else if($(this).hasClass('editpbkcontact')) {
-		var pbk_title = 'Edit Contact';
+		var pbk_title = '<?php echo lang('tni_pbk_edit_contact'); ?>';
 		var type = 'edit';
 		var param1 = $(this).parents("tr:first").attr("id");
 	}
@@ -31,13 +31,13 @@ else
 		show: 'fade',
 		hide: 'fade',
 		buttons: {
-		'Save': function() {
+		'<?php echo lang('kalkun_save')?>': function() {
 			$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize(), function(data) {
 			$("#contact_container").html(data);
 			$("#contact_container").dialog({ buttons: { "Okay": function() { $(this).dialog("close"); } } });
 			setTimeout(function() {$("#contact_container").dialog('close')} , 1500);
 		});
-		}, Cancel: function() { $(this).dialog('close');} }
+		}, <?php echo lang('kalkun_cancel')?>: function() { $(this).dialog('close');} }
 		});
 	});
 	$("#contact_container").dialog('open');
@@ -70,7 +70,7 @@ $("a.delete_contact").click(function(){
 var count = $("input:checkbox:checked").length;
 var dest_url = '<?php echo site_url('phonebook/del_phonebook') ?>';
 if(count==0) { 
-	$('.notification_area').text("No contact selected");
+	$('.notification_area').text("<?php echo lang('tni_pbk_no_contact_selected')?>");
 	$('.notification_area').show();
 }
 else {
@@ -103,7 +103,7 @@ $('.sendmessage').bind('click', function() {
 		show: 'fade',
 		hide: 'fade',
 	    buttons: {
-		'Send Message': function() {
+		'<?php echo lang('tni_send_message'); ?>': function() {
 			if($("#composeForm").valid()) {
 			$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 				$("#compose_sms_container").html(data);
@@ -112,7 +112,7 @@ $('.sendmessage').bind('click', function() {
 			});
 			}
 		},
-		Cancel: function() { $(this).dialog('close');}
+		'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('close');}
 	    }
 	  });
 	});
@@ -132,10 +132,10 @@ $('#pbkimport').click(function() {
 });	
 	
 // Search onBlur onFocus
-$('input.search_name').val('Search Contact');
+$('input.search_name').val('<?php echo lang('tni_search_contacts'); ?>');
 
 $('input.search_name').blur(function(){
-	$(this).val('Search Contact');
+	$(this).val('<?php echo lang('tni_search_contacts'); ?>');
 });
 
 $('input.search_name').focus(function(){

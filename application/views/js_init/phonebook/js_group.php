@@ -6,14 +6,14 @@ $('#addpbkgroup, a.editpbkgroup').bind('click', function() {
 if($(this).hasClass('editpbkgroup'))
 {
 	var id = $(this).parents("tr:first").attr("id");
-	var dialog_title = 'Edit group';
+	var dialog_title = '<?php echo lang('tni_group_manage'); ?>';
 	var groupname = $(this).parents("div:eq(1)").find("span.groupname").text();
 	$('input#group_name').val(groupname);
 	$('input.pbkgroup_id').val(id);
 }
 else
 {
-	var dialog_title = 'Add group';
+	var dialog_title = '<?php echo lang('tni_group_add'); ?>';
 	$('input#group_name').val("");
 	$('input.pbkgroup_id').val("");
 }
@@ -25,10 +25,10 @@ $("#addgroupdialog").dialog({
 	height: 100,
 	modal: true,
 	buttons: {
-		'Save': function() {
+		'<?php echo lang('kalkun_save')?>': function() {
 			$("form.addgroupform").submit();
 		},
-		Cancel: function() {
+		'<?php echo lang('kalkun_cancel')?>': function() {
 			$(this).dialog('close');
 		}
 	}
@@ -41,7 +41,7 @@ $("a.delete_contact").click(function(){
 var count = $("input.select_group:checkbox:checked").length;
 var dest_url = '<?php echo site_url('phonebook/del_group') ?>';
 if(count==0) { 
-	$('.notification_area').text("No group selected");
+	$('.notification_area').text("<?php echo lang('tni_group_no_selected')?>");
 	$('.notification_area').show();
 }
 else {
@@ -52,10 +52,10 @@ else {
 	height: 150,
 	modal: true,
 	buttons: {
-		Cancel: function() {
+		'<?php echo lang('kalkun_cancel')?>': function() {
 			$(this).dialog('close');
 		},			
-		'Yes, Delete selected group': function() {
+		'<?php echo lang('tni_group_del_button')?>': function() {
 			$("input.select_group:checked").each( function () {	
 			var row = $(this).parents('tr');
 			var id = row.attr('id');
@@ -81,7 +81,7 @@ $('.sendmessage').bind('click', function() {
 		show: 'fade',
 		hide: 'fade',
 	    buttons: {
-		'Send Message': function() {
+		'<?php echo lang('tni_send_message')?>': function() {
 			if($("#composeForm").valid()) {
 			$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 				$("#compose_sms_container").html(data);
@@ -90,7 +90,7 @@ $('.sendmessage').bind('click', function() {
 			});
 			}
 		},
-		Cancel: function() { $(this).dialog('close');}
+		'<?php echo lang('kalkun_cancel')?>': function() { $(this).dialog('close');}
 	    }
 	  });
 	});

@@ -1,7 +1,7 @@
 <?php $this->load->view('js_init/phonebook/js_phonebook');
 if($phonebook->num_rows()==0):
-	if($_POST) echo "<p><i>Contact not found.</i></p>";
-	else echo "<p><i>Contact is empty.</i></p>";
+	if($_POST) echo "<p><i>".lang('tni_contact_not_found')."</i></p>";
+	else echo "<p><i>".lang('tni_contact_search_empty')."</i></p>";
 else: ?>
 <table>
 <?php foreach($phonebook->result() as $tmp): ?>
@@ -15,9 +15,9 @@ else: ?>
 </div>
 <div class="right_column">
 <span class="pbk_menu hidden">
-<a class="editpbkcontact simplelink" href="#">Edit</a>
+<a class="editpbkcontact simplelink" href="#"><?php echo lang('tni_edit');?></a>
 <img src="<?php echo $this->config->item('img_path')?>circle.gif" />
-<a class="sendmessage simplelink" href="#">Send message</a>
+<a class="sendmessage simplelink" href="#"><?php echo lang('tni_send_message');?></a>
 </span>
 </td></tr>
 <?php endforeach;?>

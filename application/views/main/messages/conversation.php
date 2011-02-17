@@ -82,15 +82,15 @@ endif;
 	<div class="detail_area hidden <?php echo $number;?>">
 	<table cellspacing="0" cellpadding="0" border="0">
     <tr>
-    <td width="50px"><?php  if($tmp['source']=='inbox') echo "From"; else echo "To" ?></td>
+    <td width="50px"><?php  if($tmp['source']=='inbox') echo lang('tni_from'); else echo lang('tni_to'); ?></td>
     <td width="10px"> : </td><td><?php echo $number;?></td>
     </tr>
    
     <?php  if($tmp['source'] == 'outbox'): ?>
-    <tr><td>Inserted</td><td> : </td><td><?php echo simple_date($tmp['InsertIntoDB']);?></td></tr>
+    <tr><td><?php echo lang('tni_inserted');?></td><td> : </td><td><?php echo simple_date($tmp['InsertIntoDB']);?></td></tr>
     <?php  endif; ?>			    
 
-    <tr><td>Date</td><td> : </td><td><?php echo simple_date($message_date);?></td></tr>			    
+    <tr><td><?php echo lang('tni_date');?></td><td> : </td><td><?php echo simple_date($message_date);?></td></tr>			    
     
     <?php if($tmp['source'] != 'outbox'): ?>
     <tr><td>SMSC</td><td> : </td><td><?php echo $tmp['SMSCNumber'];?></td></tr>
@@ -100,7 +100,7 @@ endif;
     <?php if($part_no > 1): ?>
     <tr><td>Part</td><td> : </td><td><?php echo $part_no;?> part messages</td></tr>
     <?php  endif;?>			    
-    <tr><td>Status</td><td> : </td><td><?php echo $status;?></td></tr>
+    <tr><td><?php echo lang('tni_status');?></td><td> : </td><td><?php echo $status;?></td></tr>
     <?php  endif;?>
 	</table>
 	</div>			
@@ -109,7 +109,7 @@ endif;
 		
 	<div class="optionmenu hidden" style="padding-left: 20px">
 	<ul>
-	<li><a class="detail_button" href="#">Show details</a></li>
+	<li><a class="detail_button" href="#"><?php echo lang('tni_show_details'); ?></a></li>
 					
 	<?php if($tmp['source'] == 'inbox'): ?>
 	<li><img src="<?php echo $this->config->item('img_path');?>circle.gif" /></li>
@@ -123,7 +123,7 @@ endif;
 	
 	<?php if(!$on_pbk): ?>
 	<li><img src="<?php echo $this->config->item('img_path');?>circle.gif" /></li>
-	<li><a href="#" class="add_to_pbk">Add contact</a></li>	
+	<li><a href="#" class="add_to_pbk"><?php echo lang('tni_contact_add'); ?></a></li>	
 	<?php endif; ?>
 	</ul>
 	</div>

@@ -15,7 +15,7 @@ $(document).ready(function() {
 	$("a.global_delete").click(function(){
 		var count = $("input.select_conversation:checkbox:checked").length;
 		if(count==0) { 
-			$('.notification_area').text("No conversation selected");
+			$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected')?>");
 			$('.notification_area').show();
 		}
 		else 
@@ -39,7 +39,7 @@ $(document).ready(function() {
 		var count = $("input.select_conversation:checkbox:checked").length;
 		if(count==0) { 
 			$("#movetodialog").dialog('close');
-			$('.notification_area').text("No conversation selected");
+			$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected')?>");
 			$('.notification_area').show();
 		}
 		else 
@@ -120,10 +120,10 @@ $(document).ready(function() {
 			height: 100,
 			modal: true,	
 			buttons: {
-				'Save': function() {
+				'<?php echo lang('kalkun_save'); ?>': function() {
 					$("form.renamefolderform").submit();
 				},
-				Cancel: function() {
+				'<?php echo lang('kalkun_cancel'); ?>': function() {
 					$(this).dialog('close');
 				}
 			}
@@ -144,10 +144,10 @@ $(document).ready(function() {
 			height: 150,
 			modal: true,	
 			buttons: {
-				Cancel: function() {
+				'<?php echo lang('kalkun_cancel'); ?>': function() {
 					$(this).dialog('close');
 				},			
-				'Delete this folder': function() {
+				'<?php echo lang('tni_delete_folder'); ?>': function() {
 					location.href=url;
 				}
 			}

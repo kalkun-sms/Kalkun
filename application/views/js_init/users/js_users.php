@@ -6,12 +6,12 @@ var inbox_master = '<?php echo $this->config->item('inbox_owner_id');?>';
 // Add/Edit Contact
 $('.addpbkcontact, .edit_user').bind('click', function() {
 if($(this).hasClass('addpbkcontact')) {
-	var user_title = 'Add User';
+	var user_title = '<?php echo lang('tni_user_add');?>';
 	var type = 'normal';
 	var param1 = '';
 }	
 else if($(this).hasClass('edit_user')) {
-	var user_title = 'Edit User';
+	var user_title = '<?php echo lang('tni_user_edit');?>';
 	var type = 'edit';
 	var param1 = $(this).parents("tr:first").attr("id");
 }
@@ -23,7 +23,7 @@ $(this).dialog({
 	show: 'fade',
 	hide: 'fade',
 	buttons: {
-	'Save': function() {
+	'<?php echo lang('kalkun_save');?>': function() {
 		if($("#addUser").valid()) {
 		$.post("<?php echo site_url('users/add_user_process') ?>", $("#addUser").serialize(), function(data) {
 		$("#users_container").html(data);
@@ -31,7 +31,7 @@ $(this).dialog({
 		setTimeout(function() {$("#users_container").dialog('close')} , 1500);
 		});
 		}
-	}, Cancel: function() { $(this).dialog('close');} }
+	}, '<?php echo lang('kalkun_cancel');?>': function() { $(this).dialog('close');} }
 	});
 });
 
@@ -64,7 +64,7 @@ $("a.delete_user").click(function(){
 var count = $("input:checkbox:checked").length;
 var dest_url = '<?php echo site_url('users/del_users') ?>';
 if(count==0) { 
-	$('.notification_area').text("No user selected");
+	$('.notification_area').text("<?php echo lang('tni_error_nouser_sel'); ?>");
 	$('.notification_area').show();
 }		
 else {
@@ -75,16 +75,16 @@ else {
 	height: 175,
 	modal: true,
 	buttons: {
-		Cancel: function() {
+		'<?php echo lang('kalkun_cancel'); ?>': function() {
 			$(this).dialog('close');
 		},			
-		'Yes, Delete selected user': function() {
+		'<?php echo lang('tni_user_confirm_delete'); ?>': function() {
 			$("input.select_user:checked").each( function () {
 			var row = $(this).parents('tr');
 			var id = row.attr('id');
 			if(id==inbox_master)
 			{
-				$('.notification_area').text("Can't delete Inbox master");
+				$('.notification_area').text("<?php echo lang('tni_action_not_allowed'); ?>");
 				$('.notification_area').show();	
 			}
 			else {
@@ -120,10 +120,10 @@ $('#pbkimport').click(function() {
 });	
 	
 // Search onBlur onFocus
-$('input.search_name').val('Search User');
+$('input.search_name').val('<?php echo lang('tni_user_search'); ?>');
 
 $('input.search_name').blur(function(){
-	$(this).val('Search User');
+	$(this).val('<?php echo lang('tni_user_search'); ?>');
 });
 
 $('input.search_name').focus(function(){

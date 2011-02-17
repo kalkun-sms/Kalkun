@@ -17,7 +17,7 @@ $type = array('inbox', 'sentitems');
 // Reply to option
 if($val_type=='reply'): ?>
 <tr>
-<td width="100px" align="right" class="form_label label">To:</td>
+<td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
 <td>
 <?php
 $phone = base64_decode(HexToAscii($dest));
@@ -35,13 +35,13 @@ endif;
 
 <?php /* Member */ elseif($val_type=='member'):?>
 <tr>
-<td width="100px" align="right" class="form_label label">To:</td>
+<td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
 <td>Member<input type="hidden" name="sendoption" value="member" /></td>    
 </tr>
 
 <?php /* Phonebook contact */ elseif($val_type=='pbk_contact'):?>
 <tr>
-<td width="100px" align="right" class="form_label label">To:</td>
+<td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
 <td>
 <?php
 $qry = $this->Phonebook_model->getPhonebook(array('option' => 'bynumber', 'number' => $dest));
@@ -58,7 +58,7 @@ endif;
 
 <?php /* Phonebook group */ elseif($val_type=='pbk_groups'):?>
 <tr>
-<td width="100px" align="right" class="form_label label">To:</td>
+<td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
 <td>
 <?php echo $this->Phonebook_model->getPhonebook(array('option' => 'groupname', 'id' => $dest))->row('GroupName');?>
 <input type="hidden" name="sendoption" value="pbk_groups" />
@@ -99,7 +99,7 @@ else echo lang('kalkun_send_to').":";
 
 <div id="group" class="hidden">
 <select name="groupvalue">
-<option value="" selected="selected">-- Select Group --</option>
+<option value="" selected="selected">-- <?php echo lang('tni_group_select'); ?> --</option>
 <?php
 foreach($this->Phonebook_model->getPhonebook(array('option' => 'group'))->result() as $tmp):
 echo "<option value=\"".$tmp->ID."\">".$tmp->GroupName."</option>";
@@ -135,8 +135,8 @@ endforeach;
 <select name="minute"><?php echo get_minute();?></select> 			
 </div>
 <div id="delayoption" class="hidden">
-<select name="delayhour"><?php echo get_hour();?></select> Hour&nbsp;
-<select name="delayminute"><?php echo get_minute();?></select> Minutes 
+<select name="delayhour"><?php echo get_hour();?></select> <?php echo lang('kalkun_compose_hour'); ?>&nbsp;
+<select name="delayminute"><?php echo get_minute();?></select> <?php echo lang('kalkun_compose_minutes'); ?> 
 </div>
 </td>
 </tr>    
@@ -144,14 +144,14 @@ endforeach;
 <tr>
 <td align="right" class="label"><?php echo lang('kalkun_sms_mode').":";?></td>
 <td><input type="checkbox" id="sms_mode" name="sms_mode" value="1" class="left_aligned" />
-<label for="sms_mode">Send as Flash SMS</label>
+<label for="sms_mode"><?php echo lang('kalkun_compose_send_as_flash'); ?></label>
 </td>    
 </tr>    
    
 <?php if($this->config->item('sms_bomber')): ?>    
 <tr valign="top">
-<td align="right" class="label">Amount:</td>
-<td><input type="text" style="width: 25px" name="sms_loop" id="sms_loop" value="1" />&nbsp; times
+<td align="right" class="label"><?php echo lang('kalkun_compose_amount').":";?></td>
+<td><input type="text" style="width: 25px" name="sms_loop" id="sms_loop" value="1" />&nbsp; <?php echo lang('kalkun_compose_times'); ?>
 </td>
 </tr>
 <?php else: ?>
@@ -169,7 +169,7 @@ if($sig_option=='true') echo "\n\n".$sig; ?>
 </textarea>
 <div>
 	<div style="float: left"><span class="counter"></span></div>
-	<div style="float: right; padding-right: 5px;"><input class="left_aligned" type="checkbox" value="unicode" id="unicode" name="unicode" /><label for="unicode">Send as Unicode</label></div>
+	<div style="float: right; padding-right: 5px;"><input class="left_aligned" type="checkbox" value="unicode" id="unicode" name="unicode" /><label for="unicode"><?php echo lang('kalkun_compose_send_as_unicode'); ?></label></div>
 </div>
 </td>
 </tr>      

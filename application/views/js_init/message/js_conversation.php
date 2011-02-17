@@ -9,7 +9,7 @@ var dest_url = base + source;
 $("a.global_delete").click(function(){
 var count = $("input:checkbox:checked").length;
 if(count==0) { 
-	$('.notification_area').text("No message selected");
+	$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected'); ?>");
 	$('.notification_area').show();
 }
 else {
@@ -27,7 +27,7 @@ $(".move_to").click(function() {
 var count = $("input:checkbox:checked").length;
 if(count==0) { 
 	$("#movetodialog").dialog('close');
-	$('.notification_area').text("No message selected");
+	$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected'); ?>");
 	$('.notification_area').show();
 }
 else {    	
@@ -68,7 +68,7 @@ $(row).find("div.optionmenu").toggle();
 if($(row).find("div.detail_area").is(":visible"))
 { 
 	$(row).find("div.detail_area").toggle(); 
-	$(row).find("a.detail_button").html('Show details'); 
+	$(row).find("a.detail_button").html('<?php echo lang('tni_show_details'); ?>'); 
 }
 return false;
 });
@@ -121,7 +121,7 @@ $("#compose_sms_container").load(url, { 'type': type, 'param1': param1, 'param2'
 	show: 'fade',
 	hide: 'fade',
     buttons: {
-	'Send Message': function() {
+	'<?php echo lang('tni_send_message'); ?>': function() {
 		if($("#composeForm").valid()) {
 		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 			$("#compose_sms_container").html(data);
@@ -130,7 +130,7 @@ $("#compose_sms_container").load(url, { 'type': type, 'param1': param1, 'param2'
 		});
 		}
 	},
-	Cancel: function() { $(this).dialog('close');}
+	'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('close');}
     }
   });
 });
@@ -156,8 +156,8 @@ $('a.detail_button').click(function() {
 var row = $(this).parents('div:eq(2)');
 $(row).find("div.detail_area").toggle();
 	
-if($(this).text()=='Hide details') $(this).html('Show details');
-else $(this).html('Hide details');
+if($(this).text()=='<?php echo lang('tni_hide_details'); ?>') $(this).html('<?php echo lang('tni_show_details'); ?>');
+else $(this).html('<?php echo lang('tni_hide_details'); ?>');
 return false;		
 });	
 

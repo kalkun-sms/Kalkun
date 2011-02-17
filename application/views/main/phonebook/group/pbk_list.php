@@ -1,6 +1,6 @@
 <?php
 if($group->num_rows()==0):
-echo "<p><i>Group is empty.</i></p>";
+echo "<p><i>".lang('tni_group_no_group')."</i></p>";
 else: ?>
 <table>
 <?php foreach($group->result() as $tmp): ?>
@@ -15,9 +15,9 @@ else: ?>
 </div>
 <div class="right_column">
 <span class="pbk_menu hidden">
-<a class="editpbkgroup simplelink" href="#">Edit</a>
+<a class="editpbkgroup simplelink" href="#"><?php echo lang('tni_edit');?></a>
 <img src="<?php echo $this->config->item('img_path')?>circle.gif" />
-<a class="sendmessage simplelink" href="#">Send message</a>
+<a class="sendmessage simplelink" href="#"><?php echo lang('tni_send_message');?></a>
 </span>
 </td></tr>
 <?php endforeach;?>

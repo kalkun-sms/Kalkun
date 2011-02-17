@@ -3,10 +3,25 @@
 <ul>
 	<?php 
 	if($this->uri->segment(2)=='conversation'):
-		if($this->uri->segment(3)=='folder'): ?>
-		<li><?php echo anchor('messages/folder/'.$this->uri->segment(4),'&lsaquo;&lsaquo; Back to '.humanize($this->uri->segment(4)), array('class' => 'button'));?></li>
+		if($this->uri->segment(3)=='folder'): 
+
+			// _tni_ added this for translation on the inbox, outbox etc.
+			$theFolder = $this->uri->segment(4);
+			$theFname = "inbox";
+			if($theFolder == "inbox") {
+			$theFname = lang('kalkun_inbox');
+			} else if($theFolder == "outbox") {
+			$theFname = lang('kalkun_outbox');
+			} else if($theFolder == "sentitems") {
+			$theFname = lang('kalkun_sentitems');
+			} else {
+				$theFname = $this->Kalkun_model->getFolders('name', $this->uri->segment(4))->row('name');
+				// $theFname = $this->uri->segment(4);
+			}
+	?>
+		<li><?php echo anchor('messages/folder/'.$this->uri->segment(4),'&lsaquo;&lsaquo; '.lang('tni_back_to').' '.$theFname, array('class' => 'button'));?></li>
 		<?php else: ?>
-		<li><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6),'&lsaquo;&lsaquo; Back to '.humanize($this->Kalkun_model->getFolders('name', $this->uri->segment(6))->row('name')), array('class' => 'button'));?></li>
+		<li><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6),'&lsaquo;&lsaquo; '.lang('tni_back_to').' '.humanize($this->Kalkun_model->getFolders('name', $this->uri->segment(6))->row('name')), array('class' => 'button'));?></li>
 		<li>&nbsp;</li>
 		<?php endif;?>
 	<?php endif;?>
@@ -17,7 +32,7 @@
 	elseif($this->uri->segment(2)=='conversation' && $this->uri->segment(4)=='outbox'):
 	else:?>
 	<li>&nbsp;</li>
-	<li><a class="move_to_button button" href="#">Move To</a></li>	
+	<li><a class="move_to_button button" href="#"><?php echo lang('kalkun_move_to');?></a></li>	
 	<?php endif; ?>
 	<li><a class="global_delete button" href="#">
 	<?php echo lang('kalkun_delete'); 

@@ -1,6 +1,6 @@
 <div id="space_area">
 
-<div id="dash_box_titlebar"><?php echo "Statistic";?></div>
+<div id="dash_box_titlebar"><?php echo lang('kalkun_statistic');?></div>
 <div id="dash_box">
 	<?php $this->load->view('main/dashboard/statistic');?>
 </div>
