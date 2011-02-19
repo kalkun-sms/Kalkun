@@ -73,17 +73,17 @@ function getPhonebook($param)
 	return $this->db->get();	
 }
 
-function addPhonebook()
+function addPhonebook($param)
 {
-	$this->db->set('Name', trim($this->input->post('name')));
-	$this->db->set('Number', trim($this->input->post('number')));
-	$this->db->set('GroupID', $this->input->post('groupvalue'));
-	$this->db->set('id_user', $this->input->post('pbk_id_user'));
+	$this->db->set('Name', $param['Name']);
+	$this->db->set('Number', $param['Number']);
+	$this->db->set('GroupID', $param['GroupID']);
+	$this->db->set('id_user', $param['id_user']);
 	
 	// edit mode
-	if($this->input->post('editid_pbk')) 
+	if(isset($param['id_pbk'])) 
 	{
-		$this->db->where('id_pbk', $this->input->post('editid_pbk'));
+		$this->db->where('id_pbk', $param['id_pbk']);
 		$this->db->update('pbk');
 	}
 	else $this->db->insert('pbk');

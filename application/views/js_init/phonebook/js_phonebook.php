@@ -121,12 +121,20 @@ $('.sendmessage').bind('click', function() {
 });
 	
 // Contact import
-$('#pbkimport').click(function() {
+$('#importpbk').click(function() {
 	$("#pbkimportdialog").dialog({
 		bgiframe: true,
 		autoOpen: false,
 		height: 300,
 		modal: true,
+		buttons: {
+			'Import': function() {
+				$("form.importpbkform").submit();
+			},
+			Cancel: function() {
+				$(this).dialog('close');
+			}
+		}
 	});		
 	$('#pbkimportdialog').dialog('open');
 });	

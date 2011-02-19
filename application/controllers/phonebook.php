@@ -53,11 +53,6 @@ function group()
 	$this->load->view('main/layout', $data);
 }
 
-function add_phonebook()
-{
-	if($_POST) $this->Phonebook_model->addPhonebook();
-	else redirect('phonebook');		
-}
 
 function del_phonebook()
 {
@@ -69,11 +64,6 @@ function del_group()
 	$this->Phonebook_model->delGroup();
 }
 
-function update_phonebook()
-{
-	$this->Phonebook_model->updatePhonebook();
-}
-
 function add_phonebook_group()
 {
 	if($_POST) { $this->Phonebook_model->addPhonebookGroup(); redirect('phonebook/group'); }
@@ -81,19 +71,22 @@ function add_phonebook_group()
 
 function import_phonebook()
 {
-	if($_POST) { 
-          $this->load->library('csvreader');
-          $filePath = 'http://localhost:8888/kalkun/worked/temp/test.csv';
-          $csvData = $this->csvreader->parse_file($filePath);
-		
-		echo "<pre>";
-		print_r($csvData);
-		echo "</pre>";
-		
-		//$this->Kalkun_model->importPhonebook(); 
-		//redirect('phonebook'); 
-	}
-	else redirect('phonebook');	
+	$this->load->library('csvreader');
+	$filePath = $_FILES["csvfile"]["tmp_name"];
+	$csvData = $this->csvreader->parse_file($filePath, true);	
+	
+	$n=0;
+	foreach($csvData as $field):
+		$pbk['Name'] = $field["Name"];
+		$pbk['Number'] = $field["Number"];
+		$pbk['GroupID'] = $this->input->post('importgroupvalue');
+		$pbk['id_user'] = $this->input->post('pbk_id_user');			
+		$this->Phonebook_model->addPhonebook($pbk);
+		$n++;
+	endforeach;
+	
+	$this->session->set_flashdata('notif', $n.' contacts successfully imported');
+	redirect('phonebook');		 
 }
 
 function add_contact()
@@ -115,9 +108,21 @@ function add_contact()
 
 function add_contact_process()
 {
-	$this->Phonebook_model->addPhonebook();
-	if($this->input->post('editid_pbk')) echo "<div class=\"notif\">Contact has been updated.</div>";
-	else echo "<div class=\"notif\">Contact has been added.</div>";
+	$pbk['Name'] = trim($this->input->post('name'));
+	$pbk['Number'] = trim($this->input->post('number'));
+	$pbk['GroupID'] = $this->input->post('groupvalue');
+	$pbk['id_user'] = $this->input->post('pbk_id_user');
+	
+	if($this->input->post('editid_pbk'))
+	{
+		$pbk['id_pbk'] = $this->input->post('editid_pbk');
+		$msg = "<div class=\"notif\">Contact has been updated.</div>";
+	}
+	else
+		$msg = "<div class=\"notif\">Contact has been added.</div>";
+		
+	$this->Phonebook_model->addPhonebook($pbk);
+	echo $msg;
 }
 
 }

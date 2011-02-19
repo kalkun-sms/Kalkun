@@ -19,6 +19,7 @@ $config['js_path']  = $config['base_url'].'media/js/';
 $config['img_path'] = $config['base_url'].'media/images/';
 $config['sql_path'] = $config['base_url'].'media/db/';
 $config['swf_path'] = $config['base_url'].'media/swf/';
+$config['csv_path'] = $config['base_url'].'media/csv/';
 
 /*
 |--------------------------------------------------------------------------
