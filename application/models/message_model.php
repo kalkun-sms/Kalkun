@@ -99,7 +99,7 @@ Class Message_model extends Model {
 		$outbox_id = $this->db->insert_id();
 		$user = array(
 				'id_outbox' => $outbox_id,
-				'id_user' => $this->session->userdata('id_user')
+				'id_user' => $tmp_data['uid']
 				);
 		$this->db->insert('user_outbox', $user);		
 	}	

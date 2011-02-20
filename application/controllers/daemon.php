@@ -8,6 +8,68 @@ Class Daemon extends Controller {
 						
 		parent::controller();
 	}
+
+	// ================================================================
+	// MESSAGE ROUTINE
+	// ================================================================
+	
+	function message_routine()
+	{
+		$this->load->model('User_model');
+		
+		// ===================================================================
+		// INBOX
+		// ===================================================================
+		
+		// get unProcessed message
+		$message = $this->Message_model->getUnprocessed();
+		
+		foreach($message->result() as $tmp_message):
+		
+		// sms content
+		if($this->config->item('sms_content')):
+		list($code) = explode(" ", $tmp_message->TextDecoded);
+		$reg_code = $this->config->item('sms_content_reg_code');
+		$unreg_code = $this->config->item('sms_content_unreg_code');
+		if(strtoupper($code)==strtoupper($reg_code)) 
+		$this->register_member($tmp_message->SenderNumber);
+		else if(strtoupper($code)==strtoupper($unreg_code))
+		$this->unregister_member($tmp_message->SenderNumber);
+		endif;	
+		
+		// check @username tag
+		$users = $this->User_model->getUsers(array('option' => 'all'));
+		foreach($users->result() as $tmp_user)
+		{
+			$tag = "@".$tmp_user->username;
+			$msg_word = array();
+			$msg_word = explode(" ", $tmp_message->TextDecoded);
+			$check = in_array($tag, $msg_word);
+						
+			// update ownership
+			if($check!==false) { $this->Message_model->updateOwner($tmp_message->ID, $tmp_user->id_user); break; }
+		}
+		
+		// if no matched username, set owner to Inbox Master
+		if($check===false) $this->Message_model->updateOwner($tmp_message->ID, $this->config->item('inbox_owner_id'));
+		
+		// simple autoreply
+		if($this->config->item('simple_autoreply'))
+		{
+			$data['coding'] = 'default';
+			$data['class'] = '1';
+			$data['dest'] = $tmp_message->SenderNumber;
+			$data['date'] = date('Y-m-d H:i:s');
+			$data['message'] = $this->config->item('simple_autoreply_msg');
+			$data['delivery_report'] = 'default';
+			$data['uid'] = $this->config->item('simple_autoreply_uid');	
+			$this->Message_model->sendMessages($data);	
+		}			
+		
+		// update Processed
+		$this->Message_model->updateProcessed($tmp_message->ID);
+		endforeach;	
+	}
 	
 	// ================================================================
 	// SERVER ALERT

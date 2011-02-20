@@ -93,7 +93,16 @@ class Messages extends MY_Controller {
 		
 			// Input manually
 			case 'sendoption3':
-			$dest = $this->input->post('manualvalue');
+			$tmp_dest = explode(',', $this->input->post('manualvalue'));
+			$dest = array();
+			foreach($tmp_dest as $key => $tmp):
+			$tmp = trim($tmp); // remove space
+			if(trim($tmp)!='') {
+				$dest[$key] = $tmp;
+			}
+			endforeach;
+			//print_r($dest);
+			//exit;
 			break;
 			
 			// Reply
@@ -142,7 +151,8 @@ class Messages extends MY_Controller {
 		$data['message'] = $this->input->post('message');
 		$data['date'] = $date;
 		$data['delivery_report'] = $this->Kalkun_model->getSetting()->row('delivery_report');
-		$data['coding'] = ($this->input->post('unicode')=='unicode') ? 'unicode' : 'default';		
+		$data['coding'] = ($this->input->post('unicode')=='unicode') ? 'unicode' : 'default';	
+		$data['uid'] = $this->session->userdata('id_user');	
 				
 		// Send the message
 		if(is_array($dest)) 

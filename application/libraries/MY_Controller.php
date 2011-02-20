@@ -32,53 +32,8 @@ class MY_Controller  extends Controller  {
 	{
 		$this->load->model('User_model');
 		
-		// ===================================================================
-		// INBOX
-		// ===================================================================
-		
-		// get unProcessed message
-		$message = $this->Message_model->getUnprocessed();
-		
-		foreach($message->result() as $tmp_message):
-		
-		// user mention, move to user_inbox if contains @username
-		// ... php stristr() function
-		
-		// sms content
-		if($this->config->item('sms_content')):
-		list($code) = explode(" ", $tmp_message->TextDecoded);
-		$reg_code = $this->config->item('sms_content_reg_code');
-		$unreg_code = $this->config->item('sms_content_unreg_code');
-		if(strtoupper($code)==strtoupper($reg_code)) 
-		$this->register_member($tmp_message->SenderNumber);
-		else if(strtoupper($code)==strtoupper($unreg_code))
-		$this->unregister_member($tmp_message->SenderNumber);
-		endif;	
-		
-		// check @username tag
-		$users = $this->User_model->getUsers(array('option' => 'all'));
-		//print_r($users);
-		foreach($users->result() as $tmp_user)
-		{
-			$tag = "@".$tmp_user->username;
-			$msg_word = array();
-			$msg_word = explode(" ", $tmp_message->TextDecoded);
-			$check = in_array($tag, $msg_word);
-						
-			// update ownership
-			if($check!==false) { $this->Message_model->updateOwner($tmp_message->ID, $tmp_user->id_user); break; }
-		}
-		
-		// if no matched username, set pwner to Inbox Master
-		if($check===false) $this->Message_model->updateOwner($tmp_message->ID, $this->config->item('inbox_owner_id'));
-		
-		// update Processed
-		$this->Message_model->updateProcessed($tmp_message->ID);
-		endforeach;
-		
-		
 		// =============================
-		// OUTBOX
+		// OUTBOX & SENITEMS
 		// =============================
 		
 		$outbox = $this->Message_model->getUserOutbox($this->session->userdata("id_user"));

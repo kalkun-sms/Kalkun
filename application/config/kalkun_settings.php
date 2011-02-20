@@ -70,5 +70,18 @@ $config['sms_content_reg_code'] = 'REG';
 $config['sms_content_unreg_code'] = 'UNREG';
 
 
+/*
+|--------------------------------------------------------------------------
+| Simple Autoreply (Experimental)
+|--------------------------------------------------------------------------
+|
+| Always reply (automatically) every incoming message
+|
+*/
+$config['simple_autoreply'] = FALSE;
+$config['simple_autoreply_uid'] = '1'; // set user id who sent the message, must be valid ID
+$config['simple_autoreply_msg'] = "Thanks for sending me the message";
+
+
 /* End of file kalkun_settings.php */
 /* Location: ./system/application/config/kalkun_settings.php */
