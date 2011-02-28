@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 30, 2010 at 04:16 AM
+-- Generation Time: Feb 22, 2011 at 05:38 PM
 -- Server version: 5.1.37
 -- PHP Version: 5.3.0
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `member` (
   `phone_number` text NOT NULL,
   `reg_date` datetime NOT NULL,
   PRIMARY KEY (`id_member`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
 
 -- --------------------------------------------------------
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `sms_used` (
   `id_user` int(11) NOT NULL,
   `sms_count` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_sms_used`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
 
 -- --------------------------------------------------------
 
@@ -61,9 +61,40 @@ CREATE TABLE IF NOT EXISTS `user` (
   `level` enum('admin','user') NOT NULL DEFAULT 'user',
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `username_2` (`username`),
   UNIQUE KEY `phone_number` (`phone_number`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id_user`, `username`, `realname`, `password`, `phone_number`, `level`) VALUES
+(1, 'kalkun', 'Kalkun SMS', 'f0af18413d1c9e0366d8d1273160f55d5efeddfe', '123456789', 'admin');
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_folders`
+--
+
+CREATE TABLE IF NOT EXISTS `user_folders` (
+  `id_folder` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id_folder`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `user_folders`
+--
+
+INSERT INTO `user_folders` (`id_folder`, `name`, `id_user`) VALUES
+(1, 'inbox', 0),
+(2, 'outbox', 0),
+(3, 'sent_items', 0),
+(4, 'draft', 0),
+(5, 'Trash', 0);
 
 -- --------------------------------------------------------
 
@@ -122,38 +153,46 @@ CREATE TABLE IF NOT EXISTS `user_settings` (
   PRIMARY KEY (`id_user`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-
---
--- ALTER
---
-
-ALTER TABLE `pbk` ADD `id_user` INT( 11 ) NOT NULL;
-ALTER TABLE `pbk_groups` ADD `id_user` INT( 11 ) NOT NULL;
-ALTER TABLE `pbk_groups` CHANGE `Name` `GroupName` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
-
-RENAME TABLE `folders` TO `user_folders`;
-ALTER TABLE `user_folders` ADD `id_user` INT( 11 ) NOT NULL;
-
---
--- UPDATE
---
-UPDATE `pbk` SET `id_user`='1';
-UPDATE `pbk_groups` SET `id_user`='1';
-UPDATE `user_folders` SET `id_user`='1';
-UPDATE `user_folders` SET `id_user`='0' where `id_folder` BETWEEN 1 and 5;
-
-
---
--- DROP
--- 
-DROP TABLE `plugin`;
-DROP TABLE `plugin_blacklist_number`;
-DROP TABLE `plugin_server_alert`;
-
-
 --
 -- Dumping data for table `user_settings`
 --
 
 INSERT INTO `user_settings` (`id_user`, `theme`, `signature`, `permanent_delete`, `paging`, `bg_image`, `delivery_report`, `language`, `conversation_sort`) VALUES
 (1, 'green', 'false;--\nPut your signature here', 'false', 20, 'true;background.jpg', 'default', 'english', 'asc');
+
+
+-- --------------------------------------------------------
+
+--
+-- Alter table structure for table `inbox`
+--
+
+ALTER TABLE `inbox` ADD `id_folder` INT( 11 ) NOT NULL DEFAULT '1',
+ADD `readed` ENUM( 'false', 'true' ) NOT NULL DEFAULT 'false';
+
+
+-- --------------------------------------------------------
+
+--
+-- Alter table structure for table `sentitems`
+--
+
+ALTER TABLE `sentitems` ADD `id_folder` INT( 11 ) NOT NULL DEFAULT '3';
+
+
+-- --------------------------------------------------------
+
+--
+-- Alter table structure for table `pbk`
+--
+
+ALTER TABLE `pbk` ADD `id_user` INT( 11 ) NOT NULL;
+
+
+-- --------------------------------------------------------
+
+--
+-- Alter table structure for table `pbk_groups`
+--
+
+ALTER TABLE `pbk_groups` ADD `id_user` INT( 11 ) NOT NULL;
