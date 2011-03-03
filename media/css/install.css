@@ -140,20 +140,13 @@ a {
 }
 
 .formtable {
-	width: 100%;
-	background-color: #EEE;
+	background-color: #F5F5F5;
 	border: 1px solid #CCC;
 	padding: 10px;
 }
 
 .formtable td {
 	padding: 5px;
-}
-
-.formtable input {
-	border: 1px solid #CCC;
-	padding: 3px;
-	font-size: 14px;
 }
 
 .formtable select {

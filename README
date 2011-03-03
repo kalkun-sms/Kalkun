@@ -1,5 +1,5 @@
 Kalkun - Open Source Web-based SMS Management
-Version : 0.2.1
+Version : 0.2.9
 
 (For complete instruction, see http://sourceforge.net/apps/trac/kalkun/wiki/Installation)
 
@@ -18,16 +18,22 @@ INSTALL :
 		> quit
 	- edit database config (system/application/config/database.php)
 		change database value to 'kalkun', username and password is depend on your mysql configuration
+	
+	- import gammu database schema (it's included on gammu source, eg. gammu/docs/sql/mysql.sql)
+		- using mysql console
+			# mysql kalkun - u username -p < gammu/docs/sql/mysql.sql
+		- using phpMyAdmin
+	
 		
 	There are 2 way to install:	
 	1. Graphic Install	
 	- launch http://your-location/kalkun/index.php/install, and follow instruction there
 	
 	2. Manual Install
-	- import sql file (media/db/install.sql) to the kalkun database (you can do it with phpmyadmin)
+	- import sql file (media/db/mysql_kalkun.sql) to the kalkun database (you can do it with phpmyadmin)
 	
 	- or if you don't have phpmyadmin, you might want to try this	
-		# mysql kalkun - u username -p < media/db/install.sql
+		# mysql kalkun - u username -p < media/db/mysql_kalkun.sql
 	
 	IMPORTANT: After install you need to remove install folder.
 		
@@ -38,4 +44,4 @@ INSTALL :
 	
 CONTACT : 
 Feel free to contact me if you having problem...
-azhari.harahap@yahoo.com
+blackarazi@gmail.com

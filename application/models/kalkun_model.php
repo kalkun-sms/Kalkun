@@ -14,8 +14,13 @@ Class Kalkun_model extends Model {
 	{
 		$username = $this->input->post('username');
 		$password = sha1($this->input->post('password'));
-		$sql = "select * from user where username='".$username."' and password='".$password."'";
-		$query = $this->db->query($sql);
+		$this->db->from('user');
+		$this->db->where('username', $username);
+		$this->db->where('password', $password);
+		$query = $this->db->get();
+		
+		//$sql = "select * from user where username='".$username."' and password='".$password."'";
+		//$query = $this->db->query($sql);
 		if($query->num_rows()=='1') {
 			$this->session->set_userdata('loggedin', 'TRUE');
 			$this->session->set_userdata('level', $query->row('level'));

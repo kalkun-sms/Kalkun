@@ -25,8 +25,17 @@
 	</tr>
 	
 	<tr>
-		<td colspan="3">MySQL</td>
-		<td class="right"><?php if(extension_loaded('mysql')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; } ?></td>
+		<td colspan="3">MySQL or SQLite3 (Using PDO)</td>
+		<td class="right">
+		<?php 
+			if(extension_loaded('mysql')) $db_msg = "MySQL";
+			if(extension_loaded('pdo_sqlite')) $db_msg = "SQLite3";
+			if(extension_loaded('mysql') && extension_loaded('sqlite3')) $db_msg = "Both";
+			
+			if(isset($db_msg)) echo "<span class=\"green\">OK (".$db_msg.")</span>"; 
+			else { echo "<span class=\"red\">Not OK</span>"; $error++; } 
+		?>
+		</td>
 	</tr>
 
 	<tr>
