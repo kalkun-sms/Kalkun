@@ -6,9 +6,10 @@ Version : 0.2.9
 You need to install and configure this first :
 	- apache 2.x.x
 	- PHP 5.x.x (with mysql, session, hash, json extension)
+	- PHP-CLI
 	- MySQL 5.x.x
-	- or you can just install xampp for linux (http://www.apachefriends.org/en/xampp-linux.html)
-	- gammu, make sure smsd is configured
+	or you can just install xampp (http://www.apachefriends.org/en/xampp.html)
+	- gammu-smsd, make sure it is already ruuning and configured
 
 INSTALL :
 	- extract to web root folder (eq: /var/www/html => Ubuntu)
@@ -24,6 +25,18 @@ INSTALL :
 			# mysql kalkun - u username -p < gammu/docs/sql/mysql.sql
 		- using phpMyAdmin
 	
+	- configure daemon (to manage inbox and autoreply)
+		- set path on gammu-smsd configuration at runonreceive directive
+			e.g:
+				[smsd]
+				runonreceive = /opt/lampp/htdocs/kalkun/scripts/daemon.sh
+			or, if you using Windows:
+				[smsd]
+				runonreceive = C:\xampp\htdocs\kalkun\scripts\daemon.bat
+		- set correct path (php-cli path and daemon.php path) on daemon.sh or daemon.bat 
+		- make sure that the daemon script is executable
+		- Change URI path in daemon.php, default is "http://localhost/kalkun";
+		
 		
 	There are 2 way to install:	
 	1. Graphic Install	

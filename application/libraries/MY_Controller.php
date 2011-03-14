@@ -48,26 +48,7 @@ class MY_Controller  extends Controller  {
 		}	
 		else $this->Message_model->deleteUserOutbox($tmp->id_outbox);
 		endforeach;
-	}
-	
-	private function register_member($number)
-	{
-		$this->load->model('Member_model');
-		
-		//check if number not registered
-		if($this->Member_model->check_member($number)==0)
-		$this->Member_model->add_member($number);
-	}
-	
-	private function unregister_member($number)
-	{
-		$this->load->model('Member_model');
-		
-		//check if already registered
-		if($this->Member_model->check_member($number)==1)
-		$this->Member_model->remove_member($number);
 	}	
-	
 	
 	private function blacklist_number()
 	{
