@@ -7,6 +7,7 @@ $lang = array('bahasa'	=> 'Bahasa Indonesia',
 			'czech'	=> 'Česky',
        		'english'	=> 'English',
        		'portuguese'	=> 'Portuguese',
+       		'russian'	=> 'Russian',
       		); 
 $lang_act = $this->Kalkun_model->getSetting()->row('language'); 
 echo form_dropdown('language', $lang, $lang_act);       
