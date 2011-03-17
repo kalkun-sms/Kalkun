@@ -18,7 +18,7 @@ Class Message_model extends Model {
 	//=================================================================	
 
 	function sendMessages($data)
-	{
+	{		
 		if($data['dest']!=NULL && $data['date']!=NULL && $data['message']!=NULL)
 		{
 			// Check message's length	
@@ -44,6 +44,11 @@ Class Message_model extends Model {
 			// Multipart message
 			if($messagelength > $standar_length)
 			{
+				// generate UDH
+				$UDH = "050003";
+				$UDH .= strtoupper(dechex(mt_rand(0, 255)));
+				$data['UDH'] = $UDH;
+						
 				// split string
 				$tmpmsg = str_split($data['message'], $multipart_length);
 				
@@ -62,7 +67,7 @@ Class Message_model extends Model {
 				
 				// insert the rest part to Outbox Multipart
 				for($i=1; $i<count($tmpmsg); $i++) 
-					$this->sendMessageMultipart($outboxid, $tmpmsg[$i], $i, $part, $data['coding']);
+					$this->sendMessageMultipart($outboxid, $tmpmsg[$i], $i, $part, $data['coding'], $data['class'], $UDH);
 			}		
 			else 
 			{
@@ -91,7 +96,7 @@ Class Message_model extends Model {
 		if($tmp_data['option']=='multipart')
 		{
 			$data['MultiPart'] = 'true'; 
-			$data['UDH'] = '050003D3'.$tmp_data['part'].'01'; 
+			$data['UDH'] = $tmp_data['UDH'].$tmp_data['part'].'01'; 
 		}
 					
 		$this->db->insert('outbox', $data);
@@ -104,17 +109,17 @@ Class Message_model extends Model {
 		$this->db->insert('user_outbox', $user);		
 	}	
 	
-	private function sendMessageMultipart($outboxid, $message, $pos, $part, $coding) 
+	private function sendMessageMultipart($outboxid, $message, $pos, $part, $coding, $class, $UDH) 
 	{
 		$code = $pos+1;
 		if($code < 10) $code = '0'.$code;
 		
 		$data = array (
 				'ID' => $outboxid,
-				'UDH' => '050003D3'.$part.''.$code,
+				'UDH' => $UDH.$part.''.$code,
 				'SequencePosition' => $pos+1,
 				'Coding' => $coding,
-				'Class' => $this->input->post('sms_mode'),
+				'Class' => $class,
 				'TextDecoded' => $message,
 				);	
 		$this->db->insert('outbox_multipart',$data);						
@@ -266,25 +271,95 @@ Class Message_model extends Model {
 		switch($type)
 		{
 			case 'inbox':
-				$sql = "select ".$tmp_select." from inbox, user_inbox, (select max(ReceivingDateTime) as maxdate from inbox,user_inbox where id_folder='".$tmp_id_folder."' and inbox.ID=user_inbox.id_inbox and user_inbox.id_user='".$user_id."' group by SenderNumber) as maxresult";
-				$sql.= " where inbox.ID=user_inbox.id_inbox and user_inbox.id_user='".$user_id."' and id_folder='".$tmp_id_folder."' and user_inbox.trash='".$tmp_trash."' and inbox.ReceivingDateTime=maxresult.maxdate group by SenderNumber order by ReceivingDateTime DESC";
+				$this->db->from('inbox');
+				$this->db->select_max('ReceivingDateTime', 'maxdate');
+				$this->db->join('user_inbox','user_inbox.id_inbox=inbox.ID');
+				$this->db->where('id_user', $user_id);
+				$this->db->where('id_folder', $tmp_id_folder);
+				$this->db->group_by('SenderNumber');
+				
+				$sub_sql = $this->db->_compile_select();
+				$this->db->_reset_select();
+				
+				$this->db->from("($sub_sql) as maxresult,inbox");
+				$this->db->join('user_inbox','user_inbox.id_inbox=inbox.ID');
+				$this->db->where('id_user', $user_id);
+				$this->db->where('id_folder', $tmp_id_folder);
+				$this->db->where('trash', $tmp_trash);
+				
+				$engine = $this->db->platform();
+				if($engine=='postgre')
+				{
+					$this->db->where('"ReceivingDateTime"', 'maxresult.maxdate', FALSE);
+					//$this->db->select_max('text');
+					//$this->db->select_max('inbox.ReceivingDateTime');
+					$this->db->select($tmp_select);
+				}
+				else
+				{
+					$this->db->where('ReceivingDateTime', 'maxresult.maxdate', FALSE);
+					$this->db->select($tmp_select);
+				}
+				//$this->db->group_by('SenderNumber');
+				$this->db->order_by('ReceivingDateTime', 'DESC');
 			break;
 			
 			case 'outbox':
+				$this->db->from('outbox');
+				$this->db->select_max('SendingDateTime', 'maxdate');
+				$this->db->join('user_outbox','outbox.ID=user_outbox.id_outbox');
+				$this->db->where('id_user', $user_id);
+				$this->db->group_by('DestinationNumber');
+				
+				$sub_sql = $this->db->_compile_select();
+				$this->db->_reset_select();
+				
+				$this->db->from("outbox, ($sub_sql) as maxresult");
+				$this->db->select($tmp_select);
+				$this->db->join('user_outbox','outbox.ID=user_outbox.id_outbox');
+				$this->db->where('id_user', $user_id);
+				$this->db->where('SendingDateTime', 'maxresult.maxdate', FALSE);
+				$this->db->group_by('DestinationNumber');
+				$this->db->order_by('SendingDateTime', 'DESC');
+							
+				// deprecated			
 				$sql = "select ".$tmp_select." from outbox, user_outbox, (select max(SendingDateTime) as maxdate from outbox, user_outbox where outbox.ID=user_outbox.id_outbox and user_outbox.id_user='".$user_id."' group by DestinationNumber) as maxresult";
 				$sql.= " where outbox.ID=user_outbox.id_outbox and user_outbox.id_user='".$user_id."' and outbox.SendingDateTime=maxresult.maxdate group by DestinationNumber order by SendingDateTime DESC";
 			break;
 			
 			case 'sentitems':
+				$this->db->from('sentitems');
+				$this->db->select_max('SendingDateTime', 'maxdate');
+				$this->db->join('user_sentitems','sentitems.ID=user_sentitems.id_sentitems');
+				$this->db->where('id_user', $user_id);
+				$this->db->where('id_folder', $tmp_id_folder);
+				$this->db->where('SequencePosition', '1');
+				$this->db->group_by('DestinationNumber');
+				
+				$sub_sql = $this->db->_compile_select();
+				$this->db->_reset_select();
+				
+				$this->db->from("sentitems, ($sub_sql) as maxresult");
+				$this->db->select($tmp_select);
+				$this->db->join('user_sentitems','sentitems.ID=user_sentitems.id_sentitems');
+				$this->db->where('id_user', $user_id);
+				$this->db->where('id_folder', $tmp_id_folder);
+				$this->db->where('SequencePosition', '1');
+				$this->db->where('trash', $tmp_trash);
+				$this->db->where('SendingDateTime', 'maxresult.maxdate', FALSE);
+				$this->db->group_by('DestinationNumber');
+				$this->db->order_by('SendingDateTime', 'DESC');
+				
+				// deprecated			
 				$sql = "select ".$tmp_select." from sentitems, user_sentitems, (select max(SendingDateTime) as maxdate from sentitems, user_sentitems where sentitems.ID=user_sentitems.id_sentitems and user_sentitems.id_user='".$user_id."' and id_folder='".$tmp_id_folder."' and SequencePosition='1' group by DestinationNumber) as maxresult";
 				$sql.= " where sentitems.ID=user_sentitems.id_sentitems and user_sentitems.id_user='".$user_id."' and id_folder='".$tmp_id_folder."' and SequencePosition='1' and user_sentitems.trash='".$tmp_trash."' and sentitems.SendingDateTime=maxresult.maxdate group by DestinationNumber order by SendingDateTime DESC";			
 			break;
 		}
 		
-		if($option=='paginate') $sql.= " limit ".$limit." offset ".$offset."";
+		if($option=='paginate') $this->db->limit($limit, $offset);
 		
-		if($option=='count') return $this->db->query($sql)->num_rows();
-		else return $this->db->query($sql);
+		if($option=='count') return $this->db->get()->num_rows();
+		else return $this->db->get();
 	}
 	
 
