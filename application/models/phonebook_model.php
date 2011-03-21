@@ -42,7 +42,7 @@ function getPhonebook($param)
 	
 	case 'group':
 	$this->db->select('*');
-	$this->db->select('Name as GroupName');
+	$this->db->select_as('Name','GroupName');
 	$this->db->from('pbk_groups');
 	$this->db->where('id_user', $this->session->userdata('id_user'));
 	$this->db->order_by('Name');

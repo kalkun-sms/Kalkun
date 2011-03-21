@@ -32,6 +32,21 @@ class Messages extends MY_Controller {
 				case 'inbox':
 				$tmp_number = 'SenderNumber';
 				$data['message'] = $this->Message_model->getMessagesbyID('inbox', $id)->row('TextDecoded');
+				
+				// check multipart
+				$multipart['type'] = 'inbox';
+				$multipart['option'] = 'check';
+				$multipart['id_message'] = $id;
+				$tmp_check = $this->Message_model->getMultipart($multipart);
+				if($tmp_check->row('UDH')!='')
+				{
+					$multipart['option'] = 'all';
+					$multipart['udh'] = substr($tmp_check->row('UDH'),0,8);
+					$multipart['phone_number'] = $tmp_check->row('SenderNumber');					
+					foreach($this->Message_model->getMultipart($multipart)->result() as $part):
+					$data['message'] .= $part->TextDecoded;
+					endforeach;	
+				}				
 				break;
 				
 				case 'sentitems':
@@ -39,24 +54,29 @@ class Messages extends MY_Controller {
 				$data['message'] = $this->Message_model->getMessagesbyID('sentitems', $id)->row('TextDecoded');
 				
 				// check multipart
-				$tmp_check = $this->Message_model->getMultipart('sentitems', 'check', $id);
+				$multipart['type'] = 'sentitems';
+				$multipart['option'] = 'check';
+				$multipart['id_message'] = $id;
+				$tmp_check = $this->Message_model->getMultipart($multipart);
 				if($tmp_check!=0)
 				{
-					foreach($this->Message_model->getMultipart('sentitems', 'all', $id)->result() as $part):
+					$multipart['option'] = 'all';
+					foreach($this->Message_model->getMultipart($multipart)->result() as $part):
 					$data['message'] .= $part->TextDecoded;
 					endforeach;	
 				}
-			break;
+				break;
 			}
 		
+			// deprecated
 			// get phone number
-			$tmp_source = $this->Message_model->getMessagesbyID($source, $id)->row($tmp_number);
+			// $tmp_source = $this->Message_model->getMessagesbyID($source, $id)->row($tmp_number);
 			
 			// check phonebook name by phone number
-			$tmp_check = $this->Phonebook_model->getPhonebook(array('option'=>'bynumber', 'number'=>$tmp_source));
-			if($tmp_check->num_rows()!=0) $tmp_source = $tmp_check->row('Name').'  <'.$tmp_source.'>';
+			// $tmp_check = $this->Phonebook_model->getPhonebook(array('option'=>'bynumber', 'number'=>$tmp_source));
+			// if($tmp_check->num_rows()!=0) $tmp_source = $tmp_check->row('Name').'  <'.$tmp_source.'>';
 			
-			$data['message'] = "Original message from: ".$tmp_source."\n\n".$data['message'];		
+			// $data['message'] = "Original message from: ".$tmp_source."\n\n".$data['message'];		
 		}
 		else if($type=='reply') $data['dest'] = $this->input->post('param1');
 		else if($type=='pbk_contact') $data['dest'] = $this->input->post('param1');
@@ -263,7 +283,7 @@ class Messages extends MY_Controller {
 		{
 			$data['main'] = 'main/messages/index';
 			$inbox = $this->Message_model->getMessages('inbox', 'by_number', NULL, NULL, trim(base64_decode(HexToAscii($number))))->result_array();	
-			
+
 			// add global date for sorting
 			foreach($inbox as $key=>$tmp):
 			$inbox[$key]['globaldate'] = $inbox[$key]['ReceivingDateTime'];
@@ -271,7 +291,7 @@ class Messages extends MY_Controller {
 			endforeach;
 			
 			$sentitems = $this->Message_model->getMessages('sentitems', 'by_number', NULL, NULL, trim(base64_decode(HexToAscii($number))))->result_array();	
-			
+
 			// add global date for sorting
 			foreach($sentitems as $key=>$tmp):
 			$sentitems[$key]['globaldate'] = $sentitems[$key]['SendingDateTime'];
@@ -315,7 +335,7 @@ class Messages extends MY_Controller {
 			endforeach;
 			
 			$sentitems = $this->Message_model->getMessages('sentitems', 'by_number', $id_folder, NULL, trim(base64_decode(HexToAscii($number))))->result_array();							
-			
+
 			// add global date for sorting
 			foreach($sentitems as $key=>$tmp):
 			$sentitems[$key]['globaldate'] = $sentitems[$key]['SendingDateTime'];

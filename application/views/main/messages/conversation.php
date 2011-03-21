@@ -55,23 +55,42 @@ else
 			
 <?php
 if($tmp['source'] == 'sentitems'):
-
-// check delivery status
-$status = check_delivery_report($tmp['Status']);
-
-$part_no = 1;
-//check multipart
-if($this->Message_model->getMultipart('sentitems', 'check', $tmp['ID'])!=0):
-	foreach($this->Message_model->getMultipart('sentitems', 'all', $tmp['ID'])->result() as $part):
-	$tmp['TextDecoded'].=$part->TextDecoded;
-	$part_no++;
-	endforeach;			
-endif;
+	// check delivery status
+	$status = check_delivery_report($tmp['Status']);
+	$part_no = 1;
+	//check multipart
+	$multipart['type'] = 'sentitems';
+	$multipart['option'] = 'check';
+	$multipart['id_message'] = $tmp['ID'];
+	if($this->Message_model->getMultipart($multipart)!=0):
+		$multipart['option'] = 'all';
+		foreach($this->Message_model->getMultipart($multipart)->result() as $part):
+		$tmp['TextDecoded'].=$part->TextDecoded;
+		$part_no++;
+		endforeach;			
+	endif;
 elseif($tmp['source'] == 'outbox'): 
 	//check multipart
-	if($this->Message_model->getMultipart('outbox', 'check', $tmp['ID'])=='true'):
+	$multipart['type'] = 'outbox';
+	$multipart['option'] = 'check';
+	$multipart['id_message'] = $tmp['ID'];	
+	if($this->Message_model->getMultipart($multipart)=='true'):
 		$part_no = 1;
-		foreach($this->Message_model->getMultipart('outbox', 'all', $tmp['ID'])->result_array() as $part):
+		$multipart['option'] = 'all';
+		foreach($this->Message_model->getMultipart($multipart)->result_array() as $part):
+		$tmp['TextDecoded'].=$part['TextDecoded'];
+		$part_no++;
+		endforeach;
+	endif;
+elseif($tmp['source'] == 'inbox'):
+	$part_no = 1;
+	// check multipart
+	if(!empty($tmp['UDH'])):	
+		$multipart['type'] = 'inbox';
+		$multipart['option'] = 'all';
+		$multipart['udh'] = substr($tmp['UDH'],0,8);
+		$multipart['phone_number'] = $tmp['SenderNumber'];
+		foreach($this->Message_model->getMultipart($multipart)->result_array() as $part):
 		$tmp['TextDecoded'].=$part['TextDecoded'];
 		$part_no++;
 		endforeach;
@@ -96,12 +115,13 @@ endif;
     <tr><td>SMSC</td><td> : </td><td><?php echo $tmp['SMSCNumber'];?></td></tr>
     <?php endif; ?>
     
-    <?php if($tmp['source'] == 'sentitems'): ?>
+    <?php if($tmp['source'] == 'sentitems' OR $tmp['source'] == 'inbox'): ?>
     <?php if($part_no > 1): ?>
     <tr><td>Part</td><td> : </td><td><?php echo $part_no;?> part messages</td></tr>
-    <?php  endif;?>			    
+    <?php endif;?>	
+    <?php elseif($tmp['source'] == 'sentitems'): ?>		    
     <tr><td><?php echo lang('tni_status');?></td><td> : </td><td><?php echo $status;?></td></tr>
-    <?php  endif;?>
+    <?php endif;?>
 	</table>
 	</div>			
 		

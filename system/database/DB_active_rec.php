@@ -34,6 +34,7 @@ class CI_DB_active_record extends CI_DB_driver {
 	var $ar_join				= array();
 	var $ar_where				= array();
 	var $ar_like				= array();
+	var $ar_or_like				= FALSE;
 	var $ar_groupby				= array();
 	var $ar_having				= array();
 	var $ar_limit				= FALSE;
@@ -100,6 +101,42 @@ class CI_DB_active_record extends CI_DB_driver {
 		}
 		return $this;
 	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Select AS
+	 *
+	 * Generates the SELECT(field AS) portion of the query
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	object
+	 */
+	function select_as($select = '', $alias = '')
+	{		
+		if ( ! is_string($select) OR $select == '')
+		{
+			$this->display_error('db_invalid_query');
+		}
+
+		if ( ! is_string($alias) OR $alias == '')
+		{
+			$this->display_error('db_invalid_query');
+		}		
+
+		$sql = $this->_protect_identifiers(trim($select)).' AS '.$this->_protect_identifiers(trim($alias));
+
+		$this->ar_select[] = $sql;
+		
+		if ($this->ar_caching === TRUE)
+		{
+			$this->ar_cache_select[] = $sql;
+			$this->ar_cache_exists[] = 'select';
+		}		
+
+		return $this;
+	}	 	
 
 	// --------------------------------------------------------------------
 
@@ -648,6 +685,8 @@ class CI_DB_active_record extends CI_DB_driver {
 	 */
 	function or_like($field, $match = '', $side = 'both')
 	{
+		// Az
+		$this->ar_or_like = TRUE;
 		return $this->_like($field, $match, 'OR ', $side);
 	}
 
@@ -666,6 +705,8 @@ class CI_DB_active_record extends CI_DB_driver {
 	 */
 	function or_not_like($field, $match = '', $side = 'both')
 	{
+		// Az
+		$this->ar_or_like = TRUE;
 		return $this->_like($field, $match, 'OR ', $side, 'NOT');
 	}
 	
@@ -706,7 +747,7 @@ class CI_DB_active_record extends CI_DB_driver {
 			$k = $this->_protect_identifiers($k);
 
 			$prefix = (count($this->ar_like) == 0) ? '' : $type;
-
+			
 			$v = $this->escape_like_str($v);
 
 			if ($side == 'before')
@@ -1556,7 +1597,11 @@ class CI_DB_active_record extends CI_DB_driver {
 		{
 			if (count($this->ar_where) > 0)
 			{
-				$sql .= "\nAND ";
+				// Default
+				//$sql .= "\nAND ";
+				
+				// Az
+				$sql .= ($this->ar_or_like) ? "\nOR " : "\nAND ";
 			}
 
 			$sql .= implode("\n", $this->ar_like);
@@ -1775,6 +1820,7 @@ class CI_DB_active_record extends CI_DB_driver {
 								'ar_join'			=> array(), 
 								'ar_where'			=> array(), 
 								'ar_like'			=> array(), 
+								'ar_or_like'		=> FALSE, // Az
 								'ar_groupby'		=> array(), 
 								'ar_having'			=> array(), 
 								'ar_orderby'		=> array(), 
