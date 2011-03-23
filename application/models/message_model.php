@@ -1,23 +1,58 @@
 <?php
-Class Message_model extends Model {
+/**
+ * Kalkun
+ * An open source web based SMS Management
+ *
+ * @package		Kalkun
+ * @author		Kalkun Dev Team
+ * @license		http://kalkun.sourceforge.net/license.php
+ * @link		http://kalkun.sourceforge.net
+ */
+
+// ------------------------------------------------------------------------
+
+/**
+ * Message_model Class
+ *
+ * @package		Kalkun
+ * @subpackage	Messages
+ * @category	Models
+ */
+class Message_model extends Model { 
 	
+	var $udh = '';
+	
+	/**
+	 * Constructor
+	 *
+	 * @access	public
+	 */
 	function Message_model()
 	{
 		parent::Model();
 	}
-	
-	//	name: 		sendMessages
-	//	@param:		type ('inbox', 'sentitems','outbox')
-	//				option ('all', 'unread', 'by_number', 'by_id', 'count', 'unread_count')
-	//				id_folder int
-	//				id_message int
-	//				number int
-	//	@return: 	array/object
-	//
-	//  note: by_id option not work, use getMessagesbyID instead
-	//=================================================================	
 
-	function sendMessages($data)
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Send Messages
+	 *
+	 * Get messages from inbox, outbox, sentitems
+	 *
+	 * @access	public   		 
+	 * @param	mixed $options 
+	 * Option: Values
+	 * --------------
+	 * dest string, phone number destination
+	 * date datetime
+	 * message string
+	 * coding default, unicode
+	 * class -1, 0, 1
+	 * delivery_report default, yes, no
+	 * uid int
+	 * @return	object
+	 */	
+	function send_messages($data)
 	{		
 		if($data['dest']!=NULL && $data['date']!=NULL && $data['message']!=NULL)
 		{
@@ -130,32 +165,45 @@ Class Message_model extends Model {
 		$sql = "select max(ID) as value from outbox";
 		return $this->db->query($sql);	
 	}	
+
+
+	// --------------------------------------------------------------------
 	
-	
-	//=================================================================
-	//	name: 		getMessages
-	//	@param:		type ('inbox', 'sentitems','outbox')
-	//				option ('all', 'unread', 'by_number', 'by_id', 'count', 'unread_count')
-	//				id_folder int
-	//				id_message int
-	//				number int
-	//	@return: 	array/object
-	//
-	//  note: by_id option not work, use getMessagesbyID instead
-	//=================================================================	
-	
-	function getMessages($type=NULL, $option=NULL, $id_folder=NULL, $id_message=NULL, $number=NULL)
+	/**
+	 * Get Messages
+	 *
+	 * Get messages from inbox, outbox, sentitems
+	 *
+	 * @access	public   		 
+	 * @param	mixed $options 
+	 * Option: Values
+	 * --------------
+	 * type inbox, outbox, sentitems
+	 * id_folder int
+	 * id_message int
+	 * number string
+	 * processed bool
+	 * readed bool
+	 * uid int
+	 * @return	object
+	 */	
+	function get_messages($options = array())
 	{
+		// default values
+    	$options = $this->_default(array('type' => 'inbox'), $options);
+    
+    	// register valid type
 		$valid_type = array('inbox', 'outbox', 'sentitems');
-		$valid_option = array('by_number', 'by_number_count', 'by_id', 'count', 'unprocessed');
 		
-		if(!in_array($type, $valid_type) || !in_array($option, $valid_option)) 
-		die('<b>Invalid type/option request on Message_model->getMessages function.</b>');
+		// check if it's valid type
+		if(!in_array($options['type'], $valid_type)) 
+		die('Invalid type request on class '.get_class($this).' function '.__FUNCTION__);		
 		
-		$user_folder = "user_".$type;
-		$user_id = $this->session->userdata('id_user');
+		$user_folder = "user_".$options['type'];
+		$this->db->from($options['type']);
 		
-		if($type=='inbox')
+		// set valid field name
+		if($options['type']=='inbox')
 		{
 			$tmp_number = 'SenderNumber'; 
 			$tmp_order = 'ReceivingDateTime';	
@@ -165,22 +213,55 @@ Class Message_model extends Model {
 		{
 			$tmp_number = 'DestinationNumber';
 			$tmp_order = 'SendingDateTime';	
-			if($type=='sentitems') $this->db->where('SequencePosition', '1');		
+			if($options['type']=='sentitems') $this->db->where('SequencePosition', '1');		
 		}
-		
-		if($option=='count' || $option=='by_number_count') $tmp_select = 'count(*) as count';
-		else $tmp_select = '*';
-		
-		$this->db->select($tmp_select);
-		$this->db->from($type);
-		
-		if($id_folder!=NULL) $this->db->where('id_folder', $id_folder);
-		else 
+						
+		// if id message if set
+		if(isset($options['id_message'])) $this->db->where('ID', $options['id_message']);
+		else
 		{
-			if($type!='outbox') $this->db->where('id_folder', array_search($type, $valid_type)+1);
+			// if id folder is set, else use default value (inbox = 1, sentitems = 3)
+			if(isset($options['id_folder'])) $this->db->where('id_folder', $options['id_folder']);
+			else 
+			{
+				if($options['type']!='outbox') $this->db->where('id_folder', array_search($options['type'], $valid_type)+1);
+			}			
 		}
-							
-		switch($option)
+		
+		// if phone number if set
+		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
+
+		// if readed if set
+		if(isset($options['readed']) && is_bool($options['readed'])) 
+		{
+			// valid only for inbox
+			if($options['type']=='inbox')
+			{
+				$readed = ($options['readed']) ? 'true' : 'false'; 
+				$this->db->where('readed', $readed);	
+			}
+		}
+
+		// if processed if set
+		if(isset($options['processed']) && is_bool($options['processed'])) 
+		{
+			// valid only for inbox
+			if($options['type']=='inbox')
+			{
+				$processed = ($options['processed']) ? 'true' : 'false'; 
+				$this->db->where('Processed', $processed);
+			}
+		}		
+		
+		// join user table
+		if(isset($options['uid']))
+		{
+			$this->db->join($user_folder, $user_folder.'.id_'.$options['type'].'='.$options['type'].'.ID');
+			$this->db->where($user_folder.'.id_user',$options['uid']);		
+		}
+		
+		// deprecated				
+		/*switch($option)
 		{
 			case 'by_id':
 				$this->db->where('ID', $id_message);
@@ -200,22 +281,26 @@ Class Message_model extends Model {
 		if($option!='unprocessed') {
 			$this->db->join($user_folder, $user_folder.'.id_'.$type.'='.$type.'.ID');
 			$this->db->where($user_folder.'.id_user',$user_id);
-		}
+		}*/
 		
-		if($option=='count' || $option=='by_number_count') return $this->db->get()->row('count');
-		else return $this->db->get();
+		//if($option=='count' || $option=='by_number_count') return $this->db->get()->row('count');
+		//else return $this->db->get();
+		$result = $this->db->get();
+	
+		return $result;
 	}
 	
+	// deprecated
 	// get unProcesses inbox 
-	function getUnprocessed()
+	/*function getUnprocessed()
 	{
 		$this->db->where('Processed', 'false');
 		return $this->db->get('inbox');
-	}
+	}*/
 	
-	
+	// deprecated
 	// get unread message from inbox
-	function getUnread($id_folder=NULL)
+	/*function getUnread($id_folder=NULL)
 	{
 		$this->db->select('count(*) as count');
 		$this->db->from('inbox');
@@ -225,10 +310,10 @@ Class Message_model extends Model {
 		if($id_folder!=NULL) $this->db->where('id_folder', $id_folder);
 		else $this->db->where('id_folder', '1');
 		return $this->db->get()->row('count');	
-	}
+	}*/
 	
-	
-	function getMessagesbyID($type=NULL, $id_message=NULL)
+	// deprecated
+	/*function getMessagesbyID($type=NULL, $id_message=NULL)
 	{
 		$this->db->select('TextDecoded');
 		if($type=='inbox') $this->db->select('SenderNumber');
@@ -238,38 +323,72 @@ Class Message_model extends Model {
 		$this->db->where('ID', $id_message);
 		
 		return $this->db->get();
-	}
+	}*/
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	* _default method combines the options array with a set of defaults 
+	* giving the values in the options array priority.
+	*
+	* @param array $defaults
+	* @param array $options
+	* @return array
+	*/
+	function _default($defaults, $options)
+	{
+	    return array_merge($defaults, $options);
+	}	
 	
 
-	//=================================================================
-	//	name: 		getConversation
-	//	@param:		type ('inbox', 'sentitems','outbox')
-	//				option ('all', 'paginate')
-	//				id_folder int
-	//				limit int
-	//				offset int
-	//	@return: 	array/object
-	//=================================================================	
-		
-	function getConversation($type=NULL, $option=NULL, $id_folder=NULL, $limit=NULL, $offset=NULL, $trash=NULL)
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Get Conversation
+	 *
+	 * Get list of conversation
+	 *
+	 * @access	public   		 
+	 * @param	mixed $options 
+	 * Option: Values
+	 * --------------
+	 * type inbox, outbox, sentitems
+	 * id_folder int
+	 * limit int
+	 * offset int
+	 * trash bool
+	 *
+	 * @return	object
+	 */			
+	function get_conversation($options = array())
 	{
+		// default values
+    	$options = $this->_default(array('type' => 'inbox'), $options);
+    
+    	// register valid type
 		$valid_type = array('inbox', 'outbox', 'sentitems');
-		$valid_option = array('all', 'paginate', 'count');
 		
-		if(!in_array($type, $valid_type) || !in_array($option, $valid_option)) 
-		die('<b>Invalid type/option request on Message_model->getConversation function.</b>');
-			
+		// check if it's valid type
+		if(!in_array($options['type'], $valid_type)) 
+		die('Invalid type request on class '.get_class($this).' function '.__FUNCTION__);
+							
 		$user_id = $this->session->userdata('id_user');
-		if($option=='count') $tmp_select = "count(*) as count";
-		else $tmp_select = "*";
 		
-		if($id_folder!=NULL) $tmp_id_folder = $id_folder;
-		else $tmp_id_folder = array_search($type, $valid_type)+1;
+		// deprecated
+		// if($option=='count') $tmp_select = "count(*) as count";
+		// else $tmp_select = "*";
 		
-		if($id_folder=='5') $tmp_trash='1';
+		// if($id_folder!=NULL) $tmp_id_folder = $id_folder;
+		// else $tmp_id_folder = array_search($type, $valid_type)+1;
+
+		// if id folder is set, else use default value (inbox = 1, outbox = 2, sentitems = 3)
+		if(isset($options['id_folder'])) $tmp_id_folder = $options['id_folder'];
+		else $tmp_id_folder = array_search($options['type'], $valid_type)+1;
+		
+		if(isset($options['id_folder']) && $options['id_folder']=='5') $tmp_trash='1';
 		else $tmp_trash='0';
 		
-		switch($type)
+		switch($options['type'])
 		{
 			case 'inbox':
 				$this->db->from('inbox');
@@ -294,12 +413,12 @@ Class Message_model extends Model {
 					$this->db->where('"ReceivingDateTime"', 'maxresult.maxdate', FALSE);
 					//$this->db->select_max('text');
 					//$this->db->select_max('inbox.ReceivingDateTime');
-					$this->db->select($tmp_select);
+					//$this->db->select($tmp_select);
 				}
 				else
 				{
 					$this->db->where('ReceivingDateTime', 'maxresult.maxdate', FALSE);
-					$this->db->select($tmp_select);
+					//$this->db->select($tmp_select);
 				}
 				//$this->db->group_by('SenderNumber');
 				$this->db->order_by('ReceivingDateTime', 'DESC');
@@ -316,7 +435,7 @@ Class Message_model extends Model {
 				$this->db->_reset_select();
 				
 				$this->db->from("outbox, ($sub_sql) as maxresult");
-				$this->db->select($tmp_select);
+				//$this->db->select($tmp_select);
 				$this->db->join('user_outbox','outbox.ID=user_outbox.id_outbox');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('SendingDateTime', 'maxresult.maxdate', FALSE);
@@ -341,7 +460,7 @@ Class Message_model extends Model {
 				$this->db->_reset_select();
 				
 				$this->db->from("sentitems, ($sub_sql) as maxresult");
-				$this->db->select($tmp_select);
+				//$this->db->select($tmp_select);
 				$this->db->join('user_sentitems','sentitems.ID=user_sentitems.id_sentitems');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
@@ -357,36 +476,214 @@ Class Message_model extends Model {
 			break;
 		}
 		
-		if($option=='paginate') $this->db->limit($limit, $offset);
+		// deprecated
+		// if($option=='paginate') $this->db->limit($limit, $offset);
 		
-		if($option=='count') return $this->db->get()->num_rows();
-		else return $this->db->get();
+		// if($option=='count') return $this->db->get()->num_rows();
+		// else return $this->db->get();
+		
+		if(isset($options['limit']) && isset($options['offset'])) 
+		{
+			$this->db->limit($options['limit'], $options['offset']);
+		}
+		return $this->db->get();
 	}
+
+	// --------------------------------------------------------------------
 	
-
-
-	//=================================================================
-	//	name: 		delMessages
-	//	@param:		type ('conversation', 'single')
-	//				source ('inbox', 'outbox', 'sentitems')
-	//				option ('permanent', 'temp', 'outbox')
-	//				id int
-	//=================================================================	
-
-	function delMessages($type, $source, $option, $id=NULL)
+	/**
+	 * Move Messages
+	 *
+	 * Move messages from a folder to another folder
+	 *
+	 * @access	public   		 
+	 * @param	mixed $options 
+	 * Option: Values
+	 * --------------
+	 * type conversation, single
+	 * current_folder int, source folder, use with conversation type
+	 * id_folder int, destination folder, use with conversation and single type
+	 * number string, use with conversation type
+	 * folder inbox, sentitems, use with single type
+	 * id_message, use with single type
+	 * trash, bool
+	 * 
+	 * @return	object
+	 */		 
+	function move_messages($options = array())
 	{
+		// default values
+    	$options = $this->_default(array('trash' => FALSE), $options);
+    	$trash = ($options['trash']) ? '1':'0';
+    			
+		switch($options['type']) 
+		{	
+			case 'conversation':
+			$id_folder = $options['id_folder'];
+			$number = $options['number'];
+					
+			if($options['current_folder']=='') 
+			{ 
+				$inbox_folder=1;
+				$sentitems_folder=3; 
+			}
+			else
+			{
+				$inbox_folder=$sentitems_folder=$options['current_folder'];
+			}
+			
+			// deprecated
+			// $inbox = $this->db->query("select ID from inbox where id_folder='".$inbox_folder."' and SenderNumber = '".$number."'");
+			
+			// deprecated
+			/*$this->db->select('ID');
+			$this->db->where('id_folder', $inbox_folder);
+			$this->db->where('SenderNumber', $number);
+			$inbox = $this->db->get('inbox');
+			
+			foreach($inbox->result() as $tmp):
+				// deprecated
+				// $this->db->query("update inbox set id_folder='".."' where ID='".$tmp->ID."'");
+				// $this->db->query("update user_inbox set trash='0' where id_inbox='".$tmp->ID."'");
+				
+				$this->db->set('id_folder', $id_folder);
+				$this->db->where('ID', $tmp->ID);
+				$this->db->update('inbox');
+				
+				$this->db->set('trash', '0');
+				$this->db->where('id_inbox', $tmp->ID);
+				$this->db->update('user_inbox');
+			endforeach;*/
+						
+			// proccess inbox
+			$this->db->set('i.id_folder', $id_folder);
+			$this->db->set('ui.trash', $trash);
+			$this->db->where('i.id_folder', $inbox_folder);
+			$this->db->where('i.SenderNumber', $number);
+			$this->db->where('i.ID = ui.id_inbox'); /* FIXME */
+			$this->db->update('inbox as i, user_inbox as ui'); /* FIXME */
+
+			// deprecated
+			// $sentitems = $this->db->query("select ID from sentitems where id_folder='".$inbox_folder."' and DestinationNumber = '".$number."'");
+
+			// deprecated
+			/*$this->db->select('ID');
+			$this->db->where('id_folder', $sentitems_folder);
+			$this->db->where('DestinationNumber', $number);
+			$sentitems = $this->db->get('sentitems');
+			
+			foreach($sentitems->result() as $tmp):
+				// deprecated
+				// $this->db->query("update sentitems set id_folder='".$this->input->post('id_folder')."' where ID='".$tmp->ID."'");
+				// $this->db->query("update user_sentitems set trash='0' where id_sentitems='".$tmp->ID."'");
+
+				$this->db->set('id_folder', $id_folder);
+				$this->db->where('ID', $tmp->ID);
+				$this->db->update('sentitems');
+				
+				$this->db->set('trash', '0');
+				$this->db->where('id_sentitems', $tmp->ID);
+				$this->db->update('user_sentitems');				
+			endforeach;*/
+	
+			// proccess sentitems
+			$this->db->set('si.id_folder', $id_folder);
+			$this->db->set('usi.trash', $trash);
+			$this->db->where('si.id_folder', $sentitems_folder);
+			$this->db->where('si.DestinationNumber', $number);
+			$this->db->where('si.ID = usi.id_sentitems'); /* FIXME */
+			$this->db->update('sentitems as si, user_sentitems as usi'); /* FIXME */
+			break;	
+				
+			case 'single':
+			$folder = $options['folder'];
+			$id_folder = $options['id_folder'];
+			$id_message = $options['id_message'];			
+			$user_folder = "user_".$folder; // add user prefix
+			$id_folder_field = "id_".$folder; // add id prefix
+			
+			// deprecated
+			// $this->db->query("update ".$folder." set id_folder='".$this->input->post('id_folder')."' where ID = '".$this->input->post('id_message')."'");
+			// $this->db->query("update user_".$folder." set trash='0' where id_".$folder." = '".$this->input->post('id_message')."'");		
+			
+			/*
+			if($folder=='inbox')
+			{
+				$multipart['type'] = 'inbox';
+				$multipart['option'] = 'check';
+				$multipart['id_message'] = $id_message;
+				$tmp_check = $this->getMultipart($multipart);
+				if($tmp_check->row('UDH')!='')
+				{
+					$multipart['option'] = 'all';
+					$multipart['udh'] = substr($tmp_check->row('UDH'),0,8);
+					$multipart['phone_number'] = $tmp_check->row('SenderNumber');					
+					foreach($this->getMultipart($multipart)->result() as $part):
+					$id_message[] = $part->ID;
+					endforeach;	
+				}					
+			}*/
+			
+			// deprecated
+			/*foreach($id_message as $tmp):
+				$this->db->set('id_folder', $id_folder);
+				$this->db->where('ID', $tmp);
+				$this->db->update($options['folder']);
+				
+				$this->db->set('trash', '0');
+				$this->db->where($id_folder_field, $tmp);
+				$this->db->update($user_folder);
+			endforeach;*/
+
+			foreach($id_message as $tmp):
+		 		$this->db->set('a.id_folder', $id_folder);
+				$this->db->set('b.trash', $trash);
+				$this->db->where('a.ID', $tmp);
+				$this->db->where('a.ID = b.'.$id_folder_field); /* FIXME */
+				$this->db->update($folder.' as a, '.$user_folder.' as b'); /* FIXME */
+			endforeach;			
+			break;
+		}
+	}	
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Delete Messages
+	 *
+	 * Delete messages, permanent or temporary.
+	 *
+	 * @access	public   		 
+	 * @param	mixed $options 
+	 * Option: Values
+	 * --------------
+	 * type conversation, single
+	 * option permanent, temporary, outbox
+	 * current_folder int, source folder, use with conversation type
+	 * number string
+	 * source inbox, outbox, sentitems
+	 * id int, use with single type
+	 * 
+	 * @return	object
+	 */	
+	function delete_messages($options = array())
+	{
+		$type = $options['type'];
+		$source = $options['source'];
+		$option = $options['option'];
+
+		if(isset($options['id'])) $tmp_id = $options['id'];		
+		if(isset($options['number'])) $number = $options['number'];	
+		if(isset($options['current_folder'])) $current_folder = $options['current_folder'];	
+		
 		$user_source = "user_".$source;
 		$id_source = "id_".$source;	
-					
-		if($this->input->post('id')) $tmp_id = $this->input->post('id');
-		else $tmp_id = $id;		
-		
+							
 		switch($type)
 		{
 			case 'conversation':
-			$number = $this->input->post('number');
-			if($this->input->post('current_folder')=='') { $inbox_folder=1; $sentitems_folder=3; }
-			else $inbox_folder=$sentitems_folder=$this->input->post('current_folder');			
+			if(!isset($options['current_folder'])) { $inbox_folder=1; $sentitems_folder=3; }
+			else $inbox_folder=$sentitems_folder=$current_folder;			
 
 			switch($option)
 			{
@@ -410,8 +707,9 @@ Class Message_model extends Model {
 				// deprecated
 				// $inbox = $this->db->query("select ID from inbox where id_folder='".$inbox_folder."' and SenderNumber = '".$number."'");
 				
+				// deprecated
 				// same as moveMessage FIXME DRY
-				$this->db->select('ID');
+				/*$this->db->select('ID');
 				$this->db->where('id_folder', $inbox_folder);
 				$this->db->where('SenderNumber', $number);
 				$inbox = $this->db->get('inbox');
@@ -428,11 +726,23 @@ Class Message_model extends Model {
 					$this->db->set('trash', '1');
 					$this->db->where('id_inbox', $tmp->ID);
 					$this->db->update('user_inbox');					
-				endforeach;
+				endforeach;*/
+								
+				// use move_messages function
+				$param['type'] = 'conversation';
+				$param['number'] = $number;
+				$param['current_folder'] = $options['current_folder'];
+				$param['id_folder'] = '5';
+				$param['trash'] = TRUE;
+				//echo print_r($param);
+				$this->move_messages($param);
+				echo $this->db->last_query();
 				
 				// deprecated
 				// $sentitems = $this->db->query("select ID from sentitems where id_folder='".$sentitems_folder."' and DestinationNumber = '".$number."'");
-				$this->db->select('ID');
+								
+				// deprecated
+				/*$this->db->select('ID');
 				$this->db->where('id_folder', $sentitems_folder);
 				$this->db->where('DestinationNumber', $number);
 				$sentitems = $this->db->get('sentitems');
@@ -449,11 +759,11 @@ Class Message_model extends Model {
 					$this->db->set('trash', '1');
 					$this->db->where('id_sentitems', $tmp->ID);
 					$this->db->update('user_sentitems');
-				endforeach;						
+				endforeach;	*/					
 				break;
 				
 				case 'outbox':
-				$tmp_sql = $this->getMessages('outbox', 'by_number', NULL, NULL, $this->input->post('number'))->result_array();
+				$tmp_sql = $this->get_messages(array('type' => 'outbox', 'number' => $number))->result_array();
 				// looping all message
 				foreach($tmp_sql as $tmp):
 				//check multipart message
@@ -471,10 +781,13 @@ Class Message_model extends Model {
 			switch($option)
 			{				
 				case 'permanent':
-				$this->db->delete("user_".$source, array('id_'.$source => $tmp_id));
-				$this->db->delete($source, array('ID' => $tmp_id));
+				foreach($tmp_id as $tmp):
+					$this->db->delete("user_".$source, array('id_'.$source => $tmp));
+					$this->db->delete($source, array('ID' => $tmp));				
+				endforeach;
 
-				if($source=="inbox")
+				// deprecated
+				/*if($source=="inbox")
 				{
 					// check multipart
 					$multipart['type'] = 'inbox';
@@ -492,7 +805,7 @@ Class Message_model extends Model {
 							$this->db->delete($source, array('ID' => $part->ID));
 						endforeach;	
 					}	
-				}
+				}*/
 				break;	
 				
 				case 'temp':
@@ -500,7 +813,17 @@ Class Message_model extends Model {
 				// $this->db->query("update ".$source." set id_folder='5' where ID = '".$tmp_id."'");
 				// $this->db->query("update user_".$source." set trash='1' where id_".$source." = '".$tmp_id."'");
 
-				$this->db->set('id_folder', '5');
+
+				// use move_messages function
+				$param['type'] = 'single';
+				$param['id_message'] = $tmp_id;
+				$param['folder'] = $source;
+				$param['id_folder'] = '5';
+				$param['trash'] = TRUE;
+				$this->move_messages($param);
+				
+				// deprecated
+				/*$this->db->set('id_folder', '5');
 				$this->db->where('ID', $tmp_id);
 				$this->db->update($source);
 
@@ -532,123 +855,22 @@ Class Message_model extends Model {
 							$this->db->update($user_source);
 						endforeach;	
 					}
-				}
+				}*/
 				break;
 				
 				case 'outbox':
 				//check multipart message
-				$multipart = array('type' => 'outbox', 'option' => 'check', 'id_message' => $tmp_id);
+				$multipart = array('type' => 'outbox', 'option' => 'check', 'id_message' => $tmp_id[0]);
 				if($this->getMultipart($multipart)=='true')
-				$this->db->delete('outbox_multipart', array('ID' => $tmp_id));
+				$this->db->delete('outbox_multipart', array('ID' => $tmp_id[0]));
 				
-				$this->db->delete('outbox', array('ID' => $tmp_id));
+				$this->db->delete('outbox', array('ID' => $tmp_id[0]));
 				break;
 			}		
 			break;		
 		}		
 	}	
-
-
-	//=================================================================
-	//	name: 		MoveMessage
-	//	@param:		type ('conversation', 'single')
-	//				current_folder int
-	//				id_folder int
-	//=================================================================	
-
-	function MoveMessage()
-	{
-		switch($this->input->post('type')) 
-		{
-			case 'conversation':
-			if($this->input->post('current_folder')=='') { $inbox_folder=1; $sentitems_folder=3; }
-			else $inbox_folder=$sentitems_folder=$this->input->post('current_folder');
-			$number = $this->input->post('number');
-
-			// deprecated
-			// $inbox = $this->db->query("select ID from inbox where id_folder='".$inbox_folder."' and SenderNumber = '".$number."'");
-			
-			$this->db->select('ID');
-			$this->db->where('id_folder', $inbox_folder);
-			$this->db->where('SenderNumber', $number);
-			$inbox = $this->db->get('inbox');
-			
-			foreach($inbox->result() as $tmp):
-				// deprecated
-				// $this->db->query("update inbox set id_folder='".."' where ID='".$tmp->ID."'");
-				// $this->db->query("update user_inbox set trash='0' where id_inbox='".$tmp->ID."'");
-				
-				$this->db->set('id_folder', $this->input->post('id_folder'));
-				$this->db->where('ID', $tmp->ID);
-				$this->db->update('inbox');
-				
-				$this->db->set('trash', '0');
-				$this->db->where('id_inbox', $tmp->ID);
-				$this->db->update('user_inbox');
-			endforeach;
-
-			// deprecated
-			// $sentitems = $this->db->query("select ID from sentitems where id_folder='".$inbox_folder."' and DestinationNumber = '".$number."'");
-
-			$this->db->select('ID');
-			$this->db->where('id_folder', $sentitems_folder);
-			$this->db->where('DestinationNumber', $number);
-			$sentitems = $this->db->get('sentitems');
-			
-			foreach($sentitems->result() as $tmp):
-				// deprecated
-				// $this->db->query("update sentitems set id_folder='".$this->input->post('id_folder')."' where ID='".$tmp->ID."'");
-				// $this->db->query("update user_sentitems set trash='0' where id_sentitems='".$tmp->ID."'");
-
-				$this->db->set('id_folder', $this->input->post('id_folder'));
-				$this->db->where('ID', $tmp->ID);
-				$this->db->update('sentitems');
-				
-				$this->db->set('trash', '0');
-				$this->db->where('id_sentitems', $tmp->ID);
-				$this->db->update('user_sentitems');				
-			endforeach;
-			break;	
-				
-			case 'single':
-			$folder = $this->input->post('folder');
-			$user_folder = "user_".$folder;
-			$id_folder = "id_".$folder;
-			$id_message[] = $this->input->post('id_message');
-			
-			// deprecated
-			// $this->db->query("update ".$folder." set id_folder='".$this->input->post('id_folder')."' where ID = '".$this->input->post('id_message')."'");
-			// $this->db->query("update user_".$folder." set trash='0' where id_".$folder." = '".$this->input->post('id_message')."'");		
-			
-			if($this->input->post('folder')=='inbox')
-			{
-				$multipart['type'] = 'inbox';
-				$multipart['option'] = 'check';
-				$multipart['id_message'] = $this->input->post('id_message');
-				$tmp_check = $this->getMultipart($multipart);
-				if($tmp_check->row('UDH')!='')
-				{
-					$multipart['option'] = 'all';
-					$multipart['udh'] = substr($tmp_check->row('UDH'),0,8);
-					$multipart['phone_number'] = $tmp_check->row('SenderNumber');					
-					foreach($this->getMultipart($multipart)->result() as $part):
-					$id_message[] = $part->ID;
-					endforeach;	
-				}					
-			}
-			
-			foreach($id_message as $tmp):
-			$this->db->set('id_folder', $this->input->post('id_folder'));
-			$this->db->where('ID', $tmp);
-			$this->db->update($folder);
-			
-			$this->db->set('trash', '0');
-			$this->db->where($id_folder, $tmp);
-			$this->db->update($user_folder);
-			endforeach;			
-			break;
-		}
-	}	
+	
 	
 
 	//=================================================================
@@ -721,9 +943,11 @@ Class Message_model extends Model {
 	// Update processed inbox
 	function updateProcessed($id)
 	{
-		$data = array ('Processed' => 'true');
-		$this->db->where('ID', $id);		
-		$this->db->update('inbox', $data);
+		foreach($id as $tmp):
+			$data = array ('Processed' => 'true');
+			$this->db->where('ID', $tmp);		
+			$this->db->update('inbox', $data);
+		endforeach;
 	}		
 	
 	// Update ownership

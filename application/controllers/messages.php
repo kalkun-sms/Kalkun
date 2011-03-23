@@ -1,12 +1,38 @@
 <?php
+/**
+ * Kalkun
+ * An open source web based SMS Management
+ *
+ * @package		Kalkun
+ * @author		Kalkun Dev Team
+ * @license		http://kalkun.sourceforge.net/license.php
+ * @link		http://kalkun.sourceforge.net
+ */
+
+// ------------------------------------------------------------------------
+
+/**
+ * Messages Class
+ *
+ * @package		Kalkun
+ * @subpackage	Messages
+ * @category	Controllers
+ */
 class Messages extends MY_Controller {
 
+	/**
+	 * Constructor
+	 *
+	 * @access	public
+	 */
 	function Messages()
 	{
 		parent::MY_Controller();
 		
 		// session check
 		if($this->session->userdata('loggedin')==NULL) redirect('login');
+		
+		$param['uid'] = $this->session->userdata('id_user');
 	}
 	
 	//=================================================================
@@ -31,7 +57,9 @@ class Messages extends MY_Controller {
 			{
 				case 'inbox':
 				$tmp_number = 'SenderNumber';
-				$data['message'] = $this->Message_model->getMessagesbyID('inbox', $id)->row('TextDecoded');
+				$param['type'] = 'inbox';
+				$param['id_message'] = $id;
+				$data['message'] = $this->Message_model->get_messages($param)->row('TextDecoded');
 				
 				// check multipart
 				$multipart['type'] = 'inbox';
@@ -51,8 +79,9 @@ class Messages extends MY_Controller {
 				
 				case 'sentitems':
 				$tmp_number = 'DestinationNumber';
-				$data['message'] = $this->Message_model->getMessagesbyID('sentitems', $id)->row('TextDecoded');
-				
+				$param = array('type' => 'sentitems', 'id_message' => $id);
+				$data['message'] = $this->Message_model->get_messages($param)->row('TextDecoded');
+								
 				// check multipart
 				$multipart['type'] = 'sentitems';
 				$multipart['option'] = 'check';
@@ -181,7 +210,7 @@ class Messages extends MY_Controller {
 			$data['dest'] = $dest;				
 			for($i=1;$i<=$this->input->post('sms_loop');$i++) 
 			{ 
-				$this->Message_model->sendMessages($data);
+				$this->Message_model->send_messages($data);
 				$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
 			}
 			endforeach;
@@ -191,7 +220,7 @@ class Messages extends MY_Controller {
 			$data['dest'] = $dest;				
 			for($i=1; $i<=$this->input->post('sms_loop'); $i++) 
 			{ 
-				$this->Message_model->sendMessages($data); 
+				$this->Message_model->send_messages($data); 
 				$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
 			}
 		}
@@ -231,15 +260,22 @@ class Messages extends MY_Controller {
 		
 		if ($option=='ajax') 
 		{
-			$data['messages'] = $this->Message_model->getConversation($type, 'paginate', NULL, $config['per_page'], $offset);
+			$param['type'] = $type;
+			$param['limit'] = $config['per_page'];
+			$param['offset'] = $offset;
+			$data['messages'] = $this->Message_model->get_conversation($param);
 			$this->load->view('main/messages/message_list', $data);
 		}
 		else 
 		{
 			$config['base_url'] = site_url().'/messages/folder/'.$type;
-			$config['total_rows'] = $this->Message_model->getConversation($type, 'count');	
+			$config['total_rows'] = $this->Message_model->get_conversation(array('type' => $type))->num_rows();	
 			$config['uri_segment'] = 4;	
-			$data['messages'] = $this->Message_model->getConversation($type, 'paginate', NULL, $config['per_page'], $this->uri->segment(4,0));
+			
+			$param['type'] = $type;
+			$param['limit'] = $config['per_page'];
+			$param['offset'] = $this->uri->segment(4,0);			
+			$data['messages'] = $this->Message_model->get_conversation($param);
 			$this->pagination->initialize($config); 
 		
 			$data['main'] = 'main/messages/index';
@@ -261,18 +297,28 @@ class Messages extends MY_Controller {
 		
 		if ($option=='ajax') 
 		{
-			$data['messages'] = $this->Message_model->getConversation($type, 'paginate', $id_folder, $config['per_page'], $offset);
+			$param['type'] = $type;
+			$param['id_folder'] = $id_folder;
+			$param['limit'] = $config['per_page'];
+			$param['offset'] = $offset;			
+			$data['messages'] = $this->Message_model->get_conversation($param);
 			$this->load->view('main/messages/message_list', $data);
 		}
 		else 
 		{			
+			$param['type'] = $type;
+			$param['id_folder'] = $id_folder;
 			$config['base_url'] = site_url().'/messages/my_folder/'.$type.'/'.$id_folder;
-			$config['total_rows'] = $this->Message_model->getConversation($type, 'count', $id_folder);
+			$config['total_rows'] = $this->Message_model->get_conversation($param)->num_rows();
 			$config['uri_segment'] = 5;			
 			$this->pagination->initialize($config); 
 			
 			$data['main'] = 'main/messages/index';
-			$data['messages'] = $this->Message_model->getConversation($type, 'paginate', $id_folder, $config['per_page'], $this->uri->segment(5,0));
+			$param['type'] = $type;
+			$param['id_folder'] = $id_folder;
+			$param['limit'] = $config['per_page'];
+			$param['offset'] = $this->uri->segment(5,0);				
+			$data['messages'] = $this->Message_model->get_conversation($param);
 			$this->load->view('main/layout', $data);
 		}
 	}
@@ -282,7 +328,9 @@ class Messages extends MY_Controller {
 		if($source=='folder' && $type!='outbox') 
 		{
 			$data['main'] = 'main/messages/index';
-			$inbox = $this->Message_model->getMessages('inbox', 'by_number', NULL, NULL, trim(base64_decode(HexToAscii($number))))->result_array();	
+			$param['type'] = 'inbox';
+			$param['number'] = trim(base64_decode(HexToAscii($number)));
+			$inbox = $this->Message_model->get_messages($param)->result_array();	
 
 			// add global date for sorting
 			foreach($inbox as $key=>$tmp):
@@ -290,7 +338,9 @@ class Messages extends MY_Controller {
 			$inbox[$key]['source'] = 'inbox';
 			endforeach;
 			
-			$sentitems = $this->Message_model->getMessages('sentitems', 'by_number', NULL, NULL, trim(base64_decode(HexToAscii($number))))->result_array();	
+			$param['type'] = 'sentitems';
+			$param['number'] = trim(base64_decode(HexToAscii($number)));
+			$sentitems = $this->Message_model->get_messages($param)->result_array();	
 
 			// add global date for sorting
 			foreach($sentitems as $key=>$tmp):
@@ -314,7 +364,9 @@ class Messages extends MY_Controller {
 		else if($source=='folder' && $type=='outbox')
 		{
 			$data['main'] = 'main/messages/index';
-			$outbox = $this->Message_model->getMessages('outbox', 'by_number', NULL, NULL, trim(base64_decode(HexToAscii($number))))->result_array();	
+			$param['type'] = 'outbox';
+			$param['number'] = trim(base64_decode(HexToAscii($number)));
+			$outbox = $this->Message_model->get_messages($param)->result_array();	
 			
 			foreach($outbox as $key=>$tmp):
 			$outbox[$key]['source'] = 'outbox';
@@ -326,15 +378,21 @@ class Messages extends MY_Controller {
 		else 
 		{
 			$data['main'] = 'main/messages/index';
-			$inbox = $this->Message_model->getMessages('inbox', 'by_number', $id_folder, NULL, trim(base64_decode(HexToAscii($number))))->result_array();	
+			$param['type'] = 'inbox';
+			$param['id_folder'] = $id_folder;
+			$param['number'] = trim(base64_decode(HexToAscii($number)));
+			$inbox = $this->Message_model->get_messages($param)->result_array();	
 			
 			// add global date for sorting
 			foreach($inbox as $key=>$tmp):
 			$inbox[$key]['globaldate'] = $inbox[$key]['ReceivingDateTime'];
 			$inbox[$key]['source'] = 'inbox';
 			endforeach;
-			
-			$sentitems = $this->Message_model->getMessages('sentitems', 'by_number', $id_folder, NULL, trim(base64_decode(HexToAscii($number))))->result_array();							
+
+			$param['type'] = 'sentitems';
+			$param['id_folder'] = $id_folder;
+			$param['number'] = trim(base64_decode(HexToAscii($number)));			
+			$sentitems = $this->Message_model->get_messages($param)->result_array();							
 
 			// add global date for sorting
 			foreach($sentitems as $key=>$tmp):
@@ -359,26 +417,63 @@ class Messages extends MY_Controller {
 	
 	function move_message()
 	{
-		$this->Message_model->MoveMessage();
-	}	
+		if($this->input->post('type')) $param['type'] = $this->input->post('type');
+		if($this->input->post('current_folder')) $param['current_folder'] = $this->input->post('current_folder');
+		if($this->input->post('number')) $param['number'] = $this->input->post('number');
+		if($this->input->post('id_folder')) $param['id_folder'] = $this->input->post('id_folder');
+		if($this->input->post('folder')) $param['folder'] = $this->input->post('folder');
+		if($this->input->post('id_message')) $param['id_message'][0] = $this->input->post('id_message');
+		
+		if(isset($param['type']) && $param['type']=='single' && isset($param['folder']) && $param['folder']=='inbox')
+		{
+			$multipart = array('type' => 'inbox', 'option' => 'check', 'id_message' => $param['id_message'][0]);
+			$tmp_check = $this->Message_model->getMultipart($multipart);
+			if($tmp_check->row('UDH')!='')
+			{
+				$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'),0,8));	
+				$multipart['phone_number'] = $tmp_check->row('SenderNumber');				
+				foreach($this->Message_model->getMultipart($multipart)->result() as $part):
+				$param['id_message'][] = $part->ID;
+				endforeach;	
+			}			
+		}
+		$this->Message_model->move_messages($param);
+	}
 	
 	
 	function delete_messages($source=NULL)
 	{
-		if($source=='outbox'): $this->Message_model->delMessages($this->input->post('type'), $source, 'outbox');
-		else:
-			// check trash delete
-			if($this->input->post('current_folder')=='5'): 
-			$this->Message_model->delMessages($this->input->post('type'), $source, 'permanent');
-			else:	
-				// check permanent delete
-				if($this->Kalkun_model->getSetting()->row('permanent_delete')=='true'):
-					$this->Message_model->delMessages($this->input->post('type'), $source, 'permanent');
-				else:	
-					$this->Message_model->delMessages($this->input->post('type'), $source, 'temp');
-				endif;	
-			endif;
-		endif;
+		if($this->input->post('type')) $param['type'] = $this->input->post('type');
+		if($this->input->post('current_folder')) $param['current_folder'] = $this->input->post('current_folder');
+		if($this->input->post('id')) $param['id'][0] = $this->input->post('id');
+		if(!is_null($source)) $param['source'] = $source;
+		if($this->input->post('number')) $param['number'] = $this->input->post('number');
+		
+		if($param['source']=='outbox') $param['option'] = 'outbox';
+		else
+		{
+			// check trash/permanent delete
+			if($param['current_folder']=='5' OR $this->Kalkun_model->getSetting()->row('permanent_delete')=='true') $param['option'] = 'permanent';
+			else $param['option'] = 'temp';	
+		}
+				
+		if($param['type']=='single' && $param['source']=='inbox')
+		{
+			$multipart['type'] = 'inbox';
+			$multipart['option'] = 'check';
+			$multipart['id_message'] = $param['id'][0];
+			$tmp_check = $this->Message_model->getMultipart($multipart);
+			if($tmp_check->row('UDH')!='')
+			{
+				$multipart['option'] = 'all';
+				$multipart['udh'] = substr($tmp_check->row('UDH'),0,8);
+				$multipart['phone_number'] = $tmp_check->row('SenderNumber');					
+				foreach($this->Message_model->getMultipart($multipart)->result() as $part):
+				$param['id'][] = $part->ID;
+				endforeach;	
+			}				
+		}
+		$this->Message_model->delete_messages($param);
 	}
 	
 	function __check_folder_privileges($id_folder=NULL) 

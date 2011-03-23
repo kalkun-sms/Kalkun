@@ -11,20 +11,30 @@ swfobject.embedSWF(
 
 <div align="center" id="test_chart">&nbsp;</div>
 
+<?php 
+$inbox = $this->Message_model->get_messages(array('type' => 'inbox'))->num_rows();
+$outbox = $this->Message_model->get_messages(array('type' => 'outbox'))->num_rows();
+$sentitems = $this->Message_model->get_messages(array('type' => 'sentitems'))->num_rows();
+$trash_inbox = $this->Message_model->get_messages(array('type' => 'inbox', 'id_folder' => '5'))->num_rows();
+$trash_sentitems = $this->Message_model->get_messages(array('type' => 'sentitems', 'id_folder' => '5'))->num_rows();
+$trash = $trash_inbox + $trash_sentitems;
+?>
+
 <div style="float: left; width: 150px;">
 <h4><?php echo lang('kalkun_folder');?>: </h4>
-<p><span><?php echo lang('kalkun_inbox');?>:</span> <?php echo  $this->Message_model->getMessages('inbox', 'count');?></p>
-<p><span><?php echo lang('kalkun_outbox');?>:</span> <?php echo  $this->Message_model->getMessages('outbox', 'count');?></p>
-
-<p><span><?php echo lang('kalkun_sentitems');?>:</span> <?php echo  $this->Message_model->getMessages('sentitems', 'count');?></p>
-<p><span><?php echo lang('kalkun_trash');?>:</span> <?php echo $this->Message_model->getMessages('inbox', 'count', '5') + $this->Message_model->getMessages('sentitems', 'count', '5');?></p>
+<p><span><?php echo lang('kalkun_inbox');?>:</span> <?php echo $inbox;?></p>
+<p><span><?php echo lang('kalkun_outbox');?>:</span> <?php echo $outbox;?></p>
+<p><span><?php echo lang('kalkun_sentitems');?>:</span> <?php echo $sentitems;?></p>
+<p><span><?php echo lang('kalkun_trash');?>:</span> <?php echo $trash;?></p>
 </div>
 
 <div style="float: left; width: 200px;">
 <h4><?php echo lang('kalkun_myfolder');?>: </h4>
 <?php  
 foreach($this->Kalkun_model->getFolders('all')->result() as $val):
-$folder_count = $this->Message_model->getMessages('inbox', 'count', $val->id_folder) + $this->Message_model->getMessages('sentitems', 'count', $val->id_folder);
+$folder_count_inbox = $this->Message_model->get_messages(array('type' => 'inbox', 'id_folder' => $val->id_folder))->num_rows();
+$folder_count_sentitems = $this->Message_model->get_messages(array('type' => 'sentitems', 'id_folder' => $val->id_folder))->num_rows();
+$folder_count = $folder_count_inbox + $folder_count_sentitems;
 echo "<p><span>".$val->name.": </span>".$folder_count."</p>";
 endforeach;	
 ?>

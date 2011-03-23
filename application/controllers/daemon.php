@@ -22,8 +22,8 @@ Class Daemon extends Controller {
 		// ===================================================================
 		
 		// get unProcessed message
-		$message = $this->Message_model->getUnprocessed();
-		
+		$message = $this->Message_model->get_messages(array('processed' => FALSE));
+
 		foreach($message->result() as $tmp_message):
 		
 		// sms content
@@ -67,7 +67,19 @@ Class Daemon extends Controller {
 		}			
 		
 		// update Processed
-		$this->Message_model->updateProcessed($tmp_message->ID);
+		$id_message[0] = $tmp_message->ID;
+		$multipart = array('type' => 'inbox', 'option' => 'check', 'id_message' => $id_message[0]);
+		$tmp_check = $this->Message_model->getMultipart($multipart);
+		if($tmp_check->row('UDH')!='')
+		{
+			$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'),0,8));	
+			$multipart['phone_number'] = $tmp_check->row('SenderNumber');
+			$multipart['type'] = 'inbox';				
+			foreach($this->Message_model->getMultipart($multipart)->result() as $part):
+			$id_message[] = $part->ID;
+			endforeach;	
+		}		
+		$this->Message_model->updateProcessed($id_message);
 		endforeach;	
 	}
 

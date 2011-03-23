@@ -9,7 +9,7 @@
 	<?php echo anchor('messages/folder/inbox', lang('kalkun_inbox'));?> 
 	<span class="unread_inbox_notif">
 	<?php 
-	$tmp_unread = $this->Message_model->getUnread();
+	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE))->num_rows();
 	if($tmp_unread > 0) echo " (".$tmp_unread.")";
 	?>
 	</span></li>
@@ -28,7 +28,7 @@
 	<?php foreach($this->Kalkun_model->getFolders('all')->result() as $folder):?>
 	<li>
 	<?php echo anchor('messages/my_folder/inbox/'.$folder->id_folder, $folder->name); 
-	$tmp_unread = $this->Message_model->getUnread($folder->id_folder);
+	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => $folder->id_folder))->num_rows();
 	if($tmp_unread > 0) echo " (".$tmp_unread.")";
 	?>
 	</li><?php endforeach;?>

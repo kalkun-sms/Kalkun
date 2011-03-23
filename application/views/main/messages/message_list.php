@@ -1,13 +1,15 @@
 <?php $this->load->view('js_init/message/js_object');
 if($messages->num_rows()==0) 
 {
+	$no_message_container['start'] = "<p class=\"no_content\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>";
+	$no_message_container['end'] = "</i></p>";
+	
 	if($this->uri->segment(2)=='my_folder') 
 	{
-		if($this->uri->segment(4)=='5') 
-		echo "<p class=\"no_content\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('tni_msglist_trash_empty')."</i></p>";
-		else echo "<p class=\"no_content\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message_in_folder').".</i></p>";
+		if($this->uri->segment(4)=='5') echo $no_message_container['start'].lang('tni_msglist_trash_empty').$no_message_container['end'];
+		else echo $no_message_container['start'].lang('kalkun_no_message_in_folder').$no_message_container['end'];
 	}
-	else echo "<p class=\"no_content\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message')." ".lang('kalkun_'.$this->uri->segment(3)).".</i></p>";
+	else echo $no_message_container['start'].lang('kalkun_no_message')." ".lang('kalkun_'.$this->uri->segment(3)).$no_message_container['end'];
 }
 else 
 {
@@ -51,9 +53,9 @@ else
 		&nbsp;&nbsp;<?php echo $senderName;?>
 		<?php 
 			if($this->uri->segment(2)=='folder'):
-			echo "(".$this->Message_model->getMessages($this->uri->segment(3), 'by_number_count', NULL, NULL, $number).")";
+			echo "(".$this->Message_model->get_messages(array('type' => $this->uri->segment(3), 'number' => $number))->num_rows().")";
 			else:
-			echo "(".$this->Message_model->getMessages($this->uri->segment(3), 'by_number_count', $this->uri->segment(4), NULL, $number).")";
+			echo "(".$this->Message_model->get_messages(array('type' => $this->uri->segment(3), 'number' => $number, 'id_folder' => $this->uri->segment(4)))->num_rows().")";
 			endif;
 		?>
 		</span>
