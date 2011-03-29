@@ -14,7 +14,7 @@
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/effects.fade.min.js"></script>
 <?php
 //background image
-list($bg_act_option, $bg_act) = explode(';',$this->Kalkun_model->getSetting()->row('bg_image'));
+list($bg_act_option, $bg_act) = explode(';',$this->Kalkun_model->get_setting()->row('bg_image'));
 if($bg_act_option=='true'):?>
 <style type="text/css">
 body { 

@@ -10,7 +10,7 @@ $(document).ready(function(){
 	//$(".word_count").text("");
 	//$("input#sms_loop").attr("disabled", true);
 	
-	$("#personvalue").tokenInput("<?php echo site_url('messages/getphonebook');?>", {
+	$("#personvalue").tokenInput("<?php echo site_url('phonebook/get_phonebook');?>", {
 		hintText:"<?php echo lang('tni_name_search')?>",
 		noResultsText:"No results",
 		searchingText: "<?php echo lang('tni_compose_searching'); ?>...",	
@@ -60,7 +60,7 @@ $(document).ready(function(){
 	});
 	
 	/*
-	var url = "<?php echo  site_url();?>/messages/getphonebook";
+	var url = "<?php echo  site_url();?>/messages/get_phonebook";
 	$("#input_box").tokenInput(url, {
 		hintText: "Type in the names of your phonebook",
 		noResultsText: "No results",
@@ -69,7 +69,7 @@ $(document).ready(function(){
 	*/
 	
 	// Phonebook autocompleter
-	/*var url = "<?php echo  site_url();?>/messages/getphonebook";
+	/*var url = "<?php echo  site_url();?>/messages/get_phonebook";
 	$("#input_box").autocomplete(url, {
 		multiple: true,
 		multipleSeparator: ", \n",

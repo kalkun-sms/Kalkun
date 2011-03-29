@@ -15,7 +15,7 @@
 </tr>
 <tr valign="top">
 	<td>Gammu DB Version</small></td>
-	<td><strong><?php echo $this->Kalkun_model->getGammuInfo('db_version')->row('Version'); ?></strong>
+	<td><strong><?php echo $this->Kalkun_model->get_gammu_info('db_version')->row('Version'); ?></strong>
 		<br /><small>It's readed from your gammu database schema.
 	</td>
 </tr>

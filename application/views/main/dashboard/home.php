@@ -18,17 +18,17 @@
     <tr valign="top">
         <td><?php echo lang('kalkun_gammu_version');?></td>
         <td>:</td>
-        <td><?php echo  filter_data($this->Kalkun_model->getGammuInfo('gammu_version')->row('Client')); ?></td>
+        <td><?php echo  filter_data($this->Kalkun_model->get_gammu_info('gammu_version')->row('Client')); ?></td>
     </tr>
     <tr valign="top">
         <td><?php echo lang('kalkun_gammu_db_schema');?></td>
         <td>:</td>
-        <td><?php echo  filter_data($this->Kalkun_model->getGammuInfo('db_version')->row('Version')); ?></td>
+        <td><?php echo  filter_data($this->Kalkun_model->get_gammu_info('db_version')->row('Version')); ?></td>
     </tr>       
     <tr valign="top">
         <td><?php echo lang('kalkun_phone_imei');?></td>
         <td>:</td>
-        <td><?php echo  filter_data($this->Kalkun_model->getGammuInfo('phone_imei')->row('IMEI')); ?></td>
+        <td><?php echo  filter_data($this->Kalkun_model->get_gammu_info('phone_imei')->row('IMEI')); ?></td>
     </tr>        
 </table>
 </div>

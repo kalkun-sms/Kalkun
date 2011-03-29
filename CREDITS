@@ -1,0 +1,27 @@
+
+Build system
+==============
+CodeIgniter 1.7.2 <http://codeigniter.com/>
+jQuery 1.3.2 <http://jquery.com/>
+jQuery UI 1.7.2 <http://jqueryui.com/>
+jQuery Plugin:
+	* TokenInput 1.1 <http://loopj.com/jquery-tokeninput/>
+	* Validate <http://bassistance.de/jquery-plugins/jquery-plugin-validation/>
+	* Autogrow Textarea
+Open Flash Chart 2 <http://teethgrinder.co.uk/open-flash-chart-2/>
+
+
+Developer
+==========
+Azhari Harahap
+Oskar Holowaty
+
+
+Translator
+===========
+Bahasa - Azhari Harahap <azhari@harahap.us>
+Czech - Michal Čihař <michal@cihar.com>
+English - Azhari Harahap <azhari@harahap.us>
+Italian - Luca Meneghesso <lucamene@libero.it>
+Portuguese - Joao Barros <profitcode@gmail.com>
+Russian - Denis Polkovnikov <denis.polkovnikov@gmail.com>

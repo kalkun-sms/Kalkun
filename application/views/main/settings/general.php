@@ -9,7 +9,7 @@ $lang = array('bahasa'	=> 'Bahasa Indonesia',
        		'portuguese'	=> 'Portuguese',
        		'russian'	=> 'Russian',
       		); 
-$lang_act = $this->Kalkun_model->getSetting()->row('language'); 
+$lang_act = $this->Kalkun_model->get_setting()->row('language'); 
 echo form_dropdown('language', $lang, $lang_act);       
 ?>
 </td>
@@ -20,7 +20,7 @@ echo form_dropdown('language', $lang, $lang_act);
 <td>
 <?php 
 $conv = array('asc' => lang('tni_set_conv_order_old'), 'desc' => lang('tni_set_conv_order_new')); 
-$conv_act = $this->Kalkun_model->getSetting()->row('conversation_sort'); 
+$conv_act = $this->Kalkun_model->get_setting()->row('conversation_sort'); 
 echo form_dropdown('conversation_sort', $conv, $conv_act);  
 ?>
 </td>  
@@ -31,7 +31,7 @@ echo form_dropdown('conversation_sort', $conv, $conv_act);
 <td>
 <?php 
 $paging = array('10' => '10', '15' => '15', '20' => '20', '25' => '25'); 
-$paging_act = $this->Kalkun_model->getSetting()->row('paging'); 
+$paging_act = $this->Kalkun_model->get_setting()->row('paging'); 
 echo form_dropdown('paging', $paging, $paging_act);  
 ?>
 <small>&nbsp;&nbsp;<?php echo lang('tni_set_data_pp_hint'); ?></small>
@@ -41,7 +41,7 @@ echo form_dropdown('paging', $paging, $paging_act);
 <tr valign="top">
 <td><?php echo lang('tni_set_perm_del'); ?></td>
 <td>
-<?php $permanent_act = $this->Kalkun_model->getSetting()->row('permanent_delete');?>
+<?php $permanent_act = $this->Kalkun_model->get_setting()->row('permanent_delete');?>
 <input type="radio" id="permanent_delete_false" name="permanent_delete" value="false" 
 <?php if($permanent_act=='false') echo "checked=\"checked\""; ?> /> 
 <label for="permanent_delete_false"><?php echo lang('tni_set_perm_deloff'); ?></label> <small><?php echo lang('tni_set_perm_deloff_hint'); ?></small><br />
@@ -56,7 +56,7 @@ echo form_dropdown('paging', $paging, $paging_act);
 <td>
 <?php 
 $report = array('default' => lang('tni_default'), 'yes' => lang('tni_yes'), 'no' => lang('tni_no'));
-$report_act = $this->Kalkun_model->getSetting()->row('delivery_report'); 
+$report_act = $this->Kalkun_model->get_setting()->row('delivery_report'); 
 echo form_dropdown('delivery_report', $report, $report_act);  
 ?>			
 </td>  

@@ -1,6 +1,30 @@
 <?php
-Class Member extends MY_Controller {
-	
+/**
+ * Kalkun
+ * An open source web based SMS Management
+ *
+ * @package		Kalkun
+ * @author		Kalkun Dev Team
+ * @license		http://kalkun.sourceforge.net/license.php
+ * @link		http://kalkun.sourceforge.net
+ */
+
+// ------------------------------------------------------------------------
+
+/**
+ * Member Class
+ *
+ * @package		Kalkun
+ * @subpackage	Member
+ * @category	Controllers
+ */
+class Member extends MY_Controller {
+
+	/**
+	 * Constructor
+	 *
+	 * @access	public
+	 */		
 	function Member()
 	{
 		parent::MY_Controller();			
@@ -9,10 +33,18 @@ Class Member extends MY_Controller {
 		if($this->session->userdata('loggedin')==NULL) redirect('login');
 		
 		$this->load->database();
-		$this->lang->load('kalkun', $this->Kalkun_model->getSetting()->row('language'));
+		$this->lang->load('kalkun', $this->Kalkun_model->get_setting()->row('language'));
 	}
 	
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Index
+	 *
+	 * Display list of all member
+	 *
+	 * @access	public   		 
+	 */		
 	function index()
 	{
 		$this->load->model('Member_model');
@@ -24,4 +56,6 @@ Class Member extends MY_Controller {
 		$this->load->view('main/layout', $data);
 	}
 }
-?>
+
+/* End of file member.php */
+/* Location: ./application/controllers/member.php */ 

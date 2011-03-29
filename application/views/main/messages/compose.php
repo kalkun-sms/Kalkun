@@ -21,7 +21,7 @@ if($val_type=='reply'): ?>
 <td>
 <?php
 $phone = base64_decode(HexToAscii($dest));
-$qry = $this->Phonebook_model->getPhonebook(array('option' => 'bynumber', 'number' => $phone));
+$qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $phone));
 if($qry->num_rows()!=0): 
 echo $qry->row('Name')." <".$phone.">";
 else:
@@ -44,7 +44,7 @@ endif;
 <td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
 <td>
 <?php
-$qry = $this->Phonebook_model->getPhonebook(array('option' => 'bynumber', 'number' => $dest));
+$qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $dest));
 if($qry->num_rows()!=0): 
 echo $qry->row('Name')." <".$dest.">";
 else:
@@ -60,7 +60,7 @@ endif;
 <tr>
 <td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
 <td>
-<?php echo $this->Phonebook_model->getPhonebook(array('option' => 'groupname', 'id' => $dest))->row('GroupName');?>
+<?php echo $this->Phonebook_model->get_phonebook(array('option' => 'groupname', 'id' => $dest))->row('GroupName');?>
 <input type="hidden" name="sendoption" value="pbk_groups" />
 <input type="hidden" name="id_pbk" value="<?php echo $dest;?>" />
 </td>    
@@ -101,7 +101,7 @@ else echo lang('kalkun_send_to').":";
 <select name="groupvalue">
 <option value="" selected="selected">-- <?php echo lang('tni_group_select'); ?> --</option>
 <?php
-foreach($this->Phonebook_model->getPhonebook(array('option' => 'group'))->result() as $tmp):
+foreach($this->Phonebook_model->get_phonebook(array('option' => 'group'))->result() as $tmp):
 echo "<option value=\"".$tmp->ID."\">".$tmp->GroupName."</option>";
 endforeach; 
 ?>
@@ -164,7 +164,7 @@ endforeach;
 <textarea class="word_count" style="width: 400px; height: 100px" id="message" name="message">
 <?php 
 if($val_type=='forward') echo $message;
-list($sig_option, $sig)=explode(';',$this->Kalkun_model->getSetting()->row('signature'));
+list($sig_option, $sig)=explode(';',$this->Kalkun_model->get_setting()->row('signature'));
 if($sig_option=='true') echo "\n\n".$sig; ?>
 </textarea>
 <div>

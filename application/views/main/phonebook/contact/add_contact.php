@@ -10,7 +10,7 @@
 <input type="text" name="number" id="number" value="<?php if(isset($contact)) echo $contact->row('Number'); else if(isset($number)) echo $number;?>" class="text ui-widget-content ui-corner-all" />
 <label for="group"><?php echo lang('kalkun_group'); ?></label>
 <?php
-$group = $this->Phonebook_model->getPhonebook(array('option' => 'group'));
+$group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
 foreach($group->result() as $tmp):
 	$groups[$tmp->ID]=$tmp->GroupName;
 endforeach; 

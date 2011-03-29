@@ -15,13 +15,13 @@
 			} else if($theFolder == "sentitems") {
 			$theFname = lang('kalkun_sentitems');
 			} else {
-				$theFname = $this->Kalkun_model->getFolders('name', $this->uri->segment(4))->row('name');
+				$theFname = $this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name');
 				// $theFname = $this->uri->segment(4);
 			}
 	?>
 		<li><?php echo anchor('messages/folder/'.$this->uri->segment(4),'&lsaquo;&lsaquo; '.lang('tni_back_to').' '.$theFname, array('class' => 'button'));?></li>
 		<?php else: ?>
-		<li><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6),'&lsaquo;&lsaquo; '.lang('tni_back_to').' '.humanize($this->Kalkun_model->getFolders('name', $this->uri->segment(6))->row('name')), array('class' => 'button'));?></li>
+		<li><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6),'&lsaquo;&lsaquo; '.lang('tni_back_to').' '.humanize($this->Kalkun_model->get_folders('name', $this->uri->segment(6))->row('name')), array('class' => 'button'));?></li>
 		<li>&nbsp;</li>
 		<?php endif;?>
 	<?php endif;?>

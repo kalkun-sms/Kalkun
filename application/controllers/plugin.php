@@ -1,6 +1,30 @@
 <?php
-Class Plugin extends MY_Controller {
-	
+/**
+ * Kalkun
+ * An open source web based SMS Management
+ *
+ * @package		Kalkun
+ * @author		Kalkun Dev Team
+ * @license		http://kalkun.sourceforge.net/license.php
+ * @link		http://kalkun.sourceforge.net
+ */
+
+// ------------------------------------------------------------------------
+
+/**
+ * Plugin Class
+ *
+ * @package		Kalkun
+ * @subpackage	Plugin
+ * @category	Controllers
+ */
+class Plugin extends MY_Controller {
+
+	/**
+	 * Constructor
+	 *
+	 * @access	public
+	 */		
 	function Plugin()
 	{
 		parent::MY_Controller();		
@@ -9,15 +33,33 @@ Class Plugin extends MY_Controller {
 		if($this->session->userdata('loggedin')==NULL) redirect('login');
 								
 		$this->load->database();						
-		$this->lang->load('kalkun', $this->Kalkun_model->getSetting('language', 'value')->row('value'));
+		$this->lang->load('kalkun', $this->Kalkun_model->get_setting('language', 'value')->row('value'));
 	}
+
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Index
+	 *
+	 * Display list of all plugin
+	 *
+	 * @access	public   		 
+	 */	
 	function index() 
 	{
 		$data['main'] = 'main/plugin/index';
 		$this->load->view('main/layout', $data);
 	}
+
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Change status
+	 *
+	 * Enable/Disable status of a plugin
+	 *
+	 * @access	public   		 
+	 */	
 	function change_status($name, $state)
 	{
 		$data = array('plugin_status' => $state);
@@ -26,20 +68,16 @@ Class Plugin extends MY_Controller {
 		
 		redirect('plugin/'.$name);
 	}
+
+	// --------------------------------------------------------------------
 	
-	function sms_bomber()
-	{
-		$data['main'] = 'main/messages/compose';
-		$data['pbkgroup'] = $this->Kalkun_model->getPhonebook('group');
-		$this->load->view('main/layout', $data);		
-	}
-
-
-
-	//=================================================================
-	// BLACKLIST NUMBER
-	//=================================================================		
-	
+	/**
+	 * Blacklist number
+	 *
+	 * Display blacklist number page
+	 *
+	 * @access	public   		 
+	 */	
 	function blacklist_number()
 	{
 		if($_POST) 
@@ -52,7 +90,7 @@ Class Plugin extends MY_Controller {
 		$this->load->library('pagination');
 		$config['base_url'] = site_url().'/plugin/blacklist_number';
 		$config['total_rows'] = $this->Plugin_model->getBlacklistNumber('count');
-		$config['per_page'] = $this->Kalkun_model->getSetting('paging', 'value')->row('value');
+		$config['per_page'] = $this->Kalkun_model->get_setting('paging', 'value')->row('value');
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';		
 		$config['uri_segment'] = 3;
@@ -65,18 +103,30 @@ Class Plugin extends MY_Controller {
 		$this->load->view('main/layout', $data);
 	}
 	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Delete blacklist number
+	 *
+	 * Remove phone number from blacklist
+	 *
+	 * @access	public   		 
+	 */	
 	function delete_blacklist_number($id)
 	{
 		$this->Plugin_model->delBlacklistNumber($id);
 		redirect('plugin/blacklist_number');
 	}
 	
+	// --------------------------------------------------------------------
 	
-	
-	//=================================================================
-	// SERVER ALERT
-	//=================================================================		
-	
+	/**
+	 * Server alert
+	 *
+	 * Display Server alert page
+	 *
+	 * @access	public   		 
+	 */		
 	function server_alert()
 	{
 		if($_POST) 
@@ -89,7 +139,7 @@ Class Plugin extends MY_Controller {
 		$this->load->library('pagination');
 		$config['base_url'] = site_url().'/plugin/server_alert';
 		$config['total_rows'] = $this->Plugin_model->getServerAlert('count');
-		$config['per_page'] = $this->Kalkun_model->getSetting('paging', 'value')->row('value');
+		$config['per_page'] = $this->Kalkun_model->get_setting('paging', 'value')->row('value');
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';		
 		$config['uri_segment'] = 3;
@@ -101,16 +151,37 @@ Class Plugin extends MY_Controller {
 		$data['number'] = $this->uri->segment(3,0)+1;
 		$this->load->view('main/layout', $data);
 	}
+
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Delete server alert
+	 *
+	 * Remove host from server alert
+	 *
+	 * @access	public   		 
+	 */	
 	function delete_server_alert($id)
 	{
 		$this->Plugin_model->delServerAlert($id);
 		redirect('plugin/server_alert');
 	}	
+
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Change server alert state
+	 *
+	 * Enable/disable state of a host
+	 *
+	 * @access	public   		 
+	 */	
 	function change_server_alert_state($id)
 	{
 		$this->Plugin_model->changeState($id, 'true');
 		redirect('plugin/server_alert');
 	}
 }
+
+/* End of file plugin.php */
+/* Location: ./application/controllers/plugin.php */ 

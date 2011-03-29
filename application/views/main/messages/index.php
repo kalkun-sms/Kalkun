@@ -4,8 +4,8 @@
 <!-- Move To Dialog -->
 <div id="movetodialog" title="<?php echo lang('kalkun_select_folder');?>" class="dialog" style="background: #cce9f2;">
 <?php 
-if($this->uri->segment(2)=='my_folder') $folder = $this->Kalkun_model->getFolders('exclude', $this->uri->segment(4)); 
-else $folder = $this->Kalkun_model->getFolders('all');
+if($this->uri->segment(2)=='my_folder') $folder = $this->Kalkun_model->get_folders('exclude', $this->uri->segment(4)); 
+else $folder = $this->Kalkun_model->get_folders('all');
 ?>
 <?php foreach($folder->result() as $folder):?>
 <div class="move_to" id="<?php echo $folder->id_folder;?>"><a href="#"><?php echo $folder->name;?></a></div>
@@ -38,7 +38,7 @@ if($this->uri->segment(2)=='my_folder')
 
 <div id="two_column_container" class="tabbing">
 <div id="left_column" class="two_column_medium">
-	<?php echo"<span class=\"folder_name\">".$this->Kalkun_model->getFolders('name', $this->uri->segment(4))->row('name')."</span>";?>
+	<?php echo"<span class=\"folder_name\">".$this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name')."</span>";?>
 	<?php if($this->uri->segment(4)!='5'):?>
 	<sup>[ 
 	<a href="#" title="<?php echo lang('kalkun_rename_folder_title');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="renamefolder"><?php echo lang('kalkun_rename');?></a> - 

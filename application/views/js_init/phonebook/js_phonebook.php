@@ -68,7 +68,7 @@ else $(this).parents('div:eq(2)').removeClass("messagelist_hover");
 // Delete contact
 $("a.delete_contact").click(function(){
 var count = $("input:checkbox:checked").length;
-var dest_url = '<?php echo site_url('phonebook/del_phonebook') ?>';
+var dest_url = '<?php echo site_url('phonebook/delete_contact') ?>';
 if(count==0) { 
 	$('.notification_area').text("<?php echo lang('tni_pbk_no_contact_selected')?>");
 	$('.notification_area').show();

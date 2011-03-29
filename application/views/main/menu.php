@@ -25,7 +25,7 @@
 	<div class="clear">&nbsp;</div>
 	<div id="mf_child_menu">
 	<ul>
-	<?php foreach($this->Kalkun_model->getFolders('all')->result() as $folder):?>
+	<?php foreach($this->Kalkun_model->get_folders('all')->result() as $folder):?>
 	<li>
 	<?php echo anchor('messages/my_folder/inbox/'.$folder->id_folder, $folder->name); 
 	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => $folder->id_folder))->num_rows();

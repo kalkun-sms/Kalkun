@@ -39,7 +39,7 @@ $('#addgroupdialog').dialog('open');
 // Delete group
 $("a.delete_contact").click(function(){
 var count = $("input.select_group:checkbox:checked").length;
-var dest_url = '<?php echo site_url('phonebook/del_group') ?>';
+var dest_url = '<?php echo site_url('phonebook/delete_group') ?>';
 if(count==0) { 
 	$('.notification_area').text("<?php echo lang('tni_group_no_selected')?>");
 	$('.notification_area').show();

@@ -136,12 +136,12 @@
 	
 	function check_delivery_report($report)
 	{
-		if($report=='SendingError' or $report=='Error' or $report=='DeliveryFailed'): $status = 'Sending Failed';
-		elseif($report=='SendingOKNoReport'): $status = 'Sending OK - No Report';
-		elseif($report=='SendingOK'): $status = 'Sending OK - Wait For Report';
-		elseif($report=='DeliveryOK'): $status = 'Delivered';
-		elseif($report=='DeliveryPending'): $status = 'Pending';
-		elseif($report=='DeliveryUnknown'): $status = 'Unknown';
+		if($report=='SendingError' or $report=='Error' or $report=='DeliveryFailed'): $status = lang('tni_msg_stat_fail');
+		elseif($report=='SendingOKNoReport'): $status = lang('tni_msg_stat_oknr');
+		elseif($report=='SendingOK'): $status = lang('tni_msg_stat_okwr');
+		elseif($report=='DeliveryOK'): $status = lang('tni_msg_stat_deliv');
+		elseif($report=='DeliveryPending'): $status = lang('tni_msg_stat_pend');
+		elseif($report=='DeliveryUnknown'): $status = lang('tni_msg_stat_unknown');
 		endif;		
 		
 		return $status;

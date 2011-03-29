@@ -20,7 +20,7 @@ else
 	$type = $this->uri->segment(3);
 	if($type == 'inbox') 
 	{
-		$qry = $this->Phonebook_model->getPhonebook(array('option'=>'bynumber','number'=>$tmp->SenderNumber));
+		$qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber','number'=>$tmp->SenderNumber));
 		if($qry->num_rows()!=0) $senderName = $qry->row('Name');
 		else $senderName = $tmp->SenderNumber;
 		$number = $tmp->SenderNumber;
@@ -30,7 +30,7 @@ else
 	}
 	else 
 	{
-		$qry = $this->Phonebook_model->getPhonebook(array('option'=>'bynumber','number'=>$tmp->DestinationNumber));
+		$qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber','number'=>$tmp->DestinationNumber));
 		if($qry->num_rows()!=0) $senderName = $qry->row('Name');
 		else $senderName = $tmp->DestinationNumber;
 		$number = $tmp->DestinationNumber;

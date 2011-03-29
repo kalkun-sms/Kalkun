@@ -1,16 +1,47 @@
 <?php
-Class Kalkun_model extends Model {
-	
+/**
+ * Kalkun
+ * An open source web based SMS Management
+ *
+ * @package		Kalkun
+ * @author		Kalkun Dev Team
+ * @license		http://kalkun.sourceforge.net/license.php
+ * @link		http://kalkun.sourceforge.net
+ */
+
+// ------------------------------------------------------------------------
+
+/**
+ * Kalkun_model Class
+ *
+ * Handle all base database activity 
+ *
+ * @package		Kalkun
+ * @subpackage	Base
+ * @category	Models
+ */
+class Kalkun_model extends Model {
+
+	/**
+	 * Constructor
+	 *
+	 * @access	public
+	 */	
 	function Kalkun_model()
 	{
 		parent::Model();
 	}
 	
-	//=================================================================
-	// LOGIN
-	//=================================================================
+	// --------------------------------------------------------------------
 	
-	function Login()
+	/**
+	 * Login
+	 *
+	 * Check login credential and set session
+	 *
+	 * @access	public   		 
+	 */	
+	function login()
 	{
 		$username = $this->input->post('username');
 		$password = sha1($this->input->post('password'));
@@ -19,8 +50,6 @@ Class Kalkun_model extends Model {
 		$this->db->where('password', $password);
 		$query = $this->db->get();
 		
-		//$sql = "select * from user where username='".$username."' and password='".$password."'";
-		//$query = $this->db->query($sql);
 		if($query->num_rows()=='1') {
 			$this->session->set_userdata('loggedin', 'TRUE');
 			$this->session->set_userdata('level', $query->row('level'));
@@ -31,49 +60,85 @@ Class Kalkun_model extends Model {
 		else $this->session->set_flashdata('errorlogin', 'Your username or password are incorrect');
 	}	
 
-	//=================================================================
-	// FOLDER
-	//=================================================================
-
-	function getFolders($option=NULL, $id_folder=NULL, $id_user=NULL)
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Get Folders
+	 *
+	 * List of custom folders
+	 *
+	 * @access	public   		 
+	 */	
+	function get_folders($option=NULL, $id_folder=NULL, $id_user=NULL)
 	{
+		$this->db->from('user_folders');
+		
 		switch($option)
 		{
 			case 'all':
-			$sql = "select * from user_folders where id_folder > 5";
+				$this->db->where('id_folder >', '5');
 			break;
 			
 			case 'exclude':
-			$sql = "select * from user_folders where id_folder > 5 and id_folder!='".$id_folder."'";
+				$this->db->where('id_folder >', '5');
+				$this->db->where('id_folder !=', $id_folder);
 			break;
 			
 			case 'name':
-			$sql = "select * from user_folders where id_folder='".$id_folder."'";
+				$this->db->where('id_folder', $id_folder);
 			break;
-			
 		}
 		
-		if($id_folder!='5') $sql.= " and id_user='".$this->session->userdata('id_user')."'";
-		$sql .= " order by name";
-		return $this->db->query($sql);	
+		if($id_folder!='5')
+		{
+			$this->db->where('id_user', $this->session->userdata('id_user'));
+		}
+		
+		$this->db->order_by('name');
+		return $this->db->get();	
 	}
+
+	// --------------------------------------------------------------------
 	
-	function addFolder()
+	/**
+	 * Add Folder
+	 *
+	 * Add custom folder
+	 *
+	 * @access	public   		 
+	 */		
+	function add_folder()
 	{
-		$data = array (
-				'name' => $this->input->post('folder_name'),
-				'id_user' => $this->input->post('id_user')
-					);
+		$data = array ('name' => $this->input->post('folder_name'),'id_user' => $this->input->post('id_user'));
 		$this->db->insert('user_folders',$data);		
 	}
-		
-	function renameFolder()
-	{
-		$sql = "update user_folders set name='".$this->input->post('edit_folder_name')."' where id_folder='".$this->input->post('id_folder')."'";
-		$this->db->query($sql);
-	}
+
+	// --------------------------------------------------------------------
 	
-	function deleteFolder($id_folder=NULL)
+	/**
+	 * Rename Folder
+	 *
+	 * Rename custom folder
+	 *
+	 * @access	public   		 
+	 */			
+	function rename_folder()
+	{
+		$this->db->set('name', $this->input->post('edit_folder_name'));
+		$this->db->where('id_folder', $this->input->post('id_folder'));		
+		$this->db->update('user_folders');
+	}
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Delete Folder
+	 *
+	 * Delete custom folder
+	 *
+	 * @access	public   		 
+	 */		
+	function delete_folder($id_folder=NULL)
 	{
 		$id_user = $this->session->userdata('id_user');
 				
@@ -82,7 +147,7 @@ Class Kalkun_model extends Model {
 				FROM user_folders AS uf
 				LEFT JOIN inbox AS i ON i.id_folder = uf.id_folder
 				LEFT JOIN user_inbox AS ui ON ui.id_inbox = i.ID
-				WHERE uf.id_folder = '".$id_folder."'";
+				WHERE uf.id_folder = '".$id_folder."'"; /* FIXME */
 		$this->db->query($inbox);
 		
 		// Sentitems
@@ -90,18 +155,22 @@ Class Kalkun_model extends Model {
 				FROM user_folders AS uf
 				LEFT JOIN sentitems AS s ON s.id_folder = uf.id_folder
 				LEFT JOIN user_sentitems AS us ON us.id_sentitems = s.ID
-				WHERE uf.id_folder = '".$id_folder."'";
+				WHERE uf.id_folder = '".$id_folder."'"; /* FIXME */
 		$this->db->query($sentitems);	
 		
 		$this->db->delete('user_folders', array('id_folder' => $id_folder, 'id_user' => $id_user)); 
 	}
 	
+	// --------------------------------------------------------------------
 	
-	//=================================================================
-	// SETTINGS
-	//=================================================================	
-
-	function UpdateSetting($option)
+	/**
+	 * Update Setting
+	 *
+	 * Update setting/user preferences
+	 *
+	 * @access	public   		 
+	 */		
+	function update_setting($option)
 	{
 		switch($option)
 		{
@@ -142,17 +211,34 @@ Class Kalkun_model extends Model {
 			break;
 		}		
 	}
+
+	// --------------------------------------------------------------------
 	
-	function getSetting()
+	/**
+	 * Get Setting
+	 *
+	 * Get setting/user preferences
+	 *
+	 * @access	public   		 
+	 */		
+	function get_setting()
 	{
 		$id_user = $this->session->userdata('id_user');
 		$this->db->where('user.id_user', $id_user);
 		$this->db->join('user', 'user.id_user = user_settings.id_user');
 		return $this->db->get('user_settings');
 	}
+
+	// --------------------------------------------------------------------
 	
-	// check duplicate entry
-	function checkSetting($param)
+	/**
+	 * Check Setting
+	 *
+	 * Check for duplicate username or phone number
+	 *
+	 * @access	public   		 
+	 */		
+	function check_setting($param)
 	{
 		$this->db->from('user');
 		switch($param['option'])
@@ -166,66 +252,73 @@ Class Kalkun_model extends Model {
 			break;				
 		}
 		return $this->db->get();
-		
 	}
 	
+	// --------------------------------------------------------------------
 	
-	//=================================================================
-	// GAMMU INFO
-	//=================================================================	
-	
-	function getGammuInfo($option)
+	/**
+	 * Get Gammu Info
+	 *
+	 * Get gammu related information
+	 *
+	 * @access	public   		 
+	 */	
+	function get_gammu_info($option)
 	{
 		switch($option)
 		{
 			case 'gammu_version':
-				$sql = "select Client from phones order by UpdatedInDB desc limit 1";
-				break;
+				$this->db->from('phones');
+				$this->db->select('Client');
+				$this->db->order_by('UpdatedInDB', 'DESC');
+				$this->db->limit('1');
+			break;
+			
 			case 'db_version':
-				$sql = "select Version from gammu";
-				break;	
-			case 'last_activity':
-				$sql = "select UpdatedInDB from phones order by UpdatedInDB desc limit 1";
-				break;
-			case 'phone_imei':
-				$sql = "select IMEI from phones order by UpdatedInDB desc limit 1";
-				break;	
-			case 'phone_signal':
-				$sql = "select Signal from phones order by UpdatedInDB desc limit 1";
-				break;	
-			case 'phone_battery':
-				$sql = "select Battery from phones order by UpdatedInDB desc limit 1";
-				break;															
-		}
-		return $this->db->query($sql);
-	}
-	
-	
-	//=================================================================
-	// MISC
-	//=================================================================		
-	
-	function getInfo($option)
-	{
-		switch($option)
-		{
-			case 'database_used':
-				$dbsize = 0;
-				$sql = "SHOW TABLE STATUS";
-				$tmp_res = $this->db->query($sql);
-				foreach($tmp_res->result() as $tmp):
-				$dbsize += $tmp->Data_length + $tmp->Index_length;
-				endforeach;
-				return $dbsize;
+				$this->db->from('gammu');
+				$this->db->select('Version');			
 			break;	
+			
+			case 'last_activity':
+				$this->db->from('phones');
+				$this->db->select('UpdatedInDB');	
+				$this->db->order_by('UpdatedInDB', 'DESC');
+				$this->db->limit('1');							
+			break;
+			
+			case 'phone_imei':
+				$this->db->from('phones');
+				$this->db->select('IMEI');	
+				$this->db->order_by('UpdatedInDB', 'DESC');
+				$this->db->limit('1');		
+			break;	
+			
+			case 'phone_signal':
+				$this->db->from('phones');
+				$this->db->select('Signal');	
+				$this->db->order_by('UpdatedInDB', 'DESC');
+				$this->db->limit('1');				
+			break;	
+			
+			case 'phone_battery':
+				$this->db->from('phones');
+				$this->db->select('Battery');	
+				$this->db->order_by('UpdatedInDB', 'DESC');
+				$this->db->limit('1');				
+			break;															
 		}
+		return $this->db->get();
 	}
+		
+	// --------------------------------------------------------------------
 	
-	
-	//=================================================================
-	// SMS USED
-	//=================================================================		
-	
+	/**
+	 * Get SMS Used
+	 *
+	 * Get SMS count used by user based on date
+	 *
+	 * @access	public   		 
+	 */			
 	function get_sms_used($option, $param)
 	{
 		switch($option)
@@ -242,7 +335,16 @@ Class Kalkun_model extends Model {
 			break;	
 		}
 	}
+
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Add SMS Used
+	 *
+	 * Add SMS counter used by user based on date
+	 *
+	 * @access	public   		 
+	 */	
 	function add_sms_used($user_id)
 	{
 		$date = date("Y-m-d");
@@ -274,4 +376,6 @@ Class Kalkun_model extends Model {
 		else return $res;
 	}
 }
-?>
+
+/* End of file kalkun_model.php */
+/* Location: ./application/models/kalkun_model.php */

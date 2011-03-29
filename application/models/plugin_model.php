@@ -1,6 +1,32 @@
 <?php
-Class Plugin_model extends Model {
-	
+/**
+ * Kalkun
+ * An open source web based SMS Management
+ *
+ * @package		Kalkun
+ * @author		Kalkun Dev Team
+ * @license		http://kalkun.sourceforge.net/license.php
+ * @link		http://kalkun.sourceforge.net
+ */
+
+// ------------------------------------------------------------------------
+
+/**
+ * Plugin_model Class
+ *
+ * Handle all plugin database activity 
+ *
+ * @package		Kalkun
+ * @subpackage	Plugin
+ * @category	Models
+ */
+class Plugin_model extends Model {
+
+	/**
+	 * Constructor
+	 *
+	 * @access	public
+	 */		
 	function Plugin_model()
 	{
 		parent::Model();
@@ -13,11 +39,6 @@ Class Plugin_model extends Model {
 		$this->db->where('plugin_name', $name);
 		return $this->db->get('plugin')->row('plugin_status');
 	}
-	
-
-	//=================================================================
-	// BLACKLIST NUMBER
-	//=================================================================	
 	
 	function getBlacklistNumber($option=NULL, $limit=NULL, $offset=NULL)
 	{
@@ -61,12 +82,6 @@ Class Plugin_model extends Model {
 	{
 		$this->db->delete('plugin_blacklist_number', array('id_blacklist_number' => $id)); 
 	}
-	
-
-
-	//=================================================================
-	// SERVER ALERT
-	//=================================================================	
 	
 	function getServerAlert($option=NULL, $limit=NULL, $offset=NULL)
 	{
@@ -135,4 +150,6 @@ Class Plugin_model extends Model {
 		return $this->db->get('plugin_server_alert')->row('timeout');	
 	}
 }
-?>
+
+/* End of file plugin_model.php */
+/* Location: ./application/models/plugin_model.php */

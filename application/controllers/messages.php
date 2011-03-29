@@ -30,15 +30,20 @@ class Messages extends MY_Controller {
 		parent::MY_Controller();
 		
 		// session check
-		if($this->session->userdata('loggedin')==NULL) redirect('login');
+		if ($this->session->userdata('loggedin')==NULL) redirect('login');
 		
 		$param['uid'] = $this->session->userdata('id_user');
 	}
 	
-	//=================================================================
-	// COMPOSE
-	//=================================================================
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Compose
+	 *
+	 * Render compose window form
+	 *
+	 * @access	public   		 
+	 */	
 	function compose()
 	{
 		// register valid type
@@ -49,11 +54,11 @@ class Messages extends MY_Controller {
 		$data['val_type'] = $type;
 		
 		// Forward option
-		if($type=='forward') 
+		if ($type=='forward') 
 		{
 			$source = $this->input->post('param1');
 			$id = $this->input->post('param2');
-			switch($source)
+			switch ($source)
 			{
 				case 'inbox':
 				$tmp_number = 'SenderNumber';
@@ -65,13 +70,13 @@ class Messages extends MY_Controller {
 				$multipart['type'] = 'inbox';
 				$multipart['option'] = 'check';
 				$multipart['id_message'] = $id;
-				$tmp_check = $this->Message_model->getMultipart($multipart);
-				if($tmp_check->row('UDH')!='')
+				$tmp_check = $this->Message_model->get_multipart($multipart);
+				if ($tmp_check->row('UDH')!='')
 				{
 					$multipart['option'] = 'all';
 					$multipart['udh'] = substr($tmp_check->row('UDH'),0,8);
 					$multipart['phone_number'] = $tmp_check->row('SenderNumber');					
-					foreach($this->Message_model->getMultipart($multipart)->result() as $part):
+					foreach($this->Message_model->get_multipart($multipart)->result() as $part):
 					$data['message'] .= $part->TextDecoded;
 					endforeach;	
 				}				
@@ -86,34 +91,33 @@ class Messages extends MY_Controller {
 				$multipart['type'] = 'sentitems';
 				$multipart['option'] = 'check';
 				$multipart['id_message'] = $id;
-				$tmp_check = $this->Message_model->getMultipart($multipart);
-				if($tmp_check!=0)
+				$tmp_check = $this->Message_model->get_multipart($multipart);
+				if ($tmp_check!=0)
 				{
 					$multipart['option'] = 'all';
-					foreach($this->Message_model->getMultipart($multipart)->result() as $part):
+					foreach($this->Message_model->get_multipart($multipart)->result() as $part):
 					$data['message'] .= $part->TextDecoded;
 					endforeach;	
 				}
 				break;
-			}
-		
-			// deprecated
-			// get phone number
-			// $tmp_source = $this->Message_model->getMessagesbyID($source, $id)->row($tmp_number);
-			
-			// check phonebook name by phone number
-			// $tmp_check = $this->Phonebook_model->getPhonebook(array('option'=>'bynumber', 'number'=>$tmp_source));
-			// if($tmp_check->num_rows()!=0) $tmp_source = $tmp_check->row('Name').'  <'.$tmp_source.'>';
-			
-			// $data['message'] = "Original message from: ".$tmp_source."\n\n".$data['message'];		
+			}		
 		}
-		else if($type=='reply') $data['dest'] = $this->input->post('param1');
-		else if($type=='pbk_contact') $data['dest'] = $this->input->post('param1');
-		else if($type=='pbk_groups') $data['dest'] = $this->input->post('param1');
+		else if ($type=='reply') $data['dest'] = $this->input->post('param1');
+		else if ($type=='pbk_contact') $data['dest'] = $this->input->post('param1');
+		else if ($type=='pbk_groups') $data['dest'] = $this->input->post('param1');
 		
 		$this->load->view('main/messages/compose', $data);
 	}
+
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Compose Process
+	 *
+	 * Process submitted form
+	 *
+	 * @access	public   		 
+	 */		
 	function compose_process()
 	{
 		if($_POST)
@@ -125,33 +129,35 @@ class Messages extends MY_Controller {
 			case 'sendoption1':
 			$tmp_dest = explode(',', $this->input->post('personvalue'));
 			$dest = array();
-			foreach($tmp_dest as $key => $tmp):
-			if(trim($tmp)!='') {
-				$dest[$key] = $tmp;
+			foreach ($tmp_dest as $key => $tmp)
+			{
+				if(trim($tmp)!='') {
+					$dest[$key] = $tmp;
+				}
 			}
-			endforeach;
 			break;
 		
 			//Group	
 			case 'sendoption2':
 			$dest = array();
-			foreach($this->Phonebook_model->getPhonebook(array('option' => 'bygroup', 'group_id' => $this->input->post('groupvalue')))->result() as $tmp):
-			$dest[] = $tmp->Number;
-			endforeach;
+			$param = array('option' => 'bygroup', 'group_id' => $this->input->post('groupvalue'));
+			foreach($this->Phonebook_model->get_phonebook($param)->result() as $tmp)
+			{
+				$dest[] = $tmp->Number;
+			}
 			break;
 		
 			// Input manually
 			case 'sendoption3':
 			$tmp_dest = explode(',', $this->input->post('manualvalue'));
 			$dest = array();
-			foreach($tmp_dest as $key => $tmp):
-			$tmp = trim($tmp); // remove space
-			if(trim($tmp)!='') {
-				$dest[$key] = $tmp;
+			foreach($tmp_dest as $key => $tmp)
+			{
+				$tmp = trim($tmp); // remove space
+				if(trim($tmp)!='') {
+					$dest[$key] = $tmp;
+				}
 			}
-			endforeach;
-			//print_r($dest);
-			//exit;
 			break;
 			
 			// Reply
@@ -163,17 +169,20 @@ class Messages extends MY_Controller {
 			case 'member':
 			$this->load->model('Member_model');
 			$dest = array();
-			foreach($this->Member_model->get_member('all')->result() as $tmp):
-			$dest[] = $tmp->phone_number;
-			endforeach;								
+			foreach($this->Member_model->get_member('all')->result() as $tmp)
+			{
+				$dest[] = $tmp->phone_number;
+			}								
 			break;	
 			
 			// Phonebook group
 			case 'pbk_groups':
 			$dest = array();
-			foreach($this->Phonebook_model->getPhonebook(array('option' => 'bygroup', 'group_id' => $this->input->post('id_pbk')))->result() as $tmp):
-			$dest[] = $tmp->Number;
-			endforeach;
+			$param = array('option' => 'bygroup', 'group_id' => $this->input->post('id_pbk'));
+			foreach($this->Phonebook_model->get_phonebook($param)->result() as $tmp)
+			{
+				$dest[] = $tmp->Number;
+			}
 			break;					
 		}
 				
@@ -199,7 +208,7 @@ class Messages extends MY_Controller {
 		$data['class'] = ($this->input->post('sms_mode')) ? '0' : '1';
 		$data['message'] = $this->input->post('message');
 		$data['date'] = $date;
-		$data['delivery_report'] = $this->Kalkun_model->getSetting()->row('delivery_report');
+		$data['delivery_report'] = $this->Kalkun_model->get_setting()->row('delivery_report');
 		$data['coding'] = ($this->input->post('unicode')=='unicode') ? 'unicode' : 'default';	
 		$data['uid'] = $this->session->userdata('id_user');	
 				
@@ -227,25 +236,16 @@ class Messages extends MY_Controller {
 		echo "<div class=\"notif\">Your message has been move to Outbox and ready for delivery.</div>";
 		}
 	}
+		
+	// --------------------------------------------------------------------
 	
-	// contact autocompleter
-	function getphonebook()
-	{
-		$q = $this->input->post('q', TRUE);
-		if (isset($q) && strlen($q) > 0)
-		{
-			$user_id = $this->session->userdata("id_user");
-			$sql = "select Number as id, Name as name from pbk where id_user='".$user_id."' and Name like '%".$q."%' order by Name ";
-			$query = $this->Kalkun_model->db->query($sql);
-			echo json_encode($query->result());
-		}
-	}	
-	
-	
-	//=================================================================
-	// MESSAGE
-	//=================================================================		
-	
+	/**
+	 * Folder
+	 *
+	 * List messages on folder (inbox, outbox, sentitems, trash)
+	 *
+	 * @access	public   		 
+	 */		
 	function folder($type=NULL, $option=NULL, $offset=NULL)
 	{		
 		// validate url
@@ -254,7 +254,7 @@ class Messages extends MY_Controller {
 		
 		// Pagination
 		$this->load->library('pagination');
-		$config['per_page'] = $this->Kalkun_model->getSetting()->row('paging');
+		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';
 		
@@ -283,6 +283,15 @@ class Messages extends MY_Controller {
 		}
 	}
 	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * My Folder
+	 *
+	 * List messages on custom folder (user created folder)
+	 *
+	 * @access	public   		 
+	 */	
 	function my_folder($type=NULL, $id_folder=NULL, $option=NULL, $offset=NULL)
 	{
 		// validate url
@@ -291,7 +300,7 @@ class Messages extends MY_Controller {
 		
 		// Pagination
 		$this->load->library('pagination');
-		$config['per_page'] = $this->Kalkun_model->getSetting()->row('paging');		
+		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');		
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';
 		
@@ -322,7 +331,16 @@ class Messages extends MY_Controller {
 			$this->load->view('main/layout', $data);
 		}
 	}
+
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Conversation
+	 *
+	 * List messages on conversation (based on phone number)
+	 *
+	 * @access	public
+	 */		
 	function conversation($source=NULL, $type=NULL, $number=NULL, $id_folder=NULL)
 	{
 		if($source=='folder' && $type!='outbox') 
@@ -356,7 +374,7 @@ class Messages extends MY_Controller {
 			endforeach;
 			
 			// sort data
-			$sort_option = $this->Kalkun_model->getSetting()->row('conversation_sort');
+			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			usort($data['messages'], "compare_date_".$sort_option);
 			
 			$this->load->view('main/layout', $data);	
@@ -408,13 +426,22 @@ class Messages extends MY_Controller {
 			endforeach;		
 			
 			// sort data
-			$sort_option = $this->Kalkun_model->getSetting()->row('conversation_sort');
+			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			usort($data['messages'], "compare_date_".$sort_option);
 			
 			$this->load->view('main/layout', $data);				
 		}
 	}
 	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Move Message
+	 *
+	 * Move messages from a folder to another folder
+	 *
+	 * @access	public
+	 */		
 	function move_message()
 	{
 		if($this->input->post('type')) $param['type'] = $this->input->post('type');
@@ -427,12 +454,12 @@ class Messages extends MY_Controller {
 		if(isset($param['type']) && $param['type']=='single' && isset($param['folder']) && $param['folder']=='inbox')
 		{
 			$multipart = array('type' => 'inbox', 'option' => 'check', 'id_message' => $param['id_message'][0]);
-			$tmp_check = $this->Message_model->getMultipart($multipart);
+			$tmp_check = $this->Message_model->get_multipart($multipart);
 			if($tmp_check->row('UDH')!='')
 			{
 				$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'),0,8));	
 				$multipart['phone_number'] = $tmp_check->row('SenderNumber');				
-				foreach($this->Message_model->getMultipart($multipart)->result() as $part):
+				foreach($this->Message_model->get_multipart($multipart)->result() as $part):
 				$param['id_message'][] = $part->ID;
 				endforeach;	
 			}			
@@ -440,7 +467,15 @@ class Messages extends MY_Controller {
 		$this->Message_model->move_messages($param);
 	}
 	
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Delete Message
+	 *
+	 * Delete messages, permanently or temporarily
+	 *
+	 * @access	public
+	 */		
 	function delete_messages($source=NULL)
 	{
 		if($this->input->post('type')) $param['type'] = $this->input->post('type');
@@ -453,7 +488,7 @@ class Messages extends MY_Controller {
 		else
 		{
 			// check trash/permanent delete
-			if($param['current_folder']=='5' OR $this->Kalkun_model->getSetting()->row('permanent_delete')=='true') $param['option'] = 'permanent';
+			if($param['current_folder']=='5' OR $this->Kalkun_model->get_setting()->row('permanent_delete')=='true') $param['option'] = 'permanent';
 			else $param['option'] = 'temp';	
 		}
 				
@@ -462,23 +497,34 @@ class Messages extends MY_Controller {
 			$multipart['type'] = 'inbox';
 			$multipart['option'] = 'check';
 			$multipart['id_message'] = $param['id'][0];
-			$tmp_check = $this->Message_model->getMultipart($multipart);
+			$tmp_check = $this->Message_model->get_multipart($multipart);
 			if($tmp_check->row('UDH')!='')
 			{
 				$multipart['option'] = 'all';
 				$multipart['udh'] = substr($tmp_check->row('UDH'),0,8);
 				$multipart['phone_number'] = $tmp_check->row('SenderNumber');					
-				foreach($this->Message_model->getMultipart($multipart)->result() as $part):
+				foreach($this->Message_model->get_multipart($multipart)->result() as $part):
 				$param['id'][] = $part->ID;
 				endforeach;	
 			}				
 		}
 		$this->Message_model->delete_messages($param);
 	}
+
+	// --------------------------------------------------------------------
 	
-	function __check_folder_privileges($id_folder=NULL) 
+	/**
+	 * Check Folder Privileges
+	 *
+	 * Check folder privileges/permission
+	 *
+	 * @access	private
+	 */		
+	function _check_folder_privileges($id_folder=NULL) 
 	{
 		//$this->
 	}
 }	
-?>
+
+/* End of file messages.php */
+/* Location: ./application/controllers/messages.php */ 

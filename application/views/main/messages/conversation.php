@@ -17,7 +17,7 @@ else
 	$type = $this->uri->segment(4);
 	if($tmp['source'] == 'inbox') 
 	{
-		$qry = $this->Phonebook_model->getPhonebook(array('option'=>'bynumber','number'=>$tmp['SenderNumber']));
+		$qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber','number'=>$tmp['SenderNumber']));
 		if($qry->num_rows()!=0) { $senderName = $qry->row('Name'); $on_pbk=TRUE;}
 		else { $senderName = $tmp['SenderNumber']; $on_pbk=FALSE;}
 		
@@ -27,7 +27,7 @@ else
 	}
 	else 
 	{
-		$qry = $this->Phonebook_model->getPhonebook(array('option'=>'bynumber','number'=>$tmp['DestinationNumber']));
+		$qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber','number'=>$tmp['DestinationNumber']));
 		if($qry->num_rows()!=0) { $senderName = $qry->row('Name'); $on_pbk=TRUE;}
 		else { $senderName = $tmp['DestinationNumber']; $on_pbk=FALSE;}
 		
@@ -62,9 +62,9 @@ if($tmp['source'] == 'sentitems'):
 	$multipart['type'] = 'sentitems';
 	$multipart['option'] = 'check';
 	$multipart['id_message'] = $tmp['ID'];
-	if($this->Message_model->getMultipart($multipart)!=0):
+	if($this->Message_model->get_multipart($multipart)!=0):
 		$multipart['option'] = 'all';
-		foreach($this->Message_model->getMultipart($multipart)->result() as $part):
+		foreach($this->Message_model->get_multipart($multipart)->result() as $part):
 		$tmp['TextDecoded'].=$part->TextDecoded;
 		$part_no++;
 		endforeach;			
@@ -74,10 +74,10 @@ elseif($tmp['source'] == 'outbox'):
 	$multipart['type'] = 'outbox';
 	$multipart['option'] = 'check';
 	$multipart['id_message'] = $tmp['ID'];	
-	if($this->Message_model->getMultipart($multipart)=='true'):
+	if($this->Message_model->get_multipart($multipart)=='true'):
 		$part_no = 1;
 		$multipart['option'] = 'all';
-		foreach($this->Message_model->getMultipart($multipart)->result_array() as $part):
+		foreach($this->Message_model->get_multipart($multipart)->result_array() as $part):
 		$tmp['TextDecoded'].=$part['TextDecoded'];
 		$part_no++;
 		endforeach;
@@ -90,7 +90,7 @@ elseif($tmp['source'] == 'inbox'):
 		$multipart['option'] = 'all';
 		$multipart['udh'] = substr($tmp['UDH'],0,8);
 		$multipart['phone_number'] = $tmp['SenderNumber'];
-		foreach($this->Message_model->getMultipart($multipart)->result_array() as $part):
+		foreach($this->Message_model->get_multipart($multipart)->result_array() as $part):
 		$tmp['TextDecoded'].=$part['TextDecoded'];
 		$part_no++;
 		endforeach;
@@ -151,7 +151,7 @@ endif;
 	</div></div>
 		
 <?php 
-	if($tmp['source']=='inbox') if($tmp['readed'] == 'false') $this->Message_model->updateRead($tmp['ID']);
+	if($tmp['source']=='inbox') if($tmp['readed'] == 'false') $this->Message_model->update_read($tmp['ID']);
 	endforeach;
 }
 ?>

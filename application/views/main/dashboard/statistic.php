@@ -31,7 +31,7 @@ $trash = $trash_inbox + $trash_sentitems;
 <div style="float: left; width: 200px;">
 <h4><?php echo lang('kalkun_myfolder');?>: </h4>
 <?php  
-foreach($this->Kalkun_model->getFolders('all')->result() as $val):
+foreach($this->Kalkun_model->get_folders('all')->result() as $val):
 $folder_count_inbox = $this->Message_model->get_messages(array('type' => 'inbox', 'id_folder' => $val->id_folder))->num_rows();
 $folder_count_sentitems = $this->Message_model->get_messages(array('type' => 'sentitems', 'id_folder' => $val->id_folder))->num_rows();
 $folder_count = $folder_count_inbox + $folder_count_sentitems;
@@ -43,9 +43,9 @@ endforeach;
 <div style="float: left; width: 175px;">
 <h4><?php echo lang('kalkun_phonebook');?>: </h4>
 <p><span><?php echo lang('kalkun_contact');?>: </span>
-<?php echo  $this->Phonebook_model->getPhonebook(array('option' => 'all'))->num_rows();?></p>
+<?php echo  $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();?></p>
 <p><span><?php echo lang('kalkun_group');?>: </span>
-<?php echo  $this->Phonebook_model->getPhonebook(array('option' => 'group'))->num_rows();?></p>
+<?php echo  $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();?></p>
 </div>
 
 <div style="clear: both;">

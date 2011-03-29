@@ -1,10 +1,30 @@
 <?php
+/**
+ * Kalkun
+ * An open source web based SMS Management
+ *
+ * @package		Kalkun
+ * @author		Kalkun Dev Team
+ * @license		http://kalkun.sourceforge.net/license.php
+ * @link		http://kalkun.sourceforge.net
+ */
+
+// ------------------------------------------------------------------------
+
+/**
+ * Install Class
+ *
+ * @package		Kalkun
+ * @subpackage	Install
+ * @category	Controllers
+ */
 class Install extends Controller {
 	
-	//=================================================================
-	// KALKUN INSTALLATION
-	//=================================================================	
-	
+	/**
+	 * Constructor
+	 *
+	 * @access	public
+	 */
 	function Install()
 	{
 		parent::Controller();
@@ -14,24 +34,60 @@ class Install extends Controller {
 		if(!$this->db->table_exists('gammu')) die("Cannot find gammu database schema.");
 	}
 	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Index
+	 *
+	 * Display welcome page
+	 *
+	 * @access	public   		 
+	 */	
 	function index()
 	{
 		$data['main'] = 'main/install/welcome';
 		$this->load->view('main/install/layout', $data);	
 	}
+
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Requirement check
+	 *
+	 * Requirement check page
+	 *
+	 * @access	public   		 
+	 */		
 	function requirement_check()
 	{
 		$data['main'] = 'main/install/requirement_check';
 		$this->load->view('main/install/layout', $data);
 	}
-		
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Database setup
+	 *
+	 * Database setup page
+	 *
+	 * @access	public   		 
+	 */			
 	function database_setup()
 	{	
 		$data['main'] = 'main/install/database_setup';
 		$this->load->view('main/install/layout', $data);			
 	}
-		
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Run install
+	 *
+	 * Dumping data drom SQL file
+	 *
+	 * @access	public   		 
+	 */			
 	function run_install($type=NULL)
 	{
 		// This method taken from Roundcube installation
@@ -47,7 +103,16 @@ class Install extends Controller {
 		$data['main'] = 'main/install/install_result';
 		$this->load->view('main/install/layout', $data);
 	}
+
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Execute SQL
+	 *
+	 * Run SQL command from file, line by line
+	 *
+	 * @access	private   		 
+	 */		
 	function _execute_sql($sqlfile)
 	{
 		$error=0;
@@ -71,7 +136,17 @@ class Install extends Controller {
 		}
 		return $error;		
 	}
+
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Upgrade
+	 *
+	 * Upgrade installation, database cleanup
+	 * Only used if there is change on database structure
+	 *
+	 * @access	private   		 
+	 */		
 	function _upgrade() 
 	{
 		// get all inbox ID
@@ -121,4 +196,6 @@ class Install extends Controller {
 		$this->Kalkun_model->db->query('DROP TABLE `settings`;');
 	}
 }
-?>
+
+/* End of file install.php */
+/* Location: ./application/controllers/install.php */ 

@@ -2,10 +2,10 @@
 <?php 
 echo lang('tni_status').": ";
 // Get signal and battery value
-//$signal = $this->Kalkun_model->getGammuInfo('phone_signal')->row('Signal'); 
-//$battery = $this->Kalkun_model->getGammuInfo('phone_battery')->row('Battery');
+//$signal = $this->Kalkun_model->get_gammu_info('phone_signal')->row('Signal'); 
+//$battery = $this->Kalkun_model->get_gammu_info('phone_battery')->row('Battery');
 
-$status = $this->Kalkun_model->getGammuInfo('last_activity')->row('UpdatedInDB');
+$status = $this->Kalkun_model->get_gammu_info('last_activity')->row('UpdatedInDB');
 if($status!=NULL) {
 	$status = get_modem_status($status, $this->config->item("modem_tolerant"));
 	
