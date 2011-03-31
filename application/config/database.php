@@ -38,10 +38,23 @@ $active_group = "default";
 $active_record = TRUE;
 
 $db['default']['hostname'] = "localhost";
+
+// MySQL
 $db['default']['username'] = "root";
 $db['default']['password'] = "password";
 $db['default']['database'] = "kalkun";
 $db['default']['dbdriver'] = "mysql";
+
+// PostgreSQL
+// $db['default']['username'] = "postgres";
+// $db['default']['password'] = "password";
+// $db['default']['database'] = "kalkun";
+// $db['default']['dbdriver'] = "postgre";
+
+// SQLite3
+// $db['default']['database'] = "sqlite:/path/to/kalkun.sqlite";
+// $db['default']['dbdriver'] = "pdo";
+
 $db['default']['dbprefix'] = "";
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
@@ -52,4 +65,4 @@ $db['default']['dbcollat'] = "utf8_general_ci";
 
 
 /* End of file database.php */
-/* Location: ./system/application/config/database.php */
+/* Location: ./application/config/database.php */

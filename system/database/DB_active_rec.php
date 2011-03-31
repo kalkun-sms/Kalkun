@@ -766,7 +766,8 @@ class CI_DB_active_record extends CI_DB_driver {
 			// some platforms require an escape sequence definition for LIKE wildcards
 			if ($this->_like_escape_str != '')
 			{
-				$like_statement = $like_statement.sprintf($this->_like_escape_str, $this->_like_escape_char);
+				$like_statement = $like_statement.sprintf($this->_like_escape_str, $this->_like_escape_chr); /* Az */
+				//$like_statement = $like_statement.sprintf($this->_like_escape_str, $this->_like_escape_char); /* bug */
 			}
 			
 			$this->ar_like[] = $like_statement;

@@ -25,14 +25,15 @@
 	</tr>
 	
 	<tr>
-		<td colspan="3">MySQL or SQLite3 (Using PDO)</td>
+		<td colspan="3">
+		<?php $db_property = get_database_property($database_driver); ?>
+		<?php echo $db_property['human']; ?> <i>(Readed from database configuration)</i>
+		</td>
 		<td class="right">
 		<?php 
-			if(extension_loaded('mysql')) $db_msg = "MySQL";
-			if(extension_loaded('pdo_sqlite')) $db_msg = "SQLite3";
-			if(extension_loaded('mysql') && extension_loaded('sqlite3')) $db_msg = "Both";
+			if(extension_loaded($db_property['driver'])) $db_msg="";
 			
-			if(isset($db_msg)) echo "<span class=\"green\">OK (".$db_msg.")</span>"; 
+			if(isset($db_msg)) echo "<span class=\"green\">OK</span>"; 
 			else { echo "<span class=\"red\">Not OK</span>"; $error++; } 
 		?>
 		</td>

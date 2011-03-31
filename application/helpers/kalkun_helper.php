@@ -176,8 +176,7 @@
 			} 
 		}
 		return $size;
-    } 
-    
+    }     
     
 	function get_hour()
 	{
@@ -195,7 +194,36 @@
 			if($min<10) $min = "0".$min;
 			echo "<option value=\"".$min."\">".$min."</option>"; 
 		}
-	}    
+	} 
+	
+	
+	function get_database_property($driver)
+	{
+		// valid and supported driver
+		$valid_driver = array('postgre', 'mysql', 'pdo');
+		
+		if(!in_array($driver, $valid_driver)) die ('Database driver you\'re using is not supported');
+		
+		$postgre['name'] = 'postgre';
+		$postgre['file'] = 'pgsql';
+		$postgre['human'] = 'PostgreSQL';
+		$postgre['escape_char'] = '"';
+		$postgre['driver'] = 'pgsql';
+		
+		$mysql['name'] = 'mysql';
+		$mysql['file'] = 'mysql';
+		$mysql['human'] = 'MySQL';
+		$mysql['escape_char'] = '`';
+		$mysql['driver'] = 'mysql';
+		
+		$pdo['name'] = 'sqlite';
+		$pdo['file'] = 'sqlite';
+		$pdo['human'] = 'SQLite3 (Using PDO)';
+		$pdo['escape_char'] = '';
+		$pdo['driver'] = 'pdo_sqlite';
+		
+		return ${$driver};
+	}   
 
 /* End of file kalkun_helper.php */
-/* Location: ./system/helpers/kalkun_helper.php */
+/* Location: ./application/helpers/kalkun_helper.php */

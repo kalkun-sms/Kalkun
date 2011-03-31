@@ -61,6 +61,7 @@ class Install extends Controller {
 	function requirement_check()
 	{
 		$data['main'] = 'main/install/requirement_check';
+		$data['database_driver'] = $this->db->platform();
 		$this->load->view('main/install/layout', $data);
 	}
 
@@ -76,6 +77,7 @@ class Install extends Controller {
 	function database_setup()
 	{	
 		$data['main'] = 'main/install/database_setup';
+		$data['database_driver'] = $this->db->platform();
 		$this->load->view('main/install/layout', $data);			
 	}
 
@@ -147,6 +149,8 @@ class Install extends Controller {
 	 *
 	 * @access	private   		 
 	 */		
+	 // Currently not used
+	 /*
 	function _upgrade() 
 	{
 		// get all inbox ID
@@ -194,7 +198,7 @@ class Install extends Controller {
 		
 		// drop settings table
 		$this->Kalkun_model->db->query('DROP TABLE `settings`;');
-	}
+	}*/
 }
 
 /* End of file install.php */

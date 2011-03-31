@@ -47,8 +47,8 @@ class Phonebook_model extends Model {
 		{
 			case 'all':
 			$this->db->select('*');
-			$this->db->select('pbk.ID as id_pbk');
-			$this->db->select('pbk_groups.Name as GroupName');	
+			$this->db->select_as('pbk.ID','id_pbk');
+			$this->db->select_as('pbk_groups.Name', 'GroupName');	
 			$this->db->from('pbk');
 			$this->db->where('pbk.id_user', $this->session->userdata('id_user'));
 			$this->db->join('pbk_groups', 'pbk_groups.ID=pbk.GroupID');
@@ -57,7 +57,7 @@ class Phonebook_model extends Model {
 			
 			case 'paginate':
 			$this->db->select('*');
-			$this->db->select('ID as id_pbk');	
+			$this->db->select_as('ID', 'id_pbk');	
 			$this->db->from('pbk');
 			$this->db->where('id_user', $this->session->userdata('id_user'));
 			$this->db->order_by('Name');
@@ -66,9 +66,9 @@ class Phonebook_model extends Model {
 			
 			case 'by_idpbk':
 			$this->db->select('*');
-			$this->db->select('pbk.ID as id_pbk');
-			$this->db->select('pbk.Name as Name');
-			$this->db->select('pbk_groups.Name as GroupName');	
+			$this->db->select_as('pbk.ID', 'id_pbk');
+			$this->db->select_as('pbk.Name', 'Name');
+			$this->db->select('pbk_groups.Name', 'GroupName');	
 			$this->db->from('pbk');
 			$this->db->where('pbk.id_user', $this->session->userdata('id_user'));
 			$this->db->join('pbk_groups', 'pbk_groups.ID=pbk.GroupID');
@@ -85,7 +85,7 @@ class Phonebook_model extends Model {
 		
 			case 'group_paginate':
 			$this->db->select('*');
-			$this->db->select('Name as GroupName');
+			$this->db->select_as('Name', 'GroupName');
 			$this->db->from('pbk_groups');
 			$this->db->where('id_user', $this->session->userdata('id_user'));
 			$this->db->order_by('Name');
@@ -93,7 +93,7 @@ class Phonebook_model extends Model {
 			break;	
 			
 			case 'groupname':
-			$this->db->select('Name as GroupName');
+			$this->db->select_as('Name', 'GroupName');
 			$this->db->from('pbk_groups');
 			$this->db->where('ID', $param['id']);
 			$this->db->where('id_user', $this->session->userdata('id_user'));
@@ -101,7 +101,7 @@ class Phonebook_model extends Model {
 			
 			case 'bynumber':
 			$this->db->select('*');
-			$this->db->select('ID as id_pbk');	
+			$this->db->select_as('ID', 'id_pbk');	
 			$this->db->from('pbk');
 			$this->db->where('Number', $param['number']);
 			$this->db->where('id_user', $this->session->userdata('id_user'));
@@ -115,7 +115,7 @@ class Phonebook_model extends Model {
 			
 			case 'search':
 			$this->db->select('*');
-			$this->db->select('ID as id_pbk');	
+			$this->db->select_as('ID', 'id_pbk');	
 			$this->db->from('pbk');
 			$this->db->like('Name', $this->input->post('search_name'));
 			$this->db->where('id_user', $this->session->userdata('id_user'));

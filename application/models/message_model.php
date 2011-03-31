@@ -131,6 +131,7 @@ class Message_model extends Model {
 				'DestinationNumber' => $tmp_data['dest'],
 				'Coding' => $tmp_data['coding'],
 				'Class' => $tmp_data['class'],
+				'CreatorID' => '', // postgre 
 				'TextDecoded' => $tmp_data['message'],
 				'DeliveryReport' => $tmp_data['delivery_report']			
 				);
@@ -218,8 +219,10 @@ class Message_model extends Model {
 		if($options['type']=='inbox')
 		{
 			$tmp_number = 'SenderNumber'; 
-			$tmp_order = 'ReceivingDateTime';	
-			$this->db->where("(UDH = '' OR UDH LIKE '%1')", NULL, FALSE); /* FIXME */				
+			$tmp_order = 'ReceivingDateTime';
+			
+			$udh_where = "(".$this->_protect_identifiers("UDH")." = '' OR ".$this->_protect_identifiers("UDH")." LIKE '%1')";
+			$this->db->where($udh_where, NULL, FALSE);				
 		}
 		else 
 		{
@@ -228,7 +231,7 @@ class Message_model extends Model {
 			if($options['type']=='sentitems') $this->db->where('SequencePosition', '1');		
 		}
 						
-		// if id message if set
+		// if id message is set
 		if(isset($options['id_message'])) $this->db->where('ID', $options['id_message']);
 		else
 		{
@@ -240,10 +243,10 @@ class Message_model extends Model {
 			}			
 		}
 		
-		// if phone number if set
+		// if phone number is set
 		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
 
-		// if readed if set
+		// if readed is set
 		if(isset($options['readed']) && is_bool($options['readed'])) 
 		{
 			// valid only for inbox
@@ -254,7 +257,7 @@ class Message_model extends Model {
 			}
 		}
 
-		// if processed if set
+		// if processed is set
 		if(isset($options['processed']) && is_bool($options['processed'])) 
 		{
 			// valid only for inbox
@@ -269,11 +272,51 @@ class Message_model extends Model {
 		if(isset($options['uid']))
 		{
 			$this->db->join($user_folder, $user_folder.'.id_'.$options['type'].'='.$options['type'].'.ID');
-			$this->db->where($user_folder.'.id_user',$options['uid']);		
+			$this->db->where($user_folder.'.id_user',$options['uid']);	
+			
+			// if trash is set
+			if(isset($options['trash']) && is_bool($options['trash'])) $this->db->where($user_folder.'.trash', $options['trash']);	
 		}
 		
 		$result = $this->db->get();
 		return $result;
+	}
+
+	// --------------------------------------------------------------------
+	
+	/**
+	* _protect_identifiers
+	*
+	* Ugly hack to add backticks to database field
+	*
+	* @param string $identifier
+	* @return string
+	*/
+	function _protect_identifiers($identifier=NULL)
+	{
+		$escape_char;
+		$escaped_identifer="";
+		
+		// get database engine
+		$db_engine = $this->db->platform();
+		$escape_char = get_database_property($db_engine);
+		$escape_char = $escape_char['escape_char'];
+		
+		$sub = explode(".", $identifier);
+		$sub_count = count($sub);
+
+		foreach($sub as $key => $tmp)
+		{
+			$escaped_identifer.=$escape_char.$tmp.$escape_char;
+			
+			// if this is not the last
+			if($key!=$sub_count-1)
+			{
+				$escaped_identifer.=".";
+			}
+		}
+		
+	    return $escaped_identifer;
 	}
 		
 	// --------------------------------------------------------------------
@@ -335,7 +378,7 @@ class Message_model extends Model {
 		{
 			case 'inbox':
 				$this->db->from('inbox');
-				$this->db->select_max('ReceivingDateTime', 'maxdate');
+				$this->db->select_max($this->_protect_identifiers('ReceivingDateTime'), $this->_protect_identifiers('maxdate'), FALSE);
 				$this->db->join('user_inbox','user_inbox.id_inbox=inbox.ID');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
@@ -344,21 +387,21 @@ class Message_model extends Model {
 				$sub_sql = $this->db->_compile_select();
 				$this->db->_reset_select();
 				
-				$this->db->from("($sub_sql) as maxresult,inbox");
+				$this->db->distinct();
+				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').",inbox");
 				$this->db->join('user_inbox','user_inbox.id_inbox=inbox.ID');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
 				$this->db->where('trash', $tmp_trash);
 				
-				$this->db->where('ReceivingDateTime', 'maxresult.maxdate', FALSE);
-				//$this->db->select($tmp_select);
-				$this->db->group_by('SenderNumber');
+				$this->db->where($this->_protect_identifiers('ReceivingDateTime'), $this->_protect_identifiers('maxresult.maxdate'), FALSE);
+				//$this->db->group_by('SenderNumber');
 				$this->db->order_by('ReceivingDateTime', 'DESC');
 			break;
 			
 			case 'outbox':
 				$this->db->from('outbox');
-				$this->db->select_max('SendingDateTime', 'maxdate');
+				$this->db->select_max($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxdate'), FALSE);
 				$this->db->join('user_outbox','outbox.ID=user_outbox.id_outbox');
 				$this->db->where('id_user', $user_id);
 				$this->db->group_by('DestinationNumber');
@@ -366,18 +409,18 @@ class Message_model extends Model {
 				$sub_sql = $this->db->_compile_select();
 				$this->db->_reset_select();
 				
-				$this->db->from("outbox, ($sub_sql) as maxresult");
-				//$this->db->select($tmp_select);
+				$this->db->distinct();
+				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').",outbox");
 				$this->db->join('user_outbox','outbox.ID=user_outbox.id_outbox');
 				$this->db->where('id_user', $user_id);
-				$this->db->where('SendingDateTime', 'maxresult.maxdate', FALSE);
-				$this->db->group_by('DestinationNumber');
+				$this->db->where($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxresult.maxdate'), FALSE);
+				//$this->db->group_by('DestinationNumber');
 				$this->db->order_by('SendingDateTime', 'DESC');
 			break;
 			
 			case 'sentitems':
 				$this->db->from('sentitems');
-				$this->db->select_max('SendingDateTime', 'maxdate');
+				$this->db->select_max($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxdate'), FALSE);
 				$this->db->join('user_sentitems','sentitems.ID=user_sentitems.id_sentitems');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
@@ -387,15 +430,15 @@ class Message_model extends Model {
 				$sub_sql = $this->db->_compile_select();
 				$this->db->_reset_select();
 				
-				$this->db->from("sentitems, ($sub_sql) as maxresult");
-				//$this->db->select($tmp_select);
+				$this->db->distinct();
+				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').",sentitems");
 				$this->db->join('user_sentitems','sentitems.ID=user_sentitems.id_sentitems');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
 				$this->db->where('SequencePosition', '1');
 				$this->db->where('trash', $tmp_trash);
-				$this->db->where('SendingDateTime', 'maxresult.maxdate', FALSE);
-				$this->db->group_by('DestinationNumber');
+				$this->db->where($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxresult.maxdate'), FALSE);
+				//$this->db->group_by('DestinationNumber');
 				$this->db->order_by('SendingDateTime', 'DESC');			
 			break;
 		}
@@ -455,17 +498,25 @@ class Message_model extends Model {
 			$this->db->set('ui.trash', $trash);
 			$this->db->where('i.id_folder', $inbox_folder);
 			$this->db->where('i.SenderNumber', $number);
-			$this->db->where('i.ID = ui.id_inbox'); /* FIXME */
-			$this->db->update('inbox as i, user_inbox as ui'); /* FIXME */
+			$this->db->where($this->_protect_identifiers('i.ID'), $this->_protect_identifiers('ui.id_inbox'), FALSE);
+			$update_inbox = $this->_protect_identifiers('inbox');
+			$update_inbox_alias = $this->_protect_identifiers('i');
+			$update_user_inbox = $this->_protect_identifiers('user_inbox');
+			$update_user_inbox_alias = $this->_protect_identifiers('ui');			
+			$this->db->update($update_inbox.' as '.$update_inbox_alias.', '.$update_user_inbox.' as '.$update_user_inbox_alias);
 	
 			// proccess sentitems
 			$this->db->set('si.id_folder', $id_folder);
 			$this->db->set('usi.trash', $trash);
 			$this->db->where('si.id_folder', $sentitems_folder);
 			$this->db->where('si.DestinationNumber', $number);
-			$this->db->where('si.ID = usi.id_sentitems'); /* FIXME */
-			$this->db->update('sentitems as si, user_sentitems as usi'); /* FIXME */
-			break;	
+			$this->db->where($this->_protect_identifiers('si.ID'), $this->_protect_identifiers('usi.id_sentitems'), FALSE);
+			$update_sentitems = $this->_protect_identifiers('sentitems');
+			$update_sentitems_alias = $this->_protect_identifiers('si');
+			$update_user_sentitems = $this->_protect_identifiers('user_sentitems');
+			$update_user_sentitems_alias = $this->_protect_identifiers('usi');			
+			$this->db->update($update_sentitems.' as '.$update_sentitems_alias.', '.$update_user_sentitems.' as '.$update_user_sentitems_alias);
+			break;
 				
 			case 'single':
 			$folder = $options['folder'];
@@ -478,12 +529,17 @@ class Message_model extends Model {
 		 		$this->db->set('a.id_folder', $id_folder);
 				$this->db->set('b.trash', $trash);
 				$this->db->where('a.ID', $tmp);
-				$this->db->where('a.ID = b.'.$id_folder_field); /* FIXME */
-				$this->db->update($folder.' as a, '.$user_folder.' as b'); /* FIXME */
-			endforeach;			
+				$update_id_folder_field = 'b.'.$id_folder_field;
+				$this->db->where($this->_protect_identifiers('a.ID'), $this->_protect_identifiers($update_id_folder_field), FALSE);
+				$update_folder = $this->_protect_identifiers($folder);
+				$update_folder_alias = $this->_protect_identifiers('a');
+				$update_user_folder = $this->_protect_identifiers($user_folder);
+				$update_user_folder_alias = $this->_protect_identifiers('b');				
+				$this->db->update($update_folder.' as '.$update_folder_alias.', '.$update_user_folder.' as '.$update_user_folder_alias);
+			endforeach;
 			break;
 		}
-	}	
+	}
 
 	// --------------------------------------------------------------------
 	
@@ -507,6 +563,8 @@ class Message_model extends Model {
 	 */	
 	function delete_messages($options = array())
 	{
+		$user_id = $this->session->userdata('id_user');
+		
 		$type = $options['type'];
 		$source = $options['source'];
 		$option = $options['option'];
@@ -524,22 +582,54 @@ class Message_model extends Model {
 			if(!isset($options['current_folder'])) { $inbox_folder=1; $sentitems_folder=3; }
 			else $inbox_folder=$sentitems_folder=$current_folder;			
 
+			$trash = FALSE;
 			switch($option)
 			{
 				case 'permanent':
+				
+				// if it's coming from trash
+				if(isset($current_folder) && $current_folder=='5') $trash = TRUE;	
+				
+				// get inbox
+				$param = array('id_folder' => $inbox_folder, 'number' => $number, 'trash' => $trash, 'uid' => $user_id);
+				$inbox = $this->get_messages($param);
+				
+				foreach($inbox->result() as $tmp)
+				{
+					$this->db->where('ID', $tmp->id_inbox);
+					$this->db->delete('inbox');
+		
+					$this->db->where('id_inbox', $tmp->id_inbox);
+					$this->db->delete('user_inbox');					
+				}
+				
+				// deprecated
 				// inbox
-				$inbox = "DELETE i, ui
+				/*$inbox = "DELETE i, ui
 						FROM inbox AS i
 						LEFT JOIN user_inbox AS ui ON ui.id_inbox = i.ID
-						WHERE i.SenderNumber = '".$number."' AND ui.trash='1'"; /* FIXME */
-				$this->db->query($inbox);
+						WHERE i.SenderNumber = '".$number."' AND ui.trash='1'";
+				$this->db->query($inbox);*/
+				
+				// get sentitems
+				$param = array('id_folder' => $sentitems_folder, 'type' => 'sentitems', 'number' => $number, 'trash' => $trash, 'uid' => $user_id);
+				$sentitems = $this->get_messages($param);
+				
+				foreach($sentitems->result() as $tmp)
+				{
+					$this->db->where('ID', $tmp->id_sentitems);
+					$this->db->delete('sentitems');
+		
+					$this->db->where('id_sentitems', $tmp->id_sentitems);
+					$this->db->delete('user_sentitems');					
+				}				
 				
 				// sentitems
-				$sentitems = "DELETE s, us
+				/*$sentitems = "DELETE s, us
 						FROM sentitems AS s
 						LEFT JOIN user_sentitems AS us ON us.id_sentitems = s.ID
-						WHERE s.DestinationNumber = '".$number."' AND us.trash='1'"; /* FIXME */
-				$this->db->query($sentitems);
+						WHERE s.DestinationNumber = '".$number."' AND us.trash='1'";
+				$this->db->query($sentitems);*/
 				break;	
 				
 				case 'temp':	
@@ -630,10 +720,9 @@ class Message_model extends Model {
 				}
 				else if($param['type']=='sentitems')
 				{	
-					$this->db->select('count(*) as count');
 					$this->db->where('ID', $param['id_message']);
 					$this->db->where('SequencePosition >', 1);
-					return $this->db->get('sentitems')->row('count');
+					return $this->db->get('sentitems')->num_rows();
 				}
 			break;
 			

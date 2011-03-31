@@ -142,21 +142,59 @@ class Kalkun_model extends Model {
 	{
 		$id_user = $this->session->userdata('id_user');
 				
+		// get inbox
+		$this->db->select_as('inbox.ID', 'id_inbox');
+		$this->db->from('inbox');
+		$this->db->join('user_inbox', 'user_inbox.id_inbox=inbox.ID');
+		$this->db->join('user_folders', 'user_folders.id_folder=inbox.id_folder');
+		$this->db->where('user_folders.id_folder', $id_folder);
+		$inbox = $this->db->get();
+		
+		// delete inbox and user_inbox
+		foreach($inbox->result() as $tmp)
+		{
+			$this->db->where('ID', $tmp->id_inbox);
+			$this->db->delete('inbox');
+
+			$this->db->where('id_inbox', $tmp->id_inbox);
+			$this->db->delete('user_inbox');		
+		}
+				
+		// deprecated		
 		// inbox
-		$inbox = "DELETE i, ui
+		/* $inbox = "DELETE i, ui
 				FROM user_folders AS uf
 				LEFT JOIN inbox AS i ON i.id_folder = uf.id_folder
 				LEFT JOIN user_inbox AS ui ON ui.id_inbox = i.ID
-				WHERE uf.id_folder = '".$id_folder."'"; /* FIXME */
-		$this->db->query($inbox);
+				WHERE uf.id_folder = '".$id_folder."'";
+		$this->db->query($inbox);*/
+
+		// get sentitems
+		$this->db->select_as('sentitems.ID', 'id_sentitems');
+		$this->db->from('sentitems');
+		$this->db->join('user_sentitems', 'user_sentitems.id_sentitems=sentitems.ID');
+		$this->db->join('user_folders', 'user_folders.id_folder=sentitems.id_folder');
+		$this->db->where('user_folders.id_folder', $id_folder);
+		$sentitems = $this->db->get();
+
+		// delete sentitems and user_sentitems
+		foreach($sentitems->result() as $tmp)
+		{	
+			$this->db->where('ID', $tmp->id_sentitems);
+			$this->db->delete('sentitems');
+
+			$this->db->where('id_sentitems', $tmp->id_sentitems);
+			$this->db->delete('user_sentitems');		
+		}		
 		
+		// deprecated		
 		// Sentitems
-		$sentitems = "DELETE s, us
+		/*$sentitems = "DELETE s, us
 				FROM user_folders AS uf
 				LEFT JOIN sentitems AS s ON s.id_folder = uf.id_folder
 				LEFT JOIN user_sentitems AS us ON us.id_sentitems = s.ID
-				WHERE uf.id_folder = '".$id_folder."'"; /* FIXME */
-		$this->db->query($sentitems);	
+				WHERE uf.id_folder = '".$id_folder."'";
+		$this->db->query($sentitems);*/	
 		
 		$this->db->delete('user_folders', array('id_folder' => $id_folder, 'id_user' => $id_user)); 
 	}
