@@ -20,7 +20,7 @@ if($val_type=='reply'): ?>
 <td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
 <td>
 <?php
-$phone = base64_decode(HexToAscii($dest));
+$phone = $dest;
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $phone));
 if($qry->num_rows()!=0): 
 echo $qry->row('Name')." <".$phone.">";

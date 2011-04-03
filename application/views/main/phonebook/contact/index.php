@@ -2,6 +2,19 @@
 
 <div id="contact_container" class="hidden"></div>
 
+<!-- Add contact wizard dialog -->
+<div id="pbk_add_wizard_dialog" title="Select Add Contact Method" class="dialog">
+	<div align="left">
+	<p><a href="#" id="addpbkcontact" class="addpbkcontact"><big><strong>Using contact form</strong></big><br />
+	Manually add contact using contact form
+	</a></p>
+	
+	<p><a href="#" id="importpbk"><big><strong>Import CSV file</strong></big><br />
+	Import contact from CSV format file
+	</a></p>
+	</div>
+</div>
+
 <!-- Import Phonebook dialog -->
 <div id="pbkimportdialog" title="Import Phonebook"  class="dialog">
 	<p id="validateTips"><?php echo lang('tni_form_fields_required'); ?></p>
@@ -33,8 +46,7 @@
 	<input type="text" name="search_name" size="20" class="search_name" value="" />
 	<?php echo form_close(); ?>	
 	&nbsp;
-	<a href="#" id="addpbkcontact" class="addpbkcontact nicebutton">&#43; <?php echo lang('tni_contact_add'); ?></a>	
-	<a href="#" id="importpbk" class="nicebutton">&#43; Import</a>
+	<a href="#" id="addpbkcontact_wizard" class="nicebutton">&#43; <?php echo lang('tni_contact_add'); ?></a>	
 	<a href="<?php echo site_url('phonebook/group');?>" id="addpbkgroup" class="nicebutton">&#43; <?php echo lang('tni_groups_manage'); ?></a>
 	</div>
 </div>

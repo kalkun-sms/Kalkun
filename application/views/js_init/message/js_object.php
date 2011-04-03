@@ -16,7 +16,7 @@ $(document).ready(function() {
 	$('div.ui-dialog-buttonpane:eq(2) button:eq(0)').text(cancel);
 	$('div.ui-dialog-buttonpane:eq(2) button:eq(1)').text(delete_folder);
 	
-	$("div#paging a:contains('First')").text(first + ' <');	
+	$("div#paging a:contains('First')").text('< ' + first);	
 	$("div#paging a:contains('Last')").text(last + ' >');	
     
 });    

@@ -51,5 +51,13 @@ $route['logout'] = "login/logout";
 $route['settings/(:any)'] = "kalkun/settings/$1";
 $route['about'] = "kalkun/about";
 
+// pretty URL mockup
+//$route['inbox'] = "messages/folder/inbox/0";
+//$route['inbox/(:num)'] = "messages/folder/inbox/$1";
+//$route['outbox'] = "messages/folder/outbox";
+//$route['sentitems'] = "messages/folder/sentitems";
+
+//$route['label/(:num)'] = "messages/my_folder/inbox/$1";
+
 /* End of file routes.php */
-/* Location: ./system/application/config/routes.php */
+/* Location: ./application/config/routes.php */

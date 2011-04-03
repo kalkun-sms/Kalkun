@@ -246,11 +246,16 @@ class Messages extends MY_Controller {
 	 *
 	 * @access	public   		 
 	 */		
-	function folder($type=NULL, $option=NULL, $offset=NULL)
+	function folder($type=NULL, $offset=0)
 	{		
 		// validate url
 		$valid_type = array('inbox', 'sentitems', 'outbox');		
 		if(!in_array($type, $valid_type)) die('Invalid URL');
+		
+		$data['folder'] = 'folder';
+		$data['type'] = $type;
+		$data['offset'] = $offset;
+		$data['id_folder'] = '';
 		
 		// Pagination
 		$this->load->library('pagination');
@@ -258,7 +263,7 @@ class Messages extends MY_Controller {
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';
 		
-		if ($option=='ajax') 
+		if(is_ajax())
 		{
 			$param['type'] = $type;
 			$param['limit'] = $config['per_page'];
@@ -268,7 +273,7 @@ class Messages extends MY_Controller {
 		}
 		else 
 		{
-			$config['base_url'] = site_url().'/messages/folder/'.$type;
+			$config['base_url'] = site_url('messages/folder/'.$type);
 			$config['total_rows'] = $this->Message_model->get_conversation(array('type' => $type))->num_rows();	
 			$config['uri_segment'] = 4;	
 			
@@ -292,11 +297,16 @@ class Messages extends MY_Controller {
 	 *
 	 * @access	public   		 
 	 */	
-	function my_folder($type=NULL, $id_folder=NULL, $option=NULL, $offset=NULL)
+	function my_folder($type=NULL, $id_folder=NULL, $offset=0)
 	{
 		// validate url
 		$valid = array('inbox', 'sentitems');		
 		if(!in_array($type, $valid)) die('Invalid URL');
+
+		$data['folder'] = 'my_folder';
+		$data['type'] = $type;
+		$data['offset'] = $offset;
+		$data['id_folder'] = $id_folder;
 		
 		// Pagination
 		$this->load->library('pagination');
@@ -304,7 +314,7 @@ class Messages extends MY_Controller {
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';
 		
-		if ($option=='ajax') 
+		if(is_ajax())
 		{
 			$param['type'] = $type;
 			$param['id_folder'] = $id_folder;
@@ -317,7 +327,7 @@ class Messages extends MY_Controller {
 		{			
 			$param['type'] = $type;
 			$param['id_folder'] = $id_folder;
-			$config['base_url'] = site_url().'/messages/my_folder/'.$type.'/'.$id_folder;
+			$config['base_url'] = site_url('/messages/my_folder/'.$type.'/'.$id_folder);
 			$config['total_rows'] = $this->Message_model->get_conversation($param)->num_rows();
 			$config['uri_segment'] = 5;			
 			$this->pagination->initialize($config); 
@@ -347,7 +357,7 @@ class Messages extends MY_Controller {
 		{
 			$data['main'] = 'main/messages/index';
 			$param['type'] = 'inbox';
-			$param['number'] = trim(base64_decode(HexToAscii($number)));
+			$param['number'] = trim($number);
 			$inbox = $this->Message_model->get_messages($param)->result_array();	
 
 			// add global date for sorting
@@ -357,7 +367,7 @@ class Messages extends MY_Controller {
 			endforeach;
 			
 			$param['type'] = 'sentitems';
-			$param['number'] = trim(base64_decode(HexToAscii($number)));
+			$param['number'] = trim($number);
 			$sentitems = $this->Message_model->get_messages($param)->result_array();	
 
 			// add global date for sorting
@@ -383,7 +393,7 @@ class Messages extends MY_Controller {
 		{
 			$data['main'] = 'main/messages/index';
 			$param['type'] = 'outbox';
-			$param['number'] = trim(base64_decode(HexToAscii($number)));
+			$param['number'] = trim($number);
 			$outbox = $this->Message_model->get_messages($param)->result_array();	
 			
 			foreach($outbox as $key=>$tmp):
@@ -398,7 +408,7 @@ class Messages extends MY_Controller {
 			$data['main'] = 'main/messages/index';
 			$param['type'] = 'inbox';
 			$param['id_folder'] = $id_folder;
-			$param['number'] = trim(base64_decode(HexToAscii($number)));
+			$param['number'] = trim($number);
 			$inbox = $this->Message_model->get_messages($param)->result_array();	
 			
 			// add global date for sorting
@@ -409,7 +419,7 @@ class Messages extends MY_Controller {
 
 			$param['type'] = 'sentitems';
 			$param['id_folder'] = $id_folder;
-			$param['number'] = trim(base64_decode(HexToAscii($number)));			
+			$param['number'] = trim($number);			
 			$sentitems = $this->Message_model->get_messages($param)->result_array();							
 
 			// add global date for sorting
@@ -444,6 +454,8 @@ class Messages extends MY_Controller {
 	 */		
 	function move_message()
 	{
+		$param['current_folder'] = '';
+		
 		if($this->input->post('type')) $param['type'] = $this->input->post('type');
 		if($this->input->post('current_folder')) $param['current_folder'] = $this->input->post('current_folder');
 		if($this->input->post('number')) $param['number'] = $this->input->post('number');

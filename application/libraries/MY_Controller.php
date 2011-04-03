@@ -51,8 +51,7 @@ class MY_Controller  extends Controller  {
 		$this->load->model('User_model');
 		$uid = $this->session->userdata("id_user");
 		
-		$outbox = $this->Message_model->get_messages(array('uid' => $uid, 'type' => 'outbox'));
-		
+		$outbox = $this->Message_model->get_user_outbox($uid);
 		foreach ($outbox->result() as $tmp)
 		{
 			$id_message = $tmp->id_outbox;

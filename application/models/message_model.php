@@ -142,11 +142,11 @@ class Message_model extends Model {
 			$data['UDH'] = $tmp_data['UDH'].$tmp_data['part'].'01'; 
 		}
 					
-		$last_outbox_id = $this->db->insert('outbox', $data);
+		$this->db->insert('outbox', $data);
 		
-		$outbox_id = $this->db->insert_id();
+		$last_outbox_id = $this->db->insert_id();
 		$user = array(
-				'id_outbox' => $outbox_id,
+				'id_outbox' => $last_outbox_id,
 				'id_user' => $tmp_data['uid']
 				);
 		$this->db->insert('user_outbox', $user);
@@ -785,6 +785,12 @@ class Message_model extends Model {
 		$this->db->set('id_sentitems', $id_message);	
 		$this->db->insert('user_sentitems');
 	}
+
+	function get_user_outbox($user_id)
+	{
+		$this->db->where('id_user', $user_id);
+		return $this->db->get("user_outbox");
+	}		
 
 	function delete_user_outbox($id_message)
 	{

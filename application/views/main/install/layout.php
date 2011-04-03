@@ -61,7 +61,7 @@ else if(step=="run_install")
 		</ul>
 		</div>
 	</div>
-	<div id="footer">Powered by Kalkun 0.2</div>
+	<div id="footer">Powered by Kalkun <?php echo $this->config->item('kalkun_version');?></div>
 </center>
 </body>
 </html>

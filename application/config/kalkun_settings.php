@@ -2,6 +2,15 @@
 
 /*
 |--------------------------------------------------------------------------
+| Kalkun Metadata (DO NOT CHANGE!!!)
+|--------------------------------------------------------------------------
+|
+*/
+$config['kalkun_version'] = '0.3';
+$config['kalkun_release_date'] = '-';
+
+/*
+|--------------------------------------------------------------------------
 | Modem Tolerant
 |--------------------------------------------------------------------------
 |
@@ -113,4 +122,4 @@ $config['ext_script'][1]['value'] = '+62';
 $config['ext_script'][1]['parameter'] = 'phone|content';
 
 /* End of file kalkun_settings.php */
-/* Location: ./system/application/config/kalkun_settings.php */
+/* Location: ./application/config/kalkun_settings.php */

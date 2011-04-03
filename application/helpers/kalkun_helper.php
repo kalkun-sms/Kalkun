@@ -196,6 +196,14 @@
 		}
 	} 
 	
+	function is_ajax()
+	{
+		if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
+			return TRUE;
+		else 
+			return FALSE;	
+	}
+	
 	
 	function get_database_property($driver)
 	{

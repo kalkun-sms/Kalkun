@@ -2,45 +2,75 @@
 var count = 0;
 
 $(document).ready(function() {
+	
+    var offset = "<?php echo $offset;?>";    
+    var folder = "<?php echo $folder;?>";    
+    var base_url = "<?php echo site_url();?>";
+    var source = "<?php echo $type;?>";
+    var delete_url = base_url + '/messages/delete_messages/';
+    var move_url = base_url + '/messages/move_message/';
+    var refresh_url = base_url + '/messages/' + folder + '/' + source;
+    var delete_folder_url = base_url + '/kalkun/delete_folder/';
     
-    var base = "<?php echo  site_url();?>/messages/delete_messages/";
-    var source = "<?php echo $this->uri->segment(3);?>";
+    if(folder=='folder')
+    {
+    	var current_folder = '';
+    	var id_folder = '';
+    }
+    else 
+    {	
+    	var current_folder = "<?php echo $id_folder;?>";
+    	var id_folder = "<?php echo $id_folder;?>";
+    	refresh_url = refresh_url + '/' + id_folder;
+    }
     
-    var folder = "<?php echo $this->uri->segment(2);?>";
-    if(folder=='folder') var current_folder = '';
-    else var current_folder = "<?php echo $this->uri->segment(4);?>";
-    var dest_url = base + source;
-       	        
-    // delete
-	$("a.global_delete").click(function(){
+    refresh_url = refresh_url + '/' + offset;
+     
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Delete conversation
+	 *
+	 * Delete all messages on selected conversation
+	 *
+	 */	
+	$("a.global_delete").click(function()
+	{
 		var count = $("input.select_conversation:checkbox:checked").length;
-		if(count==0) { 
-			$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected')?>");
-			$('.notification_area').show();
+		if(count==0) 
+		{ 
+			show_notification("<?php echo lang('tni_msg_no_conv_selected')?>");
 		}
 		else 
 		{
-			var param = '<?php echo $this->uri->segment(4);?>';	
-					
 			$('.loading_area').fadeIn("slow");
-			$("input.select_conversation:checked").each( function () {
+			$("input.select_conversation:checked").each(function() 
+			{
 				var message_row = $(this).parents('div:eq(2)');
-				$.post(dest_url, {type: 'conversation', number: $(this).val(), current_folder: current_folder}, function() {
+				$.post(delete_url + source, {type: 'conversation', number: $(this).val(), current_folder: current_folder}, function() 
+				{
 					$(message_row).slideUp("slow");
 					$(message_row).remove();
 				});
 			});
 			$('.loading_area').fadeOut("slow");
+			show_notification(count + ' conversation deleted'); // translate
 		}
 	});
-	       
-    // Move folder        
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Move conversation
+	 *
+	 * Move all messages on selected conversation from a folder to another folder
+	 *
+	 */		       
     $(".move_to").click(function() {
 		var count = $("input.select_conversation:checkbox:checked").length;
-		if(count==0) { 
+		if(count==0) {
 			$("#movetodialog").dialog('close');
-			$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected')?>");
-			$('.notification_area').show();
+			show_notification("<?php echo lang('tni_msg_no_conv_selected')?>");
 		}
 		else 
 		{    	
@@ -49,71 +79,76 @@ $(document).ready(function() {
 			$('.loading_area').fadeIn("slow");
 			$("input.select_conversation:checked").each(function () {
 				var message_row = $(this).parents('div:eq(2)');
-				$.post("<?php echo  site_url('messages/move_message') ?>", {type: 'conversation', current_folder: current_folder, folder: source, 
+				$.post(move_url, {type: 'conversation', current_folder: current_folder, folder: source, 
 					id_folder: id_folder, number: $(this).val()}, function() {
 					$(message_row).slideUp("slow");
 				});
-			});		
+			});
 			$('.loading_area').fadeOut("slow");
+			show_notification(count + ' conversation moved'); // translate
 		}
 		count=0;
-    });    
+    });
     
-    $(".move_to_button").click(function() {
+    $(".move_to_button").click(function() 
+    {
+		$("#movetodialog").dialog({
+			bgiframe: true,
+			autoOpen: false,
+			modal: true,
+		});    	
     	$('#movetodialog').dialog('open');
     	return false;
     });
     
-    
     // select all
-    $("a.select_all_button").click(function(){
+    $("a.select_all_button").click(function()
+    {
     	$(".select_conversation").attr('checked', true);
     	$(".messagelist").addClass("messagelist_hover");
     	return false;
     });
     
     // clear all
-    $("a.clear_all_button").click(function(){
+    $("a.clear_all_button").click(function()
+    {
     	$(".select_conversation").attr('checked', false);
     	$(".messagelist").removeClass("messagelist_hover");
     	return false;
     });        
     
     // input checkbox
-    $("input.select_conversation").click(function(){
+    $("input.select_conversation").click(function()
+    {
     	if($(this).attr('checked')==true) 
     	{
     		$(this).parents('div:eq(2)').addClass("messagelist_hover");
     	}
     	else 
     	{
-    		//$(this).attr('checked', true)
     		$(this).parents('div:eq(2)').removeClass("messagelist_hover");
     	}
     });
     
     // refresh
-    $("a.refresh_button").click(function(){  	
+    $("a.refresh_button").click(function()
+    {  	
     	$('.loading_area').fadeIn("slow");
-    	if(folder=='folder') $('#message_holder').load("<?php echo site_url('messages/folder/'.$this->uri->segment(3).'/ajax/'.$this->uri->segment(4,0).'') ?>");
-  		else $('#message_holder').load("<?php echo site_url('messages/my_folder/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/ajax/'.$this->uri->segment(5,0).'') ?>");
-  		
+    	$('#message_holder').load(refresh_url);  		
     	$('.loading_area').fadeOut("slow");
     	return false;
     });
-    
-
-	// Move To dialog
-	$("#movetodialog").dialog({
-		bgiframe: true,
-		autoOpen: false,
-		modal: true,
-	});    
-     
-    	
-	// Rename folder button
-	$('#renamefolder').click(function() {
-		// Rename folder dialog
+        	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Rename folder
+	 *
+	 * Rename custom folder
+	 *
+	 */	
+	$('#renamefolder').click(function() 
+	{
 		$("#renamefolderdialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
@@ -127,28 +162,33 @@ $(document).ready(function() {
 					$(this).dialog('close');
 				}
 			}
-		});			
+		});
 		var editname = $(this).parents('div').children("span.folder_name").text();
 		$("#edit_folder_name").val(editname);
 		$('#renamefolderdialog').dialog('open');
 	});	    
 			
-	// Delete Folder link
-	$('#deletefolder').click(function(){
-		// Delete folder dialog
-		var id_folder = '<?php echo $this->uri->segment(4);?>';
-		var url = '<?php echo  site_url();?>/kalkun/delete_folder/' + id_folder + '';
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Delete folder
+	 *
+	 * Delete custom folder
+	 *
+	 */	
+	$('#deletefolder').click(function()
+	{
 		$("#deletefolderdialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
-			height: 150,
+			height: 165,
 			modal: true,	
 			buttons: {
 				'<?php echo lang('kalkun_cancel'); ?>': function() {
 					$(this).dialog('close');
-				},			
+				},
 				'<?php echo lang('tni_delete_folder'); ?>': function() {
-					location.href=url;
+					location.href=delete_folder_url + id_folder;
 				}
 			}
 		});			
@@ -156,6 +196,5 @@ $(document).ready(function() {
 		return false;
 	});
 
-    
 });    
 </script>
