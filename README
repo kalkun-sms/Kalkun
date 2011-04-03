@@ -1,3 +1,7 @@
+1) English
+2) Français
+
+1)English
 Kalkun - Open Source Web-based SMS Management
 Version : 0.2.9
 
@@ -52,6 +56,70 @@ INSTALL :
 		
 	- open up your browser and go to http://your-location/kalkun
 	- Default account : username = kalkun, password = kalkun (you can change it after you login)
+	- enjoy...:)
+	
+	
+CONTACT : 
+Feel free to contact me if you having problem...
+blackarazi@gmail.com
+
+--
+
+2) Français
+Kalkun - Open Source Web-based SMS Management
+Version : 0.2.9
+
+(Pour des instructions complètes, voir http://sourceforge.net/apps/trac/kalkun/wiki/Installation)
+
+Premièrement, vous devez installer et configurer :
+	- apache 2.x.x
+	- PHP 5.x.x (avec mysql, session, hash, json extension)
+	- PHP-CLI
+	- MySQL 5.x.x
+	ou, vous pouvez juste installer xamp (http://www.apachefriends.org/en/xampp.html)
+	- gammu-smsd, assurez-vous de l'avoir déjà installé et configuré
+
+INSTALLATION :
+	- extraire le dossier à la racine web (ex: /var/www/ => Ubuntu)
+	- Créer une base de donnée appelée kalkun
+		# mysql
+		> CREATE DATABASE kalkun;
+		> quit
+	- éditer la configuration de la base de donnée [dans le fichier] (system/application/config/database.php)
+		changer la valeur de la base de donnée pour 'kalkun', le nom d'utilisateur et le mot de passe dépend de votre configuration mysql
+	
+	- importer le schéma de la base de donnée gammu (qui est inclus dans les sources de gammu, ex: gammu/docs/sql/mysql.sql)
+		- using mysql console
+			# mysql kalkun - u username -p < gammu/docs/sql/mysql.sql
+		- using phpMyAdmin
+	
+	- configurer le démon (pour gérer la boite de réception et  les réponses automatiques)
+		- configurer le chemin dans la configuration de degammu-smsd (runonreceive)
+			ex :
+				[smsd]
+				runonreceive = /opt/lampp/htdocs/kalkun/scripts/daemon.sh
+			ou, <strike>if you using Windows:
+				[smsd]
+				runonreceive = C:\xampp\htdocs\kalkun\scripts\daemon.bat</strike>
+		- set correct path (php-cli path and daemon.php path) on daemon.sh or <strike>daemon.bat</strike> 
+		- make sure that the daemon script is executable
+		- Change URI path in daemon.php, default is "http://localhost/kalkun";
+		
+		
+	Il y a deux possibilités lors de l'installtion :	
+	1. Installation Graphique	
+	- lancer http://<votre-domaine>/kalkun/index.php/install, et suivez les instructions.
+	
+	2. Installation Manuelle
+	- importer le fichier sql (media/db/mysql_kalkun.sql) dans la base de donnée kalkun (vous pouvez faire cela grâce à phpmyadmin)
+	
+	- ou, si vous ne disposez pas de phpmyadmin, vous pouvez essayer ceci	
+		# mysql kalkun - u username -p < media/db/mysql_kalkun.sql
+	
+	IMPORTANT: après l'installation, vous devez supprimer le dossier d'installtion.
+		
+	- ouvrez votre navigateur et allez sur http://<votre-domaine>/kalkun
+	- Compte par défaut : utilisateur = kalkun, mot de passe = kalkun (vous pouvez le changer après vous être loggé)
 	- enjoy...:)
 	
 	
