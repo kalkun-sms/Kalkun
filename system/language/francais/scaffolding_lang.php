@@ -1,16 +1,16 @@
 <?php
 
-$lang['scaff_view_records']		= 'View Records';
-$lang['scaff_create_record']	= 'Create New Record';
-$lang['scaff_add']				= 'Add Data';
-$lang['scaff_view']				= 'View Data';
-$lang['scaff_edit']				= 'Edit';
-$lang['scaff_delete']			= 'Delete';
-$lang['scaff_view_all']			= 'View All';
-$lang['scaff_yes']				= 'Yes';
-$lang['scaff_no']				= 'No';
-$lang['scaff_no_data']			= 'No data exists for this table yet.';
-$lang['scaff_del_confirm']		= 'Are you sure you want to delete the following row:';
+$lang['scaff_view_records']		= 'Voir les enrregistrements';
+$lang['scaff_create_record']	= 'Créer un nouvel enrregistrement';
+$lang['scaff_add']				= 'ajouter des données';
+$lang['scaff_view']				= 'Voir les données';
+$lang['scaff_edit']				= 'Editer';
+$lang['scaff_delete']			= 'Effacer';
+$lang['scaff_view_all']			= 'Voir tout';
+$lang['scaff_yes']				= 'Oui';
+$lang['scaff_no']				= 'Non';
+$lang['scaff_no_data']			= 'Pas de données existantes pour cette table.';
+$lang['scaff_del_confirm']		= 'Etes-vous certain de vouloir suprimer la ligne following:     Are you sure you want to delete the following row:';
 
 
 /* End of file scaffolding_lang.php */
