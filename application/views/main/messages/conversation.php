@@ -118,8 +118,9 @@ endif;
     <?php if($tmp['source'] == 'sentitems' OR $tmp['source'] == 'inbox'): ?>
     <?php if($part_no > 1): ?>
     <tr><td>Part</td><td> : </td><td><?php echo $part_no;?> part messages</td></tr>
-    <?php endif;?>	
-    <?php elseif($tmp['source'] == 'sentitems'): ?>		    
+    <?php endif;?>
+    <?php endif;?>
+    <?php if($tmp['source'] == 'sentitems'): ?>		    
     <tr><td><?php echo lang('tni_status');?></td><td> : </td><td><?php echo $status;?></td></tr>
     <?php endif;?>
 	</table>

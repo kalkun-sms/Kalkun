@@ -68,7 +68,7 @@ class Phonebook_model extends Model {
 			$this->db->select('*');
 			$this->db->select_as('pbk.ID', 'id_pbk');
 			$this->db->select_as('pbk.Name', 'Name');
-			$this->db->select('pbk_groups.Name', 'GroupName');	
+			$this->db->select_as('pbk_groups.Name', 'GroupName');	
 			$this->db->from('pbk');
 			$this->db->where('pbk.id_user', $this->session->userdata('id_user'));
 			$this->db->join('pbk_groups', 'pbk_groups.ID=pbk.GroupID');
