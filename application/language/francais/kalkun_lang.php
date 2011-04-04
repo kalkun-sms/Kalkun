@@ -108,14 +108,14 @@ $lang['kalkun_last'] = "Last";
 // Others
 $lang['kalkun_compose_amount'] = "Amount";
 $lang['kalkun_compose_send_as_flash'] = "Send as Flash SMS";
-$lang['kalkun_compose_send_as_unicode'] = "Send as Unicode";
+$lang['kalkun_compose_send_as_unicode'] = "Envoyer en Unicode";
 $lang['kalkun_compose_times'] = "times";
 $lang['kalkun_compose_hour'] = "Hour";
 $lang['kalkun_compose_minutes'] = "Minutes";
 
 
 // tni contribution
-$lang['tni_contact_add'] = "Add Contact";
+$lang['tni_contact_add'] = "Ajouter des Contacts";
 $lang['tni_send_message'] = "Send Message";
 $lang['tni_folders_sms'] = "SMS Folders";
 $lang['tni_name_search'] = "Insert Name from Contact List";
@@ -165,12 +165,12 @@ $lang['tni_user_edit'] = "Edit/Add User";
 $lang['tni_user_word'] = "User";  
 $lang['tni_user_wordp'] = "Users";  
 $lang['tni_user_confirm_delete'] = "Delete users confirmation";  
-$lang['tni_user_delete_body'] = "Delete User?<br>This includes all records from this user (messages and contacts).";  
-$lang['tni_user_not_found'] = "User not found";  
+$lang['tni_user_delete_body'] = "Effacer Utilisateur?<br>This includes all records from this user (messages and contacts).";  
+$lang['tni_user_not_found'] = "Utilisateur non trouvé";  
 $lang['tni_user_search_empty'] = "Users is empty";  
-$lang['tni_user_person_name'] = "Name";  
-$lang['tni_user_username'] = "Username";  
-$lang['tni_user_password'] = "Password";  
+$lang['tni_user_person_name'] = "Nom";  
+$lang['tni_user_username'] = "Utilisateur";  
+$lang['tni_user_password'] = "Mot de passe";  
 $lang['tni_user_search'] = "Search User";  
 $lang['tni_user_conf_password'] = "Confirm Password";  
 $lang['tni_user_updated'] = "User has been updated";  
@@ -179,7 +179,7 @@ $lang['tni_action_not_allowed'] = "Action not allowed";
 $lang['tni_error_enter_name'] = "Enter Name";  
 $lang['tni_error_enter_password'] = "Enter Password";  
 $lang['tni_error_password_nomatch'] = "Passwords do not match";  
-$lang['tni_error_toshort'] = "Too Short";  
+$lang['tni_error_toshort'] = "Trop petit";  
 $lang['tni_error_nouser_sel'] = "No user Selected";  
 $lang['tni_level'] = "Level";  
 $lang['tni_delete_folder'] = "Delete this folder";  
@@ -197,8 +197,8 @@ $lang['tni_compose_enter_sendate'] = "Please enter sending date";
 $lang['tni_compose_click_calendar'] = "Click on calendar";  
 $lang['tni_archived_by'] = "Show by";  
 $lang['tni_received'] = "Received";  
-$lang['tni_from'] = "From";  
-$lang['tni_to'] = "To";  
+$lang['tni_from'] = "De";  
+$lang['tni_to'] = "Pou";  
 $lang['tni_inserted'] = "Inserted";  
 $lang['tni_date'] = "Date";  
 $lang['tni_msg_stat_fail'] = "Sending Failed";  
@@ -221,7 +221,7 @@ $lang['tni_set_perm_deloff_hint'] = " - Always move to Trash first";
 $lang['tni_set_perm_delon'] = "Permanent delete On";  
 
 $lang['tni_set_title'] = "User's settings";  
-$lang['tni_set_general'] = "General";  
+$lang['tni_set_general'] = "Général";  
 $lang['tni_set_personal'] = "Personal";  
 $lang['tni_set_appearance'] = "Appearance";  
 
@@ -233,9 +233,9 @@ $lang['tni_signature_hint']  = "Max. 50 characters";
 $lang['tni_signature_hintb']  = "Signature will take place at the end of your message";   
 $lang['tni_language']  = "Language";   
 $lang['tni_settings']  = "Settings";  
-$lang['tni_yes']  = "Yes";   
-$lang['tni_no'] = "No";   
-$lang['tni_default'] = "Default";   
+$lang['tni_yes']  = "Oui";   
+$lang['tni_no'] = "Non";   
+$lang['tni_default'] = "Defaut";   
 $lang['tni_set_deliv_report'] = "Delivery Report"; 
 
 
