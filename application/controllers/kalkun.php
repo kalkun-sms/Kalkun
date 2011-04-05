@@ -117,7 +117,7 @@ class Kalkun extends MY_Controller {
 				
 				$y = new y_axis();
 				if(max($data_2)>0) $max=max($data_2); else $max=10;
-				$y->set_range(0, $max, 10); 
+				$y->set_range(0, $max, round($max/100)*10); 
 				
 				$element = $bar;
 			break;
@@ -161,7 +161,7 @@ class Kalkun extends MY_Controller {
 				
 				$y = new y_axis();
 				if(max($data_2)>0) $max=max($data_2); else $max=10;
-				$y->set_range(0, $max, 10);	
+				$y->set_range(0, $max, round($max/100)*10);	
 							
 				$element = $line;
 			break;
