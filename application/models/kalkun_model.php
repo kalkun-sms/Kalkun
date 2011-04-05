@@ -226,6 +226,7 @@ class Kalkun_model extends Model {
 				$this->db->set('realname', $this->input->post('realname'));
 				$this->db->set('username', $this->input->post('username'));
 				$this->db->set('phone_number', $this->input->post('phone_number'));
+                $this->db->set('email_id', $this->input->post('email_id'));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user');
 				
@@ -259,14 +260,13 @@ class Kalkun_model extends Model {
 	 *
 	 * @access	public   		 
 	 */		
-	function get_setting()
+    function get_setting($id_user = '')
 	{
-		$id_user = $this->session->userdata('id_user');
+		if($id_user == '') $id_user = $this->session->userdata('id_user');
 		$this->db->where('user.id_user', $id_user);
 		$this->db->join('user', 'user.id_user = user_settings.id_user');
 		return $this->db->get('user_settings');
 	}
-
 	// --------------------------------------------------------------------
 	
 	/**

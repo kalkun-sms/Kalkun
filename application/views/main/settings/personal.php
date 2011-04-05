@@ -21,6 +21,13 @@
 </tr> 
 
 <tr valign="top">
+<td><?php echo lang('tni_email_address'); ?></td>
+<td>
+<input type="text" name="email_id" value="<?php echo $settings->row('email_id');?>" />
+</td>
+</tr> 
+
+<tr valign="top">
 <td><?php echo lang('tni_signature'); ?><br /><small><?php echo lang('tni_signature_hint'); ?></small></td>
 <td>
 <?php list($sig_option, $sig) = explode(';',$settings->row('signature'));?>

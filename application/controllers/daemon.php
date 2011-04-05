@@ -68,11 +68,11 @@ class Daemon extends Controller {
 				$check = in_array($tag, $msg_word);
 							
 				// update ownership
-				if($check!==false) { $this->Message_model->update_owner($tmp_message->ID, $tmp_user->id_user); break; }
+				if($check!==false) { $this->Message_model->update_owner($tmp_message->ID, $tmp_user->id_user); $msg_user =  $tmp_user->id_user;  break; }
 			}
 			
 			// if no matched username, set owner to Inbox Master
-			if($check===false) $this->Message_model->update_owner($tmp_message->ID, $this->config->item('inbox_owner_id'));
+			if($check===false){ $this->Message_model->update_owner($tmp_message->ID, $this->config->item('inbox_owner_id'));  $msg_user =  $this->config->item('inbox_owner_id');  }
 			
 			// simple autoreply
 			if($this->config->item('simple_autoreply'))
@@ -80,7 +80,7 @@ class Daemon extends Controller {
 				$this->_simple_autoreply($tmp_message->SenderNumber);				
 			}	
 
-			// external script
+            // external script
 			if($this->config->item('ext_script_state'))
 			{
 				$this->_external_script($tmp_message->SenderNumber, $tmp_message->TextDecoded, $tmp_message->ID);				
@@ -99,9 +99,37 @@ class Daemon extends Controller {
 				$id_message[] = $part->ID;
 				endforeach;	
 			}		
-			$this->Message_model->update_processed($id_message);
+            $this->Message_model->update_processed($id_message);
+            
+            // sms to email
+			if($this->config->item('sms2email'))
+			{
+				$this->_sms2email($tmp_message->TextDecoded, $tmp_message->SenderNumber , $msg_user);				
+			}	
+            
 		}	
 	}
+
+    function _sms2email($message , $from, $msg_user)
+    {
+        //error_reporting(E_ALL ^ E_NOTICE);
+        $this->load->library('email');
+        $this->load->model('kalkun_model');
+
+        $mail_to = $this->Kalkun_model->get_setting($msg_user)->row('email_id');
+        
+        $this->email->from('postmaster@domain.com', $from);
+        $this->email->to($mail_to); 
+         
+        $this->email->subject('Kalkun New SMS');
+        $this->email->message($message."\n\n". "From ".$from);	
+        
+        $this->email->send();
+
+        //echo $this->email->print_debugger();
+ 
+    }
+
 
 	// --------------------------------------------------------------------
 	
