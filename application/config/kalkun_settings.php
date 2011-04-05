@@ -117,6 +117,16 @@ $config['sms_content_unreg_code'] = 'UNREG';
 
 $config['sms2email'] = TRUE;
 
+$config['protocol'] = 'mail'; // mail/smtp
+$config['smtp_host'] = "localhost";
+$config['smtp_port'] = "25";
+$config['smtp_user'] = "username";
+$config['smtp_pass'] = "password";
+
+$config['charset'] = 'iso-8859-1';
+$config['wordwrap'] = TRUE;
+
+
 
 
 

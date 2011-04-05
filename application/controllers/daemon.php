@@ -118,6 +118,8 @@ class Daemon extends Controller {
         $active  = $this->Kalkun_model->get_setting($msg_user)->row('email_forward');
         if($active != 'true') return;
         
+        
+        $this->email->initialize($config);
 
         $mail_to = $this->Kalkun_model->get_setting($msg_user)->row('email_id');
         
