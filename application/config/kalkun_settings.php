@@ -108,29 +108,21 @@ $config['sms_content_unreg_code'] = 'UNREG';
 
 /*
 |--------------------------------------------------------------------------
-| SMS to Email (Experimental)
+| SMS to Email  Mail Settings
 |--------------------------------------------------------------------------
 |
 | Forward Incomming sms to a email address
 |
 */
-
-$config['sms2email'] = TRUE;
-
+ 
 $config['protocol'] = 'mail'; // mail/smtp
 $config['smtp_host'] = "localhost";
 $config['smtp_port'] = "25";
 $config['smtp_user'] = "username";
 $config['smtp_pass'] = "password";
-
-$config['charset'] = 'iso-8859-1';
+$config['charset'] = 'utf-8';
 $config['wordwrap'] = TRUE;
-
 $config['mail_from'] = 'postmaster@domain.com' ;
-
-
-
-
 
 /*
 |--------------------------------------------------------------------------

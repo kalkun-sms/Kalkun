@@ -102,40 +102,13 @@ class Daemon extends Controller {
             $this->Message_model->update_processed($id_message);
             
             // sms to email
-			if($this->config->item('sms2email'))
-			{
-				$this->_sms2email($tmp_message->TextDecoded, $tmp_message->SenderNumber , $msg_user);				
-			}	
+			$this->_sms2email($tmp_message->TextDecoded, $tmp_message->SenderNumber , $msg_user);				
+		 
             
 		}	
 	}
 
-    function _sms2email($message , $from, $msg_user)
-    {
-        
-        $this->load->library('email');
-        $this->load->model('kalkun_model');
-        $this->load->model('phonebook_model');
-        $active  = $this->Kalkun_model->get_setting($msg_user)->row('email_forward');
-        if($active != 'true') return;
-               
-        $this->email->initialize($this->config);
-        $mail_to = $this->Kalkun_model->get_setting($msg_user)->row('email_id');      
-        
-        $qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber','number'=>$from , 'id_user' =>$msg_user));
-		if($qry->num_rows()!=0) $from = $qry->row('Name');
-       
-        $this->email->from($this->config->item('mail_from'), $from);
-        $this->email->to($mail_to); 
-         
-        $this->email->subject('Kalkun New SMS');
-        $this->email->message($message."\n\n". "- ".$from);	
-
-        $this->email->send();
-
-        //echo $this->email->print_debugger();
- 
-    }
+    
 
 
 	// --------------------------------------------------------------------
@@ -286,7 +259,32 @@ class Daemon extends Controller {
 		}
 		
 	}	 
-	
+	/**
+     *  function  _sms2email
+     * 
+     *  Function for sms to email feature
+     *  
+     *  @access	private
+     **/ 
+    function _sms2email($message , $from, $msg_user)
+    {
+        $this->load->library('email');
+        $this->load->model('kalkun_model');
+        $this->load->model('phonebook_model');
+        $active  = $this->Kalkun_model->get_setting($msg_user)->row('email_forward');
+        if($active != 'true') return;         
+        $this->email->initialize($this->config);
+        $mail_to = $this->Kalkun_model->get_setting($msg_user)->row('email_id');            
+        $qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber','number'=>$from , 'id_user' =>$msg_user));
+		if($qry->num_rows()!=0) $from = $qry->row('Name');
+        $this->email->from($this->config->item('mail_from'), $from);
+        $this->email->to($mail_to); 
+        $this->email->subject('Kalkun New SMS');
+        $this->email->message($message."\n\n". "- ".$from);	
+        $this->email->send();
+
+    }
+    
 	function _is_match($subject, $matched)
 	{
 		if ($subject===$matched) return TRUE;
