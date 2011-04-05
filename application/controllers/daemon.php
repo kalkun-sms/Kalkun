@@ -112,9 +112,12 @@ class Daemon extends Controller {
 
     function _sms2email($message , $from, $msg_user)
     {
-        //error_reporting(E_ALL ^ E_NOTICE);
         $this->load->library('email');
         $this->load->model('kalkun_model');
+        
+        $active  = $this->Kalkun_model->get_setting($msg_user)->row('email_forward');
+        if($active != 'true') return;
+        
 
         $mail_to = $this->Kalkun_model->get_setting($msg_user)->row('email_id');
         
@@ -124,6 +127,7 @@ class Daemon extends Controller {
         $this->email->subject('Kalkun New SMS');
         $this->email->message($message."\n\n". "From ".$from);	
         
+         
         $this->email->send();
 
         //echo $this->email->print_debugger();

@@ -151,6 +151,7 @@ $lang['tni_form_fields_required'] = "All form fields are required";
 $lang['tni_contact_name'] = "Name";   
 $lang['tni_contact_phonenumber'] = "Telephone Number";   
 $lang['tni_email_address'] = "Email ID";    
+$lang['tni_email_forward'] = "Enable Email Forwarding";
 $lang['tni_compose_msgto_outbox'] = "Your message has been moved to Outbox<br>and is ready for delivery.";  
 $lang['tni_compose_searching'] = "Searching...";  
 $lang['tni_outbox_sent_time'] = "Less than a minute ago";  

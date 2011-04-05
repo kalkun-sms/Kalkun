@@ -217,6 +217,7 @@ class Kalkun_model extends Model {
 				$this->db->set('paging', $this->input->post('paging'));
 				$this->db->set('permanent_delete', $this->input->post('permanent_delete'));
 				$this->db->set('delivery_report', $this->input->post('delivery_report'));
+                $this->db->set('email_forward', $this->input->post('email_forward'));
 				$this->db->set('conversation_sort', $this->input->post('conversation_sort'));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user_settings');
