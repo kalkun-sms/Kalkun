@@ -1,3 +1,10 @@
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+// validation
+$("#settingsForm").validate();
+});
+</script>
 <table width="100%" cellpadding="5">
 <tr valign="top">
 <td width="175px"><?php echo lang('tni_contact_name'); ?></td>
@@ -23,7 +30,7 @@
 <tr valign="top">
 <td><?php echo lang('tni_email_address'); ?></td>
 <td>
-<input type="text" name="email_id" value="<?php echo $settings->row('email_id');?>" />
+<input type="text" name="email_id" class="email" value="<?php echo $settings->row('email_id');?>" />
 </td>
 </tr> 
 
