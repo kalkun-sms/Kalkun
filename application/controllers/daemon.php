@@ -114,22 +114,22 @@ class Daemon extends Controller {
     {
         $this->load->library('email');
         $this->load->model('kalkun_model');
-        
+        $this->load->model('Phonebook_model');
         $active  = $this->Kalkun_model->get_setting($msg_user)->row('email_forward');
         if($active != 'true') return;
-        
-        
+               
         $this->email->initialize($config);
-
-        $mail_to = $this->Kalkun_model->get_setting($msg_user)->row('email_id');
+        $mail_to = $this->Kalkun_model->get_setting($msg_user)->row('email_id');      
         
+        $qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber','number'=>$from));
+		if($qry->num_rows()!=0) $from = $qry->row('Name');
+       
         $this->email->from('postmaster@domain.com', $from);
         $this->email->to($mail_to); 
          
         $this->email->subject('Kalkun New SMS');
-        $this->email->message($message."\n\n". "From ".$from);	
-        
-         
+        $this->email->message($message."\n\n". "- ".$from);	
+
         $this->email->send();
 
         //echo $this->email->print_debugger();
