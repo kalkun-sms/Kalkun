@@ -43,6 +43,10 @@ class Phonebook_model extends Model {
 	 */	
 	function get_phonebook($param)
 	{
+	   
+	   if( isset($param['id_user']) && !empty($param['id_user']) ) $user_id = $param['id_user'];
+       else $user_id = $this->session->userdata('id_user') ; 
+       
 		switch($param['option']) 
 		{
 			case 'all':
@@ -50,7 +54,7 @@ class Phonebook_model extends Model {
 			$this->db->select_as('pbk.ID','id_pbk');
 			$this->db->select_as('pbk_groups.Name', 'GroupName');	
 			$this->db->from('pbk');
-			$this->db->where('pbk.id_user', $this->session->userdata('id_user'));
+			$this->db->where('pbk.id_user', $user_id);
 			$this->db->join('pbk_groups', 'pbk_groups.ID=pbk.GroupID');
 			$this->db->order_by('pbk.Name');
 			break;	
@@ -59,7 +63,7 @@ class Phonebook_model extends Model {
 			$this->db->select('*');
 			$this->db->select_as('ID', 'id_pbk');	
 			$this->db->from('pbk');
-			$this->db->where('id_user', $this->session->userdata('id_user'));
+			$this->db->where('id_user',$user_id);
 			$this->db->order_by('Name');
 			$this->db->limit($param['limit'], $param['offset']);
 			break;
@@ -70,7 +74,7 @@ class Phonebook_model extends Model {
 			$this->db->select_as('pbk.Name', 'Name');
 			$this->db->select_as('pbk_groups.Name', 'GroupName');	
 			$this->db->from('pbk');
-			$this->db->where('pbk.id_user', $this->session->userdata('id_user'));
+			$this->db->where('pbk.id_user', $user_id);
 			$this->db->join('pbk_groups', 'pbk_groups.ID=pbk.GroupID');
 			$this->db->where('pbk.ID', $param['id_pbk']);
 			break;
@@ -79,7 +83,7 @@ class Phonebook_model extends Model {
 			$this->db->select('*');
 			$this->db->select_as('Name','GroupName');
 			$this->db->from('pbk_groups');
-			$this->db->where('id_user', $this->session->userdata('id_user'));
+			$this->db->where('id_user', $user_id);
 			$this->db->order_by('Name');
 			break;
 		
@@ -87,7 +91,7 @@ class Phonebook_model extends Model {
 			$this->db->select('*');
 			$this->db->select_as('Name', 'GroupName');
 			$this->db->from('pbk_groups');
-			$this->db->where('id_user', $this->session->userdata('id_user'));
+			$this->db->where('id_user', $user_id);
 			$this->db->order_by('Name');
 			$this->db->limit($param['limit'], $param['offset']);
 			break;	
@@ -96,7 +100,7 @@ class Phonebook_model extends Model {
 			$this->db->select_as('Name', 'GroupName');
 			$this->db->from('pbk_groups');
 			$this->db->where('ID', $param['id']);
-			$this->db->where('id_user', $this->session->userdata('id_user'));
+			$this->db->where('id_user', $user_id);
 			break;
 			
 			case 'bynumber':
@@ -104,13 +108,13 @@ class Phonebook_model extends Model {
 			$this->db->select_as('ID', 'id_pbk');	
 			$this->db->from('pbk');
 			$this->db->where('Number', $param['number']);
-			$this->db->where('id_user', $this->session->userdata('id_user'));
+			$this->db->where('id_user', $user_id);
 			break;
 			
 			case 'bygroup':
 			$this->db->from('pbk');
 			$this->db->where('GroupID', $param['group_id']);
-			$this->db->where('id_user', $this->session->userdata('id_user'));
+			$this->db->where('id_user', $user_id);
 			break;
 			
 			case 'search':
@@ -118,13 +122,12 @@ class Phonebook_model extends Model {
 			$this->db->select_as('ID', 'id_pbk');	
 			$this->db->from('pbk');
 			$this->db->like('Name', $this->input->post('search_name'));
-			$this->db->where('id_user', $this->session->userdata('id_user'));
+			$this->db->where('id_user', $user_id);
 			$this->db->order_by('Name');
 			break;
 		}
 		return $this->db->get();	
 	}
-
 	// --------------------------------------------------------------------
 	
 	/**
