@@ -97,20 +97,18 @@ $(document).ready(function() {
 	$('div.ui-dialog-buttonpane:eq(0) button:eq(1)').text(cancel);
 	$('div.ui-dialog-buttonpane:eq(0) button:eq(0)').text(save);
 
-   //shift select
- $("input:checkbox").createCheckboxRange(function(){
+   	//shift select
+ 	$("input:checkbox").createCheckboxRange(function(){
     if($(this).attr('checked')==true) 
-    	{
-    
-	  $(this).parents('div:eq(2)').addClass("messagelist_hover");
-      }
-      else 
-    	{
-    		//$(this).attr('checked', true)
-    		$(this).parents('div:eq(2)').removeClass("messagelist_hover");
-    	}
-      
-}); 
+    {
+		$(this).parents('div:eq(2)').addClass("messagelist_hover");
+    }
+    else 
+   	{
+    	//$(this).attr('checked', true)
+    	$(this).parents('div:eq(2)').removeClass("messagelist_hover");
+    }   
+	}); 
 		
 });
 </script>
