@@ -26,6 +26,7 @@ $config['modem_tolerant'] = '10';
 |--------------------------------------------------------------------------
 |
 | All message from inbox that don't belongs to anyone will be owned by this user ID.
+| Must be valid user ID
 |
 */
 $config['inbox_owner_id'] = '1';
@@ -40,6 +41,32 @@ $config['inbox_owner_id'] = '1';
 |
 */
 $config['sms_bomber'] = FALSE;
+
+
+/*
+|--------------------------------------------------------------------------
+| Append @username
+|--------------------------------------------------------------------------
+|
+| Append @username on sent messages
+| Act as identifier which messages sent by which username
+| @username will be automatically replaced by username who sent the messages
+|
+*/
+$config['append_username'] = FALSE;
+$config['append_username_message'] = "Sender: @username";
+
+
+/*
+|--------------------------------------------------------------------------
+| SMS Advertise
+|--------------------------------------------------------------------------
+|
+| Advertised message that will be appended at the end of message
+|
+*/
+$config['sms_advertise'] = FALSE;
+$config['sms_advertise_message'] = "This is ads message";
 
 
 /*

@@ -176,3 +176,10 @@ if($sig_option=='true') echo "\n\n".$sig; ?>
 </table>
 <br />
 <?php  echo form_close();?>
+
+<?php
+if($this->config->item('sms_advertise'))
+{
+	echo "*Ads is active";
+}
+?>

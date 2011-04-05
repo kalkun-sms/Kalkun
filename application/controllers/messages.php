@@ -211,6 +211,21 @@ class Messages extends MY_Controller {
 		$data['delivery_report'] = $this->Kalkun_model->get_setting()->row('delivery_report');
 		$data['coding'] = ($this->input->post('unicode')=='unicode') ? 'unicode' : 'default';	
 		$data['uid'] = $this->session->userdata('id_user');	
+		
+		// if append @username is active
+		if($this->config->item('append_username'))
+		{
+			$append_username_message = $this->config->item('append_username_message');
+			$append_username_message = str_replace("@username", "@".$this->session->userdata('username'), $append_username_message);				
+			$data['message'] .= "\n".$append_username_message;
+		}
+
+		// if ads is active
+		if($this->config->item('sms_advertise'))
+		{
+			$ads_message = $this->config->item('sms_advertise_message');
+			$data['message'] .= "\n".$ads_message;
+		}				
 				
 		// Send the message
 		if(is_array($dest)) 

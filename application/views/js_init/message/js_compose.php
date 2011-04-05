@@ -79,7 +79,7 @@ $(document).ready(function(){
 
 	// Default value
 	sms_char = 160;
-	
+		
 	// Unicode 
 	$("input#unicode").click(function(){
 		var n = $("input#unicode:checked").length;
@@ -90,6 +90,25 @@ $(document).ready(function(){
 			sms_char = 70;
 		}
 	});
+
+	// if ads is active
+	<?php 
+	if($this->config->item('sms_advertise'))
+	{
+		$ads_count = strlen($this->config->item('sms_advertise_message'));
+		echo "sms_char = sms_char - ".$ads_count.";";
+	}
+	
+	// if append @username is active
+	if($this->config->item('append_username'))
+	{
+		$append_username_message = $this->config->item('append_username_message');
+		$append_username_message = str_replace("@username", "@".$this->session->userdata('username'), $append_username_message);
+		
+		$append_username_count = strlen($append_username_message);
+		echo "sms_char = sms_char - ".$append_username_count.";";		
+	}
+	?>
 		
 	// Character counter
 	$('.word_count').each(function(){   
