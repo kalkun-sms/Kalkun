@@ -125,7 +125,7 @@ class Daemon extends Controller {
         $qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber','number'=>$from , 'id_user' =>$msg_user));
 		if($qry->num_rows()!=0) $from = $qry->row('Name');
        
-        $this->email->from('postmaster@domain.com', $from);
+        $this->email->from($this->config->item('mail_from'), $from);
         $this->email->to($mail_to); 
          
         $this->email->subject('Kalkun New SMS');

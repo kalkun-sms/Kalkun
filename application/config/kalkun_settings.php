@@ -126,6 +126,7 @@ $config['smtp_pass'] = "password";
 $config['charset'] = 'iso-8859-1';
 $config['wordwrap'] = TRUE;
 
+$config['mail_from'] = 'postmaster@domain.com' ;
 
 
 
