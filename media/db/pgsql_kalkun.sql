@@ -8,6 +8,7 @@ CREATE TABLE "user" (
 	"realname" varchar(100) NOT NULL, 
 	"password" varchar(255) NOT NULL, 
 	"phone_number" varchar(15) NOT NULL, 
+    "email_id" varchar(64) NOT NULL,
 	"level" text NOT NULL DEFAULT 'user',
 	UNIQUE("phone_number", "username"),
 	CHECK ("level" IN ('admin','user'))
@@ -21,15 +22,17 @@ CREATE TABLE "user_settings" (
 	"paging" integer NOT NULL DEFAULT 10, 
 	"bg_image" varchar(50) NOT NULL,
 	"delivery_report" text NOT NULL DEFAULT 'default',
+    "email_forward" text NOT NULL DEFAULT 'false',
 	"language" varchar(20) NOT NULL DEFAULT 'english',
 	"conversation_sort" text NOT NULL DEFAULT 'asc',
 	CHECK ("permanent_delete" IN ('true','false')),
 	CHECK ("delivery_report" IN ('default','yes','no')),
+    CHECK ("email_forward" IN ('true','false')),
 	CHECK ("conversation_sort" IN ('asc','desc'))
 );
 
-INSERT INTO "user" VALUES(1, 'kalkun', 'Kalkun SMS', 'f0af18413d1c9e0366d8d1273160f55d5efeddfe', '123456789', 'admin');
-INSERT INTO "user_settings" VALUES (1, 'green', 'false;Put your signature here', 'false', 20, 'true;background.jpg', 'default', 'english', 'asc');
+INSERT INTO "user" VALUES(1, 'kalkun', 'Kalkun SMS', 'f0af18413d1c9e0366d8d1273160f55d5efeddfe', '123456789', 'yourname@domain.com', 'admin');
+INSERT INTO "user_settings" VALUES (1, 'green', 'false;Put your signature here', 'false', 20, 'true;background.jpg', 'default', 'false', 'english', 'asc');
 
 
 CREATE TABLE "user_outbox" (

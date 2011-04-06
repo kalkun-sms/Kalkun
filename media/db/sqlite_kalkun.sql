@@ -3,12 +3,13 @@ CREATE TABLE "user" (
 	"username" VARCHAR(12) NOT NULL UNIQUE,
 	"realname" VARCHAR(100) NOT NULL, 
 	"password" VARCHAR(255) NOT NULL, 
-	"phone_number" VARCHAR(15) NOT NULL UNIQUE, 
+	"phone_number" VARCHAR(15) NOT NULL UNIQUE,
+     "email_id" VARCHAR(64) NOT NULL, 
 	"level" TEXT NOT NULL DEFAULT 'user',
 	CHECK ("level" IN ('admin','user'))
 );
 
-INSERT INTO "user" VALUES(1, 'kalkun', 'Kalkun SMS', 'f0af18413d1c9e0366d8d1273160f55d5efeddfe', '123456789', 'admin');
+INSERT INTO "user" VALUES(1, 'kalkun', 'Kalkun SMS', 'f0af18413d1c9e0366d8d1273160f55d5efeddfe', '123456789', 'yourname@domain.com', 'admin');
 
 CREATE TABLE "user_settings" (
 	"id_user" INTEGER PRIMARY KEY  NOT NULL, 
@@ -18,14 +19,16 @@ CREATE TABLE "user_settings" (
 	"paging" INTEGER NOT NULL DEFAULT 10, 
 	"bg_image" VARCHAR(50) NOT NULL,
 	"delivery_report" TEXT NOT NULL DEFAULT 'default',
+    "email_forward" TEXT NOT NULL DEFAULT 'false',
 	"language" VARCHAR(20) NOT NULL DEFAULT 'english',
 	"conversation_sort" TEXT NOT NULL DEFAULT 'asc',
 	CHECK ("permanent_delete" IN ('true','false')),
 	CHECK ("delivery_report" IN ('default','yes','no')),
+    CHECK ("email_forward" IN ('true','false')),
 	CHECK ("conversation_sort" IN ('asc','desc'))
 );
 
-INSERT INTO "user_settings" VALUES (1, 'green', 'false;--\nPut your signature here', 'false', 20, 'true;background.jpg', 'default', 'english', 'asc');
+INSERT INTO "user_settings" VALUES (1, 'green', 'false;--\nPut your signature here', 'false', 20, 'true;background.jpg', 'default', 'false', 'english', 'asc');
 
 CREATE TABLE "user_outbox" (
 	"id_outbox" INTEGER PRIMARY KEY  NOT NULL, 
