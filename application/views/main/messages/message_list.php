@@ -47,7 +47,7 @@ else
 	<div class="messagelist <?php  if($type == 'inbox' && $tmp->readed=='false') echo "unreaded";?>">
 	<div class="message_container">
 		<div class="message_header" style="color: #444; height: 20px; overflow: hidden">
-		<input type="checkbox" id="<?php echo $number;?>" class="select_conversation nicecheckbox" value="<?php echo $number;?>" />
+		<input type="checkbox" id="<?php echo $number;?>" class="select_conversation nicecheckbox" value="<?php echo $number;?>" style="border: none;" />
 		<span class="message_toggle" style="cursor: pointer;" onclick="document.location.href='<?php echo site_url();?>/messages/conversation/<?php echo $folder;?>/<?php echo $type;?>/<?php echo $number;?>/<?php echo $this->uri->segment(4);?>'">
 		<span <?php  if($type == 'inbox' && $tmp->readed=='false') echo "style=\"font-weight: bold\"";?>><?php echo nice_date($message_date);?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow;?>.gif" />
 		&nbsp;&nbsp;<?php echo $senderName;?>

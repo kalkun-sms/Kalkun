@@ -13,6 +13,9 @@
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/ui.dialog.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/effects.core.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/effects.fade.min.js"></script>
+<!--[if IE]>
+  <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>ie-fix.css" />
+<![endif]-->
 <?php
 //background image
 list($bg_act_option, $bg_act) = explode(';',$this->Kalkun_model->get_setting()->row('bg_image'));
@@ -23,7 +26,8 @@ body {
 	background-repeat: repeat-x; 
 	background-attachment: fixed;
 }
-</style>	
+</style>
+	
 <?php
 endif;
 

@@ -64,7 +64,7 @@ $(document).ready(function() {
 			autoOpen: false,
 			height: 300,
 			width: 525,
-			modal: true,		
+			modal: true		
 		});	
 		$('#about').dialog('open');
 		return false;

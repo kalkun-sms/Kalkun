@@ -76,12 +76,12 @@ else echo lang('kalkun_send_to').":";
 </td>
 <td>
 <span class="form_option">
-<input type="radio" id="sendoption1" name="sendoption" value="sendoption1" checked="checked" class="left_aligned"  />
+<input type="radio" id="sendoption1" name="sendoption" value="sendoption1" checked="checked" class="left_aligned" style="border: none;" />
 <label for="sendoption1"><?php echo lang('kalkun_contact');?></label>
 </span>
-<input type="radio" id="sendoption2" name="sendoption" value="sendoption2" />
+<input type="radio" id="sendoption2" name="sendoption" value="sendoption2" style="border: none;" />
 <label for="sendoption2"><?php echo lang('kalkun_group');?> </label>
-<input type="radio" id="sendoption3" name="sendoption" value="sendoption3" />
+<input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;" />
 <label for="sendoption3"><?php echo lang('kalkun_input_manually');?> </label>
 </td>    
 </tr>
@@ -114,11 +114,11 @@ endforeach;
 <tr>
 <td align="right" class="label"><?php echo lang('kalkun_send_date').":";?></td>
 <td>
-<input class="left_aligned" type="radio" id="option1" name="senddateoption" value="option1" checked="checked" />
+<input class="left_aligned" type="radio" id="option1" name="senddateoption" value="option1" checked="checked" style="border: none;" />
 <label for="option1"><?php  echo lang('kalkun_now');?></label>
-<input type="radio" id="option2" name="senddateoption" value="option2" />
+<input type="radio" id="option2" name="senddateoption" value="option2" style="border: none;"/>
 <label for="option2"><?php  echo lang('kalkun_at_date_time');?></label>
-<input type="radio" id="option3" name="senddateoption" value="option3" />
+<input type="radio" id="option3" name="senddateoption" value="option3" style="border: none;" />
 <label for="option3"><?php  echo lang('kalkun_after_a_delay');?></label>
 </td>    
 </tr>
@@ -143,7 +143,7 @@ endforeach;
 
 <tr>
 <td align="right" class="label"><?php echo lang('kalkun_sms_mode').":";?></td>
-<td><input type="checkbox" id="sms_mode" name="sms_mode" value="1" class="left_aligned" />
+<td><input type="checkbox" id="sms_mode" name="sms_mode" value="1" class="left_aligned" style="border: none;" />
 <label for="sms_mode"><?php echo lang('kalkun_compose_send_as_flash'); ?></label>
 </td>    
 </tr>    
@@ -169,7 +169,7 @@ if($sig_option=='true') echo "\n\n".$sig; ?>
 </textarea>
 <div>
 	<div style="float: left"><span class="counter"></span></div>
-	<div style="float: right; padding-right: 5px;"><input class="left_aligned" type="checkbox" value="unicode" id="unicode" name="unicode" /><label for="unicode"><?php echo lang('kalkun_compose_send_as_unicode'); ?></label></div>
+	<div style="float: right; padding-right: 5px;"><input class="left_aligned" type="checkbox" value="unicode" id="unicode" name="unicode" style="border: none;" /><label for="unicode"><?php echo lang('kalkun_compose_send_as_unicode'); ?></label></div>
 </div>
 </td>
 </tr>      
