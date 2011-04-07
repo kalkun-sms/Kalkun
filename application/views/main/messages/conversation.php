@@ -2,6 +2,7 @@
 <?php 	
 $this->load->view('js_init/message/js_object');
 $this->load->view('js_init/message/js_conversation');
+$this->load->view('js_init/message/js_sms_search');
 
 if(count($messages)==0) 
 {

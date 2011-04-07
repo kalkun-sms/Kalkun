@@ -242,6 +242,9 @@ class Message_model extends Model {
 				if($options['type']!='outbox') $this->db->where('id_folder', array_search($options['type'], $valid_type)+1);
 			}			
 		}
+         
+        //if search string is set
+		if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
 		
 		// if phone number is set
 		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);

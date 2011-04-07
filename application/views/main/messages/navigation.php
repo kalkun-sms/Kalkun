@@ -39,10 +39,30 @@
 	if($this->uri->segment(4)=='5' or $this->uri->segment(6)=='5') echo " ".lang('kalkun_permanently');?></a></li>	
 	<?php if($this->uri->segment(2)!='conversation'):?>
 	<li>&nbsp;</li>
-	<li><a href="#" class="refresh_button button"><?php echo lang('kalkun_refresh');?></a></li>			
-	<?php if($this->pagination->create_links()!=''): ?>
-	<li class="paging"><div id="paging"><?php echo $this->pagination->create_links();?></div></li>
-	<?php endif;?>
+	<li><a href="#" class="refresh_button button"><?php echo lang('kalkun_refresh');?></a></li>	
+    		
+	<?php 
+    if($this->uri->segment(2) != 'search'):
+    if($this->pagination->create_links()!=''): ?>
+	<li class="paging"><div id="paging"><?php  echo $this->pagination->create_links();?></div></li>
+	<?php 
+    endif;
+    endif;
+    ?>
 	<?php endif;?>
 </ul>
+<?php if($place != 'bottom'): ?>
+<div  id="window_title_right">
+<?php
+if($this->uri->segment(2)=='conversation')    $source =  $this->uri->segment(4);
+else $source = $this->uri->segment(3);
+if($this->uri->segment(2)=='my_folder')   $folder_id = $this->uri->segment(4);
+echo form_open("messages/search/$source", array('class' => 'search_form'));
+echo form_hidden('source', $source);
+echo form_hidden('folder_id', $folder_id);
+?>
+<input type="text" name="search_sms" size="20" class="search_sms" value="" />
+<?php echo form_close(); ?>	
+</div>
+<?php endif; ?>
 </div>	

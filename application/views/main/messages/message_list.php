@@ -1,4 +1,5 @@
 <?php $this->load->view('js_init/message/js_object');
+$this->load->view('js_init/message/js_sms_search');
 if($messages->num_rows()==0) 
 {
 	$no_message_container['start'] = "<p class=\"no_content\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>";

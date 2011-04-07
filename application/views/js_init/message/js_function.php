@@ -195,6 +195,8 @@ $(document).ready(function() {
 		$('#deletefolderdialog').dialog('open');
 		return false;
 	});
+    
+    
 
 });    
 </script>
