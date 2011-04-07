@@ -127,7 +127,7 @@ endif;
 	</table>
 	</div>			
 		
-	<?php echo "<div class=\"message_content hidden\" style=\"padding: 5px 10px 5px 20px\">".nl2br($tmp['TextDecoded'])."</div>";?>		
+	<?php echo "<div class=\"message_content hidden\" style=\"padding: 5px 10px 5px 20px\">".showmsg($tmp['TextDecoded'])."</div>";?>		
 		
 	<div class="optionmenu hidden" style="padding-left: 20px">
 	<ul>

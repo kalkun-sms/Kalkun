@@ -1,5 +1,27 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+    
+    /**
+      * INDIA NDNC Registry Check
+      * In order to avaoid sending sms to NDNC registered phone numbers
+      **/
+    function NDNCcheck($mobileno)
+	{  
+		    $mobileno = substr($mobileno, -10, 10);
+			$url = "http://www.ndncregistry.gov.in/ndncregistry/saveSearchSub.misc";
+			$postString = "phoneno=" . $mobileno;
+			$request = curl_init($url);
+            curl_setopt($request, CURLOPT_HEADER, 0);
+			curl_setopt($request , CURLOPT_PROXY , '10.3.100.211:8080' );
+			curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($request, CURLOPT_POST, 1);
+			curl_setopt($request, CURLOPT_POSTFIELDS, $postString);
+			curl_setopt($request, CURLOPT_SSL_VERIFYPEER, FALSE);
+			$response = curl_exec($request);
+			curl_close ($request);
+            		 
+			return (is_int(strpos(strtolower(strip_tags($response)), "number is not")) ? false : true);
+	
+    }
 	function filter_data($data) 
 	{
 		if($data==NULL) return "<i>Unknown</i>";
@@ -112,9 +134,21 @@
    
    	function message_preview($str, $n)
    	{
-   		if (strlen($str) <= $n) return $str;
-		else return substr($str, 0, $n).'&#8230;';
+   		if (strlen($str) <= $n) return showtags($str);
+		else return showtags(substr($str, 0, $n)).'&#8230;';
    	}
+   	
+    function showtags($msg)
+    {
+        $msg = preg_replace("/</","&lt;",$msg);
+        $msg = preg_replace("/>/","&gt;",$msg);
+        return $msg;
+    }
+    
+    function showmsg($msg)
+    {
+        return nl2br(showtags($msg));
+    }
    	
    	function compare_date_asc($a, $b)
 	{
