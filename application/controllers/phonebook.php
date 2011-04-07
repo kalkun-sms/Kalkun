@@ -77,7 +77,28 @@ class Phonebook extends MY_Controller {
 	 * @access	public   		 
 	 */	
 	function group()
-	{
+	{    
+	    $group_id =  $this->uri->segment(3);
+        if(!empty($group_id))
+        {
+            $data['title'] = $this->uri->segment(4) . ' Contacts';
+    		$this->load->library('pagination');
+    		$config['base_url'] = site_url().'/phonebook/index/';
+    		$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'bygroup' , 'group_id' =>$group_id ))->num_rows();
+    		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
+    		$config['cur_tag_open'] = '<span id="current">';
+    		$config['cur_tag_close'] = '</span>';
+    		  
+    		$param = array( 'option' => 'bygroup' , 'group_id' =>$group_id );
+    		
+    		$data['main'] = 'main/phonebook/contact/index';	
+    	    $data['phonebook'] = $this->Phonebook_model->get_phonebook($param);
+    		$data['pbkgroup'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->result();
+            
+    	 	$this->load->view('main/layout', $data);
+
+        } 
+        else{
 		$data['title'] = 'Groups';
 		$this->load->library('pagination');
 		$config['base_url'] = site_url().'/phonebook/group/';
@@ -93,6 +114,7 @@ class Phonebook extends MY_Controller {
 		$data['group'] = $this->Phonebook_model->get_phonebook($param);
 		
 		$this->load->view('main/layout', $data);
+        }
 	}
 
 	// --------------------------------------------------------------------

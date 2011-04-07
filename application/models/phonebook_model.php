@@ -116,10 +116,12 @@ class Phonebook_model extends Model {
 			case 'bygroup':
             $this->db->select('*');	
 			$this->db->from('pbk');
+            $this->db->select_as('pbk.Name', 'Name');	
             $this->db->join('user_group', 'user_group.id_pbk=pbk.ID');
 			$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups');
             $this->db->where('user_group.id_pbk_groups', $param['group_id']);
             $this->db->where('pbk.id_user', $user_id);
+            $this->db->order_by("pbk.Name", "asc");
 			break;
 			
 			case 'search':
