@@ -251,8 +251,11 @@ class Messages extends MY_Controller {
                 }
 		}	
         
-        	
+       	
+        
+        
 		// Send the message
+        if(isset($dest))  // handles if empty numbers after any number removal process
 		if(is_array($dest)) 
 		{
 			foreach($dest as $dest):

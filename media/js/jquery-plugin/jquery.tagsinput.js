@@ -11,13 +11,16 @@
 	http://www.opensource.org/licenses/mit-license.php
 
 	ben@xoxco.com
+    
+    Custom Edited by Kinshuk <kinshuk1989@gmail.com> for use in Kalkun
 
 */
 
 (function($) {
 
 	var delimiter = new Array();
-	
+	var allowed_values = new Array();
+    
 	jQuery.fn.addTag = function(value,options) {
 		
 			var options = jQuery.extend({focus:false},options);
@@ -30,7 +33,11 @@
 				}
 				value = jQuery.trim(value);
 				if (value !='') { 
-					
+				     
+				   	if(findIdx(value,allowed_values) == -1)
+                    {
+                        return false;
+                    }
 					$('<span class="tag">'+value + '&nbsp;&nbsp;<a href="#" title="Remove tag" onclick="return $(\'#'+id + '\').removeTag(\'' + escape(value) + '\');">x</a></span>').insertBefore('#'+id+'_addTag');
 					tagslist.push(value);
 				
@@ -74,8 +81,10 @@
 	
 	jQuery.fn.tagsInput = function(options) { 
 	
-		var settings = jQuery.extend({defaultText:'Add Group',width:'270px',height:'50px','hide':true,'delimiter':',',autocomplete:{selectFirst:false}},options);
-	
+		var settings = jQuery.extend({defaultText:'Add',width:'270px',height:'50px','hide':true,'delimiter':',',autocomplete:{selectFirst:false}},options);
+	    
+        allowed_values = options['autocomplete_url'];
+        
 		this.each(function() { 
 			if (settings.hide) { 
 				$(this).hide();				
@@ -194,3 +203,17 @@
 		};
 			
 })(jQuery);
+
+function findIdx(item, arr) {
+// find index position of {item}
+// in Array {arr} - return -1, if 
+// item not found 
+var idx;
+var last = arr.length;
+for (var i = 0; i < last; i++) {
+idx = (item == arr[i])?i:-1;
+// quit on first "found"
+if (-1 != idx) break;
+}
+return idx;
+}

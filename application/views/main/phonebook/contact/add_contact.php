@@ -13,13 +13,13 @@ $(document).ready(function() {
     endforeach; 
     $grouptext = substr($grouptext,0, strlen($grouptext)-1);
     ?>
-    var data = "<?=$grouptext?>".split(";");
+    var grp_data = "<?=$grouptext?>".split(";");
     $('#groups').tagsInput({
-        'autocomplete_url' : data,
+        'autocomplete_url' : grp_data,
         'autocomplete':{matchContains:false},
         'height':'50px',
         'width':'270px',
-       'defaultText':'Add Group'
+       'defaultText':'Select Group'
     });
 });
 </script>
