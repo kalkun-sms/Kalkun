@@ -495,15 +495,12 @@ class Messages extends MY_Controller {
 	 * @access	public
 	 */		
 	function search()
-	{
- 			 
+	{	 
             $data['main'] = 'main/messages/index';
             $param['search_string'] =$this->input->post('search_sms');
 			$search = $this->Message_model->search_messages($param);	
   			$data['messages'] = $search;
-			$this->load->view('main/layout', $data);
-             		
- 		
+			$this->load->view('main/layout', $data);	
 	}
 	
     

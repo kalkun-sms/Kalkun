@@ -17,8 +17,7 @@ else $folder = $this->Kalkun_model->get_folders('all');
 <?php
 // my folder view
 if($this->uri->segment(2)=='my_folder')
-{
-?>
+{ ?>
 
 <!-- Rename Folder Dialog -->
 <div id="renamefolderdialog" title="<?php echo lang('kalkun_rename_folder');?>" class="dialog">
