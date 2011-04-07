@@ -938,3 +938,13 @@ label.error {
 .underline_link {
 	text-decoration: underline;	
 }
+
+.groupname a{
+    color:#000;
+    text-decoration:none ;	
+}
+
+.groupname a:hover{
+    color:#000;
+    text-decoration: underline;	
+}
