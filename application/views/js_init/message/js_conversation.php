@@ -1,9 +1,9 @@
 <script type="text/javascript">
 $(document).ready(function() {	    
 var base = "<?php echo  site_url();?>/messages/delete_messages/";
-var source = "<?php echo $this->uri->segment(4);?>";
+//var source = "<?php echo $this->uri->segment(4);?>";
 var current_folder = "<?php echo $this->uri->segment(6);?>";
-var dest_url = base + source;
+//var dest_url = base + source;
      
 // Delete messages
 $("a.global_delete").click(function(){
@@ -15,12 +15,9 @@ if(count==0) {
 else {
 	$("input.select_message:checked").each( function () {
 	   var message_row = $(this).parents('div:eq(2)');
-       if(source == 'all')
-       {
          id_access = '#item_source'+$(this).val();
          item_folder =  $(id_access).val();
          dest_url = base + item_folder;
-       }
 		$.post(dest_url, {type: 'single', id: $(this).val(), current_folder: current_folder}, function() {
 			$(message_row).slideUp("slow");
 		});
