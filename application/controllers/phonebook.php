@@ -41,7 +41,7 @@ class Phonebook extends MY_Controller {
 	 */	
 	function index($type = NULL) 
 	{		
-		$data['title'] = 'Contacts';
+		$data['title'] = lang('tni_contacts');
 		$this->load->library('pagination');
 		$config['base_url'] = site_url().'/phonebook/index/';
 		$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();
@@ -81,13 +81,13 @@ class Phonebook extends MY_Controller {
 	    $group_id =  $this->uri->segment(3);
         if(!empty($group_id))
         {
-            $data['title'] = $this->uri->segment(4) . ' Contacts';
+            $data['title'] =  'Group Contacts';
     		$this->load->library('pagination');
-    		$config['base_url'] = site_url().'/phonebook/index/';
-    		$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'bygroup' , 'group_id' =>$group_id ))->num_rows();
-    		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-    		$config['cur_tag_open'] = '<span id="current">';
-    		$config['cur_tag_close'] = '</span>';
+    		//$config['base_url'] = site_url().'/phonebook/index/';
+    		//$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'bygroup' , 'group_id' =>$group_id ))->num_rows();
+    		//$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
+    		//$config['cur_tag_open'] = '<span id="current">';
+    		//$config['cur_tag_close'] = '</span>';
     		  
     		$param = array( 'option' => 'bygroup' , 'group_id' =>$group_id );
     		

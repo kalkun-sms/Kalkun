@@ -40,7 +40,7 @@
 	
 <div id="window_container">
 <div id="window_title">
-	<div id="window_title_left"><?php echo lang('tni_contacts'); ?></div>
+	<div id="window_title_left"><?php echo $title; ?></div>
 	<div id="window_title_right">
 	<?php echo form_open('phonebook', array('class' => 'search_form')); ?>
 	<input type="text" name="search_name" size="20" class="search_name" value="" />
