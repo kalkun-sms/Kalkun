@@ -188,15 +188,15 @@ class Phonebook_model extends Model {
         $this->db->delete('user_group', array('id_pbk' => $pbk_id)); 
         
         // now insert the lastest
-        $group_id = $param['GroupID'];
-        if(!empty($group_id))
-        {
-            $this->db->set('id_pbk', $pbk_id);
-    		$this->db->set('id_pbk_groups', $group_id);
-    		$this->db->set('id_user', $param['id_user']);
-            $this->db->insert('user_group');
-        }
-       
+        if(isset($param['GroupID']))
+            if(!empty($param['GroupID']))
+            {
+                $this->db->set('id_pbk', $pbk_id);
+        		$this->db->set('id_pbk_groups', $param['GroupID']);
+        		$this->db->set('id_user', $param['id_user']);
+                $this->db->insert('user_group');
+            }
+        if(isset($param['Groups']))
         if(!empty($param['Groups'])){
             $groups = array_unique(explode(',',$param['Groups']));
             $CI =& get_instance();

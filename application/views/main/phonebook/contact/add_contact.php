@@ -34,7 +34,11 @@ $(document).ready(function() {
 <label for="number"><?php echo lang('tni_contact_phonenumber'); ?></label>
 <input type="text" name="number" id="number" value="<?php if(isset($contact)) echo $contact->row('Number'); else if(isset($number)) echo $number;?>" class="text ui-widget-content ui-corner-all" />
 <label for="group"><?php echo lang('kalkun_group'); ?></label> 
-<input name="groups" id="groups" value="<?=$this->Phonebook_model->get_groups($contact->row('id_pbk'),$this->session->userdata('id_user'))->GroupNames?>"  />
+<?php if(isset($contact)): ?> 
+<input name="groups" id="groups" value="<?php echo $this->Phonebook_model->get_groups($contact->row('id_pbk'),$this->session->userdata('id_user'))->GroupNames?>"  />
+<?php else : ?>
+<input name="groups" id="groups" value=""  />
+<?php endif;?>
 <?php
 //$group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
 //foreach($group->result() as $tmp):
