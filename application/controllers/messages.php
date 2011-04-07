@@ -252,10 +252,10 @@ class Messages extends MY_Controller {
 		}	
         
        	
-        
-        
+                
+                
 		// Send the message
-        if(isset($dest))  // handles if empty numbers after any number removal process
+        if(isset($dest))  // handles if empty numbers after any number removal process        
 		if(is_array($dest)) 
 		{
 			foreach($dest as $dest):
@@ -496,39 +496,14 @@ class Messages extends MY_Controller {
 	 */		
 	function search()
 	{
- 			$data['main'] = 'main/messages/index';
-			$param['type'] = $this->input->post('source');
-            $folder_id = $this->input->post('folder_id');
-            if(!empty(  $folder_id )) $param['id_folder'] = $folder_id ;
+ 			 
+            $data['main'] = 'main/messages/index';
             $param['search_string'] =$this->input->post('search_sms');
- 
-			$search = $this->Message_model->get_messages($param)->result_array();	
-           // var_dump($this->db->last_query());
-
-            if($param['type'] == 'inbox')
-            {
-			// add global date for sorting
-			foreach($search as $key=>$tmp):
-			$search[$key]['globaldate'] = $search[$key]['ReceivingDateTime'];
-			$search[$key]['source'] = 'inbox';
-			endforeach;
-            }
-            elseif($param['type'] == 'sentitems')
-            {
-                // add global date for sorting
-    			foreach($search as $key=>$tmp):
-    			$search[$key]['globaldate'] = $search[$key]['SendingDateTime'];
-    			$search[$key]['source'] = 'sentitems';
-    			endforeach;
-            }
+			$search = $this->Message_model->search_messages($param);	
   			$data['messages'] = $search;
-			
-		 	// sort data
-			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
-			usort($data['messages'], "compare_date_".$sort_option);
-			
-			$this->load->view('main/layout', $data);		
-		 
+			$this->load->view('main/layout', $data);
+             		
+ 		
 	}
 	
     

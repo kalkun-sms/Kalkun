@@ -14,7 +14,13 @@ if(count==0) {
 }
 else {
 	$("input.select_message:checked").each( function () {
-		var message_row = $(this).parents('div:eq(2)');
+	   var message_row = $(this).parents('div:eq(2)');
+       if(source == 'all')
+       {
+         id_access = '#item_source'+$(this).val();
+         item_folder =  $(id_access).val();
+         dest_url = base + item_folder;
+       }
 		$.post(dest_url, {type: 'single', id: $(this).val(), current_folder: current_folder}, function() {
 			$(message_row).slideUp("slow");
 		});

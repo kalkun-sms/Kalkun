@@ -181,7 +181,89 @@ class Message_model extends Model {
 	}
 
 	// --------------------------------------------------------------------
-	
+	function search_messages($options = array())
+	{
+        if(!isset($options['search_string']))  die("No String to Search For");
+		 
+		$this->db->from('inbox');
+        $tmp_number = 'SenderNumber'; 
+		$tmp_order = 'ReceivingDateTime';
+		$udh_where = "(".$this->_protect_identifiers("UDH")." = '' OR ".$this->_protect_identifiers("UDH")." LIKE '%1')";
+		$this->db->where($udh_where, NULL, FALSE);				
+		
+        $this->db->like('TextDecoded', $options['search_string']);
+		
+		// if phone number is set
+		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
+        
+        //remove already trashed
+		if(!isset($options['trash'])) $this->db->where('id_folder !=', '5');
+        
+        // join user table
+		if(isset($options['uid']))
+		{
+			$this->db->join($user_folder, $user_folder.'.id_'.$options['type'].'='.$options['type'].'.ID');
+			$this->db->where($user_folder.'.id_user',$options['uid']);	
+		}
+        
+       	$result = $this->db->get();
+        
+        $inbox = $result->result_array();
+        
+       	// add global date for sorting
+		foreach($inbox as $key=>$tmp):
+		$inbox[$key]['globaldate'] = $inbox[$key]['ReceivingDateTime'];
+		$inbox[$key]['source'] = 'inbox';
+		endforeach;
+            
+            
+            
+        $this->db->from('sentitems');
+		$tmp_number = 'DestinationNumber';
+		$tmp_order = 'SendingDateTime';	
+	    $this->db->where('SequencePosition', '1');		
+			
+	    $this->db->like('TextDecoded', $options['search_string']);
+		
+		// if phone number is set
+		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
+        
+         //remove already trashed
+		if(!isset($options['trash'])) $this->db->where('id_folder !=', '5');
+        
+        // join user table
+		if(isset($options['uid']))
+		{
+			$this->db->join($user_folder, $user_folder.'.id_'.$options['type'].'='.$options['type'].'.ID');
+			$this->db->where($user_folder.'.id_user',$options['uid']);	
+		}
+        
+       	$result = $this->db->get();
+        
+        $sentitems = $result->result_array();
+         
+        // add global date for sorting
+		foreach($sentitems as $key=>$tmp):
+			$sentitems[$key]['globaldate'] = $sentitems[$key]['SendingDateTime'];
+			$sentitems[$key]['source'] = 'sentitems';
+		endforeach;
+			
+		$data['messages'] = $inbox;
+			
+		// merge inbox and sentitems
+		foreach($sentitems as $tmp):
+		  $data['messages'][] = $tmp;
+		endforeach;		
+			
+		// sort data
+		$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
+		usort($data['messages'], "compare_date_".$sort_option);
+ 
+		return $data['messages'];
+	}
+    
+    
+    // --------------------------------------------------------------------
 	/**
 	 * Get Messages
 	 *

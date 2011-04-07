@@ -53,15 +53,7 @@
 </ul>
 <?php if($place != 'bottom'): ?>
 <div  id="window_title_right">
-<?php
-if($this->uri->segment(2)=='conversation')    $source =  $this->uri->segment(4);
-else $source = $this->uri->segment(3);
-if($this->uri->segment(2)=='my_folder')   $folder_id = $this->uri->segment(4);
-else  $folder_id = '';
-echo form_open("messages/search/$source", array('class' => 'search_form'));
-echo form_hidden('source', $source);
-echo form_hidden('folder_id', $folder_id);
-?>
+<?php echo form_open("messages/search/results/all", array('class' => 'search_form')); ?>
 <input type="text" name="search_sms" size="20" class="search_sms" value="" />
 <?php echo form_close(); ?>	
 </div>
