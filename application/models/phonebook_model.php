@@ -55,7 +55,8 @@ class Phonebook_model extends Model {
 			$this->db->select_as('pbk_groups.Name', 'GroupName');	
 			$this->db->from('pbk');
 			$this->db->where('pbk.id_user', $user_id);
-			$this->db->join('pbk_groups', 'pbk_groups.ID=pbk.GroupID');
+            $this->db->join('user_group', 'user_group.id_pbk=pbk.ID', 'left');
+			$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups', 'left');
 			$this->db->order_by('pbk.Name');
 			break;	
 			
@@ -70,12 +71,13 @@ class Phonebook_model extends Model {
 			
 			case 'by_idpbk':
 			$this->db->select('*');
-			$this->db->select_as('pbk.ID', 'id_pbk');
-			$this->db->select_as('pbk.Name', 'Name');
+			$this->db->select_as('pbk.ID','id_pbk');
+            $this->db->select_as('pbk.Name', 'Name');	
 			$this->db->select_as('pbk_groups.Name', 'GroupName');	
 			$this->db->from('pbk');
 			$this->db->where('pbk.id_user', $user_id);
-			$this->db->join('pbk_groups', 'pbk_groups.ID=pbk.GroupID');
+            $this->db->join('user_group', 'user_group.id_pbk=pbk.ID', 'left');
+			$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups', 'left');
 			$this->db->where('pbk.ID', $param['id_pbk']);
 			break;
 			
@@ -112,9 +114,12 @@ class Phonebook_model extends Model {
 			break;
 			
 			case 'bygroup':
+            $this->db->select('*');	
 			$this->db->from('pbk');
-			$this->db->where('GroupID', $param['group_id']);
-			$this->db->where('id_user', $user_id);
+            $this->db->join('user_group', 'user_group.id_pbk=pbk.ID');
+			$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups');
+            $this->db->where('user_group.id_pbk_groups', $param['group_id']);
+            $this->db->where('pbk.id_user', $user_id);
 			break;
 			
 			case 'search':
@@ -159,9 +164,9 @@ class Phonebook_model extends Model {
 	 */		
 	function add_contact($param)
 	{
+	   
 		$this->db->set('Name', $param['Name']);
 		$this->db->set('Number', $param['Number']);
-		$this->db->set('GroupID', $param['GroupID']);
 		$this->db->set('id_user', $param['id_user']);
 		
 		// edit mode
@@ -171,6 +176,46 @@ class Phonebook_model extends Model {
 			$this->db->update('pbk');
 		}
 		else $this->db->insert('pbk');
+        
+        // optimisation required.
+        if(isset($param['id_pbk'])) 
+		{
+            $pbk_id = $param['id_pbk'];
+        }
+        else $pbk_id = $this->db->insert_id();
+        
+        //delete past groups
+        $this->db->delete('user_group', array('id_pbk' => $pbk_id)); 
+        
+        // now insert the lastest
+        $group_id = $param['GroupID'];
+        if(!empty($group_id))
+        {
+            $this->db->set('id_pbk', $pbk_id);
+    		$this->db->set('id_pbk_groups', $group_id);
+    		$this->db->set('id_user', $param['id_user']);
+            $this->db->insert('user_group');
+        }
+       
+        if(!empty($param['Groups'])){
+            $groups = array_unique(explode(',',$param['Groups']));
+            $CI =& get_instance();
+            foreach($groups as $_grp)
+            {   
+                $group_id  = $CI->Phonebook_model->group_id($_grp,$param['id_user']);
+                
+                if($group_id != null)
+                {
+                    $this->db->set('id_pbk', $pbk_id);
+            		$this->db->set('id_pbk_groups', $group_id);
+            		$this->db->set('id_user', $param['id_user']);
+                    $this->db->insert('user_group');
+                }
+            }
+             
+            
+        }
+        
 	}
 
 	// --------------------------------------------------------------------
@@ -195,6 +240,55 @@ class Phonebook_model extends Model {
 		}
 		else $this->db->insert('pbk_groups');		
 	}	
+    
+    // --------------------------------------------------------------------
+    
+     /**
+	 * Get Groups ID for a Group Name
+	 *
+	 * @access	public   		 
+	 * @param	text $group_name
+     * @param	number $user_id
+	 * @return
+	 */	
+    function group_id($group_name, $user_id)
+    {
+        	$this->db->select('*');
+			$this->db->from('pbk_groups');
+            $this->db->where('Name', $group_name);
+			$this->db->where('id_user', $user_id);
+            return $this->db->get()->row()->ID;
+    }
+    
+    // --------------------------------------------------------------------
+    
+    /**
+	 * Get Groups for  a contact id
+	 *
+	 * @access	public   		 
+	 * @param	number $pbk_id
+     * @param	number $user_id
+	 * @return
+	 */	
+    function get_groups($pbk_id,$user_id)
+    {
+        $this->db->select_as('user_group.id_pbk_groups', 'GroupID');
+        $this->db->select_as('pbk_groups.Name', 'GroupName');	
+		$this->db->from('user_group');
+        $this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups');           
+        $this->db->where('user_group.id_user', $user_id);
+		$this->db->where('user_group.id_pbk', $pbk_id);
+        $q =  $this->db->get();
+        $GroupID = $GroupName = '';
+        foreach ($q->result() as $_gp) 
+        {
+            $GroupName .= $_gp->GroupName.',';
+            $GroupID .= $_gp->GroupID .',';
+        }
+        $GroupName = substr($GroupName,0, strlen($GroupName)-1);
+        $GroupID = substr($GroupID,0, strlen($GroupID)-1);
+        return (object) array("GroupNames" => $GroupName, "GroupIDs" => $GroupID);
+    }
 
 	// --------------------------------------------------------------------
 	
@@ -208,6 +302,7 @@ class Phonebook_model extends Model {
 	function delete_contact()
 	{
 		$this->db->delete('pbk', array('ID' => $this->input->post('id'))); 
+        $this->db->delete('user_group', array('id_pbk' => $this->input->post('id'))); 
 	}
 
 	// --------------------------------------------------------------------
@@ -223,6 +318,7 @@ class Phonebook_model extends Model {
 	{
 		$this->db->delete('pbk', array('GroupID' => $this->input->post('id'))); 
 		$this->db->delete('pbk_groups', array('ID' => $this->input->post('id'))); 
+        $this->db->delete('user_group', array('id_pbk_groups' => $this->input->post('id'))); 
 	}
 	
 }

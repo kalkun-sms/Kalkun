@@ -198,3 +198,19 @@ ALTER TABLE `pbk` ADD `id_user` INT( 11 ) NOT NULL;
 --
 
 ALTER TABLE `pbk_groups` ADD `id_user` INT( 11 ) NOT NULL;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_group`
+--
+
+
+CREATE TABLE IF NOT EXISTS `user_group` (
+  `id_group` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pbk` int(11) NOT NULL,
+  `id_pbk_groups` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id_group`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;

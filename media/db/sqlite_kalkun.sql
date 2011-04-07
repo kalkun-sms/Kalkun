@@ -82,3 +82,10 @@ ALTER TABLE "sentitems" ADD COLUMN "id_folder" INTEGER NOT NULL DEFAULT 3;
 
 ALTER TABLE "pbk" ADD COLUMN "id_user" INTEGER NULL;
 ALTER TABLE "pbk_groups" ADD COLUMN "id_user" INTEGER NULL;
+
+CREATE TABLE   "user_group" (
+  "id_group" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "id_pbk" INTEGER NOT NULL,
+  "id_pbk_groups" INTEGER NOT NULL,
+  "id_user" INTEGER NOT NULL,
+);

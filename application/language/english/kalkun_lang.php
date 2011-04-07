@@ -46,7 +46,7 @@ $lang['kalkun_signal'] = "Signal";
 
 // Phonebook
 $lang['kalkun_contact'] = "Contact";
-$lang['kalkun_group'] = "Group";
+$lang['kalkun_group'] = "Groups";
 
 // Message
 $lang['kalkun_message'] = "Message";
@@ -76,7 +76,6 @@ $lang['kalkun_at_date_time'] = "At date and time";
 $lang['kalkun_after_a_delay'] = "After a delay";
 
 $lang['kalkun_person'] = "Person";
-$lang['kalkun_group'] = "Group";
 $lang['kalkun_input_manually'] = "Input manually";
 
 $lang['kalkun_show_hide_option'] = "Show/hide option";

@@ -209,7 +209,8 @@ class Phonebook extends MY_Controller {
 	{
 		$pbk['Name'] = trim($this->input->post('name'));
 		$pbk['Number'] = trim($this->input->post('number'));
-		$pbk['GroupID'] = $this->input->post('groupvalue');
+		//$pbk['GroupID'] = $this->input->post('groupvalue');
+        $pbk['Groups'] = $this->input->post('groups');
 		$pbk['id_user'] = $this->input->post('pbk_id_user');
 		
 		if($this->input->post('editid_pbk'))
@@ -244,7 +245,8 @@ class Phonebook extends MY_Controller {
 			$query = $this->Phonebook_model->search_phonebook($param);
 			echo json_encode($query->result());
 		}
-	}	
+	}
+    
 }
 
 /* End of file phonebook.php */
