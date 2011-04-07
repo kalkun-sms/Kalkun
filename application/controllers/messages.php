@@ -481,7 +481,7 @@ class Messages extends MY_Controller {
             {
 			// add global date for sorting
 			foreach($search as $key=>$tmp):
-			$search[$key]['globaldate'] = $inbox[$key]['ReceivingDateTime'];
+			$search[$key]['globaldate'] = $search[$key]['ReceivingDateTime'];
 			$search[$key]['source'] = 'inbox';
 			endforeach;
             }

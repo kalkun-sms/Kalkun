@@ -57,6 +57,7 @@
 if($this->uri->segment(2)=='conversation')    $source =  $this->uri->segment(4);
 else $source = $this->uri->segment(3);
 if($this->uri->segment(2)=='my_folder')   $folder_id = $this->uri->segment(4);
+else  $folder_id = '';
 echo form_open("messages/search/$source", array('class' => 'search_form'));
 echo form_hidden('source', $source);
 echo form_hidden('folder_id', $folder_id);
