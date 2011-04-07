@@ -124,6 +124,17 @@ $config['charset'] = 'utf-8';
 $config['wordwrap'] = TRUE;
 $config['mail_from'] = 'postmaster@domain.com' ;
 
+
+/*
+|--------------------------------------------------------------------------
+| NDNC Filter (INDIA)
+|--------------------------------------------------------------------------
+|
+| Filters outgoing messages for numbers registered in NDNC Registry
+|
+*/
+$config['ndnc'] = FALSE;
+
 /*
 |--------------------------------------------------------------------------
 | Simple Autoreply (Experimental)

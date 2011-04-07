@@ -226,7 +226,32 @@ class Messages extends MY_Controller {
 			$ads_message = $this->config->item('sms_advertise_message');
 			$data['message'] .= "\n".$ads_message;
 		}				
-				
+			
+  	    // if ndnc filtering enabled
+        $ndnc_msg = '';
+		if($this->config->item('ndnc'))
+		{
+				if(is_array($dest)) 
+                {
+                    for ($i= 0 ; $i< count($dest);  $i++)
+                    {
+                        if(NDNCcheck($dest[$i]))
+                        {
+                            unset($dest[$i]);
+                            $ndnc_msg = "<font color='red'>A Number was found in NDNC Resitry. SMS sending was skipped for it.</font><br>" ; 
+                        }
+                    }
+                }
+                else{
+                        if(NDNCcheck($dest))
+                        {
+                            unset($dest);
+                            $ndnc_msg = "<font color='red'>A Number was found in NDNC Resitry. SMS sending was skipped for it.</font><br>" ; 
+                        }
+                }
+		}	
+        
+        	
 		// Send the message
 		if(is_array($dest)) 
 		{
@@ -248,7 +273,7 @@ class Messages extends MY_Controller {
 				$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
 			}
 		}
-		echo "<div class=\"notif\">Your message has been move to Outbox and ready for delivery.</div>";
+		echo "<div class=\"notif\">$ndnc_msg Your message has been move to Outbox and ready for delivery.</div>";
 		}
 	}
 		
