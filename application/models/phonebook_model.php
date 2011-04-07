@@ -257,7 +257,7 @@ class Phonebook_model extends Model {
 			$this->db->from('pbk_groups');
             $this->db->where('Name', $group_name);
 			$this->db->where('id_user', $user_id);
-            return $this->db->get()->row()->ID;
+            return @$this->db->get()->row()->ID;
     }
     
     // --------------------------------------------------------------------
