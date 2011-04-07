@@ -1,5 +1,5 @@
 <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquerycssmenu.css" />
-<?php if($this->uri->segment(2)!='conversation') $this->load->view('js_init/message/js_function'); ?>
+<?php if($this->uri->segment(2)!='conversation' || $this->uri->segment(2)=='search') $this->load->view('js_init/message/js_function'); ?>
 
 <!-- Move To Dialog -->
 <div id="movetodialog" title="<?php echo lang('kalkun_select_folder');?>" class="dialog" style="background: #cce9f2;">

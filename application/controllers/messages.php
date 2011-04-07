@@ -481,7 +481,7 @@ class Messages extends MY_Controller {
 			// sort data
 			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			usort($data['messages'], "compare_date_".$sort_option);
-			
+		
 			$this->load->view('main/layout', $data);				
 		}
 	}
@@ -496,10 +496,23 @@ class Messages extends MY_Controller {
 	 */		
 	function search()
 	{
+	   
  			$data['main'] = 'main/messages/index';
 			$param['type'] = $this->input->post('source');
             $folder_id = $this->input->post('folder_id');
             if(!empty(  $folder_id )) $param['id_folder'] = $folder_id ;
+            else{
+                switch($param['type'])
+                {
+                    case 'inbox' :  $folder_id = 1;  
+                                    break;
+                    case 'sentitems' :  $folder_id = 3;  
+                                    break;
+                    case 'outbox' :  $folder_id = 2;  
+                                    break;
+ 
+                }
+            }
             $param['search_string'] =$this->input->post('search_sms');
  
 			$search = $this->Message_model->get_messages($param)->result_array();	
@@ -527,6 +540,16 @@ class Messages extends MY_Controller {
 			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			usort($data['messages'], "compare_date_".$sort_option);
 			
+           
+        
+            $data['folder'] = $param['type'];
+            $valid_type = array('inbox', 'sentitems', 'outbox');		
+            if(!in_array($param['type'], $valid_type)) $data['folder'] = 'my_folder';
+            
+            $data['type'] = $param['type'];
+			$data['id_folder'] = $folder_id;
+			$data['limit'] = '1000';
+			$data['offset'] = '0';
 			$this->load->view('main/layout', $data);		
 		 
 	}
