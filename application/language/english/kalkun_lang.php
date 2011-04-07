@@ -111,6 +111,7 @@ $lang['kalkun_compose_send_as_unicode'] = "Send as Unicode";
 $lang['kalkun_compose_times'] = "times";
 $lang['kalkun_compose_hour'] = "Hour";
 $lang['kalkun_compose_minutes'] = "Minutes";
+$lang['kalkun_no_message_search'] = "Oops! Your Query doesnt match any records.";
 
 
 // tni contribution

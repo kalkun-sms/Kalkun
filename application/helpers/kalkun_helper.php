@@ -11,7 +11,7 @@
 			$postString = "phoneno=" . $mobileno;
 			$request = curl_init($url);
             curl_setopt($request, CURLOPT_HEADER, 0);
-			curl_setopt($request , CURLOPT_PROXY , '10.3.100.211:8080' );
+			//curl_setopt($request , CURLOPT_PROXY , '10.3.100.211:8080' );
 			curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($request, CURLOPT_POST, 1);
 			curl_setopt($request, CURLOPT_POSTFIELDS, $postString);

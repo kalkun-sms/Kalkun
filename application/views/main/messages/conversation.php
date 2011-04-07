@@ -7,6 +7,7 @@ $this->load->view('js_init/message/js_sms_search');
 if(count($messages)==0) 
 {
 	if($this->uri->segment(2)=='my_folder') echo "<p style=\"padding-left: 10px\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message_in_folder').".</i></p>";
+    else if($this->uri->segment(2)=='search') echo "<p style=\"padding-left: 10px\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message_search').".</i></p>";
 	else echo "<p style=\"padding-left: 10px\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message')." ".lang('kalkun_'.$this->uri->segment(3)).".</i></p>";
 }
 else 
