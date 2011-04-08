@@ -36,6 +36,7 @@ $(document).ready(function() {
 		$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type': "normal" }, function() {
 		  $(this).dialog({
 		    modal:true,
+            draggable : true,            
 			width: 550,
 			show: 'fade',
 			hide: 'fade',
