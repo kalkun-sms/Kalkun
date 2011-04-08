@@ -210,6 +210,7 @@ class Messages extends MY_Controller {
 		$data['date'] = $date;
 		$data['delivery_report'] = $this->Kalkun_model->get_setting()->row('delivery_report');
 		$data['coding'] = ($this->input->post('unicode')=='unicode') ? 'unicode' : 'default';	
+        $data['ndnc'] = ($this->input->post('ndnc')=='ndnc') ? true : false;
 		$data['uid'] = $this->session->userdata('id_user');	
 		
 		// if append @username is active
@@ -231,6 +232,7 @@ class Messages extends MY_Controller {
         $ndnc_msg = '';
 		if($this->config->item('ndnc'))
 		{
+            if($data['ndnc']) {
 				if(is_array($dest)) 
                 {
                     for ($i= 0 ; $i< count($dest);  $i++)
@@ -249,6 +251,7 @@ class Messages extends MY_Controller {
                             $ndnc_msg = "<font color='red'>A Number was found in NDNC Resitry. SMS sending was skipped for it.</font><br>" ; 
                         }
                 }
+            }
 		}	
         
        	
