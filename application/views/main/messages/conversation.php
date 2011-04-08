@@ -43,10 +43,11 @@ else
 	$char_per_line = 90-strlen(nice_date($message_date))-strlen($senderName);
 ?>
 		
-<div class="messagelist conversation messagelist_conversation">
+<div class="messagelist conversation messagelist_conversation" >
 <div class="message_container <?php echo $tmp['source'];?>">
 	<div class="message_header" style="color: #444; height: 20px; overflow: hidden">
     <input  type="hidden" name="item_source<?php echo $tmp['ID'];?>"  id="item_source<?php echo $tmp['ID'];?>"  value="<?php echo $tmp['source']; ?>" />
+    <input  type="hidden" class="item_number" name="item_number<?php echo $tmp['ID'];?>"  id="item_number<?php echo $tmp['ID'];?>"  value="<?php echo $number; ?>" />
 	<input type="checkbox" id="<?php echo $tmp['ID'];?>" class="select_message nicecheckbox" value="<?php echo $tmp['ID'];?>" style="border: none;" />
 	<span class="message_toggle" style="cursor: pointer">
 	<span <?php  if($tmp['source'] == 'inbox' && $tmp['readed']=='false') echo "style=\"font-weight: bold\"";?>><?php echo nice_date($message_date);?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow;?>.gif" />
@@ -101,7 +102,7 @@ elseif($tmp['source'] == 'inbox'):
 endif;				
 ?>	
 		
-	<div class="detail_area hidden <?php echo $number;?>">
+	<div class="detail_area hidden <?php echo $number;?>" >
 	<table cellspacing="0" cellpadding="0" border="0">
     <tr>
     <td width="50px"><?php  if($tmp['source']=='inbox') echo lang('tni_from'); else echo lang('tni_to'); ?></td>

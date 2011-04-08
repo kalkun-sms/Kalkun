@@ -107,7 +107,9 @@ var url = '<?php echo site_url('messages/compose')?>';
 if(button=='reply_button')
 {
 	var type = 'reply';
-	var param1 = '<?php echo $this->uri->segment(5);?>'; /* phone number */
+	// var param1 = '<?php echo $this->uri->segment(5);?>'; depreciated
+    var param1 = $(this).parents('div:eq(1)').children().children('input.item_number').val();  /* phone number */
+         
 }
 else if(button=='forward_button')
 {
