@@ -91,13 +91,17 @@ $("a.clear_all_button").click(function(){
 	return false;
 });        
     
+<?php if(!is_ajax()) : ?>
 // refresh
-$("a.refresh_button").click(function(){
+$("a.message_refresh_button").click(function(){
+    //alert('dsasa');
 	$('.loading_area').fadeIn("slow");
 	//$('.loading_area').html('Loading...');
-	$('#message_holder').load("<?php echo  site_url('messages/folder/inbox/ajax/'.$this->uri->segment(4,0).'') ?>");
+	$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'') ?>");
 	$('.loading_area').fadeOut("slow");
 });    
+
+<?php endif; ?> 
     
 // Reply SMS
 $('a.reply_button, a.forward_button').bind('click', function() {

@@ -47,7 +47,11 @@
 	<?php 
     endif;
     endif;
+    else:
     ?>
+    <li>&nbsp;</li>
+	<li><a href="#" class="message_refresh_button button"><?php echo lang('kalkun_refresh');?></a></li>	
+    
 	<?php endif;?>
 </ul>
 <?php if($place != 'bottom'): ?>

@@ -430,7 +430,13 @@ class Messages extends MY_Controller {
 			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			usort($data['messages'], "compare_date_".$sort_option);
 			
-			$this->load->view('main/layout', $data);	
+            if(is_ajax())
+            {
+		  			$this->load->view('main/messages/conversation', $data);
+	        }
+            else{
+			     $this->load->view('main/layout', $data);
+            }	
 		}
 		else if($source=='folder' && $type=='outbox')
 		{
@@ -444,7 +450,13 @@ class Messages extends MY_Controller {
 			endforeach;	
 			$data['messages'] = $outbox;
 			
-			$this->load->view('main/layout', $data);							
+			if(is_ajax())
+            {
+		  			$this->load->view('main/messages/conversation', $data);
+	        }
+            else{
+			     $this->load->view('main/layout', $data);
+            }							
 		}
 		else 
 		{
@@ -482,7 +494,13 @@ class Messages extends MY_Controller {
 			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			usort($data['messages'], "compare_date_".$sort_option);
 			
-			$this->load->view('main/layout', $data);				
+			if(is_ajax())
+            {
+		  			$this->load->view('main/messages/conversation', $data);
+	        }
+            else{
+			     $this->load->view('main/layout', $data);
+            }				
 		}
 	}
 	
