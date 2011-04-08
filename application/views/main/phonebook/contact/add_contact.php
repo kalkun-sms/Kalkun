@@ -7,7 +7,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquery.autocomplete.css" />
 <script type="text/javascript">
 $(document).ready(function() {
-    
     <?php
     $group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
     $grouptext = '';
