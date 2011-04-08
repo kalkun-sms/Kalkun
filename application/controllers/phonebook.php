@@ -76,44 +76,36 @@ class Phonebook extends MY_Controller {
 	 *
 	 * @access	public   		 
 	 */	
-	function group()
+	function group($group_id = NULL)
 	{    
-	    $group_id =  $this->uri->segment(3);
         if(!empty($group_id))
         {
             $data['title'] =  'Group Contacts';
     		$this->load->library('pagination');
-    		//$config['base_url'] = site_url().'/phonebook/index/';
-    		//$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'bygroup' , 'group_id' =>$group_id ))->num_rows();
-    		//$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-    		//$config['cur_tag_open'] = '<span id="current">';
-    		//$config['cur_tag_close'] = '</span>';
-    		  
     		$param = array( 'option' => 'bygroup' , 'group_id' =>$group_id );
-    		
     		$data['main'] = 'main/phonebook/contact/index';	
     	    $data['phonebook'] = $this->Phonebook_model->get_phonebook($param);
     		$data['pbkgroup'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->result();
-            
-    	 	$this->load->view('main/layout', $data);
-
+    	 	
+             $this->load->view('main/layout', $data);
         } 
-        else{
-		$data['title'] = 'Groups';
-		$this->load->library('pagination');
-		$config['base_url'] = site_url().'/phonebook/group/';
-		$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();
-		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-		$config['cur_tag_open'] = '<span id="current">';
-		$config['cur_tag_close'] = '</span>';	
-		$config['uri_segment'] = 3;
-		$this->pagination->initialize($config);
-		$param = array('option' => 'group_paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3,0));
-		
-		$data['main'] = 'main/phonebook/group/index';
-		$data['group'] = $this->Phonebook_model->get_phonebook($param);
-		
-		$this->load->view('main/layout', $data);
+        else
+        {
+    		$data['title'] = 'Groups';
+    		$this->load->library('pagination');
+    		$config['base_url'] = site_url().'/phonebook/group/';
+    		$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();
+    		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
+    		$config['cur_tag_open'] = '<span id="current">';
+    		$config['cur_tag_close'] = '</span>';	
+    		$config['uri_segment'] = 3;
+    		$this->pagination->initialize($config);
+    		$param = array('option' => 'group_paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3,0));
+    		
+    		$data['main'] = 'main/phonebook/group/index';
+    		$data['group'] = $this->Phonebook_model->get_phonebook($param);
+    		
+    		$this->load->view('main/layout', $data);
         }
 	}
 

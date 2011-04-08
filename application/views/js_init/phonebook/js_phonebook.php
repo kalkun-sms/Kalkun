@@ -32,11 +32,14 @@ $(document).ready(function() {
 			hide: 'fade',
 			buttons: {
 			'<?php echo lang('kalkun_save')?>': function() {
+			 if($('#addContact').valid()){
 				$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize(), function(data) {
 				$("#contact_container").html(data);
 				$("#contact_container").dialog({ buttons: { "Okay": function() { $(this).dialog("close"); } } });
 				setTimeout(function() {$("#contact_container").dialog('close')} , 1500);
 			});
+            } else { return false;}
+            
 			}, <?php echo lang('kalkun_cancel')?>: function() { $(this).dialog('close');} }
 			});
 		});
