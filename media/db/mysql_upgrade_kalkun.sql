@@ -1,6 +1,6 @@
 -- Kalkun upgrade from 0.2.9 to 0.2.10
  
-ALTER TABLE `user` ADD `email_id` varchar(15) NOT NULL;
+ALTER TABLE `user` ADD `email_id` varchar(64) NOT NULL;
 
 ALTER TABLE `user_settings` ADD `email_forward` ENUM( 'true', 'false' ) NOT NULL DEFAULT 'false';
 
