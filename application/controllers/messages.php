@@ -521,6 +521,7 @@ class Messages extends MY_Controller {
             $param['search_string'] =$this->input->post('search_sms');
 			$search = $this->Message_model->search_messages($param);	
   			$data['messages'] = $search;
+  			$data['search_string'] = $param['search_string'];
 			$this->load->view('main/layout', $data);	
 	}
 	
