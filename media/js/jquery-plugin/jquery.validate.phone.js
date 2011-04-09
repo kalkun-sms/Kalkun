@@ -21,12 +21,12 @@ var minDigitsInIPhoneNumber = 10;
 jQuery.validator.addMethod("phone", function(phone_number, element) {      
         var bracket=3
         strPhone= trim(phone_number)
-        if(strPhone.indexOf("+")>1) return false
-        if(strPhone.indexOf("-")!=-1)bracket=bracket+1
-        if(strPhone.indexOf("(")!=-1 && strPhone.indexOf("(")>bracket)return false
+        if(strPhone.indexOf("+")>1) return false;
+        if(strPhone.indexOf("-")!=-1)bracket=bracket+1;
+        if(strPhone.indexOf("(")!=-1 && strPhone.indexOf("(")>bracket)return false;
         var brchr=strPhone.indexOf("(")
-        if(strPhone.indexOf("(")!=-1 && strPhone.charAt(brchr+2)!=")")return false
-        if(strPhone.indexOf("(")==-1 && strPhone.indexOf(")")!=-1)return false
+        if(strPhone.indexOf("(")!=-1 && strPhone.charAt(brchr+2)!=")")return false;
+        if(strPhone.indexOf("(")==-1 && strPhone.indexOf(")")!=-1)return false;
         s=stripCharsInBag(strPhone,validWorldPhoneChars);
         return (isInteger(s) && s.length >= minDigitsInIPhoneNumber);    
 }, "Please specify a valid phone number");
@@ -50,7 +50,6 @@ function stripCharsInBag(s, bag)
 {   var i;
     var returnString = "";
     for (i = 0; i < s.length; i++)
-    {   var c = s.charAt(i);       if (bag.indexOf(c) == -1) returnString += c;
-    }
+    {   var c = s.charAt(i);       if (bag.indexOf(c) == -1) returnString += c;    }
     return returnString;
 } 
