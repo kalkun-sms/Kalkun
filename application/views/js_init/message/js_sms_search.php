@@ -1,5 +1,5 @@
 <script type="text/javascript">
-
+//currently not used
 $(document).ready(function() {
 
 // Search onBlur onFocus

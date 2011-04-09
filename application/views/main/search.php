@@ -1,3 +1,4 @@
+<?php if($this->uri->segment(1) == 'messages'): ?>
 <?php echo form_open("messages/search/results/all", array('class' => 'search_form')); ?>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr valign="top">
@@ -6,3 +7,4 @@
 </tr>
 </table>
 <?php echo form_close(); ?>
+<?php endif; ?>
