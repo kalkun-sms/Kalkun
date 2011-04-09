@@ -160,15 +160,17 @@ class Install extends Controller {
        
         for ($i = 0 ; $i< count($result); $i++)
         {
-            $data = array(
-           'id_pbk' => $result[$i]->ID ,
-           'id_pbk_groups' => $result[$i]->GroupID,
-           'id_user' => $result[$i]->id_user    );
-
-            $this->db->insert('user_group', $data); 
-            
-            $this->db->where('ID', $result[$i]->ID);
-            $this->db->update('pbk', array( 'GroupID' => '-1' ));
+            if($result[$i]->GroupID != '-1') :
+                $data = array(
+               'id_pbk' => $result[$i]->ID ,
+               'id_pbk_groups' => $result[$i]->GroupID,
+               'id_user' => $result[$i]->id_user    );
+    
+                $this->db->insert('user_group', $data); 
+                
+                $this->db->where('ID', $result[$i]->ID);
+                $this->db->update('pbk', array( 'GroupID' => '-1' ));
+            endif;
             
             $this->db->update('user', array( 'email_id' => 'you@domain.com' ));
             $this->db->update('user_settings', array( 'email_forward' => 'false' ));
