@@ -1,6 +1,6 @@
 <h2>Database setup</h2>
-<p>Welcome to database setup, this step will help you dumping data to your database. </p>
-<?php echo form_open('install/run_install', array('class' => 'formtable'));?>
+<p>Welcome to database setup, this step will help you setup your database for using Kalkun. </p>
+<?php echo form_open('install/run_install/'.$type, array('class' => 'formtable'));?>
 <h4 align="center" style="padding-bottom: 5px; border-bottom: 1px solid #999">Database backend engine and gammu database version.</h4>
 <table width="90%">
 <tr valign="top">
@@ -18,9 +18,13 @@
 		<br /><small>It's readed from your gammu database schema.
 	</td>
 </tr>
+<?php if($type == 'upgrade' ) : ?>
+<tr valign="top">
+	<td  colspan="2"><br />Seems that Kalkun is already Installed. A Upgrade will be performed.</td>
+</tr>
+<?php endif; ?>
 </table>
-<p>&nbsp;</p>
-<p align="center"><input type="submit" class="button" value="Run Database Setup" /></p>
+<p align="center"><input type="submit" class="button" value="<?php if($type == 'upgrade' ) : echo "Upgrade Database"; else: echo "Run Database Setup"; endif; ?>" /></p>
 <?php echo form_close();?>
 
 <p>&nbsp;</p>

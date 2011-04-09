@@ -28,7 +28,7 @@ class Install extends Controller {
 	function Install()
 	{
 		parent::Controller();
-		if(!file_exists('./install')) die("Installation disabled.");
+		//if(!file_exists('./install')) die("Installation disabled.");
 		
 		// check if gammu schema already exist
 		if(!$this->db->table_exists('gammu')) die("Cannot find gammu database schema.");
@@ -78,6 +78,8 @@ class Install extends Controller {
 	{	
 		$data['main'] = 'main/install/database_setup';
 		$data['database_driver'] = $this->db->platform();
+        $data['type'] = 'install';
+       	if($this->db->table_exists('user'))  $data['type'] = 'upgrade';
 		$this->load->view('main/install/layout', $data);			
 	}
 
@@ -92,15 +94,13 @@ class Install extends Controller {
 	 */			
 	function run_install($type=NULL)
 	{
-		// This method taken from Roundcube installation
-		//if($type=='install') $sqlfile = $this->config->item('sql_path')."install.sql";
-		//else $sqlfile = $this->config->item('sql_path')."upgrade.sql";
-		
-		$sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_kalkun.sql";
-		$data['error'] = $this->_execute_sql($sqlfile);
-		
-		// cleanup
-		//if($type=='upgrade') $this->_upgrade();
+	    
+		 if($type=='upgrade') $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_upgrade_kalkun.sql";
+		 else $sqlfile = $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_kalkun.sql";
+  
+  		$data['error'] = $this->_execute_sql($sqlfile);
+        
+        if($type=='upgrade') $this->_upgrade();
 		
 		$data['main'] = 'main/install/install_result';
 		$this->load->view('main/install/layout', $data);
@@ -149,56 +149,36 @@ class Install extends Controller {
 	 *
 	 * @access	private   		 
 	 */		
-	 // Currently not used
-	 /*
+ 
 	function _upgrade() 
 	{
-		// get all inbox ID
-		$sql = "select ID from inbox";
-		$inbox = $this->Kalkun_model->db->query($sql);
-		foreach($inbox->result() as $tmp):
-			$data = array('id_inbox' => $tmp->ID, 
-						'id_user' => '1');
-			$this->Kalkun_model->db->insert('user_inbox', $data);
-		endforeach;
-		
-		// update processed
-		$this->Kalkun_model->db->query("update inbox set Processed='true'");
-		
-		// get all outbox ID
-		$sql = "select ID from outbox";
-		$inbox = $this->Kalkun_model->db->query($sql);
-		foreach($inbox->result() as $tmp):
-			$data = array('id_inbox' => $tmp->ID, 
-						'id_user' => '1');
-			$this->Kalkun_model->db->insert('user_outbox',$data);
-		endforeach;	
-	
-		// get all sentitems ID
-		$sql = "select ID from sentitems";
-		$inbox = $this->Kalkun_model->db->query($sql);
-		foreach($inbox->result() as $tmp):
-			$data = array('id_sentitems' => $tmp->ID, 
-						'id_user' => '1');
-			$this->Kalkun_model->db->insert('user_sentitems',$data);
-		endforeach;		
-		
-		// get current password
-		$sql = "select value from settings where id='2'";
-		$pass = $this->Kalkun_model->db->query($sql)->row('value');
-		
-		$data = array('id_user' => '1',
-					'username' => 'kalkun',
-					'realname' => 'Kalkun SMS',
-					'password' => $pass,
-					'phone_number' => '123456',
-					'level' => 'admin'	
-					);
-		$this->Kalkun_model->db->insert('user',$data);
-		
-		// drop settings table
-		$this->Kalkun_model->db->query('DROP TABLE `settings`;');
-	}*/
+	   
+       //moving groups to new schema
+       $this->db->select('*');
+	   $this->db->from('pbk');
+       $result = $this->db->get()->result();
+       
+        for ($i = 0 ; $i< count($result); $i++)
+        {
+            $data = array(
+           'id_pbk' => $result[$i]->ID ,
+           'id_pbk_groups' => $result[$i]->GroupID,
+           'id_user' => $result[$i]->id_user    );
+
+            $this->db->insert('user_group', $data); 
+            
+            $this->db->where('ID', $result[$i]->ID);
+            $this->db->update('pbk', array( 'GroupID' => '-1' ));
+            
+            $this->db->update('user', array( 'email_id' => 'you@domain.com' ));
+            $this->db->update('user_settings', array( 'email_forward' => 'false' ));
+            
+        }
+       
+       
+       
+ 
+	} 
 }
 
 /* End of file install.php */
