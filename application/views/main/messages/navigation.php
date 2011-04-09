@@ -54,11 +54,4 @@
     
 	<?php endif;?>
 </ul>
-<?php if($place != 'bottom'): ?>
-<div  id="window_title_right">
-<?php echo form_open("messages/search/results/all", array('class' => 'search_form')); ?>
-<input type="text" name="search_sms" size="20" class="search_sms" value="" />
-<?php echo form_close(); ?>	
-</div>
-<?php endif; ?>
 </div>	

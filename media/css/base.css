@@ -829,6 +829,13 @@ label.error {
 	float: right;
 	
 }
+ 
+#message_search_box input.search_sms{
+    background-image: url("../images/bg_search_input.gif");
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left:17px;
+}
 
 
 #window_sub_header {
