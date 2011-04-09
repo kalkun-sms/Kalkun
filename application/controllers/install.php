@@ -174,10 +174,7 @@ class Install extends Controller {
             $this->db->update('user_settings', array( 'email_forward' => 'false' ));
             
         }
-       
-       
-       
- 
+
 	} 
 }
 
