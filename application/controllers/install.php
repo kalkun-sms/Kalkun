@@ -28,7 +28,7 @@ class Install extends Controller {
 	function Install()
 	{
 		parent::Controller();
-		//if(!file_exists('./install')) die("Installation disabled.");
+		if(!file_exists('./install')) die("Installation disabled.");
 		
 		// check if gammu schema already exist
 		if(!$this->db->table_exists('gammu')) die("Cannot find gammu database schema.");
