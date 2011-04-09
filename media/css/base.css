@@ -599,15 +599,15 @@ select {
     margin-right: 3px;
 }
 
-.search_form {
-	color: #FFF;
-	float: left;
+.search_form input[type="submit"] {
+	background: url("../images/bg-button.gif") repeat; 
+	-moz-border-radius: 0; 
+	border: 1px solid #999; 
+	border-left: none;
 }
 
-.search_form input {
-	margin: 2px;
-	font-size: 10.5px;
-	padding: 2px;
+.search_form input[type="text"] {
+	width: 200px;
 }
 
 
