@@ -607,10 +607,19 @@ textarea {
 }
 
 .sms_search_form input[type="submit"] {
-	background: url("../images/bg-button.gif") repeat; 
-	-moz-border-radius: 0; 
+	background: url("../images/bg-button.gif") repeat;
+    -moz-border-radius: 0px; 
+	-webkit-border-radius : 0px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px; 
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    height:23px;
 	border: 1px solid #999; 
-	border-left: none;
+    padding-top:2px;
+    padding-bottom:0px;
+	border-left:1px solid #AAA; 
+    margin-left:-5px;
 }
 
 .sms_search_form input[type="text"] {
