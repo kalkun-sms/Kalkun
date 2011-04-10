@@ -37,7 +37,7 @@ $(document).ready(function() {
 <input type="text" name="number" id="number" value="<?php if(isset($contact)) echo $contact->row('Number'); else if(isset($number)) echo $number;?>" class="text ui-widget-content ui-corner-all required phone" />
 <label for="group"><?php echo lang('kalkun_group'); ?></label> 
 <?php if(isset($contact)): ?> 
-<input name="groups" id="groups" value="<?php echo $this->Phonebook_model->get_groups($contact->row('id_pbk'),$this->session->userdata('id_user'))->GroupNames?>"  />
+<input name="groups" id="groups" value="<?php echo $this->Phonebook_model->get_groups($contact->row('id_pbk'),$this->session->userdata('id_user'))->GroupNames?>" type="hidden" />
 <?php else : ?>
 <input name="groups" id="groups" value=""  type="hidden" />
 <?php endif;?>
