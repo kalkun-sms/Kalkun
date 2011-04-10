@@ -607,22 +607,24 @@ textarea {
 }
 
 .sms_search_form input[type="submit"] {
-	background: url("../images/bg-button.gif") repeat;
+	background: url("../images/bg-button.gif") repeat-x;
     -moz-border-radius: 0px; 
 	-webkit-border-radius : 0px;
-    -moz-border-radius-topright: 5px;
-    -moz-border-radius-bottomright: 5px; 
-    -webkit-border-top-right-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    height:23px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 3px; 
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    margin: 0;
+    padding: 3px 10px;
 	border: 1px solid #999; 
-    padding-top:2px;
-	border-left:1px solid #AAA; 
-    margin-left:-5px;
+	border-left: 1px solid #AAA;
+	line-height: 16px;
 }
 
 .sms_search_form input[type="text"] {
-	width: 200px;
+	width: 250px;
+	margin:0;
+	border-right: none;
 }
 
 .search_form {
