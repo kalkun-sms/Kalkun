@@ -3,7 +3,12 @@ var refreshId = setInterval(function() {
 	$('.modem_status').load('<?php echo site_url('kalkun/notification')?>');
 	//$('.unread_inbox').load('<?php echo site_url('kalkun/unread_inbox')?>');\
 	//var current_title = $(document).attr('title');
-	$.post("<?php echo site_url('kalkun/unread_inbox')?>", function(data) {
+	new_notification();
+}, 60000);
+
+function new_notification()
+{
+    $.post("<?php echo site_url('kalkun/unread_inbox')?>", function(data) {
 		$('span.unread_inbox_notif').text(data);
 				
 		var current_title = $(document).attr('title');
@@ -14,7 +19,7 @@ var refreshId = setInterval(function() {
 		var newtitle = data + ' ' + title;
 		$(document).attr('title', newtitle);
 	});
-}, 60000);
+}
 
 function show_notification(text)
 {

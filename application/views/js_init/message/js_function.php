@@ -134,7 +134,8 @@ $(document).ready(function() {
     $("a.refresh_button").click(function()
     {  	
     	$('.loading_area').fadeIn("slow");
-    	$('#message_holder').load(refresh_url);  		
+    	$('#message_holder').load(refresh_url);  
+        new_notification();		
     	$('.loading_area').fadeOut("slow");
     	return false;
     });
