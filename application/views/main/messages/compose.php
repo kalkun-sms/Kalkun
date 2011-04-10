@@ -161,7 +161,7 @@ endforeach;
 <tr valign="top">
 <td align="right" class="label"><?php echo lang('kalkun_message').":";?></td>
 <td>
-<textarea class="word_count" style="width: 400px; line-height: 16px;" id="message" name="message">
+<textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;"   id="message" name="message">
 <?php 
 if($val_type=='forward') echo $message;
 list($sig_option, $sig)=explode(';',$this->Kalkun_model->get_setting()->row('signature'));
