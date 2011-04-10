@@ -19,6 +19,13 @@
 		<span class="notification_area"><?php echo $this->session->flashdata('notif');?></span>
 		<?php endif; ?>
 		</div>
+        <?php
+        $this->load->library('browser');
+        $browser = new Browser();
+        if( $browser->getBrowser() == Browser::BROWSER_CHROME ) {
+        	echo '<style type="text/css">.sms_search_form input[type="submit"] {padding-bottom:0px; } </style>';;
+        }
+        ?>
 		<div id="top_link"><?php echo $this->load->view('main/search');?></div>
 	</div>
 	
