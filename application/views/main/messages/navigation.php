@@ -36,22 +36,13 @@
 	<li><a class="global_delete button" href="#">
 	<?php echo lang('kalkun_delete'); 
 	if($this->uri->segment(4)=='5' or $this->uri->segment(6)=='5') echo " ".lang('kalkun_permanently');?></a></li>	
-	<?php if($this->uri->segment(2)!='conversation'):?>
+	
 	<li>&nbsp;</li>
 	<li><a href="#" class="refresh_button button"><?php echo lang('kalkun_refresh');?></a></li>	
     		
-	<?php 
-    if($this->uri->segment(2) != 'search'):
-    if($this->pagination->create_links()!=''): ?>
+	<?php if($this->uri->segment(2) != 'search' && $this->pagination->create_links()!=''): ?>
 	<li class="paging"><div id="paging"><?php  echo $this->pagination->create_links();?></div></li>
-	<?php 
-    endif;
-    endif;
-    else:
-    ?>
-    <li>&nbsp;</li>
-	<li><a href="#" class="message_refresh_button button"><?php echo lang('kalkun_refresh');?></a></li>	
+	<?php endif; ?>
     
-	<?php endif;?>
 </ul>
 </div>	

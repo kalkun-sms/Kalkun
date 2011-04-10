@@ -399,11 +399,25 @@ class Messages extends MY_Controller {
 	 */		
 	function conversation($source=NULL, $type=NULL, $number=NULL, $id_folder=NULL)
 	{
+		// Pagination
+		$this->load->library('pagination');
+		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');		
+		$config['cur_tag_open'] = '<span id="current">';
+		$config['cur_tag_close'] = '</span>';
+		
 		if($source=='folder' && $type!='outbox') 
 		{
 			$data['main'] = 'main/messages/index';
 			$param['type'] = 'inbox';
 			$param['number'] = trim($number);
+
+			$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.$number);
+			$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
+			$config['uri_segment'] = 6;			
+			$this->pagination->initialize($config); 
+			
+			$param['limit'] = $config['per_page'];
+			$param['offset'] = $this->uri->segment(6,0);
 			$inbox = $this->Message_model->get_messages($param)->result_array();	
 
 			// add global date for sorting
@@ -446,6 +460,14 @@ class Messages extends MY_Controller {
 			$data['main'] = 'main/messages/index';
 			$param['type'] = 'outbox';
 			$param['number'] = trim($number);
+
+			$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.$number);
+			$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
+			$config['uri_segment'] = 6;			
+			$this->pagination->initialize($config); 
+			
+			$param['limit'] = $config['per_page'];
+			$param['offset'] = $this->uri->segment(6,0);			
 			$outbox = $this->Message_model->get_messages($param)->result_array();	
 			
 			foreach($outbox as $key=>$tmp):
@@ -461,12 +483,20 @@ class Messages extends MY_Controller {
 			     $this->load->view('main/layout', $data);
             }							
 		}
-		else 
+		else // my folder
 		{
 			$data['main'] = 'main/messages/index';
 			$param['type'] = 'inbox';
 			$param['id_folder'] = $id_folder;
 			$param['number'] = trim($number);
+
+			$config['base_url'] = site_url('/messages/conversation/my_folder/'.$type.'/'.$number.'/'.$id_folder);
+			$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
+			$config['uri_segment'] = 7;			
+			$this->pagination->initialize($config); 
+			
+			$param['limit'] = $config['per_page'];
+			$param['offset'] = $this->uri->segment(7,0);			
 			$inbox = $this->Message_model->get_messages($param)->result_array();	
 			
 			// add global date for sorting

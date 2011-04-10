@@ -362,6 +362,11 @@ class Message_model extends Model {
 			// if trash is set
 			if(isset($options['trash']) && is_bool($options['trash'])) $this->db->where($user_folder.'.trash', $options['trash']);	
 		}
+
+		if(isset($options['limit']) && isset($options['offset'])) 
+		{
+			$this->db->limit($options['limit'], $options['offset']);
+		}		
 		
 		$result = $this->db->get();
 		return $result;

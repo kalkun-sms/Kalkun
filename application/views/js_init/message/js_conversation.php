@@ -93,7 +93,7 @@ $("a.clear_all_button").click(function(){
     
 <?php if(!is_ajax()) : ?>
 // refresh
-$("a.message_refresh_button").click(function(){
+$("a.refresh_button").click(function(){
 	$('.loading_area').fadeIn("slow");
 	//$('.loading_area').html('Loading...');
 	$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6,0)) ?>");
