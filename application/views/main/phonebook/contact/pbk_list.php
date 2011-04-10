@@ -10,7 +10,7 @@ else: ?>
 <div class="two_column_container contact_list">
 	<div class="left_column">
 	<div id="pbkname">
-	<input type="checkbox" class="select_contact" />&nbsp;<span style="font-weight: bold;"><?php echo $tmp->Name;?></span></div>	
+	<input type="checkbox" class="select_contact" />&nbsp;<span style="font-weight: bold;"><?php echo   anchor('messages/conversation/folder/all/'.$tmp->Number,$tmp->Name , 'title="'.$tmp->Name .'"') ;?></span></div>	
 	<div class="hidden" id="pbknumber"><?php echo $tmp->Number;?></div>
 </div>
 <div class="right_column">

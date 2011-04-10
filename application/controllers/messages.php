@@ -447,13 +447,13 @@ class Messages extends MY_Controller {
 			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			usort($data['messages'], "compare_date_".$sort_option);
 			
-            if(is_ajax())
-            {
+      if(is_ajax())
+      {
 		  			$this->load->view('main/messages/conversation', $data);
-	        }
-            else{
+	    }
+      else{
 			     $this->load->view('main/layout', $data);
-            }	
+      }	
 		}
 		else if($source=='folder' && $type=='outbox')
 		{
@@ -476,14 +476,14 @@ class Messages extends MY_Controller {
 			$data['messages'] = $outbox;
 			
 			if(is_ajax())
-            {
+      {
 		  			$this->load->view('main/messages/conversation', $data);
-	        }
-            else{
+	    }
+      else{
 			     $this->load->view('main/layout', $data);
-            }							
+       }							
 		}
-		else // my folder
+		else if($source=='my_folder' ) // my folder
 		{
 			$data['main'] = 'main/messages/index';
 			$param['type'] = 'inbox';
@@ -528,13 +528,27 @@ class Messages extends MY_Controller {
 			usort($data['messages'], "compare_date_".$sort_option);
 			
 			if(is_ajax())
-            {
+      {
 		  			$this->load->view('main/messages/conversation', $data);
-	        }
-            else{
-			     $this->load->view('main/layout', $data);
-            }				
+      }
+      else{
+			   $this->load->view('main/layout', $data);
+      }				
 		}
+    else //all 
+    {
+      $data['main'] = 'main/messages/index';
+      $param['number'] = $number;
+			$search = $this->Message_model->search_messages($param);	
+  		$data['messages'] = $search;
+			if(is_ajax())
+      {
+		  	$this->load->view('main/messages/conversation', $data);
+      }
+      else{
+			  $this->load->view('main/layout', $data);
+      }		
+   }
 	}
 	
     

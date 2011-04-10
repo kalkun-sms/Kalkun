@@ -183,7 +183,7 @@ class Message_model extends Model {
 	// --------------------------------------------------------------------
 	function search_messages($options = array())
 	{
-        if(!isset($options['search_string']))  die("No String to Search For");
+        if(!isset($options['number'])) if(!isset($options['search_string']))  die("No String to Search For");
 		 
 		$this->db->from('inbox');
         $tmp_number = 'SenderNumber'; 
@@ -191,7 +191,7 @@ class Message_model extends Model {
 		$udh_where = "(".$this->_protect_identifiers("UDH")." = '' OR ".$this->_protect_identifiers("UDH")." LIKE '%1')";
 		$this->db->where($udh_where, NULL, FALSE);				
 		
-        $this->db->like('TextDecoded', $options['search_string']);
+        if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
 		
 		// if phone number is set
 		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
@@ -223,7 +223,7 @@ class Message_model extends Model {
 		$tmp_order = 'SendingDateTime';	
 	    $this->db->where('SequencePosition', '1');		
 			
-	    $this->db->like('TextDecoded', $options['search_string']);
+	    if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
 		
 		// if phone number is set
 		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
