@@ -173,7 +173,7 @@ return false;
 
 // Add contact
 $('.add_to_pbk').bind('click', function() {
-var param1 = $(this).parents('div:eq(1)').children('.detail_area').attr('class').split(' ').slice(-1); /* phone number */
+var param1 = $(this).parents('div:eq(1)').children().children('input.item_number').val();  /* phone number */
 $("#contact_container").load('<?php echo site_url('phonebook/add_contact')?>', { 'type': 'message', 'param1': param1}, function() {
 $(this).dialog({
 	title: 'Add contact',
