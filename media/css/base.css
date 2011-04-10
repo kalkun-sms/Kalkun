@@ -794,6 +794,11 @@ label.error {
 	padding: 0;
 }
 
+#message_holder p {
+	padding: 10px;
+	margin: 0;
+}
+
 .move_to {
 	padding: 5px;
 	background: #cce9f2;
