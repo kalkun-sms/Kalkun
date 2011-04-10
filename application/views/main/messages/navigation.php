@@ -14,8 +14,8 @@
 			} else if($theFolder == "sentitems") {
 			$theFname = lang('kalkun_sentitems');
 			} else {
-				$theFname = $this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name');
-				// $theFname = $this->uri->segment(4);
+					//$theFname = $this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name');
+			 $theFname = $this->uri->segment(4);
 			}
 	?>
 		<li><?php echo anchor('messages/folder/'.$this->uri->segment(4),'&lsaquo;&lsaquo; '.lang('tni_back_to').' '.$theFname, array('class' => 'button'));?></li>

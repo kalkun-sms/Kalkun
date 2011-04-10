@@ -294,6 +294,8 @@ class Messages extends MY_Controller {
 	 */		
 	function folder($type=NULL, $offset=0)
 	{		
+	  
+    if($type == 'phonebook')  redirect('phonebook/');
 		// validate url
 		$valid_type = array('inbox', 'sentitems', 'outbox');		
 		if(!in_array($type, $valid_type)) die('Invalid URL');
