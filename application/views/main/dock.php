@@ -1,5 +1,4 @@
 <div id="top_navigation_container">
-
 	<div id="top_navigation_left">
 		<span class="modem_status">
 		<?php $this->load->view('main/notification');?>		

@@ -52,7 +52,7 @@ select {
 	width: 775px;
 	overflow: hidden;
 	padding-bottom: 15px;
-	margin-top: 0px;
+	margin-top: 30px;
 }
 
 #header_left {
@@ -82,6 +82,8 @@ select {
 	opacity: 0.5;
 	color: #FFF;
 	height: 15px;
+	position: fixed;
+	top: 0;	
 }
 
 #top_navigation a {
