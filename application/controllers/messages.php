@@ -529,7 +529,7 @@ class Messages extends MY_Controller {
 			
 			if(is_ajax())
       {
-		  			$this->load->view('main/messages/conversation', $data);
+		  	 $this->load->view('main/messages/conversation', $data);
       }
       else{
 			   $this->load->view('main/layout', $data);
