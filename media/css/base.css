@@ -46,6 +46,11 @@ select {
 	padding: 3px 4px;	
 }
 
+textarea {
+	font-family: "lucida grande",Tahoma,Verdana,"BitStream vera Sans";
+	font-size: 12px;
+}
+
 /* Header */
 
 #header {

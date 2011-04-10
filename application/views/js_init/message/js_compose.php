@@ -6,6 +6,8 @@ $(document).ready(function(){
 		minDate: 0, maxDate: '+1Y',
 		dateFormat: 'yy-mm-dd', showOn: 'button', buttonImage: img_path + 'calendar.gif', buttonImageOnly: true
 	});
+	
+	$("#message").autogrow();
 
 	//$(".word_count").text("");
 	//$("input#sms_loop").attr("disabled", true);
