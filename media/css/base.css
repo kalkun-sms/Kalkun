@@ -982,3 +982,13 @@ label.error {
     color:#000;
     text-decoration: underline;	
 }
+
+#pbkname a{
+    color:#000;
+    text-decoration:none ;	
+}
+
+#pbkname a:hover{
+    color:#000;
+    text-decoration: underline;	
+}
