@@ -1,5 +1,6 @@
 Kalkun - Open Source Web-based SMS Management
-Version : 0.2.9
+Homepage : http://kalkun.sourceforge.net
+Version  : 0.2.10
 
 (For complete instruction, see http://sourceforge.net/apps/trac/kalkun/wiki/Installation)
 
@@ -53,8 +54,3 @@ INSTALL :
 	- open up your browser and go to http://your-location/kalkun
 	- Default account : username = kalkun, password = kalkun (you can change it after you login)
 	- enjoy...:)
-	
-	
-CONTACT : 
-Feel free to contact me if you having problem...
-blackarazi@gmail.com
