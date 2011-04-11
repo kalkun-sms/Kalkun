@@ -79,13 +79,9 @@ class Install extends Controller {
 		$data['main'] = 'main/install/database_setup';
 		$data['database_driver'] = $this->db->platform();
         $data['type'] = 'install';
-        if($this->config->item('kalkun_upgradeable'))
+        if($this->config->item('kalkun_upgradeable') && $this->db->table_exists('user'))
         {
         	$data['type'] = 'upgrade';
-       		if($this->db->table_exists('user'))
-       		{
-       			$data['upgrade_requirement'] = TRUE;	
-       		}
         }
 		$this->load->view('main/install/layout', $data);			
 	}

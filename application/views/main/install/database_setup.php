@@ -18,13 +18,13 @@
 		<br /><small>It's readed from your gammu database schema.
 	</td>
 </tr>
-<?php if($type == 'upgrade' && $upgrade_requirement) : ?>
+<?php if($type == 'upgrade') : ?>
 <tr valign="top">
 	<td  colspan="2"><br />Seems that Kalkun <b><?php echo $this->config->item('kalkun_previous_version');?></b> is already Installed. An Upgrade to <b><?php echo $this->config->item('kalkun_version');?></b> will be performed.</td>
 </tr>
 <?php endif; ?>
 </table>
-<p align="center"><input type="submit" class="button" value="<?php if($type == 'upgrade' && $upgrade_requirement) : echo "Run Upgrade"; else: echo "Run Database Setup"; endif; ?>" /></p>
+<p align="center"><input type="submit" class="button" value="<?php if($type == 'upgrade') : echo "Run Upgrade"; else: echo "Run Database Setup"; endif; ?>" /></p>
 <?php echo form_close();?>
 
 <p>&nbsp;</p>
