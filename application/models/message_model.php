@@ -261,7 +261,7 @@ class Message_model extends Model {
     
     $return_data= array();
     $return_data['total_rows'] = count($data['messages']);
-   
+    $return_data['messages'] = array();
    
     //paginate
     if(isset($options['offset'] ) && isset($options['limit'])) 
