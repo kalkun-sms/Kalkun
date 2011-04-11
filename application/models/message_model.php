@@ -261,11 +261,12 @@ class Message_model extends Model {
     
     $return_data= array();
     $return_data['total_rows'] = count($data['messages']);
-    
+   
+   
     //paginate
     if(isset($options['offset'] ) && isset($options['limit'])) 
     {
-      for($i = $options['offset'] ; $i  <= ($options['offset']+ $options['limit']) ;  $i++)
+      for($i = $options['offset'] ; $i  <  min( ($options['offset']+ $options['limit']), $return_data['total_rows']) ;  $i++)
       {
          $return_data['messages'][] = $data['messages'][$i];
       }
@@ -274,7 +275,6 @@ class Message_model extends Model {
     {
        $return_data['messages'] = $data['messages'];
     }
-
 		return  (object) $return_data;
 	}
     
