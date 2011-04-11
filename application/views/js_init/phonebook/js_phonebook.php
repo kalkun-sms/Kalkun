@@ -159,7 +159,7 @@ $(document).ready(function() {
 	
 		
 	// Search onBlur onFocus
-	$('input.search_name').val('<?php echo lang('tni_search_contacts'); ?>');
+	/*$('input.search_name').val('<?php echo lang('tni_search_contacts'); ?>');
 	
 	$('input.search_name').blur(function(){
 		$(this).val('<?php echo lang('tni_search_contacts'); ?>');
@@ -167,7 +167,7 @@ $(document).ready(function() {
 	
 	$('input.search_name').focus(function(){
 		$(this).val('');
-	});
+	});*/
 	  
 });    
 </script>

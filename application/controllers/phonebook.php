@@ -60,7 +60,12 @@ class Phonebook extends MY_Controller {
 		else:
 		$data['main'] = 'main/phonebook/contact/index';	
 		$data['pbkgroup'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->result();
-		if($_POST) $data['phonebook'] = $this->Phonebook_model->get_phonebook(array('option' => 'search'));
+		if($_POST)
+    {
+      $data['phonebook'] = $this->Phonebook_model->get_phonebook(array('option' => 'search'));
+      $data['search_string'] = $this->input->post('search_name');
+    }
+    
 		else $data['phonebook'] = $this->Phonebook_model->get_phonebook($param);
 		
 		$this->load->view('main/layout', $data);

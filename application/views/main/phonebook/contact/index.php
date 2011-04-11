@@ -42,10 +42,6 @@
 <div id="window_title">
 	<div id="window_title_left"><?php echo $title; ?></div>
 	<div id="window_title_right">
-	<?php echo form_open('phonebook', array('class' => 'search_form')); ?>
-	<input type="text" name="search_name" size="20" class="search_name" value="" />
-	<?php echo form_close(); ?>	
-	&nbsp;
 	<a href="#" id="addpbkcontact_wizard" class="nicebutton">&#43; <?php echo lang('tni_contact_add'); ?></a>	
 	<a href="<?php echo site_url('phonebook/group');?>" id="addpbkgroup" class="nicebutton">&#43; <?php echo lang('tni_groups_manage'); ?></a>
 	</div>
