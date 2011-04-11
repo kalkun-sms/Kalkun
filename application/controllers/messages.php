@@ -420,6 +420,7 @@ class Messages extends MY_Controller {
 			
 			$param['limit'] = $config['per_page'];
 			$param['offset'] = $this->uri->segment(6,0);
+      $param['order_by'] = 'ReceivingDateTime';
 			$inbox = $this->Message_model->get_messages($param)->result_array();	
 
 			// add global date for sorting
@@ -430,6 +431,7 @@ class Messages extends MY_Controller {
 			
 			$param['type'] = 'sentitems';
 			$param['number'] = trim($number);
+      $param['order_by'] = 'SendingDateTime';
 			$sentitems = $this->Message_model->get_messages($param)->result_array();	
 
 			// add global date for sorting
@@ -469,7 +471,8 @@ class Messages extends MY_Controller {
 			$this->pagination->initialize($config); 
 			
 			$param['limit'] = $config['per_page'];
-			$param['offset'] = $this->uri->segment(6,0);			
+			$param['offset'] = $this->uri->segment(6,0);
+      $param['order_by'] = 'SendingDateTime';			
 			$outbox = $this->Message_model->get_messages($param)->result_array();	
 			
 			foreach($outbox as $key=>$tmp):
@@ -498,7 +501,8 @@ class Messages extends MY_Controller {
 			$this->pagination->initialize($config); 
 			
 			$param['limit'] = $config['per_page'];
-			$param['offset'] = $this->uri->segment(7,0);			
+			$param['offset'] = $this->uri->segment(7,0);
+      $param['order_by'] = 'ReceivingDateTime';			
 			$inbox = $this->Message_model->get_messages($param)->result_array();	
 			
 			// add global date for sorting
@@ -509,7 +513,8 @@ class Messages extends MY_Controller {
 
 			$param['type'] = 'sentitems';
 			$param['id_folder'] = $id_folder;
-			$param['number'] = trim($number);			
+			$param['number'] = trim($number);	
+      $param['order_by'] = 'SendingDateTime';		
 			$sentitems = $this->Message_model->get_messages($param)->result_array();							
 
 			// add global date for sorting

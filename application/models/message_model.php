@@ -183,15 +183,15 @@ class Message_model extends Model {
 	// --------------------------------------------------------------------
 	function search_messages($options = array())
 	{
-        if(!isset($options['number'])) if(!isset($options['search_string']))  die("No String to Search For");
+    if(!isset($options['number'])) if(!isset($options['search_string']))  die("No String to Search For");
 		 
 		$this->db->from('inbox');
-        $tmp_number = 'SenderNumber'; 
+    $tmp_number = 'SenderNumber'; 
 		$tmp_order = 'ReceivingDateTime';
 		$udh_where = "(".$this->_protect_identifiers("UDH")." = '' OR ".$this->_protect_identifiers("UDH")." LIKE '%1')";
 		$this->db->where($udh_where, NULL, FALSE);				
 		
-        if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
+    if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
 		
 		// if phone number is set
 		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
@@ -206,11 +206,11 @@ class Message_model extends Model {
 			$this->db->where($user_folder.'.id_user',$options['uid']);	
 		}
         
-       	$result = $this->db->get();
+    $result = $this->db->get();
         
-        $inbox = $result->result_array();
+    $inbox = $result->result_array();
         
-       	// add global date for sorting
+    // add global date for sorting
 		foreach($inbox as $key=>$tmp):
 		$inbox[$key]['globaldate'] = $inbox[$key]['ReceivingDateTime'];
 		$inbox[$key]['source'] = 'inbox';
@@ -218,12 +218,12 @@ class Message_model extends Model {
             
             
             
-        $this->db->from('sentitems');
+    $this->db->from('sentitems');
 		$tmp_number = 'DestinationNumber';
 		$tmp_order = 'SendingDateTime';	
-	    $this->db->where('SequencePosition', '1');		
+	  $this->db->where('SequencePosition', '1');		
 			
-	    if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
+	  if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
 		
 		// if phone number is set
 		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
@@ -238,9 +238,9 @@ class Message_model extends Model {
 			$this->db->where($user_folder.'.id_user',$options['uid']);	
 		}
         
-       	$result = $this->db->get();
+    $result = $this->db->get();
         
-        $sentitems = $result->result_array();
+    $sentitems = $result->result_array();
          
         // add global date for sorting
 		foreach($sentitems as $key=>$tmp):
@@ -362,6 +362,8 @@ class Message_model extends Model {
 			// if trash is set
 			if(isset($options['trash']) && is_bool($options['trash'])) $this->db->where($user_folder.'.trash', $options['trash']);	
 		}
+    
+		if(isset($options['order_by'])) $this->db->order_by($options['order_by'], isset($options['order_by_type'])?$options['order_by_type']:'DESC');
 
 		if(isset($options['limit']) && isset($options['offset'])) 
 		{
