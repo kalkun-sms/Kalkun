@@ -170,7 +170,7 @@ textarea {
 
 #left_column, .left_column {
 	float: left;
-	width: 350px;
+	width: 300px;
 }
 
 #right_column, .right_column {
@@ -811,6 +811,14 @@ label.error {
 	background: #FFFFCC;
 }
 
+#about .mascot {
+	width: 200px;	
+}
+
+#about .detail {
+	width: 300px;	
+}
+
 
 /* ================================================================== */
 /* 					LOGIN - START									  */
@@ -854,7 +862,7 @@ label.error {
 
 #window_title_left {
 	float: left;
-	width: 100px;
+	width: 150px;
 }
 
 #window_title_right {

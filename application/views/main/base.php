@@ -1,17 +1,17 @@
 
 <!-- About dialog -->
 <div id="about" title="About Kalkun" class="dialog">
-	<div style="float: left;">
+	<div class="mascot" style="float: left;">
 	<img src="<?php echo $this->config->item('img_path');?>mascot.png" />
 	</div>
 
-	<div style="float: right">
+	<div class="detail" style="float: left">
 	<center>
 	<div class="base_bg rounded"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></div>
 	<h1>PHP Frontend for gammu-smsd</h1>
 	</center>
 	<table>
-		<tr valign="top"><td><b>Author:</b></td><td>&nbsp;</td><td>Azhari Harahap &lt;azhari@harahap.us&gt;</td></tr>
+		<tr valign="top"><td><b>Author:</b></td><td>&nbsp;</td><td>See CREDITS page</td></tr>
 		<tr><td><b>Version:</b></td><td>&nbsp;</td><td><?php echo $this->config->item('kalkun_version');?></td></tr>		
 		<tr><td><b>Released:</b></td><td>&nbsp;</td><td><?php echo $this->config->item('kalkun_release_date');?></td>
 		<tr><td><b>License:</b></td><td>&nbsp;</td><td>GNU/GPL</td>		

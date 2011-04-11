@@ -6,8 +6,10 @@
 |--------------------------------------------------------------------------
 |
 */
-$config['kalkun_version'] = '0.3';
-$config['kalkun_release_date'] = '-';
+$config['kalkun_version'] = '0.2.10';
+$config['kalkun_release_date'] = '11 April 2011';
+$config['kalkun_upgradeable'] = TRUE;
+$config['kalkun_previous_version'] = '0.2.9';
 
 /*
 |--------------------------------------------------------------------------
