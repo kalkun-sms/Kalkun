@@ -407,7 +407,7 @@ class Messages extends MY_Controller {
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';
 		
-		if($source=='folder' && $type!='outbox') 
+		if($source=='folder' && $type!='outbox' && $type!='phonebook'  ) 
 		{
 			$data['main'] = 'main/messages/index';
 			$param['type'] = 'inbox';
@@ -421,6 +421,7 @@ class Messages extends MY_Controller {
 			$param['limit'] = $config['per_page'];
 			$param['offset'] = $this->uri->segment(6,0);
       $param['order_by'] = 'ReceivingDateTime';
+      $param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			$inbox = $this->Message_model->get_messages($param)->result_array();	
 
 			// add global date for sorting
@@ -432,6 +433,7 @@ class Messages extends MY_Controller {
 			$param['type'] = 'sentitems';
 			$param['number'] = trim($number);
       $param['order_by'] = 'SendingDateTime';
+      $param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			$sentitems = $this->Message_model->get_messages($param)->result_array();	
 
 			// add global date for sorting
@@ -472,7 +474,8 @@ class Messages extends MY_Controller {
 			
 			$param['limit'] = $config['per_page'];
 			$param['offset'] = $this->uri->segment(6,0);
-      $param['order_by'] = 'SendingDateTime';			
+      $param['order_by'] = 'SendingDateTime';	
+      $param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');		
 			$outbox = $this->Message_model->get_messages($param)->result_array();	
 			
 			foreach($outbox as $key=>$tmp):
@@ -502,7 +505,8 @@ class Messages extends MY_Controller {
 			
 			$param['limit'] = $config['per_page'];
 			$param['offset'] = $this->uri->segment(7,0);
-      $param['order_by'] = 'ReceivingDateTime';			
+      $param['order_by'] = 'ReceivingDateTime';	
+      $param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');		
 			$inbox = $this->Message_model->get_messages($param)->result_array();	
 			
 			// add global date for sorting
@@ -514,7 +518,8 @@ class Messages extends MY_Controller {
 			$param['type'] = 'sentitems';
 			$param['id_folder'] = $id_folder;
 			$param['number'] = trim($number);	
-      $param['order_by'] = 'SendingDateTime';		
+      $param['order_by'] = 'SendingDateTime';	
+      $param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');	
 			$sentitems = $this->Message_model->get_messages($param)->result_array();							
 
 			// add global date for sorting
@@ -544,10 +549,21 @@ class Messages extends MY_Controller {
 		}
     else //all 
     {
+ 
       $data['main'] = 'main/messages/index';
       $param['number'] = $number;
-			$search = $this->Message_model->search_messages($param);	
-  		$data['messages'] = $search;
+      
+      $config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');		
+      $config['cur_tag_open'] = '<span id="current">';
+      $config['cur_tag_close'] = '</span>';
+      $config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.$number);
+      $config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
+      $config['uri_segment'] = 6;			
+      $this->pagination->initialize($config);
+      $param['limit'] = $config['per_page'];
+      $param['offset'] = $this->uri->segment(6,0);      
+			$data['messages'] = $this->Message_model->search_messages($param)->messages;
+      
 			if(is_ajax())
       {
 		  	$this->load->view('main/messages/conversation', $data);
@@ -568,11 +584,10 @@ class Messages extends MY_Controller {
 	 */		
 	function search()
 	{	 
-            $data['main'] = 'main/messages/index';
-            $param['search_string'] =$this->input->post('search_sms');
-			$search = $this->Message_model->search_messages($param);	
-  			$data['messages'] = $search;
-  			$data['search_string'] = $param['search_string'];
+      $data['main'] = 'main/messages/index';
+      $param['search_string'] =$this->input->post('search_sms');
+			$data['messages'] = $this->Message_model->search_messages($param)->messages;	
+  		$data['search_string'] = $param['search_string'];
 			$this->load->view('main/layout', $data);	
 	}
 	

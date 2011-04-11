@@ -258,8 +258,24 @@ class Message_model extends Model {
 		// sort data
 		$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 		usort($data['messages'], "compare_date_".$sort_option);
- 
-		return $data['messages'];
+    
+    $return_data= array();
+    $return_data['total_rows'] = count($data['messages']);
+    
+    //paginate
+    if(isset($options['offset'] ) && isset($options['limit'])) 
+    {
+      for($i = $options['offset'] ; $i  <= ($options['offset']+ $options['limit']) ;  $i++)
+      {
+         $return_data['messages'][] = $data['messages'][$i];
+      }
+    }
+    else 
+    {
+       $return_data['messages'] = $data['messages'];
+    }
+
+		return  (object) $return_data;
 	}
     
     
