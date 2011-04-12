@@ -10,6 +10,7 @@ $(document).ready(function() {
 	{
 		$('.notification_area').text("<?php echo lang('tni_group_no_group'); ?>");
 		$('.notification_area').show();	
+    setTimeout( "	$('.notification_area').fadeOut();", 2000);
 	}
 	else
 	{
@@ -75,6 +76,7 @@ $(document).ready(function() {
 	if(count==0) { 
 		$('.notification_area').text("<?php echo lang('tni_pbk_no_contact_selected')?>");
 		$('.notification_area').show();
+    setTimeout( "	$('.notification_area').fadeOut();", 2000);
 	}
 	else {
 		$("input.select_contact:checked").each( function () {
@@ -98,6 +100,7 @@ $(document).ready(function() {
 	if(count==0) { 
 		$('.notification_area').text("<?php echo lang('tni_pbk_no_contact_selected')?>");
 		$('.notification_area').show();
+    setTimeout( "	$('.notification_area').fadeOut();", 2000);
 	}
 	else {
 		$("input.select_contact:checked").each( function () {
@@ -107,6 +110,7 @@ $(document).ready(function() {
 		});
     $('.notification_area').text("Updated");
 		$('.notification_area').show();
+    setTimeout( "	$('.notification_area').fadeOut();", 2000);
 	}
   $(this).val('do');
 	});
