@@ -4,7 +4,7 @@
 	<a href="#" class="clear_all nicebutton"><?php echo lang('kalkun_clear_all');?></a>
 	<a href="#" class="delete_contact nicebutton"><?php echo lang('kalkun_delete');?></a>	
  	
-  <select id="grp_action"  name="grp_action" class="nicebutton" style="width: 100px;;">
+  <select    name="grp_action" class="grp_action nicebutton" style="width: 100px;;">
 	<option value="do">Action</option>
 	<option value="null">- Add to Group -</option>
   <?php
