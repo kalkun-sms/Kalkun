@@ -934,7 +934,7 @@ label.error {
 .ui-dialog .ui-state-highlight, .ui-dialog .ui-state-error { padding: .3em;  }
 
 .contact_list {
-	height: 25px;
+	min-height: 25px;
 	padding: 5px 0;
 	border-top: 1px solid #EEE;
 }

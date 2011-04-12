@@ -7,20 +7,23 @@ else: ?>
 <?php foreach($phonebook->result() as $tmp): ?>
 <tr id="<?php echo $tmp->id_pbk;?>">
 <td>
-<div class="two_column_container contact_list">
+<div class="two_column_container contact_list" style="display: inline-block;">
 	<div class="left_column">
-	<div id="pbkname">
-	<input type="checkbox" class="select_contact" />&nbsp;<span style="font-weight: bold;"><?php echo $tmp->Name  ;?></span></div>	
-	<div class="hidden" id="pbknumber"><?php echo $tmp->Number;?></div>
-</div>
-<div class="right_column">
-<span class="pbk_menu hidden">
-<a class="editpbkcontact simplelink" href="#"><?php echo lang('tni_edit');?></a>
-<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
-<a class="sendmessage simplelink" href="#"><?php echo lang('tni_send_message');?></a>
-<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
-<?php echo   anchor('messages/conversation/folder/phonebook/'.$tmp->Number,lang('tni_see_conversation'), 'title="'.lang('tni_see_conversation').'" class="simplelink"') ;?>
-</span>
+		<div id="pbkname">
+		<input type="checkbox" class="select_contact" />&nbsp;<span style="font-weight: bold;"><?php echo $tmp->Name  ;?></span>
+		<div id="pbknumber" style="padding: 2px 0 5px 24px;"><?php echo $tmp->Number;?></div>
+		</div>	
+	</div>
+	<div class="right_column">
+		<span class="pbk_menu hidden">
+		<a class="editpbkcontact simplelink" href="#"><?php echo lang('tni_edit');?></a>
+		<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
+		<a class="sendmessage simplelink" href="#"><?php echo lang('tni_send_message');?></a>
+		<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
+		<?php echo anchor('messages/conversation/folder/phonebook/'.$tmp->Number,lang('tni_see_conversation'), 'title="'.lang('tni_see_conversation').'" class="simplelink"') ;?>
+		</span>
+	</div>
+</div>	
 </td></tr>
 <?php endforeach;?>
 </table>
