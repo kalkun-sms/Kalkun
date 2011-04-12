@@ -160,6 +160,23 @@ class Phonebook extends MY_Controller {
 	}
 
 	// --------------------------------------------------------------------
+  
+  	/**
+	 * Add/Remove Group from Contact
+	 *
+	 * Add a group
+	 *
+	 * @access	public   		 
+	 */		
+	function update_contact_group()
+	{
+		if($_POST) 
+		{ 
+			$this->Phonebook_model->multi_attach_group();  
+		}
+	}
+
+	// --------------------------------------------------------------------
 	
 	/**
 	 * Import contact

@@ -219,6 +219,40 @@ class Phonebook_model extends Model {
         }
         
 	}
+  
+  function multi_attach_group()
+  {
+     
+     $id_group = $this->input->post('id_group');
+     $id_pbk = $this->input->post('id_pbk');
+     
+     if($id_group == 'null' ) die("Invalid Group ID");
+     
+     //parse group value
+     if(preg_match('/-/',$id_group)) { $mode = 'delete'; $id_group = substr($id_group,1);  }
+     else $mode = 'add';
+     
+     if($mode == 'delete')
+     {
+        $this->db->delete('user_group', array('id_pbk' => $id_pbk , 'id_pbk_groups' => $id_group)); 
+     }
+     else // Add Mode 
+     {
+        $this->db->from('user_group');
+        $this->db->where('id_pbk', $id_pbk);
+		    $this->db->where('id_pbk_groups', $id_group);
+        
+        if($this->db->get()->num_rows() < 1)
+        {
+           $this->db->set('id_pbk', $id_pbk);
+           $this->db->set('id_pbk_groups', $id_group);
+           $this->db->set('id_user',  $this->session->userdata('id_user'));
+           $this->db->insert('user_group');
+        }
+
+     }
+     
+  }
 
 	// --------------------------------------------------------------------
 	

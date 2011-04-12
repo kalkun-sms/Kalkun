@@ -86,6 +86,31 @@ $(document).ready(function() {
 		});
 	}
 	});
+  
+  // Add/Remove from Group
+	$("#grp_action").change(function(){
+	 
+  var grp_id =  $(this).val();
+  if(grp_id == 'null' || grp_id == 'do') return false;
+  
+	var count = $("input:checkbox:checked").length;
+	var dest_url = '<?php echo site_url('phonebook/update_contact_group') ?>';
+	if(count==0) { 
+		$('.notification_area').text("<?php echo lang('tni_pbk_no_contact_selected')?>");
+		$('.notification_area').show();
+	}
+	else {
+		$("input.select_contact:checked").each( function () {
+		var row = $(this).parents('tr');
+		var id = row.attr('id');
+		$.post(dest_url, {id_pbk: id , id_group :grp_id });
+		});
+    $('.notification_area').text("Updated");
+		$('.notification_area').show();
+	}
+  $(this).val('do');
+	});
+  
 	
 	// Show menu on hover
 	$("tr").hover(function() {
