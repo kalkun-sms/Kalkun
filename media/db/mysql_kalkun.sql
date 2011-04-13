@@ -216,6 +216,21 @@ CREATE TABLE IF NOT EXISTS `user_group` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
 
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_templates`
+--
+
+CREATE TABLE IF NOT EXISTS `user_templates` (
+  `id_template` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `Name` varchar(64) NOT NULL,
+  `Message` text NOT NULL,
+  PRIMARY KEY (`id_template`),
+  UNIQUE KEY `Name` (`Name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
+
 
 --
 -- Table structure for table `plugin`

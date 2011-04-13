@@ -163,26 +163,10 @@ endforeach;
 <td colspan="2" align="right">
 <div id="middlebar">
 <ul class="menu">
-<li><a href="#" onclick="javascript:showlayer('sm_1')"> Canned Responses</a></li>
+<li><a href="javascript:void(0)" onclick="javascript:showlayer('sm_1')"> Canned Responses</a></li>
 <ul class="submenu" id="sm_1">
-<li>Insert</li>
-<?php
-foreach($this->db->get('user_templates')->result() as $tmp):
-echo "<li><a href=\"javascript:insert('{$tmp->Name}')\">{$tmp->Name}</a></li>";
-endforeach; 
-?>
-<li>Save</li>
-<?php
-foreach($this->db->get('user_templates')->result() as $tmp):
-echo "<li><a href=\"javascript:save('{$tmp->Name}')\">{$tmp->Name}</a></li>";
-endforeach; 
-?>
-<li><a href="javascript:save(null)"><em>Save New Message</em></a></li>
-<li>Delete</li>
-<?php
-foreach($this->db->get('user_templates')->result() as $tmp):
-echo "<li><a href=\"javascript:del('{$tmp->Name}')\">{$tmp->Name}</a></li>";
-endforeach; 
+<?php 
+$this->Message_model->canned_response('','','list');
 ?>
 </ul>
 </ul>
