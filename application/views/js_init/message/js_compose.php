@@ -147,19 +147,28 @@ $(document).ready(function(){
 
 });
 
-//canned response
-function showlayer(layer){
-        var myLayer = document.getElementById(layer);
-        if(myLayer.style.display=="none" || myLayer.style.display==""){
-            myLayer.style.display="block";
-        } else { 
-            myLayer.style.display="none";
-        }
-}
+$('#canned_response').bind('click', function() {
 
+var url = '<?php echo site_url('messages/canned_response/list')?>';
+
+$("#canned_response_container").load(url,  function() {
+   $(this).dialog({
+    modal: true,
+    draggable : true,     
+	width: 250,
+	show: 'fade',
+	hide: 'fade',
+    title: 'Choose Responses',
+  });
+});
+$("#canned_response_container").dialog('open');
+return false;
+});    
+	
+ 
 function save(name)
 {
-    showlayer('sm_1');
+    
     if(name == null)     var name = prompt("Please enter a Name for Your Message. This should be unique.",'',"Message Name");
     else{  
         var c = confirm("Are you Sure?  This is overwrite the previuos message"); 
@@ -170,41 +179,42 @@ function save(name)
     
     if(name != null){
         $.post(dest_url, {'name': name, message: $('#message').val()}, function() {
+                $("#canned_response_container").dialog('close');
     			$('.notification_area').text("Message Saved");
             	$('.notification_area').show();
                 setTimeout( "$('.notification_area').fadeOut();", 2000);
-                update_canned_responses();
+                
     	});
     }
 }
 
 function insert(name)
 {
-    showlayer('sm_1');
+
     var dest_url = "<?php echo  site_url();?>/messages/canned_response/get";
     $.post(dest_url, {'name': name}, function(data) {
 			$('#message').val(data);
+            $("#canned_response_container").dialog('close');
 	});
 }
 
 function del(name)
 {
-    showlayer('sm_1');
+
+    var c = confirm("Are you Sure?"); 
+    if (!c ) return;
     var dest_url = "<?php echo  site_url();?>/messages/canned_response/delete";
     $.post(dest_url, {'name': name}, function() {
+            $("#canned_response_container").dialog('close');
 			$('.notification_area').text("Message Deleted");
         	$('.notification_area').show();
             setTimeout( "$('.notification_area').fadeOut();", 2000);
-            update_canned_responses();
 	});
 }
 
 function update_canned_responses()
 {
     var dest_url = "<?php echo  site_url();?>/messages/canned_response/list";
-    $.get(dest_url,  function(data) {
-           $('#sm_1').html(data)
-
-	});
+    $.get(dest_url,  function(data) {     $('#sm_1').html(data)	});
 }
 </script>

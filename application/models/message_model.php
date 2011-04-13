@@ -928,19 +928,20 @@ class Message_model extends Model {
     {
         if($action == 'list')
         {
-            echo "<li >Insert</li>";
+            echo "<ul class='canned'><li class='headtitle' >Insert</li>";
             foreach($this->db->get('user_templates')->result() as $tmp):
             echo "<li><a href=\"javascript:insert('{$tmp->Name}')\">{$tmp->Name}</a></li>";
             endforeach; 
-            echo "<li >Save</li>";
+            echo "<li  class='headtitle' >Save</li>";
             foreach($this->db->get('user_templates')->result() as $tmp):
             echo "<li><a href=\"javascript:save('{$tmp->Name}')\">{$tmp->Name}</a></li>";
             endforeach; 
             echo "<li><a href='javascript:save(null)'><em>Save New...</em></a></li>";
-            echo "<li >Delete</li>";
+            echo "<li  class='headtitle' >Delete</li>";
             foreach($this->db->get('user_templates')->result() as $tmp):
             echo "<li><a href=\"javascript:del('{$tmp->Name}')\">{$tmp->Name}</a></li>";
             endforeach; 
+            echo "</ul>";
         }
         else if($action == 'get')
         {

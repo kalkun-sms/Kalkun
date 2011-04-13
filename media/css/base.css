@@ -937,6 +937,7 @@ label.error {
 	min-height: 25px;
 	padding: 5px 0;
 	border-top: 1px solid #EEE;
+    
 }
 
 .toolbar {
@@ -1004,4 +1005,21 @@ label.error {
 #pbkname a:hover{
     color:#000;
     text-decoration: underline;	
+}
+
+ul.canned {
+   	list-style-type: none;
+    margin-left:0px;
+    padding-left:10px;
+}
+
+ul.canned li{
+    	list-style-type: none;
+        margin-left:10px;
+}
+
+ul.canned  li.headtitle {
+    font-weight: bold;
+    margin-left: 0px;
+    
 }

@@ -7,8 +7,7 @@
 .left_aligned { margin-left:0; padding-left:0;}
 .form_option { width: 100px;}
 </style>
-<?php $this->load->view('js_init/message/js_compose');
-$this->load->view('js_init/message/css_compose'); ?>
+<?php $this->load->view('js_init/message/js_compose'); ?>
 
 <?php echo form_open('messages/compose', array('id' => 'composeForm', 'class' => 'composeForm'));?>
 <table width="100%">
@@ -156,23 +155,10 @@ endforeach;
 <td align="right" class="label"><?php echo lang('kalkun_sms_mode').":";?></td>
 <td><input type="checkbox" id="sms_mode" name="sms_mode" value="1" class="left_aligned" style="border: none;" />
 <label for="sms_mode"><?php echo lang('kalkun_compose_send_as_flash'); ?></label>
+<span style="padding-left: 20px;"><a href="javascript:void(0)"  id="canned_response"> Canned Responses</a></span>
 </td>    
 </tr>    
-
-<tr>
-<td colspan="2" align="right">
-<div id="middlebar">
-<ul class="menu">
-<li><a href="javascript:void(0)" onclick="javascript:showlayer('sm_1')"> Canned Responses</a></li>
-<ul class="submenu" id="sm_1">
-<?php 
-$this->Message_model->canned_response('','','list');
-?>
-</ul>
-</ul>
-</div>
-</td>
-</tr>
+ 
 
 <tr valign="top">
 <td align="right" class="label"><?php echo lang('kalkun_message').":";?></td>
@@ -192,7 +178,7 @@ if($sig_option=='true') echo "\n\n".$sig; ?>
 </table>
 <br />
 <?php  echo form_close();?>
-
+<div id="canned_response_container" > </div>
 <?php
 if($this->config->item('sms_advertise'))
 {
