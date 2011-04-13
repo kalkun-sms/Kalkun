@@ -7,7 +7,8 @@
 .left_aligned { margin-left:0; padding-left:0;}
 .form_option { width: 100px;}
 </style>
-<?php $this->load->view('js_init/message/js_compose'); ?>
+<?php $this->load->view('js_init/message/js_compose');
+$this->load->view('js_init/message/css_compose'); ?>
 
 <?php echo form_open('messages/compose', array('id' => 'composeForm', 'class' => 'composeForm'));?>
 <table width="100%">
@@ -141,13 +142,6 @@ endforeach;
 </td>
 </tr>    
 
-<tr>
-<td align="right" class="label"><?php echo lang('kalkun_sms_mode').":";?></td>
-<td><input type="checkbox" id="sms_mode" name="sms_mode" value="1" class="left_aligned" style="border: none;" />
-<label for="sms_mode"><?php echo lang('kalkun_compose_send_as_flash'); ?></label>
-</td>    
-</tr>    
-   
 <?php if($this->config->item('sms_bomber')): ?>    
 <tr valign="top">
 <td align="right" class="label"><?php echo lang('kalkun_compose_amount').":";?></td>
@@ -157,6 +151,44 @@ endforeach;
 <?php else: ?>
 <input type="hidden" name="sms_loop" id="sms_loop" value="1" />
 <?php endif;?>
+
+<tr>
+<td align="right" class="label"><?php echo lang('kalkun_sms_mode').":";?></td>
+<td><input type="checkbox" id="sms_mode" name="sms_mode" value="1" class="left_aligned" style="border: none;" />
+<label for="sms_mode"><?php echo lang('kalkun_compose_send_as_flash'); ?></label>
+</td>    
+</tr>    
+
+<tr>
+<td colspan="2" align="right">
+<div id="middlebar">
+<ul class="menu">
+<li><a href="#" onclick="javascript:showlayer('sm_1')"> Canned Responses</a></li>
+<ul class="submenu" id="sm_1">
+<li>Insert</li>
+<?php
+foreach($this->db->get('user_templates')->result() as $tmp):
+echo "<li><a href=\"javascript:insert('{$tmp->Name}')\">{$tmp->Name}</a></li>";
+endforeach; 
+?>
+<li>Save</li>
+<?php
+foreach($this->db->get('user_templates')->result() as $tmp):
+echo "<li><a href=\"javascript:save('{$tmp->Name}')\">{$tmp->Name}</a></li>";
+endforeach; 
+?>
+<li><a href="javascript:save(null)"><em>Save New Message</em></a></li>
+<li>Delete</li>
+<?php
+foreach($this->db->get('user_templates')->result() as $tmp):
+echo "<li><a href=\"javascript:del('{$tmp->Name}')\">{$tmp->Name}</a></li>";
+endforeach; 
+?>
+</ul>
+</ul>
+</div>
+</td>
+</tr>
 
 <tr valign="top">
 <td align="right" class="label"><?php echo lang('kalkun_message').":";?></td>

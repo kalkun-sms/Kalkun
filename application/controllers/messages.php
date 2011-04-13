@@ -686,6 +686,14 @@ class Messages extends MY_Controller {
 	{
 		//$this->
 	}
+    
+    function canned_response($action = NULL)
+    {
+        $name = $this->input->post('name');
+        $message = $this->input->post('message');
+        $this->Message_model->canned_response($name, $message, $action);
+        
+    }
 }	
 
 /* End of file messages.php */

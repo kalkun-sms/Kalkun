@@ -922,6 +922,35 @@ class Message_model extends Model {
 		$data = array ('id_user' => $user_id, 'id_inbox' => $msg_id);
 		$this->db->insert('user_inbox', $data);			
 	}	
+    
+    //Save Canned Response
+    function canned_response($name,$message, $action)
+    {
+        if($action == 'get')
+        {
+            $message = $this->db->get_where('user_templates', array('Name' => $name), 1, 0)->row('Message');
+            echo $message;
+        }
+        else if($action == 'save')
+        {
+            $record = array('Name'=>$name, 'Message'=>$message, 'id_user'=> $this->session->userdata('id_user'));
+             
+            $query = $this->db->get_where('user_templates', array('Name'=> $name), 1, 0);
+            if ($query->num_rows() == 0) {
+              // A record does not exist, insert one.
+              $query = $this->db->insert('user_templates', $record);
+            } else {
+              // A record does exist, update it.
+              $query = $this->db->update('user_templates', $record, array('id_template'=>$query->row('id_template')));
+            }
+        }
+        else if($action == 'delete')
+        {
+            $this->db->delete('user_templates', array('Name' => $name));
+        }
+        else
+            die("Invalid Option");
+    }
 }
 
 /* End of file messages_model.php */

@@ -142,6 +142,60 @@ $(document).ready(function(){
 		if($(this).val()=='sendoption2')  { $("#group").show(); $("#person").hide(); $("#manually").hide();}
 		if($(this).val()=='sendoption3')  { $("#group").hide(); $("#person").hide(); $("#manually").show();}		
 	});	
+    
+    
 
 });
+
+//canned response
+function showlayer(layer){
+        var myLayer = document.getElementById(layer);
+        if(myLayer.style.display=="none" || myLayer.style.display==""){
+            myLayer.style.display="block";
+        } else { 
+            myLayer.style.display="none";
+        }
+}
+
+function save(name)
+{
+    showlayer('sm_1');
+    if(name == null)     var name = prompt("Please enter a Name for Your Message. This should be unique.",'',"Message Name");
+    else{  
+        var c = confirm("Are you Sure?  This is overwrite the previuos message"); 
+        if (!c ) return;
+    }
+    
+    var dest_url = "<?php echo  site_url();?>/messages/canned_response/save";
+    
+    if(name != null){
+        $.post(dest_url, {'name': name, message: $('#message').val()}, function() {
+    			$('.notification_area').text("Message Saved");
+            	$('.notification_area').show();
+                setTimeout( "$('.notification_area').fadeOut();", 2000);
+    	});
+    }
+}
+
+function insert(name)
+{
+    showlayer('sm_1');
+    var dest_url = "<?php echo  site_url();?>/messages/canned_response/get";
+    $.post(dest_url, {'name': name}, function(data) {
+			$('#message').val(data);
+            
+	});
+}
+
+function del(name)
+{
+    showlayer('sm_1');
+    var dest_url = "<?php echo  site_url();?>/messages/canned_response/delete";
+    $.post(dest_url, {'name': name}, function() {
+            
+			$('.notification_area').text("Message Deleted");
+        	$('.notification_area').show();
+            setTimeout( "$('.notification_area').fadeOut();", 2000);
+	});
+}
 </script>
