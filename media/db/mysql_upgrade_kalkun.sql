@@ -32,8 +32,7 @@ CREATE TABLE IF NOT EXISTS `user_templates` (
   `id_user` int(11) NOT NULL,
   `Name` varchar(64) NOT NULL,
   `Message` text NOT NULL,
-  PRIMARY KEY (`id_template`),
-  UNIQUE KEY `Name` (`Name`)
+  PRIMARY KEY (`id_template`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
 
 
