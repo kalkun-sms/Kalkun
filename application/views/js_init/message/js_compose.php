@@ -155,10 +155,16 @@ $("#canned_response_container").load(url,  function() {
    $(this).dialog({
     modal: true,
     draggable : true,     
-	width: 250,
+	width: 400,
 	show: 'fade',
 	hide: 'fade',
     title: 'Choose Responses',
+  	buttons: {
+	'Save New...': function() {
+		save(null);
+	},
+	Cancel: function() { $(this).dialog('close');}
+    }
   });
 });
 $("#canned_response_container").dialog('open');
@@ -171,7 +177,7 @@ function save(name)
     
     if(name == null)     var name = prompt("Please enter a Name for Your Message. This should be unique.",'',"Message Name");
     else{  
-        var c = confirm("Are you Sure?  This is overwrite the previuos message"); 
+        var c = confirm("Are you Sure?  This will overwrite previous message"); 
         if (!c ) return;
     }
     

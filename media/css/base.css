@@ -178,6 +178,16 @@ textarea {
 	text-align: right;
 }
 
+.small_two_column_container {
+	width: 375px;
+	min-height: 25px;
+}
+
+.small_two_column_container .left_column {
+	width: 215px;
+	min-height: 25px;
+}
+
 
 .two_column_big {
 	width: 500px;

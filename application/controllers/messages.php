@@ -689,10 +689,17 @@ class Messages extends MY_Controller {
     
     function canned_response($action = NULL)
     {
-        $name = $this->input->post('name');
-        $message = $this->input->post('message');
-        $this->Message_model->canned_response($name, $message, $action);
-        
+    	if($action == 'list')
+    	{
+    		$data['canned_list'] = $this->Message_model->canned_response($name, $message, $action);
+    		$this->load->view('main/messages/canned_response', $data);
+    	} 
+    	else
+    	{
+        	$name = $this->input->post('name');
+        	$message = $this->input->post('message');
+        	$this->Message_model->canned_response($name, $message, $action);
+    	}
     }
 }	
 

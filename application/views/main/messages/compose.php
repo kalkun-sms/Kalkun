@@ -155,7 +155,7 @@ endforeach;
 <td align="right" class="label"><?php echo lang('kalkun_sms_mode').":";?></td>
 <td><input type="checkbox" id="sms_mode" name="sms_mode" value="1" class="left_aligned" style="border: none;" />
 <label for="sms_mode"><?php echo lang('kalkun_compose_send_as_flash'); ?></label>
-<span style="padding-left: 20px;"><a href="javascript:void(0)"  id="canned_response"> Canned Responses</a></span>
+<div style="float: right; text-align: right; padding-right: 10px;"><a href="javascript:void(0)"  id="canned_response"> Canned Responses...</a></div>
 </td>    
 </tr>    
  
