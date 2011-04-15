@@ -53,8 +53,13 @@ class Message_model extends Model {
 	 * @return	object
 	 */	
 	function send_messages($data)
-	{		
-		if($data['dest']!=NULL && $data['date']!=NULL && $data['message']!=NULL)
+	{	
+        if($this->config->item('disable_outgoing'))
+        {
+            echo "<div class=\"notif\">Outgoing SMS Disabled</div>"; return;
+        }
+		
+        if($data['dest']!=NULL && $data['date']!=NULL && $data['message']!=NULL)
 		{
 			// Check message's length	
 			$messagelength = strlen($data['message']);

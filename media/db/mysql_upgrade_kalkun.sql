@@ -8,6 +8,17 @@ ALTER TABLE `user_settings` ADD `email_forward` ENUM( 'true', 'false' ) NOT NULL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kalkun`
+--
+
+CREATE TABLE IF NOT EXISTS `kalkun` (
+  `version` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_group`
 --
 

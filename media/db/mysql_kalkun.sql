@@ -22,6 +22,16 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kalkun`
+--
+
+CREATE TABLE IF NOT EXISTS `kalkun` (
+  `version` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `member`
 --
 

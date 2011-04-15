@@ -33,6 +33,18 @@ $config['modem_tolerant'] = '10';
 */
 $config['inbox_owner_id'] = '1';
 
+/*
+|--------------------------------------------------------------------------
+| Disable Outgoing Message
+|--------------------------------------------------------------------------
+|
+| Disable outgoing messages.
+| To decide if the disable outgoing message. If enabled all outgoing 
+| messages will be barred.
+|
+*/
+
+$config['disable_outgoing'] = FALSE ;
 
 /*
 |--------------------------------------------------------------------------

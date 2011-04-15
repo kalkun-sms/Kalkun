@@ -1,5 +1,5 @@
 <?php if($canned_list->num_rows()==0):?>
-	<div><p><i>There is canned response created yet.</i></p></div>
+	<div><p><i>Looks like there isn't any canned response created yet. Save your first canned response now.</i></p></div>
 <?php else:?>
 <?php foreach($canned_list->result() as $list):?>
 	<div class="small_two_column_container canned_list">
