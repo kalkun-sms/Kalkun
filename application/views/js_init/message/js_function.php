@@ -133,10 +133,12 @@ $(document).ready(function() {
     // refresh
     $("a.refresh_button").click(function()
     {  	
-    	$('.loading_area').fadeIn("slow");
-    	$('#message_holder').load(refresh_url);  
-        new_notification();		
-    	$('.loading_area').fadeOut("slow");
+    	$('.loading_area').html('Loading...');
+        $('.loading_area').fadeIn("slow");
+    	$('#message_holder').load(refresh_url, function() {
+    	    new_notification();		
+            $('.loading_area').fadeOut("slow");
+        });  
     	return false;
     });
         	

@@ -94,11 +94,12 @@ $("a.clear_all_button").click(function(){
 <?php if(!is_ajax()) : ?>
 // refresh
 $("a.refresh_button").click(function(){
-	$('.loading_area').fadeIn("slow");
-	//$('.loading_area').html('Loading...');
-	$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6,0)) ?>");
-    new_notification();
-	$('.loading_area').fadeOut("slow");
+	$('.loading_area').html('Loading...');
+    $('.loading_area').fadeIn("slow");
+	$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6,0)) ?>", function() { 
+        new_notification();
+        $('.loading_area').fadeOut("slow");
+    });
 });    
 
 <?php endif; ?> 

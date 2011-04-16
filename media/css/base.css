@@ -1017,19 +1017,9 @@ label.error {
     text-decoration: underline;	
 }
 
-ul.canned {
-   	list-style-type: none;
-    margin-left:0px;
-    padding-left:10px;
-}
 
-ul.canned li{
-    	list-style-type: none;
-        margin-left:10px;
-}
-
-ul.canned  li.headtitle {
-    font-weight: bold;
-    margin-left: 0px;
-    
+.canned_list {
+    border-bottom: 1px solid #EEEEEE;
+    min-height: 25px;
+    padding: 5px 0;
 }

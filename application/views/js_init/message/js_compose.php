@@ -161,7 +161,7 @@ $("#canned_response_container").load(url,  function() {
     title: 'Choose Responses',
   	buttons: {
 	'Save New...': function() {
-		save(null);
+		save_canned_response(null);
 	},
 	Cancel: function() { $(this).dialog('close');}
     }
@@ -172,7 +172,7 @@ return false;
 });    
 	
  
-function save(name)
+function save_canned_response(name)
 {
     
     if(name == null)     var name = prompt("Please enter a Name for Your Message. This should be unique.",'',"Message Name");
@@ -184,17 +184,16 @@ function save(name)
     var dest_url = "<?php echo  site_url();?>/messages/canned_response/save";
     
     if(name != null){
+        $('.loading_area').html("Saving...");
+       	$('.loading_area').fadeIn("slow");
         $.post(dest_url, {'name': name, message: $('#message').val()}, function() {
+                $('.loading_area').fadeOut("slow");
                 $("#canned_response_container").dialog('close');
-    			$('.notification_area').text("Message Saved");
-            	$('.notification_area').show();
-                setTimeout( "$('.notification_area').fadeOut();", 2000);
-                
     	});
     }
 }
 
-function insert(name)
+function insert_canned_response(name)
 {
 
     var dest_url = "<?php echo  site_url();?>/messages/canned_response/get";
@@ -204,23 +203,20 @@ function insert(name)
 	});
 }
 
-function del(name)
+function delete_canned_response(name)
 {
 
     var c = confirm("Are you Sure?"); 
     if (!c ) return;
     var dest_url = "<?php echo  site_url();?>/messages/canned_response/delete";
     $.post(dest_url, {'name': name}, function() {
-            $("#canned_response_container").dialog('close');
-			$('.notification_area').text("Message Deleted");
-        	$('.notification_area').show();
-            setTimeout( "$('.notification_area').fadeOut();", 2000);
+			update_canned_responses();
 	});
 }
 
 function update_canned_responses()
 {
     var dest_url = "<?php echo  site_url();?>/messages/canned_response/list";
-    $.get(dest_url,  function(data) {     $('#sm_1').html(data)	});
+    $.get(dest_url,  function(data) {    $("#canned_response_container").html(data)	});
 }
 </script>

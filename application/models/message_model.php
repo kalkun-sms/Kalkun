@@ -53,8 +53,13 @@ class Message_model extends Model {
 	 * @return	object
 	 */	
 	function send_messages($data)
-	{		
-		if($data['dest']!=NULL && $data['date']!=NULL && $data['message']!=NULL)
+	{	
+        if($this->config->item('disable_outgoing'))
+        {
+            echo "<div class=\"notif\">Outgoing SMS Disabled</div>"; return;
+        }
+		
+        if($data['dest']!=NULL && $data['date']!=NULL && $data['message']!=NULL)
 		{
 			// Check message's length	
 			$messagelength = strlen($data['message']);
@@ -928,7 +933,7 @@ class Message_model extends Model {
     {
         if($action == 'list')
         {
-        	return $this->db->get('user_templates');
+        	return $this->db->get_where('user_templates', array( 'id_user'=> $this->session->userdata('id_user') ));
         }
         else if($action == 'get')
         {
@@ -939,7 +944,7 @@ class Message_model extends Model {
         {
             $record = array('Name'=>$name, 'Message'=>$message, 'id_user'=> $this->session->userdata('id_user'));
              
-            $query = $this->db->get_where('user_templates', array('Name'=> $name), 1, 0);
+            $query = $this->db->get_where('user_templates', array('Name'=> $name, 'id_user'=> $this->session->userdata('id_user')), 1, 0);
             if ($query->num_rows() == 0) {
               // A record does not exist, insert one.
               $query = $this->db->insert('user_templates', $record);

@@ -105,6 +105,9 @@ class Install extends Controller {
         
         if($type=='upgrade') $this->_upgrade();
 		
+        $this->db->empty_table('kalkun'); 
+        $this->db->insert('kalkun', array( 'version' => $this->config->item('kalkun_version'))); 
+        
 		$data['main'] = 'main/install/install_result';
 		$this->load->view('main/install/layout', $data);
 	}

@@ -33,6 +33,7 @@ $lang['kalkun_ago'] = "ago";
 $lang['kalkun_notification'] = "Notification";
 $lang['kalkun_statistic'] = "Statistics";
 $lang['kalkun_system_information'] = "System Information";
+$lang['kalkun_alerts'] = "Alerts";
 $lang['kalkun_operating_system'] = "Operating System";
 $lang['kalkun_gammu_version'] = "Gammu Version";
 $lang['kalkun_gammu_db_schema'] = "Gammu DB Schema";
