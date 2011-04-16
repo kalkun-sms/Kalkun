@@ -101,15 +101,20 @@ class Message_model extends Model {
 				$data['message'] = $tmpmsg[0];
 				$data['part'] = $part;
 				$outboxid = $this->_send_message_route($data);
+                $this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));	
 				
 				// insert the rest part to Outbox Multipart
 				for($i=1; $i<count($tmpmsg); $i++) 
-					$this->_send_message_multipart($outboxid, $tmpmsg[$i], $i, $part, $data['coding'], $data['class'], $UDH);
+				{
+				    $this->_send_message_multipart($outboxid, $tmpmsg[$i], $i, $part, $data['coding'], $data['class'], $UDH);
+                    $this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));		
+                }
 			}		
 			else 
 			{
 				$data['option'] = 'single';
-				$this->_send_message_route($data);		
+				$this->_send_message_route($data);
+				$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));		
 			}	
 		}
 		else 
@@ -188,15 +193,15 @@ class Message_model extends Model {
 	// --------------------------------------------------------------------
 	function search_messages($options = array())
 	{
-    if(!isset($options['number'])) if(!isset($options['search_string']))  die("No String to Search For");
+        if(!isset($options['number'])) if(!isset($options['search_string']))  die("No String to Search For");
 		 
 		$this->db->from('inbox');
-    $tmp_number = 'SenderNumber'; 
+        $tmp_number = 'SenderNumber'; 
 		$tmp_order = 'ReceivingDateTime';
 		$udh_where = "(".$this->_protect_identifiers("UDH")." = '' OR ".$this->_protect_identifiers("UDH")." LIKE '%1')";
 		$this->db->where($udh_where, NULL, FALSE);				
 		
-    if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
+        if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
 		
 		// if phone number is set
 		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
@@ -211,11 +216,11 @@ class Message_model extends Model {
 			$this->db->where($user_folder.'.id_user',$options['uid']);	
 		}
         
-    $result = $this->db->get();
+        $result = $this->db->get();
         
-    $inbox = $result->result_array();
+        $inbox = $result->result_array();
         
-    // add global date for sorting
+        // add global date for sorting
 		foreach($inbox as $key=>$tmp):
 		$inbox[$key]['globaldate'] = $inbox[$key]['ReceivingDateTime'];
 		$inbox[$key]['source'] = 'inbox';
@@ -223,12 +228,12 @@ class Message_model extends Model {
             
             
             
-    $this->db->from('sentitems');
+        $this->db->from('sentitems');
 		$tmp_number = 'DestinationNumber';
 		$tmp_order = 'SendingDateTime';	
-	  $this->db->where('SequencePosition', '1');		
+        $this->db->where('SequencePosition', '1');		
 			
-	  if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
+	   if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
 		
 		// if phone number is set
 		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
@@ -243,9 +248,9 @@ class Message_model extends Model {
 			$this->db->where($user_folder.'.id_user',$options['uid']);	
 		}
         
-    $result = $this->db->get();
+        $result = $this->db->get();
         
-    $sentitems = $result->result_array();
+        $sentitems = $result->result_array();
          
         // add global date for sorting
 		foreach($sentitems as $key=>$tmp):
@@ -264,23 +269,24 @@ class Message_model extends Model {
 		$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 		usort($data['messages'], "compare_date_".$sort_option);
     
-    $return_data= array();
-    $return_data['total_rows'] = count($data['messages']);
-    $return_data['messages'] = array();
-   
-    //paginate
-    if(isset($options['offset'] ) && isset($options['limit'])) 
-    {
-      for($i = $options['offset'] ; $i  <  min( ($options['offset']+ $options['limit']), $return_data['total_rows']) ;  $i++)
-      {
-         $return_data['messages'][] = $data['messages'][$i];
-      }
-    }
-    else 
-    {
-       $return_data['messages'] = $data['messages'];
-    }
-		return  (object) $return_data;
+        $return_data= array();
+        $return_data['total_rows'] = count($data['messages']);
+        $return_data['messages'] = array();
+       
+        //paginate
+        if(isset($options['offset'] ) && isset($options['limit'])) 
+        {
+          for($i = $options['offset'] ; $i  <  min( ($options['offset']+ $options['limit']), $return_data['total_rows']) ;  $i++)
+          {
+             $return_data['messages'][] = $data['messages'][$i];
+          }
+        }
+        else 
+        {
+           $return_data['messages'] = $data['messages'];
+        }
+    	
+        return  (object) $return_data;
 	}
     
     

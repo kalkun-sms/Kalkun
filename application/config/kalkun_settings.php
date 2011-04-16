@@ -147,7 +147,7 @@ $config['mail_from'] = 'postmaster@domain.com' ;
 | Filters outgoing messages for numbers registered in NDNC Registry
 |
 */
-$config['ndnc'] = TRUE;
+$config['ndnc'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

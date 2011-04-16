@@ -266,7 +266,6 @@ class Messages extends MY_Controller {
 			for($i=1;$i<=$this->input->post('sms_loop');$i++) 
 			{ 
 				$this->Message_model->send_messages($data);
-				$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
 			}
 			endforeach;
 		}
@@ -276,7 +275,6 @@ class Messages extends MY_Controller {
 			for($i=1; $i<=$this->input->post('sms_loop'); $i++) 
 			{ 
 				$this->Message_model->send_messages($data); 
-				$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
 			}
 		}
 		echo "<div class=\"notif\">$ndnc_msg Your message has been move to Outbox and ready for delivery.</div>";
