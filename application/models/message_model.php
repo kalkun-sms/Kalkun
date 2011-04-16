@@ -933,7 +933,7 @@ class Message_model extends Model {
     {
         if($action == 'list')
         {
-        	return $this->db->get('user_templates');
+        	return $this->db->get_where('user_templates', array( 'id_user'=> $this->session->userdata('id_user') ));
         }
         else if($action == 'get')
         {
