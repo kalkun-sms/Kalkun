@@ -184,12 +184,11 @@ function save(name)
     var dest_url = "<?php echo  site_url();?>/messages/canned_response/save";
     
     if(name != null){
+        $('.loading_area').html("Saving...");
+       	$('.loading_area').fadeIn("slow");
         $.post(dest_url, {'name': name, message: $('#message').val()}, function() {
+                $('.loading_area').fadeOut("slow");
                 $("#canned_response_container").dialog('close');
-    			$('.notification_area').text("Message Saved");
-            	$('.notification_area').show();
-                setTimeout( "$('.notification_area').fadeOut();", 2000);
-                
     	});
     }
 }
@@ -211,16 +210,13 @@ function del(name)
     if (!c ) return;
     var dest_url = "<?php echo  site_url();?>/messages/canned_response/delete";
     $.post(dest_url, {'name': name}, function() {
-            $("#canned_response_container").dialog('close');
-			$('.notification_area').text("Message Deleted");
-        	$('.notification_area').show();
-            setTimeout( "$('.notification_area').fadeOut();", 2000);
+			update_canned_responses();
 	});
 }
 
 function update_canned_responses()
 {
     var dest_url = "<?php echo  site_url();?>/messages/canned_response/list";
-    $.get(dest_url,  function(data) {     $('#sm_1').html(data)	});
+    $.get(dest_url,  function(data) {    $("#canned_response_container").html(data)	});
 }
 </script>
