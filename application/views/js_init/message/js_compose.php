@@ -161,7 +161,7 @@ $("#canned_response_container").load(url,  function() {
     title: 'Choose Responses',
   	buttons: {
 	'Save New...': function() {
-		save(null);
+		save_canned_response(null);
 	},
 	Cancel: function() { $(this).dialog('close');}
     }
@@ -172,7 +172,7 @@ return false;
 });    
 	
  
-function save(name)
+function save_canned_response(name)
 {
     
     if(name == null)     var name = prompt("Please enter a Name for Your Message. This should be unique.",'',"Message Name");
@@ -193,7 +193,7 @@ function save(name)
     }
 }
 
-function insert(name)
+function insert_canned_response(name)
 {
 
     var dest_url = "<?php echo  site_url();?>/messages/canned_response/get";
@@ -203,7 +203,7 @@ function insert(name)
 	});
 }
 
-function del(name)
+function delete_canned_response(name)
 {
 
     var c = confirm("Are you Sure?"); 
