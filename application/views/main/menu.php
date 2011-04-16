@@ -9,7 +9,7 @@
 	<?php echo anchor('messages/folder/inbox', lang('kalkun_inbox'));?> 
 	<span class="unread_inbox_notif">
 	<?php 
-	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE))->num_rows();
+	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'uid' => $this->session->userdata('id_user')))->num_rows();
 	if($tmp_unread > 0) echo " (".$tmp_unread.")";
 	?>
 	</span></li>

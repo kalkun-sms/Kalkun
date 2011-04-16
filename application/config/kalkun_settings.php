@@ -135,7 +135,7 @@ $config['mail_from'] = 'postmaster@domain.com' ;
 | Filters outgoing messages for numbers registered in NDNC Registry
 |
 */
-$config['ndnc'] = FALSE;
+$config['ndnc'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -178,6 +178,25 @@ $config['ext_script'][1]['key'] = 'sender';
 $config['ext_script'][1]['type'] = 'contain';
 $config['ext_script'][1]['value'] = '+62';
 $config['ext_script'][1]['parameter'] = 'phone|content';
+
+/*
+|--------------------------------------------------------------------------
+| Multiple phone/modem support
+|--------------------------------------------------------------------------
+| 
+| state - enables/disabled
+| strategy - failover, scheduled_time, scheduled_day, scheduled_date, phone_number_prefix, phone_number
+| id - Modem ID, must match to PhoneID on smsdrc
+| value - Modem value to use based on strategy 
+| 
+*/
+$config['multiple_modem_state'] = FALSE;
+$config['multiple_modem_strategy'] = 'scheduled_time';
+$config['multiple_modem'][0]['id'] = 'sierra';
+$config['multiple_modem'][0]['value'] = '08:00:00-12:00:00';
+
+$config['multiple_modem'][1]['id'] = 'fasttrack';
+$config['multiple_modem'][1]['value'] = '13:00:00-24:00:00';
 
 /* End of file kalkun_settings.php */
 /* Location: ./application/config/kalkun_settings.php */
