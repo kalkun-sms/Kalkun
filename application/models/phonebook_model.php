@@ -151,7 +151,6 @@ class Phonebook_model extends Model {
 		$this->db->select_as('Name', 'name');
 		$this->db->where('id_user', $param['uid']);
 		$this->db->like('Name', $param['query']);
-        $this->db->or_like('Number', $param['query']);
 		$this->db->order_by('Name');		
 		return $this->db->get();
 	}
