@@ -1,4 +1,3 @@
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.emoticons.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {	    
 var base = "<?php echo  site_url();?>/messages/delete_messages/";
