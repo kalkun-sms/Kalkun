@@ -20,7 +20,7 @@ jQuery.fn.emoticons = function(icon_folder) {
      * 'face-emoticon.png'
      * so for example, if we want to add a cow emoticon
      * we add "cow" : Array("(C)") to emotes
-     * and an image called 'face-cow.png' under the emoticons folder   
+     * and an image called 'face-cow.png' under the emoticons folder
      */
     var emotes = {"smile": Array(":-)",":)","=]","=)"),
                   "sad": Array(":-(","=(",":[",":&lt;"),
@@ -34,8 +34,10 @@ jQuery.fn.emoticons = function(icon_folder) {
                   "smile-big": Array(":o)"),
                   "glasses": Array("8)","8-)"),
                   "kiss": Array("(K)",":-*"),
+                  "love": Array("<3","&lt;3"),
+                  "unlove": Array("</3","&lt;/3"),
                   "monkey": Array("(M)")};
-                  
+
     /* Replaces all ocurrences of emoticons in the given html with images
      */
     function emoticons(html){
