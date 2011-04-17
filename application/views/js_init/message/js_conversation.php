@@ -1,9 +1,12 @@
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.emoticons.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {	    
 var base = "<?php echo  site_url();?>/messages/delete_messages/";
 //var source = "<?php echo $this->uri->segment(4);?>";
 var current_folder = "<?php echo $this->uri->segment(6);?>";
 //var dest_url = base + source;
+     
+$(".message_container").emoticons("<?php echo   $this->config->item('img_path').'emoticons/'; ?>");    
      
 // Delete messages
 $("a.global_delete").click(function(){
