@@ -127,7 +127,7 @@ $(document).ready(function() {
 	// Compose SMS
 	$('.sendmessage').bind('click', function() {
 		var header = $(this).parents('div:eq(1)');
-		var param1 = header.children('.left_column').children('#pbknumber').text();
+		var param1 = header.children('.left_column').children('#pbkname').children('#pbknumber').text();
 		$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type': "pbk_contact", 'param1': param1 }, function() {
 		  $(this).dialog({
 		    modal:true,
