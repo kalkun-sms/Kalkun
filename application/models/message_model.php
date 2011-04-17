@@ -141,7 +141,8 @@ class Message_model extends Model {
 				'DestinationNumber' => $tmp_data['dest'],
 				'Coding' => $tmp_data['coding'],
 				'Class' => $tmp_data['class'],
-				'CreatorID' => '', // postgre 
+				'CreatorID' => $tmp_data['CreatorID'],
+				'SenderID' => $tmp_data['SenderID'],
 				'TextDecoded' => $tmp_data['message'],
 				'DeliveryReport' => $tmp_data['delivery_report']			
 				);

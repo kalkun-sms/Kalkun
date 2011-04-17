@@ -122,13 +122,14 @@ class Messages extends MY_Controller {
 	{
 		if($_POST)
 		{
+		$dest = array();
+
 		// Select send option
 		switch($this->input->post('sendoption')) 
 		{
 			// Person
 			case 'sendoption1':
 			$tmp_dest = explode(',', $this->input->post('personvalue'));
-			$dest = array();
 			foreach ($tmp_dest as $key => $tmp)
 			{
 				if(trim($tmp)!='') {
@@ -139,7 +140,6 @@ class Messages extends MY_Controller {
 		
 			//Group	
 			case 'sendoption2':
-			$dest = array();
 			$param = array('option' => 'bygroup', 'group_id' => $this->input->post('groupvalue'));
 			foreach($this->Phonebook_model->get_phonebook($param)->result() as $tmp)
 			{
@@ -150,7 +150,6 @@ class Messages extends MY_Controller {
 			// Input manually
 			case 'sendoption3':
 			$tmp_dest = explode(',', $this->input->post('manualvalue'));
-			$dest = array();
 			foreach($tmp_dest as $key => $tmp)
 			{
 				$tmp = trim($tmp); // remove space
@@ -162,13 +161,12 @@ class Messages extends MY_Controller {
 			
 			// Reply
 			case 'reply':
-			$dest = $this->input->post('reply_value');
+			$dest[] = $this->input->post('reply_value');
 			break;
 		
 			// Member
 			case 'member':
 			$this->load->model('Member_model');
-			$dest = array();
 			foreach($this->Member_model->get_member('all')->result() as $tmp)
 			{
 				$dest[] = $tmp->phone_number;
@@ -177,7 +175,6 @@ class Messages extends MY_Controller {
 			
 			// Phonebook group
 			case 'pbk_groups':
-			$dest = array();
 			$param = array('option' => 'bygroup', 'group_id' => $this->input->post('id_pbk'));
 			foreach($this->Phonebook_model->get_phonebook($param)->result() as $tmp)
 			{
@@ -253,29 +250,26 @@ class Messages extends MY_Controller {
                 }
             }
 		}	
-        
-       	
-                
                 
 		// Send the message
-        if(isset($dest))  // handles if empty numbers after any number removal process        
-		if(is_array($dest)) 
+        if(!empty($dest))  // handles if empty numbers after any number removal process        
 		{
 			foreach($dest as $dest):
-			$data['dest'] = $dest;				
+			$data['dest'] = $dest;
+        	$data['SenderID'] = NULL;
+        	$data['CreatorID'] = '';
+        	
+	       	// if multiple modem is active
+	       	if($this->config->item('multiple_modem_state'))
+	       	{
+	       		$data['SenderID'] = $data['CreatorID'] = $this->_multiple_modem_select($dest, $date);
+	       	}							
+
 			for($i=1;$i<=$this->input->post('sms_loop');$i++) 
 			{ 
 				$this->Message_model->send_messages($data);
 			}
 			endforeach;
-		}
-		else 
-		{
-			$data['dest'] = $dest;				
-			for($i=1; $i<=$this->input->post('sms_loop'); $i++) 
-			{ 
-				$this->Message_model->send_messages($data); 
-			}
 		}
 		echo "<div class=\"notif\">$ndnc_msg Your message has been move to Outbox and ready for delivery.</div>";
 		}
@@ -684,7 +678,16 @@ class Messages extends MY_Controller {
 	{
 		//$this->
 	}
-    
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Canned Response a.k.a SMS Template
+	 *
+	 * Get/List/Save/Update/Delete Canned Response
+	 *
+	 * @access	public
+	 */    
     function canned_response($action = NULL)
     {
         $name = $this->input->post('name');
@@ -700,6 +703,73 @@ class Messages extends MY_Controller {
         	$this->Message_model->canned_response($name, $message, $action);
     	}
     }
+    
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Multiple modem
+	 *
+	 * Select modem to use based on multiple modem configuration
+	 *
+	 * @access	private
+	 */		
+	function _multiple_modem_select($phone_number, $date) 
+	{
+		$modem_list = $this->config->item('multiple_modem');
+		switch($this->config->item('multiple_modem_strategy'))
+		{
+			case 'scheduled_time':	
+				list($date, $time) = explode(" ", $date);
+				foreach($modem_list as $modem):
+				list($start_time,$end_time) = explode("-", $modem['value']);
+				if($time >= $start_time && $time <= $end_time) $selected_modem = $modem['id'];
+				endforeach;
+			break;
+
+			case 'scheduled_day':	
+				$this->load->helper('date');
+				$day = date('w', human_to_unix($date));
+				foreach($modem_list as $modem):
+				list($start_day,$end_day) = explode("-", $modem['value']);
+				if($day >= $start_day && $day <= $end_day) $selected_modem = $modem['id'];
+				endforeach;
+			break;	
+
+			case 'scheduled_date':	
+				list($date, $time) = explode(" ", $date);
+				foreach($modem_list as $modem):
+				list($start_date,$end_date) = explode(":", $modem['value']);
+				if($date >= $start_date && $date <= $end_date) $selected_modem = $modem['id'];
+				endforeach;			
+			break;
+
+			case 'phone_number_prefix':
+				foreach($modem_list as $modem):
+				$prefix_number = $modem['value'];
+					foreach($prefix_number as $prefix):
+					if(strpos($phone_number, $prefix)!== FALSE) $selected_modem = $modem['id'];
+					endforeach;
+				endforeach;
+			break;		
+
+			case 'phone_number':	
+				foreach($modem_list as $modem):
+				$dest_phone_number = $modem['value'];
+				if(in_array($phone_number, $dest_phone_number)) $selected_modem = $modem['id'];
+				endforeach;			
+			break;									
+		}
+		
+		// Return selected modem, if not return first modem as default value
+		if(isset($selected_modem))
+		{
+			return $selected_modem;
+		}
+		else
+		{
+			return $modem_list[0]['id'];
+		}
+	}    
 }	
 
 /* End of file messages.php */

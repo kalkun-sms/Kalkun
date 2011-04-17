@@ -33,18 +33,6 @@ $config['modem_tolerant'] = '10';
 */
 $config['inbox_owner_id'] = '1';
 
-/*
-|--------------------------------------------------------------------------
-| Disable Outgoing Message
-|--------------------------------------------------------------------------
-|
-| Disable outgoing messages.
-| To decide if the disable outgoing message. If enabled all outgoing 
-| messages will be barred.
-|
-*/
-
-$config['disable_outgoing'] = FALSE ;
 
 /*
 |--------------------------------------------------------------------------
@@ -197,18 +185,25 @@ $config['ext_script'][1]['parameter'] = 'phone|content';
 |--------------------------------------------------------------------------
 | 
 | state - enables/disabled
-| strategy - failover, scheduled_time, scheduled_day, scheduled_date, phone_number_prefix, phone_number
+| strategy
+|	- failover (not implemented yet)
+|	- round robin (not implemented yet)
+|	- scheduled_time (Start-End, Format: HH:MM:SS-HH:MM:SS)
+|	- scheduled_day (Start-End, Format: 0-3, Note: 0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+|	- scheduled_date (Start:End, Format: YYYY-MM-DD:YYYY-MM-DD)
+|	- phone_number_prefix (Must be in array, eg. array('+62813', '+62856'))
+|	- phone_number (Must be in array, eg. array('123456789', '987654321'))
 | id - Modem ID, must match to PhoneID on smsdrc
 | value - Modem value to use based on strategy 
 | 
 */
 $config['multiple_modem_state'] = FALSE;
-$config['multiple_modem_strategy'] = 'scheduled_time';
+$config['multiple_modem_strategy'] = 'scheduled_date';
 $config['multiple_modem'][0]['id'] = 'sierra';
-$config['multiple_modem'][0]['value'] = '08:00:00-12:00:00';
+$config['multiple_modem'][0]['value'] = '2012-04-17:2012-05-17';
 
 $config['multiple_modem'][1]['id'] = 'fasttrack';
-$config['multiple_modem'][1]['value'] = '13:00:00-24:00:00';
+$config['multiple_modem'][1]['value'] = '2014-04-17:2014-05-17';
 
 /* End of file kalkun_settings.php */
 /* Location: ./application/config/kalkun_settings.php */
