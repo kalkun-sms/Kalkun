@@ -128,8 +128,8 @@ class Phonebook_model extends Model {
 			$this->db->select('*');
 			$this->db->select_as('ID', 'id_pbk');	
 			$this->db->from('pbk');
-			$this->db->like('Name', $this->input->post('search_name'));
-			$this->db->where('id_user', $user_id);
+			$this->db->or_like(array('Name' => $this->input->post('search_name'), 'Number' =>$this->input->post('search_name')));  
+			$this->db->having('id_user', $user_id);
 			$this->db->order_by('Name');
 			break;
 		}
