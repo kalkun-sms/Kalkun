@@ -5,7 +5,8 @@ var base = "<?php echo  site_url();?>/messages/delete_messages/";
 var current_folder = "<?php echo $this->uri->segment(6);?>";
 //var dest_url = base + source;
      
-$(".message_container").emoticons("<?php echo   $this->config->item('img_path').'emoticons/'; ?>");    
+$(".message_preview").emoticons("<?php echo   $this->config->item('img_path').'emoticons/'; ?>");
+$(".message_content").emoticons("<?php echo   $this->config->item('img_path').'emoticons/'; ?>");        
      
 // Delete messages
 $("a.global_delete").click(function(){
