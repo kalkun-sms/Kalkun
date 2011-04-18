@@ -141,6 +141,27 @@ endforeach;
 </td>
 </tr>    
 
+<tr>
+<td align="right" class="label">Validity</td>
+<td><select size="1" name="validity">
+	<option value="-1">Default</option>
+	<option value="0">5 Min</option>
+	<option value="1">10 Min</option>
+	<option value="5">30 Min</option>
+	<option value="11">1 Hour</option>
+	<option value="23">2 Hour</option>
+	<option value="35">4 Hour</option>
+	<option value="143">12 Hour</option>
+	<option value="167">1 Day</option>
+	<option value="168">2 Day</option>
+	<option value="171">5 Day</option>
+	<option value="173">1 Week</option>
+	<option value="180">2 Week</option>
+	<option value="196">4 Week</option>
+	<option value="255">Maximum</option>
+</select></td>
+</tr>
+
 <?php if($this->config->item('sms_bomber')): ?>    
 <tr valign="top">
 <td align="right" class="label"><?php echo lang('kalkun_compose_amount').":";?></td>

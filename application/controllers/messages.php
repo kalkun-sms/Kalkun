@@ -205,6 +205,7 @@ class Messages extends MY_Controller {
 		$data['class'] = ($this->input->post('sms_mode')) ? '0' : '1';
 		$data['message'] = $this->input->post('message');
 		$data['date'] = $date;
+        $data['validity'] = $this->input->post('validity');
 		$data['delivery_report'] = $this->Kalkun_model->get_setting()->row('delivery_report');
 		$data['coding'] = ($this->input->post('unicode')=='unicode') ? 'unicode' : 'default';	
         $data['ndnc'] = ($this->input->post('ndnc')=='ndnc') ? true : false;

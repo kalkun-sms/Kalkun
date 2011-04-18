@@ -144,6 +144,7 @@ class Message_model extends Model {
 				'CreatorID' => $tmp_data['CreatorID'],
 				'SenderID' => $tmp_data['SenderID'],
 				'TextDecoded' => $tmp_data['message'],
+                'RelativeValidity' => $tmp_data['validity'],
 				'DeliveryReport' => $tmp_data['delivery_report']			
 				);
 					
