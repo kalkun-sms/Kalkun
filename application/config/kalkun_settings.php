@@ -57,6 +57,15 @@ $config['disable_outgoing'] = FALSE ;
 */
 $config['sms_bomber'] = FALSE;
 
+/*
+|--------------------------------------------------------------------------
+| Enable Smiles/Emoticons
+|--------------------------------------------------------------------------
+|
+| Enable Smiley/Emoticons for messages
+|
+*/
+$config['enable_emoticons'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
