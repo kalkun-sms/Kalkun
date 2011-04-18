@@ -98,6 +98,7 @@ class Kalkun_API {
 		    'senddateoption' => urlencode('option1'),
 		    'sms_mode' => urlencode($this->sms_mode),
 		    'sms_loop' => urlencode('1'),
+            'validity' => urlencode('-1'),
 		    'message' => urlencode($this->message)
 		);
 		$sms_field = $this->urlify($sms);
