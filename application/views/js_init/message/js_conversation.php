@@ -1,7 +1,7 @@
 <script type="text/javascript">
 $(document).ready(function() {	    
 var base = "<?php echo  site_url();?>/messages/delete_messages/";
-//var source = "<?php echo $this->uri->segment(4);?>";
+var source = "<?php echo $this->uri->segment(4);?>";
 var current_folder = "<?php echo $this->uri->segment(6);?>";
 //var dest_url = base + source;
      
