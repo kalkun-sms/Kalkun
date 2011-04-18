@@ -61,7 +61,7 @@ textarea {
 }
 
 #header_left {
-	width: 325px;
+	width: 275px;
 	float: left;
 }
 
@@ -170,7 +170,7 @@ textarea {
 
 #left_column, .left_column {
 	float: left;
-	width: 350px;
+	width: 325px;
 }
  
 #right_column, .right_column {
@@ -632,7 +632,7 @@ textarea {
 }
 
 .sms_search_form input[type="text"] {
-	width: 250px;
+	width: 215px;
 	margin:0;
 	border-right: none;
 }

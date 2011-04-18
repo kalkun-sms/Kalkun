@@ -15,8 +15,11 @@
 ?>
 </p>
 <p>&nbsp;</p>
+<h4>Configure daemon</h4>
+<p>Please note that you also <b>MUST</b> configure "daemon" otherwise you can't get your inbox, see instruction on README file.</p>
+<p>&nbsp;</p>
 <p align="center"><a href="<?php echo site_url();?>" class="button" >Go To Application</a></p>
 <?php else: ?>
-<p>Consider manual installation, read the INSTALL instruction file.</p>
+<p>Consider manual installation, read the README instruction file.</p>
 <?php endif; ?>
 <p>&nbsp;</p>

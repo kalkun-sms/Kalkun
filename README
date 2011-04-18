@@ -1,6 +1,5 @@
 Kalkun - Open Source Web-based SMS Management
 Homepage : http://kalkun.sourceforge.net
-Version  : 0.2.10
 
 (For complete instruction, see http://sourceforge.net/apps/trac/kalkun/wiki/Installation)
 
@@ -18,7 +17,7 @@ INSTALL :
 		# mysql
 		> CREATE DATABASE kalkun;
 		> quit
-	- edit database config (system/application/config/database.php)
+	- edit database config (application/config/database.php)
 		change database value to 'kalkun', username and password is depend on your mysql configuration
 	
 	- import gammu database schema (it's included on gammu source, eg. gammu/docs/sql/mysql.sql)

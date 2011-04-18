@@ -12,7 +12,7 @@
 	</center>
 	<table>
 		<tr valign="top"><td><b>Author:</b></td><td>&nbsp;</td><td>See CREDITS page</td></tr>
-		<tr><td><b>Version:</b></td><td>&nbsp;</td><td><?php echo $this->config->item('kalkun_version');?></td></tr>		
+		<tr><td><b>Version:</b></td><td>&nbsp;</td><td><?php echo $this->config->item('kalkun_version')." (".$this->config->item('kalkun_codename').")";?></td></tr>		
 		<tr><td><b>Released:</b></td><td>&nbsp;</td><td><?php echo $this->config->item('kalkun_release_date');?></td>
 		<tr><td><b>License:</b></td><td>&nbsp;</td><td>GNU/GPL</td>		
 		<tr><td><b>Homepage:</b></td><td>&nbsp;</td>

@@ -92,3 +92,20 @@ CREATE TABLE   "user_group" (
   "id_pbk_groups" integer NOT NULL,
   "id_user" integer NOT NULL,
 );
+
+CREATE TABLE "plugin" (
+  "id_plugin" serial PRIMARY KEY,
+  "plugin_name" varchar(50) NOT NULL,
+  "plugin_status" text NOT NULL DEFAULT 'false'
+);
+
+CREATE TABLE "kalkun" (
+  "version" text NOT NULL
+);
+
+CREATE TABLE "user_templates" (
+  "id_template" serial PRIMARY KEY,
+  "id_user" integer NOT NULL,
+  "Name" varchar(64) NOT NULL,
+  "Message" text NOT NULL
+);

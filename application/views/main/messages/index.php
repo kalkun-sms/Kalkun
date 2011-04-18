@@ -1,5 +1,5 @@
 <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquerycssmenu.css" />
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.emoticons.js"></script>
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.emoticons.min.js"></script>
 <?php if($this->uri->segment(2)!='conversation' && $this->uri->segment(2)!='search') $this->load->view('js_init/message/js_function'); ?>
 
 <!-- Move To Dialog -->

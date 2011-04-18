@@ -93,5 +93,17 @@ CREATE TABLE "user_group" (
 CREATE TABLE "plugin" (
   "id_plugin" INTEGER PRIMARY KEY AUTOINCREMENT,
   "plugin_name" VARCHAR(50) NOT NULL,
-  "plugin_status" TEXT NOT NULL DEFAULT 'false',
+  "plugin_status" TEXT NOT NULL DEFAULT 'false'
+);
+
+
+CREATE TABLE "kalkun" (
+  "version" TEXT NOT NULL
+);
+
+CREATE TABLE "user_templates" (
+  "id_template" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "id_user" INTEGER NOT NULL,
+  "Name" VARCHAR(64) NOT NULL,
+  "Message" TEXT NOT NULL
 );
