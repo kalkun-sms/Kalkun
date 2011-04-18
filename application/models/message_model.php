@@ -825,6 +825,9 @@ class Message_model extends Model {
 	 */	
 	function get_multipart($param)
 	{	
+		// default values
+    	$param = $this->_default(array('type' => 'inbox'), $param);
+    	
 		switch($param['option'])
 		{
 			case 'check':
