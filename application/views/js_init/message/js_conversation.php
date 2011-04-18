@@ -44,7 +44,9 @@ $("#movetodialog").dialog('close');
 $('.loading_area').fadeIn("slow");
 $("input.select_message:checked").each(function () {
 	var message_row = $(this).parents('div:eq(2)');
-	$.post("<?php echo  site_url('messages/move_message') ?>", {type: 'single', current_folder: current_folder, folder: source, 
+    id_access = '#item_source'+$(this).val();
+    item_folder =  $(id_access).val();
+	$.post("<?php echo  site_url('messages/move_message') ?>", {type: 'single', current_folder: current_folder, folder: item_folder, 
 		id_folder: id_folder, id_message: $(this).val()}, function() {
 		$(message_row).slideUp("slow");
 	});
