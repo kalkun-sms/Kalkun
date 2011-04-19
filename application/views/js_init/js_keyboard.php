@@ -22,6 +22,7 @@ $(document).bind('keydown', 's', function(){
 $(document).bind('keydown', 'c', function(){
   compose_message();
 });
+<?php if($this->uri->segment(1)!=''):   ?>
 
 $(document).bind('keydown', 'shift+#', function(){
  action_delete();
@@ -55,5 +56,5 @@ $(document).bind('keydown', 'r', function(){
   message_reply();
 });
 <?php endif; ?>
-
+<?php endif; ?>
 </script>
