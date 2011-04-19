@@ -499,7 +499,8 @@ class Message_model extends Model {
 		{
 			case 'inbox':
 				$this->db->from('inbox');
-				$this->db->select_max($this->_protect_identifiers('ReceivingDateTime'), $this->_protect_identifiers('maxdate'), FALSE);
+				//$this->db->select_max($this->_protect_identifiers('ReceivingDateTime'), $this->_protect_identifiers('maxdate'), FALSE);
+                $this->db->select_max($this->_protect_identifiers('ID'), $this->_protect_identifiers('maxID'), FALSE);
 				$this->db->join('user_inbox','user_inbox.id_inbox=inbox.ID');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
@@ -509,13 +510,15 @@ class Message_model extends Model {
 				$this->db->_reset_select();
 				
 				$this->db->distinct();
-				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').",inbox");
+				//$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').",inbox");
+                $this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').",inbox");
 				$this->db->join('user_inbox','user_inbox.id_inbox=inbox.ID');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
 				$this->db->where('trash', $tmp_trash);
 				
-				$this->db->where($this->_protect_identifiers('ReceivingDateTime'), $this->_protect_identifiers('maxresult.maxdate'), FALSE);
+				//$this->db->where($this->_protect_identifiers('ReceivingDateTime'), $this->_protect_identifiers('maxresult.maxdate'), FALSE);
+                $this->db->where($this->_protect_identifiers('ID'), $this->_protect_identifiers('maxresult.maxID'), FALSE);
 				//$this->db->group_by('SenderNumber');
 				$this->db->order_by('ReceivingDateTime', 'DESC');
 			break;
