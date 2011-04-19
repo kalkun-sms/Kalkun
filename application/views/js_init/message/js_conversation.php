@@ -116,20 +116,20 @@ $('a.reply_button, a.forward_button').bind('click',message_reply =  function() {
 var button = $(this).attr('class');
 var url = '<?php echo site_url('messages/compose')?>';
 
-if(button=='reply_button')
+if(button=='forward_button')
+{
+	var type = 'forward';
+	var header = $(this).parents('div:eq(1)');
+	var param1 = header.attr('class').split(' ').slice(-1)['0']; /* source */
+	var param2 = header.children().children('input.select_message').attr('id'); /* message_id */
+}
+else
 {
 	var type = 'reply';
 	var param1 = '<?php echo $this->uri->segment(5);?>';
     if(param1 == null || param1 == '')  
         var param1 = $(this).parents('div:eq(1)').children().children('input.item_number').val();  /* phone number */
          
-}
-else if(button=='forward_button')
-{
-	var type = 'forward';
-	var header = $(this).parents('div:eq(1)');
-	var param1 = header.attr('class').split(' ').slice(-1)['0']; /* source */
-	var param2 = header.children().children('input.select_message').attr('id'); /* message_id */
 }
 		
 $("#compose_sms_container").load(url, { 'type': type, 'param1': param1, 'param2': param2}, function() {
