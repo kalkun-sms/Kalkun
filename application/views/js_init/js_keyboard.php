@@ -22,6 +22,19 @@ $(document).bind('keydown', 's', function(){
 $(document).bind('keydown', 'c', function(){
   compose_message();
 });
+
+$(document).bind('keydown', 'shift+/', function(){
+    $("#kbd").dialog({
+			bgiframe: true,
+			autoOpen: false,
+			height: 300,
+			width: 400,
+			modal: true		
+		});	
+		$('#kbd').dialog('open');
+  
+}); 
+
 <?php if($this->uri->segment(1)!=''):   ?>
 
 $(document).bind('keydown', 'shift+#', function(){
@@ -39,17 +52,6 @@ $(document).bind('keydown', 'f5', function(){
 });
 
 <?php endif; ?>
-$(document).bind('keydown', 'shift+/', function(){
-    $("#kbd").dialog({
-			bgiframe: true,
-			autoOpen: false,
-			height: 300,
-			width: 400,
-			modal: true		
-		});	
-		$('#kbd').dialog('open');
-  
-}); 
 
 <?php if($this->uri->segment(2)=='conversation' ):   ?>
 $(document).bind('keydown', 'r', function(){
