@@ -135,7 +135,8 @@ else
 $("#compose_sms_container").load(url, { 'type': type, 'param1': param1, 'param2': param2}, function() {
   $(this).dialog({
     modal: true,
-    draggable : true,     
+    draggable : true,    
+    open: function(event, ui) {$("#message").focus();}, 
 	width: 550,
 	show: 'fade',
 	hide: 'fade',
