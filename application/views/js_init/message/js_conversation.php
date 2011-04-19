@@ -11,7 +11,7 @@ $(".message_content").emoticons("<?php echo   $this->config->item('img_path').'e
 <?php endif; ?>
 
 // Delete messages
-$("a.global_delete").click(function(){
+$("a.global_delete").click(action_delete = function(){
 var count = $("input:checkbox:checked").length;
 if(count==0) { 
 	$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected'); ?>");
@@ -55,7 +55,7 @@ $('.loading_area').fadeOut("slow");
 }
 });    
     
-$(".move_to_button").click(function() {
+$(".move_to_button").click(message_move = function() {
 	$('#movetodialog').dialog('open');
 	return false;
 });
@@ -100,7 +100,7 @@ $("a.clear_all_button").click(function(){
     
 <?php if(!is_ajax()) : ?>
 // refresh
-$("a.refresh_button").click(function(){
+$("a.refresh_button").click(refresh = function(){
 	$('.loading_area').html('Loading...');
     $('.loading_area').fadeIn("slow");
 	$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6,0)) ?>", function() { 

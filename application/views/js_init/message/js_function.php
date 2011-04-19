@@ -34,7 +34,7 @@ $(document).ready(function() {
 	 * Delete all messages on selected conversation
 	 *
 	 */	
-	$("a.global_delete").click(function()
+	$("a.global_delete").click(action_delete = function()
 	{
 		var count = $("input.select_conversation:checkbox:checked").length;
 		if(count==0) 
@@ -66,7 +66,7 @@ $(document).ready(function() {
 	 * Move all messages on selected conversation from a folder to another folder
 	 *
 	 */		       
-    $(".move_to").click(function() {
+    $(".move_to").click( function() {
 		var count = $("input.select_conversation:checkbox:checked").length;
 		if(count==0) {
 			$("#movetodialog").dialog('close');
@@ -90,7 +90,7 @@ $(document).ready(function() {
 		count=0;
     });
     
-    $(".move_to_button").click(function() 
+    $(".move_to_button").click(message_move = function() 
     {
 		$("#movetodialog").dialog({
 			bgiframe: true,
@@ -131,7 +131,7 @@ $(document).ready(function() {
     });
     
     // refresh
-    $("a.refresh_button").click(function()
+    $("a.refresh_button").click(refresh = function()
     {  	
     	$('.loading_area').html('Loading...');
         $('.loading_area').fadeIn("slow");

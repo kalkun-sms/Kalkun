@@ -37,7 +37,7 @@ $('#addgroupdialog').dialog('open');
 });
 		
 // Delete group
-$("a.delete_contact").click(function(){
+$("a.delete_contact").click(action_delete = function(){
 var count = $("input.select_group:checkbox:checked").length;
 var dest_url = '<?php echo site_url('phonebook/delete_group') ?>';
 if(count==0) { 

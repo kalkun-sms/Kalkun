@@ -35,3 +35,73 @@
 		<input type="text" name="folder_name" id="folder_name" class="text ui-widget-content ui-corner-all" />
 	</form>
 </div>
+
+<!-- Shortcuts dialog -->
+<div id="kbd" title="Kalkun Keyboard Shortcuts" class="dialog">
+	 
+
+	<div class="detail" style="float: left">
+	<center>
+ 	<h1>Keyboard Shortcuts</h1>
+	</center>
+	
+    <table>
+    <tr>
+    	<td>
+        
+        <table>
+        <tr>
+        	<td colspan="2"> Jumping </td>
+        </tr>
+        <tr>
+        	<td class="align_right">g then i :</td>
+        	<td>Goto Inbox</td>
+        </tr>
+        <tr>
+        	<td class="align_right">g then o :</td>
+        	<td>Goto Outbox</td>
+        </tr>
+        <tr>
+        	<td class="align_right">g then s :</td>
+        	<td>Goto Sent Items</td>
+        </tr>
+        </table>
+         
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        
+    	<td>
+        <table>
+        <tr>
+        	<td colspan="2">Actions</td>
+        </tr>
+        <tr>
+        	<td class="align_right">c :</td>
+        	<td>Compose</td>
+        </tr>
+        <tr>
+        	<td class="align_right">m :</td>
+        	<td>Move To</td>
+        </tr>
+        <tr>
+        	<td class="align_right">Shift+# :</td>
+        	<td>Delete</td>
+        </tr>
+        <tr>
+        	<td class="align_right">Shift+? :</td>
+        	<td>This Help</td>
+        </tr>
+        <tr>
+        	<td></td>
+        	<td></td>
+        </tr>
+        </table>
+        
+        </td>
+    </tr>
+    </table>
+    
+	<br />
+ 
+	</div>
+</div>

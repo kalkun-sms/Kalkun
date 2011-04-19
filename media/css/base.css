@@ -440,7 +440,7 @@ textarea {
 
 /* Paging */
 
-#paging {
+#paging , .align_right {
 	text-align: right;
 }
 
