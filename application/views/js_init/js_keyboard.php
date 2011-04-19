@@ -26,12 +26,12 @@ $(document).bind('keydown', 'c', function(){
 $(document).bind('keydown', 'shift+#', function(){
  action_delete();
 });
-<?php if($this->uri->segment(2)!='phonebook' ):   ?>
+<?php if($this->uri->segment(1)!='phonebook' ):   ?>
 $(document).bind('keydown', 'm', function(){
   message_move();
 });
 <?php endif; ?>
-<?php if($this->uri->segment(2)!='phonebook' && $this->uri->segment(2)!='search'):   ?>
+<?php if($this->uri->segment(1)!='phonebook' && $this->uri->segment(2)!='search'):   ?>
 
 $(document).bind('keydown', 'f5', function(){
   refresh();return false;
@@ -49,4 +49,11 @@ $(document).bind('keydown', 'shift+/', function(){
 		$('#kbd').dialog('open');
   
 }); 
+
+<?php if($this->uri->segment(2)=='conversation' ):   ?>
+$(document).bind('keydown', 'r', function(){
+  message_reply();
+});
+<?php endif; ?>
+
 </script>

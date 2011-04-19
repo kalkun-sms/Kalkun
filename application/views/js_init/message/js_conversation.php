@@ -112,22 +112,23 @@ $("a.refresh_button").click(refresh = function(){
 <?php endif; ?> 
     
 // Reply SMS
-$('a.reply_button, a.forward_button').bind('click', function() {
+$('a.reply_button, a.forward_button').bind('click',message_reply =  function() {
 var button = $(this).attr('class');
 var url = '<?php echo site_url('messages/compose')?>';
 
 if(button=='reply_button')
 {
 	var type = 'reply';
-	// var param1 = '<?php echo $this->uri->segment(5);?>'; depreciated
-    var param1 = $(this).parents('div:eq(1)').children().children('input.item_number').val();  /* phone number */
+	var param1 = '<?php echo $this->uri->segment(5);?>';
+    if(param1 == null || param1 == '')  
+        var param1 = $(this).parents('div:eq(1)').children().children('input.item_number').val();  /* phone number */
          
 }
 else if(button=='forward_button')
 {
 	var type = 'forward';
 	var header = $(this).parents('div:eq(1)');
-	var param1 = header.attr('class').split(' ').slice(-1); /* source */
+	var param1 = header.attr('class').split(' ').slice(-1)['0']; /* source */
 	var param2 = header.children().children('input.select_message').attr('id'); /* message_id */
 }
 		
