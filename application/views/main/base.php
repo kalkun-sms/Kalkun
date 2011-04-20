@@ -83,13 +83,20 @@
         </tr>
          <tr>
         	<td class="align_right">o or &lt;Enter&gt; :</td>
-        	<td>Open conversation; <br/>collapse/expand conversatin</td>
+        	<td>Open conversation; <br/>collapse/expand conversation</td>
         </tr>
-	   <tr>
-        	<td class="align_right">d :</td>
-        	<td>Show message details</td>
+	  <tr>
+        <td colspan="2" align="center"><br /><strong>	Threadlist selection</strong></td>
         </tr>
-
+<tr>
+        	<td class="align_right">* then a :</td>
+        	<td>Select all conversations</td>
+        </tr><tr>
+        	<td class="align_right">* then n :</td>
+        	<td>Deselect all conversations</td>
+        </tr>
+	
+	
 	
         </table>
          
@@ -101,21 +108,47 @@
         <tr>
         	<td colspan="2" align="center"><strong>Actions</strong></td>
         </tr>
+        
         <tr>
-        	<td class="align_right">c :</td>
-        	<td>Compose</td>
+        	<td class="align_right">x :</td>
+        	<td>Select Conversation</td>
         </tr>
         <tr>
         	<td class="align_right">m :</td>
         	<td>Move To</td>
         </tr>
-        <tr>
-        	<td class="align_right">Shift+# :</td>
-        	<td>Delete</td>
+         <tr>
+        	<td class="align_right">r :</td>
+        	<td>Reply</td>
         </tr>
         <tr>
-        	<td class="align_right">Shift+? :</td>
-        	<td>This Help</td>
+        	<td class="align_right">f :</td>
+        	<td>Forward</td>
+        </tr>
+        <tr>
+        	<td class="align_right">d :</td>
+        	<td>Show message details</td>
+        </tr>
+          
+        
+        <tr>
+        	<td class="align_right"># :</td>
+        	<td>Delete</td>
+        </tr>
+        <tr><td colspan="2" align="center">	<br /><strong>Application</strong>
+ </td>
+        </tr>
+        <tr>
+        	<td class="align_right">c :</td>
+        	<td>Compose</td>
+        </tr>
+        <tr>
+        	<td class="align_right">s :</td>
+        	<td>Search</td>
+        </tr>
+        <tr>
+        	<td class="align_right">? :</td>
+        	<td>Open shortcut help</td>
         </tr>
         <tr>
         	<td></td>

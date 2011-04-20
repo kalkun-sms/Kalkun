@@ -102,7 +102,7 @@ $(document).ready(function() {
     });
     
     // select all
-    $("a.select_all_button").click(function()
+    $("a.select_all_button").click(select_all = function()
     {
     	$(".select_conversation").attr('checked', true);
     	$(".messagelist").addClass("messagelist_hover");
@@ -110,7 +110,7 @@ $(document).ready(function() {
     });
     
     // clear all
-    $("a.clear_all_button").click(function()
+    $("a.clear_all_button").click(clear_all = function()
     {
     	$(".select_conversation").attr('checked', false);
     	$(".messagelist").removeClass("messagelist_hover");

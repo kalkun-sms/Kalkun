@@ -85,14 +85,14 @@ return false;
     
     
 // select all
-$("a.select_all_button").click(function(){
+$("a.select_all_button").click(select_all = function(){
 	$(".select_message").attr('checked', true);
 	$(".messagelist").addClass("messagelist_hover");
 	return false;
 });
 
 // clear all
-$("a.clear_all_button").click(function(){
+$("a.clear_all_button").click(clear_all =  function(){
 	$(".select_message").attr('checked', false);
 	$(".messagelist").removeClass("messagelist_hover");
 	return false;

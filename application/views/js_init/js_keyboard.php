@@ -1,11 +1,18 @@
 <script type="text/javascript">
 var go_to = false;
-
+var s_all = false;
 //set g
 $(document).bind('keyup', 'g', function(){
    go_to = true;
    setTimeout(function(){go_to = false;}, "3000");
 });
+
+$(document).bind('keyup', '*', function(){
+   s_all = true;
+   setTimeout(function(){s_all = false;}, "3000");
+});
+
+
 
 $(document).bind('keydown', 'i', function(){
   if(go_to == true)    window.location = "<?php echo site_url('messages/folder/inbox');  ?>";
@@ -74,6 +81,7 @@ $(document).bind('keydown', 'o return', function(){
    $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.message_content').toggle();
  $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('span.message_preview').toggle();
   $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.optionmenu').toggle();
+  return false;
 });
 
 $(document).bind('keydown', 'd', function(){  
@@ -84,6 +92,49 @@ $(document).bind('keydown', 'u', function(){
     var dest = $('#back_threadlist').attr('href');
     document.location = dest;  
 });
+$(document).bind('keydown', 'x', function(){  
+    if($("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').attr('checked')==true)
+    {
+        $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').removeAttr('checked');
+        $("#message_holder").children(":eq("+current_select+")").removeClass("messagelist_hover");    
+      
+    }else
+    {
+        $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').attr('checked', true)
+        $("#message_holder").children(":eq("+current_select+")").addClass("messagelist_hover");    
+    }  
+    
+});
+$(document).bind('keydown', 'f', function(){
+      
+   var param2 = $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').attr('id');
+   var param1 = $('#item_source'+param2).val();
+  $("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type': 'forward', 'param1': param1, 'param2': param2}, function() {
+  $(this).dialog({
+    modal: true,    
+    open: function(event, ui) {$("#message").focus();}, 
+	width: 550,
+	show: 'fade',
+	hide: 'fade',
+    buttons: {
+	'<?php echo lang('tni_send_message'); ?>': function() {
+		if($("#composeForm").valid()) {
+		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
+			$("#compose_sms_container").html(data);
+			$("#compose_sms_container").dialog({ buttons: { "Okay": function() { $(this).dialog("destroy"); } } });
+			setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+		});
+		}
+	},
+	'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('destroy');}
+    }
+  });
+});
+$("#compose_sms_container").dialog('open');
+return false;
+   
+});
+
 <?php endif; ?>
 
 <?php if($this->uri->segment(1) == 'messages' && $this->uri->segment(2)!='conversation'  ):   ?>
@@ -115,9 +166,35 @@ $(document).bind('keydown', 'o return', function(){
     var group = "<?php echo $this->uri->segment(2) ; ?>";
     var folder = "<?php echo $this->uri->segment(3) ; ?>";
     document.location = "<?php echo site_url('messages/conversation'); ?>/" + group + "/"+ folder+"/" + current_number ;
+    return false;
+});
+
+$(document).bind('keydown', 'x', function(){  
+    if($("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_conversation').attr('checked')==true)
+    {
+        $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_conversation').removeAttr('checked');
+        $("#message_holder").children(":eq("+current_select+")").removeClass("messagelist_hover");    
+      
+    }else
+    {
+        $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_conversation').attr('checked', true)
+        $("#message_holder").children(":eq("+current_select+")").addClass("messagelist_hover");    
+    }  
+    
 });
 <?php endif; ?>
 
+<?php if($this->uri->segment(1) == 'messages'  ):   ?>
+
+
+$(document).bind('keydown', 'a', function(){
+  if(s_all == true)    select_all();
+});
+
+$(document).bind('keydown', 'n', function(){
+  if(s_all == true)     clear_all();
+});
+<?php endif; ?>
 
 <?php endif; ?>
 </script>
