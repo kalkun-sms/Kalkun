@@ -187,10 +187,10 @@ $(document).bind('keydown', 'x', function(){
 
 <?php endif; ?>
 
-<?php if($this->uri->segment(1) == 'messages'  ):   ?>
+ 
 $(document).bind('keydown', 'a', function(){   if(s_all == true)    select_all(); });
 $(document).bind('keydown', 'n', function(){   if(s_all == true)     clear_all(); });
-<?php endif; ?>
+ 
 
 <?php endif; ?>
 });

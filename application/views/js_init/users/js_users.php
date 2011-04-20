@@ -40,14 +40,14 @@ return false;
 });	
 
 // select all
-$("a.select_all").click(function(){
+$("a.select_all").click(select_all = function(){
 $(".select_user").attr('checked', true);
 $(".contact_list").addClass("messagelist_hover");
 return false;
 });
 
 // clear all
-$("a.clear_all").click(function(){
+$("a.clear_all").click(clear_all = function(){
 $(".select_user").attr('checked', false);
 $(".contact_list").removeClass("messagelist_hover");
 return false;
@@ -60,7 +60,7 @@ else $(this).parents('div:eq(2)').removeClass("messagelist_hover");
 });
 
 // Delete user
-$("a.delete_user").click(function(){
+$("a.delete_user").click(action_delete = function(){
 var count = $("input:checkbox:checked").length;
 var dest_url = '<?php echo site_url('users/del_users') ?>';
 if(count==0) { 

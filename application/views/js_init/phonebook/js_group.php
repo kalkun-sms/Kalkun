@@ -99,14 +99,14 @@ $('.sendmessage').bind('click', function() {
 });
 	
 // select all
-$("a.select_all").click(function(){
+$("a.select_all").click(select_all = function(){
 $(".select_group").attr('checked', true);
 $(".contact_list").addClass("messagelist_hover");
 return false;
 });
 
 // clear all
-$("a.clear_all").click(function(){
+$("a.clear_all").click(clear_all = function(){
 $(".select_group").attr('checked', false);
 $(".contact_list").removeClass("messagelist_hover");
 return false;
