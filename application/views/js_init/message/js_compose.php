@@ -224,6 +224,7 @@ function update_canned_responses()
 var is_tab = false;
 $(document).ready(function() {
     $('#message').bind('keydown', 'tab', function(){
+        //$('.ui-dialog-buttonpane button:eq(0)').focus(); 
         is_tab = true; 
         setTimeout(function(){is_tab = false;}, "5000");
     });

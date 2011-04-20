@@ -59,8 +59,12 @@ $(document).bind('keydown', 'm', function(){   message_move(); });
 $(document).bind('keydown', 'f5', function(){   refresh();return false; });
 <?php endif; ?>
 
-<?php if($this->uri->segment(2)=='conversation' ):   ?>  
+<?php if($this->uri->segment(2)=='conversation' || $this->uri->segment(2)=='search' ):   ?>  
+
+<?php if($this->uri->segment(2) !='search' ):   ?>
 $(document).bind('keydown', 'r', function(){   message_reply(); });
+<?php endif; ?>
+
 // for convesation
 var totalmsg = $("#message_holder > div.messagelist").length;
 var current_select =2;
@@ -139,7 +143,7 @@ return false;
 });
 <?php endif; ?>
 
-<?php if($this->uri->segment(1) == 'messages' && $this->uri->segment(2)!='conversation'  ):   ?>
+<?php if($this->uri->segment(1) == 'messages' && $this->uri->segment(2)!='conversation'  && $this->uri->segment(2)!='search'  ):   ?>
 // for message_list page
 var totalmsg = $("#message_holder > div.messagelist").length;
 var current_select = 0;
