@@ -1,6 +1,9 @@
 <script type="text/javascript">
 var go_to = false;
 var s_all = false;
+var current_number = '';
+
+$(document).ready(function() {
 //set g
 $(document).bind('keyup', 'g', function(){
    go_to = true;
@@ -11,7 +14,6 @@ $(document).bind('keyup', '*', function(){
    s_all = true;
    setTimeout(function(){s_all = false;}, "3000");
 });
-
 
 
 $(document).bind('keydown', 'i', function(){
@@ -56,9 +58,7 @@ $(document).bind('keydown', 'm', function(){   message_move(); });
 $(document).bind('keydown', 'f5', function(){   refresh();return false; });
 <?php endif; ?>
 
-<?php if($this->uri->segment(2)=='conversation' ):   ?>
-$(document).ready(function() {
-    
+<?php if($this->uri->segment(2)=='conversation' ):   ?>  
 $(document).bind('keydown', 'r', function(){   message_reply(); });
 // for convesation
 var totalmsg = $("#message_holder > div.messagelist").length;
@@ -67,7 +67,7 @@ var current_select =2;
 //move next
 $(document).bind('keydown', 'j', function(){  
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').removeClass('infocus'); //selecting child
-    current_select ++; if(current_select > totalmsg +2 ) current_select = 3;
+    current_select ++; if(current_select > totalmsg +2 ) current_select = 2;
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').addClass('infocus'); //selecting child
 });
 
@@ -94,6 +94,7 @@ $(document).bind('keydown', 'u', function(){
     var dest = $('#back_threadlist').attr('href');
     document.location = dest;  
 });
+
 $(document).bind('keydown', 'x', function(){  
     if($("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').attr('checked')==true)
     {
@@ -107,8 +108,8 @@ $(document).bind('keydown', 'x', function(){
     }  
     
 });
+
 $(document).bind('keydown', 'f', function(){
-      
    var param2 = $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').attr('id');
    var param1 = $('#item_source'+param2).val();
   $("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type': 'forward', 'param1': param1, 'param2': param2}, function() {
@@ -134,17 +135,14 @@ $(document).bind('keydown', 'f', function(){
 });
 $("#compose_sms_container").dialog('open');
 return false;
-   
-});
 });
 <?php endif; ?>
 
 <?php if($this->uri->segment(1) == 'messages' && $this->uri->segment(2)!='conversation'  ):   ?>
 // for message_list page
-$(document).ready(function() {
 var totalmsg = $("#message_holder > div.messagelist").length;
 var current_select = 0;
-var current_number = '';
+
 //move next
 $(document).bind('keydown', 'j', function(){  
     $("#message_holder").children(":eq("+current_select+")").removeClass('infocus'); //selecting child
@@ -160,15 +158,14 @@ $(document).bind('keydown', 'k', function(){
     current_select --; if(current_select < 1 ) current_select = totalmsg ;
     $("#message_holder").children(":eq("+current_select+")").addClass('infocus'); //selecting child
     current_number = $("#message_holder").children(":eq("+current_select+")").children().children().children('input.select_conversation').val();
-   
-   
 });
 
 //select
 $(document).bind('keydown', 'o return', function(){  
     var group = "<?php echo $this->uri->segment(2) ; ?>";
     var folder = "<?php echo $this->uri->segment(3) ; ?>";
-    document.location = "<?php echo site_url('messages/conversation'); ?>/" + group + "/"+ folder+"/" + current_number ;
+    var fid = "<?php echo $this->uri->segment(4,'') ; ?>";
+    document.location = "<?php echo site_url('messages/conversation'); ?>/" + group + "/"+ folder+"/" + current_number+"/" +fid ;
     return false;
 });
 
@@ -178,7 +175,8 @@ $(document).bind('keydown', 'x', function(){
         $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_conversation').removeAttr('checked');
         $("#message_holder").children(":eq("+current_select+")").removeClass("messagelist_hover");    
       
-    }else
+    }
+    else
     {
         $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_conversation').attr('checked', true)
         $("#message_holder").children(":eq("+current_select+")").addClass("messagelist_hover");    
@@ -186,20 +184,14 @@ $(document).bind('keydown', 'x', function(){
     
 });
 
-});
+
 <?php endif; ?>
 
 <?php if($this->uri->segment(1) == 'messages'  ):   ?>
-
-
-$(document).bind('keydown', 'a', function(){
-  if(s_all == true)    select_all();
-});
-
-$(document).bind('keydown', 'n', function(){
-  if(s_all == true)     clear_all();
-});
+$(document).bind('keydown', 'a', function(){   if(s_all == true)    select_all(); });
+$(document).bind('keydown', 'n', function(){   if(s_all == true)     clear_all(); });
 <?php endif; ?>
 
 <?php endif; ?>
+});
 </script>

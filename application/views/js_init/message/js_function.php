@@ -123,10 +123,12 @@ $(document).ready(function() {
     	if($(this).attr('checked')==true) 
     	{
     		$(this).parents('div:eq(2)').addClass("messagelist_hover");
+            current_number = $(this).val();
     	}
     	else 
     	{
     		$(this).parents('div:eq(2)').removeClass("messagelist_hover");
+            current_number = '';
     	}
     });
     
