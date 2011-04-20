@@ -77,7 +77,7 @@ $(document).bind('keydown', 'k', function(){
 });
 
 //select
-$(document).bind('keydown', 'o return', function(){  
+$(document).bind('keydown', 'o', function(){  
    $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.message_content').toggle();
  $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('span.message_preview').toggle();
   $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.optionmenu').toggle();
