@@ -2,9 +2,9 @@
 var go_to = false;
 
 //set g
-$(document).bind('keydown', 'g', function(){
+$(document).bind('keyup', 'g', function(){
    go_to = true;
-  setTimeout(function(){go_to = false;}, "3000");
+   setTimeout(function(){go_to = false;}, "3000");
 });
 
 $(document).bind('keydown', 'i', function(){
@@ -19,9 +19,13 @@ $(document).bind('keydown', 's', function(){
   if(go_to == true)    window.location = "<?php echo site_url('messages/folder/sentitems');  ?>";
 });
 
-$(document).bind('keydown', 'c', function(){
-  compose_message();
+$(document).bind('keydown', 'p', function(){
+  if(go_to == true)    window.location = "<?php echo site_url('phonebook');  ?>";
 });
+
+$(document).bind('keyup', 's', function(){   $("#search").focus(); });
+
+$(document).bind('keyup', 'c', function(){  compose_message();});
 
 $(document).bind('keydown', 'shift+/', function(){
     $("#kbd").dialog({
@@ -31,32 +35,23 @@ $(document).bind('keydown', 'shift+/', function(){
 			width: 400,
 			modal: true		
 		});	
-		$('#kbd').dialog('open');
-  
+    $('#kbd').dialog('open');
 }); 
 
 <?php if($this->uri->segment(1)!=''):   ?>
+$(document).bind('keydown', 'shift+#', function(){  action_delete(); });
 
-$(document).bind('keydown', 'shift+#', function(){
- action_delete();
-});
 <?php if($this->uri->segment(1)!='phonebook' ):   ?>
-$(document).bind('keydown', 'm', function(){
-  message_move();
-});
+$(document).bind('keydown', 'm', function(){   message_move(); });
 <?php endif; ?>
+
 <?php if($this->uri->segment(1)!='phonebook' && $this->uri->segment(2)!='search'):   ?>
-
-$(document).bind('keydown', 'f5', function(){
-  refresh();return false;
-});
-
+$(document).bind('keydown', 'f5', function(){   refresh();return false; });
 <?php endif; ?>
 
 <?php if($this->uri->segment(2)=='conversation' ):   ?>
-$(document).bind('keydown', 'r', function(){
-  message_reply();
-});
+$(document).bind('keydown', 'r', function(){   message_reply(); });
 <?php endif; ?>
+
 <?php endif; ?>
 </script>
