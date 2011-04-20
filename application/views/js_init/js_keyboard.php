@@ -36,7 +36,7 @@ $(document).bind('keyup', 's', function(){   $("#search").focus(); });
 
 $(document).bind('keyup', 'c', function(){  compose_message();});
 
-$(document).bind('keydown', '?', function(){
+$(document).bind('keydown', 'shift+/', function(){
     $("#kbd").dialog({
 			bgiframe: true,
 			autoOpen: false,
