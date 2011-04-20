@@ -219,4 +219,26 @@ function update_canned_responses()
     var dest_url = "<?php echo  site_url();?>/messages/canned_response/list";
     $.get(dest_url,  function(data) {    $("#canned_response_container").html(data)	});
 }
+
+//tab send message
+var is_tab = false;
+$(document).ready(function() {
+    $('#message').bind('keydown', 'tab', function(){
+        is_tab = true; 
+        setTimeout(function(){is_tab = false;}, "5000");
+    });
+    $("#composeForm").bind('keydown', 'return', function(){
+      if(is_tab == true)   
+      { 
+        if($("#composeForm").valid()) {
+    		$.post("http://localhost/sms/kalkun-dev/index.php/messages/compose_process", $("#composeForm").serialize(), function(data) {
+    		$("#compose_sms_container").html(data);
+    		$("#compose_sms_container").dialog({ buttons: { "Okay": function() { $(this).dialog("close"); } } });
+    		setTimeout(function() {$("#compose_sms_container").dialog('close')} , 1500);
+    	   }); 
+        }
+      }
+      return false;
+    });
+});
 </script>

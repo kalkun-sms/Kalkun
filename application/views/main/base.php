@@ -126,6 +126,10 @@
         	<td>Forward</td>
         </tr>
         <tr>
+        	<td class="align_right">&lt;Tab&gt; then &lt;Enter&gt; :</td>
+        	<td>Send Message</td>
+        </tr>
+        <tr>
         	<td class="align_right">d :</td>
         	<td>Show message details</td>
         </tr>

@@ -41,11 +41,12 @@ $(document).bind('keydown', 'shift+/', function(){
 			bgiframe: true,
 			autoOpen: false,
 			height: 400,
-			width: 500,
+			width: 600,
 			modal: true		
 		});	
     $('#kbd').dialog('open');
 }); 
+
 
 <?php if($this->uri->segment(1)!=''):   ?>
 $(document).bind('keydown', '#', function(){  action_delete(); });
