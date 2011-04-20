@@ -34,7 +34,7 @@ $(document).bind('keyup', 's', function(){   $("#search").focus(); });
 
 $(document).bind('keyup', 'c', function(){  compose_message();});
 
-$(document).bind('keydown', 'shift+/', function(){
+$(document).bind('keydown', '?', function(){
     $("#kbd").dialog({
 			bgiframe: true,
 			autoOpen: false,
@@ -46,7 +46,7 @@ $(document).bind('keydown', 'shift+/', function(){
 }); 
 
 <?php if($this->uri->segment(1)!=''):   ?>
-$(document).bind('keydown', 'shift+#', function(){  action_delete(); });
+$(document).bind('keydown', '#', function(){  action_delete(); });
 
 <?php if($this->uri->segment(1)!='phonebook' ):   ?>
 $(document).bind('keydown', 'm', function(){   message_move(); });
@@ -57,6 +57,8 @@ $(document).bind('keydown', 'f5', function(){   refresh();return false; });
 <?php endif; ?>
 
 <?php if($this->uri->segment(2)=='conversation' ):   ?>
+$(document).ready(function() {
+    
 $(document).bind('keydown', 'r', function(){   message_reply(); });
 // for convesation
 var totalmsg = $("#message_holder > div.messagelist").length;
@@ -65,14 +67,14 @@ var current_select =2;
 //move next
 $(document).bind('keydown', 'j', function(){  
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').removeClass('infocus'); //selecting child
-    current_select ++;
+    current_select ++; if(current_select > totalmsg +2 ) current_select = 3;
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').addClass('infocus'); //selecting child
 });
 
 //move prev
 $(document).bind('keydown', 'k', function(){  
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').removeClass('infocus'); //selecting child
-    current_select --;
+    current_select --;  if(current_select <3 ) current_select = totalmsg +2;
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').addClass('infocus'); //selecting child   
 });
 
@@ -134,18 +136,19 @@ $("#compose_sms_container").dialog('open');
 return false;
    
 });
-
+});
 <?php endif; ?>
 
 <?php if($this->uri->segment(1) == 'messages' && $this->uri->segment(2)!='conversation'  ):   ?>
 // for message_list page
+$(document).ready(function() {
 var totalmsg = $("#message_holder > div.messagelist").length;
 var current_select = 0;
 var current_number = '';
 //move next
 $(document).bind('keydown', 'j', function(){  
     $("#message_holder").children(":eq("+current_select+")").removeClass('infocus'); //selecting child
-    current_select ++;
+    current_select ++; if(current_select > totalmsg   ) current_select = 1;
     $("#message_holder").children(":eq("+current_select+")").addClass('infocus'); //selecting child
     current_number = $("#message_holder").children(":eq("+current_select+")").children().children().children('input.select_conversation').val();
    
@@ -154,7 +157,7 @@ $(document).bind('keydown', 'j', function(){
 //move prev
 $(document).bind('keydown', 'k', function(){  
     $("#message_holder").children(":eq("+current_select+")").removeClass('infocus'); //selecting child
-    current_select --;
+    current_select --; if(current_select < 1 ) current_select = totalmsg ;
     $("#message_holder").children(":eq("+current_select+")").addClass('infocus'); //selecting child
     current_number = $("#message_holder").children(":eq("+current_select+")").children().children().children('input.select_conversation').val();
    
@@ -181,6 +184,8 @@ $(document).bind('keydown', 'x', function(){
         $("#message_holder").children(":eq("+current_select+")").addClass("messagelist_hover");    
     }  
     
+});
+
 });
 <?php endif; ?>
 
