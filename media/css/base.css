@@ -1023,3 +1023,7 @@ label.error {
     min-height: 25px;
     padding: 5px 0;
 }
+
+.infocus{
+    font-style: italic;
+}

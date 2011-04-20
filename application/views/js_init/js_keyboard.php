@@ -31,8 +31,8 @@ $(document).bind('keydown', 'shift+/', function(){
     $("#kbd").dialog({
 			bgiframe: true,
 			autoOpen: false,
-			height: 300,
-			width: 400,
+			height: 400,
+			width: 500,
 			modal: true		
 		});	
     $('#kbd').dialog('open');
@@ -51,7 +51,73 @@ $(document).bind('keydown', 'f5', function(){   refresh();return false; });
 
 <?php if($this->uri->segment(2)=='conversation' ):   ?>
 $(document).bind('keydown', 'r', function(){   message_reply(); });
+// for convesation
+var totalmsg = $("#message_holder > div.messagelist").length;
+var current_select =2;
+
+//move next
+$(document).bind('keydown', 'j', function(){  
+    $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').removeClass('infocus'); //selecting child
+    current_select ++;
+    $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').addClass('infocus'); //selecting child
+});
+
+//move prev
+$(document).bind('keydown', 'k', function(){  
+    $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').removeClass('infocus'); //selecting child
+    current_select --;
+    $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').addClass('infocus'); //selecting child   
+});
+
+//select
+$(document).bind('keydown', 'o return', function(){  
+   $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.message_content').toggle();
+ $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('span.message_preview').toggle();
+  $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.optionmenu').toggle();
+});
+
+$(document).bind('keydown', 'd', function(){  
+   $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.detail_area').toggle();
+});
+
+$(document).bind('keydown', 'u', function(){  
+    var dest = $('#back_threadlist').attr('href');
+    document.location = dest;  
+});
 <?php endif; ?>
+
+<?php if($this->uri->segment(1) == 'messages' && $this->uri->segment(2)!='conversation'  ):   ?>
+// for message_list page
+var totalmsg = $("#message_holder > div.messagelist").length;
+var current_select = 0;
+var current_number = '';
+//move next
+$(document).bind('keydown', 'j', function(){  
+    $("#message_holder").children(":eq("+current_select+")").removeClass('infocus'); //selecting child
+    current_select ++;
+    $("#message_holder").children(":eq("+current_select+")").addClass('infocus'); //selecting child
+    current_number = $("#message_holder").children(":eq("+current_select+")").children().children().children('input.select_conversation').val();
+   
+});
+
+//move prev
+$(document).bind('keydown', 'k', function(){  
+    $("#message_holder").children(":eq("+current_select+")").removeClass('infocus'); //selecting child
+    current_select --;
+    $("#message_holder").children(":eq("+current_select+")").addClass('infocus'); //selecting child
+    current_number = $("#message_holder").children(":eq("+current_select+")").children().children().children('input.select_conversation').val();
+   
+   
+});
+
+//select
+$(document).bind('keydown', 'o return', function(){  
+    var group = "<?php echo $this->uri->segment(2) ; ?>";
+    var folder = "<?php echo $this->uri->segment(3) ; ?>";
+    document.location = "<?php echo site_url('messages/conversation'); ?>/" + group + "/"+ folder+"/" + current_number ;
+});
+<?php endif; ?>
+
 
 <?php endif; ?>
 </script>

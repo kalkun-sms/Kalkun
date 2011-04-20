@@ -145,12 +145,12 @@ $("#compose_sms_container").load(url, { 'type': type, 'param1': param1, 'param2'
 		if($("#composeForm").valid()) {
 		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 			$("#compose_sms_container").html(data);
-			$("#compose_sms_container").dialog({ buttons: { "Okay": function() { $(this).dialog("close"); } } });
-			setTimeout(function() {$("#compose_sms_container").dialog('close')} , 1500);
+			$("#compose_sms_container").dialog({ buttons: { "Okay": function() { $(this).dialog("destroy"); } } });
+			setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
 		});
 		}
 	},
-	'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('close');}
+	'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('destroy');}
     }
   });
 });

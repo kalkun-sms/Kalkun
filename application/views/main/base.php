@@ -46,12 +46,12 @@
 	</center>
 	
     <table>
-    <tr>
+    <tr valign="top">
     	<td>
         
         <table>
         <tr>
-        	<td colspan="2"> Jumping </td>
+        	<td colspan="2" align="center"><strong> Jumping</strong> </td>
         </tr>
         <tr>
         	<td class="align_right">g then i :</td>
@@ -65,15 +65,41 @@
         	<td class="align_right">g then s :</td>
         	<td>Goto Sent Items</td>
         </tr>
+        <tr>
+        	<td class="align_right">g then p :</td>
+        	<td>Goto Phonebook</td>
+        </tr>
+        
+        <tr>
+        <td colspan="2" align="center"><br /><strong> Navigation</strong></td>
+        </tr>
+        <tr>
+        	<td class="align_right">u :</td>
+        	<td>Back to threadlist</td>
+        </tr>
+        <tr>
+        	<td class="align_right">k / j :</td>
+        	<td>Newer/older conversation</td>
+        </tr>
+         <tr>
+        	<td class="align_right">o or &lt;Enter&gt; :</td>
+        	<td>Open conversation; <br/>collapse/expand conversatin</td>
+        </tr>
+	   <tr>
+        	<td class="align_right">d :</td>
+        	<td>Show message details</td>
+        </tr>
+
+	
         </table>
          
         </td>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         
-    	<td>
+    	<td >
         <table>
         <tr>
-        	<td colspan="2">Actions</td>
+        	<td colspan="2" align="center"><strong>Actions</strong></td>
         </tr>
         <tr>
         	<td class="align_right">c :</td>
