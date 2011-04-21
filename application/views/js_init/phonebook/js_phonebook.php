@@ -79,13 +79,27 @@ $(document).ready(function() {
     setTimeout( "	$('.notification_area').fadeOut();", 2000);
 	}
 	else {
-		$("input.select_contact:checked").each( function () {
-		var row = $(this).parents('tr');
-		var id = row.attr('id');
-		$.post(dest_url, {id: id}, function() {
-			$(row).slideUp("slow");
-		});
-		});
+    	$("#confirm_delete_contact_dialog").dialog({
+          autoOpen: false,
+          modal: true,
+          buttons : {
+            "Confirm" : function() {
+              		$("input.select_contact:checked:visible").each( function () {
+            		var row = $(this).parents('tr');
+            		var id = row.attr('id');
+            		$.post(dest_url, {id: id}, function() {
+            			$(row).slideUp("slow");
+            		});
+            		});
+                    $(this).dialog("close");
+            },
+            "Cancel" : function() {
+              $(this).dialog("close");
+            }
+          }
+        });
+        $("#contact-delete-count").html($("input.select_contact:checked:visible").length);
+        $('#confirm_delete_contact_dialog').dialog('open');
 	}
 	});
   

@@ -2,6 +2,12 @@
 
 <div id="contact_container" class="hidden"></div>
 
+<!-- Delete Contact Dialog -->
+<div class="dialog" id="confirm_delete_contact_dialog" title="Confirmation Required">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+	Are you sure to delete <span id="contact-delete-count"></span> contacts? </p>
+</div>
+
 <!-- Add contact wizard dialog -->
 <div id="pbk_add_wizard_dialog" title="Select Add Contact Method" class="dialog">
 	<div align="left">
