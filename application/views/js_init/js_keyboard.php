@@ -70,15 +70,14 @@ var totalmsg = $("#message_holder > div.messagelist").length;
 var current_select =0;
 
 //move next
-$(document).bind('keydown', 'j', function(){  
+$(document).bind('keydown', 'j', function(){
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').removeClass('infocus'); //selecting child
     current_select ++; if(current_select > totalmsg  ) current_select = 1;
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').addClass('infocus'); //selecting child
-    console.log($("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').html());
 });
 
 //move prev
-$(document).bind('keydown', 'k', function(){  
+$(document).bind('keydown', 'k', function(){
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').removeClass('infocus'); //selecting child
     current_select --;  if(current_select < 1 ) current_select = totalmsg ;
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').addClass('infocus'); //selecting child   
@@ -156,13 +155,12 @@ $(document).bind('keydown', 'j', function(){
     current_select ++; if(current_select > totalmsg   ) current_select = 1;
     $("#message_holder").children(":eq("+current_select+")").addClass('infocus'); //selecting child
     current_number = $("#message_holder").children(":eq("+current_select+")").children().children().children('input.select_conversation').val();
-   
 });
 
 //move prev
 $(document).bind('keydown', 'k', function(){  
     $("#message_holder").children(":eq("+current_select+")").removeClass('infocus'); //selecting child
-    current_select --; if(current_select < 1 ) current_select = totalmsg ;
+    current_select --; if(current_select < 0 ) current_select = totalmsg ;
     $("#message_holder").children(":eq("+current_select+")").addClass('infocus'); //selecting child
     current_number = $("#message_holder").children(":eq("+current_select+")").children().children().children('input.select_conversation').val();
 });
