@@ -70,7 +70,7 @@ var totalmsg = $("#message_holder > div.messagelist").length;
 var current_select =0;
 
 //move next
-$(document).bind('keydown', 'j', function(){  
+$(document).bind('keydown', 'j', function(){
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').removeClass('infocus'); //selecting child
     current_select ++; if(current_select > totalmsg  ) current_select = 1;
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').addClass('infocus'); //selecting child
@@ -78,7 +78,7 @@ $(document).bind('keydown', 'j', function(){
 });
 
 //move prev
-$(document).bind('keydown', 'k', function(){  
+$(document).bind('keydown', 'k', function(){
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').removeClass('infocus'); //selecting child
     current_select --;  if(current_select < 1 ) current_select = totalmsg ;
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').addClass('infocus'); //selecting child   
