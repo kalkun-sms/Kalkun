@@ -67,19 +67,20 @@ $(document).bind('keydown', 'r', function(){   message_reply(); });
 
 // for convesation
 var totalmsg = $("#message_holder > div.messagelist").length;
-var current_select =2;
+var current_select =0;
 
 //move next
 $(document).bind('keydown', 'j', function(){  
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').removeClass('infocus'); //selecting child
-    current_select ++; if(current_select > totalmsg +2 ) current_select = 2;
+    current_select ++; if(current_select > totalmsg  ) current_select = 0;
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').addClass('infocus'); //selecting child
+    console.log($("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').html());
 });
 
 //move prev
 $(document).bind('keydown', 'k', function(){  
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').removeClass('infocus'); //selecting child
-    current_select --;  if(current_select <3 ) current_select = totalmsg +2;
+    current_select --;  if(current_select < 1 ) current_select = totalmsg ;
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').addClass('infocus'); //selecting child   
 });
 
@@ -115,7 +116,7 @@ $(document).bind('keydown', 'x', function(){
 });
 
 $(document).bind('keydown', 'f', function(){
-   if(current_select < 3) return false;
+   if(current_select < 1) return false;
    var param2 = $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').attr('id');
    var param1 = $('#item_source'+param2).val();
   $("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type': 'forward', 'param1': param1, 'param2': param2}, function() {
