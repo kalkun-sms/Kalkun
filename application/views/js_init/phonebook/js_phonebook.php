@@ -71,7 +71,7 @@ $(document).ready(function() {
 	
 	// Delete contact
 	$("a.delete_contact").click(action_delete = function(){
-	var count = $("input:checkbox:checked").length;
+	var count = $("input:checkbox:checked:visible").length;
 	var dest_url = '<?php echo site_url('phonebook/delete_contact') ?>';
 	if(count==0) { 
 		$('.notification_area').text("<?php echo lang('tni_pbk_no_contact_selected')?>");
