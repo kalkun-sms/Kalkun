@@ -5,7 +5,7 @@
 <!-- Delete Contact Dialog -->
 <div class="dialog" id="confirm_delete_contact_dialog" title="Confirmation Required">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-	Are you sure to delete <span id="contact-delete-count"></span> contacts? </p>
+	Are you sure to delete <span id="contact-delete-count"></span> contact(s)? </p>
 </div>
 
 <!-- Add contact wizard dialog -->
