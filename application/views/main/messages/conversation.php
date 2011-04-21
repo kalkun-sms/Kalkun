@@ -1,8 +1,5 @@
 <div id="contact_container" class="hidden"></div>
 <?php 	
-$this->load->view('js_init/message/js_object');
-$this->load->view('js_init/message/js_conversation');
-
 if(count($messages)==0) 
 {
 	if($this->uri->segment(2)=='my_folder') echo "<p style=\"padding-left: 10px\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message_in_folder').".</i></p>";
@@ -158,4 +155,6 @@ endif;
 	if($tmp['source']=='inbox') if($tmp['readed'] == 'false') $this->Message_model->update_read($tmp['ID']);
 	endforeach;
 }
+$this->load->view('js_init/message/js_object');
+$this->load->view('js_init/message/js_conversation');
 ?>
