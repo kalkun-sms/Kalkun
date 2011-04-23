@@ -199,6 +199,38 @@ $(document).bind('keydown', 'o return', function(){
     return false;
 });
 
+//quick reply
+$(document).bind('keydown', 'r', function(){  
+var url = '<?php echo site_url('messages/compose')?>';
+var type = 'reply';
+var param1 = current_number;
+     
+$("#compose_sms_container").load(url, { 'type': type, 'param1': param1, 'param2': ''}, function() {
+  $(this).dialog({
+    modal: true,
+    draggable : true,    
+    open: function(event, ui) {$("#message").focus();}, 
+	width: 550,
+	show: 'fade',
+	hide: 'fade',
+    buttons: {
+	'<?php echo lang('tni_send_message'); ?>': function() {
+		if($("#composeForm").valid()) {
+		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
+			$("#compose_sms_container").html(data);
+			$("#compose_sms_container").dialog({ buttons: { "Okay": function() { $(this).dialog("destroy"); } } });
+			setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+		});
+		}
+	},
+	'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('destroy');}
+    }
+  });
+});
+$("#compose_sms_container").dialog('open');
+return false;
+});
+
 $(document).bind('keydown', 'x', function(){  
     if($("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_conversation').attr('checked')==true)
     {
