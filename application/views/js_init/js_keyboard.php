@@ -15,7 +15,6 @@ $(document).bind('keyup', '*', function(){
    setTimeout(function(){s_all = false;}, "3000");
 });
 
-
 $(document).bind('keydown', 'i', function(){
   if(go_to == true)    window.location = "<?php echo site_url('messages/folder/inbox'); ?>";
 });
@@ -130,8 +129,8 @@ $(document).bind('keydown', 'x', function(){
     {
         $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').removeAttr('checked');
         $("#message_holder").children(":eq("+current_select+")").removeClass("messagelist_hover");    
-      
-    }else
+    }
+    else
     {
         $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').attr('checked', true)
         $("#message_holder").children(":eq("+current_select+")").addClass("messagelist_hover");    
@@ -140,32 +139,32 @@ $(document).bind('keydown', 'x', function(){
 });
 
 $(document).bind('keydown', 'f', function(){
-   if(current_select < 1) return false;
-   var param2 = $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').attr('id');
-   var param1 = $('#item_source'+param2).val();
-  $("#compose_sms_container").load('<?php echo site_url('messages/compose') ?>', { 'type': 'forward', 'param1': param1, 'param2': param2}, function() {
-  $(this).dialog({
-    modal: true,    
-    open: function(event, ui) {$("#message").focus();}, 
-	width: 550,
-	show: 'fade',
-	hide: 'fade',
-    buttons: {
-	'<?php echo lang('tni_send_message'); ?>': function() {
-		if($("#composeForm").valid()) {
-		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
-			$("#compose_sms_container").html(data);
-			$("#compose_sms_container").dialog({ buttons: { "Okay": function() { $(this).dialog("destroy"); } } });
-			setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
-		});
-		}
-	},
-	'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('destroy');}
-    }
-  });
-});
-$("#compose_sms_container").dialog('open');
-return false;
+    if(current_select < 1) return false;
+    var param2 = $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').attr('id');
+    var param1 = $('#item_source'+param2).val();
+    $("#compose_sms_container").load('<?php echo site_url('messages/compose') ?>', { 'type': 'forward', 'param1': param1, 'param2': param2}, function() {
+      $(this).dialog({
+        modal: true,    
+        open: function(event, ui) {$("#message").focus();}, 
+    	width: 550,
+    	show: 'fade',
+    	hide: 'fade',
+        buttons: {
+    	'<?php echo lang('tni_send_message'); ?>': function() {
+    		if($("#composeForm").valid()) {
+    		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
+    			$("#compose_sms_container").html(data);
+    			$("#compose_sms_container").dialog({ buttons: { "Okay": function() { $(this).dialog("destroy"); } } });
+    			setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+    		});
+    		}
+    	},
+    	'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('destroy');}
+        }
+      });
+    });
+    $("#compose_sms_container").dialog('open');
+    return false;
 });
 <?php endif; ?>
 
@@ -201,34 +200,29 @@ $(document).bind('keydown', 'o return', function(){
 
 //quick reply
 $(document).bind('keydown', 'r', function(){  
-var url = '<?php echo site_url('messages/compose')?>';
-var type = 'reply';
-var param1 = current_number;
-     
-$("#compose_sms_container").load(url, { 'type': type, 'param1': param1, 'param2': ''}, function() {
-  $(this).dialog({
-    modal: true,
-    draggable : true,    
-    open: function(event, ui) {$("#message").focus();}, 
-	width: 550,
-	show: 'fade',
-	hide: 'fade',
-    buttons: {
-	'<?php echo lang('tni_send_message'); ?>': function() {
-		if($("#composeForm").valid()) {
-		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
-			$("#compose_sms_container").html(data);
-			$("#compose_sms_container").dialog({ buttons: { "Okay": function() { $(this).dialog("destroy"); } } });
-			setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
-		});
-		}
-	},
-	'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('destroy');}
-    }
-  });
-});
-$("#compose_sms_container").dialog('open');
-return false;
+    $("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type':'reply', 'param1': current_number, 'param2': ''}, function() {
+      $(this).dialog({
+        modal: true, 
+        open: function(event, ui) {$("#message").focus();}, 
+    	width: 550,
+    	show: 'fade',
+    	hide: 'fade',
+        buttons: {
+    	'<?php echo lang('tni_send_message'); ?>': function() {
+    		if($("#composeForm").valid()) {
+    		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
+    			$("#compose_sms_container").html(data);
+    			$("#compose_sms_container").dialog({ buttons: { "Okay": function() { $(this).dialog("destroy"); } } });
+    			setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+    		});
+    		}
+    	},
+    	'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('destroy');}
+        }
+      });
+    });
+    $("#compose_sms_container").dialog('open');
+    return false;
 });
 
 $(document).bind('keydown', 'x', function(){  
@@ -236,7 +230,6 @@ $(document).bind('keydown', 'x', function(){
     {
         $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_conversation').removeAttr('checked');
         $("#message_holder").children(":eq("+current_select+")").removeClass("messagelist_hover");    
-      
     }
     else
     {
