@@ -82,6 +82,10 @@
         	<td>Newer/older conversation</td>
         </tr>
          <tr>
+        	<td class="align_right">p / n :</td>
+        	<td>Read Prev/Next conversation</td>
+        </tr>
+        <tr>
         	<td class="align_right">o or &lt;Enter&gt; :</td>
         	<td>Open conversation; <br/>collapse/expand conversation</td>
         </tr>
