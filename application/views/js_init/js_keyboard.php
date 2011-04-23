@@ -24,15 +24,19 @@ $(document).bind('keydown', 'o', function(){
 });
  
 $(document).bind('keydown', 's', function(){
-  if(go_to == true)    window.location = "<?php echo site_url('messages/folder/sentitems'); ?>";
+  if(go_to == true)
+  {    
+    window.location = "<?php echo site_url('messages/folder/sentitems'); ?>";
+    return false;
+  }
+  $("#search").focus();
+  return false;
 });
 
 $(document).bind('keydown', 'p', function(){
   if(go_to == true)    window.location = "<?php echo site_url('phonebook'); ?>";
 });
-
-$(document).bind('keyup', 's', function(){   $("#search").focus(); });
-
+ 
 $(document).bind('keyup', 'c', function(){  compose_message();});
 
 $(document).bind('keydown', 'shift+/', function(){
@@ -109,6 +113,11 @@ $(document).bind('keydown', 'n', function(){
 
 //select
 $(document).bind('keydown', 'o', read_message =  function(){  
+    if(go_to == true)
+    {    
+        window.location = "<?php echo site_url('messages/folder/outbox'); ?>";
+        return false;
+    }
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.message_content').toggle();
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('span.message_preview').toggle();
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.optionmenu').toggle();
@@ -190,7 +199,15 @@ $(document).bind('keydown', 'k', function(){
 });
 
 //select
-$(document).bind('keydown', 'o return', function(){  
+$(document).bind('keydown', 'o return', function(e){
+    var code = (e.keyCode ? e.keyCode : e.which);
+    if(go_to == true && code == 79)
+    {    
+        window.location = "<?php echo site_url('messages/folder/outbox'); ?>";
+        return false;
+    }
+    
+    if(current_select < 1) return false;
     var group = "<?php echo $this->uri->segment(2); ?>";
     var folder = "<?php echo $this->uri->segment(3); ?>";
     var fid = "<?php echo $this->uri->segment(4, ''); ?>";
@@ -199,7 +216,8 @@ $(document).bind('keydown', 'o return', function(){
 });
 
 //quick reply
-$(document).bind('keydown', 'r', function(){  
+$(document).bind('keydown', 'r', function(){ 
+    if(current_select < 1) return false;
     $("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type':'reply', 'param1': current_number, 'param2': ''}, function() {
       $(this).dialog({
         modal: true, 
