@@ -58,10 +58,7 @@ $(document).bind('keydown', '#', function(){  action_delete(); });
 $(document).bind('keydown', 'm', function(){   message_move(); });
 <?php endif; ?>
 
-<?php if ($this->uri->segment(1) != 'phonebook' && $this->uri->segment(2) != 'search'): ?>
-$(document).bind('keydown', 'f5', function(){   refresh(); current_select =0; return false; });
-<?php endif; ?>
-
+ 
 <?php if ($this->uri->segment(2) == 'conversation' || $this->uri->segment(2) == 'search'): ?>  
 
 <?php if ($this->uri->segment(2) != 'search'): ?>
@@ -256,6 +253,10 @@ $(document).bind('keydown', 'x', function(){
     }  
     
 });
+<?php endif; ?>
+
+<?php if ($this->uri->segment(1) != 'phonebook' && $this->uri->segment(2) != 'search'): ?>
+$(document).bind('keydown', 'f5', function(){   refresh(); current_select =0; return false; });
 <?php endif; ?>
 
 $(document).bind('keydown', 'a', function(){   if(s_all == true)    select_all(); });
