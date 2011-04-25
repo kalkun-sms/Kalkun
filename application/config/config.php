@@ -23,21 +23,6 @@ $config['csv_path'] = $config['base_url'].'media/csv/';
 
 /*
 |--------------------------------------------------------------------------
-| Gammu Location
-|--------------------------------------------------------------------------
-|
-| Gammu Installation Location
-| Default Locations... You will need to verify for your system
-| Linux : /usr/local/bin/gammu
-| Windows : C:\Program Files\Gammu 1.29.92\bin\
-|
-*/
-$config['gammu_path'] = "C:\Gammu 1.29.92\bin\\";
-$config['gammu_sms_inject'] = $config['gammu_path']."gammu-smsd-inject";
-$config['gammu_config'] = $config['gammu_path']."config.ini";
-
-/*
-|--------------------------------------------------------------------------
 | Index File
 |--------------------------------------------------------------------------
 |
