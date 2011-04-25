@@ -35,6 +35,26 @@ class Message_model extends Model {
 	}
 
 	// --------------------------------------------------------------------
+    
+    function _send_wap_link($data)
+    {
+        if($data['dest']!=NULL && $data['date']!=NULL && $data['url']!=NULL && $data['message']!=NULL)
+		{
+		    $cmd = '"'.$this->config->item('gammu_sms_inject').'"' ." -c " .'"'.$this->config->item('gammu_config').'"'. " WAPINDICATOR " . $data['dest']. " \"". $data['url']. "\"  \"".$data['message']."\" ";
+            $ret = exec ($cmd);
+            preg_match("/with ID ([\d]+)/i",$ret,$matches);
+            $insert_id = $matches[1];
+            $this->db->update('outbox', array('SendingDateTime' => $data['date']), "ID = $insert_id" );
+            $this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));	
+		}
+		else 
+		{
+			echo 'Parameter invalid';	
+		}
+    }
+    
+    
+    // --------------------------------------------------------------------
 	
 	/**
 	 * Send Messages
@@ -58,6 +78,9 @@ class Message_model extends Model {
         {
             echo "<div class=\"notif\">Outgoing SMS Disabled</div>"; return;
         }
+        
+        // check if wap msg
+        if($data['type']=='waplink') { $this->_send_wap_link($data); return ;} 
 		
         if($data['dest']!=NULL && $data['date']!=NULL && $data['message']!=NULL)
 		{

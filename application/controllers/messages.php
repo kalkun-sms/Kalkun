@@ -202,7 +202,8 @@ class Messages extends MY_Controller {
 					date('i')+$this->input->post('delayminute'), date('s'), date('m'), date('d'), date('Y')));
 			break;				
 		}
-		$data['class'] = ($this->input->post('sms_mode')) ? '0' : '1';
+        $data['type'] = $this->input->post('smstype') ;
+		$data['class'] = ($data['type'] == 'flash') ? '0' : '1';
 		$data['message'] = $this->input->post('message');
 		$data['date'] = $date;
         $data['validity'] = $this->input->post('validity');
@@ -210,6 +211,7 @@ class Messages extends MY_Controller {
 		$data['coding'] = ($this->input->post('unicode')=='unicode') ? 'unicode' : 'default';	
         $data['ndnc'] = ($this->input->post('ndnc')=='ndnc') ? true : false;
 		$data['uid'] = $this->session->userdata('id_user');	
+        $data['url'] = $this->input->post('url');
 		
 		// if append @username is active
 		if($this->config->item('append_username'))

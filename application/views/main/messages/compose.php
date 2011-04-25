@@ -171,15 +171,25 @@ endforeach;
 <?php else: ?>
 <input type="hidden" name="sms_loop" id="sms_loop" value="1" />
 <?php endif;?>
-
-<tr>
-<td align="right" class="label"><?php echo lang('kalkun_sms_mode').":";?></td>
-<td><input type="checkbox" id="sms_mode" name="sms_mode" value="1" class="left_aligned" style="border: none;" />
-<label for="sms_mode"><?php echo lang('kalkun_compose_send_as_flash'); ?></label>
-<div style="float: right; text-align: right; padding-right: 10px;"><a href="javascript:void(0)"  id="canned_response"> Canned Responses...</a></div>
-</td>    
-</tr>    
  
+<tr>
+<td align="right" class="label">SMS Type</td>
+<td>
+<input class="left_aligned" type="radio" id="stype1" name="smstype" value="normal" checked="checked" style="border: none;" />
+<label for="stype1">Normal</label>
+<input type="radio" id="stype2" name="smstype" value="flash" style="border: none;"/>
+<label for="stype2">Flash<?php //echo lang('kalkun_compose_send_as_flash'); ?></label>
+<input type="radio" id="stype3" name="smstype" value="waplink" style="border: none;"/>
+<label for="stype3">WAP Push Link</label>
+<div style="float: right; text-align: right; padding-right: 10px;"><a href="javascript:void(0)"  id="canned_response"> Canned Responses...</a></div>
+
+</td>
+</tr>
+
+<tr style="display: none;" id="url-display">
+<td align="right" class="label">URL</td>
+<td><input type="text" style="width: 97%;" name="url" value="" /></td>
+</tr>
 
 <tr valign="top">
 <td align="right" class="label"><?php echo lang('kalkun_message').":";?></td>

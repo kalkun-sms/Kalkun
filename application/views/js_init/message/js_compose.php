@@ -232,14 +232,21 @@ $(document).ready(function() {
       if(is_tab == true)   
       { 
         if($("#composeForm").valid()) {
-    		$.post("http://localhost/sms/kalkun-dev/index.php/messages/compose_process", $("#composeForm").serialize(), function(data) {
+            $('.ui-dialog-buttonpane :button').each(function(){ if($(this).text() == 'Send Message') $(this).html('Sending <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');   });
+    		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
     		$("#compose_sms_container").html(data);
-    		$("#compose_sms_container").dialog({ buttons: { "Okay": function() { $(this).dialog("close"); } } });
-    		setTimeout(function() {$("#compose_sms_container").dialog('close')} , 1500);
+    		$("#compose_sms_container" ).dialog( "option", "buttons", { "Okay": function() { $(this).dialog("destroy"); } } );
+    		setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
     	   }); 
         }
       }
       return false;
     });
+});
+
+$("input[name='smstype']").click(function() {
+		if($(this).val()=='normal')  { $("#url-display").hide(); }
+		if($(this).val()=='flash')  { $("#url-display").hide(); }
+		if($(this).val()=='waplink')  { $("#url-display").show(); }	
 });
 </script>
