@@ -142,6 +142,7 @@ $(document).ready(function() {
 	$('.sendmessage').bind('click', function() {
 		var header = $(this).parents('div:eq(1)');
 		var param1 = header.children('.left_column').children('#pbkname').children('#pbknumber').text();
+		$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
 		$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type': "pbk_contact", 'param1': param1 }, function() {
 		  $(this).dialog({
 		    modal:true,

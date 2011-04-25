@@ -148,6 +148,7 @@ $(document).bind('keydown', 'f', function(){
     if(current_select < 1) return false;
     var param2 = $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').attr('id');
     var param1 = $('#item_source'+param2).val();
+    $("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
     $("#compose_sms_container").load('<?php echo site_url('messages/compose') ?>', { 'type': 'forward', 'param1': param1, 'param2': param2}, function() {
       $(this).dialog({
         modal: true,    
@@ -216,6 +217,7 @@ $(document).bind('keydown', 'o return', function(e){
 //quick reply
 $(document).bind('keydown', 'r', function(){ 
     if(current_select < 1) return false;
+    $("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
     $("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type':'reply', 'param1': current_number, 'param2': ''}, function() {
       $(this).dialog({
         modal: true, 

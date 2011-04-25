@@ -74,6 +74,7 @@ else {
 $('.sendmessage').bind('click', function() {
 	var row = $(this).parents('tr');
 	var id_group = row.attr('id');
+	$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
 	$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type': "pbk_groups", 'param1': id_group }, function() {
 	  $(this).dialog({
 	    modal:true,

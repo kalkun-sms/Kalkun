@@ -10,6 +10,7 @@ $(document).ready(function(){
 			$('.notification_area').show();	
 		}
 		else {
+		$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
 		$("#compose_sms_container").load('<?php echo site_url('messages/compose/member')?>', { 'type': "member" }, function() {
 		  $(this).dialog({
 		    modal:true,		

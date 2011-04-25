@@ -131,7 +131,7 @@ else
         var param1 = $(this).parents('div:eq(1)').children().children('input.item_number').val();  /* phone number */
          
 }
-		
+$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");		
 $("#compose_sms_container").load(url, { 'type': type, 'param1': param1, 'param2': param2}, function() {
   $(this).dialog({
     modal: true,
