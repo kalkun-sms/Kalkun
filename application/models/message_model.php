@@ -44,6 +44,7 @@ class Message_model extends Model {
             $ret = exec ($cmd);
             preg_match("/with ID ([\d]+)/i",$ret,$matches);
             $insert_id = $matches[1];
+            if(empty($insert_id))  die( "<div class=\"notif\"><font color='red'>Could Not Send Message. Make Sure Gammu Path is correctly set.</font></div>");
             $this->db->update('outbox', array('SendingDateTime' => $data['date']), "ID = $insert_id" );
             $this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));	
 		}
