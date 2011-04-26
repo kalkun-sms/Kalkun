@@ -1,40 +1,29 @@
 <script type="text/javascript">
-var go_to = false;
-var s_all = false;
 var current_number = '';
 
 $(document).ready(function() {
-//set g
-$(document).bind('keyup', 'g', function(){
-   go_to = true;
-   setTimeout(function(){go_to = false;}, "3000");
+
+$(document).bind('keydown', 'g;i', function(){
+      window.location = "<?php echo site_url('messages/folder/inbox'); ?>";
 });
 
-$(document).bind('keyup', '*', function(){
-   s_all = true;
-   setTimeout(function(){s_all = false;}, "3000");
-});
-
-$(document).bind('keydown', 'i', function(){
-  if(go_to == true)    window.location = "<?php echo site_url('messages/folder/inbox'); ?>";
-});
-
-$(document).bind('keydown', 'o', function(){
-  if(go_to == true)    window.location = "<?php echo site_url('messages/folder/outbox'); ?>";
+$(document).bind('keydown', 'g;o', function(){
+   window.location = "<?php echo site_url('messages/folder/outbox'); ?>";
 });
  
-$(document).bind('keydown', 's', function(){
-  if(go_to == true)
-  {    
+$(document).bind('keydown', 'g;s', function(){
     window.location = "<?php echo site_url('messages/folder/sentitems'); ?>";
     return false;
-  }
-  $("#search").focus();
-  return false;
 });
 
-$(document).bind('keydown', 'p', function(){
-  if(go_to == true)    window.location = "<?php echo site_url('phonebook'); ?>";
+$(document).bind('keydown', 's', function(){
+   $("#search").focus();
+    return false;
+});
+
+
+$(document).bind('keydown', 'g;p', function(){
+    window.location = "<?php echo site_url('phonebook'); ?>";
 });
  
 $(document).bind('keyup', 'c', function(){  compose_message();});
@@ -263,8 +252,8 @@ $(document).bind('keydown', 'x', function(){
 $(document).bind('keydown', 'f5', function(){   refresh(); current_select =0; return false; });
 <?php endif; ?>
 
-$(document).bind('keydown', 'a', function(){   if(s_all == true)    select_all(); });
-$(document).bind('keydown', 'n', function(){   if(s_all == true)     clear_all(); });
+$(document).bind('keydown', '*;a', function(){ select_all(); });
+$(document).bind('keydown', '*;n', function(){ clear_all(); });
 
 <?php endif; ?>
 });
