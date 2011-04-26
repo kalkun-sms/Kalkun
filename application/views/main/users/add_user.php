@@ -21,7 +21,7 @@
 
 <label for="level"><?php echo lang('tni_level'); ?></label>
 <?php
-$level = array('admin' => 'Administrator', 'user' => 'User');
+$level = array('admin' => lang('kalkun_level_admin'), 'user' => lang('kalkun_level_user'));
 $level_act = (isset($users)) ? $users->row('level') : '';
 $option = 'class="text ui-widget-content ui-corner-all"';
 echo form_dropdown('level', $level, $level_act, $option);

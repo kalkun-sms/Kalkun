@@ -112,12 +112,12 @@ endif;
     <tr><td><?php echo lang('tni_date');?></td><td> : </td><td><?php echo simple_date($message_date);?></td></tr>			    
     
     <?php if($tmp['source'] != 'outbox'): ?>
-    <tr><td>SMSC</td><td> : </td><td><?php echo $tmp['SMSCNumber'];?></td></tr>
+    <tr><td><?php echo lang('kalkun_smsc'); ?></td><td> : </td><td><?php echo $tmp['SMSCNumber'];?></td></tr>
     <?php endif; ?>
     
     <?php if($tmp['source'] == 'sentitems' OR $tmp['source'] == 'inbox'): ?>
     <?php if($part_no > 1): ?>
-    <tr><td>Part</td><td> : </td><td><?php echo $part_no;?> part messages</td></tr>
+    <tr><td><?php echo lang('kalkun_sms_part'); ?></td><td> : </td><td><?php echo $part_no;?> <?php echo lang('kalkun_sms_part_suffix'); ?></td></tr>
     <?php endif;?>
     <?php endif;?>
     <?php if($tmp['source'] == 'sentitems'): ?>		    

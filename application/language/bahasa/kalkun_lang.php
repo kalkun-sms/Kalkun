@@ -14,6 +14,7 @@ $lang['kalkun_outbox'] = "Kotak Keluar";
 $lang['kalkun_sentitems'] = "Pesan Terkirim";
 $lang['kalkun_trash'] = "Sampah";
 $lang['kalkun_add'] = "Tambah";
+$lang['kalkun_action'] = "Tindakan";
 
 $lang['kalkun_phonebook'] = "Daftar Kontak";
 $lang['kalkun_setting'] = "Pengaturan";
@@ -33,6 +34,7 @@ $lang['kalkun_ago'] = "yang lalu";
 $lang['kalkun_notification'] = "Pemberitahuan";
 $lang['kalkun_statistic'] = "Statistik";
 $lang['kalkun_system_information'] = "Informasi Sistem";
+$lang['kalkun_alerts'] = "Alerts";
 $lang['kalkun_operating_system'] = "Sistem Operasi";
 $lang['kalkun_gammu_version'] = "Versi Gammu";
 $lang['kalkun_gammu_db_schema'] = "Skema DB Gammu";
@@ -43,10 +45,20 @@ $lang['kalkun_last_phone_activity'] = "Aktivitas modem terakhir";
 $lang['kalkun_battery'] = "Baterai";
 $lang['kalkun_signal'] = "Sinyal";
 
-
 // Phonebook
 $lang['kalkun_contact'] = "Kontak";
 $lang['kalkun_group'] = "Grup";
+$lang['kalkun_add_to_group'] = "Add to Group";
+$lang['kalkun_delete_from_group'] = "Delete From Group";
+$lang['kalkun_pbk_add_method'] = "Select Add Contact Method";
+$lang['kalkun_pbk_add_form'] = "Using contact form";
+$lang['kalkun_pbk_add_form_desc'] = "Manually add contact using contact form";
+$lang['kalkun_pbk_add_csv'] = "Import CSV file";
+$lang['kalkun_pbk_add_csv_desc'] = "Import contact from CSV format file";
+$lang['kalkun_pbk_add_csv_file'] = "CSV File";
+$lang['kalkun_pbk_add_csv_label'] = "The CSV file must be in valid format";
+$lang['kalkun_pbk_del_contact_conf'] = "Are you sure want to delete selected contact(s)?";
+$lang['kalkun_valid_example'] = "Valid Example";
 
 // Message
 $lang['kalkun_message'] = "Pesan";
@@ -104,6 +116,23 @@ $lang['kalkun_global_delete_title'] = "Klik untuk menghapus pesan terpilih";
 $lang['kalkun_first'] = "Awal";
 $lang['kalkun_last'] = "Akhir";
 
+$lang['kalkun_smsc'] = "SMSC";
+$lang['kalkun_sms_part'] = "Part";
+$lang['kalkun_sms_part_suffix'] = "part messages";
+$lang['kalkun_sms_validity'] = "Valididy";
+
+$lang['kalkun_sms_type'] = "SMS Type";
+$lang['kalkun_sms_type_normal'] = "Normal";
+$lang['kalkun_sms_type_flash'] = "Flash";
+$lang['kalkun_sms_type_wap'] = "WAP Push Link";
+$lang['kalkun_sms_type_wap_url'] = "URL";
+
+$lang['kalkun_sms_ads_active'] = "Ads is active";
+$lang['kalkun_sms_ndnc_check'] = "Check NDNC";
+$lang['kalkun_insert'] = "Insert";
+
+$lang['kalkun_canned'] = "Canned Responses";
+$lang['kalkun_canned_empty'] = "Looks like there isn't any canned response created yet. Save your first canned response now";
 
 // Others
 $lang['kalkun_compose_amount'] = "Jumlah";
@@ -112,7 +141,25 @@ $lang['kalkun_compose_send_as_unicode'] = "Kirim sebagai Unicode";
 $lang['kalkun_compose_times'] = "kali";
 $lang['kalkun_compose_hour'] = "Jam";
 $lang['kalkun_compose_minutes'] = "Menit";
+$lang['kalkun_no_message_search'] = "Oops! Your Query doesnt match any records";
+$lang['tni_see_conversation'] = "See conversation";
 
+// Setting
+$lang['kalkun_setting_passwd_current'] = "Current Password";
+$lang['kalkun_setting_passwd_forgot'] = "Forgot your password?";
+$lang['kalkun_setting_passwd_new'] = "New Password";
+$lang['kalkun_setting_passwd_valid_rule'] = "Must be at least 6 characters long";
+
+$lang['kalkun_setting_passwd_current_enter'] = "Enter your current password";
+$lang['kalkun_setting_passwd_new_enter'] = "Enter your new password";
+
+$lang['kalkun_level_admin'] = "Administrator";
+$lang['kalkun_level_user'] = $lang['tni_user_word'];
+
+// SMS Content/Member
+$lang['kalkun_sms_member'] = "Member";
+$lang['kalkun_sms_total_member'] = "Total Member";
+$lang['kalkun_sms_no_member'] = "There is no registered member yet";
 
 // tni contribution
 $lang['tni_contact_add'] = "Tambah Kontak";
@@ -145,12 +192,15 @@ $lang['tni_settings_unamepass_wrong'] = "Wrong Username or Password";
 $lang['tni_back_to'] = "Kembali ke";   
 $lang['tni_show_details'] = "Show Details";   
 $lang['tni_hide_details'] = "Hide Details";  
-$lang['tni_search_contacts'] = "Search Contact";  
+$lang['tni_search_contacts'] = "Search Contact"; 
+$lang['tni_search_sms'] =  "Search Messages"; 
 $lang['tni_edit'] = "Edit";   
 $lang['tni_form_fields_required'] = "All form fields are required";   
 $lang['tni_contact_name'] = "Name";   
 $lang['tni_contact_phonenumber'] = "Telephone Number";    
 $lang['tni_compose_msgto_outbox'] = "Your message has been moved to Outbox<br>and is ready for delivery.";  
+$lang['tni_email_address'] = "Email ID";    
+$lang['tni_email_forward'] = "Enable Email Forwarding";
 $lang['tni_compose_searching'] = "Searching...";  
 $lang['tni_outbox_sent_time'] = "Less than a minute ago";  
 $lang['tni_time_remaining'] = "remaining";  
@@ -238,5 +288,6 @@ $lang['tni_no'] = "Tidak";
 $lang['tni_default'] = "Default";   
 $lang['tni_set_deliv_report'] = "Laporan Pengiriman"; 
 
+
 /* End of file kalkun_lang.php */
-/* Location: ./system/application/language/bahasa/kalkun_lang.php */
+/* Location: ./application/language/bahasa/kalkun_lang.php */

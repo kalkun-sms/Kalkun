@@ -51,25 +51,28 @@ class Phonebook extends MY_Controller {
 		
 		if($type == "ajax") $config['uri_segment'] = 4;
 		else $config['uri_segment'] = 3;
+		
 		$this->pagination->initialize($config);
 		$param = array('option' => 'paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3,0));
 		
-		if ($type == "ajax"):
-		$data['phonebook'] = $this->Phonebook_model->get_phonebook($param);		
-		$this->load->view('main/phonebook/contact/pbk_list', $data);
-		else:
-		$data['main'] = 'main/phonebook/contact/index';	
-		$data['pbkgroup'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->result();
-		if($_POST)
-    {
-      $data['phonebook'] = $this->Phonebook_model->get_phonebook(array('option' => 'search'));
-      $data['search_string'] = $this->input->post('search_name');
-    }
-    
-		else $data['phonebook'] = $this->Phonebook_model->get_phonebook($param);
-		
-		$this->load->view('main/layout', $data);
-		endif;
+		if ($type == "ajax")
+		{
+			$data['phonebook'] = $this->Phonebook_model->get_phonebook($param);		
+			$this->load->view('main/phonebook/contact/pbk_list', $data);
+		}
+		else
+		{
+			$data['main'] = 'main/phonebook/contact/index';	
+			$data['pbkgroup'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->result();
+			if($_POST)
+	    	{
+				$data['phonebook'] = $this->Phonebook_model->get_phonebook(array('option' => 'search'));
+	      		$data['search_string'] = $this->input->post('search_name');
+	    	}
+			else $data['phonebook'] = $this->Phonebook_model->get_phonebook($param);
+			
+			$this->load->view('main/layout', $data);
+		}
 	}
 
 	// --------------------------------------------------------------------
