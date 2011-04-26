@@ -22,7 +22,9 @@ function new_notification(refreshmode)
     
     <?php if ($this->uri->segment(2) == 'folder' || $this->uri->segment(2) == 'my_folder'): ?>  
     //refresh automatically if in threastlist
-    if(refreshmode == 'true') $('#message_holder').load("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>"); 
+    if(refreshmode == 'true') $('#message_holder').load("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>", function(response, status, xhr) {
+        if (status == "error") { return false;}
+    }); 
     <?php endif; ?>
 }
 
