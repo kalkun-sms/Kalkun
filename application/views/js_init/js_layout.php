@@ -19,6 +19,11 @@ function new_notification()
 		var newtitle = data + ' ' + title;
 		$(document).attr('title', newtitle);
 	});
+    
+    <?php if ($this->uri->segment(2) == 'folder' || $this->uri->segment(2) == 'my_folder'): ?>  
+    //refresh automatically if in threastlist
+    $('#message_holder').load("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>", function() {     }); 
+    <?php endif; ?>
 }
 
 function show_notification(text)
