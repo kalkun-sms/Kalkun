@@ -6,7 +6,7 @@
 <meta name="generator" content="Geany 0.13" />
 <?php echo link_tag($this->config->item('img_path').'icon.ico', 'shortcut icon', 'image/ico');?>
 <?php echo link_tag($this->config->item('css_path').'base.css');?>
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-1.3.2.min.js"></script>
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-1.4.2.min.js"></script>
 <script language="javascript">
 $(document).ready(function(){
 $("#username").focus();

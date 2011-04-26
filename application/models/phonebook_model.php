@@ -117,6 +117,7 @@ class Phonebook_model extends Model {
             $this->db->select('*');	
 			$this->db->from('pbk');
             $this->db->select_as('pbk.Name', 'Name');	
+            $this->db->select_as('pbk_groups.Name', 'GroupName');
             $this->db->join('user_group', 'user_group.id_pbk=pbk.ID');
 			$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups');
             $this->db->where('user_group.id_pbk_groups', $param['group_id']);
