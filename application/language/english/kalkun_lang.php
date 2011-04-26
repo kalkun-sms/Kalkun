@@ -14,6 +14,7 @@ $lang['kalkun_outbox'] = "Outbox";
 $lang['kalkun_sentitems'] = "Sent Items";
 $lang['kalkun_trash'] = "Trash";
 $lang['kalkun_add'] = "Add";
+$lang['kalkun_action'] = "Action";
 
 $lang['kalkun_phonebook'] = "Phonebook";
 $lang['kalkun_setting'] = "Settings";
@@ -44,10 +45,20 @@ $lang['kalkun_last_phone_activity'] = "Last modem activity";
 $lang['kalkun_battery'] = "Battery";
 $lang['kalkun_signal'] = "Signal";
 
-
 // Phonebook
 $lang['kalkun_contact'] = "Contact";
 $lang['kalkun_group'] = "Groups";
+$lang['kalkun_add_to_group'] = "Add to Group";
+$lang['kalkun_delete_from_group'] = "Delete From Group";
+$lang['kalkun_pbk_add_method'] = "Select Add Contact Method";
+$lang['kalkun_pbk_add_form'] = "Using contact form";
+$lang['kalkun_pbk_add_form_desc'] = "Manually add contact using contact form";
+$lang['kalkun_pbk_add_csv'] = "Import CSV file";
+$lang['kalkun_pbk_add_csv_desc'] = "Import contact from CSV format file";
+$lang['kalkun_pbk_add_csv_file'] = "CSV File";
+$lang['kalkun_pbk_add_csv_label'] = "The CSV file must be in valid format";
+$lang['kalkun_pbk_del_contact_conf'] = "Are you sure want to delete selected contact(s)?";
+$lang['kalkun_valid_example'] = "Valid Example";
 
 // Message
 $lang['kalkun_message'] = "Message";
@@ -77,6 +88,7 @@ $lang['kalkun_at_date_time'] = "At date and time";
 $lang['kalkun_after_a_delay'] = "After a delay";
 
 $lang['kalkun_person'] = "Person";
+$lang['kalkun_group'] = "Group";
 $lang['kalkun_input_manually'] = "Input manually";
 
 $lang['kalkun_show_hide_option'] = "Show/hide option";
@@ -104,6 +116,23 @@ $lang['kalkun_global_delete_title'] = "Click to delete selected message";
 $lang['kalkun_first'] = "First";
 $lang['kalkun_last'] = "Last";
 
+$lang['kalkun_smsc'] = "SMSC";
+$lang['kalkun_sms_part'] = "Part";
+$lang['kalkun_sms_part_suffix'] = "part messages";
+$lang['kalkun_sms_validity'] = "Valididy";
+
+$lang['kalkun_sms_type'] = "SMS Type";
+$lang['kalkun_sms_type_normal'] = "Normal";
+$lang['kalkun_sms_type_flash'] = "Flash";
+$lang['kalkun_sms_type_wap'] = "WAP Push Link";
+$lang['kalkun_sms_type_wap_url'] = "URL";
+
+$lang['kalkun_sms_ads_active'] = "Ads is active";
+$lang['kalkun_sms_ndnc_check'] = "Check NDNC";
+$lang['kalkun_insert'] = "Insert";
+
+$lang['kalkun_canned'] = "Canned Responses";
+$lang['kalkun_canned_empty'] = "Looks like there isn't any canned response created yet. Save your first canned response now";
 
 // Others
 $lang['kalkun_compose_amount'] = "Amount";
@@ -115,6 +144,22 @@ $lang['kalkun_compose_minutes'] = "Minutes";
 $lang['kalkun_no_message_search'] = "Oops! Your Query doesnt match any records";
 $lang['tni_see_conversation'] = "See conversation";
 
+// Setting
+$lang['kalkun_setting_passwd_current'] = "Current Password";
+$lang['kalkun_setting_passwd_forgot'] = "Forgot your password?";
+$lang['kalkun_setting_passwd_new'] = "New Password";
+$lang['kalkun_setting_passwd_valid_rule'] = "Must be at least 6 characters long";
+
+$lang['kalkun_setting_passwd_current_enter'] = "Enter your current password";
+$lang['kalkun_setting_passwd_new_enter'] = "Enter your new password";
+
+$lang['kalkun_level_admin'] = "Administrator";
+$lang['kalkun_level_user'] = $lang['tni_user_word'];
+
+// SMS Content/Member
+$lang['kalkun_sms_member'] = "Member";
+$lang['kalkun_sms_total_member'] = "Total Member";
+$lang['kalkun_sms_no_member'] = "There is no registered member yet";
 
 // tni contribution
 $lang['tni_contact_add'] = "Add Contact";
@@ -153,9 +198,9 @@ $lang['tni_edit'] = "Edit";
 $lang['tni_form_fields_required'] = "All form fields are required";   
 $lang['tni_contact_name'] = "Name";   
 $lang['tni_contact_phonenumber'] = "Telephone Number";   
+$lang['tni_compose_msgto_outbox'] = "Your message has been moved to Outbox<br>and is ready for delivery.";  
 $lang['tni_email_address'] = "Email ID";    
 $lang['tni_email_forward'] = "Enable Email Forwarding";
-$lang['tni_compose_msgto_outbox'] = "Your message has been moved to Outbox<br>and is ready for delivery.";  
 $lang['tni_compose_searching'] = "Searching...";  
 $lang['tni_outbox_sent_time'] = "Less than a minute ago";  
 $lang['tni_time_remaining'] = "remaining";  
@@ -245,4 +290,4 @@ $lang['tni_set_deliv_report'] = "Delivery Report";
 
 
 /* End of file kalkun_lang.php */
-/* Location: ./system/application/language/english/kalkun_lang.php */
+/* Location: ./application/language/english/kalkun_lang.php */

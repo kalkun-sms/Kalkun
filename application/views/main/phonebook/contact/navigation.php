@@ -4,23 +4,23 @@
 	<a href="#" class="clear_all nicebutton"><?php echo lang('kalkun_clear_all');?></a>
 	<a href="javascript:void(0)" class="delete_contact nicebutton"><?php echo lang('kalkun_delete');?></a>	
  	
-  <select    name="grp_action" class="grp_action nicebutton" style="width: 100px;;">
-	<option value="do">Action</option>
-	<option value="null">- Add to Group -</option>
-  <?php
-  $group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
-foreach($group->result() as $tmp):
-echo "<option value='{$tmp->ID}'> {$tmp->GroupName} </option>";
-endforeach; 
-?>
-	<option value="null">- Delete From Group -</option>
-  <?php
-  $group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
-foreach($group->result() as $tmp):
-echo "<option value='-{$tmp->ID}'> {$tmp->GroupName} </option>";
-endforeach; 
-?>
-</select>
+  	<select name="grp_action" class="grp_action nicebutton" style="width: 100px;">
+	<option value="do"><?php echo lang('kalkun_action');?></option>
+	<option value="null">- <?php echo lang('kalkun_add_to_group');?> -</option>
+	<?php
+	$group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
+	foreach($group->result() as $tmp):
+	echo "<option value='{$tmp->ID}'> {$tmp->GroupName} </option>";
+	endforeach; 
+	?>
+	<option value="null">- <?php echo lang('kalkun_delete_from_group');?> -</option>
+	<?php
+	$group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
+	foreach($group->result() as $tmp):
+	echo "<option value='-{$tmp->ID}'> {$tmp->GroupName} </option>";
+	endforeach; 
+	?>
+	</select>
 </div>
 <div class="right_column">
 	<?php if(empty($_POST));?><div id="simplepaging" class="paging_grey"><?php echo $this->pagination->create_links();?></div>

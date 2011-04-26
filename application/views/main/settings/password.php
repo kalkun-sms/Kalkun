@@ -17,14 +17,14 @@ rules: {
 },
 messages: {
 	current_password: {
-		required: "Enter your current password"	
+		required: "<?php echo lang('kalkun_setting_passwd_current_enter');?>"	
 	},
 	new_password: {
-		required: "Enter your new password",
-		minlength: "Too short"
+		required: "<?php echo lang('kalkun_setting_passwd_new_enter');?>",
+		minlength: "<?php echo lang('tni_error_toshort');?>"
 	},
 	confirm_password: { 
-		equalTo: "Passwords don't match"
+		equalTo: "<?php echo lang('tni_error_password_nomatch');?>"
 	}
 }
 });
@@ -33,21 +33,21 @@ messages: {
 
 <table width="100%" cellpadding="5">
 <tr valign="top">
-<td width="175px" valign="top">Current Password</td>
+<td width="175px" valign="top"><?php echo lang('kalkun_setting_passwd_current');?></td>
 <td>
 <input type="password" id="current_password" name="current_password" />
-<div class="note hidden"><a href="#">Forgot your password?</a></div>
+<div class="note hidden"><a href="#"><?php echo lang('kalkun_setting_passwd_forgot');?></a></div>
 </td>
 </tr> 
 
 <tr valign="top">
-<td>New Password</td>
+<td><?php echo lang('kalkun_setting_passwd_new');?></td>
 <td><input type="password" id="new_password" name="new_password" /><br />
-<small>Must be at least 6 characters long</small></td>
+<small><?php echo lang('kalkun_setting_passwd_valid_rule');?></small></td>
 </tr>
 
 <tr valign="top">
-<td>Confirm Password</td>
+<td><?php echo lang('tni_user_conf_password');?></td>
 <td><input type="password" id="confirm_password" name="confirm_password" /></td>
 </tr>	
 </table>

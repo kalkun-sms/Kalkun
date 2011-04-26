@@ -10,7 +10,7 @@ else: ?>
 	<div class="left_column">
 	<div id="pbkname">
 	<input type="checkbox" class="select_group" />
-	<span class="groupname" style="font-weight: bold;"><?php echo anchor('phonebook/group/'.$tmp->ID,$tmp->GroupName  , 'title="'.$tmp->GroupName .'"');?></span>
+	<span class="groupname" style="font-weight: bold;"><?php echo anchor('phonebook/group_contacts/'.$tmp->ID,$tmp->GroupName  , 'title="'.$tmp->GroupName .'"');?></span>
 	</div>
 </div>
 <div class="right_column">

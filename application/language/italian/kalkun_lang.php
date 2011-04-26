@@ -14,6 +14,7 @@ $lang['kalkun_outbox'] = "In uscita";
 $lang['kalkun_sentitems'] = "Inviati";
 $lang['kalkun_trash'] = "Cestino";
 $lang['kalkun_add'] = "Aggiungi";
+$lang['kalkun_action'] = "Action";
 
 $lang['kalkun_phonebook'] = "Rubrica";
 $lang['kalkun_setting'] = "Impostazioni";
@@ -33,6 +34,7 @@ $lang['kalkun_ago'] = "fa";
 $lang['kalkun_notification'] = "Notifica";
 $lang['kalkun_statistic'] = "Statistiche";
 $lang['kalkun_system_information'] = "Informazioni di Sistema";
+$lang['kalkun_alerts'] = "Alerts";
 $lang['kalkun_operating_system'] = "Sistema Operativo";
 $lang['kalkun_gammu_version'] = "Versione di Gammu";
 $lang['kalkun_gammu_db_schema'] = "Schema DB Gammu";
@@ -43,10 +45,20 @@ $lang['kalkun_last_phone_activity'] = "Ultma attività modem";
 $lang['kalkun_battery'] = "Batteria";
 $lang['kalkun_signal'] = "Segnale";
 
-
 // Phonebook
 $lang['kalkun_contact'] = "Contatti";
 $lang['kalkun_group'] = "Gruppi";
+$lang['kalkun_add_to_group'] = "Add to Group";
+$lang['kalkun_delete_from_group'] = "Delete From Group";
+$lang['kalkun_pbk_add_method'] = "Select Add Contact Method";
+$lang['kalkun_pbk_add_form'] = "Using contact form";
+$lang['kalkun_pbk_add_form_desc'] = "Manually add contact using contact form";
+$lang['kalkun_pbk_add_csv'] = "Import CSV file";
+$lang['kalkun_pbk_add_csv_desc'] = "Import contact from CSV format file";
+$lang['kalkun_pbk_add_csv_file'] = "CSV File";
+$lang['kalkun_pbk_add_csv_label'] = "The CSV file must be in valid format";
+$lang['kalkun_pbk_del_contact_conf'] = "Are you sure want to delete selected contact(s)?";
+$lang['kalkun_valid_example'] = "Valid Example";
 
 // Message
 $lang['kalkun_message'] = "Messaggio";
@@ -104,6 +116,23 @@ $lang['kalkun_global_delete_title'] = "Clicca per cancellare i messaggi selezion
 $lang['kalkun_first'] = "Primo";
 $lang['kalkun_last'] = "Ultimo";
 
+$lang['kalkun_smsc'] = "SMSC";
+$lang['kalkun_sms_part'] = "Part";
+$lang['kalkun_sms_part_suffix'] = "part messages";
+$lang['kalkun_sms_validity'] = "Valididy";
+
+$lang['kalkun_sms_type'] = "SMS Type";
+$lang['kalkun_sms_type_normal'] = "Normal";
+$lang['kalkun_sms_type_flash'] = "Flash";
+$lang['kalkun_sms_type_wap'] = "WAP Push Link";
+$lang['kalkun_sms_type_wap_url'] = "URL";
+
+$lang['kalkun_sms_ads_active'] = "Ads is active";
+$lang['kalkun_sms_ndnc_check'] = "Check NDNC";
+$lang['kalkun_insert'] = "Insert";
+
+$lang['kalkun_canned'] = "Canned Responses";
+$lang['kalkun_canned_empty'] = "Looks like there isn't any canned response created yet. Save your first canned response now";
 
 // Others
 $lang['kalkun_compose_amount'] = "Totale";
@@ -112,7 +141,25 @@ $lang['kalkun_compose_send_as_unicode'] = "Invia in Unicode";
 $lang['kalkun_compose_times'] = "volte";
 $lang['kalkun_compose_hour'] = "Ora";
 $lang['kalkun_compose_minutes'] = "Minuti";
+$lang['kalkun_no_message_search'] = "Oops! Your Query doesnt match any records";
+$lang['tni_see_conversation'] = "See conversation";
 
+// Setting
+$lang['kalkun_setting_passwd_current'] = "Current Password";
+$lang['kalkun_setting_passwd_forgot'] = "Forgot your password?";
+$lang['kalkun_setting_passwd_new'] = "New Password";
+$lang['kalkun_setting_passwd_valid_rule'] = "Must be at least 6 characters long";
+
+$lang['kalkun_setting_passwd_current_enter'] = "Enter your current password";
+$lang['kalkun_setting_passwd_new_enter'] = "Enter your new password";
+
+$lang['kalkun_level_admin'] = "Administrator";
+$lang['kalkun_level_user'] = $lang['tni_user_word'];
+
+// SMS Content/Member
+$lang['kalkun_sms_member'] = "Member";
+$lang['kalkun_sms_total_member'] = "Total Member";
+$lang['kalkun_sms_no_member'] = "There is no registered member yet";
 
 // tni contribution
 $lang['tni_contact_add'] = "Aggiungi Contatto";
@@ -145,12 +192,15 @@ $lang['tni_settings_unamepass_wrong'] = "Username o Password non validi";
 $lang['tni_back_to'] = "Torna a";   
 $lang['tni_show_details'] = "Visualizza Dettagli";   
 $lang['tni_hide_details'] = "Nascondi Dettagli";  
-$lang['tni_search_contacts'] = "Cerca contatto";  
+$lang['tni_search_contacts'] = "Cerca contatto"; 
+$lang['tni_search_sms'] =  "Search Messages"; 
 $lang['tni_edit'] = "Modifica";   
 $lang['tni_form_fields_required'] = "Tutti i campi sono obbligatori";   
 $lang['tni_contact_name'] = "Nome";   
 $lang['tni_contact_phonenumber'] = "Numero di telefono";    
 $lang['tni_compose_msgto_outbox'] = "Il tuo messaggio è stato spostato nell'Outbox<br>ed è pronto per la spedizione.";  
+$lang['tni_email_address'] = "Email ID";    
+$lang['tni_email_forward'] = "Enable Email Forwarding";
 $lang['tni_compose_searching'] = "Ricerca...";  
 $lang['tni_outbox_sent_time'] = "Meno di un minuto fa";  
 $lang['tni_time_remaining'] = "rimanente";  
@@ -240,4 +290,4 @@ $lang['tni_set_deliv_report'] = "Rapporto di invio";
 
 
 /* End of file kalkun_lang.php */
-/* Location: ./system/application/language/italian/kalkun_lang.php */
+/* Location: ./application/language/italian/kalkun_lang.php */

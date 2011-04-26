@@ -5,18 +5,18 @@
 <!-- Delete Contact Dialog -->
 <div class="dialog" id="confirm_delete_contact_dialog" title="Confirmation Required">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-	Are you sure to delete <span id="contact-delete-count"></span> contact(s)? </p>
+	<?php echo lang('kalkun_pbk_del_contact_conf');?> </p>
 </div>
 
 <!-- Add contact wizard dialog -->
-<div id="pbk_add_wizard_dialog" title="Select Add Contact Method" class="dialog">
+<div id="pbk_add_wizard_dialog" title="<?php echo lang('kalkun_pbk_add_method');?>" class="dialog">
 	<div align="left">
-	<p><a href="#" id="addpbkcontact" class="addpbkcontact"><big><strong>Using contact form</strong></big><br />
-	Manually add contact using contact form
+	<p><a href="#" id="addpbkcontact" class="addpbkcontact"><big><strong><?php echo lang('kalkun_pbk_add_form');?></strong></big><br />
+	<?php echo lang('kalkun_pbk_add_form_desc');?>
 	</a></p>
 	
-	<p><a href="#" id="importpbk"><big><strong>Import CSV file</strong></big><br />
-	Import contact from CSV format file
+	<p><a href="#" id="importpbk"><big><strong><?php echo lang('kalkun_pbk_add_csv');?></strong></big><br />
+	<?php echo lang('kalkun_pbk_add_csv_desc');?>
 	</a></p>
 	</div>
 </div>
@@ -27,12 +27,12 @@
 	<form class="importpbkform" method="post" enctype="multipart/form-data" action="<?php echo site_url();?>/phonebook/import_phonebook">
 	<fieldset>
 		<input type="hidden" name="pbk_id_user" id="pbk_id_user" value="<?php echo $this->session->userdata('id_user');?>" />
-		<label for="csvfile">CSV File</label>
+		<label for="csvfile"><?php echo lang('kalkun_pbk_add_csv_file');?></label>
 		<input type="file" name="csvfile" id="csvfile" class="text ui-widget-content ui-corner-all" />
-		<p><small>The CSV file must be in valid format, see <a href="<?php echo $this->config->item('csv_path');?>contact_sample.csv">Valid Example</a></small></p>
-		<label for="group">Group</label>
+		<p><small><?php echo lang('kalkun_pbk_add_csv_label').":";?> <a href="<?php echo $this->config->item('csv_path');?>contact_sample.csv"><b><?php echo lang('kalkun_valid_example');?></b></a></small></p>
+		<label for="group"><?php echo lang('kalkun_group');?></label>
     	<select id="importgroupvalue" name="importgroupvalue">
-    	<option value="">-- Select Group --</option>
+    	<option value="">-- <?php echo lang('tni_group_select');?> --</option>
     	<?php
     	foreach($pbkgroup as $tmp):
     	echo "<option value=\"".$tmp->ID."\">".$tmp->GroupName."</option>";

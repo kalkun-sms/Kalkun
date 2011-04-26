@@ -48,6 +48,4 @@ endforeach;
 <?php echo  $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();?></p>
 </div>
 
-<div style="clear: both;">
-&nbsp;
-</div>
+<div style="clear: both;">&nbsp;</div>
