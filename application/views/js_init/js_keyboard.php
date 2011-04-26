@@ -99,11 +99,6 @@ $(document).bind('keydown', 'n', function(){
 
 //select
 $(document).bind('keydown', 'o', read_message =  function(){  
-    if(go_to == true)
-    {    
-        window.location = "<?php echo site_url('messages/folder/outbox'); ?>";
-        return false;
-    }
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.message_content').toggle();
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('span.message_preview').toggle();
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.optionmenu').toggle();
@@ -188,13 +183,7 @@ $(document).bind('keydown', 'k', function(){
 
 //select
 $(document).bind('keydown', 'o return', function(e){
-    var code = (e.keyCode ? e.keyCode : e.which);
-    if(go_to == true && code == 79)
-    {    
-        window.location = "<?php echo site_url('messages/folder/outbox'); ?>";
-        return false;
-    }
-    
+    //var code = (e.keyCode ? e.keyCode : e.which);
     if(current_select < 1) return false;
     var group = "<?php echo $this->uri->segment(2); ?>";
     var folder = "<?php echo $this->uri->segment(3); ?>";
