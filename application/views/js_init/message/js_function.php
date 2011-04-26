@@ -138,7 +138,7 @@ $(document).ready(function() {
     	$('.loading_area').html('Loading...');
         $('.loading_area').fadeIn("slow");
     	$('#message_holder').load(refresh_url, function() {
-    	    new_notification();		
+    	    new_notification(false);		
             $('.loading_area').fadeOut("slow");
         });  
     	return false;
