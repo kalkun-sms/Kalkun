@@ -57,7 +57,7 @@ $lang['kalkun_pbk_add_csv'] = "Import CSV file";
 $lang['kalkun_pbk_add_csv_desc'] = "Import contact from CSV format file";
 $lang['kalkun_pbk_add_csv_file'] = "CSV File";
 $lang['kalkun_pbk_add_csv_label'] = "The CSV file must be in valid format";
-$lang['kalkun_pbk_del_contact_conf'] = "Are you sure want to delete selected contact(s)?";
+$lang['kalkun_pbk_del_contact_conf'] = "Are you sure want to delete <span id='contact-delete-count'></span> contact(s)?";
 $lang['kalkun_valid_example'] = "Valid Example";
 
 // Message
