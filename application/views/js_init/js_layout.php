@@ -3,12 +3,12 @@ var refreshId = setInterval(function() {
 	$('.modem_status').load('<?php echo site_url('kalkun/notification')?>');
 	//$('.unread_inbox').load('<?php echo site_url('kalkun/unread_inbox')?>');\
 	//var current_title = $(document).attr('title');
-	new_notification();
+	new_notification('true');
 }, 60000);
 
-function new_notification()
+function new_notification(refreshmode)
 {
-    $.post("<?php echo site_url('kalkun/unread_inbox')?>", function(data) {
+    $.get("<?php echo site_url('kalkun/unread_inbox')?>", function(data) {
 		$('span.unread_inbox_notif').text(data);
 				
 		var current_title = $(document).attr('title');
@@ -22,7 +22,7 @@ function new_notification()
     
     <?php if ($this->uri->segment(2) == 'folder' || $this->uri->segment(2) == 'my_folder'): ?>  
     //refresh automatically if in threastlist
-    $('#message_holder').load("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>", function() {     }); 
+    if(refreshmode == 'true') $('#message_holder').load("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>"); 
     <?php endif; ?>
 }
 
