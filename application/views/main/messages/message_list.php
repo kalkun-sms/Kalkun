@@ -53,9 +53,9 @@ else
 		&nbsp;&nbsp;<?php echo $senderName;?>
 		<?php 
 			if($folder=='folder'):
-			echo "(".$this->Message_model->get_messages(array('type' => $type, 'number' => $number))->num_rows().")";
+			echo "(".$this->Message_model->get_messages(array('type' => $type, 'number' => $number, 'uid' => $this->session->userdata('id_user')))->num_rows().")";
 			else:
-			echo "(".$this->Message_model->get_messages(array('type' => $type, 'number' => $number, 'id_folder' => $this->uri->segment(4)))->num_rows().")";
+			echo "(".$this->Message_model->get_messages(array('type' => $type, 'number' => $number, 'id_folder' => $this->uri->segment(4), 'uid' => $this->session->userdata('id_user')))->num_rows().")";
 			endif;
 		?>
 		</span>

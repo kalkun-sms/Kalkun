@@ -12,11 +12,12 @@ swfobject.embedSWF(
 <div align="center" id="test_chart">&nbsp;</div>
 
 <?php 
-$inbox = $this->Message_model->get_messages(array('type' => 'inbox'))->num_rows();
-$outbox = $this->Message_model->get_messages(array('type' => 'outbox'))->num_rows();
-$sentitems = $this->Message_model->get_messages(array('type' => 'sentitems'))->num_rows();
-$trash_inbox = $this->Message_model->get_messages(array('type' => 'inbox', 'id_folder' => '5'))->num_rows();
-$trash_sentitems = $this->Message_model->get_messages(array('type' => 'sentitems', 'id_folder' => '5'))->num_rows();
+$uid = $this->session->userdata('id_user');
+$inbox = $this->Message_model->get_messages(array('type' => 'inbox', 'uid' => $uid))->num_rows();
+$outbox = $this->Message_model->get_messages(array('type' => 'outbox', 'uid' => $uid))->num_rows();
+$sentitems = $this->Message_model->get_messages(array('type' => 'sentitems', 'uid' => $uid))->num_rows();
+$trash_inbox = $this->Message_model->get_messages(array('type' => 'inbox', 'id_folder' => '5', 'uid' => $uid))->num_rows();
+$trash_sentitems = $this->Message_model->get_messages(array('type' => 'sentitems', 'id_folder' => '5', 'uid' => $uid))->num_rows();
 $trash = $trash_inbox + $trash_sentitems;
 ?>
 

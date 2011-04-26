@@ -154,7 +154,7 @@ $lang['kalkun_setting_passwd_current_enter'] = "Enter your current password";
 $lang['kalkun_setting_passwd_new_enter'] = "Enter your new password";
 
 $lang['kalkun_level_admin'] = "Administrator";
-$lang['kalkun_level_user'] = $lang['tni_user_word'];
+$lang['kalkun_level_user'] = "User";
 
 // SMS Content/Member
 $lang['kalkun_sms_member'] = "Member";
