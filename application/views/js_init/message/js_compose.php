@@ -50,14 +50,19 @@ $(document).ready(function(){
 			},
 			datevalue: {
 				required: "#option2:checked"	
-			}
+			},
+            url :  {
+                required: "#stype3:checked",
+                url: true
+            }
 		},
 		messages: {
 			personvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
 			manualvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
 			groupvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
 			message: "<?php echo lang('tni_compose_enter_msg'); ?>",
-			datevalue: "<?php echo lang('tni_compose_enter_sendate'); ?>"
+			datevalue: "<?php echo lang('tni_compose_enter_sendate'); ?>",
+            url : "Should be a valid URL"
 		}
 	});
 	
