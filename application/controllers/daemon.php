@@ -100,6 +100,7 @@ class Daemon extends Controller {
 				endforeach;	
 			}		
             $this->Message_model->update_processed($id_message);
+            $this->Kalkun_model->add_sms_used($msg_user,'in');
             
             // sms to email
 			$this->_sms2email($tmp_message->TextDecoded, $tmp_message->SenderNumber , $msg_user);				

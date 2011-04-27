@@ -83,17 +83,19 @@ class Kalkun extends MY_Controller {
 		    $x[] = mktime(0, 0, 0, date("m"), date("d")-$i, date('Y'));	    
 		    $param['sms_date'] = date('Y-m-d', mktime(0,0,0,date("m"),date("d")-$i,date("Y")));
 		    $param['user_id'] = $this->session->userdata('id_user');		    
-		    $y[] = $this->Kalkun_model->get_sms_used('date', $param);
+		    $yout[] = $this->Kalkun_model->get_sms_used('date', $param, 'out');
+            $yin[] = $this->Kalkun_model->get_sms_used('date', $param,'in');
 		}
-		$this->_render_statistic($x, $y, 'bar');
+		$this->_render_statistic($x, $yout,  $yin, 'bar' );
 	}
 	
-	function _render_statistic($x = array(), $y = array(), $type='bar')
+	function _render_statistic($x = array(), $yout = array(),  $yin = array(), $type='bar'  )
 	{
 		$this->load->helper('date');
 		$this->load->library('OpenFlashChartLib', NULL, 'OFCL');
 		$data_1 = array();
-		$data_2 = array();		
+		$data_2 = array();	
+        $data_3 = array();	
 
 		switch($type)
 		{	
@@ -101,17 +103,28 @@ class Kalkun extends MY_Controller {
 				for($i=0; $i<=7;$i++)
 				{
 				    $data_1[$i] = date('M-d', $x[$i]);
-				    $data_2[$i] = (int)$y[$i]; // force to integer
+				    $data_2[$i] = (int)$yout[$i]; // force to integer
+                    $data_3[$i] = (int)$yin[$i]; // force to integer
 				}				
 				
 				$data_1 = array_reverse($data_1);
 				$data_2 = array_reverse($data_2);
+                $data_3 = array_reverse($data_3);
 				
-				$bar = new bar();
-				$bar->set_values($data_2);
-				$bar->set_colour('#21759B'); 
-				$bar->set_tooltip('#x_label#<br>#val# SMS');
-				$bar->set_key("SMS used in last 7 days", 10);
+				$bar_1 = new bar();
+				$bar_1->set_values($data_3);
+				$bar_1->set_colour('#639F45');
+                $bar_1->key( 'Incoming SMS', 10 ); 
+				$bar_1->set_tooltip('#x_label#<br>#val# SMS');
+				//$bar_1->set_key("SMS used in last 7 days", 10);
+                
+                $bar_2 = new bar();
+                $bar_2->set_values($data_2);
+			    $bar_2->set_colour('#21759B');
+                $bar_2->key( 'Outgoing SMS', 10 ); 
+			    $bar_2->set_tooltip('#x_label#<br>#val# SMS');
+				 
+                
 				
 				$x = new x_axis();				
 				$labels = new x_axis_labels();
@@ -120,26 +133,35 @@ class Kalkun extends MY_Controller {
 				$x->set_labels($labels);
 				
 				$y = new y_axis();
-				if(max($data_2)>0) $max=max($data_2); else $max=10;
+				$max = max(max($data_1),max($data_2));
+				if($max < 1)  $max=10;
 				$y->set_range(0, $max, round($max/100)*10); 
 				
-				$element = $bar;
+				$element1 = $bar_1;
+                $element2 = $bar_2;
 			break;
 			
 			case 'line':
 				for($i=0; $i<=7;$i++)
 				{
-				    $data_1[$i] = new scatter_value($x[$i], $y[$i]);
-				    $data_2[$i] = $y[$i];
+				    $data_1[$i] = new scatter_value($x[$i], $yin[$i]);
+                    $data_2[$i] = new scatter_value($x[$i], $yout[$i]);
+                    $data_3[$i] = (int)$yin[$i];
+				    $data_4[$i] = (int)$yout[$i];
 				}
 				    		
 				$def = new solid_dot();
 				$def->size(4)->halo_size(0)->colour('#21759B')->tooltip('#date:d M y#<br>#val# SMS');
 				
-				$line = new scatter_line('#21759B', 3); 
-				$line->set_values($data_1);
-				$line->set_default_dot_style($def);
-				$line->set_key("SMS used in last 7 days", 10);
+				$line_1 = new scatter_line('#639F45', 3); 
+				$line_1->set_values($data_1);
+				$line_1->set_default_dot_style($def);
+				$line_1->set_key("Incoming SMS", 10);
+                
+                $line_2 = new scatter_line('#21759B', 3); 
+				$line_2->set_values($data_2);
+				$line_2->set_default_dot_style($def);
+				$line_2->set_key("Outgoing SMS", 10);
 
 				$x = new x_axis();
 				// grid line and tick every 10
@@ -164,14 +186,19 @@ class Kalkun extends MY_Controller {
 				$x->set_labels($labels);
 				
 				$y = new y_axis();
-				if(max($data_2)>0) $max=max($data_2); else $max=10;
+                 
+                $max = max(max($data_3),max($data_4));
+				if($max < 1)  $max=10;
 				$y->set_range(0, $max, round($max/100)*10);	
 							
-				$element = $line;
+				$element1 = $line_1;
+                $element2 = $line_2;
 			break;
 		}		
 		$chart = new open_flash_chart();
-		$chart->add_element($element);
+		$chart->add_element($element1);
+        $chart->add_element($element2);
+        //$chart->set_title( 'SMS used in last 7 days' );
 		$chart->set_x_axis($x);
 		$chart->set_y_axis($y);
 		

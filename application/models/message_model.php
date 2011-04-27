@@ -38,7 +38,7 @@ class Message_model extends Model {
     
     function _send_wap_link($data)
     {
-        if($data['dest']!=NULL && $data['date']!=NULL && $data['url']!=NULL && $data['message']!=NULL)
+        if($data['dest']!=NULL && $data['date']!=NULL && $data['url']!=NULL && $data['message']!=NULL && $data['type']=='waplink')
 		{
 		    $cmd = '"'.$this->config->item('gammu_sms_inject').'"' ." -c " .'"'.$this->config->item('gammu_config').'"'. " WAPINDICATOR " . $data['dest']. " \"". $data['url']. "\"  \"".$data['message']."\" ";
             $ret = exec ($cmd);

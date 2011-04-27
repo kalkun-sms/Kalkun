@@ -52,7 +52,8 @@ CREATE TABLE IF NOT EXISTS `sms_used` (
   `id_sms_used` int(11) NOT NULL AUTO_INCREMENT,
   `sms_date` date NOT NULL,
   `id_user` int(11) NOT NULL,
-  `sms_count` int(11) NOT NULL DEFAULT '0',
+  `out_sms_count` int(11) NOT NULL DEFAULT '0',
+  `in_sms_count` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_sms_used`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
 
