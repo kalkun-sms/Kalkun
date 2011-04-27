@@ -85,12 +85,12 @@ textarea {
 }
 
 #top_navigation {
-	background: #333;
+	background: #666;
+	background-image: -moz-linear-gradient(center bottom , #666, #999);
 	margin-top: 0px;
 	width: 100%;
 	padding: 10px 0px;	
-	opacity: 0.5;
-	color: #FFF;
+	color: #DDD;
 	height: 15px;
 	position: fixed;
 	top: 0;	

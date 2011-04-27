@@ -41,7 +41,7 @@ else
 	}
 		
 	// count string for message preview
-	$char_per_line = 90-strlen(nice_date($message_date))-strlen($senderName);
+	$char_per_line = 100-strlen(nice_date($message_date))-strlen($senderName);
 	?>
 	
 	<div class="messagelist <?php  if($type == 'inbox' && $tmp->readed=='false') echo "unreaded";?>">

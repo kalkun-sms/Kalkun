@@ -135,7 +135,7 @@
    	function message_preview($str, $n)
    	{
    		if (strlen($str) <= $n) return showtags($str);
-		else return showtags(substr($str, 0, $n)).'&#8230;';
+		else return showtags(substr($str, 0, $n-3)).'&#8230;';
    	}
    	
     function showtags($msg)
