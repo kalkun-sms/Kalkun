@@ -114,15 +114,24 @@ class Phonebook extends MY_Controller {
 	 */		
 	function group_contacts($group_id = NULL)
 	{
+		$param = array('option' => 'bygroup', 'group_id' => $group_id);
 		$this->load->library('pagination');
-   		$param = array('option' => 'bygroup', 'group_id' => $group_id);
+   		$config['base_url'] = site_url().'/phonebook/group_contacts/'.$group_id;
+   		$config['total_rows'] = $this->Phonebook_model->get_phonebook($param)->num_rows();
+   		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
+   		$config['cur_tag_open'] = '<span id="current">';
+   		$config['cur_tag_close'] = '</span>';	
+   		$config['uri_segment'] = 4;
+   		$this->pagination->initialize($config);
+   				
+   		$param['limit'] = $config['per_page'];
+   		$param['offset'] = $this->uri->segment(4,0);
    		$contacts = $this->Phonebook_model->get_phonebook($param);
    		$data['main'] = 'main/phonebook/contact/index';	
    	    $data['title'] = $contacts->row('GroupName');
    	    $data['phonebook'] = $contacts;
    		$data['pbkgroup'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->result();
    	 	
-   	 	//var_dump($contacts);
 		$this->load->view('main/layout', $data);
 	}
 

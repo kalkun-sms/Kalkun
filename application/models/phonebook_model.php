@@ -123,6 +123,8 @@ class Phonebook_model extends Model {
             $this->db->where('user_group.id_pbk_groups', $param['group_id']);
             $this->db->where('pbk.id_user', $user_id);
             $this->db->order_by("pbk.Name", "asc");
+            
+            if(isset($param['limit']) && isset($param['offset'])) $this->db->limit($param['limit'], $param['offset']);
 			break;
 			
 			case 'search':
