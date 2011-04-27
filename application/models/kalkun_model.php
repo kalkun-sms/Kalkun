@@ -387,7 +387,10 @@ class Kalkun_model extends Model {
 	{
 		$date = date("Y-m-d");
 		$count = $this->_check_sms_used($date, $user_id,$type);
-		if($count>0)
+        $this->db->where('sms_date', $date);
+		$this->db->where('id_user', $user_id);
+        
+  		if($this->db->count_all_results('sms_used')>0)
 		{	
 			$this->db->set($type.'_sms_count', $count+1);
 			$this->db->where('sms_date', $date);
