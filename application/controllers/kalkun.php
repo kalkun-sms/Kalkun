@@ -198,7 +198,7 @@ class Kalkun extends MY_Controller {
 		$chart = new open_flash_chart();
 		$chart->add_element($element1);
         $chart->add_element($element2);
-        //$chart->set_title( 'SMS used in last 7 days' );
+        $chart->set_title( 'SMS used in last 7 days' );
 		$chart->set_x_axis($x);
 		$chart->set_y_axis($y);
 		

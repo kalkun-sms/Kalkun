@@ -70,7 +70,7 @@ class open_flash_chart
 	
 	function set_title( $t )
 	{
-		$this->title = $t;
+		$this->title = new title($t);
 	}
 	
 	function set_x_axis( $x )
