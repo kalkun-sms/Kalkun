@@ -101,7 +101,18 @@ $("a.clear_all_button").click(clear_all =  function(){
 $("a.refresh_button").click(refresh = function(){
 	$('.loading_area').html('Loading...');
     $('.loading_area').fadeIn("slow");
-	$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6,0)) ?>", function() { 
+	$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6,0)) ?>", function(response, status, xhr) { 
+            if (status == "error")  
+            {
+                $('.loading_area').html('<nobr>Oops Network Error. Retrying in <span id="countdown-count">10</span> Seconds.</nobr>');
+                var cntdwn = setInterval(function() {
+                    current_val = $('#countdown-count').html();
+                    if(current_val > 0)   $('#countdown-count').html(current_val  - 1 )	;
+                    else      clearInterval(cntdwn);                    
+                    } , 1000);	
+                setTimeout(function() {refresh();	} , 10000);	
+                return false;
+            }
         new_notification('false');
         $('.loading_area').fadeOut("slow");
     });

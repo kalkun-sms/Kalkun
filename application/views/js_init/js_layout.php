@@ -21,10 +21,23 @@ function new_notification(refreshmode)
 	});
     
     <?php if ($this->uri->segment(2) == 'folder' || $this->uri->segment(2) == 'my_folder'): ?>  
-    //refresh automatically if in threastlist
-    if(refreshmode == 'true') $('#message_holder').load("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>", function(response, status, xhr) {
-        if (status == "error") { return false;}
-    }); 
+    function auto_refresh(){
+            $('#message_holder').load("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>", function(response, status, xhr) {
+            if (status == "error")  
+            {
+                    $('.loading_area').html('<nobr>Oops Network Error. Retrying in <span id="countdown-count">10</span> Seconds.</nobr>');
+                    var cntdwn = setInterval(function() {
+                        current_val = $('#countdown-count').html();
+                        if(current_val > 0)   $('#countdown-count').html(current_val  - 1 )	;
+                        else      clearInterval(cntdwn);                    
+                        } , 1000);	
+                    setTimeout(function() {auto_refresh();	} , 10000);	
+                    return false;
+            }
+        }); 
+    }
+    if(refreshmode == 'true')         //refresh automatically if in threastlist 
+        auto_refresh();
     <?php endif; ?>
 }
 

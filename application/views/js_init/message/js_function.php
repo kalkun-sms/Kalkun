@@ -133,13 +133,24 @@ $(document).ready(function() {
     {  	
     	$('.loading_area').html('Loading...');
         $('.loading_area').fadeIn("slow");
-    	$('#message_holder').load(refresh_url, function() {
-    	    new_notification('false');		
+    	$('#message_holder').load(refresh_url, function(response, status, xhr) {
+            if (status == "error")  
+            {
+                $('.loading_area').html('<nobr>Oops Network Error. Retrying in <span id="countdown-count">10</span> Seconds.</nobr>');
+                var cntdwn = setInterval(function() {
+                    current_val = $('#countdown-count').html();
+                    if(current_val > 0)   $('#countdown-count').html(current_val  - 1 )	;
+                    else      clearInterval(cntdwn);                    
+                    } , 1000);	
+                setTimeout(function() {refresh();	} , 10000);	
+                return false;
+            }
+            new_notification('false');		
             $('.loading_area').fadeOut("slow");
         });  
     	return false;
     });
-        	
+         
 	// --------------------------------------------------------------------
 	
 	/**

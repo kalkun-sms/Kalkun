@@ -624,7 +624,7 @@ textarea {
 
 .loading_area, .notification_area {
  	text-align: center;	
-  	width: 100px;
+  	width: auto;
     margin: 0 auto; 
 	padding: 5px 10px; 
  	background: #FFFFCC;
