@@ -589,6 +589,11 @@ textarea {
 	display: none;
 }
 
+.good{
+    color:green;
+    text-shadow: #FFFFFF 0px 0px 2px;
+}
+
 .warning {
 	color: red;
 }

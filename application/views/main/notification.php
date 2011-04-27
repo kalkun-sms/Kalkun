@@ -9,8 +9,8 @@ $status = $this->Kalkun_model->get_gammu_info('last_activity')->row('UpdatedInDB
 if($status!=NULL) {
 	$status = get_modem_status($status, $this->config->item("modem_tolerant"));
 	
-	if($status=="connect") echo "<span style=\"color: green\">".lang('tni_connected')."</span>";
-	else echo "<span style=\"color: red\">".lang('tni_disconnected')."</span>";
+	if($status=="connect") echo "<span class=\"good\">".lang('tni_connected')."</span>";
+	else echo "<span class=\"warning\">".lang('tni_disconnected')."</span>";
 }
 else echo "Unknown";
 ?>
