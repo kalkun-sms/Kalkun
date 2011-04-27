@@ -35,13 +35,11 @@ $(".move_to").click(function() {
 var count = $("input:checkbox:checked").length;
 if(count==0) { 
 	$("#movetodialog").dialog('close');
-	$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected'); ?>");
-	$('.notification_area').show();
+	show_notification("<?php echo lang('tni_msg_no_conv_selected'); ?>");
 }
 else {    	
 var id_folder = $(this).attr('id');
 $("#movetodialog").dialog('close');
-$('.loading_area').fadeIn("slow");
 $("input.select_message:checked").each(function () {
 	var message_row = $(this).parents('div:eq(2)');
     id_access = '#item_source'+$(this).val();
@@ -49,9 +47,9 @@ $("input.select_message:checked").each(function () {
 	$.post("<?php echo  site_url('messages/move_message') ?>", {type: 'single', current_folder: current_folder, folder: item_folder, 
 		id_folder: id_folder, id_message: $(this).val()}, function() {
 		$(message_row).slideUp("slow");
+        show_notification("Messages Moved")
 	});
 });		
-$('.loading_area').fadeOut("slow");
 }
 });    
     

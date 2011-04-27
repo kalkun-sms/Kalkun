@@ -43,7 +43,6 @@ $(document).ready(function() {
 		}
 		else 
 		{
-			$('.loading_area').fadeIn("slow");
 			$("input.select_conversation:checked").each(function() 
 			{
 				var message_row = $(this).parents('div:eq(2)');
@@ -53,7 +52,6 @@ $(document).ready(function() {
 					$(message_row).remove();
 				});
 			});
-			$('.loading_area').fadeOut("slow");
 			show_notification(count + ' conversation deleted'); // translate
 		}
 	});
@@ -76,7 +74,6 @@ $(document).ready(function() {
 		{    	
 			var id_folder = $(this).attr('id');	
 			$("#movetodialog").dialog('close');
-			$('.loading_area').fadeIn("slow");
 			$("input.select_conversation:checked").each(function () {
 				var message_row = $(this).parents('div:eq(2)');
 				$.post(move_url, {type: 'conversation', current_folder: current_folder, folder: source, 
@@ -84,7 +81,6 @@ $(document).ready(function() {
 					$(message_row).slideUp("slow");
 				});
 			});
-			$('.loading_area').fadeOut("slow");
 			show_notification(count + ' conversation moved'); // translate
 		}
 		count=0;

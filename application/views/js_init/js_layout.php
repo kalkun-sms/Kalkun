@@ -31,7 +31,8 @@ function new_notification(refreshmode)
 function show_notification(text)
 {
 	$('.notification_area').text(text);
-	$('.notification_area').show();		
+	$('.notification_area').fadeIn('slow');	
+    setTimeout(function() {$('.notification_area').fadeOut('slow');	} , 1500);	
 }
 
 $(document).ready(function() {

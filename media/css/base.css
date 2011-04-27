@@ -632,7 +632,8 @@ textarea {
 
 .notification_area {
 	float: left;
-	width: auto;	
+	width: auto;
+    opacity:1;	
 }
 
 .nicecheckbox {
