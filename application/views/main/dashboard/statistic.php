@@ -3,7 +3,7 @@
 
 <script type="text/javascript">
 swfobject.embedSWF(
-"<?php echo $this->config->item('swf_path');?>open-flash-chart.swf", "test_chart", "525", "200",
+"<?php echo $this->config->item('swf_path');?>open-flash-chart.swf", "test_chart", "650", "200",
 "9.0.0", "expressInstall.swf",
 {"data-file":"<?php echo urlencode($data_url);?>"},{"wmode":"transparent"}
 );
@@ -21,7 +21,7 @@ $trash_sentitems = $this->Message_model->get_messages(array('type' => 'sentitems
 $trash = $trash_inbox + $trash_sentitems;
 ?>
 
-<div style="float: left; width: 150px;">
+<div style="float: left; width: 200px;">
 <h4><?php echo lang('kalkun_folder');?>: </h4>
 <p><span><?php echo lang('kalkun_inbox');?>:</span> <?php echo $inbox;?></p>
 <p><span><?php echo lang('kalkun_outbox');?>:</span> <?php echo $outbox;?></p>
@@ -29,7 +29,7 @@ $trash = $trash_inbox + $trash_sentitems;
 <p><span><?php echo lang('kalkun_trash');?>:</span> <?php echo $trash;?></p>
 </div>
 
-<div style="float: left; width: 200px;">
+<div style="float: left; width: 250px;">
 <h4><?php echo lang('kalkun_myfolder');?>: </h4>
 <?php  
 foreach($this->Kalkun_model->get_folders('all')->result() as $val):
@@ -41,7 +41,7 @@ endforeach;
 ?>
 </div>
 
-<div style="float: left; width: 175px;">
+<div style="float: left; width: 200px;">
 <h4><?php echo lang('kalkun_phonebook');?>: </h4>
 <p><span><?php echo lang('kalkun_contact');?>: </span>
 <?php echo  $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();?></p>

@@ -14,7 +14,7 @@
 			<div id="logo"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></div>
 			<div id="app_meta">Open source web based SMS management</div>
 		</div>
-		<div class="notification_container"><span class="notification_area hidden"><?php echo lang('tni_loading');?>...</span>
+		<div class="notification_container" align="center"><span class="notification_area hidden"><?php echo lang('tni_loading');?>...</span>
 		<?php if($this->session->flashdata('notif')): ?>
 		<span class="notification_area"><?php echo $this->session->flashdata('notif');?></span>
 		<?php endif; ?>

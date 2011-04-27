@@ -54,14 +54,14 @@ textarea {
 /* Header */
 
 #header {
-	width: 775px;
+	width: 925px;
 	overflow: hidden;
 	padding-bottom: 15px;
 	margin-top: 30px;
 }
 
 #header_left {
-	width: 275px;
+	width: 300px;
 	float: left;
 }
 
@@ -77,6 +77,11 @@ textarea {
 	color: #FFF;
 	font-weight: bold;
 	margin: 0px 5px;
+}
+
+.notification_container {
+	width: 200px;
+	text-align: center;	
 }
 
 #top_navigation {
@@ -96,7 +101,7 @@ textarea {
 }
 
 #top_navigation_container {
-	width: 775px;
+	width: 925px;
 }
 
 #top_navigation_left {
@@ -149,7 +154,7 @@ textarea {
 /* Container */
 
 #container {
-	width: 775px;
+	width: 925px;
 	overflow: hidden;	
 	text-align: left;		
 	background: transparent;
@@ -158,13 +163,13 @@ textarea {
 /* two column container */
 
 #two_column_container  {
-	width: 560px;
+	width: 685px;
 	padding: 10px 10px 5px 10px;
 	min-height: 25px;
 }
 
 .two_column_container {
-	width: 550px;
+	width: 675px;
 	min-height: 25px;
 }
 
@@ -212,6 +217,7 @@ textarea {
 	float: left;
 	text-align: left;
 	font-size: 12px;
+	font-weight: 400;
 }
 
 #menu ul {
@@ -222,7 +228,7 @@ textarea {
 }
 
 #menu li {
-	width: 150px;
+	width: 175px;
 	padding: 10px;
 	border-bottom: 1px dashed;
 }
@@ -279,7 +285,7 @@ textarea {
 #content {
 	float: right;
 	text-align: left;	
-	width: 590px;
+	width: 715px;
 	background: #FFF;
 	padding: 0px 0px;	
     line-height:1.5em;
@@ -461,9 +467,20 @@ textarea {
 	text-align: right;
 }
 
+#simplepaging ul {
+	border: 0;
+	margin: 0;
+	padding: 0;	
+}
+
+#simplepaging ul li {
+	border:0; margin:0; padding:0;
+	font-size: 11px;
+	list-style: none;
+	display: inline;
+}
+
 #simplepaging #current {
-	margin: 2px 0px 2px 5px;
-	padding: 2px 5px 2px 5px;
 	text-decoration: overline;
 }
 
@@ -472,8 +489,14 @@ textarea {
 	color: #000;
 	padding: 3px 5px;
 	border: 1px solid #999;
+	border-right: none;
 	font-weight: bold;
 	font-size: 11px;	
+	margin: 0;
+}
+
+#simplepaging ul li:last-child {
+	border-right: 1px solid #999;
 }
 
 #simplepaging #current { 
@@ -532,7 +555,7 @@ textarea {
 /* Footer */
 #footer {
 	clear: both;
-	width: 775px;
+	width: 925px;
 	text-align: right;
 	color: #000;
 	font-size: 11px;
@@ -632,7 +655,7 @@ textarea {
 }
 
 .sms_search_form input[type="text"] {
-	width: 215px;
+	width: 250px;
 	margin:0;
 	border-right: none;
 }

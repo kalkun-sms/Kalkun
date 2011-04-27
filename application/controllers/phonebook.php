@@ -43,11 +43,10 @@ class Phonebook extends MY_Controller {
 	{		
 		$data['title'] = lang('tni_contacts');
 		$this->load->library('pagination');
+		$config = $this->_get_pagination_style();
 		$config['base_url'] = site_url().'/phonebook/index/';
 		$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-		$config['cur_tag_open'] = '<span id="current">';
-		$config['cur_tag_close'] = '</span>';
 		
 		if($type == "ajax") $config['uri_segment'] = 4;
 		else $config['uri_segment'] = 3;
@@ -88,11 +87,10 @@ class Phonebook extends MY_Controller {
 	{    
    		$data['title'] = 'Groups';
    		$this->load->library('pagination');
+   		$config = $this->_get_pagination_style();
    		$config['base_url'] = site_url().'/phonebook/group/';
    		$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();
    		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-   		$config['cur_tag_open'] = '<span id="current">';
-   		$config['cur_tag_close'] = '</span>';	
    		$config['uri_segment'] = 3;
    		$this->pagination->initialize($config);
    		$param = array('option' => 'group_paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3,0));
@@ -116,11 +114,10 @@ class Phonebook extends MY_Controller {
 	{
 		$param = array('option' => 'bygroup', 'group_id' => $group_id);
 		$this->load->library('pagination');
+		$config = $this->_get_pagination_style();
    		$config['base_url'] = site_url().'/phonebook/group_contacts/'.$group_id;
    		$config['total_rows'] = $this->Phonebook_model->get_phonebook($param)->num_rows();
    		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-   		$config['cur_tag_open'] = '<span id="current">';
-   		$config['cur_tag_close'] = '</span>';	
    		$config['uri_segment'] = 4;
    		$this->pagination->initialize($config);
    				
@@ -134,6 +131,34 @@ class Phonebook extends MY_Controller {
    	 	
 		$this->load->view('main/layout', $data);
 	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Get Pagination Style
+	 *
+	 * Get config style for pagination
+	 *
+	 * @access	private   		 
+	 */		
+	 function _get_pagination_style()
+	 {
+   		$config['full_tag_open'] = '<ul>';
+   		$config['full_tag_close'] = '</ul>';
+   		$config['num_tag_open'] = '<li>';
+   		$config['num_tag_close'] = '</li>';	 
+   		$config['cur_tag_open'] = '<li><span id="current">';
+   		$config['cur_tag_close'] = '</span></li>';	
+   		$config['prev_tag_open'] = '<li>';
+   		$config['prev_tag_close'] = '</li>';
+   		$config['next_tag_open'] = '<li>';
+   		$config['next_tag_close'] = '</li>';
+   		$config['first_tag_open'] = '<li>';
+   		$config['first_tag_close'] = '</li>';
+   		$config['last_tag_open'] = '<li>';
+   		$config['last_tag_close'] = '</li>';
+   		return $config;   			
+	 }
 
 	// --------------------------------------------------------------------
 	
