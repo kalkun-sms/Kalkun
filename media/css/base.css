@@ -618,12 +618,16 @@ textarea {
 }
 
 .loading_area, .notification_area {
-	margin: 0; 
  	text-align: center;	
   	width: 100px;
+    margin: 0 auto; 
 	padding: 5px 10px; 
  	background: #FFFFCC;
  	font-weight: bold;
+    z-index:100;
+    position:absolute;
+    opacity:0.7;
+    
 }
 
 .notification_area {
