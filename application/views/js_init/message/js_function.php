@@ -165,7 +165,7 @@ $(document).ready(function() {
     	$('.loading_area').html('Loading...');
         $('.loading_area').fadeIn("slow");
     	$('#message_holder').load(refresh_url, function(response, status, xhr) {
-            if (status == "error")  
+            if (status == "error" || xhr.status != 200 )  
             {
                 $('.loading_area').html('<nobr>Oops Network Error. Retrying in <span id="countdown-count">10</span> Seconds.</nobr>');
                 var cntdwn = setInterval(function() {

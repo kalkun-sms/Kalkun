@@ -23,7 +23,7 @@ function new_notification(refreshmode)
     <?php if ($this->uri->segment(2) == 'folder' || $this->uri->segment(2) == 'my_folder'): ?>  
     function auto_refresh(){
             $('#message_holder').load("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>", function(response, status, xhr) {
-            if (status == "error")  
+            if (status == "error" || xhr.status != 200 ) 
             {
                     $('.loading_area').html('<nobr>Oops Network Error. Retrying in <span id="countdown-count">10</span> Seconds.</nobr>');
                     var cntdwn = setInterval(function() {

@@ -130,7 +130,7 @@ $("a.refresh_button").click(refresh = function(){
 	$('.loading_area').html('Loading...');
     $('.loading_area').fadeIn("slow");
 	$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6,0)) ?>", function(response, status, xhr) { 
-            if (status == "error")  
+            if (status == "error" || xhr.status != 200 )  
             {
                 $('.loading_area').html('<nobr>Oops Network Error. Retrying in <span id="countdown-count">10</span> Seconds.</nobr>');
                 var cntdwn = setInterval(function() {
