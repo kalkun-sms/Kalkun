@@ -655,7 +655,8 @@ class CI_Session {
 		setcookie(
 					$this->sess_cookie_name,
 					$cookie_data,
-					$this->sess_expiration + time(),
+					//$this->sess_expiration + time(),
+					$this->userdata('remember_me')? $this->sess_expiration + time() : 0,
 					$this->cookie_path,
 					$this->cookie_domain,
 					0

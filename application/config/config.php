@@ -225,7 +225,8 @@ $config['cache_path'] = '';
 | enabled you MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = "";
+// Kalkun default encryption key, you must change it to random 32 characters in length (128 bits)
+$config['encryption_key'] = "F0af18413d1c9e03A6d8d1273160f5Ed"; 
 
 /*
 |--------------------------------------------------------------------------
@@ -240,7 +241,7 @@ $config['encryption_key'] = "";
 |
 */
 $config['sess_cookie_name']		= 'kalkun_ci_session';
-$config['sess_expiration']		= 7200;
+$config['sess_expiration']		= 1209600; // 2 weeks
 $config['sess_encrypt_cookie']	= TRUE;
 $config['sess_use_database']	= FALSE;
 $config['sess_table_name']		= 'ci_sessions';

@@ -1,6 +1,7 @@
 <title><?php echo "Kalkun"; if(isset($title)): echo " / ".$title; endif;?></title>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <meta name="generator" content="Geany 0.13" />
+<meta name="robots" content="noindex,nofollow">
 <link rel="shortcut icon" href="<?php echo  $this->config->item('img_path');?>icon.ico" type="image/x-icon" />
 <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>base.css" />
 <style type="text/css">

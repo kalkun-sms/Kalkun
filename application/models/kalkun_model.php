@@ -54,7 +54,8 @@ class Kalkun_model extends Model {
 			$this->session->set_userdata('loggedin', 'TRUE');
 			$this->session->set_userdata('level', $query->row('level'));
 			$this->session->set_userdata('id_user', $query->row('id_user'));
-			$this->session->set_userdata('username', $query->row('username'));			
+			$this->session->set_userdata('username', $query->row('username'));	
+			if($this->input->post('remember_me')) $this->session->set_userdata('remember_me', TRUE);	
 			redirect('kalkun');
 		}
 		else $this->session->set_flashdata('errorlogin', 'Your username or password are incorrect');

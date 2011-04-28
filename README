@@ -4,52 +4,55 @@ Homepage : http://kalkun.sourceforge.net
 (For complete instruction, see http://sourceforge.net/apps/trac/kalkun/wiki/Installation)
 
 You need to install and configure this first :
-	- apache 2.x.x
-	- PHP 5.x.x (with mysql, session, hash, json extension)
-	- PHP-CLI
-	- MySQL 5.x.x
-	or you can just install xampp (http://www.apachefriends.org/en/xampp.html)
-	- gammu-smsd, make sure it is already ruuning and configured
+- apache 2.x.x
+- PHP 5.x.x (with mysql/pgsql/pdo_sqlite, session, hash, json extension)
+- PHP-CLI
+- MySQL 5.x.x or PostgreSQL or SQLite3
+or you can just install xampp (http://www.apachefriends.org/en/xampp.html)
+- gammu-smsd, make sure it is already ruuning and configured
 
-INSTALL :
-	- extract to web root folder (eq: /var/www/html => Ubuntu)
-	- Create database named kalkun
+INSTALLATION:
+1) extract to web root folder (eq: /var/www/html => Ubuntu)
+2) Create database named kalkun (you can do it with mysql console or phpMyAdmin)
+	- using mysql console
 		# mysql
 		> CREATE DATABASE kalkun;
 		> quit
-	- edit database config (application/config/database.php)
-		change database value to 'kalkun', username and password is depend on your mysql configuration
+	- using phpMyAdmin
+3) edit database config (application/config/database.php)
+	change database value to 'kalkun', username and password is depend on your mysql configuration
+
+4) import gammu database schema (it's included on gammu source, eg. gammu/docs/sql/mysql.sql)
+	- using mysql console
+		# mysql kalkun - u username -p < gammu/docs/sql/mysql.sql
+	- using phpMyAdmin
+
+5) configure daemon (to manage inbox and autoreply)
+	- set path on gammu-smsd configuration at runonreceive directive
+		e.g:
+			[smsd]
+			runonreceive = /opt/lampp/htdocs/kalkun/scripts/daemon.sh
+		or, if you using Windows:
+			[smsd]
+			runonreceive = C:\xampp\htdocs\kalkun\scripts\daemon.bat
+	- set correct path (php-cli path and daemon.php path) on daemon.sh or daemon.bat 
+	- make sure that the daemon script is executable
+	- Change URI path in daemon.php, default is (http://localhost/kalkun);
 	
-	- import gammu database schema (it's included on gammu source, eg. gammu/docs/sql/mysql.sql)
-		- using mysql console
-			# mysql kalkun - u username -p < gammu/docs/sql/mysql.sql
-		- using phpMyAdmin
 	
-	- configure daemon (to manage inbox and autoreply)
-		- set path on gammu-smsd configuration at runonreceive directive
-			e.g:
-				[smsd]
-				runonreceive = /opt/lampp/htdocs/kalkun/scripts/daemon.sh
-			or, if you using Windows:
-				[smsd]
-				runonreceive = C:\xampp\htdocs\kalkun\scripts\daemon.bat
-		- set correct path (php-cli path and daemon.php path) on daemon.sh or daemon.bat 
-		- make sure that the daemon script is executable
-		- Change URI path in daemon.php, default is "http://localhost/kalkun";
-		
-		
-	There are 2 way to install:	
-	1. Graphic Install	
+There are 2 way to install:	
+1) Graphic Install	
 	- launch http://your-location/kalkun/index.php/install, and follow instruction there
-	
-	2. Manual Install
-	- import sql file (media/db/mysql_kalkun.sql) to the kalkun database (you can do it with phpmyadmin)
-	
-	- or if you don't have phpmyadmin, you might want to try this	
+or
+2) Manual Install (import sql file media/db/mysql_kalkun.sql to kalkun database)
+	- using mysql console
 		# mysql kalkun - u username -p < media/db/mysql_kalkun.sql
+	- using phpMyAdmin	
+
+IMPORTANT: 
+	- After install finished, you need to remove install folder.
+	- To improve security, it's higly recommended to change "encryption_key" on application/config/config.php
 	
-	IMPORTANT: After install you need to remove install folder.
-		
-	- open up your browser and go to http://your-location/kalkun
-	- Default account : username = kalkun, password = kalkun (you can change it after you login)
-	- enjoy...:)
+- open up your browser and go to http://your-location/kalkun
+- Default account : username = kalkun, password = kalkun (you can change it after you login)
+- enjoy...:)
