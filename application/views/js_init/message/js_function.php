@@ -55,6 +55,37 @@ $(document).ready(function() {
 			show_notification(count + ' conversation deleted'); // translate
 		}
 	});
+    
+    
+	/**
+	 * Recover conversation
+	 *
+	 * Recover all messages on selected conversation
+	 *
+	 */	
+	$("a.recover_button").click(action_recover = function()
+	{
+		var count = $("input.select_conversation:checkbox:checked").length;
+		if(count==0) 
+		{ 
+			show_notification("<?php echo lang('tni_msg_no_conv_selected')?>");
+		}
+		else 
+		{
+ 
+            var id_folder = ( source == 'inbox' ) ?  1 : 3;	
+ 
+			$("input.select_conversation:checked").each(function () {
+				var message_row = $(this).parents('div:eq(2)');
+				$.post(move_url, {type: 'conversation', current_folder: current_folder, folder: source, 
+					id_folder: id_folder, number: $(this).val()}, function() {
+					$(message_row).slideUp("slow");
+				});
+			});
+			show_notification(count + ' conversation recovered'); // translate
+		}
+	});
+
 
 	// --------------------------------------------------------------------
 	

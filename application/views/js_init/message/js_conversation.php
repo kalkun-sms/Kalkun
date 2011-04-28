@@ -29,7 +29,35 @@ else {
 	});
 }
 });
-
+/**
+	 * Recover conversation
+	 *
+	 * Recover all messages on selected conversation
+	 *
+	 */	
+	$("a.recover_button").click(action_recover = function()
+	{
+		var count = $("input.select_message:checkbox:checked:visible").length;
+		if(count==0) 
+		{ 
+			show_notification("<?php echo lang('tni_msg_no_conv_selected')?>");
+		}
+		else 
+		{
+ 
+            var id_folder = ( source == 'inbox' ) ?  1 : 3;	
+ 
+			$("input.select_message:checked:visible").each(function () {
+				var message_row = $(this).parents('div:eq(2)');
+                	$.post("<?php echo  site_url('messages/move_message') ?>", {type: 'single', current_folder: current_folder, folder: source, 
+					id_folder: id_folder, id_message: $(this).val()}, function() {
+					$(message_row).slideUp("slow");
+				});
+			});
+			show_notification(count + ' conversation recovered'); // translate
+		}
+});
+    
 // Move folder
 $(".move_to").click(function() {
 var count = $("input:checkbox:checked").length;

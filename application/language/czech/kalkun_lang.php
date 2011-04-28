@@ -79,6 +79,7 @@ $lang['kalkun_delete_message_title'] = "Klitněte pro odstranění zprávy";
 $lang['kalkun_delete_folder'] = "Odstranit tuto složku";
 $lang['kalkun_delete_folder_title'] = "Klikněte pro odstranění složky";
 $lang['kalkun_permanently'] = "permanently";
+$lang['kalkun_recover'] = "Recover";
 
 $lang['kalkun_send_date'] = "Datum odesláni";
 $lang['kalkun_sms_mode'] = "Režim SMS";

@@ -79,6 +79,7 @@ $lang['kalkun_delete_message_title'] = "Clicca per eliminare";
 $lang['kalkun_delete_folder'] = "Elimina cartella";
 $lang['kalkun_delete_folder_title'] = "Clicca per cancellare la cartella";
 $lang['kalkun_permanently'] = "permanentemente";
+$lang['kalkun_recover'] = "Recover";
 
 $lang['kalkun_send_date'] = "Data di invio";
 $lang['kalkun_sms_mode'] = "Modalità SMS";

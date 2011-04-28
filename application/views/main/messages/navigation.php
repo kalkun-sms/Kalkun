@@ -31,6 +31,9 @@
 	elseif($this->uri->segment(2)=='conversation' && $this->uri->segment(4)=='outbox'):
 	else:?>
 	<li>&nbsp;</li>
+    <?php if($this->uri->segment(4)=='5' or $this->uri->segment(6)=='5') : ?>
+    <li><a href="javascript:void(0);" class="recover_button button"><?php echo lang('kalkun_recover');?></a></li>
+    <?php endif; ?>
 	<li><a class="move_to_button button" href="#"><?php echo lang('kalkun_move_to');?></a></li>	
 	<?php endif; ?>
 	<li><a class="global_delete button" href="javascript:void(0);">

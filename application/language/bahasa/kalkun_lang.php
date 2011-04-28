@@ -79,6 +79,7 @@ $lang['kalkun_delete_message_title'] = "Klik untuk menghapus pesan ini";
 $lang['kalkun_delete_folder'] = "Hapus berkas ini";
 $lang['kalkun_delete_folder_title'] = "Klik untuk menghapus berkas ini";
 $lang['kalkun_permanently'] = "selamanya";
+$lang['kalkun_recover'] = "Recover";
 
 $lang['kalkun_send_date'] = "Tanggal kirim";
 $lang['kalkun_sms_mode'] = "Modus SMS";

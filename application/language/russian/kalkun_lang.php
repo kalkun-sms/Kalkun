@@ -79,6 +79,7 @@ $lang['kalkun_delete_message_title'] = "Нажмите, чтобы удалит�
 $lang['kalkun_delete_folder'] = "Удалиь папку";//"Delete this folder";
 $lang['kalkun_delete_folder_title'] = "Нажмите, чтобы удалить эту папку";//"Click to delete this folder"
 $lang['kalkun_permanently'] = "на всегда";//(permanently)
+$lang['kalkun_recover'] = "Recover";
 
 $lang['kalkun_send_date'] = "Дата отправки";
 $lang['kalkun_sms_mode'] = "Режим SMS";
