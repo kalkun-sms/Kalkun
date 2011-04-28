@@ -34,7 +34,7 @@ function new_notification(refreshmode)
                     setTimeout(function() {auto_refresh();	} , 10000);	
                     return false;
             }
-        }); 
+        });
     }
     if(refreshmode == 'true') //refresh automatically if in threastlist 
         auto_refresh();
