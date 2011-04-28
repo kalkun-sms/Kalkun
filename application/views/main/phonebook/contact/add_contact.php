@@ -15,7 +15,7 @@ $(document).ready(function() {
     endforeach; 
     $grouptext = substr($grouptext,0, strlen($grouptext)-1);
     ?>
-    var grp_data = "<?=$grouptext?>".split(";");
+    var grp_data = "<?php echo $grouptext?>".split(";");
     $('#groups').tagsInput({
         'autocomplete_url' : grp_data,
         'autocomplete':{matchContains:false},
@@ -35,21 +35,19 @@ $(document).ready(function() {
 <input type="text" name="name" id="name" value="<?php if(isset($contact)) echo $contact->row('Name');?>" class="text ui-widget-content ui-corner-all required" />
 <label for="number"><?php echo lang('tni_contact_phonenumber'); ?></label>
 <input type="text" name="number" id="number" value="<?php if(isset($contact)) echo $contact->row('Number'); else if(isset($number)) echo $number;?>" class="text ui-widget-content ui-corner-all required phone" />
+
+<div style="margin-bottom:12px">
+<input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if(isset($contact) && $contact->row('is_public')) echo "checked=\"checked\"";?> /> 
+<label for="is_public" style="display: inline">Set as public contact</label>
+</div>
+
 <label for="group"><?php echo lang('kalkun_group'); ?></label> 
 <?php if(isset($contact)): ?> 
 <input name="groups" id="groups" value="<?php echo $this->Phonebook_model->get_groups($contact->row('id_pbk'),$this->session->userdata('id_user'))->GroupNames?>" type="hidden" />
 <?php else : ?>
 <input name="groups" id="groups" value=""  type="hidden" />
 <?php endif;?>
-<?php
-//$group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
-//foreach($group->result() as $tmp):
-//	$groups[$tmp->ID]=$tmp->GroupName;
-//endforeach; 
-//$group_act = (isset($contact)) ? $contact->row('ID') : '';
-//$option = 'class="text ui-widget-content ui-corner-all"';
-//echo form_dropdown('groupvalue', $groups, $group_act, $option);
-?>
+
 <?php if(isset($contact)): ?> 
 <input type="hidden" name="editid_pbk" id="editid_pbk" value="<?php echo $contact->row('id_pbk');?>" />
 <?php endif;?>

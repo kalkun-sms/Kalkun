@@ -200,7 +200,7 @@ ALTER TABLE `sentitems` ADD `id_folder` INT( 11 ) NOT NULL DEFAULT '3';
 --
 
 ALTER TABLE `pbk` ADD `id_user` INT( 11 ) NOT NULL;
-
+ALTER TABLE `pbk` ADD `is_public` enum('true','false') NOT NULL DEFAULT 'false';
 
 -- --------------------------------------------------------
 
@@ -209,6 +209,7 @@ ALTER TABLE `pbk` ADD `id_user` INT( 11 ) NOT NULL;
 --
 
 ALTER TABLE `pbk_groups` ADD `id_user` INT( 11 ) NOT NULL;
+ALTER TABLE `pbk_groups` ADD `is_public` enum('true','false') NOT NULL DEFAULT 'false';
 
 
 -- --------------------------------------------------------

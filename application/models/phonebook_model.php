@@ -64,7 +64,8 @@ class Phonebook_model extends Model {
 			$this->db->select('*');
 			$this->db->select_as('ID', 'id_pbk');	
 			$this->db->from('pbk');
-			$this->db->where('id_user',$user_id);
+			if(isset($param['public']) && $param['public']) $this->db->where('is_public', TRUE);
+			else $this->db->where('id_user',$user_id);
 			$this->db->order_by('Name');
 			$this->db->limit($param['limit'], $param['offset']);
 			break;
@@ -85,7 +86,8 @@ class Phonebook_model extends Model {
 			$this->db->select('*');
 			$this->db->select_as('Name','GroupName');
 			$this->db->from('pbk_groups');
-			$this->db->where('id_user', $user_id);
+			if(isset($param['public']) && $param['public']) $this->db->where('is_public', TRUE);
+			else $this->db->where('id_user',$user_id);			
 			$this->db->order_by('Name');
 			break;
 		
@@ -93,7 +95,8 @@ class Phonebook_model extends Model {
 			$this->db->select('*');
 			$this->db->select_as('Name', 'GroupName');
 			$this->db->from('pbk_groups');
-			$this->db->where('id_user', $user_id);
+			if(isset($param['public']) && $param['public']) $this->db->where('is_public', TRUE);
+			else $this->db->where('id_user',$user_id);
 			$this->db->order_by('Name');
 			$this->db->limit($param['limit'], $param['offset']);
 			break;	
@@ -102,7 +105,7 @@ class Phonebook_model extends Model {
 			$this->db->select_as('Name', 'GroupName');
 			$this->db->from('pbk_groups');
 			$this->db->where('ID', $param['id']);
-			$this->db->where('id_user', $user_id);
+			//$this->db->where('id_user', $user_id); /* check */
 			break;
 			
 			case 'bynumber':
@@ -121,7 +124,7 @@ class Phonebook_model extends Model {
             $this->db->join('user_group', 'user_group.id_pbk=pbk.ID');
 			$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups');
             $this->db->where('user_group.id_pbk_groups', $param['group_id']);
-            $this->db->where('pbk.id_user', $user_id);
+            //$this->db->where('pbk.id_user', $user_id); /* check */
             $this->db->order_by("pbk.Name", "asc");
             
             if(isset($param['limit']) && isset($param['offset'])) $this->db->limit($param['limit'], $param['offset']);
@@ -134,6 +137,17 @@ class Phonebook_model extends Model {
 			$this->db->or_like(array('Name' => $this->input->post('search_name'), 'Number' =>$this->input->post('search_name')));  
 			$this->db->having('id_user', $user_id);
 			$this->db->order_by('Name');
+			break;
+			
+			case 'public':
+			$this->db->select('*');
+			$this->db->select_as('pbk.ID','id_pbk');
+			$this->db->select_as('pbk_groups.Name', 'GroupName');	
+			$this->db->from('pbk');
+			$this->db->where('pbk.is_public', TRUE);
+            $this->db->join('user_group', 'user_group.id_pbk=pbk.ID', 'left');
+			$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups', 'left');
+			$this->db->order_by('pbk.Name');
 			break;
 		}
 		return $this->db->get();	
@@ -169,10 +183,10 @@ class Phonebook_model extends Model {
 	 */		
 	function add_contact($param)
 	{
-	   
 		$this->db->set('Name', $param['Name']);
 		$this->db->set('Number', $param['Number']);
 		$this->db->set('id_user', $param['id_user']);
+		$this->db->set('is_public', $param['is_public']);
 		
 		// edit mode
 		if(isset($param['id_pbk'])) 
@@ -270,6 +284,7 @@ class Phonebook_model extends Model {
 	{
 		$this->db->set('Name', trim($this->input->post('group_name')));
 		$this->db->set('id_user', trim($this->input->post('pbkgroup_id_user')));
+		$this->db->set('is_public', $this->input->post('is_public')? 'true' : 'false');
 			
 		// edit mode	
 		if($this->input->post('pbkgroup_id'))

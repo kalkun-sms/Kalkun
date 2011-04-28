@@ -48,7 +48,8 @@
 <div id="window_title">
 	<div id="window_title_left"><?php echo $title; ?></div>
 	<div id="window_title_right">
-	<a href="#" id="addpbkcontact_wizard" class="nicebutton">&#43; <?php echo lang('tni_contact_add'); ?></a>	
+	<a href="#" id="addpbkcontact_wizard" class="nicebutton">&#43; <?php echo lang('tni_contact_add'); ?></a>
+	<a href="<?php echo site_url('phonebook/index/public');?>" class="nicebutton">&#43; Public Contacts</a>	
 	<a href="<?php echo site_url('phonebook/group');?>" id="addpbkgroup" class="nicebutton">&#43; <?php echo lang('tni_groups_manage'); ?></a>
 	</div>
 </div>

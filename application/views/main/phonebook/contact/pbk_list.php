@@ -16,8 +16,10 @@ else: ?>
 	</div>
 	<div class="right_column">
 		<span class="pbk_menu hidden">
+		<?php if(isset($public_contact) && !$public_contact):?>
 		<a class="editpbkcontact simplelink" href="#"><?php echo lang('tni_edit');?></a>
 		<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
+		<?php endif;?>
 		<a class="sendmessage simplelink" href="#"><?php echo lang('tni_send_message');?></a>
 		<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
 		<?php echo anchor('messages/conversation/folder/phonebook/'.$tmp->Number,lang('tni_see_conversation'), 'title="'.lang('tni_see_conversation').'" class="simplelink"') ;?>

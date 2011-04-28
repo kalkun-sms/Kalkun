@@ -6,10 +6,13 @@ $('#addpbkgroup, a.editpbkgroup').bind('click', function() {
 if($(this).hasClass('editpbkgroup'))
 {
 	var id = $(this).parents("tr:first").attr("id");
+	var public = $(this).parents("tr:first").attr("public");
 	var dialog_title = '<?php echo lang('tni_group_manage'); ?>';
 	var groupname = $(this).parents("div:eq(1)").find("span.groupname").text();
 	$('input#group_name').val(groupname);
 	$('input.pbkgroup_id').val(id);
+	if(public=="true") $("input#is_public").attr('checked', true);
+	else $("input#is_public").attr('checked', false);
 }
 else
 {
@@ -22,7 +25,7 @@ $("#addgroupdialog").dialog({
 	bgiframe: true,
 	title: dialog_title,
 	autoOpen: false,
-	height: 100,
+	height: 175,
 	modal: true,
 	buttons: {
 		'<?php echo lang('kalkun_save')?>': function() {

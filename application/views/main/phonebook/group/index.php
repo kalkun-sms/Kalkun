@@ -14,6 +14,8 @@
 		<input type="hidden" name="pbkgroup_id" class="pbkgroup_id" value="" />
 		<label for="name"><?php echo lang('tni_group_name');?></label>
 		<input type="text" name="group_name" id="group_name" class="text ui-widget-content ui-corner-all" />
+		<input type="checkbox" name="is_public" id="is_public" style="display: inline" /> 
+		<label for="is_public" style="display: inline">Set as public group</label>		
 	</form>
 </div>
 	
@@ -22,6 +24,7 @@
 	<div id="window_title_left"><?php echo lang('tni_groups');?></div>
 	<div id="window_title_right">
 	<a href="#" id="addpbkgroup" class="addpbkgroup nicebutton">&#43; <?php echo lang('tni_group_add');?></a>	
+	<a href="<?php echo site_url('phonebook/group/public');?>" class="nicebutton">&#43; Public Groups</a>
 	<a href="<?php echo site_url('phonebook');?>" class="nicebutton">&#43; <?php echo lang('tni_groups_edit_contacts');?></a>
 	</div>
 </div>

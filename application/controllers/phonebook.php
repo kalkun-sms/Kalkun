@@ -41,37 +41,47 @@ class Phonebook extends MY_Controller {
 	 */	
 	function index($type = NULL) 
 	{		
-		$data['title'] = lang('tni_contacts');
 		$this->load->library('pagination');
 		$config = $this->_get_pagination_style();
-		$config['base_url'] = site_url().'/phonebook/index/';
-		$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-		
-		if($type == "ajax") $config['uri_segment'] = 4;
-		else $config['uri_segment'] = 3;
-		
-		$this->pagination->initialize($config);
-		$param = array('option' => 'paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3,0));
-		
-		if ($type == "ajax")
+
+		if ($type == 'public')
 		{
+			$config['uri_segment'] = 4;
+			$config['base_url'] = site_url().'/phonebook/index/public';
+			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'public'))->num_rows();			
+			$this->pagination->initialize($config);
+						
+			$data['title'] = "Public contacts";
+			$data['public_contact'] = TRUE;
+			$param = array('option' => 'paginate', 'public' => TRUE, 'limit' => $config['per_page'], 'offset' => $this->uri->segment(4,0));
 			$data['phonebook'] = $this->Phonebook_model->get_phonebook($param);		
-			$this->load->view('main/phonebook/contact/pbk_list', $data);
 		}
 		else
 		{
-			$data['main'] = 'main/phonebook/contact/index';	
-			$data['pbkgroup'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->result();
+			$config['uri_segment'] = 3;
+			$config['base_url'] = site_url().'/phonebook/index/';
+			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();
+			$this->pagination->initialize($config);
+			
+			$data['title'] = lang('tni_contacts');
+			$data['public_contact'] = FALSE;
+			
 			if($_POST)
 	    	{
 				$data['phonebook'] = $this->Phonebook_model->get_phonebook(array('option' => 'search'));
 	      		$data['search_string'] = $this->input->post('search_name');
 	    	}
-			else $data['phonebook'] = $this->Phonebook_model->get_phonebook($param);
-			
-			$this->load->view('main/layout', $data);
+			else
+			{
+				$param = array('option' => 'paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3,0));
+				$data['phonebook'] = $this->Phonebook_model->get_phonebook($param);
+			}
 		}
+		
+		$data['main'] = 'main/phonebook/contact/index';
+		$data['pbkgroup'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->result();
+		$this->load->view('main/layout', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -83,21 +93,39 @@ class Phonebook extends MY_Controller {
 	 *
 	 * @access	public   		 
 	 */	
-	function group()
+	function group($type = NULL)
 	{    
-   		$data['title'] = 'Groups';
+   		
    		$this->load->library('pagination');
    		$config = $this->_get_pagination_style();
-   		$config['base_url'] = site_url().'/phonebook/group/';
-   		$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();
    		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-   		$config['uri_segment'] = 3;
-   		$this->pagination->initialize($config);
-   		$param = array('option' => 'group_paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3,0));
+   		
+   		if ($type == 'public')
+   		{
+   			$data['title'] = 'Public Groups';
+   			$data['public_group'] = TRUE;
+   			$config['base_url'] = site_url().'/phonebook/group/public';
+   			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group', 'public' => TRUE))->num_rows();
+   			$config['uri_segment'] = 4;
+   			$this->pagination->initialize($config);
+   	
+	   		$param = array('option' => 'group_paginate', 'public' => TRUE, 'limit' => $config['per_page'], 'offset' => $this->uri->segment(4,0));
+	   		$data['group'] = $this->Phonebook_model->get_phonebook($param);   			
+   		}
+   		else
+   		{
+   			$data['title'] = 'Groups';
+   			$data['public_group'] = FALSE;
+	   		$config['base_url'] = site_url().'/phonebook/group/';
+	   		$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();
+	   		$config['uri_segment'] = 3;
+	   		$this->pagination->initialize($config);
+	   		
+	   		$param = array('option' => 'group_paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3,0));
+	   		$data['group'] = $this->Phonebook_model->get_phonebook($param);
+   		}
    		
    		$data['main'] = 'main/phonebook/group/index';
-   		$data['group'] = $this->Phonebook_model->get_phonebook($param);
-   		
    		$this->load->view('main/layout', $data);
 	}
 
@@ -294,6 +322,7 @@ class Phonebook extends MY_Controller {
 		//$pbk['GroupID'] = $this->input->post('groupvalue');
         $pbk['Groups'] = $this->input->post('groups');
 		$pbk['id_user'] = $this->input->post('pbk_id_user');
+		$pbk['is_public'] = $this->input->post('is_public')? 'true' : 'false';
 		
 		if($this->input->post('editid_pbk'))
 		{
