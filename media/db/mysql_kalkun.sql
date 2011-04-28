@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `user_folders` (
   `name` varchar(50) NOT NULL,
   `id_user` int(11) NOT NULL,
   PRIMARY KEY (`id_folder`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `user_folders`
@@ -106,7 +106,8 @@ INSERT INTO `user_folders` (`id_folder`, `name`, `id_user`) VALUES
 (2, 'outbox', 0),
 (3, 'sent_items', 0),
 (4, 'draft', 0),
-(5, 'Trash', 0);
+(5, 'Trash', 0),
+(6, 'Spam', 0);
 
 -- --------------------------------------------------------
 

@@ -13,6 +13,7 @@ $lang['kalkun_inbox'] = "Přijaté";
 $lang['kalkun_outbox'] = "Odchozí";
 $lang['kalkun_sentitems'] = "Odeslané";
 $lang['kalkun_trash'] = "Koš";
+$lang['kalkun_spam'] = "Spam";
 $lang['kalkun_add'] = "Přidat";
 $lang['kalkun_action'] = "Action";
 
