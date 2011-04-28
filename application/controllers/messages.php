@@ -580,7 +580,7 @@ class Messages extends MY_Controller {
 	function search()
 	{	 
       $data['main'] = 'main/messages/index';
-      $param['search_string'] =$this->input->post('search_sms');
+      $param['search_string'] = trim($this->input->post('search_sms'));
       if(!empty($param['search_string']))
 			$data['messages'] = $this->Message_model->search_messages($param)->messages;
       else	
