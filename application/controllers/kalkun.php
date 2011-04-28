@@ -133,7 +133,7 @@ class Kalkun extends MY_Controller {
 				$x->set_labels($labels);
 				
 				$y = new y_axis();
-				$max = max(max($data_1),max($data_2));
+				$max = max(max($data_2),max($data_3));
 				if($max < 1)  $max=10;
 				$y->set_range(0, $max, round($max/100)*10); 
 				
