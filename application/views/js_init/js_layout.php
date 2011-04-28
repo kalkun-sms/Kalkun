@@ -23,14 +23,14 @@ function new_notification(refreshmode)
     <?php if ($this->uri->segment(2) == 'folder' || $this->uri->segment(2) == 'my_folder'): ?>  
     function auto_refresh(){
             $('#message_holder').load("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>", function(response, status, xhr) {
-            if (status == "error")  
+            if (status == "error" || xhr.status != 200 ) 
             {
-                    $('.loading_area').html('<nobr>Oops Network Error. Retrying in <span id="countdown-count">10</span> Seconds.</nobr>');
+                    $('.loading_area').html('<nobr>Oops Network Error. <span id="retry-progress-display"> Retrying in <span id="countdown-count">10</span> Seconds.</span></nobr>');
                     var cntdwn = setInterval(function() {
                         current_val = $('#countdown-count').html();
-                        if(current_val > 0)   $('#countdown-count').html(current_val  - 1 )	;
-                        else      clearInterval(cntdwn);                    
-                        } , 1000);	
+                        if(current_val > 1)   $('#countdown-count').html(current_val  - 1 )	;
+                        else    {  clearInterval(cntdwn); $('#retry-progress-display').html('Retrying Now...') }                    
+                    } , 1000);	
                     setTimeout(function() {auto_refresh();	} , 10000);	
                     return false;
             }

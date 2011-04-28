@@ -160,20 +160,22 @@ $(document).ready(function() {
     });
     
     // refresh
-    $("a.refresh_button").click(refresh = function()
+    $("a.refresh_button").click(refresh = function(type)
     {  	
-    	$('.loading_area').html('Loading...');
-        $('.loading_area').fadeIn("slow");
+    	if(type != 'retry') {
+            $('.loading_area').html('Loading...');
+            $('.loading_area').fadeIn("slow");
+        }
     	$('#message_holder').load(refresh_url, function(response, status, xhr) {
-            if (status == "error")  
+            if (status == "error" || xhr.status != 200 )  
             {
-                $('.loading_area').html('<nobr>Oops Network Error. Retrying in <span id="countdown-count">10</span> Seconds.</nobr>');
+                $('.loading_area').html('<nobr>Oops Network Error. <span id="retry-progress-display"> Retrying in <span id="countdown-count">10</span> Seconds.</span></nobr>');
                 var cntdwn = setInterval(function() {
                     current_val = $('#countdown-count').html();
-                    if(current_val > 0)   $('#countdown-count').html(current_val  - 1 )	;
-                    else      clearInterval(cntdwn);                    
-                    } , 1000);	
-                setTimeout(function() {refresh();	} , 10000);	
+                    if(current_val > 1)   $('#countdown-count').html(current_val  - 1 )	;
+                    else    {  clearInterval(cntdwn); $('#retry-progress-display').html('Retrying Now...') }                    
+                } , 1000);	
+                setTimeout(function() {refresh('retry');	} , 10000);	
                 return false;
             }
             new_notification('false');		
