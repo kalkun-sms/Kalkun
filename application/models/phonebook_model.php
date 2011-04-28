@@ -113,10 +113,8 @@ class Phonebook_model extends Model {
 			$this->db->select('*');
 			$this->db->select_as('ID', 'id_pbk');	
 			$this->db->from('pbk');
-			$this->db->where('id_user', $user_id);
-            $this->db->or_where('is_public', 'true');
-            $this->db->having('Number', $param['number']);
-			break;
+			$this->db->where("(`id_user` = '$user_id' or `is_public` = 'true' ) AND `Number` = '{$param['number']}'");
+            break;
 			
 			case 'bygroup':
             $this->db->select('*');	

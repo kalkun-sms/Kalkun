@@ -649,6 +649,7 @@ class Messages extends MY_Controller {
 			// check trash/permanent delete
 			if ($this->Kalkun_model->get_setting()->row('permanent_delete')=='true') $param['option'] = 'permanent';
 			else if (isset($param['current_folder']) && $param['current_folder']=='5') $param['option'] = 'permanent';
+            else if (isset($param['current_folder']) && $param['current_folder']=='6') $param['option'] = 'permanent';
 			else $param['option'] = 'temp';	
 		}
 				

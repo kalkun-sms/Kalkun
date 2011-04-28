@@ -41,7 +41,7 @@ if($this->uri->segment(2)=='my_folder')
 <div id="two_column_container" class="tabbing">
 <div id="left_column" class="two_column_medium">
 	<?php echo"<span class=\"folder_name\">".$this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name')."</span>";?>
-	<?php if($this->uri->segment(4)!='5'):?>
+	<?php if($this->uri->segment(4)!='5' && $this->uri->segment(4)!='6'):?>
 	<sup>[ 
 	<a href="#" title="<?php echo lang('kalkun_rename_folder_title');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="renamefolder"><?php echo lang('kalkun_rename');?></a> - 
 			<a href="#" title="<?php echo lang('kalkun_delete_folder_title');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="deletefolder"><?php echo lang('kalkun_delete');?></a> ]

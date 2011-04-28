@@ -13,6 +13,7 @@ $lang['kalkun_inbox'] = "Kotak Masuk";
 $lang['kalkun_outbox'] = "Kotak Keluar";
 $lang['kalkun_sentitems'] = "Pesan Terkirim";
 $lang['kalkun_trash'] = "Sampah";
+$lang['kalkun_spam'] = "Spam";
 $lang['kalkun_add'] = "Tambah";
 $lang['kalkun_action'] = "Tindakan";
 

@@ -13,6 +13,7 @@ $lang['kalkun_inbox'] = "Inbox";
 $lang['kalkun_outbox'] = "Outbox";
 $lang['kalkun_sentitems'] = "Sent Items";
 $lang['kalkun_trash'] = "Trash";
+$lang['kalkun_spam'] = "Spam";
 $lang['kalkun_add'] = "Add";
 $lang['kalkun_action'] = "Action";
 
