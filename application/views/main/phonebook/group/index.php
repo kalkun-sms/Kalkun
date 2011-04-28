@@ -23,8 +23,12 @@
 <div id="window_title">
 	<div id="window_title_left"><?php echo lang('tni_groups');?></div>
 	<div id="window_title_right">
-	<a href="#" id="addpbkgroup" class="addpbkgroup nicebutton">&#43; <?php echo lang('tni_group_add');?></a>	
-	<a href="<?php echo site_url('phonebook/group/public');?>" class="nicebutton">&#43; Public Groups</a>
+	<a href="#" id="addpbkgroup" class="addpbkgroup nicebutton">&#43; <?php echo lang('tni_group_add');?></a>
+    <?php if($this->uri->segment(3)=='public') : ?>
+	<a href="<?php echo site_url('phonebook/group/');?>" class="nicebutton">&#43; My Groups</a>
+    <?php else: ?>  
+    <a href="<?php echo site_url('phonebook/group/public');?>" class="nicebutton">&#43; Public Groups</a>
+    <?php endif; ?>		
 	<a href="<?php echo site_url('phonebook');?>" class="nicebutton">&#43; <?php echo lang('tni_groups_edit_contacts');?></a>
 	</div>
 </div>

@@ -131,7 +131,7 @@
         </tr>
         <tr>
         	<td class="align_right">&lt;Tab&gt; then &lt;Enter&gt; :</td>
-        	<td>Send Message</td>
+        	<td><?php echo lang('tni_send_message'); ?></td>
         </tr>
         <tr>
         	<td class="align_right">d :</td>

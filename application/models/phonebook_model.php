@@ -71,7 +71,7 @@ class Phonebook_model extends Model {
 			break;
 			
 			case 'by_idpbk':
-			$this->db->select('*');
+			$this->db->select('pbk.*');
 			$this->db->select_as('pbk.ID','id_pbk');
             $this->db->select_as('pbk.Name', 'Name');	
 			$this->db->select_as('pbk_groups.Name', 'GroupName');	
@@ -105,7 +105,8 @@ class Phonebook_model extends Model {
 			$this->db->select_as('Name', 'GroupName');
 			$this->db->from('pbk_groups');
 			$this->db->where('ID', $param['id']);
-			//$this->db->where('id_user', $user_id); /* check */
+			$this->db->where('id_user', $user_id);
+            $this->db->or_where('is_public', TRUE);
 			break;
 			
 			case 'bynumber':

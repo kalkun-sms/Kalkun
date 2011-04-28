@@ -180,7 +180,7 @@ $("#compose_sms_container").load(url, { 'type': type, 'param1': param1, 'param2'
     buttons: {
 	'<?php echo lang('tni_send_message'); ?>': function() {
 		if($("#composeForm").valid()) {
-		  $('.ui-dialog-buttonpane :button').each(function(){ if($(this).text() == 'Send Message') $(this).html('Sending <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');                    });
+		  $('.ui-dialog-buttonpane :button').each(function(){ if($(this).text() == '<?php echo lang('tni_send_message'); ?>') $(this).html('<?php echo lang('tni_sending_message'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');                    });
 		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 			$("#compose_sms_container").html(data);
 		    $("#compose_sms_container" ).dialog( "option", "buttons", { "Okay": function() { $(this).dialog("destroy"); } } );
