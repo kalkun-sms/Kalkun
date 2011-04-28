@@ -137,6 +137,11 @@ $(document).ready(function() {
     	$(this).parents('div:eq(2)').removeClass("messagelist_hover");
     }   
 	}); 
+    
+    //search
+    $('.sms_search_form').submit(function() {
+       if($.trim($('#search').val()) == '')  return false;
+    });
 		
 });
 </script>
