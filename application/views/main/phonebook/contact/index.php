@@ -49,7 +49,11 @@
 	<div id="window_title_left"><?php echo $title; ?></div>
 	<div id="window_title_right">
 	<a href="#" id="addpbkcontact_wizard" class="nicebutton">&#43; <?php echo lang('tni_contact_add'); ?></a>
-	<a href="<?php echo site_url('phonebook/index/public');?>" class="nicebutton">&#43; Public Contacts</a>	
+     <?php if($this->uri->segment(3)=='public') : ?>
+	<a href="<?php echo site_url('phonebook/');?>" class="nicebutton">&#43; My Contacts</a>
+    <?php else: ?>  
+    <a href="<?php echo site_url('phonebook/index/public');?>" class="nicebutton">&#43; Public Contacts</a>
+    <?php endif; ?>	
 	<a href="<?php echo site_url('phonebook/group');?>" id="addpbkgroup" class="nicebutton">&#43; <?php echo lang('tni_groups_manage'); ?></a>
 	</div>
 </div>

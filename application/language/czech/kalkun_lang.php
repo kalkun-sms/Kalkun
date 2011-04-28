@@ -165,6 +165,7 @@ $lang['kalkun_sms_no_member'] = "There is no registered member yet";
 // tni contribution
 $lang['tni_contact_add'] = "Add Contact";
 $lang['tni_send_message'] = "Send Message";
+$lang['tni_sending_message'] = "Sending";
 $lang['tni_folders_sms'] = "SMS Folders";
 $lang['tni_name_search'] = "Insert Name from Contact List";
 $lang['tni_group_del_title'] = "Delete Group(s) Confirmation";

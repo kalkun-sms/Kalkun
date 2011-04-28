@@ -71,7 +71,7 @@ class Phonebook_model extends Model {
 			break;
 			
 			case 'by_idpbk':
-			$this->db->select('*');
+			$this->db->select('pbk.*');
 			$this->db->select_as('pbk.ID','id_pbk');
             $this->db->select_as('pbk.Name', 'Name');	
 			$this->db->select_as('pbk_groups.Name', 'GroupName');	
