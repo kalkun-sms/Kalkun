@@ -104,17 +104,18 @@ class Phonebook_model extends Model {
 			case 'groupname':
 			$this->db->select_as('Name', 'GroupName');
 			$this->db->from('pbk_groups');
-			$this->db->where('ID', $param['id']);
 			$this->db->where('id_user', $user_id);
             $this->db->or_where('is_public', 'true');
+            $this->db->having('ID', $param['id']);
 			break;
 			
 			case 'bynumber':
 			$this->db->select('*');
 			$this->db->select_as('ID', 'id_pbk');	
 			$this->db->from('pbk');
-			$this->db->where('Number', $param['number']);
 			$this->db->where('id_user', $user_id);
+            $this->db->or_where('is_public', 'true');
+            $this->db->having('Number', $param['number']);
 			break;
 			
 			case 'bygroup':
@@ -124,9 +125,9 @@ class Phonebook_model extends Model {
             $this->db->select_as('pbk_groups.Name', 'GroupName');
             $this->db->join('user_group', 'user_group.id_pbk=pbk.ID');
 			$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups');
-            $this->db->where('user_group.id_pbk_groups', $param['group_id']);
             $this->db->where('pbk_groups.id_user', $user_id); 
             $this->db->or_where('pbk_groups.is_public', 'true'); 
+            $this->db->having('user_group.id_pbk_groups', $param['group_id']);
             $this->db->order_by("pbk.Name", "asc");
             
             if(isset($param['limit']) && isset($param['offset'])) $this->db->limit($param['limit'], $param['offset']);
@@ -138,6 +139,7 @@ class Phonebook_model extends Model {
 			$this->db->from('pbk');
 			$this->db->or_like(array('Name' => $this->input->post('search_name'), 'Number' =>$this->input->post('search_name')));  
 			$this->db->having('id_user', $user_id);
+            $this->db->or_having('is_public', 'true');
 			$this->db->order_by('Name');
 			break;
 			
@@ -169,6 +171,7 @@ class Phonebook_model extends Model {
 		$this->db->select_as('Number', 'id');
 		$this->db->select_as('Name', 'name');
 		$this->db->where('id_user', $param['uid']);
+        $this->db->or_where('is_public', 'true');
 		$this->db->like('Name', $param['query']);
 		$this->db->order_by('Name');		
 		return $this->db->get();
