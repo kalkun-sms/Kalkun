@@ -38,7 +38,7 @@
 	<?php endif; ?>
 	<li><a class="global_delete button" href="javascript:void(0);">
 	<?php echo lang('kalkun_delete'); 
-	if($this->uri->segment(4)=='5' or $this->uri->segment(6)=='5') echo " ".lang('kalkun_permanently');?></a></li>	
+	if($this->uri->segment(4)=='5' or $this->uri->segment(6)=='5' or $this->uri->segment(4)=='6' or $this->uri->segment(6)=='6') echo " ".lang('kalkun_permanently');?></a></li>	
 	<?php if($this->uri->segment(2) != 'search'): ?>
 	<li>&nbsp;</li>
 	<li><a href="javascript:void(0);" class="refresh_button button"><?php echo lang('kalkun_refresh');?></a></li>	
