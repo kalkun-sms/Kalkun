@@ -800,12 +800,25 @@ class Messages extends MY_Controller {
     
     //function spam check
     
-    function spam_check($method = NULL , $action = NULL)
+    function report_spam(  $type = NULL)
     {
-        
+        $this->load->Model('Spam_model');
+        $ID = $this->input->post('id_message');
+        $Text = $this->Message_model->get_messages(array('type' => 'inbox' , 'id_message' => $ID ))->row('TextDecoded');
+        $params = array('ID'=> $ID , 'Text'=> $Text );
+        if($type == 'ham')
+            $this->Spam_model->report_ham($params);
+        else
+            $this->Spam_model->report_spam($params);
     }
     
-    
+    function test_spam($id = NULLS)
+    {
+        $this->load->Model('Spam_model');
+        $Text = $this->Message_model->get_messages(array('type' => 'inbox' , 'id_message' =>$id ))->row('TextDecoded');
+        var_dump($Text);
+        var_dump($this->Spam_model->apply_spam_filter($id,$Text));
+    }
     
 }	
 

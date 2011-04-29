@@ -245,7 +245,7 @@ $("#contact_container").dialog('open');
 return false;
 });	
     
-<?php if($this->uri->segment(4)!='6' ) : ?>
+<?php if($this->uri->segment(4)!='6' &&  $this->uri->segment(6)!='6') : ?>
 // report spam
 $(".spam_button").click(function() {
     var count = $("input:checkbox:checked:visible").length;
@@ -258,7 +258,7 @@ $(".spam_button").click(function() {
         id_access = '#item_source'+$(this).val();
         item_folder =  $(id_access).val();
         if(item_folder != 'inbox') {show_notification("Outgoing Message cannot be spam") ;return; } 
-    	$.post("<?php echo  site_url('messages/spam_check/mark/spam') ?>", { id_message: $(this).val()}, function() {
+    	$.post("<?php echo  site_url('messages/report_spam/spam') ?>", { id_message: $(this).val()}, function() {
     		$(message_row).slideUp("slow");
             show_notification("Spam Reported")
     	});
@@ -276,7 +276,7 @@ $(".ham_button").click(function() {
     var id_folder = $(this).attr('id');
     $("input.select_message:checked:visible").each(function () {
     	var message_row = $(this).parents('div:eq(2)');
-    	$.post("<?php echo  site_url('messages/spam_check/mark/ham') ?>", {  id_message: $(this).val()}, function() {
+    	$.post("<?php echo  site_url('messages/report_spam/ham') ?>", {  id_message: $(this).val()}, function() {
     		$(message_row).slideUp("slow");
             show_notification("Messages Marked not Spam")
     	});

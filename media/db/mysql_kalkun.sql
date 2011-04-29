@@ -254,3 +254,18 @@ CREATE TABLE IF NOT EXISTS `plugin` (
   `plugin_status` enum('true','false') NOT NULL,
   PRIMARY KEY  (`id_plugin`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `spam_check`
+--
+
+CREATE TABLE IF NOT EXISTS `spam_check` (
+  `id_spam_check` int(11) NOT NULL AUTO_INCREMENT,
+  `id_inbox` int(11) NOT NULL,
+  `token` text NOT NULL,
+  `rating` text NOT NULL,
+  `category` enum('spam','ham') NOT NULL DEFAULT 'spam',
+  PRIMARY KEY (`id_spam_check`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1  ;

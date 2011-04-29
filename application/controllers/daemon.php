@@ -46,6 +46,7 @@ class Daemon extends Controller {
 	function message_routine()
 	{
 		$this->load->model('User_model');
+        $this->load->model('Spam_model');
 		
 		// get unProcessed message
 		$message = $this->Message_model->get_messages(array('processed' => FALSE));
@@ -74,6 +75,10 @@ class Daemon extends Controller {
 			// if no matched username, set owner to Inbox Master
 			if($check===false){ $this->Message_model->update_owner($tmp_message->ID, $this->config->item('inbox_owner_id'));  $msg_user =  $this->config->item('inbox_owner_id');  }
 			
+            //check for spam
+            //if($this->Spam_model->apply_spam_filter($tmp_message->ID,$tmp_message->TextDecoded))
+            //    continue; ////is spam do not process later part
+                       
 			// simple autoreply
 			if($this->config->item('simple_autoreply'))
 			{
