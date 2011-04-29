@@ -58,7 +58,7 @@ else {
 		}
 });
     
-// Move folder
+// Move messages
 $(".move_to").click(function() {
 var count = $("input:checkbox:checked").length;
 if(count==0) { 
@@ -244,6 +244,46 @@ $(this).dialog({
 $("#contact_container").dialog('open');
 return false;
 });	
+    
+<?php if($this->uri->segment(4)!='6' ) : ?>
+// report spam
+$(".spam_button").click(function() {
+    var count = $("input:checkbox:checked:visible").length;
+    if(count==0) { 
+    	show_notification("<?php echo lang('tni_msg_no_conv_selected'); ?>");
+    }
+    else {    	
+    $("input.select_message:checked:visible").each(function () {
+    	var message_row = $(this).parents('div:eq(2)');
+        id_access = '#item_source'+$(this).val();
+        item_folder =  $(id_access).val();
+        if(item_folder != 'inbox') {show_notification("Outgoing Message cannot be spam") ;return; } 
+    	$.post("<?php echo  site_url('messages/spam_check/mark/spam') ?>", { id_message: $(this).val()}, function() {
+    		$(message_row).slideUp("slow");
+            show_notification("Spam Reported")
+    	});
+    });		
+    }
+});   
+<?php else: ?>
+ //report ham
+$(".ham_button").click(function() {
+    var count = $("input:checkbox:checked:visible").length;
+    if(count==0) { 
+    	show_notification("<?php echo lang('tni_msg_no_conv_selected'); ?>");
+    }
+    else {    	
+    var id_folder = $(this).attr('id');
+    $("input.select_message:checked:visible").each(function () {
+    	var message_row = $(this).parents('div:eq(2)');
+    	$.post("<?php echo  site_url('messages/spam_check/mark/ham') ?>", {  id_message: $(this).val()}, function() {
+    		$(message_row).slideUp("slow");
+            show_notification("Messages Marked not Spam")
+    	});
+    });		
+    }
+});   
+<?php endif; ?>
     
 });    
 </script>

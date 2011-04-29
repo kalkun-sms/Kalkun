@@ -118,6 +118,9 @@ $lang['kalkun_clear_all_title'] = "Нажмите, чтобы очистить �
 $lang['kalkun_refresh'] = "Обновить";
 $lang['kalkun_global_delete_title'] = "нажмите, чтобы удалиь выбранное сообщения";
 
+$lang['kalkun_report_spam'] = "Report Spam";
+$lang['kalkun_ham'] = "Not Spam";
+
 $lang['kalkun_first'] = "Первый";
 $lang['kalkun_last'] = "Последний";
 

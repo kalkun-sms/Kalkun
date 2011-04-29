@@ -118,6 +118,10 @@ $lang['kalkun_clear_all_title'] = "Clique para eliminar todas mensagens";
 $lang['kalkun_refresh'] = "Actualizar";
 $lang['kalkun_global_delete_title'] = "Clique para eliminar mensagem escolhida";
 
+$lang['kalkun_report_spam'] = "Report Spam";
+$lang['kalkun_ham'] = "Not Spam";
+
+
 $lang['kalkun_first'] = "Primiero";
 $lang['kalkun_last'] = "Ultimo";
 

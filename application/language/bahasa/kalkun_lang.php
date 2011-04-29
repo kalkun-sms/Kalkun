@@ -118,6 +118,9 @@ $lang['kalkun_clear_all_title'] = "Klik untuk membersihkan semua pesan terpilih"
 $lang['kalkun_refresh'] = "Segarkan";
 $lang['kalkun_global_delete_title'] = "Klik untuk menghapus pesan terpilih";
 
+$lang['kalkun_report_spam'] = "Report Spam";
+$lang['kalkun_ham'] = "Not Spam";
+
 $lang['kalkun_first'] = "Awal";
 $lang['kalkun_last'] = "Akhir";
 

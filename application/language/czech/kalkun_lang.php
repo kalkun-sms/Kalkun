@@ -118,6 +118,9 @@ $lang['kalkun_clear_all_title'] = "Klikněte pro zrušení označení všech zpr
 $lang['kalkun_refresh'] = "Obnovit";
 $lang['kalkun_global_delete_title'] = "Klikněte pro odstranění vybraných zpráv";
 
+$lang['kalkun_report_spam'] = "Report Spam";
+$lang['kalkun_ham'] = "Not Spam";
+
 $lang['kalkun_first'] = "První";
 $lang['kalkun_last'] = "Poslední";
 

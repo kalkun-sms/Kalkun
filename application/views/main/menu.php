@@ -14,9 +14,10 @@
 	?>
 	</span></li>
 	<li><?php echo anchor('messages/folder/outbox',lang('kalkun_outbox')); ?></li>
-	<li><?php echo anchor('messages/folder/sentitems',lang('kalkun_sentitems')); ?></li>
+    <li><?php echo anchor('messages/folder/sentitems',lang('kalkun_sentitems')); ?></li>
+    <li><?php echo anchor('messages/my_folder/inbox/6',lang('kalkun_spam')); ?></li>
 	<li><?php echo anchor('messages/my_folder/inbox/5',lang('kalkun_trash')); ?></li>
-    <li><?php echo anchor('messages/my_folder/inbox/6',lang('kalkun_spam')); ?></li>						
+    						
 	</ul>
 	</div>
 </li>

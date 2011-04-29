@@ -798,6 +798,13 @@ class Messages extends MY_Controller {
         
     }
     
+    //function spam check
+    
+    function spam_check($method = NULL , $action = NULL)
+    {
+        
+    }
+    
     
     
 }	
