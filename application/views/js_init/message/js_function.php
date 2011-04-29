@@ -243,6 +243,7 @@ $(document).ready(function() {
     
     // --------------------------------------------------------------------
 	
+    <?php if($this->uri->segment(4)=='5' || $this->uri->segment(4)=='6'):?>
 	/**
 	 * Delete all
 	 *
@@ -269,7 +270,7 @@ $(document).ready(function() {
 		$('#deletealldialog').dialog('open');
 		return false;
 	});
-    
+    <?php endif; ?>
      
 });    
 </script>
