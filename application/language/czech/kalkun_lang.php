@@ -108,6 +108,9 @@ $lang['kalkun_delete_folder_confirmation'] = "Tato složka a všechny zprávyv n
 $lang['kalkun_no_message'] = "Žádné zprávy ve složce ";
 $lang['kalkun_no_message_in_folder'] = "Žádné zprávy v této složce";
 
+$lang['kalkun_delete_all_confirmation_header'] = "Delete All";
+$lang['kalkun_delete_all_confirmation'] = "Are you sure? This will affect all conversations.";
+
 $lang['kalkun_select_all'] = "Označit vše";
 $lang['kalkun_select_all_title'] = "Klikněte pro označeni všech zpráv";
 $lang['kalkun_clear_all'] = "Zrušit označení všech";

@@ -776,7 +776,30 @@ class Messages extends MY_Controller {
 		{
 			return $modem_list[0]['id'];
 		}
-	}    
+	} 
+    
+    // function empty trash/spam
+    function delete_all($type = NULL)
+    {
+        // register valid type
+		$valid_type = array('trash', 'spam' );
+		// check if it's valid type
+		if(!in_array($type, $valid_type)) die("Invalid Type");
+        
+        switch($type){
+            case 'trash':
+                $this->db->delete('inbox', array('id_folder' => '5')); 
+                $this->db->delete('sentitems', array('id_folder' => '5')); 
+                break;
+            case 'spam':
+                $this->db->delete('inbox', array('id_folder' => '6')); 
+                break;
+        }
+        
+    }
+    
+    
+    
 }	
 
 /* End of file messages.php */

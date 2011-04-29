@@ -108,6 +108,9 @@ $lang['kalkun_delete_folder_confirmation'] = "These folder and all message on it
 $lang['kalkun_no_message'] = "There is no messages in your ";
 $lang['kalkun_no_message_in_folder'] = "There is no messages in this folder";
 
+$lang['kalkun_delete_all_confirmation_header'] = "Delete All";
+$lang['kalkun_delete_all_confirmation'] = "Are you sure? This will affect all conversations.";
+
 $lang['kalkun_select_all'] = "Select All";
 $lang['kalkun_select_all_title'] = "Click to select all message";
 $lang['kalkun_clear_all'] = "Clear All";

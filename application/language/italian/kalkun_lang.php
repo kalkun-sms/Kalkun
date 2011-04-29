@@ -108,6 +108,9 @@ $lang['kalkun_delete_folder_confirmation'] = "Questa cartella e tutti i messaggi
 $lang['kalkun_no_message'] = "Non ci sono messaggi nella tua cartella";
 $lang['kalkun_no_message_in_folder'] = "Questa cartella non contiene messaggi";
 
+$lang['kalkun_delete_all_confirmation_header'] = "Delete All";
+$lang['kalkun_delete_all_confirmation'] = "Are you sure? This will affect all conversations.";
+
 $lang['kalkun_select_all'] = "Seleziona tutto";
 $lang['kalkun_select_all_title'] = "Clicca per selezionare tutti i messaggi";
 $lang['kalkun_clear_all'] = "Elimina tutto";

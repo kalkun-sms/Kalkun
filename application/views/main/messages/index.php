@@ -37,10 +37,19 @@ if($this->uri->segment(2)=='my_folder')
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
 	<?php echo lang('kalkun_delete_folder_confirmation');?></p>
 </div>		
+<!-- Delete All Confirmation -->
+<div class="dialog" id="deletealldialog" title="<?php echo lang('kalkun_delete_all_confirmation_header');?>">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+	<?php echo lang('kalkun_delete_all_confirmation');?></p>
+</div>	
 
 <div id="two_column_container" class="tabbing">
 <div id="left_column" class="two_column_medium">
 	<?php echo"<span class=\"folder_name\">".$this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name')."</span>";?>
+    <?php if($this->uri->segment(4)=='5' || $this->uri->segment(4)=='6'):?>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="padding: 0; cursor: pointer; font-weight: normal;" id="delete-all-link">Delete All Messages Now</a>
+    <?php endif; ?>
+    
 	<?php if($this->uri->segment(4)!='5' && $this->uri->segment(4)!='6'):?>
 	<sup>[ 
 	<a href="#" title="<?php echo lang('kalkun_rename_folder_title');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="renamefolder"><?php echo lang('kalkun_rename');?></a> - 

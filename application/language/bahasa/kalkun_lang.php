@@ -108,6 +108,9 @@ $lang['kalkun_delete_folder_confirmation'] = "Berkas ini dan semua pesan di dala
 $lang['kalkun_no_message'] = "Tidak ada pesan dalam ";
 $lang['kalkun_no_message_in_folder'] = "Tidak ada pesan dalam berkas ini";
 
+$lang['kalkun_delete_all_confirmation_header'] = "Delete All";
+$lang['kalkun_delete_all_confirmation'] = "Are you sure? This will affect all conversations.";
+
 $lang['kalkun_select_all'] = "Pilih Semua";
 $lang['kalkun_select_all_title'] = "Klik untuk memilih semua pesan";
 $lang['kalkun_clear_all'] = "Bersihkan Semua";

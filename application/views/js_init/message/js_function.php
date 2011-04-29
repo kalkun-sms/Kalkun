@@ -241,7 +241,35 @@ $(document).ready(function() {
 		return false;
 	});
     
+    // --------------------------------------------------------------------
+	
+	/**
+	 * Delete all
+	 *
+	 * Delete all
+	 *
+	 */	
+	$('#delete-all-link').click(function()
+	{
+		$("#deletealldialog").dialog({
+			bgiframe: true,
+			autoOpen: false,
+			height: 165,
+			modal: true,	
+			buttons: {
+				'<?php echo lang('kalkun_cancel'); ?>': function() {
+					$(this).dialog('close');
+				},
+				'<?php echo lang('kalkun_delete_all_confirmation_header'); ?>': function() {
+					$.get("<?php echo site_url('messages/delete_all').'/'.strtolower($this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name'));?>");
+                    $(this).dialog('close');
+				}
+			}
+		});			
+		$('#deletealldialog').dialog('open');
+		return false;
+	});
     
-
+     
 });    
 </script>
