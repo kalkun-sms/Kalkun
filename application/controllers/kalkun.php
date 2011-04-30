@@ -135,7 +135,10 @@ class Kalkun extends MY_Controller {
 				$y = new y_axis();
 				$max = max(max($data_2),max($data_3));
 				if($max < 1)  $max=10;
-				$y->set_range(0, $max, round($max/100)*10); 
+				$max = round($max/5)*5;
+				$range = round($max/5);
+				$range = round($range/10)*10;
+				$y->set_range(0, $max, $range); 
 				
 				$element1 = $bar_1;
                 $element2 = $bar_2;
