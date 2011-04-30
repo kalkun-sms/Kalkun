@@ -12,14 +12,17 @@
 	<div id="header">
 		<div id="header_left">
 			<div id="logo"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></div>
-			<div id="app_meta">Open source web based SMS management</div>
+			
 		</div>
-		<div class="notification_container" align="center"><span class="notification_area hidden"><?php echo lang('tni_loading');?>...</span>
-		<?php if($this->session->flashdata('notif')): ?>
-		<span class="notification_area"><?php echo $this->session->flashdata('notif');?></span>
-		<?php endif; ?>
+		<div id="header_right">
+			<div id="top_link"><?php echo $this->load->view('main/search');?></div>
+			<div class="clear">&nbsp;</div>
+			<div class="notification_container" align="center"><span class="notification_area hidden"><?php echo lang('tni_loading');?>...</span>
+			<?php if($this->session->flashdata('notif')): ?>
+			<span class="notification_area"><?php echo $this->session->flashdata('notif');?></span>
+			<?php endif; ?>
+			</div>
 		</div>
-		<div id="top_link"><?php echo $this->load->view('main/search');?></div>
 	</div>
 	
 	<div id="container">

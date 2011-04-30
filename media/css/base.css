@@ -58,10 +58,11 @@ textarea {
 	overflow: hidden;
 	padding-bottom: 15px;
 	margin-top: 30px;
+	height: 50px;
 }
 
 #header_left {
-	width: 300px;
+	width: 200px;
 	float: left;
 }
 
@@ -79,9 +80,18 @@ textarea {
 	margin: 0px 5px;
 }
 
+#header_right {
+	width: 725px;
+	float: right;
+	text-align: right;
+}
+
 .notification_container {
-	width: 200px;
+	display: block;
 	text-align: center;	
+	margin-left: 5px;
+	padding: 5px 0px;
+	display: block;	
 }
 
 #top_navigation {
@@ -128,9 +138,6 @@ textarea {
 
 #top_link {
 	float: right;
-	text-align: right;		
-	margin-top: 30px;
-	margin-left: 5px;
 	padding: 5px 0px;
 }
 
@@ -566,6 +573,11 @@ textarea {
 }
 
 /* Misc */
+.clear {
+	clear: both;
+	line-height: 0;	
+}
+
 .rounded {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -617,7 +629,7 @@ textarea {
 }
 
 .loading_container {
- 	position: absolute;
+ 	position: fixed;
  	top: 0%;	
  	left: 50%;	
 }
@@ -629,16 +641,16 @@ textarea {
 	padding: 5px 10px; 
  	background: #FFFFCC;
  	font-weight: bold;
+}
+
+.loading_area {
     z-index:100;
     position:absolute;
-    opacity:0.7;
-    
+    opacity:0.7;	
 }
 
 .notification_area {
-	float: left;
-	width: auto;
-    opacity:1;	
+
 }
 
 .nicecheckbox {
@@ -665,7 +677,7 @@ textarea {
 }
 
 .sms_search_form input[type="text"] {
-	width: 250px;
+	width: 300px;
 	margin:0;
 	border-right: none;
 }
