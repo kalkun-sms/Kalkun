@@ -31,6 +31,9 @@ $(document).ready(function() {
 			modal: true,
 			show: 'fade',
 			hide: 'fade',
+			open: function() {
+				$("#name").focus();
+			},
 			buttons: {
 			'<?php echo lang('kalkun_save')?>': function() {
 			 if($('#addContact').valid()){

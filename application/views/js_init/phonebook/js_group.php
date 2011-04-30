@@ -34,6 +34,9 @@ $("#addgroupdialog").dialog({
 		'<?php echo lang('kalkun_cancel')?>': function() {
 			$(this).dialog('close');
 		}
+	},
+	open: function() {
+		$("#group_name").focus();
 	}
 });		
 $('#addgroupdialog').dialog('open');

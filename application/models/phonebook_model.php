@@ -102,6 +102,7 @@ class Phonebook_model extends Model {
 			break;	
 			
 			case 'groupname':
+			$this->db->select('ID');
 			$this->db->select_as('Name', 'GroupName');
 			$this->db->from('pbk_groups');
 			$this->db->where('id_user', $user_id);

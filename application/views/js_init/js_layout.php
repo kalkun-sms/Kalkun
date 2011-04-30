@@ -84,7 +84,10 @@ $(document).ready(function() {
 				}
 			},
 			Cancel: function() { $(this).dialog('destroy');}
-		    }
+		    },
+		    open: function() {
+            $("#personvalue").focus();
+        	}
 		  });
 		});
 		$("#compose_sms_container").dialog('open');
@@ -103,9 +106,9 @@ $(document).ready(function() {
 		$('#about').dialog('open');
 		return false;
 	});		
-	
+		
 	// Add folder
-	$('#addfolder').click(function() {
+	$('#addfolder').click(function() {		
 		$("#addfolderdialog").dialog({
 		bgiframe: true,
 		autoOpen: false,
@@ -118,7 +121,10 @@ $(document).ready(function() {
 			Cancel: function() {
 				$(this).dialog('close');
 			}
-		}
+		},
+		open: function() {
+            $("#folder_name").focus();
+        }
 		});		
 		$('#addfolderdialog').dialog('open');
 		return false;
