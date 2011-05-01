@@ -44,8 +44,14 @@ class Spam_model extends Model {
             die( "<b> Could not initialize b8. error code: $started_up</b>");
     }
  
-// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
    
+     /**
+      * Spam_model::_check_spam()
+      * Check if a a text is spam
+      * @param text $text
+      * @return
+      */
      function _check_spam($text)
      {
          $level = $this->b8->classify($text);
@@ -54,10 +60,16 @@ class Spam_model extends Model {
          return (object)$ret;
      }
      
+     /**
+      * Spam_model::apply_spam_filter()
+      * 
+      * @param mixed $ID
+      * @param mixed $Text
+      * @return
+      */
      function apply_spam_filter($ID , $Text)
      {
         $is_spam = $this->_check_spam($Text);
-        var_dump($is_spam);
         if($is_spam->class == 'spam')
         {
             if($is_spam->level > $this->ratingcutoff)
@@ -67,6 +79,12 @@ class Spam_model extends Model {
         return false;
      }
      
+     /**
+      * Spam_model::report_spam()
+      * 
+      * @param mixed $params
+      * @return
+      */
      function report_spam($params)
      {
         $this->b8->learn($params['Text'], b8::SPAM);
@@ -79,6 +97,12 @@ class Spam_model extends Model {
         
      }
      
+     /**
+      * Spam_model::report_ham()
+      * 
+      * @param mixed $params
+      * @return
+      */
      function report_ham($params)
      {
         $this->b8->learn($params['Text'], b8::HAM);
@@ -90,6 +114,13 @@ class Spam_model extends Model {
         $this->_cloud_report('ham',$params['Text']);
      }
      
+     /**
+      * Spam_model::_cloud_report()
+      * 
+      * @param mixed $type
+      * @param mixed $text
+      * @return
+      */
      function _cloud_report($type, $text)
      {
         $this->load->library('curl'); 

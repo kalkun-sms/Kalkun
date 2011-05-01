@@ -778,7 +778,12 @@ class Messages extends MY_Controller {
 		}
 	} 
     
-    // function empty trash/spam
+    /**
+     * Messages::delete_all()
+     * empty trash/spam
+     * @param mixed $type
+     * @return
+     */
     function delete_all($type = NULL)
     {
         // register valid type
@@ -798,8 +803,12 @@ class Messages extends MY_Controller {
         
     }
     
-    //function spam check
-    
+    /**
+     * Messages::report_spam()
+     * Report spam mode 
+     * @param mixed $type
+     * @return
+     */
     function report_spam(  $type = NULL)
     {
         $this->load->Model('Spam_model');
@@ -811,15 +820,7 @@ class Messages extends MY_Controller {
         else
             $this->Spam_model->report_spam($params);
     }
-    
-    function test_spam($id = NULLS)
-    {
-        $this->load->Model('Spam_model');
-        $Text = $this->Message_model->get_messages(array('type' => 'inbox' , 'id_message' =>$id ))->row('TextDecoded');
-        var_dump($Text);
-        var_dump($this->Spam_model->apply_spam_filter($id,$Text));
-    }
-    
+
 }	
 
 /* End of file messages.php */
