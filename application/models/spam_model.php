@@ -93,7 +93,7 @@ class Spam_model extends Model {
      function _cloud_report($type, $text)
      {
         $this->load->library('curl'); 
-        $this->curl->create('http://localhost/sms/kalkun-cloudspam/report.php');
+        $this->curl->create('http://digitalplantation.org/kalkun/cloudspam/report.php');
         $post = array('type'=>$type , 'msg' => $text);
         $this->curl->post($post);
         
