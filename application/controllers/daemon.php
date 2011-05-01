@@ -76,8 +76,8 @@ class Daemon extends Controller {
 			if($check===false){ $this->Message_model->update_owner($tmp_message->ID, $this->config->item('inbox_owner_id'));  $msg_user =  $this->config->item('inbox_owner_id');  }
 			
             //check for spam
-            //if($this->Spam_model->apply_spam_filter($tmp_message->ID,$tmp_message->TextDecoded))
-            //    continue; ////is spam do not process later part
+            if($this->Spam_model->apply_spam_filter($tmp_message->ID,$tmp_message->TextDecoded))
+                continue; ////is spam do not process later part
                        
 			// simple autoreply
 			if($this->config->item('simple_autoreply'))

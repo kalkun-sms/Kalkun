@@ -22,7 +22,12 @@
  */
 class Spam_model extends Model {
 
-    var $classifier;
+    public $classifier;
+    public $ratingcutoff = 0.7;
+
+   
+    public $b8;
+ 
 	/**
 	 * Constructor
 	 *
@@ -31,74 +36,45 @@ class Spam_model extends Model {
 	function Spam_model()
 	{
 		parent::Model();
-        $this->load->library('classifier-php/bayes.php');
-        $this->classifier = new Bayes('spam','ham');
+        require(dirname(__FILE__) .'/../libraries/b8/b8.php');
+        $this->_init();
+        
 	}
+    function _init()
+    {
+        $b8_config = array( 'storage' => 'mysql');
+        $config_database= array(
+	   'database'   => $this->db->database,
+	   'table_name' => 'b8_wordlist',
+	   'host'       => $this->db->hostname,
+	   'user'       => $this->db->username,
+	   'pass'       => $this->db->password); 
+       
+       $this->b8 = new b8($b8_config, $config_database);
+       $started_up = $this->b8->validate();
+
+	   if($started_up !== TRUE) 		
+        die( "<b> Could not initialize b8. error code: $started_up</b>");
+    }
 
 	// --------------------------------------------------------------------
-	
-	 function _train_model()
-     {
-        $_data = $this->db->get('spam_check');
-        foreach ($_data->result() as $row)
-        {
-            var_dump($row);
-            //$this->classifier->train($row->category, $row->token); 
-            $this->classifier->train('spam', $row->token);
-        }
-        // spam from user data
-        $this->db->select('TextDecoded');
-        $this->db->distinct();
-        $this->db->where('id_folder', '6');
-        $_data = $this->db->get('inbox');
-        foreach ($_data->result() as $row)
-        {
-            var_dump($row);
-            $this->classifier->train('spam', $row->TextDecoded); 
-        }
-        
-        
-        //now train good data from user inbox and outbox
-        
-        $this->db->distinct();
-        $this->db->select('TextDecoded');
-        $this->db->where("`id_folder` != '6' ");
-        $this->db->where('Processed', 'false');
-        $_data = $this->db->get('inbox');
-        $this->db->limit(100);
-        foreach ($_data->result() as $row)
-        {//var_dump($row);
-            $this->classifier->train('ham', $row->TextDecoded); 
-        }
-        
-        $this->db->distinct();
-        $this->db->select('TextDecoded');
-        $this->db->where("`id_folder` != '6' ");
-        $_data = $this->db->get('sentitems');
-        $this->db->limit(100);
-        foreach ($_data->result() as $row)
-        {//var_dump($row);
-            $this->classifier->train('ham', $row->TextDecoded); 
-        }
-        
-        
-     }
-     
-     
+	   
      function _check_spam($text)
      {
-         $this->_train_model();
-         return $this->classifier->classify($text);
-     } 
+         $level = $this->b8->classify($text);
+         $ret['class'] = ($level > $this->ratingcutoff) ? 'spam' : 'ham' ;
+         $ret ['level'] = $level;
+         return (object)$ret;
+     }
      
      function apply_spam_filter($ID , $Text)
      {
         $is_spam = $this->_check_spam($Text);
-        var_dump($this->classifier->classifications($Text));
         var_dump($is_spam);
-        if($is_spam == 'spam')
+        if($is_spam->class == 'spam')
         {
-            //$this->report_spam(array( 'ID' => $ID , 'Text' => $Text));
+            if($is_spam->level > '0.9')
+                $this->report_spam(array( 'ID' => $ID , 'Text' => $Text));
             return true;
         }
         return false;
@@ -106,13 +82,9 @@ class Spam_model extends Model {
      
      function report_spam($params)
      {
-        // id provided
-        $data = array( 'id_inbox' =>  $params['ID'],
-           'token' => $params['Text'] ,
-           'rating' => '1',
-           'category' => 'spam' );
-        $this->db->insert('spam_check', $data);    
-         
+        $this->b8->unlearn($params['Text'], b8::HAM);
+        $this->b8->learn($params['Text'], b8::SPAM);
+           
         //move message to spam folder
         $this->db->where('ID',$params['ID']);
         $this->db->update('inbox', array( 'id_folder' => '6' ));
@@ -121,15 +93,12 @@ class Spam_model extends Model {
      
      function report_ham($params)
      {
-        // id provided
-        $this->db->delete('spam_check', array('id_inbox' => $params['ID'])); 
- 
+        $this->b8->unlearn($params['Text'], b8::SPAM);
+        $this->b8->learn($params['Text'], b8::HAM);
+         
         //move message to spam folder
         $this->db->where('ID',$params['ID']);
         $this->db->update('inbox', array( 'id_folder' => '1' ));
-        
      }
 
-}	
-
- 
+}
