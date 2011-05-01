@@ -27,6 +27,20 @@ $config['gammu_path'] = "C:\Gammu 1.29.92\bin\\";
 $config['gammu_sms_inject'] = $config['gammu_path']."gammu-smsd-inject";
 $config['gammu_config'] = $config['gammu_path']."config.ini";
 
+
+/*
+|--------------------------------------------------------------------------
+|   Kalkun Cloud Feature Network Settings
+|--------------------------------------------------------------------------
+*/
+$config['enable_proxy'] = false;
+$config['proxy_host'] = 'proxyhost.com';
+$config['proxy_port'] = '8080';
+$config['proxy_username'] = '';
+$config['proxy_password'] = '';
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Modem Tolerant

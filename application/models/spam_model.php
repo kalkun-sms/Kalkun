@@ -69,23 +69,43 @@ class Spam_model extends Model {
      
      function report_spam($params)
      {
-        $this->b8->unlearn($params['Text'], b8::HAM);
         $this->b8->learn($params['Text'], b8::SPAM);
            
         //move message to spam folder
         $this->db->where('ID',$params['ID']);
         $this->db->update('inbox', array( 'id_folder' => '6' ));
         
+        $this->_cloud_report('spam',$params['Text']);
+        
      }
      
      function report_ham($params)
      {
-        $this->b8->unlearn($params['Text'], b8::SPAM);
         $this->b8->learn($params['Text'], b8::HAM);
          
         //move message to spam folder
         $this->db->where('ID',$params['ID']);
         $this->db->update('inbox', array( 'id_folder' => '1' ));
+        
+        $this->_cloud_report('ham',$params['Text']);
+     }
+     
+     function _cloud_report($type, $text)
+     {
+        $this->load->library('curl'); 
+        $this->curl->create('http://localhost/sms/kalkun-cloudspam/report.php');
+        $post = array('type'=>$type , 'msg' => $text);
+        $this->curl->post($post);
+        
+        if($this->config->item('enable_proxy'))
+        {
+            $this->curl->proxy($this->config->item('proxy_host'), $this->config->item('proxy_port'));
+            if($this->config->item('proxy_username') != '')
+                $this->curl->proxy_login($this->config->item('proxy_username'),$this->config->item('proxy_password'));
+        }
+        
+        echo $this->curl->execute();
+
      }
  
 }

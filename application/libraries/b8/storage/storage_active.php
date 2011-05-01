@@ -220,7 +220,9 @@ class b8_storage_active extends b8_storage_base
 
         if (count($this->_puts) > 0) {
 
-            $this->db->insert_batch('b8_wordlist', $this->_puts);
+            //$CI->db->insert_batch('b8_wordlist', $this->_puts); // code igniter has a problem with the inser_batch func
+            foreach ($this->_puts as $inpt) 
+                $CI->db->insert('b8_wordlist', $inpt);
             $this->_puts = array();
 
         }
@@ -229,28 +231,21 @@ class b8_storage_active extends b8_storage_base
 
             //maybe use duplicate method
             foreach ($this->_updates as $updt) {
-                
                 $CI->db->from('b8_wordlist');
                 $CI->db->where('token', $updt['token']);
-                if ($CI->db->count_all_results()) {
+                if ($CI->db->count_all_results()) 
+                {
                     $CI->db->where('token', $updt['token']);
                     $CI->db->update('b8_wordlist', $updt);
-                } else {
+                }
+                else 
+                {
                     $CI->db->insert('b8_wordlist', $updt);
                 }
             }
-
-
-            /*$result = $CI->db->query('
-            INSERT INTO `b8_wordlist`' . '(token, count)
-            VALUES ' . implode(', ', $this->_updates) . '
-            ON DUPLICATE KEY UPDATE b8_wordlist' . '.count = VALUES(count);');*/
             $this->_updates = array();
-
         }
-
     }
-
 }
 
 ?>
