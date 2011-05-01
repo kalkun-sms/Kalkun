@@ -74,6 +74,9 @@ class Spam_model extends Model {
         {
             if($is_spam->level > $this->ratingcutoff)
                 $this->report_spam(array( 'ID' => $ID , 'Text' => $Text));
+            //move to spam folder    
+            $this->db->where('ID',$ID)->update('inbox', array( 'id_folder' => '6' ));
+        
             return true;
         }
         return false;
