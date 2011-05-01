@@ -11,3 +11,13 @@ UPDATE `inbox` set id_folder = id_folder + 1 where id_folder > 5
 UPDATE `sentitems` set id_folder = id_folder + 1 where id_folder > 5
 UPDATE `user_folders` set id_folder = id_folder + 1 where id_folder > 5
 INSERT INTO `user_folders` (`id_folder`, `name`, `id_user`) VALUES (6, 'Spam', 0);
+
+CREATE TABLE `b8_wordlist` (
+  `token` varchar(255) character set utf8 collate utf8_bin NOT NULL,
+  `count` varchar(255) default NULL,
+  PRIMARY KEY  (`token`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `b8_wordlist` VALUES ('bayes*dbversion', '2');
+INSERT INTO `b8_wordlist` VALUES ('bayes*texts.ham', '0');
+INSERT INTO `b8_wordlist` VALUES ('bayes*texts.spam', '0');

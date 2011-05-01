@@ -269,3 +269,15 @@ CREATE TABLE IF NOT EXISTS `spam_check` (
   `category` enum('spam','ham') NOT NULL DEFAULT 'spam',
   PRIMARY KEY (`id_spam_check`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1  ;
+
+-- --------------------------------------------------------
+
+CREATE TABLE `b8_wordlist` (
+  `token` varchar(255) character set utf8 collate utf8_bin NOT NULL,
+  `count` varchar(255) default NULL,
+  PRIMARY KEY  (`token`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `b8_wordlist` VALUES ('bayes*dbversion', '2');
+INSERT INTO `b8_wordlist` VALUES ('bayes*texts.ham', '0');
+INSERT INTO `b8_wordlist` VALUES ('bayes*texts.spam', '0');
