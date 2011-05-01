@@ -245,7 +245,7 @@ $("#contact_container").dialog('open');
 return false;
 });	
     
-<?php if($this->uri->segment(4)!='6' &&  $this->uri->segment(6)!='6'  ) : ?>
+<?php if($this->uri->segment(4)!='6' &&  $this->uri->segment(6)!='6' && !is_ajax()  ) : ?>
 // report spam
 $(".spam_button").click(function() {
     var count = $("input:checkbox:checked:visible").length;
