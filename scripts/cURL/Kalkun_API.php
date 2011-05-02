@@ -17,7 +17,7 @@ class Kalkun_API {
 	var $message = "";
 	var $sms_mode = "0"; // 1 = flash, 0 = normal
 	//var $send_date = date('Y-m-d H:i:s');
-
+	var $coding = "";
 	var $curl_id = "";
 	
 	function Kalkun_API($params = array())
@@ -99,6 +99,7 @@ class Kalkun_API {
 		    'sms_mode' => urlencode($this->sms_mode),
 		    'sms_loop' => urlencode('1'),
             'validity' => urlencode('-1'),
+            'unicode' => $this->coding,
 		    'message' => urlencode($this->message)
 		);
 		$sms_field = $this->urlify($sms);

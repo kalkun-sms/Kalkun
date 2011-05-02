@@ -8,6 +8,9 @@ $config['password'] = "password";
 $config['phone_number'] = "123456";
 $config['message'] = "Test message from API";
 
+// unicode message
+// $config['coding'] = 'unicode';
+
 $sms = new Kalkun_API($config);
 $sms->run();
 ?>
