@@ -109,6 +109,7 @@ class Kalkun_API {
 	//url-ify the data for the POST
 	function urlify($param)
 	{
+		$param_string = '';
 		foreach($param as $key=>$value) 
 		{ $param_string .= $key.'='.$value.'&'; }
 		rtrim($param_string,'&');
