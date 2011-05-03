@@ -47,9 +47,11 @@ class Kalkun_API {
 	
 	function run()
 	{
-		if($this->login()) $this->send_sms();
-		else echo "Login failed";
-		
+		if($this->login())
+		{
+			$this->send_sms();
+		}
+				
 		$this->finish();
 	}
 	
@@ -57,7 +59,11 @@ class Kalkun_API {
 	{
 		$ch = $this->curl_id;
 		curl_close($ch);
-		unlink($this->session_file);
+		
+		if (file_exists($this->session_file))
+		{
+			unlink($this->session_file);
+		}
 	}
 	
 	function login()
@@ -78,7 +84,18 @@ class Kalkun_API {
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
 		$output = curl_exec($ch);
 		
-		if(strpos($output,"Please enter your username and password") !== false) return FALSE;
+		// Check if URL exist
+		$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		if($http_code == 404) {
+			$this->show_message('URL not found');
+		    return FALSE;
+		}
+		
+		if(strpos($output,"Please enter your username and password") !== false)
+		{
+			$this->show_message('Login failed');
+			return FALSE;
+		}
 		else return TRUE;
 	}
 	
@@ -99,7 +116,7 @@ class Kalkun_API {
 		    'sms_mode' => urlencode($this->sms_mode),
 		    'sms_loop' => urlencode('1'),
             'validity' => urlencode('-1'),
-            'unicode' => $this->coding,
+            'unicode' => urlencode($this->coding),
 		    'message' => urlencode($this->message)
 		);
 		$sms_field = $this->urlify($sms);
@@ -115,6 +132,11 @@ class Kalkun_API {
 		{ $param_string .= $key.'='.$value.'&'; }
 		rtrim($param_string,'&');
 		return $param_string;		
+	}
+	
+	function show_message($message)
+	{
+		echo $message;
 	}
 }
 
