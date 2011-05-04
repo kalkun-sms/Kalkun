@@ -1,15 +1,31 @@
-<div id="space_area">
-<h3><?php echo anchor('plugin/blacklist_number', 'Blacklist Number', array('title' => 'Go to Blacklist Number')); ?></h3>
-<p>Got spammed? This tool will help you to block messages from unwanted phone number. </p>
-<div class="note">Author & Idea : Azhari Harahap</div>
-<br /><hr />
+<div id="window_container">
+<div id="window_title">
+	<div id="window_title_left"><?php echo $title; ?></div>
+	<div id="window_title_right">
+		<?php echo form_open('pluginss', array('class' => 'search_form')); ?>
+		<input type="text" name="search_name" size="20" class="search_name" value="" />
+		<?php echo form_close(); ?>
+		&nbsp;
+		<a href="<?php echo site_url('pluginss/index/installed');?>" id="addpbkcontact_wizard" class="nicebutton"><?php echo "Installed"; ?></a>
+		<a href="<?php echo site_url('pluginss/index/available');?>" id="addpbkcontact_wizard" class="nicebutton"><?php echo "Available"; ?></a>
+	</div>
+</div>
 
-<h3><?php echo anchor('plugin/server_alert', 'Server Alert', array('title' => 'Go to Server Alert')); ?></h3>
-<p>Alert you (or someone else) whenever service on your server computer (can be local or remote) is down. 
-This tool use <a target="_blank" href="http://php.net/manual/en/function.fsockopen.php">fsockopen</a> function to scan running service port. (<b>Note:</b> Make sure your firewall not block the port scan)</p>
-<div class="note">Author & Idea : Azhari Harahap</div>
-<br /><hr />
-
-<p>&nbsp;</p>
-<p>Any idea to create another plugin? feel free to contact me.</p>
+<div id="window_content">
+	<?php
+	if(count($plugins)>0):
+		foreach($plugins as $tmp):
+	?>
+	<h3><?php echo anchor('plugin/'.$tmp['plugin_system_name'], $tmp['plugin_name']); ?></h3>
+	<div><small>
+	<strong>Version:</strong> <?php echo $tmp['plugin_version'];?>&nbsp;&nbsp;
+	<strong>Author:</strong> <?php echo anchor($tmp['plugin_author_uri'], $tmp['plugin_author']);?>
+	</small></div>
+	<p><?php echo $tmp['plugin_description'];?></p>
+	<hr />
+	<?php endforeach;?>
+	
+	<?php else: ?>
+	<p>There is no installed plugin.</p>
+	<?php endif;?>
 </div>

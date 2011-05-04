@@ -1,13 +1,6 @@
 <div id="space_area">
 
-<div id="dash_box_titlebar"><?php echo lang('kalkun_statistic');?></div>
-<div id="dash_box">
-	<?php $this->load->view('main/dashboard/statistic');?>
-</div>
-<br />
-
 <?php if( isset($alerts) && count($alerts)> 0): ?> 
-
 <div id="dash_box_titlebar"><?php echo lang('kalkun_alerts');?></div>
 <div id="dash_box">
 <?php
@@ -15,10 +8,15 @@ foreach ($alerts as $msg):
    echo $msg;
 endforeach;
 ?>
-
 </div>
 <br />
 <?php endif; ?>
+
+<div id="dash_box_titlebar"><?php echo lang('kalkun_statistic');?></div>
+<div id="dash_box">
+	<?php $this->load->view('main/dashboard/statistic');?>
+</div>
+<br />
 
 <?php if($this->session->userdata('level')=='admin'): ?>
 <div id="dash_box_titlebar"><?php echo lang('kalkun_system_information');?></div>

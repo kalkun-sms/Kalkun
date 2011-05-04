@@ -33,7 +33,7 @@ class MY_Controller  extends Controller  {
 		
 		// installation mode
 		if(file_exists("install")) redirect('install');	
-	
+		
 		$this->load->library('session');
 		// session check
 		if($this->session->userdata('loggedin')==NULL) redirect('login');

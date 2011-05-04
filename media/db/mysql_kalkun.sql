@@ -281,3 +281,31 @@ CREATE TABLE `b8_wordlist` (
 INSERT INTO `b8_wordlist` VALUES ('bayes*dbversion', '2');
 INSERT INTO `b8_wordlist` VALUES ('bayes*texts.ham', '0');
 INSERT INTO `b8_wordlist` VALUES ('bayes*texts.spam', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `plugins`
+--
+
+CREATE TABLE IF NOT EXISTS `plugins` (
+  `plugin_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `plugin_system_name` varchar(255) NOT NULL,
+  `plugin_name` varchar(255) NOT NULL,
+  `plugin_uri` varchar(120) DEFAULT NULL,
+  `plugin_version` varchar(30) NOT NULL,
+  `plugin_description` text,
+  `plugin_author` varchar(120) DEFAULT NULL,
+  `plugin_author_uri` varchar(120) DEFAULT NULL,
+  `plugin_data` longtext,
+  PRIMARY KEY (`plugin_id`),
+  UNIQUE KEY `plugin_index` (`plugin_system_name`) USING BTREE
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `plugins`
+--
+
+INSERT INTO `plugins` (`plugin_id`, `plugin_system_name`, `plugin_name`, `plugin_uri`, `plugin_version`, `plugin_description`, `plugin_author`, `plugin_author_uri`, `plugin_data`) VALUES
+(1, 'blacklist_number', 'Blacklist Number', 'http://azhari.harahap.us', '0.1', 'Autoremove incoming SMS from Blacklist number', 'Azhari Harahap', 'http://azhari.harahap.us', NULL),
+(2, 'server_alert', 'Server Alert', 'http://azhari.harahap.us', '0.1', 'Send alert SMS when your server down', 'Azhari Harahap', 'http://azhari.harahap.us', NULL);
