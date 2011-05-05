@@ -225,20 +225,28 @@ class Kalkun extends MY_Controller {
 	}	
 
 	// --------------------------------------------------------------------
-	
-	/**
-	 * Unread Inbox
+       
+    /**
+	 * Unread Count
 	 *
-	 * Show unread inbox and alert when new sms arrived
+	 * Show unread inbox/spam/draft and alert when new sms arrived
 	 * Used by the autoload function and called via AJAX.
 	 *
 	 * @access	public   		 
-	 */		
-	function unread_inbox()
-	{		
-		$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE))->num_rows();
-		echo ($tmp_unread > 0)? "(".$tmp_unread.")" : "";		
-	}	
+	 */
+    function unread_count()
+    {
+        $tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE , 'uid' => $this->session->userdata('id_user')))->num_rows();
+		$in =  ($tmp_unread > 0)? "(".$tmp_unread.")" : "";	
+        
+        $tmp_unread = 0;
+		$draft =  ($tmp_unread > 0)? "(".$tmp_unread.")" : "";
+        
+        $tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE , 'id_folder' => '6' ,'uid' => $this->session->userdata('id_user')) )->num_rows();
+		$spam =  ($tmp_unread > 0)? "(".$tmp_unread.")" : "";
+        
+        echo $in. '/' . $draft . '/' . $spam;
+    }
 
 	// --------------------------------------------------------------------
 	
