@@ -74,12 +74,7 @@ class Message_model extends Model {
 	 * @return	object
 	 */	
 	function send_messages($data)
-	{	
-        if($this->config->item('disable_outgoing'))
-        {
-            echo "<div class=\"notif\">Outgoing SMS Disabled</div>"; return;
-        }
-        
+	{	        
         // check if wap msg
         if($data['type']=='waplink') { $this->_send_wap_link($data); return ;} 
 		

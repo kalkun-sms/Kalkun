@@ -334,5 +334,19 @@ $config['rewrite_short_tags'] = TRUE;
 $config['proxy_ips'] = '';
 
 
+/*
+|--------------------------------------------------------------------------
+| Module Locations
+|--------------------------------------------------------------------------
+|
+| Modules location used by HMVC
+|
+*/
+// 
+$config['modules_locations'] = array(
+        APPPATH.'plugins/' => '../plugins/',
+	);
+
+
 /* End of file config.php */
 /* Location: ./system/application/config/config.php */

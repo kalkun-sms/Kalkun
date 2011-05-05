@@ -53,6 +53,9 @@ class Daemon extends Controller {
 
 		foreach($message->result() as $tmp_message)
 		{	
+			// hook for incoming message
+			// do_action("message.incoming", $text)
+			
 			// sms content
 			if($this->config->item('sms_content'))
 			{

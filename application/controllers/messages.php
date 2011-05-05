@@ -226,7 +226,14 @@ class Messages extends MY_Controller {
 		{
 			$ads_message = $this->config->item('sms_advertise_message');
 			$data['message'] .= "\n".$ads_message;
-		}				
+		}			
+
+		// // if disable outgoing
+        if($this->config->item('disable_outgoing'))
+        {
+        	unset($dest);
+            $return_msg = "<div class=\"notif\">Outgoing SMS Disabled</div>";
+        }			
 			
   	    // if ndnc filtering enabled
         $ndnc_msg = '';
@@ -240,7 +247,7 @@ class Messages extends MY_Controller {
                         if(NDNCcheck($dest[$i]))
                         {
                             unset($dest[$i]);
-                            $ndnc_msg = "<font color='red'>A Number was found in NDNC Resitry. SMS sending was skipped for it.</font><br>" ; 
+                            $return_msg = "<font color='red'>A Number was found in NDNC Resitry. SMS sending was skipped for it.</font><br>" ; 
                         }
                     }
                 }
@@ -248,7 +255,7 @@ class Messages extends MY_Controller {
                         if(NDNCcheck($dest))
                         {
                             unset($dest);
-                            $ndnc_msg = "<font color='red'>A Number was found in NDNC Resitry. SMS sending was skipped for it.</font><br>" ; 
+                            $return_msg = "<font color='red'>A Number was found in NDNC Resitry. SMS sending was skipped for it.</font><br>" ; 
                         }
                 }
             }
@@ -273,8 +280,11 @@ class Messages extends MY_Controller {
 				$this->Message_model->send_messages($data);
 			}
 			endforeach;
+			$return_msg = "<div class=\"notif\">Your message has been move to Outbox and ready for delivery.</div>";
 		}
-		echo "<div class=\"notif\">$ndnc_msg Your message has been move to Outbox and ready for delivery.</div>";
+		
+		// Display sending status
+		echo $return_msg;
 		}
 	}
 		

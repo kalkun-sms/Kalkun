@@ -46,4 +46,5 @@ if($level=='admin'):?>
 	<li id="bottom"><?php echo anchor('member','Member'); ?></li>
 	<?php endif; ?>
 <?php endif; ?>
+<li><?php echo anchor('pluginss', 'Plugins'); ?></li>
 </ul>

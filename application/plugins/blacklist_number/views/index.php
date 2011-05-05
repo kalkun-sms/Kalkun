@@ -42,8 +42,7 @@ endif;
 ?>
 </b></a>)</sup>
 <div style="float: right">
-<a href="#" title="Add Blacklist Number" id="addblacklistbutton" class="simplebutton">
-<img src="<?php echo  $this->config->item('img_path');?>phone.png" />Add Blacklist Number</a>	
+<a href="#" id="addblacklistbutton" class="nicebutton">&#43; Add Blacklist Number</a>
 </div>
 
 	<table class="nice-table" cellpadding="0" cellspacing="0">
