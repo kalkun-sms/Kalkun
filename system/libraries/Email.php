@@ -109,7 +109,7 @@ class CI_Email {
 	function initialize($config = array())
 	{
 		$this->clear();
-		foreach ($config as $key => $val)
+		foreach ($config->config as $key => $val)
 		{
 			if (isset($this->$key))
 			{
