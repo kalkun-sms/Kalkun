@@ -261,9 +261,9 @@ $(".spam_button").click(function() {
         if(item_folder != 'inbox') {show_notification("Outgoing Message cannot be spam") ;return; } 
     	$.post("<?php echo  site_url('messages/report_spam/spam') ?>", { id_message: $(this).val()}, function() {
     		$(message_row).slideUp("slow");
-            show_notification("Spam Reported")
     	});
-    });		
+    });
+    show_notification("Spam Reported")		
     }
 });   
 <?php else: ?>
@@ -279,9 +279,10 @@ $(".ham_button").click(function() {
     	var message_row = $(this).parents('div:eq(2)');
     	$.post("<?php echo  site_url('messages/report_spam/ham') ?>", {  id_message: $(this).val()}, function() {
     		$(message_row).slideUp("slow");
-            show_notification("Messages Marked not Spam")
+            
     	});
-    });		
+    });
+    show_notification("Messages Marked not Spam")		
     }
 });   
 <?php endif; ?>
