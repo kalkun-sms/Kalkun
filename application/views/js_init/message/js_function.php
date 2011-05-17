@@ -145,7 +145,7 @@ $(document).ready(function() {
     });        
     
     // input checkbox
-    $("input.select_conversation").click(function()
+    $("input.select_conversation").live('click',function()
     {
     	if($(this).attr('checked')==true) 
     	{
