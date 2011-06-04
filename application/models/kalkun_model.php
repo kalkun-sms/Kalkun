@@ -78,23 +78,24 @@ class Kalkun_model extends Model {
 		{
 			case 'all':
 				$this->db->where('id_folder >', '6');
+				$this->db->where('id_user', $this->session->userdata('id_user'));
 			break;
 			
 			case 'exclude':
 				$this->db->where('id_folder >', '6');
 				$this->db->where('id_folder !=', $id_folder);
+				$this->db->where('id_user', $this->session->userdata('id_user'));
 			break;
 			
 			case 'name':
 				$this->db->where('id_folder', $id_folder);
+				if($id_folder!='5' && $id_folder!='6')
+				{
+					$this->db->where('id_user', $this->session->userdata('id_user'));
+				}				
 			break;
 		}
-		
-		if($id_folder!='5' && $id_folder!='6')
-		{
-			$this->db->where('id_user', $this->session->userdata('id_user'));
-		}
-		
+
 		$this->db->order_by('name');
 		return $this->db->get();	
 	}
