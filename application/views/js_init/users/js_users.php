@@ -62,7 +62,7 @@ else $(this).parents('div:eq(2)').removeClass("messagelist_hover");
 // Delete user
 $("a.delete_user").click(action_delete = function(){
 var count = $("input:checkbox:checked").length;
-var dest_url = '<?php echo site_url('users/del_users') ?>';
+var dest_url = '<?php echo site_url('users/delete_user') ?>';
 if(count==0) { 
 	$('.notification_area').text("<?php echo lang('tni_error_nouser_sel'); ?>");
 	$('.notification_area').show();

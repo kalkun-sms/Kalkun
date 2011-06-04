@@ -78,23 +78,7 @@ class Daemon extends Controller {
 			// if no matched username, set owner to Inbox Master
 			if($check===false){ $this->Message_model->update_owner($tmp_message->ID, $this->config->item('inbox_owner_id'));  $msg_user =  $this->config->item('inbox_owner_id');  }
 			
-            //check for spam
-            if($this->Spam_model->apply_spam_filter($tmp_message->ID,$tmp_message->TextDecoded))
-                continue; ////is spam do not process later part
-                       
-			// simple autoreply
-			if($this->config->item('simple_autoreply'))
-			{
-				$this->_simple_autoreply($tmp_message->SenderNumber);				
-			}	
-
-            // external script
-			if($this->config->item('ext_script_state'))
-			{
-				$this->_external_script($tmp_message->SenderNumber, $tmp_message->TextDecoded, $tmp_message->ID);				
-			}					
-			
-			// update Processed
+            // update Processed
 			$id_message[0] = $tmp_message->ID;
 			$multipart = array('type' => 'inbox', 'option' => 'check', 'id_message' => $id_message[0]);
 			$tmp_check = $this->Message_model->get_multipart($multipart);
@@ -109,6 +93,22 @@ class Daemon extends Controller {
 			}		
             $this->Message_model->update_processed($id_message);
             $this->Kalkun_model->add_sms_used($msg_user,'in');
+            
+            //check for spam
+            if($this->Spam_model->apply_spam_filter($tmp_message->ID,$tmp_message->TextDecoded))
+                continue; ////is spam do not process later part
+                       
+			// simple autoreply
+			if($this->config->item('simple_autoreply'))
+			{
+				$this->_simple_autoreply($tmp_message->SenderNumber);				
+			}	
+
+            // external script
+			if($this->config->item('ext_script_state'))
+			{
+				$this->_external_script($tmp_message->SenderNumber, $tmp_message->TextDecoded, $tmp_message->ID);				
+			}
             
             // sms to email
 			$this->_sms2email($tmp_message->TextDecoded, $tmp_message->SenderNumber , $msg_user);				

@@ -8,15 +8,18 @@ var refreshId = setInterval(function() {
 
 function new_notification(refreshmode)
 {
-    $.get("<?php echo site_url('kalkun/unread_inbox')?>", function(data) {
-		$('span.unread_inbox_notif').text(data);
-				
+    $.get("<?php echo site_url('kalkun/unread_count')?>", function(data) {
+		unreadcount = data.split('/');
+         
+        $('span.unread_inbox_notif').text(unreadcount[0]);
+        $('span.unread_spam_notif').text(unreadcount[2]);
+						
 		var current_title = $(document).attr('title');
 		var stopNumber = current_title.search('\\)');
 		if(stopNumber!='-1') var title = current_title.substr(stopNumber+1);
 		else var title = current_title;
 			
-		var newtitle = data + ' ' + title;
+		var newtitle = unreadcount[0] + ' ' + title;
 		$(document).attr('title', newtitle);
 	});
     

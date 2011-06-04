@@ -131,7 +131,7 @@ $("a.refresh_button").click(refresh = function(type){
             $('.loading_area').html('Loading...');
             $('.loading_area').fadeIn("slow");
     }
-	$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6,0)) ?>", function(response, status, xhr) { 
+	$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.preg_replace ('/ /', '%20' ,$this->uri->segment(5)).'/'.$this->uri->segment(6,0)) ?>", function(response, status, xhr) { 
        if (status == "error" || xhr.status != 200 )  
        {
             $('.loading_area').html('<nobr>Oops Network Error. <span id="retry-progress-display"> Retrying in <span id="countdown-count">10</span> Seconds.</span></nobr>');
@@ -261,9 +261,9 @@ $(".spam_button").click(function() {
         if(item_folder != 'inbox') {show_notification("Outgoing Message cannot be spam") ;return; } 
     	$.post("<?php echo  site_url('messages/report_spam/spam') ?>", { id_message: $(this).val()}, function() {
     		$(message_row).slideUp("slow");
-            show_notification("Spam Reported")
     	});
-    });		
+    });
+    show_notification("Spam Reported")		
     }
 });   
 <?php else: ?>
@@ -279,9 +279,10 @@ $(".ham_button").click(function() {
     	var message_row = $(this).parents('div:eq(2)');
     	$.post("<?php echo  site_url('messages/report_spam/ham') ?>", {  id_message: $(this).val()}, function() {
     		$(message_row).slideUp("slow");
-            show_notification("Messages Marked not Spam")
+            
     	});
-    });		
+    });
+    show_notification("Messages Marked not Spam")		
     }
 });   
 <?php endif; ?>

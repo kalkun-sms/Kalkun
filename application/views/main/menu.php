@@ -15,7 +15,14 @@
 	</span></li>
 	<li><?php echo anchor('messages/folder/outbox',lang('kalkun_outbox')); ?></li>
     <li><?php echo anchor('messages/folder/sentitems',lang('kalkun_sentitems')); ?></li>
-    <li><?php echo anchor('messages/my_folder/inbox/6',lang('kalkun_spam')); ?></li>
+    <li><?php echo anchor('messages/my_folder/inbox/6',lang('kalkun_spam')); ?>
+    <span class="unread_spam_notif">
+	<?php 
+	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE,'id_folder' => '6', 'uid' => $this->session->userdata('id_user')))->num_rows();
+	if($tmp_unread > 0) echo " (".$tmp_unread.")";
+	?>
+	</span>
+    </li>
 	<li><?php echo anchor('messages/my_folder/inbox/5',lang('kalkun_trash')); ?></li>
     						
 	</ul>
