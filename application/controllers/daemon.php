@@ -263,7 +263,7 @@ class Daemon extends Controller {
 				}
 				
 				// execute it
-				echo $shell_path." ".$script_name." ".$parameter;
+				exec($shell_path." ".$script_name." ".$parameter);
 			}
 		}
 		
