@@ -72,8 +72,17 @@ if($this->uri->segment(2)=='my_folder')
 
 	<div id="message_holder">
 	<?php 
-	if($this->uri->segment(2)=='conversation' || $this->uri->segment(2)=='search') $this->load->view('main/messages/conversation');
-	else $this->load->view('main/messages/message_list');
+	if($this->uri->segment(2)=='conversation' || $this->uri->segment(2)=='search')
+	{
+		$this->load->view('main/messages/conversation');
+		$this->load->view('js_init/message/js_object');
+		$this->load->view('js_init/message/js_conversation');
+	}
+	else 
+	{
+		$this->load->view('main/messages/message_list');
+		$this->load->view('js_init/message/js_object');
+	}
 	?>
 	</div>
 

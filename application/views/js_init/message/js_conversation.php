@@ -11,7 +11,7 @@ $(".message_content").emoticons("<?php echo   $this->config->item('img_path').'e
 <?php endif; ?>
 
 // Delete messages
-$("a.global_delete").click(action_delete = function(){
+$("a.global_delete").live('click', action_delete = function(){
 var count = $("input:checkbox:checked").length;
 if(count==0) { 
 	$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected'); ?>");
@@ -35,7 +35,7 @@ else {
 	 * Recover all messages on selected conversation
 	 *
 	 */	
-	$("a.recover_button").click(action_recover = function()
+	$("a.recover_button").live('click', action_recover = function()
 	{
 		var count = $("input.select_message:checkbox:checked:visible").length;
 		if(count==0) 
@@ -59,7 +59,7 @@ else {
 });
     
 // Move messages
-$(".move_to").click(function() {
+$(".move_to").live('click', function() {
 var count = $("input:checkbox:checked").length;
 if(count==0) { 
 	$("#movetodialog").dialog('close');
@@ -81,7 +81,7 @@ $("input.select_message:checked").each(function () {
 }
 });    
     
-$(".move_to_button").click(message_move = function() {
+$(".move_to_button").live('click', message_move = function() {
 	$('#movetodialog').dialog('open');
 	return false;
 });
@@ -95,7 +95,7 @@ $("#movetodialog").dialog({
     
 
 // message detail
-$("span.message_toggle").click(function(){
+$("span.message_toggle").live('click', function(){
 var row = $(this).parents('div:eq(1)');
 $(row).find("div.message_content").toggle();
 $(row).find("span.message_preview").toggle();
@@ -111,22 +111,37 @@ return false;
     
     
 // select all
-$("a.select_all_button").click(select_all = function(){
+$("a.select_all_button").live('click', select_all = function(){
 	$(".select_message").attr('checked', true);
 	$(".messagelist").addClass("messagelist_hover");
 	return false;
 });
 
 // clear all
-$("a.clear_all_button").click(clear_all =  function(){
+$("a.clear_all_button").live('click', clear_all =  function(){
 	$(".select_message").attr('checked', false);
 	$(".messagelist").removeClass("messagelist_hover");
 	return false;
 });        
+
+// input checkbox
+$("input.select_message").live('click',function()
+{
+	if($(this).attr('checked')==true) 
+	{
+		$(this).parents('div:eq(2)').addClass("messagelist_hover");
+        current_number = $(this).val();
+	}
+	else 
+	{
+		$(this).parents('div:eq(2)').removeClass("messagelist_hover");
+        current_number = '';
+	}
+});
     
 <?php if(!is_ajax()) : ?>
 // refresh
-$("a.refresh_button").click(refresh = function(type){
+$("a.refresh_button").live('click', refresh = function(type){
 	if(type != 'retry') {
             $('.loading_area').html('Loading...');
             $('.loading_area').fadeIn("slow");
@@ -151,7 +166,7 @@ $("a.refresh_button").click(refresh = function(type){
 <?php endif; ?> 
     
 // Reply SMS
-$('a.reply_button, a.forward_button').bind('click',message_reply =  function() {
+$('a.reply_button, a.forward_button').live('click', message_reply =  function() {
 var button = $(this).attr('class');
 var url = '<?php echo site_url('messages/compose')?>';
 
@@ -212,7 +227,7 @@ $(this).parent().find('.counter').html( length + ' characters / ' + message + ' 
 });    
    		
 // Show/hide detail
-$('a.detail_button').click(function() {
+$('a.detail_button').live('click', function() {
 var row = $(this).parents('div:eq(2)');
 $(row).find("div.detail_area").toggle();
 	
@@ -222,7 +237,7 @@ return false;
 });	
 
 // Add contact
-$('.add_to_pbk').bind('click', function() {
+$('.add_to_pbk').live('click', function() {
 var param1 = $(this).parents('div:eq(1)').children().children('input.item_number').val();  /* phone number */
 $("#contact_container").load('<?php echo site_url('phonebook/add_contact')?>', { 'type': 'message', 'param1': param1}, function() {
 $(this).dialog({
@@ -247,7 +262,7 @@ return false;
     
 <?php if($this->uri->segment(4)!='6' &&  $this->uri->segment(6)!='6' && !is_ajax()  ) : ?>
 // report spam
-$(".spam_button").click(function() {
+$(".spam_button").live('click', function() {
     var count = $("input:checkbox:checked:visible").length;
     
     if(count==0) { 
@@ -268,7 +283,7 @@ $(".spam_button").click(function() {
 });   
 <?php else: ?>
  //report ham
-$(".ham_button").click(function() {
+$(".ham_button").live('click', function() {
     var count = $("input:checkbox:checked:visible").length;
     if(count==0) { 
     	show_notification("<?php echo lang('tni_msg_no_conv_selected'); ?>");

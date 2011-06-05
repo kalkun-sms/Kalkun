@@ -34,7 +34,7 @@ $(document).ready(function() {
 	 * Delete all messages on selected conversation
 	 *
 	 */	
-	$("a.global_delete").click(action_delete = function()
+	$("a.global_delete").live('click', action_delete = function()
 	{
 		var count = $("input.select_conversation:checkbox:checked").length;
 		if(count==0) 
@@ -63,7 +63,7 @@ $(document).ready(function() {
 	 * Recover all messages on selected conversation
 	 *
 	 */	
-	$("a.recover_button").click(action_recover = function()
+	$("a.recover_button").live('click', action_recover = function()
 	{
 		var count = $("input.select_conversation:checkbox:checked").length;
 		if(count==0) 
@@ -95,7 +95,7 @@ $(document).ready(function() {
 	 * Move all messages on selected conversation from a folder to another folder
 	 *
 	 */		       
-    $(".move_to").click( function() {
+    $(".move_to").live('click', function() {
 		var count = $("input.select_conversation:checkbox:checked").length;
 		if(count==0) {
 			$("#movetodialog").dialog('close');
@@ -117,7 +117,7 @@ $(document).ready(function() {
 		count=0;
     });
     
-    $(".move_to_button").click(message_move = function() 
+    $(".move_to_button").live('click', message_move = function() 
     {
 		$("#movetodialog").dialog({
 			bgiframe: true,
@@ -129,7 +129,7 @@ $(document).ready(function() {
     });
     
     // select all
-    $("a.select_all_button").click(select_all = function()
+    $("a.select_all_button").live('click', select_all = function()
     {
     	$(".select_conversation").attr('checked', true);
     	$(".messagelist").addClass("messagelist_hover");
@@ -137,7 +137,7 @@ $(document).ready(function() {
     });
     
     // clear all
-    $("a.clear_all_button").click(clear_all = function()
+    $("a.clear_all_button").live('click', clear_all = function()
     {
     	$(".select_conversation").attr('checked', false);
     	$(".messagelist").removeClass("messagelist_hover");
@@ -160,7 +160,7 @@ $(document).ready(function() {
     });
     
     // refresh
-    $("a.refresh_button").click(refresh = function(type)
+    $("a.refresh_button").live('click', refresh = function(type)
     {  	
     	if(type != 'retry') {
             $('.loading_area').html('Loading...');
@@ -192,7 +192,7 @@ $(document).ready(function() {
 	 * Rename custom folder
 	 *
 	 */	
-	$('#renamefolder').click(function() 
+	$('#renamefolder').live('click', function() 
 	{
 		$("#renamefolderdialog").dialog({
 			bgiframe: true,
@@ -221,7 +221,7 @@ $(document).ready(function() {
 	 * Delete custom folder
 	 *
 	 */	
-	$('#deletefolder').click(function()
+	$('#deletefolder').live('click', function()
 	{
 		$("#deletefolderdialog").dialog({
 			bgiframe: true,
@@ -250,7 +250,7 @@ $(document).ready(function() {
 	 * Delete all
 	 *
 	 */	
-	$('#delete-all-link').click(function()
+	$('#delete-all-link').live('click', function()
 	{
 		$("#deletealldialog").dialog({
 			bgiframe: true,

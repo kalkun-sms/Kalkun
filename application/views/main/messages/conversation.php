@@ -154,9 +154,5 @@ endif;
 <?php 
 	if($tmp['source']=='inbox') if($tmp['readed'] == 'false') $this->Message_model->update_read($tmp['ID']);
 	endforeach;
-}
- 
-$this->load->view('js_init/message/js_object');
-$this->load->view('js_init/message/js_conversation');
- 
+} 
 ?>
