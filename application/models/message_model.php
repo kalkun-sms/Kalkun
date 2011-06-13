@@ -74,9 +74,12 @@ class Message_model extends Model {
 	 * @return	object
 	 */	
 	function send_messages($data)
-	{	        
+	{
+		// default values
+    	$data = $this->_default(array('SenderID' => NULL, 'CreatorID' => '', 'validity' => '-1'), $data);
+    	
         // check if wap msg
-        if($data['type']=='waplink') { $this->_send_wap_link($data); return ;} 
+        if(isset($data['type']) AND $data['type']=='waplink') { $this->_send_wap_link($data); return ;} 
 		
         if($data['dest']!=NULL && $data['date']!=NULL && $data['message']!=NULL)
 		{
@@ -120,20 +123,20 @@ class Message_model extends Model {
 				$data['message'] = $tmpmsg[0];
 				$data['part'] = $part;
 				$outboxid = $this->_send_message_route($data);
-                $this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));	
+                $this->Kalkun_model->add_sms_used($data['uid']);	// FIXME
 				
 				// insert the rest part to Outbox Multipart
 				for($i=1; $i<count($tmpmsg); $i++) 
 				{
 				    $this->_send_message_multipart($outboxid, $tmpmsg[$i], $i, $part, $data['coding'], $data['class'], $UDH);
-                    $this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));		
+                    $this->Kalkun_model->add_sms_used($data['uid']);		
                 }
 			}		
 			else 
 			{
 				$data['option'] = 'single';
 				$this->_send_message_route($data);
-				$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));		
+				$this->Kalkun_model->add_sms_used($data['uid']); // FIXME		
 			}	
 		}
 		else 
