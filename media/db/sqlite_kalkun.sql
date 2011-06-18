@@ -87,7 +87,7 @@ CREATE TABLE "user_group" (
   "id_group" INTEGER PRIMARY KEY AUTOINCREMENT,
   "id_pbk" INTEGER NOT NULL,
   "id_pbk_groups" INTEGER NOT NULL,
-  "id_user" INTEGER NOT NULL,
+  "id_user" INTEGER NOT NULL
 );
 
 CREATE TABLE "plugin" (
@@ -107,3 +107,19 @@ CREATE TABLE "user_templates" (
   "Name" VARCHAR(64) NOT NULL,
   "Message" TEXT NOT NULL
 );
+
+
+CREATE TABLE "plugins" (
+  "plugin_id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "plugin_system_name" VARCHAR(255) NOT NULL UNIQUE,
+  "plugin_name" VARCHAR(255) NOT NULL,
+  "plugin_uri" VARCHAR(120) DEFAULT NULL,
+  "plugin_version" VARCHAR(30) NOT NULL,
+  "plugin_description" TEXT,
+  "plugin_author" VARCHAR(120) DEFAULT NULL,
+  "plugin_author_uri" VARCHAR(120) DEFAULT NULL,
+  "plugin_data" TEXT
+);
+
+INSERT INTO "plugins" VALUES (1, 'blacklist_number', 'Blacklist Number', 'http://azhari.harahap.us', '0.1', 'Autoremove incoming SMS from Blacklist number', 'Azhari Harahap', 'http://azhari.harahap.us', NULL);
+INSERT INTO "plugins" VALUES (2, 'server_alert', 'Server Alert', 'http://azhari.harahap.us', '0.1', 'Send alert SMS when your server down', 'Azhari Harahap', 'http://azhari.harahap.us', NULL);
