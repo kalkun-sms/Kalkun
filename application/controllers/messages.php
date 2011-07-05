@@ -425,8 +425,9 @@ class Messages extends MY_Controller {
 			
 			$param['limit'] = $config['per_page'];
 			$param['offset'] = $this->uri->segment(6,0);
-      $param['order_by'] = 'ReceivingDateTime';
-      $param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
+      		$param['order_by'] = 'ReceivingDateTime';
+      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
+      		$param['uid'] = $this->session->userdata('id_user');
 			$inbox = $this->Message_model->get_messages($param)->result_array();	
 
 			// add global date for sorting
@@ -437,8 +438,8 @@ class Messages extends MY_Controller {
 			
 			$param['type'] = 'sentitems';
 			$param['number'] = trim($number);
-      $param['order_by'] = 'SendingDateTime';
-      $param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
+      		$param['order_by'] = 'SendingDateTime';
+      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			$sentitems = $this->Message_model->get_messages($param)->result_array();	
 
 			// add global date for sorting
@@ -458,13 +459,14 @@ class Messages extends MY_Controller {
 			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			usort($data['messages'], "compare_date_".$sort_option);
 			
-      if(is_ajax())
-      {
+			if(is_ajax())
+			{
 		  			$this->load->view('main/messages/conversation', $data);
-	    }
-      else{
+		  	}
+		  	else
+		  	{
 			     $this->load->view('main/layout', $data);
-      }	
+		  	}
 		}
 		else if($source=='folder' && $type=='outbox')
 		{
