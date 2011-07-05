@@ -271,7 +271,8 @@ class Phonebook extends MY_Controller {
 			$pbk['Name'] = $field["Name"];
 			$pbk['Number'] = $field["Number"];
 			$pbk['GroupID'] = $this->input->post('importgroupvalue');
-			$pbk['id_user'] = $this->input->post('pbk_id_user');			
+			$pbk['id_user'] = $this->input->post('pbk_id_user');
+			$pbk['is_public'] = $this->input->post('is_public')? 'true' : 'false';			
 			$this->Phonebook_model->add_contact($pbk);
 			$n++;
 		endforeach;

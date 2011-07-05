@@ -30,6 +30,8 @@
 		<label for="csvfile"><?php echo lang('kalkun_pbk_add_csv_file');?></label>
 		<input type="file" name="csvfile" id="csvfile" class="text ui-widget-content ui-corner-all" />
 		<p><small><?php echo lang('kalkun_pbk_add_csv_label').":";?> <a href="<?php echo $this->config->item('csv_path');?>contact_sample.csv"><b><?php echo lang('kalkun_valid_example');?></b></a></small></p>
+		<p><input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if(isset($contact) && $contact->row('is_public')== 'true') echo "checked=\"checked\"";?> /> 
+		<label for="is_public" style="display: inline">Set as public contact</label></p>
 		<label for="group"><?php echo lang('kalkun_group');?></label>
     	<select id="importgroupvalue" name="importgroupvalue">
     	<option value="">-- <?php echo lang('tni_group_select');?> --</option>
