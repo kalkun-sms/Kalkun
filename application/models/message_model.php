@@ -82,13 +82,10 @@ class Message_model extends Model {
         if(isset($data['type']) AND $data['type']=='waplink') { $this->_send_wap_link($data); return ;} 
 		
         if($data['dest']!=NULL && $data['date']!=NULL && $data['message']!=NULL)
-		{
-			// Check message's length	
-			$messagelength = strlen($data['message']);
-			
+		{	
 			// Check coding
 			switch($data['coding'])
-			{ 
+			{
 				case 'default':
 					$standar_length = 160;
 					$data['coding'] = 'Default_No_Compression';
@@ -99,20 +96,23 @@ class Message_model extends Model {
 					$data['coding'] = 'Unicode_No_Compression';
 				break;
 			}
-			
-			$UDH_length = 7;
-			$multipart_length = $standar_length - $UDH_length; 
+
+			// Check message's length
+			$messagelength = $this->_get_message_length($data['message'], $data['coding']);			
 
 			// Multipart message
 			if($messagelength > $standar_length)
 			{
+				$UDH_length = 7;
+				$multipart_length = $standar_length - $UDH_length; 
+			
 				// generate UDH
 				$UDH = "050003";
 				$UDH .= strtoupper(dechex(mt_rand(0, 255)));
 				$data['UDH'] = $UDH;
 						
 				// split string
-				$tmpmsg = str_split($data['message'], $multipart_length);
+				$tmpmsg = $this->_get_message_multipart($data['message'], $data['coding'], $multipart_length);			
 				
 				// count part message
 				$part = count($tmpmsg);
@@ -131,7 +131,7 @@ class Message_model extends Model {
 				    $this->_send_message_multipart($outboxid, $tmpmsg[$i], $i, $part, $data['coding'], $data['class'], $UDH);
                     $this->Kalkun_model->add_sms_used($data['uid']);		
                 }
-			}		
+			}
 			else 
 			{
 				$data['option'] = 'single';
@@ -460,6 +460,104 @@ class Message_model extends Model {
 		}
 		
 	    return $escaped_identifer;
+	}
+
+	// --------------------------------------------------------------------
+	
+	/**
+	* _get_message_length
+	*
+	* Get message length
+	* Watch out for special character ^ { } \ [ ] ~ | € (only for non unicode)
+	*
+	* @param string $message, $coding
+	* @return string
+	*/		
+	function _get_message_length($message=NULL, $coding=NULL)
+	{
+		$special = 0;
+		if($coding=="Default_No_Compression")
+		{
+			$special = substr_count($message, '^') + substr_count($message, '{') + substr_count($message, '}');
+			$special += substr_count($message, '[') + substr_count($message, ']') + substr_count($message, '~');
+			$special += substr_count($message, '|') + substr_count($message, '€') + substr_count($message, '\\');
+			return strlen($message) + $special;
+		}
+		else
+		{
+			return strlen($message);
+		}
+	}
+
+	function _is_special_char($char)
+	{
+		$special_char = array('^','{','}','[',']','~','|','€','\\');
+		if(in_array($char, $special_char)) 
+			return TRUE;
+		else
+			return FALSE;
+	}	
+
+	// --------------------------------------------------------------------
+	
+	/**
+	* _get_message_multipart
+	*
+	* Get message multipart
+	* Split message into multipart
+	*
+	* @param string $message, $coding
+	* @return string
+	*/		
+	function _get_message_multipart($message=NULL, $coding=NULL, $multipart_length=NULL)
+	{
+		if($coding=='Default_No_Compression')
+		{			
+			$char = str_split($message);
+			$string = "";
+			$left = 153;
+			$char_taken = 0;
+			$msg = array();
+			
+			while (list($key, $val) = each($char))
+			{
+				if($left>0)
+				{			
+					if($this->_is_special_char($val))
+					{
+						if($left>1)
+						{
+							$string .= $val;
+							$left -= 2;
+						}
+						else
+						{
+							$left = 0;
+							prev($char);
+							$char_taken--;
+						}
+					}
+					else
+					{
+						$string .= $val;
+						$left -= 1;
+					}
+				}
+				$char_taken++;
+				
+				if($left==0 OR $char_taken==strlen($message))
+				{
+					$msg[] = $string;
+					$string = "";
+					$left = 153;
+				}
+			}
+		}
+		else
+		{
+			$msg = str_split($message, $multipart_length);
+		}
+		return $msg;
 	}
 		
 	// --------------------------------------------------------------------
