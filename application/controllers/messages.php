@@ -264,22 +264,25 @@ class Messages extends MY_Controller {
 		// Send the message
         if(!empty($dest))  // handles if empty numbers after any number removal process        
 		{
-			foreach($dest as $dest):
-			$data['dest'] = $dest;
-        	$data['SenderID'] = NULL;
-        	$data['CreatorID'] = '';
-        	
-	       	// if multiple modem is active
-	       	if($this->config->item('multiple_modem_state'))
-	       	{
-	       		$data['SenderID'] = $data['CreatorID'] = $this->_multiple_modem_select($dest, $date);
-	       	}							
-
-			for($i=1;$i<=$this->input->post('sms_loop');$i++) 
-			{ 
-				$this->Message_model->send_messages($data);
+			$n = 0;
+			$sms_loop = $this->input->post('sms_loop');
+			foreach($dest as $dest)
+			{
+				$data['dest'] = $dest;
+	        	$data['SenderID'] = NULL;
+	        	$data['CreatorID'] = '';
+	        	
+				for($i=1;$i<=$sms_loop;$i++) 
+				{
+			       	// if multiple modem is active
+			       	if($this->config->item('multiple_modem_state'))
+			       	{
+			       		$data['SenderID'] = $data['CreatorID'] = $this->_multiple_modem_select($dest, $date, $n*$sms_loop+$i);
+			       	}
+					$this->Message_model->send_messages($data);
+				}
+				$n++;
 			}
-			endforeach;
 			$return_msg = "<div class=\"notif\">Your message has been move to Outbox and ready for delivery.</div>";
 		}
 		
@@ -736,7 +739,7 @@ class Messages extends MY_Controller {
 	 *
 	 * @access	private
 	 */		
-	function _multiple_modem_select($phone_number, $date) 
+	function _multiple_modem_select($phone_number, $date, $n) 
 	{
 		$modem_list = $this->config->item('multiple_modem');
 		switch($this->config->item('multiple_modem_strategy'))
@@ -780,7 +783,14 @@ class Messages extends MY_Controller {
 				$dest_phone_number = $modem['value'];
 				if(in_array($phone_number, $dest_phone_number)) $selected_modem = $modem['id'];
 				endforeach;			
-			break;									
+			break;		
+			
+			case 'round_robin':
+				$modem_count = count($modem_list);
+				$n = $n%$modem_count;
+				if($n==0) $n = $modem_count;
+				$selected_modem = $modem_list[$n-1];
+			break;							
 		}
 		
 		// Return selected modem, if not return first modem as default value

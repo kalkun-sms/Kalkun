@@ -238,7 +238,7 @@ $config['ext_script'][1]['parameter'] = 'phone|content';
 | state - enables/disabled
 | strategy
 |	- failover (not implemented yet)
-|	- round robin (not implemented yet)
+|	- round robin (Must be in array, eg. array('sierra', 'fasttrack'), id and value is NOT used)
 |	- scheduled_time (Start-End, Format: HH:MM:SS-HH:MM:SS)
 |	- scheduled_day (Start-End, Format: 0-3, Note: 0 = Sunday, 1 = Monday, ..., 6 = Saturday)
 |	- scheduled_date (Start:End, Format: YYYY-MM-DD:YYYY-MM-DD)
