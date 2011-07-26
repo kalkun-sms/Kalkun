@@ -32,6 +32,9 @@ class Message_model extends Model {
 	function Message_model()
 	{
 		parent::Model();
+		
+		// Set mb encoding
+		mb_internal_encoding($this->config->item('charset'));
 	}
 
 	// --------------------------------------------------------------------
@@ -468,35 +471,62 @@ class Message_model extends Model {
 	* _get_message_length
 	*
 	* Get message length
-	* Watch out for special character ^ { } \ [ ] ~ | € (only for non unicode)
-	*
+	* Watch out for special character ^ { } \ [ ] ~ | €
+	* And also German Umlauts ä ö ü ß Ä Ö Ü (only for non unicode coding)
+	* 
 	* @param string $message, $coding
 	* @return string
 	*/		
 	function _get_message_length($message=NULL, $coding=NULL)
 	{
-		$special = 0;
+		$msg_length = 0;
 		if($coding=="Default_No_Compression")
-		{
-			$special = substr_count($message, '^') + substr_count($message, '{') + substr_count($message, '}');
-			$special += substr_count($message, '[') + substr_count($message, ']') + substr_count($message, '~');
-			$special += substr_count($message, '|') + substr_count($message, '€') + substr_count($message, '\\');
-			return strlen($message) + $special;
+		{			
+			$msg_char = $this->_string_split($message);
+			foreach($msg_char as $char)
+			{
+				if($this->_is_special_char($char))
+				{
+					$msg_length += 2;
+				}
+				else
+				{
+					$msg_length += 1;
+				}
+				
+			}
+			return $msg_length;
 		}
 		else
 		{
-			return strlen($message);
+			return mb_strlen($message);
 		}
 	}
 
 	function _is_special_char($char)
 	{
-		$special_char = array('^','{','}','[',']','~','|','€','\\');
-		if(in_array($char, $special_char)) 
+		$special_char = array('^','{','}','[',']','~','|','€','\\','ä','ö','ü','ß','Ä','Ö','Ü');
+		if(in_array($char, $special_char))
+		{
 			return TRUE;
+		}
 		else
+		{
 			return FALSE;
+		}
 	}	
+
+	function _string_split($string, $length=1)
+	{
+		$len = mb_strlen($string);
+		$result = array();
+		for($i=0;$i<$len;$i+=$length)
+		{
+			$char = mb_substr($string, $i, $length);
+			array_push($result, $char);
+	    }
+	    return $result;
+	}
 
 	// --------------------------------------------------------------------
 	
@@ -512,8 +542,8 @@ class Message_model extends Model {
 	function _get_message_multipart($message=NULL, $coding=NULL, $multipart_length=NULL)
 	{
 		if($coding=='Default_No_Compression')
-		{			
-			$char = str_split($message);
+		{
+			$char = $this->_string_split($message);
 			$string = "";
 			$left = 153;
 			$char_taken = 0;
@@ -522,7 +552,7 @@ class Message_model extends Model {
 			while (list($key, $val) = each($char))
 			{
 				if($left>0)
-				{			
+				{
 					if($this->_is_special_char($val))
 					{
 						if($left>1)
@@ -545,7 +575,7 @@ class Message_model extends Model {
 				}
 				$char_taken++;
 				
-				if($left==0 OR $char_taken==strlen($message))
+				if($left==0 OR $char_taken==mb_strlen($message))
 				{
 					$msg[] = $string;
 					$string = "";
@@ -555,7 +585,7 @@ class Message_model extends Model {
 		}
 		else
 		{
-			$msg = str_split($message, $multipart_length);
+			$msg = $this->_string_split($message, $multipart_length);
 		}
 		return $msg;
 	}
