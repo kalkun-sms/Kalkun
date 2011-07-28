@@ -471,8 +471,7 @@ class Message_model extends Model {
 	* _get_message_length
 	*
 	* Get message length
-	* Watch out for special character ^ { } \ [ ] ~ | €
-	* And also German Umlauts ä ö ü ß Ä Ö Ü (only for non unicode coding)
+	* Watch out for special character ^ { } \ [ ] ~ | € (only for non unicode coding)
 	* 
 	* @param string $message, $coding
 	* @return string
@@ -505,7 +504,17 @@ class Message_model extends Model {
 
 	function _is_special_char($char)
 	{
-		$special_char = array('^','{','}','[',']','~','|','€','\\','ä','ö','ü','ß','Ä','Ö','Ü');
+		// GSM Default 7-bit special character (count as 2 char)
+		$special_char = array('^','{','}','[',']','~','|','€','\\');
+		
+		// GSM Default 7-bit character (count as 1 char)
+		$default = array('@', '£', '$', '¥', 'è', 'é', 'ù', 'ì', 'ò', 'Ç', 'Ø', 'ø', 'Å', 'å', 'Δ', '_', 'Φ', 'Γ', 'Λ',
+					'Ω', 'Π', 'Ψ', 'Σ', 'Θ', 'Ξ', 'Æ', 'æ', 'É', '!', '"', '#', '¤', '%', '&', '\'', '(',')', '*', '+', 
+					',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', 
+					'¡', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 
+					'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ñ', '§', '¿', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
+					'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'ñ', 'à');
+		
 		if(in_array($char, $special_char))
 		{
 			return TRUE;
