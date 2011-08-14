@@ -62,21 +62,12 @@ CREATE TABLE "user_folders" (
 
 INSERT INTO "user_folders" VALUES(1, 'inbox', 0), (2, 'outbox', 0), (3, 'sent_items', 0), (4, 'draft', 0), (5, 'Trash', 0);
 
-
 CREATE TABLE "sms_used" (
 	"id_sms_used" serial PRIMARY KEY, 
 	"sms_date" date NOT NULL, 
 	"id_user" integer NOT NULL, 
 	"sms_count" integer NOT NULL DEFAULT 0
 );
-
-
-CREATE TABLE "member" (
-	"id_member" serial PRIMARY KEY, 
-	"phone_number" text NOT NULL, 
-	"reg_date" timestamp(0) WITHOUT time zone NOT NULL
-);
-
 
 ALTER TABLE "inbox" ADD COLUMN "id_folder" integer NOT NULL DEFAULT 1;
 ALTER TABLE "inbox" ADD COLUMN "readed" text NOT NULL DEFAULT 'false';
@@ -86,17 +77,11 @@ ALTER TABLE "sentitems" ADD COLUMN "id_folder" integer NOT NULL DEFAULT 3;
 ALTER TABLE "pbk" ADD COLUMN "id_user" integer NULL;
 ALTER TABLE "pbk_groups" ADD COLUMN "id_user" integer NULL;
 
-CREATE TABLE   "user_group" (
+CREATE TABLE "user_group" (
   "id_group" integer PRIMARY KEY,
   "id_pbk" integer NOT NULL,
   "id_pbk_groups" integer NOT NULL,
   "id_user" integer NOT NULL,
-);
-
-CREATE TABLE "plugin" (
-  "id_plugin" serial PRIMARY KEY,
-  "plugin_name" varchar(50) NOT NULL,
-  "plugin_status" text NOT NULL DEFAULT 'false'
 );
 
 CREATE TABLE "kalkun" (

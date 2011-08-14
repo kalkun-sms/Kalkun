@@ -40,44 +40,4 @@ CREATE TABLE IF NOT EXISTS `plugins` (
   `plugin_data` longtext,
   PRIMARY KEY (`plugin_id`),
   UNIQUE KEY `plugin_index` (`plugin_system_name`) USING BTREE
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `plugins`
---
-
-INSERT INTO `plugins` (`plugin_id`, `plugin_system_name`, `plugin_name`, `plugin_uri`, `plugin_version`, `plugin_description`, `plugin_author`, `plugin_author_uri`, `plugin_data`) VALUES
-(1, 'blacklist_number', 'Blacklist Number', 'http://azhari.harahap.us', '0.1', 'Autoremove incoming SMS from Blacklist number', 'Azhari Harahap', 'http://azhari.harahap.us', NULL),
-(2, 'server_alert', 'Server Alert', 'http://azhari.harahap.us', '0.1', 'Send alert SMS when your server down', 'Azhari Harahap', 'http://azhari.harahap.us', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `plugin_blacklist_number`
---
-
-CREATE TABLE IF NOT EXISTS `plugin_blacklist_number` (
-  `id_blacklist_number` int(11) NOT NULL AUTO_INCREMENT,
-  `phone_number` varchar(15) NOT NULL,
-  `reason` varchar(255) NOT NULL,
-  PRIMARY KEY (`id_blacklist_number`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `plugin_server_alert`
---
-
-CREATE TABLE IF NOT EXISTS `plugin_server_alert` (
-  `id_server_alert` int(11) NOT NULL AUTO_INCREMENT,
-  `alert_name` varchar(100) NOT NULL,
-  `ip_address` varchar(20) NOT NULL,
-  `port_number` int(5) NOT NULL,
-  `timeout` int(4) NOT NULL DEFAULT '30',
-  `phone_number` varchar(15) NOT NULL,
-  `respond_message` varchar(135) NOT NULL,
-  `status` enum('true','false') NOT NULL DEFAULT 'true',
-  `release_code` varchar(8) NOT NULL,
-  PRIMARY KEY (`id_server_alert`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;

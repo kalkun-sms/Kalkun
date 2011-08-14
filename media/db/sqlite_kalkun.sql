@@ -67,14 +67,6 @@ CREATE TABLE "sms_used" (
 	"sms_count" INTEGER NOT NULL DEFAULT 0
 );
 
-
-CREATE TABLE "member" (
-	"id_member" INTEGER PRIMARY KEY AUTOINCREMENT, 
-	"phone_number" TEXT NOT NULL, 
-	"reg_date" DATETIME NOT NULL
-);
-
-
 ALTER TABLE "inbox" ADD COLUMN "id_folder" INTEGER NOT NULL DEFAULT 1;
 ALTER TABLE "inbox" ADD COLUMN "readed" TEXT NOT NULL DEFAULT 'false';
 
@@ -89,13 +81,6 @@ CREATE TABLE "user_group" (
   "id_pbk_groups" INTEGER NOT NULL,
   "id_user" INTEGER NOT NULL
 );
-
-CREATE TABLE "plugin" (
-  "id_plugin" INTEGER PRIMARY KEY AUTOINCREMENT,
-  "plugin_name" VARCHAR(50) NOT NULL,
-  "plugin_status" TEXT NOT NULL DEFAULT 'false'
-);
-
 
 CREATE TABLE "kalkun" (
   "version" TEXT NOT NULL
@@ -120,6 +105,3 @@ CREATE TABLE "plugins" (
   "plugin_author_uri" VARCHAR(120) DEFAULT NULL,
   "plugin_data" TEXT
 );
-
-INSERT INTO "plugins" VALUES (1, 'blacklist_number', 'Blacklist Number', 'http://azhari.harahap.us', '0.1', 'Autoremove incoming SMS from Blacklist number', 'Azhari Harahap', 'http://azhari.harahap.us', NULL);
-INSERT INTO "plugins" VALUES (2, 'server_alert', 'Server Alert', 'http://azhari.harahap.us', '0.1', 'Send alert SMS when your server down', 'Azhari Harahap', 'http://azhari.harahap.us', NULL);
