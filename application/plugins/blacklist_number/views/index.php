@@ -31,16 +31,6 @@
 
 <div id="space_area">
 <h3 style="float: left">Blacklist Number</h3> 
-<?php $status = $this->Plugin_model->getPluginStatus('blacklist_number');?>
-<sup>(Status: <a href="<?php echo site_url();?>/plugin/change_status/blacklist_number/<?php echo ($status=='true')? 'false' : 'true';?>" title="Click to change status"><b>
-<?php 
-if($status=='true'): 
-echo "Active";
-else:
-echo "<span class=\"warning\">Inactive</span>";
-endif;
-?>
-</b></a>)</sup>
 <div style="float: right">
 <a href="#" id="addblacklistbutton" class="nicebutton">&#43; Add Blacklist Number</a>
 </div>
@@ -67,7 +57,7 @@ endif;
 				<td class="phone_number"><?php echo $tmp->phone_number;?></td>
 				<td class="reason"><?php echo $tmp->reason;?></td>
 				<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
-				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/delete_blacklist_number/<?php echo $tmp->id_blacklist_number;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
+				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/blacklist_number/delete/<?php echo $tmp->id_blacklist_number;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 			</tr>
 			
 			<?php 

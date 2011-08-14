@@ -53,7 +53,7 @@ class Blacklist_number extends Plugin_Controller {
 		$this->load->view('main/layout', $data);
 	}
 	
-	function delete()
+	function delete($id)
 	{
 		$this->plugin_model->delete($id);
 		redirect('plugin/blacklist_number');

@@ -15,25 +15,28 @@
  * Member Class
  *
  * @package		Kalkun
- * @subpackage	Member
+ * @subpackage	Plugin
  * @category	Controllers
  */
-class Member extends MY_Controller {
+include_once(APPPATH.'plugins/Plugin_Controller.php');
+
+class SMS_member extends Plugin_Controller {
 
 	/**
 	 * Constructor
 	 *
 	 * @access	public
 	 */		
-	function Member()
+	function SMS_member()
 	{
-		parent::MY_Controller();			
+		parent::Plugin_Controller();			
 		
 		// session check
 		if($this->session->userdata('loggedin')==NULL) redirect('login');
 		
 		$this->load->database();
 		$this->lang->load('kalkun', $this->Kalkun_model->get_setting()->row('language'));
+		$this->load->model('sms_member_model', 'plugin_model');
 	}
 	
 	// --------------------------------------------------------------------
@@ -47,11 +50,10 @@ class Member extends MY_Controller {
 	 */		
 	function index()
 	{
-		$this->load->model('Member_model');
-		$data['main'] = 'main/member/index';
-		$data['title'] = 'Member';
-		$data['total_member'] = $this->Member_model->get_member('total')->row('count');
-		$data['member'] = $this->Member_model->get_member('all')->result_array();
+		$data['main'] = 'index';
+		$data['title'] = 'SMS Member';
+		$data['total_member'] = $this->plugin_model->get_member('total')->row('count');
+		$data['member'] = $this->plugin_model->get_member('all')->result_array();
 		
 		$this->load->view('main/layout', $data);
 	}

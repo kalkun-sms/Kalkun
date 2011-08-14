@@ -1,4 +1,4 @@
-<?php $this->load->view('js_init/member/js_member');?>
+<?php $this->load->view('js_member');?>
 <div id="window_container">
 <div id="window_title">
 	<div id="window_title_left"><?php echo lang('kalkun_sms_member');?></div>

@@ -68,7 +68,7 @@ class Blacklist_number_model extends Model {
 	function delete($id)
 	{
 		$this->db->delete('plugin_blacklist_number', array('id_blacklist_number' => $id)); 
-	}	
+	}
 }
 
 /* End of file blacklist_number_model.php */

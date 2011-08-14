@@ -9,7 +9,7 @@
 */
 
 // Add hook for incoming message
-add_action("message.incoming", "blacklist_number", 10);
+add_action("message.incoming.before", "blacklist_number", 10);
 
 /**
 * Function called when plugin first activated
@@ -50,11 +50,22 @@ function blacklist_number_install()
     return true;
 }
 
-function blacklist_number($text)
+function blacklist_number($sms)
 {
-    $CI = get_instance();
-    $CI->load->model('Message_model');
+    $CI =& get_instance();
+    $CI->load->model('Kalkun_model');
+    
+    // Get blacklist number
+    $lists = $CI->db->select('phone_number')->get('plugin_blacklist_number')->result_array();
+    foreach($lists as $tmp)
+    {
+    	$evil[] = $tmp['phone_number'];
+    }
     
     // Delete message if it's on blacklist number
-    // $CI->db->query("delete from inbox ... ");
+    if(in_array($sms->SenderNumber, $evil))
+    {
+    	$CI->db->where('ID',$sms->ID)->delete('inbox');
+    	return 'break';
+    }
 }

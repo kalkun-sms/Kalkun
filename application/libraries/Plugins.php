@@ -150,27 +150,30 @@ class Plugins {
     */
     public function include_plugins()
     {
-        // Validate and include our found plugins
-        foreach (self::$plugins_active AS $name => $value)
-        {
-            // The plugin information being added to the database
-            $data = array(
-                "plugin_system_name" => $name,
-                "plugin_name"        => trim(self::$plugins_pool[$name]['plugin_info']['plugin_name']),
-                "plugin_uri"         => trim(self::$plugins_pool[$name]['plugin_info']['plugin_uri']),
-                "plugin_version"     => trim(self::$plugins_pool[$name]['plugin_info']['plugin_version']),
-                "plugin_description" => trim(self::$plugins_pool[$name]['plugin_info']['plugin_description']),
-                "plugin_author"      => trim(self::$plugins_pool[$name]['plugin_info']['plugin_author']),
-                "plugin_author_uri"  => trim(self::$plugins_pool[$name]['plugin_info']['plugin_author_uri'])
-            );
-            $this->_ci->db->where('plugin_system_name', $name)->update('plugins', $data);
-            
-            // If the file was included
-            @include_once $this->plugins_dir.$name."/".$name.".php";
-            
-            // Trigger an install event
-            $this->trigger_install_plugin($name);   
-        } 
+    	if (isset(self::$plugins_active))
+    	{
+	        // Validate and include our found plugins
+	        foreach (self::$plugins_active AS $name => $value)
+	        {
+	            // The plugin information being added to the database
+	            $data = array(
+	                "plugin_system_name" => $name,
+	                "plugin_name"        => trim(self::$plugins_pool[$name]['plugin_info']['plugin_name']),
+	                "plugin_uri"         => trim(self::$plugins_pool[$name]['plugin_info']['plugin_uri']),
+	                "plugin_version"     => trim(self::$plugins_pool[$name]['plugin_info']['plugin_version']),
+	                "plugin_description" => trim(self::$plugins_pool[$name]['plugin_info']['plugin_description']),
+	                "plugin_author"      => trim(self::$plugins_pool[$name]['plugin_info']['plugin_author']),
+	                "plugin_author_uri"  => trim(self::$plugins_pool[$name]['plugin_info']['plugin_author_uri'])
+	            );
+	            $this->_ci->db->where('plugin_system_name', $name)->update('plugins', $data);
+	            
+	            // If the file was included
+	            @include_once $this->plugins_dir.$name."/".$name.".php";
+	            
+	            // Trigger an install event
+	            $this->trigger_install_plugin($name);   
+	        } 
+    	}
     }
     
     

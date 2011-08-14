@@ -44,12 +44,15 @@ class Pluginss extends MY_Controller {
 	{
 		$data['main'] = 'main/plugin/index';
 		$data['title'] = 'Plugins';
+		$data['type'] = $type;
 		if($type=='installed')
 		{
+			$data['title'].= " - Installed";
 			$data['plugins'] = $this->Plugin_model->get_plugins()->result_array();	
 		}
 		else
 		{
+			$data['title'].= " - Available";
 			$plugins = get_available_plugin();
 			$no = 0;
 			
@@ -92,7 +95,25 @@ class Pluginss extends MY_Controller {
 	 */	
 	function install($plugin_name)
 	{
-		
+		activate_plugin($plugin_name);
+		$this->session->set_flashdata('notif', 'Plugin '.$plugin_name.' successfully installed');
+		redirect('pluginss');
+	}
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Uninstall
+	 *
+	 * Uninstall a plugin
+	 *
+	 * @access	public   		 
+	 */	
+	function uninstall($plugin_name)
+	{
+		deactivate_plugin($plugin_name);
+		$this->session->set_flashdata('notif', 'Plugin '.$plugin_name.' successfully uninstalled');
+		redirect('pluginss');		
 	}
 
 	// --------------------------------------------------------------------

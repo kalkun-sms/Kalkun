@@ -45,43 +45,46 @@ class Daemon extends Controller {
 	 */
 	function message_routine()
 	{
-		$this->load->model('User_model');
-        $this->load->model('Spam_model');
-		
 		// get unProcessed message
 		$message = $this->Message_model->get_messages(array('processed' => FALSE));
 
 		foreach($message->result() as $tmp_message)
-		{	
-			// hook for incoming message
-			// do_action("message.incoming", $text)
+		{			
+			// check for spam
+			$this->load->model('Spam_model');
+            if($this->Spam_model->apply_spam_filter($tmp_message->ID,$tmp_message->TextDecoded))
+            {
+                continue; ////is spam do not process later part
+            }
+            
+			// hook for incoming message (before ownership)
+			$status = do_action("message.incoming.before", $tmp_message);
+
+            // message deleted, do not process later part
+            if(isset($status) AND $status=='break')
+            {
+            	continue;
+            }
+
+            // set message's ownership
+			$msg_user = $this->_set_ownership($tmp_message);
+			$this->Kalkun_model->add_sms_used($msg_user,'in');
 			
-			// sms content
-			if($this->config->item('sms_content'))
-			{
-				$this->_sms_content($tmp_message->TextDecoded, $tmp_message->SenderNumber);
-			}	
+            // hook for incoming message (after ownership)
+            $tmp_message->msg_user = $msg_user;
+			$status = do_action("message.incoming.after", $tmp_message);
 			
-			// check @username tag
-			$users = $this->User_model->getUsers(array('option' => 'all'));
-			foreach($users->result() as $tmp_user)
+			// message deleted, do not process later part
+			if(isset($status) AND $status=='break')
 			{
-				$tag = "@".$tmp_user->username;
-				$msg_word = array();
-				$msg_word = explode(" ", $tmp_message->TextDecoded);
-				$check = in_array($tag, $msg_word);
-							
-				// update ownership
-				if($check!==false) { $this->Message_model->update_owner($tmp_message->ID, $tmp_user->id_user); $msg_user =  $tmp_user->id_user;  break; }
+				continue;
 			}
 			
-			// if no matched username, set owner to Inbox Master
-			if($check===false){ $this->Message_model->update_owner($tmp_message->ID, $this->config->item('inbox_owner_id'));  $msg_user =  $this->config->item('inbox_owner_id');  }
-			
-            // update Processed
+			// update Processed
 			$id_message[0] = $tmp_message->ID;
 			$multipart = array('type' => 'inbox', 'option' => 'check', 'id_message' => $id_message[0]);
 			$tmp_check = $this->Message_model->get_multipart($multipart);
+			
 			if($tmp_check->row('UDH')!='')
 			{
 				$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'),0,8));	
@@ -90,221 +93,51 @@ class Daemon extends Controller {
 				foreach($this->Message_model->get_multipart($multipart)->result() as $part):
 				$id_message[] = $part->ID;
 				endforeach;	
-			}		
-            $this->Message_model->update_processed($id_message);
-            $this->Kalkun_model->add_sms_used($msg_user,'in');
-            
-            //check for spam
-            if($this->Spam_model->apply_spam_filter($tmp_message->ID,$tmp_message->TextDecoded))
-                continue; ////is spam do not process later part
-                       
-			// simple autoreply
-			if($this->config->item('simple_autoreply'))
-			{
-				$this->_simple_autoreply($tmp_message->SenderNumber);				
-			}	
-
-            // external script
-			if($this->config->item('ext_script_state'))
-			{
-				$this->_external_script($tmp_message->SenderNumber, $tmp_message->TextDecoded, $tmp_message->ID);				
 			}
-            
-            // sms to email
-			$this->_sms2email($tmp_message->TextDecoded, $tmp_message->SenderNumber , $msg_user);				
-		 
-            
-		}	
-	}
-
-    
-
-
-	// --------------------------------------------------------------------
-	
-	/**
-	 * SMS content
-	 *
-	 * Process the SMS content procedure
-	 *
-	 * @access	private   		 
-	 */
-	function _sms_content($message, $number)
-	{
-		list($code) = explode(" ", $message);
-		$reg_code = $this->config->item('sms_content_reg_code');
-		$unreg_code = $this->config->item('sms_content_unreg_code');
-		if (strtoupper($code)==strtoupper($reg_code))
-		{ 
-			$this->_register_member($number);
-		}
-		else if (strtoupper($code)==strtoupper($unreg_code))
-		{
-			$this->_unregister_member($number);
+			$this->Message_model->update_processed($id_message);
 		}
 	}
 
 	// --------------------------------------------------------------------
 	
 	/**
-	 * Register member
+	 * Set Ownership
 	 *
-	 * Register member's phone number
+	 * Set ownership for incoming message
 	 *
-	 * @access	private   		 
+	 * @access	private	 
 	 */
-	function _register_member($number)
-	{
-		$this->load->model('Member_model');
-		
-		//check if number not registered
-		if($this->Member_model->check_member($number)==0)
-		$this->Member_model->add_member($number);
-	}
-
-	// --------------------------------------------------------------------
-	
-	/**
-	 * Unregister member
-	 *
-	 * Unregister member's phone number
-	 *
-	 * @access	private   		 
-	 */	
-	function _unregister_member($number)
-	{
-		$this->load->model('Member_model');
-		
-		//check if already registered
-		if($this->Member_model->check_member($number)==1)
-		$this->Member_model->remove_member($number);
-	}	
-
-	// --------------------------------------------------------------------
-	
-	/**
-	 * Simple autoreply
-	 *
-	 * Send autoreply message
-	 *
-	 * @access	private   		 
-	 */
-	function _simple_autoreply($phone_number)
-	{
-		$data['coding'] = 'default';
-		$data['class'] = '1';
-		$data['dest'] = $phone_number;
-		$data['date'] = date('Y-m-d H:i:s');
-		$data['message'] = $this->config->item('simple_autoreply_msg');
-		$data['delivery_report'] = 'default';
-		$data['uid'] = $this->config->item('simple_autoreply_uid');	
-		$this->Message_model->send_messages($data);				
-	} 
-
-	// --------------------------------------------------------------------
-	
-	/**
-	 * External script
-	 *
-	 * Execute external script if condition match
-	 *
-	 * @access	private   		 
-	 */	
-	function _external_script($phone=NULL, $content=NULL, $id=NULL)
-	{
-		$shell_path = $this->config->item('ext_script_path');
-				
-		// Load all rules	
-		foreach($this->config->item('ext_script') as $rule)
-		{
-			$script_name = $rule['name'];
-			$value=$parameter="";
-			
-			// evaluate rule key
-			switch($rule['key'])
-			{
-				case 'sender':
-					$value = $phone;
-				break;
-				
-				case 'content':
-					$value = $content;
-				break;
-			}
-			
-			// evaluate rule type
-			switch($rule['type'])
-			{
-				case 'match':
-					$is_valid = $this->_is_match($rule['value'], $value);
-				break;
-				
-				case 'contain':
-					$is_valid = $this->_is_contain($rule['value'], $value);
-				break;
-			}
-			
-			// if we got valid rules
-			if ($is_valid)
-			{
-				// build extra parameters
-				if (!empty($rule['parameter']))
-				{
-					$valid_param = array('phone','content','id');
-					$param = explode("|", $rule['parameter']);
-					
-					foreach ($param as $tmp)
-					{
-						if (in_array($tmp, $valid_param))
-						{
-							$parameter.=" ".${$tmp};
-						}
-					}
-				}
-				
-				// execute it
-				exec($shell_path." ".$script_name." ".$parameter);
-			}
-		}
-		
-	}	 
-	/**
-     *  function  _sms2email
-     * 
-     *  Function for sms to email feature
-     *  
-     *  @access	private
-     **/ 
-    function _sms2email($message , $from, $msg_user)
+    function _set_ownership($tmp_message)
     {
-        $this->load->library('email');
-        $this->load->model('kalkun_model');
-        $this->load->model('phonebook_model');
-        $active  = $this->Kalkun_model->get_setting($msg_user)->row('email_forward');
-        if($active != 'true') return;         
-        $this->email->initialize($this->config);
-        $mail_to = $this->Kalkun_model->get_setting($msg_user)->row('email_id');            
-        $qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber','number'=>$from , 'id_user' =>$msg_user));
-		if($qry->num_rows()!=0) $from = $qry->row('Name');
-        $this->email->from($this->config->item('mail_from'), $from);
-        $this->email->to($mail_to); 
-        $this->email->subject('Kalkun New SMS');
-        $this->email->message($message."\n\n". "- ".$from);	
-        $this->email->send();
-
-    }
-    
-	function _is_match($subject, $matched)
-	{
-		if ($subject===$matched) return TRUE;
-		else return FALSE;
-	}
-	
-	function _is_contain($subject, $matched)
-	{
-		if (!strstr($matched, $subject)) return FALSE;
-		else return TRUE;
-	}	
+    	$this->load->model('User_model');
+    	
+		// check @username tag
+		$users = $this->User_model->getUsers(array('option' => 'all'));
+		foreach ($users->result() as $tmp_user)
+		{
+			$tag = "@".$tmp_user->username;
+			$msg_word = array();
+			$msg_word = explode(" ", $tmp_message->TextDecoded);
+			$check = in_array($tag, $msg_word);
+						
+			// update ownership
+			if($check!==false)
+			{
+				$this->Message_model->update_owner($tmp_message->ID, $tmp_user->id_user); 
+				$msg_user =  $tmp_user->id_user;
+				break;
+			}
+		}
+		
+		// if no matched username, set owner to Inbox Master
+		if($check===false)
+		{
+			$this->Message_model->update_owner($tmp_message->ID, $this->config->item('inbox_owner_id'));
+			$msg_user =  $this->config->item('inbox_owner_id');
+		}
+		
+		return $msg_user;
+    }	
 	
 	// --------------------------------------------------------------------
 	
@@ -336,47 +169,10 @@ class Daemon extends Controller {
 					$this->Message_model->sendMessages($data);
 					log_message('info', 'Kalkun server alert=> Alert Name: '.$tmp->alert_name.', Dest: '.$tmp->phone_number);
 					$this->Plugin_model->changeState($tmp->id_server_alert, 'false');
-				} 
+				}
 			endforeach;
 		}
 	}
-
-	// --------------------------------------------------------------------
-	
-	/**
-	 * Blacklist number
-	 *
-	 * Force delete SMS if coming from blacklist phone number
-	 *
-	 * @access	private   		 
-	 */	
-	function _blacklist_number()
-	{
-		// check plugin status
-		$tmp_stat = $this->Plugin_model->getPluginStatus('blacklist_number');
-		
-		if($tmp_stat=='true')
-		{		
-		// get Blacklist Number
-		$number = $this->Plugin_model->getBlacklistNumber('all');
-		
-		// get unProcessed message
-		$message = $this->Message_model->getMessages('inbox', 'unprocessed');
-		
-		foreach($message->result() as $tmp_message):
-		foreach($number->result() as $tmp_number):
-			if($tmp_message->SenderNumber==$tmp_number->phone_number)
-			{
-				$this->Message_model->delMessages('single', 'inbox', 'permanent', $tmp_message->ID);
-				break;
-			}
-		endforeach;
-		
-		// update Processed
-		$this->Message_model->update_processed($tmp_message->ID);
-		endforeach;
-		}		
-	}	
 }
 
 /* End of file daemon.php */
