@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   `realname` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `phone_number` varchar(15) NOT NULL,
-  `email_id` varchar(64) NOT NULL,
   `level` enum('admin','user') NOT NULL DEFAULT 'user',
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `username` (`username`),
@@ -67,8 +66,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `realname`, `password`, `phone_number`, `email_id`, `level`) VALUES
-(1, 'kalkun', 'Kalkun SMS', 'f0af18413d1c9e0366d8d1273160f55d5efeddfe', '123456789', 'you@domain.com', 'admin');
+INSERT INTO `user` (`id_user`, `username`, `realname`, `password`, `phone_number`, `level`) VALUES
+(1, 'kalkun', 'Kalkun SMS', 'f0af18413d1c9e0366d8d1273160f55d5efeddfe', '123456789', 'admin');
 
 
 -- --------------------------------------------------------
@@ -148,7 +147,6 @@ CREATE TABLE IF NOT EXISTS `user_settings` (
   `paging` int(2) NOT NULL DEFAULT '10',
   `bg_image` varchar(50) NOT NULL,
   `delivery_report` enum('default','yes','no') NOT NULL DEFAULT 'default',
-  `email_forward`  enum('true','false') NOT NULL DEFAULT 'false',
   `language` varchar(20) NOT NULL DEFAULT 'english',
   `conversation_sort` enum('asc','desc') NOT NULL DEFAULT 'asc',
   PRIMARY KEY (`id_user`)
@@ -158,8 +156,8 @@ CREATE TABLE IF NOT EXISTS `user_settings` (
 -- Dumping data for table `user_settings`
 --
 
-INSERT INTO `user_settings` (`id_user`, `theme`, `signature`, `permanent_delete`, `paging`, `bg_image`, `delivery_report`, `email_forward`, `language`, `conversation_sort`) VALUES
-(1, 'green', 'false;--\nPut your signature here', 'false', 20, 'true;background.jpg', 'default' ,  'false', 'english', 'asc');
+INSERT INTO `user_settings` (`id_user`, `theme`, `signature`, `permanent_delete`, `paging`, `bg_image`, `delivery_report`, `language`, `conversation_sort`) VALUES
+(1, 'green', 'false;--\nPut your signature here', 'false', 20, 'true;background.jpg', 'default' , 'english', 'asc');
 
 
 -- --------------------------------------------------------

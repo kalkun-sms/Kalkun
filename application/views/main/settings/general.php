@@ -61,20 +61,7 @@ $report_act = $this->Kalkun_model->get_setting()->row('delivery_report');
 echo form_dropdown('delivery_report', $report, $report_act);  
 ?>			
 </td>  
-</tr>   
-
-
-<tr valign="top">
-<td><?php echo lang('tni_email_forward'); ?></td>
-<td>
-<?php 
-$email_forward = array( 'true' => lang('tni_yes'),  'false' => lang('tni_no') );
-$email_forward_act = $this->Kalkun_model->get_setting()->row('email_forward'); 
-echo form_dropdown('email_forward', $email_forward, $email_forward_act);  
-?>			
-</td>  
-</tr> 
-
+</tr>
    
 </table>
 <input type="hidden" name="option" value="general" /> 
