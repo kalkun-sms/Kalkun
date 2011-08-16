@@ -127,23 +127,39 @@ class Messages extends MY_Controller {
 		// Select send option
 		switch($this->input->post('sendoption')) 
 		{
-			// Person
+			// Phonebook
 			case 'sendoption1':
 			$tmp_dest = explode(',', $this->input->post('personvalue'));
 			foreach ($tmp_dest as $key => $tmp)
 			{
-				if(trim($tmp)!='') {
-					$dest[$key] = $tmp;
+				if (trim($tmp)!='')
+				{
+					list ($id, $type) = explode(':', $tmp);
+					// Person
+					if ($type=='c')
+					{
+						// Already sent, no need to send again
+						if (in_array($id, $dest)) 
+						{
+							continue;	
+						}
+						$dest[] = $id;
+					}
+					// Group
+					else
+					{
+						$param = array('option' => 'bygroup', 'group_id' => $id);
+						foreach ($this->Phonebook_model->get_phonebook($param)->result() as $group)
+						{
+							// Already sent, no need to send again
+							if (in_array($group->Number, $dest)) 
+							{
+								continue;	
+							}
+							$dest[] = $group->Number;
+						}
+					}
 				}
-			}
-			break;
-		
-			//Group	
-			case 'sendoption2':
-			$param = array('option' => 'bygroup', 'group_id' => $this->input->post('groupvalue'));
-			foreach($this->Phonebook_model->get_phonebook($param)->result() as $tmp)
-			{
-				$dest[] = $tmp->Number;
 			}
 			break;
 		

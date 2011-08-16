@@ -8,7 +8,7 @@
 @import url("<?php echo $this->config->item('css_path');?>blue.css");
 </style>
 <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>jquery-ui/ui.all.css" />	
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-1.4.2.min.js"></script>
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-1.6.2.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.hotkeys.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.field.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.autogrow-textarea.min.js"></script>

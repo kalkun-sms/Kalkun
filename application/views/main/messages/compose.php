@@ -77,10 +77,8 @@ else echo lang('kalkun_send_to').":";
 <td>
 <span class="form_option">
 <input type="radio" id="sendoption1" name="sendoption" value="sendoption1" checked="checked" class="left_aligned" style="border: none;" />
-<label for="sendoption1"><?php echo lang('kalkun_contact');?></label>
+<label for="sendoption1"><?php echo lang('kalkun_phonebook');?></label>
 </span>
-<input type="radio" id="sendoption2" name="sendoption" value="sendoption2" style="border: none;" />
-<label for="sendoption2"><?php echo lang('kalkun_group');?> </label>
 <input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;" />
 <label for="sendoption3"><?php echo lang('kalkun_input_manually');?> </label>
 </td>    

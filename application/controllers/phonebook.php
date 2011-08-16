@@ -354,8 +354,20 @@ class Phonebook extends MY_Controller {
 		{
 			$user_id = $this->session->userdata("id_user");
 			$param = array('uid' => $user_id, 'query' => $q);
-			$query = $this->Phonebook_model->search_phonebook($param);
-			echo json_encode($query->result());
+			$query = $this->Phonebook_model->search_phonebook($param)->result_array();
+			
+			// Add identifier, c for contact, g for group
+			foreach($query as $key => $q)
+			{
+				$query[$key]['id'] = $q['id'].":c";
+			}
+			$group = $this->Phonebook_model->search_group($param)->result_array();
+			foreach($group as $key => $q)
+			{
+				$group[$key]['id'] = $q['id'].":g";
+			}
+			$combine = array_merge($query, $group);
+			echo json_encode($combine);
 		}
 	}
     

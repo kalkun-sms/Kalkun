@@ -178,6 +178,26 @@ class Phonebook_model extends Model {
 	// --------------------------------------------------------------------
 	
 	/**
+	 * Search Group
+	 *
+	 * @access	public   		 
+	 * @param	mixed $param
+	 * @return	object
+	 */		
+	function search_group($param)	
+	{
+		$this->db->from('pbk_groups');
+		$this->db->select_as('ID', 'id');
+		$this->db->select_as('Name', 'name');
+		$this->db->where("(`id_user` = '{$param['uid']}'  OR `is_public` = 'true' )");
+		$this->db->like('Name', $param['query']);
+		$this->db->order_by('Name');	
+		return $this->db->get();
+	}	
+
+	// --------------------------------------------------------------------
+	
+	/**
 	 * Add Contact
 	 *
 	 * @access	public   		 

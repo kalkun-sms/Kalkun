@@ -15,7 +15,8 @@ $(document).ready(function(){
 	$("#personvalue").tokenInput("<?php echo site_url('phonebook/get_phonebook');?>", {
 		hintText:"<?php echo lang('tni_name_search')?>",
 		noResultsText:"No results",
-		searchingText: "<?php echo lang('tni_compose_searching'); ?>...",	
+		searchingText: "<?php echo lang('tni_compose_searching'); ?>...",
+		preventDuplicates: true,	
 		method: "POST",
             classes: {
                 tokenList: "token-input-list-facebook",

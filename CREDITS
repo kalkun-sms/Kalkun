@@ -8,10 +8,10 @@ CodeIgniter extra:
 	* CSVReader Library by Pierre-Jean Turpeau <http://www.codeigniter.com/wiki/CSVReader>
 	* CI-Plugin-System <https://github.com/Vheissu/CI-Plugin-System>
 	* HMVC 5.3.5 commit #2d6d33922276 <https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc>
-jQuery 1.3.2 <http://jquery.com/>
+jQuery 1.6.2 <http://jquery.com/>
 jQuery UI 1.7.2 <http://jqueryui.com/>
 jQuery Plugin:
-	* TokenInput 1.1 <http://loopj.com/jquery-tokeninput/>
+	* TokenInput 1.6.0 <http://loopj.com/jquery-tokeninput/>
 	* Validate <http://bassistance.de/jquery-plugins/jquery-plugin-validation/>
 	* Autogrow Textarea
 	* Field 0.9.3 <http://www.pengoworks.com/workshop/jquery/field/field.plugin.htm>
