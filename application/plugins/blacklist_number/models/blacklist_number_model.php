@@ -72,4 +72,4 @@ class Blacklist_number_model extends Model {
 }
 
 /* End of file blacklist_number_model.php */
-/* Location: ./application/models/plugin/blacklist_number_model.php */
+/* Location: ./application/plugins/blacklist_number/models/blacklist_number_model.php */

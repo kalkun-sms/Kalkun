@@ -17,8 +17,12 @@
 | unreg_code - Unregistration code (Don't use space)
 |
 */
-$config['reg_code'] = 'REG';
-$config['unreg_code'] = 'UNREG';
+function initialize()
+{
+	$config['reg_code'] = 'REG';
+	$config['unreg_code'] = 'UNREG';
+	return $config;
+}
 
 // Add hook for incoming message
 add_action("message.incoming.before", "sms_member", 13);
@@ -64,7 +68,7 @@ function sms_member_install()
 
 function sms_member($sms)
 {
-	global $config;
+	$config = initialize();
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
 	
@@ -87,16 +91,12 @@ function sms_member($sms)
  * Register member
  *
  * Register member's phone number
- *
- * @access	private   		 
  */
 function register_member($number)
-{
-	$this->load->model('Member_model');
-	
+{	
 	//check if number not registered
-	if($this->Member_model->check_member($number)==0)
-	$this->Member_model->add_member($number);
+	if(models_check_member($number)==0)
+	models_add_member($number);
 }
 
 // --------------------------------------------------------------------
@@ -105,14 +105,48 @@ function register_member($number)
  * Unregister member
  *
  * Unregister member's phone number
- *
- * @access	private   		 
  */	
 function unregister_member($number)
-{
-	$this->load->model('Member_model');
-	
+{	
 	//check if already registered
-	if($this->Member_model->check_member($number)==1)
-	$this->Member_model->remove_member($number);
-}	
+	if(models_check_member($number)==1)
+	models_remove_member($number);
+}
+
+// --------------------------------------------------------------------
+
+/**
+ * Models
+ *
+ * Handle database activity 
+ */
+function models_check_member($number)
+{
+	$CI =& get_instance();
+    $CI->load->model('Kalkun_model');
+    
+	$CI->db->from('plugin_sms_member');
+	$CI->db->where('phone_number', $number);
+	return $CI->db->count_all_results();    		
+}
+
+function models_add_member($number)
+{
+	$CI =& get_instance();
+    $CI->load->model('Kalkun_model');
+    	
+	$data = array('phone_number' => $number, 'reg_date' => date ('Y-m-d H:i:s'));
+	$CI->db->insert('plugin_sms_member', $data);
+}
+
+function models_remove_member()
+{
+	$CI =& get_instance();
+    $CI->load->model('Kalkun_model');
+    
+	$CI->db->where('phone_number', $number);		
+	$CI->db->delete('plugin_sms_member');	
+}
+
+/* End of file sms_member.php */
+/* Location: ./application/plugins/sms_member/sms_member.php */

@@ -59,5 +59,5 @@ class SMS_member extends Plugin_Controller {
 	}
 }
 
-/* End of file member.php */
-/* Location: ./application/controllers/member.php */ 
+/* End of file sms_member.php */
+/* Location: ./application/plugins/sms_member/controllers/sms_member.php */

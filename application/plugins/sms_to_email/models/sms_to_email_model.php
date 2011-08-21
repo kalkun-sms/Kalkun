@@ -52,4 +52,4 @@ class SMS_to_email_model extends Model {
 }
 
 /* End of file sms_to_email_model.php */
-/* Location: ./application/models/plugin/sms_to_email_model.php */
+/* Location: ./application/plugins/sms_to_email/models/sms_to_email_model.php */
