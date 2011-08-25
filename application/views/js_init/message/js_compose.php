@@ -43,8 +43,8 @@ $(document).ready(function(){
 			manualvalue: {
 				required: "#sendoption3:checked"
 			},
-			import_value: {
-				required: "#sendoption4:checked"
+			import_file: {
+				required: "#sendoption4:checked,#import_value:filled"
 			},
 			message: {
 				required: true
@@ -60,7 +60,7 @@ $(document).ready(function(){
 		messages: {
 			personvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
 			manualvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
-			import_value: "<?php echo lang('tni_compose_enter_dest'); ?>",
+			import_file: "<?php echo lang('tni_compose_enter_dest'); ?>",
 			message: "<?php echo lang('tni_compose_enter_msg'); ?>",
 			datevalue: "<?php echo lang('tni_compose_enter_sendate'); ?>",
             url : "Should be a valid URL"
