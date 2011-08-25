@@ -49,17 +49,17 @@ $lang['kalkun_signal'] = "Sinyal";
 // Phonebook
 $lang['kalkun_contact'] = "Kontak";
 $lang['kalkun_group'] = "Grup";
-$lang['kalkun_add_to_group'] = "Add to Group";
-$lang['kalkun_delete_from_group'] = "Delete From Group";
-$lang['kalkun_pbk_add_method'] = "Select Add Contact Method";
-$lang['kalkun_pbk_add_form'] = "Using contact form";
-$lang['kalkun_pbk_add_form_desc'] = "Manually add contact using contact form";
-$lang['kalkun_pbk_add_csv'] = "Import CSV file";
-$lang['kalkun_pbk_add_csv_desc'] = "Import contact from CSV format file";
-$lang['kalkun_pbk_add_csv_file'] = "CSV File";
-$lang['kalkun_pbk_add_csv_label'] = "The CSV file must be in valid format";
-$lang['kalkun_pbk_del_contact_conf'] = "Are you sure want to delete <span id='contact-delete-count'></span> contact(s)?";
-$lang['kalkun_valid_example'] = "Valid Example";
+$lang['kalkun_add_to_group'] = "Tambahkan ke Grup";
+$lang['kalkun_delete_from_group'] = "Hapus dari Group";
+$lang['kalkun_pbk_add_method'] = "Pilih Cara Tambah Kontak";
+$lang['kalkun_pbk_add_form'] = "Menggunakan form kontak";
+$lang['kalkun_pbk_add_form_desc'] = "Menambahkan kontak menggunakan form secara manual";
+$lang['kalkun_pbk_add_csv'] = "Impor berkas CSV";
+$lang['kalkun_pbk_add_csv_desc'] = "Impor kontak dari berkas format CSV";
+$lang['kalkun_pbk_add_csv_file'] = "Berkas CSV";
+$lang['kalkun_pbk_add_csv_label'] = "Berkas CSV harus dalam format yang valid";
+$lang['kalkun_pbk_del_contact_conf'] = "Apakah Anda yakin menghapus kontak <span id='contact-delete-count'></span>?";
+$lang['kalkun_valid_example'] = "Contoh yang Valid";
 
 // Message
 $lang['kalkun_message'] = "Pesan";
@@ -108,8 +108,8 @@ $lang['kalkun_delete_folder_confirmation'] = "Berkas ini dan semua pesan di dala
 $lang['kalkun_no_message'] = "Tidak ada pesan dalam ";
 $lang['kalkun_no_message_in_folder'] = "Tidak ada pesan dalam berkas ini";
 
-$lang['kalkun_delete_all_confirmation_header'] = "Delete All";
-$lang['kalkun_delete_all_confirmation'] = "Are you sure? This will affect all conversations.";
+$lang['kalkun_delete_all_confirmation_header'] = "Hapus Semua";
+$lang['kalkun_delete_all_confirmation'] = "Apakah Anda yakin? Ini akan menghapus semua percakapan.";
 
 $lang['kalkun_select_all'] = "Pilih Semua";
 $lang['kalkun_select_all_title'] = "Klik untuk memilih semua pesan";
@@ -118,16 +118,16 @@ $lang['kalkun_clear_all_title'] = "Klik untuk membersihkan semua pesan terpilih"
 $lang['kalkun_refresh'] = "Segarkan";
 $lang['kalkun_global_delete_title'] = "Klik untuk menghapus pesan terpilih";
 
-$lang['kalkun_report_spam'] = "Report Spam";
-$lang['kalkun_ham'] = "Not Spam";
+$lang['kalkun_report_spam'] = "Laporkan Spam";
+$lang['kalkun_ham'] = "Bukan Spam";
 
 $lang['kalkun_first'] = "Awal";
 $lang['kalkun_last'] = "Akhir";
 
 $lang['kalkun_smsc'] = "SMSC";
-$lang['kalkun_sms_part'] = "Part";
-$lang['kalkun_sms_part_suffix'] = "part messages";
-$lang['kalkun_sms_validity'] = "Valididy";
+$lang['kalkun_sms_part'] = "Bagian";
+$lang['kalkun_sms_part_suffix'] = "bagian pesan";
+$lang['kalkun_sms_validity'] = "Validitas";
 
 $lang['kalkun_sms_type'] = "SMS Type";
 $lang['kalkun_sms_type_normal'] = "Normal";
@@ -137,7 +137,7 @@ $lang['kalkun_sms_type_wap_url'] = "URL";
 
 $lang['kalkun_sms_ads_active'] = "Ads is active";
 $lang['kalkun_sms_ndnc_check'] = "Check NDNC";
-$lang['kalkun_insert'] = "Insert";
+$lang['kalkun_insert'] = "Masukkan";
 
 $lang['kalkun_canned'] = "Canned Responses";
 $lang['kalkun_canned_empty'] = "Looks like there isn't any canned response created yet. Save your first canned response now";
@@ -149,20 +149,20 @@ $lang['kalkun_compose_send_as_unicode'] = "Kirim sebagai Unicode";
 $lang['kalkun_compose_times'] = "kali";
 $lang['kalkun_compose_hour'] = "Jam";
 $lang['kalkun_compose_minutes'] = "Menit";
-$lang['kalkun_no_message_search'] = "Oops! Your Query doesnt match any records";
-$lang['tni_see_conversation'] = "See conversation";
+$lang['kalkun_no_message_search'] = "Maaf, Query Anda tidak cocok dengan ";
+$lang['tni_see_conversation'] = "Lihat percakapan";
 
 // Setting
-$lang['kalkun_setting_passwd_current'] = "Current Password";
-$lang['kalkun_setting_passwd_forgot'] = "Forgot your password?";
-$lang['kalkun_setting_passwd_new'] = "New Password";
-$lang['kalkun_setting_passwd_valid_rule'] = "Must be at least 6 characters long";
+$lang['kalkun_setting_passwd_current'] = "Password saat ini";
+$lang['kalkun_setting_passwd_forgot'] = "Lupa password Anda?";
+$lang['kalkun_setting_passwd_new'] = "Password Baru";
+$lang['kalkun_setting_passwd_valid_rule'] = "Setidaknya harus 6 karakter";
 
-$lang['kalkun_setting_passwd_current_enter'] = "Enter your current password";
-$lang['kalkun_setting_passwd_new_enter'] = "Enter your new password";
+$lang['kalkun_setting_passwd_current_enter'] = "Masukkan password Anda saat ini";
+$lang['kalkun_setting_passwd_new_enter'] = "Masukkan password baru Anda";
 
 $lang['kalkun_level_admin'] = "Administrator";
-$lang['kalkun_level_user'] = "User";
+$lang['kalkun_level_user'] = "Pengguna";
 
 // SMS Content/Member
 $lang['kalkun_sms_member'] = "Member";
@@ -172,12 +172,12 @@ $lang['kalkun_sms_no_member'] = "There is no registered member yet";
 // tni contribution
 $lang['tni_contact_add'] = "Tambah Kontak";
 $lang['tni_send_message'] = "Kirim Pesan";
-$lang['tni_sending_message'] = "Sending";
+$lang['tni_sending_message'] = "Sedang mengirim";
 $lang['tni_folders_sms'] = "Berkas SMS";
 $lang['tni_name_search'] = "Insert Name from Contact List";
 $lang['tni_group_del_title'] = "Delete Group(s) Confirmation";
 $lang['tni_group_delete'] = "Delete Gruop(s)?<br>All conaycys in this Group(s) will also be eliminated.";
-$lang['tni_group_del_button'] = "Yes, delete selected group(s).";
+$lang['tni_group_del_button'] = "Ya, delete selected group(s).";
 $lang['tni_group_add'] = "Grup Baru";
 $lang['tni_group_name'] = "Nama Grup";
 $lang['tni_group_show_contacts'] = "Show Contacts in this Group";
@@ -185,15 +185,15 @@ $lang['tni_group_field_num'] = "Number Of Fields";
 $lang['tni_group_field_string'] = "Field Values";
 $lang['tni_group_field_title'] = "Group SMS Field Values"; 
 $lang['tni_groups'] = "Groups";
-$lang['tni_groups_manage'] = "Manage Groups";   
-$lang['tni_group_manage'] = "Manage Group";  
-$lang['tni_groups_edit_contacts'] = "Edit Contact";
-$lang['tni_group_select'] = "Select Group";
+$lang['tni_groups_manage'] = "Kelola Grup";   
+$lang['tni_group_manage'] = "Kelola Grup";  
+$lang['tni_groups_edit_contacts'] = "Kelola Kontak";
+$lang['tni_group_select'] = "Pilih Grup";
 $lang['tni_msglist_trash_empty'] = "There is no messages in your Trash";  
 $lang['tni_msg_no_conv_selected'] = "No Item selected";  
 $lang['tni_pbk_no_contact_selected'] = "No contact selected";  
 $lang['tni_compose_sms'] = "Compose SMS";  
-$lang['tni_contacts'] = "Contacts";  
+$lang['tni_contacts'] = "Kontak";  
 $lang['tni_settings_saved'] = "Your settings has been saved...";  
 $lang['tni_settings_wrong_pword'] = "You entered wrong password";  
 $lang['tni_settings_uname_exists'] = "Username already exist";  
@@ -201,9 +201,9 @@ $lang['tni_settings_unamepass_wrong'] = "Wrong Username or Password";
 $lang['tni_back_to'] = "Kembali ke";   
 $lang['tni_show_details'] = "Show Details";   
 $lang['tni_hide_details'] = "Hide Details";  
-$lang['tni_search_contacts'] = "Search Contact"; 
-$lang['tni_search_sms'] =  "Search Messages"; 
-$lang['tni_edit'] = "Edit";   
+$lang['tni_search_contacts'] = "Cari Kontak"; 
+$lang['tni_search_sms'] =  "Cari Pesan"; 
+$lang['tni_edit'] = "Sunting";   
 $lang['tni_form_fields_required'] = "All form fields are required";   
 $lang['tni_contact_name'] = "Name";   
 $lang['tni_contact_phonenumber'] = "Telephone Number";    
@@ -211,7 +211,7 @@ $lang['tni_compose_msgto_outbox'] = "Your message has been moved to Outbox<br>an
 $lang['tni_email_address'] = "Email ID";    
 $lang['tni_email_forward'] = "Enable Email Forwarding";
 $lang['tni_compose_searching'] = "Searching...";  
-$lang['tni_outbox_sent_time'] = "Less than a minute ago";  
+$lang['tni_outbox_sent_time'] = "Beberapa saat yang lalu";  
 $lang['tni_time_remaining'] = "remaining";  
 $lang['tni_pbk_edit_contact'] = "Edit Contact";  
 $lang['tni_pbk_contact_edited'] = "Contact has been edited";  
@@ -260,24 +260,24 @@ $lang['tni_from'] = "From";
 $lang['tni_to'] = "To";  
 $lang['tni_inserted'] = "Inserted";  
 $lang['tni_date'] = "Date";  
-$lang['tni_msg_stat_fail'] = "Sending Failed";  
-$lang['tni_msg_stat_oknr'] = "Sending OK - No Report";  
-$lang['tni_msg_stat_okwr'] = "Sending OK - Waiting for Report";  
-$lang['tni_msg_stat_deliv'] = "Delivered";  
-$lang['tni_msg_stat_pend'] = "Pending";  
-$lang['tni_msg_stat_unknown'] = "Unknown";  
+$lang['tni_msg_stat_fail'] = "Pengiriman Gagal";  
+$lang['tni_msg_stat_oknr'] = "Pengiriman Berhasil - Tidak ada laporan";  
+$lang['tni_msg_stat_okwr'] = "Pengiriman Berhasil - Menunggu laporan";  
+$lang['tni_msg_stat_deliv'] = "Tersampaikan";  
+$lang['tni_msg_stat_pend'] = "Menunggu";  
+$lang['tni_msg_stat_unknown'] = "Tidak diketahui";  
 
-$lang['tni_set_conv_order_old'] = "Oldest First";  
-$lang['tni_set_conv_order_new'] = "Newest First";  
-$lang['tni_set_conv_sort'] = "Conversation sort";  
+$lang['tni_set_conv_order_old'] = "Terlama lebih dahulu";  
+$lang['tni_set_conv_order_new'] = "Terbaru lebih dahulu";  
+$lang['tni_set_conv_sort'] = "Urutan percakapan";  
 
-$lang['tni_set_data_pp'] = "Data per Page";  
-$lang['tni_set_data_pp_hint'] = "Will be used for paging in message and phonebook";  
+$lang['tni_set_data_pp'] = "Data per Halaman";  
+$lang['tni_set_data_pp_hint'] = "Akan digunakan pada pesan dan buku telepon";  
 
-$lang['tni_set_perm_del'] = "Permanent delete";  
-$lang['tni_set_perm_deloff'] = "Permanent delete Off";  
-$lang['tni_set_perm_deloff_hint'] = " - Always move to Trash first";   
-$lang['tni_set_perm_delon'] = "Permanent delete On";  
+$lang['tni_set_perm_del'] = "Penghapusan Permanen";  
+$lang['tni_set_perm_deloff'] = "Matikan Penghapusan Permanen";  
+$lang['tni_set_perm_deloff_hint'] = " - Selalu pindahkan ke tong sampah terlebih dahulu";   
+$lang['tni_set_perm_delon'] = "Hidupkan Penghapusan Permanen";  
 
 $lang['tni_set_title'] = "Setelan Pengguna";  
 $lang['tni_set_general'] = "Umum";  

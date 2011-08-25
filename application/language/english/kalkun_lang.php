@@ -127,7 +127,7 @@ $lang['kalkun_last'] = "Last";
 $lang['kalkun_smsc'] = "SMSC";
 $lang['kalkun_sms_part'] = "Part";
 $lang['kalkun_sms_part_suffix'] = "part messages";
-$lang['kalkun_sms_validity'] = "Valididy";
+$lang['kalkun_sms_validity'] = "Validity";
 
 $lang['kalkun_sms_type'] = "SMS Type";
 $lang['kalkun_sms_type_normal'] = "Normal";
