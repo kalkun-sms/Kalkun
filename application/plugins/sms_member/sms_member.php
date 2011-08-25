@@ -17,7 +17,7 @@
 | unreg_code - Unregistration code (Don't use space)
 |
 */
-function initialize()
+function sms_member_initialize()
 {
 	$config['reg_code'] = 'REG';
 	$config['unreg_code'] = 'UNREG';
@@ -63,12 +63,21 @@ function sms_member_deactivate()
 */
 function sms_member_install()
 {
+	$CI =& get_instance();
+	
+	// check if table already exist
+	if (!$CI->db->table_exists('plugin_sms_member'))
+	{
+		$db_driver = $CI->db->platform();
+		$db_prop = get_database_property($db_driver);
+		execute_sql(APPPATH."plugins/sms_member/media/".$db_prop['file']."_sms_member.sql");
+	}
     return true;
 }
 
 function sms_member($sms)
 {
-	$config = initialize();
+	$config = sms_member_initialize();
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
 	

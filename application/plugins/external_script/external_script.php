@@ -23,7 +23,7 @@
 | parameter - extra parameter to send to the script (phone,content,id), each value divided by |
 | 
 */
-function initialize()
+function external_script_initialize()
 {
 	$config['ext_script_path'] = '/bin/sh';
 	$config['ext_script'][0]['name'] = '/usr/local/reboot_server.sh';
@@ -83,7 +83,7 @@ function external_script_install()
 
 function external_script($sms)
 {
-	$config = initialize();
+	$config = external_script_initialize();
 	$phone = $sms->SenderNumber;
 	$content = $sms->TextDecoded;
 	$id = $sms->ID;

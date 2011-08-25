@@ -47,13 +47,21 @@ function blacklist_number_deactivate()
 */
 function blacklist_number_install()
 {
+	$CI =& get_instance();
+	
+	// check if table already exist
+	if (!$CI->db->table_exists('plugin_blacklist_number'))
+	{
+		$db_driver = $CI->db->platform();
+		$db_prop = get_database_property($db_driver);
+		execute_sql(APPPATH."plugins/blacklist_number/media/".$db_prop['file']."_blacklist_number.sql");
+	}
     return true;
 }
 
 function blacklist_number($sms)
 {
     $CI =& get_instance();
-    $CI->load->model('Kalkun_model');
     
     // Get blacklist number
     $lists = $CI->db->select('phone_number')->get('plugin_blacklist_number')->result_array();

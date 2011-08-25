@@ -101,7 +101,7 @@ class Install extends Controller {
 		if($type=='upgrade') $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_upgrade_kalkun.sql";
 		else $sqlfile = $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_kalkun.sql";
   
-  		$data['error'] = $this->_execute_sql($sqlfile);
+  		$data['error'] = execute_sql($sqlfile);
         
         if($type=='upgrade') $this->_upgrade();
 		
@@ -110,39 +110,6 @@ class Install extends Controller {
         
 		$data['main'] = 'main/install/install_result';
 		$this->load->view('main/install/layout', $data);
-	}
-
-	// --------------------------------------------------------------------
-	
-	/**
-	 * Execute SQL
-	 *
-	 * Run SQL command from file, line by line
-	 *
-	 * @access	private   		 
-	 */		
-	function _execute_sql($sqlfile)
-	{
-		$error=0;
-		if ($lines = @file($sqlfile, FILE_SKIP_EMPTY_LINES)) 
-		{
-		  $buff = '';
-		  foreach ($lines as $i => $line)
-		  {
-			if (preg_match('/^--/', $line)) continue;
-			$buff .= $line . "\n";
-			if (preg_match('/;$/', trim($line)))
-			{
-				// if contains TRIGGER
-				if(preg_match('/CREATE TRIGGER$/', trim($line))) $buff .= ' END;';
-				
-				$query = $this->Kalkun_model->db->query($buff);
-			  	if(!$query) $error++;
-			  	$buff = '';
-			}
-		  }
-		}
-		return $error;		
 	}
 
 	// --------------------------------------------------------------------

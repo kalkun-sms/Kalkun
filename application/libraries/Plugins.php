@@ -168,7 +168,7 @@ class Plugins {
 	            $this->_ci->db->where('plugin_system_name', $name)->update('plugins', $data);
 	            
 	            // If the file was included
-	            @include_once $this->plugins_dir.$name."/".$name.".php";
+	            include_once $this->plugins_dir.$name."/".$name.".php";
 	            
 	            // Trigger an install event
 	            $this->trigger_install_plugin($name);   

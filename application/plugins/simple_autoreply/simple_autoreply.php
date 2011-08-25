@@ -17,7 +17,7 @@
 | message - the message you want to sent
 | 
 */
-function initialize()
+function simple_autoreply_initialize()
 {
 	$config['uid'] = '1';
 	$config['message'] = "Thanks for sending me the message";
@@ -68,7 +68,7 @@ function simple_autoreply_install()
 
 function simple_autoreply($sms)
 {
-	$config = initialize();
+	$config = simple_autoreply_initialize();
     $CI =& get_instance();
     $CI->load->model('Message_model');
 	$data['coding'] = 'default';

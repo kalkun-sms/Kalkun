@@ -29,13 +29,7 @@ class SMS_member extends Plugin_Controller {
 	 */		
 	function SMS_member()
 	{
-		parent::Plugin_Controller();			
-		
-		// session check
-		if($this->session->userdata('loggedin')==NULL) redirect('login');
-		
-		$this->load->database();
-		$this->lang->load('kalkun', $this->Kalkun_model->get_setting()->row('language'));
+		parent::Plugin_Controller();
 		$this->load->model('sms_member_model', 'plugin_model');
 	}
 	

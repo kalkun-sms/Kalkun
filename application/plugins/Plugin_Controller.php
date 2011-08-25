@@ -36,6 +36,17 @@ class Plugin_Controller extends MY_Controller {
 		{
 			redirect(site_url('/'), 'location', 301);
 		}
+		//$this->load->library('Plugins');
+		//$this->load->library('plugins', array('plugins_dir' => 'application/plugins/'));
+
+		// Check if plugin is active
+		$CI =& get_instance();
+		$check = $CI->db->where('plugin_system_name', strtolower(get_class($this)))->get('plugins');
+		if ($check->num_rows()!=1)
+		{
+			$this->session->set_flashdata('notif', 'Plugin '.strtolower(get_class($this)).' is not installed');
+			redirect('pluginss');
+		}
 	}
 
 	// --------------------------------------------------------------------

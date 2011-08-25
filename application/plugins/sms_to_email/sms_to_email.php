@@ -24,7 +24,7 @@
 | mail_subject - The mail subject
 |
 */
-function initialize()
+function sms_to_email_initialize()
 {
 	$config['protocol'] = 'mail';
 	$config['smtp_host'] = "localhost";
@@ -77,13 +77,22 @@ function sms_to_email_deactivate()
 */
 function sms_to_email_install()
 {
+	$CI =& get_instance();
+	
+	// check if table already exist
+	if (!$CI->db->table_exists('plugin_sms_to_email'))
+	{
+		$db_driver = $CI->db->platform();
+		$db_prop = get_database_property($db_driver);
+		execute_sql(APPPATH."plugins/sms_to_email/media/".$db_prop['file']."_sms_to_email.sql");
+	}	
     return true;
 }
 
 
 function sms_to_email($sms)
 {
-	$config = initialize();
+	$config = sms_to_email_initialize();
 	$message = $sms->TextDecoded;
 	$from = $sms->SenderNumber;
 	$msg_user = $sms->msg_user;
