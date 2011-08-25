@@ -43,8 +43,8 @@ $(document).ready(function(){
 			manualvalue: {
 				required: "#sendoption3:checked"
 			},
-			groupvalue: {
-				required: "#sendoption2:checked"
+			import_value: {
+				required: "#sendoption4:checked"
 			},
 			message: {
 				required: true
@@ -60,7 +60,7 @@ $(document).ready(function(){
 		messages: {
 			personvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
 			manualvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
-			groupvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
+			import_value: "<?php echo lang('tni_compose_enter_dest'); ?>",
 			message: "<?php echo lang('tni_compose_enter_msg'); ?>",
 			datevalue: "<?php echo lang('tni_compose_enter_sendate'); ?>",
             url : "Should be a valid URL"
@@ -130,11 +130,10 @@ $(document).ready(function(){
 		});  
 	});
 
-	
 	$("#nowoption").show();
 	$("#delayoption").hide();
 	$("#dateoption").hide();
-	$("#group").hide();
+	$("#import").hide();
 	$("#manually").hide();
 
 	$("input[name='senddateoption']").click(function() {
@@ -144,12 +143,37 @@ $(document).ready(function(){
 	});
 
 	$("input[name='sendoption']").click(function() {
-		if($(this).val()=='sendoption1')  { $("#person").show(); $("#group").hide(); $("#manually").hide();}
-		if($(this).val()=='sendoption2')  { $("#group").show(); $("#person").hide(); $("#manually").hide();}
-		if($(this).val()=='sendoption3')  { $("#group").hide(); $("#person").hide(); $("#manually").show();}		
-	});	
-    
-    
+		if($(this).val()=='sendoption1')  { $("#person").show(); $("#import").hide(); $("#manually").hide();}
+		if($(this).val()=='sendoption3')  { $("#person").hide(); $("#import").hide(); $("#manually").show();}
+		if($(this).val()=='sendoption4')  { $("#person").hide(); $("#import").show(); $("#manually").hide();}		
+	});
+	
+	// POST files using hidden iframe
+	// Taken from <http://www.joshclarkson.net/blog/file-uploads-in-a-hidden-iframe-using-jquery/>
+	// with some modification
+	$('#import_file').bind('change', function() {
+		var userFile = $('#import_file').val();
+		var iframe = $('<iframe name="postframe" id="postframe" class="hidden" src="about:none" />');
+		$('div#iframe').append(iframe);
+		
+		// add attribute to the form
+        $('#composeForm').attr("userfile", userFile);
+        $('#composeForm').attr("enctype", "multipart/form-data");
+        $('#composeForm').attr("target", "postframe");
+        $('#composeForm').submit();
+
+        //need to get contents of the iframe
+        $("#postframe").load(function(){
+        	iframeContents = $("iframe")[0].contentDocument.body.innerHTML;
+            $("#import_value").val(iframeContents);
+        });
+        
+        // remove attribute
+        $('#composeForm').removeAttr("userfile");
+        $('#composeForm').removeAttr("enctype");
+        $('#composeForm').removeAttr("target");
+        return false;
+	});    
 
 });
 
