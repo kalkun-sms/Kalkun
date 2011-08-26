@@ -146,9 +146,19 @@ endif;
 	<li><img src="<?php echo $this->config->item('img_path');?>circle.gif" /></li>
 	<li><a href="#" class="add_to_pbk"><?php echo lang('tni_contact_add'); ?></a></li>	
 	<?php endif; ?>
+	
+	<?php if($tmp['source'] == 'sentitems'): ?>
+	<li><img src="<?php echo $this->config->item('img_path');?>circle.gif" /></li>
+	<li><a href="#" class="resend">Resend</a></li>		
+	<?php endif; ?>
 	</ul>
 	</div>
-				
+	
+	<div class="message_metadata hidden">
+		<span class="coding"><?php echo $tmp['Coding'];?></span>
+		<span class="class"><?php echo $tmp['Class'];?></span> 
+	</div>
+	
 	</div></div>
 		
 <?php 
