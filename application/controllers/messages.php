@@ -120,8 +120,27 @@ class Messages extends MY_Controller {
 	 */		
 	function compose_process()
 	{
-		if($_POST)
+		// We need POST variable
+		if(!$_POST)
 		{
+			return;
+		}
+		
+		// Import value from file (currently only CSV)
+		if (isset($_FILES["import_file"]))
+		{
+			$this->load->library('csvreader');
+			$filePath = $_FILES["import_file"]["tmp_name"];
+			$csvData = $this->csvreader->parse_file($filePath, true);	
+			
+			foreach($csvData as $field)
+			{
+				$dest[] = trim($field["Number"]);
+			}			
+			echo implode(",", $dest);
+			return;
+		}
+		
 		$dest = array();
 
 		// Select send option
@@ -166,6 +185,18 @@ class Messages extends MY_Controller {
 			// Input manually
 			case 'sendoption3':
 			$tmp_dest = explode(',', $this->input->post('manualvalue'));
+			foreach($tmp_dest as $key => $tmp)
+			{
+				$tmp = trim($tmp); // remove space
+				if(trim($tmp)!='') {
+					$dest[$key] = $tmp;
+				}
+			}
+			break;
+
+			// Import from file
+			case 'sendoption4':
+			$tmp_dest = explode(',', $this->input->post('import_value'));
 			foreach($tmp_dest as $key => $tmp)
 			{
 				$tmp = trim($tmp); // remove space
@@ -304,7 +335,6 @@ class Messages extends MY_Controller {
 		
 		// Display sending status
 		echo $return_msg;
-		}
 	}
 		
 	// --------------------------------------------------------------------
