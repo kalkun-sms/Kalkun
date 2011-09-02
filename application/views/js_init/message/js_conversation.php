@@ -345,6 +345,56 @@ $("#compose_sms_container").dialog({
 $("#compose_sms_container").dialog('open');	
 });
 
+//resend_bulk
+$(".resend_bulk").live('click', function() {
+var count = $("input:checkbox:checked").length;
+if(count==0) { 
+	$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected'); ?>");
+	$('.notification_area').show();
+}
+else {
+	resend_conf = '<p>You are about to resend ' + count + ' message(s)</p>';
+	delete_dup = '<input type="checkbox" id="delete_dup" /> <label for="delete_dup">Delete copy of this message (Prevent Duplicate)</label>';
+	$("#compose_sms_container").html(resend_conf + delete_dup);
+	$("#compose_sms_container").dialog({
+		//title: 'Resend SMS',
+	    modal: true,
+	    draggable : true,
+		width: 550,
+		show: 'fade',
+		hide: 'fade',
+		buttons: {
+		'Continue': function() {
+			delete_dup_status = $("#delete_dup").is(":checked");
+
+			$("input.select_message:checked").each(function() {
+				DestinationNumber = $(this).parents('div:eq(0)').children('input.item_number').val();
+				TextDecoded = $(this).parents('div:eq(1)').children('div.message_content').text();
+				ID = $(this).parents('div:eq(1)').children().children('input.select_message').attr('id');
+				Class = $(this).parents('div:eq(1)').children('div.message_metadata').children('span.class').text();
+				Coding = $(this).parents('div:eq(1)').children('div.message_metadata').children('span.coding').text();
+				if (Coding=='Unicode_No_Compression')
+				{
+					Coding = 'unicode';	
+				}				
+				$.post("<?php echo site_url('messages/compose_process') ?>", {sendoption: 'sendoption3', manualvalue: DestinationNumber, senddateoption: 'option1', class: Class, unicode: Coding, validity: '-1', smstype: 'normal', sms_loop: '1', message: TextDecoded}, function(data) {
+						$("#compose_sms_container").html(data);
+						$("#compose_sms_container").dialog({ buttons: { "Okay": function() { $(this).dialog("close"); } } });
+						setTimeout(function() {$("#compose_sms_container").dialog('close')} , 1500);
+					});
+					
+				// Delete copy
+				if (delete_dup_status)
+				{
+					dest_url = base + 'sentitems';
+					$.post(dest_url, {type: 'single', id: ID, current_folder: current_folder});
+				}		
+			});		
+		}, Cancel: function() { $(this).dialog('close');} }
+		});
+	$("#compose_sms_container").dialog('open');
+}	
+});
 
 });    
 </script>

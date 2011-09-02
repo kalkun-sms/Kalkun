@@ -442,6 +442,26 @@ class Messages extends MY_Controller {
 			$config['uri_segment'] = 6;
 			$this->pagination->initialize($config); 
 			
+			
+			if($param['number']=='sending_error') 
+			{
+			$param['type'] = 'sentitems';
+			$param['number'] = trim($number);
+      		$param['order_by'] = 'SendingDateTime';
+      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
+      		$param['uid'] = $this->session->userdata('id_user');
+			$sentitems = $this->Message_model->get_messages($param)->result_array();	
+
+			// add global date for sorting
+			foreach($sentitems as $key=>$tmp):
+			$sentitems[$key]['globaldate'] = $sentitems[$key]['SendingDateTime'];
+			$sentitems[$key]['source'] = 'sentitems';
+			endforeach;
+			
+			$data['messages'] = $sentitems;				
+			}
+			else
+			{
 			$param['type'] = 'inbox';
 			$param['limit'] = $config['per_page'];
 			$param['offset'] = $this->uri->segment(6,0);
@@ -474,6 +494,7 @@ class Messages extends MY_Controller {
 			foreach($sentitems as $tmp):
 			$data['messages'][] = $tmp;
 			endforeach;
+			}
 			
 			// sort data
 			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
