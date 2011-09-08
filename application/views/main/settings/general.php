@@ -9,6 +9,7 @@ $lang = array('bahasa'	=> 'Bahasa Indonesia',
        		'italian'	=> 'Italian',
        		'portuguese'	=> 'Portuguese',
        		'russian'	=> 'Russian',
+            'spanish'       => 'Español',
        		'turkish'	=> 'Turkish',
       		); 
 $lang_act = $this->Kalkun_model->get_setting()->row('language'); 
