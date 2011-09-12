@@ -50,9 +50,14 @@
 	</tr>
 
 	<tr>
-		<td colspan="3" class="bottom">JSON</td>
-		<td class="right bottom"><?php if(extension_loaded('json')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
+		<td colspan="3">JSON</td>
+		<td class="right"><?php if(extension_loaded('json')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
 	</tr>
+
+	<tr>
+		<td colspan="3" class="bottom">MBString</td>
+		<td class="right bottom"><?php if(extension_loaded('mbstring')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
+	</tr>	
 
 </table>
 

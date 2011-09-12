@@ -56,13 +56,15 @@ INSERT INTO "user_folders" VALUES(2, 'outbox', 0);
 INSERT INTO "user_folders" VALUES(3, 'sent_items', 0);
 INSERT INTO "user_folders" VALUES(4, 'draft', 0);
 INSERT INTO "user_folders" VALUES(5, 'Trash', 0);
-
+INSERT INTO "user_folders" VALUES(6, 'Spam', 0);
+INSERT INTO "user_folders" VALUES(10, 'Reserved', 0);
 
 CREATE TABLE "sms_used" (
 	"id_sms_used" INTEGER PRIMARY KEY AUTOINCREMENT, 
 	"sms_date" DATE NOT NULL, 
 	"id_user" INTEGER NOT NULL, 
-	"sms_count" INTEGER NOT NULL DEFAULT 0
+	"out_sms_count" INTEGER NOT NULL DEFAULT 0,
+	"in_sms_count" INTEGER NOT NULL DEFAULT 0
 );
 
 ALTER TABLE "inbox" ADD COLUMN "id_folder" INTEGER NOT NULL DEFAULT 1;
@@ -71,7 +73,10 @@ ALTER TABLE "inbox" ADD COLUMN "readed" TEXT NOT NULL DEFAULT 'false';
 ALTER TABLE "sentitems" ADD COLUMN "id_folder" INTEGER NOT NULL DEFAULT 3;
 
 ALTER TABLE "pbk" ADD COLUMN "id_user" INTEGER NULL;
+ALTER TABLE "pbk" ADD COLUMN "is_public" TEXT NOT NULL DEFAULT 'false';
+
 ALTER TABLE "pbk_groups" ADD COLUMN "id_user" INTEGER NULL;
+ALTER TABLE "pbk_groups" ADD COLUMN "is_public" TEXT NOT NULL DEFAULT 'false';
 
 CREATE TABLE "user_group" (
   "id_group" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -91,6 +96,14 @@ CREATE TABLE "user_templates" (
   "Message" TEXT NOT NULL
 );
 
+CREATE TABLE "b8_wordlist" (
+  "token" VARCHAR(255) PRIMARY KEY AUTOINCREMENT,
+  "count" VARCHAR(255) DEFAULT NULL
+);
+
+INSERT INTO "b8_wordlist" VALUES('bayes*dbversion', '2');
+INSERT INTO "b8_wordlist" VALUES('bayes*texts.ham', '0');
+INSERT INTO "b8_wordlist" VALUES('bayes*texts.spam', '0');
 
 CREATE TABLE "plugins" (
   "plugin_id" INTEGER PRIMARY KEY AUTOINCREMENT,

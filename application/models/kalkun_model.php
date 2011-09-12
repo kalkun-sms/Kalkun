@@ -77,12 +77,12 @@ class Kalkun_model extends Model {
 		switch($option)
 		{
 			case 'all':
-				$this->db->where('id_folder >', '6');
+				$this->db->where('id_folder >', '10');
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 			break;
 			
 			case 'exclude':
-				$this->db->where('id_folder >', '6');
+				$this->db->where('id_folder >', '10');
 				$this->db->where('id_folder !=', $id_folder);
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 			break;

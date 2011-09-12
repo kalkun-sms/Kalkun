@@ -97,7 +97,6 @@ class Install extends Controller {
 	 */			
 	function run_install($type=NULL)
 	{
-	    
 		if($type=='upgrade') $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_upgrade_kalkun.sql";
 		else $sqlfile = $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_kalkun.sql";
   
@@ -125,31 +124,28 @@ class Install extends Controller {
  
 	function _upgrade() 
 	{
+	   // upgrade method from 0.3 to 0.4
 	   
-       //moving groups to new schema
-       $this->db->select('*');
-	   $this->db->from('pbk');
-       $result = $this->db->get()->result();
-       
-        for ($i = 0 ; $i< count($result); $i++)
-        {
-            if($result[$i]->GroupID != '-1') :
-                $data = array(
-               'id_pbk' => $result[$i]->ID ,
-               'id_pbk_groups' => $result[$i]->GroupID,
-               'id_user' => $result[$i]->id_user    );
-    
-                $this->db->insert('user_group', $data); 
-                
-                $this->db->where('ID', $result[$i]->ID);
-                $this->db->update('pbk', array( 'GroupID' => '-1' ));
-            endif;
-            
-            $this->db->update('user', array( 'email_id' => 'you@domain.com' ));
-            $this->db->update('user_settings', array( 'email_forward' => 'false' ));
-            
-        }
-
+	   // Preserve id_folder 1 to 10
+	   $id_folder = $this->db->where('id_folder >', '5')->where('id_folder <', '11')->get('user_folders');
+	   
+	   foreach ($id_folder->result() as $id)
+	   {
+	   		// Get max ID
+	   		$max_id = $this->db->select_max('id_folder', 'max_id')->get('user_folders');
+	   		$max_id = $max_id->row('max_id');
+			$new_id = $max_id+1;
+			
+	   		// Update Inbox and Sentitems
+	   		$this->db->where('id_folder', $id->id_folder)->update('inbox', array('id_folder' => $new_id));
+	   		$this->db->where('id_folder', $id->id_folder)->update('sentitems', array('id_folder' => $new_id));
+	   		
+	   		// Update user_folders
+	   		$this->db->where('id_folder', $id->id_folder)->update('user_folders', array('id_folder' => $new_id));	   		
+	   }
+	   
+	   // Insert spam folder
+	   $this->db->insert('user_folders', array('id_folder' => 6, 'name' => 'Spam', 'id_user' => 0));	   
 	} 
 }
 

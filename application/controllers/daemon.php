@@ -29,7 +29,7 @@ class Daemon extends Controller {
 	{	
 		// Commented this for allow access from other machine
 		// if($_SERVER['REMOTE_ADDR']!='127.0.0.1') exit("Access Denied.");		
-						
+		$this->load->library('Plugins');
 		parent::controller();
 	}
 

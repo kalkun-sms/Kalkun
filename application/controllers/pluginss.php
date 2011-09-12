@@ -28,6 +28,7 @@ class Pluginss extends MY_Controller {
 	function Pluginss()
 	{
 		parent::MY_Controller();
+		$this->load->library('Plugins');
 		$this->load->model('Plugin_model');
 	}
 

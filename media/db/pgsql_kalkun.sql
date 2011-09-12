@@ -50,7 +50,7 @@ CREATE TABLE "user_sentitems" (
 	"trash" smallint NOT NULL DEFAULT 0 
 );
 
-CREATE SEQUENCE "user_folders_id_folder_seq" START 6;
+CREATE SEQUENCE "user_folders_id_folder_seq" START 11;
 
 CREATE TABLE "user_folders" (
 	"id_folder" integer PRIMARY KEY DEFAULT nextval('user_folders_id_folder_seq'), 
@@ -58,13 +58,14 @@ CREATE TABLE "user_folders" (
 	"id_user" integer NOT NULL
 );
 
-INSERT INTO "user_folders" VALUES(1, 'inbox', 0), (2, 'outbox', 0), (3, 'sent_items', 0), (4, 'draft', 0), (5, 'Trash', 0);
+INSERT INTO "user_folders" VALUES(1, 'inbox', 0), (2, 'outbox', 0), (3, 'sent_items', 0), (4, 'draft', 0), (5, 'Trash', 0), (6, 'Spam', 0);
 
 CREATE TABLE "sms_used" (
 	"id_sms_used" serial PRIMARY KEY, 
 	"sms_date" date NOT NULL, 
 	"id_user" integer NOT NULL, 
-	"sms_count" integer NOT NULL DEFAULT 0
+	"out_sms_count" integer NOT NULL DEFAULT 0,
+	"in_sms_count" integer NOT NULL DEFAULT 0
 );
 
 ALTER TABLE "inbox" ADD COLUMN "id_folder" integer NOT NULL DEFAULT 1;
@@ -73,7 +74,10 @@ ALTER TABLE "inbox" ADD COLUMN "readed" text NOT NULL DEFAULT 'false';
 ALTER TABLE "sentitems" ADD COLUMN "id_folder" integer NOT NULL DEFAULT 3;
 
 ALTER TABLE "pbk" ADD COLUMN "id_user" integer NULL;
+ALTER TABLE "pbk" ADD COLUMN "is_public" text NOT NULL DEFAULT 'false';
+
 ALTER TABLE "pbk_groups" ADD COLUMN "id_user" integer NULL;
+ALTER TABLE "pbk_groups" ADD COLUMN "is_public" text NOT NULL DEFAULT 'false';
 
 CREATE TABLE "user_group" (
   "id_group" integer PRIMARY KEY,
@@ -91,4 +95,26 @@ CREATE TABLE "user_templates" (
   "id_user" integer NOT NULL,
   "Name" varchar(64) NOT NULL,
   "Message" text NOT NULL
+);
+
+CREATE TABLE "b8_wordlist" (
+  "token" varchar(255) serial PRIMARY KEY,
+  "count" varchar(255) DEFAULT NULL
+);
+
+INSERT INTO "b8_wordlist" VALUES('bayes*dbversion', '2');
+INSERT INTO "b8_wordlist" VALUES('bayes*texts.ham', '0');
+INSERT INTO "b8_wordlist" VALUES('bayes*texts.spam', '0');
+
+CREATE TABLE "plugins" (
+  "plugin_id" serial PRIMARY KEY,
+  "plugin_system_name" varchar(255) NOT NULL,
+  "plugin_name" varchar(255) NOT NULL,
+  "plugin_uri" varchar(120) DEFAULT NULL,
+  "plugin_version" varchar(30) NOT NULL,
+  "plugin_description" text,
+  "plugin_author" varchar(120) DEFAULT NULL,
+  "plugin_author_uri" varchar(120) DEFAULT NULL,
+  "plugin_data" text,
+  UNIQUE("plugin_system_name")
 );

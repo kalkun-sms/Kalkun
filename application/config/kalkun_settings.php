@@ -6,11 +6,11 @@
 |--------------------------------------------------------------------------
 |
 */
-$config['kalkun_version'] = '0.3';
-$config['kalkun_codename'] = 'Samosir';
-$config['kalkun_release_date'] = '18 April 2011';
+$config['kalkun_version'] = '0.4RC1';
+$config['kalkun_codename'] = 'Toba';
+$config['kalkun_release_date'] = '12 September 2011';
 $config['kalkun_upgradeable'] = TRUE;
-$config['kalkun_previous_version'] = '0.2.10';
+$config['kalkun_previous_version'] = '0.3';
 
 /*
 |--------------------------------------------------------------------------
@@ -161,13 +161,9 @@ $config['ndnc'] = FALSE;
 | value - Modem value to use based on strategy 
 | 
 */
-$config['multiple_modem_state'] = FALSE;
-$config['multiple_modem_strategy'] = 'scheduled_date';
-$config['multiple_modem'][0]['id'] = 'sierra';
-$config['multiple_modem'][0]['value'] = '2012-04-17:2012-05-17';
-
-$config['multiple_modem'][1]['id'] = 'fasttrack';
-$config['multiple_modem'][1]['value'] = '2014-04-17:2014-05-17';
+$config['multiple_modem_state'] = TRUE;
+$config['multiple_modem_strategy'] = 'round_robin';
+$config['multiple_modem'] = array('sierra', 'fasttrack');
 
 /* End of file kalkun_settings.php */
 /* Location: ./application/config/kalkun_settings.php */

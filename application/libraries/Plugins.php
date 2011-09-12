@@ -659,3 +659,20 @@ function get_available_plugin()
 {
 	return Plugins::$plugins_pool;
 }
+
+function get_installed_plugin()
+{
+	return Plugins::$plugins_active;
+}
+
+function check_available_plugin($name)
+{
+	$available_plugin = Plugins::$plugins_pool;
+	return array_key_exists($name, $available_plugin);
+}
+
+function check_installed_plugin($name)
+{
+	$installed_plugin = Plugins::$plugins_active;
+	return array_key_exists($name, $installed_plugin);
+}

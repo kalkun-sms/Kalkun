@@ -1,15 +1,15 @@
 Kalkun - Open Source Web-based SMS Management
 Homepage : http://kalkun.sourceforge.net
 
-(For complete instruction, see http://sourceforge.net/apps/trac/kalkun/wiki/Installation)
+(For complete instruction, see http://github.com/back2arie/Kalkun/wiki/Installation)
 
-You need to install and configure this first :
+You need to install and configure this first:
 - apache 2.x.x
-- PHP 5.x.x (with mysql/pgsql/pdo_sqlite, session, hash, json extension)
+- PHP 5.x.x (with mysql/pgsql/pdo_sqlite, session, hash, json, mbstring extension)
 - PHP-CLI
 - MySQL 5.x.x or PostgreSQL or SQLite3
 or you can just install xampp (http://www.apachefriends.org/en/xampp.html)
-- gammu-smsd, make sure it is already ruuning and configured
+- gammu-smsd, make sure it is already running and configured
 
 INSTALLATION:
 1) extract to web root folder (eq: /var/www/html => Ubuntu)
@@ -27,7 +27,7 @@ INSTALLATION:
 		# mysql kalkun - u username -p < gammu/docs/sql/mysql.sql
 	- using phpMyAdmin
 
-5) configure daemon (to manage inbox and autoreply)
+5) configure daemon (to manage inbox and autoreply) - IMPORTANT
 	- set path on gammu-smsd configuration at runonreceive directive
 		e.g:
 			[smsd]

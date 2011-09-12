@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `user_folders` (
   `name` varchar(50) NOT NULL,
   `id_user` int(11) NOT NULL,
   PRIMARY KEY (`id_folder`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `user_folders`
