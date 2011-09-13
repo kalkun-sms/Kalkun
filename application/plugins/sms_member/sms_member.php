@@ -64,7 +64,7 @@ function sms_member_deactivate()
 function sms_member_install()
 {
 	$CI =& get_instance();
-	
+	$CI->load->helper('kalkun');
 	// check if table already exist
 	if (!$CI->db->table_exists('plugin_sms_member'))
 	{

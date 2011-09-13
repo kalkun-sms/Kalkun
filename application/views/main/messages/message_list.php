@@ -1,4 +1,5 @@
 <?php
+$this->load->helper('kalkun');
 if($messages->num_rows()==0) 
 {
 	$no_message_container['start'] = "<p class=\"no_content\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>";

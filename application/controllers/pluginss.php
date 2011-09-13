@@ -43,6 +43,7 @@ class Pluginss extends MY_Controller {
 	 */	
 	function index($type='installed') 
 	{
+		$this->load->helper('form');
 		$data['main'] = 'main/plugin/index';
 		$data['title'] = 'Plugins';
 		$data['type'] = $type;

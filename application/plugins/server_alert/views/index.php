@@ -1,4 +1,7 @@
-<?php $this->load->view('js_init/plugin/js_server_alert');?>
+<?php
+$this->load->view('js_init/plugin/js_server_alert');
+$this->load->model('Plugin_model');
+?>
 
 <!-- Add Alert dialog -->	
 <div id="alert-dialog" title="Add Server Alert" class="dialog">

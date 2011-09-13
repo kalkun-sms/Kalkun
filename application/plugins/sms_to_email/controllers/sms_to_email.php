@@ -30,6 +30,7 @@ class SMS_to_email extends Plugin_Controller {
 	
 	function index()
 	{
+		$this->load->helper('form');
 		$data['title'] = 'SMS to Email Settings';
 		$data['main'] = 'index';
 		$data['settings'] = $this->plugin_model->get_setting($this->session->userdata('id_user'));

@@ -1,4 +1,5 @@
 <?php 
+$this->load->helper('form');
 if($this->uri->segment(1)=='phonebook') :
 echo form_open("phonebook", array('class' => 'sms_search_form')); ?>
 <table border="0" cellpadding="0" cellspacing="0">

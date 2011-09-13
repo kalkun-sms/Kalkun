@@ -27,7 +27,8 @@ class Kalkun extends MY_Controller {
 	 */	
 	function Kalkun()
 	{
-		parent::MY_Controller();	
+		parent::MY_Controller();
+		log_message('debug', dirname($_SERVER['SCRIPT_NAME']));
 	}		
 		
 	// --------------------------------------------------------------------
@@ -41,6 +42,7 @@ class Kalkun extends MY_Controller {
 	 */		
 	function index() 
 	{
+		$this->load->model('Phonebook_model');
 		$data['main'] = 'main/dashboard/home';
 		$data['title'] = 'Dashboard';
         $data['data_url'] = site_url('kalkun/get_statistic');

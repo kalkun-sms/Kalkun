@@ -1,4 +1,6 @@
-<?php echo doctype('xhtml1-trans');?>
+<?php 
+$this->load->helper('html');
+echo doctype('xhtml1-trans');?>
 <html>
 <head><?php echo $this->load->view('main/header');?></head>
 <body>

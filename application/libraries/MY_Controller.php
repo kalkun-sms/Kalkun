@@ -37,8 +37,11 @@ class MY_Controller  extends Controller  {
 		$this->load->library('session');
 		// session check
 		if($this->session->userdata('loggedin')==NULL) redirect('login');
+
+		$this->load->model('Kalkun_model');
 		
 		// language
+		$this->load->helper('language');
 		$lang = $this->Kalkun_model->get_setting()->row('language');
 		$this->lang->load('kalkun', $lang);
 			
@@ -49,6 +52,7 @@ class MY_Controller  extends Controller  {
 	function _message_routine()
 	{
 		$this->load->model('User_model');
+		$this->load->model('Message_model');
 		$uid = $this->session->userdata("id_user");
 		
 		$outbox = $this->Message_model->get_user_outbox($uid);

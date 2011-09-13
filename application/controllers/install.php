@@ -60,6 +60,7 @@ class Install extends Controller {
 	 */		
 	function requirement_check()
 	{
+		$this->load->helper('kalkun');
 		$data['main'] = 'main/install/requirement_check';
 		$data['database_driver'] = $this->db->platform();
 		$this->load->view('main/install/layout', $data);
@@ -76,6 +77,8 @@ class Install extends Controller {
 	 */			
 	function database_setup()
 	{	
+		$this->load->model('Kalkun_model');
+		$this->load->helper(array('form', 'kalkun'));
 		$data['main'] = 'main/install/database_setup';
 		$data['database_driver'] = $this->db->platform();
         $data['type'] = 'install';
@@ -97,6 +100,7 @@ class Install extends Controller {
 	 */			
 	function run_install($type=NULL)
 	{
+		$this->load->helper('kalkun');
 		if($type=='upgrade') $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_upgrade_kalkun.sql";
 		else $sqlfile = $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_kalkun.sql";
   

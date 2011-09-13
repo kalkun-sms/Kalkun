@@ -150,6 +150,7 @@ class Daemon extends Controller {
 	 */		
 	function server_alert_engine()
 	{
+		$this->load->model('Plugin_model');
 		// check plugin status
 		$tmp_stat = $this->Plugin_model->getPluginStatus('server_alert');
 		

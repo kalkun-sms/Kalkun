@@ -48,7 +48,7 @@ function blacklist_number_deactivate()
 function blacklist_number_install()
 {
 	$CI =& get_instance();
-	
+	$CI->load->helper('kalkun');
 	// check if table already exist
 	if (!$CI->db->table_exists('plugin_blacklist_number'))
 	{

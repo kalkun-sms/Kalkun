@@ -30,7 +30,6 @@ class Login extends Controller
 	{
 		parent::controller();
 		$this->load->library('session');		
-		$this->load->database();
 		$this->load->model('Kalkun_model');	
 	}
 
@@ -44,7 +43,8 @@ class Login extends Controller
 	 * @access	public   		 
 	 */	
 	function index()
-	{		
+	{
+		$this->load->helper('form');
 		if($_POST) $this->Kalkun_model->login();
 		$this->load->view('main/login');
 	}

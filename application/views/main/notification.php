@@ -1,5 +1,5 @@
-
 <?php 
+$this->load->helper('kalkun');
 echo lang('tni_status').": ";
 // Get signal and battery value
 //$signal = $this->Kalkun_model->get_gammu_info('phone_signal')->row('Signal'); 

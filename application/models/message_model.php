@@ -440,6 +440,7 @@ class Message_model extends Model {
 	*/
 	function _protect_identifiers($identifier=NULL)
 	{
+		$this->load->helper('kalkun');
 		$escape_char;
 		$escaped_identifer="";
 		

@@ -39,7 +39,7 @@
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array();
+$autoload['libraries'] = array('database');
 
 
 /*
@@ -51,7 +51,7 @@ $autoload['libraries'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','html','form','inflector','kalkun','language','text');
+$autoload['helper'] = array('url');
 
 
 /*
@@ -108,9 +108,8 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('Kalkun_model', 'Message_model', 'Plugin_model', 'Phonebook_model');
-
+$autoload['model'] = array();
 
 
 /* End of file autoload.php */
-/* Location: ./system/application/config/autoload.php */
+/* Location: ./application/config/autoload.php */

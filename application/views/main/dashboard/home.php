@@ -1,3 +1,4 @@
+<?php $this->load->helper('kalkun'); ?>
 <div id="space_area">
 
 <?php if( isset($alerts) && count($alerts)> 0): ?> 

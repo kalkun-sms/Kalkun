@@ -31,8 +31,9 @@ class Messages extends MY_Controller {
 		
 		// session check
 		if ($this->session->userdata('loggedin')==NULL) redirect('login');
-		
 		$param['uid'] = $this->session->userdata('id_user');
+		
+		$this->load->model('Phonebook_model');
 	}
 	
 	// --------------------------------------------------------------------
@@ -46,6 +47,8 @@ class Messages extends MY_Controller {
 	 */	
 	function compose()
 	{
+		$this->load->helper(array('form','kalkun'));
+		
 		// register valid type
 		$val_type = array('normal', 'reply', 'forward', 'member', 'pbk_contact', 'pbk_groups');
 		$type = $this->input->post('type');
@@ -120,6 +123,8 @@ class Messages extends MY_Controller {
 	 */		
 	function compose_process()
 	{
+		$this->load->helper('kalkun');
+		
 		if($_POST)
 		{
 		$dest = array();
@@ -318,6 +323,7 @@ class Messages extends MY_Controller {
 	 */		
 	function folder($type=NULL, $offset=0)
 	{		
+		$this->load->helper('kalkun');
 	  
     if($type == 'phonebook')  redirect('phonebook/');
 		// validate url
@@ -371,6 +377,8 @@ class Messages extends MY_Controller {
 	 */	
 	function my_folder($type=NULL, $id_folder=NULL, $offset=0)
 	{
+		$this->load->helper('kalkun');
+		
 		// validate url
 		$valid = array('inbox', 'sentitems');		
 		if(!in_array($type, $valid)) die('Invalid URL');
@@ -425,6 +433,8 @@ class Messages extends MY_Controller {
 	 */		
 	function conversation($source=NULL, $type=NULL, $number=NULL, $id_folder=NULL)
 	{
+		$this->load->helper('kalkun');
+		
 		// Pagination
 		$this->load->library('pagination');
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');		

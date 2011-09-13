@@ -28,6 +28,7 @@ class Phonebook extends MY_Controller {
 	function Phonebook()
 	{
 		parent::MY_Controller();
+		$this->load->model('Phonebook_model');
 	}
 
 	// --------------------------------------------------------------------
@@ -292,6 +293,7 @@ class Phonebook extends MY_Controller {
 	 */		
 	function add_contact()
 	{
+		$this->load->helper('form');
 		$data['pbkgroup'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
 		$type = $this->input->post('type');
 		

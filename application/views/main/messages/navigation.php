@@ -1,3 +1,5 @@
+<?php $this->load->helper('inflector'); ?>
+
 <div class="jquerycssmenu">
 <ul>
 	<?php 

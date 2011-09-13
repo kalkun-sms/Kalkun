@@ -30,7 +30,6 @@ class Plugin_model extends Model {
 	function Plugin_model()
 	{
 		parent::Model();
-		$this->load->database();
 	}
 	
 	function get_plugins()

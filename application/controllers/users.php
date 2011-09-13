@@ -81,6 +81,7 @@ class Users extends MY_Controller
 	 */	
 	function add_user()
 	{
+		$this->load->helper('form');
 		$type = $this->input->post('type');
 		$data['tmp'] = "";
 		
