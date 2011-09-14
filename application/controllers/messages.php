@@ -768,13 +768,22 @@ class Messages extends MY_Controller {
 	function _multiple_modem_select($phone_number, $date, $n) 
 	{
 		$modem_list = $this->config->item('multiple_modem');
-		switch($this->config->item('multiple_modem_strategy'))
+		$strategies = explode(':', $this->config->item('multiple_modem_strategy'));
+		$first_strategy = $strategies[0];
+		$valid_second_strategy = array('round_robin', 'failover', 'recent');
+		if (count($strategies)==2)
+		{
+			$second_strategy = $strategies[1];
+		}
+		
+		// find candidates
+		switch($first_strategy)
 		{
 			case 'scheduled_time':	
 				list($date, $time) = explode(" ", $date);
 				foreach($modem_list as $modem):
 				list($start_time,$end_time) = explode("-", $modem['value']);
-				if($time >= $start_time && $time <= $end_time) $selected_modem = $modem['id'];
+				if($time >= $start_time && $time <= $end_time) $candidate_modem[] = $modem['id'];
 				endforeach;
 			break;
 
@@ -783,7 +792,7 @@ class Messages extends MY_Controller {
 				$day = date('w', human_to_unix($date));
 				foreach($modem_list as $modem):
 				list($start_day,$end_day) = explode("-", $modem['value']);
-				if($day >= $start_day && $day <= $end_day) $selected_modem = $modem['id'];
+				if($day >= $start_day && $day <= $end_day) $candidate_modem[] = $modem['id'];
 				endforeach;
 			break;	
 
@@ -791,7 +800,7 @@ class Messages extends MY_Controller {
 				list($date, $time) = explode(" ", $date);
 				foreach($modem_list as $modem):
 				list($start_date,$end_date) = explode(":", $modem['value']);
-				if($date >= $start_date && $date <= $end_date) $selected_modem = $modem['id'];
+				if($date >= $start_date && $date <= $end_date) $candidate_modem[] = $modem['id'];
 				endforeach;			
 			break;
 
@@ -799,7 +808,7 @@ class Messages extends MY_Controller {
 				foreach($modem_list as $modem):
 				$prefix_number = $modem['value'];
 					foreach($prefix_number as $prefix):
-					if(strpos($phone_number, $prefix)!== FALSE) $selected_modem = $modem['id'];
+					if(strpos($phone_number, $prefix)!== FALSE) $candidate_modem[] = $modem['id'];
 					endforeach;
 				endforeach;
 			break;		
@@ -807,16 +816,47 @@ class Messages extends MY_Controller {
 			case 'phone_number':	
 				foreach($modem_list as $modem):
 				$dest_phone_number = $modem['value'];
-				if(in_array($phone_number, $dest_phone_number)) $selected_modem = $modem['id'];
+				if(in_array($phone_number, $dest_phone_number)) $candidate_modem[] = $modem['id'];
 				endforeach;			
 			break;		
 			
-			case 'round_robin':
-				$modem_count = count($modem_list);
-				$n = $n%$modem_count;
-				if($n==0) $n = $modem_count;
-				$selected_modem = $modem_list[$n-1];
-			break;							
+			case 'round_robin': // currently only works with multiple message, not a single message
+				$candidate_modem[] = $this->_multiple_modem_round_robin($modem_list, $n);
+			break;
+			
+			case 'failover':
+				$candidate_modem[] = $this->_multiple_modem_failover($modem_list);
+			break;
+			
+			case 'recent': // use latest active modem
+				$candidate_modem[] = $this->_multiple_modem_recent($modem_list);
+			break;
+		}
+
+		// if second strategy exist, and the first strategy is NOT one of them
+		if(isset($second_strategy) AND !in_array($first_strategy, $valid_second_strategy))
+		{
+			switch($second_strategy)
+			{
+				case 'round_robin':
+					$selected_modem = $this->_multiple_modem_round_robin($candidate_modem, $n);
+				break;
+				
+				case 'failover':
+					$selected_modem = $this->_multiple_modem_failover($candidate_modem);
+				break;
+				
+				case 'recent':
+					$selected_modem = $this->_multiple_modem_recent($candidate_modem);
+				break;
+			}
+		}
+		else
+		{
+			if(isset($candidate_modem) AND count($candidate_modem)>=1)
+			{
+				$selected_modem = $candidate_modem[0];	
+			}
 		}
 		
 		// Return selected modem, if not return first modem as default value
@@ -829,7 +869,44 @@ class Messages extends MY_Controller {
 			return $modem_list[0]['id'];
 		}
 	} 
+	
+	function _multiple_modem_round_robin($modems, $n)
+	{
+		$modem_count = count($modems);
+		$n = $n%$modem_count;
+		if($n==0) $n = $modem_count;
+		return $modems[$n-1];
+		
+		// Currently not used
+		/*$available_modem = $this->Message_model->get_modem_list('count', 'asc');
+		foreach ($modems as $modem)
+		{
+			if ($modem == $available_modem->row('ID'))
+			{
+				return $modem;
+			}
+		}*/
+	}
+	
+	function _multiple_modem_failover($modems)
+	{
+		// Not yet implemented
+		// ...
+	}
+
+	function _multiple_modem_recent($modems)
+	{
+		$available_modem = $this->Message_model->get_modem_list('time', 'desc');
+		foreach ($modems as $modem)
+		{
+			if ($modem == $available_modem->row('ID'))
+			{
+				return $modem;
+			}
+		}
+	}	
     
+    // --------------------------------------------------------------------
     /**
      * Messages::delete_all()
      * empty trash/spam

@@ -537,6 +537,44 @@ class Message_model extends Model {
 	    }
 	    return $result;
 	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Get Modem List
+     *
+     * Get Modem List based on criteria
+     *
+     * @access  public           
+     * @param   $criteria $order
+     * 
+     * @return  string  
+     */ 
+    function get_modem_list($criteria='time', $order='asc')
+    {
+    	$valid_criteria = array('time', 'count');
+    	$valid_order = array('asc', 'desc');
+    	if (!in_array($criteria, $valid_criteria) OR !in_array($order, $valid_order)) 
+    	{
+    		return;	
+    	}
+    	
+    	// set valid field based on criteria
+    	if ($criteria=='time')
+    	{
+    		$criteria_field = 'UpdatedInDB';
+    	}
+    	else
+    	{
+    		$criteria_field = 'Sent';	
+    	}
+    	
+		$this->db->from('phones');
+		$this->db->select('ID');
+		$this->db->where('Send', 'yes');
+		$this->db->order_by($criteria_field, $order);
+		return $this->db->get();
+    }
 
 	// --------------------------------------------------------------------
 	

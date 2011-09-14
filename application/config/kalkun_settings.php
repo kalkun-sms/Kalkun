@@ -150,20 +150,53 @@ $config['ndnc'] = FALSE;
 | 
 | state - enables/disabled
 | strategy
-|	- failover (not implemented yet)
-|	- round robin (Must be in array, eg. array('sierra', 'fasttrack'), id and value is NOT used)
+|	(First)
 |	- scheduled_time (Start-End, Format: HH:MM:SS-HH:MM:SS)
 |	- scheduled_day (Start-End, Format: 0-3, Note: 0 = Sunday, 1 = Monday, ..., 6 = Saturday)
 |	- scheduled_date (Start:End, Format: YYYY-MM-DD:YYYY-MM-DD)
 |	- phone_number_prefix (Must be in array, eg. array('+62813', '+62856'))
 |	- phone_number (Must be in array, eg. array('123456789', '987654321'))
+|	(Second)
+|	- failover (not implemented yet)
+|	- recent (Must be in array, eg. array('sierra', 'fasttrack'), id and value is NOT used)
+|	- round robin (Must be in array, eg. array('sierra', 'fasttrack'), id and value is NOT used)
 | id - Modem ID, must match to PhoneID on smsdrc
 | value - Modem value to use based on strategy 
+|
+| NOTE: You can also use two strategy at the same time as long as it's valid
+| eg. scheduled_time:round_robin (stategy name is divided by ':')
+| 	  This combination allow you to select multiple modem for same time range, 
+|	  and those available/valid modem will be selected again with round robin strategy.
+|
+| Valid combination format: (First:Second)
+| Another combination example (valid):  
+|	- phone_number_prefix:round_robin
+|	- scheduled_day:recent
+| Invalid/wrong combination:
+|	- round_robin:phone_number_prefix
+|	- round_robin:recent
 | 
 */
-$config['multiple_modem_state'] = TRUE;
-$config['multiple_modem_strategy'] = 'round_robin';
-$config['multiple_modem'] = array('sierra', 'fasttrack');
+$config['multiple_modem_state'] = FALSE;
+$config['multiple_modem_strategy'] = 'scheduled_date';
+$config['multiple_modem'][0]['id'] = 'sierra';
+$config['multiple_modem'][0]['value'] = '2012-04-17:2012-05-17';
+
+$config['multiple_modem'][1]['id'] = 'fasttrack';
+$config['multiple_modem'][1]['value'] = '2014-04-17:2014-05-17';
+
+
+/*
+|--------------------------------------------------------------------------
+| Multiple phone/modem user preferences (Not implemented yet)
+|--------------------------------------------------------------------------
+|
+| Allow user to select modem when sending message
+|
+*/
+//$config['multiple_modem_compose_state'] = FALSE;
+//$config['multiple_modem_compose_criteria'] = 'time';
+//$config['multiple_modem_compose_order'] = 'desc';
 
 /* End of file kalkun_settings.php */
 /* Location: ./application/config/kalkun_settings.php */
