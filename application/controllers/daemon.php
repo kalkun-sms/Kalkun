@@ -28,9 +28,9 @@ class Daemon extends Controller {
 	function Daemon()
 	{	
 		// Commented this for allow access from other machine
-		// if($_SERVER['REMOTE_ADDR']!='127.0.0.1') exit("Access Denied.");		
-		$this->load->library('Plugins');
+		// if($_SERVER['REMOTE_ADDR']!='127.0.0.1') exit("Access Denied.");	
 		parent::controller();
+		$this->load->library('Plugins');
 	}
 
 	// --------------------------------------------------------------------
@@ -45,13 +45,14 @@ class Daemon extends Controller {
 	 */
 	function message_routine()
 	{
+		$this->load->model(array('Kalkun_model', 'Message_model', 'Spam_model'));
+		
 		// get unProcessed message
 		$message = $this->Message_model->get_messages(array('processed' => FALSE));
 
 		foreach($message->result() as $tmp_message)
 		{			
 			// check for spam
-			$this->load->model('Spam_model');
             if($this->Spam_model->apply_spam_filter($tmp_message->ID,$tmp_message->TextDecoded))
             {
                 continue; ////is spam do not process later part
@@ -109,7 +110,7 @@ class Daemon extends Controller {
 	 */
     function _set_ownership($tmp_message)
     {
-    	$this->load->model('User_model');
+    	$this->load->model('Message_model', 'User_model');
     	
 		// check @username tag
 		$users = $this->User_model->getUsers(array('option' => 'all'));
