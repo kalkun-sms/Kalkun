@@ -15,6 +15,7 @@ echo form_open("messages/search/results/all", array('class' => 'sms_search_form'
 <tr valign="top">
 <td><input type="text" name="search_sms" id="search"  value="<?php if (isset($search_string)) echo $search_string;?>" class="ui-corner-left" /></td> 
 <td><input type="submit" value="Search Message" /></td>
+<td valign="middle"><div style="margin-left: 5px"><small><a style="text-decoration: underline" id="a_search" href="#">Advanced Search</a></small></div></td>
 </tr>
 </table>
 <?php echo form_close(); endif; ?>

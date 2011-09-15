@@ -157,6 +157,34 @@ $(document).ready(function() {
     $('.sms_search_form').submit(function() {
        if($.trim($('#search').val()) == '')  return false;
     });
-		
+
+	// advanced search    
+	$("#a_search_date_from, #a_search_date_to").datepicker({
+		maxDate: 0,
+		dateFormat: 'yy-mm-dd'
+	});
+	$('#a_search').click(function() {
+		$("#a_search_dialog").dialog({
+		bgiframe: true,
+		autoOpen: false,
+		height: 275,
+		width: 400,
+		modal: true,
+		buttons: {
+			'Search': function() {
+				$('#a_search_form').submit();
+			},
+			Cancel: function() {
+				$(this).dialog('close');
+			}
+		},
+		open: function() {
+            $("#a_search_from_to").focus();
+        }
+		});		
+		$('#a_search_dialog').dialog('open');
+		return false;
+	});
+	
 });
 </script>

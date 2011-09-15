@@ -624,14 +624,33 @@ class Messages extends MY_Controller {
 	 */		
 	function search()
 	{	 
-      $data['main'] = 'main/messages/index';
-      $param['search_string'] = trim($this->input->post('search_sms'));
-      if(!empty($param['search_string']))
+		$data['main'] = 'main/messages/index';
+		$param['search_string'] = trim($this->input->post('search_sms'));
+
+		if (!empty($param['search_string']))
+		{
 			$data['messages'] = $this->Message_model->search_messages($param)->messages;
-      else	
-            $data['messages'] = array();
-  		$data['search_string'] = $param['search_string'];
-			$this->load->view('main/layout', $data);	
+		}
+		else if($this->input->post('a_search_trigger')) // advanced search
+		{
+			if ($this->input->post('a_search_from_to')) $param['number'] = $this->input->post('a_search_from_to');
+			if ($this->input->post('a_search_date_from')) $param['date_from'] = $this->input->post('a_search_date_from');
+			if ($this->input->post('a_search_date_to')) $param['date_to'] = $this->input->post('a_search_date_to');
+			if ($this->input->post('a_search_sentitems_status')) $param['status'] = $this->input->post('a_search_sentitems_status');
+			if ($this->input->post('a_search_query')) $param['search_string'] = $this->input->post('a_search_query');
+			if ($this->input->post('a_search_on'))
+			{
+				$param['id_folder'] = $this->input->post('a_search_on');
+				if ($this->input->post('a_search_on')=='5' OR $this->input->post('a_search_on')=='all') $param['trash'] = TRUE;
+			}
+			$data['messages'] = $this->Message_model->search_messages($param)->messages;
+		}
+		else
+		{
+			$data['messages'] = array();
+		}
+		$data['search_string'] = $param['search_string'];
+		$this->load->view('main/layout', $data);	
 	}
 	
     

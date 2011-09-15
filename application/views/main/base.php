@@ -172,3 +172,68 @@
  
 	</div>
 </div>
+
+<!-- Add Folder Dialog -->
+<div id="a_search_dialog" title="Advanced Search" class="dialog">
+	<?php
+	$this->load->helper('form');
+	echo form_open("messages/search/results/all", array('id' => 'a_search_form'));
+	echo form_hidden('a_search_trigger', TRUE);
+	?>
+	<table width="100%">
+		<tr>
+			<td align="right"><label for="a_search_from_to"><b>From/To</b></label></td>
+			<td colspan="3"><input style="width: 95%" type="text" id="a_search_from_to" name="a_search_from_to" /></td>
+		</tr>	
+		<tr>
+			<td align="right"><label for="a_search_query"><b>Query</b></label></td>
+			<td colspan="3"><input style="width: 95%" type="text" id="a_search_query" name="a_search_query" /></td>
+		</tr>		
+		<tr>
+			<td align="right"><label for="a_search_on"><b>Search On</b></label></td>
+			<td colspan="3">
+				<select name="a_search_on" style="width: 98%">
+					<option value="all">All Folders</option>
+					<option value="1">Inbox</option>
+					<option value="3">Sentitems</option>
+					<option value="6">Spam</option>
+					<option value="5">Trash</option>
+					<?php 
+					$my_folders=$this->Kalkun_model->get_folders('all');
+					foreach ($my_folders->result() as $my_folder):
+					echo "<option value=\"$my_folder->id_folder\">$my_folder->name</option>";
+					endforeach;
+					?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td align="right"><label for="a_search_date_from"><b>Date From</b></label></td>
+			<td><input type="text" id="a_search_date_from" name="a_search_date_from" /></td>
+			<td><label for="a_search_date_to"><b>To</b></label></td>
+			<td><input type="text" id="a_search_date_to" name="a_search_date_to" /></td>
+		</tr>
+		<tr>
+			<td align="right"><label for="a_search_sentitems_status"><b>Status</b></label></td>
+			<td colspan="3">
+				<select name="a_search_sentitems_status" style="width: 98%">
+					<option>Any</option>
+					<option>Delivered</option>
+					<option>Failed</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td align="right"><label for="a_search_paging"><b>Paging</b></label></td>
+			<td colspan="3">
+				<select name="a_search_paging" style="width: 98%">
+					<option>10 per page</option>
+					<option>20 per page</option>
+					<option>30 per page</option>
+					<option>Do not use paging</option>
+				</select>
+			</td>
+		</tr>				
+	</table>
+	<?php echo form_close();?>
+</div>

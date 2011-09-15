@@ -1,10 +1,8 @@
 <?php $this->load->helper('html');?>
 <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>jquery-plugin/token-input-facebook.css" />
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/ui.datepicker.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.tokeninput.min.js"></script>
 <style type="text/css">
-.ui-datepicker {z-index:10100;}
 .left_aligned { margin-left:0; padding-left:0;}
 .form_option { width: 100px;}
 </style>

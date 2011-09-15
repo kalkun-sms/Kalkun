@@ -221,7 +221,8 @@ class Message_model extends Model {
 	function search_messages($options = array())
 	{
         if(!isset($options['number'])) if(!isset($options['search_string']))  die("No String to Search For");
-		 
+		
+		// Inbox
 		$this->db->from('inbox');
         $tmp_number = 'SenderNumber'; 
 		$tmp_order = 'ReceivingDateTime';
@@ -232,6 +233,19 @@ class Message_model extends Model {
 		
 		// if phone number is set
 		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
+		
+		// date range
+        if(isset($options['date_from']) AND isset($options['date_to']))
+        {
+        	$this->db->where($tmp_order.' >', $options['date_from']);
+        	$this->db->where($tmp_order.' <', $options['date_to']);
+        }
+        
+        // custom folder
+        if(isset($options['id_folder']))
+        {
+        	if ($options['id_folder']!='all') $this->db->where('id_folder', $options['id_folder']);
+        }
         
         //remove already trashed
 		if(!isset($options['trash'])) $this->db->where('id_folder !=', '5');
@@ -252,18 +266,49 @@ class Message_model extends Model {
 		$inbox[$key]['globaldate'] = $inbox[$key]['ReceivingDateTime'];
 		$inbox[$key]['source'] = 'inbox';
 		endforeach;
-            
-            
-            
+          
+        // Sentitems              
         $this->db->from('sentitems');
 		$tmp_number = 'DestinationNumber';
 		$tmp_order = 'SendingDateTime';	
         $this->db->where('SequencePosition', '1');		
 			
-	   if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
+		if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
 		
 		// if phone number is set
 		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
+
+		// date range
+        if(isset($options['date_from']) AND isset($options['date_to']))
+        {
+        	$this->db->where($tmp_order.' >', $options['date_from']);
+        	$this->db->where($tmp_order.' <', $options['date_to']);
+        }		
+
+        // custom folder
+        if(isset($options['id_folder']))
+        {
+        	if ($options['id_folder']!='all') $this->db->where('id_folder', $options['id_folder']);
+        }        
+        
+        // sending status
+        if(isset($options['status']))
+        {
+        	switch(strtolower($options['status']))
+        	{
+        		case 'delivered':
+        			$this->db->where_in('Status', array('SendingOK', 'SendingOKNoReport', 'DeliveryOK', 'DeliveryPending'));
+        		break;
+        		
+        		case 'failed':
+        			$this->db->where_in('Status', array('SendingError', 'DeliveryFailed', 'DeliveryUnknown', 'Error'));     		
+        		break;
+        		
+        		default:
+        			// nothing to do
+        		break;
+        	}	
+        }
         
          //remove already trashed
 		if(!isset($options['trash'])) $this->db->where('id_folder !=', '5');
@@ -276,7 +321,6 @@ class Message_model extends Model {
 		}
         
         $result = $this->db->get();
-        
         $sentitems = $result->result_array();
          
         // add global date for sorting

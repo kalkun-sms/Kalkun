@@ -15,6 +15,7 @@
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/ui.core.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/ui.draggable.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/ui.dialog.min.js"></script>
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/ui.datepicker.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/effects.core.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/effects.fade.min.js"></script>
 <!--[if IE]>

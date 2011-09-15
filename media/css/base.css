@@ -137,8 +137,9 @@ textarea {
 }
 
 #top_link {
-	float: right;
+	float: left;
 	padding: 5px 0px;
+	margin-left: 5px;
 }
 
 #top_link a {
@@ -1071,4 +1072,8 @@ label.error {
 
 .infocus{
     font-style: italic;
+}
+
+.ui-datepicker {
+	z-index:10100;
 }
