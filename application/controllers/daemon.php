@@ -110,7 +110,7 @@ class Daemon extends Controller {
 	 */
     function _set_ownership($tmp_message)
     {
-    	$this->load->model('Message_model', 'User_model');
+    	$this->load->model(array('Message_model', 'User_model'));
     	
 		// check @username tag
 		$users = $this->User_model->getUsers(array('option' => 'all'));
