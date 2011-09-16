@@ -177,7 +177,7 @@
 <div id="a_search_dialog" title="Advanced Search" class="dialog">
 	<?php
 	$this->load->helper('form');
-	echo form_open("messages/search/results/all", array('id' => 'a_search_form'));
+	echo form_open("messages/query", array('id' => 'a_search_form'));
 	echo form_hidden('a_search_trigger', TRUE);
 	?>
 	<table width="100%">
@@ -227,10 +227,12 @@
 			<td align="right"><label for="a_search_paging"><b>Paging</b></label></td>
 			<td colspan="3">
 				<select name="a_search_paging" style="width: 98%">
-					<option>10 per page</option>
-					<option>20 per page</option>
-					<option>30 per page</option>
-					<option>Do not use paging</option>
+					<option value="10">10 per page</option>
+					<option value="20">20 per page</option>
+					<option value="30">30 per page</option>
+					<option value="40">40 per page</option>
+					<option value="50">50 per page</option>
+					<option value="all">Do not use paging</option>
 				</select>
 			</td>
 		</tr>				

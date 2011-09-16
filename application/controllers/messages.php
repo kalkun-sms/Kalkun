@@ -623,34 +623,99 @@ class Messages extends MY_Controller {
 	 * @access	public
 	 */		
 	function search()
-	{	 
+	{
+		// Get URI string
+		$segment = $this->uri->segment_array();
+		$segment_count = count($segment);
 		$data['main'] = 'main/messages/index';
-		$param['search_string'] = trim($this->input->post('search_sms'));
+		$data['messages'] = array();
 
-		if (!empty($param['search_string']))
+		// Pagination
+		$this->load->library('pagination');
+		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
+		$config['cur_tag_open'] = '<span id="current">';
+		$config['cur_tag_close'] = '</span>';
+		
+		switch($segment[3])
 		{
-			$data['messages'] = $this->Message_model->search_messages($param)->messages;
-		}
-		else if($this->input->post('a_search_trigger')) // advanced search
-		{
-			if ($this->input->post('a_search_from_to')) $param['number'] = $this->input->post('a_search_from_to');
-			if ($this->input->post('a_search_date_from')) $param['date_from'] = $this->input->post('a_search_date_from');
-			if ($this->input->post('a_search_date_to')) $param['date_to'] = $this->input->post('a_search_date_to');
-			if ($this->input->post('a_search_sentitems_status')) $param['status'] = $this->input->post('a_search_sentitems_status');
-			if ($this->input->post('a_search_query')) $param['search_string'] = $this->input->post('a_search_query');
-			if ($this->input->post('a_search_on'))
+			case 'basic':
+			$param_needed = 4; // minimal count of segment
+			if($segment_count>=$param_needed)
 			{
-				$param['id_folder'] = $this->input->post('a_search_on');
-				if ($this->input->post('a_search_on')=='5' OR $this->input->post('a_search_on')=='all') $param['trash'] = TRUE;
+				if ($segment[4]!='_') $param['search_string'] = $segment[4];
+				$data['search_string'] = $segment[4];
+				$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;	
+				$config['uri_segment'] = $param_needed+1;
+				$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
+				$this->pagination->initialize($config);
+				$param['limit'] = $config['per_page'];
+				$param['offset'] = $this->uri->segment($param_needed+1,0);
+				$data['messages'] = $this->Message_model->search_messages($param)->messages;
 			}
-			$data['messages'] = $this->Message_model->search_messages($param)->messages;
+			break;
+			
+			case 'advanced':
+			$param_needed = 10;
+			if($segment_count>=$param_needed)
+			{
+				if ($segment[4]!='_') $param['search_string'] = $segment[4];
+				if ($segment[5]!='_') $param['number'] = $segment[5];
+				if ($segment[6]!='_') $param['date_from'] = $segment[6];
+				if ($segment[7]!='_') $param['date_to'] = $segment[7];
+				if ($segment[8]!='_') $param['status'] = $segment[8];
+				if ($segment[9]!='_')
+				{
+					$param['a_search_on'] = $segment[9];
+					if ($segment[9]=='5' OR $segment[9]=='all') $param['trash'] = TRUE;
+				}
+				$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
+				if ($segment[10]!='_')
+				{
+					$config['per_page'] = ($segment[10]=='all') ? $config['total_rows'] : $segment[10];
+				}				
+				$config['uri_segment'] = $param_needed+1;
+				$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
+				$this->pagination->initialize($config);
+				$param['limit'] = $config['per_page'];
+				$param['offset'] = $this->uri->segment($param_needed+1,0);		
+				$data['messages'] = $this->Message_model->search_messages($param)->messages;
+			}
+			break;
+		}
+		$this->load->view('main/layout', $data);
+	}
+	
+	function query()
+	{
+		// basic search
+		if ($this->input->post('search_sms'))
+		{
+			$params[] = 'basic';
+			$params[] = trim($this->input->post('search_sms'));
+		}
+		// advanced search
+		else if ($this->input->post('a_search_trigger'))
+		{
+			$params[] = 'advanced';
+			$params[] = $this->input->post('a_search_query') ? $this->input->post('a_search_query') : "_";			
+			$params[] = $this->input->post('a_search_from_to') ? $this->input->post('a_search_from_to') : "_";
+			$params[] = $this->input->post('a_search_date_from') ? $this->input->post('a_search_date_from') : "_";
+			$params[] = $this->input->post('a_search_date_to') ? $this->input->post('a_search_date_to') : "_";
+			$params[] = $this->input->post('a_search_sentitems_status') ? $this->input->post('a_search_sentitems_status') : "_";
+			$params[] = $this->input->post('a_search_on') ? $this->input->post('a_search_on') : "_";
+			$params[] = $this->input->post('a_search_paging') ? $this->input->post('a_search_paging') : "_";
 		}
 		else
 		{
-			$data['messages'] = array();
+			// nothing to search
 		}
-		$data['search_string'] = $param['search_string'];
-		$this->load->view('main/layout', $data);	
+		
+		$url = 'messages/search';
+		foreach ($params as $param)
+		{
+			$url .= '/'.$param;
+		}
+		redirect($url);
 	}
 	
     

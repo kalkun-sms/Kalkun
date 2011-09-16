@@ -28,7 +28,6 @@ class Kalkun extends MY_Controller {
 	function Kalkun()
 	{
 		parent::MY_Controller();
-		log_message('debug', dirname($_SERVER['SCRIPT_NAME']));
 	}		
 		
 	// --------------------------------------------------------------------
