@@ -39,6 +39,16 @@ $config['proxy_port'] = '8080';
 $config['proxy_username'] = '';
 $config['proxy_password'] = '';
 
+/*
+|--------------------------------------------------------------------------
+| Conversation Grouping
+|--------------------------------------------------------------------------
+|
+| Enable/disable grouping on message list,
+| If set to FALSE, message will be listed as single message.
+|
+*/
+$config['conversation_grouping'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

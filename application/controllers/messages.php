@@ -325,7 +325,8 @@ class Messages extends MY_Controller {
 	{		
 		$this->load->helper('kalkun');
 	  
-    if($type == 'phonebook')  redirect('phonebook/');
+		if($type == 'phonebook')  redirect('phonebook/');
+		
 		// validate url
 		$valid_type = array('inbox', 'sentitems', 'outbox');		
 		if(!in_array($type, $valid_type)) die('Invalid URL');
@@ -346,21 +347,43 @@ class Messages extends MY_Controller {
 			$param['type'] = $type;
 			$param['limit'] = $config['per_page'];
 			$param['offset'] = $offset;
-			$data['messages'] = $this->Message_model->get_conversation($param);
+			if ($this->config->item('conversation_grouping')) 
+			{
+				$data['messages'] = $this->Message_model->get_conversation($param);
+			}
+			else
+			{
+	      		$param['order_by'] = ($type=='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
+	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');				
+				$data['messages'] = $this->Message_model->get_messages($param);
+			}
 			$this->load->view('main/messages/message_list', $data);
 		}
 		else 
 		{
-			$config['base_url'] = site_url('messages/folder/'.$type);
-			$config['total_rows'] = $this->Message_model->get_conversation(array('type' => $type))->num_rows();	
-			$config['uri_segment'] = 4;	
+			if ($this->config->item('conversation_grouping'))
+			{
+				$config['total_rows'] = $this->Message_model->get_conversation(array('type' => $type))->num_rows();
+				$param['type'] = $type;
+				$param['limit'] = $config['per_page'];
+				$param['offset'] = $this->uri->segment(4,0);			
+				$data['messages'] = $this->Message_model->get_conversation($param);				
+			}
+			else
+			{
+				$config['total_rows'] = $this->Message_model->get_messages(array('type' => $type))->num_rows();
+				$param['type'] = $type;
+				$param['limit'] = $config['per_page'];
+				$param['offset'] = $this->uri->segment(4,0);	
+	      		$param['order_by'] = ($type=='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
+	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');						
+				$data['messages'] = $this->Message_model->get_messages($param);				
+			}
 			
-			$param['type'] = $type;
-			$param['limit'] = $config['per_page'];
-			$param['offset'] = $this->uri->segment(4,0);			
-			$data['messages'] = $this->Message_model->get_conversation($param);
+			$config['base_url'] = site_url('messages/folder/'.$type);				
+			$config['uri_segment'] = 4;	
 			$this->pagination->initialize($config); 
-		
+	
 			$data['main'] = 'main/messages/index';
 			$this->load->view('main/layout', $data);			
 		}
@@ -400,24 +423,44 @@ class Messages extends MY_Controller {
 			$param['id_folder'] = $id_folder;
 			$param['limit'] = $config['per_page'];
 			$param['offset'] = $offset;			
-			$data['messages'] = $this->Message_model->get_conversation($param);
+
+			if ($this->config->item('conversation_grouping')) 
+			{
+				$data['messages'] = $this->Message_model->get_conversation($param);
+			}
+			else
+			{
+	      		$param['order_by'] = ($type=='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
+	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');				
+				$data['messages'] = $this->Message_model->get_messages($param);				
+			}			
 			$this->load->view('main/messages/message_list', $data);
 		}
 		else 
-		{			
+		{	
 			$param['type'] = $type;
-			$param['id_folder'] = $id_folder;
+			$param['id_folder'] = $id_folder;			
+			if ($this->config->item('conversation_grouping'))
+			{
+				$config['total_rows'] = $this->Message_model->get_conversation($param)->num_rows();
+				$param['limit'] = $config['per_page'];
+				$param['offset'] = $this->uri->segment(5,0);				
+				$data['messages'] = $this->Message_model->get_conversation($param);				
+			}
+			else
+			{
+				$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
+				$param['limit'] = $config['per_page'];
+				$param['offset'] = $this->uri->segment(5,0);
+	      		$param['order_by'] = ($type=='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
+	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');						
+				$data['messages'] = $this->Message_model->get_messages($param);					
+			}
 			$config['base_url'] = site_url('/messages/my_folder/'.$type.'/'.$id_folder);
-			$config['total_rows'] = $this->Message_model->get_conversation($param)->num_rows();
 			$config['uri_segment'] = 5;			
 			$this->pagination->initialize($config); 
 			
 			$data['main'] = 'main/messages/index';
-			$param['type'] = $type;
-			$param['id_folder'] = $id_folder;
-			$param['limit'] = $config['per_page'];
-			$param['offset'] = $this->uri->segment(5,0);				
-			$data['messages'] = $this->Message_model->get_conversation($param);
 			$this->load->view('main/layout', $data);
 		}
 	}
@@ -446,7 +489,7 @@ class Messages extends MY_Controller {
 			$data['main'] = 'main/messages/index';
 			$param['type'] = $type;
 			$param['number'] = trim($number);
-
+			
 			$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.$number);
 			$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
 			$config['uri_segment'] = 6;
@@ -455,10 +498,10 @@ class Messages extends MY_Controller {
 			$param['type'] = 'inbox';
 			$param['limit'] = $config['per_page'];
 			$param['offset'] = $this->uri->segment(6,0);
-      		$param['order_by'] = 'ReceivingDateTime';
-      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
+			$param['order_by'] = 'ReceivingDateTime';
+			$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
       		$param['uid'] = $this->session->userdata('id_user');
-			$inbox = $this->Message_model->get_messages($param)->result_array();	
+      		$inbox = $this->Message_model->get_messages($param)->result_array();
 
 			// add global date for sorting
 			foreach($inbox as $key=>$tmp):
