@@ -168,7 +168,7 @@ $(document).ready(function() {
 		bgiframe: true,
 		autoOpen: false,
 		height: 275,
-		width: 400,
+		width: 500,
 		modal: true,
 		buttons: {
 			'Search': function() {
