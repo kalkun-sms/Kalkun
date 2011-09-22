@@ -232,7 +232,7 @@ class Message_model extends Model {
         if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
 		
 		// if phone number is set
-		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
+		if(isset($options['number'])) $this->db->like($tmp_number, $options['number']);
 		
 		// date range
         if(isset($options['date_from']) AND isset($options['date_to']))
