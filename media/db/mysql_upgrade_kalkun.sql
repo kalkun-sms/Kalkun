@@ -16,6 +16,11 @@ INSERT INTO `b8_wordlist` VALUES ('bayes*dbversion', '2');
 INSERT INTO `b8_wordlist` VALUES ('bayes*texts.ham', '0');
 INSERT INTO `b8_wordlist` VALUES ('bayes*texts.spam', '0');
 
+-- Drop earlier plugin table : not used any more --
+
+DROP TABLE `plugin`
+
+
 -- --------------------------------------------------------
 
 --
