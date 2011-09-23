@@ -8,7 +8,7 @@
 </style>
 <?php $this->load->view('js_init/message/js_compose'); ?>
 
-<?php echo form_open('messages/compose', array('id' => 'composeForm', 'class' => 'composeForm'));?>
+<?php echo form_open('messages/compose_process', array('id' => 'composeForm', 'class' => 'composeForm'));?>
 <table width="100%">
 <?php  
 $type = array('inbox', 'sentitems');
@@ -80,7 +80,9 @@ else echo lang('kalkun_send_to').":";
 </span>
 <input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;" />
 <label for="sendoption3"><?php echo lang('kalkun_input_manually');?> </label>
-</td>    
+<input type="radio" id="sendoption4" name="sendoption" value="sendoption4" style="border: none;" />
+<label for="sendoption4">Import from file</label>
+</td>
 </tr>
     
 <tr>
@@ -94,16 +96,8 @@ else echo lang('kalkun_send_to').":";
 <input style="width: 95%;" type="text" name="manualvalue" />
 </div>
 
-<div id="group" class="hidden">
-<select name="groupvalue">
-<option value="" selected="selected">-- <?php echo lang('tni_group_select'); ?> --</option>
-<?php
-foreach($this->Phonebook_model->get_phonebook(array('option' => 'group'))->result() as $tmp):
-echo "<option value=\"".$tmp->ID."\">".$tmp->GroupName."</option>";
-endforeach; 
-?>
-</select>
-</div>
+<div id="import" class="hidden"><input type="file" name="import_file" id="import_file" class="text ui-widget-content ui-corner-all" /></div>
+<input type="hidden" id="import_value" name="import_value" />
 </td>
 </tr>
 <?php endif; ?>
@@ -123,8 +117,7 @@ endforeach;
 <tr>
 <td>&nbsp;</td>
 <td>
-<div id="nowoption">
-</div>
+<div id="nowoption"></div>
 <div id="dateoption" class="hidden">
 <input type="text" name="datevalue" id="datevalue" class="datepicker" readonly="readonly" />
 <?php echo nbs(2);?>
@@ -206,6 +199,8 @@ if($sig_option=='true') echo "\n\n".$sig; ?>
 </table>
 <br />
 <?php  echo form_close();?>
+
+<div id="iframe" style="width:0px; height:0px; visibility:none;"></div>
 <div id="canned_response_container" > </div>
 <?php
 if($this->config->item('sms_advertise'))

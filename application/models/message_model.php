@@ -427,8 +427,11 @@ class Message_model extends Model {
 		if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
 		
 		// if phone number is set
-		if(isset($options['number'])) $this->db->where($tmp_number, $options['number']);
-
+		if(isset($options['number']) AND $options['number']!='sending_error') $this->db->where($tmp_number, $options['number']);
+		
+		// sentitems only error
+		if($options['type']=='sentitems' AND isset($options['number']) AND $options['number']=='sending_error') $this->db->where('Status', 'SendingError');
+		
 		// if readed is set
 		if(isset($options['readed']) && is_bool($options['readed'])) 
 		{
