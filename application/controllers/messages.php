@@ -546,7 +546,7 @@ class Messages extends MY_Controller {
 			$data['main'] = 'main/messages/index';
 			$param['type'] = 'outbox';
 			$param['number'] = trim($number);
-
+			$param['uid'] = $this->session->userdata('id_user');
 			$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.$number);
 			$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
 			$config['uri_segment'] = 6;			
