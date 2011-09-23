@@ -312,7 +312,7 @@ class Messages extends MY_Controller {
                 }
             }
 		}	
-                
+                        
 		// Send the message
         if(!empty($dest))  // handles if empty numbers after any number removal process        
 		{
@@ -337,6 +337,8 @@ class Messages extends MY_Controller {
 			}
 			$return_msg = "<div class=\"notif\">Your message has been move to Outbox and ready for delivery.</div>";
 		}
+        if(!isset($return_msg))
+             $return_msg = "<div class=\"notif\"><font color='red'>No Numbers was found. SMS not send.</font></div>" ;
 		
 		// Display sending status
 		echo $return_msg;
