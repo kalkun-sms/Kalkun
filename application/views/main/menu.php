@@ -14,7 +14,10 @@
 	?>
 	</span></li>
 	<li><?php echo anchor('messages/folder/outbox',lang('kalkun_outbox')); ?></li>
-    <li><?php echo anchor('messages/folder/sentitems',lang('kalkun_sentitems')); ?></li>
+    <li><?php echo anchor('messages/folder/sentitems',lang('kalkun_sentitems')); ?>  </li>
+    <?php if( $this->uri->segment(3)=='sentitems' || $this->uri->segment(4)=='sentitems') : ?>
+    <li style="list-style: none;"><?php echo anchor('messages/conversation/folder/sentitems/sending_error',lang('kalkun_senterroritems')); ?> </li>
+     <?php endif; ?>
     <li><?php echo anchor('messages/my_folder/inbox/6',lang('kalkun_spam')); ?>
     <span class="unread_spam_notif">
 	<?php 

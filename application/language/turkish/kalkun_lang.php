@@ -12,6 +12,7 @@ $lang['kalkun_compose'] = "Yaz";
 $lang['kalkun_inbox'] = "Gelen Kutusu";
 $lang['kalkun_outbox'] = "Giden Kutusu";
 $lang['kalkun_sentitems'] = "Gönderilen ögeler";
+$lang['kalkun_senterroritems'] = "Sending Error";
 $lang['kalkun_trash'] = "Çöp Kutusu";
 $lang['kalkun_spam'] = "Spam";
 $lang['kalkun_add'] = "Ekle";

@@ -12,6 +12,7 @@ $lang['kalkun_compose'] = "Создать";
 $lang['kalkun_inbox'] = "Входящие";
 $lang['kalkun_outbox'] = "Исходящие";
 $lang['kalkun_sentitems'] = "Отправленные";
+$lang['kalkun_senterroritems'] = "Sending Error";
 $lang['kalkun_trash'] = "Корзина";
 $lang['kalkun_spam'] = "Spam";
 $lang['kalkun_add'] = "Добавить";

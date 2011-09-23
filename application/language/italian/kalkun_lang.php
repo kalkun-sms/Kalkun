@@ -12,6 +12,7 @@ $lang['kalkun_compose'] = "Componi";
 $lang['kalkun_inbox'] = "In arrivo";
 $lang['kalkun_outbox'] = "In uscita";
 $lang['kalkun_sentitems'] = "Inviati";
+$lang['kalkun_senterroritems'] = "Sending Error";
 $lang['kalkun_trash'] = "Cestino";
 $lang['kalkun_spam'] = "Spam";
 $lang['kalkun_add'] = "Aggiungi";

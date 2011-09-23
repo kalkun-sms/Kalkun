@@ -12,6 +12,7 @@ $lang['kalkun_compose'] = "Tulis pesan";
 $lang['kalkun_inbox'] = "Kotak Masuk";
 $lang['kalkun_outbox'] = "Kotak Keluar";
 $lang['kalkun_sentitems'] = "Pesan Terkirim";
+$lang['kalkun_senterroritems'] = "Sending Error";
 $lang['kalkun_trash'] = "Sampah";
 $lang['kalkun_spam'] = "Spam";
 $lang['kalkun_add'] = "Tambah";
