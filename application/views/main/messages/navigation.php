@@ -59,7 +59,7 @@
 	<li><a href="#" class="resend_bulk button">Resend</a></li>	
     <?php endif; ?>		    
     
-	<?php if($this->uri->segment(2) != 'search' && $this->pagination->create_links()!=''): ?>
+	<?php if($this->pagination->create_links()!=''): ?>
 	<li class="paging"><div id="paging"><?php  echo $this->pagination->create_links();?></div></li>
 	<?php endif; ?>
     
