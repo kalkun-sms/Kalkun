@@ -304,7 +304,7 @@ $(".ham_button").live('click', function() {
 
 // resend
 $(".resend").live('click', function() {
-DestinationNumber = '<?php echo $this->uri->segment(5);?>';
+DestinationNumber = $(this).parents('div:eq(1)').children().children('input.item_number').val();
 TextDecoded = $(this).parents('div:eq(1)').children('div.message_content').text();
 ID = $(this).parents('div:eq(1)').children().children('input.select_message').attr('id');
 Class = $(this).parents('div:eq(1)').children('div.message_metadata').children('span.class').text();
