@@ -761,7 +761,7 @@ class Messages extends MY_Controller {
 				if ($segment[8]!='_') $param['status'] = $segment[8];
 				if ($segment[9]!='_')
 				{
-					$param['a_search_on'] = $segment[9];
+					$param['id_folder'] = $segment[9];
 					if ($segment[9]=='5' OR $segment[9]=='all') $param['trash'] = TRUE;
 				}
 				$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
