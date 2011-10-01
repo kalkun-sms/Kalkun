@@ -189,9 +189,11 @@ class Phonebook_model extends Model {
 		$this->db->from('pbk_groups');
 		$this->db->select_as('ID', 'id');
 		$this->db->select_as('Name', 'name');
-		$this->db->where("(`id_user` = '{$param['uid']}'  OR `is_public` = 'true' )");
+		$this->db->where("(`pbk_groups`.`id_user` = '{$param['uid']}'  OR `is_public` = 'true' )");
 		$this->db->like('Name', $param['query']);
-		$this->db->order_by('Name');	
+		$this->db->order_by('Name');
+		$this->db->join('user_group', 'user_group.id_pbk_groups=pbk_groups.ID');
+		$this->db->group_by('Name');
 		return $this->db->get();
 	}	
 
