@@ -32,6 +32,13 @@ $(document).ready(function(){
             }
 
         });
+
+	// Import CSV
+	$('#composeForm').ajaxForm({
+	    success: function(data) {
+            $('#import_value').val(data);
+        }
+	});
 		
 	// validation
 	$("#composeForm").validate({
@@ -148,30 +155,8 @@ $(document).ready(function(){
 		if($(this).val()=='sendoption4')  { $("#person").hide(); $("#import").show(); $("#manually").hide();}		
 	});
 	
-	// POST files using hidden iframe
-	// Taken from <http://www.joshclarkson.net/blog/file-uploads-in-a-hidden-iframe-using-jquery/>
-	// with some modification
 	$('#import_file').bind('change', function() {
-		var userFile = $('#import_file').val();
-		var iframe = $('<iframe name="postframe" id="postframe" class="hidden" src="about:none" />');
-		$('div#iframe').append(iframe);
-		
-		// add attribute to the form
-        $('#composeForm').attr("userfile", userFile);
-        $('#composeForm').attr("enctype", "multipart/form-data");
-        $('#composeForm').attr("target", "postframe");
-        $('#composeForm').submit();
-
-        //need to get contents of the iframe
-        $("#postframe").load(function(){
-        	iframeContents = $("iframe")[0].contentDocument.body.innerHTML;
-            $("#import_value").val(iframeContents);
-        });
-        
-        // remove attribute
-        $('#composeForm').removeAttr("userfile");
-        $('#composeForm').removeAttr("enctype");
-        $('#composeForm').removeAttr("target");
+		$('#composeForm').submit();
         return false;
 	});    
 

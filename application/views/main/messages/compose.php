@@ -2,13 +2,14 @@
 <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>jquery-plugin/token-input-facebook.css" />
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.tokeninput.min.js"></script>
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.form.min.js"></script>
 <style type="text/css">
 .left_aligned { margin-left:0; padding-left:0;}
 .form_option { width: 100px;}
 </style>
 <?php $this->load->view('js_init/message/js_compose'); ?>
 
-<?php echo form_open('messages/compose_process', array('id' => 'composeForm', 'class' => 'composeForm'));?>
+<?php echo form_open_multipart('messages/compose_process', array('id' => 'composeForm', 'class' => 'composeForm'));?>
 <table width="100%">
 <?php  
 $type = array('inbox', 'sentitems');
