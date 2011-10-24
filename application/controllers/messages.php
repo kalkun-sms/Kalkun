@@ -261,7 +261,7 @@ class Messages extends MY_Controller {
         $data['validity'] = $this->input->post('validity');
 		$data['delivery_report'] = $this->Kalkun_model->get_setting()->row('delivery_report');
 		$data['coding'] = ($this->input->post('unicode')=='unicode') ? 'unicode' : 'default';	
-        $data['ndnc'] = ($this->input->post('ndnc')=='ndnc') ? true : false;
+        $data['ncpr'] = ($this->input->post('ncpr')=='ncpr') ? true : false;
 		$data['uid'] = $this->session->userdata('id_user');	
         $data['url'] = $this->input->post('url');
 		
@@ -289,25 +289,25 @@ class Messages extends MY_Controller {
 			
   	    // if ndnc filtering enabled
         $ndnc_msg = '';
-		if($this->config->item('ndnc'))
+		if($this->config->item('ncpr'))
 		{
             if($data['ndnc']) {
 				if(is_array($dest)) 
                 {
                     for ($i= 0 ; $i< count($dest);  $i++)
                     {
-                        if(NDNCcheck($dest[$i]))
+                        if(DNDcheck($dest[$i]))
                         {
                             unset($dest[$i]);
-                            $return_msg = "<font color='red'>A Number was found in NDNC Resitry. SMS sending was skipped for it.</font><br>" ; 
+                            $return_msg = "<font color='red'>A Number was found in DND Resitry. SMS sending was skipped for it.</font><br>" ; 
                         }
                     }
                 }
                 else{
-                        if(NDNCcheck($dest))
+                        if(DNDcheck($dest))
                         {
                             unset($dest);
-                            $return_msg = "<font color='red'>A Number was found in NDNC Resitry. SMS sending was skipped for it.</font><br>" ; 
+                            $return_msg = "<font color='red'>A Number was found in DND Resitry. SMS sending was skipped for it.</font><br>" ; 
                         }
                 }
             }

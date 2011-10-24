@@ -1,13 +1,13 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     
 /**
-*	INDIA NDNC Registry Check
-*	In order to avaoid sending sms to NDNC registered phone numbers
+*	INDIA NCPR(DND) Registry Check
+*	In order to avaoid sending sms to NCPR registered phone numbers
 **/
-function NDNCcheck($mobileno)
+function DNDcheck($mobileno)
 {  
 	$mobileno = substr($mobileno, -10, 10);
-	$url = "http://www.ndncregistry.gov.in/ndncregistry/saveSearchSub.misc";
+	$url = "http://www.nccptrai.gov.in/nccpregistry/saveSearchSub.misc";
 	$postString = "phoneno=" . $mobileno;
 	$request = curl_init($url);
 	curl_setopt($request, CURLOPT_HEADER, 0);

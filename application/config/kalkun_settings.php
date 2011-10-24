@@ -144,13 +144,13 @@ $config['sms_advertise_message'] = "This is ads message";
 
 /*
 |--------------------------------------------------------------------------
-| NDNC Filter (INDIA)
+| NCPR(DND) Filter (INDIA)
 |--------------------------------------------------------------------------
 |
-| Filters outgoing messages for numbers registered in NDNC Registry
+| Filters outgoing messages for numbers registered in NCPR(DND) Registry
 |
 */
-$config['ndnc'] = FALSE;
+$config['ncpr'] = FALSE;
 
 
 /*

@@ -137,7 +137,7 @@ $lang['kalkun_sms_type_wap'] = "WAP Push Link";
 $lang['kalkun_sms_type_wap_url'] = "URL";
 
 $lang['kalkun_sms_ads_active'] = "Werbung ist aktiv";
-$lang['kalkun_sms_ndnc_check'] = "NDNC überprüfen";
+$lang['kalkun_sms_ncpr_check'] = "DND überprüfen";
 $lang['kalkun_insert'] = "Einfügen";
 
 $lang['kalkun_canned'] = "Vorlagen";
