@@ -131,22 +131,7 @@ class Messages extends MY_Controller {
 			return;
 		}
 		
-		// Import value from file (currently only CSV)
-		if (isset($_FILES["import_file"]))
-		{
-			$this->load->library('csvreader');
-			$filePath = $_FILES["import_file"]["tmp_name"];
-			$csvData = $this->csvreader->parse_file($filePath, true);	
-			
-			foreach($csvData as $field)
-			{
-				$dest[] = trim($field["Number"]);
-			}			
-			echo implode(",", $dest);
-			return;
-		}
-		
-		$dest = array();
+        $dest = array();
 
 		// Select send option
 		switch($this->input->post('sendoption')) 
@@ -199,7 +184,7 @@ class Messages extends MY_Controller {
 			}
 			break;
 
-			// Import from file
+			// Import from file  (CSV)
 			case 'sendoption4':
 			$tmp_dest = explode(',', $this->input->post('import_value'));
 			foreach($tmp_dest as $key => $tmp)
