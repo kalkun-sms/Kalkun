@@ -133,6 +133,22 @@ class Messages extends MY_Controller {
 		
         $dest = array();
 
+		// Import value from file (currently only CSV)
+		if (isset($_FILES["import_file"]))
+		{
+			$this->load->library('csvreader');
+			$filePath = $_FILES["import_file"]["tmp_name"];
+			$csvData = $this->csvreader->parse_file($filePath, true);	
+			
+			foreach($csvData as $field)
+			{
+				$dest[] = trim($field["Number"]);
+			}			
+			echo implode(",", $dest);
+			return;
+		}
+		
+
 		// Select send option
 		switch($this->input->post('sendoption')) 
 		{
