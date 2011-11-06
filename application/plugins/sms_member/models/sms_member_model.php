@@ -56,6 +56,46 @@ class SMS_member_model extends Model {
 		$this->db->from('plugin_sms_member');	
 		return $this->db->get();
 	}
+
+	/**
+	 * Add Member
+	 *
+	 * @access	public   		 
+	 * @param	string $number
+	 * @return	void
+	 */		
+	function add_member($number)
+	{
+		$data = array('phone_number' => $number, 'reg_date' => date ('Y-m-d H:i:s'));
+		$this->db->insert('plugin_sms_member', $data);
+	}
+
+	/**
+	 * Remove Member
+	 *
+	 * @access	public   		 
+	 * @param	string $number
+	 * @return	void
+	 */	
+	function remove_member($number)
+	{
+		$this->db->where('phone_number', $number);		
+		$this->db->delete('plugin_sms_member');			
+	}
+
+	/**
+	 * Check/ Count Member
+	 *
+	 * @access	public   		 
+	 * @param	string $number
+	 * @return	integer
+	 */	
+	function check_member($number)
+	{
+		$this->db->from('plugin_sms_member');
+		$this->db->where('phone_number', $number);
+		return $this->db->count_all_results();    		
+	}
 }
 
 /* End of file sms_member_model.php */

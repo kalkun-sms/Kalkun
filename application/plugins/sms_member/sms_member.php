@@ -102,10 +102,13 @@ function sms_member($sms)
  * Register member's phone number
  */
 function register_member($number)
-{	
+{
+	$CI =& get_instance();
+    $CI->load->model('sms_member/sms_member_model', 'plugin_model');
+    	
 	//check if number not registered
-	if(models_check_member($number)==0)
-	models_add_member($number);
+	if($CI->plugin_model->check_member($number)==0)
+	$CI->plugin_model->add_member($number);
 }
 
 // --------------------------------------------------------------------
@@ -117,44 +120,12 @@ function register_member($number)
  */	
 function unregister_member($number)
 {	
-	//check if already registered
-	if(models_check_member($number)==1)
-	models_remove_member($number);
-}
-
-// --------------------------------------------------------------------
-
-/**
- * Models
- *
- * Handle database activity 
- */
-function models_check_member($number)
-{
 	$CI =& get_instance();
-    $CI->load->model('Kalkun_model');
-    
-	$CI->db->from('plugin_sms_member');
-	$CI->db->where('phone_number', $number);
-	return $CI->db->count_all_results();    		
-}
-
-function models_add_member($number)
-{
-	$CI =& get_instance();
-    $CI->load->model('Kalkun_model');
+    $CI->load->model('sms_member/sms_member_model', 'plugin_model');
     	
-	$data = array('phone_number' => $number, 'reg_date' => date ('Y-m-d H:i:s'));
-	$CI->db->insert('plugin_sms_member', $data);
-}
-
-function models_remove_member()
-{
-	$CI =& get_instance();
-    $CI->load->model('Kalkun_model');
-    
-	$CI->db->where('phone_number', $number);		
-	$CI->db->delete('plugin_sms_member');	
+	//check if already registered
+	if($CI->plugin_model->check_member($number)==1)
+	$CI->plugin_model->remove_member($number);
 }
 
 /* End of file sms_member.php */
