@@ -153,6 +153,18 @@ $lang['kalkun_compose_minutes'] = "Minutos";
 $lang['kalkun_no_message_search'] = "Oops!, su consulta no concide con ningún registro";
 $lang['tni_see_conversation'] = "Ver la conversación";
 
+$lang['kalkun_advanced_search'] = "Advanced Search";
+$lang['kalkun_resend'] = "Resend";
+$lang['kalkun_public_contact'] = "Public Contacts";
+$lang['kalkun_public_contact_set'] = "Set as Public Contact";
+$lang['kalkun_my_contact'] = "My Contacts";
+$lang['kalkun_public_group'] = "Public Groups";
+$lang['kalkun_public_group_set'] = "Set as Public Group";
+$lang['kalkun_my_group'] = "My Groups";
+$lang['kalkun_statistic_title'] = "SMS used in last 7 days";
+$lang['kalkun_incoming_sms'] = "Incoming SMS";
+$lang['kalkun_outgoing_sms'] = "Outgoing SMS";
+
 // Setting
 $lang['kalkun_setting_passwd_current'] = "Clave actual";
 $lang['kalkun_setting_passwd_forgot'] = "¿Olvidó su clave?";

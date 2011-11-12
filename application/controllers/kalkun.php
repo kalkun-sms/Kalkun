@@ -115,14 +115,14 @@ class Kalkun extends MY_Controller {
 				$bar_1 = new bar();
 				$bar_1->set_values($data_3);
 				$bar_1->set_colour('#639F45');
-                $bar_1->key( 'Incoming SMS', 10 ); 
+                $bar_1->key(lang('kalkun_incoming_sms'), 10 ); 
 				$bar_1->set_tooltip('#x_label#<br>#val# SMS');
 				//$bar_1->set_key("SMS used in last 7 days", 10);
                 
                 $bar_2 = new bar();
                 $bar_2->set_values($data_2);
 			    $bar_2->set_colour('#21759B');
-                $bar_2->key( 'Outgoing SMS', 10 ); 
+                $bar_2->key(lang('kalkun_outgoing_sms'), 10 ); 
 			    $bar_2->set_tooltip('#x_label#<br>#val# SMS');
 				 
                 
@@ -202,7 +202,7 @@ class Kalkun extends MY_Controller {
 		$chart = new open_flash_chart();
 		$chart->add_element($element1);
         $chart->add_element($element2);
-        $chart->set_title( 'SMS used in last 7 days' );
+        $chart->set_title(lang('kalkun_statistic_title'));
 		$chart->set_x_axis($x);
 		$chart->set_y_axis($y);
 		

@@ -53,7 +53,7 @@ class Phonebook extends MY_Controller {
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'public'))->num_rows();			
 			$this->pagination->initialize($config);
 						
-			$data['title'] = "Public contacts";
+			$data['title'] = lang('kalkun_public_contact');
 			$data['public_contact'] = TRUE;
 			$param = array('option' => 'paginate', 'public' => TRUE, 'limit' => $config['per_page'], 'offset' => $this->uri->segment(4,0));
 			$data['phonebook'] = $this->Phonebook_model->get_phonebook($param);		
@@ -103,7 +103,7 @@ class Phonebook extends MY_Controller {
    		
    		if ($type == 'public')
    		{
-   			$data['title'] = 'Public Groups';
+   			$data['title'] = lang('kalkun_public_group');
    			$data['public_group'] = TRUE;
    			$config['base_url'] = site_url().'/phonebook/group/public';
    			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group', 'public' => TRUE))->num_rows();
@@ -115,7 +115,7 @@ class Phonebook extends MY_Controller {
    		}
    		else
    		{
-   			$data['title'] = 'Groups';
+   			$data['title'] = lang('tni_groups');
    			$data['public_group'] = FALSE;
 	   		$config['base_url'] = site_url().'/phonebook/group/';
 	   		$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();
