@@ -181,9 +181,13 @@ textarea {
 	min-height: 25px;
 }
 
-#left_column, .left_column {
+#left_column, .left_column, .left_column_big {
 	float: left;
 	width: 325px;
+}
+
+.left_column_big {
+	width: 425px;
 }
  
 #right_column, .right_column {
