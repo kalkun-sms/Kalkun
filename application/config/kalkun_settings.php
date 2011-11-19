@@ -6,9 +6,9 @@
 |--------------------------------------------------------------------------
 |
 */
-$config['kalkun_version'] = '0.4RC1';
+$config['kalkun_version'] = '0.4RC2';
 $config['kalkun_codename'] = 'Toba';
-$config['kalkun_release_date'] = '12 September 2011';
+$config['kalkun_release_date'] = '20 November 2011';
 $config['kalkun_upgradeable'] = TRUE;
 $config['kalkun_previous_version'] = '0.3';
 
