@@ -105,9 +105,9 @@ class Phonebook_model extends Model {
 			$this->db->select('ID');
 			$this->db->select_as('Name', 'GroupName');
 			$this->db->from('pbk_groups');
-			$this->db->where('id_user', $user_id);
-            $this->db->or_where('is_public', 'true');
-            $this->db->having('ID', $param['id']);
+            $condition = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";            
+            $this->db->where($condition, NULL, FALSE);
+            $this->db->where('ID', $param['id']);
 			break;
 			
 			case 'bynumber':
@@ -124,9 +124,9 @@ class Phonebook_model extends Model {
             $this->db->select_as('pbk_groups.Name', 'GroupName');
             $this->db->join('user_group', 'user_group.id_pbk=pbk.ID');
 			$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups');
-            $this->db->where('pbk_groups.id_user', $user_id); 
-            $this->db->or_where('pbk_groups.is_public', 'true'); 
-            $this->db->having('user_group.id_pbk_groups', $param['group_id']);
+            $condition = "({$this->_protect_identifiers('pbk_groups.id_user')} = {$user_id} OR {$this->_protect_identifiers('pbk_groups.is_public')} = 'true')";
+            $this->db->where($condition, NULL, FALSE);
+            $this->db->where('user_group.id_pbk_groups', $param['group_id']);
             $this->db->order_by("pbk.Name", "asc");
             
             if(isset($param['limit']) && isset($param['offset'])) $this->db->limit($param['limit'], $param['offset']);
@@ -134,11 +134,12 @@ class Phonebook_model extends Model {
 			
 			case 'search':
 			$this->db->select('*');
-			$this->db->select_as('ID', 'id_pbk');	
+			$this->db->select_as('ID', 'id_pbk');
 			$this->db->from('pbk');
-			$this->db->or_like(array('Name' => $this->input->post('search_name'), 'Number' =>$this->input->post('search_name')));  
-			$this->db->having('id_user', $user_id);
-            $this->db->or_having('is_public', 'true');
+			$condition1 = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";
+			$condition2 = "({$this->_protect_identifiers('Name')} LIKE '%{$this->input->post('search_name')}%' OR {$this->_protect_identifiers('Number')} LIKE '%{$this->input->post('search_name')}%')";
+			$this->db->where($condition1, NULL, FALSE);
+			$this->db->where($condition2, NULL, FALSE);
 			$this->db->order_by('Name');
 			break;
 			
@@ -153,8 +154,47 @@ class Phonebook_model extends Model {
 			$this->db->order_by('pbk.Name');
 			break;
 		}
+		//echo $this->db->last_query();
 		return $this->db->get();	
 	}
+	// --------------------------------------------------------------------
+	
+	/**
+	* _protect_identifiers
+	*
+	* Ugly hack to add backticks to database field
+	*
+	* @param string $identifier
+	* @return string
+	*/
+	function _protect_identifiers($identifier=NULL)
+	{
+		$this->load->helper('kalkun');
+		$escape_char;
+		$escaped_identifer="";
+		
+		// get database engine
+		$db_engine = $this->db->platform();
+		$escape_char = get_database_property($db_engine);
+		$escape_char = $escape_char['escape_char'];
+		
+		$sub = explode(".", $identifier);
+		$sub_count = count($sub);
+
+		foreach($sub as $key => $tmp)
+		{
+			$escaped_identifer.=$escape_char.$tmp.$escape_char;
+			
+			// if this is not the last
+			if($key!=$sub_count-1)
+			{
+				$escaped_identifer.=".";
+			}
+		}
+		
+	    return $escaped_identifer;
+	}
+
 	// --------------------------------------------------------------------
 	
 	/**

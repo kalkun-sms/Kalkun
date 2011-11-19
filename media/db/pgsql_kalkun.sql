@@ -25,7 +25,6 @@ CREATE TABLE "user_settings" (
 	"conversation_sort" text NOT NULL DEFAULT 'asc',
 	CHECK ("permanent_delete" IN ('true','false')),
 	CHECK ("delivery_report" IN ('default','yes','no')),
-    CHECK ("email_forward" IN ('true','false')),
 	CHECK ("conversation_sort" IN ('asc','desc'))
 );
 
@@ -80,10 +79,10 @@ ALTER TABLE "pbk_groups" ADD COLUMN "id_user" integer NULL;
 ALTER TABLE "pbk_groups" ADD COLUMN "is_public" text NOT NULL DEFAULT 'false';
 
 CREATE TABLE "user_group" (
-  "id_group" integer PRIMARY KEY,
+  "id_group" serial PRIMARY KEY,
   "id_pbk" integer NOT NULL,
   "id_pbk_groups" integer NOT NULL,
-  "id_user" integer NOT NULL,
+  "id_user" integer NOT NULL
 );
 
 CREATE TABLE "kalkun" (
@@ -98,7 +97,7 @@ CREATE TABLE "user_templates" (
 );
 
 CREATE TABLE "b8_wordlist" (
-  "token" varchar(255) serial PRIMARY KEY,
+  "token" varchar(255) PRIMARY KEY,
   "count" varchar(255) DEFAULT NULL
 );
 
@@ -109,7 +108,7 @@ INSERT INTO "b8_wordlist" VALUES('bayes*texts.spam', '0');
 CREATE TABLE "plugins" (
   "plugin_id" serial PRIMARY KEY,
   "plugin_system_name" varchar(255) NOT NULL,
-  "plugin_name" varchar(255) NOT NULL,
+  "plugin_name" varchar(255) DEFAULT NULL,
   "plugin_uri" varchar(120) DEFAULT NULL,
   "plugin_version" varchar(30) NOT NULL,
   "plugin_description" text,
