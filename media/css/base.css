@@ -181,9 +181,13 @@ textarea {
 	min-height: 25px;
 }
 
-#left_column, .left_column {
+#left_column, .left_column, .left_column_big {
 	float: left;
 	width: 325px;
+}
+
+.left_column_big {
+	width: 425px;
 }
  
 #right_column, .right_column {
@@ -261,7 +265,7 @@ textarea {
 }
 
 #f_child_menu li, #mf_child_menu li {
-	width: 100px;
+	width: 120px;
 	padding: 10px 0px 0px 0px;
 	border: none;
 	margin-left: 15px;

@@ -14,7 +14,7 @@ $("#settingsForm").validate();
 </tr>
 
 <tr valign="top">
-<td>Username</td>
+<td><?php echo lang('tni_user_username'); ?></td>
 <td>
 <input type="text" name="username" value="<?php echo $settings->row('username');?>" />
 </td>

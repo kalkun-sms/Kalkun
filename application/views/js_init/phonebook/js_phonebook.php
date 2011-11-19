@@ -96,7 +96,7 @@ $(document).ready(function() {
             		});
                     $(this).dialog("close");
             },
-            "Cancel" : function() {
+            "<?php echo lang('kalkun_cancel'); ?>" : function() {
               $(this).dialog("close");
             }
           }
@@ -182,7 +182,7 @@ $(document).ready(function() {
 				'Import': function() {
 					$("form.importpbkform").submit();
 				},
-				Cancel: function() {
+				"<?php echo lang('kalkun_cancel'); ?>": function() {
 					$(this).dialog('close');
 				}
 			}
@@ -194,10 +194,10 @@ $(document).ready(function() {
 	$('#addpbkcontact_wizard').click(function() {
 		$("#pbk_add_wizard_dialog").dialog({
 			autoOpen: false,
-			height: 200,
+			height: 250,
 			modal: true,
 			buttons: {
-				'Close': function() {
+				'<?php echo lang('kalkun_cancel'); ?>': function() {
 					$(this).dialog('close');
 				}
 			}

@@ -18,7 +18,7 @@ INSERT INTO "b8_wordlist" VALUES('bayes*texts.spam', '0');
 CREATE TABLE "plugins" (
   "plugin_id" serial PRIMARY KEY,
   "plugin_system_name" varchar(255) NOT NULL,
-  "plugin_name" varchar(255) NOT NULL,
+  "plugin_name" varchar(255) DEFAULT NULL,
   "plugin_uri" varchar(120) DEFAULT NULL,
   "plugin_version" varchar(30) NOT NULL,
   "plugin_description" text,

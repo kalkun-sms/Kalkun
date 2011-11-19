@@ -219,7 +219,7 @@ class Messages extends MY_Controller {
 		
 			// Member
 			case 'member':
-			$this->load->model('Member_model');
+			$this->load->model('sms_member/sms_member_model', 'Member_model');
 			foreach($this->Member_model->get_member('all')->result() as $tmp)
 			{
 				$dest[] = $tmp->phone_number;

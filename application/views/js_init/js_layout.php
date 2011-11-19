@@ -86,7 +86,7 @@ $(document).ready(function() {
 				});
 				}
 			},
-			Cancel: function() { $(this).dialog('destroy');}
+			"<?php echo lang('kalkun_cancel'); ?>": function() { $(this).dialog('destroy');}
 		    },
 		    open: function() {
             $("#personvalue").focus();
@@ -171,10 +171,10 @@ $(document).ready(function() {
 		width: 500,
 		modal: true,
 		buttons: {
-			'Search': function() {
+			'<?php echo lang('kalkun_search');?>': function() {
 				$('#a_search_form').submit();
 			},
-			Cancel: function() {
+			"<?php echo lang('kalkun_cancel');?>": function() {
 				$(this).dialog('close');
 			}
 		},

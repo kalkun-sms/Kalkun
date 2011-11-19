@@ -22,7 +22,6 @@ CREATE TABLE "user_settings" (
 	"conversation_sort" TEXT NOT NULL DEFAULT 'asc',
 	CHECK ("permanent_delete" IN ('true','false')),
 	CHECK ("delivery_report" IN ('default','yes','no')),
-    CHECK ("email_forward" IN ('true','false')),
 	CHECK ("conversation_sort" IN ('asc','desc'))
 );
 

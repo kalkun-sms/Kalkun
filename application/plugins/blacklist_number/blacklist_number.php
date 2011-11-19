@@ -62,9 +62,11 @@ function blacklist_number_install()
 function blacklist_number($sms)
 {
     $CI =& get_instance();
+    $CI->load->model('blacklist_number/blacklist_number_model', 'plugin_model');
+    $evil = array();
     
     // Get blacklist number
-    $lists = $CI->db->select('phone_number')->get('plugin_blacklist_number')->result_array();
+    $lists = $CI->plugin_model->get('all')->result_array();
     foreach($lists as $tmp)
     {
     	$evil[] = $tmp['phone_number'];

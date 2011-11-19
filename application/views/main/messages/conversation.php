@@ -149,7 +149,7 @@ endif;
 	
 	<?php if($tmp['source'] == 'sentitems'): ?>
 	<li><img src="<?php echo $this->config->item('img_path');?>circle.gif" /></li>
-	<li><a href="#" class="resend">Resend</a></li>		
+	<li><a href="#" class="resend"><?php echo lang('kalkun_resend');?></a></li>		
 	<?php endif; ?>
 	</ul>
 	</div>

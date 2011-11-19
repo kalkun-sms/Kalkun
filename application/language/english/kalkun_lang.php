@@ -142,6 +142,12 @@ $lang['kalkun_insert'] = "Insert";
 
 $lang['kalkun_canned'] = "Canned Responses";
 $lang['kalkun_canned_empty'] = "Looks like there isn't any canned response created yet. Save your first canned response now";
+$lang['kalkun_canned_title'] = "Choose Responses";
+$lang['kalkun_canned_save_new'] = "Save New...";
+$lang['kalkun_canned_saving'] = "Saving...";
+$lang['kalkun_canned_confirm'] = "Are you Sure?";
+$lang['kalkun_canned_template_name'] = "Please enter a Name for Your Message. This should be unique.";
+$lang['kalkun_canned_template_update'] = "Are you Sure?  This will overwrite previous message";
 
 // Others
 $lang['kalkun_compose_amount'] = "Amount";
@@ -152,6 +158,37 @@ $lang['kalkun_compose_hour'] = "Hour";
 $lang['kalkun_compose_minutes'] = "Minutes";
 $lang['kalkun_no_message_search'] = "Oops! Your Query doesnt match any records";
 $lang['tni_see_conversation'] = "See conversation";
+
+$lang['kalkun_search'] = "Search";
+$lang['kalkun_advanced_search'] = "Advanced Search";
+$lang['kalkun_advanced_search_from_to'] = "From/To";
+$lang['kalkun_advanced_search_query'] = "Query";
+$lang['kalkun_advanced_search_on'] = "Search On";
+$lang['kalkun_advanced_search_on_all_folder'] = "All Folders";
+$lang['kalkun_advanced_search_date_from'] = "Date From";
+$lang['kalkun_advanced_search_date_to'] = "Date To";
+$lang['kalkun_advanced_search_msg_status'] = "Status";
+$lang['kalkun_advanced_search_msg_status_any'] = "Any";
+$lang['kalkun_advanced_search_paging'] = "Paging";
+$lang['kalkun_advanced_search_paging_per_page'] = "Per Page";
+$lang['kalkun_advanced_search_no_paging'] = "Do not use paging";
+
+$lang['kalkun_resend'] = "Resend";
+$lang['kalkun_public_contact'] = "Public Contacts";
+$lang['kalkun_public_contact_set'] = "Set as Public Contact";
+$lang['kalkun_my_contact'] = "My Contacts";
+$lang['kalkun_public_group'] = "Public Groups";
+$lang['kalkun_public_group_set'] = "Set as Public Group";
+$lang['kalkun_my_group'] = "My Groups";
+$lang['kalkun_statistic_title'] = "SMS used in last 7 days";
+$lang['kalkun_incoming_sms'] = "Incoming SMS";
+$lang['kalkun_outgoing_sms'] = "Outgoing SMS";
+$lang['kalkun_delete_all_message_now'] = "Delete All Messages Now";
+$lang['kalkun_contact_del_title'] = "Delete Contact(s) Confirmation";
+$lang['kalkun_compose_valid_url'] = "Should be a valid URL";
+$lang['kalkun_compose_import_file'] = "Import from file";
+$lang['kalkun_compose_counter_character'] = "characters";
+$lang['kalkun_compose_counter_message'] = "message";
 
 // Setting
 $lang['kalkun_setting_passwd_current'] = "Current Password";
@@ -217,8 +254,8 @@ $lang['tni_time_remaining'] = "remaining";
 $lang['tni_pbk_edit_contact'] = "Edit Contact";  
 $lang['tni_pbk_contact_edited'] = "Contact has been edited";  
 $lang['tni_pbk_contact_added'] = "Contact has been added";  
-$lang['tni_contact_not_found'] = "User not found";  
-$lang['tni_contact_search_empty'] = "Users is empty";  
+$lang['tni_contact_not_found'] = "Contact not found";  
+$lang['tni_contact_search_empty'] = "Contact is empty";  
 $lang['tni_user_add'] = "Add/Edit Users";  
 $lang['tni_user_addp'] = "Add Users";  
 $lang['tni_user_edit'] = "Edit/Add User";  

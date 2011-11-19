@@ -56,7 +56,7 @@
     
 	<?php if($this->uri->segment(2)=='conversation' && $this->uri->segment(4)=='sentitems'): ?>
 	<li>&nbsp;</li>
-	<li><a href="#" class="resend_bulk button">Resend</a></li>	
+	<li><a href="#" class="resend_bulk button"><?php echo lang('kalkun_resend');?></a></li>	
     <?php endif; ?>		    
     
 	<?php if($this->pagination->create_links()!=''): ?>

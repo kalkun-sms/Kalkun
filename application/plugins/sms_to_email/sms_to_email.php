@@ -98,11 +98,10 @@ function sms_to_email($sms)
 	$msg_user = $sms->msg_user;
 	$CI =& get_instance();    	
     $CI->load->library('email');
-    $CI->load->model('kalkun_model');
-    $CI->load->model('phonebook_model');
+    $CI->load->model('Phonebook_model');
+    $CI->load->model('sms_to_email/sms_to_email_model', 'plugin_model');
     
-    $CI->Kalkun_model->db->from('plugin_sms_to_email')->where('id_user', $msg_user);
-    $active  = $CI->Kalkun_model->db->get();
+    $active  = $CI->plugin_model->get_setting($msg_user);
     if($active->num_rows()==0 OR $active->row('email_forward') != 'true') return;
     $CI->email->initialize($config);
     $mail_to = $active->row('email_id');            
