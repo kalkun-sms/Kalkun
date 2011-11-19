@@ -70,7 +70,7 @@ $(document).ready(function(){
 			import_file: "<?php echo lang('tni_compose_enter_dest'); ?>",
 			message: "<?php echo lang('tni_compose_enter_msg'); ?>",
 			datevalue: "<?php echo lang('tni_compose_enter_sendate'); ?>",
-            url : "Should be a valid URL"
+            url : "<?php echo lang('kalkun_compose_valid_url');?>"
 		}
 	});
 	
@@ -127,13 +127,15 @@ $(document).ready(function(){
 		
 	// Character counter
 	$('.word_count').each(function(){   
+	text_character = "<?php echo lang('kalkun_compose_counter_character');?>";
+	text_message = "<?php echo lang('kalkun_compose_counter_message');?>";
 	var length = $(this).val().length;  
 	var message = Math.ceil(length/sms_char);
-	$(this).parent().find('.counter').html( length + ' characters / ' + message + ' message(s)');  
+	$(this).parent().find('.counter').html( length + ' ' + text_character + ' / ' + message + ' ' + text_message);  
 		$(this).keyup(function(){  
 			var new_length = $(this).val().length;  
 			var message = Math.ceil(new_length/sms_char);
-			 $(this).parent().find('.counter').html( new_length + ' characters / ' + message + ' message(s)');  
+			 $(this).parent().find('.counter').html( new_length + ' ' + text_character + ' / ' + message + ' ' + text_message);  
 		});  
 	});
 
@@ -173,12 +175,12 @@ $("#canned_response_container").load(url,  function() {
 	width: 400,
 	show: 'fade',
 	hide: 'fade',
-    title: 'Choose Responses',
+    title: '<?php echo lang('kalkun_canned_title')?>',
   	buttons: {
-	'Save New...': function() {
+	'<?php echo lang('kalkun_canned_save_new');?>': function() {
 		save_canned_response(null);
 	},
-	Cancel: function() { $(this).dialog('close');}
+	"<?php echo lang('kalkun_cancel');?>": function() { $(this).dialog('close');}
     }
   });
 });
@@ -199,7 +201,7 @@ function save_canned_response(name)
     var dest_url = "<?php echo  site_url();?>/messages/canned_response/save";
     
     if(name != null){
-        $('.loading_area').html("Saving...");
+        $('.loading_area').html("<?php echo lang('kalkun_canned_saving');?>");
        	$('.loading_area').fadeIn("slow");
         $.post(dest_url, {'name': name, message: $('#message').val()}, function() {
                 $('.loading_area').fadeOut("slow");

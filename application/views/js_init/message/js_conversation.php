@@ -241,7 +241,7 @@ $('.add_to_pbk').live('click', function() {
 var param1 = $(this).parents('div:eq(1)').children().children('input.item_number').val();  /* phone number */
 $("#contact_container").load('<?php echo site_url('phonebook/add_contact')?>', { 'type': 'message', 'param1': param1}, function() {
 $(this).dialog({
-	title: 'Add contact',
+	title: '<?php echo lang('tni_contact_add');?>',
 	modal: true,
 	show: 'fade',
 	hide: 'fade',
@@ -253,7 +253,7 @@ $(this).dialog({
 		$("#contact_container").dialog({ buttons: { "Okay": function() { $(this).dialog("close"); } } });
 		setTimeout(function() {$("#contact_container").dialog('close')} , 1500);
 	});
-	}, Cancel: function() { $(this).dialog('close');} }
+	}, "<?php echo lang('kalkun_cancel'); ?>": function() { $(this).dialog('close');} }
 	});
 });
 $("#contact_container").dialog('open');
@@ -340,7 +340,7 @@ $("#compose_sms_container").dialog({
 			dest_url = base + 'sentitems';
 			$.post(dest_url, {type: 'single', id: ID, current_folder: current_folder});
 		}			
-	}, Cancel: function() { $(this).dialog('close');} }
+	}, "<?php echo lang('kalkun_cancel'); ?>": function() { $(this).dialog('close');} }
 	});
 $("#compose_sms_container").dialog('open');	
 });
@@ -390,7 +390,7 @@ else {
 					$.post(dest_url, {type: 'single', id: ID, current_folder: current_folder});
 				}		
 			});		
-		}, Cancel: function() { $(this).dialog('close');} }
+		}, "<?php echo lang('kalkun_cancel'); ?>": function() { $(this).dialog('close');} }
 		});
 	$("#compose_sms_container").dialog('open');
 }	

@@ -82,7 +82,7 @@ else echo lang('kalkun_send_to').":";
 <input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;" />
 <label for="sendoption3"><?php echo lang('kalkun_input_manually');?> </label>
 <input type="radio" id="sendoption4" name="sendoption" value="sendoption4" style="border: none;" />
-<label for="sendoption4">Import from file</label>
+<label for="sendoption4"><?php echo lang('kalkun_compose_import_file');?></label>
 </td>
 </tr>
     

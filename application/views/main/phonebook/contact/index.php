@@ -3,7 +3,7 @@
 <div id="contact_container" class="hidden"></div>
 
 <!-- Delete Contact Dialog -->
-<div class="dialog" id="confirm_delete_contact_dialog" title="Confirmation Required">
+<div class="dialog" id="confirm_delete_contact_dialog" title="<?php echo lang('kalkun_contact_del_title');?>">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
 	<?php echo lang('kalkun_pbk_del_contact_conf');?> </p>
 </div>
@@ -22,7 +22,7 @@
 </div>
 
 <!-- Import Phonebook dialog -->
-<div id="pbkimportdialog" title="Import Phonebook"  class="dialog">
+<div id="pbkimportdialog" title="<?php echo lang('kalkun_pbk_add_csv');?>"  class="dialog">
 	<p id="validateTips"><?php echo lang('tni_form_fields_required'); ?></p>
 	<form class="importpbkform" method="post" enctype="multipart/form-data" action="<?php echo site_url();?>/phonebook/import_phonebook">
 	<fieldset>
