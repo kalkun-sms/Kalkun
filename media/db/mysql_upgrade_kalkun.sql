@@ -40,3 +40,5 @@ CREATE TABLE IF NOT EXISTS `plugins` (
   PRIMARY KEY (`plugin_id`),
   UNIQUE KEY `plugin_index` (`plugin_system_name`) USING BTREE
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
+UPDATE `user_settings` SET `language`='indonesian' WHERE `language`='bahasa';

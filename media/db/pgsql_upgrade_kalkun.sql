@@ -27,3 +27,5 @@ CREATE TABLE "plugins" (
   "plugin_data" text,
   UNIQUE("plugin_system_name")
 );
+
+UPDATE "user_settings" SET "language"='indonesian' WHERE "language"='bahasa';

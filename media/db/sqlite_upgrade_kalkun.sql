@@ -39,3 +39,5 @@ CREATE TABLE "plugins" (
   "plugin_author_uri" VARCHAR(120) DEFAULT NULL,
   "plugin_data" TEXT
 );
+
+UPDATE "user_settings" SET "language"='indonesian' WHERE "language"='bahasa';
