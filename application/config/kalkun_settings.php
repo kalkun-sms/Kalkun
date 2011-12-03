@@ -6,15 +6,15 @@
 |--------------------------------------------------------------------------
 |
 */
-$config['kalkun_version'] = '0.4RC2';
+$config['kalkun_version'] = '0.4';
 $config['kalkun_codename'] = 'Toba';
-$config['kalkun_release_date'] = '20 November 2011';
+$config['kalkun_release_date'] = '03 December 2011';
 $config['kalkun_upgradeable'] = TRUE;
 $config['kalkun_previous_version'] = '0.3';
 
 /*
 |--------------------------------------------------------------------------
-| Gammu Location
+| Gammu Location (currently only used if you want to send WAP link)
 |--------------------------------------------------------------------------
 |
 | Gammu Installation Location
@@ -115,7 +115,7 @@ $config['enable_emoticons'] = FALSE;
 | @username will be automatically replaced by username who sent the messages
 |
 */
-$config['append_username'] = FALSE;
+$config['append_username'] = TRUE;
 $config['append_username_message'] = "Sender: @username";
 
 
