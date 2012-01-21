@@ -96,7 +96,7 @@ CREATE TABLE "user_templates" (
 );
 
 CREATE TABLE "b8_wordlist" (
-  "token" VARCHAR(255) PRIMARY KEY AUTOINCREMENT,
+  "token" VARCHAR(255) PRIMARY KEY,
   "count" VARCHAR(255) DEFAULT NULL
 );
 
