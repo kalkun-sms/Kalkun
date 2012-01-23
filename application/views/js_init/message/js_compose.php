@@ -35,11 +35,29 @@ $(document).ready(function(){
 
 	// Import CSV
 	$('#composeForm').ajaxForm({
+		dataType:  'json',
 	    success: function(data) {
-            $('#import_value').val(data);
+            var limit = data.Field.length;
+            for (var i=0; i < limit; i++) {
+            	var element = $('#import_value_count').clone().attr('id', 'import_value_' + i).attr('name', data.Field[i]);
+            	$('#import_value_count').after(element);
+            	$('#import_value_' + i).val(data[data.Field[i]]);
+            	
+            	var button = $('#field_button').clone().attr('id', 'field_button_' + i).attr('value', data.Field[i]).removeClass('hidden');
+            	$('#field_button').after(button).after(' ');
+            }
+            $('#import_value_count').val(limit);
+            $('#field_option').show();          
+            
+			// Field button
+			$('.field_button').click(function() {
+				var field = $(this).val();
+				var text = $('#message').val();
+				$('#message').val(text + '[[' + field + ']]');
+			});
         }
 	});
-		
+			
 	// validation
 	$("#composeForm").validate({
 		rules: {

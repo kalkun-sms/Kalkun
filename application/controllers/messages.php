@@ -139,12 +139,20 @@ class Messages extends MY_Controller {
 			$this->load->library('csvreader');
 			$filePath = $_FILES["import_file"]["tmp_name"];
 			$csvData = $this->csvreader->parse_file($filePath, true);	
-			
-			foreach($csvData as $field)
+			$csvField = array_keys($csvData[0]);
+			foreach($csvData as $data)
 			{
-				$dest[] = trim($field["Number"]);
+				foreach ($csvField as $field)
+				{
+					$tmp[$field][] = trim($data[$field]);
+				}
 			}			
-			echo implode(",", $dest);
+			foreach ($csvField as $field)
+			{
+				$csv[$field] = implode(",", $tmp[$field]);
+			}
+			$csv['Field'] = $csvField;
+			echo json_encode($csv);
 			return;
 		}
 		
@@ -202,12 +210,15 @@ class Messages extends MY_Controller {
 
 			// Import from file  (CSV)
 			case 'sendoption4':
-			$tmp_dest = explode(',', $this->input->post('import_value'));
-			foreach($tmp_dest as $key => $tmp)
+			if (count($this->input->post('import_value_count') > 0))
 			{
-				$tmp = trim($tmp); // remove space
-				if(trim($tmp)!='') {
-					$dest[$key] = $tmp;
+				$tmp_dest = explode(',', $this->input->post('Number'));
+				foreach($tmp_dest as $key => $tmp)
+				{
+					$tmp = trim($tmp); // remove space
+					if(trim($tmp)!='') {
+						$dest[$key] = $tmp;
+					}
 				}
 			}
 			break;
@@ -313,7 +324,19 @@ class Messages extends MY_Controller {
                 }
             }
 		}	
-                        
+		
+		// check for field
+		preg_match_all('/\[\[(.*?)\]\]/', $data['message'], $field_count);
+        if (count($field_count[1]) > 0)
+        {
+        	$field_status = TRUE;
+        	$field_name = $field_count[1];
+        	foreach ($field_name as $field)
+        	{
+        		$$field = explode(',', $this->input->post($field));
+        	}
+        }
+        
 		// Send the message
         if(!empty($dest))  // handles if empty numbers after any number removal process        
 		{
@@ -321,9 +344,20 @@ class Messages extends MY_Controller {
 			$sms_loop = $this->input->post('sms_loop');
 			foreach($dest as $dest)
 			{
+				$backup['message'] = $data['message'];
 				$data['dest'] = $dest;
 	        	$data['SenderID'] = NULL;
 	        	$data['CreatorID'] = '';
+	        	
+	        	// change field to value
+	        	if ($field_status)
+	        	{
+        			foreach ($field_name as $field)
+        			{
+        				$field_tag = $$field;
+	        			$data['message'] = str_replace("[[{$field}]]", $field_tag[$n], $data['message']);
+        			}
+	        	}
 	        	
 				for($i=1;$i<=$sms_loop;$i++) 
 				{
@@ -334,6 +368,7 @@ class Messages extends MY_Controller {
 			       	}
 					$this->Message_model->send_messages($data);
 				}
+				$data['message'] = $backup['message'];
 				$n++;
 			}
 			$return_msg = "<div class=\"notif\">Your message has been move to Outbox and ready for delivery.</div>";
