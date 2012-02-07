@@ -5,6 +5,7 @@
 <?php 
 $lang = array('czech'	=> 'Česky',
        		'english'	=> 'English',
+       		'finnish'	=> 'Finnish',
        		'german'	=> 'German',
        		'indonesian'	=> 'Indonesian',
        		'italian'	=> 'Italian',
