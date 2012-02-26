@@ -117,19 +117,24 @@ $(document).ready(function() {
 	if(count==0) { 
 		$('.notification_area').text("<?php echo lang('tni_pbk_no_contact_selected')?>");
 		$('.notification_area').show();
-    setTimeout( "	$('.notification_area').fadeOut();", 2000);
+        setTimeout( "	$('.notification_area').fadeOut();", 2000);
 	}
 	else {
-		$("input.select_contact:checked").each( function () {
-		var row = $(this).parents('tr');
-		var id = row.attr('id');
-		$.post(dest_url, {id_pbk: id , id_group :grp_id });
-		});
-    $('.notification_area').text("Updated");
-		$('.notification_area').show();
-    setTimeout( "	$('.notification_area').fadeOut();", 2000);
+		$("input.select_contact:checked").each( function (i , val) {
+		  var row = $(this).parents('tr');
+		  var id = row.attr('id');
+		  $.post(dest_url, {id_pbk: id , id_group :grp_id }, function (){
+		      if( i ==  ($("input.select_contact:checked").length -1 )  ) // execute only after the last one.
+              {
+                $('.notification_area').text("Updated");
+                $('.notification_area').show();
+                setTimeout( "	$('.notification_area').fadeOut();", 2000);
+              }
+		  });
+		});        
+    
 	}
-  $(this).val('do');
+    $(this).val('do');
 	});
   
 	
