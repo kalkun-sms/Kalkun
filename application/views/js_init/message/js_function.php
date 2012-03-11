@@ -160,7 +160,7 @@ $(document).ready(function() {
     });
     
     // refresh
-    $("a.refresh_button").live('click', refresh = function(type)
+    $("a.refresh_button, div#logo a").live('click', refresh = function(type)
     {  	
     	if(type != 'retry') {
             $('.loading_area').html('Loading...');

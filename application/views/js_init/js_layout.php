@@ -185,6 +185,13 @@ $(document).ready(function() {
 		$('#a_search_dialog').dialog('open');
 		return false;
 	});
-	
+
+	<?php if ($this->uri->segment(2) != 'folder' AND $this->uri->segment(2) != 'my_folder'): ?>	
+	// logo click 
+	$('div#logo a').click(function() {
+		new_notification('false');
+		return false;
+	});
+	<? endif;?>
 });
 </script>
