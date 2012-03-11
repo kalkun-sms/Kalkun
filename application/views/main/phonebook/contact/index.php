@@ -51,7 +51,7 @@
 	<div id="window_title_left"><?php echo $title; ?></div>
 	<div id="window_title_right">
 	<a href="#" id="addpbkcontact_wizard" class="nicebutton">&#43; <?php echo lang('tni_contact_add'); ?></a>
-     <?php if($this->uri->segment(3)=='public') : ?>
+     <?php if($public_contact) : ?>
 	<a href="<?php echo site_url('phonebook/');?>" class="nicebutton">&#43; <?php echo lang('kalkun_my_contact');?></a>
     <?php else: ?>  
     <a href="<?php echo site_url('phonebook/index/public');?>" class="nicebutton">&#43; <?php echo lang('kalkun_public_contact');?></a>

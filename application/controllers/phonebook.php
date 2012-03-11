@@ -153,6 +153,10 @@ class Phonebook extends MY_Controller {
    		$param['limit'] = $config['per_page'];
    		$param['offset'] = $this->uri->segment(4,0);
    		$contacts = $this->Phonebook_model->get_phonebook($param);
+   		
+   		if($contacts->row('is_public') == 'true') $data['public_contact'] = TRUE;
+   		else $data['public_contact'] = FALSE;
+   		
    		$data['main'] = 'main/phonebook/contact/index';	
    	    $data['title'] = $contacts->row('GroupName');
    	    $data['phonebook'] = $contacts;
