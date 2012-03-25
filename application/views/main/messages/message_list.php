@@ -45,7 +45,7 @@ else
 	$char_per_line = 100-strlen(nice_date($message_date))-strlen($senderName);
 	?>
 	
-	<div class="messagelist <?php  if($type == 'inbox' && $tmp->readed=='false') echo "unreaded";?>">
+	<div title="<?php echo $tmp->TextDecoded?>" class="messagelist <?php  if($type == 'inbox' && $tmp->readed=='false') echo "unreaded";?>">
 	<div class="message_container">
 		<div class="message_header" style="color: #444; height: 20px; overflow: hidden">
 		<input type="checkbox" id="<?php echo $number;?>" class="select_conversation nicecheckbox" value="<?php echo $number;?>" style="border: none;" />
