@@ -34,6 +34,7 @@ class Messages extends MY_Controller {
 		$param['uid'] = $this->session->userdata('id_user');
 		
 		$this->load->model('Phonebook_model');
+		$this->load->library('Plugins');
 	}
 	
 	// --------------------------------------------------------------------
@@ -324,6 +325,9 @@ class Messages extends MY_Controller {
                 }
             }
 		}	
+		
+		// hook for outgoing message
+		$dest = do_action("message.outgoing", $dest);
 		
 		// check for field
 		preg_match_all('/\[\[(.*?)\]\]/', $data['message'], $field_count);
