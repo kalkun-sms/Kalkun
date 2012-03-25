@@ -89,7 +89,9 @@ class Server_alert_model extends Model {
 	function get_time_interval()
 	{
 		$this->db->select('sum(timeout) as timeout');
-		return $this->db->get('plugin_server_alert')->row('timeout');	
+		$interval = $this->db->get('plugin_server_alert')->row('timeout');	
+		if (empty($interval)) $interval = 0;
+		return $interval;
 	}
 
 }

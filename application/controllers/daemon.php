@@ -139,7 +139,7 @@ class Daemon extends Controller {
 		
 		return $msg_user;
     }	
-	
+
 	// --------------------------------------------------------------------
 	
 	/**
@@ -147,34 +147,32 @@ class Daemon extends Controller {
 	 *
 	 * Scan host port and send SMS alert if the host is down
 	 *
-	 * @access	public   		 
+	 * @access	public	 
 	 */		
-	function server_alert_engine()
+	function server_alert_daemon()
 	{
-		$this->load->model('Plugin_model');
-		// check plugin status
-		$tmp_stat = $this->Plugin_model->getPluginStatus('server_alert');
-		
-		if($tmp_stat=='true')
+		$this->load->model(array('Kalkun_model', 'Message_model'));
+	    $this->load->model('server_alert/server_alert_model', 'plugin_model');
+	    
+		$tmp_data = $this->plugin_model->get('active');
+		foreach($tmp_data->result() as $tmp)
 		{
-			$tmp_data = $this->Plugin_model->getServerAlert('active');
-			foreach($tmp_data->result() as $tmp):
-				$fp = fsockopen($tmp->ip_address, $tmp->port_number, $errno, $errstr, 60);
-				if(!$fp)
-				{
-					$data['message'] = $tmp->respond_message."\n\nKalkun Server Alert";
-					$data['date'] = date('Y-m-d H:i:s');
-					$data['dest'] = $tmp->phone_number;
-					$data['delivery_report'] = $this->Kalkun_model->get_setting('delivery_report', 'value')->row('value');
-					$data['class'] = '1';
-					
-					$this->Message_model->sendMessages($data);
-					log_message('info', 'Kalkun server alert=> Alert Name: '.$tmp->alert_name.', Dest: '.$tmp->phone_number);
-					$this->Plugin_model->changeState($tmp->id_server_alert, 'false');
-				}
-			endforeach;
+			$fp = fsockopen($tmp->ip_address, $tmp->port_number, $errno, $errstr, 60);
+			if(!$fp)
+			{
+				$data['coding'] = 'default';	
+				$data['message'] = $tmp->respond_message."\n\nKalkun Server Alert";
+				$data['date'] = date('Y-m-d H:i:s');
+				$data['dest'] = $tmp->phone_number;
+				$data['delivery_report'] = 'default';
+				$data['class'] = '1';
+				$data['uid'] = '1';
+				$this->Message_model->send_messages($data);
+				$this->plugin_model->change_state($tmp->id_server_alert, 'false');
+			}
 		}
 	}
+
 }
 
 /* End of file daemon.php */

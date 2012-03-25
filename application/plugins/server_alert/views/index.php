@@ -1,7 +1,5 @@
-<?php
-$this->load->view('js_init/plugin/js_server_alert');
-$this->load->model('Plugin_model');
-?>
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
+<?php $this->load->view('js_init/plugin/js_server_alert');?>
 
 <!-- Add Alert dialog -->	
 <div id="alert-dialog" title="Add Server Alert" class="dialog">
@@ -54,19 +52,8 @@ $this->load->model('Plugin_model');
 
 <div id="space_area">
 <h3 style="float: left">Server Alert</h3> 
-<?php $status = $this->Plugin_model->getPluginStatus('server_alert');?>
-<sup>(Status: <a href="<?php echo site_url();?>/plugin/change_status/server_alert/<?php echo ($status=='true')? 'false' : 'true';?>" title="Click to change status"><b>
-<?php 
-if($status=='true'): 
-echo "Active";
-else:
-echo "<span class=\"warning\">Inactive</span>";
-endif;
-?>
-</b></a>)</sup>
 <div style="float: right">
-<a href="#" title="Add Server Alert" id="addalertbutton" class="simplebutton">
-<img src="<?php echo  $this->config->item('img_path');?>alert.png" />Add Server Alert</a>	
+<a href="#" id="addalertbutton" class="nicebutton">&#43; Add Server Alert</a>
 </div>
 
 	<table class="nice-table" cellpadding="0" cellspacing="0">
@@ -99,13 +86,13 @@ endif;
 				<td class="phone_number"><?php echo $tmp->phone_number;?></td>	
 				<td class="respond_message hidden"><?php echo $tmp->respond_message;?></td>	
 				<?php if($tmp->status=='false'):?>
-				<td><a href="<?php echo site_url();?>/plugin/change_server_alert_state/<?php echo $tmp->id_server_alert;?>" class="release"><img class="ui-icon ui-icon-locked" title="Release state" /></a></td>
+				<td><a href="<?php echo site_url();?>/plugin/server_alert/change_state/<?php echo $tmp->id_server_alert;?>" class="release"><img class="ui-icon ui-icon-locked" title="Release state" /></a></td>
 				<?php 
 				else: echo "<td>&nbsp;</td>";
 				endif; 
 				?>
 				<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>				
-				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/delete_server_alert/<?php echo $tmp->id_server_alert;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
+				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/server_alert/delete/<?php echo $tmp->id_server_alert;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 			</tr>
 			
 			<?php 
@@ -119,5 +106,5 @@ endif;
 		
 	</table>
 	<br />
-	<?php echo "<div class=\"note\">Total Time Interval : ".$this->Plugin_model->getTimeInterval()." seconds</div>"; ?>
+	<?php echo "<div class=\"note\">Total Time Interval : ".$time_interval." seconds</div>"; ?>
 </div>

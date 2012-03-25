@@ -50,6 +50,8 @@ class Server_alert extends Plugin_Controller {
 		$data['main'] = 'index';
 		$data['alert'] = $this->plugin_model->get('paginate', $config['per_page'], $this->uri->segment(3,0));
 		$data['number'] = $this->uri->segment(3,0)+1;
+		
+		$data['time_interval'] = $this->plugin_model->get_time_interval();
 		$this->load->view('main/layout', $data);
 	}
 	
@@ -68,7 +70,8 @@ class Server_alert extends Plugin_Controller {
 	function get_time_interval()
 	{
 		echo "Total Time Interval : ".$this->plugin_model->get_time_interval()." seconds";	
-	}	
+	}
+
 }
 	
 /* End of file server_alert.php */
