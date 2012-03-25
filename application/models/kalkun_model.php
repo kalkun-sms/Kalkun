@@ -363,10 +363,13 @@ class Kalkun_model extends Model {
 		switch($option)
 		{
 			case 'date':
-				$this->db->select($type.'_sms_count');
+				$this->db->select_sum($type.'_sms_count');
 				$this->db->from('sms_used');
 				$this->db->where('sms_date', $param['sms_date']);
-				$this->db->where('id_user', $param['user_id']);
+				if (isset($param['user_id']))
+				{
+					$this->db->where('id_user', $param['user_id']);
+				}
 				$res = $this->db->get()->row($type.'_sms_count');
 				if(!$res) return 0;
 				else return $res;
