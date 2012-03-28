@@ -29,6 +29,7 @@ class Phonebook extends MY_Controller {
 	{
 		parent::MY_Controller();
 		$this->load->model('Phonebook_model');
+		$this->load->library('Plugins');
 	}
 
 	// --------------------------------------------------------------------

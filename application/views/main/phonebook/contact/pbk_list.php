@@ -16,6 +16,12 @@ else: ?>
 	</div>
 	<div class="right_column">
 		<span class="pbk_menu hidden">
+		<?php
+		// hook for contact menu
+		$menu = do_action("phonebook.contact.menu", $tmp);
+		echo "<a class=\"simplelink\" href=\"{$menu['url']}\">{$menu['title']}</a>&nbsp;";
+		echo "<img src=\"{$this->config->item('img_path')}circle.gif\" />";
+		?>
 		<?php if(isset($public_contact) && !$public_contact):?>
 		<a class="editpbkcontact simplelink" href="#"><?php echo lang('tni_edit');?></a>
 		<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
