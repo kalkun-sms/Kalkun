@@ -373,7 +373,19 @@ class Phonebook extends MY_Controller {
 			{
 				$group[$key]['id'] = $q['id'].":g";
 			}
-			$combine = array_merge($query, $group);
+			
+			// hook for contact get
+			$contact = do_action("phonebook.contact.get");
+			if (empty($contact))
+			{
+				$contact = array();
+			}
+			foreach($contact as $key => $q)
+			{
+				$contact[$key]['id'] = $q['id'].":c";
+			}
+			
+			$combine = array_merge($query, $group, $contact);
 			echo json_encode($combine);
 		}
 	}
