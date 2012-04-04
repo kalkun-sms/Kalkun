@@ -388,24 +388,32 @@ class Kalkun_model extends Model {
 	 */	
 	function add_sms_used($user_id, $type = 'out')
 	{
-		$date = date("Y-m-d");
-		$count = $this->_check_sms_used($date, $user_id,$type);
-        $this->db->where('sms_date', $date);
-		$this->db->where('id_user', $user_id);
-        
-  		if($this->db->count_all_results('sms_used')>0)
-		{	
-			$this->db->set($type.'_sms_count', $count+1);
-			$this->db->where('sms_date', $date);
-			$this->db->where('id_user', $user_id);
-			$this->db->update('sms_used');
-		}	
-		else
+		if (!is_array($user_id))
 		{
-			$this->db->set($type.'_sms_count', '1');
-			$this->db->set('sms_date', $date);
-			$this->db->set('id_user', $user_id);
-			$this->db->insert('sms_used'); 
+			$user_id[] = $user_id;
+		}
+		
+		foreach($user_id as $uid) 
+		{
+			$date = date("Y-m-d");
+			$count = $this->_check_sms_used($date, $uid, $type);
+	        $this->db->where('sms_date', $date);
+			$this->db->where('id_user', $uid);
+	        
+	  		if($this->db->count_all_results('sms_used')>0)
+			{	
+				$this->db->set($type.'_sms_count', $count+1);
+				$this->db->where('sms_date', $date);
+				$this->db->where('id_user', $uid);
+				$this->db->update('sms_used');
+			}	
+			else
+			{
+				$this->db->set($type.'_sms_count', '1');
+				$this->db->set('sms_date', $date);
+				$this->db->set('id_user', $uid);
+				$this->db->insert('sms_used'); 
+			}
 		}
 	}
 	

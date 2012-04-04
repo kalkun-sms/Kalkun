@@ -70,7 +70,7 @@ $config['modem_tolerant'] = '10';
 | Must be valid user ID
 |
 */
-$config['inbox_owner_id'] = '1';
+$config['inbox_owner_id'] = array('1', '2', '3');
 
 /*
 |--------------------------------------------------------------------------

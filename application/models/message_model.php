@@ -1183,8 +1183,63 @@ class Message_model extends Model {
 	// Update ownership
 	function update_owner($msg_id, $user_id)
 	{
-		$data = array ('id_user' => $user_id, 'id_inbox' => $msg_id);
-		$this->db->insert('user_inbox', $data);			
+		if (!is_array($user_id))
+		{
+			$user_id[] = $user_id;
+		}
+		
+		$count = count($user_id);
+		for ($i=0; $i<$count; $i++)
+		{
+			$this->db->where('id_user', $user_id[$i]);
+			$this->db->where('id_inbox', $msg_id);
+			$exist = $this->db->count_all_results('user_inbox');
+			if ($exist == 0)
+			{
+				$data = array ('id_user' => $user_id[$i], 'id_inbox' => $msg_id);
+				$this->db->insert('user_inbox', $data);
+			}
+			
+			// not the last element
+			if ($i != $count-1)
+			{
+				$data = $this->db->get_where('inbox', array('ID' => $msg_id));
+				$data = $data->row();
+				unset($data->ID);
+				$data->Processed = 'true';
+				if (!empty($data->UDH))
+				{
+					// Generate new UDH
+					$newUDH = '';
+					for ($j=1; $j<=4; $j++)
+					{
+						$newUDH .= strtoupper(dechex(mt_rand(0, 255)));
+					}
+					$data->UDH = $newUDH.substr($data->UDH, -4);
+				}
+				$this->db->insert('inbox', $data);
+				$new_msg_id = $this->db->insert_id();
+				
+				// check multipart
+				$multipart = array('type' => 'inbox', 'option' => 'check', 'id_message' => $msg_id);
+				$tmp_check = $this->get_multipart($multipart);
+				
+				if ($tmp_check->row('UDH')!='')
+				{
+					$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'),0,8));	
+					$multipart['phone_number'] = $tmp_check->row('SenderNumber');
+					$multipart['type'] = 'inbox';				
+					foreach($this->get_multipart($multipart)->result() as $part)
+					{
+						unset($part->ID);
+						$part->Processed = 'true';
+						$part->UDH = $newUDH.substr($part->UDH, -4);
+						$this->db->insert('inbox', $part);
+					}
+				}
+				$msg_id = $new_msg_id;
+			}
+		}
 	}	
     
     //Save Canned Response
