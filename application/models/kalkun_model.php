@@ -390,7 +390,7 @@ class Kalkun_model extends Model {
 	{
 		if (!is_array($user_id))
 		{
-			$user_id[] = $user_id;
+			$user_id[0] = $user_id;
 		}
 		
 		foreach($user_id as $uid) 
