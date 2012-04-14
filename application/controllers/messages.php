@@ -62,6 +62,7 @@ class Messages extends MY_Controller {
 		{
 			$source = $this->input->post('param1');
 			$id = $this->input->post('param2');
+			$data['source'] = $source;
 			switch ($source)
 			{
 				case 'inbox':
@@ -69,6 +70,7 @@ class Messages extends MY_Controller {
 				$param['type'] = 'inbox';
 				$param['id_message'] = $id;
 				$data['message'] = $this->Message_model->get_messages($param)->row('TextDecoded');
+				$data['msg_id'] = $id;
 				
 				// check multipart
 				$multipart['type'] = 'inbox';
@@ -180,7 +182,7 @@ class Messages extends MY_Controller {
 						$dest[] = $id;
 					}
 					// Group
-					else
+					else if ($type=='g')
 					{
 						$param = array('option' => 'bygroup', 'group_id' => $id);
 						foreach ($this->Phonebook_model->get_phonebook($param)->result() as $group)
@@ -192,6 +194,12 @@ class Messages extends MY_Controller {
 							}
 							$dest[] = $group->Number;
 						}
+					}
+					// User, share mode
+					else if ($type='u')
+					{
+						// set share user id, process later
+						$share_uid[] = $id;
 					}
 				}
 			}
@@ -341,6 +349,17 @@ class Messages extends MY_Controller {
         	}
         }
         
+        // Share message
+		if (is_array($share_uid))
+		{
+			foreach($share_uid as $id)
+			{
+				$msg_id = $this->Message_model->copy_message($this->input->post('msg_id'));
+				$this->Message_model->update_owner($msg_id, $id);
+	          	$return_msg = "<div class=\"notif\">Message successfully delivered to user inbox</div>";
+			}
+		}
+		
 		// Send the message
         if(!empty($dest))  // handles if empty numbers after any number removal process        
 		{
@@ -383,7 +402,7 @@ class Messages extends MY_Controller {
 		// Display sending status
 		echo $return_msg;
 	}
-		
+                       
 	// --------------------------------------------------------------------
 	
 	/**

@@ -185,6 +185,7 @@ else echo lang('kalkun_send_to').":";
 <tr valign="top">
 <td align="right" class="label"><?php echo lang('kalkun_message').":";?></td>
 <td>
+<?php if($val_type=='forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo $msg_id;?>" /> <?php endif;?>
 <textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;"   id="message" name="message">
 <?php 
 if($val_type=='forward') echo $message;

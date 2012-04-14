@@ -12,7 +12,7 @@ $(document).ready(function(){
 	//$(".word_count").text("");
 	//$("input#sms_loop").attr("disabled", true);
 	
-	$("#personvalue").tokenInput("<?php echo site_url('phonebook/get_phonebook');?>", {
+	$("#personvalue").tokenInput("<?php echo site_url('phonebook/get_phonebook/').'/'.(isset($source)?$source:'');?>", {
 		hintText:"<?php echo lang('tni_name_search')?>",
 		noResultsText:"No results",
 		searchingText: "<?php echo lang('tni_compose_searching'); ?>...",

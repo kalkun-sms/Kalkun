@@ -354,8 +354,10 @@ class Phonebook extends MY_Controller {
 	 *
 	 * @access	public   		 
 	 */	
-	function get_phonebook()
+	function get_phonebook($type)
 	{
+		$this->load->model('User_model');
+		
 		$q = $this->input->post('q', TRUE);
 		if (isset($q) && strlen($q) > 0)
 		{
@@ -363,7 +365,7 @@ class Phonebook extends MY_Controller {
 			$param = array('uid' => $user_id, 'query' => $q);
 			$query = $this->Phonebook_model->search_phonebook($param)->result_array();
 			
-			// Add identifier, c for contact, g for group
+			// Add identifier, c for contact, g for group, u for user
 			foreach($query as $key => $q)
 			{
 				$query[$key]['id'] = $q['id'].":c";
@@ -372,6 +374,18 @@ class Phonebook extends MY_Controller {
 			foreach($group as $key => $q)
 			{
 				$group[$key]['id'] = $q['id'].":g";
+			}
+			
+			// User, currently on inbox only
+			$user = array();
+			if ($type=='inbox')
+			{
+				$user = $this->User_model->search_user($q)->result_array();
+				foreach($user as $key => $q)
+				{
+					$user[$key]['id'] = $q['id_user'].":u";
+					$user[$key]['name'] = $q['realname'];
+				}
 			}
 			
 			// hook for contact get
@@ -385,7 +399,7 @@ class Phonebook extends MY_Controller {
 				$contact[$key]['id'] = $q['id'].":c";
 			}
 			
-			$combine = array_merge($query, $group, $contact);
+			$combine = array_merge($query, $group, $user, $contact);
 			echo json_encode($combine);
 		}
 	}
