@@ -6,11 +6,11 @@
 |--------------------------------------------------------------------------
 |
 */
-$config['kalkun_version'] = '0.4';
-$config['kalkun_codename'] = 'Toba';
-$config['kalkun_release_date'] = '03 December 2011';
+$config['kalkun_version'] = '0.5RC1';
+$config['kalkun_codename'] = 'Ubud';
+$config['kalkun_release_date'] = '15 April 2012';
 $config['kalkun_upgradeable'] = TRUE;
-$config['kalkun_previous_version'] = '0.3';
+$config['kalkun_previous_version'] = '0.4';
 
 /*
 |--------------------------------------------------------------------------
