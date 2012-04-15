@@ -690,7 +690,8 @@ class Messages extends MY_Controller {
 			$param['type'] = 'inbox';
 			$param['id_folder'] = $id_folder;
 			$param['number'] = trim($number);
-
+			$param['uid'] = $this->session->userdata('id_user');
+			
 			$config['base_url'] = site_url('/messages/conversation/my_folder/'.$type.'/'.$number.'/'.$id_folder);
 			$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
 			$config['uri_segment'] = 7;			
