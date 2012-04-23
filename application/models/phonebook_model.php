@@ -114,7 +114,7 @@ class Phonebook_model extends Model {
 			$this->db->select('*');
 			$this->db->select_as('ID', 'id_pbk');	
 			$this->db->from('pbk');
-			$this->db->where("(`id_user` = '$user_id' or `is_public` = 'true' ) AND `Number` = '{$param['number']}'");
+			$this->db->where("({$this->_protect_identifiers('id_user')} = '$user_id' or {$this->_protect_identifiers('is_public')} = 'true' ) AND {$this->_protect_identifiers('Number')} = '{$param['number']}'");
             break;
 			
 			case 'bygroup':
@@ -209,7 +209,7 @@ class Phonebook_model extends Model {
 		$this->db->from('pbk');
 		$this->db->select_as('Number', 'id');
 		$this->db->select_as('Name', 'name');
-		$this->db->where("(`id_user` = '{$param['uid']}'  OR `is_public` = 'true' )");
+		$this->db->where("({$this->_protect_identifiers('id_user')} = '{$param['uid']}'  OR {$this->_protect_identifiers('is_public')} = 'true' )");
 		$this->db->like('Name', $param['query']);
 		$this->db->order_by('Name');		
 		return $this->db->get();
@@ -229,7 +229,7 @@ class Phonebook_model extends Model {
 		$this->db->from('pbk_groups');
 		$this->db->select_as('ID', 'id');
 		$this->db->select_as('Name', 'name');
-		$this->db->where("(`pbk_groups`.`id_user` = '{$param['uid']}'  OR `is_public` = 'true' )");
+		$this->db->where("({$this->_protect_identifiers('pbk_groups')}.{$this->_protect_identifiers('id_user')} = '{$param['uid']}'  OR {$this->_protect_identifiers('is_public')} = 'true' )");
 		$this->db->like('Name', $param['query']);
 		$this->db->order_by('Name');
 		$this->db->join('user_group', 'user_group.id_pbk_groups=pbk_groups.ID');
