@@ -110,7 +110,7 @@ CREATE TABLE "plugins" (
   "plugin_system_name" varchar(255) NOT NULL,
   "plugin_name" varchar(255) DEFAULT NULL,
   "plugin_uri" varchar(120) DEFAULT NULL,
-  "plugin_version" varchar(30) NOT NULL,
+  "plugin_version" varchar(30) DEFAULT NULL,
   "plugin_description" text,
   "plugin_author" varchar(120) DEFAULT NULL,
   "plugin_author_uri" varchar(120) DEFAULT NULL,
