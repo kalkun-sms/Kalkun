@@ -6,10 +6,10 @@
 |--------------------------------------------------------------------------
 |
 */
-$config['kalkun_version'] = '0.5RC1';
+$config['kalkun_version'] = '0.5';
 $config['kalkun_codename'] = 'Ubud';
-$config['kalkun_release_date'] = '15 April 2012';
-$config['kalkun_upgradeable'] = TRUE;
+$config['kalkun_release_date'] = '1 May 2012';
+$config['kalkun_upgradeable'] = FALSE;
 $config['kalkun_previous_version'] = '0.4';
 
 /*
