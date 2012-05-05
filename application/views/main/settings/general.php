@@ -6,6 +6,7 @@
 $lang = array('czech'	=> 'Česky',
        		'english'	=> 'English',
        		'finnish'	=> 'Finnish',
+       		'french'	=> 'French',
        		'german'	=> 'German',
        		'indonesian'	=> 'Indonesian',
        		'italian'	=> 'Italian',
