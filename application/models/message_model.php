@@ -381,7 +381,7 @@ class Message_model extends Model {
 	 * @return	object
 	 */	
 	function get_messages($options = array())
-	{
+	{		
 		// default values
     	$options = $this->_default(array('type' => 'inbox'), $options);
     
@@ -391,7 +391,10 @@ class Message_model extends Model {
 		// check if it's valid type
 		if(!in_array($options['type'], $valid_type)) 
 		die('Invalid type request on class '.get_class($this).' function '.__FUNCTION__);		
-		
+
+		// if phone number is set
+		if(isset($options['number']) AND $options['number']!='sending_error') $arr_number = $this->Phonebook_model->convert_phonenumber($options['number']);
+
 		$user_folder = "user_".$options['type'];
 		$this->db->from($options['type']);
 		
@@ -427,7 +430,7 @@ class Message_model extends Model {
 		if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
 		
 		// if phone number is set
-		if(isset($options['number']) AND $options['number']!='sending_error') $this->db->where($tmp_number, $options['number']);
+		if(isset($options['number']) AND $options['number']!='sending_error') $this->db->where_in($tmp_number, $arr_number);
 		
 		// sentitems only error
 		if($options['type']=='sentitems' AND isset($options['number']) AND $options['number']=='sending_error') $this->db->where('Status', 'SendingError');

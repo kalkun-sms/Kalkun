@@ -149,6 +149,7 @@ CREATE TABLE IF NOT EXISTS `user_settings` (
   `delivery_report` enum('default','yes','no') NOT NULL DEFAULT 'default',
   `language` varchar(20) NOT NULL DEFAULT 'english',
   `conversation_sort` enum('asc','desc') NOT NULL DEFAULT 'asc',
+  `country_code` varchar(2) NOT NULL DEFAULT 'US',
   PRIMARY KEY (`id_user`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

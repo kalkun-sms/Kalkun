@@ -23,6 +23,7 @@ CREATE TABLE "user_settings" (
 	"delivery_report" text NOT NULL DEFAULT 'default',
 	"language" varchar(20) NOT NULL DEFAULT 'english',
 	"conversation_sort" text NOT NULL DEFAULT 'asc',
+	"country_code" varchar(2) NOT NULL DEFAULT 'US',
 	CHECK ("permanent_delete" IN ('true','false')),
 	CHECK ("delivery_report" IN ('default','yes','no')),
 	CHECK ("conversation_sort" IN ('asc','desc'))

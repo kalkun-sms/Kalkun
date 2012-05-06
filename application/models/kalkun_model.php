@@ -220,6 +220,7 @@ class Kalkun_model extends Model {
 				$this->db->set('permanent_delete', $this->input->post('permanent_delete'));
 				$this->db->set('delivery_report', $this->input->post('delivery_report'));
 				$this->db->set('conversation_sort', $this->input->post('conversation_sort'));
+				$this->db->set('country_code', $this->input->post('dial_code'));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user_settings');
 			break;

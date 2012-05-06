@@ -308,6 +308,7 @@ class Kalkun extends MY_Controller {
 	 */	
 	function settings()
 	{
+		$this->load->helper('country_dial_code_helper');
 		$data['title'] = 'Settings';
 		$type = $this->uri->segment(2);
 		$valid_type = array('general', 'personal', 'appearance', 'password', 'save');

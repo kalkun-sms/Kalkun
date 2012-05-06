@@ -111,10 +111,14 @@ class Phonebook_model extends Model {
 			break;
 			
 			case 'bynumber':
+			// search phone number prefix
+			$arr_number = $this->convert_phonenumber($param['number']);
+
 			$this->db->select('*');
 			$this->db->select_as('ID', 'id_pbk');	
 			$this->db->from('pbk');
-			$this->db->where("({$this->_protect_identifiers('id_user')} = '$user_id' or {$this->_protect_identifiers('is_public')} = 'true' ) AND {$this->_protect_identifiers('Number')} = '{$param['number']}'");
+			$this->db->where("({$this->_protect_identifiers('id_user')} = '$user_id' OR {$this->_protect_identifiers('is_public')} = 'true')");
+			$this->db->where_in('Number', $arr_number);
             break;
 			
 			case 'bygroup':
@@ -439,7 +443,26 @@ class Phonebook_model extends Model {
 		$this->db->delete('pbk_groups', array('ID' => $this->input->post('id'))); 
         $this->db->delete('user_group', array('id_pbk_groups' => $this->input->post('id'))); 
 	}
+
+	// --------------------------------------------------------------------
 	
+	/**
+	 * Get Phonenumber (original, localization, and internationalization )
+	 *
+	 * @access	public   		 
+	 * @param	string $number
+	 * @return array
+	 */	
+	function convert_phonenumber($number)
+	{
+		$this->load->helper('country_dial_code_helper');
+		$country_code = $this->Kalkun_model->get_setting()->row('country_code');
+		$dial_code = getCountryInformation($country_code);
+		$dial_code = '+'.$dial_code['dial_code'];
+		$number_local = str_replace($dial_code, '0', $number);
+		$number_inter = $dial_code.substr($number, 1);
+		return array($number, $number_local, $number_inter);	
+	}
 }
 
 /* End of file phonebook_model.php */
