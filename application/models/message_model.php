@@ -393,7 +393,7 @@ class Message_model extends Model {
 		die('Invalid type request on class '.get_class($this).' function '.__FUNCTION__);		
 
 		// if phone number is set
-		if(isset($options['number']) AND $options['number']!='sending_error') $arr_number = $this->Phonebook_model->convert_phonenumber($options['number']);
+		if(isset($options['number']) AND $options['number']!='sending_error') $arr_number = $this->Phonebook_model->convert_phonenumber(array('number' => $options['number']));
 
 		$user_folder = "user_".$options['type'];
 		$this->db->from($options['type']);

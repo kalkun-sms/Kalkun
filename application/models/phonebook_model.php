@@ -112,7 +112,7 @@ class Phonebook_model extends Model {
 			
 			case 'bynumber':
 			// search phone number prefix
-			$arr_number = $this->convert_phonenumber($param['number']);
+			$arr_number = $this->convert_phonenumber(array('number' => $param['number'], 'id_user' => $user_id));
 
 			$this->db->select('*');
 			$this->db->select_as('ID', 'id_pbk');	
@@ -450,18 +450,19 @@ class Phonebook_model extends Model {
 	 * Get Phonenumber (original, localization, and internationalization )
 	 *
 	 * @access	public   		 
-	 * @param	string $number
+	 * @param	array $param
 	 * @return array
 	 */	
-	function convert_phonenumber($number)
+	function convert_phonenumber($param)
 	{
+		if(!isset($param['id_user'])) $param['id_user'] = '';
 		$this->load->helper('country_dial_code_helper');
-		$country_code = $this->Kalkun_model->get_setting()->row('country_code');
+		$country_code = $this->Kalkun_model->get_setting($param['id_user'])->row('country_code');
 		$dial_code = getCountryInformation($country_code);
 		$dial_code = '+'.$dial_code['dial_code'];
-		$number_local = str_replace($dial_code, '0', $number);
-		$number_inter = $dial_code.substr($number, 1);
-		return array($number, $number_local, $number_inter);	
+		$number_local = str_replace($dial_code, '0', $param['number']);
+		$number_inter = $dial_code.substr($param['number'], 1);
+		return array($param['number'], $number_local, $number_inter);	
 	}
 }
 
