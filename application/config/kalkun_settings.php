@@ -130,6 +130,16 @@ $config['append_username_message'] = "Sender: @username";
 $config['sms_advertise'] = FALSE;
 $config['sms_advertise_message'] = "This is ads message";
 
+/*
+|--------------------------------------------------------------------------
+| Inbox Routing Use Phonebook
+|--------------------------------------------------------------------------
+|
+| If no @username found on new incoming messages, 
+| then Kalkun will check origin phonenumber on all user phonebook.
+|
+*/
+$config['inbox_routing_use_phonebook'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

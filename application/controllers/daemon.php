@@ -110,7 +110,7 @@ class Daemon extends Controller {
 	 */
     function _set_ownership($tmp_message)
     {
-    	$this->load->model(array('Message_model', 'User_model'));
+    	$this->load->model(array('Message_model', 'User_model', 'Phonebook_model'));
     	
 		// check @username tag
 		$users = $this->User_model->getUsers(array('option' => 'all'));
@@ -130,8 +130,30 @@ class Daemon extends Controller {
 			}
 		}
 		
+		// If inbox_routing_use_phonebook is enabled
+		if($this->config->item('inbox_routing_use_phonebook'))
+		{
+			foreach ($users->result() as $tmp_user)
+			{
+				$param['id_user'] = $tmp_user->id_user;
+				$param['number'] = $tmp_message->SenderNumber;
+				$param['option'] = 'bynumber';
+				$check = $this->Phonebook_model->get_phonebook($param);
+				
+				if($check->num_rows() != 0)
+				{
+					$msg_user[] =  $tmp_user->id_user;
+				}
+			}
+			
+			if(isset($msg_user))
+			{
+				$this->Message_model->update_owner($tmp_message->ID, $msg_user); 
+			}
+		}
+		
 		// if no matched username, set owner to Inbox Master
-		if($check===false)
+		if($check===false AND !isset($msg_user))
 		{
 			$this->Message_model->update_owner($tmp_message->ID, $this->config->item('inbox_owner_id'));
 			$msg_user =  $this->config->item('inbox_owner_id');
