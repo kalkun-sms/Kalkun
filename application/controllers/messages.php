@@ -338,6 +338,7 @@ class Messages extends MY_Controller {
 		$dest = do_action("message.outgoing", $dest);
 		
 		// check for field
+		$field_status = FALSE;
 		preg_match_all('/\[\[(.*?)\]\]/', $data['message'], $field_count);
         if (count($field_count[1]) > 0)
         {
@@ -350,7 +351,7 @@ class Messages extends MY_Controller {
         }
         
         // Share message
-		if (is_array($share_uid))
+		if (isset($share_uid) AND is_array($share_uid))
 		{
 			foreach($share_uid as $id)
 			{

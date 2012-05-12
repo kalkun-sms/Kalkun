@@ -354,7 +354,7 @@ class Phonebook extends MY_Controller {
 	 *
 	 * @access	public   		 
 	 */	
-	function get_phonebook($type)
+	function get_phonebook($type = NULL)
 	{
 		$this->load->model('User_model');
 		

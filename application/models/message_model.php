@@ -1188,7 +1188,7 @@ class Message_model extends Model {
 	{
 		if (!is_array($user_id))
 		{
-			$user_id[0] = $user_id;
+			$user_id = (array) $user_id;
 		}
 		
 		$count = count($user_id);
