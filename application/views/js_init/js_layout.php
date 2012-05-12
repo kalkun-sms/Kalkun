@@ -21,6 +21,16 @@ function new_notification(refreshmode)
 			
 		var newtitle = unreadcount[0] + ' ' + title;
 		$(document).attr('title', newtitle);
+				
+		// play the sound
+		if (unreadcount[0] != '')
+		{
+			$.fn.soundPlay({
+				url: "<?php echo $this->config->item('sound_path').$this->config->item('new_incoming_message_sound')?>",
+				playerId: 'embed_player',
+				command: 'play'
+			});
+		}
 	});
     
     <?php if ($this->uri->segment(2) == 'folder' || $this->uri->segment(2) == 'my_folder'): ?>  
