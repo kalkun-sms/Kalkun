@@ -238,6 +238,7 @@ class Phonebook_model extends Model {
 		$this->db->order_by('Name');
 		$this->db->join('user_group', 'user_group.id_pbk_groups=pbk_groups.ID');
 		$this->db->group_by('Name');
+		$this->db->group_by('ID');
 		return $this->db->get();
 	}	
 
