@@ -202,6 +202,6 @@ $(document).ready(function() {
 		new_notification('false');
 		return false;
 	});
-	<? endif;?>
+	<?php endif;?>
 });
 </script>
