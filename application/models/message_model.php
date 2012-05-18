@@ -864,30 +864,53 @@ class Message_model extends Model {
 			{
 				$inbox_folder=$sentitems_folder=$options['current_folder'];
 			}
-									
+			
+			// start transcation		
+			$this->db->trans_start();
+							
 			// proccess inbox
-			$this->db->set('i.id_folder', $id_folder);
-			$this->db->set('ui.trash', $trash);
-			$this->db->where('i.id_folder', $inbox_folder);
-			$this->db->where('i.SenderNumber', $number);
-			$this->db->where($this->_protect_identifiers('i.ID'), $this->_protect_identifiers('ui.id_inbox'), FALSE);
-			$update_inbox = $this->_protect_identifiers('inbox');
-			$update_inbox_alias = $this->_protect_identifiers('i');
-			$update_user_inbox = $this->_protect_identifiers('user_inbox');
-			$update_user_inbox_alias = $this->_protect_identifiers('ui');			
-			$this->db->update($update_inbox.' as '.$update_inbox_alias.', '.$update_user_inbox.' as '.$update_user_inbox_alias);
-	
+			$this->db->select('ID');
+			$this->db->from('inbox');
+			$this->db->where('id_folder', $inbox_folder);
+			$this->db->where('SenderNumber', $number);
+			$this->db->join('user_inbox', 'user_inbox.id_inbox = inbox.ID');
+			$res = $this->db->get();
+			if ($res->num_rows() > 0)
+			{
+				foreach ($res->result_array() as $row)
+				{
+					$ids[] = $row['ID'];
+				}
+				$this->db->set('id_folder', $id_folder);
+				$this->db->where_in('ID', $ids);		
+				$this->db->update('inbox');
+				$this->db->set('trash', $trash);
+				$this->db->where_in('id_inbox', $ids);
+				$this->db->update('user_inbox');
+			}
+
 			// proccess sentitems
-			$this->db->set('si.id_folder', $id_folder);
-			$this->db->set('usi.trash', $trash);
-			$this->db->where('si.id_folder', $sentitems_folder);
-			$this->db->where('si.DestinationNumber', $number);
-			$this->db->where($this->_protect_identifiers('si.ID'), $this->_protect_identifiers('usi.id_sentitems'), FALSE);
-			$update_sentitems = $this->_protect_identifiers('sentitems');
-			$update_sentitems_alias = $this->_protect_identifiers('si');
-			$update_user_sentitems = $this->_protect_identifiers('user_sentitems');
-			$update_user_sentitems_alias = $this->_protect_identifiers('usi');			
-			$this->db->update($update_sentitems.' as '.$update_sentitems_alias.', '.$update_user_sentitems.' as '.$update_user_sentitems_alias);
+			$this->db->select('ID');
+			$this->db->from('sentitems');
+			$this->db->where('id_folder', $sentitems_folder);
+			$this->db->where('DestinationNumber', $number);
+			$this->db->join('user_sentitems', 'user_sentitems.id_sentitems = sentitems.ID');
+			$res = $this->db->get();
+			if ($res->num_rows() > 0)
+			{
+				foreach($res->result_array() as $row)
+				{
+					$ids[] = $row['ID'];
+				}
+				$this->db->set('id_folder', $id_folder);
+				$this->db->where_in('ID', $ids);		
+				$this->db->update('sentitems');
+				$this->db->set('trash', $trash);
+				$this->db->where_in('id_sentitems', $ids);
+				$this->db->update('user_sentitems');
+			}
+
+			$this->db->trans_complete();
 			break;
 				
 			case 'single':
