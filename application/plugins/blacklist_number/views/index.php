@@ -1,4 +1,4 @@
-<?php $this->load->view('js_init/plugin/js_blacklist_number');?>
+<?php $this->load->view('js_blacklist_number');?>
 
 <!-- Add Blacklist dialog -->	
 <div id="blacklist-dialog" title="Add Blacklist Number" class="dialog">
