@@ -27,7 +27,7 @@ class MY_Controller  extends Controller  {
 	 *
 	 * @access	public
 	 */
-	function MY_Controller()
+	function MY_Controller($login=TRUE)
 	{
 		parent::Controller();
 		
@@ -35,18 +35,22 @@ class MY_Controller  extends Controller  {
 		if(file_exists("install")) redirect('install');	
 		
 		$this->load->library('session');
-		// session check
-		if($this->session->userdata('loggedin')==NULL) redirect('login');
-
-		$this->load->model('Kalkun_model');
 		
-		// language
-		$this->load->helper('language');
-		$lang = $this->Kalkun_model->get_setting()->row('language');
-		$this->lang->load('kalkun', $lang);
+		if($login)
+		{
+			// session check
+			if($this->session->userdata('loggedin')==NULL) redirect('login');
 			
-		// Message routine
-		$this->_message_routine();
+			$this->load->model('Kalkun_model');
+			
+			// language
+			$this->load->helper('language');
+			$lang = $this->Kalkun_model->get_setting()->row('language');
+			$this->lang->load('kalkun', $lang);
+				
+			// Message routine
+			$this->_message_routine();
+		}
 	}
 		
 	function _message_routine()
