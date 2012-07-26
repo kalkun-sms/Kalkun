@@ -116,3 +116,9 @@ CREATE TABLE "plugins" (
   "plugin_author_uri" VARCHAR(120) DEFAULT NULL,
   "plugin_data" TEXT
 );
+
+CREATE TABLE "user_forgot_password" (
+  "id_user" INTEGER PRIMARY KEY,
+  "token" VARCHAR(255) NOT NULL,
+  "valid_until" NUMERIC NOT NULL
+);

@@ -247,3 +247,16 @@ CREATE TABLE "plugins" (
   PRIMARY KEY ("plugin_id"),
   UNIQUE KEY "plugin_index" ("plugin_system_name")
 );
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table "user_forgot_password"
+--
+
+CREATE TABLE "user_forgot_password" (
+  "id_user" int(11) NOT NULL,
+  "token" varchar(255) NOT NULL,
+  "valid_until" datetime NOT NULL,
+  PRIMARY KEY ("id_user")
+);

@@ -3,7 +3,7 @@ $this->load->helper('html');
 echo doctype('xhtml1-trans');?>
 <html>
 <head>
-<title>Kalkun / Login</title>
+<title>Kalkun / Password Reset</title>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <meta name="generator" content="Geany 0.13" />
 <meta name="robots" content="noindex,nofollow">
@@ -12,7 +12,7 @@ echo doctype('xhtml1-trans');?>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-1.6.2.min.js"></script>
 <script language="javascript">
 $(document).ready(function(){
-$("#username").focus();
+$("#new_password").focus();
 });
 </script>
 <style type="text/css">
@@ -30,16 +30,14 @@ $("#username").focus();
 
 <div id="login_logo"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></div>
 <div id="login_container">
-<?php echo form_open('login'); ?>
+<?php echo form_open('login/password_reset'); ?>
 <table id="login" cellpadding="3" cellspacing="2" border="0"  class="rounded">
-<tr><td><i>Please enter your username and password</i></td></tr>
-<tr><td><label>Username</label><input type="text" name="username" id="username" style="width:95%" /></td></tr>
-<tr><td><label>Password</label><input type="password" name="password" style="width:95%" /></td></tr>
-<tr><td><div style="float: left">
-<input type="checkbox" id="remember_me" name="remember_me" /><label for="remember_me">Remember me</label></div>
-<div align="center" style="float: right; padding-right: 3px"><input type="submit" id="submit" value="Login" /></div></td></tr>
-<tr><td align="center"><a style="color: #fff" href="<?php echo site_url('login/forgot_password');?>">Forgot your password?</a></td></tr>
+<tr><td><i>Choose your new password</i></td></tr>
+<tr><td><label>New Password</label><input type="password" name="new_password" id="new_password" style="width:95%" /></td></tr>
+<tr><td><label>Verify Password</label><input type="password" name="password" style="width:95%" /></td></tr>
+<tr><td><div align="center" style="float: right; padding-right: 3px"><input type="submit" id="submit" value="Submit" /></div></td></tr>
 </table>
+<?php echo form_hidden('token', $token); ?>
 <?php echo form_close();?>
 </div>
 

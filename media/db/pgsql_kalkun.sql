@@ -118,3 +118,9 @@ CREATE TABLE "plugins" (
   "plugin_data" text,
   UNIQUE("plugin_system_name")
 );
+
+CREATE TABLE "user_forgot_password" (
+  "id_user" integer PRIMARY KEY,
+  "token" varchar(255) NOT NULL,
+  "valid_until" timestamp(0) WITHOUT time zone NOT NULL
+);

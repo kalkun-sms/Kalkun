@@ -59,8 +59,89 @@ class Kalkun_model extends Model {
 			redirect('kalkun');
 		}
 		else $this->session->set_flashdata('errorlogin', 'Your username or password are incorrect');
-	}	
-
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Forgot password
+	 *
+	 * Generate token and send token to user
+	 *
+	 * @access	public   		 
+	 */	
+	function forgot_password()
+	{		
+		$username = $this->input->post('username');
+		$phone = sha1($this->input->post('phone'));
+		$this->db->from('user');
+		$this->db->where('username', $username);
+		$this->db->or_where('phone_number', $phone);
+		$query = $this->db->get();
+		
+		if($query->num_rows()==1)
+		{
+			$this->db->from('user_forgot_password');
+			$this->db->where('id_user', $query->row('id_user'));
+			$user = $this->db->get();
+			
+			if($user->num_rows()==1)
+			{
+				$valid_token = (strtotime('now') < strtotime($user->row('valid_until'))) ? TRUE : FALSE;
+				
+				// Destroy invalid token
+				if(!$valid_token)
+				{
+					$this->db->from('user_forgot_password');
+					$this->db->where('token', $user->row('token'));
+					$this->db->delete();
+				}
+				else
+				{
+					$this->session->set_flashdata('errorlogin', 'Token already generated and still active.');
+					redirect('login/forgot_password');
+				}
+			}
+			
+			if($user->num_rows()==0 OR !$valid_token)
+			{
+				$token = md5(time());
+				$this->db->set('id_user', $query->row('id_user'));
+				$this->db->set('token', $token);
+				$this->db->set('valid_until', date('Y-m-d H:i:s', mktime(date("H"), date("i")+30, date("s"), date("m"), date("d"), date("Y"))));
+				$this->db->insert('user_forgot_password');
+				return array('phone' => $query->row('phone_number'), 'token' => $token);
+			}
+		}
+		return FALSE;
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Valid token
+	 *
+	 * Check valid token from reset password table
+	 *
+	 * @return boolean | array
+	 * @access	public   		 
+	 */	
+	function valid_token($token=NULL)
+	{
+		$this->db->from('user_forgot_password');
+		$this->db->where('token', $token);
+		$token = $this->db->get();
+		
+		if($token->num_rows()==1)
+		{
+			return $token->row_array();
+		}
+		else
+		{
+			return FALSE;	
+		}
+	}
+	
 	// --------------------------------------------------------------------
 	
 	/**
@@ -253,6 +334,22 @@ class Kalkun_model extends Model {
 		}		
 	}
 
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Update Password
+	 *
+	 * Update user password from uid
+	 *
+	 * @access	public
+	 */	
+    function update_password($uid = NULL)
+	{
+		$this->db->set('password', sha1($this->input->post('new_password')));
+		$this->db->where('id_user', $uid);
+		$this->db->update('user');
+	}
+	 
 	// --------------------------------------------------------------------
 	
 	/**
