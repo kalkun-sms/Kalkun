@@ -385,6 +385,14 @@ class Messages extends MY_Controller {
 	        	
 				for($i=1;$i<=$sms_loop;$i++) 
 				{
+					// Re-schedule if max sms limit occured
+					if($this->config->item('max_sms_sent_by_minute') != 0)
+					{
+						$minute_added = floor(($n*$sms_loop+$i) / $this->config->item('max_sms_sent_by_minute'));
+						$data['date'] = date('Y-m-d H:i:s', mktime(date('H'), 
+										date('i')+$minute_added, date('s'), date('m'), date('d'), date('Y')));;
+					}
+					
 			       	// if multiple modem is active
 			       	if($this->config->item('multiple_modem_state'))
 			       	{
