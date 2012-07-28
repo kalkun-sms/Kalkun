@@ -124,9 +124,10 @@ class b8_storage_active extends b8_storage_base
 
     protected function _get_query($tokens)
     {
-
+        # ... and fetch the data
+        $CI = &get_instance();
+        
         # Construct the query ...
-
         if (count($tokens) > 0) {
 
             $where = array();
@@ -134,17 +135,12 @@ class b8_storage_active extends b8_storage_base
             foreach ($tokens as $token) {
                 array_push($where, $token);
             }
-
-            $where = 'token IN ("' . implode('", "', $where) . '")';
+			$CI->db->where_in('token', $where);
         } else {
-            $where = 'token = "' . $token . '"';
+            $CI->db->where('token', $token);
         }
 
-        # ... and fetch the data
-        $CI = &get_instance();
-
         $CI->db->select('token, count');
-        $CI->db->where($where);
 
         $res = $CI->db->get('b8_wordlist')->result_array();
         $data = array();
@@ -210,8 +206,7 @@ class b8_storage_active extends b8_storage_base
         $CI = &get_instance();
 
         if (count($this->_deletes) > 0) {
-
-            $CI->db->where('token IN ("' . implode('", "', $this->_deletes) . '")');
+			$CI->db->where_in('token', $this->_deletes);
             $CI->db->delete('b8_wordlist');
 
             $this->_deletes = array();

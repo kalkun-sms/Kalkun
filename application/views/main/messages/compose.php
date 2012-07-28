@@ -98,7 +98,7 @@ else echo lang('kalkun_send_to').":";
 </div>
 
 <div id="import" class="hidden"><input type="file" name="import_file" id="import_file" class="text ui-widget-content ui-corner-all" /></div>
-<input type="hidden" id="import_value" name="import_value" />
+<input type="hidden" id="import_value_count" name="import_value_count" />
 </td>
 </tr>
 <?php endif; ?>
@@ -185,6 +185,7 @@ else echo lang('kalkun_send_to').":";
 <tr valign="top">
 <td align="right" class="label"><?php echo lang('kalkun_message').":";?></td>
 <td>
+<?php if($val_type=='forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo $msg_id;?>" /> <?php endif;?>
 <textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;"   id="message" name="message">
 <?php 
 if($val_type=='forward') echo $message;
@@ -197,6 +198,14 @@ if($sig_option=='true') echo "\n\n".$sig; ?>
 </div>
 </td>
 </tr>      
+<tr id="field_option" class="hidden">
+<td align="right" class="label">Select field :</td>
+<td>
+	<div style="border: 1px solid #AAA; padding: 5px; width: 96%;">
+	<input type="button" id="field_button" class="hidden field_button" value="Name" />
+	</div>
+</td>
+</tr>
 </table>
 <br />
 <?php  echo form_close();?>

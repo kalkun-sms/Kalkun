@@ -381,7 +381,7 @@ class Message_model extends Model {
 	 * @return	object
 	 */	
 	function get_messages($options = array())
-	{
+	{		
 		// default values
     	$options = $this->_default(array('type' => 'inbox'), $options);
     
@@ -391,7 +391,10 @@ class Message_model extends Model {
 		// check if it's valid type
 		if(!in_array($options['type'], $valid_type)) 
 		die('Invalid type request on class '.get_class($this).' function '.__FUNCTION__);		
-		
+
+		// if phone number is set
+		if(isset($options['number']) AND $options['number']!='sending_error') $arr_number = $this->Phonebook_model->convert_phonenumber(array('number' => $options['number']));
+
 		$user_folder = "user_".$options['type'];
 		$this->db->from($options['type']);
 		
@@ -427,7 +430,7 @@ class Message_model extends Model {
 		if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
 		
 		// if phone number is set
-		if(isset($options['number']) AND $options['number']!='sending_error') $this->db->where($tmp_number, $options['number']);
+		if(isset($options['number']) AND $options['number']!='sending_error') $this->db->where_in($tmp_number, $arr_number);
 		
 		// sentitems only error
 		if($options['type']=='sentitems' AND isset($options['number']) AND $options['number']=='sending_error') $this->db->where('Status', 'SendingError');
@@ -861,30 +864,53 @@ class Message_model extends Model {
 			{
 				$inbox_folder=$sentitems_folder=$options['current_folder'];
 			}
-									
+			
+			// start transcation		
+			$this->db->trans_start();
+							
 			// proccess inbox
-			$this->db->set('i.id_folder', $id_folder);
-			$this->db->set('ui.trash', $trash);
-			$this->db->where('i.id_folder', $inbox_folder);
-			$this->db->where('i.SenderNumber', $number);
-			$this->db->where($this->_protect_identifiers('i.ID'), $this->_protect_identifiers('ui.id_inbox'), FALSE);
-			$update_inbox = $this->_protect_identifiers('inbox');
-			$update_inbox_alias = $this->_protect_identifiers('i');
-			$update_user_inbox = $this->_protect_identifiers('user_inbox');
-			$update_user_inbox_alias = $this->_protect_identifiers('ui');			
-			$this->db->update($update_inbox.' as '.$update_inbox_alias.', '.$update_user_inbox.' as '.$update_user_inbox_alias);
-	
+			$this->db->select('ID');
+			$this->db->from('inbox');
+			$this->db->where('id_folder', $inbox_folder);
+			$this->db->where('SenderNumber', $number);
+			$this->db->join('user_inbox', 'user_inbox.id_inbox = inbox.ID');
+			$res = $this->db->get();
+			if ($res->num_rows() > 0)
+			{
+				foreach ($res->result_array() as $row)
+				{
+					$ids[] = $row['ID'];
+				}
+				$this->db->set('id_folder', $id_folder);
+				$this->db->where_in('ID', $ids);		
+				$this->db->update('inbox');
+				$this->db->set('trash', $trash);
+				$this->db->where_in('id_inbox', $ids);
+				$this->db->update('user_inbox');
+			}
+
 			// proccess sentitems
-			$this->db->set('si.id_folder', $id_folder);
-			$this->db->set('usi.trash', $trash);
-			$this->db->where('si.id_folder', $sentitems_folder);
-			$this->db->where('si.DestinationNumber', $number);
-			$this->db->where($this->_protect_identifiers('si.ID'), $this->_protect_identifiers('usi.id_sentitems'), FALSE);
-			$update_sentitems = $this->_protect_identifiers('sentitems');
-			$update_sentitems_alias = $this->_protect_identifiers('si');
-			$update_user_sentitems = $this->_protect_identifiers('user_sentitems');
-			$update_user_sentitems_alias = $this->_protect_identifiers('usi');			
-			$this->db->update($update_sentitems.' as '.$update_sentitems_alias.', '.$update_user_sentitems.' as '.$update_user_sentitems_alias);
+			$this->db->select('ID');
+			$this->db->from('sentitems');
+			$this->db->where('id_folder', $sentitems_folder);
+			$this->db->where('DestinationNumber', $number);
+			$this->db->join('user_sentitems', 'user_sentitems.id_sentitems = sentitems.ID');
+			$res = $this->db->get();
+			if ($res->num_rows() > 0)
+			{
+				foreach($res->result_array() as $row)
+				{
+					$ids[] = $row['ID'];
+				}
+				$this->db->set('id_folder', $id_folder);
+				$this->db->where_in('ID', $ids);		
+				$this->db->update('sentitems');
+				$this->db->set('trash', $trash);
+				$this->db->where_in('id_sentitems', $ids);
+				$this->db->update('user_sentitems');
+			}
+
+			$this->db->trans_complete();
 			break;
 				
 			case 'single':
@@ -1183,9 +1209,82 @@ class Message_model extends Model {
 	// Update ownership
 	function update_owner($msg_id, $user_id)
 	{
-		$data = array ('id_user' => $user_id, 'id_inbox' => $msg_id);
-		$this->db->insert('user_inbox', $data);			
+		if (!is_array($user_id))
+		{
+			$user_id = (array) $user_id;
+		}
+		
+		$count = count($user_id);
+		for ($i=0; $i<$count; $i++)
+		{
+			$this->db->where('id_user', $user_id[$i]);
+			$this->db->where('id_inbox', $msg_id);
+			$exist = $this->db->count_all_results('user_inbox');
+			if ($exist == 0)
+			{
+				$data = array ('id_user' => $user_id[$i], 'id_inbox' => $msg_id);
+				$this->db->insert('user_inbox', $data);
+			}
+			
+			// not the last element
+			if ($i != $count-1)
+			{
+				// copy message
+				$msg_id = $this->copy_message($msg_id);
+			}
+		}
 	}	
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Copy message
+	 *
+	 * @access	public   		 
+	 * @param	integer
+	 * 
+	 * @return integer
+	 */	
+	function copy_message($msg_id)
+	{
+		$data = $this->db->get_where('inbox', array('ID' => $msg_id));
+		$data = $data->row();
+		unset($data->ID);
+		$data->Processed = 'true';
+		$data->readed = 'false';
+		if (!empty($data->UDH))
+		{
+			// Generate new UDH
+			$newUDH = '';
+			for ($j=1; $j<=4; $j++)
+			{
+				$newUDH .= strtoupper(dechex(mt_rand(0, 255)));
+			}
+			$data->UDH = $newUDH.substr($data->UDH, -4);
+		}
+		$this->db->insert('inbox', $data);
+		$new_msg_id = $this->db->insert_id();
+		
+		// check multipart
+		$multipart = array('type' => 'inbox', 'option' => 'check', 'id_message' => $msg_id);
+		$tmp_check = $this->get_multipart($multipart);
+		
+		if ($tmp_check->row('UDH')!='')
+		{
+			$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'),0,8));	
+			$multipart['phone_number'] = $tmp_check->row('SenderNumber');
+			$multipart['type'] = 'inbox';				
+			foreach($this->get_multipart($multipart)->result() as $part)
+			{
+				unset($part->ID);
+				$part->Processed = 'true';
+				$data->readed = 'false';
+				$part->UDH = $newUDH.substr($part->UDH, -4);
+				$this->db->insert('inbox', $part);
+			}
+		}
+		return $new_msg_id;
+	}
     
     //Save Canned Response
     function canned_response($name,$message, $action)

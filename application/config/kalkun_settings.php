@@ -6,11 +6,11 @@
 |--------------------------------------------------------------------------
 |
 */
-$config['kalkun_version'] = '0.4';
-$config['kalkun_codename'] = 'Toba';
-$config['kalkun_release_date'] = '03 December 2011';
-$config['kalkun_upgradeable'] = TRUE;
-$config['kalkun_previous_version'] = '0.3';
+$config['kalkun_version'] = '0.5';
+$config['kalkun_codename'] = 'Ubud';
+$config['kalkun_release_date'] = '1 May 2012';
+$config['kalkun_upgradeable'] = FALSE;
+$config['kalkun_previous_version'] = '0.4';
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +70,7 @@ $config['modem_tolerant'] = '10';
 | Must be valid user ID
 |
 */
-$config['inbox_owner_id'] = '1';
+$config['inbox_owner_id'] = array('1', '2', '3');
 
 /*
 |--------------------------------------------------------------------------
@@ -130,6 +130,36 @@ $config['append_username_message'] = "Sender: @username";
 $config['sms_advertise'] = FALSE;
 $config['sms_advertise_message'] = "This is ads message";
 
+/*
+|--------------------------------------------------------------------------
+| New incoming message sound
+|--------------------------------------------------------------------------
+|
+| The sound filename (must be located on media/sound directory)
+|
+*/
+$config['new_incoming_message_sound'] = 'bird1.wav';
+
+/*
+|--------------------------------------------------------------------------
+| Max sms sent by minute
+|--------------------------------------------------------------------------
+|
+| Usefull because of some carrier is blocking massive messaging.
+|
+*/
+$config['max_sms_sent_by_minute'] = 0;
+
+/*
+|--------------------------------------------------------------------------
+| Inbox Routing Use Phonebook
+|--------------------------------------------------------------------------
+|
+| If no @username found on new incoming messages, 
+| then Kalkun will check origin phonenumber on all user phonebook.
+|
+*/
+$config['inbox_routing_use_phonebook'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

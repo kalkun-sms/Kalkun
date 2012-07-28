@@ -20,6 +20,7 @@ CREATE TABLE "user_settings" (
 	"delivery_report" TEXT NOT NULL DEFAULT 'default',
 	"language" VARCHAR(20) NOT NULL DEFAULT 'english',
 	"conversation_sort" TEXT NOT NULL DEFAULT 'asc',
+	"country_code" VARCHAR(2) NOT NULL DEFAULT 'US',
 	CHECK ("permanent_delete" IN ('true','false')),
 	CHECK ("delivery_report" IN ('default','yes','no')),
 	CHECK ("conversation_sort" IN ('asc','desc'))
@@ -114,4 +115,10 @@ CREATE TABLE "plugins" (
   "plugin_author" VARCHAR(120) DEFAULT NULL,
   "plugin_author_uri" VARCHAR(120) DEFAULT NULL,
   "plugin_data" TEXT
+);
+
+CREATE TABLE "user_forgot_password" (
+  "id_user" INTEGER PRIMARY KEY,
+  "token" VARCHAR(255) NOT NULL,
+  "valid_until" NUMERIC NOT NULL
 );

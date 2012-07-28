@@ -34,6 +34,7 @@ class Messages extends MY_Controller {
 		$param['uid'] = $this->session->userdata('id_user');
 		
 		$this->load->model('Phonebook_model');
+		$this->load->library('Plugins');
 	}
 	
 	// --------------------------------------------------------------------
@@ -61,6 +62,7 @@ class Messages extends MY_Controller {
 		{
 			$source = $this->input->post('param1');
 			$id = $this->input->post('param2');
+			$data['source'] = $source;
 			switch ($source)
 			{
 				case 'inbox':
@@ -68,6 +70,7 @@ class Messages extends MY_Controller {
 				$param['type'] = 'inbox';
 				$param['id_message'] = $id;
 				$data['message'] = $this->Message_model->get_messages($param)->row('TextDecoded');
+				$data['msg_id'] = $id;
 				
 				// check multipart
 				$multipart['type'] = 'inbox';
@@ -139,12 +142,20 @@ class Messages extends MY_Controller {
 			$this->load->library('csvreader');
 			$filePath = $_FILES["import_file"]["tmp_name"];
 			$csvData = $this->csvreader->parse_file($filePath, true);	
-			
-			foreach($csvData as $field)
+			$csvField = array_keys($csvData[0]);
+			foreach($csvData as $data)
 			{
-				$dest[] = trim($field["Number"]);
+				foreach ($csvField as $field)
+				{
+					$tmp[$field][] = trim($data[$field]);
+				}
 			}			
-			echo implode(",", $dest);
+			foreach ($csvField as $field)
+			{
+				$csv[$field] = implode(",", $tmp[$field]);
+			}
+			$csv['Field'] = $csvField;
+			echo json_encode($csv);
 			return;
 		}
 		
@@ -171,7 +182,7 @@ class Messages extends MY_Controller {
 						$dest[] = $id;
 					}
 					// Group
-					else
+					else if ($type=='g')
 					{
 						$param = array('option' => 'bygroup', 'group_id' => $id);
 						foreach ($this->Phonebook_model->get_phonebook($param)->result() as $group)
@@ -183,6 +194,12 @@ class Messages extends MY_Controller {
 							}
 							$dest[] = $group->Number;
 						}
+					}
+					// User, share mode
+					else if ($type='u')
+					{
+						// set share user id, process later
+						$share_uid[] = $id;
 					}
 				}
 			}
@@ -202,12 +219,15 @@ class Messages extends MY_Controller {
 
 			// Import from file  (CSV)
 			case 'sendoption4':
-			$tmp_dest = explode(',', $this->input->post('import_value'));
-			foreach($tmp_dest as $key => $tmp)
+			if (count($this->input->post('import_value_count') > 0))
 			{
-				$tmp = trim($tmp); // remove space
-				if(trim($tmp)!='') {
-					$dest[$key] = $tmp;
+				$tmp_dest = explode(',', $this->input->post('Number'));
+				foreach($tmp_dest as $key => $tmp)
+				{
+					$tmp = trim($tmp); // remove space
+					if(trim($tmp)!='') {
+						$dest[$key] = $tmp;
+					}
 				}
 			}
 			break;
@@ -313,7 +333,34 @@ class Messages extends MY_Controller {
                 }
             }
 		}	
-                        
+		
+		// hook for outgoing message
+		$dest = do_action("message.outgoing", $dest);
+		
+		// check for field
+		$field_status = FALSE;
+		preg_match_all('/\[\[(.*?)\]\]/', $data['message'], $field_count);
+        if (count($field_count[1]) > 0)
+        {
+        	$field_status = TRUE;
+        	$field_name = $field_count[1];
+        	foreach ($field_name as $field)
+        	{
+        		$$field = explode(',', $this->input->post($field));
+        	}
+        }
+        
+        // Share message
+		if (isset($share_uid) AND is_array($share_uid))
+		{
+			foreach($share_uid as $id)
+			{
+				$msg_id = $this->Message_model->copy_message($this->input->post('msg_id'));
+				$this->Message_model->update_owner($msg_id, $id);
+	          	$return_msg = "<div class=\"notif\">Message successfully delivered to user inbox</div>";
+			}
+		}
+		
 		// Send the message
         if(!empty($dest))  // handles if empty numbers after any number removal process        
 		{
@@ -321,12 +368,31 @@ class Messages extends MY_Controller {
 			$sms_loop = $this->input->post('sms_loop');
 			foreach($dest as $dest)
 			{
+				$backup['message'] = $data['message'];
 				$data['dest'] = $dest;
 	        	$data['SenderID'] = NULL;
 	        	$data['CreatorID'] = '';
 	        	
+	        	// change field to value
+	        	if ($field_status)
+	        	{
+        			foreach ($field_name as $field)
+        			{
+        				$field_tag = $$field;
+	        			$data['message'] = str_replace("[[{$field}]]", $field_tag[$n], $data['message']);
+        			}
+	        	}
+	        	
 				for($i=1;$i<=$sms_loop;$i++) 
 				{
+					// Re-schedule if max sms limit occured
+					if($this->config->item('max_sms_sent_by_minute') != 0)
+					{
+						$minute_added = floor(($n*$sms_loop+$i) / $this->config->item('max_sms_sent_by_minute'));
+						$data['date'] = date('Y-m-d H:i:s', mktime(date('H'), 
+										date('i')+$minute_added, date('s'), date('m'), date('d'), date('Y')));;
+					}
+					
 			       	// if multiple modem is active
 			       	if($this->config->item('multiple_modem_state'))
 			       	{
@@ -334,6 +400,7 @@ class Messages extends MY_Controller {
 			       	}
 					$this->Message_model->send_messages($data);
 				}
+				$data['message'] = $backup['message'];
 				$n++;
 			}
 			$return_msg = "<div class=\"notif\">Your message has been move to Outbox and ready for delivery.</div>";
@@ -344,7 +411,7 @@ class Messages extends MY_Controller {
 		// Display sending status
 		echo $return_msg;
 	}
-		
+                       
 	// --------------------------------------------------------------------
 	
 	/**
@@ -632,7 +699,8 @@ class Messages extends MY_Controller {
 			$param['type'] = 'inbox';
 			$param['id_folder'] = $id_folder;
 			$param['number'] = trim($number);
-
+			$param['uid'] = $this->session->userdata('id_user');
+			
 			$config['base_url'] = site_url('/messages/conversation/my_folder/'.$type.'/'.$number.'/'.$id_folder);
 			$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
 			$config['uri_segment'] = 7;			

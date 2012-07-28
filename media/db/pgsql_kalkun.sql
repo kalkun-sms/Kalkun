@@ -23,6 +23,7 @@ CREATE TABLE "user_settings" (
 	"delivery_report" text NOT NULL DEFAULT 'default',
 	"language" varchar(20) NOT NULL DEFAULT 'english',
 	"conversation_sort" text NOT NULL DEFAULT 'asc',
+	"country_code" varchar(2) NOT NULL DEFAULT 'US',
 	CHECK ("permanent_delete" IN ('true','false')),
 	CHECK ("delivery_report" IN ('default','yes','no')),
 	CHECK ("conversation_sort" IN ('asc','desc'))
@@ -110,10 +111,16 @@ CREATE TABLE "plugins" (
   "plugin_system_name" varchar(255) NOT NULL,
   "plugin_name" varchar(255) DEFAULT NULL,
   "plugin_uri" varchar(120) DEFAULT NULL,
-  "plugin_version" varchar(30) NOT NULL,
+  "plugin_version" varchar(30) DEFAULT NULL,
   "plugin_description" text,
   "plugin_author" varchar(120) DEFAULT NULL,
   "plugin_author_uri" varchar(120) DEFAULT NULL,
   "plugin_data" text,
   UNIQUE("plugin_system_name")
+);
+
+CREATE TABLE "user_forgot_password" (
+  "id_user" integer PRIMARY KEY,
+  "token" varchar(255) NOT NULL,
+  "valid_until" timestamp(0) WITHOUT time zone NOT NULL
 );

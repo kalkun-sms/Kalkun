@@ -13,7 +13,7 @@ echo doctype('xhtml1-trans');?>
 	
 	<div id="header">
 		<div id="header_left">
-			<div id="logo"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></div>
+			<div id="logo"><a href="#"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></a></div>
 			
 		</div>
 		<div id="header_right">

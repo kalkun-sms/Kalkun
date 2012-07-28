@@ -21,6 +21,16 @@ function new_notification(refreshmode)
 			
 		var newtitle = unreadcount[0] + ' ' + title;
 		$(document).attr('title', newtitle);
+				
+		// play the sound
+		if (unreadcount[0] != '')
+		{
+			$.fn.soundPlay({
+				url: "<?php echo $this->config->item('sound_path').$this->config->item('new_incoming_message_sound')?>",
+				playerId: 'embed_player',
+				command: 'play'
+			});
+		}
 	});
     
     <?php if ($this->uri->segment(2) == 'folder' || $this->uri->segment(2) == 'my_folder'): ?>  
@@ -83,6 +93,13 @@ $(document).ready(function() {
 					$("#compose_sms_container").html(data);
                     $("#compose_sms_container" ).dialog( "option", "buttons", { "Okay": function() { $(this).dialog("destroy"); } } );
 					setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+				});
+				}
+			},
+			"Send and Repeat": function() { 
+				if($("#composeForm").valid()) {
+				$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
+					$("#compose_sms_container").append(data);
 				});
 				}
 			},
@@ -185,6 +202,13 @@ $(document).ready(function() {
 		$('#a_search_dialog').dialog('open');
 		return false;
 	});
-	
+
+	<?php if ($this->uri->segment(2) != 'folder' AND $this->uri->segment(2) != 'my_folder'): ?>	
+	// logo click 
+	$('div#logo a').click(function() {
+		new_notification('false');
+		return false;
+	});
+	<?php endif;?>
 });
 </script>

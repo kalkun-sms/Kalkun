@@ -29,6 +29,7 @@ class Phonebook extends MY_Controller {
 	{
 		parent::MY_Controller();
 		$this->load->model('Phonebook_model');
+		$this->load->library('Plugins');
 	}
 
 	// --------------------------------------------------------------------
@@ -153,6 +154,10 @@ class Phonebook extends MY_Controller {
    		$param['limit'] = $config['per_page'];
    		$param['offset'] = $this->uri->segment(4,0);
    		$contacts = $this->Phonebook_model->get_phonebook($param);
+   		
+   		if($contacts->row('is_public') == 'true') $data['public_contact'] = TRUE;
+   		else $data['public_contact'] = FALSE;
+   		
    		$data['main'] = 'main/phonebook/contact/index';	
    	    $data['title'] = $contacts->row('GroupName');
    	    $data['phonebook'] = $contacts;
@@ -349,8 +354,10 @@ class Phonebook extends MY_Controller {
 	 *
 	 * @access	public   		 
 	 */	
-	function get_phonebook()
+	function get_phonebook($type = NULL)
 	{
+		$this->load->model('User_model');
+		
 		$q = $this->input->post('q', TRUE);
 		if (isset($q) && strlen($q) > 0)
 		{
@@ -358,9 +365,10 @@ class Phonebook extends MY_Controller {
 			$param = array('uid' => $user_id, 'query' => $q);
 			$query = $this->Phonebook_model->search_phonebook($param)->result_array();
 			
-			// Add identifier, c for contact, g for group
+			// Add identifier, c for contact, g for group, u for user
 			foreach($query as $key => $q)
 			{
+				$query[$key]['name'] .= ' ('.$q['id'].')';
 				$query[$key]['id'] = $q['id'].":c";
 			}
 			$group = $this->Phonebook_model->search_group($param)->result_array();
@@ -368,7 +376,31 @@ class Phonebook extends MY_Controller {
 			{
 				$group[$key]['id'] = $q['id'].":g";
 			}
-			$combine = array_merge($query, $group);
+			
+			// User, currently on inbox only
+			$user = array();
+			if ($type=='inbox')
+			{
+				$user = $this->User_model->search_user($q)->result_array();
+				foreach($user as $key => $q)
+				{
+					$user[$key]['id'] = $q['id_user'].":u";
+					$user[$key]['name'] = $q['realname'];
+				}
+			}
+			
+			// hook for contact get
+			$contact = do_action("phonebook.contact.get");
+			if (empty($contact))
+			{
+				$contact = array();
+			}
+			foreach($contact as $key => $q)
+			{
+				$contact[$key]['id'] = $q['id'].":c";
+			}
+			
+			$combine = array_merge($query, $group, $user, $contact);
 			echo json_encode($combine);
 		}
 	}

@@ -19,7 +19,18 @@ $lang_act = $this->Kalkun_model->get_setting()->row('language');
 echo form_dropdown('language', $lang, $lang_act);       
 ?>
 </td>
-</tr>     
+</tr>  
+
+<tr valign="top">
+<td>Country dial code</td>
+<td>
+<?php 
+$dial_code = getCountryDialCode(); 
+$dial_code_act = $this->Kalkun_model->get_setting()->row('country_code'); 
+echo form_dropdown('dial_code', $dial_code, $dial_code_act);
+?>
+</td>
+</tr>    
 
 <tr valign="top">
 <td><?php echo lang('tni_set_conv_sort'); ?></td>

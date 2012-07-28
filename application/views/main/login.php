@@ -38,6 +38,7 @@ $("#username").focus();
 <tr><td><div style="float: left">
 <input type="checkbox" id="remember_me" name="remember_me" /><label for="remember_me">Remember me</label></div>
 <div align="center" style="float: right; padding-right: 3px"><input type="submit" id="submit" value="Login" /></div></td></tr>
+<tr><td align="center"><a style="color: #fff" href="<?php echo site_url('login/forgot_password');?>">Forgot your password?</a></td></tr>
 </table>
 <?php echo form_close();?>
 </div>

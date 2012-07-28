@@ -149,6 +149,7 @@ CREATE TABLE IF NOT EXISTS `user_settings` (
   `delivery_report` enum('default','yes','no') NOT NULL DEFAULT 'default',
   `language` varchar(20) NOT NULL DEFAULT 'english',
   `conversation_sort` enum('asc','desc') NOT NULL DEFAULT 'asc',
+  `country_code` varchar(2) NOT NULL DEFAULT 'US',
   PRIMARY KEY (`id_user`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -264,3 +265,17 @@ CREATE TABLE IF NOT EXISTS `plugins` (
   PRIMARY KEY (`plugin_id`),
   UNIQUE KEY `plugin_index` (`plugin_system_name`) USING BTREE
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_forgot_password`
+--
+
+CREATE TABLE IF NOT EXISTS `user_forgot_password` (
+  `id_user` int(11) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `valid_until` datetime NOT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;

@@ -12,7 +12,7 @@ $(document).ready(function(){
 	//$(".word_count").text("");
 	//$("input#sms_loop").attr("disabled", true);
 	
-	$("#personvalue").tokenInput("<?php echo site_url('phonebook/get_phonebook');?>", {
+	$("#personvalue").tokenInput("<?php echo site_url('phonebook/get_phonebook/').'/'.(isset($source)?$source:'');?>", {
 		hintText:"<?php echo lang('tni_name_search')?>",
 		noResultsText:"No results",
 		searchingText: "<?php echo lang('tni_compose_searching'); ?>...",
@@ -35,11 +35,29 @@ $(document).ready(function(){
 
 	// Import CSV
 	$('#composeForm').ajaxForm({
+		dataType:  'json',
 	    success: function(data) {
-            $('#import_value').val(data);
+            var limit = data.Field.length;
+            for (var i=0; i < limit; i++) {
+            	var element = $('#import_value_count').clone().attr('id', 'import_value_' + i).attr('name', data.Field[i]);
+            	$('#import_value_count').after(element);
+            	$('#import_value_' + i).val(data[data.Field[i]]);
+            	
+            	var button = $('#field_button').clone().attr('id', 'field_button_' + i).attr('value', data.Field[i]).removeClass('hidden');
+            	$('#field_button').after(button).after(' ');
+            }
+            $('#import_value_count').val(limit);
+            $('#field_option').show();          
+            
+			// Field button
+			$('.field_button').click(function() {
+				var field = $(this).val();
+				var text = $('#message').val();
+				$('#message').val(text + '[[' + field + ']]');
+			});
         }
 	});
-		
+			
 	// validation
 	$("#composeForm").validate({
 		rules: {

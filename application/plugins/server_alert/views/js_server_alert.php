@@ -5,7 +5,7 @@ $(document).ready(function() {
 	$(".addserveralertform").validate({
 		rules: {
 			alert_name: {
-				required: true			
+				required: true
 			},
 			ip_address: {
 				required: true
@@ -32,7 +32,7 @@ $(document).ready(function() {
 			port_number: "Please enter port number",
 			timeout: "Please enter timeout",
 			phone_number: "Please enter phone number",
-			//respond_message: "Please enter respond message",
+			respond_message: "Please enter respond message",
 		}
 	});	
     
@@ -60,8 +60,6 @@ $(document).ready(function() {
 		$('#alert-dialog').dialog('open');
 	});
 
-
-	
 	// Edit alert dialog
 	$("#editalert-dialog").dialog({
 		bgiframe: true,
@@ -78,7 +76,6 @@ $(document).ready(function() {
 		}
 	});
 
-	
 	// Edit blacklist - get data
 	$('a.edit').click(function() {
 		var editid_server_alert = $(this).parents("tr:first").attr("id");

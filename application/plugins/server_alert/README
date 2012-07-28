@@ -1,0 +1,47 @@
+Server Alert
+=============
+Alert you whenever your service (eq: Web server, Mail server, Internet connection) is down
+This tool use fsockopen function to scan running service port.
+Note: Make sure your firewall not block the port scan
+
+IMPORTANT : You need php-cli(http://www.php-cli.com/) to use this plugin.
+
+Field description :
+Alert Name 		: 	The name for your alert, it's can be anything
+Host 			: 	Hostname/IP address of your server (it can be local or remote)
+Service Port 	: 	The number of running service port, eq: 80 for webserver, 25 for smtp/mail, etc.
+Connect Timeout : 	The connection timeout, in seconds. 
+Phone Number	: 	Person in charge to receive the alert message
+Respond Message	:	The alert message
+Status			:	Alert status (false if the alert get the service is down)
+
+Example : 
+You want to know if your internet connection is down. 
+Off course the computer running Kalkun must be able to connect to the internet first.
+For example you define www.google.com as a Host to test the internet connection.
+It's better to define the closest Host from you to the internet to reduce latency.
+
+Next, run the daemon, it's use cron (it's run on *nix environment) to execute script in every certain time. 
+Before that, config /application/plugins/server_alert/daemon_engine.php first. Change $uri value to your kalkun-uri.
+
+For example to run the script every minute :
+$ crontab -e
+* * * * * /usr/bin/php /var/www/html/kalkun/application/plugins/server_alert/daemon_engine.php
+
+/usr/bin/php is your php-cli program, change it if you use other path.
+/var/www/html/kalkun is location of your kalkun source. 
+
+More about cron : https://help.ubuntu.com/community/CronHowto
+
+IMPORTANT : 
+If you have many alert, detertime cron time interval is critical, this is for avoid other instances execute before current instance finish to executed.
+To determine cron time interval, you can find it on the bottom plugin dashboard.
+It will show you total time interval for your alert in seconds.
+
+For example, if it said 600 seconds. It's same as 5 minutes. Then your cron is like this :
+*/5 * * * * /usr/bin/php /var/www/html/kalkun/application/plugins/server_alert/daemon_engine.php
+
+Next, if the alert get that the service, the alert status become 'false', it's to avoid you get alert message continuously.
+To enable it again, go to Plugin -> Server Alert, there is "Release state" button to inactive alert.
+
+Note : MS Windows user might want to try cron for Windows (http://cronw.sourceforge.net/)

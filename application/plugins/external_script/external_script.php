@@ -20,7 +20,7 @@
 | key - what condition we looking at (sender or content)
 | type - pattern matching used (match or contain)
 | value - the value to matching with
-| parameter - extra parameter to send to the script (phone,content,id), each value divided by |
+| parameter - extra parameter to send to the script (phone,content,id,time), each value divided by |
 | 
 */
 function external_script_initialize()
@@ -87,6 +87,7 @@ function external_script($sms)
 	$phone = $sms->SenderNumber;
 	$content = $sms->TextDecoded;
 	$id = $sms->ID;
+	$time = $sms->ReceivingDateTime;
 	$shell_path = $config['ext_script_path'];
 			
 	// Load all rules	
@@ -125,7 +126,7 @@ function external_script($sms)
 			// build extra parameters
 			if (!empty($rule['parameter']))
 			{
-				$valid_param = array('phone','content','id');
+				$valid_param = array('phone','content','id','time');
 				$param = explode("|", $rule['parameter']);
 				
 				foreach ($param as $tmp)

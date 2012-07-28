@@ -129,6 +129,23 @@ class User_model extends Model {
 		$this->db->delete('user', array('id_user' => $id_user));
 	}
 
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Search User
+	 *
+	 * @access	public   		 
+	 * @param	string $realname
+	 * @return	object
+	 */
+	 function search_user($realname)
+	 {
+		$this->db->from('user_settings');
+		$this->db->join('user', 'user.id_user = user_settings.id_user');
+	 	$this->db->like('realname', $realname);
+		$this->db->order_by('realname');
+		return $this->db->get();
+	 }
 }	
 
 /* End of file user_model.php */

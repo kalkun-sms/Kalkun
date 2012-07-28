@@ -27,6 +27,7 @@ else {
 			$(message_row).slideUp("slow");
 		});
 	});
+	show_notification(count + ' messages deleted'); // translate
 }
 });
 /**

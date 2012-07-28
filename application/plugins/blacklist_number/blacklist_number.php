@@ -9,7 +9,10 @@
 */
 
 // Add hook for incoming message
-add_action("message.incoming.before", "blacklist_number", 10);
+add_action("message.incoming.before", "blacklist_number_incoming", 10);
+
+// Add hook for outgoing message
+add_action("message.outgoing", "blacklist_number_outgoing", 10);
 
 /**
 * Function called when plugin first activated
@@ -59,7 +62,7 @@ function blacklist_number_install()
     return true;
 }
 
-function blacklist_number($sms)
+function blacklist_number_incoming($sms)
 {
     $CI =& get_instance();
     $CI->load->model('blacklist_number/blacklist_number_model', 'plugin_model');
@@ -78,6 +81,30 @@ function blacklist_number($sms)
     	$CI->db->where('ID',$sms->ID)->delete('inbox');
     	return 'break';
     }
+}
+
+function blacklist_number_outgoing($numbers = array())
+{
+    $CI =& get_instance();
+    $CI->load->model('blacklist_number/blacklist_number_model', 'plugin_model');
+    $evil = array();
+    
+    // Get blacklist number
+    $lists = $CI->plugin_model->get('all')->result_array();
+    foreach($lists as $tmp)
+    {
+    	$evil[] = $tmp['phone_number'];
+    }
+    
+    // Delete number if it's on blacklist number
+    foreach($numbers as $key => $number)
+    {
+	    if(in_array($number, $evil))
+	    {
+	    	unset($numbers[$key]);
+	    }
+	}
+	return $numbers;
 }
 
 /* End of file blacklist_number.php */

@@ -9,7 +9,8 @@ $(document).ready(function(){
 				required: true
 			},
 			username: {
-				required: true
+				required: true,
+				maxlength: 12
 			},
 			phone_number: {
 				required: true

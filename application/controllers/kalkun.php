@@ -83,7 +83,10 @@ class Kalkun extends MY_Controller {
 		{
 		    $x[] = mktime(0, 0, 0, date("m"), date("d")-$i, date('Y'));	    
 		    $param['sms_date'] = date('Y-m-d', mktime(0,0,0,date("m"),date("d")-$i,date("Y")));
-		    $param['user_id'] = $this->session->userdata('id_user');		    
+		    if ($this->session->userdata('level')!='admin')
+		    {
+		    	$param['user_id'] = $this->session->userdata('id_user');		    
+		    }
 		    $yout[] = $this->Kalkun_model->get_sms_used('date', $param, 'out');
             $yin[] = $this->Kalkun_model->get_sms_used('date', $param,'in');
 		}
@@ -305,6 +308,7 @@ class Kalkun extends MY_Controller {
 	 */	
 	function settings()
 	{
+		$this->load->helper('country_dial_code_helper');
 		$data['title'] = 'Settings';
 		$type = $this->uri->segment(2);
 		$valid_type = array('general', 'personal', 'appearance', 'password', 'save');
