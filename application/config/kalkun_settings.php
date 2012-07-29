@@ -22,6 +22,7 @@ $config['kalkun_previous_version'] = '0.5';
 | kannel <http://kannel.org> - Experimental
 | clickatell <http://clickatell.com> - Experimental
 | ozeking <http://ozekisms.com> - Experimental
+| nowsms <http://nowsms.com> - Experimental
 | 
 */
 $config['gateway']['engine'] = 'gammu';
