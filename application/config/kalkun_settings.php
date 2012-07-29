@@ -21,7 +21,8 @@ $config['kalkun_previous_version'] = '0.5';
 | gammu <http://wammu.eu>
 | kannel <http://kannel.org> - Experimental
 | clickatell <http://clickatell.com> - Experimental
-|
+| ozeking <http://ozekisms.com> - Experimental
+| 
 */
 $config['gateway']['engine'] = 'gammu';
 $config['gateway']['url'] = 'http://localhost:13013';
