@@ -14,6 +14,17 @@ $config['kalkun_previous_version'] = '0.5';
 
 /*
 |--------------------------------------------------------------------------
+| Gateway Engine (Default to Gammu)
+|--------------------------------------------------------------------------
+|
+*/
+$config['gateway']['engine'] = 'gammu';
+$config['gateway']['url'] = 'http://localhost:13013';
+$config['gateway']['username'] = 'username';
+$config['gateway']['password'] = 'password';
+
+/*
+|--------------------------------------------------------------------------
 | Gammu Location (currently only used if you want to send WAP link)
 |--------------------------------------------------------------------------
 |
