@@ -454,7 +454,8 @@ class Messages extends MY_Controller {
 			else
 			{
 	      		$param['order_by'] = ($type=='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
-	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');				
+	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');			
+	      		$param['uid'] = $this->session->userdata('id_user');	
 				$data['messages'] = $this->Message_model->get_messages($param);
 			}
 			$this->load->view('main/messages/message_list', $data);
@@ -476,7 +477,8 @@ class Messages extends MY_Controller {
 				$param['limit'] = $config['per_page'];
 				$param['offset'] = $this->uri->segment(4,0);	
 	      		$param['order_by'] = ($type=='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
-	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');						
+	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');		
+	      		$param['uid'] = $this->session->userdata('id_user');				
 				$data['messages'] = $this->Message_model->get_messages($param);				
 			}
 			
@@ -815,6 +817,7 @@ class Messages extends MY_Controller {
 				$this->pagination->initialize($config);
 				$param['limit'] = $config['per_page'];
 				$param['offset'] = $this->uri->segment($param_needed+1,0);
+				$param['uid'] = $this->session->userdata('id_user');
 				$data['messages'] = $this->Message_model->search_messages($param)->messages;
 			}
 			break;
@@ -843,6 +846,7 @@ class Messages extends MY_Controller {
 				$this->pagination->initialize($config);
 				$param['limit'] = $config['per_page'];
 				$param['offset'] = $this->uri->segment($param_needed+1,0);		
+				$param['uid'] = $this->session->userdata('id_user');
 				$data['messages'] = $this->Message_model->search_messages($param)->messages;
 			}
 			break;
