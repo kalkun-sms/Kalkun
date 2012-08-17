@@ -39,7 +39,7 @@ class Ozeking_model extends Gammu_model {
 	
 	/**
 	 * Send Messages (Still POC)
-	 * Using HTTP API
+	 * Using HTTP API <http://ozekisms.com/index.php?ow_page_number=413>
 	 * 
 	 * @return void
 	 */	
@@ -51,5 +51,5 @@ class Ozeking_model extends Gammu_model {
 	}
 }
 
-/* End of file kannel_model.php */
+/* End of file ozeking_model.php */
 /* Location: ./application/models/gateway/ozeking_model.php */

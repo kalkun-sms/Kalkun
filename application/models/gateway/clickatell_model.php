@@ -15,7 +15,7 @@
  * Clickatell_model Class
  *
  * Handle all messages database activity 
- * for Kannel <http://clickatell.com>
+ * for Clickatell <http://clickatell.com>
  *
  * @package		Kalkun
  * @subpackage	Messages
@@ -45,7 +45,7 @@ class Clickatell_model extends Gammu_model {
 	
 	/**
 	 * Send Messages (Still POC)
-	 * Using HTTP API
+	 * Using HTTP API <http://www.clickatell.com/apis-scripts/apis/http-s/>
 	 * 
 	 * @return void
 	 */	
@@ -57,5 +57,5 @@ class Clickatell_model extends Gammu_model {
 	}
 }
 
-/* End of file kannel_model.php */
+/* End of file clikatell_model.php */
 /* Location: ./application/models/gateway/clikatell_model.php */
