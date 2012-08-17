@@ -223,6 +223,8 @@ class Gammu_model extends Model {
         if(!isset($options['number'])) if(!isset($options['search_string']))  die("No String to Search For");
 		
 		// Inbox
+		$options['type'] = 'inbox';
+		$user_folder = "user_".$options['type'];
 		$this->db->from('inbox');
         $tmp_number = 'SenderNumber'; 
 		$tmp_order = 'ReceivingDateTime';
@@ -268,6 +270,8 @@ class Gammu_model extends Model {
 		endforeach;
           
         // Sentitems              
+		$options['type'] = 'sentitems';
+		$user_folder = "user_".$options['type'];
         $this->db->from('sentitems');
 		$tmp_number = 'DestinationNumber';
 		$tmp_order = 'SendingDateTime';	
