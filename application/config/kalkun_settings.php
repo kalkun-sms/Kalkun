@@ -23,7 +23,7 @@ $config['kalkun_previous_version'] = '0.5';
 | clickatell <http://clickatell.com> - Experimental
 | ozeking <http://ozekisms.com> - Experimental
 | nowsms <http://nowsms.com> - Experimental
-| 
+| way2sms <http://way2sms.com> - Experimental
 */
 $config['gateway']['engine'] = 'gammu';
 $config['gateway']['url'] = 'http://localhost:13013';
