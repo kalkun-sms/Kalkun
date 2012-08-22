@@ -136,7 +136,7 @@ $(document).ready(function(){
 	if($this->config->item('append_username'))
 	{
 		$append_username_message = $this->config->item('append_username_message');
-		$append_username_message = str_replace("@username", "@".$this->session->userdata('username'), $append_username_message);
+		$append_username_message = "\n".str_replace("@username", "@".$this->session->userdata('username'), $append_username_message);
 		
 		$append_username_count = strlen($append_username_message);
 		echo "sms_char = sms_char - ".$append_username_count.";";		
