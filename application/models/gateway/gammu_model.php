@@ -111,7 +111,9 @@ class Gammu_model extends Model {
 			
 				// generate UDH
 				$UDH = "050003";
-				$UDH .= strtoupper(dechex(mt_rand(0, 255)));
+				$hex = dechex(mt_rand(0, 255));
+                $hex = str_pad($hex, 2, "0", STR_PAD_LEFT);
+                $UDH .= strtoupper($hex);
 				$data['UDH'] = $UDH;
 						
 				// split string
