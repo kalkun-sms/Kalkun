@@ -162,6 +162,10 @@ class Gammu_model extends Model {
 	 */		
 	function _send_message_route($tmp_data)
 	{
+        // remove spaces and dashes if any
+        $tmp_data['dest'] = str_replace(" ", "", $tmp_data['dest']);
+        $tmp_data['dest'] = str_replace("-", "", $tmp_data['dest']);
+
 		$data = array (
 				'InsertIntoDB' => date('Y-m-d H:i:s'),
 				'SendingDateTime' => $tmp_data['date'],
