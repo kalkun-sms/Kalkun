@@ -158,6 +158,7 @@ class Phonebook extends MY_Controller {
    		if($contacts->row('is_public') == 'true') $data['public_contact'] = TRUE;
    		else $data['public_contact'] = FALSE;
    		
+   		$data['group_id'] = $group_id;
    		$data['main'] = 'main/phonebook/contact/index';	
    	    $data['title'] = $contacts->row('GroupName');
    	    $data['phonebook'] = $contacts;
@@ -310,6 +311,10 @@ class Phonebook extends MY_Controller {
 		else if ($type=='message')
 		{
 			$data['number'] = $this->input->post('param1');
+		}
+		else if($type=='normal')
+		{
+			$data['group_id'] = $this->input->post('param1');
 		}
 		$this->load->view('main/phonebook/contact/add_contact', $data);	
 	}

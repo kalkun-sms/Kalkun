@@ -388,6 +388,25 @@ class Phonebook_model extends Model {
     
     // --------------------------------------------------------------------
     
+     /**
+	 * Get Groups Name for a Group ID
+	 *
+	 * @access	public   		 
+	 * @param	string $group_name
+     * @param	number $user_id
+	 * @return
+	 */	
+    function group_name($group_id, $user_id)
+    {
+       	$this->db->select('*');
+		$this->db->from('pbk_groups');
+        $this->db->where('ID', $group_id);
+		$this->db->where('id_user', $user_id);
+        return @$this->db->get()->row()->Name;
+    }
+    
+    // --------------------------------------------------------------------
+    
     /**
 	 * Get Groups for  a contact id
 	 *
