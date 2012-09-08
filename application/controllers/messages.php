@@ -1075,6 +1075,14 @@ class Messages extends MY_Controller {
 				endforeach;			
 			break;		
 			
+			case 'user':
+				$user_id = $this->session->userdata('id_user');
+				foreach($modem_list as $modem):
+				$allowed_users = $modem['value'];
+				if(in_array($user_id, $allowed_users)) $candidate_modem[] = $modem['id'];
+				endforeach;	
+			break;
+			
 			case 'round_robin': // currently only works with multiple message, not a single message
 				$candidate_modem[] = $this->_multiple_modem_round_robin($modem_list, $n);
 			break;
