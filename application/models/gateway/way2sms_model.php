@@ -62,6 +62,7 @@ class Way2sms_model extends Gammu_model {
 
     function sendWay2SMS($uid, $pwd, $phone, $msg)
     {
+
         $curl = curl_init();
         $timeout = 30;
         $result = array();
@@ -109,6 +110,9 @@ class Way2sms_model extends Gammu_model {
 
         foreach ($pharr as $p)
         {
+            if(substr($p, 0, 3) == '+91')
+                $p = substr($p, 3);
+
             if (strlen($p) != 10 || !is_numeric($p) || strpos($p, ".") != false)
             {
                 $result[] = array('phone' => $p, 'msg' => urldecode($msg), 'result' => "invalid number");
