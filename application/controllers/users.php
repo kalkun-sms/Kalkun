@@ -26,9 +26,9 @@ class Users extends MY_Controller
 	 *
 	 * @access	public
 	 */	
-	function Users()
+	function __construct()
 	{
-		parent::MY_Controller();
+		parent::__construct();
 		
 		// check level
 		if($this->session->userdata('level')!='admin')
