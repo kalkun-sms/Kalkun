@@ -1001,11 +1001,14 @@ class Gammu_model extends Model {
 				
 				foreach($inbox->result() as $tmp)
 				{
+					// start transcation    
+					$this->db->trans_start();
 					$this->db->where('ID', $tmp->id_inbox);
 					$this->db->delete('inbox');
 		
 					$this->db->where('id_inbox', $tmp->id_inbox);
-					$this->db->delete('user_inbox');					
+					$this->db->delete('user_inbox');	
+					$this->db->trans_complete();				
 				}
 				
 				// deprecated
@@ -1022,11 +1025,14 @@ class Gammu_model extends Model {
 				
 				foreach($sentitems->result() as $tmp)
 				{
+					// start transcation    
+					$this->db->trans_start();
 					$this->db->where('ID', $tmp->id_sentitems);
 					$this->db->delete('sentitems');
 		
 					$this->db->where('id_sentitems', $tmp->id_sentitems);
-					$this->db->delete('user_sentitems');					
+					$this->db->delete('user_sentitems');	
+					$this->db->trans_complete();								
 				}				
 				
 				// sentitems
@@ -1053,10 +1059,15 @@ class Gammu_model extends Model {
 				foreach($tmp_sql as $tmp):
 				//check multipart message
 				$multipart = array('type' => 'outbox', 'option' => 'check', 'id_message' => $tmp['ID']);
+				
+				// start transcation    
+				$this->db->trans_start();
+				
 				if($this->get_multipart($multipart)=='true')
 				$this->db->delete('outbox_multipart', array('ID' => $tmp['ID']));
 				
 				$this->db->delete('outbox', array('ID' => $tmp['ID']));
+				$this->db->trans_complete();				
 				endforeach;		
 				break;
 			}
@@ -1067,8 +1078,11 @@ class Gammu_model extends Model {
 			{				
 				case 'permanent':
 				foreach($tmp_id as $tmp):
+					// start transcation    
+					$this->db->trans_start();
 					$this->db->delete("user_".$source, array('id_'.$source => $tmp));
-					$this->db->delete($source, array('ID' => $tmp));				
+					$this->db->delete($source, array('ID' => $tmp));	
+					$this->db->trans_complete();
 				endforeach;
 				break;	
 				
@@ -1085,10 +1099,14 @@ class Gammu_model extends Model {
 				case 'outbox':
 				//check multipart message
 				$multipart = array('type' => 'outbox', 'option' => 'check', 'id_message' => $tmp_id[0]);
+				
+				// start transcation    
+				$this->db->trans_start();
 				if($this->get_multipart($multipart)=='true')
 				$this->db->delete('outbox_multipart', array('ID' => $tmp_id[0]));
 				
 				$this->db->delete('outbox', array('ID' => $tmp_id[0]));
+				$this->db->trans_complete();
 				break;
 			}		
 			break;		
