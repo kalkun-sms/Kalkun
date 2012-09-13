@@ -25,9 +25,9 @@ class Kalkun extends MY_Controller {
 	 *
 	 * @access	public
 	 */	
-	function Kalkun()
+	function __construct()
 	{
-		parent::MY_Controller();
+		parent::__construct();
 	}		
 		
 	// --------------------------------------------------------------------

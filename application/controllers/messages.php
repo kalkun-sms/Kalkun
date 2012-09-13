@@ -25,9 +25,9 @@ class Messages extends MY_Controller {
 	 *
 	 * @access	public
 	 */
-	function Messages()
+	function __construct()
 	{
-		parent::MY_Controller();
+		parent::__construct();
 		
 		// session check
 		if ($this->session->userdata('loggedin')==NULL) redirect('login');

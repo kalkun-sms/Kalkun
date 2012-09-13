@@ -25,9 +25,9 @@ class Install extends Controller {
 	 *
 	 * @access	public
 	 */
-	function Install()
+	function __construct()
 	{
-		parent::Controller();
+		parent::__construct();
 		if(!file_exists('./install')) die("Installation disabled.");
 		
 		// check if gammu schema already exist

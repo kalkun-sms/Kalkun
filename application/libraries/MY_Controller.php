@@ -27,9 +27,9 @@ class MY_Controller  extends Controller  {
 	 *
 	 * @access	public
 	 */
-	function MY_Controller($login=TRUE)
+	function __construct($login=TRUE)
 	{
-		parent::Controller();
+		parent::__construct();
 		
 		// installation mode
 		if(file_exists("install")) redirect('install');	

@@ -25,9 +25,9 @@ class Phonebook extends MY_Controller {
 	 *
 	 * @access	public
 	 */		
-	function Phonebook()
+	function __construct()
 	{
-		parent::MY_Controller();
+		parent::__construct();
 		$this->load->model('Phonebook_model');
 		$this->load->library('Plugins');
 	}

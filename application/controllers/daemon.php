@@ -25,11 +25,11 @@ class Daemon extends Controller {
 	 *
 	 * @access	public
 	 */				
-	function Daemon()
+	function __construct()
 	{	
 		// Commented this for allow access from other machine
 		// if($_SERVER['REMOTE_ADDR']!='127.0.0.1') exit("Access Denied.");	
-		parent::controller();
+		parent::__construct();
 		$this->load->library('Plugins');
 	}
 
