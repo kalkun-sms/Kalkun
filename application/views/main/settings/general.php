@@ -14,6 +14,7 @@ $lang = array('czech'	=> 'Česky',
        		'portuguese'	=> 'Portuguese',
        		'russian'	=> 'Russian',
             'spanish'       => 'Español',
+            'slovak'       => 'Slovak',
        		'turkish'	=> 'Turkish',
       		); 
 $lang_act = $this->Kalkun_model->get_setting()->row('language'); 
