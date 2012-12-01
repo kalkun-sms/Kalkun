@@ -17,10 +17,10 @@ class Api extends MY_Controller {
 
     function __construct()
     {
-        parent::__construct();
+        parent::__construct(FALSE);
         $this->load->model('Api_Model','api_model');
         $this->load->library('ApiSession','apisession');
-        $this->load->model('Kalkun_model');
+        $this->load->model(array('Kalkun_model', 'Message_model'));
         log_message('info','init remote access api');
         
         $this->ENDPOINT = site_url($this->ENDPOINT);
@@ -61,46 +61,34 @@ class Api extends MY_Controller {
             return 0;
         }
         
-        function sendMessage($destinationNumber,$message)
+        function sendMessage($destinationNumber = '', $message = '')
         {
             $CI =& get_instance();
+            $message = trim($message);
+            $destinationNumber	= preg_replace("/^\+/","00",$destinationNumber);
 
-            if ($CI->apisession->userdata('loggedin') == 'TRUE')
+            if(preg_match("/^\d+$/",$destinationNumber))
             {
-                $message = trim($message);
-                $destinationNumber	= preg_replace("/^\+/","00",$destinationNumber);
-
-                if(preg_match("/^\d+$/",$destinationNumber))
-                {
-                    $CI->sendMessage($destinationNumber, time(), $message,true);
-                    return 1;
-                }
-                return 0;
+                $CI->sendMessage($destinationNumber, $message, 1);
+                return 1;
             }
+            
             return 0;
         }
         
-        function sendFlashMessage($destinationNumber,$message)
+        function sendFlashMessage($destinationNumber = '', $message = '')
         {
             $CI =& get_instance();
+            $message = trim($message);
 
-            if ($CI->apisession->userdata('loggedin') == 'TRUE')
+            $destinationNumber	= preg_replace("/^\+/","00",$destinationNumber);
+
+            if(preg_match("/^\d+$/",$destinationNumber))
             {
-                $message = trim($message);
-
-                if (strlen($message) >= 159)
-                    return 0;
-
-                $destinationNumber	= preg_replace("/^\+/","00",$destinationNumber);
-
-                if(preg_match("/^\d+$/",$destinationNumber))
-                {
-                    $CI->sendMessage($destinationNumber, time(), $message,false);
-                    return 1;
-                }
-
-                return 0;
+                $CI->sendMessage($destinationNumber, $message, 0);
+                return 1;
             }
+
             return 0;
         }
         
@@ -173,11 +161,11 @@ class Api extends MY_Controller {
                 $this->ENDPOINT.'/sendFlashMessage',            // soapaction
                 'rpc',                                          // style
                 'encoded',                                      // use
-                'Send Flash SMS Message (< 160 letters)'        // documentation
+                'Send Flash SMS Message'                        // documentation
             );
             
             $this->server->register('logout',
-                array(), 	// input parameters
+                array(),                                        // input parameters
                 array('result' => 'xsd:integer'),               // output parameter
                 'urn:Api',                                      // namespace
                 $this->ENDPOINT."/logout",                      // soapaction
@@ -188,25 +176,23 @@ class Api extends MY_Controller {
         }
     }
 
-    public function sendMessage($dest = '', $date = '', $message = '', $normal = 1)
+    public function sendMessage($dest = '', $message = '', $class = 1)
     {
         //TODO - NOTIFICATIONS
         
-        // FIXME - WORKAROUND
-        if ($normal) // normal sms
-            $_POST['sms_mode'] = 1;
-        else // flash sms
-            $_POST['sms_mode'] = 0;
-            
-        $this->send($dest,$date,$message);
+        $this->send($dest, $message, $class);
     }
 
-    private function send($dest, $date, $message)
+    private function send($dest = '', $message = '', $class = 1)
     {
         $data['dest'] = $dest;
-        $data['date'] = date('Y-m-d H:i:s', $date);
+        $data['date'] = date('Y-m-d H:i:s');
         $data['message'] = $message;
-        $this->Message_model->send_messages($data);
+        $data['coding'] = 'default';
+        $data['uid'] = 1;
+        $data['class'] = $class;
+        $data['delivery_report'] = 'default';
+        return $this->Message_model->send_messages($data);
     }
 
     public function getApiVersion()
