@@ -253,8 +253,8 @@ class Phonebook_model extends Model {
 	 */		
 	function add_contact($param)
 	{
-		$param['Number'] = str_replace(' ', '', $param['Number']);
-		$param['Number'] = str_replace('-', '', $param['Number']);
+        $param['Number'] = str_replace(' ', '', $param['Number']);
+        $param['Number'] = str_replace('-', '', $param['Number']);
 		$this->db->set('Name', $param['Name']);
 		$this->db->set('Number', $param['Number']);
 		$this->db->set('id_user', $param['id_user']);

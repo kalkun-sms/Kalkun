@@ -14,25 +14,6 @@ $config['kalkun_previous_version'] = '0.5';
 
 /*
 |--------------------------------------------------------------------------
-| Gateway Engine (Default to Gammu)
-|--------------------------------------------------------------------------
-|
-| Valid engine are: 
-| gammu <http://wammu.eu>
-| kannel <http://kannel.org> - Experimental
-| clickatell <http://clickatell.com> - Experimental
-| ozeking <http://ozekisms.com> - Experimental
-| nowsms <http://nowsms.com> - Experimental
-| way2sms <http://way2sms.com> - Experimental
-*/
-$config['gateway']['engine'] = 'gammu';
-$config['gateway']['url'] = 'http://localhost:13013';
-$config['gateway']['username'] = 'username';
-$config['gateway']['password'] = 'password';
-$config['gateway']['api_id'] = 'xxx1234567890'; 
-
-/*
-|--------------------------------------------------------------------------
 | Gammu Location (currently only used if you want to send WAP link)
 |--------------------------------------------------------------------------
 |
