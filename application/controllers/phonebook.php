@@ -25,9 +25,9 @@ class Phonebook extends MY_Controller {
 	 *
 	 * @access	public
 	 */		
-	function Phonebook()
+	function __construct()
 	{
-		parent::MY_Controller();
+		parent::__construct();
 		$this->load->model('Phonebook_model');
 		$this->load->library('Plugins');
 	}
@@ -158,6 +158,7 @@ class Phonebook extends MY_Controller {
    		if($contacts->row('is_public') == 'true') $data['public_contact'] = TRUE;
    		else $data['public_contact'] = FALSE;
    		
+   		$data['group_id'] = $group_id;
    		$data['main'] = 'main/phonebook/contact/index';	
    	    $data['title'] = $contacts->row('GroupName');
    	    $data['phonebook'] = $contacts;
@@ -311,6 +312,10 @@ class Phonebook extends MY_Controller {
 		{
 			$data['number'] = $this->input->post('param1');
 		}
+		else if($type=='normal')
+		{
+			$data['group_id'] = $this->input->post('param1');
+		}
 		$this->load->view('main/phonebook/contact/add_contact', $data);	
 	}
 
@@ -368,7 +373,7 @@ class Phonebook extends MY_Controller {
 			// Add identifier, c for contact, g for group, u for user
 			foreach($query as $key => $q)
 			{
-				$query[$key]['name'] .= ' ('.$q['id'].')';
+				$query[$key]['name'] .= ' ('.str_replace('+', '', $q['id']).')';
 				$query[$key]['id'] = $q['id'].":c";
 			}
 			$group = $this->Phonebook_model->search_group($param)->result_array();

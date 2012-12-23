@@ -253,6 +253,8 @@ class Phonebook_model extends Model {
 	 */		
 	function add_contact($param)
 	{
+		$param['Number'] = str_replace(' ', '', $param['Number']);
+		$param['Number'] = str_replace('-', '', $param['Number']);
 		$this->db->set('Name', $param['Name']);
 		$this->db->set('Number', $param['Number']);
 		$this->db->set('id_user', $param['id_user']);
@@ -382,6 +384,25 @@ class Phonebook_model extends Model {
             $this->db->where('Name', $group_name);
 			$this->db->where('id_user', $user_id);
             return @$this->db->get()->row()->ID;
+    }
+    
+    // --------------------------------------------------------------------
+    
+     /**
+	 * Get Groups Name for a Group ID
+	 *
+	 * @access	public   		 
+	 * @param	string $group_name
+     * @param	number $user_id
+	 * @return
+	 */	
+    function group_name($group_id, $user_id)
+    {
+       	$this->db->select('*');
+		$this->db->from('pbk_groups');
+        $this->db->where('ID', $group_id);
+		$this->db->where('id_user', $user_id);
+        return @$this->db->get()->row()->Name;
     }
     
     // --------------------------------------------------------------------

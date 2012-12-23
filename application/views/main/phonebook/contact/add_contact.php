@@ -44,6 +44,8 @@ $(document).ready(function() {
 <label for="group"><?php echo lang('kalkun_group'); ?></label> 
 <?php if(isset($contact)): ?> 
 <input name="groups" id="groups" value="<?php echo $this->Phonebook_model->get_groups($contact->row('id_pbk'),$this->session->userdata('id_user'))->GroupNames?>" type="hidden" />
+<?php elseif(isset($group_id)):?>
+<input name="groups" id="groups" value="<?php echo $this->Phonebook_model->group_name($group_id, $this->session->userdata('id_user'))?>" type="hidden" />
 <?php else : ?>
 <input name="groups" id="groups" value=""  type="hidden" />
 <?php endif;?>

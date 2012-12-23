@@ -25,11 +25,11 @@ class Daemon extends Controller {
 	 *
 	 * @access	public
 	 */				
-	function Daemon()
+	function __construct()
 	{	
 		// Commented this for allow access from other machine
 		// if($_SERVER['REMOTE_ADDR']!='127.0.0.1') exit("Access Denied.");	
-		parent::controller();
+		parent::__construct();
 		$this->load->library('Plugins');
 	}
 
@@ -153,7 +153,7 @@ class Daemon extends Controller {
 		}
 		
 		// if no matched username, set owner to Inbox Master
-		if($check===false AND !isset($msg_user))
+		if($check===false OR !isset($msg_user))
 		{
 			$this->Message_model->update_owner($tmp_message->ID, $this->config->item('inbox_owner_id'));
 			$msg_user =  $this->config->item('inbox_owner_id');

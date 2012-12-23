@@ -26,9 +26,9 @@ class Login extends Controller
 	 *
 	 * @access	public
 	 */	
-	function Login()
+	function __construct()
 	{
-		parent::controller();
+		parent::__construct();
 		$this->load->library('session');		
 		$this->load->model('Kalkun_model');	
 	}

@@ -4,6 +4,8 @@
 <td>
 <?php 
 $lang = array('czech'	=> 'Česky',
+       		'danish'	=> 'Danish',
+       		'dutch'		=> 'Dutch',
        		'english'	=> 'English',
        		'finnish'	=> 'Finnish',
        		'french'	=> 'French',
