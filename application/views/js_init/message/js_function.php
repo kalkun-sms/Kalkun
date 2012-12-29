@@ -37,6 +37,8 @@ $(document).ready(function() {
 	$("a.global_delete").live('click', action_delete = function()
 	{
 		var count = $("input.select_conversation:checkbox:checked").length;
+        var notif = count + ' conversation deleted';
+
 		if(count==0) 
 		{ 
 			show_notification("<?php echo lang('tni_msg_no_conv_selected')?>");
@@ -46,13 +48,19 @@ $(document).ready(function() {
 			$("input.select_conversation:checked").each(function() 
 			{
 				var message_row = $(this).parents('div:eq(2)');
-				$.post(delete_url + source, {type: 'conversation', number: $(this).val(), current_folder: current_folder}, function() 
+                $.ajaxSetup({async: false});
+				$.post(delete_url + source, {type: 'conversation', number: $(this).val(), current_folder: current_folder}, function(data) 
 				{
-					$(message_row).slideUp("slow");
-					$(message_row).remove();
+                    if (!data) {
+                        $(message_row).slideUp("slow");
+                        $(message_row).remove();
+                    }
+                    else {
+                        notif = data;
+                    }
 				});
 			});
-			show_notification(count + ' conversation deleted'); // translate
+			show_notification(notif); // translate
 		}
 	});
     

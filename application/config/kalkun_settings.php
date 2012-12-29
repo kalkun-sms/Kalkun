@@ -163,6 +163,16 @@ $config['inbox_routing_use_phonebook'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
+| Only admin can permanently delete
+|--------------------------------------------------------------------------
+|
+| Prevent non-admin user from permanently delete message
+|
+*/
+$config['only_admin_can_permanently_delete'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
 | Registration (Not implemented yet)
 |--------------------------------------------------------------------------
 |

@@ -952,6 +952,12 @@ class Messages extends MY_Controller {
             else if (isset($param['current_folder']) && $param['current_folder']=='6') $param['option'] = 'permanent';
 			else $param['option'] = 'temp';	
 		}
+
+        if($param['option'] == 'permanent' AND $this->config->item('only_admin_can_permanently_delete') AND $this->session->userdata('level') != 'admin')
+        {
+            echo 'Only administrator can permanently delete message';
+            exit;
+        }
 				
 		if($param['type']=='single' && $param['source']=='inbox')
 		{
