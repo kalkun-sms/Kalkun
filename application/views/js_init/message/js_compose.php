@@ -150,8 +150,12 @@ $(document).ready(function(){
 	var length = $(this).val().length;  
 	var message = Math.ceil(length/sms_char);
 	$(this).parent().find('.counter').html( length + ' ' + text_character + ' / ' + message + ' ' + text_message);  
-		$(this).keyup(function(){  
-			var new_length = $(this).val().length;  
+		$(this).keyup(function(){ 
+			var new_length = $(this).val().length;
+            var str=$(this).val();
+            var n=str.match(/\^|\{|\}|\\|\[|\]|\~|\||\€/g);
+            n = (n) ? n.length : 0;
+            new_length = new_length + n;
 			var message = Math.ceil(new_length/sms_char);
 			 $(this).parent().find('.counter').html( new_length + ' ' + text_character + ' / ' + message + ' ' + text_message);  
 		});  
