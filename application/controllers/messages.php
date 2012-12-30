@@ -51,7 +51,7 @@ class Messages extends MY_Controller {
 		$this->load->helper(array('form','kalkun'));
 		
 		// register valid type
-		$val_type = array('normal', 'reply', 'forward', 'member', 'pbk_contact', 'pbk_groups');
+		$val_type = array('normal', 'reply', 'forward', 'member', 'pbk_contact', 'pbk_groups', 'all_contacts');
 		$type = $this->input->post('type');
 		if(!in_array($type, $val_type)) die('Invalid type on compose');
 		
@@ -249,6 +249,15 @@ class Messages extends MY_Controller {
 			// Phonebook group
 			case 'pbk_groups':
 			$param = array('option' => 'bygroup', 'group_id' => $this->input->post('id_pbk'));
+			foreach($this->Phonebook_model->get_phonebook($param)->result() as $tmp)
+			{
+				$dest[] = $tmp->Number;
+			}
+			break;					
+
+			// All contacts
+			case 'all_contacts':
+			$param = array('option' => 'all');
 			foreach($this->Phonebook_model->get_phonebook($param)->result() as $tmp)
 			{
 				$dest[] = $tmp->Number;

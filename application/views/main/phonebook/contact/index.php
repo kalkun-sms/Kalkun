@@ -50,6 +50,7 @@
 <div id="window_title">
 	<div id="window_title_left"><?php echo $title; ?></div>
 	<div id="window_title_right">
+	<a href="#" id="sendallcontact" class="nicebutton">&#43; <?php echo lang('kalkun_send_to_all_contacts'); ?></a>
 	<a href="#" id="addpbkcontact_wizard" class="nicebutton">&#43; <?php echo lang('tni_contact_add'); ?></a>
      <?php if($public_contact) : ?>
 	<a href="<?php echo site_url('phonebook/');?>" class="nicebutton">&#43; <?php echo lang('kalkun_my_contact');?></a>

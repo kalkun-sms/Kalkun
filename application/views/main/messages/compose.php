@@ -65,6 +65,15 @@ endif;
 <input type="hidden" name="id_pbk" value="<?php echo $dest;?>" />
 </td>    
 </tr>
+
+<?php /* All Contacts */ elseif($val_type=='all_contacts'):?>
+<tr>
+<td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
+<td>
+<?php echo lang('kalkun_all_contacts'); ?>
+<input type="hidden" name="sendoption" value="all_contacts" />
+</td>    
+</tr>
     	
 <?php /* Forward to option */ else: ?>
 <tr>

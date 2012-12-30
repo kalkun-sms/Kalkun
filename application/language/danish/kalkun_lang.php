@@ -49,6 +49,8 @@ $lang['kalkun_signal'] = "Signal";
 
 // Phonebook
 $lang['kalkun_contact'] = "Kontakt";
+$lang['kalkun_all_contacts'] = "All Contacts";
+$lang['kalkun_send_to_all_contacts'] = "Send To All Contacts";
 $lang['kalkun_group'] = "Grupper";
 $lang['kalkun_add_to_group'] = "Føj til gruppe";
 $lang['kalkun_delete_from_group'] = "Fjern fra gruppe";
