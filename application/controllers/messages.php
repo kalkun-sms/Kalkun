@@ -25,9 +25,9 @@ class Messages extends MY_Controller {
 	 *
 	 * @access	public
 	 */
-	function Messages()
+	function __construct()
 	{
-		parent::MY_Controller();
+		parent::__construct();
 		
 		// session check
 		if ($this->session->userdata('loggedin')==NULL) redirect('login');
@@ -51,7 +51,7 @@ class Messages extends MY_Controller {
 		$this->load->helper(array('form','kalkun'));
 		
 		// register valid type
-		$val_type = array('normal', 'reply', 'forward', 'member', 'pbk_contact', 'pbk_groups');
+		$val_type = array('normal', 'reply', 'forward', 'member', 'pbk_contact', 'pbk_groups', 'all_contacts');
 		$type = $this->input->post('type');
 		if(!in_array($type, $val_type)) die('Invalid type on compose');
 		
@@ -249,6 +249,15 @@ class Messages extends MY_Controller {
 			// Phonebook group
 			case 'pbk_groups':
 			$param = array('option' => 'bygroup', 'group_id' => $this->input->post('id_pbk'));
+			foreach($this->Phonebook_model->get_phonebook($param)->result() as $tmp)
+			{
+				$dest[] = $tmp->Number;
+			}
+			break;					
+
+			// All contacts
+			case 'all_contacts':
+			$param = array('option' => 'all');
 			foreach($this->Phonebook_model->get_phonebook($param)->result() as $tmp)
 			{
 				$dest[] = $tmp->Number;
@@ -454,7 +463,8 @@ class Messages extends MY_Controller {
 			else
 			{
 	      		$param['order_by'] = ($type=='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
-	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');				
+	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');			
+	      		$param['uid'] = $this->session->userdata('id_user');	
 				$data['messages'] = $this->Message_model->get_messages($param);
 			}
 			$this->load->view('main/messages/message_list', $data);
@@ -476,7 +486,8 @@ class Messages extends MY_Controller {
 				$param['limit'] = $config['per_page'];
 				$param['offset'] = $this->uri->segment(4,0);	
 	      		$param['order_by'] = ($type=='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
-	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');						
+	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');		
+	      		$param['uid'] = $this->session->userdata('id_user');				
 				$data['messages'] = $this->Message_model->get_messages($param);				
 			}
 			
@@ -531,7 +542,8 @@ class Messages extends MY_Controller {
 			else
 			{
 	      		$param['order_by'] = ($type=='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
-	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');				
+	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
+	      		$param['uid'] = $this->session->userdata('id_user');				
 				$data['messages'] = $this->Message_model->get_messages($param);				
 			}			
 			$this->load->view('main/messages/message_list', $data);
@@ -553,7 +565,8 @@ class Messages extends MY_Controller {
 				$param['limit'] = $config['per_page'];
 				$param['offset'] = $this->uri->segment(5,0);
 	      		$param['order_by'] = ($type=='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
-	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');						
+	      		$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');	
+	      		$param['uid'] = $this->session->userdata('id_user');					
 				$data['messages'] = $this->Message_model->get_messages($param);					
 			}
 			$config['base_url'] = site_url('/messages/my_folder/'.$type.'/'.$id_folder);
@@ -815,6 +828,7 @@ class Messages extends MY_Controller {
 				$this->pagination->initialize($config);
 				$param['limit'] = $config['per_page'];
 				$param['offset'] = $this->uri->segment($param_needed+1,0);
+				$param['uid'] = $this->session->userdata('id_user');
 				$data['messages'] = $this->Message_model->search_messages($param)->messages;
 			}
 			break;
@@ -843,6 +857,7 @@ class Messages extends MY_Controller {
 				$this->pagination->initialize($config);
 				$param['limit'] = $config['per_page'];
 				$param['offset'] = $this->uri->segment($param_needed+1,0);		
+				$param['uid'] = $this->session->userdata('id_user');
 				$data['messages'] = $this->Message_model->search_messages($param)->messages;
 			}
 			break;
@@ -946,6 +961,12 @@ class Messages extends MY_Controller {
             else if (isset($param['current_folder']) && $param['current_folder']=='6') $param['option'] = 'permanent';
 			else $param['option'] = 'temp';	
 		}
+
+        if($param['option'] == 'permanent' AND $this->config->item('only_admin_can_permanently_delete') AND $this->session->userdata('level') != 'admin')
+        {
+            echo 'Only administrator can permanently delete message';
+            exit;
+        }
 				
 		if($param['type']=='single' && $param['source']=='inbox')
 		{
@@ -1068,6 +1089,14 @@ class Messages extends MY_Controller {
 				if(in_array($phone_number, $dest_phone_number)) $candidate_modem[] = $modem['id'];
 				endforeach;			
 			break;		
+			
+			case 'user':
+				$user_id = $this->session->userdata('id_user');
+				foreach($modem_list as $modem):
+				$allowed_users = $modem['value'];
+				if(in_array($user_id, $allowed_users)) $candidate_modem[] = $modem['id'];
+				endforeach;	
+			break;
 			
 			case 'round_robin': // currently only works with multiple message, not a single message
 				$candidate_modem[] = $this->_multiple_modem_round_robin($modem_list, $n);

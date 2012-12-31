@@ -20,6 +20,7 @@ $lang['kalkun_action'] = "Action";
 
 $lang['kalkun_phonebook'] = "Répertoire";
 $lang['kalkun_setting'] = "Paramètres";
+$lang['kalkun_filters'] = "Filters";
 $lang['kalkun_about'] = "De";
 $lang['kalkun_logout'] = "Déconnexion";
 
@@ -49,6 +50,8 @@ $lang['kalkun_signal'] = "Signal";
 
 // Phonebook
 $lang['kalkun_contact'] = "Contact";
+$lang['kalkun_all_contacts'] = "All Contacts";
+$lang['kalkun_send_to_all_contacts'] = "Send To All Contacts";
 $lang['kalkun_group'] = "Groupes";
 $lang['kalkun_add_to_group'] = "Ajouter au groupe";
 $lang['kalkun_delete_from_group'] = "Supprimer du groupe";
@@ -201,6 +204,9 @@ $lang['kalkun_setting_passwd_new_enter'] = "Entrer votre nouveau mot de passe";
 
 $lang['kalkun_level_admin'] = "Administrateur";
 $lang['kalkun_level_user'] = "Utilisateur";
+
+$lang['kalkun_filter_add'] = "Create a new filter";
+$lang['kalkun_filter_has_the_words'] = "Has the words";
 
 // SMS Content/Member
 $lang['kalkun_sms_member'] = "Membre";

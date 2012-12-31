@@ -37,6 +37,8 @@ function external_script_initialize()
 	$config['ext_script'][1]['type'] = 'contain';
 	$config['ext_script'][1]['value'] = '+62';
 	$config['ext_script'][1]['parameter'] = 'phone|content';
+	
+	return $config;
 }
 
 // Add hook for incoming message

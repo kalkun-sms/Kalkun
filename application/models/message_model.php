@@ -111,7 +111,9 @@ class Message_model extends Model {
 			
 				// generate UDH
 				$UDH = "050003";
-				$UDH .= strtoupper(dechex(mt_rand(0, 255)));
+				$hex = dechex(mt_rand(0, 255));
+                $hex = str_pad($hex, 2, "0", STR_PAD_LEFT);
+                $UDH .= strtoupper($hex);
 				$data['UDH'] = $UDH;
 						
 				// split string
@@ -160,6 +162,10 @@ class Message_model extends Model {
 	 */		
 	function _send_message_route($tmp_data)
 	{
+        // remove spaces and dashes if any
+        $tmp_data['dest'] = str_replace(" ", "", $tmp_data['dest']);
+        $tmp_data['dest'] = str_replace("-", "", $tmp_data['dest']);
+
 		$data = array (
 				'InsertIntoDB' => date('Y-m-d H:i:s'),
 				'SendingDateTime' => $tmp_data['date'],
@@ -223,6 +229,8 @@ class Message_model extends Model {
         if(!isset($options['number'])) if(!isset($options['search_string']))  die("No String to Search For");
 		
 		// Inbox
+		$options['type'] = 'inbox';
+		$user_folder = "user_".$options['type'];
 		$this->db->from('inbox');
         $tmp_number = 'SenderNumber'; 
 		$tmp_order = 'ReceivingDateTime';
@@ -268,6 +276,8 @@ class Message_model extends Model {
 		endforeach;
           
         // Sentitems              
+		$options['type'] = 'sentitems';
+		$user_folder = "user_".$options['type'];
         $this->db->from('sentitems');
 		$tmp_number = 'DestinationNumber';
 		$tmp_order = 'SendingDateTime';	
@@ -991,11 +1001,14 @@ class Message_model extends Model {
 				
 				foreach($inbox->result() as $tmp)
 				{
+					// start transcation    
+					$this->db->trans_start();
 					$this->db->where('ID', $tmp->id_inbox);
 					$this->db->delete('inbox');
 		
 					$this->db->where('id_inbox', $tmp->id_inbox);
-					$this->db->delete('user_inbox');					
+					$this->db->delete('user_inbox');	
+					$this->db->trans_complete();				
 				}
 				
 				// deprecated
@@ -1012,11 +1025,14 @@ class Message_model extends Model {
 				
 				foreach($sentitems->result() as $tmp)
 				{
+					// start transcation    
+					$this->db->trans_start();
 					$this->db->where('ID', $tmp->id_sentitems);
 					$this->db->delete('sentitems');
 		
 					$this->db->where('id_sentitems', $tmp->id_sentitems);
-					$this->db->delete('user_sentitems');					
+					$this->db->delete('user_sentitems');	
+					$this->db->trans_complete();								
 				}				
 				
 				// sentitems
@@ -1043,10 +1059,15 @@ class Message_model extends Model {
 				foreach($tmp_sql as $tmp):
 				//check multipart message
 				$multipart = array('type' => 'outbox', 'option' => 'check', 'id_message' => $tmp['ID']);
+				
+				// start transcation    
+				$this->db->trans_start();
+				
 				if($this->get_multipart($multipart)=='true')
 				$this->db->delete('outbox_multipart', array('ID' => $tmp['ID']));
 				
 				$this->db->delete('outbox', array('ID' => $tmp['ID']));
+				$this->db->trans_complete();				
 				endforeach;		
 				break;
 			}
@@ -1057,8 +1078,11 @@ class Message_model extends Model {
 			{				
 				case 'permanent':
 				foreach($tmp_id as $tmp):
+					// start transcation    
+					$this->db->trans_start();
 					$this->db->delete("user_".$source, array('id_'.$source => $tmp));
-					$this->db->delete($source, array('ID' => $tmp));				
+					$this->db->delete($source, array('ID' => $tmp));	
+					$this->db->trans_complete();
 				endforeach;
 				break;	
 				
@@ -1075,10 +1099,14 @@ class Message_model extends Model {
 				case 'outbox':
 				//check multipart message
 				$multipart = array('type' => 'outbox', 'option' => 'check', 'id_message' => $tmp_id[0]);
+				
+				// start transcation    
+				$this->db->trans_start();
 				if($this->get_multipart($multipart)=='true')
 				$this->db->delete('outbox_multipart', array('ID' => $tmp_id[0]));
 				
 				$this->db->delete('outbox', array('ID' => $tmp_id[0]));
+				$this->db->trans_complete();
 				break;
 			}		
 			break;		

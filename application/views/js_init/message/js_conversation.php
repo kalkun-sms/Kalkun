@@ -18,16 +18,23 @@ if(count==0) {
 	$('.notification_area').show();
 }
 else {
+    var notif = count + ' messages deleted';
 	$("input.select_message:checked").each( function () {
 	   var message_row = $(this).parents('div:eq(2)');
          id_access = '#item_source'+$(this).val();
          item_folder =  $(id_access).val();
          dest_url = base + item_folder;
-		$.post(dest_url, {type: 'single', id: $(this).val(), current_folder: current_folder}, function() {
-			$(message_row).slideUp("slow");
+        $.ajaxSetup({async: false});
+		$.post(dest_url, {type: 'single', id: $(this).val(), current_folder: current_folder}, function(data) {
+            if (!data) {
+                $(message_row).slideUp("slow");
+            }
+            else {
+                notif = data;
+            }
 		});
 	});
-	show_notification(count + ' messages deleted'); // translate
+	show_notification(notif); // translate
 }
 });
 /**

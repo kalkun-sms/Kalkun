@@ -23,6 +23,7 @@ b8 Bayesian spam filter 0.5.2 <http://nasauber.de/opensource/b8/>
 Country Dial Code <http://ninetwozero.com/2011/12/04/php-country-array-with-dial-codes/>
 JQuery sound plugin <http://www.esblog.in/2010/08/playing-sound-file-using-jquery-sound-plugin/>
 Bird sound <http://www.ndrr.com/rmr_faq/Sounds/bird1.wav>
+jQuery Word/Character Counter <http://www.jamesfairhurst.co.uk/posts/view/jquery_word_character_counter>
 
 Developer
 ==========
@@ -33,12 +34,14 @@ Kinshuk Bairagi <kinshuk1989@gmail.com>
 
 Translator
 ===========
-Bahasa - Azhari Harahap <azhari@harahap.us>
 Czech - Michal Čihař <michal@cihar.com>
+Danish - Mikkel Munch Mortensen <3xm@detfalskested.dk>
+Dutch - Bas Goes <befjes@gmail.com>
 English - Azhari Harahap <azhari@harahap.us>
 Finnish - Samuli Valavuo <svalavuo@gmail.com>
 French - Manue Caliot, Martin Deschamps <zaouh1@gmail.com>
 German - Thomas Freislich <thomas.freislich@gmail.com>, oachkatzlschwaf <https://github.com/oachkatzlschwaf>
+Indonesian - Azhari Harahap <azhari@harahap.us>
 Italian - Luca Meneghesso <lucamene@libero.it>
 Portuguese - Joao Barros <profitcode@gmail.com>
 Russian - Denis Polkovnikov <denis.polkovnikov@gmail.com>

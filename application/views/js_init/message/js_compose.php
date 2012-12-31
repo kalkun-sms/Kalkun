@@ -136,7 +136,7 @@ $(document).ready(function(){
 	if($this->config->item('append_username'))
 	{
 		$append_username_message = $this->config->item('append_username_message');
-		$append_username_message = str_replace("@username", "@".$this->session->userdata('username'), $append_username_message);
+		$append_username_message = "\n".str_replace("@username", "@".$this->session->userdata('username'), $append_username_message);
 		
 		$append_username_count = strlen($append_username_message);
 		echo "sms_char = sms_char - ".$append_username_count.";";		
@@ -150,8 +150,12 @@ $(document).ready(function(){
 	var length = $(this).val().length;  
 	var message = Math.ceil(length/sms_char);
 	$(this).parent().find('.counter').html( length + ' ' + text_character + ' / ' + message + ' ' + text_message);  
-		$(this).keyup(function(){  
-			var new_length = $(this).val().length;  
+		$(this).keyup(function(){ 
+			var new_length = $(this).val().length;
+            var str=$(this).val();
+            var n=str.match(/\^|\{|\}|\\|\[|\]|\~|\||\€/g);
+            n = (n) ? n.length : 0;
+            new_length = new_length + n;
 			var message = Math.ceil(new_length/sms_char);
 			 $(this).parent().find('.counter').html( new_length + ' ' + text_character + ' / ' + message + ' ' + text_message);  
 		});  

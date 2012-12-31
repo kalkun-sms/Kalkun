@@ -1,15 +1,14 @@
- 
-ALTER TABLE `user_settings` ADD `country_code` varchar(2) NOT NULL DEFAULT 'US';
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_forgot_password`
+-- Table structure for table `user_filters`
 --
 
-CREATE TABLE IF NOT EXISTS `user_forgot_password` (
+CREATE TABLE IF NOT EXISTS `user_filters` (
+  `id_filter` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `valid_until` datetime NOT NULL,
-  PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `from` varchar(15) NOT NULL,
+  `has_the_words` varchar(50) NOT NULL,
+  `id_folder` int(11) NOT NULL,
+  PRIMARY KEY (`id_filter`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

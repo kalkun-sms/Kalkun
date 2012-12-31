@@ -25,9 +25,9 @@ class Kalkun extends MY_Controller {
 	 *
 	 * @access	public
 	 */	
-	function Kalkun()
+	function __construct()
 	{
-		parent::MY_Controller();
+		parent::__construct();
 	}		
 		
 	// --------------------------------------------------------------------
@@ -74,26 +74,74 @@ class Kalkun extends MY_Controller {
 	 *
 	 * Get statistic data that used to render the graph
 	 *
+     * @param string (days, weeks, months)
 	 * @access	public   		 
 	 */	
-	function get_statistic()
+	function get_statistic($type = 'days')
 	{
-		// generate 7 data points
-		for ($i=0; $i<=7; $i++)
+        // count number of days
+        switch ($type)
+        {
+            case 'days':
+            default:
+                $days = 10;
+                $format = 'M-d';
+            break;
+
+            case 'weeks':
+                $days = 30;
+                $format = 'W';
+                $prefix = ucwords(lang('kalkun_week')).' ';
+            break;
+
+            case 'months':
+                $days = 60;
+                $format = 'M-Y';
+            break;
+        }
+
+		// generate data points
+        $x = array();
+		for ($i=0; $i<=$days; $i++)
 		{
-		    $x[] = mktime(0, 0, 0, date("m"), date("d")-$i, date('Y'));	    
+		    $key = date($format, mktime(0, 0, 0, date("m"), date("d")-$i, date('Y')));
+
+            if (isset($prefix)) 
+            {
+                $key = $prefix.$key;
+            }
+
+            if(!isset($yout[$key]))
+            {
+                $yout[$key] = 0;
+            }
+
+            if(!isset($yin[$key]))
+            {
+                $yin[$key] = 0;
+            }
+
+            if(!in_array($key, $x))
+            {
+                $x[] = $key;
+            }
+
 		    $param['sms_date'] = date('Y-m-d', mktime(0,0,0,date("m"),date("d")-$i,date("Y")));
 		    if ($this->session->userdata('level')!='admin')
 		    {
 		    	$param['user_id'] = $this->session->userdata('id_user');		    
 		    }
-		    $yout[] = $this->Kalkun_model->get_sms_used('date', $param, 'out');
-            $yin[] = $this->Kalkun_model->get_sms_used('date', $param,'in');
+		    $yout[$key] += $this->Kalkun_model->get_sms_used('date', $param, 'out');
+            $yin[$key] += $this->Kalkun_model->get_sms_used('date', $param,'in');
 		}
-		$this->_render_statistic($x, $yout,  $yin, 'bar' );
+
+        $yout = array_values($yout);
+        $yin = array_values($yin);
+        $points = count($x)-1;
+		$this->_render_statistic($x, $yout,  $yin, 'bar', $points);
 	}
 	
-	function _render_statistic($x = array(), $yout = array(),  $yin = array(), $type='bar'  )
+	function _render_statistic($x = array(), $yout = array(),  $yin = array(), $type='bar', $points)
 	{
 		$this->load->helper('date');
 		$this->load->library('OpenFlashChartLib', NULL, 'OFCL');
@@ -104,9 +152,9 @@ class Kalkun extends MY_Controller {
 		switch($type)
 		{	
 			case 'bar':
-				for($i=0; $i<=7;$i++)
+				for($i=0; $i<=$points;$i++)
 				{
-				    $data_1[$i] = date('M-d', $x[$i]);
+				    $data_1[$i] = $x[$i];
 				    $data_2[$i] = (int)$yout[$i]; // force to integer
                     $data_3[$i] = (int)$yin[$i]; // force to integer
 				}				
@@ -205,7 +253,6 @@ class Kalkun extends MY_Controller {
 		$chart = new open_flash_chart();
 		$chart->add_element($element1);
         $chart->add_element($element2);
-        $chart->set_title(lang('kalkun_statistic_title'));
 		$chart->set_x_axis($x);
 		$chart->set_y_axis($y);
 		
@@ -311,7 +358,7 @@ class Kalkun extends MY_Controller {
 		$this->load->helper('country_dial_code_helper');
 		$data['title'] = 'Settings';
 		$type = $this->uri->segment(2);
-		$valid_type = array('general', 'personal', 'appearance', 'password', 'save');
+		$valid_type = array('general', 'personal', 'appearance', 'password', 'save', 'filters');
 		if(!in_array($type, $valid_type)) show_404();
 		
 		if($_POST && $type=='save') { 		
@@ -337,10 +384,29 @@ class Kalkun extends MY_Controller {
 			$this->session->set_flashdata('notif', 'Your settings has been saved');
 			redirect('settings/'.$option);
 		}
+
+        if($type == 'filters')
+        {
+            $data['filters'] = $this->Kalkun_model->get_filters($this->session->userdata('id_user'));
+            $data['my_folders'] = $this->Kalkun_model->get_folders('all');
+        }
+
 		$data['main'] = 'main/settings/setting';
 		$data['settings'] = $this->Kalkun_model->get_setting();
 		$data['type'] = 'main/settings/'.$type;
 		$this->load->view('main/layout', $data);
+	}
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Delete Filter
+	 *
+	 * @access	public
+	 */		
+	function delete_filter($id_filter=NULL)
+	{
+		$this->Kalkun_model->delete_filter($id_filter);
 	}
 	
 }

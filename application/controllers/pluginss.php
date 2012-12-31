@@ -25,9 +25,9 @@ class Pluginss extends MY_Controller {
 	 *
 	 * @access	public
 	 */		
-	function Pluginss()
+	function __construct()
 	{
-		parent::MY_Controller();
+		parent::__construct();
 		$this->load->library('Plugins');
 		$this->load->model('Plugin_model');
 	}

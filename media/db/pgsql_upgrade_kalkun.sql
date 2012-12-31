@@ -1,8 +1,7 @@
- 
-ALTER TABLE "user_settings" ADD COLUMN "country_code" varchar(2) NOT NULL DEFAULT 'US';
-
-CREATE TABLE "user_forgot_password" (
-  "id_user" integer PRIMARY KEY,
-  "token" varchar(255) NOT NULL,
-  "valid_until" timestamp(0) WITHOUT time zone NOT NULL
+CREATE TABLE "user_filters" (
+  "id_filter" serial PRIMARY KEY,
+  "id_user" integer NOT NULL,
+  "from" varchar(15) NOT NULL,
+  "has_the_words" varchar(50) NOT NULL,
+  "id_folder" integer NOT NULL
 );

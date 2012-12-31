@@ -17,7 +17,7 @@ $(document).ready(function() {
 		if($(this).hasClass('addpbkcontact')) {
 			var pbk_title = '<?php echo lang('tni_contact_add'); ?>';
 			var type = 'normal';
-			var param1 = '';
+			var param1 = '<?php echo (isset($group_id))? $group_id : "";?>';
 		}	
 		else if($(this).hasClass('editpbkcontact')) {
 			var pbk_title = '<?php echo lang('tni_pbk_edit_contact'); ?>';
@@ -152,6 +152,34 @@ $(document).ready(function() {
 		var param1 = header.children('.left_column').children('#pbkname').children('#pbknumber').text();
 		$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
 		$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type': "pbk_contact", 'param1': param1 }, function() {
+		  $(this).dialog({
+		    modal:true,
+			width: 550,
+			show: 'fade',
+			hide: 'fade',
+		    buttons: {
+			'<?php echo lang('tni_send_message'); ?>': function() {
+				if($("#composeForm").valid()) {
+                $('.ui-dialog-buttonpane :button').each(function(){ if($(this).text() == '<?php echo lang('tni_send_message'); ?>') $(this).html('<?php echo lang('tni_sending_message'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');   });
+				$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
+					$("#compose_sms_container").html(data);
+					$("#compose_sms_container" ).dialog( "option", "buttons", { "Okay": function() { $(this).dialog("destroy"); } } );
+					setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+				});
+				}
+			},
+			'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('destroy');}
+		    }
+		  });
+		});
+		$("#compose_sms_container").dialog('open');
+		return false;
+	});
+
+	// Send to all
+	$('#sendallcontact').bind('click', function() {
+		$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
+		$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type': "all_contacts" }, function() {
 		  $(this).dialog({
 		    modal:true,
 			width: 550,

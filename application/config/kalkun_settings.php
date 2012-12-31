@@ -67,10 +67,11 @@ $config['modem_tolerant'] = '10';
 |--------------------------------------------------------------------------
 |
 | All message from inbox that don't belongs to anyone will be owned by this user ID.
+| Can be set to multiple users
 | Must be valid user ID
 |
 */
-$config['inbox_owner_id'] = array('1', '2', '3');
+$config['inbox_owner_id'] = array('1');
 
 /*
 |--------------------------------------------------------------------------
@@ -160,6 +161,16 @@ $config['max_sms_sent_by_minute'] = 0;
 |
 */
 $config['inbox_routing_use_phonebook'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Only admin can permanently delete
+|--------------------------------------------------------------------------
+|
+| Prevent non-admin user from permanently delete message
+|
+*/
+$config['only_admin_can_permanently_delete'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

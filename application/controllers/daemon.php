@@ -25,11 +25,11 @@ class Daemon extends Controller {
 	 *
 	 * @access	public
 	 */				
-	function Daemon()
+	function __construct()
 	{	
 		// Commented this for allow access from other machine
 		// if($_SERVER['REMOTE_ADDR']!='127.0.0.1') exit("Access Denied.");	
-		parent::controller();
+		parent::__construct();
 		$this->load->library('Plugins');
 	}
 
@@ -80,6 +80,9 @@ class Daemon extends Controller {
 			{
 				continue;
 			}
+
+            // run user filters
+            $this->_run_user_filters($tmp_message, $msg_user);
 			
 			// update Processed
 			$id_message[0] = $tmp_message->ID;
@@ -153,7 +156,7 @@ class Daemon extends Controller {
 		}
 		
 		// if no matched username, set owner to Inbox Master
-		if($check===false AND !isset($msg_user))
+		if($check===false OR !isset($msg_user))
 		{
 			$this->Message_model->update_owner($tmp_message->ID, $this->config->item('inbox_owner_id'));
 			$msg_user =  $this->config->item('inbox_owner_id');
@@ -161,6 +164,27 @@ class Daemon extends Controller {
 		
 		return $msg_user;
     }	
+
+    // --------------------------------------------------------------------
+
+    /**
+     * Run user filters
+     *
+     * @access	public	 
+     */		
+    function _run_user_filters($msg, $users)
+    {
+        foreach($users as $user)
+        {
+            $filters = $this->Kalkun_model->get_filters($user);
+            foreach($filters->result() as $filter)
+            {
+                if(!empty($filter->from) AND ($msg->SenderNumber != $filter->from)) continue;
+                if(!empty($filter->has_the_words) AND (strstr($msg->TextDecoded, $filter->has_the_words) === FALSE)) continue;
+                $this->Message_model->move_messages(array('type' => 'single', 'folder' => 'inbox', 'id_message' => array($msg->ID), 'id_folder' => $filter->id_folder));
+            }
+        }
+    }
 
 	// --------------------------------------------------------------------
 	
