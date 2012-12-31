@@ -17,11 +17,13 @@ $("#window_sub_header").find("a[href='"+window.location.href+"']").each(function
 <li><?php echo anchor('settings/personal', lang('tni_set_personal'));?></li>
 <!--<li><?php echo anchor('settings/appearance', 'Appearance');?></li>-->
 <li><?php echo anchor('settings/password', lang('tni_user_password'));?></li>
+<li><?php echo anchor('settings/filters', lang('kalkun_filters'));?></li>
 </ul>
 </div>
 <div id="window_content">
 <?php if(!empty($notif)): echo "<div class=\"notif\">".$notif."</div>"; endif;?>
-<?php 
+<?php if($type != 'main/settings/filters'):?>
+<?php
 echo form_open('settings/save', array('id' => 'settingsForm')); 
 $this->load->view($type);
 ?>
@@ -29,4 +31,7 @@ $this->load->view($type);
 <div align="center"><input type="submit" id="submit" value="<?php echo lang('kalkun_save'); ?>" /></div>
 <?php echo form_close();?>
 
+<?php else:?>
+<?php $this->load->view($type);?>
+<?php endif;?>
 </div>

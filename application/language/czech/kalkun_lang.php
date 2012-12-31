@@ -20,6 +20,7 @@ $lang['kalkun_action'] = "Action";
 
 $lang['kalkun_phonebook'] = "Adresář";
 $lang['kalkun_setting'] = "Nastavení";
+$lang['kalkun_filters'] = "Filters";
 $lang['kalkun_about'] = "O programu";
 $lang['kalkun_logout'] = "Odhlásit";
 
@@ -203,6 +204,9 @@ $lang['kalkun_setting_passwd_new_enter'] = "Enter your new password";
 
 $lang['kalkun_level_admin'] = "Administrator";
 $lang['kalkun_level_user'] = "User";
+
+$lang['kalkun_filter_add'] = "Create a new filter";
+$lang['kalkun_filter_has_the_words'] = "Has the words";
 
 // SMS Content/Member
 $lang['kalkun_sms_member'] = "Member";

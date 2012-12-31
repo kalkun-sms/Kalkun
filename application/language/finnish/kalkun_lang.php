@@ -20,6 +20,7 @@ $lang['kalkun_action'] = "Toiminto";
 
 $lang['kalkun_phonebook'] = "Osoitekirja";
 $lang['kalkun_setting'] = "Asetukset";
+$lang['kalkun_filters'] = "Filters";
 $lang['kalkun_about'] = "Tietoja";
 $lang['kalkun_logout'] = "Kirjaudu ulos";
 
@@ -203,6 +204,9 @@ $lang['kalkun_setting_passwd_new_enter'] = "Syötä uusi salasana";
 
 $lang['kalkun_level_admin'] = "Pääkäyttäjä";
 $lang['kalkun_level_user'] = "Käyttäjä";
+
+$lang['kalkun_filter_add'] = "Create a new filter";
+$lang['kalkun_filter_has_the_words'] = "Has the words";
 
 // SMS Content/Member
 $lang['kalkun_sms_member'] = "Jäsen";

@@ -331,6 +331,20 @@ class Kalkun_model extends Model {
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user');				
 			break;
+
+            case 'filters':
+                $id_filter = $this->input->post('id_filter');
+                $this->db->set('from', $this->input->post('from'));
+                $this->db->set('has_the_words', $this->input->post('has_the_words'));
+                $this->db->set('id_folder', $this->input->post('id_folder'));
+                $this->db->set('id_user', $this->input->post('id_user'));
+
+                if(!empty($id_filter)) {
+                    $this->db->where('id_filter', $id_filter);
+                    $this->db->update('user_filters');
+                }
+                else $this->db->insert('user_filters');
+            break;
 		}		
 	}
 
@@ -525,6 +539,42 @@ class Kalkun_model extends Model {
 		if(!$res) return 0;
 		else return $res;
 	}
+
+    // --------------------------------------------------------------------
+
+    /**
+     * Get user filters
+     *
+     * @access	public
+     */
+    
+    function get_filters($user_id = NULL)
+    {
+        $this->db->from('user_filters');
+
+        if(!is_null($user_id)) {
+            $this->db->where('user_filters.id_user', $user_id);
+        }
+
+        $this->db->join('user_folders', 'user_folders.id_folder=user_filters.id_folder');
+        return $this->db->get();
+    }
+
+    // --------------------------------------------------------------------
+
+    /**
+     * Delete user filters
+     *
+     * @access	public
+     */
+    
+    function delete_filter($id_filter = NULL)
+    {
+        $this->db->from('user_filters');
+        $this->db->where('id_filter', $id_filter);
+        return $this->db->delete();
+    }
+
 }
 
 /* End of file kalkun_model.php */

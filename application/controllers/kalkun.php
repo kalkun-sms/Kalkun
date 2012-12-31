@@ -358,7 +358,7 @@ class Kalkun extends MY_Controller {
 		$this->load->helper('country_dial_code_helper');
 		$data['title'] = 'Settings';
 		$type = $this->uri->segment(2);
-		$valid_type = array('general', 'personal', 'appearance', 'password', 'save');
+		$valid_type = array('general', 'personal', 'appearance', 'password', 'save', 'filters');
 		if(!in_array($type, $valid_type)) show_404();
 		
 		if($_POST && $type=='save') { 		
@@ -384,10 +384,29 @@ class Kalkun extends MY_Controller {
 			$this->session->set_flashdata('notif', 'Your settings has been saved');
 			redirect('settings/'.$option);
 		}
+
+        if($type == 'filters')
+        {
+            $data['filters'] = $this->Kalkun_model->get_filters($this->session->userdata('id_user'));
+            $data['my_folders'] = $this->Kalkun_model->get_folders('all');
+        }
+
 		$data['main'] = 'main/settings/setting';
 		$data['settings'] = $this->Kalkun_model->get_setting();
 		$data['type'] = 'main/settings/'.$type;
 		$this->load->view('main/layout', $data);
+	}
+
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Delete Filter
+	 *
+	 * @access	public
+	 */		
+	function delete_filter($id_filter=NULL)
+	{
+		$this->Kalkun_model->delete_filter($id_filter);
 	}
 	
 }

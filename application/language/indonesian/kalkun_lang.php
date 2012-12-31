@@ -20,6 +20,7 @@ $lang['kalkun_action'] = "Tindakan";
 
 $lang['kalkun_phonebook'] = "Daftar Kontak";
 $lang['kalkun_setting'] = "Pengaturan";
+$lang['kalkun_filters'] = "Saringan";
 $lang['kalkun_about'] = "Tentang";
 $lang['kalkun_logout'] = "Keluar";
 
@@ -203,6 +204,9 @@ $lang['kalkun_setting_passwd_new_enter'] = "Masukkan password baru Anda";
 
 $lang['kalkun_level_admin'] = "Administrator";
 $lang['kalkun_level_user'] = "Pengguna";
+
+$lang['kalkun_filter_add'] = "Buat saringan baru";
+$lang['kalkun_filter_has_the_words'] = "Mengandung kata";
 
 // SMS Content/Member
 $lang['kalkun_sms_member'] = "Member";

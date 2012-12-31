@@ -1,8 +1,7 @@
-
-ALTER TABLE "user_settings" ADD COLUMN "country_code" VARCHAR(2) NOT NULL DEFAULT 'US';
-
-CREATE TABLE "user_forgot_password" (
-  "id_user" INTEGER PRIMARY KEY,
-  "token" VARCHAR(255) NOT NULL,
-  "valid_until" NUMERIC NOT NULL
+CREATE TABLE "user_filters" (
+  "id_filter" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "id_user" INTEGER NOT NULL,
+  "from" VARCHAR(15) NOT NULL,
+  "has_the_words" VARCHAR(50) NOT NULL,
+  "id_folder" INTEGER NOT NULL
 );
