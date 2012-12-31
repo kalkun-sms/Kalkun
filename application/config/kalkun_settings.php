@@ -6,11 +6,11 @@
 |--------------------------------------------------------------------------
 |
 */
-$config['kalkun_version'] = '0.6';
-$config['kalkun_codename'] = 'Wakatobi';
-$config['kalkun_release_date'] = '28 July 2012';
+$config['kalkun_version'] = '0.7';
+$config['kalkun_codename'] = 'Yogyakarta';
+$config['kalkun_release_date'] = '31 December 2012';
 $config['kalkun_upgradeable'] = TRUE;
-$config['kalkun_previous_version'] = '0.5';
+$config['kalkun_previous_version'] = '0.6';
 
 /*
 |--------------------------------------------------------------------------
