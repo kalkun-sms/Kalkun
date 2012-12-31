@@ -67,10 +67,11 @@ $config['modem_tolerant'] = '10';
 |--------------------------------------------------------------------------
 |
 | All message from inbox that don't belongs to anyone will be owned by this user ID.
+| Can be set to multiple users
 | Must be valid user ID
 |
 */
-$config['inbox_owner_id'] = array('1', '2', '3');
+$config['inbox_owner_id'] = array('1');
 
 /*
 |--------------------------------------------------------------------------
