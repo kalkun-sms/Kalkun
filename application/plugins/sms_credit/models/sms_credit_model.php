@@ -63,6 +63,30 @@ class SMS_credit_model extends Model {
         return $this->db->get();
     }
 
+    // --------------------------------------------------------------------
+
+    /**
+     * Add Packages
+     *
+     * @access  public
+     * @param array
+     * @return  object
+     */
+    function add_packages($param = array())
+    {
+        if(isset($param['id_credit_template']))
+        {
+            $this->db->where('id_credit_template', $param['id_credit_template']);
+            unset($param['id_credit_template']);
+            $this->db->update('plugin_sms_credit_template', $param);
+        }
+        else
+        {
+            $this->db->insert('plugin_sms_credit_template', $param);
+        }
+    }
+
+
 }
 
 /* End of file sms_credit_model.php */

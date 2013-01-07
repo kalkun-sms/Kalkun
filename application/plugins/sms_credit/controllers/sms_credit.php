@@ -60,6 +60,20 @@ class SMS_credit extends Plugin_Controller {
      */		
     function packages()
     {
+        if($_POST)
+        {
+            $param['id_credit_template'] = $this->input->post('id_package');
+
+            if(empty($param['id_credit_template'])) {
+                unset($param['id_credit_template']);
+            }
+
+            $param['template_name'] = trim($this->input->post('package_name'));
+            $param['sms_numbers'] = trim($this->input->post('sms_amount'));
+            $this->plugin_model->add_packages($param);
+            redirect('plugin/sms_credit/packages');
+        }
+
         $data['main'] = 'packages';
         $data['title'] = 'Credit Package';
         $data['packages'] = $this->plugin_model->get_packages();
