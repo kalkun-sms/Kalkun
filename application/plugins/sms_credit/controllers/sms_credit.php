@@ -51,6 +51,8 @@ class SMS_credit extends Plugin_Controller {
         $this->load->view('main/layout', $data);
     }
 
+    // --------------------------------------------------------------------
+
     /**
      * Packages
      *
@@ -59,6 +61,32 @@ class SMS_credit extends Plugin_Controller {
      * @access  public
      */		
     function packages()
+    {
+        if($_POST)
+        {
+            $data['query'] = $this->input->post('query');
+            $data['packages'] = $this->plugin_model->search_packages($data['query']);
+        }
+        else
+        {
+            $data['packages'] = $this->plugin_model->get_packages();
+        }
+
+        $data['main'] = 'packages';
+        $data['title'] = 'Credit Package';
+        $this->load->view('main/layout', $data);
+    }
+
+    // --------------------------------------------------------------------
+
+    /**
+     * Add Packages
+     *
+     * Add Packages
+     *
+     * @access  public
+     */		
+    function add_packages()
     {
         if($_POST)
         {
@@ -73,14 +101,7 @@ class SMS_credit extends Plugin_Controller {
             $this->plugin_model->add_packages($param);
             redirect('plugin/sms_credit/packages');
         }
-
-        $data['main'] = 'packages';
-        $data['title'] = 'Credit Package';
-        $data['packages'] = $this->plugin_model->get_packages();
-        
-        $this->load->view('main/layout', $data);
     }
-
 
 }
 

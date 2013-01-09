@@ -34,5 +34,18 @@ $(document).ready(function() {
 
         $('#packages-dialog').dialog('open');
     });
+
+    // Search onBlur onFocus
+    if($('input.search_packages').val() == '') {
+        $('input.search_packages').val('Search Packages');
+    }
+
+    $('input.search_packages').blur(function(){
+       $(this).val('Search Packages');
+    });
+
+    $('input.search_packages').focus(function(){
+        $(this).val('');
+    });
 }); 
 </script>

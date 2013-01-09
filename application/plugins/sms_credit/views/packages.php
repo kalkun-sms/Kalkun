@@ -4,8 +4,8 @@
     <div id="window_title">
         <div id="window_title_left"><?php echo $title;?></div>
         <div id="window_title_right">
-            <?php echo form_open('users', array('class' => 'search_form')); ?>
-            <input type="text" name="search_name" size="20" class="search_name" value="" />
+            <?php echo form_open('plugin/sms_credit/packages', array('class' => 'search_form')); ?>
+            <input type="text" name="query" class="search_packages" size="20" value="<?php if(isset($query)) echo $query;?>" />
             <?php echo form_close(); ?>
             &nbsp;
             <a href="<?php echo site_url('plugin/sms_credit');?>" class="nicebutton">Users</a>
@@ -46,7 +46,7 @@
 <!-- Add packages dialog -->
 <div id="packages-dialog" title="Add Packages" class="dialog">
     <p id="validateTips">All form fields are required.</p>
-    <?php echo form_open('plugin/sms_credit/packages', array('id' => 'addpackagesform')); ?>
+    <?php echo form_open('plugin/sms_credit/add_packages', array('id' => 'addpackagesform')); ?>
     <fieldset>
         <input type="hidden" name="id_package" id="id_package" class="text ui-widget-content ui-corner-all" />
         <label for="package_name">Package name</label>

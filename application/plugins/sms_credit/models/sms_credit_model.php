@@ -66,6 +66,21 @@ class SMS_credit_model extends Model {
     // --------------------------------------------------------------------
 
     /**
+     * Search Packages
+     *
+     * @access  public
+     * @return  object
+     */
+    function search_packages($query = '')
+    {
+        $this->db->from('plugin_sms_credit_template');
+        $this->db->like('template_name', $query);
+        return $this->db->get();
+    }
+
+    // --------------------------------------------------------------------
+
+    /**
      * Add Packages
      *
      * @access  public
