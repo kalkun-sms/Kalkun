@@ -57,39 +57,60 @@ $(document).ready(function() {
 
 var inbox_master = '<?php echo $this->config->item('inbox_owner_id');?>';
 	
-// Add/Edit Contact
-$('.addpbkcontact, .edit_user').bind('click', function() {
-
-    if($(this).hasClass('addpbkcontact')) {
-        var user_title = '<?php echo lang('tni_user_add');?>';
-        var type = 'normal';
-        var param1 = '';
-    }	
-    else if($(this).hasClass('edit_user')) {
-        var user_title = '<?php echo lang('tni_user_edit');?>';
-        var type = 'edit';
-        var param1 = $(this).parents("tr:first").attr("id");
-    }
+// Add User
+$('.addpbkcontact').bind('click', function() {
 
     $("#users_container").dialog({
-        title: user_title,
+        title: '<?php echo lang('tni_user_addp');?>',
+        modal: true,
+        show: 'fade',
+        hide: 'fade',
+        buttons: {
+            '<?php echo lang('kalkun_save');?>': function() {
+                if($("#addUser").valid()) {
+                    $("form#addUser").submit()
+                }
+            },
+            '<?php echo lang('kalkun_cancel');?>': function() { 
+                $(this).dialog('destroy');
+            }
+        }
+    });
+
+    $("#users_container").dialog('open');
+    return false;
+});
+
+// Edit User
+$('.edit_user').bind('click', function() {
+
+    var id_user = $(this).parents('tr').attr('id');
+    var id_package = $(this).parents('div:eq(1)').find('span.id_package').text();
+    var package_start = $(this).parents('div:eq(1)').find('span.package_start').text();
+    var package_end = $(this).parents('div:eq(1)').find('span.package_end').text();
+    $('#id_user').val(id_user);
+    $('#edit_id_package').val(id_package);
+    $('#edit_package_start').val(package_start);
+    $('#edit_package_end').val(package_end);
+
+    $("#edit_users_container").dialog({
+        title: 'Change Package for ',
         modal: true,
         show: 'fade',
         hide: 'fade',
         buttons: {
         '<?php echo lang('kalkun_save');?>': function() {
-            if($("#addUser").valid()) {
-                $("form#addUser").submit()
-            }
+            $("form#editUser").submit()
         },
         '<?php echo lang('kalkun_cancel');?>': function() { 
             $(this).dialog('destroy');}
         }
     });
 
-    $("#users_container").dialog('open');
+    $("#edit_users_container").dialog('open');
     return false;
-});	
+});
+
 
 // select all
 $("a.select_all").click(select_all = function(){

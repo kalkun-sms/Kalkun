@@ -16,24 +16,34 @@
     <div id="window_content">
 
         <table>
-        <?php foreach($users->result() as $tmp): ?>
-        <tr id="<?php echo $tmp->id_user;?>">
-        <td>
-        <div class="two_column_container contact_list">
-            <div class="left_column">
-            <div id="pbkname">
-                <span style="font-weight: bold;"><?php echo $tmp->realname;?></span>
-                <?php if(!is_null($tmp->template_name)): echo "<sup>( $tmp->template_name )</sup>"; ?>
-                <?php else: echo "<sup>( No package )</sup>"; ?>
-                <?php endif;?>
-            </div>	
-        </div>
-        <div class="right_column">
-        <span class="pbk_menu">
-        <a class="edit_user simplelink" href="#">Change Package</a>
-        </span>
-        </td></tr>
-        <?php endforeach;?>
+            <?php foreach($users->result() as $tmp): ?>
+            <tr id="<?php echo $tmp->id_user;?>">
+                <td>
+                    <div class="two_column_container contact_list">
+                        <div class="left_column">
+                            <div id="pbkname">
+                                <span style="font-weight: bold;"><?php echo $tmp->realname;?></span>
+                                <?php if(!is_null($tmp->template_name)): echo "<sup>( $tmp->template_name )</sup>"; ?>
+                                <?php else: echo "<sup>( No package )</sup>"; ?>
+                                <?php endif;?>
+                            </div>	
+                        </div>
+
+                        <div class="right_column">
+                            <span class="pbk_menu">
+                                <a class="edit_user simplelink" href="#">Change Package</a>
+                            </span>
+                        </div>
+
+                        <div class="hidden">
+                            <span class="id_package"><?php echo $tmp->id_credit_template;?></span>
+                            <span class="package_start"><?php echo $tmp->valid_start;?></span>
+                            <span class="package_end"><?php echo $tmp->valid_end;?></span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <?php endforeach;?>
         </table>
 
     </div>
@@ -78,10 +88,34 @@ echo form_dropdown('package', $package, '', $option);
 
 <label for="package_end">Package End</label>
 <input type="text" style="display: inline; width: 80%" name="package_end" id="package_end" class="text datepicker ui-widget-content ui-corner-all" />
+</fieldset>
+<?php echo form_close();?>
+</div>
 
-<?php if(isset($users)): ?> 
+
+<!-- Edit User dialog -->	
+<div id="edit_users_container" class="dialog" style="display: none">
+<p id="validateTips"><?php echo lang('tni_form_fields_required'); ?></p>
+<?php echo form_open('plugin/sms_credit/add_users', array('id' => 'editUser'));?>
+<fieldset>
+<label for="package">Package</label>
+<?php
+foreach($packages->result_array() as $row)
+{
+    $package[$row['id_credit_template']] = $row['template_name'];
+}
+$option = 'id="edit_id_package" class="text ui-widget-content ui-corner-all"';
+echo form_dropdown('package', $package, '', $option);
+?>
+<br /><br />
+
+<label for="package_start">Package Start</label>
+<input type="text" style="display: inline; width: 80%" name="package_start" id="edit_package_start" class="text datepicker ui-widget-content ui-corner-all" />
+
+<label for="package_end">Package End</label>
+<input type="text" style="display: inline; width: 80%" name="package_end" id="edit_package_end" class="text datepicker ui-widget-content ui-corner-all" />
+
 <input type="hidden" name="id_user" id="id_user" />
-<?php endif;?>
 </fieldset>
 <?php echo form_close();?>
 </div>

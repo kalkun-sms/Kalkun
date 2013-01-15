@@ -66,20 +66,25 @@ class SMS_credit extends Plugin_Controller {
         if($_POST)
         {
             $param['id_user'] = $this->input->post('id_user');
-            $param['realname'] = trim($this->input->post('realname'));
-            $param['username'] = trim($this->input->post('username'));
-            $param['phone_number'] = $this->input->post('phone_number');
-            $param['level'] = $this->input->post('level');
-            $param['password'] = sha1($this->input->post('password'));
             $param['id_template_credit'] = $this->input->post('package');
-            $param['package_start'] = $this->input->post('package_start');
-            $param['package_end'] = $this->input->post('package_end');
+            $param['valid_start'] = $this->input->post('package_start');
+            $param['valid_end'] = $this->input->post('package_end');
 
-            if(empty($param['id_user'])) {
+            if(empty($param['id_user']))
+            {
                 unset($param['id_user']);
+                $param['realname'] = trim($this->input->post('realname'));
+                $param['username'] = trim($this->input->post('username'));
+                $param['phone_number'] = $this->input->post('phone_number');
+                $param['level'] = $this->input->post('level');
+                $param['password'] = sha1($this->input->post('password'));
+                $this->plugin_model->add_users($param);
             }
-
-            $this->plugin_model->add_users($param);
+            else
+            {
+                 $this->plugin_model->change_users_package($param);
+            }
+           
             redirect('plugin/sms_credit');
         }
     }
