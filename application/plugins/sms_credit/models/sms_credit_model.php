@@ -52,6 +52,67 @@ class SMS_credit_model extends Model {
     // --------------------------------------------------------------------
 
     /**
+     * Add Users
+     *
+     * @access  public
+     * @return  object
+     */
+    function add_users($param = array())
+    {
+        if(isset($param['id_template_credit']))
+        {
+            $package['id_template_credit'] = $param['id_template_credit'];
+            $package['valid_start'] = $param['package_start'];
+            $package['valid_end'] = $param['package_end'];
+            unset($param['id_template_credit']);
+            unset($param['package_start']);
+            unset($param['package_end']);
+        }
+
+        // start transcation 
+        $this->db->trans_start();
+
+        if(isset($param['id_user']))
+        {
+            $this->db->where('id_user', $param['id_user']);
+            unset($param['id_user']);
+            $this->db->update('user', $param);
+
+            // Delete user package first
+            $this->db->delete('plugin_sms_credit', array('id_user' => $param['id_user']));
+            
+            // insert package
+            $package['id_user'] = $param['id_user'];
+            $this->db->insert('plugin_sms_credit', $package);
+        }
+        else
+        {
+            $this->db->insert('user', $param);
+
+            // user_settings
+            $user_id = $this->db->insert_id();
+            $this->db->set('theme', 'blue');
+            $this->db->set('signature', 'false;');
+            $this->db->set('permanent_delete', 'false');
+            $this->db->set('paging', '20');
+            $this->db->set('bg_image', 'true;background.jpg');
+            $this->db->set('delivery_report', 'default');
+            $this->db->set('language', 'english');	
+            $this->db->set('conversation_sort', 'asc');
+            $this->db->set('id_user', $user_id);
+            $this->db->insert('user_settings');
+
+            // packages
+            $package['id_user'] = $user_id;
+            $this->db->insert('plugin_sms_credit', $package);
+        }
+
+        $this->db->trans_complete();
+    }
+
+    // --------------------------------------------------------------------
+
+    /**
      * Get Packages
      *
      * @access  public

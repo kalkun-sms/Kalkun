@@ -47,9 +47,43 @@ class SMS_credit extends Plugin_Controller {
         $data['main'] = 'index';
         $data['title'] = 'Users Credit';
         $data['users'] = $this->plugin_model->get_users();
+        $data['packages'] = $this->plugin_model->get_packages();
         
         $this->load->view('main/layout', $data);
     }
+
+    // --------------------------------------------------------------------
+
+    /**
+     * Add Users
+     *
+     * Add an User with packages
+     *
+     * @access  public
+     */		
+    function add_users()
+    {
+        if($_POST)
+        {
+            $param['id_user'] = $this->input->post('id_user');
+            $param['realname'] = trim($this->input->post('realname'));
+            $param['username'] = trim($this->input->post('username'));
+            $param['phone_number'] = $this->input->post('phone_number');
+            $param['level'] = $this->input->post('level');
+            $param['password'] = sha1($this->input->post('password'));
+            $param['id_template_credit'] = $this->input->post('package');
+            $param['package_start'] = $this->input->post('package_start');
+            $param['package_end'] = $this->input->post('package_end');
+
+            if(empty($param['id_user'])) {
+                unset($param['id_user']);
+            }
+
+            $this->plugin_model->add_users($param);
+            redirect('plugin/sms_credit');
+        }
+    }
+
 
     // --------------------------------------------------------------------
 
