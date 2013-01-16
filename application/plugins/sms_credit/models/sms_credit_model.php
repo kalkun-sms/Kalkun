@@ -107,6 +107,27 @@ class SMS_credit_model extends Model {
     // --------------------------------------------------------------------
 
     /**
+     * Delete Users
+     *
+     * @access  public
+     * @return  object
+     */
+    function delete_users($id_user = NULL)
+    {
+        $this->db->trans_start();
+        $this->db->delete('plugin_sms_credit', array('id_user' => $id_user));
+        $this->db->delete('sms_used', array('id_user' => $id_user));
+        $this->db->delete('user_folders', array('id_user' => $id_user));
+        $this->db->delete('pbk', array('id_user' => $id_user));
+        $this->db->delete('pbk_groups', array('id_user' => $id_user));
+        $this->db->delete('user_settings', array('id_user' => $id_user));
+        $this->db->delete('user', array('id_user' => $id_user));
+        $this->db->trans_complete();
+    }
+
+    // --------------------------------------------------------------------
+
+    /**
      * Change Users Package
      *
      * @access  public

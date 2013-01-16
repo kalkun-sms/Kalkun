@@ -107,6 +107,20 @@ class SMS_credit extends Plugin_Controller {
         }
     }
 
+    // --------------------------------------------------------------------
+
+    /**
+     * Delete Users
+     *
+     * Delete an User
+     *
+     * @access  public
+     */		
+    function delete_users($id = NULL)
+    {
+        $this->plugin_model->delete_users($id);
+        redirect('plugin/sms_credit');
+    }
 
     // --------------------------------------------------------------------
 

@@ -31,6 +31,8 @@
 
                         <div class="right_column">
                             <span class="pbk_menu">
+                                <a class="delete_user simplelink" href="<?php echo site_url('plugin/sms_credit/delete_users/'.$tmp->id_user);?>"><?php echo lang('kalkun_delete'); ?></a>
+                                <img src="<?php echo $this->config->item('img_path')?>circle.gif" />
                                 <a class="edit_user simplelink" href="#">Change Package</a>
                             </span>
                         </div>
@@ -120,3 +122,10 @@ echo form_dropdown('package', $package, '', $option);
 <?php echo form_close();?>
 </div>
 
+<!-- Delete User Confirmation Dialog -->
+<div class="dialog" id="confirm_delete_user_dialog" title="Delete Users Confirmation">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+        Are you sure want to delete this user?
+    </p>
+</div>

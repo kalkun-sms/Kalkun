@@ -111,68 +111,29 @@ $('.edit_user').bind('click', function() {
     return false;
 });
 
-
-// select all
-$("a.select_all").click(select_all = function(){
-$(".select_user").attr('checked', true);
-$(".contact_list").addClass("messagelist_hover");
-return false;
-});
-
-// clear all
-$("a.clear_all").click(clear_all = function(){
-$(".select_user").attr('checked', false);
-$(".contact_list").removeClass("messagelist_hover");
-return false;
-}); 
-
-// input checkbox
-$("input.select_user").click(function(){
-if($(this).attr('checked')==true) $(this).parents('div:eq(2)').addClass("messagelist_hover");
-else $(this).parents('div:eq(2)').removeClass("messagelist_hover");
-});
-
 // Delete user
-$("a.delete_user").click(action_delete = function(){
-    var count = $("input:checkbox:checked").length;
-    var dest_url = '<?php echo site_url('users/delete_user') ?>';
+$("a.delete_user").click(function(e){
 
-    if(count==0) { 
-        $('.notification_area').text("<?php echo lang('tni_error_nouser_sel'); ?>");
-        $('.notification_area').show();
-    }		
-    else {
-        // confirm first
-        $("#confirm_delete_user_dialog").dialog({
-            bgiframe: true,
-            autoOpen: false,
-            height: 175,
-            modal: true,
-            buttons: {
-                '<?php echo lang('kalkun_cancel'); ?>': function() {
-                    $(this).dialog('close');
-                },			
-                '<?php echo lang('tni_user_confirm_delete'); ?>': function() {
-                    $("input.select_user:checked").each( function () {
-                    var row = $(this).parents('tr');
-                    var id = row.attr('id');
-                    if(id==inbox_master)
-                    {
-                        $('.notification_area').text("<?php echo lang('tni_action_not_allowed'); ?>");
-                        $('.notification_area').show();	
-                    }
-                    else {
-                        $.post(dest_url, {id_user: id}, function() {
-                            $(row).slideUp("slow");
-                        });
-                    }
-                    });
-                $(this).dialog('close');
-                }
-            }
-        });
-        $('#confirm_delete_user_dialog').dialog('open');
+    e.preventDefault();
+    var url = $(this).attr('href');
+
+    // confirm first
+    $("#confirm_delete_user_dialog").dialog({
+    bgiframe: true,
+    autoOpen: false,
+    height: 150,
+    modal: true,
+    buttons: {
+        '<?php echo lang('kalkun_cancel')?>': function() {
+            $(this).dialog('close');
+        },
+        '<?php echo lang('tni_yes')?>': function() {
+            window.location.href = url;
+            $(this).dialog('close');
+        }
     }
+    });
+    $('#confirm_delete_user_dialog').dialog('open');
 });
 
 // Search onBlur onFocus
