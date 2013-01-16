@@ -31,6 +31,8 @@
 
                 <div class="right_column">
                     <span class="pbk_menu">
+                        <a class="deletepackagesbutton simplelink" href="<?php echo site_url('plugin/sms_credit/delete_packages/'.$tmp->id_credit_template);?>"><?php echo lang('kalkun_delete'); ?></a>
+                        <img src="<?php echo $this->config->item('img_path')?>circle.gif" />
                         <a class="editpackagesbutton simplelink" href="#"><?php echo lang('tni_edit'); ?></a>
                     </span>
                 </div>
@@ -55,4 +57,13 @@
         <input type="text" name="sms_amount" id="sms_amount" value="" class="text ui-widget-content ui-corner-all" />
     </fieldset>
     <?php echo form_close(); ?>
+</div>
+
+<!-- Delete Package Confirmation Dialog -->
+<div class="dialog" id="confirm_delete_package_dialog" title="Delete Packages Confirmation">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+        Are you sure to delete this package?
+        All users belong to this package will no longer limited.
+    </p>
 </div>

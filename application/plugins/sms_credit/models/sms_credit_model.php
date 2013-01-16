@@ -183,6 +183,22 @@ class SMS_credit_model extends Model {
         }
     }
 
+    // --------------------------------------------------------------------
+
+    /**
+     * Add Packages
+     *
+     * @access  public
+     * @param integer $id
+     * @return  object
+     */
+    function delete_packages($id = NULL)
+    {
+        $this->db->trans_start();
+        $this->db->delete('plugin_sms_credit', array('id_template_credit' => $id));
+        $this->db->delete('plugin_sms_credit_template', array('id_credit_template' => $id));
+        $this->db->trans_complete();        
+    }
 
 }
 

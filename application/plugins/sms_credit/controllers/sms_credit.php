@@ -171,6 +171,21 @@ class SMS_credit extends Plugin_Controller {
         }
     }
 
+    // --------------------------------------------------------------------
+
+    /**
+     * Delete Packages
+     *
+     * Delete Packages
+     *
+     * @access  public
+     */		
+    function delete_packages($id = NULL)
+    {
+        $this->plugin_model->delete_packages($id);
+        redirect('plugin/sms_credit/packages');
+    }
+
 }
 
 /* End of file sms_credit.php */

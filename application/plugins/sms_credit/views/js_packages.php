@@ -47,5 +47,30 @@ $(document).ready(function() {
     $('input.search_packages').focus(function(){
         $(this).val('');
     });
+
+    // Delete package
+    $("a.deletepackagesbutton").click(function(e){
+
+        e.preventDefault();
+        var url = $(this).attr('href');
+
+        // confirm first
+        $("#confirm_delete_package_dialog").dialog({
+        bgiframe: true,
+        autoOpen: false,
+        height: 150,
+        modal: true,
+        buttons: {
+            '<?php echo lang('kalkun_cancel')?>': function() {
+                $(this).dialog('close');
+            },
+            '<?php echo lang('tni_yes')?>': function() {
+                window.location.href = url;
+                $(this).dialog('close');
+            }
+        }
+        });
+        $('#confirm_delete_package_dialog').dialog('open');
+    });
 }); 
 </script>
