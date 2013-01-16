@@ -14,7 +14,7 @@
     </div>
 
     <div id="window_content">
-
+        <?php $this->load->view("navigation_users");?>
         <table>
             <?php foreach($users->result() as $tmp): ?>
             <tr id="<?php echo $tmp->id_user;?>">
@@ -45,7 +45,7 @@
             </tr>
             <?php endforeach;?>
         </table>
-
+        <?php $this->load->view("navigation_users");?>
     </div>
 </div>
 

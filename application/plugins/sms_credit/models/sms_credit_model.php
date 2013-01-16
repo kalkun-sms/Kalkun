@@ -52,6 +52,11 @@ class SMS_credit_model extends Model {
             $this->db->like('realname', $param['q']);
         }
 
+        if(isset($param['limit']) AND isset($param['offset']))
+        {
+            $this->db->limit($param['limit'], $param['offset']);
+        }
+
         return $this->db->get();
     }
 
