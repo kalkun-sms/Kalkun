@@ -41,11 +41,17 @@ class SMS_credit_model extends Model {
      * @access  public
      * @return  object
      */
-    function get_users()
+    function get_users($param = array())
     {
         $this->db->from('plugin_sms_credit');
         $this->db->join('user', 'user.id_user = plugin_sms_credit.id_user', 'right');
         $this->db->join('plugin_sms_credit_template', 'plugin_sms_credit_template.id_credit_template = plugin_sms_credit.id_template_credit', 'left');
+
+        if(isset($param['q']))
+        {
+            $this->db->like('realname', $param['q']);
+        }
+
         return $this->db->get();
     }
 

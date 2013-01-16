@@ -44,9 +44,16 @@ class SMS_credit extends Plugin_Controller {
      */		
     function index()
     {
+        $q = '';
+        if($_POST)
+        {
+            $q = $this->input->post('search_name');
+            $data['query'] = $q;
+        }
+
         $data['main'] = 'index';
         $data['title'] = 'Users Credit';
-        $data['users'] = $this->plugin_model->get_users();
+        $data['users'] = $this->plugin_model->get_users(array('q' => $q));
         $data['packages'] = $this->plugin_model->get_packages();
         
         $this->load->view('main/layout', $data);

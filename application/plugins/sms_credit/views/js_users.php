@@ -176,7 +176,9 @@ $("a.delete_user").click(action_delete = function(){
 });
 
 // Search onBlur onFocus
-$('input.search_name').val('<?php echo lang('tni_user_search'); ?>');
+if($('input.search_name').val() == '') {
+    $('input.search_name').val('<?php echo lang('tni_user_search'); ?>');
+}
 
 $('input.search_name').blur(function(){
 	$(this).val('<?php echo lang('tni_user_search'); ?>');

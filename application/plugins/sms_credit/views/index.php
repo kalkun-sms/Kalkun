@@ -4,8 +4,8 @@
     <div id="window_title">
         <div id="window_title_left"><?php echo $title;?></div>
         <div id="window_title_right">
-            <?php echo form_open('users', array('class' => 'search_form')); ?>
-            <input type="text" name="search_name" size="20" class="search_name" value="" />
+            <?php echo form_open('plugin/sms_credit', array('class' => 'search_form')); ?>
+            <input type="text" name="search_name" size="20" class="search_name" value="<?php if(isset($query)) echo $query;?>" />
             <?php echo form_close(); ?>
             &nbsp;
             <a href="<?php echo site_url('plugin/sms_credit/packages');?>" class="nicebutton">Packages</a>	
