@@ -14,7 +14,7 @@
     </div>
 
     <div id="window_content">
-
+        <?php $this->load->view("navigation");?>
         <table>
         <?php foreach($packages->result() as $tmp): ?>
         <tr id="<?php echo $tmp->id_credit_template;?>">
@@ -39,7 +39,7 @@
         </tr>
         <?php endforeach;?>
         </table>
-
+        <?php $this->load->view("navigation");?>
     </div>
 </div>
 

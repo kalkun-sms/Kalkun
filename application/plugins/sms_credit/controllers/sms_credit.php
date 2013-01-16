@@ -119,6 +119,17 @@ class SMS_credit extends Plugin_Controller {
      */		
     function packages()
     {
+        $this->load->library('pagination');
+        $config['base_url'] = site_url('plugin/sms_credit/packages');
+        $config['total_rows'] = $this->plugin_model->get_packages()->num_rows();
+        $config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
+        $config['cur_tag_open'] = '<span id="current">';
+        $config['cur_tag_close'] = '</span>';
+        $config['uri_segment'] = 4;
+        $this->pagination->initialize($config);
+        $param['limit'] = $config['per_page'];
+        $param['offset'] = $this->uri->segment(4,0);
+
         if($_POST)
         {
             $data['query'] = $this->input->post('query');
@@ -126,7 +137,7 @@ class SMS_credit extends Plugin_Controller {
         }
         else
         {
-            $data['packages'] = $this->plugin_model->get_packages();
+            $data['packages'] = $this->plugin_model->get_packages($param);
         }
 
         $data['main'] = 'packages';

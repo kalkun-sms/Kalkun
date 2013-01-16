@@ -134,8 +134,13 @@ class SMS_credit_model extends Model {
      * @access  public
      * @return  object
      */
-    function get_packages()
+    function get_packages($param = array())
     {
+        if(isset($param['limit']) AND isset($param['offset']))
+        {
+            $this->db->limit($param['limit'], $param['offset']);
+        }
+
         $this->db->from('plugin_sms_credit_template');
         return $this->db->get();
     }
