@@ -29,7 +29,7 @@ class Plugin_Controller extends MY_Controller {
 	
 	function Plugin_Controller($login=TRUE)
 	{
-		parent::MY_Controller($login);
+		parent::__construct($login);
 
 		/* Prevent this controller from being called directly */
 		if (get_class() == get_class($this))
