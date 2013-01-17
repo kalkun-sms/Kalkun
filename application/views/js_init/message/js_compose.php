@@ -111,8 +111,15 @@ $(document).ready(function(){
 	*/
 
 	// Default value
-	sms_char = 160;
-		
+    if($("input#unicode:checked").length == 1)
+    {
+	    sms_char = 70;
+	}
+    else
+    {
+        sms_char = 160;
+    }
+
 	// Unicode 
 	$("input#unicode").click(function(){
 		var n = $("input#unicode:checked").length;
