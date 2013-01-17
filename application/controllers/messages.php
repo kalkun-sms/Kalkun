@@ -345,6 +345,7 @@ class Messages extends MY_Controller {
 		
 		// hook for outgoing message
 		$dest = do_action("message.outgoing", $dest);
+		$sms = do_action("message.outgoing_all", $data);
 		
 		// check for field
 		$field_status = FALSE;

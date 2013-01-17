@@ -16,12 +16,12 @@
 */
 function sms_credit_initialize()
 {
-    $config = array();
+    $config = array('allow_user_with_no_package' => TRUE);
     return $config;
 }
 
 // Add hook for outgoing message
-add_action("message.outgoing", "sms_credit", 11);
+add_action("message.outgoing_all", "sms_credit", 10);
 
 /**
 * Function called when plugin first activated
@@ -73,8 +73,32 @@ function sms_credit_install()
 
 function sms_credit($sms)
 {
+    $CI =& get_instance();
+    $CI->load->model('Kalkun_model');
+    $CI->load->model('sms_credit/sms_credit_model', 'plugin_model');
+
     $config = sms_credit_initialize();
-    // todo
+    $uid = $sms['uid'];
+
+    // check user credit
+    $user_package = $CI->plugin_model->get_users(array('id' => $uid))->row_array();
+
+    if(isset($user_package['sms_numbers']))
+    {
+        $has_package = TRUE;
+        $sms_used = $CI->Kalkun_model->get_sms_used('date', array('user_id' => $uid, 
+                   'sms_date_start' => $user_package['valid_start'], 'sms_date_end' => $user_package['valid_end']));
+    }
+    else
+    {
+        $has_package = FALSE;
+    }
+
+    if(($has_package AND $sms_used >= $user_package['sms_numbers']) OR (!$has_package AND !$config['allow_user_with_no_package']))
+    {
+        echo "Sorry, your sms credit limit exceeded.";
+        exit;
+    }
 }
 
 /* End of file sms_credit.php */
