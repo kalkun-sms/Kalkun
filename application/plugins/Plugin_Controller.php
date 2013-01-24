@@ -31,6 +31,13 @@ class Plugin_Controller extends MY_Controller {
 	{
 		parent::__construct($login);
 
+        // Prevent non-admin user
+        if($login AND $this->session->userdata('level') != 'admin')
+        {
+            $this->session->set_flashdata('notif', 'Only administrator can manage plugin');
+            redirect('/');
+        }
+
 		/* Prevent this controller from being called directly */
 		if (get_class() == get_class($this))
 		{

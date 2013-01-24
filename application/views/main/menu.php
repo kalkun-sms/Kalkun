@@ -55,6 +55,6 @@ if($level=='admin'):?>
 	<?php if($this->config->item('sms_content')): ?> 
 	<li id="bottom"><?php echo anchor('member','Member'); ?></li>
 	<?php endif; ?>
+    <li><?php echo anchor('pluginss', 'Plugins'); ?></li>
 <?php endif; ?>
-<li><?php echo anchor('pluginss', 'Plugins'); ?></li>
 </ul>
