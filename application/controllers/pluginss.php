@@ -28,6 +28,14 @@ class Pluginss extends MY_Controller {
 	function __construct()
 	{
 		parent::__construct();
+
+        // Prevent non-admin user
+        if($this->session->userdata('level') != 'admin')
+        {
+            $this->session->set_flashdata('notif', 'Only administrator can manage plugin');
+            redirect('/');
+        }
+
 		$this->load->library('Plugins');
 		$this->load->model('Plugin_model');
 	}

@@ -193,6 +193,16 @@ $config['only_admin_can_permanently_delete'] = FALSE;
 */
 $config['ncpr'] = FALSE;
 
+/*
+|--------------------------------------------------------------------------
+| UNICODE
+|--------------------------------------------------------------------------
+|
+| Enable unicode by default?
+| Send as Unicode checkbox will automatically checked
+|
+*/
+$config['unicode'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

@@ -203,7 +203,7 @@ if($sig_option=='true') echo "\n\n".$sig; ?>
 </textarea>
 <div>
 	<div style="float: left"><span class="counter"></span></div>
-	<div style="float: right; padding-right: 5px;"><?php if($this->config->item('ncpr')) { ?><input class="left_aligned" type="checkbox" value="ndnc" id="ncpr" name="ncpr" style="border: none;" /><label for="ncpr"><?php echo lang('kalkun_sms_ncpr_check');?> </label>  <?php }?><input class="left_aligned" type="checkbox" value="unicode" id="unicode" name="unicode" style="border: none;" /><label for="unicode"><?php echo lang('kalkun_compose_send_as_unicode'); ?></label></div>
+	<div style="float: right; padding-right: 5px;"><?php if($this->config->item('ncpr')) { ?><input class="left_aligned" type="checkbox" value="ndnc" id="ncpr" name="ncpr" style="border: none;" /><label for="ncpr"><?php echo lang('kalkun_sms_ncpr_check');?> </label>  <?php }?><input class="left_aligned" type="checkbox" value="unicode" id="unicode" name="unicode" style="border: none;" <?php if($this->config->item('unicode')) echo 'checked="checked"';?> /><label for="unicode"><?php echo lang('kalkun_compose_send_as_unicode'); ?></label></div>
 </div>
 </td>
 </tr>      

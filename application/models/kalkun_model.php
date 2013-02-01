@@ -477,7 +477,17 @@ class Kalkun_model extends Model {
 			case 'date':
 				$this->db->select_sum($type.'_sms_count');
 				$this->db->from('sms_used');
-				$this->db->where('sms_date', $param['sms_date']);
+
+                if(isset($param['sms_date_start']) AND isset($param['sms_date_end']))
+                {
+                    $this->db->where('sms_date >=', $param['sms_date_start']);
+                    $this->db->where('sms_date <=', $param['sms_date_end']);
+                }
+                else
+                {
+                    $this->db->where('sms_date', $param['sms_date']);
+                }
+
 				if (isset($param['user_id']))
 				{
 					$this->db->where('id_user', $param['user_id']);
