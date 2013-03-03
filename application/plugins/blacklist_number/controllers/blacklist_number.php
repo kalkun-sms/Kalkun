@@ -39,17 +39,17 @@ class Blacklist_number extends Plugin_Controller {
 		}
 
 		$this->load->library('pagination');
-		$config['base_url'] = site_url('plugin/blacklist_number');
+		$config['base_url'] = site_url('plugin/blacklist_number/index');
 		$config['total_rows'] = $this->plugin_model->get('count');
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';		
-		$config['uri_segment'] = 3;
+		$config['uri_segment'] = 4;
 		$this->pagination->initialize($config);
 				
 		$data['main'] = 'index';
-		$data['blacklist'] = $this->plugin_model->get('paginate', $config['per_page'], $this->uri->segment(3,0));
-		$data['number'] = $this->uri->segment(3,0)+1;
+		$data['blacklist'] = $this->plugin_model->get('paginate', $config['per_page'], $this->uri->segment(4,0));
+		$data['number'] = $this->uri->segment(4,0)+1;
 		$this->load->view('main/layout', $data);
 	}
 	

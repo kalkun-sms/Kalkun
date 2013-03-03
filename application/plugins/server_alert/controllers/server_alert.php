@@ -39,17 +39,17 @@ class Server_alert extends Plugin_Controller {
 		}
 
 		$this->load->library('pagination');
-		$config['base_url'] = site_url('plugin/server_alert');
+		$config['base_url'] = site_url('plugin/server_alert/index');
 		$config['total_rows'] = $this->plugin_model->get('count');
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';		
-		$config['uri_segment'] = 3;
+		$config['uri_segment'] = 4;
 		$this->pagination->initialize($config);
 				
 		$data['main'] = 'index';
-		$data['alert'] = $this->plugin_model->get('paginate', $config['per_page'], $this->uri->segment(3,0));
-		$data['number'] = $this->uri->segment(3,0)+1;
+		$data['alert'] = $this->plugin_model->get('paginate', $config['per_page'], $this->uri->segment(4,0));
+		$data['number'] = $this->uri->segment(4,0)+1;
 		
 		$data['time_interval'] = $this->plugin_model->get_time_interval();
 		$this->load->view('main/layout', $data);
