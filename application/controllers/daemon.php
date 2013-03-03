@@ -123,6 +123,12 @@ class Daemon extends Controller {
 			$msg_word = array();
 			$msg_word = explode(" ", $tmp_message->TextDecoded);
 			$check = in_array($tag, $msg_word);
+
+            // check user phone number if enabled
+            if($check === false AND $this->config->item('inbox_routing_user_phonenumber'))
+            {
+                $check = ($tmp_message->SenderNumber == $tmp_user->phone_number) ? TRUE : FALSE;
+            }
 						
 			// update ownership
 			if($check!==false)

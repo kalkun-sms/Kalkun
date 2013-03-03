@@ -164,6 +164,17 @@ $config['inbox_routing_use_phonebook'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
+| Inbox Routing User Phonenumber
+|--------------------------------------------------------------------------
+|
+| If no @username found on new incoming messages, 
+| then Kalkun will check origin phonenumber againts user phonenumber.
+|
+*/
+$config['inbox_routing_user_phonenumber'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
 | Only admin can permanently delete
 |--------------------------------------------------------------------------
 |
