@@ -128,28 +128,7 @@ class Install extends Controller {
  
 	function _upgrade() 
 	{
-	   // upgrade method from 0.3 to 0.4
-	   
-	   // Preserve id_folder 1 to 10
-	   $id_folder = $this->db->where('id_folder >', '5')->where('id_folder <', '11')->get('user_folders');
-	   
-	   foreach ($id_folder->result() as $id)
-	   {
-	   		// Get max ID
-	   		$max_id = $this->db->select_max('id_folder', 'max_id')->get('user_folders');
-	   		$max_id = $max_id->row('max_id');
-			$new_id = $max_id+1;
-			
-	   		// Update Inbox and Sentitems
-	   		$this->db->where('id_folder', $id->id_folder)->update('inbox', array('id_folder' => $new_id));
-	   		$this->db->where('id_folder', $id->id_folder)->update('sentitems', array('id_folder' => $new_id));
-	   		
-	   		// Update user_folders
-	   		$this->db->where('id_folder', $id->id_folder)->update('user_folders', array('id_folder' => $new_id));	   		
-	   }
-	   
-	   // Insert spam folder
-	   $this->db->insert('user_folders', array('id_folder' => 6, 'name' => 'Spam', 'id_user' => 0));	   
+
 	} 
 }
 
