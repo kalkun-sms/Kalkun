@@ -3,7 +3,8 @@
 <td width="175px"><?php echo lang('tni_language'); ?></td>
 <td>
 <?php 
-$lang = array('czech'	=> 'Česky',
+$lang = array('brazilian_portuguese'	=> 'Brazilian Portuguese',
+       		'czech'	=> 'Česky',
        		'danish'	=> 'Danish',
        		'dutch'		=> 'Dutch',
        		'english'	=> 'English',
