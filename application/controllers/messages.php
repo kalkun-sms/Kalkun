@@ -769,7 +769,7 @@ class Messages extends MY_Controller {
 		{
 			$data['main'] = 'main/messages/index';
 			$param['number'] = $number;
-			
+			$param['uid'] = $this->session->userdata('id_user');
 			$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 			$config['cur_tag_open'] = '<span id="current">';
 			$config['cur_tag_close'] = '</span>';
