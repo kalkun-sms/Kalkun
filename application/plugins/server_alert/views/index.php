@@ -20,7 +20,7 @@
 		<input type="text" name="phone_number" id="phone_number" class="text ui-widget-content ui-corner-all" />
 		<div class="note">(Person in charge to receive the alert message)</div><br />						
 		<label for="respond_message">Respond Message</label>
-		<textarea style="width: 96%" name="respond_message" id="respond_message" class="text ui-widget-content ui-corner-all" maxlength=10 ></textarea>
+		<textarea style="width: 96%" name="respond_message" id="respond_message" class="text ui-widget-content ui-corner-all" maxlength=100 ></textarea>
 		<div class="note">(Maximum 100 character)</div><br />		
 	</fieldset>
 	<?php echo form_close(); ?>
