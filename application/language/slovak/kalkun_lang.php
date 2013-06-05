@@ -50,20 +50,20 @@ $lang['kalkun_signal'] = "Signál";
 
 // Phonebook
 $lang['kalkun_contact'] = "Kontakt";
-$lang['kalkun_all_contacts'] = "All Contacts";
-$lang['kalkun_send_to_all_contacts'] = "Send To All Contacts";
+$lang['kalkun_all_contacts'] = "Všetky kontakty";
+$lang['kalkun_send_to_all_contacts'] = "Odoslať pre všetky kontakty";
 $lang['kalkun_group'] = "Skupina";
 $lang['kalkun_add_to_group'] = "Pridať do skupiny";
 $lang['kalkun_delete_from_group'] = "Zmazať zo skupiny";
 $lang['kalkun_pbk_add_method'] = "Zvoľte metódu pridania kontaktu";
-$lang['kalkun_pbk_add_form'] = "Using contact form";
-$lang['kalkun_pbk_add_form_desc'] = "Manually add contact using contact form";
-$lang['kalkun_pbk_add_csv'] = "Import CSV file";
-$lang['kalkun_pbk_add_csv_desc'] = "Import contact from CSV format file";
-$lang['kalkun_pbk_add_csv_file'] = "CSV File";
-$lang['kalkun_pbk_add_csv_label'] = "The CSV file must be in valid format";
-$lang['kalkun_pbk_del_contact_conf'] = "Are you sure want to delete <span id='contact-delete-count'></span> contact(s)?";
-$lang['kalkun_valid_example'] = "Valid Example";
+$lang['kalkun_pbk_add_form'] = "Použiť kontaktný formulár";
+$lang['kalkun_pbk_add_form_desc'] = "Manuálne pridať kontakt cez kontaktný formulár";
+$lang['kalkun_pbk_add_csv'] = "Importovať CSV súbor";
+$lang['kalkun_pbk_add_csv_desc'] = "Importovať kontakt z CSV formátu";
+$lang['kalkun_pbk_add_csv_file'] = "CSV súbor";
+$lang['kalkun_pbk_add_csv_label'] = "CSV súbor musí byť v platnom formáte";
+$lang['kalkun_pbk_del_contact_conf'] = "Ste si istý, že chcete zmazať <span id='contact-delete-count'></span> kontakt/y?";
+$lang['kalkun_valid_example'] = "Správny príklad";
 
 // Message
 $lang['kalkun_message'] = "Správa";
