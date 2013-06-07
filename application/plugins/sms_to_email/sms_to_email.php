@@ -100,18 +100,27 @@ function sms_to_email($sms)
     $CI->load->library('email');
     $CI->load->model('Phonebook_model');
     $CI->load->model('sms_to_email/sms_to_email_model', 'plugin_model');
-    
-    $active  = $CI->plugin_model->get_setting($msg_user);
-    if($active->num_rows()==0 OR $active->row('email_forward') != 'true') return;
-    $CI->email->initialize($config);
-    $mail_to = $active->row('email_id');            
-    $qry = $CI->Phonebook_model->get_phonebook(array('option'=>'bynumber', 'number'=>$from , 'id_user'=>$msg_user));
-    if($qry->num_rows()!=0) $from = $qry->row('Name');
-    $CI->email->from($config['mail_from'], $from);
-    $CI->email->to($mail_to); 
-    $CI->email->subject($config['mail_subject']);
-    $CI->email->message($message."\n\n". "- ".$from);
-    $CI->email->send();
+   
+    if(!is_array($sms->msg_user))
+    {
+        unset($msg_user);
+        $msg_user[] = $sms->msg_user;
+    }
+
+    foreach($msg_user as $uid)
+    {
+        $active  = $CI->plugin_model->get_setting($uid);
+        if($active->num_rows()==0 OR $active->row('email_forward') != 'true') continue;
+        $CI->email->initialize($config);
+        $mail_to = $active->row('email_id');            
+        $qry = $CI->Phonebook_model->get_phonebook(array('option'=>'bynumber', 'number'=>$from , 'id_user'=>$uid));
+        if($qry->num_rows()!=0) $from = $qry->row('Name');
+        $CI->email->from($config['mail_from'], $from);
+        $CI->email->to($mail_to); 
+        $CI->email->subject($config['mail_subject']);
+        $CI->email->message($message."\n\n". "- ".$from);
+        $CI->email->send();
+    }
 }
 
 /* End of file sms_to_email.php */
