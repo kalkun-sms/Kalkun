@@ -50,20 +50,20 @@ $lang['kalkun_signal'] = "Signál";
 
 // Phonebook
 $lang['kalkun_contact'] = "Kontakt";
-$lang['kalkun_all_contacts'] = "All Contacts";
-$lang['kalkun_send_to_all_contacts'] = "Send To All Contacts";
+$lang['kalkun_all_contacts'] = "Všetky kontakty";
+$lang['kalkun_send_to_all_contacts'] = "Odoslať pre všetky kontakty";
 $lang['kalkun_group'] = "Skupina";
 $lang['kalkun_add_to_group'] = "Pridať do skupiny";
 $lang['kalkun_delete_from_group'] = "Zmazať zo skupiny";
 $lang['kalkun_pbk_add_method'] = "Zvoľte metódu pridania kontaktu";
-$lang['kalkun_pbk_add_form'] = "Using contact form";
-$lang['kalkun_pbk_add_form_desc'] = "Manually add contact using contact form";
-$lang['kalkun_pbk_add_csv'] = "Import CSV file";
-$lang['kalkun_pbk_add_csv_desc'] = "Import contact from CSV format file";
-$lang['kalkun_pbk_add_csv_file'] = "CSV File";
-$lang['kalkun_pbk_add_csv_label'] = "The CSV file must be in valid format";
-$lang['kalkun_pbk_del_contact_conf'] = "Are you sure want to delete <span id='contact-delete-count'></span> contact(s)?";
-$lang['kalkun_valid_example'] = "Valid Example";
+$lang['kalkun_pbk_add_form'] = "Využiť kontaktný formulár";
+$lang['kalkun_pbk_add_form_desc'] = "Manuálne pridať kontakt cez kontaktný formulár";
+$lang['kalkun_pbk_add_csv'] = "Importovať CSV súbor";
+$lang['kalkun_pbk_add_csv_desc'] = "Importovať kontakt z CSV súboru";
+$lang['kalkun_pbk_add_csv_file'] = "CSV súbor";
+$lang['kalkun_pbk_add_csv_label'] = "CSV musí byť v platnom formáte";
+$lang['kalkun_pbk_del_contact_conf'] = "Ste si istý mazaním <span id='contact-delete-count'></span> kontaktu/ov?";
+$lang['kalkun_valid_example'] = "Príklad platného tvaru";
 
 // Message
 $lang['kalkun_message'] = "Správa";
@@ -139,18 +139,18 @@ $lang['kalkun_sms_type_flash'] = "Flash";
 $lang['kalkun_sms_type_wap'] = "WAP odkaz";
 $lang['kalkun_sms_type_wap_url'] = "URL";
 
-$lang['kalkun_sms_ads_active'] = "Ads is active";
-$lang['kalkun_sms_ncpr_check'] = "Check DND";
-$lang['kalkun_insert'] = "Insert";
+$lang['kalkun_sms_ads_active'] = "Reklamy sú aktívne";
+$lang['kalkun_sms_ncpr_check'] = "Over DND";
+$lang['kalkun_insert'] = "Vlož";
 
-$lang['kalkun_canned'] = "Canned Responses";
-$lang['kalkun_canned_empty'] = "Looks like there isn't any canned response created yet. Save your first canned response now";
-$lang['kalkun_canned_title'] = "Choose Responses";
-$lang['kalkun_canned_save_new'] = "Save New...";
-$lang['kalkun_canned_saving'] = "Saving...";
-$lang['kalkun_canned_confirm'] = "Are you Sure?";
-$lang['kalkun_canned_template_name'] = "Please enter a Name for Your Message. This should be unique.";
-$lang['kalkun_canned_template_update'] = "Are you Sure?  This will overwrite previous message";
+$lang['kalkun_canned'] = "Automatické odpovede";
+$lang['kalkun_canned_empty'] = "Vyzerá to tak, že tu ešte nieje automatická odpoveď. Vytvorte si nejakú.";
+$lang['kalkun_canned_title'] = "Zvoľ odpovede";
+$lang['kalkun_canned_save_new'] = "Uložiť novú...";
+$lang['kalkun_canned_saving'] = "Ukladanie...";
+$lang['kalkun_canned_confirm'] = "Ste si istý?";
+$lang['kalkun_canned_template_name'] = "Prosím, vložte meno vašej odpovede, mala by byť unikátna.";
+$lang['kalkun_canned_template_update'] = "Ste si istý? Toto prepíše vašu predošlú správu";
 
 // Others
 $lang['kalkun_compose_amount'] = "Suma";
@@ -159,59 +159,59 @@ $lang['kalkun_compose_send_as_unicode'] = "Odoslať - Unicode";
 $lang['kalkun_compose_times'] = "krát";
 $lang['kalkun_compose_hour'] = "Hodín";
 $lang['kalkun_compose_minutes'] = "Minút";
-$lang['kalkun_no_message_search'] = "Oops! Your Query doesnt match any records";
-$lang['tni_see_conversation'] = "See conversation";
+$lang['kalkun_no_message_search'] = "Ach! Vašej požiadavke nevyhovuje žiaden záznam";
+$lang['tni_see_conversation'] = "Zobraz konverzáciu";
 
-$lang['kalkun_search'] = "Search";
-$lang['kalkun_advanced_search'] = "Advanced Search";
-$lang['kalkun_advanced_search_from_to'] = "From/To";
-$lang['kalkun_advanced_search_query'] = "Query";
-$lang['kalkun_advanced_search_on'] = "Search On";
-$lang['kalkun_advanced_search_on_all_folder'] = "All Folders";
-$lang['kalkun_advanced_search_date_from'] = "Date From";
-$lang['kalkun_advanced_search_date_to'] = "Date To";
-$lang['kalkun_advanced_search_msg_status'] = "Status";
-$lang['kalkun_advanced_search_msg_status_any'] = "Any";
-$lang['kalkun_advanced_search_paging'] = "Paging";
-$lang['kalkun_advanced_search_paging_per_page'] = "Per Page";
-$lang['kalkun_advanced_search_no_paging'] = "Do not use paging";
+$lang['kalkun_search'] = "Vyhľadať";
+$lang['kalkun_advanced_search'] = "Rozšírené vyhľadávanie";
+$lang['kalkun_advanced_search_from_to'] = "Od/Pre";
+$lang['kalkun_advanced_search_query'] = "Požiadavka";
+$lang['kalkun_advanced_search_on'] = "Vyhľadávanie zapnuté";
+$lang['kalkun_advanced_search_on_all_folder'] = "Všetky adresáre";
+$lang['kalkun_advanced_search_date_from'] = "Dátum od";
+$lang['kalkun_advanced_search_date_to'] = "Dátum do";
+$lang['kalkun_advanced_search_msg_status'] = "Stav";
+$lang['kalkun_advanced_search_msg_status_any'] = "Hociaké";
+$lang['kalkun_advanced_search_paging'] = "Stránkovanie";
+$lang['kalkun_advanced_search_paging_per_page'] = "Na stránku";
+$lang['kalkun_advanced_search_no_paging'] = "Nepoužiť stránkovanie";
 
-$lang['kalkun_resend'] = "Resend";
-$lang['kalkun_public_contact'] = "Public Contacts";
-$lang['kalkun_public_contact_set'] = "Set as Public Contact";
-$lang['kalkun_my_contact'] = "My Contacts";
-$lang['kalkun_public_group'] = "Public Groups";
-$lang['kalkun_public_group_set'] = "Set as Public Group";
-$lang['kalkun_my_group'] = "My Groups";
-$lang['kalkun_statistic_title'] = "SMS used in last 7 days";
-$lang['kalkun_incoming_sms'] = "Incoming SMS";
-$lang['kalkun_outgoing_sms'] = "Outgoing SMS";
-$lang['kalkun_delete_all_message_now'] = "Delete All Messages Now";
-$lang['kalkun_contact_del_title'] = "Delete Contact(s) Confirmation";
-$lang['kalkun_compose_valid_url'] = "Should be a valid URL";
-$lang['kalkun_compose_import_file'] = "Import from file";
-$lang['kalkun_compose_counter_character'] = "characters";
-$lang['kalkun_compose_counter_message'] = "message";
+$lang['kalkun_resend'] = "Preposlať";
+$lang['kalkun_public_contact'] = "Verejné kontakty";
+$lang['kalkun_public_contact_set'] = "Uložiť ako verejný kontakt";
+$lang['kalkun_my_contact'] = "Moje kontakty";
+$lang['kalkun_public_group'] = "Verejné skupiny";
+$lang['kalkun_public_group_set'] = "Uložiť ako verejnú skupinu";
+$lang['kalkun_my_group'] = "Moje skupiny";
+$lang['kalkun_statistic_title'] = "SMS za posledných 7 dní";
+$lang['kalkun_incoming_sms'] = "Prichádzajúce SMS";
+$lang['kalkun_outgoing_sms'] = "Odchádzajúce SMS";
+$lang['kalkun_delete_all_message_now'] = "Vymazať všetky správy teraz";
+$lang['kalkun_contact_del_title'] = "Potvrdenie zmazania kontaktu/ov";
+$lang['kalkun_compose_valid_url'] = "Mala by byť platná URL";
+$lang['kalkun_compose_import_file'] = "Import zo súboru";
+$lang['kalkun_compose_counter_character'] = "znakov";
+$lang['kalkun_compose_counter_message'] = "správa";
 
 // Setting
-$lang['kalkun_setting_passwd_current'] = "Current Password";
-$lang['kalkun_setting_passwd_forgot'] = "Forgot your password?";
-$lang['kalkun_setting_passwd_new'] = "New Password";
-$lang['kalkun_setting_passwd_valid_rule'] = "Must be at least 6 characters long";
+$lang['kalkun_setting_passwd_current'] = "Terajšie heslo";
+$lang['kalkun_setting_passwd_forgot'] = "Zabudli ste heslo?";
+$lang['kalkun_setting_passwd_new'] = "Nové heslo";
+$lang['kalkun_setting_passwd_valid_rule'] = "Musí mať aspoň 6 znakov";
 
-$lang['kalkun_setting_passwd_current_enter'] = "Enter your current password";
-$lang['kalkun_setting_passwd_new_enter'] = "Enter your new password";
+$lang['kalkun_setting_passwd_current_enter'] = "Zadajte terajšie heslo";
+$lang['kalkun_setting_passwd_new_enter'] = "Zadajte nové heslo";
 
-$lang['kalkun_level_admin'] = "Administrator";
-$lang['kalkun_level_user'] = "User";
+$lang['kalkun_level_admin'] = "Administrátor";
+$lang['kalkun_level_user'] = "Užívateľ";
 
-$lang['kalkun_filter_add'] = "Create a new filter";
-$lang['kalkun_filter_has_the_words'] = "Has the words";
+$lang['kalkun_filter_add'] = "Vytvoriť nový filter";
+$lang['kalkun_filter_has_the_words'] = "Má slová";
 
 // SMS Content/Member
-$lang['kalkun_sms_member'] = "Member";
-$lang['kalkun_sms_total_member'] = "Total Member";
-$lang['kalkun_sms_no_member'] = "There is no registered member yet";
+$lang['kalkun_sms_member'] = "Člen";
+$lang['kalkun_sms_total_member'] = "Spolu členov";
+$lang['kalkun_sms_no_member'] = "Ešte tu nieje žiaden zaregistrovaný člen";
 
 // tni contribution
 $lang['tni_contact_add'] = "Add Contact";
@@ -299,47 +299,47 @@ $lang['tni_compose_enter_msg'] = "Please enter your message";
 $lang['tni_compose_enter_sendate'] = "Please enter sending date";  
 $lang['tni_compose_click_calendar'] = "Click on calendar";  
 $lang['tni_archived_by'] = "Show by";  
-$lang['tni_received'] = "Received";  
-$lang['tni_from'] = "From";  
-$lang['tni_to'] = "To";  
-$lang['tni_inserted'] = "Inserted";  
-$lang['tni_date'] = "Date";  
-$lang['tni_msg_stat_fail'] = "Sending Failed";  
-$lang['tni_msg_stat_oknr'] = "Sending OK - No Report";  
-$lang['tni_msg_stat_okwr'] = "Sending OK - Waiting for Report";  
-$lang['tni_msg_stat_deliv'] = "Delivered";  
-$lang['tni_msg_stat_pend'] = "Pending";  
-$lang['tni_msg_stat_unknown'] = "Unknown";  
+$lang['tni_received'] = "Doručené";  
+$lang['tni_from'] = "Od";  
+$lang['tni_to'] = "Pre";  
+$lang['tni_inserted'] = "Vložené";  
+$lang['tni_date'] = "Dátum";  
+$lang['tni_msg_stat_fail'] = "Odosielanie zlyhalo";  
+$lang['tni_msg_stat_oknr'] = "Odosielanie: Áno - Žiadna doručenka";  
+$lang['tni_msg_stat_okwr'] = "Odosielanie: Áno - Čakanie na doručenku";  
+$lang['tni_msg_stat_deliv'] = "Doručené";  
+$lang['tni_msg_stat_pend'] = "Čakanie";  
+$lang['tni_msg_stat_unknown'] = "Neznáme";  
 
-$lang['tni_set_conv_order_old'] = "Oldest First";  
-$lang['tni_set_conv_order_new'] = "Newest First";  
-$lang['tni_set_conv_sort'] = "Conversation sort";  
+$lang['tni_set_conv_order_old'] = "Najstaršie najskôr";  
+$lang['tni_set_conv_order_new'] = "Najnovšie najskôr";  
+$lang['tni_set_conv_sort'] = "Usporiadanie konverzácií";  
 
-$lang['tni_set_data_pp'] = "Data per Page";  
-$lang['tni_set_data_pp_hint'] = "Will be used for paging in message and phonebook";  
+$lang['tni_set_data_pp'] = "Záznamov na stránku";  
+$lang['tni_set_data_pp_hint'] = "Bude použité ako stránkovanie v správach a adresári";  
 
-$lang['tni_set_perm_del'] = "Permanent delete";  
-$lang['tni_set_perm_deloff'] = "Permanent delete Off";  
-$lang['tni_set_perm_deloff_hint'] = " - Always move to Trash first";   
-$lang['tni_set_perm_delon'] = "Permanent delete On";  
+$lang['tni_set_perm_del'] = "Trvalé mazanie";  
+$lang['tni_set_perm_deloff'] = "Trvalé mazanie - VYP";  
+$lang['tni_set_perm_deloff_hint'] = " - Vždy zmaž najskôr do koša";   
+$lang['tni_set_perm_delon'] = "Trvalé mazanie - ZAP";  
 
-$lang['tni_set_title'] = "User's settings";  
-$lang['tni_set_general'] = "General";  
-$lang['tni_set_personal'] = "Personal";  
-$lang['tni_set_appearance'] = "Appearance";  
+$lang['tni_set_title'] = "Nastavenia užívateľa";  
+$lang['tni_set_general'] = "Všeobecné";  
+$lang['tni_set_personal'] = "Osobné";  
+$lang['tni_set_appearance'] = "Rozhranie";  
 
 
-$lang['tni_signature']  = "Signature";  
-$lang['tni_signature_off']  = "Signature Off";  
-$lang['tni_signature_on']  = "Signature On";  
-$lang['tni_signature_hint']  = "Max. 50 characters";  
-$lang['tni_signature_hintb']  = "Signature will take place at the end of your message";   
-$lang['tni_language']  = "Language";   
-$lang['tni_settings']  = "Settings";  
-$lang['tni_yes']  = "Yes";   
-$lang['tni_no'] = "No";   
-$lang['tni_default'] = "Default";   
-$lang['tni_set_deliv_report'] = "Delivery Report"; 
+$lang['tni_signature']  = "Podpis";  
+$lang['tni_signature_off']  = "Podpis - VYP";  
+$lang['tni_signature_on']  = "Podpis - ZAP";  
+$lang['tni_signature_hint']  = "Max. 50 znakov";  
+$lang['tni_signature_hintb']  = "Podpis bude na konci vašej správy";   
+$lang['tni_language']  = "Jazyk";   
+$lang['tni_settings']  = "Nastavenia";  
+$lang['tni_yes']  = "Áno";   
+$lang['tni_no'] = "Nie";   
+$lang['tni_default'] = "Základné";   
+$lang['tni_set_deliv_report'] = "Oznam o doručení"; 
 
 
 /* End of file kalkun_lang.php */
