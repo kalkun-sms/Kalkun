@@ -5,7 +5,7 @@
 // Global
 $lang['kalkun_title'] = "Kalkun: Gerenciamento de SMS Web";
 $lang['kalkun_dashboard'] = "Painel";
-$lang['kalkun_folder'] = "pasta";
+$lang['kalkun_folder'] = "Pastas";
 $lang['kalkun_myfolder'] = "Minhas Pastas";
 
 $lang['kalkun_compose'] = "Escrever";
@@ -27,11 +27,11 @@ $lang['kalkun_logout'] = "Sair";
 $lang['kalkun_year'] = "ano";
 $lang['kalkun_month'] = "mes";
 $lang['kalkun_week'] = "semana";
-$lang['kalkun_day'] = "dia";
-$lang['kalkun_hour'] = "hora";
-$lang['kalkun_minute'] = "minuto";
+$lang['kalkun_day'] = "dia(s)";
+$lang['kalkun_hour'] = "hora(s)";
+$lang['kalkun_minute'] = "minuto(s)";
 $lang['kalkun_second'] = "segundo";
-$lang['kalkun_ago'] = "voltar";
+$lang['kalkun_ago'] = "atr&aacute;s";
 
 // Dashboard
 $lang['kalkun_notification'] = "Notifica&ccedil;&atilde;o";
@@ -96,7 +96,7 @@ $lang['kalkun_after_a_delay'] = "Daqui a...";
 
 $lang['kalkun_person'] = "Pessoa";
 $lang['kalkun_group'] = "Grupo";
-$lang['kalkun_input_manually'] = "Digitar";
+$lang['kalkun_input_manually'] = "Digitar n&uacute;mero";
 
 $lang['kalkun_show_hide_option'] = "Exibir/Esconder Opcao";
 $lang['kalkun_add_folder'] = "Adicionar Pasta";
@@ -145,7 +145,7 @@ $lang['kalkun_sms_ncpr_check'] = "N&atilde;o Perturbe";
 $lang['kalkun_insert'] = "Inserir";
 
 $lang['kalkun_canned'] = "Respostas prontas";
-$lang['kalkun_canned_empty'] = "Aparentemente n&atilde;o h&aacute; respostas criadas. Salve sua primeira resposta agora.";
+$lang['kalkun_canned_empty'] = "Aparentemente n&atilde;o h&aacute; respostas criadas. Grave a primeira resposta agora";
 $lang['kalkun_canned_title'] = "Escolher Respostas";
 $lang['kalkun_canned_save_new'] = "Salvar Nova...";
 $lang['kalkun_canned_saving'] = "Salvando...";
@@ -249,7 +249,7 @@ $lang['tni_hide_details'] = "Esconder Detalhes";
 $lang['tni_search_contacts'] = "Pesquisar Contatos";
 $lang['tni_search_sms'] =  "Pesquisar Mensagens";  
 $lang['tni_edit'] = "Editar";   
-$lang['tni_form_fields_required'] = "Todos os campos s&atilde;o necess7aacute;rios";   
+$lang['tni_form_fields_required'] = "Todos os campos s&atilde;o necess&aacute;rios";   
 $lang['tni_contact_name'] = "Nome";   
 $lang['tni_contact_phonenumber'] = "N&uacute;mero de Telefone";   
 $lang['tni_compose_msgto_outbox'] = "Sua mensagem foi encaminhada para a caixa de saida<br>e esta pronta para envio.";  
@@ -342,4 +342,4 @@ $lang['tni_default'] = "Default";
 $lang['tni_set_deliv_report'] = "Relat&oacute;rio de entrega"; 
 
 /* End of file kalkun_lang.php */
-/* Location: ./application/language/brazilian_portuguese/kalkun_lang.php */
+/* Location: ./application/language/english/kalkun_lang.php */
