@@ -342,4 +342,4 @@ $lang['tni_default'] = "Default";
 $lang['tni_set_deliv_report'] = "Relat&oacute;rio de entrega"; 
 
 /* End of file kalkun_lang.php */
-/* Location: ./application/language/english/kalkun_lang.php */
+/* Location: ./application/language/brazilian_portuguese/kalkun_lang.php */
