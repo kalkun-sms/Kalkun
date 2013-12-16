@@ -81,7 +81,7 @@ function sms_credit($sms)
     $uid = $sms['uid'];
 
     // check user credit
-    $user_package = $CI->plugin_model->get_users(array('id' => $uid))->row_array();
+    $user_package = $CI->plugin_model->get_users(array('id' => $uid, 'valid_start' => date('Y-m-d H:i:s'), 'valid_end' => date('Y-m-d H:i:s')))->row_array();
 
     if(isset($user_package['sms_numbers']))
     {

@@ -57,6 +57,12 @@ class SMS_credit_model extends Model {
             $this->db->like('realname', $param['q']);
         }
 
+        if(isset($param['valid_start']) AND isset($param['valid_end']))
+        {
+            $this->db->where('valid_start <=', $param['valid_start']);
+            $this->db->where('valid_end >=', $param['valid_end']);
+        }
+
         if(isset($param['limit']) AND isset($param['offset']))
         {
             $this->db->limit($param['limit'], $param['offset']);
