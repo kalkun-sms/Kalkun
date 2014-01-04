@@ -139,9 +139,34 @@ class Messages extends MY_Controller {
 		// Import value from file (currently only CSV)
 		if (isset($_FILES["import_file"]))
 		{
-			$this->load->library('csvreader');
-			$filePath = $_FILES["import_file"]["tmp_name"];
-			$csvData = $this->csvreader->parse_file($filePath, true);	
+			// $this->load->library('csvreader');
+			// $filePath = $_FILES["import_file"]["tmp_name"];
+			// $csvData = $this->csvreader->parse_file($filePath, true);	
+		            // Load the spreadsheet reader library
+		            $this->load->library('excel_reader');
+		            //File name
+		            $file = $_FILES["import_file"]["tmp_name"];
+		            //Read data
+		            $this->excel_reader->read($file);
+		            //setting report error
+		            error_reporting(E_ALL ^ E_NOTICE);
+		            // Sheet 1
+		            $data = $this->excel_reader->sheets[0] ;
+		            //baca header
+		            $header=array();
+		            for ($i = 1; $i <= $data['numCols']; $i++) {
+		                $header[$i]=$data['cells'][1][$i];
+		            }
+		            //simpan dalam array
+		            $csvData = array();
+		            for ($i = 2; $i <= $data['numRows']; $i++) {
+		                $isi=array();
+		                for ($j = 1; $j <= $data['numCols']; $j++) {
+		                    $isi[$header[$j]] = $data['cells'][$i][$j];
+		                }
+		                $csvData[]=$isi;
+		            }            
+	
 			$csvField = array_keys($csvData[0]);
 			foreach($csvData as $data)
 			{
