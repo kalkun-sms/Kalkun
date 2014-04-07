@@ -330,8 +330,8 @@ $lang['tni_set_appearance'] = "Wygląd";
 
 
 $lang['tni_signature']  = "Sygnatura";
-$lang['tni_signature_off']  = "Sygnatura załączona";
-$lang['tni_signature_on']  = "Sygnatura wyłączona";
+$lang['tni_signature_off']  = "Sygnatura wyłączona";
+$lang['tni_signature_on']  = "Sygnatura załączona";
 $lang['tni_signature_hint']  = "Maks. 50 znaków";
 $lang['tni_signature_hintb']  = "Sygnatura będzie dodawana na końcu wiadomości SMS";
 $lang['tni_language']  = "Język";
