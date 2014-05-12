@@ -239,202 +239,114 @@ $lang['tni_group_select'] = "Csoport kiválasztása";
 $lang['tni_msglist_trash_empty'] = "Nincsenek üzenetek a Lomtárban";
 
 $lang['tni_msg_no_conv_selected'] = "Egyetlen elem sem lett kiválasztva";
-
 $lang['tni_pbk_no_contact_selected'] = "Egyetlen kapcsolat sem lett kiválasztva";
-
 $lang['tni_compose_sms'] = "SMS Létrehozás";
-
 $lang['tni_contacts'] = "Kapcsolatok";
-
 $lang['tni_settings_saved'] = "A beállítások mentésre kerültek...";
-
 $lang['tni_settings_wrong_pword'] = "Rossz jelszót adott meg";
-
 $lang['tni_settings_uname_exists'] = "A felhasználónév már létezik";
-
 $lang['tni_settings_unamepass_wrong'] = "Rossz felhasználónév vagy jelszó";
 
 $lang['tni_back_to'] = "Vissza";
-
 $lang['tni_show_details'] = "Részletek Mutatása";
-
 $lang['tni_hide_details'] = "Részletek Elrejtése";
-
 $lang['tni_search_contacts'] = "Kapcsolatok keresése";
 $lang['tni_search_sms'] = "Üzenetek keresése";
-
 $lang['tni_edit'] = "Szerkesztés";
-
 $lang['tni_form_fields_required'] = "Az összes form mezőt kötelező kitölteni";
-
 $lang['tni_contact_name'] = "Név";
-
 $lang['tni_contact_phonenumber'] = "Telefonszám";
-
-$lang['tni_compose_msgto_outbox'] = "Az üzenete a kimenő üzenetek közé került
-és készen áll a küldésre";
-
+$lang['tni_compose_msgto_outbox'] = "Az üzenete a kimenő üzenetek közé kerültés készen áll a küldésre";
 $lang['tni_email_address'] = "Email ID";
-
 $lang['tni_email_forward'] = "Email Továbbítás engedélyezése";
 $lang['tni_compose_searching'] = "Keresés...";
-
 $lang['tni_outbox_sent_time'] = "Kevesebb, mint egy perccel ezelőtt";
-
 $lang['tni_time_remaining'] = "maradék";
-
 $lang['tni_pbk_edit_contact'] = "Kapcsolat szerkesztése";
-
 $lang['tni_pbk_contact_edited'] = "A kapcsolat szerkesztve";
-
 $lang['tni_pbk_contact_added'] = "A kapcsolat hozzáadva";
-
 $lang['tni_contact_not_found'] = "A kapcsolat nem található";
-
 $lang['tni_contact_search_empty'] = "A kapcsolat üres";
 
 $lang['tni_user_add'] = "Felhasználók hozzáadása / szerkesztése";
-
 $lang['tni_user_addp'] = "Felhasználók hozzáadása";
-
 $lang['tni_user_edit'] = "Felhasználó hozzáadása / szerkesztése";
-
 $lang['tni_user_word'] = "Felhasználó";
-
 $lang['tni_user_wordp'] = "Felhasználók";
-
 $lang['tni_user_confirm_delete'] = "Felhasználók törlése Megerősítés";
-
-$lang['tni_user_delete_body'] = "Töröljük a felhasználót?
-Ez magába foglalja a felhasználó összes bejegyzését (üzenetek / kapcsolatok).";
-
+$lang['tni_user_delete_body'] = "Töröljük a felhasználót? Ez magába foglalja a felhasználó összes bejegyzését (üzenetek / kapcsolatok).";
 $lang['tni_user_not_found'] = "A felhasználó nem található";
-
 $lang['tni_user_search_empty'] = "A mappa üres";
-
 $lang['tni_user_person_name'] = "Név";
-
 $lang['tni_user_username'] = "Felhasználónév";
-
 $lang['tni_user_password'] = "Jelszó";
-
 $lang['tni_user_search'] = "Felhasználó keresése";
-
 $lang['tni_user_conf_password'] = "Jelszó megerősítése";
-
 $lang['tni_user_updated'] = "A felhasználó frissítve";
-
 $lang['tni_user_phone_number'] = "Telefonszám";
 
 $lang['tni_action_not_allowed'] = "A művelet nem megengedett";
-
 $lang['tni_error_enter_name'] = "Adja meg a nevet";
-
 $lang['tni_error_enter_password'] = "Adja meg a jelszót";
-
 $lang['tni_error_password_nomatch'] = "A jelszavak nem egyeznek";
-
 $lang['tni_error_toshort'] = "Túl rövid";
-
 $lang['tni_error_nouser_sel'] = "Nincs felhasználó kiválasztva";
 
 $lang['tni_level'] = "Szint";
-
 $lang['tni_delete_folder'] = "A mappa törlése";
-
 $lang['tni_loading'] = "Töltés";
-
 $lang['tni_status'] = "Státusz";
-
 $lang['tni_connected'] = "Csatlakozva";
-
 $lang['tni_disconnected'] = "Szétkapcsolva";
-
 $lang['tni_user_enter_login'] = "Kérem adja meg a felhasználónevét és jelszavát";
-
 $lang['tni_group_no_group'] = "Nincs csoport kiválasztva, adjon meg előbb egyet";
-
 $lang['tni_group_no_selected'] = "Nincs csoport kiválasztva";
-
 $lang['tni_original_msg_from'] = "Kitől";
-
 $lang['tni_compose_enter_dest'] = "Kérem adja meg a címet";
-
 $lang['tni_compose_enter_msg'] = "Kérem adja meg az üzenetet";
-
 $lang['tni_compose_enter_sendate'] = "Kérem adja meg a küldés dátumát";
-
 $lang['tni_compose_click_calendar'] = "Kattintson a naptárra";
-
 $lang['tni_archived_by'] = "Rendezés";
-
 $lang['tni_received'] = "Beérkezett";
-
 $lang['tni_from'] = "Kitől";
-
 $lang['tni_to'] = "Kinek";
-
 $lang['tni_inserted'] = "Beszúrva";
-
 $lang['tni_date'] = "Dátum";
 
 $lang['tni_msg_stat_fail'] = "Küldés sikertelen";
-
 $lang['tni_msg_stat_oknr'] = "Küldés OK - Nincs Jelentés";
-
 $lang['tni_msg_stat_okwr'] = "Küldés OK - Várakozás a jelentésre";
-
 $lang['tni_msg_stat_deliv'] = "Továbbítva";
-
 $lang['tni_msg_stat_pend'] = "Folyamatban";
-
 $lang['tni_msg_stat_unknown'] = "Ismeretlen";
 
 $lang['tni_set_conv_order_old'] = "Régebbieket előre";
-
 $lang['tni_set_conv_order_new'] = "Újabbakat előre";
-
 $lang['tni_set_conv_sort'] = "Üzenetváltás rendezés";
 
 $lang['tni_set_data_pp'] = "Adat laponként";
-
 $lang['tni_set_data_pp_hint'] = "A lapozáshoz lesz használva az Üzenetekben és a Telefonkönyvben";
 
 $lang['tni_set_perm_del'] = "Végleges törlés";
-
 $lang['tni_set_perm_deloff'] = "Végleges törlés Kikapcsolása";
-
 $lang['tni_set_perm_deloff_hint'] = " - Mindig a Lomtárba mozgassa először";
-
 $lang['tni_set_perm_delon'] = "Végleges törlés Bekapcsolása";
 
 $lang['tni_set_title'] = "A felhasználó beállításai";
-
 $lang['tni_set_general'] = "Általános";
-
 $lang['tni_set_personal'] = "Személyes";
-
 $lang['tni_set_appearance'] = "Megjelenés";
 
 $lang['tni_signature'] = "Aláírás";
-
 $lang['tni_signature_off'] = "Aláírás Kikapcsolása";
-
 $lang['tni_signature_on'] = "Aláírás Bekapcsolása";
 $lang['tni_signature_hint'] = "Max. 50 karakter";
-
 $lang['tni_signature_hintb'] = "Az aláírás az üzenetei végén foglal majd helyet";
-
 $lang['tni_language'] = "Nyelv";
-
 $lang['tni_settings'] = "Beállítások";
-
 $lang['tni_yes'] = "Igen";
-
 $lang['tni_no'] = "Nem";
-
 $lang['tni_default'] = "Alapértelmezett";
-
 $lang['tni_set_deliv_report'] = "Kézbesítés jelentés";
 
 /* End of file kalkun_lang.php /
