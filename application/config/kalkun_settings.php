@@ -24,12 +24,24 @@ $config['kalkun_previous_version'] = '0.6';
 | ozeking <http://ozekisms.com> - Experimental
 | nowsms <http://nowsms.com> - Experimental
 | way2sms <http://way2sms.com> - Experimental
+| tmobilecz <https://sms.t-mobile.cz/closed.jsp> - Experimental
 */
 $config['gateway']['engine'] = 'gammu';
 $config['gateway']['url'] = 'http://localhost:13013';
 $config['gateway']['username'] = 'username';
 $config['gateway']['password'] = 'password';
 $config['gateway']['api_id'] = 'xxx1234567890'; 
+// for tmobilecz you must specify the credentials to log-in to T-Mobile CZ portal
+// numeric keys - credentials for specific kalkun user (user's ID from table "user")
+// key "default" - credentials for all other Kalkun users
+// subkey "user" and "pass" - string - username and password for T-Mobile CZ portal
+// subkey "hist" - boolean - save copies of SMS in T-Mobile CZ portal
+// subkey "eml" - string - T-Mobile CZ will send copy of SMS to specified e-mail. Leave empty to switch off.
+$config['gateway']['tmobileczauth'] = array(
+                  1=>array('user'=>'admins login',   'pass'=>'his_password',  'hist'=>true, 'eml'=>''),
+ 	          2=>array('user'=>'2nd users login','pass'=>'her_password',  'hist'=>true, 'eml'=>''),
+ 	  'default'=>array('user'=>'all others',     'pass'=>'their_password','hist'=>true, 'eml'=>'')
+); 
 
 /*
 |--------------------------------------------------------------------------
