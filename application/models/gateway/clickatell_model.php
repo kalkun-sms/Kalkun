@@ -21,9 +21,9 @@
  * @subpackage	Messages
  * @category	Models
  */
-require_once('gammu_model'.EXT);
+require_once('nongammu_model'.EXT);
 
-class Clickatell_model extends Gammu_model { 
+class Clickatell_model extends nongammu_model { 
 	
 	/**
 	 * Constructor
@@ -49,7 +49,7 @@ class Clickatell_model extends Gammu_model {
 	 * 
 	 * @return void
 	 */	
-	function send_messages($data)
+	function really_send_messages($data)
 	{
 		$gateway = $this->gateway;
 		file_get_contents($gateway['url'].'/http/sendmsg?user='.$gateway['username'].

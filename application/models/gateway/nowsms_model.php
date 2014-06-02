@@ -21,9 +21,9 @@
  * @subpackage	Messages
  * @category	Models
  */
-require_once('gammu_model'.EXT);
+require_once('nongammu_model'.EXT);
 
-class Nowsms_model extends Gammu_model { 
+class Nowsms_model extends nongammu_model { 
 	
 	/**
 	 * Constructor
@@ -43,7 +43,7 @@ class Nowsms_model extends Gammu_model {
 	 * 
 	 * @return void
 	 */	
-	function send_messages($data)
+	function really_send_messages($data)
 	{
 		$gateway = $this->config->item('gateway');
 		file_get_contents($gateway['url'].'/?User='.$gateway['username'].

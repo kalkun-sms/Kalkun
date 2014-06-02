@@ -22,9 +22,9 @@
  * @subpackage	Messages
  * @category	Models
  */
-require_once('gammu_model'.EXT);
+require_once('nongammu_model'.EXT);
 
-class panacea_model extends Gammu_model { 
+class panacea_model extends nongammu_model { 
 	
 	/**
 	 * Constructor
@@ -46,7 +46,7 @@ class panacea_model extends Gammu_model {
 	 *
 	 * replace xxx from &from=xxx with your sender id
 	 */	
-	function send_messages($data)
+	function really_send_messages($data)
 	{
 		$gateway = $this->config->item('gateway');
 		file_get_contents($gateway['url'].'/json?action=message_send&username='.$gateway['username'].

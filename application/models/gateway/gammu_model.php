@@ -29,9 +29,9 @@ class Gammu_model extends Model {
 	 *
 	 * @access	public
 	 */
-	function Message_model()
+	function __construct()
 	{
-		parent::Model();
+		parent::__construct();
 		
 		// Set mb encoding
 		mb_internal_encoding($this->config->item('charset'));
@@ -1345,6 +1345,13 @@ class Gammu_model extends Model {
         }
         else
             die("Invalid Option");
+    }
+
+    // hook function for Alternate Gateways
+    // do nothing for GAMMU (gammu-smsd moves from outbox to sentitems)
+    function process_outbox_queue()
+    {
+	log_message('info',"Nothing to do in outbox queue for GAMMU.");
     }
 }
 

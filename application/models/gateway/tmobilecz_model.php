@@ -14,16 +14,17 @@
 /**
  * Tmobilecz_model Class
  *
- * Handle all messages database activity 
+ * Handle the real sending of SMS
  * for T-Mobile CZ <https://sms.t-mobile.cz/>
+ * Database handling inherited from nongammu_model
  *
  * @package	Kalkun
  * @subpackage	Messages
  * @category	Models
  */
-require_once('gammu_model'.EXT);
+require_once('nongammu_model'.EXT);
 
-class Tmobilecz_model extends Gammu_model { 
+class Tmobilecz_model extends nongammu_model { 
 	
 	/**
 	 * Constructor
@@ -39,7 +40,7 @@ class Tmobilecz_model extends Gammu_model {
     // --------------------------------------------------------------------
 	
 	/**
-	 * Send Messages (Still POC)
+	 * Real Send Messages
 	 * 
 	 * @access	public   		 
 	 * @param	mixed $options 
@@ -52,18 +53,14 @@ class Tmobilecz_model extends Gammu_model {
 	 * class -1, 0, 1
 	 * delivery_report default, yes, no
 	 * uid int
-	 * @return	object
+	 * @return null/string
 	 */	
-	function send_messages($data)
+	function really_send_messages($data)
 	{
-            if (trim($data['message']) == "") {
-                log_message('error',"TMCZ> Aborting empty SMS via ".__CLASS__." to ".$data['dest']);
-                return;
-	    };
             $gateway = $this->config->item('gateway');
 	    if(!is_array($gateway['tmobileczauth'])) {
 	        log_message('error',"TMCZ> Authentication not configured in kalkun_settings.php. SMS aborted.");
-		return;
+		return "Authentication not configured in kalkun_settings.php.";
 	    };
 	    $auth=$gateway['tmobileczauth'];
 	    if (($user=$auth[$data['uid']]['user'])&&($pass=$auth[$data['uid']]['pass'])){
@@ -77,7 +74,7 @@ class Tmobilecz_model extends Gammu_model {
 	    }else{
 	        log_message('error',"TMCZ> Aborting SMS. No credentials to send SMS via ".
                            __CLASS__." to ".$data['dest']." for user ID ".$data['uid']);
-		return;
+		return "No credentials to send SMS.";
 	    };
 	    log_message('debug',"TMCZ> SMS via ".__CLASS__." user ".$user." to ".$data['dest'].
 	                        " length ".strlen($data['message'])." chars");
@@ -85,6 +82,7 @@ class Tmobilecz_model extends Gammu_model {
                                       $data['class']=="0",$data['delivery_report']=="yes",$hist,$eml);
 	    if(is_string($ret)){
 	        log_message('error',"TMCZ> SMS via ".__CLASS__." to ".$data['dest']." failed: ".$ret);
+		return $ret;
 	    };
         }
 
