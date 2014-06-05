@@ -124,12 +124,14 @@ class Tmobilecz_model extends nongammu_model {
 	$cookies=$cache_path."cookie_".__CLASS__."_".$uid;
 	if (! is_really_writable($cache_path))
 	    return "Cookie file $cookies not writable";
+        if ((($cookiemt=filemtime($cookies))!==false)&&((time()-$cookiemt)>300)) //cookies older than 5mins
+            unlink($cookies);
         curl_setopt($curl, CURLOPT_COOKIEFILE, $cookies);
         curl_setopt($curl, CURLOPT_COOKIEJAR, $cookies);
         curl_setopt($curl, CURLOPT_URL, "https://sms.t-mobile.cz/closed.jsp");
         curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0");
-        curl_setopt($curl, CURLOPT_REFERER, "https://sms.t-mobile.cz/");
-	log_message('debug',"TMCZ> getting first page...");
+        curl_setopt($curl, CURLOPT_REFERER, "");
+        log_message('debug',"TMCZ> getting first page...");
         $text = curl_exec($curl);
 
         // Check if any error occured
@@ -146,7 +148,7 @@ class Tmobilecz_model extends nongammu_model {
                 "nextURL=checkStatus.jsp&errURL=clickError.jsp&".
                 "username=".urlencode($uid)."&remember=1&".
 		"password=".urlencode($pwd)."&submit=Přihlásit");
-	    log_message('debug',"TMCZ> logging in...");
+            log_message('debug',"TMCZ> logging in...");
             $text = curl_exec($curl);
              
             // Check if any error occured
@@ -177,6 +179,7 @@ class Tmobilecz_model extends nongammu_model {
 		($dRpt?"confirmation=1&":"").  //confirm SMS delivery
 		($hist?"history=on&":"").      //save in provider's history
 		"email=".urlencode($emlCopy)); //provider will send a copy to e-mail
+        log_message('debug',"TMCZ> sending SMS...");
         $text = curl_exec($curl);
 
         // Check if any error occured
