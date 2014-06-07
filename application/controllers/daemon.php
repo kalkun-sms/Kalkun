@@ -36,7 +36,7 @@ class Daemon extends Controller {
 	// --------------------------------------------------------------------
 	
 	/**
-	 * Message routine
+	 * Incoming Message routine
 	 *
 	 * Process the new/unprocessed incoming sms
 	 * Called by shell/batch script on Gammu RunOnReceive directive
@@ -219,6 +219,21 @@ class Daemon extends Controller {
 		}
 	}
 
+	
+	/**
+	 * Outbox Message routine for Alternate Gateways
+	 *
+	 * Process outgoing sms waiting in outbox
+	 * Called by shell/batch script via Crontab
+	 *
+	 * @access	public   		 
+	 */
+	function outbox_routine()
+	{
+		$this->load->model(array('Message_model'));
+		// send waiting messages
+		$this->Message_model->process_outbox_queue();
+        }
 }
 
 /* End of file daemon.php */
