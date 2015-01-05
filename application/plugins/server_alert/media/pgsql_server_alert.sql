@@ -1,6 +1,6 @@
 CREATE TABLE "plugin_server_alert" (
-	"id_server_alert" serial INTEGER PRIMARY KEY, 
-	"alert_name" varchar(100) NOT NULL, 
+	"id_server_alert" serial PRIMARY KEY,
+	"alert_name" varchar(100) NOT NULL,
 	"ip_address" varchar(20) NOT NULL,
 	"port_number" integer NOT NULL,
 	"timeout" integer NOT NULL DEFAULT '30',
