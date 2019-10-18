@@ -1,7 +1,7 @@
 <script language="javascript">
 $(document).ready(function() {
 
-var inbox_master = '<?php echo $this->config->item('inbox_owner_id');?>';
+var inbox_master = '<?php echo $this->config->item('inbox_owner_id')[0];?>';
 	
 // Add/Edit Contact
 $('.addpbkcontact, .edit_user').bind('click', function() {

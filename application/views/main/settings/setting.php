@@ -1,6 +1,5 @@
 <script type="text/javascript">
 $(document).ready(function(){ 	
-
 // Get current page for styling/css	
 $("#window_sub_header").find("a[href='"+window.location.href+"']").each(function(){
 	$(this).addClass("current");

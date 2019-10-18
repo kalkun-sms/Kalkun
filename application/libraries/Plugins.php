@@ -22,7 +22,7 @@ class Plugins {
     
     // Error and Message Pools
     public static $errors;
-    public static $messages;
+    public static $messages = [];
     
     public function __construct($params = array())
     {
@@ -46,18 +46,19 @@ class Plugins {
         else // else set to default value
         {
         	$this->set_plugin_dir(FCPATH . "plugins/");
-        }  
+        }
+        
         
         // Remove index.php string on the plugins directory if any
        	$this->plugins_dir = str_replace("index.php", "", $this->plugins_dir);      
-                
+            
         $this->find_plugins();          // Find all plugins
         $this->get_activated_plugins(); // Get all activated plugins
         $this->get_plugin_infos();      // Gets information about all plugins and stores it
         $this->include_plugins();       // Include plugins
         
-        self::$messages = ""; // Clear messages
-        self::$errors   = ""; // Clear errors                      
+        self::$messages = []; // Clear messages
+        self::$errors   = []; // Clear errors                      
     }
     
     /**
@@ -96,14 +97,15 @@ class Plugins {
         if ($plugins !== false)
         {        
             // Iterate through every plugin found
-            foreach ($plugins AS $key => $name)
+            foreach ($plugins as $key => $name)
             {                 
-                $name = strtolower(trim($name)); // Trim any whitespace and lowercase
+                $name = str_replace('/','',strtolower(trim($name))); // Trim any whitespace and lowercase
                       
                 // If the plugin hasn't already been added and isn't a file
                 if ( !isset(self::$plugins_pool[$name]) AND !stripos($name, ".") )
                 {                
                     // Make sure a valid plugin file by the same name as the folder exists
+                    //log_message('error',$this->plugins_dir.$name.$name.".php");
                     if ( file_exists($this->plugins_dir.$name."/".$name.".php") )
                     {
                         // Register the plugin
@@ -132,7 +134,7 @@ class Plugins {
         if ( $plugins->num_rows() > 0 )
         {
             // For every plugin, store it
-            foreach ($plugins->result_array() AS $plugin)
+            foreach ($plugins->result_array() as $plugin)
             {
                 self::$plugins_active[$plugin['plugin_system_name']] = $plugin['plugin_system_name'];
             }
@@ -153,7 +155,7 @@ class Plugins {
     	if (isset(self::$plugins_active))
     	{
 	        // Validate and include our found plugins
-	        foreach (self::$plugins_active AS $name => $value)
+	        foreach (self::$plugins_active as $name => $value)
 	        {
 	            // The plugin information being added to the database
 	            $data = array(
@@ -187,8 +189,9 @@ class Plugins {
     {
         if (self::$plugins_pool !== false)
         {
+            if(empty(self::$plugins_pool)) return;
             // Iterate over all plugins
-            foreach (self::$plugins_pool AS $plugin => $value )
+            foreach (self::$plugins_pool as $plugin => $value )
             {        
                 $plugin = strtolower(trim($plugin)); // Lowercase and trim the plugin name
                 
@@ -200,7 +203,7 @@ class Plugins {
                 preg_match ( '|Description:(.*)$|mi', $plugin_data, $description );
                 preg_match ( '|Author:(.*)$|mi', $plugin_data, $author_name );
                 preg_match ( '|Author URI:(.*)$|mi', $plugin_data, $author_uri );
-                
+                $arr = [];
                 if (isset($name[1]))
                 {
                     $arr['plugin_name'] = trim($name[1]);
@@ -232,7 +235,7 @@ class Plugins {
                 }
                 
                 // For every plugin header item
-                foreach ($arr AS $k => $v)
+                foreach ($arr as $k => $v)
                 {
                     // If the key doesn't exist or the value is not the same, update the array
                     if ( !isset(self::$plugins_pool[$plugin]['plugin_info'][$k]) OR self::$plugins_pool[$plugin]['plugin_info'][$k] != $v )
@@ -262,7 +265,7 @@ class Plugins {
         // Okay the plugin exists, push it to the activated array
         if ( isset(self::$plugins_pool[$name]) AND !isset(self::$plugins_active[$name]) )
         {
-            $this->_ci->db->insert('plugins', array('plugin_system_name' => $name));
+            $this->_ci->db->insert('plugins', array('plugin_name' => $name,'plugin_system_name' => $name));
             self::$messages[] = "Plugin ".self::$plugins_pool[$name]['plugin_info']['plugin_name']." successfully activated!";
         }
     }
@@ -310,7 +313,7 @@ class Plugins {
         */
         if ( is_array($name) )
         {
-            foreach ($name AS $name)
+            foreach ($name as $name)
             {
                 // Store the action hook in the $hooks array
                 self::$actions[$name][$priority][$function] = array("function" => $function);
@@ -346,11 +349,11 @@ class Plugins {
         // Key sort our action hooks
         ksort(self::$actions[$name]);
         
-        foreach(self::$actions[$name] AS $priority => $names)
+        foreach(self::$actions[$name] as $priority => $names)
         {
             if ( is_array($names) )
             {
-                foreach($names AS $name)
+                foreach($names as $name)
                 {
                     // This line runs our function and stores the result in a variable                    
                     $returnargs = call_user_func_array($name['function'], array(&$arguments));
@@ -628,7 +631,7 @@ function plugin_errors()
 {
     if ( is_array(Plugins::$errors) )
     {
-        foreach (Plugins::$errors AS $k => $error)
+        foreach (Plugins::$errors as $k => $error)
         {
             echo $error."\n\r";   
         }
@@ -643,7 +646,7 @@ function plugin_messages()
 {
     if ( is_array(Plugins::$messages) )
     {
-        foreach (Plugins::$messages AS $k => $message)
+        foreach (Plugins::$messages as $k => $message)
         {
             echo $message."\n\r";   
         }
@@ -657,7 +660,7 @@ function plugin_messages()
 
 function get_available_plugin()
 {
-	return Plugins::$plugins_pool;
+    return Plugins::$plugins_pool;
 }
 
 function get_installed_plugin()
