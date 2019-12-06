@@ -51,7 +51,7 @@ $lang['kalkun_signal'] = "Se&ntilde;al";
 // Phonebook
 $lang['kalkun_contact'] = "Contacto";
 $lang['kalkun_all_contacts'] = "All Contacts";
-$lang['kalkun_send_to_all_contacts'] = "Send To All Contacts";
+$lang['kalkun_send_to_all_contacts'] = "Enviar a todos los contactos";
 $lang['kalkun_group'] = "Grupos";
 $lang['kalkun_add_to_group'] = "Agregar a Grupo";
 $lang['kalkun_delete_from_group'] = "Eliminar del Grupo";
@@ -78,7 +78,7 @@ $lang['kalkun_forward'] = "Reenviar";
 $lang['kalkun_forward_to'] = "Reenviar a";
 $lang['kalkun_forward_title'] = "Click para reenviar este mensaje";
 $lang['kalkun_move_to'] = "Mover a";
-$lang['kalkun_select_folder'] = "Seleccione directorio";
+$lang['kalkun_select_folder'] = "Seleccione el directorio";
 $lang['kalkun_delete'] = "Eliminar";
 $lang['kalkun_delete_message_title'] = "Click para eliminar este mensaje";
 $lang['kalkun_delete_folder'] = "Eliminar este directorio";
@@ -205,8 +205,8 @@ $lang['kalkun_setting_passwd_new_enter'] = "Ingrese su nueva clave";
 $lang['kalkun_level_admin'] = "Administrador";
 $lang['kalkun_level_user'] = "Usuario";
 
-$lang['kalkun_filter_add'] = "Create a new filter";
-$lang['kalkun_filter_has_the_words'] = "Has the words";
+$lang['kalkun_filter_add'] = "Crear un nuevo filtro";
+$lang['kalkun_filter_has_the_words'] = "contiene las palabras";
 
 // SMS Content/Member
 $lang['kalkun_sms_member'] = "Miembro";
