@@ -269,9 +269,27 @@ class Phonebook extends MY_Controller {
 	 */		
 	function import_phonebook()
 	{
-		$this->load->library('csvreader');
-		$filePath = $_FILES["csvfile"]["tmp_name"];
-		$csvData = $this->csvreader->parse_file($filePath, true);	
+        //		$this->load->library('csvreader');
+        //		$filePath = $_FILES["csvfile"]["tmp_name"];
+        //		$csvData = $this->csvreader->parse_file($filePath, true);	
+
+        	$this->load->library('excel_reader');
+	        $file = $_FILES["csvfile"]["tmp_name"];
+	        $this->excel_reader->read($file);
+	        error_reporting(E_ALL ^ E_NOTICE);
+	        $data = $this->excel_reader->sheets[0] ;
+	        $header=array();
+	        for ($i = 1; $i <= $data['numCols']; $i++) {
+	            $header[$i]=$data['cells'][1][$i];
+	        }
+	        $csvData = array();
+	        for ($i = 2; $i <= $data['numRows']; $i++) {
+	            $isi=array();
+	            for ($j = 1; $j <= $data['numCols']; $j++) {
+	                $isi[$header[$j]] = $data['cells'][$i][$j];
+	            }
+	            $csvData[]=$isi;
+	        }            
 		
 		$n=0;
 		foreach($csvData as $field):
