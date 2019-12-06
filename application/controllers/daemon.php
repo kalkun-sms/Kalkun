@@ -91,7 +91,7 @@ class Daemon extends Controller {
 			
 			if($tmp_check->row('UDH')!='')
 			{
-				$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'),0,8));	
+				$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'),0,-2));	
 				$multipart['phone_number'] = $tmp_check->row('SenderNumber');
 				$multipart['type'] = 'inbox';				
 				foreach($this->Message_model->get_multipart($multipart)->result() as $part):
