@@ -34,7 +34,7 @@ class Spam_model extends CI_Model {
      * @access	public
      */		
     function __construct()
-	{
+    {
 		parent::__construct();
         $b8_config = array( 'storage' => 'active');
         $config_database= array(); // not required for activare record, see b8 documentation for mysql/dba methods
