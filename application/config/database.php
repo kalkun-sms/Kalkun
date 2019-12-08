@@ -37,7 +37,7 @@
 $active_group = "default";
 $active_record = TRUE;
 
-$db['default']['hostname'] = "localhost";
+$db['default']['hostname'] = "127.0.0.1";
 
 // MySQL
 $db['default']['username'] = "root";
@@ -56,7 +56,7 @@ $db['default']['dbdriver'] = "mysqli";
 // $db['default']['dbdriver'] = "pdo";
 
 $db['default']['dbprefix'] = "";
-$db['default']['pconnect'] = TRUE;
+$db['default']['pconnect'] = FALSE;
 $db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;
 $db['default']['cachedir'] = "";
