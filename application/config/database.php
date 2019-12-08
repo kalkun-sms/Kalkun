@@ -43,7 +43,7 @@ $db['default']['hostname'] = "localhost";
 $db['default']['username'] = "root";
 $db['default']['password'] = "password";
 $db['default']['database'] = "kalkun";
-$db['default']['dbdriver'] = "mysql";
+$db['default']['dbdriver'] = "mysqli";
 
 // PostgreSQL
 // $db['default']['username'] = "postgres";
