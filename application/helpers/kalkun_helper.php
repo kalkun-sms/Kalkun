@@ -198,7 +198,7 @@ function is_ajax()
 function get_database_property($driver)
 {
 	// valid and supported driver
-	$valid_driver = array('postgre', 'mysql', 'pdo');
+	$valid_driver = array('postgre', 'mysql', 'mysqli','pdo');
 	
 	if(!in_array($driver, $valid_driver)) die ('Database driver you\'re using is not supported');
 	
@@ -213,6 +213,12 @@ function get_database_property($driver)
 	$mysql['human'] = 'MySQL';
 	$mysql['escape_char'] = '`';
 	$mysql['driver'] = 'mysql';
+
+	$mysqli['name'] = 'mysqli';
+	$mysqli['file'] = 'mysqli';
+	$mysqli['human'] = 'MySQLi';
+	$mysqli['escape_char'] = '`';
+	$mysqli['driver'] = 'mysqli';
 	
 	$pdo['name'] = 'sqlite';
 	$pdo['file'] = 'sqlite';

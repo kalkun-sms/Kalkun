@@ -181,10 +181,35 @@ ALTER TABLE `sentitems` ADD `id_folder` INT( 11 ) NOT NULL DEFAULT '3';
 
 
 -- --------------------------------------------------------
-
+-- mulai versi db 16, pbk dan pbk__groups dihapus di gammu
 --
 -- Alter table structure for table `pbk`
 --
+CREATE TABLE `pbk` (
+  `ID` integer NOT NULL auto_increment,
+  `GroupID` integer NOT NULL default '-1',
+  `Name` text NOT NULL,
+  `Number` text NOT NULL,
+  PRIMARY KEY (`ID`)
+);
+
+-- 
+-- Dumping data for table `pbk`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `pbk_groups`
+-- 
+
+CREATE TABLE `pbk_groups` (
+  `Name` text NOT NULL,
+  `ID` integer NOT NULL auto_increment,
+  PRIMARY KEY `ID` (`ID`)
+);
+
 
 ALTER TABLE `pbk` ADD `id_user` INT( 11 ) NOT NULL;
 ALTER TABLE `pbk` ADD `is_public` enum('true','false') NOT NULL DEFAULT 'false';
@@ -257,7 +282,7 @@ CREATE TABLE IF NOT EXISTS `plugins` (
   `plugin_system_name` varchar(255) NOT NULL,
   `plugin_name` varchar(255) NOT NULL,
   `plugin_uri` varchar(120) DEFAULT NULL,
-  `plugin_version` varchar(30) NOT NULL,
+  `plugin_version` varchar(30) NULL,
   `plugin_description` text,
   `plugin_author` varchar(120) DEFAULT NULL,
   `plugin_author_uri` varchar(120) DEFAULT NULL,
@@ -295,3 +320,12 @@ CREATE TABLE IF NOT EXISTS `user_filters` (
   `id_folder` int(11) NOT NULL,
   PRIMARY KEY (`id_filter`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `ci_sessions` (
+  `id` varchar(40) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
+  `data` blob NOT NULL,
+  KEY `ci_sessions_timestamp` (`timestamp`)
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

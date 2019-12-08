@@ -1,11 +1,11 @@
 <?php
 /**
 * Plugin Name: SOAP
-* Plugin URI: http://oskarholowaty.com/
+* Plugin URI: http://azhari.harahap.us
 * Version: 0.0.8
 * Description: SOAP Server Plugin
-* Author: Oskar Holowaty
-* Author URI: http://oskarholowaty.com/
+* Author: Azhari Harahap
+* Author URI: http://azhari.harahap.us
 */
 
 

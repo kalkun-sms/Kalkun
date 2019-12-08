@@ -1,3 +1,4 @@
+
 <?php
 // Hungarian Translation
 // Created by: Nándor Simon <simon.nandor@simonszoft.hu>

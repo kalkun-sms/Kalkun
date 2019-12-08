@@ -17,10 +17,10 @@ $lang = array('brazilian_portuguese'	=> 'Brazilian Portuguese',
        		'polish'        => 'Polski',
        		'portuguese'	=> 'Portuguese',
        		'russian'	=> 'Russian',
-            'spanish'       => 'Español',
-            'slovak'       => 'Slovak',
+                  'spanish'       => 'Español',
+                  'slovak'       => 'Slovak',
        		'turkish'	=> 'Turkish',
-      		); 
+		); 
 $lang_act = $this->Kalkun_model->get_setting()->row('language'); 
 echo form_dropdown('language', $lang, $lang_act);       
 ?>
