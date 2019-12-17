@@ -37,11 +37,11 @@
 $active_group = "default";
 $active_record = TRUE;
 
-$db['default']['hostname'] = "127.0.0.1";
+$db['default']['hostname'] = "localhost";
 
 // MySQL
-$db['default']['username'] = "ahmad";
-$db['default']['password'] = "ahmad";
+$db['default']['username'] = "root";
+$db['default']['password'] = "password";
 $db['default']['database'] = "kalkun";
 $db['default']['dbdriver'] = "mysqli";
 
@@ -56,7 +56,7 @@ $db['default']['dbdriver'] = "mysqli";
 // $db['default']['dbdriver'] = "pdo";
 
 $db['default']['dbprefix'] = "";
-$db['default']['pconnect'] = FALSE;
+$db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;
 $db['default']['cachedir'] = "";
