@@ -242,6 +242,7 @@ $config['encryption_key'] = "F0af18413d1c9e03A6d8d1273160f5Ed";
 | 'time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
+$config['sess_driver'] = 'database'; // Change files to database
 $config['sess_cookie_name']		= 'kalkun_ci_session';
 $config['sess_expiration']		= 1209600; // 2 weeks
 $config['sess_encrypt_cookie']	= TRUE;
