@@ -45,7 +45,7 @@ class Plugins {
         }
         else // else set to default value
         {
-        	$this->set_plugin_dir(FCPATH . "plugins/");
+        	$this->set_plugin_dir(APPPATH . "plugins/");
         }
         
         
