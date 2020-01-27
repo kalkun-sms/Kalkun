@@ -39,7 +39,20 @@ class MY_Controller  extends CI_Controller  {
 		if($login)
 		{
 			// session check
-			if($this->session->userdata('loggedin')==NULL) redirect('login');
+			if($this->session->userdata('loggedin')==NULL)
+			{
+				$this->session->set_flashdata('bef_login_method',
+					$this->input->method(false));
+				$this->session->set_flashdata('bef_login_history_count',
+					-1);
+				$this->session->set_flashdata('bef_login_requested_url',
+					current_url());
+				$this->session->set_flashdata('bef_login_HTTP_REFERER',
+					$_SERVER["HTTP_REFERER"]);
+				$this->session->set_flashdata('bef_login_post_data',
+					$this->input->post());
+				redirect('login');
+			}
 			
 			$this->load->model('Kalkun_model');
 			
