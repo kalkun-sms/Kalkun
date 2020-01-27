@@ -40,14 +40,31 @@ class Kalkun_model extends CI_Model {
 		$this->db->where('username', $username);
 		$this->db->where('password', $password);
 		$query = $this->db->get();
-		
+
+		$this->session->set_flashdata('bef_login_history_count',
+			$this->session->flashdata('bef_login_history_count')-1);
+		$this->session->set_flashdata('bef_login_HTTP_REFERER', 
+			$this->session->flashdata('bef_login_HTTP_REFERER'));
+		$this->session->set_flashdata('bef_login_method', 
+			$this->session->flashdata('bef_login_method'));
+		$this->session->set_flashdata('bef_login_post_data',
+			$this->session->flashdata('bef_login_post_data'));
+
 		if($query->num_rows()=='1') {
 			$this->session->set_userdata('loggedin', 'TRUE');
 			$this->session->set_userdata('level', $query->row('level'));
 			$this->session->set_userdata('id_user', $query->row('id_user'));
 			$this->session->set_userdata('username', $query->row('username'));	
-			if($this->input->post('remember_me')) $this->session->set_userdata('remember_me', TRUE);	
-			redirect('kalkun');
+			if($this->input->post('remember_me')) $this->session->set_userdata('remember_me', TRUE);
+
+			if ($this->session->flashdata('bef_login_method') === "post" &&
+				$this->session->flashdata('bef_login_HTTP_REFERER')) {
+				redirect($this->session->flashdata('bef_login_requested_url'));
+			} else if ($this->session->flashdata('bef_login_requested_url')) {
+				redirect($this->session->flashdata('bef_login_requested_url'));
+			} else {
+				redirect('kalkun');
+			}
 		}
 		else $this->session->set_flashdata('errorlogin', 'Your username or password are incorrect');
 	}
