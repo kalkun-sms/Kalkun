@@ -48,7 +48,7 @@ $route['logout'] = "login/logout";
 //$route['phonebook'] = "kalkun/phonebook/0";
 //$route['phonebook/(:num)'] = "kalkun/phonebook/$1";
 
-$route['plugin/(:any)'] = "$1";
+$route['plugin/(.+)'] = "$1";
 $route['settings/(:any)'] = "kalkun/settings/$1";
 $route['about'] = "kalkun/about";
 
