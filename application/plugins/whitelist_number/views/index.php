@@ -17,7 +17,7 @@
 	<p id="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/whitelist_number', array('class' => 'editwhitelistnumberform')); ?>
 	<fieldset>
-		<input type="hidden" name="editid_whitelist_number" id="editid_whitelist_number" />
+		<input type="hidden" name="editid_whitelist" id="editid_whitelist" />
 		<label for="editphone_number">Match</label>
 		<input type="text" name="editmatch" id="editphone_number" class="text ui-widget-content ui-corner-all" />
 	</fieldset>
@@ -47,11 +47,11 @@
 		{
 			foreach($whitelist->result() as $tmp):
 			?>
-			<tr id="<?php echo $tmp->id_whitelist_number;?>">
+			<tr id="<?php echo $tmp->id_whitelist;?>">
 				<td class="nice-table-left"><?php echo $number;?></td>
-				<td class="phone_number"><?php echo $tmp->phone_number;?></td>
+				<td class="phone_number"><?php echo $tmp->match;?></td>
 				<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
-				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/whitelist_number/delete/<?php echo $tmp->id_whitelist_number;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
+				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/whitelist_number/delete/<?php echo $tmp->id_whitelist;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 			</tr>
 			
 			<?php 

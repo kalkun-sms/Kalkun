@@ -33,7 +33,7 @@ class Whitelist_number extends Plugin_Controller {
 	{
 		if($_POST) 
 		{	
-			if($this->input->post('editid_whitelist_number')) $this->plugin_model->update();
+			if($this->input->post('editid_whitelist')) $this->plugin_model->update();
 			else $this->plugin_model->add();
 			redirect('plugin/whitelist_number');
 		}
@@ -48,7 +48,7 @@ class Whitelist_number extends Plugin_Controller {
 		$this->pagination->initialize($config);
 				
 		$data['main'] = 'index';
-		$data['blacklist'] = $this->plugin_model->get('paginate', $config['per_page'], $this->uri->segment(3,0));
+		$data['whitelist'] = $this->plugin_model->get('paginate', $config['per_page'], $this->uri->segment(3,0));
 		$data['number'] = $this->uri->segment(3,0)+1;
 		$this->load->view('main/layout', $data);
 	}
