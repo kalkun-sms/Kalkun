@@ -21,16 +21,16 @@
  * @category    Models
  */
 
-class SMS_credit_model extends Model {
+class SMS_credit_model extends CI_Model {
 
     /**
      * Constructor
      *
      * @access	public
      */		
-    function SMS_credit_model()
+    function __construct()
     {
-        parent::Model();
+        parent::__construct();
     }
 
     // --------------------------------------------------------------------

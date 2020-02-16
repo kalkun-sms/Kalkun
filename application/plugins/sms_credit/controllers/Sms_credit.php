@@ -29,7 +29,7 @@ class SMS_credit extends Plugin_Controller {
      */
     function __construct()
     {
-        parent::Plugin_Controller();
+        parent::__construct();
         $this->load->model('sms_credit_model', 'plugin_model');
     }
 

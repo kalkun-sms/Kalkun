@@ -5,11 +5,11 @@
  *	@License: GNU General Public License
 */
 
-Class Api_Model extends Model {
+Class Api_Model extends CI_Model {
 	
 	function Plugin_model()
 	{
-		parent::Model();
+		parent::__construct();
 		$this->load->library('Remote_Messages');
 	}
 	

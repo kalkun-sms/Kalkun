@@ -18,11 +18,11 @@
  * @subpackage	Plugin
  * @category	Models
  */
-class SMS_to_xmpp_model extends Model {
+class SMS_to_xmpp_model extends CI_Model {
 	
-	function SMS_to_xmpp_model()
+	function __construct()
 	{
-		parent::Model();
+		parent::__construct();
 	}
 	
 	function check_status($uid)

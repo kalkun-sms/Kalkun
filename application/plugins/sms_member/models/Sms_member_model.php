@@ -20,16 +20,16 @@
  * @subpackage	Member
  * @category	Models
  */
-class SMS_member_model extends Model {
+class SMS_member_model extends CI_Model {
 
 	/**
 	 * Constructor
 	 *
 	 * @access	public
 	 */		
-	function SMS_member_model()
+	function __construct()
 	{
-		parent::Model();
+		parent::__construct();
 	}
 
 	// --------------------------------------------------------------------

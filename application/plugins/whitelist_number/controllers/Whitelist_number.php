@@ -22,9 +22,9 @@ include_once(APPPATH.'plugins/Plugin_Controller.php');
 
 class Whitelist_number extends Plugin_Controller {
 	
-	function Whitelist_number()
+	function __construct()
 	{
-		parent::Plugin_Controller();		
+		parent::__construct();
 		$this->load->model('Kalkun_model');
 		$this->load->model('whitelist_number_model', 'plugin_model');
 	}

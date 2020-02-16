@@ -20,12 +20,12 @@
  * @subpackage	Plugin
  * @category	Models
  */
-class Whitelist_number_model extends Model {
+class Whitelist_number_model extends CI_Model {
 	
-	function Whitelist_number_model()
+	function __construct()
 	{
-		parent::Model();
-	}	
+		parent::__construct();
+	}
 	
 	function get($option=NULL, $limit=NULL, $offset=NULL)
 	{
