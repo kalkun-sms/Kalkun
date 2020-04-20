@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class REST_Controller extends Controller
+class REST_Controller extends CI_Controller
 {
     protected $rest_format = NULL; // Set this in a controller to use a default format
 
@@ -32,7 +32,8 @@ class REST_Controller extends Controller
     // Constructor function
     function __construct()
     {
-        parent::Controller();
+        parent::__construct();
+        $this->request = new \stdClass();
 
 	    // How is this request being made? POST, DELETE, GET, PUT?
 	    $this->request->method = $this->_detect_method();
@@ -516,7 +517,7 @@ class REST_Controller extends Controller
 			return FALSE;
 		}
 
-		$valid_logins =& $this->config->item('rest_valid_logins');
+		$valid_logins = $this->config->item('rest_valid_logins');
 
 		if ( ! array_key_exists($username, $valid_logins))
 		{
@@ -598,7 +599,7 @@ class REST_Controller extends Controller
 			$this->_force_login($uniqid);
         }
 
-		$valid_logins =& $this->config->item('rest_valid_logins');
+		$valid_logins = $this->config->item('rest_valid_logins');
 		$valid_pass = $valid_logins[$digest['username']];
 
         // This is the valid response expected
@@ -763,7 +764,7 @@ class REST_Controller extends Controller
     private function _format_html($data = array())
     {
 		// Multi-dimentional array
-		if (isset($data[0]))
+		if (isset($data[0]) && is_array($data[0]))
 		{
 			$headings = array_keys($data[0]);
 		}

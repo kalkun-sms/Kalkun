@@ -27,9 +27,9 @@ class SMS_member extends Plugin_Controller {
 	 *
 	 * @access	public
 	 */		
-	function SMS_member()
+	function __construct()
 	{
-		parent::Plugin_Controller();
+		parent::__construct();
 		$this->load->model('sms_member_model', 'plugin_model');
 	}
 	

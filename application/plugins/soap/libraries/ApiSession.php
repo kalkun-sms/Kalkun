@@ -14,7 +14,7 @@ class ApiSession {
 
     var $flashdata_key     = 'flash'; // prefix for "flash" variables (eg. flash:new:message)
 
-    function ApiSession()
+    function __construct()
     {
         $this->object =& get_instance();
         log_message('debug', "Native_session Class Initialized");

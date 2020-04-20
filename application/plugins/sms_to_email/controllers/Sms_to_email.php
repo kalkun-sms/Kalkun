@@ -22,9 +22,9 @@ include_once(APPPATH.'plugins/Plugin_Controller.php');
 
 class SMS_to_email extends Plugin_Controller {
 	
-	function SMS_to_email()
+	function __construct()
 	{
-		parent::Plugin_Controller();		
+		parent::__construct();
 		$this->load->model('sms_to_email_model', 'plugin_model');
 	}
 	

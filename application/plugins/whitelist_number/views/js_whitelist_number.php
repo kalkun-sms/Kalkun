@@ -46,8 +46,8 @@ $(document).ready(function() {
 	
 	// Edit whitelist - get data
 	$('a.edit').click(function() {
-		var editid_whitelist_number = $(this).parents("tr:first").attr("id");
-		$("#editid_whitelist_number").val(editid_whitelist_number);		
+		var editid_whitelist = $(this).parents("tr:first").attr("id");
+		$("#editid_whitelist").val(editid_whitelist);
 		var editphone_number = $(this).parents("tr:first").children("td.phone_number").text();
 		$("#editphone_number").val(editphone_number);
 		var editreason = $(this).parents("tr:first").children("td.reason").text();

@@ -1,6 +1,7 @@
 <?php
 /**
 * Plugin Name: Whitelist Number
+* Plugin URI: ?
 * Version: 1.0
 * Description: Autoremove outgoing SMS not in whitelist
 * Author: Максим Морэ

@@ -20,12 +20,12 @@
  * @subpackage	Plugin
  * @category	Models
  */
-class Whitelist_number_model extends Model {
+class Whitelist_number_model extends CI_Model {
 	
-	function Whitelist_number_model()
+	function __construct()
 	{
-		parent::Model();
-	}	
+		parent::__construct();
+	}
 	
 	function get($option=NULL, $limit=NULL, $offset=NULL)
 	{
@@ -59,13 +59,13 @@ class Whitelist_number_model extends Model {
 		$data = array (
 				'match' => trim($this->input->post('editmatch',TRUE)),
 					);
-		$this->db->where('id_whitelist_number', $this->input->post('editid_whitelist_number',TRUE));			
+		$this->db->where('id_whitelist', $this->input->post('editid_whitelist',TRUE));
 		$this->db->update('plugin_whitelist_number',$data);
 	}	
 	
 	function delete($id)
 	{
-		$this->db->delete('plugin_whitelist_number', array('id_whitelist_number' => $id)); 
+		$this->db->delete('plugin_whitelist_number', array('id_whitelist' => $id));
 	}
 }
 

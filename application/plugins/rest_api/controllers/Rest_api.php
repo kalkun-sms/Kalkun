@@ -45,7 +45,11 @@ class Rest_api extends REST_Controller {
 		$data['delivery_report'] = 'default';
 		$data['SenderID'] = $this->get('SenderID');
 		$data['uid'] = 1;
+
 		$sms = $this->Message_model->send_messages($data);
+		$sms['phoneNumber'] = $data['dest'];
+		$sms['message'] = $data['message'];
+
 		$this->response($sms);
 	}
 }

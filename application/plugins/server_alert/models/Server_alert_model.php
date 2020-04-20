@@ -20,12 +20,12 @@
  * @subpackage	Plugin
  * @category	Models
  */
-class Server_alert_model extends Model {
+class Server_alert_model extends CI_Model {
 	
-	function Server_alert_model()
+	function __construct()
 	{
-		parent::Model();
-	}	
+		parent::__construct();
+	}
 
 	function get($option=NULL, $limit=NULL, $offset=NULL)
 	{

@@ -25,7 +25,7 @@ class JSONRPC extends Plugin_Controller {
 	function __construct()
 	{
 		parent::__construct(FALSE);
-		$this->load->library('CI_jsonrpc', NULL, 'jsonrpc');
+		$this->load->library('Ci_Jsonrpc', NULL, 'jsonrpc');
 	}
 	
 	/**
@@ -39,7 +39,7 @@ class JSONRPC extends Plugin_Controller {
         $methods['sms.send_sms']['function'] = 'JSONRPC.rpc_send_sms';
         $methods['sms.send_sms']['summary']  = 'Sending an SMS';
         
-        $server =& $this->jsonrpc->get_server();
+        $server = $this->jsonrpc->get_server();
         $server->define_methods($methods);
         $server->set_object($this);
         
@@ -53,7 +53,7 @@ class JSONRPC extends Plugin_Controller {
     function rpc_send_sms($request)
     {
     	$this->load->model(array('Kalkun_model', 'Message_model'));
-        $server =& $this->jsonrpc->get_server();
+        $server = $this->jsonrpc->get_server();
 		$parameters = $request;
 		
 		$data['coding'] = 'default';
@@ -77,7 +77,7 @@ class JSONRPC extends Plugin_Controller {
 		$this->load->helper('url');
 		$server_url = site_url('plugin/jsonrpc/send_sms');		
 		
-        $client =& $this->jsonrpc->get_client();
+        $client = $this->jsonrpc->get_client();
         $client->server($server_url);
         $client->method('sms.send_sms');
 		

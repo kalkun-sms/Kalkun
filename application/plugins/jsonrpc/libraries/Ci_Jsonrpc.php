@@ -1,12 +1,11 @@
 <?php
 
 
-class CI_Jsonrpc {	
+class Ci_Jsonrpc {	
 	var $server;
 	var $client;
 	
-	function CI_Jsonrpc() {
-		
+	function __construct() {
 	}
 	
 	function get_server() {
@@ -45,7 +44,7 @@ class JSON_RPC_Message {
 	var $parser;
 	var $VALUE_MAPPINGS = array();
 	
-	function JSON_RPC_Message() {
+	function __construct() {
 		$this->parser = new JSON_RPC_Parser();		
 		$this->JSON_RPC_ID = 'ID_'.rand();
 		
@@ -80,8 +79,8 @@ class JSON_RPC_Request extends JSON_RPC_Message {
 	var $remote_method;
 	var $request_method;
 	
-	function JSON_RPC_Request() {
-		parent::JSON_RPC_Message();
+	function __construct() {
+		parent::__construct();
 		
 		$this->VALUE_MAPPINGS[$this->HOST_KEY]			= 'host';
 		$this->VALUE_MAPPINGS[$this->USER_AGENT_KEY]	= 'user_agent';
@@ -165,8 +164,8 @@ class JSON_RPC_Response extends JSON_RPC_Message {
 	var $error_code = '';
 	var $error_message = '';
 	
-	function JSON_RPC_Response($message = '', $error_code = '', $error_message = '') {
-		parent::JSON_RPC_Message();
+	function __construct($message = '', $error_code = '', $error_message = '') {
+		parent::__construct();
 		
 		$this->raw_data = $message;
 		$this->error_code = $error_code;
@@ -263,8 +262,8 @@ class JSON_RPC_Server_Response extends JSON_RPC_Message {
 			)
 		);
 	
-	function JSON_RPC_Server_Response($data_object = null) {
-		parent::JSON_RPC_Message();
+	function __construct($data_object = null) {
+		parent::__construct();
 		
 		if($data_object != null) {
 			$this->data_object = $data_object;			
@@ -313,8 +312,8 @@ class JSON_RPC_Server_Request extends JSON_RPC_Message {
 	var $error_code = '';
 	var $error_message = '';
 	
-	function JSON_RPC_Server_Request($message = '', $error_code = '', $error_message = '') {
-		parent::JSON_RPC_Message();
+	function __construct($message = '', $error_code = '', $error_message = '') {
+		parent::__construct();
 		
 		$this->raw_data = $message;
 		$this->error_code = $error_code;
@@ -345,7 +344,7 @@ class JSON_RPC_Client {
 	var $port		= 80;
 	var $timeout	= 5;
 	
-	function JSON_RPC_Client() {
+	function __construct() {
 		$this->request = new JSON_RPC_Request();
 	}
 	function server($url, $request_method = 'POST', $port = 80) {
@@ -424,7 +423,7 @@ class JSON_RPC_Server {
 	var $service_help		= '';
 	var $service_address	= '';
 	
-	function JSON_RPC_Server() {
+	function __construct() {
 		$this->methods['system.describe'] = array(
 			'function'=>'this.describe',
 			'summary'=>'Display relevant information about the JSON RPC server.',

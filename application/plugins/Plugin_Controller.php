@@ -26,8 +26,8 @@ class Plugin_Controller extends MY_Controller {
 	var $plugin_version = '';
 	var $plugin_author = '';
 	var $plugin_view_dir = '';
-	
-	function Plugin_Controller($login=TRUE)
+
+	function __construct($login=TRUE)
 	{
 		parent::__construct($login);
 

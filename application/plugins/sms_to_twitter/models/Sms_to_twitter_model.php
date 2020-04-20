@@ -18,12 +18,12 @@
  * @subpackage	Plugin
  * @category	Models
  */
-class SMS_to_twitter_model extends Model {
+class SMS_to_twitter_model extends CI_Model {
 	
-	function SMS_to_twitter_model()
+	function __construct()
 	{
-		parent::Model();
-	}	
+		parent::__construct();
+	}
 	
 	function check_token($uid)
 	{

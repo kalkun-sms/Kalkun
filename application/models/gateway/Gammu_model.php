@@ -41,20 +41,32 @@ class Gammu_model extends CI_Model {
     
     function _send_wap_link($data)
     {
+        $f_ret = array();
+
         if($data['dest']!=NULL && $data['date']!=NULL && $data['url']!=NULL && $data['message']!=NULL && $data['type']=='waplink')
 		{
 		    $cmd = '"'.$this->config->item('gammu_sms_inject').'"' ." -c " .'"'.$this->config->item('gammu_config').'"'. " WAPINDICATOR " . $data['dest']. " \"". $data['url']. "\"  \"".$data['message']."\" ";
             $ret = exec ($cmd);
             preg_match("/with ID ([\d]+)/i",$ret,$matches);
             $insert_id = $matches[1];
-            if(empty($insert_id))  die( "<div class=\"notif\"><font color='red'>Could Not Send Message. Make Sure Gammu Path is correctly set.</font></div>");
-            $this->db->update('outbox', array('SendingDateTime' => $data['date']), "ID = $insert_id" );
-            $this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));	
+            if(empty($insert_id))
+            {
+                die( "<div class=\"notif\"><font color='red'>Could Not Send Message. Make Sure Gammu Path is correctly set.</font></div>");
+                $f_ret = array('status' => 'Could Not Send Message. Make Sure Gammu Path is correctly set.'); //FIXME
+            }
+            else
+            {
+                $this->db->update('outbox', array('SendingDateTime' => $data['date']), "ID = $insert_id" );
+                $this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
+                $f_ret = array('status' => 'Message queued');
+            }
 		}
 		else 
 		{
-			echo 'Parameter invalid';	
+			echo 'Parameter invalid';
+			$f_ret = array('status' => 'Parameter invalid');
 		}
+		return $f_ret;
     }
     
     
@@ -82,7 +94,7 @@ class Gammu_model extends CI_Model {
     	$data = $this->_default(array('SenderID' => NULL, 'CreatorID' => '', 'validity' => '-1'), $data);
     	
         // check if wap msg
-        if(isset($data['type']) AND $data['type']=='waplink') { $this->_send_wap_link($data); return ;} 
+        if(isset($data['type']) AND $data['type']=='waplink') { return $this->_send_wap_link($data); } 
 		
         if($data['dest']!=NULL && $data['date']!=NULL && $data['message']!=NULL)
 		{	
@@ -143,10 +155,12 @@ class Gammu_model extends CI_Model {
 				$this->_send_message_route($data);
 				$this->Kalkun_model->add_sms_used($data['uid']); // FIXME		
 			}	
+			return array('status' => 'Message queued');
 		}
 		else 
 		{
-			echo 'Parameter invalid';	
+			echo 'Parameter invalid';
+			return array('status' => 'Parameter invalid');
 		}
 	}
 
