@@ -43,7 +43,7 @@ class Rest_api extends REST_Controller {
 		$data['date'] = date('Y-m-d H:i:s');
 		$data['message'] = $this->get('message');
 		$data['delivery_report'] = 'default';
-		$data['SenderID'] = $this->get('SenderID');
+		$data['SenderID'] = ($this->get('SenderID')) ? $this->get('SenderID') : NULL;
 		$data['uid'] = 1;
 
 		$sms = $this->Message_model->send_messages($data);
