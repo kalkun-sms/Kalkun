@@ -236,21 +236,25 @@ $config['encryption_key'] = "F0af18413d1c9e03A6d8d1273160f5Ed";
 |--------------------------------------------------------------------------
 |
 | 'session_cookie_name' = the name you want for the cookie
-| 'encrypt_sess_cookie' = TRUE/FALSE (boolean).  Whether to encrypt the cookie
 | 'session_expiration'  = the number of SECONDS you want the session to last.
 |  by default sessions last 7200 seconds (two hours).  Set to zero for no expiration.
 | 'time_to_update'		= how many seconds between CI refreshing Session Information
 |
+| If you use SQLite3 you can't use driver "database"
+| see: https://codeigniter.com/userguide3/libraries/sessions.html#session-drivers
+| Set config this way:
+| $config['sess_driver']     = 'files';
+| $config['sess_save_path']  = 'session_save_path()';
+|
 */
+
 $config['sess_driver'] = 'database'; // Change files to database
 $config['sess_cookie_name']		= 'kalkun_ci_session';
 $config['sess_expiration']		= 1209600; // 2 weeks
-$config['sess_encrypt_cookie']	= TRUE;
-$config['sess_use_database']	= FALSE;
-$config['sess_table_name']		= 'ci_sessions';
+$config['sess_save_path']		= 'ci_sessions';
 $config['sess_match_ip']		= FALSE;
-$config['sess_match_useragent']	= FALSE;
 $config['sess_time_to_update'] 	= 300;
+$config['sess_regenerate_destroy'] 	= FALSE;
 
 /*
 |--------------------------------------------------------------------------

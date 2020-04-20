@@ -150,6 +150,13 @@ CREATE TABLE "user_filters" (
   "id_folder" integer NOT NULL
 );
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ci_sessions`
+-- see: https://codeigniter.com/userguide3/libraries/sessions.html#database-driver
+--
+
 CREATE TABLE "ci_sessions" (
     "id" varchar(128) NOT NULL,
     "ip_address" varchar(45) NOT NULL,
@@ -158,3 +165,6 @@ CREATE TABLE "ci_sessions" (
 );
 
 CREATE INDEX "ci_sessions_timestamp" ON "ci_sessions" ("timestamp");
+
+-- When sess_match_ip = FALSE
+ALTER TABLE ci_sessions ADD PRIMARY KEY (id);
