@@ -321,11 +321,20 @@ CREATE TABLE IF NOT EXISTS `user_filters` (
   PRIMARY KEY (`id_filter`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
 
-CREATE TABLE `ci_sessions` (
-  `id` varchar(40) NOT NULL,
+--
+-- Table structure for table `ci_sessions`
+-- see: https://codeigniter.com/userguide3/libraries/sessions.html#database-driver
+--
+
+CREATE TABLE IF NOT EXISTS `ci_sessions` (
+  `id` varchar(128) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
-  `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
+  `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
   `data` blob NOT NULL,
   KEY `ci_sessions_timestamp` (`timestamp`)
-) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
+
+-- When sess_match_ip = FALSE
+ALTER TABLE ci_sessions ADD PRIMARY KEY (id);
