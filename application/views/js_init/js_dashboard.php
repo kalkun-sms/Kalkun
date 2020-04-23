@@ -2,26 +2,22 @@
 
 function reload(url)
 {
-  tmp = findSWF("test_chart");
-
-  //
-  // to load from a specific URL:
-  // you may need to 'escape' (URL escape, i.e. percent escape) your URL if it has & in it
-  //
-  x = tmp.reload(url);
+    $.get(url).success(function(data)
+    {
+        updateChartData(data);
+    });
 }
 
-function findSWF(movieName) 
+function updateChartData(content)
 {
-  if (navigator.appName.indexOf("Microsoft")!= -1) {
-    return window["ie_" + movieName];
-  }
-  else {
-    return document[movieName];
-  }
+    myChart.data = JSON.parse(content)
+    myChart.update();
 }
 
 $(document).ready(function() {
+    // Load data for the chart
+    reload("<?php echo $data_url;?>");
+
     $('a.stats-toggle').css("color", "#454545");
     $('a.stats-toggle').click(function(e) {
         url = $(this).attr('href');
@@ -32,4 +28,4 @@ $(document).ready(function() {
     });
 });
 
-</script>	
+</script>
