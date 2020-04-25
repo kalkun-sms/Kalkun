@@ -347,6 +347,12 @@ class Messages extends MY_Controller {
 		$dest = do_action("message.outgoing", $dest);
 		$sms = do_action("message.outgoing_all", $data);
 		
+		$dest_data = do_action("message.outgoing_dest_data", array($dest, $data));
+		if (isset($dest_data) && sizeof($dest_data) == 2) {
+			$dest = $dest_data[0];
+			$data = $dest_data[1];
+		}
+
 		// check for field
 		$field_status = FALSE;
 		preg_match_all('/\[\[(.*?)\]\]/', $data['message'], $field_count);
