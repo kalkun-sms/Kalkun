@@ -7,7 +7,7 @@ Homepage : http://kalkun.sourceforge.net - Documentation : http://github.com/bac
 You need to install and configure this first:
 
 * apache 2.x.x
-* PHP 7.2.x / 5.x.x (with mysql/pgsql/pdo_sqlite, session, hash, json, mbstring extension)
+* PHP 7.2.x (with mysql/pgsql/pdo_sqlite, session, hash, json, mbstring,apcu extension)
 * PHP-CLI   
 * MySQL 5.x.x or PostgreSQL or SQLite3
 * gammu-smsd, make sure it is already running and configured
