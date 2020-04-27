@@ -13,6 +13,7 @@ You need to install and configure this first:
   * hash
   * json
   * mbstring
+  * apcu
 * PHP-CLI
 * MySQL 5.x.x or PostgreSQL or SQLite3
 * gammu-smsd (make sure it is already running and configured)
