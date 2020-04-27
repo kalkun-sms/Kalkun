@@ -68,197 +68,97 @@ class Kalkun extends MY_Controller {
 	}	
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Get Statistic
 	 *
 	 * Get statistic data that used to render the graph
 	 *
-     * @param string (days, weeks, months)
-	 * @access	public   		 
-	 */	
+	 * @param string (days, weeks, months)
+	 * @access	public
+	 */
 	function get_statistic($type = 'days')
 	{
-        // count number of days
-        switch ($type)
-        {
-            case 'days':
-            default:
-                $days = 10;
-                $format = 'M-d';
-            break;
-
-            case 'weeks':
-                $days = 30;
-                $format = 'W';
-                $prefix = ucwords(lang('kalkun_week')).' ';
-            break;
-
-            case 'months':
-                $days = 60;
-                $format = 'M-Y';
-            break;
-        }
-
-		// generate data points
-        $x = array();
-		for ($i=0; $i<=$days; $i++)
+		// count number of days
+		switch ($type)
 		{
-		    $key = date($format, mktime(0, 0, 0, date("m"), date("d")-$i, date('Y')));
+			case 'days':
+			default:
+				$days = 10;
+				$format = 'M-d';
+			break;
 
-            if (isset($prefix)) 
-            {
-                $key = $prefix.$key;
-            }
+			case 'weeks':
+				$days = 30;
+				$format = 'W';
+				$prefix = ucwords(lang('kalkun_week')).' ';
+			break;
 
-            if(!isset($yout[$key]))
-            {
-                $yout[$key] = 0;
-            }
-
-            if(!isset($yin[$key]))
-            {
-                $yin[$key] = 0;
-            }
-
-            if(!in_array($key, $x))
-            {
-                $x[] = $key;
-            }
-
-		    $param['sms_date'] = date('Y-m-d', mktime(0,0,0,date("m"),date("d")-$i,date("Y")));
-		    if ($this->session->userdata('level')!='admin')
-		    {
-		    	$param['user_id'] = $this->session->userdata('id_user');		    
-		    }
-		    $yout[$key] += $this->Kalkun_model->get_sms_used('date', $param, 'out');
-            $yin[$key] += $this->Kalkun_model->get_sms_used('date', $param,'in');
+			case 'months':
+				$days = 60;
+				$format = 'M-Y';
+			break;
 		}
 
-        $yout = array_values($yout);
-        $yin = array_values($yin);
-        $points = count($x)-1;
-		$this->_render_statistic($x, $yout,  $yin, 'bar', $points);
-	}
-	
-	function _render_statistic($x = array(), $yout = array(),  $yin = array(), $type='bar', $points)
-	{
-		$this->load->helper('date');
-		$this->load->library('OpenFlashChartLib', NULL, 'OFCL');
-		$data_1 = array();
-		$data_2 = array();	
-        $data_3 = array();	
+		// generate data points
+		$x = array();
+		for ($i=0; $i<=$days; $i++)
+		{
+			$key = date($format, mktime(0, 0, 0, date("m"), date("d")-$i, date('Y')));
 
-		switch($type)
-		{	
-			case 'bar':
-				for($i=0; $i<=$points;$i++)
+			if (isset($prefix))
+			{
+				$key = $prefix.$key;
+			}
+
+			if(!isset($yout[$key]))
+			{
+				$yout[$key] = 0;
+			}
+
+			if(!isset($yin[$key]))
+			{
+				$yin[$key] = 0;
+			}
+
+			if(!in_array($key, $x))
+			{
+				$x[] = $key;
+			}
+
+			$param['sms_date'] = date('Y-m-d', mktime(0,0,0,date("m"),date("d")-$i,date("Y")));
+			if ($this->session->userdata('level')!='admin')
+			{
+				$param['user_id'] = $this->session->userdata('id_user');
+			}
+			$yout[$key] += $this->Kalkun_model->get_sms_used('date', $param, 'out');
+			$yin[$key] += $this->Kalkun_model->get_sms_used('date', $param,'in');
+		}
+
+		$yout = array_values($yout);
+		$yin = array_values($yin);
+		$points = count($x)-1;
+
+		echo '{
+			"labels": '.json_encode(array_reverse($x)).',
+			"datasets": [
 				{
-				    $data_1[$i] = $x[$i];
-				    $data_2[$i] = (int)$yout[$i]; // force to integer
-                    $data_3[$i] = (int)$yin[$i]; // force to integer
-				}				
-				
-				$data_1 = array_reverse($data_1);
-				$data_2 = array_reverse($data_2);
-                $data_3 = array_reverse($data_3);
-				
-				$bar_1 = new bar();
-				$bar_1->set_values($data_3);
-				$bar_1->set_colour('#639F45');
-                $bar_1->key(lang('kalkun_incoming_sms'), 10 ); 
-				$bar_1->set_tooltip('#x_label#<br>#val# SMS');
-				//$bar_1->set_key("SMS used in last 7 days", 10);
-                
-                $bar_2 = new bar();
-                $bar_2->set_values($data_2);
-			    $bar_2->set_colour('#21759B');
-                $bar_2->key(lang('kalkun_outgoing_sms'), 10 ); 
-			    $bar_2->set_tooltip('#x_label#<br>#val# SMS');
-				 
-                
-				
-				$x = new x_axis();				
-				$labels = new x_axis_labels();
-				$labels->set_labels($data_1);
-				$labels->set_steps(1);
-				$x->set_labels($labels);
-				
-				$y = new y_axis();
-				$max = max(max($data_2),max($data_3));
-				if($max < 10)  $max=10;
-				$max = ceil($max/5)*5;
-				$range = ceil($max/5);
-				$range = ceil($range/10)*10;
-				$y->set_range(0, $max, $range); 
-				
-				$element1 = $bar_1;
-                $element2 = $bar_2;
-			break;
-			
-			case 'line':
-				for($i=0; $i<=7;$i++)
-				{
-				    $data_1[$i] = new scatter_value($x[$i], $yin[$i]);
-                    $data_2[$i] = new scatter_value($x[$i], $yout[$i]);
-                    $data_3[$i] = (int)$yin[$i];
-				    $data_4[$i] = (int)$yout[$i];
+					"label": "'.lang('kalkun_outgoing_sms').'",
+					"backgroundColor": "#21759B",
+					"data": '.json_encode(array_reverse($yout)).',
+					"borderWidth": 1
 				}
-				    		
-				$def = new solid_dot();
-				$def->size(4)->halo_size(0)->colour('#21759B')->tooltip('#date:d M y#<br>#val# SMS');
-				
-				$line_1 = new scatter_line('#639F45', 3); 
-				$line_1->set_values($data_1);
-				$line_1->set_default_dot_style($def);
-				$line_1->set_key("Incoming SMS", 10);
-                
-                $line_2 = new scatter_line('#21759B', 3); 
-				$line_2->set_values($data_2);
-				$line_2->set_default_dot_style($def);
-				$line_2->set_key("Outgoing SMS", 10);
-
-				$x = new x_axis();
-				// grid line and tick every 10
-				$x->set_range(
-				    mktime(0, 0, 0, date("m"), date("d")-7, date('Y')), // <-- min == 7 day before
-				    mktime(0, 0, 0, date("m"), date("d"), date('Y'))    // <-- max == Today
-				    );
-				
-				// show ticks and grid lines for every day:
-				$x->set_steps(86400);
-				
-				$labels = new x_axis_labels();
-				// tell the labels to render the number as a date:
-				$labels->text('#date:M-d#');
-				// generate labels for every day
-				$labels->set_steps(86400);
-				// only display every other label (every other day)
-				$labels->visible_steps(1);
-				$labels->rotate(45);
-				
-				// finally attach the label definition to the x axis
-				$x->set_labels($labels);
-				
-				$y = new y_axis();
-                 
-                $max = max(max($data_3),max($data_4));
-				if($max < 1)  $max=10;
-				$y->set_range(0, $max, round($max/100)*10);	
-							
-				$element1 = $line_1;
-                $element2 = $line_2;
-			break;
-		}		
-		$chart = new open_flash_chart();
-		$chart->add_element($element1);
-        $chart->add_element($element2);
-		$chart->set_x_axis($x);
-		$chart->set_y_axis($y);
-		
-		echo $chart->toPrettyString();			
+				,
+				{
+					"label": "'.lang('kalkun_incoming_sms').'",
+					"backgroundColor": "#639F45",
+					"data": '.json_encode(array_reverse($yin)).',
+					"borderWidth": 1
+				}
+			]
+		}';
 	}
-	
+
 	// --------------------------------------------------------------------
 	
 	/**

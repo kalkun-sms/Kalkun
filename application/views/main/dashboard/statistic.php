@@ -1,15 +1,7 @@
 <?php $this->load->view('js_init/js_dashboard');?>
 
 <base href="<?= $this->config->item('base_url') ?>" />
-<script type="text/javascript" src="<?php echo $this->config->item('js_path');?>swfobject.js"></script>
-
-<script type="text/javascript">
-swfobject.embedSWF(
-"<?php echo $this->config->item('swf_path');?>open-flash-chart.swf", "test_chart", "650", "200",
-"9.0.0", "expressInstall.swf",
-{"data-file":"<?php echo urlencode($data_url);?>"},{"wmode":"transparent"}
-);
-</script>
+<script type="text/javascript" src="<?php echo $this->config->item('js_path');?>Chart.bundle.min.js"></script>
 
 <div align="right">
     <a href="<?php echo site_url('kalkun/get_statistic/days');?>" class="stats-toggle"><?php echo ucwords(lang('kalkun_day'));?></a>&nbsp; &nbsp;
@@ -17,7 +9,35 @@ swfobject.embedSWF(
     <a href="<?php echo site_url('kalkun/get_statistic/months');?>" class="stats-toggle"><?php echo ucwords(lang('kalkun_month'));?></a>&nbsp; &nbsp;
 </div>
 
-<div align="center" id="test_chart">&nbsp;</div>
+<div align="center" class="chart-container" style="position: relative; height:200px; width:650px">
+    <canvas id="myChart" width="650" height="200" aria-label="Statistics chart" role="img" style="background:#fff; border:1px solid #ccc;">
+        <p>Stats Fallback</p>
+    </canvas>
+</div>
+
+<script>
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [ "No data" ],
+        datasets: [{
+            label: "No data",
+            data: [0]}
+        ]
+    }
+    ,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
 
 <?php 
 $uid = $this->session->userdata('id_user');
