@@ -670,9 +670,8 @@ class Gammu_model extends CI_Model {
 			$left = 153;
 			$char_taken = 0;
 			$msg = array();
-			
-			while (list($key, $val) = each($char))
-			{
+		 
+			foreach ($char as $key => $val) {
 				if($left>0)
 				{
 					if($this->_is_special_char($val))
