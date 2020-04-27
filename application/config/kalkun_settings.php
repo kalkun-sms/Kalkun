@@ -25,6 +25,7 @@ $config['kalkun_previous_version'] = '0.6';
 | nowsms <http://nowsms.com> - Experimental
 | way2sms <http://way2sms.com> - Experimental
 | tmobilecz <https://sms.t-mobile.cz/closed.jsp> - Experimental
+| connekt <https://github.com/kingster/connekt> - Experimental
 */
 $config['gateway']['engine'] = 'gammu';
 $config['gateway']['url'] = 'http://localhost:13013';
