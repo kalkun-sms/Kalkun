@@ -5,6 +5,6 @@ if(php_sapi_name() != 'cli' && !empty($_SERVER['REMOTE_ADDR'])) exit("Access Den
 // Please configure this
 $url = "http://localhost/kalkun";
 
-fclose(fopen($url."/index.php/daemon/message_routine/", "r"));
+$result = file_get_contents($url."/index.php/daemon/message_routine/", "r");
 
-?>
+echo $result;
