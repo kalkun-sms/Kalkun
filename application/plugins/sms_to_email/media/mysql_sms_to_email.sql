@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS `plugin_sms_to_email` (
   `email_forward` ENUM('true', 'false') NOT NULL DEFAULT 'false',
   `email_id` VARCHAR(64) NOT NULL,
   UNIQUE(`id_user`)
-) ENGINE=MyISAM;
+);

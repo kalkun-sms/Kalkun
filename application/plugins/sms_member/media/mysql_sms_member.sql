@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS `plugin_sms_member` (
   `phone_number` text NOT NULL,
   `reg_date` datetime NOT NULL,
   PRIMARY KEY (`id_member`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+);

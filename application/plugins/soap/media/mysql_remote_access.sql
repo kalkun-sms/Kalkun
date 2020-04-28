@@ -13,4 +13,4 @@ CREATE TABLE `plugin_remote_access` (
   `token` varchar(135) NOT NULL,
   `status` enum('true','false') NOT NULL default 'true',
   PRIMARY KEY  (`id_remote_access`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+);

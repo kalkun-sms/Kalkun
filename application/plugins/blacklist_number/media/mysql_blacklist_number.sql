@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS `plugin_blacklist_number` (
   `phone_number` varchar(15) NOT NULL,
   `reason` varchar(255) NOT NULL,
   PRIMARY KEY (`id_blacklist_number`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+);
