@@ -58,7 +58,7 @@ You need to install and configure this first:
    -  Set path on gammu-smsd configuration at runonreceive directive, e.g:
       ```
       [smsd]
-      runonreceive = /opt/lampp/htdocs/kalkun/scripts/daemon.sh
+      runonreceive = /var/www/html/kalkun/scripts/daemon.sh
       ```
       or, if you use Windows:
       ```
@@ -72,19 +72,22 @@ You need to install and configure this first:
 6. Configure Kalkun
     - _There are 2 ways to configure_
         - Graphic Install (this will also check that all the dependencies are installed)  
-          1. First create directory /opt/lampp/htdocs/kalkun/*install*  
           1. Launch http://your-location/kalkun/index.php/install, and follow instruction there
-          1. Finally delete folder /opt/lampp/htdocs/kalkun/*install* in case the installer didn't do so.
-        - Manual Install = import sql file located in kalkun/media/db/ to kalkun database.
+          1. Finally delete file /var/www/html/kalkun/*install* in case the installer didn't do so.
+        - Manual Install 
+          1. Import sql file located in kalkun/media/db/ to kalkun database.
         
-            For MySQL
-            ```
-            mysql -u username -p kalkun < kalkun/media/db/mysql_kalkun.sql
-            ```
-            For PostgreSQL
-            ```
-            psql -U username -h localhost kalkun < kalkun/media/db/pgsql_kalkun.sql
-            ```
+             For MySQL
+             ```
+             mysql -u username -p kalkun < /var/www/html/kalkun/media/db/mysql_kalkun.sql
+             ```
+             For PostgreSQL
+             ```
+             psql -U username -h localhost kalkun < /var/www/html/kalkun/media/db/pgsql_kalkun.sql
+             ```
+           2. Delete the file /var/www/html/kalkun/*install* 
+           
+              `rm /var/www/html/kalkun/install`
 ## IMPORTANT
   * After install is finished, you need to remove install folder.
   * To improve security, it's higly recommended to change "encryption_key" in application/config/config.php
