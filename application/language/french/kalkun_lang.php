@@ -190,8 +190,19 @@ $lang['kalkun_delete_all_message_now'] = "Supprimer tous les messages";
 $lang['kalkun_contact_del_title'] = "Confirmation de la suppression du contact";
 $lang['kalkun_compose_valid_url'] = "L'URL doit étre valide";
 $lang['kalkun_compose_import_file'] = "Importer à partir du fichier";
-$lang['kalkun_compose_counter_character'] = "caractéres";
+$lang['kalkun_compose_counter_character'] = "caractères";
 $lang['kalkun_compose_counter_message'] = "message";
+
+// Messages controller
+$lang['kalkun_msg_login_success_data_lost'] = "Login réussi. Mais données %s perdues durant le processus de login.";
+$lang['kalkun_msg_go_back_and_submit'] = 'Veuillez <a href="%s" onclick="goBackToForm()">retourner à votre formulaire</a> et le soumettre à nouveau.';
+$lang['kalkun_msg_login_success_resubmit'] = "Login réussi. Le formulaire est à nouveau soumis.";
+$lang['kalkun_msg_outgoing_disabled'] = "SMS sortants désactivés";
+$lang['kalkun_msg_number_in_DND'] = "Un numéro a été trouvé dans le registre DND. L'envoi est annulé pour celui-ci.";
+$lang['kalkun_msg_delivered_to_user_inbox'] = "Message placé avec succès dans la boîte de réception de l'utilisateur";
+$lang['kalkun_msg_moved_to_outbox'] = "Message placé dans la boite d'envoi et prêt à être envoyé";
+$lang['kalkun_msg_no_numberfound'] = "Pas de numéro trouvé. SMS non envoyé";
+$lang['kalkun_msg_only_admin_can_permanently_delete'] = "Seuls les administrateurs peuvent supprimer des messages de façon permanente";
 
 // Setting
 $lang['kalkun_setting_passwd_current'] = "Mot de passe actuel";

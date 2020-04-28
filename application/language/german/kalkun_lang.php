@@ -193,6 +193,17 @@ $lang['kalkun_compose_import_file'] = "Von Datei importieren";
 $lang['kalkun_compose_counter_character'] = "Zeichen";
 $lang['kalkun_compose_counter_message'] = "Nachricht";
 
+// Messages controller
+$lang['kalkun_msg_login_success_data_lost'] = "Login successful. But %s data lost during login process.";
+$lang['kalkun_msg_go_back_and_submit'] = 'Please <a href="%s" onclick="goBackToForm()">go back to your form</a> and submit again.';
+$lang['kalkun_msg_login_success_resubmit'] = "Login successful. Resubmitting Form.";
+$lang['kalkun_msg_outgoing_disabled'] = "Outgoing SMS disabled";
+$lang['kalkun_msg_number_in_DND'] = "A number was found in DND Resitry. SMS sending was skipped for it.";
+$lang['kalkun_msg_delivered_to_user_inbox'] = "Message successfully delivered to user inbox";
+$lang['kalkun_msg_moved_to_outbox'] = "Your message has been moved to outbox and is ready for delivery";
+$lang['kalkun_msg_no_numberfound'] = "No number found. SMS not sent";
+$lang['kalkun_msg_only_admin_can_permanently_delete'] = "Only administrators can permanently delete messages";
+
 // Setting
 $lang['kalkun_setting_passwd_current'] = "Aktuelles Passwort";
 $lang['kalkun_setting_passwd_forgot'] = "Passswort vergessen?";
