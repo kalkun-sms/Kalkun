@@ -9,7 +9,7 @@
 <p>Before run Kalkun, you <b>MUST</b> remove the <b>install</b> folder located on the root of Kalkun directory.</p>
 <p>Removal status: 
 <?php
-	$rm = rmdir('./install');
+	$rm = unlink('./install');
 	if($rm) echo "<span class=\"green\">SUCCESS</span>"; 
 	else echo "<span class=\"red\">FAILED</span> (You have to remove it manually)";
 ?>
