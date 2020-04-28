@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS `plugin_sms_to_xmpp` (
   `xmpp_password` varchar(255) NOT NULL,
   `xmpp_server` varchar(100) NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+);

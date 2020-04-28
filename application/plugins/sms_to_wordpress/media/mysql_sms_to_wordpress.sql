@@ -10,4 +10,4 @@ CREATE TABLE IF NOT EXISTS `plugin_sms_to_wordpress` (
   `wp_password` VARCHAR(255) NOT NULL,
   `wp_url` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM;
+);

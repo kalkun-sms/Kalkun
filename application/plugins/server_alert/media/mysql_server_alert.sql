@@ -15,4 +15,4 @@ CREATE TABLE IF NOT EXISTS `plugin_server_alert` (
   `status` enum('true','false') NOT NULL DEFAULT 'true',
   `release_code` varchar(8) NOT NULL,
   PRIMARY KEY (`id_server_alert`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+);
