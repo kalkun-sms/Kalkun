@@ -9,13 +9,18 @@
 		<th>Installed</th>
 		<th class="right">Status</th>
 	</tr>
-	
+
 	<tr>
 		<td>PHP</td>
-		<td>>= 5.0.0</td>
+		<td>>= 7.0</td>
 		<td><?php echo PHP_VERSION;?></td>
 		<td class="right">
-			<?php if(version_compare(PHP_VERSION, '5.0.0', '>=')) echo "<span class=\"green\">OK</span>"; 
+			<?php
+			if(version_compare(PHP_VERSION, '7.0', '>='))
+				echo "<span class=\"green\">OK</span>";
+			else if (version_compare(PHP_VERSION, '5.3.6', '>='))
+				// CI3 recommends 5.6+ (or at very least 5.3.6). We recommend >= 7.0
+				echo "<span class=\"orange\">OK</span>";
 			else { echo "<span class=\"red\">Not OK</span>"; $error++; }
 			?>
 		</td>
@@ -23,18 +28,18 @@
 	<tr>
 		<td colspan="4" style="background-color: #cce9f2" class="right"><b>PHP extension/module</b></td>
 	</tr>
-	
+
 	<tr>
 		<td colspan="3">
 		<?php $db_property = get_database_property($database_driver); ?>
 		<?php echo $db_property['human']; ?> <i>(Readed from database configuration)</i>
 		</td>
 		<td class="right">
-		<?php 
+		<?php
 			if(extension_loaded($db_property['driver'])) $db_msg="";
-			
-			if(isset($db_msg)) echo "<span class=\"green\">OK</span>"; 
-			else { echo "<span class=\"red\">Not OK</span>"; $error++; } 
+
+			if(isset($db_msg)) echo "<span class=\"green\">OK</span>";
+			else { echo "<span class=\"red\">Not OK</span>"; $error++; }
 		?>
 		</td>
 	</tr>
@@ -43,7 +48,7 @@
 		<td colspan="3">Session</td>
 		<td class="right"><?php if(extension_loaded('session')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
 	</tr>
-	
+
 	<tr>
 		<td colspan="3">Hash</td>
 		<td class="right"><?php if(extension_loaded('hash')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
@@ -55,10 +60,14 @@
 	</tr>
 
 	<tr>
-		<td colspan="3" class="bottom">MBString</td>
-		<td class="right bottom"><?php if(extension_loaded('mbstring')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
-	</tr>	
+		<td colspan="3">MBString</td>
+		<td class="right"><?php if(extension_loaded('mbstring')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
+	</tr>
 
+	<tr>
+		<td colspan="3" class="bottom">APC or APCu</td>
+		<td class="right bottom"><?php if(extension_loaded('apc') || extension_loaded('apcu')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
+	</tr>
 </table>
 
 <p>&nbsp;</p>
