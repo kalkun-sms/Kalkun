@@ -127,13 +127,58 @@ class Messages extends MY_Controller {
 	function compose_process()
 	{
 		$this->load->helper('kalkun');
-		
+
 		// We need POST variable
 		if(!$_POST)
 		{
+			// Repost the form if we went through login process
+			// Finally, after form submission (call to compose_process), redirect to a result page
+			// that cannot be POSTed again in case of page refresh.
+			if ($this->session->flashdata('bef_login_method') === "post")
+			{
+				?>
+				<!DOCTYPE html>
+				<html><head><script>
+					function goBackToForm() {
+						window.history.go(<?php echo $this->session->flashdata('bef_login_history_count')?>);
+					}
+					function submitForm() {
+						document.forms["redirectpost"].submit();
+					}
+				</script></head>
+				<?php if (!$this->session->flashdata('bef_login_post_data')) {
+					// Here the user logged in, but we lost the content of the POST.
+					// So we redirect him to the form he Posted by using the javascript
+					// "history.go" function. That way the content of
+					// the web-form he initially submitted is not lost.
+
+					// Some browsers like firefox don't honor the history.go() well in case of an onload event
+					// Hence this message with a link pointing to the history on which the user can click. ?>
+					<body onload="goBackToForm()">
+						<p>Login successful. But <?php echo strtoupper($this->session->flashdata('bef_login_method'));?> data lost during login process.<br> Please <a href="<?php echo $this->session->flashdata('bef_login_HTTP_REFERER')?>" onclick="goBackToForm()">go back to your form</a> and submit again.</p>
+					</body>
+				<?php } else {
+					// Here the user logged in and we could keeep the content of the POST.
+					// So resubmit the POSTed data directly to this page  ?>
+					<body onload="submitForm()">
+						<p>Login successful. Resubmitting Form.</p>
+						<form name="redirectpost" method="post" action="<?php echo current_url(); ?>">
+						<?php
+							if ( !is_null($this->session->flashdata('bef_login_post_data')) ) {
+								foreach ($this->session->flashdata('bef_login_post_data') as $k => $v) {
+								echo '<input type="hidden" name="' . $k . '" value="' . $v . '"> ';
+								}
+							}
+						?>
+						</form>
+					</body>
+				<?php } ?>
+				</html>
+				<?php
+			}
 			return;
 		}
-		
+
         $dest = array();
 
 		// Import value from file (currently only CSV)
@@ -314,7 +359,7 @@ class Messages extends MY_Controller {
         if($this->config->item('disable_outgoing'))
         {
         	unset($dest);
-            $return_msg = "<div class=\"notif\">Outgoing SMS Disabled</div>";
+            $return_msg = "<div class=\"notif\">Outgoing SMS disabled</div>";
         }			
 			
   	    // if ndnc filtering enabled
@@ -329,7 +374,7 @@ class Messages extends MY_Controller {
                         if(DNDcheck($dest[$i]))
                         {
                             unset($dest[$i]);
-                            $return_msg = "<font color='red'>A Number was found in DND Resitry. SMS sending was skipped for it.</font><br>" ; 
+                            $return_msg = "<font color='red'>A number was found in DND Resitry. SMS sending was skipped for it.</font><br>" ;
                         }
                     }
                 }
@@ -337,7 +382,7 @@ class Messages extends MY_Controller {
                         if(DNDcheck($dest))
                         {
                             unset($dest);
-                            $return_msg = "<font color='red'>A Number was found in DND Resitry. SMS sending was skipped for it.</font><br>" ; 
+                            $return_msg = "<font color='red'>A number was found in DND Resitry. SMS sending was skipped for it.</font><br>" ;
                         }
                 }
             }
@@ -413,75 +458,18 @@ class Messages extends MY_Controller {
 				$data['message'] = $backup['message'];
 				$n++;
 			}
-			$return_msg = "<div class=\"notif\">Your message has been move to Outbox and ready for delivery.</div>";
+			$return_msg = "<div class=\"notif\">Your message has been moved to outbox and is ready for delivery.</div>";
 		}
         if(!isset($return_msg))
-             $return_msg = "<div class=\"notif\"><font color='red'>No Numbers was found. SMS not send.</font></div>" ;
-		
+             $return_msg = "<div class=\"notif\"><font color='red'>No number found. SMS not sent.</font></div>" ;
+
 		// Display sending status
 		echo $return_msg;
-		return $return_msg;
+
+		if ($this->input->post('redirect_to_form_result') == "1")
+			redirect('form_result/index/'.urlencode(base64_encode($return_msg)));
 	}
 
-	function compose_process_api()
-	{
-		// Wrapper for compose_process called by form POST from another website
-		//
-		// Repost the form if we went through login process
-		// Finally, after form submission (call to compose_process), redirect to a result page
-		// that cannot be POSTed again in case of page refresh.
-
-		if(!$_POST)
-		{
-			if ($this->session->flashdata('bef_login_method') === "post")
-			{
-				?>
-				<!DOCTYPE html>
-				<html><head><script>
-					function goBackToForm() {
-						window.history.go(<?php echo $this->session->flashdata('bef_login_history_count')?>);
-					}
-					function submitForm() {
-						document.forms["redirectpost"].submit();
-					}
-				</script></head>
-				<?php if (!$this->session->flashdata('bef_login_post_data')) { 
-					// Here the user logged in, but we lost the content of the POST.
-					// So we redirect him to the form he Posted by using the javascript 
-					// "history.go" function. That way the content of
-					// the web-form he initially submitted is not lost.
-
-					// Some browsers like firefox don't honor the history.go() well in case of an onload event
-					// Hence this message with a link pointing to the history on which the user can click. ?>
-					<body onload="goBackToForm()">
-						<p>Login successful. But <?php echo strtoupper($this->session->flashdata('bef_login_method'));?> data lost during login process.<br> Please <a href="<?php echo $this->session->flashdata('bef_login_HTTP_REFERER')?>" onclick="goBackToForm()">go back to your form</a> and submit again.</p>
-					</body>
-				<?php } else { 
-					// Here the user logged in and we could keeep the content of the POST.
-					// So resubmit the POSTed data directly to this page  ?>
-					<body onload="submitForm()">
-						<p>Login successful. Resubmitting Form.</p>
-						<form name="redirectpost" method="post" action="<?php echo current_url(); ?>">
-						<?php
-							if ( !is_null($this->session->flashdata('bef_login_post_data')) ) {
-								foreach ($this->session->flashdata('bef_login_post_data') as $k => $v) {
-								echo '<input type="hidden" name="' . $k . '" value="' . $v . '"> ';
-								}
-							}
-						?>
-						</form>
-					</body>
-				<?php } ?>
-				</html>
-				<?php
-			}
-			return;
-		}
-
-		$return_msg = $this->compose_process();
-		redirect('form_result/index/'.urlencode(base64_encode($return_msg)));
-	}
-                       
 	// --------------------------------------------------------------------
 	
 	/**
