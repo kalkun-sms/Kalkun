@@ -155,13 +155,17 @@ class Messages extends MY_Controller {
 					// Some browsers like firefox don't honor the history.go() well in case of an onload event
 					// Hence this message with a link pointing to the history on which the user can click. ?>
 					<body onload="goBackToForm()">
-						<p>Login successful. But <?php echo strtoupper($this->session->flashdata('bef_login_method'));?> data lost during login process.<br> Please <a href="<?php echo $this->session->flashdata('bef_login_HTTP_REFERER')?>" onclick="goBackToForm()">go back to your form</a> and submit again.</p>
+						<p><?php
+							printf(lang('kalkun_msg_login_success_data_lost'), strtoupper($this->session->flashdata('bef_login_method')));
+							echo ' <br> ';
+							printf(lang('kalkun_msg_go_back_and_submit'), $this->session->flashdata('bef_login_HTTP_REFERER'));
+							?>
 					</body>
 				<?php } else {
 					// Here the user logged in and we could keeep the content of the POST.
 					// So resubmit the POSTed data directly to this page  ?>
 					<body onload="submitForm()">
-						<p>Login successful. Resubmitting Form.</p>
+						<p><?php echo lang('kalkun_msg_login_success_resubmit');?></p>
 						<form name="redirectpost" method="post" action="<?php echo current_url(); ?>">
 						<?php
 							if ( !is_null($this->session->flashdata('bef_login_post_data')) ) {
@@ -359,7 +363,7 @@ class Messages extends MY_Controller {
         if($this->config->item('disable_outgoing'))
         {
         	unset($dest);
-            $return_msg = "<div class=\"notif\">Outgoing SMS disabled</div>";
+            $return_msg = '<div class="notif">'.lang('kalkun_msg_outgoing_disabled').'</div>';
         }			
 			
   	    // if ndnc filtering enabled
@@ -374,7 +378,7 @@ class Messages extends MY_Controller {
                         if(DNDcheck($dest[$i]))
                         {
                             unset($dest[$i]);
-                            $return_msg = "<font color='red'>A number was found in DND Resitry. SMS sending was skipped for it.</font><br>" ;
+                            $return_msg = '<font color="red">'.lang('kalkun_msg_number_in_DND').'</font><br>' ;
                         }
                     }
                 }
@@ -382,7 +386,7 @@ class Messages extends MY_Controller {
                         if(DNDcheck($dest))
                         {
                             unset($dest);
-                            $return_msg = "<font color='red'>A number was found in DND Resitry. SMS sending was skipped for it.</font><br>" ;
+                            $return_msg = '<font color="red">'.lang('kalkun_msg_number_in_DND').'</font><br>' ;
                         }
                 }
             }
@@ -412,7 +416,7 @@ class Messages extends MY_Controller {
 			{
 				$msg_id = $this->Message_model->copy_message($this->input->post('msg_id'));
 				$this->Message_model->update_owner($msg_id, $id);
-	          	$return_msg = "<div class=\"notif\">Message successfully delivered to user inbox</div>";
+				$return_msg = '<div class="notif">'.lang('kalkun_msg_delivered_to_user_inbox').'</div>';
 			}
 		}
 		
@@ -458,16 +462,16 @@ class Messages extends MY_Controller {
 				$data['message'] = $backup['message'];
 				$n++;
 			}
-			$return_msg = "<div class=\"notif\">Your message has been moved to outbox and is ready for delivery.</div>";
+			$return_msg = '<div class="notif">'.lang('kalkun_msg_moved_to_outbox').'</div>';
 		}
         if(!isset($return_msg))
-             $return_msg = "<div class=\"notif\"><font color='red'>No number found. SMS not sent.</font></div>" ;
+             $return_msg = '<div class="notif"><font color="red">'.lang('kalkun_msg_no_numberfound').'</font></div>' ;
 
 		// Display sending status
 		echo $return_msg;
 
 		if ($this->input->post('redirect_to_form_result') == "1")
-			redirect('form_result/index/'.urlencode(base64_encode($return_msg)));
+			redirect('info_message/index/'.urlencode(base64_encode($return_msg)));
 	}
 
 	// --------------------------------------------------------------------
@@ -1013,7 +1017,7 @@ class Messages extends MY_Controller {
 
         if($param['option'] == 'permanent' AND $this->config->item('only_admin_can_permanently_delete') AND $this->session->userdata('level') != 'admin')
         {
-            echo 'Only administrator can permanently delete message';
+            echo lang('kalkun_msg_only_admin_can_permanently_delete');
             exit;
         }
 				
