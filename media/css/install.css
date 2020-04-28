@@ -160,7 +160,13 @@ a {
 	font-weight: bold;
 }
 
+.orange {
+        color: orange;
+        font-weight: bold;
+}
+
 .red {
 	color: red;
 	font-weight: bold;
 }
+
