@@ -248,7 +248,8 @@ $config['encryption_key'] = "F0af18413d1c9e03A6d8d1273160f5Ed";
 */
 
 $config['sess_driver']                  = 'files'; // comment this 2 lines and uncomment next 2 lines
-$config['sess_save_path']		= '/tmp';
+$config['sess_save_path']		= session_save_path() == "" ? "/tmp" : session_save_path();
+
 
 //$config['sess_driver']                  = 'database';
 //$config['sess_save_path']               = 'ci_sessions';
