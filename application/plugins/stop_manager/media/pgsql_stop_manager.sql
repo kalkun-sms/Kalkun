@@ -1,3 +1,9 @@
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `plugin_stop_manager`
+--
+
 CREATE TABLE "plugin_stop_manager" (
     "id_stop_manager" serial PRIMARY KEY,
     "destination_number" varchar(20) NOT NULL,

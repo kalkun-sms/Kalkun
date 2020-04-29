@@ -21,6 +21,7 @@
     // Enable the use of "type" in optin/optout
     $config['enable_type'] = TRUE;
 
+    $config['autoreply_language'] = 'english';
     $config['enable_autoreply_outnumber_filter'] = TRUE;
     // Send only if this is a french mobile phone number ( +336 et +337 )
     $config['autoreply_outnumber_match_rule'] = '/\+33[67][0-9]{8}/';
