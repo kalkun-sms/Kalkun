@@ -72,7 +72,8 @@ function stop_manager_initialize()
     $config['enable_optin'] = $CI->config->item('enable_optin', 'kalkun_plugin_stop_manager');
     $config['enable_type'] = $CI->config->item('enable_type', 'kalkun_plugin_stop_manager');
 
-    $config['enable_autoreply_outnumber_filter'] = $CI->config->item('enable_autoreply_outnumber_filter', 'kalkun_plugin_stop_manager');;
+    $config['autoreply_language'] = $CI->config->item('autoreply_language', 'kalkun_plugin_stop_manager');
+    $config['enable_autoreply_outnumber_filter'] = $CI->config->item('enable_autoreply_outnumber_filter', 'kalkun_plugin_stop_manager');
     $config['autoreply_outnumber_match_rule'] = $CI->config->item('autoreply_outnumber_match_rule', 'kalkun_plugin_stop_manager');
 
     return $config;
@@ -118,7 +119,7 @@ function stop_manager_cleanup_outgoing($all)
         }
     }
 
-    // Récupérer la liste des numéros ayant STOP pour ce type de sms
+    // Get ths list of numbers having "STOP" for this type of SMS
     $CI->load->model('stop_manager/Stop_manager_model', 'Stop_manager_model');
     $db_result = $CI->Stop_manager_model->get_num_for_type($type)->result_array();
     $blocked_numbers = array();
@@ -127,7 +128,7 @@ function stop_manager_cleanup_outgoing($all)
         $blocked_numbers[] = $row['destination_number'];
     }
 
-    // Supprimer le n° de tel si le destinataire est dans la base des STOP pour ce type de sms_to_email
+    // Remove the phone no. if the recipient is in the STOP table for this type of sms
     foreach($dest as $key => $number) {
         foreach($blocked_numbers as $n) {
             if($n == $number) {
@@ -136,8 +137,8 @@ function stop_manager_cleanup_outgoing($all)
         }
     }
 
-    // Supprimer à l'intérieur des messages le "tag" qui permet de savoir de quel message il s'agit
-    // Par ex ~rappel~ en fin de message
+    // Remove inside the message the "tag" that permits to know what type of message it is
+    // eg. "~rappel~" at the end of the message
     if ($ret_match && isset($matches[1])) {
         $data['message'] = trim($matches[1]);
     }
@@ -152,8 +153,8 @@ function stop_manager_incoming($sms)
     $optin_keywords = array_map('strtoupper', $config['optin_keywords']);
     $type_keywords = array_map('strtolower', $config['type_keywords']);
 
-    // A la reception du message, si c'est un message STOP (STOP rappel) par exemple
-    // Le mettre dans la table des STOP
+    // On message reception, if it is a STOP message (eg STOP rappel)
+    // Put it to the STOP table
     $msg = $sms->TextDecoded;
     $from = $sms->SenderNumber;
     //$msg_user = $sms->msg_user;
@@ -169,10 +170,18 @@ function stop_manager_incoming($sms)
     else
         $ret = preg_match('/\b('.$cmds_reg.')\b/i', $msg, $matches, PREG_UNMATCHED_AS_NULL);
 
+    $CI =& get_instance();
+
+    // language
+    $CI->load->helper('language');
+    // We cannot determine the language of a specific user since this is called on incoming message
+    // So the language to use by this robot is read from plugin config
+    $lang = $config['autoreply_language'];
+    $CI->lang->load('stop_manager', $lang, FALSE, TRUE, APPPATH.'/plugins/stop_manager/');
+
     if ($ret) {
         $cmd = strtoupper($matches[1]);
         $type = ($config['enable_type']) ? strtolower($matches[2]) : "TYPE_NOT_SET_SO_STOP_ALL";
-        $CI =& get_instance();
         $CI->load->model('stop_manager/Stop_manager_model', 'Stop_manager_model');
 
         $text = "";
@@ -182,9 +191,9 @@ function stop_manager_incoming($sms)
             case in_array($cmd, $optout_keywords):
                 $ret = $CI->Stop_manager_model->add($from, $type, $msg);
 
-                $strTemplate = ':received_command pris en compte.';
+                $strTemplate = lang('sm_command_valid_optout_1_taken_into_account');
                 if ($config['enable_optin'])
-                    $strTemplate .= ' Pour recevoir à nouveau, répondre ":optin_command"';
+                    $strTemplate .= lang('sm_command_valid_optout_2_to_optin_reply');
 
                 $strParams = [
                     ':received_command' => ($config['enable_type']) ? $cmd.' '.$type : $cmd,
@@ -198,8 +207,8 @@ function stop_manager_incoming($sms)
             case (in_array($cmd, $optin_keywords) && $config['enable_optin']) :
                 $ret = $CI->Stop_manager_model->delete($from, $type);
 
-                $strTemplate = ':received_command pris en compte.';
-                $strTemplate .= ' Pour ne plus recevoir, répondre ":optout_command"';
+                $strTemplate = lang('sm_command_valid_optin_1_taken_into_account');
+                $strTemplate .= lang('sm_command_valid_optin_2_to_optout_reply');
 
                 $strParams = [
                     ':received_command' => ($config['enable_type']) ? $cmd.' '.$type : $cmd,
@@ -211,22 +220,22 @@ function stop_manager_incoming($sms)
                     autoreply($from, $text);
                 break;
             default:
-                $text = "Demande non valide ($msg)";
+                $text = lang('sm_command_invalid_short')." ($msg)";
                 if ($config['enable_autoreply_error'])
                     autoreply($from, $text);
                 break;
         }
     } else {
-        $strTemplate = "Demande non valide (:received_command). Répondre ':optout_keyword";
+        $strTemplate = lang('sm_command_invalid_long_1_reply');
         if ($config['enable_type'])
             $strTemplate .= " <type>";
         $strTemplate .= "'";
         if ($config['enable_optin'])
-            $strTemplate .= " ou ':optin_keyword <type>'";
+            $strTemplate .= lang('sm_command_invalid_long_2_or');
         $strTemplate .= ".";
         if ($config['enable_type'])
-            $strTemplate .= " Les valeurs possibles pour <type> sont: :types_valides.";
-        $strTemplate .= " Par exemple ':example'.";
+            $strTemplate .= lang('sm_command_invalid_long_3_possible_type_values_are');
+        $strTemplate .= lang('sm_command_invalid_long_4_eg');
 
         $strParams = [
             ':received_command' => $msg,
