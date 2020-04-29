@@ -3,7 +3,6 @@ Build system
 CodeIgniter 1.7.2 <http://codeigniter.com/>
 CodeIgniter extra:
 	* PDO driver for SQLite3 by Xintrea <xintrea@gmail.com>
-	* Open Flash Chart 2 Library by <thomas@kbox.ch>
 	* CSVReader Library by Pierre-Jean Turpeau <http://www.codeigniter.com/wiki/CSVReader>
 	* CI-Plugin-System <https://github.com/Vheissu/CI-Plugin-System>
 	* HMVC 5.3.5 commit #2d6d33922276 <https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc>
