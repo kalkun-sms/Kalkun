@@ -16,13 +16,15 @@ You need to install and configure this first:
   * mbstring
   * APC or APCu
 * PHP-CLI
+* PHP Composer
 * MySQL 5.1+ or PostgreSQL or SQLite3
 * gammu-smsd (make sure it is already running and configured)
 
 ## Installation
 
 1. Extract to web root folder (eg: /var/www/html => Ubuntu)
-2. Create database named kalkun
+1. Run `composer install` 
+1. Create database named kalkun
 
    For MySQL (you may do it with mysql console or phpMyAdmin)
      ```
@@ -34,13 +36,13 @@ You need to install and configure this first:
     CREATE USER username WITH password 'password' NOCREATEDB NOCREATEROLE;
     CREATE DATABASE kalkun WITH OWNER = username;
     ```
-3. Edit database config (application/config/database.php)  
+1. Edit database config (application/config/database.php)  
    Change database value to 'kalkun'.  
    username and password depends on your database configuration.  
    If you use a specific port with PostgreSQL, you may also need to set
    `$db['default']['port'] = "5432";`
 
-4. Import gammu database schema (it's included on gammu source, eg. `gammu/docs/sql/mysql.sql`)
+1. Import gammu database schema (it's included on gammu source, eg. `gammu/docs/sql/mysql.sql`)
 
     For MySQL : 
     ```
@@ -54,7 +56,7 @@ You need to install and configure this first:
     ```
     gunzip -c /usr/share/doc/gammu-smsd/examples/pgsql.sql.gz | psql -U username -h localhost kalkun
     ```
-5. Configure daemon (to manage inbox and autoreply)
+1. Configure daemon (to manage inbox and autoreply)
    -  Set path on gammu-smsd configuration at runonreceive directive, e.g:
       ```
       [smsd]
@@ -69,7 +71,7 @@ You need to install and configure this first:
    - set correct path (php-cli path and outbox_queue.php path) on outbox_queue.sh or outbox_queue.bat
    - make sure that the daemon & outbox_queue scripts are executable
    - Change URI path in daemon.php & outbox_queue.php. Default is (http://localhost/kalkun)
-6. Configure Kalkun
+1. Configure Kalkun
     - _There are 2 ways to configure_
         - Graphic Install (this will also check that all the dependencies are installed)  
           1. Launch http://your-location/kalkun/index.php/install, and follow instruction there
