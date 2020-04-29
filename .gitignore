@@ -1,2 +1,4 @@
 application/config/database.php
 .DS_Store
+
+/vendor/
