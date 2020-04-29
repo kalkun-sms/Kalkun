@@ -261,18 +261,18 @@ class b8
 
 		for($i = 0; $i < $this->config['use_relevant']; $i++) {
 
-			if($tmp = each($importance)) {
+			if ($token = key($importance)) {
 
 				# Important tokens remain
 
 				# If the token's rating is relevant enough, use it
 
-				if(abs(0.5 - $rating[$tmp['key']]) > $this->config['min_dev']) {
+				if (abs(0.5 - $rating[$token]) > $this->config['min_dev']) {
 
 					# Tokens that appear more than once also count more than once
 
-					for($x = 0, $l = $word_count[$tmp['key']]; $x < $l; $x++)
-						array_push($relevant, $rating[$tmp['key']]);
+					for ($x = 0, $l = $word_count[$token]; $x < $l; $x++)
+						array_push($relevant, $rating[$token]);
 
 				}
 
@@ -284,6 +284,7 @@ class b8
 				break;
 			}
 
+			next($importance);
 		}
 
 		# Calculate the spamminess of the text (thanks to Mr. Robinson ;-)
