@@ -1,0 +1,13 @@
+{
+    "name": "back2arie/kalkun",
+    "description": "Kalkun SMS Manager",
+    "type": "project",
+    "require": {
+        "codeigniter/framework": "^3.1",
+        "paragonie/random_compat": "^9.99"
+    },
+    "license": "MIT Licence",
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    }
+}
