@@ -335,7 +335,7 @@ switch (ENVIRONMENT)
  * If you want to use monkey patching, uncomment below code and configure
  * for your application.
  */
-/*
+
 require CI_PHPUNIT_TESTPATH . 'patcher/bootstrap.php';
 MonkeyPatchManager::init([
 	// If you want debug log, set `debug` true, and optionally you can set the log file path
@@ -359,9 +359,9 @@ MonkeyPatchManager::init([
 	// All patchers you use.
 	'patcher_list' => [
 		'ExitPatcher',
-		'FunctionPatcher',
-		'MethodPatcher',
-		'ConstantPatcher',
+		// 'FunctionPatcher',
+		// 'MethodPatcher',
+		// 'ConstantPatcher',
 	],
 	// Additional functions to patch
 	'functions_to_patch' => [
@@ -369,7 +369,6 @@ MonkeyPatchManager::init([
 	],
 	'exit_exception_classname' => 'CIPHPUnitTestExitException',
 ]);
-*/
 
 /*
  * -------------------------------------------------------------------
