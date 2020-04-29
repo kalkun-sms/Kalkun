@@ -91,64 +91,6 @@ class Stop_manager extends Plugin_Controller {
         $this->Stop_manager_model->delete($from, $type);
         redirect('plugin/stop_manager');
     }
-
-#    _____ ___ ___ _____   __  __ ___ _____ _  _  ___  ___  ___
-#   |_   _| __/ __|_   _| |  \/  | __|_   _| || |/ _ \|   \/ __|
-#     | | | _|\__ \ | |   | |\/| | _|  | | | __ | (_) | |) \__ \
-#     |_| |___|___/ |_|   |_|  |_|___| |_| |_||_|\___/|___/|___/
-#
-
-    function test_stop_manager_incoming() {
-        // To test, you need to comment out the lines starting with "add_action"
-        // at the top of ./application/plugins/stop_manager/stop_manager.php
-        // and comment out the show_404() statement here
-
-        show_404();
-        include ('application/plugins/stop_manager/stop_manager.php');
-
-        $msg = array(
-            "test ACTIVER raPpel",
-            "test StoP raPpel",
-            "test ACTIVER annul",
-            "test CANCel annul2",
-            "test yes annul",
-            "test ACTIVER annul2",
-            "STOP",
-            "invalide",
-        );
-
-        for ($i=0; $i<sizeof($msg); $i++)
-        {
-            $sms = new stdClass();
-            $sms->TextDecoded = $msg[$i];
-            $sms->SenderNumber = '+336' . sprintf('%08d', 5000 + $i);
-
-            stop_manager_incoming($sms);
-        }
-    }
-
-    function test_stop_manager_cleanup_outgoing() {
-        // To test, you need to comment out the lines starting with "add_action"
-        // at the top of ./application/plugins/stop_manager/stop_manager.php
-        // and comment out the show_404() statement here
-
-        show_404();
-        include ('application/plugins/stop_manager/stop_manager.php');
-
-        $data['message'] = "aaa ~rappel~";    // Type existant
-        //$data['message'] = "aaa ~z~";         // Type non existant
-        //$data['message'] = "aaa ~~";          // Type vide
-        //$data['message'] = "aaa";             // Type non renseigné
-
-        $nums = array();
-        for ($i=0; $i<10; $i++)
-        {
-            $nums[$i] = '+336' . sprintf('%08d', 5000 + $i);
-        }
-        $dest = array_merge(array('0612345678', '0611111111'), $nums);
-
-        stop_manager_cleanup_outgoing(array($dest, $data));
-    }
 }
 
 /* End of file Stop_manager.php */
