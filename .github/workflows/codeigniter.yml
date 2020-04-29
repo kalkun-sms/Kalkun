@@ -47,5 +47,11 @@ jobs:
           while ! mysqladmin ping -h"127.0.0.1" -P"3306" --silent; do
             sleep 1
           done
+      - name: Download Gammu DB Schema
+        uses: wei/wget@v1
+        with:
+          args: -O gammu.sql https://raw.githubusercontent.com/gammu/gammu/master/docs/sql/mysql.sql
+      - name: Import Gammu DB Schema
+        run: mysql -h"127.0.0.1" -P"3306" -uroot -ppassword kalkun < gammu.sql
       - name: Test with phpunit
         run: vendor/bin/phpunit --coverage-text -c application/tests
