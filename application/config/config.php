@@ -11,9 +11,14 @@
 |	http://example.com/
 |
 */
-$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-$config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
+
+$protocol = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+$domain = array_key_exists('HTTP_HOST', $_SERVER) ?  $_SERVER['HTTP_HOST'] : "localhost";
+
+$config['base_url'] = $protocol. "://".$domain ;
 $config['base_url'] .= preg_replace('@/+$@','',dirname($_SERVER['SCRIPT_NAME'])).'/';
+
+// $config['base_url'] = "http://localhost/Kalkun";
 
 $config['css_path'] = $config['base_url'].'media/css/';
 $config['js_path']  = $config['base_url'].'media/js/';

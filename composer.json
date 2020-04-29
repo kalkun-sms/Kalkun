@@ -8,6 +8,7 @@
     },
     "license": "MIT Licence",
     "require-dev": {
-        "phpunit/phpunit": "^7"
+        "phpunit/phpunit": "^7",
+        "kenjis/ci-phpunit-test": "^0.17.3"
     }
 }
