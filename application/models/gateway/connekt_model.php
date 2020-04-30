@@ -21,9 +21,9 @@
  * @subpackage	Messages
  * @category	Models
  */
-require_once('gammu_model'.EXT);
+require_once('nongammu_model'.EXT);
 
-class Connekt_model extends Gammu_model { 
+class Connekt_model extends nongammu_model { 
 	
 	/**
 	 * Constructor
@@ -42,7 +42,7 @@ class Connekt_model extends Gammu_model {
 	 * 
 	 * @return void
 	 */	
-	function send_messages($data)
+	function really_send_messages($data)
 	{
         $gateway = $this->config->item('gateway');
         $p = $data['dest'];
@@ -82,9 +82,11 @@ class Connekt_model extends Gammu_model {
 
         curl_close($curl);
 
-        $result[] = array('phone' => $p, 'msg' => $response, 'result' => ($httpcode >= 200 && $httpcode < 300 ) ? true : false);
-
-        return $result;
+        $is_succes = ($httpcode >= 200 && $httpcode < 300 ) ? true : false;
+        if ($is_succes)
+            return  $result[] = array('phone' => $p, 'msg' => $response, 'result' => $is_succes);
+        else
+            return $$response;
     }
 
    

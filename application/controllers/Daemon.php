@@ -239,7 +239,7 @@ class Daemon extends CI_Controller {
 		$this->load->model(array('Message_model'));
 		// send waiting messages
 		$this->Message_model->process_outbox_queue();
-        }
+	}
 }
 
 /* End of file daemon.php */
