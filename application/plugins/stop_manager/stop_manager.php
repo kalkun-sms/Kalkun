@@ -61,20 +61,22 @@ function stop_manager_install()
 function stop_manager_initialize()
 {
     $CI =& get_instance();
-    $CI->config->load("kalkun_plugin_stop_manager", TRUE);
 
-    $config['optout_keywords'] = $CI->config->item('optout_keywords', 'kalkun_plugin_stop_manager');
-    $config['optin_keywords'] = $CI->config->item('optin_keywords', 'kalkun_plugin_stop_manager');
-    $config['type_keywords'] = $CI->config->item('type_keywords', 'kalkun_plugin_stop_manager');
+    $CI->load->add_package_path(APPPATH.'plugins/stop_manager', FALSE);
+    $CI->load->config("stop_manager", TRUE);
 
-    $config['enable_autoreply_info'] = $CI->config->item('enable_autoreply_info', 'kalkun_plugin_stop_manager');
-    $config['enable_autoreply_error'] = $CI->config->item('enable_autoreply_error', 'kalkun_plugin_stop_manager');
-    $config['enable_optin'] = $CI->config->item('enable_optin', 'kalkun_plugin_stop_manager');
-    $config['enable_type'] = $CI->config->item('enable_type', 'kalkun_plugin_stop_manager');
+    $config['optout_keywords'] = $CI->config->item('optout_keywords', 'stop_manager');
+    $config['optin_keywords'] = $CI->config->item('optin_keywords', 'stop_manager');
+    $config['type_keywords'] = $CI->config->item('type_keywords', 'stop_manager');
 
-    $config['autoreply_language'] = $CI->config->item('autoreply_language', 'kalkun_plugin_stop_manager');
-    $config['enable_autoreply_outnumber_filter'] = $CI->config->item('enable_autoreply_outnumber_filter', 'kalkun_plugin_stop_manager');
-    $config['autoreply_outnumber_match_rule'] = $CI->config->item('autoreply_outnumber_match_rule', 'kalkun_plugin_stop_manager');
+    $config['enable_autoreply_info'] = $CI->config->item('enable_autoreply_info', 'stop_manager');
+    $config['enable_autoreply_error'] = $CI->config->item('enable_autoreply_error', 'stop_manager');
+    $config['enable_optin'] = $CI->config->item('enable_optin', 'stop_manager');
+    $config['enable_type'] = $CI->config->item('enable_type', 'stop_manager');
+
+    $config['autoreply_language'] = $CI->config->item('autoreply_language', 'stop_manager');
+    $config['enable_autoreply_outnumber_filter'] = $CI->config->item('enable_autoreply_outnumber_filter', 'stop_manager');
+    $config['autoreply_outnumber_match_rule'] = $CI->config->item('autoreply_outnumber_match_rule', 'stop_manager');
 
     return $config;
 }
@@ -177,7 +179,8 @@ function stop_manager_incoming($sms)
     // We cannot determine the language of a specific user since this is called on incoming message
     // So the language to use by this robot is read from plugin config
     $lang = $config['autoreply_language'];
-    $CI->lang->load('stop_manager', $lang, FALSE, TRUE, APPPATH.'/plugins/stop_manager/');
+    $CI->load->add_package_path(APPPATH.'plugins/stop_manager', FALSE);
+    $CI->load->language('stop_manager', $lang);
 
     if ($ret) {
         $cmd = strtoupper($matches[1]);

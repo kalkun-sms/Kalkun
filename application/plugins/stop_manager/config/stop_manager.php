@@ -26,6 +26,5 @@
     // Send only if this is a french mobile phone number ( +336 et +337 )
     $config['autoreply_outnumber_match_rule'] = '/\+33[67][0-9]{8}/';
 
-
 /* End of file kalkun_plugin_stop_manager.php */
-/* Location: ./application/config/kalkun_plugin_stop_manager.php */
+/* Location: ./application/plugins/stop_manager/config/stop_manager.php */
