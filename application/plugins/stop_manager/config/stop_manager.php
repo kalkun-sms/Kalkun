@@ -15,14 +15,14 @@
     // Send autoreply to confirm action is saved
     $config['enable_autoreply_info'] = TRUE;
     // Send autoreply to tell command is invalid
-    $config['enable_autoreply_error'] = TRUE;
+    $config['enable_autoreply_error'] = FALSE;
     // Enable opt-in
     $config['enable_optin'] = TRUE;
     // Enable the use of "type" in optin/optout
-    $config['enable_type'] = TRUE;
+    $config['enable_type'] = FALSE;
 
     $config['autoreply_language'] = 'english';
-    $config['enable_autoreply_outnumber_filter'] = TRUE;
+    $config['enable_autoreply_outnumber_filter'] = FALSE;
     // Send only if this is a french mobile phone number ( +336 et +337 )
     $config['autoreply_outnumber_match_rule'] = '/\+33[67][0-9]{8}/';
 
