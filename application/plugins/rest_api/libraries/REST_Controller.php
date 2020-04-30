@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class REST_Controller extends CI_Controller
+include_once(APPPATH.'plugins/Plugin_Controller.php');
+class REST_Controller extends Plugin_Controller
 {
     protected $rest_format = NULL; // Set this in a controller to use a default format
 
@@ -32,7 +33,7 @@ class REST_Controller extends CI_Controller
     // Constructor function
     function __construct()
     {
-        parent::__construct();
+        parent::__construct(FALSE);
         $this->request = new \stdClass();
 
 	    // How is this request being made? POST, DELETE, GET, PUT?
