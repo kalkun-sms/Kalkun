@@ -35,6 +35,7 @@ class nongammu_model extends Gammu_model {
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Kalkun_model');
 		log_message('debug',"NonGammu Class Initialized");
 	}
 	
