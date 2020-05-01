@@ -2,7 +2,7 @@
     
 /**
 *	INDIA NCPR(DND) Registry Check
-*	In order to avaoid sending sms to NCPR registered phone numbers
+*	In order to avoid sending sms to NCPR registered phone numbers
 **/
 function DNDcheck($mobileno)
 {  
