@@ -28,7 +28,7 @@ echo form_dropdown('language', $lang, $lang_act);
 </tr>  
 
 <tr valign="top">
-<td>Country dial code</td>
+<td><?php echo lang('tni_set_country_calling_code'); ?></td>
 <td>
 <?php 
 $dial_code = getCountryDialCode(); 

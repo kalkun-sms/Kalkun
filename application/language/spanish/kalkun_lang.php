@@ -131,6 +131,21 @@ $lang['kalkun_smsc'] = "SMSC";
 $lang['kalkun_sms_part'] = "Parte";
 $lang['kalkun_sms_part_suffix'] = "parte de mensajes";
 $lang['kalkun_sms_validity'] = "Validez";
+$lang['kalkun_sms_validity_default'] = "default";
+$lang['kalkun_sms_validity_5min'] = "5 minutes";
+$lang['kalkun_sms_validity_10min'] = "10 minutes";
+$lang['kalkun_sms_validity_30min'] = "30 minutes";
+$lang['kalkun_sms_validity_1h'] = "1 hour";
+$lang['kalkun_sms_validity_2h'] = "2 hours";
+$lang['kalkun_sms_validity_4h'] = "4 hours";
+$lang['kalkun_sms_validity_12h'] = "12 hours";
+$lang['kalkun_sms_validity_1d'] = "1 day";
+$lang['kalkun_sms_validity_2d'] = "2 days";
+$lang['kalkun_sms_validity_5d'] = "5 days";
+$lang['kalkun_sms_validity_1w'] = "1 week";
+$lang['kalkun_sms_validity_2w'] = "2 weeks";
+$lang['kalkun_sms_validity_4w'] = "4 weeks";
+$lang['kalkun_sms_validity_max'] = "maximum";
 
 $lang['kalkun_sms_type'] = "Tipo SMS";
 $lang['kalkun_sms_type_normal'] = "Normal";
@@ -226,6 +241,7 @@ $lang['kalkun_sms_no_member'] = "No hay miembros registrados por el momento";
 // tni contribution
 $lang['tni_contact_add'] = "Agregar contacto";
 $lang['tni_send_message'] = "Enviar mensaje";
+$lang['tni_send_and_repeat'] = "Send and Repeat";
 $lang['tni_sending_message'] = "Enviando";
 $lang['tni_folders_sms'] = "Directorios SMS";
 $lang['tni_name_search'] = "Insertar nombre desde la lista de contactos";
@@ -323,6 +339,8 @@ $lang['tni_msg_stat_deliv'] = "Entregado";
 $lang['tni_msg_stat_pend'] = "Pendiente";
 $lang['tni_msg_stat_unknown'] = "Desconocido";
 
+$lang['tni_set_country_calling_code'] = "Country calling code";
+
 $lang['tni_set_conv_order_old'] = "Antiguos primero";
 $lang['tni_set_conv_order_new'] = "Recientes primero";
 $lang['tni_set_conv_sort'] = "Orden de la conversaci&oacute;n";
@@ -352,6 +370,10 @@ $lang['tni_no'] = "No";
 $lang['tni_default'] = "Predeterminado";
 $lang['tni_set_deliv_report'] = "Informes de entrega";
 
+$lang['kalkun_resend_about_to_resend_to'] = "You are about to resend message to <strong>%number%</strong>";
+$lang['kalkun_resend_msg_content'] = "Message content:";
+$lang['kalkun_resend_delete_copy'] = "Delete copy of this message (Prevent Duplicate)";
+$lang['kalkun_resend_about_to_resend_count'] = "You are about to resend %message_count% message(s)";
 
 /* End of file kalkun_lang.php */
 /* Location: ./application/language/spanish/kalkun_lang.php */

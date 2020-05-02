@@ -321,10 +321,14 @@ if (Coding=='Unicode_No_Compression')
 {
 	Coding = 'unicode';	
 }
-
-resend_conf = '<p>You are about to resend message to <strong>' + DestinationNumber + '</strong></p>';
-message_content = '<p><strong>Message content:</strong> <br />'+ TextDecoded + '</p>';
-delete_dup = '<input type="checkbox" id="delete_dup" /> <label for="delete_dup">Delete copy of this message (Prevent Duplicate)</label>';
+<?php
+$resend_conf_text = lang('kalkun_resend_about_to_resend_to');
+$message_content_text = lang('kalkun_resend_msg_content');
+$delete_dup_text = lang('kalkun_resend_delete_copy');
+?>
+resend_conf = '<p>' + ("<?php echo $resend_conf_text; ?>").replace('%number%', DestinationNumber) + '</p>';
+message_content = '<p><strong><?php echo $message_content_text; ?></strong> <br />'+ TextDecoded + '</p>';
+delete_dup = '<input type="checkbox" id="delete_dup" /> <label for="delete_dup"><?php echo $delete_dup_text; ?></label>';
 $("#compose_sms_container").html(resend_conf + message_content + delete_dup);	
 $("#compose_sms_container").dialog({
 	//title: 'Resend SMS',
@@ -361,8 +365,13 @@ if(count==0) {
 	$('.notification_area').show();
 }
 else {
-	resend_conf = '<p>You are about to resend ' + count + ' message(s)</p>';
-	delete_dup = '<input type="checkbox" id="delete_dup" /> <label for="delete_dup">Delete copy of this message (Prevent Duplicate)</label>';
+	<?php
+	$resend_conf_text = lang('kalkun_resend_about_to_resend_count');
+	$delete_dup_text = lang('kalkun_resend_delete_copy');
+	?>
+
+	resend_conf = '<p>' + ("<?php echo $resend_conf_text; ?>").replace('%message_count%', count) + '</p>';
+	delete_dup = '<input type="checkbox" id="delete_dup" /> <label for="delete_dup"><?php echo $delete_dup_text; ?></label>';
 	$("#compose_sms_container").html(resend_conf + delete_dup);
 	$("#compose_sms_container").dialog({
 		//title: 'Resend SMS',

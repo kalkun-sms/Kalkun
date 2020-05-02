@@ -21,7 +21,7 @@ $lang['kalkun_action'] = "Action";
 $lang['kalkun_phonebook'] = "Répertoire";
 $lang['kalkun_setting'] = "Paramètres";
 $lang['kalkun_filters'] = "Filtres";
-$lang['kalkun_about'] = "De";
+$lang['kalkun_about'] = "A propos de";
 $lang['kalkun_logout'] = "Déconnexion";
 
 $lang['kalkun_year'] = "année";
@@ -82,7 +82,7 @@ $lang['kalkun_delete'] = "Supprimer";
 $lang['kalkun_delete_message_title'] = "Cliquer pour supprimer ce message";
 $lang['kalkun_delete_folder'] = "Supprimer ce dossier";
 $lang['kalkun_delete_folder_title'] = "Cliquer pour supprimer ce message";
-$lang['kalkun_permanently'] = "en permanence";
+$lang['kalkun_permanently'] = "définitivement";
 $lang['kalkun_recover'] = "Récupérer";
 
 $lang['kalkun_send_date'] = "Date d'envoi";
@@ -131,6 +131,21 @@ $lang['kalkun_smsc'] = "SMSC";
 $lang['kalkun_sms_part'] = "Partie";
 $lang['kalkun_sms_part_suffix'] = "part messages";
 $lang['kalkun_sms_validity'] = "Validité";
+$lang['kalkun_sms_validity_default'] = "par défaut";
+$lang['kalkun_sms_validity_5min'] = "5 minutes";
+$lang['kalkun_sms_validity_10min'] = "10 minutes";
+$lang['kalkun_sms_validity_30min'] = "30 minutes";
+$lang['kalkun_sms_validity_1h'] = "1 heure";
+$lang['kalkun_sms_validity_2h'] = "2 heures";
+$lang['kalkun_sms_validity_4h'] = "4 heures";
+$lang['kalkun_sms_validity_12h'] = "12 heures";
+$lang['kalkun_sms_validity_1d'] = "1 jour";
+$lang['kalkun_sms_validity_2d'] = "2 jours";
+$lang['kalkun_sms_validity_5d'] = "5 jours";
+$lang['kalkun_sms_validity_1w'] = "1 semaine";
+$lang['kalkun_sms_validity_2w'] = "2 semaines";
+$lang['kalkun_sms_validity_4w'] = "4 semaines";
+$lang['kalkun_sms_validity_max'] = "maximum";
 
 $lang['kalkun_sms_type'] = "Type de sms";
 $lang['kalkun_sms_type_normal'] = "Normal";
@@ -171,9 +186,9 @@ $lang['kalkun_advanced_search_date_from'] = "Date à partir de";
 $lang['kalkun_advanced_search_date_to'] = "Jusqu'à la date";
 $lang['kalkun_advanced_search_msg_status'] = "Statut";
 $lang['kalkun_advanced_search_msg_status_any'] = "Tout";
-$lang['kalkun_advanced_search_paging'] = "Paging";
-$lang['kalkun_advanced_search_paging_per_page'] = "Par page";
-$lang['kalkun_advanced_search_no_paging'] = "Ne pas utiliser le paging";
+$lang['kalkun_advanced_search_paging'] = "Résultats par page";
+$lang['kalkun_advanced_search_paging_per_page'] = "par page";
+$lang['kalkun_advanced_search_no_paging'] = "Ne pas utiliser la pagination";
 
 $lang['kalkun_resend'] = "Renvoyer";
 $lang['kalkun_public_contact'] = "Contacts publics";
@@ -201,7 +216,7 @@ $lang['kalkun_msg_number_in_DND'] = "Un numéro a été trouvé dans le registre
 $lang['kalkun_msg_delivered_to_user_inbox'] = "Message placé avec succès dans la boîte de réception de l'utilisateur";
 $lang['kalkun_msg_moved_to_outbox'] = "Message placé dans la boite d'envoi et prêt à être envoyé";
 $lang['kalkun_msg_no_numberfound'] = "Pas de numéro trouvé. SMS non envoyé";
-$lang['kalkun_msg_only_admin_can_permanently_delete'] = "Seuls les administrateurs peuvent supprimer des messages de façon permanente";
+$lang['kalkun_msg_only_admin_can_permanently_delete'] = "Seuls les administrateurs peuvent supprimer des messages de façon définitive";
 
 // Setting
 $lang['kalkun_setting_passwd_current'] = "Mot de passe actuel";
@@ -225,7 +240,8 @@ $lang['kalkun_sms_no_member'] = "Il n'y a pas encore de membre inscrit";
 
 // tni contribution
 $lang['tni_contact_add'] = "Ajouter un contact";
-$lang['tni_send_message'] = "Envoyer un message";
+$lang['tni_send_message'] = "Envoyer";
+$lang['tni_send_and_repeat'] = "Envoyer et répéter";
 $lang['tni_sending_message'] = "Envoi en cours";
 $lang['tni_folders_sms'] = "Dossier SMS";
 $lang['tni_name_search'] = "Insérer un nom depuis la liste de contact";
@@ -252,7 +268,7 @@ $lang['tni_settings_saved'] = "Vos paramètres ont été enregistrés...";
 $lang['tni_settings_wrong_pword'] = "Mot de passe incorrect";  
 $lang['tni_settings_uname_exists'] = "Nom d'utilisateur déjà utilisé";  
 $lang['tni_settings_unamepass_wrong'] = "Erreur d'utilisateur ou de mot de passe";   
-$lang['tni_back_to'] = "Retourner à";   
+$lang['tni_back_to'] = "Retour à";
 $lang['tni_show_details'] = "Afficher les détails";   
 $lang['tni_hide_details'] = "Masquer les détails";  
 $lang['tni_search_contacts'] = "Rechercher contact";
@@ -323,6 +339,8 @@ $lang['tni_msg_stat_deliv'] = "Livré";
 $lang['tni_msg_stat_pend'] = "En attente";  
 $lang['tni_msg_stat_unknown'] = "Inconnu";
 
+$lang['tni_set_country_calling_code'] = "Indicatif tél. international";
+
 $lang['tni_set_conv_order_old'] = "Le plus ancien";
 $lang['tni_set_conv_order_new'] = "Le plus récent";
 $lang['tni_set_conv_sort'] = "Tri des conversations";
@@ -330,10 +348,10 @@ $lang['tni_set_conv_sort'] = "Tri des conversations";
 $lang['tni_set_data_pp'] = "Données par page";
 $lang['tni_set_data_pp_hint'] = "Utilisé pour la pagination dans le message et le répertoire";
 
-$lang['tni_set_perm_del'] = "Suppression permanente";
-$lang['tni_set_perm_deloff'] = "Suppression permanente désactivée";
+$lang['tni_set_perm_del'] = "Suppression définitive";
+$lang['tni_set_perm_deloff'] = "Inactif";
 $lang['tni_set_perm_deloff_hint'] = " - Toujours déplacer dans la corbeille en premier";
-$lang['tni_set_perm_delon'] = "Suppression permanente activée";
+$lang['tni_set_perm_delon'] = "Actif";
 
 $lang['tni_set_title'] = "Configuration de l'utilisateur";
 $lang['tni_set_general'] = "Général";  
@@ -353,6 +371,10 @@ $lang['tni_no'] = "Non";
 $lang['tni_default'] = "Par défaut";
 $lang['tni_set_deliv_report'] = "Accusé de réception";
 
+$lang['kalkun_resend_about_to_resend_to'] = "Vous êtes sur le point de renvoyer le message au <strong>%number%</strong>";
+$lang['kalkun_resend_msg_content'] = "Contenu du message:";
+$lang['kalkun_resend_delete_copy'] = "Supprimer la copie de ce message (évite les doublons)";
+$lang['kalkun_resend_about_to_resend_count'] = "Vous êtes sur le point de renvoyer %message_count% message(s)";
 
 /* End of file kalkun_lang.php */
 /* Location: ./application/language/french/kalkun_lang.php */

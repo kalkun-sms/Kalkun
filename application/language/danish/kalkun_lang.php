@@ -131,6 +131,21 @@ $lang['kalkun_smsc'] = "SMSC";
 $lang['kalkun_sms_part'] = "Del";
 $lang['kalkun_sms_part_suffix'] = "del beskeder";
 $lang['kalkun_sms_validity'] = "Gyldighed";
+$lang['kalkun_sms_validity_default'] = "default";
+$lang['kalkun_sms_validity_5min'] = "5 minutes";
+$lang['kalkun_sms_validity_10min'] = "10 minutes";
+$lang['kalkun_sms_validity_30min'] = "30 minutes";
+$lang['kalkun_sms_validity_1h'] = "1 hour";
+$lang['kalkun_sms_validity_2h'] = "2 hours";
+$lang['kalkun_sms_validity_4h'] = "4 hours";
+$lang['kalkun_sms_validity_12h'] = "12 hours";
+$lang['kalkun_sms_validity_1d'] = "1 day";
+$lang['kalkun_sms_validity_2d'] = "2 days";
+$lang['kalkun_sms_validity_5d'] = "5 days";
+$lang['kalkun_sms_validity_1w'] = "1 week";
+$lang['kalkun_sms_validity_2w'] = "2 weeks";
+$lang['kalkun_sms_validity_4w'] = "4 weeks";
+$lang['kalkun_sms_validity_max'] = "maximum";
 
 $lang['kalkun_sms_type'] = "SMS-type";
 $lang['kalkun_sms_type_normal'] = "Normal";
@@ -226,6 +241,7 @@ $lang['kalkun_sms_no_member'] = "Der er endnu ingen registrerede medlemmer";
 // tni contribution
 $lang['tni_contact_add'] = "Tilføj kontakt";
 $lang['tni_send_message'] = "Send besked";
+$lang['tni_send_and_repeat'] = "Send and Repeat";
 $lang['tni_sending_message'] = "Sender";
 $lang['tni_folders_sms'] = "SMS-mapper";
 $lang['tni_name_search'] = "Indsæt navn fra kontaktliste";
@@ -322,6 +338,8 @@ $lang['tni_msg_stat_okwr'] = "Afsendelse OK - afventer rapport";
 $lang['tni_msg_stat_deliv'] = "Afleveret";  
 $lang['tni_msg_stat_pend'] = "Afventer";  
 $lang['tni_msg_stat_unknown'] = "Ukendt";  
+
+$lang['tni_set_country_calling_code'] = "Country calling code";
 
 $lang['tni_set_conv_order_old'] = "Ældste først";  
 $lang['tni_set_conv_order_new'] = "Nyeste først";  

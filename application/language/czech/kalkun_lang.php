@@ -131,6 +131,21 @@ $lang['kalkun_smsc'] = "SMSC";
 $lang['kalkun_sms_part'] = "Part";
 $lang['kalkun_sms_part_suffix'] = "part messages";
 $lang['kalkun_sms_validity'] = "Valididy";
+$lang['kalkun_sms_validity_default'] = "default";
+$lang['kalkun_sms_validity_5min'] = "5 minutes";
+$lang['kalkun_sms_validity_10min'] = "10 minutes";
+$lang['kalkun_sms_validity_30min'] = "30 minutes";
+$lang['kalkun_sms_validity_1h'] = "1 hour";
+$lang['kalkun_sms_validity_2h'] = "2 hours";
+$lang['kalkun_sms_validity_4h'] = "4 hours";
+$lang['kalkun_sms_validity_12h'] = "12 hours";
+$lang['kalkun_sms_validity_1d'] = "1 day";
+$lang['kalkun_sms_validity_2d'] = "2 days";
+$lang['kalkun_sms_validity_5d'] = "5 days";
+$lang['kalkun_sms_validity_1w'] = "1 week";
+$lang['kalkun_sms_validity_2w'] = "2 weeks";
+$lang['kalkun_sms_validity_4w'] = "4 weeks";
+$lang['kalkun_sms_validity_max'] = "maximum";
 
 $lang['kalkun_sms_type'] = "SMS Type";
 $lang['kalkun_sms_type_normal'] = "Normal";
@@ -226,6 +241,7 @@ $lang['kalkun_sms_no_member'] = "There is no registered member yet";
 // tni contribution
 $lang['tni_contact_add'] = "Add Contact";
 $lang['tni_send_message'] = "Send Message";
+$lang['tni_send_and_repeat'] = "Send and Repeat";
 $lang['tni_sending_message'] = "Sending";
 $lang['tni_folders_sms'] = "SMS Folders";
 $lang['tni_name_search'] = "Insert Name from Contact List";
@@ -322,6 +338,8 @@ $lang['tni_msg_stat_okwr'] = "Sending OK - Waiting for Report";
 $lang['tni_msg_stat_deliv'] = "Delivered";  
 $lang['tni_msg_stat_pend'] = "Pending";  
 $lang['tni_msg_stat_unknown'] = "Unknown";  
+
+$lang['tni_set_country_calling_code'] = "Country calling code";
 
 $lang['tni_set_conv_order_old'] = "Oldest First";  
 $lang['tni_set_conv_order_new'] = "Newest First";  
