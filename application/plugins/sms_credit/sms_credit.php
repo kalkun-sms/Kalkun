@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * Plugin Name: SMS Credit
 * Plugin URI: http://azhari.harahap.us
@@ -8,16 +8,14 @@
 * Author URI: http://azhari.harahap.us
 */
 
-/*
-|--------------------------------------------------------------------------
-| CONFIGURATION
-|--------------------------------------------------------------------------
-|
-*/
 function sms_credit_initialize()
 {
-    $config = array('allow_user_with_no_package' => TRUE);
-    return $config;
+	$CI =& get_instance();
+
+	$CI->load->add_package_path(APPPATH.'plugins/sms_credit', FALSE);
+	$CI->load->config('sms_credit', TRUE);
+
+	return $CI->config->config['sms_credit'];
 }
 
 // Add hook for outgoing message

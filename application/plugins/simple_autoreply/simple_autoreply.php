@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * Plugin Name: Simple Autoreply
 * Plugin URI: http://azhari.harahap.us
@@ -8,20 +8,14 @@
 * Author URI: http://azhari.harahap.us
 */
 
-/*
-|--------------------------------------------------------------------------
-| CONFIGURATION
-|--------------------------------------------------------------------------
-| 
-| uid - identifier of which user sent the autoreply, uid 1 is the default value
-| message - the message you want to sent
-| 
-*/
 function simple_autoreply_initialize()
 {
-	$config['uid'] = '1';
-	$config['message'] = "Thanks for sending me the message";
-	return $config;
+	$CI =& get_instance();
+
+	$CI->load->add_package_path(APPPATH.'plugins/simple_autoreply', FALSE);
+	$CI->load->config('simple_autoreply', TRUE);
+
+	return $CI->config->config['simple_autoreply'];
 }
 
 // Add hook for incoming message

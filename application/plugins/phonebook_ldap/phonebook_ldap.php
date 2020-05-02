@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * Plugin Name: Phonebook LDAP
 * Plugin URI: http://azhari.harahap.us
@@ -8,26 +8,14 @@
 * Author URI: http://azhari.harahap.us
 */
 
-/*
-|--------------------------------------------------------------------------
-| CONFIGURATION
-|--------------------------------------------------------------------------
-| 
-| server - ldap server hostname
-| port - ldap server port (default is 389)
-| username - ldap username
-| password - ldap password
-| dn - Distinguished Name
-| 
-*/
 function phonebook_ldap_initialize()
 {
-	$config['server'] = 'server.hostname.com';
-	$config['port'] = '389';
-	$config['username'] = 'user@server.hostname.com';
-	$config['password'] = 'password';
-	$config['dn'] = 'dc=server,dc=hostname,dc=com';
-	return $config;
+	$CI =& get_instance();
+
+	$CI->load->add_package_path(APPPATH.'plugins/phonebook_ldap', FALSE);
+	$CI->load->config('phonebook_ldap', TRUE);
+
+	return $CI->config->config['phonebook_ldap'];
 }
 
 // Add hook for contact menu

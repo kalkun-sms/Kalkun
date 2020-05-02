@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * Plugin Name: SMS to XMPP
 * Plugin URI: http://azhari.harahap.us
@@ -8,20 +8,14 @@
 * Author URI: http://azhari.harahap.us
 */
 
-/*
-|--------------------------------------------------------------------------
-| CONFIGURATION
-|--------------------------------------------------------------------------
-|
-| xmpp_code - XMPP code (Don't use space)
-|
-*/
 function sms_to_xmpp_initialize()
 {
-	$config['php_path'] = '/usr/bin/php';
-	$config['php_script'] = realpath(dirname(__FILE__)).'/libraries/abhinavsingh-JAXL-5829c3b/sendMessage.php';
-	$config['xmpp_code'] = 'XMPP';
-	return $config;
+	$CI =& get_instance();
+
+	$CI->load->add_package_path(APPPATH.'plugins/sms_to_xmpp', FALSE);
+	$CI->load->config('sms_to_xmpp', TRUE);
+
+	return $CI->config->config['sms_to_xmpp'];
 }
 
 // Add hook for incoming message

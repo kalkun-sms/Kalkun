@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * Plugin Name: SMS Member
 * Plugin URI: http://azhari.harahap.us
@@ -8,20 +8,14 @@
 * Author URI: http://azhari.harahap.us
 */
 
-/*
-|--------------------------------------------------------------------------
-| CONFIGURATION
-|--------------------------------------------------------------------------
-|
-| reg_code - Registration code (Don't use space)
-| unreg_code - Unregistration code (Don't use space)
-|
-*/
 function sms_member_initialize()
 {
-	$config['reg_code'] = 'REG';
-	$config['unreg_code'] = 'UNREG';
-	return $config;
+	$CI =& get_instance();
+
+	$CI->load->add_package_path(APPPATH.'plugins/sms_member', FALSE);
+	$CI->load->config('sms_member', TRUE);
+
+	return $CI->config->config['sms_member'];
 }
 
 // Add hook for incoming message
