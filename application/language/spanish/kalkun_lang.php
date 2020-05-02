@@ -31,7 +31,6 @@ $lang['kalkun_day'] = "d&iacute;a";
 $lang['kalkun_hour'] = "hora";
 $lang['kalkun_minute'] = "minuto";
 $lang['kalkun_second'] = "segundo";
-$lang['kalkun_ago'] = "hace";
 
 // Dashboard
 $lang['kalkun_notification'] = "Notificaci&oacute;n";
@@ -266,7 +265,9 @@ $lang['tni_compose_msgto_outbox'] = "T&uacute; mensaje ha sido movido a la bande
 $lang['tni_email_address'] = "ID del correo";
 $lang['tni_email_forward'] = "Habilitar el reenv&iacute;o de correo";
 $lang['tni_compose_searching'] = "Buscando...";
-$lang['tni_outbox_sent_time'] = "Hace menos de un minuto";
+$lang['kalkun_nicedate_less1min_ago'] = "Hace menos de un minuto";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
 $lang['tni_time_remaining'] = "restantes";
 $lang['tni_pbk_edit_contact'] = "Editar Contacto";
 $lang['tni_pbk_contact_edited'] = "El contacto ha sido editado";

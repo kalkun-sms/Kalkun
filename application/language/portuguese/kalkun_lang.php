@@ -33,7 +33,6 @@ $lang['kalkun_day'] = "dia";
 $lang['kalkun_hour'] = "hora";
 $lang['kalkun_minute'] = "minuto";
 $lang['kalkun_second'] = "segundo";
-$lang['kalkun_ago'] = "atrás";
 
 // Dashboard
 $lang['kalkun_notification'] = "Notificação";
@@ -268,7 +267,9 @@ $lang['tni_compose_msgto_outbox'] = "Mensagem colocada na caixa de saída, pront
 $lang['tni_email_address'] = "Email ID";    
 $lang['tni_email_forward'] = "Encaminhamento Activação Email";
 $lang['tni_compose_searching'] = "Procurando..."; // Searching...
-$lang['tni_outbox_sent_time'] = "No último minuto"; // Less than a minute ago
+$lang['kalkun_nicedate_less1min_ago'] = "No último minuto"; // Less than a minute ago
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
 $lang['tni_time_remaining'] = "para envio"; // remaining
 $lang['tni_pbk_edit_contact'] = "Editar Contacto"; // Edit Contact
 $lang['tni_pbk_contact_edited'] = "Contacto foi actualizado"; // Contact has been edited

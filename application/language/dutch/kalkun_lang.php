@@ -31,7 +31,6 @@ $lang['kalkun_day'] = "dag";
 $lang['kalkun_hour'] = "uur";
 $lang['kalkun_minute'] = "minuut";
 $lang['kalkun_second'] = "seconde";
-$lang['kalkun_ago'] = "geleden";
 
 // Dashboard
 $lang['kalkun_notification'] = "Herinnering";
@@ -266,8 +265,10 @@ $lang['tni_compose_msgto_outbox'] = "Het bericht is naar Postvak Uit verplaatst<
 $lang['tni_email_address'] = "Email ID";    
 $lang['tni_email_forward'] = "Gebruik Email Doorsturen";
 $lang['tni_compose_searching'] = "Zoek...";  
-$lang['tni_outbox_sent_time'] = "Minder dan een minuut geleden";  
-$lang['tni_time_remaining'] = "Restant";  
+$lang['kalkun_nicedate_less1min_ago'] = "Minder dan een minuut geleden";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
+$lang['tni_time_remaining'] = "Restant";
 $lang['tni_pbk_edit_contact'] = "Aanpassen Contact";  
 $lang['tni_pbk_contact_edited'] = "Contact is aangepast";  
 $lang['tni_pbk_contact_added'] = "Contact is toegevoegd";  

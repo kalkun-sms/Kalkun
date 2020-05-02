@@ -31,7 +31,6 @@ $lang['kalkun_day'] = "dzień";
 $lang['kalkun_hour'] = "godzina";
 $lang['kalkun_minute'] = "minuta";
 $lang['kalkun_second'] = "sekunda";
-$lang['kalkun_ago'] = "temu";
 
 // Dashboard
 $lang['kalkun_notification'] = "Powiadomienia";
@@ -266,7 +265,9 @@ $lang['tni_compose_msgto_outbox'] = "Wiadomość została przeniesiona do skrzyn
 $lang['tni_email_address'] = "Adres e-mail";
 $lang['tni_email_forward'] = "Załącz przekierowanie na e-mail";
 $lang['tni_compose_searching'] = "Wyszukiwanie...";
-$lang['tni_outbox_sent_time'] = "Mniej niż minuta";
+$lang['kalkun_nicedate_less1min_ago'] = "Mniej niż minuta";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
 $lang['tni_time_remaining'] = "pozostało";
 $lang['tni_pbk_edit_contact'] = "Edytuj kontakt";
 $lang['tni_pbk_contact_edited'] = "Kontakt poprawiony";

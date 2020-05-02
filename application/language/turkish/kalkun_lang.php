@@ -31,7 +31,6 @@ $lang['kalkun_day'] = "gün";
 $lang['kalkun_hour'] = "saat";
 $lang['kalkun_minute'] = "dakika";
 $lang['kalkun_second'] = "saniye";
-$lang['kalkun_ago'] = "önce";
 
 // Dashboard
 $lang['kalkun_notification'] = "Uyari";
@@ -266,8 +265,10 @@ $lang['tni_compose_msgto_outbox'] = "Mesajiniz giden kutusuna tasindi<br>ve su a
 $lang['tni_email_address'] = "Email ID";    
 $lang['tni_email_forward'] = "Email yönlendirmeyi etkinlestir";
 $lang['tni_compose_searching'] = "Araniyor...";  
-$lang['tni_outbox_sent_time'] = "Bir dakikadan kisa";  
-$lang['tni_time_remaining'] = "kaldi";  
+$lang['kalkun_nicedate_less1min_ago'] = "Bir dakikadan kisa";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
+$lang['tni_time_remaining'] = "kaldi";
 $lang['tni_pbk_edit_contact'] = "Kontak bilgilerini düzenle";  
 $lang['tni_pbk_contact_edited'] = "Kontak bilgileri düzenlendi";  
 $lang['tni_pbk_contact_added'] = "Kontak eklenildi";  

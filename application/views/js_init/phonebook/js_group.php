@@ -55,7 +55,7 @@ else {
 	$("#confirm_delete_group_dialog").dialog({
 	bgiframe: true,
 	autoOpen: false,
-	height: 150,
+	height: 200,
 	modal: true,
 	buttons: {
 		'<?php echo lang('kalkun_cancel')?>': function() {
@@ -134,4 +134,4 @@ $("tr").hover(function() {
 });  
 
 });    
-</script>	
+</script>

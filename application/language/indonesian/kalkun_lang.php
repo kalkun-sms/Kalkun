@@ -31,7 +31,6 @@ $lang['kalkun_day'] = "hari";
 $lang['kalkun_hour'] = "jam";
 $lang['kalkun_minute'] = "menit";
 $lang['kalkun_second'] = "detik";
-$lang['kalkun_ago'] = "yang lalu";
 
 // Dashboard
 $lang['kalkun_notification'] = "Pemberitahuan";
@@ -266,8 +265,10 @@ $lang['tni_compose_msgto_outbox'] = "Pesan telah berada di Outbox<br>dan siap un
 $lang['tni_email_address'] = "Alamat Surel";    
 $lang['tni_email_forward'] = "Aktifkan Terusan Surel";
 $lang['tni_compose_searching'] = "Mencari...";  
-$lang['tni_outbox_sent_time'] = "Beberapa saat yang lalu";  
-$lang['tni_time_remaining'] = "lagi";  
+$lang['kalkun_nicedate_less1min_ago'] = "Beberapa saat yang lalu";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
+$lang['tni_time_remaining'] = "lagi";
 $lang['tni_pbk_edit_contact'] = "Sunting Kontak";  
 $lang['tni_pbk_contact_edited'] = "Kontak berhasil disunting";  
 $lang['tni_pbk_contact_added'] = "Kontak berhasil ditambahkan";  

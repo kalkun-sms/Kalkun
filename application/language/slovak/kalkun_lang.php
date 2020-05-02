@@ -31,7 +31,6 @@ $lang['kalkun_day'] = "deň";
 $lang['kalkun_hour'] = "hodina";
 $lang['kalkun_minute'] = "minúta";
 $lang['kalkun_second'] = "sekunda";
-$lang['kalkun_ago'] = "pred";
 
 // Dashboard
 $lang['kalkun_notification'] = "Upozornenie";
@@ -266,8 +265,10 @@ $lang['tni_compose_msgto_outbox'] = "Vaša správa bola presunutá do odosielani
 $lang['tni_email_address'] = "ID e-mailu";    
 $lang['tni_email_forward'] = "Povoliť e-mailové presmerovanie"; 
 $lang['tni_compose_searching'] = "Vyhľadávanie...";  
-$lang['tni_outbox_sent_time'] = "Menej ako minúta";  
-$lang['tni_time_remaining'] = "ostáva";  
+$lang['kalkun_nicedate_less1min_ago'] = "Menej ako minúta";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
+$lang['tni_time_remaining'] = "ostáva";
 $lang['tni_pbk_edit_contact'] = "Upraviť kontakt";  
 $lang['tni_pbk_contact_edited'] = "Kontakt bol upravený";  
 $lang['tni_pbk_contact_added'] = "Kontakt bol pridaný";  

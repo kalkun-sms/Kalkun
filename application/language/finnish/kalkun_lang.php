@@ -31,7 +31,6 @@ $lang['kalkun_day'] = "päivää";
 $lang['kalkun_hour'] = "tuntia";
 $lang['kalkun_minute'] = "minuuttia";
 $lang['kalkun_second'] = "sekuntia";
-$lang['kalkun_ago'] = "sitten";
 
 // Dashboard
 $lang['kalkun_notification'] = "Huomautus";
@@ -266,7 +265,9 @@ $lang['tni_compose_msgto_outbox'] = "Viestisi on siirretty Lähteviin<br>ja on v
 $lang['tni_email_address'] = "Sähköpostiosoite";
 $lang['tni_email_forward'] = "Käytä sähköpostivälitystä";
 $lang['tni_compose_searching'] = "Etsitään...";
-$lang['tni_outbox_sent_time'] = "Alle minuutti sitten";
+$lang['kalkun_nicedate_less1min_ago'] = "Alle minuutti sitten";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
 $lang['tni_time_remaining'] = "jäljellä";
 $lang['tni_pbk_edit_contact'] = "Muokkaa yhteystietoa";
 $lang['tni_pbk_contact_edited'] = "Yhteystieto muokattu";

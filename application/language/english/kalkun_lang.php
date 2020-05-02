@@ -31,7 +31,6 @@ $lang['kalkun_day'] = "day";
 $lang['kalkun_hour'] = "hour";
 $lang['kalkun_minute'] = "minute";
 $lang['kalkun_second'] = "second";
-$lang['kalkun_ago'] = "ago";
 
 // Dashboard
 $lang['kalkun_notification'] = "Notification";
@@ -266,7 +265,9 @@ $lang['tni_compose_msgto_outbox'] = "Your message has been moved to Outbox<br>an
 $lang['tni_email_address'] = "Email ID";    
 $lang['tni_email_forward'] = "Enable Email Forwarding";
 $lang['tni_compose_searching'] = "Searching...";  
-$lang['tni_outbox_sent_time'] = "Less than a minute ago";  
+$lang['kalkun_nicedate_less1min_ago'] = "Less than a minute ago";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
 $lang['tni_time_remaining'] = "remaining";  
 $lang['tni_pbk_edit_contact'] = "Edit Contact";  
 $lang['tni_pbk_contact_edited'] = "Contact has been edited";  
@@ -327,7 +328,7 @@ $lang['tni_set_conv_order_new'] = "Newest First";
 $lang['tni_set_conv_sort'] = "Conversation sort";  
 
 $lang['tni_set_data_pp'] = "Data per Page";  
-$lang['tni_set_data_pp_hint'] = "Will be used for paging in message and phonebook";  
+$lang['tni_set_data_pp_hint'] = "Used for paging in message and phonebook";
 
 $lang['tni_set_perm_del'] = "Permanent delete";  
 $lang['tni_set_perm_deloff'] = "Permanent delete Off";  

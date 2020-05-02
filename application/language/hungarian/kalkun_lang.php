@@ -32,7 +32,6 @@ $lang['kalkun_day'] = "nap";
 $lang['kalkun_hour'] = "óra";
 $lang['kalkun_minute'] = "perc";
 $lang['kalkun_second'] = "másodperc";
-$lang['kalkun_ago'] = "ezelőtt";
 
 // Dashboard
 $lang['kalkun_notification'] = "Figyelmeztetés";
@@ -267,8 +266,10 @@ $lang['tni_compose_msgto_outbox'] = "Üzenetét áthelyeztük a Kimenő mappába
 $lang['tni_email_address'] = "Email ID";    
 $lang['tni_email_forward'] = "Email továbbítás engedélyezése";
 $lang['tni_compose_searching'] = "Keresés...";  
-$lang['tni_outbox_sent_time'] = "Kevesebb, mint egy perccel ezelőtt...";  
-$lang['tni_time_remaining'] = "hátralévő";  
+$lang['kalkun_nicedate_less1min_ago'] = "Kevesebb, mint egy perccel ezelőtt...";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
+$lang['tni_time_remaining'] = "hátralévő";
 $lang['tni_pbk_edit_contact'] = "Kapcsolat szerkesztése";  
 $lang['tni_pbk_contact_edited'] = "A kapcsolat szerkesztve";  
 $lang['tni_pbk_contact_added'] = "Kapcsolat hozzáadva";  

@@ -8,19 +8,19 @@ $lang['kalkun_dashboard'] = "Tableau de bord";
 $lang['kalkun_folder'] = "Dossiers";
 $lang['kalkun_myfolder'] = "Mes dossiers";
 
-$lang['kalkun_compose'] = "Composer";
+$lang['kalkun_compose'] = "Ecrire";
 $lang['kalkun_inbox'] = "Boite de réception";
 $lang['kalkun_outbox'] = "Boite d'envoi";
 $lang['kalkun_sentitems'] = "Messages envoyés";
-$lang['kalkun_senterroritems'] = "Envoi en erreur";
-$lang['kalkun_trash'] = "Poubelle";
+$lang['kalkun_senterroritems'] = "Envois en erreur";
+$lang['kalkun_trash'] = "Corbeille";
 $lang['kalkun_spam'] = "Spam";
 $lang['kalkun_add'] = "Ajouter";
 $lang['kalkun_action'] = "Action";
 
 $lang['kalkun_phonebook'] = "Répertoire";
 $lang['kalkun_setting'] = "Paramètres";
-$lang['kalkun_filters'] = "Filters";
+$lang['kalkun_filters'] = "Filtres";
 $lang['kalkun_about'] = "De";
 $lang['kalkun_logout'] = "Déconnexion";
 
@@ -31,7 +31,6 @@ $lang['kalkun_day'] = "jour";
 $lang['kalkun_hour'] = "heure";
 $lang['kalkun_minute'] = "minute";
 $lang['kalkun_second'] = "seconde";
-$lang['kalkun_ago'] = "il y a";
 
 // Dashboard
 $lang['kalkun_notification'] = "Notification";
@@ -50,25 +49,25 @@ $lang['kalkun_signal'] = "Signal";
 
 // Phonebook
 $lang['kalkun_contact'] = "Contact";
-$lang['kalkun_all_contacts'] = "All Contacts";
-$lang['kalkun_send_to_all_contacts'] = "Send To All Contacts";
+$lang['kalkun_all_contacts'] = "Tous les contacts";
+$lang['kalkun_send_to_all_contacts'] = "Envoyer à tous les contacts";
 $lang['kalkun_group'] = "Groupes";
 $lang['kalkun_add_to_group'] = "Ajouter au groupe";
 $lang['kalkun_delete_from_group'] = "Supprimer du groupe";
-$lang['kalkun_pbk_add_method'] = "Sélectionner ajouter méthode de contact";
+$lang['kalkun_pbk_add_method'] = "Sélectionner la méthode d'ajout de contact";
 $lang['kalkun_pbk_add_form'] = "Utiliser le formulaire de contact";
 $lang['kalkun_pbk_add_form_desc'] = "Ajouter manuellement un contact";
 $lang['kalkun_pbk_add_csv'] = "Importer un fichier CSV";
 $lang['kalkun_pbk_add_csv_desc'] = "Importer contact à partir d'un fichier CSV";
 $lang['kalkun_pbk_add_csv_file'] = "Fichier CSV";
 $lang['kalkun_pbk_add_csv_label'] = "Le fichier CSV doit être au bon format";
-$lang['kalkun_pbk_del_contact_conf'] = "Etes-vous sur de vouloir supprimer <span id='contact-delete-count'></span> des contacts ?";
+$lang['kalkun_pbk_del_contact_conf'] = "Etes-vous sûr de vouloir supprimer <span id='contact-delete-count'></span> des contacts ?";
 $lang['kalkun_valid_example'] = "Exemple valide";
 
 // Message
 $lang['kalkun_message'] = "Message";
 $lang['kalkun_send'] = "Envoyer";
-$lang['kalkun_send_to'] = "Envoyé à";
+$lang['kalkun_send_to'] = "Destinataire";
 $lang['kalkun_reply'] = "Répondre";
 $lang['kalkun_reply_to'] = "Répondre à";
 $lang['kalkun_reply_title'] = "Cliquer pour répondre au message";
@@ -95,7 +94,7 @@ $lang['kalkun_after_a_delay'] = "Après un délai";
 
 $lang['kalkun_person'] = "Personne";
 $lang['kalkun_group'] = "Groupe";
-$lang['kalkun_input_manually'] = "Renseigner manuellement";
+$lang['kalkun_input_manually'] = "Saisie manuelle";
 
 $lang['kalkun_show_hide_option'] = "Option Afficher/Masquer";
 $lang['kalkun_add_folder'] = "Ajouter dossier";
@@ -117,7 +116,7 @@ $lang['kalkun_delete_all_confirmation'] = "Etes-vous sur ? Ceci s'appliquera à 
 
 $lang['kalkun_select_all'] = "Tout sélectionner";
 $lang['kalkun_select_all_title'] = "Cliquer pour sélectionner tous les messages";
-$lang['kalkun_clear_all'] = "Tout effacer";
+$lang['kalkun_clear_all'] = "Tout désélectionner";
 $lang['kalkun_clear_all_title'] = "Cliquer pour effacer tous les messages sélectionnés";
 $lang['kalkun_refresh'] = "Actualiser";
 $lang['kalkun_global_delete_title'] = "Cliquer pour supprimer tous les messages sélectionnés";
@@ -143,13 +142,13 @@ $lang['kalkun_sms_ads_active'] = "Ads est activé";
 $lang['kalkun_sms_ncpr_check'] = "Vérifier MDN";
 $lang['kalkun_insert'] = "Insérer";
 
-$lang['kalkun_canned'] = "Modéles";
+$lang['kalkun_canned'] = "Modèles";
 $lang['kalkun_canned_empty'] = "Il semble qu'il n'y ait pas encore de réponse de créé, souhaitez-vous enregistrer cette réponse et la conserver ?";
 $lang['kalkun_canned_title'] = "Choisissez une réponse";
-$lang['kalkun_canned_save_new'] = "Enregistrer nouveaux...";
+$lang['kalkun_canned_save_new'] = "Enregistrer";
 $lang['kalkun_canned_saving'] = "Sauvegarde...";
 $lang['kalkun_canned_confirm'] = "Etes-vous sûr ?";
-$lang['kalkun_canned_template_name'] = "Entrez un nom pour votre message. Il doit étre unique.";
+$lang['kalkun_canned_template_name'] = "Entrez un nom pour votre message. Il doit être unique.";
 $lang['kalkun_canned_template_update'] = "Etes-vous sûr ? Cela va annuler le message précédent";
 
 // Others
@@ -216,8 +215,8 @@ $lang['kalkun_setting_passwd_new_enter'] = "Entrer votre nouveau mot de passe";
 $lang['kalkun_level_admin'] = "Administrateur";
 $lang['kalkun_level_user'] = "Utilisateur";
 
-$lang['kalkun_filter_add'] = "Create a new filter";
-$lang['kalkun_filter_has_the_words'] = "Has the words";
+$lang['kalkun_filter_add'] = "Créer un nouveau filtre";
+$lang['kalkun_filter_has_the_words'] = "Contient les mots";
 
 // SMS Content/Member
 $lang['kalkun_sms_member'] = "Membre";
@@ -227,7 +226,7 @@ $lang['kalkun_sms_no_member'] = "Il n'y a pas encore de membre inscrit";
 // tni contribution
 $lang['tni_contact_add'] = "Ajouter un contact";
 $lang['tni_send_message'] = "Envoyer un message";
-$lang['tni_sending_message'] = "Envoi";
+$lang['tni_sending_message'] = "Envoi en cours";
 $lang['tni_folders_sms'] = "Dossier SMS";
 $lang['tni_name_search'] = "Insérer un nom depuis la liste de contact";
 $lang['tni_group_del_title'] = "Confirmation de la suppression du groupe";
@@ -263,10 +262,12 @@ $lang['tni_form_fields_required'] = "Tous les champs sont obligatoires";
 $lang['tni_contact_name'] = "Nom";   
 $lang['tni_contact_phonenumber'] = "Numéro de téléphone";   
 $lang['tni_compose_msgto_outbox'] = "Votre message a été déplacé vers la boite d'envoi<br>et est prêt étre envoyé";  
-$lang['tni_email_address'] = "Email ID";    
+$lang['tni_email_address'] = "Email";
 $lang['tni_email_forward'] = "Activer le transfert d'Email";
 $lang['tni_compose_searching'] = "Recherche...";  
-$lang['tni_outbox_sent_time'] = "Il y a moins d'une minute";  
+$lang['kalkun_nicedate_less1min_ago'] = "Il y a moins d'une minute";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% restant";
+$lang['kalkun_nicedate_ago'] = "Il y a %nicedate%";
 $lang['tni_time_remaining'] = "Restant";  
 $lang['tni_pbk_edit_contact'] = "Modifier contact";  
 $lang['tni_pbk_contact_edited'] = "Le contact a été modifié";  
@@ -286,7 +287,7 @@ $lang['tni_user_person_name'] = "Nom";
 $lang['tni_user_username'] = "Nom d'utilisateur";  
 $lang['tni_user_password'] = "Mot de passe";  
 $lang['tni_user_search'] = "Chercher un utilisateur";  
-$lang['tni_user_conf_password'] = "Confirmer mote de passe";  
+$lang['tni_user_conf_password'] = "Confirmer mot de passe";
 $lang['tni_user_updated'] = "L'utilisateur a été mis à jour";  
 $lang['tni_user_phone_number'] = "Numéro de téléphone";  
 $lang['tni_action_not_allowed'] = "Action non autorisée";  
@@ -324,10 +325,10 @@ $lang['tni_msg_stat_unknown'] = "Inconnu";
 
 $lang['tni_set_conv_order_old'] = "Le plus ancien";
 $lang['tni_set_conv_order_new'] = "Le plus récent";
-$lang['tni_set_conv_sort'] = "Conversation sort";
+$lang['tni_set_conv_sort'] = "Tri des conversations";
 
 $lang['tni_set_data_pp'] = "Données par page";
-$lang['tni_set_data_pp_hint'] = "Sera utilisé pour la pagination dans le message et le répertoire";
+$lang['tni_set_data_pp_hint'] = "Utilisé pour la pagination dans le message et le répertoire";
 
 $lang['tni_set_perm_del'] = "Suppression permanente";
 $lang['tni_set_perm_deloff'] = "Suppression permanente désactivée";
@@ -343,13 +344,13 @@ $lang['tni_set_appearance'] = "Apparence";
 $lang['tni_signature']  = "Signature";  
 $lang['tni_signature_off']  = "Signature désactivée";  
 $lang['tni_signature_on']  = "Signature activée";  
-$lang['tni_signature_hint']  = "Max. 50 charactéres";  
+$lang['tni_signature_hint']  = "Max. 50 caractères";
 $lang['tni_signature_hintb']  = "La signature apparaitra à la fin du message";   
 $lang['tni_language']  = "Langue";   
 $lang['tni_settings']  = "Paramètres";  
 $lang['tni_yes']  = "Oui";
 $lang['tni_no'] = "Non";
-$lang['tni_default'] = "Défaut";
+$lang['tni_default'] = "Par défaut";
 $lang['tni_set_deliv_report'] = "Accusé de réception";
 
 

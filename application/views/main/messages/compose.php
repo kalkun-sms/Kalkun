@@ -5,7 +5,8 @@
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.form.min.js"></script>
 <style type="text/css">
 .left_aligned { margin-left:0; padding-left:0;}
-.form_option { width: 100px;}
+.form_option { display:flex }
+.opt { flex-grow: 1}
 </style>
 <?php $this->load->view('js_init/message/js_compose'); ?>
 
@@ -84,14 +85,20 @@ else echo lang('kalkun_send_to').":";
 ?>
 </td>
 <td>
-<span class="form_option">
+<div class="form_option">
+<div class="opt">
 <input type="radio" id="sendoption1" name="sendoption" value="sendoption1" checked="checked" class="left_aligned" style="border: none;" />
 <label for="sendoption1"><?php echo lang('kalkun_phonebook');?></label>
-</span>
+</div>
+<div class="opt">
 <input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;" />
 <label for="sendoption3"><?php echo lang('kalkun_input_manually');?> </label>
+</div>
+<div class="opt">
 <input type="radio" id="sendoption4" name="sendoption" value="sendoption4" style="border: none;" />
 <label for="sendoption4"><?php echo lang('kalkun_compose_import_file');?></label>
+</div>
+</div>
 </td>
 </tr>
     
