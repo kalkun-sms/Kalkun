@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * Plugin Name: Phonebook Lookup
 * Plugin URI: http://azhari.harahap.us
@@ -8,18 +8,14 @@
 * Author URI: http://azhari.harahap.us
 */
 
-/*
-|--------------------------------------------------------------------------
-| CONFIGURATION
-|--------------------------------------------------------------------------
-| 
-| url - url location to lookup the phone number, the phone number variable should be #phonenumber#
-| 
-*/
 function phonebook_lookup_initialize()
 {
-	$config['url'] = 'http://www.krak.dk/person/resultat/#phonenumber#';
-	return $config;
+	$CI =& get_instance();
+
+	$CI->load->add_package_path(APPPATH.'plugins/phonebook_lookup', FALSE);
+	$CI->load->config('phonebook_lookup', TRUE);
+
+	return $CI->config->config['phonebook_lookup'];
 }
 
 // Add hook for contact menu

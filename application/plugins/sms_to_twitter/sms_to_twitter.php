@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * Plugin Name: SMS to Twitter
 * Plugin URI: http://azhari.harahap.us
@@ -8,18 +8,14 @@
 * Author URI: http://azhari.harahap.us
 */
 
-/*
-|--------------------------------------------------------------------------
-| CONFIGURATION
-|--------------------------------------------------------------------------
-|
-| twitter_code - Twitter code (Don't use space)
-|
-*/
 function sms_to_twitter_initialize()
 {
-	$config['twitter_code'] = 'TW';
-	return $config;
+	$CI =& get_instance();
+
+	$CI->load->add_package_path(APPPATH.'plugins/sms_to_twitter', FALSE);
+	$CI->load->config('sms_to_twitter', TRUE);
+
+	return $CI->config->config['sms_to_twitter'];
 }
 
 // Add hook for incoming message

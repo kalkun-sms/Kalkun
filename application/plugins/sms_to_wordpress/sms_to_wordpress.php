@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * Plugin Name: SMS to Wordpress
 * Plugin URI: http://azhari.harahap.us
@@ -8,18 +8,14 @@
 * Author URI: http://azhari.harahap.us
 */
 
-/*
-|--------------------------------------------------------------------------
-| CONFIGURATION
-|--------------------------------------------------------------------------
-|
-| wordpress_code - Wordpress code (Don't use space)
-|
-*/
 function sms_to_wordpress_initialize()
 {
-	$config['wordpress_code'] = 'WP';
-	return $config;
+	$CI =& get_instance();
+
+	$CI->load->add_package_path(APPPATH.'plugins/sms_to_wordpress', FALSE);
+	$CI->load->config('sms_to_wordpress', TRUE);
+
+	return $CI->config->config['sms_to_wordpress'];
 }
 
 // Add hook for incoming message

@@ -65,20 +65,7 @@ function stop_manager_initialize()
     $CI->load->add_package_path(APPPATH.'plugins/stop_manager', FALSE);
     $CI->load->config("stop_manager", TRUE);
 
-    $config['optout_keywords'] = $CI->config->item('optout_keywords', 'stop_manager');
-    $config['optin_keywords'] = $CI->config->item('optin_keywords', 'stop_manager');
-    $config['type_keywords'] = $CI->config->item('type_keywords', 'stop_manager');
-
-    $config['enable_autoreply_info'] = $CI->config->item('enable_autoreply_info', 'stop_manager');
-    $config['enable_autoreply_error'] = $CI->config->item('enable_autoreply_error', 'stop_manager');
-    $config['enable_optin'] = $CI->config->item('enable_optin', 'stop_manager');
-    $config['enable_type'] = $CI->config->item('enable_type', 'stop_manager');
-
-    $config['autoreply_language'] = $CI->config->item('autoreply_language', 'stop_manager');
-    $config['enable_autoreply_outnumber_filter'] = $CI->config->item('enable_autoreply_outnumber_filter', 'stop_manager');
-    $config['autoreply_outnumber_match_rule'] = $CI->config->item('autoreply_outnumber_match_rule', 'stop_manager');
-
-    return $config;
+    return $CI->config->config['stop_manager'];
 }
 
 function stop_manager_cleanup_outgoing($all)
