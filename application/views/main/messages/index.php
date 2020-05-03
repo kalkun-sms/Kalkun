@@ -45,7 +45,18 @@ if($this->uri->segment(2)=='my_folder')
 
 <div id="two_column_container" class="tabbing">
 <div id="left_column" class="two_column_medium">
-	<?php echo"<span class=\"folder_name\">".$this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name')."</span>";?>
+	<?php
+		$folder_name = $this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name');
+		switch ($folder_name)
+		{
+			case 'Trash': //Trash
+				$folder_name = lang('kalkun_trash');
+				break;
+			case 'Spam': //Spam
+				$folder_name = lang('kalkun_spam');
+				break;
+		}
+		echo '<span class="folder_name">'.$folder_name.'</span>';?>
     <?php if($this->uri->segment(4)=='5' || $this->uri->segment(4)=='6'):?>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="padding: 0; cursor: pointer; font-weight: normal;" id="delete-all-link"><?php echo lang('kalkun_delete_all_message_now');?></a>
     <?php endif; ?>

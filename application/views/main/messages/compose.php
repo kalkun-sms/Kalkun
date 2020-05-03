@@ -5,7 +5,8 @@
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.form.min.js"></script>
 <style type="text/css">
 .left_aligned { margin-left:0; padding-left:0;}
-.form_option { width: 100px;}
+.form_option { display:flex }
+.opt { flex-grow: 1}
 </style>
 <?php $this->load->view('js_init/message/js_compose'); ?>
 
@@ -84,14 +85,20 @@ else echo lang('kalkun_send_to').":";
 ?>
 </td>
 <td>
-<span class="form_option">
+<div class="form_option">
+<div class="opt">
 <input type="radio" id="sendoption1" name="sendoption" value="sendoption1" checked="checked" class="left_aligned" style="border: none;" />
 <label for="sendoption1"><?php echo lang('kalkun_phonebook');?></label>
-</span>
+</div>
+<div class="opt">
 <input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;" />
 <label for="sendoption3"><?php echo lang('kalkun_input_manually');?> </label>
+</div>
+<div class="opt">
 <input type="radio" id="sendoption4" name="sendoption" value="sendoption4" style="border: none;" />
 <label for="sendoption4"><?php echo lang('kalkun_compose_import_file');?></label>
+</div>
+</div>
 </td>
 </tr>
     
@@ -144,21 +151,21 @@ else echo lang('kalkun_send_to').":";
 <tr>
 <td align="right" class="label"><?php echo lang('kalkun_sms_validity'); ?></td>
 <td><select size="1" name="validity">
-	<option value="-1">Default</option>
-	<option value="0">5 Min</option>
-	<option value="1">10 Min</option>
-	<option value="5">30 Min</option>
-	<option value="11">1 Hour</option>
-	<option value="23">2 Hour</option>
-	<option value="35">4 Hour</option>
-	<option value="143">12 Hour</option>
-	<option value="167">1 Day</option>
-	<option value="168">2 Day</option>
-	<option value="171">5 Day</option>
-	<option value="173">1 Week</option>
-	<option value="180">2 Week</option>
-	<option value="196">4 Week</option>
-	<option value="255">Maximum</option>
+	<option value="-1"><?php echo lang('kalkun_sms_validity_default'); ?></option>
+	<option value="0"><?php echo lang('kalkun_sms_validity_5min'); ?></option>
+	<option value="1"><?php echo lang('kalkun_sms_validity_10min'); ?></option>
+	<option value="5"><?php echo lang('kalkun_sms_validity_30min'); ?></option>
+	<option value="11"><?php echo lang('kalkun_sms_validity_1h'); ?></option>
+	<option value="23"><?php echo lang('kalkun_sms_validity_2h'); ?></option>
+	<option value="35"><?php echo lang('kalkun_sms_validity_4h'); ?></option>
+	<option value="143"><?php echo lang('kalkun_sms_validity_12h'); ?></option>
+	<option value="167"><?php echo lang('kalkun_sms_validity_1d'); ?></option>
+	<option value="168"><?php echo lang('kalkun_sms_validity_2d'); ?></option>
+	<option value="171"><?php echo lang('kalkun_sms_validity_5d'); ?></option>
+	<option value="173"><?php echo lang('kalkun_sms_validity_1w'); ?></option>
+	<option value="180"><?php echo lang('kalkun_sms_validity_2w'); ?></option>
+	<option value="196"><?php echo lang('kalkun_sms_validity_4w'); ?></option>
+	<option value="255"><?php echo lang('kalkun_sms_validity_max'); ?></option>
 </select></td>
 </tr>
 

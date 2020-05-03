@@ -31,7 +31,6 @@ $lang['kalkun_day'] = "hari";
 $lang['kalkun_hour'] = "jam";
 $lang['kalkun_minute'] = "menit";
 $lang['kalkun_second'] = "detik";
-$lang['kalkun_ago'] = "yang lalu";
 
 // Dashboard
 $lang['kalkun_notification'] = "Pemberitahuan";
@@ -132,6 +131,21 @@ $lang['kalkun_smsc'] = "SMSC";
 $lang['kalkun_sms_part'] = "Bagian";
 $lang['kalkun_sms_part_suffix'] = "bagian pesan";
 $lang['kalkun_sms_validity'] = "Validitas";
+$lang['kalkun_sms_validity_default'] = "default";
+$lang['kalkun_sms_validity_5min'] = "5 minutes";
+$lang['kalkun_sms_validity_10min'] = "10 minutes";
+$lang['kalkun_sms_validity_30min'] = "30 minutes";
+$lang['kalkun_sms_validity_1h'] = "1 hour";
+$lang['kalkun_sms_validity_2h'] = "2 hours";
+$lang['kalkun_sms_validity_4h'] = "4 hours";
+$lang['kalkun_sms_validity_12h'] = "12 hours";
+$lang['kalkun_sms_validity_1d'] = "1 day";
+$lang['kalkun_sms_validity_2d'] = "2 days";
+$lang['kalkun_sms_validity_5d'] = "5 days";
+$lang['kalkun_sms_validity_1w'] = "1 week";
+$lang['kalkun_sms_validity_2w'] = "2 weeks";
+$lang['kalkun_sms_validity_4w'] = "4 weeks";
+$lang['kalkun_sms_validity_max'] = "maximum";
 
 $lang['kalkun_sms_type'] = "SMS Type";
 $lang['kalkun_sms_type_normal'] = "Normal";
@@ -227,6 +241,7 @@ $lang['kalkun_sms_no_member'] = "There is no registered member yet";
 // tni contribution
 $lang['tni_contact_add'] = "Tambah Kontak";
 $lang['tni_send_message'] = "Kirim Pesan";
+$lang['tni_send_and_repeat'] = "Send and Repeat";
 $lang['tni_sending_message'] = "Sedang mengirim";
 $lang['tni_folders_sms'] = "Berkas SMS";
 $lang['tni_name_search'] = "Masukkan nama kontak";
@@ -266,8 +281,10 @@ $lang['tni_compose_msgto_outbox'] = "Pesan telah berada di Outbox<br>dan siap un
 $lang['tni_email_address'] = "Alamat Surel";    
 $lang['tni_email_forward'] = "Aktifkan Terusan Surel";
 $lang['tni_compose_searching'] = "Mencari...";  
-$lang['tni_outbox_sent_time'] = "Beberapa saat yang lalu";  
-$lang['tni_time_remaining'] = "lagi";  
+$lang['kalkun_nicedate_less1min_ago'] = "Beberapa saat yang lalu";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
+$lang['tni_time_remaining'] = "lagi";
 $lang['tni_pbk_edit_contact'] = "Sunting Kontak";  
 $lang['tni_pbk_contact_edited'] = "Kontak berhasil disunting";  
 $lang['tni_pbk_contact_added'] = "Kontak berhasil ditambahkan";  
@@ -322,6 +339,8 @@ $lang['tni_msg_stat_deliv'] = "Tersampaikan";
 $lang['tni_msg_stat_pend'] = "Menunggu";  
 $lang['tni_msg_stat_unknown'] = "Tidak diketahui";  
 
+$lang['tni_set_country_calling_code'] = "Country calling code";
+
 $lang['tni_set_conv_order_old'] = "Terlama lebih dahulu";  
 $lang['tni_set_conv_order_new'] = "Terbaru lebih dahulu";  
 $lang['tni_set_conv_sort'] = "Urutan percakapan";  
@@ -352,6 +371,10 @@ $lang['tni_no'] = "Tidak";
 $lang['tni_default'] = "Default";   
 $lang['tni_set_deliv_report'] = "Laporan Pengiriman"; 
 
+$lang['kalkun_resend_about_to_resend_to'] = "You are about to resend message to <strong>%number%</strong>";
+$lang['kalkun_resend_msg_content'] = "Message content:";
+$lang['kalkun_resend_delete_copy'] = "Delete copy of this message (Prevent Duplicate)";
+$lang['kalkun_resend_about_to_resend_count'] = "You are about to resend %message_count% message(s)";
 
 /* End of file kalkun_lang.php */
 /* Location: ./application/language/bahasa/kalkun_lang.php */

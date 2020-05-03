@@ -1,6 +1,6 @@
 
 <!-- About dialog -->
-<div id="about" title="About Kalkun" class="dialog">
+<div id="about" title="<?php echo lang('kalkun_about');?> Kalkun" class="dialog">
 	<div class="mascot" style="float: left;">
 	<img src="<?php echo $this->config->item('img_path');?>mascot.png" />
 	</div>

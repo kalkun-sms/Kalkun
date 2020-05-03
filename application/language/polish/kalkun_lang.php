@@ -31,7 +31,6 @@ $lang['kalkun_day'] = "dzień";
 $lang['kalkun_hour'] = "godzina";
 $lang['kalkun_minute'] = "minuta";
 $lang['kalkun_second'] = "sekunda";
-$lang['kalkun_ago'] = "temu";
 
 // Dashboard
 $lang['kalkun_notification'] = "Powiadomienia";
@@ -132,6 +131,21 @@ $lang['kalkun_smsc'] = "SMSC";
 $lang['kalkun_sms_part'] = "Część";
 $lang['kalkun_sms_part_suffix'] = "część wiadomości";
 $lang['kalkun_sms_validity'] = "Ważność";
+$lang['kalkun_sms_validity_default'] = "default";
+$lang['kalkun_sms_validity_5min'] = "5 minutes";
+$lang['kalkun_sms_validity_10min'] = "10 minutes";
+$lang['kalkun_sms_validity_30min'] = "30 minutes";
+$lang['kalkun_sms_validity_1h'] = "1 hour";
+$lang['kalkun_sms_validity_2h'] = "2 hours";
+$lang['kalkun_sms_validity_4h'] = "4 hours";
+$lang['kalkun_sms_validity_12h'] = "12 hours";
+$lang['kalkun_sms_validity_1d'] = "1 day";
+$lang['kalkun_sms_validity_2d'] = "2 days";
+$lang['kalkun_sms_validity_5d'] = "5 days";
+$lang['kalkun_sms_validity_1w'] = "1 week";
+$lang['kalkun_sms_validity_2w'] = "2 weeks";
+$lang['kalkun_sms_validity_4w'] = "4 weeks";
+$lang['kalkun_sms_validity_max'] = "maximum";
 
 $lang['kalkun_sms_type'] = "Typ SMS-a";
 $lang['kalkun_sms_type_normal'] = "Zwykły";
@@ -227,6 +241,7 @@ $lang['kalkun_sms_no_member'] = "Brak zarejestrowanych członków";
 // tni contribution
 $lang['tni_contact_add'] = "Dodaj kontakt";
 $lang['tni_send_message'] = "Wyślij wiadomość";
+$lang['tni_send_and_repeat'] = "Send and Repeat";
 $lang['tni_sending_message'] = "Wysyłanie";
 $lang['tni_folders_sms'] = "Foldery SMS";
 $lang['tni_name_search'] = "Wpisz nazwę z grup kontaktów";
@@ -266,7 +281,9 @@ $lang['tni_compose_msgto_outbox'] = "Wiadomość została przeniesiona do skrzyn
 $lang['tni_email_address'] = "Adres e-mail";
 $lang['tni_email_forward'] = "Załącz przekierowanie na e-mail";
 $lang['tni_compose_searching'] = "Wyszukiwanie...";
-$lang['tni_outbox_sent_time'] = "Mniej niż minuta";
+$lang['kalkun_nicedate_less1min_ago'] = "Mniej niż minuta";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
 $lang['tni_time_remaining'] = "pozostało";
 $lang['tni_pbk_edit_contact'] = "Edytuj kontakt";
 $lang['tni_pbk_contact_edited'] = "Kontakt poprawiony";
@@ -322,6 +339,8 @@ $lang['tni_msg_stat_deliv'] = "Dostarczono";
 $lang['tni_msg_stat_pend'] = "Oczekuje";
 $lang['tni_msg_stat_unknown'] = "Nieznany";
 
+$lang['tni_set_country_calling_code'] = "Country calling code";
+
 $lang['tni_set_conv_order_old'] = "Najpierw najstarsze";
 $lang['tni_set_conv_order_new'] = "Najpierw najnowsze";
 $lang['tni_set_conv_sort'] = "Typ sortowania";
@@ -352,6 +371,10 @@ $lang['tni_no'] = "Nie";
 $lang['tni_default'] = "Domyślnie";
 $lang['tni_set_deliv_report'] = "Raport doręczenia";
 
+$lang['kalkun_resend_about_to_resend_to'] = "You are about to resend message to <strong>%number%</strong>";
+$lang['kalkun_resend_msg_content'] = "Message content:";
+$lang['kalkun_resend_delete_copy'] = "Delete copy of this message (Prevent Duplicate)";
+$lang['kalkun_resend_about_to_resend_count'] = "You are about to resend %message_count% message(s)";
 
 /* End of file kalkun_lang.php */
 /* Location: ./application/language/polish/kalkun_lang.php */

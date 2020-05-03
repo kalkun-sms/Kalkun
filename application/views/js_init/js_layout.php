@@ -96,7 +96,7 @@ $(document).ready(function() {
 				});
 				}
 			},
-			"Send and Repeat": function() { 
+			'<?php echo lang('tni_send_and_repeat'); ?>': function() {
 				if($("#composeForm").valid()) {
 				$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 					$("#compose_sms_container").append(data);

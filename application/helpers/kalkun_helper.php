@@ -47,9 +47,6 @@ function nice_date($str, $option=NULL)
 	array('name'=>lang('kalkun_second'), 'amount' => 1)
 	);
 
-	if($timestamp > $now) $string_type = ' remaining';
-	else $string_type = ' '.lang('kalkun_ago');
-
 	$diff = abs($now-$timestamp);
 
 	if($option=='smsd_check')
@@ -60,7 +57,7 @@ function nice_date($str, $option=NULL)
 	{
 		if($diff < 60)
 		{
-			return "Less than a minute ago";
+			return lang('kalkun_nicedate_less1min_ago'); // "Less than a minute ago"
 		}
 		else
 		{
@@ -80,8 +77,14 @@ function nice_date($str, $option=NULL)
 					$current_level+=1;	
 				}
 			}
-			$res = implode(' ',$result).''.$string_type;
-			return $res;
+			$res = implode(' ',$result);
+
+			if ($timestamp > $now) {
+				$text = lang('kalkun_nicedate_remaining');
+			} else {
+				$text = lang('kalkun_nicedate_ago');
+			}
+			return str_replace("%nicedate%", $res, $text);
 		}
 	}	
 }   

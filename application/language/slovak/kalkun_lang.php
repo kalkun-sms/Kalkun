@@ -31,7 +31,6 @@ $lang['kalkun_day'] = "deň";
 $lang['kalkun_hour'] = "hodina";
 $lang['kalkun_minute'] = "minúta";
 $lang['kalkun_second'] = "sekunda";
-$lang['kalkun_ago'] = "pred";
 
 // Dashboard
 $lang['kalkun_notification'] = "Upozornenie";
@@ -132,6 +131,21 @@ $lang['kalkun_smsc'] = "SMSC";
 $lang['kalkun_sms_part'] = "Časť";
 $lang['kalkun_sms_part_suffix'] = "čiastkové správy";
 $lang['kalkun_sms_validity'] = "Platnosť";
+$lang['kalkun_sms_validity_default'] = "default";
+$lang['kalkun_sms_validity_5min'] = "5 minutes";
+$lang['kalkun_sms_validity_10min'] = "10 minutes";
+$lang['kalkun_sms_validity_30min'] = "30 minutes";
+$lang['kalkun_sms_validity_1h'] = "1 hour";
+$lang['kalkun_sms_validity_2h'] = "2 hours";
+$lang['kalkun_sms_validity_4h'] = "4 hours";
+$lang['kalkun_sms_validity_12h'] = "12 hours";
+$lang['kalkun_sms_validity_1d'] = "1 day";
+$lang['kalkun_sms_validity_2d'] = "2 days";
+$lang['kalkun_sms_validity_5d'] = "5 days";
+$lang['kalkun_sms_validity_1w'] = "1 week";
+$lang['kalkun_sms_validity_2w'] = "2 weeks";
+$lang['kalkun_sms_validity_4w'] = "4 weeks";
+$lang['kalkun_sms_validity_max'] = "maximum";
 
 $lang['kalkun_sms_type'] = "SMS Typ";
 $lang['kalkun_sms_type_normal'] = "Normálna";
@@ -227,6 +241,7 @@ $lang['kalkun_sms_no_member'] = "Ešte tu nieje žiaden zaregistrovaný člen";
 // tni contribution
 $lang['tni_contact_add'] = "Pridať kontakt";
 $lang['tni_send_message'] = "Odoslať správu";
+$lang['tni_send_and_repeat'] = "Send and Repeat";
 $lang['tni_sending_message'] = "Odosielanie";
 $lang['tni_folders_sms'] = "SMS adresáre";
 $lang['tni_name_search'] = "Vložte meno z adresára";
@@ -266,8 +281,10 @@ $lang['tni_compose_msgto_outbox'] = "Vaša správa bola presunutá do odosielani
 $lang['tni_email_address'] = "ID e-mailu";    
 $lang['tni_email_forward'] = "Povoliť e-mailové presmerovanie"; 
 $lang['tni_compose_searching'] = "Vyhľadávanie...";  
-$lang['tni_outbox_sent_time'] = "Menej ako minúta";  
-$lang['tni_time_remaining'] = "ostáva";  
+$lang['kalkun_nicedate_less1min_ago'] = "Menej ako minúta";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
+$lang['tni_time_remaining'] = "ostáva";
 $lang['tni_pbk_edit_contact'] = "Upraviť kontakt";  
 $lang['tni_pbk_contact_edited'] = "Kontakt bol upravený";  
 $lang['tni_pbk_contact_added'] = "Kontakt bol pridaný";  
@@ -322,6 +339,8 @@ $lang['tni_msg_stat_deliv'] = "Doručené";
 $lang['tni_msg_stat_pend'] = "Čakanie";  
 $lang['tni_msg_stat_unknown'] = "Neznáme";  
 
+$lang['tni_set_country_calling_code'] = "Country calling code";
+
 $lang['tni_set_conv_order_old'] = "Najstaršie najskôr";  
 $lang['tni_set_conv_order_new'] = "Najnovšie najskôr";  
 $lang['tni_set_conv_sort'] = "Usporiadanie konverzácií";  
@@ -352,6 +371,10 @@ $lang['tni_no'] = "Nie";
 $lang['tni_default'] = "Základné";   
 $lang['tni_set_deliv_report'] = "Oznam o doručení"; 
 
+$lang['kalkun_resend_about_to_resend_to'] = "You are about to resend message to <strong>%number%</strong>";
+$lang['kalkun_resend_msg_content'] = "Message content:";
+$lang['kalkun_resend_delete_copy'] = "Delete copy of this message (Prevent Duplicate)";
+$lang['kalkun_resend_about_to_resend_count'] = "You are about to resend %message_count% message(s)";
 
 /* End of file kalkun_lang.php */
 /* Location: ./application/language/slovak/kalkun_lang.php */

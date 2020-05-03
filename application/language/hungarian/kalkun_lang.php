@@ -32,7 +32,6 @@ $lang['kalkun_day'] = "nap";
 $lang['kalkun_hour'] = "óra";
 $lang['kalkun_minute'] = "perc";
 $lang['kalkun_second'] = "másodperc";
-$lang['kalkun_ago'] = "ezelőtt";
 
 // Dashboard
 $lang['kalkun_notification'] = "Figyelmeztetés";
@@ -133,6 +132,21 @@ $lang['kalkun_smsc'] = "SMSC";
 $lang['kalkun_sms_part'] = "Rész";
 $lang['kalkun_sms_part_suffix'] = "rész üzenetek";
 $lang['kalkun_sms_validity'] = "Érvényesség";
+$lang['kalkun_sms_validity_default'] = "default";
+$lang['kalkun_sms_validity_5min'] = "5 minutes";
+$lang['kalkun_sms_validity_10min'] = "10 minutes";
+$lang['kalkun_sms_validity_30min'] = "30 minutes";
+$lang['kalkun_sms_validity_1h'] = "1 hour";
+$lang['kalkun_sms_validity_2h'] = "2 hours";
+$lang['kalkun_sms_validity_4h'] = "4 hours";
+$lang['kalkun_sms_validity_12h'] = "12 hours";
+$lang['kalkun_sms_validity_1d'] = "1 day";
+$lang['kalkun_sms_validity_2d'] = "2 days";
+$lang['kalkun_sms_validity_5d'] = "5 days";
+$lang['kalkun_sms_validity_1w'] = "1 week";
+$lang['kalkun_sms_validity_2w'] = "2 weeks";
+$lang['kalkun_sms_validity_4w'] = "4 weeks";
+$lang['kalkun_sms_validity_max'] = "maximum";
 
 $lang['kalkun_sms_type'] = "SMS Típus";
 $lang['kalkun_sms_type_normal'] = "Normál";
@@ -228,6 +242,7 @@ $lang['kalkun_sms_no_member'] = "Még nincs regisztrált tag";
 // tni contribution
 $lang['tni_contact_add'] = "Kapcsolat hozzáadása";
 $lang['tni_send_message'] = "Üzenet küldése";
+$lang['tni_send_and_repeat'] = "Send and Repeat";
 $lang['tni_sending_message'] = "Küldés";
 $lang['tni_folders_sms'] = "SMS mappák";
 $lang['tni_name_search'] = "Név beszúrása a kapcsolati listából";
@@ -267,8 +282,10 @@ $lang['tni_compose_msgto_outbox'] = "Üzenetét áthelyeztük a Kimenő mappába
 $lang['tni_email_address'] = "Email ID";    
 $lang['tni_email_forward'] = "Email továbbítás engedélyezése";
 $lang['tni_compose_searching'] = "Keresés...";  
-$lang['tni_outbox_sent_time'] = "Kevesebb, mint egy perccel ezelőtt...";  
-$lang['tni_time_remaining'] = "hátralévő";  
+$lang['kalkun_nicedate_less1min_ago'] = "Kevesebb, mint egy perccel ezelőtt...";
+$lang['kalkun_nicedate_remaining'] = "%nicedate% remaining";
+$lang['kalkun_nicedate_ago'] = "%nicedate% ago";
+$lang['tni_time_remaining'] = "hátralévő";
 $lang['tni_pbk_edit_contact'] = "Kapcsolat szerkesztése";  
 $lang['tni_pbk_contact_edited'] = "A kapcsolat szerkesztve";  
 $lang['tni_pbk_contact_added'] = "Kapcsolat hozzáadva";  
@@ -323,6 +340,8 @@ $lang['tni_msg_stat_deliv'] = "Elküldve";
 $lang['tni_msg_stat_pend'] = "Függőben";  
 $lang['tni_msg_stat_unknown'] = "Ismeretlen";  
 
+$lang['tni_set_country_calling_code'] = "Country calling code";
+
 $lang['tni_set_conv_order_old'] = "Legrégebbi előre";  
 $lang['tni_set_conv_order_new'] = "Legújabb előre";  
 $lang['tni_set_conv_sort'] = "Üzenetek rendezése";  
@@ -353,6 +372,10 @@ $lang['tni_no'] = "Nem";
 $lang['tni_default'] = "Alapértelmezett";   
 $lang['tni_set_deliv_report'] = "Kézbesítési jelentés"; 
 
+$lang['kalkun_resend_about_to_resend_to'] = "You are about to resend message to <strong>%number%</strong>";
+$lang['kalkun_resend_msg_content'] = "Message content:";
+$lang['kalkun_resend_delete_copy'] = "Delete copy of this message (Prevent Duplicate)";
+$lang['kalkun_resend_about_to_resend_count'] = "You are about to resend %message_count% message(s)";
 
 /* End of file kalkun_lang.php */
 /* Location: ./application/language/english/kalkun_lang.php */
