@@ -264,7 +264,7 @@ class Kalkun extends MY_Controller {
 		if($_POST && $type=='save') { 		
 			$option = $this->input->post('option');
 			// check password
-			if($option=='password' && sha1($this->input->post('current_password'))!=$this->Kalkun_model->get_setting()->row('password')) 
+			if($option=='password' && !password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password'))) 
 			{
 				$this->session->set_flashdata('notif', 'You entered wrong password');
 				redirect('settings/'.$option);

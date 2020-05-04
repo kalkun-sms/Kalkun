@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `realname`, `password`, `phone_number`, `level`) VALUES
-(1, 'kalkun', 'Kalkun SMS', 'f0af18413d1c9e0366d8d1273160f55d5efeddfe', '123456789', 'admin');
+(1, 'kalkun', 'Kalkun SMS', '$2y$10$Sg0IxngRIIp1qNITM8kWa.aJ26w58F97ByTzDKoRF/dyzKcLfx226', '123456789', 'admin');
 
 
 -- --------------------------------------------------------

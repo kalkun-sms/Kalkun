@@ -81,7 +81,7 @@ class User_model extends CI_Model {
 		}
 		else 
 		{
-			$this->db->set('password', sha1($this->input->post('password')));
+			$this->db->set('password', password_hash($this->input->post('password'), PASSWORD_BCRYPT));
 			$this->db->insert('user');
 			
 			// user_settings
