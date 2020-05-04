@@ -205,8 +205,8 @@ class Phonebook_model extends CI_Model {
 		$this->db->select('Number as id');
 		$this->db->select('Name as name');
 		$this->db->where("({$this->_protect_identifiers('id_user')} = '{$param['uid']}'  OR {$this->_protect_identifiers('is_public')} = 'true' )");
-		$this->db->like('Name', $param['query']);
-		$this->db->order_by('Name');		
+		$this->db->like('LOWER('.$this->db->protect_identifiers('Name').')', strtolower($param['query']));
+		$this->db->order_by('Name');
 		return $this->db->get();
 	}
 
