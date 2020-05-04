@@ -35,10 +35,8 @@ class Kalkun_model extends CI_Model {
 	function login()
 	{
 		$username = $this->input->post('username');
-		$password = sha1($this->input->post('password'));
 		$this->db->from('user');
 		$this->db->where('username', $username);
-		$this->db->where('password', $password);
 		$query = $this->db->get();
 
 		$this->session->set_flashdata('bef_login_history_count',
@@ -50,7 +48,7 @@ class Kalkun_model extends CI_Model {
 		$this->session->set_flashdata('bef_login_post_data',
 			$this->session->flashdata('bef_login_post_data'));
 
-		if($query->num_rows()=='1') {
+		if($query->num_rows()=='1' && password_verify($this->input->post('password'), $query->row('password'))) {
 			$this->session->set_userdata('loggedin', 'TRUE');
 			$this->session->set_userdata('level', $query->row('level'));
 			$this->session->set_userdata('id_user', $query->row('id_user'));
@@ -335,7 +333,7 @@ class Kalkun_model extends CI_Model {
 			break;
 			
 			case 'password':
-				$this->db->set('password', sha1($this->input->post('new_password')));
+				$this->db->set('password', password_hash($this->input->post('new_password'), PASSWORD_BCRYPT));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user');				
 			break;
@@ -367,7 +365,7 @@ class Kalkun_model extends CI_Model {
 	 */	
     function update_password($uid = NULL)
 	{
-		$this->db->set('password', sha1($this->input->post('new_password')));
+		$this->db->set('password', password_hash($this->input->post('new_password'), PASSWORD_BCRYPT));
 		$this->db->where('id_user', $uid);
 		$this->db->update('user');
 	}
