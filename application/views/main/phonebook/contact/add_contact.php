@@ -18,7 +18,7 @@ $(document).ready(function() {
     var grp_data = "<?php echo $grouptext?>".split(";");
     $('#groups').tagsInput({
         'autocomplete_url' : grp_data,
-        'autocomplete':{matchContains:false},
+        'autocomplete':{matchContains:false, minChars:0},
         'height':'50px',
         'width':'270px',
        'defaultText':'<?php echo lang("tni_group_select");?>'
