@@ -879,7 +879,7 @@ class Messages extends MY_Controller {
 			$param_needed = 4; // minimal count of segment
 			if($segment_count>=$param_needed)
 			{
-				if ($segment[4]!='_') $param['search_string'] = $segment[4];
+				if ($segment[4]!='_') $param['search_string'] = urldecode($segment[4]);
 				$data['search_string'] = $segment[4];
 				$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;	
 				$config['uri_segment'] = $param_needed+1;
@@ -896,7 +896,7 @@ class Messages extends MY_Controller {
 			$param_needed = 10;
 			if($segment_count>=$param_needed)
 			{
-				if ($segment[4]!='_') $param['search_string'] = $segment[4];
+				if ($segment[4]!='_') $param['search_string'] = urldecode($segment[4]);
 				if ($segment[5]!='_') $param['number'] = $segment[5];
 				if ($segment[6]!='_') $param['date_from'] = $segment[6];
 				if ($segment[7]!='_') $param['date_to'] = $segment[7];
