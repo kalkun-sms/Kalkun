@@ -251,7 +251,11 @@ class Gammu_model extends CI_Model {
 		$udh_where = "(".$this->_protect_identifiers("UDH")." = '' OR ".$this->_protect_identifiers("UDH")." LIKE '%1')";
 		$this->db->where($udh_where, NULL, FALSE);				
 		
-        if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
+		if(isset($options['search_string']))
+		{
+			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $options['search_string'])));
+			$this->db->like('LOWER('.$this->db->protect_identifiers('TextDecoded').')', $search_word);
+		}
 		
 		// if phone number is set
 		if(isset($options['number'])) $this->db->like($tmp_number, $options['number']);
@@ -297,7 +301,11 @@ class Gammu_model extends CI_Model {
 		$tmp_order = 'SendingDateTime';	
         $this->db->where('SequencePosition', '1');		
 			
-		if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
+		if(isset($options['search_string']))
+		{
+			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $options['search_string'])));
+			$this->db->like('LOWER('.$this->db->protect_identifiers('TextDecoded').')', $search_word);
+		}
 		
 		// if phone number is set
 		if(isset($options['number'])) $this->db->like($tmp_number, $options['number']);
@@ -451,7 +459,11 @@ class Gammu_model extends CI_Model {
 		}
          
         //if search string is set
-		if(isset($options['search_string'])) $this->db->like('TextDecoded', $options['search_string']);
+		if(isset($options['search_string']))
+		{
+			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $options['search_string'])));
+			$this->db->like('LOWER('.$this->db->protect_identifiers('TextDecoded').')', $search_word);
+		}
 		
 		// if phone number is set
 		if(isset($options['number']) AND $options['number']!='sending_error') $this->db->where_in($tmp_number, $arr_number);

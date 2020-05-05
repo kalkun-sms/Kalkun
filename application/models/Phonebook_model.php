@@ -128,11 +128,14 @@ class Phonebook_model extends CI_Model {
 			break;
 			
 			case 'search':
+			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $this->input->post('search_name'))));
 			$this->db->select('*');
 			$this->db->select('ID as id_pbk');
 			$this->db->from('pbk');
 			$condition1 = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";
-			$condition2 = "({$this->_protect_identifiers('Name')} LIKE '%{$this->input->post('search_name')}%' OR {$this->_protect_identifiers('Number')} LIKE '%{$this->input->post('search_name')}%')";
+			$condition2_part1 = "LOWER(".$this->db->protect_identifiers('Name').") LIKE '%".$search_word."%'";
+			$condition2_part2 = "LOWER(".$this->db->protect_identifiers('Number').") LIKE '%".$search_word."%'";
+			$condition2 = "($condition2_part1 OR $condition2_part2)";
 			$this->db->where($condition1, NULL, FALSE);
 			$this->db->where($condition2, NULL, FALSE);
 			$this->db->order_by('Name');
@@ -201,11 +204,12 @@ class Phonebook_model extends CI_Model {
 	 */		
 	function search_phonebook($param)	
 	{
+		$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $param['query'])));
 		$this->db->from('pbk');
 		$this->db->select('Number as id');
 		$this->db->select('Name as name');
 		$this->db->where("({$this->_protect_identifiers('id_user')} = '{$param['uid']}'  OR {$this->_protect_identifiers('is_public')} = 'true' )");
-		$this->db->like('LOWER('.$this->db->protect_identifiers('Name').')', strtolower($param['query']));
+		$this->db->like('LOWER('.$this->db->protect_identifiers('Name').')', $search_word);
 		$this->db->order_by('Name');
 		return $this->db->get();
 	}
@@ -219,13 +223,14 @@ class Phonebook_model extends CI_Model {
 	 * @param	mixed $param
 	 * @return	object
 	 */		
-	function search_group($param)	
+	function search_group($param)
 	{
+		$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $param['query'])));
 		$this->db->from('pbk_groups');
 		$this->db->select('ID as id');
 		$this->db->select('Name as name');
 		$this->db->where("({$this->_protect_identifiers('pbk_groups')}.{$this->_protect_identifiers('id_user')} = '{$param['uid']}'  OR {$this->_protect_identifiers('is_public')} = 'true' )");
-		$this->db->like('Name', $param['query']);
+		$this->db->like('LOWER('.$this->db->protect_identifiers('Name').')', $search_word);
 		$this->db->order_by('Name');
 		$this->db->join('user_group', 'user_group.id_pbk_groups=pbk_groups.ID');
 		$this->db->group_by('Name');
