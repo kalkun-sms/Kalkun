@@ -50,7 +50,8 @@ class User_model extends CI_Model {
 			break;
 
 			case 'search':
-			$this->db->like('realname', $this->input->post('search_name'));
+			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $this->input->post('search_name'))));
+			$this->db->like('LOWER('.$this->db->protect_identifiers('realname').')', $search_word);
 			break;			
 		}
 		$this->db->order_by('realname');
@@ -130,9 +131,10 @@ class User_model extends CI_Model {
 	 */
 	 function search_user($realname)
 	 {
+		$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $realname)));
 		$this->db->from('user_settings');
 		$this->db->join('user', 'user.id_user = user_settings.id_user');
-	 	$this->db->like('realname', $realname);
+		$this->db->like('LOWER('.$this->db->protect_identifiers('realname').')', $search_word);
 		$this->db->order_by('realname');
 		return $this->db->get();
 	 }
