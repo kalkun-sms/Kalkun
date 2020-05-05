@@ -173,7 +173,7 @@ $lang['kalkun_compose_send_as_unicode'] = "Envoyer au format Unicode";
 $lang['kalkun_compose_times'] = "Temps";
 $lang['kalkun_compose_hour'] = "Heure";
 $lang['kalkun_compose_minutes'] = "Minutes";
-$lang['kalkun_no_message_search'] = "Oops! Votre requéte ne correspond à aucun dossier";
+$lang['kalkun_no_message_search'] = "Oops! Votre requête ne correspond à aucun dossier";
 $lang['tni_see_conversation'] = "Voir la conversation";
 
 $lang['kalkun_search'] = "Rechercher";
