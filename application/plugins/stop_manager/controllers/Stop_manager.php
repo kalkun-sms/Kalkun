@@ -97,7 +97,7 @@ class Stop_manager extends Plugin_Controller {
 
     function delete($from, $type)
     {
-        $this->Stop_manager_model->delete($from, $type);
+        $this->Stop_manager_model->delete(base64_decode(urldecode($from)), base64_decode(urldecode($type)));
         redirect('plugin/stop_manager');
     }
 }
