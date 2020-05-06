@@ -63,7 +63,15 @@ class Stop_manager_model extends CI_Model {
 
     function get_num_for_type($type)
     {
-        return $this->db->query("select distinct(destination_number) from plugin_stop_manager where stop_type ilike '$type'");
+        // Query is:
+        // SELECT DISTINCT(destination_number)
+        // FROM plugin_stop_manager
+        // WHERE LOWER("stop_type") = LOWER('$type')"
+
+        $this->db->distinct();
+        $this->db->select('destination_number');
+        $this->db->where('LOWER('.$this->db->protect_identifiers('stop_type').')', strtolower(str_replace("'", "''", $type)));
+        return $this->db->get('plugin_stop_manager');
     }
 
     function add($number, $type, $msg)
