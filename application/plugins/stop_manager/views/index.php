@@ -42,7 +42,7 @@
                 <td class="reg_date"><?php echo $tmp->reg_date;?></td>
                 <td class="nice-table-right">
                 <?php if ($tmp->destination_number && $tmp->stop_type) { ?>
-                    <a href="<?php echo site_url();?>/plugin/stop_manager/delete/<?php echo $tmp->destination_number;?>/<?php echo $tmp->stop_type;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a>
+                    <a href="<?php echo site_url();?>/plugin/stop_manager/delete/<?php echo urlencode(base64_encode($tmp->destination_number));?>/<?php echo urlencode(base64_encode($tmp->stop_type));?>"><img class="ui-icon ui-icon-close" title="Delete" /></a>
                 <?php } ?>
                 </td>
             </tr>

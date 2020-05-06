@@ -79,7 +79,7 @@ class Stop_manager_model extends CI_Model {
 
     function delete($number, $type)
     {
-        $this->db->delete('plugin_stop_manager', array('destination_number' => trim($number), 'stop_type' => trim(urldecode($type))));
+        $this->db->delete('plugin_stop_manager', array('destination_number' => trim($number), 'stop_type' => trim($type)));
     }
 }
 
