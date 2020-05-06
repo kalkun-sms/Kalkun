@@ -357,14 +357,15 @@ class Messages extends MY_Controller {
 		{
 			$ads_message = $this->config->item('sms_advertise_message');
 			$data['message'] .= "\n".$ads_message;
-		}			
+		}
 
-		// // if disable outgoing
-        if($this->config->item('disable_outgoing'))
-        {
-        	unset($dest);
-            $return_msg = '<div class="notif">'.lang('kalkun_msg_outgoing_disabled').'</div>';
-        }			
+		// if disable outgoing
+		if($this->config->item('disable_outgoing'))
+		{
+			unset($dest);
+			$return_msg['type'] = 'error';
+			$return_msg['msg'] = lang('kalkun_msg_outgoing_disabled');
+		}
 			
   	    // if ndnc filtering enabled
         $ndnc_msg = '';
@@ -378,7 +379,8 @@ class Messages extends MY_Controller {
                         if(DNDcheck($dest[$i]))
                         {
                             unset($dest[$i]);
-                            $return_msg = '<font color="red">'.lang('kalkun_msg_number_in_DND').'</font><br>' ;
+                            $return_msg['type'] = 'error';
+                            $return_msg['msg'] = lang('kalkun_msg_number_in_DND');
                         }
                     }
                 }
@@ -386,7 +388,8 @@ class Messages extends MY_Controller {
                         if(DNDcheck($dest))
                         {
                             unset($dest);
-                            $return_msg = '<font color="red">'.lang('kalkun_msg_number_in_DND').'</font><br>' ;
+                            $return_msg['type'] = 'error';
+                            $return_msg['msg'] = lang('kalkun_msg_number_in_DND');
                         }
                 }
             }
@@ -422,7 +425,8 @@ class Messages extends MY_Controller {
 			{
 				$msg_id = $this->Message_model->copy_message($this->input->post('msg_id'));
 				$this->Message_model->update_owner($msg_id, $id);
-				$return_msg = '<div class="notif">'.lang('kalkun_msg_delivered_to_user_inbox').'</div>';
+				$return_msg['type'] = 'info';
+				$return_msg['msg'] = lang('kalkun_msg_delivered_to_user_inbox');
 			}
 		}
 		
@@ -468,16 +472,41 @@ class Messages extends MY_Controller {
 				$data['message'] = $backup['message'];
 				$n++;
 			}
-			$return_msg = '<div class="notif">'.lang('kalkun_msg_moved_to_outbox').'</div>';
+			$return_msg['type'] = 'info';
+			$return_msg['msg'] = lang('kalkun_msg_moved_to_outbox');
 		}
-        if(!isset($return_msg))
-             $return_msg = '<div class="notif"><font color="red">'.lang('kalkun_msg_no_numberfound').'</font></div>' ;
+		if(!isset($return_msg))
+		{
+			$return_msg['type'] = 'error';
+			$return_msg['msg'] = lang('kalkun_msg_no_numberfound');
+		}
 
 		// Display sending status
-		echo $return_msg;
+		switch ($return_msg['type'])
+		{
+			case 'error':
+				echo '<div class="notif" style="color:red">'.$return_msg['msg'].'</div>';
+				break;
+			case 'info':
+			default:
+				echo '<div class="notif">'.$return_msg['msg'].'</div>';
+				break;
+		}
 
 		if ($this->input->post('redirect_to_form_result') == "1")
-			redirect('info_message/index/'.urlencode(base64_encode($return_msg)));
+		{
+			switch ($return_msg['type'])
+			{
+				case 'error':
+					$this->session->set_flashdata('notif', '<span style="color:red">'.$return_msg['msg'].'</span>');
+					break;
+				case 'info':
+				default:
+					$this->session->set_flashdata('notif', $return_msg['msg']);
+					break;
+			}
+			redirect('messages/folder/outbox/');
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -555,7 +584,7 @@ class Messages extends MY_Controller {
 			$this->pagination->initialize($config); 
 	
 			$data['main'] = 'main/messages/index';
-			$this->load->view('main/layout', $data);			
+			$this->load->view('main/layout', $data);
 		}
 	}
 	
