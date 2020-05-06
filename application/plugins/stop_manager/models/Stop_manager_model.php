@@ -68,13 +68,39 @@ class Stop_manager_model extends CI_Model {
 
     function add($number, $type, $msg)
     {
-        $data = array (
-                'destination_number' => trim($number),
-                'stop_type' => trim($type),
+        $this->db->where('destination_number', trim($number));
+        $this->db->where('stop_type', trim($type));
+        $q = $this->db->get('plugin_stop_manager');
+        $this->db->reset_query();
+
+        if ($q->num_rows() == 1)
+        {
+            // do UPDATE (there is already a row)
+            $data = array (
                 'stop_message' => trim($msg),
                 'reg_date' => date ('Y-m-d H:i:s'),
-                    );
-        $this->db->insert('plugin_stop_manager',$data);
+            );
+            $this->db->where('destination_number', trim($number));
+            $this->db->where('stop_type', trim($type));
+            $this->db->update('plugin_stop_manager', $data);
+        }
+        else
+        {
+            if ( $q->num_rows() > 1 )
+            {
+                // do DELETE (there is more than 1 row, so remove them)
+                $this->delete($number, $type);
+            }
+
+            // do INSERT (there is no record for this (number;type))
+            $data = array (
+                    'destination_number' => trim($number),
+                    'stop_type' => trim($type),
+                    'stop_message' => trim($msg),
+                    'reg_date' => date ('Y-m-d H:i:s'),
+            );
+            $this->db->insert('plugin_stop_manager',$data);
+        }
     }
 
     function delete($number, $type)
