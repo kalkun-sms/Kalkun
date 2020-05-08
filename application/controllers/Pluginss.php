@@ -32,7 +32,7 @@ class Pluginss extends MY_Controller {
         // Prevent non-admin user
         if($this->session->userdata('level') != 'admin')
         {
-            $this->session->set_flashdata('notif', 'Only administrator can manage plugin');
+            $this->session->set_flashdata('notif', lang('pluginss_only_admin_can_manage'));
             redirect('/');
         }
 
@@ -58,12 +58,12 @@ class Pluginss extends MY_Controller {
 		$data['type'] = $type;
 		if($type=='installed')
 		{
-			$data['title'].= " - Installed";
+			$data['title'].= lang('pluginss_installed');
 			$data['plugins'] = $this->Plugin_model->get_plugins()->result_array();	
 		}
 		else
 		{
-			$data['title'].= " - Available";
+			$data['title'].= lang('pluginss_available');
 			$pluginsObj = new Plugins();
 			$plugins = get_available_plugin();
 			$no = 0;
@@ -111,7 +111,7 @@ class Pluginss extends MY_Controller {
 	function install($plugin_name)
 	{
 		activate_plugin($plugin_name);
-		$this->session->set_flashdata('notif', 'Plugin '.$plugin_name.' successfully installed');
+		$this->session->set_flashdata('notif', str_replace("%plugin_name%", $plugin_name, lang('pluginss_successfully_installed'));
 		redirect('pluginss');
 	}
 
@@ -127,7 +127,7 @@ class Pluginss extends MY_Controller {
 	function uninstall($plugin_name)
 	{
 		deactivate_plugin($plugin_name);
-		$this->session->set_flashdata('notif', 'Plugin '.$plugin_name.' successfully uninstalled');
+		$this->session->set_flashdata('notif', str_replace("%plugin_name%", $plugin_name, lang('pluginss_successfully_uninstalled'));
 		redirect('pluginss');		
 	}
 

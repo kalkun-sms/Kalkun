@@ -284,7 +284,7 @@ class Phonebook extends MY_Controller {
 			$n++;
 		endforeach;
 		
-		$this->session->set_flashdata('notif', $n.' contacts successfully imported');
+		$this->session->set_flashdata('notif', str_replace("%count%", $n, lang('pbk_successfully_imported')));
 		redirect('phonebook');		 
 	}
 
@@ -340,10 +340,10 @@ class Phonebook extends MY_Controller {
 		if($this->input->post('editid_pbk'))
 		{
 			$pbk['id_pbk'] = $this->input->post('editid_pbk');
-			$msg = "<div class=\"notif\">Contact has been updated.</div>";
+			$msg = '<div class="notif">'.lang('pbk_contact_updated').'</div>';
 		}
 		else
-			$msg = "<div class=\"notif\">Contact has been added.</div>";
+			$msg = '<div class="notif">'.lang('pbk_contact_added').'</div>';
 			
 		$this->Phonebook_model->add_contact($pbk);
 		echo $msg;

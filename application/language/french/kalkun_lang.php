@@ -204,8 +204,8 @@ $lang['kalkun_delete_all_message_now'] = "Supprimer tous les messages";
 $lang['kalkun_contact_del_title'] = "Confirmation de la suppression du contact";
 $lang['kalkun_compose_valid_url'] = "L'URL doit étre valide";
 $lang['kalkun_compose_import_file'] = "Importer à partir du fichier";
-$lang['kalkun_compose_counter_character'] = "caractères";
-$lang['kalkun_compose_counter_message'] = "message";
+$lang['kalkun_compose_counter_character'] = "caractère(s)";
+$lang['kalkun_compose_counter_message'] = "message(s)";
 
 // Messages controller
 $lang['kalkun_msg_login_success_data_lost'] = "Login réussi. Mais données %s perdues durant le processus de login.";
@@ -358,7 +358,6 @@ $lang['tni_set_general'] = "Général";
 $lang['tni_set_personal'] = "Personnel";  
 $lang['tni_set_appearance'] = "Apparence";  
 
-
 $lang['tni_signature']  = "Signature";  
 $lang['tni_signature_off']  = "Signature désactivée";  
 $lang['tni_signature_on']  = "Signature activée";  
@@ -375,6 +374,30 @@ $lang['kalkun_resend_about_to_resend_to'] = "Vous êtes sur le point de renvoyer
 $lang['kalkun_resend_msg_content'] = "Contenu du message:";
 $lang['kalkun_resend_delete_copy'] = "Supprimer la copie de ce message (évite les doublons)";
 $lang['kalkun_resend_about_to_resend_count'] = "Vous êtes sur le point de renvoyer %message_count% message(s)";
+
+// Kalkun Controller
+$lang['kalkun_outgoing_sms_disabled_contact_sysadmin'] = "SMS sortants désactivés. Contactez l'administrateur système";
+$lang['kalkun_wrong_password'] = "Mot de passe incorrect";
+$lang['kalkun_username_exists'] = "Le nom d'utilisateur existe déjà";
+$lang['kalkun_settings_saved'] = "Paramètres sauvegardés";
+// Users Controller
+$lang['users_access_denied'] = "Accès refusé";
+$lang['users_updated'] = "Utilisateur mis à jour";
+$lang['users_added'] = "Utilisateur ajouté";
+// Pluginss Controller
+$lang['pluginss_only_admin_can_manage'] = "Seul un administrateur peut gérer les plugins";
+$lang['pluginss_successfully_installed'] = "Plugin %plugin_name% installé avec succès";
+$lang['pluginss_successfully_uninstalled'] = "Plugin %plugin_name% désinstallé avec succès";
+$lang['pluginss_installed'] = " - Installés";
+$lang['pluginss_available'] = " - Displonibles";
+// Phonebook Controller
+$lang['pbk_successfully_imported'] = "%count% contacts importés avec succès";
+$lang['pbk_contact_updated'] = "Contact mis à jour";
+$lang['pbk_contact_added'] = "Contact ajouté";
+// Gammu Model
+$lang['gammu_could_not_send_msg_gammu_path_incorrect'] = "Le message n'a pu être envoyé. Assurez-vous que le chemin vers Gammu est correctement défini";
+$lang['gammu_msg_queued'] = "Message mis en file d'attente";
+$lang['gammu_parameter_invalid'] = "Paramètre invalide";
 
 /* End of file kalkun_lang.php */
 /* Location: ./application/language/french/kalkun_lang.php */

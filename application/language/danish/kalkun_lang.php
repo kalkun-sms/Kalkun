@@ -358,7 +358,6 @@ $lang['tni_set_general'] = "Generel";
 $lang['tni_set_personal'] = "Personlig";  
 $lang['tni_set_appearance'] = "Udseende";  
 
-
 $lang['tni_signature']  = "Signatur";  
 $lang['tni_signature_off']  = "Slå signatur til";  
 $lang['tni_signature_on']  = "Slå signature fra";  
@@ -371,6 +370,34 @@ $lang['tni_no'] = "Nej";
 $lang['tni_default'] = "Standard";   
 $lang['tni_set_deliv_report'] = "Afleveringsrapport"; 
 
+$lang['kalkun_resend_about_to_resend_to'] = "You are about to resend message to <strong>%number%</strong>";
+$lang['kalkun_resend_msg_content'] = "Message content:";
+$lang['kalkun_resend_delete_copy'] = "Delete copy of this message (Prevent Duplicate)";
+$lang['kalkun_resend_about_to_resend_count'] = "You are about to resend %message_count% message(s)";
+
+// Kalkun Controller
+$lang['kalkun_outgoing_sms_disabled_contact_sysadmin'] = "Outgoing SMS Disabled. Contact System Administrator";
+$lang['kalkun_wrong_password'] = "You entered wrong password";
+$lang['kalkun_username_exists'] = "Username already exists";
+$lang['kalkun_settings_saved'] = "Your settings have been saved";
+// Users Controller
+$lang['users_access_denied'] = "Access denied";
+$lang['users_updated'] = "User has been updated";
+$lang['users_added'] = "User has been added";
+// Pluginss Controller
+$lang['pluginss_only_admin_can_manage'] = "Only administrators can manage plugins";
+$lang['pluginss_successfully_installed'] = "Plugin %plugin_name% successfully installed";
+$lang['pluginss_successfully_uninstalled'] = "Plugin %plugin_name% successfully uninstalled";
+$lang['pluginss_installed'] = " - Installed";
+$lang['pluginss_available'] = " - Available";
+// Phonebook Controller
+$lang['pbk_successfully_imported'] = "%count% contacts successfully imported";
+$lang['pbk_contact_updated'] = "Contact has been updated";
+$lang['pbk_contact_added'] = "Contact has been added";
+// Gammu Model
+$lang['gammu_could_not_send_msg_gammu_path_incorrect'] = "Could not send message. Make sure Gammu path is correctly set";
+$lang['gammu_msg_queued'] = "Message queued";
+$lang['gammu_parameter_invalid'] = "Parameter invalid";
 
 /* End of file kalkun_lang.php */
 /* Location: ./application/language/danish/kalkun_lang.php */

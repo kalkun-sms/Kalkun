@@ -51,20 +51,20 @@ class Gammu_model extends CI_Model {
             $insert_id = $matches[1];
             if(empty($insert_id))
             {
-                die( "<div class=\"notif\"><font color='red'>Could Not Send Message. Make Sure Gammu Path is correctly set.</font></div>");
-                $f_ret = array('status' => 'Could Not Send Message. Make Sure Gammu Path is correctly set.'); //FIXME
+                die( '<div class="notif" style="color:red">'.lang('gammu_could_not_send_msg_gammu_path_incorrect').'</div>');
+                $f_ret = array('status' => lang('gammu_could_not_send_msg_gammu_path_incorrect')); //FIXME
             }
             else
             {
                 $this->db->update('outbox', array('SendingDateTime' => $data['date']), "ID = $insert_id" );
                 $this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
-                $f_ret = array('status' => 'Message queued');
+                $f_ret = array('status' => lang('gammu_msg_queued') );
             }
 		}
 		else 
 		{
-			echo 'Parameter invalid';
-			$f_ret = array('status' => 'Parameter invalid');
+			echo lang('gammu_parameter_invalid');
+			$f_ret = array('status' => lang('gammu_parameter_invalid'));
 		}
 		return $f_ret;
     }

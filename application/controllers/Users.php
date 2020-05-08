@@ -33,7 +33,7 @@ class Users extends MY_Controller
 		// check level
 		if($this->session->userdata('level')!='admin')
 		{
-			$this->session->set_flashdata('notif', 'Access denied');
+			$this->session->set_flashdata('notif', lang('users_access_denied'));
 			redirect('/');
 		}
 		
@@ -105,8 +105,8 @@ class Users extends MY_Controller
 	function add_user_process()
 	{
 		$this->User_model->adduser();
-		if($this->input->post('id_user')) echo "<div class=\"notif\">User has been updated.</div>";
-		else echo "<div class=\"notif\">User has been added.</div>";
+		if($this->input->post('id_user')) echo '<div class="notif">'.lang('users_updated').'</div>';
+		else echo '<div class="notif">'.lang('users_added').'</div>';
 	}	
 
 	// --------------------------------------------------------------------
