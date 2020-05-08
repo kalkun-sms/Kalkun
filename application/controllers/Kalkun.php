@@ -47,7 +47,7 @@ class Kalkun extends MY_Controller {
         $data['data_url'] = site_url('kalkun/get_statistic');
         if($this->config->item('disable_outgoing'))
         {
-          $data['alerts'][] = "<div class=\"warning\">Outgoing SMS Disabled. Contact System Administrator</div>";
+          $data['alerts'][] = '<div class="warning">'.lang('kalkun_outgoing_sms_disabled_contact_sysadmin').'</div>';
         }
 		$this->load->view('main/layout', $data);
 	}
@@ -266,7 +266,7 @@ class Kalkun extends MY_Controller {
 			// check password
 			if($option=='password' && !password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password'))) 
 			{
-				$this->session->set_flashdata('notif', 'You entered wrong password');
+				$this->session->set_flashdata('notif', lang('kalkun_wrong_password'));
 				redirect('settings/'.$option);
 			}
 			else if($option=='personal') 
@@ -275,13 +275,13 @@ class Kalkun extends MY_Controller {
 				{
 					if($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows>0) 
 					{
-						$this->session->set_flashdata('notif', 'Username already exist');
+						$this->session->set_flashdata('notif', lang('kalkun_username_exists'));
 						redirect('settings/'.$option);					
 					}
 				}
 			}
 			$this->Kalkun_model->update_setting($option);
-			$this->session->set_flashdata('notif', 'Your settings has been saved');
+			$this->session->set_flashdata('notif', lang('kalkun_settings_saved'));
 			redirect('settings/'.$option);
 		}
 
