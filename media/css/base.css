@@ -607,12 +607,16 @@ textarea {
 }
 
 .good{
-    color:green;
-    text-shadow: #FFFFFF 0px 0px 2px;
+    color:rgb(14, 202, 14);
+    /*text-shadow: #FFFFFF 0px 0px 2px;*/
 }
 
 .warning {
-	color: red;
+	color: rgb(233, 7, 7);
+}
+
+.yellow {
+	color: rgb(224, 224, 75);
 }
 
 .notif {
