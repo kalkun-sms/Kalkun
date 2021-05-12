@@ -138,10 +138,10 @@ class Kalkun extends MY_Controller {
         $yout = array_values($yout);
         $yin = array_values($yin);
         $points = count($x)-1;
-		$this->_render_statistic($x, $yout,  $yin, 'bar', $points);
+		$this->_render_statistic($points, $x, $yout,  $yin, 'bar');
 	}
 	
-	function _render_statistic($x = array(), $yout = array(),  $yin = array(), $type='bar', $points)
+	function _render_statistic($points, $x = array(), $yout = array(),  $yin = array(), $type='bar')
 	{
 		$this->load->helper('date');
 		$this->load->library('OpenFlashChartLib', NULL, 'OFCL');
