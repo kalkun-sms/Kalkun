@@ -63,7 +63,7 @@ class b8
 	 * @return void
 	 */
 
-	function __construct($config = array(), $database_config)
+	function __construct($database_config, $config = array())
 	{
 
 		# Validate config data
@@ -260,30 +260,31 @@ class b8
 		$relevant = array();
 
 		for($i = 0; $i < $this->config['use_relevant']; $i++) {
+			$tmp = array();
+			foreach($tmp as $importance) {
+				if($tmp) {
 
-			if($tmp = each($importance)) {
+					# Important tokens remain
 
-				# Important tokens remain
+					# If the token's rating is relevant enough, use it
 
-				# If the token's rating is relevant enough, use it
+					if(abs(0.5 - $rating[$tmp['key']]) > $this->config['min_dev']) {
 
-				if(abs(0.5 - $rating[$tmp['key']]) > $this->config['min_dev']) {
+						# Tokens that appear more than once also count more than once
 
-					# Tokens that appear more than once also count more than once
+						for($x = 0, $l = $word_count[$tmp['key']]; $x < $l; $x++)
+							array_push($relevant, $rating[$tmp['key']]);
 
-					for($x = 0, $l = $word_count[$tmp['key']]; $x < $l; $x++)
-						array_push($relevant, $rating[$tmp['key']]);
+					}
 
 				}
 
+				else {
+					# We have less than words to use, so we already
+					# use what we have and can break here
+					break;
+				}
 			}
-
-			else {
-				# We have less than words to use, so we already
-				# use what we have and can break here
-				break;
-			}
-
 		}
 
 		# Calculate the spamminess of the text (thanks to Mr. Robinson ;-)

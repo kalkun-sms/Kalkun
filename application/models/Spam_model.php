@@ -38,7 +38,7 @@ class Spam_model extends CI_Model {
 		parent::__construct();
         $b8_config = array( 'storage' => 'active');
         $config_database= array(); // not required for activare record, see b8 documentation for mysql/dba methods
-        $this->b8 = new b8($b8_config, $config_database );
+        $this->b8 = new b8($config_database, $b8_config);
         $started_up = $this->b8->validate();
         if($started_up !== TRUE) 		
             die( "<b> Could not initialize b8. error code: $started_up</b>");
