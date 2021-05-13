@@ -956,16 +956,18 @@ class Gammu_model extends CI_Model {
 			$id_folder_field = "id_".$folder; // add id prefix
 
 			foreach($id_message as $tmp):
-		 		$this->db->set('a.id_folder', $id_folder);
-				$this->db->set('b.trash', $trash);
-				$this->db->where('a.ID', $tmp);
-				$update_id_folder_field = 'b.'.$id_folder_field;
-				$this->db->where($this->_protect_identifiers('a.ID'), $this->_protect_identifiers($update_id_folder_field), FALSE);
-				$update_folder = $this->_protect_identifiers($folder);
-				$update_folder_alias = $this->_protect_identifiers('a');
-				$update_user_folder = $this->_protect_identifiers($user_folder);
-				$update_user_folder_alias = $this->_protect_identifiers('b');				
-				$this->db->update($update_folder.' as '.$update_folder_alias.', '.$update_user_folder.' as '.$update_user_folder_alias);
+				$this->db->trans_start();
+
+				// Update original gammu table (inbox, sentitems...)
+				$this->db->set('id_folder', $id_folder);
+				$this->db->where('ID', $tmp);
+				$this->db->update($folder);
+				// Update kalkun linked table (user_inbox, user_sentitems...)
+				$this->db->set('trash', $trash);
+				$this->db->where($id_folder_field, $tmp);
+				$this->db->update($user_folder);
+
+				$this->db->trans_complete();
 			endforeach;
 			break;
 		}
