@@ -1081,3 +1081,54 @@ label.error {
 .ui-datepicker {
 	z-index:10100;
 }
+
+/* The following has been added since forked */
+
+.signal-icon {
+  display: inline-block;
+  font-size: 0;
+  height: 33px;
+  padding: 1px 0px 0px 4px;
+  width: 74px;
+}
+
+.signal-icon.dark {
+  background-color: black;
+}
+
+.signal-icon > .signal-bar {
+  background-color: black;
+  border-radius: 2px;
+  display: inline-block;
+  margin-left: 6px;
+  opacity: 0.25;
+  width: 10px;
+}
+
+.signal-icon > .sizer {
+  display: inline-block;
+  height: 32px;
+}
+
+.signal-icon.dark > .signal-bar {
+  background-color: white;
+}
+
+.signal-icon.signal0 > .signal-bar {
+  height: 10px !important;
+}
+
+.signal-icon > .bar1 { height: 15px; }
+.signal-icon > .bar2 { height: 21px; }
+.signal-icon > .bar3 { height: 27px; }
+.signal-icon > .bar4 { height: 32px; }
+
+.signal-icon.signal1 > .bar1,
+.signal-icon.signal2 > .bar1,
+.signal-icon.signal2 > .bar2,
+.signal-icon.signal3 > .bar1,
+.signal-icon.signal3 > .bar2,
+.signal-icon.signal3 > .bar3,
+.signal-icon.signal4 > .signal-bar {
+  opacity: 1;
+}
