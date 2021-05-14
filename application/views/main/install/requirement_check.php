@@ -65,6 +65,11 @@
 	</tr>
 
 	<tr>
+		<td colspan="3">Ctype</td>
+		<td class="right"><?php if(extension_loaded('ctype')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
+	</tr>
+
+	<tr>
 		<td colspan="3" class="bottom">APC or APCu</td>
 		<td class="right bottom"><?php if(extension_loaded('apc') || extension_loaded('apcu')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
 	</tr>
