@@ -17,7 +17,7 @@ You need to install and configure this first:
   * APC or APCu
 * PHP-CLI
 * PHP Composer
-* MySQL 5.1+ or PostgreSQL or SQLite3
+* MySQL 5.5.3+ or PostgreSQL or SQLite3
 * gammu-smsd (make sure it is already running and configured)
 
 ## Installation
