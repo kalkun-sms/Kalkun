@@ -189,9 +189,10 @@ class Gammu_model extends CI_Model {
 				'CreatorID' => $tmp_data['CreatorID'],
 				'SenderID' => $tmp_data['SenderID'],
 				'TextDecoded' => $tmp_data['message'],
-                'RelativeValidity' => $tmp_data['validity'],
-				'DeliveryReport' => $tmp_data['delivery_report']			
-				);
+				'RelativeValidity' => $tmp_data['validity'],
+				'DeliveryReport' => $tmp_data['delivery_report'],
+				'CreatorID' => '🦃 Kalkun '.$this->config->item('kalkun_version')	
+		);
 					
 		if($tmp_data['option']=='multipart')
 		{

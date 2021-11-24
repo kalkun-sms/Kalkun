@@ -26,6 +26,7 @@
 |	['cachedir'] The path to the folder where cache files should be stored
 |	['char_set'] The character set used in communicating with the database
 |	['dbcollat'] The character collation used in communicating with the database
+| - NOTE: ['dbcollat'] is only used in the ‘MySQLi’ driver.
 |
 | The $active_group variable lets you choose which connection group to
 | make active.  By default there is only one group (the "default" group).
@@ -44,6 +45,8 @@ $db['default']['username'] = "root";
 $db['default']['password'] = "password";
 $db['default']['database'] = "kalkun";
 $db['default']['dbdriver'] = "mysqli";
+$db['default']['char_set'] = "utf8mb4";
+$db['default']['dbcollat'] = "utf8mb4_general_ci";
 
 // PostgreSQL
 // $db['default']['username'] = "postgres";
@@ -60,9 +63,11 @@ $db['default']['pconnect'] = FALSE;
 $db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;
 $db['default']['cachedir'] = "";
-$db['default']['char_set'] = "utf8";
-$db['default']['dbcollat'] = "utf8_general_ci";
 
+// Character set for non-MySQLi drivers
+if (strcasecmp($db['default']['dbdriver'], "mysqli") != 0) {
+	$db['default']['char_set'] = "utf8";
+}
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

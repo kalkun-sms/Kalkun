@@ -27,7 +27,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `kalkun` (
   `version` text NOT NULL
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `sms_used` (
   `out_sms_count` int(11) NOT NULL DEFAULT '0',
   `in_sms_count` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_sms_used`)
-)  DEFAULT CHARSET=utf8 ;
+)  DEFAULT CHARSET=utf8mb4 ;
 
 -- --------------------------------------------------------
 
@@ -60,14 +60,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `phone_number` (`phone_number`)
-)  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+)  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id_user`, `username`, `realname`, `password`, `phone_number`, `level`) VALUES
-(1, 'kalkun', 'Kalkun SMS', '$2y$10$Sg0IxngRIIp1qNITM8kWa.aJ26w58F97ByTzDKoRF/dyzKcLfx226', '123456789', 'admin');
+(1, 'kalkun', 'Kalkun SMS', '$2y$10$sIXe0JiaTIOsC7OOnox5t.deuJwZoawd5QKpQlSNfywziTDHpmmyy', '123456789', 'admin');
 
 
 -- --------------------------------------------------------
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `user_folders` (
   `name` varchar(50) NOT NULL,
   `id_user` int(11) NOT NULL,
   PRIMARY KEY (`id_folder`)
-)  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+)  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `user_folders`
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `user_inbox` (
   `id_user` int(11) NOT NULL,
   `trash` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_inbox`)
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `user_outbox` (
   `id_outbox` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   PRIMARY KEY (`id_outbox`)
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `user_sentitems` (
   `id_user` int(11) NOT NULL,
   `trash` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_sentitems`)
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `user_settings` (
   `conversation_sort` enum('asc','desc') NOT NULL DEFAULT 'asc',
   `country_code` varchar(2) NOT NULL DEFAULT 'US',
   PRIMARY KEY (`id_user`)
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user_settings`
@@ -237,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `user_group` (
   `id_pbk_groups` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   PRIMARY KEY (`id_group`)
-)  DEFAULT CHARSET=utf8 ;
+)  DEFAULT CHARSET=utf8mb4 ;
 
 
 -- --------------------------------------------------------
@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `user_templates` (
   `Name` varchar(64) NOT NULL,
   `Message` text NOT NULL,
   PRIMARY KEY (`id_template`)
-)  DEFAULT CHARSET=utf8 ;
+)  DEFAULT CHARSET=utf8mb4 ;
 
 
 -- --------------------------------------------------------
@@ -262,10 +262,10 @@ CREATE TABLE IF NOT EXISTS `user_templates` (
 --
 
 CREATE TABLE `b8_wordlist` (
-  `token` varchar(255) character set utf8 collate utf8_bin NOT NULL,
+  `token` varchar(255) character set utf8mb4 collate utf8mb4_bin NOT NULL,
   `count` varchar(255) default NULL,
   PRIMARY KEY  (`token`)
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `b8_wordlist` VALUES ('bayes*dbversion', '2');
 INSERT INTO `b8_wordlist` VALUES ('bayes*texts.ham', '0');
@@ -289,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `plugins` (
   `plugin_data` longtext,
   PRIMARY KEY (`plugin_id`),
   UNIQUE KEY `plugin_index` (`plugin_system_name`) USING BTREE
-)  DEFAULT CHARSET=utf8;
+)  DEFAULT CHARSET=utf8mb4;
 
 
 -- --------------------------------------------------------
@@ -303,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `user_forgot_password` (
   `token` varchar(255) NOT NULL,
   `valid_until` datetime NOT NULL,
   PRIMARY KEY (`id_user`)
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8mb4;
 
 
 -- --------------------------------------------------------
@@ -319,7 +319,7 @@ CREATE TABLE IF NOT EXISTS `user_filters` (
   `has_the_words` varchar(50) NOT NULL,
   `id_folder` int(11) NOT NULL,
   PRIMARY KEY (`id_filter`)
-)  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

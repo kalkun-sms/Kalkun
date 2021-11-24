@@ -11,4 +11,4 @@ CREATE TABLE IF NOT EXISTS `user_filters` (
   `has_the_words` varchar(50) NOT NULL,
   `id_folder` int(11) NOT NULL,
   PRIMARY KEY (`id_filter`)
-) ;
+)  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
