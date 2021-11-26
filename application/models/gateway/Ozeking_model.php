@@ -12,18 +12,18 @@
 // ------------------------------------------------------------------------
 
 /**
- * Kannel_model Class
+ * Ozeking_model Class
  *
  * Handle all messages database activity 
- * for Kannel <http://www.kannel.org/>
+ * for Ozeki NG <http://ozekisms.com>
  *
  * @package		Kalkun
  * @subpackage	Messages
  * @category	Models
  */
-require_once('nongammu_model.php');
+require_once('Nongammu_model.php');
 
-class Kannel_model extends nongammu_model { 
+class Ozeking_model extends Nongammu_model {
 	
 	/**
 	 * Constructor
@@ -39,17 +39,17 @@ class Kannel_model extends nongammu_model {
 	
 	/**
 	 * Send Messages (Still POC)
-	 *
+	 * Using HTTP API <http://ozekisms.com/index.php?ow_page_number=413>
 	 * 
 	 * @return void
 	 */	
 	function really_send_messages($data)
 	{
 		$gateway = $this->config->item('gateway');
-		file_get_contents($gateway['url'].'/cgi-bin/sendsms?username='.$gateway['username'].
-			'&password='.$gateway['password'].'&to='.$data['dest'].'&text='.urlencode($data['message']));
+		file_get_contents($gateway['url'].'/api?action=sendmessage&username='.$gateway['username'].
+			'&password='.$gateway['password'].'&messagetype=SMS:TEXT&recipient='.$data['dest'].'&messagedata='.urlencode($data['message']));
 	}
 }
 
-/* End of file kannel_model.php */
-/* Location: ./application/models/gateway/kannel_model.php */
+/* End of file ozeking_model.php */
+/* Location: ./application/models/gateway/ozeking_model.php */

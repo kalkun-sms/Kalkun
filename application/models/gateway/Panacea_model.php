@@ -22,9 +22,9 @@
  * @subpackage	Messages
  * @category	Models
  */
-require_once('nongammu_model.php');
+require_once('Nongammu_model.php');
 
-class panacea_model extends nongammu_model { 
+class Panacea_model extends Nongammu_model {
 	
 	/**
 	 * Constructor

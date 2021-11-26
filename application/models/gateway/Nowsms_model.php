@@ -12,18 +12,18 @@
 // ------------------------------------------------------------------------
 
 /**
- * Ozeking_model Class
+ * Nowsms_model Class
  *
  * Handle all messages database activity 
- * for Ozeki NG <http://ozekisms.com>
+ * for Nowsms <http://nowsms.com>
  *
  * @package		Kalkun
  * @subpackage	Messages
  * @category	Models
  */
-require_once('nongammu_model.php');
+require_once('Nongammu_model.php');
 
-class Ozeking_model extends nongammu_model { 
+class Nowsms_model extends Nongammu_model {
 	
 	/**
 	 * Constructor
@@ -39,17 +39,17 @@ class Ozeking_model extends nongammu_model {
 	
 	/**
 	 * Send Messages (Still POC)
-	 * Using HTTP API <http://ozekisms.com/index.php?ow_page_number=413>
+	 * Using HTTP API <http://www.nowsms.com/doc/submitting-sms-messages/url-parameters>
 	 * 
 	 * @return void
 	 */	
 	function really_send_messages($data)
 	{
 		$gateway = $this->config->item('gateway');
-		file_get_contents($gateway['url'].'/api?action=sendmessage&username='.$gateway['username'].
-			'&password='.$gateway['password'].'&messagetype=SMS:TEXT&recipient='.$data['dest'].'&messagedata='.urlencode($data['message']));
+		file_get_contents($gateway['url'].'/?User='.$gateway['username'].
+			'&Password='.$gateway['password'].'&PhoneNumber='.$data['dest'].'&Text='.urlencode($data['message']));
 	}
 }
 
-/* End of file ozeking_model.php */
-/* Location: ./application/models/gateway/ozeking_model.php */
+/* End of file nowsms_model.php */
+/* Location: ./application/models/gateway/nowsms_model.php */
