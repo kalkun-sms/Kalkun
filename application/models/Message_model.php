@@ -32,7 +32,7 @@ class Message_model extends CI_Model {
 		parent::__construct();
 		$gateway_config = $this->config->item('gateway');
 		$gateway_class = $gateway_config['engine'].'_model';
-		//require_once('gateway/'.$gateway_config['engine'].'_model'.EXT);		
+		//require_once('gateway/'.$gateway_config['engine'].'_model.php');
 		$this->load->model('gateway/'.$gateway_class,'gate');
 		$this->gateway = $this->gate;
 	}
