@@ -21,7 +21,7 @@
  * @subpackage	Messages
  * @category	Models
  */
-require_once('nongammu_model'.EXT);
+require_once('nongammu_model.php');
 
 class Nowsms_model extends nongammu_model { 
 	

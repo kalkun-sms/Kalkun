@@ -23,7 +23,7 @@
  * @subpackage	Messages
  * @category	Models
  */
-require_once('gammu_model'.EXT);
+require_once('gammu_model.php');
 
 class nongammu_model extends Gammu_model { 
 	
