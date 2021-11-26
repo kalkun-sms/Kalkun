@@ -21,7 +21,7 @@
  * @subpackage	Messages
  * @category	Models
  */
-require_once('gammu_model.php');
+require_once('Gammu_model.php');
 
 class Way2sms_model extends Gammu_model { 
 	

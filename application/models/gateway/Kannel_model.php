@@ -12,18 +12,18 @@
 // ------------------------------------------------------------------------
 
 /**
- * Nowsms_model Class
+ * Kannel_model Class
  *
  * Handle all messages database activity 
- * for Nowsms <http://nowsms.com>
+ * for Kannel <http://www.kannel.org/>
  *
  * @package		Kalkun
  * @subpackage	Messages
  * @category	Models
  */
-require_once('nongammu_model.php');
+require_once('Nongammu_model.php');
 
-class Nowsms_model extends nongammu_model { 
+class Kannel_model extends Nongammu_model {
 	
 	/**
 	 * Constructor
@@ -39,17 +39,17 @@ class Nowsms_model extends nongammu_model {
 	
 	/**
 	 * Send Messages (Still POC)
-	 * Using HTTP API <http://www.nowsms.com/doc/submitting-sms-messages/url-parameters>
+	 *
 	 * 
 	 * @return void
 	 */	
 	function really_send_messages($data)
 	{
 		$gateway = $this->config->item('gateway');
-		file_get_contents($gateway['url'].'/?User='.$gateway['username'].
-			'&Password='.$gateway['password'].'&PhoneNumber='.$data['dest'].'&Text='.urlencode($data['message']));
+		file_get_contents($gateway['url'].'/cgi-bin/sendsms?username='.$gateway['username'].
+			'&password='.$gateway['password'].'&to='.$data['dest'].'&text='.urlencode($data['message']));
 	}
 }
 
-/* End of file nowsms_model.php */
-/* Location: ./application/models/gateway/nowsms_model.php */
+/* End of file kannel_model.php */
+/* Location: ./application/models/gateway/kannel_model.php */

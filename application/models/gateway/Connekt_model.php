@@ -21,9 +21,9 @@
  * @subpackage	Messages
  * @category	Models
  */
-require_once('nongammu_model.php');
+require_once('Nongammu_model.php');
 
-class Connekt_model extends nongammu_model { 
+class Connekt_model extends Nongammu_model {
 	
 	/**
 	 * Constructor
