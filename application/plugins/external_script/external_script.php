@@ -82,11 +82,11 @@ function external_script($sms)
 		{
 			case 'sender':
 				$value = $phone;
-			break;
+				break;
 
 			case 'content':
 				$value = $content;
-			break;
+				break;
 		}
 
 		// evaluate rule type
@@ -95,17 +95,17 @@ function external_script($sms)
 			case 'match':
 			case 'equal':
 				$is_valid = is_equal($rule['value'], $value);
-			break;
+				break;
 
 			case 'contain':
 				$is_valid = is_contain($rule['value'], $value);
-			break;
+				break;
 
 			case 'preg_match':
 				$ret = is_preg_match($rule['value'], $value);
 				$is_valid = $ret[0];
 				$match = $ret[1][1];
-			break;
+				break;
 		}
 
 		// if we got valid rules

@@ -38,21 +38,21 @@ class User_model extends CI_Model {
 		switch($param['option'])
 		{
 			case 'all':
-			$this->db->select('*');
-			break;
+				$this->db->select('*');
+				break;
 			
 			case 'paginate':
-			$this->db->limit($param['limit'], $param['offset']);
-			break;
+				$this->db->limit($param['limit'], $param['offset']);
+				break;
 			
 			case 'by_iduser':
-			$this->db->where('user.id_user', $param['id_user']);
-			break;
+				$this->db->where('user.id_user', $param['id_user']);
+				break;
 
 			case 'search':
-			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $this->input->post('search_name'))));
-			$this->db->like('LOWER('.$this->db->protect_identifiers('realname').')', $search_word);
-			break;			
+				$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $this->input->post('search_name'))));
+				$this->db->like('LOWER('.$this->db->protect_identifiers('realname').')', $search_word);
+				break;
 		}
 		$this->db->order_by('realname');
 		return $this->db->get();

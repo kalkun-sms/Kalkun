@@ -166,13 +166,13 @@ class Kalkun_model extends CI_Model {
 			case 'all':
 				$this->db->where('id_folder >', '10');
 				$this->db->where('id_user', $this->session->userdata('id_user'));
-			break;
+				break;
 			
 			case 'exclude':
 				$this->db->where('id_folder >', '10');
 				$this->db->where('id_folder !=', $id_folder);
 				$this->db->where('id_user', $this->session->userdata('id_user'));
-			break;
+				break;
 			
 			case 'name':
 				$this->db->where('id_folder', $id_folder);
@@ -180,7 +180,7 @@ class Kalkun_model extends CI_Model {
 				{
 					$this->db->where('id_user', $this->session->userdata('id_user'));
 				}				
-			break;
+				break;
 		}
 
 		$this->db->order_by('name');
@@ -310,7 +310,7 @@ class Kalkun_model extends CI_Model {
 				$this->db->set('country_code', $this->input->post('dial_code'));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user_settings');
-			break;
+				break;
 			
 			case 'personal':
 				$this->db->set('realname', $this->input->post('realname'));
@@ -323,20 +323,20 @@ class Kalkun_model extends CI_Model {
 				$this->db->set('signature', $sig_opt.';'.$this->input->post('signature'));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user_settings');
-			break;
+				break;
 			
 			case 'appearance':
 				$this->db->set('theme', $this->input->post('theme'));
 				$this->db->set('bg_image', $this->input->post('bg_image_option').';background.jpg');
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user_settings');
-			break;
+				break;
 			
 			case 'password':
 				$this->db->set('password', password_hash($this->input->post('new_password'), PASSWORD_BCRYPT));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user');				
-			break;
+				break;
 
             case 'filters':
                 $id_filter = $this->input->post('id_filter');
@@ -350,7 +350,7 @@ class Kalkun_model extends CI_Model {
                     $this->db->update('user_filters');
                 }
                 else $this->db->insert('user_filters');
-            break;
+				break;
 		}		
 	}
 
@@ -401,12 +401,12 @@ class Kalkun_model extends CI_Model {
 		switch($param['option'])
 		{
 			case 'username':
-			$this->db->where('username', $param['username']);
-			break;	
+				$this->db->where('username', $param['username']);
+				break;
 			
 			case 'phone_number':
-			$this->db->where('phone_number', $param['phone_number']);
-			break;				
+				$this->db->where('phone_number', $param['phone_number']);
+				break;
 		}
 		return $this->db->get();
 	}
@@ -429,40 +429,40 @@ class Kalkun_model extends CI_Model {
 				$this->db->select('Client');
 				$this->db->order_by('UpdatedInDB', 'DESC');
 				$this->db->limit('1');
-			break;
+				break;
 			
 			case 'db_version':
 				$this->db->from('gammu');
 				$this->db->select('Version');			
-			break;	
+				break;
 			
 			case 'last_activity':
 				$this->db->from('phones');
 				$this->db->select('UpdatedInDB');	
 				$this->db->order_by('UpdatedInDB', 'DESC');
 				$this->db->limit('1');							
-			break;
+				break;
 			
 			case 'phone_imei':
 				$this->db->from('phones');
 				$this->db->select('IMEI');	
 				$this->db->order_by('UpdatedInDB', 'DESC');
 				$this->db->limit('1');		
-			break;	
+				break;
 			
 			case 'phone_signal':
 				$this->db->from('phones');
 				$this->db->select('Signal');	
 				$this->db->order_by('UpdatedInDB', 'DESC');
 				$this->db->limit('1');				
-			break;	
+				break;
 			
 			case 'phone_battery':
 				$this->db->from('phones');
 				$this->db->select('Battery');	
 				$this->db->order_by('UpdatedInDB', 'DESC');
 				$this->db->limit('1');				
-			break;															
+				break;
 		}
 		return $this->db->get();
 	}
@@ -501,7 +501,7 @@ class Kalkun_model extends CI_Model {
 				$res = $this->db->get()->row($type.'_sms_count');
 				if(!$res) return 0;
 				else return $res;
-			break;	
+				break;
 		}
 	}
 

@@ -86,18 +86,18 @@ class Kalkun extends MY_Controller {
 			default:
 				$days = 10;
 				$format = 'M-d';
-			break;
+				break;
 
 			case 'weeks':
 				$days = 30;
 				$format = 'W';
 				$prefix = ucwords(lang('kalkun_week')).' ';
-			break;
+				break;
 
 			case 'months':
 				$days = 60;
 				$format = 'M-Y';
-			break;
+				break;
 		}
 
 		// generate data points
