@@ -94,7 +94,7 @@ class Login extends CI_Controller
 			
 			if(!$token)
 			{
-				$this->session->set_flashdata('errorlogin', 'Oh, snap! We couldn\'t find you. Please try again.');	
+				$this->session->set_flashdata('errorlogin', "Oh, snap! We couldn't find you. Please try again.");
 			}
 			else
 			{
