@@ -24,7 +24,7 @@ function DNDcheck($mobileno)
 
 function filter_data($data) 
 {
-	if($data==NULL) return "<i>Unknown</i>";
+	if ( ! isset($data)) return "<i>Unknown</i>";
 	else return $data;	
 }
 
@@ -49,7 +49,7 @@ function nice_date($str, $option=NULL)
 
 	$diff = abs($now-$timestamp);
 
-	if($option=='smsd_check')
+	if($option==='smsd_check')
 	{
 		return $diff;	
 	}
@@ -133,7 +133,7 @@ function compare_date_asc($a, $b)
 	$date1 = strtotime($a['globaldate']);
 	$date2 = strtotime($b['globaldate']);
 
-	if($date1 == $date2) return 0;
+	if($date1 === $date2) return 0;
 	return ($date1 < $date2) ? -1 : 1; 
 }
 
@@ -142,18 +142,19 @@ function compare_date_desc($a, $b)
 	$date1 = strtotime($a['globaldate']);
 	$date2 = strtotime($b['globaldate']);
 
-	if($date1 == $date2) return 0;
+	if($date1 === $date2) return 0;
 	return ($date1 > $date2) ? -1 : 1; 
 }	
 
 function check_delivery_report($report)
 {
-	if($report=='SendingError' OR $report=='Error' OR $report=='DeliveryFailed'): $status = lang('tni_msg_stat_fail');
-	elseif($report=='SendingOKNoReport'): $status = lang('tni_msg_stat_oknr');
-	elseif($report=='SendingOK'): $status = lang('tni_msg_stat_okwr');
-	elseif($report=='DeliveryOK'): $status = lang('tni_msg_stat_deliv');
-	elseif($report=='DeliveryPending'): $status = lang('tni_msg_stat_pend');
-	elseif($report=='DeliveryUnknown'): $status = lang('tni_msg_stat_unknown');
+	if($report==='SendingError' OR $report==='Error' OR $report==='DeliveryFailed'): $status = lang('tni_msg_stat_fail');
+	elseif($report==='SendingOKNoReport'): $status = lang('tni_msg_stat_oknr');
+	elseif($report==='SendingOK'): $status = lang('tni_msg_stat_okwr');
+	elseif($report==='DeliveryOK'): $status = lang('tni_msg_stat_deliv');
+	elseif($report==='DeliveryPending'): $status = lang('tni_msg_stat_pend');
+	elseif($report==='DeliveryUnknown'): $status = lang('tni_msg_stat_unknown');
+	elseif($report==='Reserved'): $status = lang('tni_msg_stat_reserved');
 	endif;		
 
 	return $status;
@@ -188,7 +189,7 @@ function get_minute()
 
 function is_ajax()
 {
-	if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
+	if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
 	{
 		return TRUE;
 	}
