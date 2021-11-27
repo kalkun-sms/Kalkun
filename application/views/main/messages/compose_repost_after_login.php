@@ -1,12 +1,23 @@
-<!DOCTYPE html>
-<html><head><script>
+<?php
+$this->load->helper('html');
+echo doctype('html5');?>
+<html><head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<title>Repost message after login</title>
+<script>
 	function goBackToForm() {
 		window.history.go(<?php echo $this->session->flashdata('bef_login_history_count')?>);
 	}
 	function submitForm() {
 		document.forms["redirectpost"].submit();
 	}
-</script></head>
+</script>
+<link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>base.css" />
+<style type="text/css">
+	@import url("<?php echo $this->config->item('css_path');?>blue.css");
+</style>
+</head>
+
 <?php if (!$this->session->flashdata('bef_login_post_data')) {
 	// Here the user logged in, but we lost the content of the POST.
 	// So we redirect him to the form he Posted by using the javascript
