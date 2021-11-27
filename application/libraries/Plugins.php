@@ -36,7 +36,6 @@ class Plugins {
         }
         $this->_ci->load->database();
         $this->_ci->load->helper('directory');
-        $this->_ci->load->helper('file');
         
         // Set the plugins directory if passed via paramater
         if (array_key_exists('plugins_dir', $params))
@@ -195,7 +194,7 @@ class Plugins {
             {        
                 $plugin = strtolower(trim($plugin)); // Lowercase and trim the plugin name
                 
-                $plugin_data = read_file($this->plugins_dir.$plugin."/".$plugin.".php"); // Load the plugin we want
+                $plugin_data = file_get_contents($this->plugins_dir.$plugin."/".$plugin.".php"); // Load the plugin we want
                        
                 preg_match ( '|Plugin Name:(.*)$|mi', $plugin_data, $name );
                 preg_match ( '|Plugin URI:(.*)$|mi', $plugin_data, $uri );
