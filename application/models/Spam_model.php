@@ -70,7 +70,7 @@ class Spam_model extends CI_Model {
      function apply_spam_filter($ID , $Text)
      {
         $is_spam = $this->_check_spam($Text);
-        if($is_spam->class == 'spam')
+        if($is_spam->class === 'spam')
         {
             if($is_spam->level > $this->ratingcutoff)
                 $this->report_spam(array( 'ID' => $ID , 'Text' => $Text));
@@ -134,7 +134,7 @@ class Spam_model extends CI_Model {
         if($this->config->item('enable_proxy'))
         {
             $this->curl->proxy($this->config->item('proxy_host'), $this->config->item('proxy_port'));
-            if($this->config->item('proxy_username') != '')
+            if($this->config->item('proxy_username') !== '')
                 $this->curl->proxy_login($this->config->item('proxy_username'),$this->config->item('proxy_password'));
         }
         
