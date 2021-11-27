@@ -65,9 +65,9 @@ class Api extends MY_Controller {
         {
             $CI =& get_instance();
             $message = trim($message);
-            $destinationNumber	= preg_replace("/^\+/","00",$destinationNumber);
+            $destinationNumber	= preg_replace('/^\+/', '00', $destinationNumber);
 
-            if(preg_match("/^\d+$/",$destinationNumber))
+            if(preg_match('/^\d+$/', $destinationNumber))
             {
                 $CI->sendMessage($destinationNumber, $message, 1);
                 return 1;
@@ -81,9 +81,9 @@ class Api extends MY_Controller {
             $CI =& get_instance();
             $message = trim($message);
 
-            $destinationNumber	= preg_replace("/^\+/","00",$destinationNumber);
+            $destinationNumber	= preg_replace('/^\+/', '00', $destinationNumber);
 
-            if(preg_match("/^\d+$/",$destinationNumber))
+            if(preg_match('/^\d+$/', $destinationNumber))
             {
                 $CI->sendMessage($destinationNumber, $message, 0);
                 return 1;
