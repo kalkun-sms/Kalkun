@@ -104,12 +104,12 @@ class Gammu_model extends CI_Model {
 				case 'default':
 					$standar_length = 160;
 					$data['coding'] = 'Default_No_Compression';
-				break;
+					break;
 				
 				case 'unicode':
 					$standar_length = 70;
 					$data['coding'] = 'Unicode_No_Compression';
-				break;
+					break;
 			}
 
 			// Check message's length
@@ -331,15 +331,15 @@ class Gammu_model extends CI_Model {
         	{
         		case 'delivered':
         			$this->db->where_in('Status', array('SendingOK', 'SendingOKNoReport', 'DeliveryOK', 'DeliveryPending'));
-        		break;
+					break;
         		
         		case 'failed':
         			$this->db->where_in('Status', array('SendingError', 'DeliveryFailed', 'DeliveryUnknown', 'Error'));     		
-        		break;
+					break;
         		
         		default:
         			// nothing to do
-        		break;
+					break;
         	}	
         }
         
@@ -805,7 +805,7 @@ class Gammu_model extends CI_Model {
                 $this->db->where($this->_protect_identifiers('ID'), $this->_protect_identifiers('maxresult.maxID'), FALSE);
 				//$this->db->group_by('SenderNumber');
 				$this->db->order_by('ReceivingDateTime', 'DESC');
-			break;
+				break;
 			
 			case 'outbox':
 				$this->db->from('outbox');
@@ -824,7 +824,7 @@ class Gammu_model extends CI_Model {
 				$this->db->where($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxresult.maxdate'), FALSE);
 				//$this->db->group_by('DestinationNumber');
 				$this->db->order_by('SendingDateTime', 'DESC');
-			break;
+				break;
 			
 			case 'sentitems':
 				$this->db->from('sentitems');
@@ -848,7 +848,7 @@ class Gammu_model extends CI_Model {
 				$this->db->where($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxresult.maxdate'), FALSE);
 				//$this->db->group_by('DestinationNumber');
 				$this->db->order_by('SendingDateTime', 'DESC');			
-			break;
+				break;
 		}
 				
 		if(isset($options['limit']) && isset($options['offset'])) 
@@ -888,89 +888,89 @@ class Gammu_model extends CI_Model {
 		switch($options['type']) 
 		{	
 			case 'conversation':
-			$id_folder = $options['id_folder'];
-			$number = $options['number'];
-					
-			if($options['current_folder']=='') 
-			{ 
-				$inbox_folder=1;
-				$sentitems_folder=3; 
-			}
-			else
-			{
-				$inbox_folder=$sentitems_folder=$options['current_folder'];
-			}
-			
-			// start transcation		
-			$this->db->trans_start();
-							
-			// proccess inbox
-			$this->db->select('ID');
-			$this->db->from('inbox');
-			$this->db->where('id_folder', $inbox_folder);
-			$this->db->where('SenderNumber', $number);
-			$this->db->join('user_inbox', 'user_inbox.id_inbox = inbox.ID');
-			$res = $this->db->get();
-			if ($res->num_rows() > 0)
-			{
-				foreach ($res->result_array() as $row)
+				$id_folder = $options['id_folder'];
+				$number = $options['number'];
+
+				if($options['current_folder']=='')
 				{
-					$ids[] = $row['ID'];
+					$inbox_folder=1;
+					$sentitems_folder=3;
 				}
-				$this->db->set('id_folder', $id_folder);
-				$this->db->where_in('ID', $ids);		
-				$this->db->update('inbox');
-				$this->db->set('trash', $trash);
-				$this->db->where_in('id_inbox', $ids);
-				$this->db->update('user_inbox');
-			}
-
-			// proccess sentitems
-			$this->db->select('ID');
-			$this->db->from('sentitems');
-			$this->db->where('id_folder', $sentitems_folder);
-			$this->db->where('DestinationNumber', $number);
-			$this->db->join('user_sentitems', 'user_sentitems.id_sentitems = sentitems.ID');
-			$res = $this->db->get();
-			if ($res->num_rows() > 0)
-			{
-				foreach($res->result_array() as $row)
+				else
 				{
-					$ids[] = $row['ID'];
+					$inbox_folder=$sentitems_folder=$options['current_folder'];
 				}
-				$this->db->set('id_folder', $id_folder);
-				$this->db->where_in('ID', $ids);		
-				$this->db->update('sentitems');
-				$this->db->set('trash', $trash);
-				$this->db->where_in('id_sentitems', $ids);
-				$this->db->update('user_sentitems');
-			}
 
-			$this->db->trans_complete();
-			break;
-				
-			case 'single':
-			$folder = $options['folder'];
-			$id_folder = $options['id_folder'];
-			$id_message = $options['id_message'];			
-			$user_folder = "user_".$folder; // add user prefix
-			$id_folder_field = "id_".$folder; // add id prefix
-
-			foreach($id_message as $tmp):
+				// start transcation
 				$this->db->trans_start();
 
-				// Update original gammu table (inbox, sentitems...)
-				$this->db->set('id_folder', $id_folder);
-				$this->db->where('ID', $tmp);
-				$this->db->update($folder);
-				// Update kalkun linked table (user_inbox, user_sentitems...)
-				$this->db->set('trash', $trash);
-				$this->db->where($id_folder_field, $tmp);
-				$this->db->update($user_folder);
+				// proccess inbox
+				$this->db->select('ID');
+				$this->db->from('inbox');
+				$this->db->where('id_folder', $inbox_folder);
+				$this->db->where('SenderNumber', $number);
+				$this->db->join('user_inbox', 'user_inbox.id_inbox = inbox.ID');
+				$res = $this->db->get();
+				if ($res->num_rows() > 0)
+				{
+					foreach ($res->result_array() as $row)
+					{
+						$ids[] = $row['ID'];
+					}
+					$this->db->set('id_folder', $id_folder);
+					$this->db->where_in('ID', $ids);
+					$this->db->update('inbox');
+					$this->db->set('trash', $trash);
+					$this->db->where_in('id_inbox', $ids);
+					$this->db->update('user_inbox');
+				}
+
+				// proccess sentitems
+				$this->db->select('ID');
+				$this->db->from('sentitems');
+				$this->db->where('id_folder', $sentitems_folder);
+				$this->db->where('DestinationNumber', $number);
+				$this->db->join('user_sentitems', 'user_sentitems.id_sentitems = sentitems.ID');
+				$res = $this->db->get();
+				if ($res->num_rows() > 0)
+				{
+					foreach($res->result_array() as $row)
+					{
+						$ids[] = $row['ID'];
+					}
+					$this->db->set('id_folder', $id_folder);
+					$this->db->where_in('ID', $ids);
+					$this->db->update('sentitems');
+					$this->db->set('trash', $trash);
+					$this->db->where_in('id_sentitems', $ids);
+					$this->db->update('user_sentitems');
+				}
 
 				$this->db->trans_complete();
-			endforeach;
-			break;
+				break;
+				
+			case 'single':
+				$folder = $options['folder'];
+				$id_folder = $options['id_folder'];
+				$id_message = $options['id_message'];
+				$user_folder = "user_".$folder; // add user prefix
+				$id_folder_field = "id_".$folder; // add id prefix
+
+				foreach($id_message as $tmp):
+					$this->db->trans_start();
+
+					// Update original gammu table (inbox, sentitems...)
+					$this->db->set('id_folder', $id_folder);
+					$this->db->where('ID', $tmp);
+					$this->db->update($folder);
+					// Update kalkun linked table (user_inbox, user_sentitems...)
+					$this->db->set('trash', $trash);
+					$this->db->where($id_folder_field, $tmp);
+					$this->db->update($user_folder);
+
+					$this->db->trans_complete();
+				endforeach;
+				break;
 		}
 	}
 
@@ -1012,132 +1012,132 @@ class Gammu_model extends CI_Model {
 		switch($type)
 		{
 			case 'conversation':
-			if(!isset($options['current_folder'])) { $inbox_folder=1; $sentitems_folder=3; }
-			else $inbox_folder=$sentitems_folder=$current_folder;			
+				if(!isset($options['current_folder'])) { $inbox_folder=1; $sentitems_folder=3; }
+				else $inbox_folder=$sentitems_folder=$current_folder;
 
-			$trash = FALSE;
-			switch($option)
-			{
-				case 'permanent':
-				
-				// if it's coming from trash
-				if(isset($current_folder) && $current_folder=='5') $trash = TRUE;	
-				
-				// get inbox
-				$param = array('id_folder' => $inbox_folder, 'number' => $number, 'trash' => $trash, 'uid' => $user_id);
-				$inbox = $this->get_messages($param);
-				
-				foreach($inbox->result() as $tmp)
+				$trash = FALSE;
+				switch($option)
 				{
-					// start transcation    
-					$this->db->trans_start();
-					$this->db->where('ID', $tmp->id_inbox);
-					$this->db->delete('inbox');
-		
-					$this->db->where('id_inbox', $tmp->id_inbox);
-					$this->db->delete('user_inbox');	
-					$this->db->trans_complete();				
+					case 'permanent':
+
+						// if it's coming from trash
+						if(isset($current_folder) && $current_folder=='5') $trash = TRUE;
+
+						// get inbox
+						$param = array('id_folder' => $inbox_folder, 'number' => $number, 'trash' => $trash, 'uid' => $user_id);
+						$inbox = $this->get_messages($param);
+
+						foreach($inbox->result() as $tmp)
+						{
+							// start transcation
+							$this->db->trans_start();
+							$this->db->where('ID', $tmp->id_inbox);
+							$this->db->delete('inbox');
+
+							$this->db->where('id_inbox', $tmp->id_inbox);
+							$this->db->delete('user_inbox');
+							$this->db->trans_complete();
+						}
+
+						// deprecated
+						// inbox
+						/*$inbox = "DELETE i, ui
+								FROM inbox AS i
+								LEFT JOIN user_inbox AS ui ON ui.id_inbox = i.ID
+								WHERE i.SenderNumber = '".$number."' AND ui.trash='1'";
+						$this->db->query($inbox);*/
+
+						// get sentitems
+						$param = array('id_folder' => $sentitems_folder, 'type' => 'sentitems', 'number' => $number, 'trash' => $trash, 'uid' => $user_id);
+						$sentitems = $this->get_messages($param);
+
+						foreach($sentitems->result() as $tmp)
+						{
+							// start transcation
+							$this->db->trans_start();
+							$this->db->where('ID', $tmp->id_sentitems);
+							$this->db->delete('sentitems');
+
+							$this->db->where('id_sentitems', $tmp->id_sentitems);
+							$this->db->delete('user_sentitems');
+							$this->db->trans_complete();
+						}
+
+						// sentitems
+						/*$sentitems = "DELETE s, us
+								FROM sentitems AS s
+								LEFT JOIN user_sentitems AS us ON us.id_sentitems = s.ID
+								WHERE s.DestinationNumber = '".$number."' AND us.trash='1'";
+						$this->db->query($sentitems);*/
+						break;
+
+					case 'temp':
+						// use move_messages function
+						$param['type'] = 'conversation';
+						$param['number'] = $number;
+						$param['current_folder'] = $options['current_folder'];
+						$param['id_folder'] = '5';
+						$param['trash'] = TRUE;
+						$this->move_messages($param);
+						break;
+
+					case 'outbox':
+						$tmp_sql = $this->get_messages(array('type' => 'outbox', 'number' => $number))->result_array();
+						// looping all message
+						foreach($tmp_sql as $tmp):
+						//check multipart message
+						$multipart = array('type' => 'outbox', 'option' => 'check', 'id_message' => $tmp['ID']);
+
+						// start transcation
+						$this->db->trans_start();
+
+						if($this->get_multipart($multipart)=='true')
+						$this->db->delete('outbox_multipart', array('ID' => $tmp['ID']));
+
+						$this->db->delete('outbox', array('ID' => $tmp['ID']));
+						$this->db->trans_complete();
+						endforeach;
+						break;
 				}
-				
-				// deprecated
-				// inbox
-				/*$inbox = "DELETE i, ui
-						FROM inbox AS i
-						LEFT JOIN user_inbox AS ui ON ui.id_inbox = i.ID
-						WHERE i.SenderNumber = '".$number."' AND ui.trash='1'";
-				$this->db->query($inbox);*/
-				
-				// get sentitems
-				$param = array('id_folder' => $sentitems_folder, 'type' => 'sentitems', 'number' => $number, 'trash' => $trash, 'uid' => $user_id);
-				$sentitems = $this->get_messages($param);
-				
-				foreach($sentitems->result() as $tmp)
-				{
-					// start transcation    
-					$this->db->trans_start();
-					$this->db->where('ID', $tmp->id_sentitems);
-					$this->db->delete('sentitems');
-		
-					$this->db->where('id_sentitems', $tmp->id_sentitems);
-					$this->db->delete('user_sentitems');	
-					$this->db->trans_complete();								
-				}				
-				
-				// sentitems
-				/*$sentitems = "DELETE s, us
-						FROM sentitems AS s
-						LEFT JOIN user_sentitems AS us ON us.id_sentitems = s.ID
-						WHERE s.DestinationNumber = '".$number."' AND us.trash='1'";
-				$this->db->query($sentitems);*/
-				break;	
-				
-				case 'temp':	
-				// use move_messages function
-				$param['type'] = 'conversation';
-				$param['number'] = $number;
-				$param['current_folder'] = $options['current_folder'];
-				$param['id_folder'] = '5';
-				$param['trash'] = TRUE;
-				$this->move_messages($param);			
 				break;
-				
-				case 'outbox':
-				$tmp_sql = $this->get_messages(array('type' => 'outbox', 'number' => $number))->result_array();
-				// looping all message
-				foreach($tmp_sql as $tmp):
-				//check multipart message
-				$multipart = array('type' => 'outbox', 'option' => 'check', 'id_message' => $tmp['ID']);
-				
-				// start transcation    
-				$this->db->trans_start();
-				
-				if($this->get_multipart($multipart)=='true')
-				$this->db->delete('outbox_multipart', array('ID' => $tmp['ID']));
-				
-				$this->db->delete('outbox', array('ID' => $tmp['ID']));
-				$this->db->trans_complete();				
-				endforeach;		
-				break;
-			}
-			break;		
 			
 			case 'single':
-			switch($option)
-			{				
-				case 'permanent':
-				foreach($tmp_id as $tmp):
-					// start transcation    
-					$this->db->trans_start();
-					$this->db->delete("user_".$source, array('id_'.$source => $tmp));
-					$this->db->delete($source, array('ID' => $tmp));	
-					$this->db->trans_complete();
-				endforeach;
-				break;	
-				
-				case 'temp':
-				// use move_messages function
-				$param['type'] = 'single';
-				$param['id_message'] = $tmp_id;
-				$param['folder'] = $source;
-				$param['id_folder'] = '5';
-				$param['trash'] = TRUE;
-				$this->move_messages($param);
+				switch($option)
+				{
+					case 'permanent':
+						foreach($tmp_id as $tmp):
+							// start transcation
+							$this->db->trans_start();
+							$this->db->delete("user_".$source, array('id_'.$source => $tmp));
+							$this->db->delete($source, array('ID' => $tmp));
+							$this->db->trans_complete();
+						endforeach;
+						break;
+
+					case 'temp':
+						// use move_messages function
+						$param['type'] = 'single';
+						$param['id_message'] = $tmp_id;
+						$param['folder'] = $source;
+						$param['id_folder'] = '5';
+						$param['trash'] = TRUE;
+						$this->move_messages($param);
+						break;
+
+					case 'outbox':
+						//check multipart message
+						$multipart = array('type' => 'outbox', 'option' => 'check', 'id_message' => $tmp_id[0]);
+
+						// start transcation
+						$this->db->trans_start();
+						if($this->get_multipart($multipart)=='true')
+						$this->db->delete('outbox_multipart', array('ID' => $tmp_id[0]));
+
+						$this->db->delete('outbox', array('ID' => $tmp_id[0]));
+						$this->db->trans_complete();
+						break;
+				}
 				break;
-				
-				case 'outbox':
-				//check multipart message
-				$multipart = array('type' => 'outbox', 'option' => 'check', 'id_message' => $tmp_id[0]);
-				
-				// start transcation    
-				$this->db->trans_start();
-				if($this->get_multipart($multipart)=='true')
-				$this->db->delete('outbox_multipart', array('ID' => $tmp_id[0]));
-				
-				$this->db->delete('outbox', array('ID' => $tmp_id[0]));
-				$this->db->trans_complete();
-				break;
-			}		
-			break;		
 		}		
 	}	
 	
@@ -1178,7 +1178,7 @@ class Gammu_model extends CI_Model {
 					$this->db->where('SequencePosition >', 1);
 					return $this->db->get('sentitems')->num_rows();
 				}
-			break;
+				break;
 			
 			case 'all':
 				if($param['type']=='outbox') 
@@ -1202,7 +1202,7 @@ class Gammu_model extends CI_Model {
 					$this->db->order_by('SequencePosition');
 					return $this->db->get('sentitems');				
 				}
-			break;
+				break;
 		}			
 	}
 

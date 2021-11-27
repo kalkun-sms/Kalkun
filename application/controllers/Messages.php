@@ -66,46 +66,46 @@ class Messages extends MY_Controller {
 			switch ($source)
 			{
 				case 'inbox':
-				$tmp_number = 'SenderNumber';
-				$param['type'] = 'inbox';
-				$param['id_message'] = $id;
-				$data['message'] = $this->Message_model->get_messages($param)->row('TextDecoded');
-				$data['msg_id'] = $id;
-				
-				// check multipart
-				$multipart['type'] = 'inbox';
-				$multipart['option'] = 'check';
-				$multipart['id_message'] = $id;
-				$tmp_check = $this->Message_model->get_multipart($multipart);
-				if ($tmp_check->row('UDH')!='')
-				{
-					$multipart['option'] = 'all';
-					$multipart['udh'] = substr($tmp_check->row('UDH'),0,8);
-					$multipart['phone_number'] = $tmp_check->row('SenderNumber');					
-					foreach($this->Message_model->get_multipart($multipart)->result() as $part):
-					$data['message'] .= $part->TextDecoded;
-					endforeach;	
-				}				
-				break;
+					$tmp_number = 'SenderNumber';
+					$param['type'] = 'inbox';
+					$param['id_message'] = $id;
+					$data['message'] = $this->Message_model->get_messages($param)->row('TextDecoded');
+					$data['msg_id'] = $id;
+
+					// check multipart
+					$multipart['type'] = 'inbox';
+					$multipart['option'] = 'check';
+					$multipart['id_message'] = $id;
+					$tmp_check = $this->Message_model->get_multipart($multipart);
+					if ($tmp_check->row('UDH')!='')
+					{
+						$multipart['option'] = 'all';
+						$multipart['udh'] = substr($tmp_check->row('UDH'),0,8);
+						$multipart['phone_number'] = $tmp_check->row('SenderNumber');
+						foreach($this->Message_model->get_multipart($multipart)->result() as $part):
+						$data['message'] .= $part->TextDecoded;
+						endforeach;
+					}
+					break;
 				
 				case 'sentitems':
-				$tmp_number = 'DestinationNumber';
-				$param = array('type' => 'sentitems', 'id_message' => $id);
-				$data['message'] = $this->Message_model->get_messages($param)->row('TextDecoded');
-								
-				// check multipart
-				$multipart['type'] = 'sentitems';
-				$multipart['option'] = 'check';
-				$multipart['id_message'] = $id;
-				$tmp_check = $this->Message_model->get_multipart($multipart);
-				if ($tmp_check!=0)
-				{
-					$multipart['option'] = 'all';
-					foreach($this->Message_model->get_multipart($multipart)->result() as $part):
-					$data['message'] .= $part->TextDecoded;
-					endforeach;	
-				}
-				break;
+					$tmp_number = 'DestinationNumber';
+					$param = array('type' => 'sentitems', 'id_message' => $id);
+					$data['message'] = $this->Message_model->get_messages($param)->row('TextDecoded');
+
+					// check multipart
+					$multipart['type'] = 'sentitems';
+					$multipart['option'] = 'check';
+					$multipart['id_message'] = $id;
+					$tmp_check = $this->Message_model->get_multipart($multipart);
+					if ($tmp_check!=0)
+					{
+						$multipart['option'] = 'all';
+						foreach($this->Message_model->get_multipart($multipart)->result() as $part):
+						$data['message'] .= $part->TextDecoded;
+						endforeach;
+					}
+					break;
 			}		
 		}
 		else if ($type=='reply') $data['dest'] = $this->input->post('param1');
@@ -214,63 +214,49 @@ class Messages extends MY_Controller {
 		{
 			// Phonebook
 			case 'sendoption1':
-			$tmp_dest = explode(',', $this->input->post('personvalue'));
-			foreach ($tmp_dest as $key => $tmp)
-			{
-				if (trim($tmp)!='')
+				$tmp_dest = explode(',', $this->input->post('personvalue'));
+				foreach ($tmp_dest as $key => $tmp)
 				{
-					list ($id, $type) = explode(':', $tmp);
-					// Person
-					if ($type=='c')
+					if (trim($tmp)!='')
 					{
-						// Already sent, no need to send again
-						if (in_array($id, $dest)) 
-						{
-							continue;	
-						}
-						$dest[] = $id;
-					}
-					// Group
-					else if ($type=='g')
-					{
-						$param = array('option' => 'bygroup', 'group_id' => $id);
-						foreach ($this->Phonebook_model->get_phonebook($param)->result() as $group)
+						list ($id, $type) = explode(':', $tmp);
+						// Person
+						if ($type=='c')
 						{
 							// Already sent, no need to send again
-							if (in_array($group->Number, $dest)) 
+							if (in_array($id, $dest))
 							{
-								continue;	
+								continue;
 							}
-							$dest[] = $group->Number;
+							$dest[] = $id;
+						}
+						// Group
+						else if ($type=='g')
+						{
+							$param = array('option' => 'bygroup', 'group_id' => $id);
+							foreach ($this->Phonebook_model->get_phonebook($param)->result() as $group)
+							{
+								// Already sent, no need to send again
+								if (in_array($group->Number, $dest))
+								{
+									continue;
+								}
+								$dest[] = $group->Number;
+							}
+						}
+						// User, share mode
+						else if ($type='u')
+						{
+							// set share user id, process later
+							$share_uid[] = $id;
 						}
 					}
-					// User, share mode
-					else if ($type='u')
-					{
-						// set share user id, process later
-						$share_uid[] = $id;
-					}
 				}
-			}
-			break;
+				break;
 		
 			// Input manually
 			case 'sendoption3':
-			$tmp_dest = explode(',', $this->input->post('manualvalue'));
-			foreach($tmp_dest as $key => $tmp)
-			{
-				$tmp = trim($tmp); // remove space
-				if(trim($tmp)!='') {
-					$dest[$key] = $tmp;
-				}
-			}
-			break;
-
-			// Import from file  (CSV)
-			case 'sendoption4':
-			if (count($this->input->post('import_value_count') > 0))
-			{
-				$tmp_dest = explode(',', $this->input->post('Number'));
+				$tmp_dest = explode(',', $this->input->post('manualvalue'));
 				foreach($tmp_dest as $key => $tmp)
 				{
 					$tmp = trim($tmp); // remove space
@@ -278,40 +264,54 @@ class Messages extends MY_Controller {
 						$dest[$key] = $tmp;
 					}
 				}
-			}
-			break;
+				break;
+
+			// Import from file  (CSV)
+			case 'sendoption4':
+				if (count($this->input->post('import_value_count') > 0))
+				{
+					$tmp_dest = explode(',', $this->input->post('Number'));
+					foreach($tmp_dest as $key => $tmp)
+					{
+						$tmp = trim($tmp); // remove space
+						if(trim($tmp)!='') {
+							$dest[$key] = $tmp;
+						}
+					}
+				}
+				break;
 			
 			// Reply
 			case 'reply':
-			$dest[] = $this->input->post('reply_value');
-			break;
+				$dest[] = $this->input->post('reply_value');
+				break;
 		
 			// Member
 			case 'member':
-			$this->load->model('sms_member/sms_member_model', 'Member_model');
-			foreach($this->Member_model->get_member('all')->result() as $tmp)
-			{
-				$dest[] = $tmp->phone_number;
-			}								
-			break;	
+				$this->load->model('sms_member/sms_member_model', 'Member_model');
+				foreach($this->Member_model->get_member('all')->result() as $tmp)
+				{
+					$dest[] = $tmp->phone_number;
+				}
+				break;
 			
 			// Phonebook group
 			case 'pbk_groups':
-			$param = array('option' => 'bygroup', 'group_id' => $this->input->post('id_pbk'));
-			foreach($this->Phonebook_model->get_phonebook($param)->result() as $tmp)
-			{
-				$dest[] = $tmp->Number;
-			}
-			break;					
+				$param = array('option' => 'bygroup', 'group_id' => $this->input->post('id_pbk'));
+				foreach($this->Phonebook_model->get_phonebook($param)->result() as $tmp)
+				{
+					$dest[] = $tmp->Number;
+				}
+				break;
 
 			// All contacts
 			case 'all_contacts':
-			$param = array('option' => 'all');
-			foreach($this->Phonebook_model->get_phonebook($param)->result() as $tmp)
-			{
-				$dest[] = $tmp->Number;
-			}
-			break;					
+				$param = array('option' => 'all');
+				foreach($this->Phonebook_model->get_phonebook($param)->result() as $tmp)
+				{
+					$dest[] = $tmp->Number;
+				}
+				break;
 		}
 				
 		// Select send date
@@ -319,19 +319,19 @@ class Messages extends MY_Controller {
 		{
 			// Now
 			case 'option1':
-			$date = date('Y-m-d H:i:s');	
-			break;
+				$date = date('Y-m-d H:i:s');
+				break;
 			
 			// Date and time 
 			case 'option2':
-			$date = $this->input->post('datevalue')." ".$this->input->post('hour').":".$this->input->post('minute').":00";
-			break;
+				$date = $this->input->post('datevalue')." ".$this->input->post('hour').":".$this->input->post('minute').":00";
+				break;
 				
 			// Delay
 			case 'option3':
-			$date = date('Y-m-d H:i:s', mktime(date('H')+$this->input->post('delayhour'), 
-					date('i')+$this->input->post('delayminute'), date('s'), date('m'), date('d'), date('Y')));
-			break;				
+				$date = date('Y-m-d H:i:s', mktime(date('H')+$this->input->post('delayhour'),
+						date('i')+$this->input->post('delayminute'), date('s'), date('m'), date('d'), date('Y')));
+				break;
 		}
         $data['type'] = $this->input->post('smstype') ;
 		$data['class'] = ($data['type'] == 'flash') ? '0' : '1';
@@ -905,50 +905,50 @@ class Messages extends MY_Controller {
 		switch($segment[3])
 		{
 			case 'basic':
-			$param_needed = 4; // minimal count of segment
-			if($segment_count>=$param_needed)
-			{
-				if ($segment[4]!='_') $param['search_string'] = urldecode($segment[4]);
-				$data['search_string'] = $segment[4];
-				$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;	
-				$config['uri_segment'] = $param_needed+1;
-				$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
-				$this->pagination->initialize($config);
-				$param['limit'] = $config['per_page'];
-				$param['offset'] = $this->uri->segment($param_needed+1,0);
-				$param['uid'] = $this->session->userdata('id_user');
-				$data['messages'] = $this->Message_model->search_messages($param)->messages;
-			}
-			break;
+				$param_needed = 4; // minimal count of segment
+				if($segment_count>=$param_needed)
+				{
+					if ($segment[4]!='_') $param['search_string'] = urldecode($segment[4]);
+					$data['search_string'] = $segment[4];
+					$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
+					$config['uri_segment'] = $param_needed+1;
+					$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
+					$this->pagination->initialize($config);
+					$param['limit'] = $config['per_page'];
+					$param['offset'] = $this->uri->segment($param_needed+1,0);
+					$param['uid'] = $this->session->userdata('id_user');
+					$data['messages'] = $this->Message_model->search_messages($param)->messages;
+				}
+				break;
 			
 			case 'advanced':
-			$param_needed = 10;
-			if($segment_count>=$param_needed)
-			{
-				if ($segment[4]!='_') $param['search_string'] = urldecode($segment[4]);
-				if ($segment[5]!='_') $param['number'] = $segment[5];
-				if ($segment[6]!='_') $param['date_from'] = $segment[6];
-				if ($segment[7]!='_') $param['date_to'] = $segment[7];
-				if ($segment[8]!='_') $param['status'] = $segment[8];
-				if ($segment[9]!='_')
+				$param_needed = 10;
+				if($segment_count>=$param_needed)
 				{
-					$param['id_folder'] = $segment[9];
-					if ($segment[9]=='5' OR $segment[9]=='all') $param['trash'] = TRUE;
+					if ($segment[4]!='_') $param['search_string'] = urldecode($segment[4]);
+					if ($segment[5]!='_') $param['number'] = $segment[5];
+					if ($segment[6]!='_') $param['date_from'] = $segment[6];
+					if ($segment[7]!='_') $param['date_to'] = $segment[7];
+					if ($segment[8]!='_') $param['status'] = $segment[8];
+					if ($segment[9]!='_')
+					{
+						$param['id_folder'] = $segment[9];
+						if ($segment[9]=='5' OR $segment[9]=='all') $param['trash'] = TRUE;
+					}
+					$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
+					if ($segment[10]!='_')
+					{
+						$config['per_page'] = ($segment[10]=='all') ? $config['total_rows'] : $segment[10];
+					}
+					$config['uri_segment'] = $param_needed+1;
+					$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
+					$this->pagination->initialize($config);
+					$param['limit'] = $config['per_page'];
+					$param['offset'] = $this->uri->segment($param_needed+1,0);
+					$param['uid'] = $this->session->userdata('id_user');
+					$data['messages'] = $this->Message_model->search_messages($param)->messages;
 				}
-				$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
-				if ($segment[10]!='_')
-				{
-					$config['per_page'] = ($segment[10]=='all') ? $config['total_rows'] : $segment[10];
-				}				
-				$config['uri_segment'] = $param_needed+1;
-				$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
-				$this->pagination->initialize($config);
-				$param['limit'] = $config['per_page'];
-				$param['offset'] = $this->uri->segment($param_needed+1,0);		
-				$param['uid'] = $this->session->userdata('id_user');
-				$data['messages'] = $this->Message_model->search_messages($param)->messages;
-			}
-			break;
+				break;
 		}
 		$this->load->view('main/layout', $data);
 	}
@@ -1143,7 +1143,7 @@ class Messages extends MY_Controller {
 				list($start_time,$end_time) = explode("-", $modem['value']);
 				if($time >= $start_time && $time <= $end_time) $candidate_modem[] = $modem['id'];
 				endforeach;
-			break;
+				break;
 
 			case 'scheduled_day':	
 				$this->load->helper('date');
@@ -1152,7 +1152,7 @@ class Messages extends MY_Controller {
 				list($start_day,$end_day) = explode("-", $modem['value']);
 				if($day >= $start_day && $day <= $end_day) $candidate_modem[] = $modem['id'];
 				endforeach;
-			break;	
+				break;
 
 			case 'scheduled_date':	
 				list($date, $time) = explode(" ", $date);
@@ -1160,7 +1160,7 @@ class Messages extends MY_Controller {
 				list($start_date,$end_date) = explode(":", $modem['value']);
 				if($date >= $start_date && $date <= $end_date) $candidate_modem[] = $modem['id'];
 				endforeach;			
-			break;
+				break;
 
 			case 'phone_number_prefix':
 				foreach($modem_list as $modem):
@@ -1169,14 +1169,14 @@ class Messages extends MY_Controller {
 					if(strpos($phone_number, $prefix)!== FALSE) $candidate_modem[] = $modem['id'];
 					endforeach;
 				endforeach;
-			break;		
+				break;
 
 			case 'phone_number':	
 				foreach($modem_list as $modem):
 				$dest_phone_number = $modem['value'];
 				if(in_array($phone_number, $dest_phone_number)) $candidate_modem[] = $modem['id'];
 				endforeach;			
-			break;		
+				break;
 			
 			case 'user':
 				$user_id = $this->session->userdata('id_user');
@@ -1184,19 +1184,19 @@ class Messages extends MY_Controller {
 				$allowed_users = $modem['value'];
 				if(in_array($user_id, $allowed_users)) $candidate_modem[] = $modem['id'];
 				endforeach;	
-			break;
+				break;
 			
 			case 'round_robin': // currently only works with multiple message, not a single message
 				$candidate_modem[] = $this->_multiple_modem_round_robin($modem_list, $n);
-			break;
+				break;
 			
 			case 'failover':
 				$candidate_modem[] = $this->_multiple_modem_failover($modem_list);
-			break;
+				break;
 			
 			case 'recent': // use latest active modem
 				$candidate_modem[] = $this->_multiple_modem_recent($modem_list);
-			break;
+				break;
 		}
 
 		// if second strategy exist, and the first strategy is NOT one of them
@@ -1206,15 +1206,15 @@ class Messages extends MY_Controller {
 			{
 				case 'round_robin':
 					$selected_modem = $this->_multiple_modem_round_robin($candidate_modem, $n);
-				break;
+					break;
 				
 				case 'failover':
 					$selected_modem = $this->_multiple_modem_failover($candidate_modem);
-				break;
+					break;
 				
 				case 'recent':
 					$selected_modem = $this->_multiple_modem_recent($candidate_modem);
-				break;
+					break;
 			}
 		}
 		else

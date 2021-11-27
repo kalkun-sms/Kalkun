@@ -47,7 +47,7 @@ class Sms_member_model extends CI_Model {
 		{
 			case 'all':
 				$this->db->select('*');
-			break;
+				break;
 			
 			case 'total':
 				$this->db->select('count(*) as count');

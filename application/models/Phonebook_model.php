@@ -41,116 +41,116 @@ class Phonebook_model extends CI_Model {
 		switch($param['option']) 
 		{
 			case 'all':
-			$this->db->select('*');
-			$this->db->select('pbk.ID as id_pbk');
-			$this->db->select('pbk_groups.Name as GroupName');	
-			$this->db->from('pbk');
-			$this->db->where('pbk.id_user', $user_id);
-            $this->db->join('user_group', 'user_group.id_pbk=pbk.ID', 'left');
-			$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups', 'left');
-			$this->db->order_by('pbk.Name');
-			break;	
+				$this->db->select('*');
+				$this->db->select('pbk.ID as id_pbk');
+				$this->db->select('pbk_groups.Name as GroupName');
+				$this->db->from('pbk');
+				$this->db->where('pbk.id_user', $user_id);
+				$this->db->join('user_group', 'user_group.id_pbk=pbk.ID', 'left');
+				$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups', 'left');
+				$this->db->order_by('pbk.Name');
+				break;
 			
 			case 'paginate':
-			$this->db->select('*');
-			$this->db->select('ID as id_pbk');	
-			$this->db->from('pbk');
-			if(isset($param['public']) && $param['public']) $this->db->where('is_public', 'true');
-			else $this->db->where('id_user',$user_id);
-			$this->db->order_by('Name');
-			$this->db->limit($param['limit'], $param['offset']);
-			break;
+				$this->db->select('*');
+				$this->db->select('ID as id_pbk');
+				$this->db->from('pbk');
+				if(isset($param['public']) && $param['public']) $this->db->where('is_public', 'true');
+				else $this->db->where('id_user',$user_id);
+				$this->db->order_by('Name');
+				$this->db->limit($param['limit'], $param['offset']);
+				break;
 			
 			case 'by_idpbk':
-			$this->db->select('pbk.*');
-			$this->db->select('pbk.ID as id_pbk');
-            $this->db->select('pbk.Name as Name');	
-			$this->db->select('pbk_groups.Name as GroupName');	
-			$this->db->from('pbk');
-			$this->db->where('pbk.id_user', $user_id);
-            $this->db->join('user_group', 'user_group.id_pbk=pbk.ID', 'left');
-			$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups', 'left');
-			$this->db->where('pbk.ID', $param['id_pbk']);
-			break;
+				$this->db->select('pbk.*');
+				$this->db->select('pbk.ID as id_pbk');
+				$this->db->select('pbk.Name as Name');
+				$this->db->select('pbk_groups.Name as GroupName');
+				$this->db->from('pbk');
+				$this->db->where('pbk.id_user', $user_id);
+				$this->db->join('user_group', 'user_group.id_pbk=pbk.ID', 'left');
+				$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups', 'left');
+				$this->db->where('pbk.ID', $param['id_pbk']);
+				break;
 			
 			case 'group':
-			$this->db->select('*');
-			$this->db->select('Name as GroupName');
-			$this->db->from('pbk_groups');
-			if(isset($param['public']) && $param['public']) $this->db->where('is_public', 'true');
-			else $this->db->where('id_user',$user_id);			
-			$this->db->order_by('Name');
-			break;
+				$this->db->select('*');
+				$this->db->select('Name as GroupName');
+				$this->db->from('pbk_groups');
+				if(isset($param['public']) && $param['public']) $this->db->where('is_public', 'true');
+				else $this->db->where('id_user',$user_id);
+				$this->db->order_by('Name');
+				break;
 		
 			case 'group_paginate':
-			$this->db->select('*');
-			$this->db->select('Name as GroupName');
-			$this->db->from('pbk_groups');
-			if(isset($param['public']) && $param['public']) $this->db->where('is_public', 'true');
-			else $this->db->where('id_user',$user_id);
-			$this->db->order_by('Name');
-			$this->db->limit($param['limit'], $param['offset']);
-			break;	
+				$this->db->select('*');
+				$this->db->select('Name as GroupName');
+				$this->db->from('pbk_groups');
+				if(isset($param['public']) && $param['public']) $this->db->where('is_public', 'true');
+				else $this->db->where('id_user',$user_id);
+				$this->db->order_by('Name');
+				$this->db->limit($param['limit'], $param['offset']);
+				break;
 			
 			case 'groupname':
-			$this->db->select('ID');
-			$this->db->select('Name as GroupName');
-			$this->db->from('pbk_groups');
-            $condition = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";            
-            $this->db->where($condition, NULL, FALSE);
-            $this->db->where('ID', $param['id']);
-			break;
+				$this->db->select('ID');
+				$this->db->select('Name as GroupName');
+				$this->db->from('pbk_groups');
+				$condition = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";
+				$this->db->where($condition, NULL, FALSE);
+				$this->db->where('ID', $param['id']);
+				break;
 			
 			case 'bynumber':
-			// search phone number prefix
-			$arr_number = $this->convert_phonenumber(array('number' => $param['number'], 'id_user' => $user_id));
+				// search phone number prefix
+				$arr_number = $this->convert_phonenumber(array('number' => $param['number'], 'id_user' => $user_id));
 
-			$this->db->select('*');
-			$this->db->select('ID as id_pbk');	
-			$this->db->from('pbk');
-			$this->db->where("({$this->_protect_identifiers('id_user')} = '$user_id' OR {$this->_protect_identifiers('is_public')} = 'true')");
-			$this->db->where_in('Number', $arr_number);
-            break;
+				$this->db->select('*');
+				$this->db->select('ID as id_pbk');
+				$this->db->from('pbk');
+				$this->db->where("({$this->_protect_identifiers('id_user')} = '$user_id' OR {$this->_protect_identifiers('is_public')} = 'true')");
+				$this->db->where_in('Number', $arr_number);
+				break;
 			
 			case 'bygroup':
-            $this->db->select('*');	
-			$this->db->from('pbk');
-            $this->db->select('pbk.Name as Name');	
-            $this->db->select('pbk_groups.Name as GroupName');
-            $this->db->join('user_group', 'user_group.id_pbk=pbk.ID');
-			$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups');
-            $condition = "({$this->_protect_identifiers('pbk_groups.id_user')} = {$user_id} OR {$this->_protect_identifiers('pbk_groups.is_public')} = 'true')";
-            $this->db->where($condition, NULL, FALSE);
-            $this->db->where('user_group.id_pbk_groups', $param['group_id']);
-            $this->db->order_by("pbk.Name", "asc");
-            
-            if(isset($param['limit']) && isset($param['offset'])) $this->db->limit($param['limit'], $param['offset']);
-			break;
+				$this->db->select('*');
+				$this->db->from('pbk');
+				$this->db->select('pbk.Name as Name');
+				$this->db->select('pbk_groups.Name as GroupName');
+				$this->db->join('user_group', 'user_group.id_pbk=pbk.ID');
+				$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups');
+				$condition = "({$this->_protect_identifiers('pbk_groups.id_user')} = {$user_id} OR {$this->_protect_identifiers('pbk_groups.is_public')} = 'true')";
+				$this->db->where($condition, NULL, FALSE);
+				$this->db->where('user_group.id_pbk_groups', $param['group_id']);
+				$this->db->order_by("pbk.Name", "asc");
+
+				if(isset($param['limit']) && isset($param['offset'])) $this->db->limit($param['limit'], $param['offset']);
+				break;
 			
 			case 'search':
-			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $this->input->post('search_name'))));
-			$this->db->select('*');
-			$this->db->select('ID as id_pbk');
-			$this->db->from('pbk');
-			$condition1 = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";
-			$condition2_part1 = "LOWER(".$this->db->protect_identifiers('Name').") LIKE '%".$search_word."%'";
-			$condition2_part2 = "LOWER(".$this->db->protect_identifiers('Number').") LIKE '%".$search_word."%'";
-			$condition2 = "($condition2_part1 OR $condition2_part2)";
-			$this->db->where($condition1, NULL, FALSE);
-			$this->db->where($condition2, NULL, FALSE);
-			$this->db->order_by('Name');
-			break;
+				$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $this->input->post('search_name'))));
+				$this->db->select('*');
+				$this->db->select('ID as id_pbk');
+				$this->db->from('pbk');
+				$condition1 = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";
+				$condition2_part1 = "LOWER(".$this->db->protect_identifiers('Name').") LIKE '%".$search_word."%'";
+				$condition2_part2 = "LOWER(".$this->db->protect_identifiers('Number').") LIKE '%".$search_word."%'";
+				$condition2 = "($condition2_part1 OR $condition2_part2)";
+				$this->db->where($condition1, NULL, FALSE);
+				$this->db->where($condition2, NULL, FALSE);
+				$this->db->order_by('Name');
+				break;
 			
 			case 'public':
-			$this->db->select('*');
-			$this->db->select('pbk.ID as id_pbk');
-			$this->db->select('pbk_groups.Name as GroupName');	
-			$this->db->from('pbk');
-			$this->db->where('pbk.is_public', 'true');
-            $this->db->join('user_group', 'user_group.id_pbk=pbk.ID', 'left');
-			$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups', 'left');
-			$this->db->order_by('pbk.Name');
-			break;
+				$this->db->select('*');
+				$this->db->select('pbk.ID as id_pbk');
+				$this->db->select('pbk_groups.Name as GroupName');
+				$this->db->from('pbk');
+				$this->db->where('pbk.is_public', 'true');
+				$this->db->join('user_group', 'user_group.id_pbk=pbk.ID', 'left');
+				$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups', 'left');
+				$this->db->order_by('pbk.Name');
+				break;
 		}
 		//echo $this->db->last_query();
 		return $this->db->get();	
