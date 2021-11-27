@@ -137,7 +137,7 @@ else echo lang('kalkun_send_to').":";
 <div id="nowoption"></div>
 <div id="dateoption" class="hidden">
 <input type="text" name="datevalue" id="datevalue" class="datepicker" readonly="readonly" />
-<?php echo nbs(2);?>
+<?php echo "&nbsp;&nbsp;";?>
 <select name="hour"><?php echo get_hour();?></select> :
 <select name="minute"><?php echo get_minute();?></select> 			
 </div>
