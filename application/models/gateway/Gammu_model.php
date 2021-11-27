@@ -709,7 +709,7 @@ class Gammu_model extends CI_Model {
 				}
 				$char_taken++;
 				
-				if($left==0 OR $char_taken==mb_strlen($message))
+				if($left===0 OR $char_taken===mb_strlen($message))
 				{
 					$msg[] = $string;
 					$string = "";
