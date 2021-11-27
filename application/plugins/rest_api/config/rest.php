@@ -1,5 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+// phpcs:disable CodeIgniter.Commenting.InlineComment.WrongStyle
 /*
 |--------------------------------------------------------------------------
 | REST Format
@@ -204,6 +205,7 @@ $config['rest_enable_limits'] = FALSE;
 |	FALSE
 |
 */
+// phpcs:enable
 $config['rest_ignore_http_accept'] = FALSE;
 
 /* End of file config.php */

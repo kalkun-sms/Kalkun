@@ -1,11 +1,13 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+// phpcs:disable CodeIgniter.Commenting.InlineComment.WrongStyle
 /*
 |--------------------------------------------------------------------------
 | CONFIGURATION
 |--------------------------------------------------------------------------
 |
 */
+// phpcs:enable
     //$config['optout_keywords'] = array('STOP', 'STOPALL', 'UNSUBSCRIBE', 'END', 'QUIT', 'CANCEL');
     $config['optout_keywords'] = array('STOP');
     //$config['optin_keywords'] = array('ACTIVER', 'START', 'YES', 'UNSTOP');

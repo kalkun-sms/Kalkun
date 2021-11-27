@@ -1,7 +1,7 @@
 <?php
 // Portuguese Translation
 // Author: Joao Barros <profitcode@gmail.com>, Bruno Martins - VPBM, Lda <bruno.martins@vpbm.pt>
-
+// phpcs:disable CodeIgniter.Commenting.InlineComment.LongCommentWithoutSpacing -- prevents 'Please add a blank line before comments counting more than x lines.'
 // Global
 $lang['kalkun_dashboard'] = "Dashboard";
 $lang['kalkun_folder'] = "Pastas";

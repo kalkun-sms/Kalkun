@@ -1,5 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+// phpcs:disable CodeIgniter.Commenting.InlineComment.WrongStyle,CodeIgniter.Commenting.InlineComment.LongCommentWithoutSpacing
 /*
 |--------------------------------------------------------------------------
 | Kalkun Metadata (DO NOT CHANGE!!!)
@@ -298,6 +299,7 @@ $config['multiple_modem'][1]['value'] = '2014-04-17:2014-05-17';
 | Allow user to select modem when sending message
 |
 */
+// phpcs:enable
 //$config['multiple_modem_compose_state'] = FALSE;
 //$config['multiple_modem_compose_criteria'] = 'time';
 //$config['multiple_modem_compose_order'] = 'desc';

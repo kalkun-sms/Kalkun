@@ -1,4 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+// phpcs:disable CodeIgniter.Commenting.InlineComment.WrongStyle
 /*
 |--------------------------------------------------------------------------
 | CONFIGURATION
@@ -11,6 +13,7 @@
 | dn - Distinguished Name
 | 
 */
+// phpcs:enable
 $config['server'] = 'server.hostname.com';
 $config['port'] = '389';
 $config['username'] = 'user@server.hostname.com';

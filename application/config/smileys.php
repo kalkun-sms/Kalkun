@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// phpcs:disable CodeIgniter.Commenting.InlineComment.WrongStyle
 /*
 | -------------------------------------------------------------------
 | SMILEYS
@@ -13,6 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | https://codeigniter.com/user_guide/helpers/smiley_helper.html
 |
 */
+// phpcs:enable
 $smileys = array(
 
 //	smiley			image name						width	height	alt
