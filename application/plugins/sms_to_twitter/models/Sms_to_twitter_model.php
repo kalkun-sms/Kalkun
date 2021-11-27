@@ -12,13 +12,13 @@
 // ------------------------------------------------------------------------
 
 /**
- * SMS_to_twitter_model Class
+ * Sms_to_twitter_model Class
  *
  * @package		Kalkun
  * @subpackage	Plugin
  * @category	Models
  */
-class SMS_to_twitter_model extends CI_Model {
+class Sms_to_twitter_model extends CI_Model {
 	
 	function __construct()
 	{

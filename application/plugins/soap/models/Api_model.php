@@ -5,7 +5,7 @@
  *	@License: GNU General Public License
 */
 
-Class Api_Model extends CI_Model {
+Class Api_model extends CI_Model {
 	
 	function Plugin_model()
 	{

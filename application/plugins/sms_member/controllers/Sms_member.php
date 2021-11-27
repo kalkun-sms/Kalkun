@@ -12,15 +12,15 @@
 // ------------------------------------------------------------------------
 
 /**
- * Member Class
+ * Sms_member Class
  *
  * @package		Kalkun
  * @subpackage	Plugin
  * @category	Controllers
  */
-include_once(APPPATH.'plugins/Plugin_Controller.php');
+include_once(APPPATH.'plugins/Plugin_controller.php');
 
-class SMS_member extends Plugin_Controller {
+class Sms_member extends Plugin_controller {
 
 	/**
 	 * Constructor

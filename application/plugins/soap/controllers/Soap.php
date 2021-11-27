@@ -12,15 +12,15 @@
 // ------------------------------------------------------------------------
 
 /**
- * SOAP Class
+ * Soap Class
  *
  * @package		Kalkun
  * @subpackage	Plugin
  * @category	Controllers
  */
-include_once(APPPATH.'plugins/Plugin_Controller.php');
+include_once(APPPATH.'plugins/Plugin_controller.php');
 
-class Soap extends Plugin_Controller {
+class Soap extends Plugin_controller {
 
 	function __construct()
 	{
