@@ -130,7 +130,7 @@ $config['sms_bomber'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
-| Enable Smiles/Emoticons
+| Enable Smileys/Emoticons
 |--------------------------------------------------------------------------
 |
 | Enable Smiley/Emoticons for messages
