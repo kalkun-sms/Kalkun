@@ -366,7 +366,7 @@ class Gammu_model extends CI_Model {
 			
 		// merge inbox and sentitems
 		foreach($sentitems as $tmp):
-		  $data['messages'][] = $tmp;
+			$data['messages'][] = $tmp;
 		endforeach;		
 			
 		// sort data
