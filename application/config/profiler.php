@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// phpcs:disable CodeIgniter.Commenting.InlineComment.WrongStyle
 /*
 | -------------------------------------------------------------------------
 | Profiler Sections
@@ -12,3 +13,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |	https://codeigniter.com/user_guide/general/profiling.html
 |
 */
+// phpcs:enable

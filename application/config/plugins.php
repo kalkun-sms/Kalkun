@@ -1,5 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+// phpcs:disable CodeIgniter.Commenting.InlineComment.WrongStyle
 /*
 |--------------------------------------------------------------------------
 | Plugins Directory

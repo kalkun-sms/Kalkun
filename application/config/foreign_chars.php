@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// phpcs:disable CodeIgniter.Commenting.InlineComment.WrongStyle
 /*
 | -------------------------------------------------------------------
 | Foreign Characters
@@ -9,6 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | conversion used by the Text helper
 |
 */
+// phpcs:enable
 $foreign_characters = array(
 	'/ä|æ|ǽ/' => 'ae',
 	'/ö|œ/' => 'oe',

@@ -1,4 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+// phpcs:disable CodeIgniter.Commenting.InlineComment.WrongStyle
 /*
 |--------------------------------------------------------------------------
 | CONFIGURATION
@@ -8,6 +10,7 @@
 | message - the message you want to sent
 | 
 */
+// phpcs:enable
 $config['uid'] = '1';
 $config['message'] = "Thanks for sending me the message";
 

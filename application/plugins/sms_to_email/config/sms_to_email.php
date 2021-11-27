@@ -1,4 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+// phpcs:disable CodeIgniter.Commenting.InlineComment.WrongStyle
 /*
 |--------------------------------------------------------------------------
 | CONFIGURATION
@@ -15,6 +17,7 @@
 | mail_subject - The mail subject
 |
 */
+// phpcs:enable
 $config['protocol'] = 'mail';
 $config['smtp_host'] = "localhost";
 $config['smtp_port'] = "25";

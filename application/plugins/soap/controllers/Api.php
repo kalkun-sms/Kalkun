@@ -114,6 +114,7 @@ class Api extends MY_Controller {
         return true;
     }
 
+    // phpcs:disable CodeIgniter.Commenting.InlineComment.LongCommentWithoutSpacing
     function _initialze_soap_server()
     {
         log_message('debug','init');
@@ -175,6 +176,7 @@ class Api extends MY_Controller {
             );
         }
     }
+    // phpcs:enable
 
     public function sendMessage($dest = '', $message = '', $class = 1)
     {

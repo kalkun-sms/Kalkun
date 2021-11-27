@@ -1,4 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+// phpcs:disable CodeIgniter.Commenting.InlineComment.WrongStyle
 /*
 |--------------------------------------------------------------------------
 | CONFIGURATION
@@ -8,6 +10,7 @@
 | unreg_code - Unregistration code (Don't use space)
 |
 */
+// phpcs:enable
 $config['reg_code'] = 'REG';
 $config['unreg_code'] = 'UNREG';
 

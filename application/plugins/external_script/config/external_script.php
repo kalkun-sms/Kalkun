@@ -1,5 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+// phpcs:disable CodeIgniter.Commenting.InlineComment.WrongStyle
 /*
 |--------------------------------------------------------------------------
 | CONFIGURATION
@@ -16,6 +17,7 @@
 |             each value separated by |
 |
 */
+// phpcs:enable
 
 // Below are some examples
 // Enable one or more scripts by uncommenting `array_push($config['external_script'], $script);`

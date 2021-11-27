@@ -1041,11 +1041,13 @@ class Gammu_model extends CI_Model {
 
 						// deprecated
 						// inbox
-						/*$inbox = "DELETE i, ui
-								FROM inbox AS i
-								LEFT JOIN user_inbox AS ui ON ui.id_inbox = i.ID
-								WHERE i.SenderNumber = '".$number."' AND ui.trash='1'";
-						$this->db->query($inbox);*/
+						// phpcs:disable CodeIgniter.Commenting.InlineComment.LongCommentWithoutSpacing
+						//$inbox = "DELETE i, ui
+						//		FROM inbox AS i
+						//		LEFT JOIN user_inbox AS ui ON ui.id_inbox = i.ID
+						//		WHERE i.SenderNumber = '".$number."' AND ui.trash='1'";
+						//$this->db->query($inbox);
+						// phpcs:enable
 
 						// get sentitems
 						$param = array('id_folder' => $sentitems_folder, 'type' => 'sentitems', 'number' => $number, 'trash' => $trash, 'uid' => $user_id);
@@ -1064,11 +1066,13 @@ class Gammu_model extends CI_Model {
 						}
 
 						// sentitems
-						/*$sentitems = "DELETE s, us
-								FROM sentitems AS s
-								LEFT JOIN user_sentitems AS us ON us.id_sentitems = s.ID
-								WHERE s.DestinationNumber = '".$number."' AND us.trash='1'";
-						$this->db->query($sentitems);*/
+						// phpcs:disable CodeIgniter.Commenting.InlineComment.LongCommentWithoutSpacing
+						//$sentitems = "DELETE s, us
+						//		FROM sentitems AS s
+						//		LEFT JOIN user_sentitems AS us ON us.id_sentitems = s.ID
+						//		WHERE s.DestinationNumber = '".$number."' AND us.trash='1'";
+						//$this->db->query($sentitems);
+						// phpcs:enable
 						break;
 
 					case 'temp':

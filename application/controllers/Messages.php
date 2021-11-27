@@ -1244,14 +1244,15 @@ class Messages extends MY_Controller {
 		return $modems[$n-1];
 		
 		// Currently not used
-		/*$available_modem = $this->Message_model->get_modem_list('count', 'asc');
-		foreach ($modems as $modem)
-		{
-			if ($modem == $available_modem->row('ID'))
-			{
-				return $modem;
-			}
-		}*/
+		// phpcs:disable CodeIgniter.Commenting.InlineComment.LongCommentWithoutSpacing
+		//$available_modem = $this->Message_model->get_modem_list('count', 'asc');
+		//foreach ($modems as $modem)
+		//{
+		//	if ($modem == $available_modem->row('ID'))
+		//	{
+		//		return $modem;
+		//	}
+		//}
 	}
 	
 	function _multiple_modem_failover($modems)

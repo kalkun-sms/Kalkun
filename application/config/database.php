@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// phpcs:disable CodeIgniter.Commenting.InlineComment.WrongStyle
 /*
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
@@ -70,6 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
+// phpcs:enable
 $active_group = 'kalkun_mysql';
 $query_builder = TRUE;
 
