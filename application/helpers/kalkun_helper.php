@@ -203,7 +203,7 @@ function get_database_property($driver)
 	// valid and supported driver
 	$valid_driver = array('postgre', 'mysql', 'mysqli','pdo');
 	
-	if(!in_array($driver, $valid_driver)) die ('Database driver you\'re using is not supported');
+	if(!in_array($driver, $valid_driver)) die ("Database driver you're using is not supported");
 	
 	$postgre['name'] = 'postgre';
 	$postgre['file'] = 'pgsql';
