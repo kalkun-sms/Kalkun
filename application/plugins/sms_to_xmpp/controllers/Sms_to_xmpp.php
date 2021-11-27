@@ -12,15 +12,15 @@
 // ------------------------------------------------------------------------
 
 /**
- * SMS_to_xmpp Class
+ * Sms_to_xmpp Class
  *
  * @package		Kalkun
  * @subpackage	Plugin
  * @category	Controllers
  */
-include_once(APPPATH.'plugins/Plugin_Controller.php');
+include_once(APPPATH.'plugins/Plugin_controller.php');
 
-class SMS_to_xmpp extends Plugin_Controller {
+class Sms_to_xmpp extends Plugin_controller {
 	
 	function __construct()
 	{

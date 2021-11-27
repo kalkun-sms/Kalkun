@@ -12,13 +12,13 @@
 // ------------------------------------------------------------------------
 
 /**
- * SMS_to_wordpress_model Class
+ * Sms_to_wordpress_model Class
  *
  * @package		Kalkun
  * @subpackage	Plugin
  * @category	Models
  */
-class SMS_to_wordpress_model extends CI_Model {
+class Sms_to_wordpress_model extends CI_Model {
 	
 	function __construct()
 	{

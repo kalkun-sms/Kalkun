@@ -12,7 +12,7 @@
 // ------------------------------------------------------------------------
 
 /**
- * SMS_credit_model Class
+ * Sms_credit_model Class
  *
  * Handle all sms credit database activity 
  *
@@ -21,7 +21,7 @@
  * @category    Models
  */
 
-class SMS_credit_model extends CI_Model {
+class Sms_credit_model extends CI_Model {
 
     /**
      * Constructor

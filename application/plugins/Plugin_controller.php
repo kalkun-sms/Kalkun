@@ -12,7 +12,7 @@
 // ------------------------------------------------------------------------
 
 /**
- * Plugin_Controller Class
+ * Plugin_controller Class
  *
  * Check all plugin requirement before run
  *
@@ -20,7 +20,7 @@
  * @subpackage	Plugin
  * @category	Controllers
  */
-class Plugin_Controller extends MY_Controller {
+class Plugin_controller extends MY_Controller {
 		
 	var $plugin_name = '';
 	var $plugin_version = '';
@@ -99,5 +99,5 @@ class Plugin_Controller extends MY_Controller {
 	
 }	
 
-/* End of file Plugin_Controller.php */
-/* Location: ./application/plugins/Plugin_Controller.php */
+/* End of file Plugin_controller.php */
+/* Location: ./application/plugins/Plugin_controller.php */

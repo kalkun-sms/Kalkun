@@ -12,7 +12,7 @@
 // ------------------------------------------------------------------------
 
 /**
- * Member_model Class
+ * Sms_member_model Class
  *
  * Handle all member database activity 
  *
@@ -20,7 +20,7 @@
  * @subpackage	Member
  * @category	Models
  */
-class SMS_member_model extends CI_Model {
+class Sms_member_model extends CI_Model {
 
 	/**
 	 * Constructor

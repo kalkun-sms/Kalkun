@@ -18,9 +18,9 @@
  * @subpackage  Plugin
  * @category    Controllers
  */
-include_once(APPPATH.'plugins/Plugin_Controller.php');
+include_once(APPPATH.'plugins/Plugin_controller.php');
 
-class Stop_manager extends Plugin_Controller {
+class Stop_manager extends Plugin_controller {
 
     function __construct()
     {

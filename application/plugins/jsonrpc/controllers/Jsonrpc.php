@@ -12,15 +12,15 @@
 // ------------------------------------------------------------------------
 
 /**
- * JSONRPC Class
+ * Jsonrpc Class
  *
  * @package		Kalkun
  * @subpackage	Plugin
  * @category	Controllers
  */
-include_once(APPPATH.'plugins/Plugin_Controller.php');
+include_once(APPPATH.'plugins/Plugin_controller.php');
 
-class JSONRPC extends Plugin_Controller {
+class Jsonrpc extends Plugin_controller {
 	
 	function __construct()
 	{
@@ -36,7 +36,7 @@ class JSONRPC extends Plugin_Controller {
 	{
         $methods = array();
         $methods['sms.send_sms'] = array();
-        $methods['sms.send_sms']['function'] = 'JSONRPC.rpc_send_sms';
+        $methods['sms.send_sms']['function'] = 'Jsonrpc.rpc_send_sms';
         $methods['sms.send_sms']['summary']  = 'Sending an SMS';
         
         $server = $this->jsonrpc->get_server();

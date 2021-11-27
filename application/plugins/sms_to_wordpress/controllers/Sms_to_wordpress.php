@@ -12,15 +12,15 @@
 // ------------------------------------------------------------------------
 
 /**
- * SMS_to_wordpress Class
+ * Sms_to_wordpress Class
  *
  * @package		Kalkun
  * @subpackage	Plugin
  * @category	Controllers
  */
-include_once(APPPATH.'plugins/Plugin_Controller.php');
+include_once(APPPATH.'plugins/Plugin_controller.php');
 
-class SMS_to_wordpress extends Plugin_Controller {
+class Sms_to_wordpress extends Plugin_controller {
 	
 	function __construct()
 	{

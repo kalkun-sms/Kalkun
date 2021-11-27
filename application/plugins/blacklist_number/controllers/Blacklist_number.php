@@ -18,9 +18,9 @@
  * @subpackage	Plugin
  * @category	Controllers
  */
-include_once(APPPATH.'plugins/Plugin_Controller.php');
+include_once(APPPATH.'plugins/Plugin_controller.php');
 
-class Blacklist_number extends Plugin_Controller {
+class Blacklist_number extends Plugin_controller {
 	
 	function __construct()
 	{
