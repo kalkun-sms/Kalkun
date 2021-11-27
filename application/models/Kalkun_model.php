@@ -484,7 +484,7 @@ class Kalkun_model extends CI_Model {
 				$this->db->select_sum($type.'_sms_count');
 				$this->db->from('sms_used');
 
-                if(isset($param['sms_date_start']) AND isset($param['sms_date_end']))
+                if(isset($param['sms_date_start']) && isset($param['sms_date_end']))
                 {
                     $this->db->where('sms_date >=', $param['sms_date_start']);
                     $this->db->where('sms_date <=', $param['sms_date_end']);

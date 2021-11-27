@@ -419,7 +419,7 @@ class Messages extends MY_Controller {
         }
         
         // Share message
-		if (isset($share_uid) AND is_array($share_uid))
+		if (isset($share_uid) && is_array($share_uid))
 		{
 			foreach($share_uid as $id)
 			{
@@ -1050,7 +1050,7 @@ class Messages extends MY_Controller {
 			else $param['option'] = 'temp';	
 		}
 
-        if($param['option'] == 'permanent' AND $this->config->item('only_admin_can_permanently_delete') AND $this->session->userdata('level') != 'admin')
+        if($param['option'] == 'permanent' && $this->config->item('only_admin_can_permanently_delete') && $this->session->userdata('level') != 'admin')
         {
             echo lang('kalkun_msg_only_admin_can_permanently_delete');
             exit;
@@ -1200,7 +1200,7 @@ class Messages extends MY_Controller {
 		}
 
 		// if second strategy exist, and the first strategy is NOT one of them
-		if(isset($second_strategy) AND !in_array($first_strategy, $valid_second_strategy))
+		if(isset($second_strategy) && !in_array($first_strategy, $valid_second_strategy))
 		{
 			switch($second_strategy)
 			{
@@ -1219,7 +1219,7 @@ class Messages extends MY_Controller {
 		}
 		else
 		{
-			if(isset($candidate_modem) AND count($candidate_modem)>=1)
+			if(isset($candidate_modem) && count($candidate_modem)>=1)
 			{
 				$selected_modem = $candidate_modem[0];	
 			}

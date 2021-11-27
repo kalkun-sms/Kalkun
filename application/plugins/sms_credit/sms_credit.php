@@ -92,7 +92,7 @@ function sms_credit($sms)
         $has_package = FALSE;
     }
 
-    if(($has_package AND $sms_used >= $user_package['sms_numbers']) OR (!$has_package AND !$config['allow_user_with_no_package']))
+    if(($has_package && $sms_used >= $user_package['sms_numbers']) OR (!$has_package && !$config['allow_user_with_no_package']))
     {
         echo "Sorry, your sms credit limit exceeded.";
         exit;

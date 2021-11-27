@@ -62,7 +62,7 @@ class Daemon extends CI_Controller {
 			$status = do_action("message.incoming.before", $tmp_message);
 
             // message deleted, do not process later part
-            if(isset($status) AND $status=='break')
+            if(isset($status) && $status=='break')
             {
             	continue;
             }
@@ -76,7 +76,7 @@ class Daemon extends CI_Controller {
 			$status = do_action("message.incoming.after", $tmp_message);
 			
 			// message deleted, do not process later part
-			if(isset($status) AND $status=='break')
+			if(isset($status) && $status=='break')
 			{
 				continue;
 			}
@@ -125,7 +125,7 @@ class Daemon extends CI_Controller {
 			$check = in_array($tag, $msg_word);
 
             // check user phone number if enabled
-            if($check === false AND $this->config->item('inbox_routing_user_phonenumber'))
+            if($check === false && $this->config->item('inbox_routing_user_phonenumber'))
             {
                 $check = ($tmp_message->SenderNumber == $tmp_user->phone_number) ? TRUE : FALSE;
             }
@@ -185,8 +185,8 @@ class Daemon extends CI_Controller {
             $filters = $this->Kalkun_model->get_filters($user);
             foreach($filters->result() as $filter)
             {
-                if(!empty($filter->from) AND ($msg->SenderNumber != $filter->from)) continue;
-                if(!empty($filter->has_the_words) AND (strstr($msg->TextDecoded, $filter->has_the_words) === FALSE)) continue;
+                if(!empty($filter->from) && ($msg->SenderNumber != $filter->from)) continue;
+                if(!empty($filter->has_the_words) && (strstr($msg->TextDecoded, $filter->has_the_words) === FALSE)) continue;
                 $this->Message_model->move_messages(array('type' => 'single', 'folder' => 'inbox', 'id_message' => array($msg->ID), 'id_folder' => $filter->id_folder));
             }
         }

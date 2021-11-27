@@ -68,7 +68,7 @@ class Nongammu_model extends Gammu_model {
 	    $data = $this->_default(array('SenderID' => NULL, 'CreatorID' => '', 'validity' => '-1'), $data);
 
 	    // check if wap msg
-		if (isset($data['type']) AND $data['type']=='waplink') {
+		if (isset($data['type']) && $data['type']=='waplink') {
 			log_message('error',"Non-gammu alternate gateways DO NOT support WAP link sending!");
  	        return ;
 	    } 
