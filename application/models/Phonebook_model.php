@@ -96,6 +96,7 @@ class Phonebook_model extends CI_Model {
 				$this->db->select('ID');
 				$this->db->select('Name as GroupName');
 				$this->db->from('pbk_groups');
+				// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
 				$condition = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";
 				$this->db->where($condition, NULL, FALSE);
 				$this->db->where('ID', $param['id']);
@@ -108,6 +109,7 @@ class Phonebook_model extends CI_Model {
 				$this->db->select('*');
 				$this->db->select('ID as id_pbk');
 				$this->db->from('pbk');
+				// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
 				$this->db->where("({$this->_protect_identifiers('id_user')} = '$user_id' OR {$this->_protect_identifiers('is_public')} = 'true')");
 				$this->db->where_in('Number', $arr_number);
 				break;
@@ -119,6 +121,7 @@ class Phonebook_model extends CI_Model {
 				$this->db->select('pbk_groups.Name as GroupName');
 				$this->db->join('user_group', 'user_group.id_pbk=pbk.ID');
 				$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups');
+				// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
 				$condition = "({$this->_protect_identifiers('pbk_groups.id_user')} = {$user_id} OR {$this->_protect_identifiers('pbk_groups.is_public')} = 'true')";
 				$this->db->where($condition, NULL, FALSE);
 				$this->db->where('user_group.id_pbk_groups', $param['group_id']);
@@ -132,6 +135,7 @@ class Phonebook_model extends CI_Model {
 				$this->db->select('*');
 				$this->db->select('ID as id_pbk');
 				$this->db->from('pbk');
+				// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
 				$condition1 = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";
 				$condition2_part1 = "LOWER(".$this->db->protect_identifiers('Name').") LIKE '%".$search_word."%'";
 				$condition2_part2 = "LOWER(".$this->db->protect_identifiers('Number').") LIKE '%".$search_word."%'";
@@ -208,6 +212,7 @@ class Phonebook_model extends CI_Model {
 		$this->db->from('pbk');
 		$this->db->select('Number as id');
 		$this->db->select('Name as name');
+		// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
 		$this->db->where("({$this->_protect_identifiers('id_user')} = '{$param['uid']}'  OR {$this->_protect_identifiers('is_public')} = 'true' )");
 		$this->db->like('LOWER('.$this->db->protect_identifiers('Name').')', $search_word);
 		$this->db->order_by('Name');
@@ -229,6 +234,7 @@ class Phonebook_model extends CI_Model {
 		$this->db->from('pbk_groups');
 		$this->db->select('ID as id');
 		$this->db->select('Name as name');
+		// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
 		$this->db->where("({$this->_protect_identifiers('pbk_groups')}.{$this->_protect_identifiers('id_user')} = '{$param['uid']}'  OR {$this->_protect_identifiers('is_public')} = 'true' )");
 		$this->db->like('LOWER('.$this->db->protect_identifiers('Name').')', $search_word);
 		$this->db->order_by('Name');
