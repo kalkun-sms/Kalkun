@@ -148,7 +148,7 @@ function compare_date_desc($a, $b)
 
 function check_delivery_report($report)
 {
-	if($report=='SendingError' or $report=='Error' or $report=='DeliveryFailed'): $status = lang('tni_msg_stat_fail');
+	if($report=='SendingError' OR $report=='Error' OR $report=='DeliveryFailed'): $status = lang('tni_msg_stat_fail');
 	elseif($report=='SendingOKNoReport'): $status = lang('tni_msg_stat_oknr');
 	elseif($report=='SendingOK'): $status = lang('tni_msg_stat_okwr');
 	elseif($report=='DeliveryOK'): $status = lang('tni_msg_stat_deliv');
