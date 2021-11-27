@@ -47,7 +47,7 @@ class Gammu_model extends CI_Model {
 		{
 		    $cmd = '"'.$this->config->item('gammu_sms_inject').'"' ." -c " .'"'.$this->config->item('gammu_config').'"'. " WAPINDICATOR " . $data['dest']. " \"". $data['url']. "\"  \"".$data['message']."\" ";
             $ret = exec ($cmd);
-            preg_match("/with ID ([\d]+)/i",$ret,$matches);
+            preg_match('/with ID ([\d]+)/i',$ret,$matches);
             $insert_id = $matches[1];
             if(empty($insert_id))
             {
