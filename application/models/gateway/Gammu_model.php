@@ -94,7 +94,7 @@ class Gammu_model extends CI_Model {
     	$data = $this->_default(array('SenderID' => NULL, 'CreatorID' => '', 'validity' => '-1'), $data);
     	
         // check if wap msg
-        if(isset($data['type']) AND $data['type']=='waplink') { return $this->_send_wap_link($data); } 
+        if(isset($data['type']) && $data['type']=='waplink') { return $this->_send_wap_link($data); }
 		
         if($data['dest']!=NULL && $data['date']!=NULL && $data['message']!=NULL)
 		{	
@@ -262,7 +262,7 @@ class Gammu_model extends CI_Model {
 		if(isset($options['number'])) $this->db->like($tmp_number, $options['number']);
 		
 		// date range
-        if(isset($options['date_from']) AND isset($options['date_to']))
+        if(isset($options['date_from']) && isset($options['date_to']))
         {
         	$this->db->where($tmp_order.' >', $options['date_from']);
         	$this->db->where($tmp_order.' <', $options['date_to']);
@@ -312,7 +312,7 @@ class Gammu_model extends CI_Model {
 		if(isset($options['number'])) $this->db->like($tmp_number, $options['number']);
 
 		// date range
-        if(isset($options['date_from']) AND isset($options['date_to']))
+        if(isset($options['date_from']) && isset($options['date_to']))
         {
         	$this->db->where($tmp_order.' >', $options['date_from']);
         	$this->db->where($tmp_order.' <', $options['date_to']);
@@ -426,7 +426,7 @@ class Gammu_model extends CI_Model {
 		die('Invalid type request on class '.get_class($this).' function '.__FUNCTION__);		
 		
 		// if phone number is set
-		if(isset($options['number']) AND $options['number']!='sending_error') $arr_number = $this->Phonebook_model->convert_phonenumber(array('number' => $options['number']));
+		if(isset($options['number']) && $options['number']!='sending_error') $arr_number = $this->Phonebook_model->convert_phonenumber(array('number' => $options['number']));
 
 		$user_folder = "user_".$options['type'];
 		$this->db->from($options['type']);
@@ -467,10 +467,10 @@ class Gammu_model extends CI_Model {
 		}
 		
 		// if phone number is set
-		if(isset($options['number']) AND $options['number']!='sending_error') $this->db->where_in($tmp_number, $arr_number);
+		if(isset($options['number']) && $options['number']!='sending_error') $this->db->where_in($tmp_number, $arr_number);
 		
 		// sentitems only error
-		if($options['type']=='sentitems' AND isset($options['number']) AND $options['number']=='sending_error') $this->db->where('Status', 'SendingError');
+		if($options['type']=='sentitems' && isset($options['number']) && $options['number']=='sending_error') $this->db->where('Status', 'SendingError');
 		
 		// if readed is set
 		if(isset($options['readed']) && is_bool($options['readed'])) 

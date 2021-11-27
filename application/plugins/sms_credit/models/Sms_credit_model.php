@@ -58,13 +58,13 @@ class Sms_credit_model extends CI_Model {
             $this->db->like('LOWER('.$this->db->protect_identifiers('realname').')', $search_word);
         }
 
-        if(isset($param['valid_start']) AND isset($param['valid_end']))
+        if(isset($param['valid_start']) && isset($param['valid_end']))
         {
             $this->db->where('valid_start <=', $param['valid_start']);
             $this->db->where('valid_end >=', $param['valid_end']);
         }
 
-        if(isset($param['limit']) AND isset($param['offset']))
+        if(isset($param['limit']) && isset($param['offset']))
         {
             $this->db->limit($param['limit'], $param['offset']);
         }
@@ -169,7 +169,7 @@ class Sms_credit_model extends CI_Model {
      */
     function get_packages($param = array())
     {
-        if(isset($param['limit']) AND isset($param['offset']))
+        if(isset($param['limit']) && isset($param['offset']))
         {
             $this->db->limit($param['limit'], $param['offset']);
         }
