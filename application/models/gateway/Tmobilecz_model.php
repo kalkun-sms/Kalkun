@@ -73,7 +73,7 @@ class Tmobilecz_model extends Nongammu_model {
                 $eml=$auth['default']['eml'];
 	    }else{
 	        log_message('error',"TMCZ> Aborting SMS. No credentials to send SMS via ".
-                           __CLASS__." to ".$data['dest']." for user ID ".$data['uid']);
+                        __CLASS__." to ".$data['dest']." for user ID ".$data['uid']);
 		return "No credentials to send SMS.";
 	    };
 	    log_message('debug',"TMCZ> SMS via ".__CLASS__." user ".$user." to ".$data['dest'].
@@ -189,7 +189,7 @@ class Tmobilecz_model extends Nongammu_model {
 
         // Check for proper SMS sending
         if (!preg_match('|SMS zpr.v. byl. odeslán.|u',$text)&&!preg_match('|SMS was sent|u',$text)
-          &&!preg_match('|All SMS messages were sent|u',$text)) {
+            &&!preg_match('|All SMS messages were sent|u',$text)) {
             if(preg_match('|<p class="text-red text-size-2">(.+)</p>|u',$text,$matches))
               return "Error sending SMS: ".$matches[1];
 	    else
