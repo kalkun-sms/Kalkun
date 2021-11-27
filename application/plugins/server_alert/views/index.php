@@ -69,7 +69,7 @@
 		</tr>
 	    
 		<?php 
-		if($alert->num_rows()==0)
+		if($alert->num_rows()===0)
 		{
 			echo "<tr><td colspan=\"8\" style=\"border-left: 1px solid #000; border-right: 1px solid #000;\">No alert found.</td></tr>";
 		}

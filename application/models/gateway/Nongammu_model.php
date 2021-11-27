@@ -185,7 +185,7 @@ class Nongammu_model extends Gammu_model {
 		$this->db->limit(1);
 		$this->db->order_by('ID', 'DESC');
 		$lstmsg=$this->db->get();
-		if($lstmsg->num_rows() ==0){
+		if($lstmsg->num_rows() ===0){
 			$data['ID']=1;
 		}else{
 			$data['ID']=1+$lstmsg->row('ID');
@@ -214,7 +214,7 @@ class Nongammu_model extends Gammu_model {
 		$this->db->where('SendingDateTime <=',date('Y-m-d H:i:s'));
 		$this->db->order_by('SendingDateTime', 'ASC');
 		$res=$this->db->get();
-		if($res->num_rows() ==0){
+		if($res->num_rows() ===0){
 	   		log_message('debug',"Nothing to process in outbox queue.");
 	    	return;
 		};
@@ -236,7 +236,7 @@ class Nongammu_model extends Gammu_model {
 			$this->db->from('user_outbox');
 			$this->db->where('id_outbox',$row['ID']);
 			$res2=$this->db->get();
-			if ($res2->num_rows() !=1){
+			if ($res2->num_rows() !==1){
 				log_message('error',"outbox ID=".$row['ID']." not found in user_outbox. Sending as user 1.");
 			$data['uid']=1;
 			}else{

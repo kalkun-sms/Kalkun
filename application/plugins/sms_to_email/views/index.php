@@ -8,7 +8,7 @@
 <td>
 <?php 
 $email_forward = array('true' => lang('tni_yes'), 'false' => lang('tni_no'));
-if($settings->num_rows()==1)
+if($settings->num_rows()===1)
 {
 	$email_forward_act = $settings->row('email_forward'); 
 }
@@ -24,7 +24,7 @@ echo form_dropdown('email_forward', $email_forward, $email_forward_act);
 <tr valign="top">
 <td><?php echo lang('tni_email_address'); ?></td>
 <td>
-<input type="text" name="email_id" class="email" value="<?php if($settings->num_rows()==1) echo $settings->row('email_id');?>" />
+<input type="text" name="email_id" class="email" value="<?php if($settings->num_rows()===1) echo $settings->row('email_id');?>" />
 </td>
 </tr>
 </table>
