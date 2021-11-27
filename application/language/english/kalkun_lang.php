@@ -296,6 +296,7 @@ $lang['tni_msg_stat_okwr'] = "Sending OK - Waiting for Report";
 $lang['tni_msg_stat_deliv'] = "Delivered";  
 $lang['tni_msg_stat_pend'] = "Pending";  
 $lang['tni_msg_stat_unknown'] = "Unknown";  
+$lang['tni_msg_stat_reserved'] = 'Not set yet';
 
 $lang['tni_set_country_calling_code'] = "Country calling code";
 
