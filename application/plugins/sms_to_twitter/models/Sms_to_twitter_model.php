@@ -55,13 +55,13 @@ class Sms_to_twitter_model extends CI_Model {
 		$this->db->from('user');
 		$this->db->where('phone_number', $number);
 		$user = $this->db->get();
-		if ($user->num_rows() == 1)
+		if ($user->num_rows() === 1)
 		{
 			$uid = $user->row('id_user');
 			$this->db->from('plugin_sms_to_twitter');
 			$this->db->where('id_user', $uid);
 			$user_token = $this->db->get();
-			if ($user_token->num_rows() == 1)
+			if ($user_token->num_rows() === 1)
 			{
 				$tokens['access_token'] = $user_token->row('access_token');
 				$tokens['access_token_secret'] = $user_token->row('access_token_secret');

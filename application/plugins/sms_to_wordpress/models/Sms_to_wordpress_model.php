@@ -44,7 +44,7 @@ class Sms_to_wordpress_model extends CI_Model {
 		$this->db->from('plugin_sms_to_wordpress');
 		$this->db->where('id_user', $uid);
 		$user_wp = $this->db->get();
-		if ($user_wp->num_rows() == 1)
+		if ($user_wp->num_rows() === 1)
 		{
 			$secret['wp_username'] = $user_wp->row('wp_username');
 			$secret['wp_password'] = $user_wp->row('wp_password');
@@ -59,7 +59,7 @@ class Sms_to_wordpress_model extends CI_Model {
 		$this->db->from('user');
 		$this->db->where('phone_number', $number);
 		$user = $this->db->get();
-		if ($user->num_rows() == 1)
+		if ($user->num_rows() === 1)
 		{
 			$secret = $this->get_wp($user->row('id_user'));
 		}

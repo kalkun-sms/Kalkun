@@ -90,11 +90,11 @@ function sms_to_email($sms)
     foreach($msg_user as $uid)
     {
         $active  = $CI->plugin_model->get_setting($uid);
-        if($active->num_rows()==0 OR $active->row('email_forward') != 'true') continue;
+        if($active->num_rows()===0 OR $active->row('email_forward') != 'true') continue;
         $CI->email->initialize($config);
         $mail_to = $active->row('email_id');            
         $qry = $CI->Phonebook_model->get_phonebook(array('option'=>'bynumber', 'number'=>$from , 'id_user'=>$uid));
-        if($qry->num_rows()!=0) $from = $qry->row('Name');
+        if($qry->num_rows()!==0) $from = $qry->row('Name');
         $CI->email->from($config['mail_from'], $from);
         $CI->email->to($mail_to); 
         $CI->email->subject($config['mail_subject']);

@@ -23,7 +23,7 @@ if($val_type=='reply'): ?>
 <?php
 $phone = $dest;
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $phone));
-if($qry->num_rows()!=0): 
+if($qry->num_rows()!==0): 
 echo $qry->row('Name')." <".$phone.">";
 else:
 echo $phone;
@@ -46,7 +46,7 @@ endif;
 <td>
 <?php
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $dest));
-if($qry->num_rows()!=0): 
+if($qry->num_rows()!==0): 
 echo $qry->row('Name')." <".$dest.">";
 else:
 echo $dest;

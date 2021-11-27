@@ -16,7 +16,7 @@ else
 	if($tmp['source'] == 'inbox') 
 	{
 		$qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber','number'=>$tmp['SenderNumber']));
-		if($qry->num_rows()!=0) { $senderName = $qry->row('Name'); $on_pbk=TRUE;}
+		if($qry->num_rows()!==0) { $senderName = $qry->row('Name'); $on_pbk=TRUE;}
 		else { $senderName = $tmp['SenderNumber']; $on_pbk=FALSE;}
 		
 		$message_date = $tmp['ReceivingDateTime'];
@@ -26,7 +26,7 @@ else
 	else 
 	{
 		$qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber','number'=>$tmp['DestinationNumber']));
-		if($qry->num_rows()!=0) { $senderName = $qry->row('Name'); $on_pbk=TRUE;}
+		if($qry->num_rows()!==0) { $senderName = $qry->row('Name'); $on_pbk=TRUE;}
 		else { $senderName = $tmp['DestinationNumber']; $on_pbk=FALSE;}
 		
 		$message_date = $tmp['SendingDateTime'];

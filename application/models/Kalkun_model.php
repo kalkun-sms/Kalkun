@@ -48,7 +48,7 @@ class Kalkun_model extends CI_Model {
 		$this->session->set_flashdata('bef_login_post_data',
 			$this->session->flashdata('bef_login_post_data'));
 
-		if($query->num_rows()=='1' && password_verify($this->input->post('password'), $query->row('password'))) {
+		if($query->num_rows()===1 && password_verify($this->input->post('password'), $query->row('password'))) {
 			$this->session->set_userdata('loggedin', 'TRUE');
 			$this->session->set_userdata('level', $query->row('level'));
 			$this->session->set_userdata('id_user', $query->row('id_user'));
@@ -85,13 +85,13 @@ class Kalkun_model extends CI_Model {
 		$this->db->or_where('phone_number', $phone);
 		$query = $this->db->get();
 		
-		if($query->num_rows()==1)
+		if($query->num_rows()===1)
 		{
 			$this->db->from('user_forgot_password');
 			$this->db->where('id_user', $query->row('id_user'));
 			$user = $this->db->get();
 			
-			if($user->num_rows()==1)
+			if($user->num_rows()===1)
 			{
 				$valid_token = (strtotime('now') < strtotime($user->row('valid_until'))) ? TRUE : FALSE;
 				
@@ -109,7 +109,7 @@ class Kalkun_model extends CI_Model {
 				}
 			}
 			
-			if($user->num_rows()==0 OR !$valid_token)
+			if($user->num_rows()===0 OR !$valid_token)
 			{
 				$token = md5(time());
 				$this->db->set('id_user', $query->row('id_user'));
@@ -138,7 +138,7 @@ class Kalkun_model extends CI_Model {
 		$this->db->where('token', $token);
 		$token = $this->db->get();
 		
-		if($token->num_rows()==1)
+		if($token->num_rows()===1)
 		{
 			return $token->row_array();
 		}

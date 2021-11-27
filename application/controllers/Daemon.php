@@ -149,7 +149,7 @@ class Daemon extends CI_Controller {
 				$param['option'] = 'bynumber';
 				$check = $this->Phonebook_model->get_phonebook($param);
 				
-				if($check->num_rows() != 0)
+				if($check->num_rows() !== 0)
 				{
 					$msg_user[] =  $tmp_user->id_user;
 				}

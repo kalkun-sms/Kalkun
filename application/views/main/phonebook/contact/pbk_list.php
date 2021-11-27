@@ -1,5 +1,5 @@
 <?php //$this->load->view('js_init/phonebook/js_phonebook');
-if($phonebook->num_rows()==0):
+if($phonebook->num_rows()===0):
 	if($_POST) echo "<p><i>".lang('tni_contact_not_found')."</i></p>";
 	else echo "<p><i>".lang('tni_contact_search_empty')."</i></p>";
 else: ?>

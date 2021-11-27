@@ -34,7 +34,7 @@ class Sms_to_email extends Plugin_controller {
 		$data['title'] = 'SMS to Email Settings';
 		$data['main'] = 'index';
 		$data['settings'] = $this->plugin_model->get_setting($this->session->userdata('id_user'));
-		if ($data['settings']->num_rows()==1) $data['mode'] = 'edit';
+		if ($data['settings']->num_rows()===1) $data['mode'] = 'edit';
 		else $data['mode'] = 'add';
 		$this->load->view('main/layout', $data);
 	}

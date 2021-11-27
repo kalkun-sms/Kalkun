@@ -49,7 +49,7 @@ class Plugin_controller extends MY_Controller {
 		// Check if plugin is active
 		$CI =& get_instance();
 		$check = $CI->db->where('plugin_system_name', strtolower(get_class($this)))->get('plugins');
-		if ($check->num_rows()!=1)
+		if ($check->num_rows()!==1)
 		{
 			$this->session->set_flashdata('notif', 'Plugin '.strtolower(get_class($this)).' is not installed');
 			redirect('pluginss');

@@ -1363,7 +1363,7 @@ class Gammu_model extends CI_Model {
             $record = array('Name'=>$name, 'Message'=>$message, 'id_user'=> $this->session->userdata('id_user'));
              
             $query = $this->db->get_where('user_templates', array('Name'=> $name, 'id_user'=> $this->session->userdata('id_user')), 1, 0);
-            if ($query->num_rows() == 0) {
+            if ($query->num_rows() === 0) {
               // A record does not exist, insert one.
               $query = $this->db->insert('user_templates', $record);
             } else {
