@@ -81,7 +81,7 @@ class Stop_manager_model extends CI_Model {
         $q = $this->db->get('plugin_stop_manager');
         $this->db->reset_query();
 
-        if ($q->num_rows() == 1)
+        if ($q->num_rows() === 1)
         {
             // do UPDATE (there is already a row)
             $data = array (
