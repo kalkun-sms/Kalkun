@@ -19,7 +19,7 @@ endforeach;
 </div>
 <br />
 
-<?php if($this->session->userdata('level')=='admin'): ?>
+<?php if($this->session->userdata('level')==='admin'): ?>
 <div id="dash_box_titlebar"><?php echo lang('kalkun_system_information');?></div>
 <div id="dash_box">
 <table>

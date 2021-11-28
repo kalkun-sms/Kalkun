@@ -50,7 +50,7 @@
 <li><?php echo  anchor('phonebook',lang('kalkun_phonebook')); ?></li>
 <?php 
 $level = $this->session->userdata('level');
-if($level=='admin'):?>
+if($level==='admin'):?>
 	<li><?php echo anchor('users',lang('tni_user_wordp')); ?></li>
 	<?php if($this->config->item('sms_content')): ?> 
 	<li id="bottom"><?php echo anchor('member','Member'); ?></li>

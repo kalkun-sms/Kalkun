@@ -30,7 +30,7 @@ class Pluginss extends MY_Controller {
 		parent::__construct();
 
         // Prevent non-admin user
-        if($this->session->userdata('level') != 'admin')
+        if($this->session->userdata('level') !== 'admin')
         {
             $this->session->set_flashdata('notif', lang('pluginss_only_admin_can_manage'));
             redirect('/');
