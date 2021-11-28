@@ -593,5 +593,3 @@ class Kalkun_model extends CI_Model {
 
 }
 
-/* End of file kalkun_model.php */
-/* Location: ./application/models/kalkun_model.php */

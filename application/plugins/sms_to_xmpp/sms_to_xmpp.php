@@ -96,5 +96,3 @@ function sms_to_xmpp($sms)
 	}
 }
 
-/* End of file sms_to_xmpp.php */
-/* Location: ./application/plugins/sms_to_xmpp/sms_to_xmpp.php */

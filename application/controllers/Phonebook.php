@@ -412,5 +412,3 @@ class Phonebook extends MY_Controller {
     
 }
 
-/* End of file phonebook.php */
-/* Location: ./application/controllers/phonebook.php */

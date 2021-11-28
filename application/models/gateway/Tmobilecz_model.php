@@ -208,5 +208,3 @@ class Tmobilecz_model extends Nongammu_model {
 
 }
 
-/* End of file tmobilecz_model.php */
-/* Location: ./application/models/gateway/tmobilecz_model.php */

@@ -942,5 +942,3 @@ function getCountryDialCode() {
 	return $dialCode;
 }
 
-/* End of file country_dial_code_helper.php */
-/* Location: ./application/helpers/country_dial_code_helper.php */

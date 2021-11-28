@@ -1286,5 +1286,3 @@ class Messages extends MY_Controller {
 
 }	
 
-/* End of file messages.php */
-/* Location: ./application/controllers/messages.php */ 

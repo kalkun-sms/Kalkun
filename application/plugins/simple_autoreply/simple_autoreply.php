@@ -75,5 +75,3 @@ function simple_autoreply($sms)
 	$CI->Message_model->send_messages($data);
 }
 
-/* End of file simple_autoreply.php */
-/* Location: ./application/plugins/simple_autoreply/simple_autoreply.php */

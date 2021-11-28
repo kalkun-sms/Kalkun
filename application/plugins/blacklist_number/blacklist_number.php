@@ -107,5 +107,3 @@ function blacklist_number_outgoing($numbers = array())
 	return $numbers;
 }
 
-/* End of file blacklist_number.php */
-/* Location: ./application/plugins/blacklist_number/blacklist_number.php */

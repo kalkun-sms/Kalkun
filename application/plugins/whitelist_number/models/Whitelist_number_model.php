@@ -69,5 +69,3 @@ class Whitelist_number_model extends CI_Model {
 	}
 }
 
-/* End of file whitelist_number_model.php */
-/* Location: ./application/plugins/whitelist_number/models/whitelist_number_model.php */

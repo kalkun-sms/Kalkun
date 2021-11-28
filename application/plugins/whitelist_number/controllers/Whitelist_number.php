@@ -60,5 +60,3 @@ class Whitelist_number extends Plugin_controller {
 	}
 }
 	
-/* End of file whitelist_number.php */
-/* Location: ./application/plugins/whitelist_number/controllers/whitelist_number.php */

@@ -356,5 +356,3 @@ $lang['gammu_could_not_send_msg_gammu_path_incorrect'] = "Could not send message
 $lang['gammu_msg_queued'] = "Message queued";
 $lang['gammu_parameter_invalid'] = "Parameter invalid";
 
-/* End of file kalkun_lang.php */
-/* Location: ./application/language/czech/kalkun_lang.php */

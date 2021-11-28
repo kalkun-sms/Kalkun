@@ -96,5 +96,3 @@ class Server_alert_model extends CI_Model {
 
 }
 
-/* End of file server_alert_model.php */
-/* Location: ./application/models/plugin/server_alert_model.php */	

@@ -303,5 +303,3 @@ function is_null_loose($input) {
     return empty($input);
 }
 
-/* End of file kalkun_helper.php */
-/* Location: ./application/helpers/kalkun_helper.php */

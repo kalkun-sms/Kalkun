@@ -97,5 +97,3 @@ function sms_to_twitter($sms)
 	}
 }
 
-/* End of file sms_to_twitter.php */
-/* Location: ./application/plugins/sms_to_twitter/sms_to_twitter.php */

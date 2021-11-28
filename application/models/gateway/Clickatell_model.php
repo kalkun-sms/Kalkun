@@ -57,5 +57,3 @@ class Clickatell_model extends Nongammu_model {
 	}
 }
 
-/* End of file clikatell_model.php */
-/* Location: ./application/models/gateway/clikatell_model.php */

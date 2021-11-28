@@ -117,5 +117,3 @@ class Stop_manager_model extends CI_Model {
     }
 }
 
-/* End of file Stop_manager_model.php */
-/* Location: ./application/plugins/stop_manager/models/Stop_manager_model.php */

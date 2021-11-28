@@ -113,5 +113,3 @@ function sms_to_wordpress($sms)
 	}
 }
 
-/* End of file sms_to_wordpress.php */
-/* Location: ./application/plugins/sms_to_wordpress/sms_to_wordpress.php */

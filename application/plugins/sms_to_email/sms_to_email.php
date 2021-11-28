@@ -103,5 +103,3 @@ function sms_to_email($sms)
     }
 }
 
-/* End of file sms_to_email.php */
-/* Location: ./application/plugins/sms_to_email/sms_to_email.php */

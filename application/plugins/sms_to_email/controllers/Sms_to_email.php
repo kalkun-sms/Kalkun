@@ -49,5 +49,3 @@ class Sms_to_email extends Plugin_controller {
 	}
 }
 	
-/* End of file sms_to_email.php */
-/* Location: ./application/plugins/sms_to_email/controllers/sms_to_email.php */

@@ -1397,5 +1397,3 @@ class Gammu_model extends CI_Model {
     }
 }
 
-/* End of file gammu_model.php */
-/* Location: ./application/models/gateway/messages_model.php */

@@ -98,5 +98,3 @@ class Sms_member_model extends CI_Model {
 	}
 }
 
-/* End of file sms_member_model.php */
-/* Location: ./application/plugins/sms_member/models/sms_member_model.php */

@@ -99,5 +99,3 @@ function sms_credit($sms)
     }
 }
 
-/* End of file sms_credit.php */
-/* Location: ./application/plugins/sms_credit/sms_credit.php */

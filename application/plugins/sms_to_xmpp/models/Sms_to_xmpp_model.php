@@ -88,5 +88,3 @@ class Sms_to_xmpp_model extends CI_Model {
 	
 }
 
-/* End of file sms_to_xmpp_model.php */
-/* Location: ./application/plugins/sms_to_xmpp_model/models/sms_to_xmpp_model.php */

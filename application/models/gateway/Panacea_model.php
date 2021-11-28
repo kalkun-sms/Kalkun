@@ -54,5 +54,3 @@ class Panacea_model extends Nongammu_model {
 	}
 }
 
-/* End of file panacea_model.php */
-/* Location: ./application/models/gateway/panacea_model.php */

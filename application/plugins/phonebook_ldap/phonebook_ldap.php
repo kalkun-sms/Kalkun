@@ -107,5 +107,3 @@ function phonebook_ldap($number)
 }
 
 
-/* End of file phonebook_ldap.php */
-/* Location: ./application/plugins/phonebook_ldap/phonebook_ldap.php */

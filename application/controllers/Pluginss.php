@@ -164,5 +164,3 @@ class Pluginss extends MY_Controller {
 	}	
 }
 
-/* End of file plugin.php */
-/* Location: ./application/controllers/plugin.php */ 

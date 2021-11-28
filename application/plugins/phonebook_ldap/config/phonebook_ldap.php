@@ -21,5 +21,3 @@ $config['password'] = 'password';
 $config['dn'] = 'dc=server,dc=hostname,dc=com';
 
 
-/* End of file phonebook_ldap.php */
-/* Location: ./application/plugins/phonebook_ldap/config/phonebook_ldap.php */

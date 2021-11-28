@@ -122,5 +122,3 @@ function unregister_member($number)
 	$CI->plugin_model->remove_member($number);
 }
 
-/* End of file sms_member.php */
-/* Location: ./application/plugins/sms_member/sms_member.php */

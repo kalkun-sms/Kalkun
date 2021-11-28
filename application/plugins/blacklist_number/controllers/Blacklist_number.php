@@ -60,5 +60,3 @@ class Blacklist_number extends Plugin_controller {
 	}
 }
 	
-/* End of file blacklist_number.php */
-/* Location: ./application/plugins/blacklist_number/controllers/blacklist_number.php */
