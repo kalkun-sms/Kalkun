@@ -17,8 +17,8 @@ $lang['kalkun_spam'] = "Spam";
 $lang['kalkun_add'] = "Agregar";
 $lang['kalkun_action'] = "Acci&oacute;n";
 
-$lang['kalkun_phonebook'] = "Agenda de n�meros";
-$lang['kalkun_setting'] = "Configuraci�n";
+$lang['kalkun_phonebook'] = "Agenda de números";
+$lang['kalkun_setting'] = "Configuración";
 $lang['kalkun_filters'] = "Filters";
 $lang['kalkun_about'] = "Acerca de";
 $lang['kalkun_logout'] = "Salir";
@@ -54,7 +54,7 @@ $lang['kalkun_pbk_add_csv'] = "Importar a archivo CSV";
 $lang['kalkun_pbk_add_csv_desc'] = "Importar contacto desde un archivo con formato CSV";
 $lang['kalkun_pbk_add_csv_file'] = "Archivo CSV";
 $lang['kalkun_pbk_add_csv_label'] = "El archivo CSV debe tener un formato v&aacute;lido";
-$lang['kalkun_pbk_del_contact_conf'] = "¿Est&aacute; seguro que quieres eliminar <span id='contact-delete-count'></span> contacto(s)?";
+$lang['kalkun_pbk_del_contact_conf'] = "Â¿Est&aacute; seguro que quieres eliminar <span id='contact-delete-count'></span> contacto(s)?";
 $lang['kalkun_valid_example'] = "Ejemplo v&aacute;lido";
 
 // Message
@@ -89,13 +89,13 @@ $lang['kalkun_rename_folder'] = "Renombrar directorio";
 $lang['kalkun_rename_folder_title'] = "Click para renombrar este directorio";
 
 $lang['kalkun_delete_folder_confirmation_header'] = "Confirmaci&oacute;n para eliminar directorio";
-$lang['kalkun_delete_folder_confirmation'] = "Este directorio y todos sus mensajes ser&aacute;n eliminados permanentemente y no podr�n ser recuperados. �Est� seguro?";
+$lang['kalkun_delete_folder_confirmation'] = "Este directorio y todos sus mensajes ser&aacute;n eliminados permanentemente y no podrï¿œn ser recuperados. ï¿œEstï¿œ seguro?";
 
 $lang['kalkun_no_message'] = "No hay mensajes en ";
 $lang['kalkun_no_message_in_folder'] = "No hay mensajes en este directorio";
 
 $lang['kalkun_delete_all_confirmation_header'] = "Eliminar todo";
-$lang['kalkun_delete_all_confirmation'] = "¿Est&aacute;s seguro?, esto afectar&aacute; todas las conversaciones.";
+$lang['kalkun_delete_all_confirmation'] = "Â¿Est&aacute;s seguro?, esto afectar&aacute; todas las conversaciones.";
 
 $lang['kalkun_select_all'] = "Seleccionar todo";
 $lang['kalkun_clear_all'] = "Limpiar todo";
@@ -138,11 +138,11 @@ $lang['kalkun_sms_ncpr_check'] = "Comprobar NDNC";
 $lang['kalkun_insert'] = "Insertar";
 
 $lang['kalkun_canned'] = "Respuestas predise&ntilde;adas";
-$lang['kalkun_canned_empty'] = "Al parecer no existen respuestas predise&ntilde;adas por el momento. ¿Quiere guardar su primera respuesta predise&ntilde;ada ahora?";
+$lang['kalkun_canned_empty'] = "Al parecer no existen respuestas predise&ntilde;adas por el momento. Â¿Quiere guardar su primera respuesta predise&ntilde;ada ahora?";
 $lang['kalkun_canned_title'] = "Elegir respuestas";
 $lang['kalkun_canned_save_new'] = "Guardar nuevo...";
 $lang['kalkun_canned_saving'] = "Guardando...";
-$lang['kalkun_canned_confirm'] = "¿Est&aacute;s seguro?";
+$lang['kalkun_canned_confirm'] = "Â¿Est&aacute;s seguro?";
 
 // Others
 $lang['kalkun_compose_amount'] = "Cantidad";
@@ -197,7 +197,7 @@ $lang['kalkun_msg_only_admin_can_permanently_delete'] = "Only administrators can
 
 // Setting
 $lang['kalkun_setting_passwd_current'] = "Clave actual";
-$lang['kalkun_setting_passwd_forgot'] = "¿Olvid&oacute; su clave?";
+$lang['kalkun_setting_passwd_forgot'] = "Â¿Olvid&oacute; su clave?";
 $lang['kalkun_setting_passwd_new'] = "Nueva clave";
 $lang['kalkun_setting_passwd_valid_rule'] = "Debe tener al menos 6 caracteres de largo";
 
@@ -222,7 +222,7 @@ $lang['tni_send_and_repeat'] = "Send and Repeat";
 $lang['tni_sending_message'] = "Enviando";
 $lang['tni_name_search'] = "Insertar nombre desde la lista de contactos";
 $lang['tni_group_del_title'] = "Confirmaci&oacute;n para eliminar Grupo(s)";
-$lang['tni_group_delete'] = "¿Eliminar Grupo(s)?<br>Todos los contactos de este grupo ser&aacute;n eliminados.";
+$lang['tni_group_delete'] = "Â¿Eliminar Grupo(s)?<br>Todos los contactos de este grupo ser&aacute;n eliminados.";
 $lang['tni_group_del_button'] = "S&iacute;, eliminar grupo(s) seleccionado(s)";
 $lang['tni_group_add'] = "Crear Grupo";
 $lang['tni_group_name'] = "Nombre del Grupo";
@@ -260,7 +260,7 @@ $lang['tni_user_edit'] = "Editar/Agregar usuario";
 $lang['tni_user_word'] = "Usuario";
 $lang['tni_user_wordp'] = "Usuarios";
 $lang['tni_user_confirm_delete'] = "Confirmaci&oacute;n para eliminar usuarios";
-$lang['tni_user_delete_body'] = "¿Desea eliminar el usuario?<br>Este incluye todos los registros de este usuario (mensaje y contactos).";
+$lang['tni_user_delete_body'] = "Â¿Desea eliminar el usuario?<br>Este incluye todos los registros de este usuario (mensaje y contactos).";
 $lang['tni_user_not_found'] = "Usuario no encontrado";
 $lang['tni_user_search_empty'] = "El usuario est&aacute; vac&iacute;a";
 $lang['tni_user_person_name'] = "Nombre";
