@@ -31,7 +31,7 @@ class Users extends MY_Controller
 		parent::__construct();
 		
 		// check level
-		if($this->session->userdata('level')!='admin')
+		if($this->session->userdata('level')!=='admin')
 		{
 			$this->session->set_flashdata('notif', lang('users_access_denied'));
 			redirect('/');

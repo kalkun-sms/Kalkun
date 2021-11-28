@@ -1008,7 +1008,7 @@ class Messages extends MY_Controller {
 			else $param['option'] = 'temp';	
 		}
 
-        if($param['option'] == 'permanent' && $this->config->item('only_admin_can_permanently_delete') && $this->session->userdata('level') != 'admin')
+        if($param['option'] == 'permanent' && $this->config->item('only_admin_can_permanently_delete') && $this->session->userdata('level') !== 'admin')
         {
             echo lang('kalkun_msg_only_admin_can_permanently_delete');
             exit;
