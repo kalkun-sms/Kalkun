@@ -38,7 +38,7 @@ Class Soap_model extends CI_Model {
 
 	function updateRemoteAccess()
 	{
-		$status = ($this->input->post('editstatus',TRUE) == 'on')? 'true':'false';
+		$status = ($this->input->post('editstatus',TRUE) === 'on')? 'true':'false';
 		$data = array (
 				'access_name' => $this->input->post('editaccess_name',TRUE),
 				'ip_address' => $this->input->post('editip_address',TRUE),

@@ -47,7 +47,7 @@ $this->load->view('js_remote_access');
 <h3 style="float: left">Remote Access</h3> 
 <div style="float: right">
 <a href="#" title="Add Remote access" id="addremotebutton" class="simplebutton">
-<img src="<?php echo  $this->config->item('img_path');?>alert.png" />Add Rmote Access</a>	
+<img src="<?php echo  $this->config->item('img_path');?>alert.png" />Add Remote Access</a>
 </div>
 
 	<table class="nice-table" cellpadding="0" cellspacing="0">
@@ -77,7 +77,7 @@ $this->load->view('js_remote_access');
 				<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status == 'false')? '':'checked=\"checked\"'?> disabled/></td>
 				<td>&nbsp;</td>	
 				<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>			
-				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/delete_remote_access/<?php echo $tmp->id_remote_access;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
+				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/soap/delete_remote_access/<?php echo $tmp->id_remote_access;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 			</tr>
 			
 			<?php 
