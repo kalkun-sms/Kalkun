@@ -56,7 +56,7 @@ class Pluginss extends MY_Controller {
 		$data['title'] = 'Plugins';
 		$data['plugins'] = array();
 		$data['type'] = $type;
-		if($type=='installed')
+		if($type==='installed')
 		{
 			$data['title'].= lang('pluginss_installed');
 			$data['plugins'] = $this->Plugin_model->get_plugins()->result_array();	
