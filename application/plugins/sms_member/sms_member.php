@@ -78,11 +78,11 @@ function sms_member($sms)
 	list($code) = explode(" ", $message);
 	$reg_code = $config['reg_code'];
 	$unreg_code = $config['unreg_code'];
-	if (strtoupper($code)==strtoupper($reg_code))
+	if (strtoupper($code)===strtoupper($reg_code))
 	{ 
 		register_member($number);
 	}
-	else if (strtoupper($code)==strtoupper($unreg_code))
+	else if (strtoupper($code)===strtoupper($unreg_code))
 	{
 		unregister_member($number);
 	}

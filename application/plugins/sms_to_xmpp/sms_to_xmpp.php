@@ -78,7 +78,7 @@ function sms_to_xmpp($sms)
 	list($code, $to) = explode(" ", $message);
 	$xmpp_code = $config['xmpp_code'];
 	$xmpp_message = trim(str_replace($config['xmpp_code'].' '.$to, '', $message));
-	if (strtoupper($code)==strtoupper($xmpp_code))
+	if (strtoupper($code)===strtoupper($xmpp_code))
 	{
 		$CI =& get_instance();
 		$CI->load->model('sms_to_xmpp/sms_to_xmpp_model', 'plugin_model');
