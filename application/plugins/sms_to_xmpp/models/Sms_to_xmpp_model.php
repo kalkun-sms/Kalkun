@@ -31,7 +31,7 @@ class Sms_to_xmpp_model extends CI_Model {
 		$this->db->from('plugin_sms_to_xmpp');
 		$this->db->where('id_user', $uid);
 		
-		if ($this->db->count_all_results() == 1)
+		if ($this->db->count_all_results() === 1)
 		{
 			$exist = TRUE;
 		}
