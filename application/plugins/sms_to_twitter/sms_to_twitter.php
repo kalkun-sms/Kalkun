@@ -78,7 +78,7 @@ function sms_to_twitter($sms)
 	list($code) = explode(" ", $message);
 	$twitter_code = $config['twitter_code'];
 	$twitter_msg = trim(str_replace($config['twitter_code'], '', $message));
-	if (strtoupper($code)==strtoupper($twitter_code))
+	if (strtoupper($code)===strtoupper($twitter_code))
 	{
 		$CI =& get_instance();
 		$CI->load->model('sms_to_twitter/sms_to_twitter_model', 'plugin_model');

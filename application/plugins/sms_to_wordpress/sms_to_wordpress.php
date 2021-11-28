@@ -78,7 +78,7 @@ function sms_to_wordpress($sms)
 	list($code) = explode(" ", $message);
 	$wordpress_code = $config['wordpress_code'];
 	$wordpress_post = trim(str_replace($config['wordpress_code'], '', $message));
-	if (strtoupper($code)==strtoupper($wordpress_code))
+	if (strtoupper($code)===strtoupper($wordpress_code))
 	{
 		$CI =& get_instance();
 		$CI->load->model('sms_to_wordpress/sms_to_wordpress_model', 'plugin_model');
