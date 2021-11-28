@@ -101,12 +101,12 @@ class Install extends MX_Controller {
 	function run_install($type=NULL)
 	{
 		$this->load->helper('kalkun');
-		if($type=='upgrade') $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_upgrade_kalkun.sql";
+		if($type==='upgrade') $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_upgrade_kalkun.sql";
 		else $sqlfile = $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_kalkun.sql";
   
   		$data['error'] = execute_sql($sqlfile);
         
-        if($type=='upgrade') $this->_upgrade();
+        if($type==='upgrade') $this->_upgrade();
 		
         $this->db->empty_table('kalkun'); 
         $this->db->insert('kalkun', array( 'version' => $this->config->item('kalkun_version'))); 
