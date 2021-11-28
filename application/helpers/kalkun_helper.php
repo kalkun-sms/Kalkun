@@ -264,5 +264,44 @@ function execute_sql($sqlfile)
 	return $error;	
 }
 
+/**
+ * Database boolean to PHP boolean
+ *
+ * Convert data that is stored as boolean in the database to 
+ * a php bool type (true or false)
+ */
+function db_boolean_to_php_bool($dbdriver, $db_bool) {
+    switch ($dbdriver) {
+        case 'postgre':
+            if ($db_bool === 't') {
+                return TRUE;
+            }
+            //if ($db_bool === 'f') {
+            return FALSE;
+            //}
+        case 'mysql':
+        case 'mysqli':
+        case 'pdo':
+        default:
+            return boolval($db_bool);
+    }
+}
+
+/**
+ * Equivalent to "$var == NULL"
+ *
+ * This function returns the same result as "$var == NULL" but by using
+ * strict comparison operator
+  */
+function is_null_loose($input) {
+    // doing $input == NULL is like doing 'empty($input)' except that 
+    // empty() returns true if the value is "0".
+    // So in that case, return FALSE so that we can mimic '$input == NULL'
+    if (isset($input) && is_string($input) && $input === "0") {
+        return FALSE;
+    }
+    return empty($input);
+}
+
 /* End of file kalkun_helper.php */
 /* Location: ./application/helpers/kalkun_helper.php */
