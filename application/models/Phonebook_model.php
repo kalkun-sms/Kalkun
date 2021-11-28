@@ -481,7 +481,7 @@ class Phonebook_model extends CI_Model {
 	{
 		if(!isset($param['id_user'])) $param['id_user'] = '';
 		$this->load->helper('country_dial_code_helper');
-		$country_code = $this->Kalkun_model->get_setting($param['id_user'])->row('country_code');
+		$country_code = $this->Kalkun_model->get_setting()->row('country_code');
 		$dial_code = getCountryInformation($country_code);
 		$dial_code = '+'.$dial_code['dial_code'];
 		$number_local = str_replace($dial_code, '0', $param['number']);

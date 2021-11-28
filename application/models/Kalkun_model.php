@@ -176,7 +176,7 @@ class Kalkun_model extends CI_Model {
 			
 			case 'name':
 				$this->db->where('id_folder', $id_folder);
-				if($id_folder!='5' && $id_folder!='6')
+				if($id_folder!=='5' && $id_folder!=='6')
 				{
 					$this->db->where('id_user', $this->session->userdata('id_user'));
 				}				
@@ -381,7 +381,7 @@ class Kalkun_model extends CI_Model {
 	 */		
     function get_setting($id_user = '')
 	{
-		if($id_user == '') $id_user = $this->session->userdata('id_user');
+		if($id_user === '') $id_user = $this->session->userdata('id_user');
 		$this->db->where('user.id_user', $id_user);
 		$this->db->join('user', 'user.id_user = user_settings.id_user');
 		return $this->db->get('user_settings');
