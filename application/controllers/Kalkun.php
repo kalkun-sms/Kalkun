@@ -261,17 +261,17 @@ class Kalkun extends MY_Controller {
 		$valid_type = array('general', 'personal', 'appearance', 'password', 'save', 'filters');
 		if(!in_array($type, $valid_type)) show_404();
 		
-		if($_POST && $type=='save') { 		
+		if($_POST && $type==='save') { 	
 			$option = $this->input->post('option');
 			// check password
-			if($option=='password' && !password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password'))) 
+			if($option==='password' && !password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password'))) 
 			{
 				$this->session->set_flashdata('notif', lang('kalkun_wrong_password'));
 				redirect('settings/'.$option);
 			}
-			else if($option=='personal') 
+			else if($option==='personal') 
 			{
-				if($this->input->post('username')!=$this->session->userdata('username'))
+				if($this->input->post('username')!==$this->session->userdata('username'))
 				{
 					if($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows>0) 
 					{
@@ -285,7 +285,7 @@ class Kalkun extends MY_Controller {
 			redirect('settings/'.$option);
 		}
 
-        if($type == 'filters')
+        if($type === 'filters')
         {
             $data['filters'] = $this->Kalkun_model->get_filters($this->session->userdata('id_user'));
             $data['my_folders'] = $this->Kalkun_model->get_folders('all');
