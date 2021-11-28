@@ -62,7 +62,7 @@ class Daemon extends CI_Controller {
 			$status = do_action("message.incoming.before", $tmp_message);
 
             // message deleted, do not process later part
-            if(isset($status) && $status=='break')
+            if(isset($status) && $status==='break')
             {
             	continue;
             }
@@ -76,7 +76,7 @@ class Daemon extends CI_Controller {
 			$status = do_action("message.incoming.after", $tmp_message);
 			
 			// message deleted, do not process later part
-			if(isset($status) && $status=='break')
+			if(isset($status) && $status==='break')
 			{
 				continue;
 			}
@@ -89,7 +89,8 @@ class Daemon extends CI_Controller {
 			$multipart = array('type' => 'inbox', 'option' => 'check', 'id_message' => $id_message[0]);
 			$tmp_check = $this->Message_model->get_multipart($multipart);
 			
-			if($tmp_check->row('UDH')!='')
+                        // UDH is stored as text in the database (it can also be NULL)
+			if( ! empty($tmp_check->row('UDH')))
 			{
 				$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'),0,8));	
 				$multipart['phone_number'] = $tmp_check->row('SenderNumber');
@@ -127,7 +128,7 @@ class Daemon extends CI_Controller {
             // check user phone number if enabled
             if($check === false && $this->config->item('inbox_routing_user_phonenumber'))
             {
-                $check = ($tmp_message->SenderNumber == $tmp_user->phone_number) ? TRUE : FALSE;
+                $check = ($tmp_message->SenderNumber === $tmp_user->phone_number) ? TRUE : FALSE;
             }
 						
 			// update ownership
@@ -185,7 +186,7 @@ class Daemon extends CI_Controller {
             $filters = $this->Kalkun_model->get_filters($user);
             foreach($filters->result() as $filter)
             {
-                if(!empty($filter->from) && ($msg->SenderNumber != $filter->from)) continue;
+                if(!empty($filter->from) && ($msg->SenderNumber !== $filter->from)) continue;
                 if(!empty($filter->has_the_words) && (strstr($msg->TextDecoded, $filter->has_the_words) === FALSE)) continue;
                 $this->Message_model->move_messages(array('type' => 'single', 'folder' => 'inbox', 'id_message' => array($msg->ID), 'id_folder' => $filter->id_folder));
             }
