@@ -74,7 +74,7 @@ elseif($tmp['source'] == 'outbox'):
 	$multipart['type'] = 'outbox';
 	$multipart['option'] = 'check';
 	$multipart['id_message'] = $tmp['ID'];	
-	if($this->Message_model->get_multipart($multipart)=='true'):
+	if($this->Message_model->get_multipart($multipart)===TRUE):
 		$part_no = 1;
 		$multipart['option'] = 'all';
 		foreach($this->Message_model->get_multipart($multipart)->result_array() as $part):
