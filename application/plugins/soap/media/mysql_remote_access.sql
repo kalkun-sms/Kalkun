@@ -1,9 +1,7 @@
-
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `plugin_server_alert`
+-- Table structure for table `plugin_remote_access`
 --
 DROP TABLE IF EXISTS `plugin_remote_access`;
 CREATE TABLE `plugin_remote_access` (

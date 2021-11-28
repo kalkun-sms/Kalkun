@@ -46,10 +46,10 @@ class Api extends MY_Controller {
             $CI =& get_instance();
             $account = $CI->api_model->getAccount($token);
 
-            if ($account['status'] == false)
+            if ($account['status'] === false)
                 return 0;
                 
-            if ($account['ip'] == $_SERVER['REMOTE_ADDR'])
+            if ($account['ip'] === $_SERVER['REMOTE_ADDR'])
             {
                 $CI->apisession->set_userdata('loggedin', 'TRUE');
                 $CI->apisession->set_userdata('access_id',$account['id']);

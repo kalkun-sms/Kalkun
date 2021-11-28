@@ -35,7 +35,7 @@ class Soap extends Plugin_controller {
 		if($_POST) 
 		{	
 			if($this->input->post('editid_remote_access')) $this->Plugin_model->updateRemoteAccess();
-			else if ($this->input->post('notifiy') == 'on') 
+			else if ($this->input->post('notifiy') === 'on')
 				$i = 0;
 			else 
 				$this->Plugin_model->addRemoteAccess();
