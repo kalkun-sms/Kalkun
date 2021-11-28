@@ -30,7 +30,7 @@ class Messages extends MY_Controller {
 		parent::__construct();
 		
 		// session check
-		if ($this->session->userdata('loggedin')==NULL) redirect('login');
+		if ($this->session->userdata('loggedin') === NULL) redirect('login');
 		$param['uid'] = $this->session->userdata('id_user');
 		
 		$this->load->model('Phonebook_model');

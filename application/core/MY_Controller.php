@@ -39,7 +39,7 @@ class MY_Controller  extends CI_Controller  {
 		if($login)
 		{
 			// session check
-			if($this->session->userdata('loggedin')==NULL)
+			if($this->session->userdata('loggedin') === NULL)
 			{
 				$this->session->set_flashdata('bef_login_method', $this->input->method(false));
 				$this->session->set_flashdata('bef_login_history_count', -1);
