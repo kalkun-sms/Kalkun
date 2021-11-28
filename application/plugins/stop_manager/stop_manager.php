@@ -118,7 +118,7 @@ function stop_manager_cleanup_outgoing($all)
     // Remove the phone no. if the recipient is in the STOP table for this type of sms
     foreach($dest as $key => $number) {
         foreach($blocked_numbers as $n) {
-            if($n == $number) {
+            if($n === $number) {
                 unset($dest[$key]);
             }
         }
