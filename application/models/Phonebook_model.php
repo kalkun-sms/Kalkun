@@ -188,7 +188,7 @@ class Phonebook_model extends CI_Model {
 			$escaped_identifer.=$escape_char.$tmp.$escape_char;
 			
 			// if this is not the last
-			if($key!=$sub_count-1)
+			if($key!==$sub_count-1)
 			{
 				$escaped_identifer.=".";
 			}
@@ -297,7 +297,7 @@ class Phonebook_model extends CI_Model {
             {   
                 $group_id  = $CI->Phonebook_model->group_id($_grp,$param['id_user']);
                 
-                if($group_id != null)
+                if($group_id !== null)
                 {
                     $this->db->set('id_pbk', $pbk_id);
             		$this->db->set('id_pbk_groups', $group_id);
@@ -317,13 +317,14 @@ class Phonebook_model extends CI_Model {
      $id_group = $this->input->post('id_group');
      $id_pbk = $this->input->post('id_pbk');
      
-     if($id_group == 'null' ) die("Invalid Group ID");
+     //This case probably never happens because it is filtered out in 'application/views/js_init/phonebook/js_phonebook.php'
+     if($id_group === 'null' ) die("Invalid Group ID");
      
      //parse group value
      if(preg_match('/-/',$id_group)) { $mode = 'delete'; $id_group = substr($id_group,1);  }
      else $mode = 'add';
      
-     if($mode == 'delete')
+     if($mode === 'delete')
      {
         $this->db->delete('user_group', array('id_pbk' => $id_pbk , 'id_pbk_groups' => $id_group)); 
      }
