@@ -65,11 +65,13 @@ class Tmobilecz_model extends Nongammu_model {
 	    $auth=$gateway['tmobileczauth'];
 	    if (($user=$auth[$data['uid']]['user'])&&($pass=$auth[$data['uid']]['pass'])){
 	        log_message('debug',"TMCZ> Found credentials for user ID ".$data['uid']);
-		$hist=($auth[$data['uid']]['hist']==true);
+                // TODO: Changed == to === below for migration to "strict comparison operator". This wasn't tested.
+		$hist=($auth[$data['uid']]['hist']===true);
 		$eml=$auth[$data['uid']]['eml'];
 	    }elseif(($user=$auth['default']['user'])&&($pass=$auth['default']['pass'])){
 	        log_message('debug',"TMCZ> Found default credentials for all users.");
-		$hist=($auth['default']['hist']==true);
+                // TODO: Changed == to === below for migration to "strict comparison operator". This wasn't tested.
+		$hist=($auth['default']['hist']===true);
                 $eml=$auth['default']['eml'];
 	    }else{
 	        log_message('error',"TMCZ> Aborting SMS. No credentials to send SMS via ".
@@ -78,8 +80,9 @@ class Tmobilecz_model extends Nongammu_model {
 	    };
 	    log_message('debug',"TMCZ> SMS via ".__CLASS__." user ".$user." to ".$data['dest'].
 	                        " length ".strlen($data['message'])." chars");
+            // TODO: Changed both == to === below for migration to "strict comparison operator". This wasn't tested.
 	    $ret=$this->sendTMobileCZ($user, $pass, $data['dest'], $data['message'],
-                                      $data['class']=="0",$data['delivery_report']=="yes",$hist,$eml);
+                                      $data['class']==="0",$data['delivery_report']==="yes",$hist,$eml);
 	    if(is_string($ret)){
 	        log_message('error',"TMCZ> SMS via ".__CLASS__." to ".$data['dest']." failed: ".$ret);
 		return $ret;
@@ -120,7 +123,8 @@ class Tmobilecz_model extends Nongammu_model {
         curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
         curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
         curl_setopt($curl, CURLOPT_MAXREDIRS, 20);
-	$cache_path = (($path=$this->config->item('cache_path')) == '') ? BASEPATH.'cache/' : $path;
+        // TODO: Changed == to === below for migration to "strict comparison operator". This wasn't tested.
+	$cache_path = (($path=$this->config->item('cache_path')) === '') ? BASEPATH.'cache/' : $path;
 	$cookies=$cache_path."cookie_".__CLASS__."_".$uid;
 	if (! is_really_writable($cache_path))
 	    return "Cookie file $cookies not writable";
