@@ -94,5 +94,3 @@ class Connekt_model extends Nongammu_model {
 
 }
 
-/* End of file Connekt_model.php */
-/* Location: ./application/models/gateway/Connekt_model.php */

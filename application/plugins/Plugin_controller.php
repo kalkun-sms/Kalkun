@@ -99,5 +99,3 @@ class Plugin_controller extends MY_Controller {
 	
 }	
 
-/* End of file Plugin_controller.php */
-/* Location: ./application/plugins/Plugin_controller.php */

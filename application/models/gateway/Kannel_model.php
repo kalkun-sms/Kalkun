@@ -51,5 +51,3 @@ class Kannel_model extends Nongammu_model {
 	}
 }
 
-/* End of file kannel_model.php */
-/* Location: ./application/models/gateway/kannel_model.php */

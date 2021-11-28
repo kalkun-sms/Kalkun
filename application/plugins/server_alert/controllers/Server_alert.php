@@ -74,5 +74,3 @@ class Server_alert extends Plugin_controller {
 
 }
 	
-/* End of file server_alert.php */
-/* Location: ./application/plugins/server_alert/controllers/server_alert.php */

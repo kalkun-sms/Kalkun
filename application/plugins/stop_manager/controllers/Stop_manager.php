@@ -102,5 +102,3 @@ class Stop_manager extends Plugin_controller {
     }
 }
 
-/* End of file Stop_manager.php */
-/* Location: ./application/plugins/stop_manager/models/Stop_manager.php */

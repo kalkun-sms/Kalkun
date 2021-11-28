@@ -259,5 +259,3 @@ class Nongammu_model extends Gammu_model {
 
 }
 
-/* End of file nongammu_model.php */
-/* Location: ./application/models/gateway/nongammu_model.php */

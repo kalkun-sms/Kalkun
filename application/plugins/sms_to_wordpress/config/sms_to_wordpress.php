@@ -12,5 +12,3 @@
 // phpcs:enable
 $config['wordpress_code'] = 'WP';
 
-/* End of file sms_to_wordpress.php */
-/* Location: ./application/plugins/sms_to_wordpress/config/sms_to_wordpress.php */

@@ -202,5 +202,3 @@ class Sms_credit extends Plugin_controller {
 
 }
 
-/* End of file sms_credit.php */
-/* Location: ./application/plugins/sms_credit/controllers/sms_credit.php */

@@ -312,5 +312,3 @@ class Kalkun extends MY_Controller {
 	
 }
 
-/* End of file kalkun.php */
-/* Location: ./application/controllers/kalkun.php */

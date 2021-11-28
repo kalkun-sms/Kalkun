@@ -236,5 +236,3 @@ class Sms_credit_model extends CI_Model {
 
 }
 
-/* End of file sms_credit_model.php */
-/* Location: ./application/plugins/sms_credit/models/sms_credit_model.php */

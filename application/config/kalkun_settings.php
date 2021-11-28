@@ -304,5 +304,3 @@ $config['multiple_modem'][1]['value'] = '2014-04-17:2014-05-17';
 //$config['multiple_modem_compose_criteria'] = 'time';
 //$config['multiple_modem_compose_order'] = 'desc';
 
-/* End of file kalkun_settings.php */
-/* Location: ./application/config/kalkun_settings.php */

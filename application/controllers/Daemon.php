@@ -243,5 +243,3 @@ class Daemon extends CI_Controller {
 	}
 }
 
-/* End of file daemon.php */
-/* Location: ./application/controllers/daemon.php */ 

@@ -56,5 +56,3 @@ $script['parameter'] = 'phone|match';
 //array_push($config['external_script'], $script);
 unset($script);
 
-/* End of file external_script.php */
-/* Location: ./application/plugins/external_script/config/external_script.php */

@@ -79,5 +79,3 @@ function whitelist_number_outgoing($numbers = array())
 	return $numbers;
 }
 
-/* End of file whitelist_number.php */
-/* Location: ./application/plugins/whitelist_number/whitelist_number.php */

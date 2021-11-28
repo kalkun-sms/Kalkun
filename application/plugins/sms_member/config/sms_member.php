@@ -14,5 +14,3 @@
 $config['reg_code'] = 'REG';
 $config['unreg_code'] = 'UNREG';
 
-/* End of file sms_member.php */
-/* Location: ./application/plugins/sms_member/config/sms_member.php */

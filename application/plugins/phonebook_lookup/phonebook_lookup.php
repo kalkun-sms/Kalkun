@@ -69,5 +69,3 @@ function phonebook_lookup($number)
 }
 
 
-/* End of file phonebook_lookup.php */
-/* Location: ./application/plugins/phonebook_lookup/phonebook_lookup.php */

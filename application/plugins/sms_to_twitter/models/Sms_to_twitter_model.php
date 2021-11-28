@@ -71,5 +71,3 @@ class Sms_to_twitter_model extends CI_Model {
 	}
 }
 
-/* End of file sms_to_twitter_model.php */
-/* Location: ./application/plugins/sms_to_twitter/models/sms_to_twitter_model.php */

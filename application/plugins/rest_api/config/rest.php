@@ -208,5 +208,3 @@ $config['rest_enable_limits'] = FALSE;
 // phpcs:enable
 $config['rest_ignore_http_accept'] = FALSE;
 
-/* End of file config.php */
-/* Location: ./system/application/config/rest.php */

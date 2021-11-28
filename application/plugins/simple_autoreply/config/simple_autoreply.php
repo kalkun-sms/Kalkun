@@ -15,5 +15,3 @@ $config['uid'] = '1';
 $config['message'] = "Thanks for sending me the message";
 
 
-/* End of file simple_autoreply.php */
-/* Location: ./application/plugins/simple_autoreply/config/simple_autoreply.php */

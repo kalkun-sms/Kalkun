@@ -84,5 +84,3 @@ class Sms_to_wordpress_model extends CI_Model {
 	
 }
 
-/* End of file sms_to_wordpress_model.php */
-/* Location: ./application/plugins/sms_to_wordpress_model/models/sms_to_wordpress_model.php */

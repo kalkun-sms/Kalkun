@@ -28,5 +28,3 @@ $config['wordwrap'] = TRUE;
 $config['mail_from'] = 'postmaster@domain.com';
 $config['mail_subject'] = 'Kalkun New SMS';
 
-/* End of file sms_to_email.php */
-/* Location: ./application/plugins/sms_to_email/config/sms_to_email.php */

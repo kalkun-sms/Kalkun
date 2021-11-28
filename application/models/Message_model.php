@@ -45,5 +45,3 @@ class Message_model extends CI_Model {
     
 }
 
-/* End of file messages_model.php */
-/* Location: ./application/models/messages_model.php */

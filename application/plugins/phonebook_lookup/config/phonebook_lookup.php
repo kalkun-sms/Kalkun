@@ -13,5 +13,3 @@
 $config['url'] = 'http://www.krak.dk/person/resultat/#phonenumber#';
 
 
-/* End of file phonebook_lookup.php */
-/* Location: ./application/plugins/phonebook_lookup/config/phonebook_lookup.php */

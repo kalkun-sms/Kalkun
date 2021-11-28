@@ -132,5 +132,3 @@ class Install extends MX_Controller {
 	} 
 }
 
-/* End of file install.php */
-/* Location: ./application/controllers/install.php */ 

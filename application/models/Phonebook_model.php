@@ -491,5 +491,3 @@ class Phonebook_model extends CI_Model {
 	}
 }
 
-/* End of file phonebook_model.php */
-/* Location: ./application/models/phonebook_model.php */

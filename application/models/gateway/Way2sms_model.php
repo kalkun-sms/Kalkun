@@ -150,5 +150,3 @@ class Way2sms_model extends Gammu_model {
 
 }
 
-/* End of file way2sms_model.php */
-/* Location: ./application/models/gateway/way2sms_model.php */

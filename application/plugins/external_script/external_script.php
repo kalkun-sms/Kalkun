@@ -151,5 +151,3 @@ function is_preg_match($pattern, $subject)
 	else return array(FALSE, NULL);
 }
 
-/* End of file external_script.php */
-/* Location: ./application/plugins/external_script/external_script.php */

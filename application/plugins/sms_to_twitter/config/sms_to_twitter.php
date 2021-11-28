@@ -12,5 +12,3 @@
 // phpcs:enable
 $config['twitter_code'] = 'TW';
 
-/* End of file sms_to_twitter.php */
-/* Location: ./application/plugins/sms_to_twitter/config/sms_to_twitter.php */

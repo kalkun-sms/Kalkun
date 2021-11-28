@@ -51,5 +51,3 @@ class Ozeking_model extends Nongammu_model {
 	}
 }
 
-/* End of file ozeking_model.php */
-/* Location: ./application/models/gateway/ozeking_model.php */

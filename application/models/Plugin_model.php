@@ -30,5 +30,3 @@ class Plugin_model extends CI_Model {
 	
 }
 
-/* End of file plugin_model.php */
-/* Location: ./application/models/plugin_model.php */

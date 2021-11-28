@@ -51,5 +51,3 @@ class Nowsms_model extends Nongammu_model {
 	}
 }
 
-/* End of file nowsms_model.php */
-/* Location: ./application/models/gateway/nowsms_model.php */

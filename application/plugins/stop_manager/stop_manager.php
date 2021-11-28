@@ -264,5 +264,3 @@ function autoreply($tel, $reply_msg)
     }
 }
 
-/* End of file stop_manager.php */
-/* Location: ./application/plugins/stop_manager/stop_manager.php */

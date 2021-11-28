@@ -51,5 +51,3 @@ class Sms_to_email_model extends CI_Model {
 	}
 }
 
-/* End of file sms_to_email_model.php */
-/* Location: ./application/plugins/sms_to_email/models/sms_to_email_model.php */
