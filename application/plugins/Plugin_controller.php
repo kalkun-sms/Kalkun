@@ -39,7 +39,7 @@ class Plugin_controller extends MY_Controller {
         }
 
 		/* Prevent this controller from being called directly */
-		if (get_class() == get_class($this))
+		if (get_class() === get_class($this))
 		{
 			redirect(site_url('/'), 'location', 301);
 		}
