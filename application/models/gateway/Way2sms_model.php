@@ -92,7 +92,7 @@ class Way2sms_model extends Gammu_model {
 
         // Check for proper login
         $pos = stripos(curl_getinfo($curl, CURLINFO_EFFECTIVE_URL), "Main.action");
-        if ($pos === "FALSE" OR $pos == 0 OR $pos == "")
+        if ($pos === FALSE OR $pos === 0)
             return "invalid login";
 
         if (trim($msg) === "" OR strlen($msg) === 0)
@@ -110,10 +110,10 @@ class Way2sms_model extends Gammu_model {
 
         foreach ($pharr as $p)
         {
-            if(substr($p, 0, 3) == '+91')
+            if(substr($p, 0, 3) === '+91')
                 $p = substr($p, 3);
 
-            if (strlen($p) !== 10 OR !is_numeric($p) OR strpos($p, ".") != false)
+            if (strlen($p) !== 10 OR !is_numeric($p) OR strpos($p, ".") !== false)
             {
                 $result[] = array('phone' => $p, 'msg' => urldecode($msg), 'result' => "invalid number");
                 continue;
