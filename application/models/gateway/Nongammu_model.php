@@ -68,13 +68,13 @@ class Nongammu_model extends Gammu_model {
 	    $data = $this->_default(array('SenderID' => NULL, 'CreatorID' => '', 'validity' => '-1'), $data);
 
 	    // check if wap msg
-		if (isset($data['type']) && $data['type']=='waplink') {
+		if (isset($data['type']) && $data['type']==='waplink') {
 			log_message('error',"Non-gammu alternate gateways DO NOT support WAP link sending!");
  	        return ;
 	    } 
 
 	    //check empty message
-		if (trim($data['message']) == "") {
+		if (trim($data['message']) === "") {
 			log_message('error',"Cannot send empty message!");
 			return;
 	    };
@@ -134,7 +134,7 @@ class Nongammu_model extends Gammu_model {
 				'InsertIntoDB' => date('Y-m-d H:i:s'),
 				'SendingDateTime' => $tmp_data['date'],
 				'DestinationNumber' => $tmp_data['dest'],
-				'Coding' => ($tmp_data['coding']=='default'?"Default_No_Compression":"Unicode_No_Compression"),
+				'Coding' => ($tmp_data['coding']==='default'?"Default_No_Compression":"Unicode_No_Compression"),
 				'Class' => $tmp_data['class'],
 				'CreatorID' => $tmp_data['CreatorID'],
 				'SenderID' => $tmp_data['SenderID'],
@@ -167,15 +167,15 @@ class Nongammu_model extends Gammu_model {
 			'InsertIntoDB' => date('Y-m-d H:i:s'),
 			'SendingDateTime' => $tmp_data['date'],
 			'DestinationNumber' => $tmp_data['dest'],
-			'Coding' => ($tmp_data['coding']=='default'?"Default_No_Compression":"Unicode_No_Compression"),
+			'Coding' => ($tmp_data['coding']==='default'?"Default_No_Compression":"Unicode_No_Compression"),
 			'Class' => $tmp_data['class'],
 			'CreatorID' => $tmp_data['CreatorID'],
 			'Text' => '',
 			'UDH' => '',
 			'SenderID' => strval($tmp_data['SenderID']),
-			'TextDecoded' => $tmp_data['message'].($err_desc==""?'':' / '.$err_desc),
+			'TextDecoded' => $tmp_data['message'].($err_desc===""?'':' / '.$err_desc),
 			'RelativeValidity' => $tmp_data['validity'],
-			'Status' => ($err_desc==""?'SendingOK':'SendingError'),
+			'Status' => ($err_desc===""?'SendingOK':'SendingError'),
 			'SequencePosition' => 1,
 			'id_folder' => 3
 		);
@@ -224,7 +224,7 @@ class Nongammu_model extends Gammu_model {
 			$data = array (
 				'date' => $row['SendingDateTime'],
 				'dest' => $row['DestinationNumber'],
-				'coding' => ($row['Coding']=="Default_No_Compression"?'default':'unicode'),
+				'coding' => ($row['Coding']==="Default_No_Compression"?'default':'unicode'),
 				'class' => $row['Class'],
 				'CreatorID' => $row['CreatorID'],
 				'SenderID' => $row['SenderID'],
