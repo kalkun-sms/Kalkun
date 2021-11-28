@@ -47,7 +47,7 @@ class Phonebook extends MY_Controller {
 		$config = $this->_get_pagination_style();
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 
-		if ($type == 'public')
+		if ($type === 'public')
 		{
 			$config['uri_segment'] = 4;
 			$config['base_url'] = site_url().'/phonebook/index/public';
@@ -102,7 +102,7 @@ class Phonebook extends MY_Controller {
    		$config = $this->_get_pagination_style();
    		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
    		
-   		if ($type == 'public')
+   		if ($type === 'public')
    		{
    			$data['title'] = lang('kalkun_public_group');
    			$data['public_group'] = TRUE;
@@ -155,7 +155,7 @@ class Phonebook extends MY_Controller {
    		$param['offset'] = $this->uri->segment(4,0);
    		$contacts = $this->Phonebook_model->get_phonebook($param);
    		
-   		if($contacts->row('is_public') == 'true') $data['public_contact'] = TRUE;
+   		if($contacts->row('is_public') === 'true') $data['public_contact'] = TRUE;
    		else $data['public_contact'] = FALSE;
    		
    		$data['group_id'] = $group_id;
@@ -303,16 +303,16 @@ class Phonebook extends MY_Controller {
 		$data['pbkgroup'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
 		$type = $this->input->post('type');
 		
-		if ($type=='edit')
+		if ($type==='edit')
 		{
 			$id_pbk = $this->input->post('param1');
 		 	$data['contact']=$this->Phonebook_model->get_phonebook(array('option' => 'by_idpbk', 'id_pbk' => $id_pbk));
 		}
-		else if ($type=='message')
+		else if ($type==='message')
 		{
 			$data['number'] = $this->input->post('param1');
 		}
-		else if($type=='normal')
+		else if($type==='normal')
 		{
 			$data['group_id'] = $this->input->post('param1');
 		}
@@ -384,7 +384,7 @@ class Phonebook extends MY_Controller {
 			
 			// User, currently on inbox only
 			$user = array();
-			if ($type=='inbox')
+			if ($type==='inbox')
 			{
 				$user = $this->User_model->search_user($q)->result_array();
 				foreach($user as $key => $q)
