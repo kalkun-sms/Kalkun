@@ -38,7 +38,7 @@ class Sms_to_email_model extends CI_Model {
 		$this->db->set('email_id', $this->input->post('email_id'));
 		$this->db->set('email_forward', $this->input->post('email_forward'));
 
-		if ($this->input->post('mode')=='edit')
+		if ($this->input->post('mode')==='edit')
 		{
 			$this->db->where('id_user', $this->session->userdata('id_user'));
 			$this->db->update('plugin_sms_to_email');
