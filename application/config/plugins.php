@@ -10,5 +10,5 @@
 |
 */
 
-$config['plugins_dir'] = APPPATH . "plugins/";
+$config['plugins_dir'] = APPPATH . 'plugins/';
 
