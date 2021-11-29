@@ -1,4 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 include_once(APPPATH.'plugins/Plugin_controller.php');
 class REST_Controller extends Plugin_controller

@@ -1,4 +1,5 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
 * Plugin Name: SMS to Wordpress
 * Plugin URI: http://azhari.harahap.us

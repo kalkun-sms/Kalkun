@@ -1,4 +1,5 @@
-<?php (defined('BASEPATH')) OR exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /* load the MX core module class */
 require dirname(__FILE__).'/Modules.php';

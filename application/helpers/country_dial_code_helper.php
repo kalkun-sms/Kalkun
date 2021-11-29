@@ -1,4 +1,5 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
 * Country Dial Code
 * <http://ninetwozero.com/2011/12/04/php-country-array-with-dial-codes/>
