@@ -604,7 +604,6 @@ class Kalkun_model extends CI_Model {
 	 *
 	 * @access	public
 	 */
-
 	function get_filters($user_id = NULL)
 	{
 		$this->db->from('user_filters');
@@ -631,5 +630,35 @@ class Kalkun_model extends CI_Model {
 		$this->db->from('user_filters');
 		$this->db->where('id_filter', $id_filter);
 		return $this->db->delete();
+	}
+
+	function has_table_plugins()
+	{
+		return $this->db->table_exists('plugins');
+	}
+
+	function has_table_user_forgot_password()
+	{
+		return $this->db->table_exists('user_forgot_password');
+	}
+
+	function has_table_user_filters()
+	{
+		return $this->db->table_exists('user_filters');
+	}
+
+	function has_table_ci_sessions()
+	{
+		return $this->db->table_exists('ci_sessions');
+	}
+
+	function has_table_pbk()
+	{
+		return $this->db->table_exists('pbk');
+	}
+
+	function has_table_pbk_with_kalkun_fields()
+	{
+		return $this->db->field_exists('id_user', 'pbk');
 	}
 }

@@ -181,50 +181,6 @@ ALTER TABLE `sentitems` ADD `id_folder` INT( 11 ) NOT NULL DEFAULT '3';
 
 
 -- --------------------------------------------------------
--- mulai versi db 16, pbk dan pbk__groups dihapus di gammu
---
--- Alter table structure for table `pbk`
---
-CREATE TABLE `pbk` (
-  `ID` integer NOT NULL auto_increment,
-  `GroupID` integer NOT NULL default '-1',
-  `Name` text NOT NULL,
-  `Number` text NOT NULL,
-  PRIMARY KEY (`ID`)
-);
-
--- 
--- Dumping data for table `pbk`
--- 
-
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `pbk_groups`
--- 
-
-CREATE TABLE `pbk_groups` (
-  `Name` text NOT NULL,
-  `ID` integer NOT NULL auto_increment,
-  PRIMARY KEY `ID` (`ID`)
-);
-
-
-ALTER TABLE `pbk` ADD `id_user` INT( 11 ) NOT NULL;
-ALTER TABLE `pbk` ADD `is_public` enum('true','false') NOT NULL DEFAULT 'false';
-
--- --------------------------------------------------------
-
---
--- Alter table structure for table `pbk_groups`
---
-
-ALTER TABLE `pbk_groups` ADD `id_user` INT( 11 ) NOT NULL;
-ALTER TABLE `pbk_groups` ADD `is_public` enum('true','false') NOT NULL DEFAULT 'false';
-
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `user_group`
@@ -282,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `plugins` (
   `plugin_system_name` varchar(255) NOT NULL,
   `plugin_name` varchar(255) NOT NULL,
   `plugin_uri` varchar(120) DEFAULT NULL,
-  `plugin_version` varchar(30) NULL,
+  `plugin_version` varchar(30) NOT NULL,
   `plugin_description` text,
   `plugin_author` varchar(120) DEFAULT NULL,
   `plugin_author_uri` varchar(120) DEFAULT NULL,

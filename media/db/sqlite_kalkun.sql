@@ -8,7 +8,7 @@ CREATE TABLE "user" (
 	CHECK ("level" IN ('admin','user'))
 );
 
-INSERT INTO "user" VALUES(1, 'kalkun', 'Kalkun SMS', 'f0af18413d1c9e0366d8d1273160f55d5efeddfe', '123456789', 'admin');
+INSERT INTO "user" VALUES(1, 'kalkun', 'Kalkun SMS', '$2y$10$sIXe0JiaTIOsC7OOnox5t.deuJwZoawd5QKpQlSNfywziTDHpmmyy', '123456789', 'admin');
 
 CREATE TABLE "user_settings" (
 	"id_user" INTEGER PRIMARY KEY  NOT NULL, 
@@ -71,29 +71,6 @@ ALTER TABLE "inbox" ADD COLUMN "id_folder" INTEGER NOT NULL DEFAULT 1;
 ALTER TABLE "inbox" ADD COLUMN "readed" TEXT NOT NULL DEFAULT 'false';
 
 ALTER TABLE "sentitems" ADD COLUMN "id_folder" INTEGER NOT NULL DEFAULT 3;
-
--- --------------------------------------------------------
--- pbk & pbk_groups tables have been removed from gammu-smsd Databse
--- in schema version 16 (corresponding to gammu 1.37.90)
--- This will create them as they used to be created by gammu.
-
-CREATE TABLE pbk (
-  ID INTEGER PRIMARY KEY AUTOINCREMENT,
-  GroupID INTEGER NOT NULL DEFAULT '-1',
-  Name TEXT NOT NULL,
-  Number TEXT NOT NULL
-);
-
-CREATE TABLE pbk_groups (
-  Name TEXT NOT NULL,
-  ID INTEGER PRIMARY KEY AUTOINCREMENT
-);
-
-ALTER TABLE "pbk" ADD COLUMN "id_user" INTEGER NULL;
-ALTER TABLE "pbk" ADD COLUMN "is_public" TEXT NOT NULL DEFAULT 'false';
-
-ALTER TABLE "pbk_groups" ADD COLUMN "id_user" INTEGER NULL;
-ALTER TABLE "pbk_groups" ADD COLUMN "is_public" TEXT NOT NULL DEFAULT 'false';
 
 CREATE TABLE "user_group" (
   "id_group" INTEGER PRIMARY KEY AUTOINCREMENT,
