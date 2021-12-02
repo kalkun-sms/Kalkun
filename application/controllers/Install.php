@@ -18,7 +18,7 @@
  * @subpackage	Install
  * @category	Controllers
  */
-class Install extends MX_Controller {
+class Install extends CI_Controller {
 
 	/**
 	 * Constructor
