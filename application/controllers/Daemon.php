@@ -31,6 +31,7 @@ class Daemon extends CI_Controller {
 		// if($_SERVER['REMOTE_ADDR']!='127.0.0.1') exit("Access Denied.");
 		parent::__construct();
 		$this->load->library('Plugins');
+		$this->load->database();
 	}
 
 	// --------------------------------------------------------------------

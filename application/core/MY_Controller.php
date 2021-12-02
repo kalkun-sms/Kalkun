@@ -38,6 +38,7 @@ class MY_Controller  extends CI_Controller {
 		}
 
 		$this->load->library('session');
+		$this->load->database();
 
 		if ($login)
 		{
