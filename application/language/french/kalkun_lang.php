@@ -356,3 +356,5 @@ $lang['gammu_could_not_send_msg_gammu_path_incorrect'] = "Le message n'a pu êtr
 $lang['gammu_msg_queued'] = "Message mis en file d'attente";
 $lang['gammu_parameter_invalid'] = "Paramètre invalide";
 
+$lang['403_forbidden'] = '403 Forbidden';
+$lang['403_forbidden'] = 'Directory access is forbidden.';
