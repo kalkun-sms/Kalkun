@@ -211,6 +211,65 @@ class Install extends CI_Controller {
 			}
 		}
 
+		// Update b8 table from v2 (of b8 0.5) to v3 schema (of b8 0.7)
+		$b8_db_version = NULL;
+		if ($this->db->field_exists('count', 'b8_wordlist'))
+		{
+			$this->db->from('b8_wordlist');
+			$this->db->where('token', 'bayes*dbversion');
+			$b8_db_version = $this->db->get()->row()->count;
+		}
+		if ($b8_db_version === '2')
+		{
+			// Rename old table to b8_wordlist_v2
+			if ($this->db->query('ALTER TABLE b8_wordlist RENAME TO b8_wordlist_v2'))
+			{
+				// Create v3 table
+				$this->_execute_kalkun_sql_file('_b8_v3.sql');
+
+				// Fill v3 table with values from v2 table
+				$this->db->trans_start();
+
+				// 1. Inserting internal variables
+				$texts_ham_count = $this->db->query("SELECT count FROM b8_wordlist_v2 WHERE token='bayes*texts.ham'")->row()->count;
+				$texts_spam_count = $this->db->query("SELECT count FROM b8_wordlist_v2 WHERE token='bayes*texts.spam'")->row()->count;
+
+				$data = array(
+					'token' => 'b8*texts',
+					'count_ham' => $texts_ham_count,
+					'count_spam' => $texts_spam_count
+				);
+				$this->db->insert('b8_wordlist', $data);
+
+				// 2. Processing all tokens
+				$this->db->from('b8_wordlist_v2');
+				$this->db->where('token !=', 'bayes*dbversion');
+				$this->db->where('token !=', 'bayes*texts.ham');
+				$this->db->where('token !=', 'bayes*texts.spam');
+				$query = $this->db->get();
+
+				foreach ($query->result() as $row)
+				{
+					$parts = explode(' ', $row->count);
+					$ham = $parts[0];
+					$spam = $parts[1];
+
+					$data = array(
+						'token' => $row->token,
+						'count_ham' => $ham,
+						'count_spam' => $spam
+					);
+					$this->db->insert('b8_wordlist', $data);
+				}
+
+				$this->db->trans_complete();
+			}
+			else
+			{
+				return 500; // 500 = error code for failure to rename b8_wordlist
+			}
+		}
+
 		// Add here equivalent code as above for the future upgrades
 
 		return $error;

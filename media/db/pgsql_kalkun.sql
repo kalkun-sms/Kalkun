@@ -91,14 +91,21 @@ CREATE TABLE "user_templates" (
   "Message" text NOT NULL
 );
 
-CREATE TABLE "b8_wordlist" (
-  "token" varchar(255) PRIMARY KEY,
-  "count" varchar(255) DEFAULT NULL
-);
 
-INSERT INTO "b8_wordlist" VALUES('bayes*dbversion', '2');
-INSERT INTO "b8_wordlist" VALUES('bayes*texts.ham', '0');
-INSERT INTO "b8_wordlist" VALUES('bayes*texts.spam', '0');
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `b8_wordlist` v3 (for b8 >= v0.6)
+--
+
+create table "b8_wordlist" (
+  "token" varchar(255) primary key,
+  "count_ham" bigint default null,
+  "count_spam" bigint default null
+);
+insert into "b8_wordlist" ("token", "count_ham") values ('b8*dbversion', 3);
+insert into "b8_wordlist" ("token", "count_ham", "count_spam") values ('b8*texts', 0, 0);
+
 
 CREATE TABLE "plugins" (
   "plugin_id" serial PRIMARY KEY,
