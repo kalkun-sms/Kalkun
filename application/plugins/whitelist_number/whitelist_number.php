@@ -68,7 +68,7 @@ function whitelist_number_outgoing($numbers = array())
 	foreach($numbers as $key => $number)
 	{
 		foreach($heaven as $match) {
-		if(preg_match($match,$number))
+		if(preg_match($match, $number))
 		{
 			continue;
 		} else {

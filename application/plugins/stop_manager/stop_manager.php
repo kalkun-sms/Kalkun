@@ -229,7 +229,7 @@ function stop_manager_incoming($sms)
 			':received_command' => $msg,
 			':optout_keyword' => $optout_keywords[0],                                   // 1st keyword of the list
 			':optin_keyword' => ($config['enable_optin']) ? $optin_keywords[0] : '',    // 1st keyword of the list
-			':types_valides' => ($config['enable_type']) ? implode(', ',$types_valides) : '',
+			':types_valides' => ($config['enable_type']) ? implode(', ', $types_valides) : '',
 			':example' => ($config['enable_type']) ? $optout_keywords[0].' '.$types_valides[0] : $optout_keywords[0],
 		];
 

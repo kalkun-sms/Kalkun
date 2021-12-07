@@ -30,7 +30,7 @@ $("#settingsForm").validate();
 <tr valign="top">
 <td><?php echo lang('tni_signature'); ?><br /><small><?php echo lang('tni_signature_hint'); ?></small></td>
 <td>
-<?php list($sig_option, $sig) = explode(';',$settings->row('signature'));?>
+<?php list($sig_option, $sig) = explode(';', $settings->row('signature'));?>
 <input type="radio" id="signature_off" name="signatureoption" value="false" 
 <?php if($sig_option=='false') echo 'checked="checked"'; ?>  /> 
 <label for="signature_off"><?php echo lang('tni_signature_off'); ?></label><br />

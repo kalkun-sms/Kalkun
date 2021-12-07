@@ -106,7 +106,7 @@ class Stop_manager_model extends CI_Model {
 				'stop_message' => trim($msg),
 				'reg_date' => date ('Y-m-d H:i:s'),
 			);
-			$this->db->insert('plugin_stop_manager',$data);
+			$this->db->insert('plugin_stop_manager', $data);
 		}
 	}
 

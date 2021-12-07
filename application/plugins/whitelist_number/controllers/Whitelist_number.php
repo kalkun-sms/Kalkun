@@ -47,8 +47,8 @@ class Whitelist_number extends Plugin_controller {
 		$this->pagination->initialize($config);
 
 		$data['main'] = 'index';
-		$data['whitelist'] = $this->plugin_model->get('paginate', $config['per_page'], $this->uri->segment(3,0));
-		$data['number'] = $this->uri->segment(3,0)+1;
+		$data['whitelist'] = $this->plugin_model->get('paginate', $config['per_page'], $this->uri->segment(3, 0));
+		$data['number'] = $this->uri->segment(3, 0)+1;
 		$this->load->view('main/layout', $data);
 	}
 

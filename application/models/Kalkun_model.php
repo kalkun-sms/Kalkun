@@ -37,14 +37,22 @@ class Kalkun_model extends CI_Model {
 		$this->db->where('username', $username);
 		$query = $this->db->get();
 
-		$this->session->set_flashdata('bef_login_history_count',
-			$this->session->flashdata('bef_login_history_count')-1);
-		$this->session->set_flashdata('bef_login_HTTP_REFERER',
-			$this->session->flashdata('bef_login_HTTP_REFERER'));
-		$this->session->set_flashdata('bef_login_method',
-			$this->session->flashdata('bef_login_method'));
-		$this->session->set_flashdata('bef_login_post_data',
-			$this->session->flashdata('bef_login_post_data'));
+		$this->session->set_flashdata(
+			'bef_login_history_count',
+			$this->session->flashdata('bef_login_history_count')-1
+		);
+		$this->session->set_flashdata(
+			'bef_login_HTTP_REFERER',
+			$this->session->flashdata('bef_login_HTTP_REFERER')
+		);
+		$this->session->set_flashdata(
+			'bef_login_method',
+			$this->session->flashdata('bef_login_method')
+		);
+		$this->session->set_flashdata(
+			'bef_login_post_data',
+			$this->session->flashdata('bef_login_post_data')
+		);
 
 		if($query->num_rows()===1 && password_verify($this->input->post('password'), $query->row('password'))) {
 			$this->session->set_userdata('loggedin', 'TRUE');
@@ -197,7 +205,7 @@ class Kalkun_model extends CI_Model {
 	function add_folder()
 	{
 		$data = array ('name' => $this->input->post('folder_name'), 'id_user' => $this->input->post('id_user'));
-		$this->db->insert('user_folders',$data);
+		$this->db->insert('user_folders', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -543,7 +551,7 @@ class Kalkun_model extends CI_Model {
 		}
 	}
 
-	function _check_sms_used($date, $user_id , $type = 'out')
+	function _check_sms_used($date, $user_id, $type = 'out')
 	{
 		$this->db->select($type.'_sms_count');
 		$this->db->from('sms_used');

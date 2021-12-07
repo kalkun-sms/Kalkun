@@ -53,10 +53,10 @@ class Soap extends Plugin_controller {
 		$this->pagination->initialize($config);
 
 		$data['main'] = 'index';
-		$data['remote_access'] = $this->Plugin_model->getRemoteAccess('paginate', $config['per_page'], $this->uri->segment(3,0));
+		$data['remote_access'] = $this->Plugin_model->getRemoteAccess('paginate', $config['per_page'], $this->uri->segment(3, 0));
 		//TODO - GET NOTIFICATION
 		$data['notification'] = array();
-		$data['number'] = $this->uri->segment(3,0)+1;
+		$data['number'] = $this->uri->segment(3, 0)+1;
 		$this->load->view('main/layout', $data);
 	}
 

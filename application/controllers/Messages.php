@@ -79,7 +79,7 @@ class Messages extends MY_Controller {
 					if ($tmp_check->row('UDH')!=='')
 					{
 						$multipart['option'] = 'all';
-						$multipart['udh'] = substr($tmp_check->row('UDH'),0,8);
+						$multipart['udh'] = substr($tmp_check->row('UDH'), 0, 8);
 						$multipart['phone_number'] = $tmp_check->row('SenderNumber');
 						foreach($this->Message_model->get_multipart($multipart)->result() as $part):
 						$data['message'] .= $part->TextDecoded;
@@ -286,8 +286,14 @@ class Messages extends MY_Controller {
 
 			// Delay
 			case 'option3':
-				$date = date('Y-m-d H:i:s', mktime(date('H')+$this->input->post('delayhour'),
-						date('i')+$this->input->post('delayminute'), date('s'), date('m'), date('d'), date('Y')));
+				$date = date('Y-m-d H:i:s', mktime(
+					date('H')+$this->input->post('delayhour'),
+					date('i')+$this->input->post('delayminute'),
+					date('s'),
+					date('m'),
+					date('d'),
+					date('Y')
+				));
 				break;
 		}
 		$data['type'] = $this->input->post('smstype') ;
@@ -415,8 +421,14 @@ class Messages extends MY_Controller {
 					if($this->config->item('max_sms_sent_by_minute') !== 0)
 					{
 						$minute_added = floor(($n*$sms_loop+$i) / $this->config->item('max_sms_sent_by_minute'));
-						$data['date'] = date('Y-m-d H:i:s', mktime(date('H'),
-										date('i')+$minute_added, date('s'), date('m'), date('d'), date('Y')));;
+						$data['date'] = date('Y-m-d H:i:s', mktime(
+							date('H'),
+							date('i')+$minute_added,
+							date('s'),
+							date('m'),
+							date('d'),
+							date('Y')
+						));;
 					}
 
 					   // if multiple modem is active
@@ -521,7 +533,7 @@ class Messages extends MY_Controller {
 				$config['total_rows'] = $this->Message_model->get_conversation(array('type' => $type))->num_rows();
 				$param['type'] = $type;
 				$param['limit'] = $config['per_page'];
-				$param['offset'] = $this->uri->segment(4,0);
+				$param['offset'] = $this->uri->segment(4, 0);
 				$data['messages'] = $this->Message_model->get_conversation($param);
 			}
 			else
@@ -529,7 +541,7 @@ class Messages extends MY_Controller {
 				$config['total_rows'] = $this->Message_model->get_messages(array('type' => $type))->num_rows();
 				$param['type'] = $type;
 				$param['limit'] = $config['per_page'];
-				$param['offset'] = $this->uri->segment(4,0);
+				$param['offset'] = $this->uri->segment(4, 0);
 				  $param['order_by'] = ($type==='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
 				  $param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 				  $param['uid'] = $this->session->userdata('id_user');
@@ -601,14 +613,14 @@ class Messages extends MY_Controller {
 			{
 				$config['total_rows'] = $this->Message_model->get_conversation($param)->num_rows();
 				$param['limit'] = $config['per_page'];
-				$param['offset'] = $this->uri->segment(5,0);
+				$param['offset'] = $this->uri->segment(5, 0);
 				$data['messages'] = $this->Message_model->get_conversation($param);
 			}
 			else
 			{
 				$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
 				$param['limit'] = $config['per_page'];
-				$param['offset'] = $this->uri->segment(5,0);
+				$param['offset'] = $this->uri->segment(5, 0);
 				  $param['order_by'] = ($type==='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
 				  $param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 				  $param['uid'] = $this->session->userdata('id_user');
@@ -675,7 +687,7 @@ class Messages extends MY_Controller {
 			{
 			$param['type'] = 'inbox';
 			$param['limit'] = $config['per_page'];
-			$param['offset'] = $this->uri->segment(6,0);
+			$param['offset'] = $this->uri->segment(6, 0);
 			$param['order_by'] = 'ReceivingDateTime';
 			$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			  $param['uid'] = $this->session->userdata('id_user');
@@ -732,7 +744,7 @@ class Messages extends MY_Controller {
 			$this->pagination->initialize($config);
 
 			$param['limit'] = $config['per_page'];
-			$param['offset'] = $this->uri->segment(6,0);
+			$param['offset'] = $this->uri->segment(6, 0);
 			$param['order_by'] = 'SendingDateTime';
 			$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			$outbox = $this->Message_model->get_messages($param)->result_array();
@@ -765,7 +777,7 @@ class Messages extends MY_Controller {
 			$this->pagination->initialize($config);
 
 			$param['limit'] = $config['per_page'];
-			$param['offset'] = $this->uri->segment(7,0);
+			$param['offset'] = $this->uri->segment(7, 0);
 			$param['order_by'] = 'ReceivingDateTime';
 			$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			$inbox = $this->Message_model->get_messages($param)->result_array();
@@ -822,7 +834,7 @@ class Messages extends MY_Controller {
 			$config['uri_segment'] = 6;
 			$this->pagination->initialize($config);
 			$param['limit'] = $config['per_page'];
-			$param['offset'] = $this->uri->segment(6,0);
+			$param['offset'] = $this->uri->segment(6, 0);
 			$data['messages'] = $this->Message_model->search_messages($param)->messages;
 
 			if(is_ajax())
@@ -872,7 +884,7 @@ class Messages extends MY_Controller {
 					$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
 					$this->pagination->initialize($config);
 					$param['limit'] = $config['per_page'];
-					$param['offset'] = $this->uri->segment($param_needed+1,0);
+					$param['offset'] = $this->uri->segment($param_needed+1, 0);
 					$param['uid'] = $this->session->userdata('id_user');
 					$data['messages'] = $this->Message_model->search_messages($param)->messages;
 				}
@@ -901,7 +913,7 @@ class Messages extends MY_Controller {
 					$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
 					$this->pagination->initialize($config);
 					$param['limit'] = $config['per_page'];
-					$param['offset'] = $this->uri->segment($param_needed+1,0);
+					$param['offset'] = $this->uri->segment($param_needed+1, 0);
 					$param['uid'] = $this->session->userdata('id_user');
 					$data['messages'] = $this->Message_model->search_messages($param)->messages;
 				}
@@ -970,7 +982,7 @@ class Messages extends MY_Controller {
 			$tmp_check = $this->Message_model->get_multipart($multipart);
 			if($tmp_check->row('UDH')!=='')
 			{
-				$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'),0,8));
+				$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'), 0, 8));
 				$multipart['phone_number'] = $tmp_check->row('SenderNumber');
 				foreach($this->Message_model->get_multipart($multipart)->result() as $part):
 				$param['id_message'][] = $part->ID;
@@ -1022,7 +1034,7 @@ class Messages extends MY_Controller {
 			if($tmp_check->row('UDH')!=='')
 			{
 				$multipart['option'] = 'all';
-				$multipart['udh'] = substr($tmp_check->row('UDH'),0,8);
+				$multipart['udh'] = substr($tmp_check->row('UDH'), 0, 8);
 				$multipart['phone_number'] = $tmp_check->row('SenderNumber');
 				foreach($this->Message_model->get_multipart($multipart)->result() as $part):
 				$param['id'][] = $part->ID;
@@ -1097,7 +1109,7 @@ class Messages extends MY_Controller {
 			case 'scheduled_time':
 				list($date, $time) = explode(' ', $date);
 				foreach($modem_list as $modem):
-				list($start_time,$end_time) = explode('-', $modem['value']);
+				list($start_time, $end_time) = explode('-', $modem['value']);
 				if($time >= $start_time && $time <= $end_time) $candidate_modem[] = $modem['id'];
 				endforeach;
 				break;
@@ -1106,7 +1118,7 @@ class Messages extends MY_Controller {
 				$this->load->helper('date');
 				$day = date('w', human_to_unix($date));
 				foreach($modem_list as $modem):
-				list($start_day,$end_day) = explode('-', $modem['value']);
+				list($start_day, $end_day) = explode('-', $modem['value']);
 				if($day >= $start_day && $day <= $end_day) $candidate_modem[] = $modem['id'];
 				endforeach;
 				break;
@@ -1114,7 +1126,7 @@ class Messages extends MY_Controller {
 			case 'scheduled_date':
 				list($date, $time) = explode(' ', $date);
 				foreach($modem_list as $modem):
-				list($start_date,$end_date) = explode(':', $modem['value']);
+				list($start_date, $end_date) = explode(':', $modem['value']);
 				if($date >= $start_date && $date <= $end_date) $candidate_modem[] = $modem['id'];
 				endforeach;
 				break;

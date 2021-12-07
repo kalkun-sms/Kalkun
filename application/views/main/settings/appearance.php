@@ -13,7 +13,7 @@ echo form_dropdown('theme', $theme, $theme_act);
 <tr valign="top">
 <td>Background Image</td>
 <td>
-<?php list($bg_act_option, $bg_act) = explode(';',$settings->row('bg_image'));?>
+<?php list($bg_act_option, $bg_act) = explode(';', $settings->row('bg_image'));?>
 <input type="radio" id="bg_off" name="bg_image_option" value="false" 
 <?php if($bg_act_option=='false') echo 'checked="checked"'; ?> /> 
 <label for="bg_off">Background Image Off</label> <br />

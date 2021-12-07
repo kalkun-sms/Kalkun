@@ -78,7 +78,7 @@ function blacklist_number_incoming($sms)
 	// Delete message if it's on blacklist number
 	if(in_array($sms->SenderNumber, $evil))
 	{
-		$CI->db->where('ID',$sms->ID)->delete('inbox');
+		$CI->db->where('ID', $sms->ID)->delete('inbox');
 		return 'break';
 	}
 }

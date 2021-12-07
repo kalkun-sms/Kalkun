@@ -88,7 +88,7 @@ elseif($tmp['source'] == 'inbox'):
 	if(!empty($tmp['UDH'])):
 		$multipart['type'] = 'inbox';
 		$multipart['option'] = 'all';
-		$multipart['udh'] = substr($tmp['UDH'],0,8);
+		$multipart['udh'] = substr($tmp['UDH'], 0, 8);
 		$multipart['phone_number'] = $tmp['SenderNumber'];
 		foreach($this->Message_model->get_multipart($multipart)->result_array() as $part):
 		$tmp['TextDecoded'].=$part['TextDecoded'];

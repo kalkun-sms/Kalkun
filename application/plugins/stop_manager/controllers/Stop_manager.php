@@ -33,9 +33,10 @@ class Stop_manager extends Plugin_controller {
 		if($_POST && is_null($this->input->post('search_name')))
 		{
 			$this->Stop_manager_model->add(
-				$this->input->post('destination_number',TRUE),
-				$this->input->post('stop_type',TRUE),
-				$this->input->post('stop_message',TRUE));
+				$this->input->post('destination_number', TRUE),
+				$this->input->post('stop_type', TRUE),
+				$this->input->post('stop_message', TRUE)
+			);
 			redirect('plugin/stop_manager');
 		}
 
@@ -52,10 +53,10 @@ class Stop_manager extends Plugin_controller {
 			$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 			$config['cur_tag_open'] = '<span id="current">';
 			$config['cur_tag_close'] = '</span>';
-			($this->uri->segment(3,0) === 'index') ? $config['uri_segment'] = 4 : $config['uri_segment'] = 3;
+			($this->uri->segment(3, 0) === 'index') ? $config['uri_segment'] = 4 : $config['uri_segment'] = 3;
 			$this->pagination->initialize($config);
 
-			$offset = ($this->uri->segment(3,0) === 'index') ? $this->uri->segment(4,0) : $this->uri->segment(3,0);
+			$offset = ($this->uri->segment(3, 0) === 'index') ? $this->uri->segment(4, 0) : $this->uri->segment(3, 0);
 			if (!is_numeric($offset))
 				show_404();
 			if (intval($offset) >= $this->Stop_manager_model->get('count'))

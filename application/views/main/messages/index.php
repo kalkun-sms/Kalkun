@@ -15,7 +15,7 @@ else $folder = $this->Kalkun_model->get_folders('all');
 <?php endforeach;?>
 </div>
 
-<?php $this->load->view('main/messages/navigation',array('place'=>'top')); ?>		
+<?php $this->load->view('main/messages/navigation', array('place'=>'top')); ?>		
 
 <?php
 // my folder view
@@ -97,4 +97,4 @@ if($this->uri->segment(2)=='my_folder')
 	?>
 	</div>
 
-	<?php $this->load->view('main/messages/navigation',array('place'=>'bottom')); ?>
+	<?php $this->load->view('main/messages/navigation', array('place'=>'bottom')); ?>

@@ -13,7 +13,7 @@ $(document).ready(function() {
 	foreach($group->result() as $tmp):
 		$grouptext .= $tmp->GroupName.';';
 	endforeach;
-	$grouptext = substr($grouptext,0, strlen($grouptext)-1);
+	$grouptext = substr($grouptext, 0, strlen($grouptext)-1);
 	?>
     var grp_data = "<?php echo $grouptext?>".split(";");
     $('#groups').tagsInput({
@@ -43,7 +43,7 @@ $(document).ready(function() {
 
 <label for="group"><?php echo lang('kalkun_group'); ?></label> 
 <?php if(isset($contact)): ?> 
-<input name="groups" id="groups" value="<?php echo $this->Phonebook_model->get_groups($contact->row('id_pbk'),$this->session->userdata('id_user'))->GroupNames?>" type="hidden" />
+<input name="groups" id="groups" value="<?php echo $this->Phonebook_model->get_groups($contact->row('id_pbk'), $this->session->userdata('id_user'))->GroupNames?>" type="hidden" />
 <?php elseif(!empty($group_id)):?>
 <input name="groups" id="groups" value="<?php echo $this->Phonebook_model->group_name($group_id, $this->session->userdata('id_user'))?>" type="hidden" />
 <?php else : ?>

@@ -49,28 +49,28 @@ class Server_alert_model extends CI_Model {
 	function add()
 	{
 		$data = array (
-			'alert_name' => $this->input->post('alert_name',TRUE),
-			'ip_address' => $this->input->post('ip_address',TRUE),
-			'port_number' => trim($this->input->post('port_number',TRUE)),
-			'timeout' => trim($this->input->post('timeout',TRUE)),
-			'phone_number' => trim($this->input->post('phone_number',TRUE)),
-			'respond_message' => $this->input->post('respond_message',TRUE),
+			'alert_name' => $this->input->post('alert_name', TRUE),
+			'ip_address' => $this->input->post('ip_address', TRUE),
+			'port_number' => trim($this->input->post('port_number', TRUE)),
+			'timeout' => trim($this->input->post('timeout', TRUE)),
+			'phone_number' => trim($this->input->post('phone_number', TRUE)),
+			'respond_message' => $this->input->post('respond_message', TRUE),
 		);
-		$this->db->insert('plugin_server_alert',$data);
+		$this->db->insert('plugin_server_alert', $data);
 	}
 
 	function update()
 	{
 		$data = array (
-			'alert_name' => $this->input->post('editalert_name',TRUE),
-			'ip_address' => $this->input->post('editip_address',TRUE),
-			'port_number' => trim($this->input->post('editport_number',TRUE)),
-			'timeout' => trim($this->input->post('edittimeout',TRUE)),
-			'phone_number' => trim($this->input->post('editphone_number',TRUE)),
-			'respond_message' => $this->input->post('editrespond_message',TRUE),
+			'alert_name' => $this->input->post('editalert_name', TRUE),
+			'ip_address' => $this->input->post('editip_address', TRUE),
+			'port_number' => trim($this->input->post('editport_number', TRUE)),
+			'timeout' => trim($this->input->post('edittimeout', TRUE)),
+			'phone_number' => trim($this->input->post('editphone_number', TRUE)),
+			'respond_message' => $this->input->post('editrespond_message', TRUE),
 		);
-		$this->db->where('id_server_alert', $this->input->post('editid_server_alert',TRUE));
-		$this->db->update('plugin_server_alert',$data);
+		$this->db->where('id_server_alert', $this->input->post('editid_server_alert', TRUE));
+		$this->db->update('plugin_server_alert', $data);
 	}
 
 	function delete($id)

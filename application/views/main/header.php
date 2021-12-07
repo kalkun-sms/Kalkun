@@ -24,7 +24,7 @@
 <![endif]-->
 <?php
 //background image
-list($bg_act_option, $bg_act) = explode(';',$this->Kalkun_model->get_setting()->row('bg_image'));
+list($bg_act_option, $bg_act) = explode(';', $this->Kalkun_model->get_setting()->row('bg_image'));
 if($bg_act_option=='true'):?>
 <style type="text/css">
 body { 
