@@ -45,7 +45,7 @@ class Soap extends Plugin_controller {
 		$config['base_url'] = site_url().'/plugin/soap';
 		$config['total_rows'] = $this->Plugin_model->getRemoteAccess('count');
 		$config['per_page'] = 10;
-		#$config['per_page'] = $this->Kalkun_model->getSetting('paging', 'value')->row('value');
+		//$config['per_page'] = $this->Kalkun_model->getSetting('paging', 'value')->row('value');
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';
 		$config['uri_segment'] = 3;
