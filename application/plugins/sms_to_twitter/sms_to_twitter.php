@@ -32,7 +32,7 @@ add_action('message.incoming.before', 'sms_to_twitter', 15);
 */
 function sms_to_twitter_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -45,7 +45,7 @@ function sms_to_twitter_activate()
 */
 function sms_to_twitter_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -67,7 +67,7 @@ function sms_to_twitter_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH.'plugins/sms_to_twitter/media/'.$db_prop['file'].'_sms_to_twitter.sql');
 	}
-	return true;
+	return TRUE;
 }
 
 function sms_to_twitter($sms)

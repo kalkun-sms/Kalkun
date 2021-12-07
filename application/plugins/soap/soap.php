@@ -19,7 +19,7 @@
 */
 function soap_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -32,7 +32,7 @@ function soap_activate()
 */
 function soap_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -54,5 +54,5 @@ function soap_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH.'plugins/soap/media/'.$db_prop['file'].'_remote_access.sql');
 	}
-	return true;
+	return TRUE;
 }

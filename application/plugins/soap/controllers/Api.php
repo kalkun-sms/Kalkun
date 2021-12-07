@@ -46,7 +46,7 @@ class Api extends MY_Controller {
 			$CI = &get_instance();
 			$account = $CI->api_model->getAccount($token);
 
-			if ($account['status'] === false)
+			if ($account['status'] === FALSE)
 				return 0;
 
 			if ($account['ip'] === $_SERVER['REMOTE_ADDR'])
@@ -56,7 +56,7 @@ class Api extends MY_Controller {
 				return $CI->apisession->userdata('session_id');
 			}
 			else
-				$CI->session->set_userdata('loggedin', null);
+				$CI->session->set_userdata('loggedin', NULL);
 
 			return 0;
 		}
@@ -111,7 +111,7 @@ class Api extends MY_Controller {
 
 	private function remoteAccessEnabled()
 	{
-		return true;
+		return TRUE;
 	}
 
 	// phpcs:disable CodeIgniter.Commenting.InlineComment.LongCommentWithoutSpacing

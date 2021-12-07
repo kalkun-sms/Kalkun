@@ -19,7 +19,7 @@
 */
 function server_alert_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -32,7 +32,7 @@ function server_alert_activate()
 */
 function server_alert_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -54,5 +54,5 @@ function server_alert_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH.'plugins/server_alert/media/'.$db_prop['file'].'_server_alert.sql');
 	}
-	return true;
+	return TRUE;
 }

@@ -19,7 +19,7 @@
 */
 function rest_api_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -32,7 +32,7 @@ function rest_api_activate()
 */
 function rest_api_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -45,5 +45,5 @@ function rest_api_deactivate()
 */
 function rest_api_install()
 {
-	return true;
+	return TRUE;
 }

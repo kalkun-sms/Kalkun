@@ -24,7 +24,7 @@ add_action('message.outgoing', 'blacklist_number_outgoing', 10);
 */
 function blacklist_number_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -37,7 +37,7 @@ function blacklist_number_activate()
 */
 function blacklist_number_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -59,7 +59,7 @@ function blacklist_number_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH.'plugins/blacklist_number/media/'.$db_prop['file'].'_blacklist_number.sql');
 	}
-	return true;
+	return TRUE;
 }
 
 function blacklist_number_incoming($sms)

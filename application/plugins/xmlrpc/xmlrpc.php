@@ -19,7 +19,7 @@
 */
 function xmlrpc_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -32,7 +32,7 @@ function xmlrpc_activate()
 */
 function xmlrpc_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -45,5 +45,5 @@ function xmlrpc_deactivate()
 */
 function xmlrpc_install()
 {
-	return true;
+	return TRUE;
 }

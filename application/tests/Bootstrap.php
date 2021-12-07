@@ -339,7 +339,7 @@ switch (ENVIRONMENT)
 require CI_PHPUNIT_TESTPATH . 'patcher/bootstrap.php';
 MonkeyPatchManager::init([
 	// If you want debug log, set `debug` true, and optionally you can set the log file path
-	'debug' => true,
+	'debug' => TRUE,
 	'log_file' => '/tmp/monkey-patch-debug.log',
 	// PHP Parser: PREFER_PHP7, PREFER_PHP5, ONLY_PHP7, ONLY_PHP5
 	'php_parser' => 'PREFER_PHP5',

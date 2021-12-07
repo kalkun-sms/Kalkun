@@ -32,7 +32,7 @@ add_action('phonebook.contact.menu', 'phonebook_lookup', 10);
 */
 function phonebook_lookup_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -45,7 +45,7 @@ function phonebook_lookup_activate()
 */
 function phonebook_lookup_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -58,7 +58,7 @@ function phonebook_lookup_deactivate()
 */
 function phonebook_lookup_install()
 {
-	return true;
+	return TRUE;
 }
 
 function phonebook_lookup($number)
