@@ -14,7 +14,7 @@
 /**
  * Kannel_model Class
  *
- * Handle all messages database activity 
+ * Handle all messages database activity
  * for Kannel <http://www.kannel.org/>
  *
  * @package		Kalkun
@@ -24,7 +24,6 @@
 require_once('Nongammu_model.php');
 
 class Kannel_model extends Nongammu_model {
-	
 	/**
 	 * Constructor
 	 *
@@ -34,15 +33,15 @@ class Kannel_model extends Nongammu_model {
 	{
 		parent::__construct();
 	}
-	
-    // --------------------------------------------------------------------
-	
+
+	// --------------------------------------------------------------------
+
 	/**
 	 * Send Messages (Still POC)
 	 *
-	 * 
+	 *
 	 * @return void
-	 */	
+	 */
 	function really_send_messages($data)
 	{
 		$gateway = $this->config->item('gateway');
@@ -50,4 +49,3 @@ class Kannel_model extends Nongammu_model {
 			'&password='.$gateway['password'].'&to='.$data['dest'].'&text='.urlencode($data['message']));
 	}
 }
-

@@ -25,7 +25,7 @@ echo doctype('html5');?>
 	// the web-form he initially submitted is not lost.
 
 	// Some browsers like firefox don't honor the history.go() well in case of an onload event
-	// Hence this message with a link pointing to the history on which the user can click. ?>
+	// Hence this message with a link pointing to the history on which the user can click.?>
 	<body onload="goBackToForm()">
 		<p><?php
 			printf(lang('kalkun_msg_login_success_data_lost'), strtoupper($this->session->flashdata('bef_login_method')));
@@ -35,7 +35,7 @@ echo doctype('html5');?>
 	</body>
 <?php } else {
 	// Here the user logged in and we could keep the content of the POST.
-	// So resubmit the POSTed data directly to this page  ?>
+	// So resubmit the POSTed data directly to this page?>
 	<body onload="submitForm()">
 		<p><?php echo lang('kalkun_msg_login_success_resubmit');?></p>
 		<form name="redirectpost" method="post" action="<?php echo current_url(); ?>">

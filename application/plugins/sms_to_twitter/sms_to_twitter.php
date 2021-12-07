@@ -26,35 +26,35 @@ add_action("message.incoming.before", "sms_to_twitter", 15);
 * Function called when plugin first activated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_activate
-* 
+*
 */
 function sms_to_twitter_activate()
 {
-    return true;
+	return true;
 }
 
 /**
 * Function called when plugin deactivated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_deactivate
-* 
+*
 */
 function sms_to_twitter_deactivate()
 {
-    return true;
+	return true;
 }
 
 /**
 * Function called when plugin first installed into the database
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_install
-* 
+*
 */
 function sms_to_twitter_install()
 {
@@ -66,8 +66,8 @@ function sms_to_twitter_install()
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH."plugins/sms_to_twitter/media/".$db_prop['file']."_sms_to_twitter.sql");
-	}	
-    return true;
+	}
+	return true;
 }
 
 function sms_to_twitter($sms)
@@ -75,7 +75,7 @@ function sms_to_twitter($sms)
 	$config = sms_to_twitter_initialize();
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
-	
+
 	list($code) = explode(" ", $message);
 	$twitter_code = $config['twitter_code'];
 	$twitter_msg = trim(str_replace($config['twitter_code'], '', $message));
@@ -84,7 +84,7 @@ function sms_to_twitter($sms)
 		$CI =& get_instance();
 		$CI->load->model('sms_to_twitter/sms_to_twitter_model', 'plugin_model');
 		$CI->load->library('sms_to_twitter/twitter', 'twitter');
-		
+
 		// if token exist
 		$tokens = $CI->plugin_model->get_token_by_phone($number);
 		if (is_array($tokens))
@@ -97,4 +97,3 @@ function sms_to_twitter($sms)
 		}
 	}
 }
-

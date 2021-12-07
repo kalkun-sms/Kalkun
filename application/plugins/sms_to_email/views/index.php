@@ -6,17 +6,17 @@
 <tr valign="top">
 <td width="175px"><?php echo lang('tni_email_forward'); ?></td>
 <td>
-<?php 
+<?php
 $email_forward = array('true' => lang('tni_yes'), 'false' => lang('tni_no'));
 if($settings->num_rows()===1)
 {
-	$email_forward_act = $settings->row('email_forward'); 
+	$email_forward_act = $settings->row('email_forward');
 }
 else
 {
-	$email_forward_act = 'false';	
+	$email_forward_act = 'false';
 }
-echo form_dropdown('email_forward', $email_forward, $email_forward_act);  
+echo form_dropdown('email_forward', $email_forward, $email_forward_act);
 ?>
 </td>
 </tr>

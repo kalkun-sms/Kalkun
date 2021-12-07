@@ -8,13 +8,13 @@
 <script type="text/javascript">
 $(document).ready(function() {
     <?php
-    $group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
-    $grouptext = '';
-    foreach($group->result() as $tmp):
-    	$grouptext .= $tmp->GroupName.';';
-    endforeach; 
-    $grouptext = substr($grouptext,0, strlen($grouptext)-1);
-    ?>
+	$group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
+	$grouptext = '';
+	foreach($group->result() as $tmp):
+		$grouptext .= $tmp->GroupName.';';
+	endforeach;
+	$grouptext = substr($grouptext,0, strlen($grouptext)-1);
+	?>
     var grp_data = "<?php echo $grouptext?>".split(";");
     $('#groups').tagsInput({
         'autocomplete_url' : grp_data,

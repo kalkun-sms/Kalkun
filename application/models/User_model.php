@@ -14,23 +14,22 @@
 /**
  * User_model Class
  *
- * Handle all user database activity 
+ * Handle all user database activity
  *
  * @package		Kalkun
  * @subpackage	User
  * @category	Models
  */
 class User_model extends CI_Model {
-
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Get User
 	 *
-	 * @access	public   		 
+	 * @access	public
 	 * @param	mixed $param
 	 * @return	object
-	 */		
+	 */
 	function getUsers($param)
 	{
 		$this->db->from('user_settings');
@@ -40,11 +39,11 @@ class User_model extends CI_Model {
 			case 'all':
 				$this->db->select('*');
 				break;
-			
+
 			case 'paginate':
 				$this->db->limit($param['limit'], $param['offset']);
 				break;
-			
+
 			case 'by_iduser':
 				$this->db->where('user.id_user', $param['id_user']);
 				break;
@@ -59,32 +58,32 @@ class User_model extends CI_Model {
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Add User
 	 *
-	 * @access	public   		 
+	 * @access	public
 	 * @param	mixed
 	 * @return
-	 */	
+	 */
 	function addUser()
 	{
 		$this->db->set('realname', trim($this->input->post('realname')));
 		$this->db->set('username', trim($this->input->post('username')));
 		$this->db->set('phone_number', $this->input->post('phone_number'));
 		$this->db->set('level', $this->input->post('level'));
-		
+
 		// edit mode
-		if($this->input->post('id_user')) 
+		if($this->input->post('id_user'))
 		{
 			$this->db->where('id_user', $this->input->post('id_user'));
 			$this->db->update('user');
 		}
-		else 
+		else
 		{
 			$this->db->set('password', password_hash($this->input->post('password'), PASSWORD_BCRYPT));
 			$this->db->insert('user');
-			
+
 			// user_settings
 			$this->db->set('theme', 'blue');
 			$this->db->set('signature', 'false;');
@@ -92,26 +91,26 @@ class User_model extends CI_Model {
 			$this->db->set('paging', '20');
 			$this->db->set('bg_image', 'true;background.jpg');
 			$this->db->set('delivery_report', 'default');
-			$this->db->set('language', 'english');	
+			$this->db->set('language', 'english');
 			$this->db->set('conversation_sort', 'asc');
 			$this->db->set('id_user', $this->db->insert_id());
-			
+
 			$this->db->insert('user_settings');
-			
+
 		}
-	}	
+	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Delete User
 	 *
-	 * @access	public   		 
+	 * @access	public
 	 * @param	number $id_user ID user to delete
 	 * @return
-	 */		
+	 */
 	function delUsers($id_user)
-	{		
+	{
 		$this->db->delete('sms_used', array('id_user' => $id_user));
 		$this->db->delete('user_folders', array('id_user' => $id_user));
 		$this->db->delete('pbk', array('id_user' => $id_user));
@@ -121,11 +120,11 @@ class User_model extends CI_Model {
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Search User
 	 *
-	 * @access	public   		 
+	 * @access	public
 	 * @param	string $realname
 	 * @return	object
 	 */
@@ -138,5 +137,4 @@ class User_model extends CI_Model {
 		$this->db->order_by('realname');
 		return $this->db->get();
 	 }
-}	
-
+}

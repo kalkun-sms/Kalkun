@@ -28,4 +28,3 @@ $config['charset'] = 'utf-8';
 $config['wordwrap'] = TRUE;
 $config['mail_from'] = 'postmaster@domain.com';
 $config['mail_subject'] = 'Kalkun New SMS';
-

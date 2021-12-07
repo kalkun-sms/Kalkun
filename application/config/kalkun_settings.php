@@ -19,7 +19,7 @@ $config['kalkun_previous_version'] = '0.6';
 | Gateway Engine (Default to Gammu)
 |--------------------------------------------------------------------------
 |
-| Valid engine are: 
+| Valid engine are:
 | gammu <http://wammu.eu>
 | kannel <http://kannel.org> - Experimental
 | clickatell <http://clickatell.com> - Experimental
@@ -33,7 +33,7 @@ $config['gateway']['engine'] = 'gammu';
 $config['gateway']['url'] = 'http://localhost:13013';
 $config['gateway']['username'] = 'username';
 $config['gateway']['password'] = 'password';
-$config['gateway']['api_id'] = 'xxx1234567890'; 
+$config['gateway']['api_id'] = 'xxx1234567890';
 // for tmobilecz you must specify the credentials to log-in to T-Mobile CZ portal
 // numeric keys - credentials for specific kalkun user (user's ID from table "user")
 // key "default" - credentials for all other Kalkun users
@@ -41,10 +41,10 @@ $config['gateway']['api_id'] = 'xxx1234567890';
 // subkey "hist" - boolean - save copies of SMS in T-Mobile CZ portal
 // subkey "eml" - string - T-Mobile CZ will send copy of SMS to specified e-mail. Leave empty to switch off.
 $config['gateway']['tmobileczauth'] = array(
-                  1=>array('user'=>'admins login',   'pass'=>'his_password',  'hist'=>true, 'eml'=>''),
- 	          2=>array('user'=>'2nd users login','pass'=>'her_password',  'hist'=>true, 'eml'=>''),
- 	  'default'=>array('user'=>'all others',     'pass'=>'their_password','hist'=>true, 'eml'=>'')
-); 
+	1=>array('user'=>'admins login',   'pass'=>'his_password',  'hist'=>true, 'eml'=>''),
+	2=>array('user'=>'2nd users login', 'pass'=>'her_password',  'hist'=>true, 'eml'=>''),
+	'default'=>array('user'=>'all others',     'pass'=>'their_password', 'hist'=>true, 'eml'=>'')
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -113,7 +113,7 @@ $config['inbox_owner_id'] = array('1');
 |--------------------------------------------------------------------------
 |
 | Disable outgoing messages.
-| To decide if the disable outgoing message. If enabled all outgoing 
+| To decide if the disable outgoing message. If enabled all outgoing
 | messages will be barred.
 |
 */
@@ -190,7 +190,7 @@ $config['max_sms_sent_by_minute'] = 0;
 | Inbox Routing Use Phonebook
 |--------------------------------------------------------------------------
 |
-| If no @username found on new incoming messages, 
+| If no @username found on new incoming messages,
 | then Kalkun will check origin phonenumber on all user phonebook.
 |
 */
@@ -201,7 +201,7 @@ $config['inbox_routing_use_phonebook'] = FALSE;
 | Inbox Routing User Phonenumber
 |--------------------------------------------------------------------------
 |
-| If no @username found on new incoming messages, 
+| If no @username found on new incoming messages,
 | then Kalkun will check origin phonenumber againts user phonenumber.
 |
 */
@@ -253,7 +253,7 @@ $config['unicode'] = FALSE;
 |--------------------------------------------------------------------------
 | Multiple phone/modem support
 |--------------------------------------------------------------------------
-| 
+|
 | state - enables/disabled
 | strategy
 |	(First)
@@ -267,21 +267,21 @@ $config['unicode'] = FALSE;
 |	- recent (Must be in array, eg. array('sierra', 'fasttrack'), id and value is NOT used)
 |	- round robin (Must be in array, eg. array('sierra', 'fasttrack'), id and value is NOT used)
 | id - Modem ID, must match to PhoneID on smsdrc
-| value - Modem value to use based on strategy 
+| value - Modem value to use based on strategy
 |
 | NOTE: You can also use two strategy at the same time as long as it's valid
 | eg. scheduled_time:round_robin (stategy name is divided by ':')
-| 	  This combination allow you to select multiple modem for same time range, 
+| 	  This combination allow you to select multiple modem for same time range,
 |	  and those available/valid modem will be selected again with round robin strategy.
 |
 | Valid combination format: (First:Second)
-| Another combination example (valid):  
+| Another combination example (valid):
 |	- phone_number_prefix:round_robin
 |	- scheduled_day:recent
 | Invalid/wrong combination:
 |	- round_robin:phone_number_prefix
 |	- round_robin:recent
-| 
+|
 */
 $config['multiple_modem_state'] = FALSE;
 $config['multiple_modem_strategy'] = 'scheduled_date';
@@ -304,4 +304,3 @@ $config['multiple_modem'][1]['value'] = '2014-04-17:2014-05-17';
 //$config['multiple_modem_compose_state'] = FALSE;
 //$config['multiple_modem_compose_criteria'] = 'time';
 //$config['multiple_modem_compose_order'] = 'desc';
-

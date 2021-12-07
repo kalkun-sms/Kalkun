@@ -21,7 +21,6 @@
  * @category	Controllers
  */
 class Plugin_controller extends MY_Controller {
-		
 	var $plugin_name = '';
 	var $plugin_version = '';
 	var $plugin_author = '';
@@ -31,12 +30,12 @@ class Plugin_controller extends MY_Controller {
 	{
 		parent::__construct($login);
 
-        // Prevent non-admin user
-        if($login && $this->session->userdata('level') !== 'admin')
-        {
-            $this->session->set_flashdata('notif', 'Only administrator can manage plugin');
-            redirect('/');
-        }
+		// Prevent non-admin user
+		if($login && $this->session->userdata('level') !== 'admin')
+		{
+			$this->session->set_flashdata('notif', 'Only administrator can manage plugin');
+			redirect('/');
+		}
 
 		/* Prevent this controller from being called directly */
 		if (get_class() === get_class($this))
@@ -64,7 +63,7 @@ class Plugin_controller extends MY_Controller {
 	 * @access	public
 	 * @param	array	initialization parameters
 	 * @return	void
-	 */	
+	 */
 	function initialize($params = array())
 	{
 		if (count($params) > 0)
@@ -77,25 +76,24 @@ class Plugin_controller extends MY_Controller {
 				}
 			}
 		}
-		
+
 		// Check if all required value already set, otherwise thrown error
 		// ...
-		
+
 		// Check if plugin already installed
 		// ..
-		
+
 		// Check if plugin activated
 		// ..
-		
+
 		// Set plugin view directory
 		$this->plugin_view_dir = 'plugin/'.$this->plugin_name.'/';
-				
+
 		// if models exist
 		if (file_exists(APPPATH.'models/plugin/'.$this->plugin_name.'_model.php'))
 		{
 			$this->load->model('plugin/'.$this->plugin_name.'_model', 'plugin_model');
 		}
 	}
-	
-}	
 
+}

@@ -6,11 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |--------------------------------------------------------------------------
 | CONFIGURATION
 |--------------------------------------------------------------------------
-| 
+|
 | url - url location to lookup the phone number, the phone number variable should be #phonenumber#
-| 
+|
 */
 // phpcs:enable
 $config['url'] = 'http://www.krak.dk/person/resultat/#phonenumber#';
-
-

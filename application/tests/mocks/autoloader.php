@@ -50,10 +50,10 @@ function autoload($class)
 		'Profiler',
 		'Table',
 		'Trackback',
-	   	'Typography',
+		'Typography',
 		'Unit_test',
 		'Upload',
-	   	'User_agent',
+		'User_agent',
 		'Xmlrpc',
 		'Zip'
 	);
@@ -102,7 +102,7 @@ function autoload($class)
 		elseif (strpos($class, 'CI_DB') === 0)
 		{
 			$dir = SYSTEM_PATH.'database'.DIRECTORY_SEPARATOR;
-			$file = $dir.str_replace(array('CI_DB','active_record'), array('DB', 'active_rec'), $subclass).'.php';
+			$file = $dir.str_replace(array('CI_DB', 'active_record'), array('DB', 'active_rec'), $subclass).'.php';
 		}
 		else
 		{

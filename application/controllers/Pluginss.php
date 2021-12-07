@@ -19,37 +19,36 @@
  * @category	Controllers
  */
 class Pluginss extends MY_Controller {
-
 	/**
 	 * Constructor
 	 *
 	 * @access	public
-	 */		
+	 */
 	function __construct()
 	{
 		parent::__construct();
 
-        // Prevent non-admin user
-        if($this->session->userdata('level') !== 'admin')
-        {
-            $this->session->set_flashdata('notif', lang('pluginss_only_admin_can_manage'));
-            redirect('/');
-        }
+		// Prevent non-admin user
+		if($this->session->userdata('level') !== 'admin')
+		{
+			$this->session->set_flashdata('notif', lang('pluginss_only_admin_can_manage'));
+			redirect('/');
+		}
 
 		$this->load->library('Plugins');
 		$this->load->model('Plugin_model');
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Index
 	 *
 	 * Display list of all plugin
 	 *
-	 * @access	public   		 
-	 */	
-	function index($type='installed') 
+	 * @access	public
+	 */
+	function index($type='installed')
 	{
 		$this->load->helper('form');
 		$data['main'] = 'main/plugin/index';
@@ -59,7 +58,7 @@ class Pluginss extends MY_Controller {
 		if($type==='installed')
 		{
 			$data['title'].= lang('pluginss_installed');
-			$data['plugins'] = $this->Plugin_model->get_plugins()->result_array();	
+			$data['plugins'] = $this->Plugin_model->get_plugins()->result_array();
 		}
 		else
 		{
@@ -67,7 +66,7 @@ class Pluginss extends MY_Controller {
 			$pluginsObj = new Plugins();
 			$plugins = get_available_plugin();
 			$no = 0;
-			
+
 			if(!empty($plugins)){
 				// do cleanup array key
 				foreach($plugins as $key => $tmp)
@@ -77,10 +76,10 @@ class Pluginss extends MY_Controller {
 					{
 						$new_plugin[$no][$key2] = $tmp2;
 					}
-					$no++;	
+					$no++;
 				}
 				$installed = $this->Plugin_model->get_plugins()->result_array();
-				
+
 				foreach($new_plugin as $key => $tmp)
 				{
 					foreach($installed as $tmp2)
@@ -89,25 +88,25 @@ class Pluginss extends MY_Controller {
 						{
 							unset($new_plugin[$key]);
 						}
-					}	
+					}
 				}
 				$result = $new_plugin;
 				$data['plugins'] = $result;
 			}
-			
+
 		}
 		$this->load->view('main/layout', $data);
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Install
 	 *
 	 * Install a plugin
 	 *
-	 * @access	public   		 
-	 */	
+	 * @access	public
+	 */
 	function install($plugin_name)
 	{
 		activate_plugin($plugin_name);
@@ -116,51 +115,50 @@ class Pluginss extends MY_Controller {
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Uninstall
 	 *
 	 * Uninstall a plugin
 	 *
-	 * @access	public   		 
-	 */	
+	 * @access	public
+	 */
 	function uninstall($plugin_name)
 	{
 		deactivate_plugin($plugin_name);
 		$this->session->set_flashdata('notif', str_replace("%plugin_name%", $plugin_name, lang('pluginss_successfully_uninstalled')));
-		redirect('pluginss');		
+		redirect('pluginss');
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Activate
 	 *
 	 * Activated a plugin
 	 *
-	 * @access	public   		 
-	 */		
+	 * @access	public
+	 */
 	function activate($plugin_name)
 	{
 		$data = array('plugin_status' => 'true');
 		$this->db->where('plugin_name', $plugin_name);
-		$this->db->update('plugin', $data);			
+		$this->db->update('plugin', $data);
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Deactivate
 	 *
 	 * Deactivated a plugin
 	 *
-	 * @access	public   		 
-	 */		
+	 * @access	public
+	 */
 	function deactivate($plugin_name)
 	{
 		$data = array('plugin_status' => 'false');
 		$this->db->where('plugin_name', $plugin_name);
 		$this->db->update('plugin', $data);
-	}	
+	}
 }
-

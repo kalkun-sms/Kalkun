@@ -33,7 +33,7 @@ add_action("message.incoming.before", "external_script", 12);
 */
 function external_script_activate()
 {
-    return true;
+	return true;
 }
 
 /**
@@ -46,7 +46,7 @@ function external_script_activate()
 */
 function external_script_deactivate()
 {
-    return true;
+	return true;
 }
 
 /**
@@ -59,7 +59,7 @@ function external_script_deactivate()
 */
 function external_script_install()
 {
-    return true;
+	return true;
 }
 
 function external_script($sms)
@@ -115,7 +115,7 @@ function external_script($sms)
 			// build extra parameters
 			if (!empty($rule['parameter']))
 			{
-				$valid_param = array('phone','content','id','time','match');
+				$valid_param = array('phone', 'content', 'id', 'time', 'match');
 				$param = explode("|", $rule['parameter']);
 
 				foreach ($param as $tmp)
@@ -151,4 +151,3 @@ function is_preg_match($pattern, $subject)
 	if ($ret === 1) return array(TRUE, $matches);
 	else return array(FALSE, NULL);
 }
-

@@ -21,13 +21,12 @@
 include_once(APPPATH.'plugins/Plugin_controller.php');
 
 class Sms_to_email extends Plugin_controller {
-	
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->model('sms_to_email_model', 'plugin_model');
 	}
-	
+
 	function index()
 	{
 		$this->load->helper('form');
@@ -38,7 +37,7 @@ class Sms_to_email extends Plugin_controller {
 		else $data['mode'] = 'add';
 		$this->load->view('main/layout', $data);
 	}
-	
+
 	function save()
 	{
 		if ($_POST)
@@ -48,4 +47,3 @@ class Sms_to_email extends Plugin_controller {
 		}
 	}
 }
-	

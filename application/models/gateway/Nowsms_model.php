@@ -14,7 +14,7 @@
 /**
  * Nowsms_model Class
  *
- * Handle all messages database activity 
+ * Handle all messages database activity
  * for Nowsms <http://nowsms.com>
  *
  * @package		Kalkun
@@ -24,7 +24,6 @@
 require_once('Nongammu_model.php');
 
 class Nowsms_model extends Nongammu_model {
-	
 	/**
 	 * Constructor
 	 *
@@ -34,15 +33,15 @@ class Nowsms_model extends Nongammu_model {
 	{
 		parent::__construct();
 	}
-	
-    // --------------------------------------------------------------------
-	
+
+	// --------------------------------------------------------------------
+
 	/**
 	 * Send Messages (Still POC)
 	 * Using HTTP API <http://www.nowsms.com/doc/submitting-sms-messages/url-parameters>
-	 * 
+	 *
 	 * @return void
-	 */	
+	 */
 	function really_send_messages($data)
 	{
 		$gateway = $this->config->item('gateway');
@@ -50,4 +49,3 @@ class Nowsms_model extends Nongammu_model {
 			'&Password='.$gateway['password'].'&PhoneNumber='.$data['dest'].'&Text='.urlencode($data['message']));
 	}
 }
-

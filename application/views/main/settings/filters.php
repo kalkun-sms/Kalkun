@@ -45,11 +45,11 @@
 
         <label for="move_to"><?php echo lang('kalkun_move_to');?></label>
         <select name="id_folder" id="id_folder" style="width: 98%">
-        <?php 
-        foreach ($my_folders->result() as $my_folder):
-        echo "<option value=\"$my_folder->id_folder\">$my_folder->name</option>";
-        endforeach;
-        ?>
+        <?php
+		foreach ($my_folders->result() as $my_folder):
+		echo "<option value=\"$my_folder->id_folder\">$my_folder->name</option>";
+		endforeach;
+		?>
         </select>
     </form>
 </div>

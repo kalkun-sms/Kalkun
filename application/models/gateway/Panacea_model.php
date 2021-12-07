@@ -15,7 +15,7 @@
 /**
  * panacea_model Class
  *
- * Handle all messages database activity 
+ * Handle all messages database activity
  * for Panacea Mobile <http://panaceamobile.com>
  *
  * @package		Kalkun
@@ -25,7 +25,6 @@
 require_once('Nongammu_model.php');
 
 class Panacea_model extends Nongammu_model {
-	
 	/**
 	 * Constructor
 	 *
@@ -35,17 +34,17 @@ class Panacea_model extends Nongammu_model {
 	{
 		parent::__construct();
 	}
-	
-    // --------------------------------------------------------------------
-	
+
+	// --------------------------------------------------------------------
+
 	/**
 	 * Send Messages (Still POC)
 	 * Using HTTP API <http://www.panaceamobile.com/docs/PanaceaApi/PanaceaApi.html>
-	 * 
+	 *
 	 * @return void
 	 *
 	 * replace xxx from &from=xxx with your sender id
-	 */	
+	 */
 	function really_send_messages($data)
 	{
 		$gateway = $this->config->item('gateway');
@@ -53,4 +52,3 @@ class Panacea_model extends Nongammu_model {
 			'&password='.$gateway['password'].'&to='.$data['dest'].'&text='.urlencode($data['message']).'&from=xxx');
 	}
 }
-

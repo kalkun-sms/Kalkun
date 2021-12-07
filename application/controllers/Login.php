@@ -18,30 +18,29 @@
  * @subpackage	Login
  * @category	Controllers
  */
-class Login extends CI_Controller 
+class Login extends CI_Controller
 {
-
 	/**
 	 * Constructor
 	 *
 	 * @access	public
-	 */	
+	 */
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->library('session');		
-		$this->load->model('Kalkun_model');	
+		$this->load->library('session');
+		$this->load->model('Kalkun_model');
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Index
 	 *
 	 * Display login form and handle login process
 	 *
-	 * @access	public   		 
-	 */	
+	 * @access	public
+	 */
 	function index()
 	{
 		$this->load->helper('form');
@@ -60,38 +59,38 @@ class Login extends CI_Controller
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Logout
 	 *
 	 * Logout process, destroy user session
 	 *
-	 * @access	public   		 
-	 */		
+	 * @access	public
+	 */
 	function logout()
 	{
 		$this->session->sess_destroy();
 		redirect('login');
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Forgot Password
 	 *
 	 * Forgot password form
 	 *
-	 * @access	public   		 
-	 */		
+	 * @access	public
+	 */
 	function forgot_password()
 	{
 		$this->load->model('Message_model');
 		$this->load->helper('form');
-		
+
 		if($_POST)
 		{
 			$token = $this->Kalkun_model->forgot_password();
-			
+
 			if(!$token)
 			{
 				$this->session->set_flashdata('errorlogin', "Oh, snap! We couldn't find you. Please try again.");
@@ -107,40 +106,40 @@ class Login extends CI_Controller
 				$data['delivery_report'] = 'default';
 				$data['uid'] = 1;
 				$this->Message_model->send_messages($data);
-				$this->session->set_flashdata('errorlogin', 'Forgot password information already sent to your phone.');	
+				$this->session->set_flashdata('errorlogin', 'Forgot password information already sent to your phone.');
 			}
 			redirect('login/forgot_password');
 		}
 		$this->load->view('main/forgot_password');
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Password Reset
 	 *
 	 * Password reset form
 	 *
-	 * @access	public   		 
-	 */		
+	 * @access	public
+	 */
 	function password_reset($token=NULL)
 	{
 		$this->load->helper('form');
-		
+
 		if($_POST)
 		{
 			$token = $this->input->post('token');
 			$user_token = $this->Kalkun_model->valid_token($token);
 			$this->Kalkun_model->update_password($user_token['id_user']);
-			$this->session->set_flashdata('errorlogin', 'Successfully changed your password.');	
+			$this->session->set_flashdata('errorlogin', 'Successfully changed your password.');
 			redirect('login');
 		}
-		
+
 		if(!$this->Kalkun_model->valid_token($token))
 		{
-			$this->session->set_flashdata('errorlogin', 'Invalid token detected.');	
+			$this->session->set_flashdata('errorlogin', 'Invalid token detected.');
 			redirect('login/forgot_password');
-			
+
 		}
 		else
 		{
@@ -148,6 +147,5 @@ class Login extends CI_Controller
 			$this->load->view('main/password_reset', $data);
 		}
 	}
-	
-}
 
+}

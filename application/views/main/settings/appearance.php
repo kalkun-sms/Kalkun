@@ -2,10 +2,10 @@
 <tr valign="top">
 <td width="175px">Themes</td>
 <td>
-<?php 
-$theme = array('blue' => 'Blue', 'dark' => 'Dark', 'green' => 'Green'); 
-$theme_act = $this->Kalkun_model->get_setting()->row('theme'); 
-echo form_dropdown('theme', $theme, $theme_act);  
+<?php
+$theme = array('blue' => 'Blue', 'dark' => 'Dark', 'green' => 'Green');
+$theme_act = $this->Kalkun_model->get_setting()->row('theme');
+echo form_dropdown('theme', $theme, $theme_act);
 ?>
 </td>
 </tr> 

@@ -18,35 +18,35 @@ add_action("message.outgoing", "blacklist_number_outgoing", 10);
 * Function called when plugin first activated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_activate
-* 
+*
 */
 function blacklist_number_activate()
 {
-    return true;
+	return true;
 }
 
 /**
 * Function called when plugin deactivated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_deactivate
-* 
+*
 */
 function blacklist_number_deactivate()
 {
-    return true;
+	return true;
 }
 
 /**
 * Function called when plugin first installed into the database
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_install
-* 
+*
 */
 function blacklist_number_install()
 {
@@ -59,51 +59,50 @@ function blacklist_number_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH."plugins/blacklist_number/media/".$db_prop['file']."_blacklist_number.sql");
 	}
-    return true;
+	return true;
 }
 
 function blacklist_number_incoming($sms)
 {
-    $CI =& get_instance();
-    $CI->load->model('blacklist_number/blacklist_number_model', 'plugin_model');
-    $evil = array();
-    
-    // Get blacklist number
-    $lists = $CI->plugin_model->get('all')->result_array();
-    foreach($lists as $tmp)
-    {
-    	$evil[] = $tmp['phone_number'];
-    }
-    
-    // Delete message if it's on blacklist number
-    if(in_array($sms->SenderNumber, $evil))
-    {
-    	$CI->db->where('ID',$sms->ID)->delete('inbox');
-    	return 'break';
-    }
+	$CI =& get_instance();
+	$CI->load->model('blacklist_number/blacklist_number_model', 'plugin_model');
+	$evil = array();
+
+	// Get blacklist number
+	$lists = $CI->plugin_model->get('all')->result_array();
+	foreach($lists as $tmp)
+	{
+		$evil[] = $tmp['phone_number'];
+	}
+
+	// Delete message if it's on blacklist number
+	if(in_array($sms->SenderNumber, $evil))
+	{
+		$CI->db->where('ID',$sms->ID)->delete('inbox');
+		return 'break';
+	}
 }
 
 function blacklist_number_outgoing($numbers = array())
 {
-    $CI =& get_instance();
-    $CI->load->model('blacklist_number/blacklist_number_model', 'plugin_model');
-    $evil = array();
-    
-    // Get blacklist number
-    $lists = $CI->plugin_model->get('all')->result_array();
-    foreach($lists as $tmp)
-    {
-    	$evil[] = $tmp['phone_number'];
-    }
-    
-    // Delete number if it's on blacklist number
-    foreach($numbers as $key => $number)
-    {
-	    if(in_array($number, $evil))
-	    {
-	    	unset($numbers[$key]);
-	    }
+	$CI =& get_instance();
+	$CI->load->model('blacklist_number/blacklist_number_model', 'plugin_model');
+	$evil = array();
+
+	// Get blacklist number
+	$lists = $CI->plugin_model->get('all')->result_array();
+	foreach($lists as $tmp)
+	{
+		$evil[] = $tmp['phone_number'];
+	}
+
+	// Delete number if it's on blacklist number
+	foreach($numbers as $key => $number)
+	{
+		if(in_array($number, $evil))
+		{
+			unset($numbers[$key]);
+		}
 	}
 	return $numbers;
 }
-

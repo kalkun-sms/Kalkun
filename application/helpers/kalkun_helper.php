@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-    
+
 /**
 *	INDIA NCPR(DND) Registry Check
 *	In order to avoid sending sms to NCPR registered phone numbers
 **/
 function DNDcheck($mobileno)
-{  
+{
 	$mobileno = substr($mobileno, -10, 10);
 	$url = "http://www.nccptrai.gov.in/nccpregistry/saveSearchSub.misc";
 	$postString = "phoneno=" . $mobileno;
@@ -19,14 +19,14 @@ function DNDcheck($mobileno)
 	curl_setopt($request, CURLOPT_SSL_VERIFYPEER, FALSE);
 	$response = curl_exec($request);
 	curl_close ($request);
-	      		 
+
 	return (is_int(strpos(strtolower(strip_tags($response)), "number is not")) ? false : true);
 }
 
-function filter_data($data) 
+function filter_data($data)
 {
 	if ( ! isset($data)) return "<i>Unknown</i>";
-	else return $data;	
+	else return $data;
 }
 
 function nice_date($str, $option=NULL)
@@ -39,20 +39,20 @@ function nice_date($str, $option=NULL)
 	$timestamp = mktime($hour, $minute, $second, $month, $day, $year);
 	$now = time();
 	$blocks = array(
-	array('name'=>lang('kalkun_year'), 'amount' => 60*60*24*365),
-	array('name'=>lang('kalkun_month'), 'amount' => 60*60*24*31),
-	array('name'=>lang('kalkun_week'), 'amount' => 60*60*24*7),
-	array('name'=>lang('kalkun_day'), 'amount' => 60*60*24),
-	array('name'=>lang('kalkun_hour'), 'amount' => 60*60),
-	array('name'=>lang('kalkun_minute'), 'amount' => 60),
-	array('name'=>lang('kalkun_second'), 'amount' => 1)
+		array('name'=>lang('kalkun_year'), 'amount' => 60*60*24*365),
+		array('name'=>lang('kalkun_month'), 'amount' => 60*60*24*31),
+		array('name'=>lang('kalkun_week'), 'amount' => 60*60*24*7),
+		array('name'=>lang('kalkun_day'), 'amount' => 60*60*24),
+		array('name'=>lang('kalkun_hour'), 'amount' => 60*60),
+		array('name'=>lang('kalkun_minute'), 'amount' => 60),
+		array('name'=>lang('kalkun_second'), 'amount' => 1)
 	);
 
 	$diff = abs($now-$timestamp);
 
 	if($option==='smsd_check')
 	{
-		return $diff;	
+		return $diff;
 	}
 	else
 	{
@@ -75,7 +75,7 @@ function nice_date($str, $option=NULL)
 					//if ($amount>1) {$plural='s';} else {$plural='';}
 					$result[] = $amount.' '.$block['name'].$plural;
 					$diff -= $amount*$block['amount'];
-					$current_level+=1;	
+					$current_level+=1;
 				}
 			}
 			$res = implode(' ',$result);
@@ -87,8 +87,8 @@ function nice_date($str, $option=NULL)
 			}
 			return str_replace("%nicedate%", $res, $text);
 		}
-	}	
-}   
+	}
+}
 
 function get_modem_status($status, $tolerant)
 {
@@ -96,7 +96,7 @@ function get_modem_status($status, $tolerant)
 	list($date, $time) = explode(' ', $status);
 	list($year, $month, $day) = explode('-', $date);
 	list($hour, $minute, $second) = explode(':', $time);
-	
+
 	$timestamp = mktime($hour, $minute+$tolerant, $second, $month, $day, $year);
 	$now = time();
 
@@ -105,7 +105,7 @@ function get_modem_status($status, $tolerant)
 	{
 		return "connect";
 	}
-	else 
+	else
 	{
 		return "disconnect";
 	}
@@ -135,7 +135,7 @@ function compare_date_asc($a, $b)
 	$date2 = strtotime($b['globaldate']);
 
 	if($date1 === $date2) return 0;
-	return ($date1 < $date2) ? -1 : 1; 
+	return ($date1 < $date2) ? -1 : 1;
 }
 
 function compare_date_desc($a, $b)
@@ -144,8 +144,8 @@ function compare_date_desc($a, $b)
 	$date2 = strtotime($b['globaldate']);
 
 	if($date1 === $date2) return 0;
-	return ($date1 > $date2) ? -1 : 1; 
-}	
+	return ($date1 > $date2) ? -1 : 1;
+}
 
 function check_delivery_report($report)
 {
@@ -156,7 +156,7 @@ function check_delivery_report($report)
 	elseif($report==='DeliveryPending'): $status = lang('tni_msg_stat_pend');
 	elseif($report==='DeliveryUnknown'): $status = lang('tni_msg_stat_unknown');
 	elseif($report==='Reserved'): $status = lang('tni_msg_stat_reserved');
-	endif;		
+	endif;
 
 	return $status;
 }
@@ -164,7 +164,7 @@ function check_delivery_report($report)
 function simple_date($datetime)
 {
 	list($date, $time) = explode(' ', $datetime);
-	list($year, $month, $day) = explode('-', $date);		
+	list($year, $month, $day) = explode('-', $date);
 	return $day.'/'.$month.'/'.$year.' '.$time;
 }
 
@@ -174,7 +174,7 @@ function get_hour()
 	{
 		$hour = $i;
 		if($hour<10) $hour = "0".$hour;
-		echo "<option value=\"".$hour."\">".$hour."</option>"; 
+		echo "<option value=\"".$hour."\">".$hour."</option>";
 	}
 }
 
@@ -184,9 +184,9 @@ function get_minute()
 	{
 		$min = $i;
 		if($min<10) $min = "0".$min;
-		echo "<option value=\"".$min."\">".$min."</option>"; 
+		echo "<option value=\"".$min."\">".$min."</option>";
 	}
-} 
+}
 
 function is_ajax()
 {
@@ -195,7 +195,7 @@ function is_ajax()
 		return TRUE;
 	}
 	else
-	{ 
+	{
 		return FALSE;
 	}
 }
@@ -203,16 +203,16 @@ function is_ajax()
 function get_database_property($driver)
 {
 	// valid and supported driver
-	$valid_driver = array('postgre', 'mysql', 'mysqli','pdo');
-	
+	$valid_driver = array('postgre', 'mysql', 'mysqli', 'pdo');
+
 	if(!in_array($driver, $valid_driver)) die ("Database driver you're using is not supported");
-	
+
 	$postgre['name'] = 'postgre';
 	$postgre['file'] = 'pgsql';
 	$postgre['human'] = 'PostgreSQL';
 	$postgre['escape_char'] = '"';
 	$postgre['driver'] = 'pgsql';
-	
+
 	$mysql['name'] = 'mysql';
 	$mysql['file'] = 'mysql';
 	$mysql['human'] = 'MySQL';
@@ -224,15 +224,15 @@ function get_database_property($driver)
 	$mysqli['human'] = 'MySQLi';
 	$mysqli['escape_char'] = '`';
 	$mysqli['driver'] = 'mysqli';
-	
+
 	$pdo['name'] = 'sqlite';
 	$pdo['file'] = 'sqlite';
 	$pdo['human'] = 'SQLite3 (Using PDO)';
 	$pdo['escape_char'] = '';
 	$pdo['driver'] = 'pdo_sqlite';
-	
+
 	return ${$driver};
-}   
+}
 
 /**
  * Execute SQL
@@ -242,10 +242,10 @@ function get_database_property($driver)
 function execute_sql($sqlfile)
 {
 	$CI =& get_instance();
-    $CI->load->model('Kalkun_model');
-        
+	$CI->load->model('Kalkun_model');
+
 	$error=0;
-	if ($lines = @file($sqlfile, FILE_SKIP_EMPTY_LINES)) 
+	if ($lines = @file($sqlfile, FILE_SKIP_EMPTY_LINES))
 	{
 		$buff = '';
 		foreach ($lines as $i => $line)
@@ -257,35 +257,35 @@ function execute_sql($sqlfile)
 				// if contains TRIGGER
 				if(preg_match('/CREATE TRIGGER$/', trim($line))) $buff .= ' END;';
 				$query = $CI->Kalkun_model->db->query($buff);
-		  		if(!$query) $error++;
-		  		$buff = '';
-		  	}
-	  	}
+				if(!$query) $error++;
+				$buff = '';
+			}
+		}
 	}
-	return $error;	
+	return $error;
 }
 
 /**
  * Database boolean to PHP boolean
  *
- * Convert data that is stored as boolean in the database to 
+ * Convert data that is stored as boolean in the database to
  * a php bool type (true or false)
  */
 function db_boolean_to_php_bool($dbdriver, $db_bool) {
-    switch ($dbdriver) {
-        case 'postgre':
-            if ($db_bool === 't') {
-                return TRUE;
-            }
-            //if ($db_bool === 'f') {
-            return FALSE;
-            //}
-        case 'mysql':
-        case 'mysqli':
-        case 'pdo':
-        default:
-            return boolval($db_bool);
-    }
+	switch ($dbdriver) {
+		case 'postgre':
+			if ($db_bool === 't') {
+				return TRUE;
+			}
+			//if ($db_bool === 'f') {
+			return FALSE;
+			//}
+		case 'mysql':
+		case 'mysqli':
+		case 'pdo':
+		default:
+			return boolval($db_bool);
+	}
 }
 
 /**
@@ -295,12 +295,11 @@ function db_boolean_to_php_bool($dbdriver, $db_bool) {
  * strict comparison operator
   */
 function is_null_loose($input) {
-    // doing $input == NULL is like doing 'empty($input)' except that 
-    // empty() returns true if the value is "0".
-    // So in that case, return FALSE so that we can mimic '$input == NULL'
-    if (isset($input) && is_string($input) && $input === "0") {
-        return FALSE;
-    }
-    return empty($input);
+	// doing $input == NULL is like doing 'empty($input)' except that
+	// empty() returns true if the value is "0".
+	// So in that case, return FALSE so that we can mimic '$input == NULL'
+	if (isset($input) && is_string($input) && $input === "0") {
+		return FALSE;
+	}
+	return empty($input);
 }
-

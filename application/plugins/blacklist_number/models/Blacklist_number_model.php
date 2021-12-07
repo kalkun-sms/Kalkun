@@ -14,19 +14,18 @@
 /**
  * Blacklist_number_model Class
  *
- * Handle all plugin database activity 
+ * Handle all plugin database activity
  *
  * @package		Kalkun
  * @subpackage	Plugin
  * @category	Models
  */
 class Blacklist_number_model extends CI_Model {
-	
 	function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	function get($option=NULL, $limit=NULL, $offset=NULL)
 	{
 		switch($option)
@@ -34,40 +33,39 @@ class Blacklist_number_model extends CI_Model {
 			case 'all':
 				return $this->db->get('plugin_blacklist_number');
 			break;
-			
+
 			case 'paginate':
-				return $this->db->get('plugin_blacklist_number', $limit, $offset);		
+				return $this->db->get('plugin_blacklist_number', $limit, $offset);
 			break;
-			
+
 			case 'count':
 				$this->db->select('count(*) as count');
 				return $this->db->get('plugin_blacklist_number')->row('count');
 			break;
 		}
 	}
-	
+
 	function add()
 	{
 		$data = array (
-				'phone_number' => trim($this->input->post('phone_number',TRUE)),
-				'reason' => trim($this->input->post('reason',TRUE)),
-					);
-		$this->db->insert('plugin_blacklist_number',$data);			
+			'phone_number' => trim($this->input->post('phone_number',TRUE)),
+			'reason' => trim($this->input->post('reason',TRUE)),
+		);
+		$this->db->insert('plugin_blacklist_number',$data);
 	}
 
 	function update()
 	{
 		$data = array (
-				'phone_number' => trim($this->input->post('editphone_number',TRUE)),
-				'reason' => $this->input->post('editreason',TRUE),
-					);
-		$this->db->where('id_blacklist_number', $this->input->post('editid_blacklist_number',TRUE));			
+			'phone_number' => trim($this->input->post('editphone_number',TRUE)),
+			'reason' => $this->input->post('editreason',TRUE),
+		);
+		$this->db->where('id_blacklist_number', $this->input->post('editid_blacklist_number',TRUE));
 		$this->db->update('plugin_blacklist_number',$data);
-	}	
-	
+	}
+
 	function delete($id)
 	{
-		$this->db->delete('plugin_blacklist_number', array('id_blacklist_number' => $id)); 
+		$this->db->delete('plugin_blacklist_number', array('id_blacklist_number' => $id));
 	}
 }
-

@@ -1,40 +1,40 @@
 <div id="contact_container" class="hidden"></div>
 <?php
-if(count($messages)==0) 
+if(count($messages)==0)
 {
 	if($this->uri->segment(2)=='my_folder') echo "<p style=\"padding-left: 10px\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message_in_folder').".</i></p>";
-    else if($this->uri->segment(2)=='search') echo "<p style=\"padding-left: 10px\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message_search').".</i></p>";
+	else if($this->uri->segment(2)=='search') echo "<p style=\"padding-left: 10px\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message_search').".</i></p>";
 	else echo "<p style=\"padding-left: 10px\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message')." ".lang('kalkun_'.$this->uri->segment(3)).".</i></p>";
 }
-else 
-{	
+else
+{
 	// loop - begin
 	foreach($messages as $tmp):
 
 	// initialization
 	$type = $this->uri->segment(4);
-	if($tmp['source'] == 'inbox') 
+	if($tmp['source'] == 'inbox')
 	{
-		$qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber','number'=>$tmp['SenderNumber']));
+		$qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber', 'number'=>$tmp['SenderNumber']));
 		if($qry->num_rows()!==0) { $senderName = $qry->row('Name'); $on_pbk=TRUE;}
 		else { $senderName = $tmp['SenderNumber']; $on_pbk=FALSE;}
-		
+
 		$message_date = $tmp['ReceivingDateTime'];
 		$number = $tmp['SenderNumber'];
 		$arrow = 'arrow_left';
 	}
-	else 
+	else
 	{
-		$qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber','number'=>$tmp['DestinationNumber']));
+		$qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber', 'number'=>$tmp['DestinationNumber']));
 		if($qry->num_rows()!==0) { $senderName = $qry->row('Name'); $on_pbk=TRUE;}
 		else { $senderName = $tmp['DestinationNumber']; $on_pbk=FALSE;}
-		
+
 		$message_date = $tmp['SendingDateTime'];
 		$number = $tmp['DestinationNumber'];
 		if($type == 'outbox') $arrow = 'circle';
 		else $arrow = 'arrow_right';
 	}
-		
+
 	// count string for message preview
 	$char_per_line = 100-strlen(nice_date($message_date))-strlen($senderName);
 ?>
@@ -67,13 +67,13 @@ if($tmp['source'] == 'sentitems'):
 		foreach($this->Message_model->get_multipart($multipart)->result() as $part):
 		$tmp['TextDecoded'].=$part->TextDecoded;
 		$part_no++;
-		endforeach;			
+		endforeach;
 	endif;
-elseif($tmp['source'] == 'outbox'): 
+elseif($tmp['source'] == 'outbox'):
 	//check multipart
 	$multipart['type'] = 'outbox';
 	$multipart['option'] = 'check';
-	$multipart['id_message'] = $tmp['ID'];	
+	$multipart['id_message'] = $tmp['ID'];
 	if($this->Message_model->get_multipart($multipart)===TRUE):
 		$part_no = 1;
 		$multipart['option'] = 'all';
@@ -85,7 +85,7 @@ elseif($tmp['source'] == 'outbox'):
 elseif($tmp['source'] == 'inbox'):
 	$part_no = 1;
 	// check multipart
-	if(!empty($tmp['UDH'])):	
+	if(!empty($tmp['UDH'])):
 		$multipart['type'] = 'inbox';
 		$multipart['option'] = 'all';
 		$multipart['udh'] = substr($tmp['UDH'],0,8);
@@ -94,8 +94,8 @@ elseif($tmp['source'] == 'inbox'):
 		$tmp['TextDecoded'].=$part['TextDecoded'];
 		$part_no++;
 		endforeach;
-	endif;			
-endif;				
+	endif;
+endif;
 ?>	
 		
 	<div class="detail_area hidden <?php echo $number;?>" >
@@ -161,8 +161,8 @@ endif;
 	
 	</div></div>
 		
-<?php 
+<?php
 	if($tmp['source']=='inbox') if($tmp['readed'] == 'false') $this->Message_model->update_read($tmp['ID']);
 	endforeach;
-} 
+}
 ?>

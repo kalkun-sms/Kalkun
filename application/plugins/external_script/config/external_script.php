@@ -56,4 +56,3 @@ $script['value'] = '/\s*ACTIVER\s+rappel\s+([0-9]+)\s*/i';
 $script['parameter'] = 'phone|match';
 //array_push($config['external_script'], $script);
 unset($script);
-

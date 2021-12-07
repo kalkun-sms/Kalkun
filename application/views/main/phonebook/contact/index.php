@@ -36,10 +36,10 @@
     	<select id="importgroupvalue" name="importgroupvalue">
     	<option value="">-- <?php echo lang('tni_group_select');?> --</option>
     	<?php
-    	foreach($pbkgroup as $tmp):
-    	echo "<option value=\"".$tmp->ID."\">".$tmp->GroupName."</option>";
-    	endforeach; 
-    	?>
+		foreach($pbkgroup as $tmp):
+		echo "<option value=\"".$tmp->ID."\">".$tmp->GroupName."</option>";
+		endforeach;
+		?>
     	</select>
 	</fieldset>
 	</form>

@@ -14,4 +14,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // phpcs:enable
 $config['reg_code'] = 'REG';
 $config['unreg_code'] = 'UNREG';
-
