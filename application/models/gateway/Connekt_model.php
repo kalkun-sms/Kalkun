@@ -62,11 +62,11 @@ class Connekt_model extends Nongammu_model {
 
 		curl_setopt_array($curl, array(
 			CURLOPT_URL => $gateway['url'],
-			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_RETURNTRANSFER => TRUE,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
 			CURLOPT_TIMEOUT => 0,
-			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_FOLLOWLOCATION => TRUE,
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => 'POST',
 			CURLOPT_POSTFIELDS => json_encode($payload),
@@ -81,7 +81,7 @@ class Connekt_model extends Nongammu_model {
 
 		curl_close($curl);
 
-		$is_succes = ($httpcode >= 200 && $httpcode < 300) ? true : false;
+		$is_succes = ($httpcode >= 200 && $httpcode < 300) ? TRUE : FALSE;
 		if ($is_succes)
 			return  $result[] = array('phone' => $p, 'msg' => $response, 'result' => $is_succes);
 		else

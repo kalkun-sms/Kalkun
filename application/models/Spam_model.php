@@ -76,9 +76,9 @@ class Spam_model extends CI_Model {
 			//move to spam folder
 			$this->db->where('ID', $ID)->update('inbox', array('id_folder' => '6'));
 
-			return true;
+			return TRUE;
 		}
-		return false;
+		return FALSE;
 	 }
 
 	 /**

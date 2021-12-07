@@ -19,7 +19,7 @@
 */
 function welcome_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -32,7 +32,7 @@ function welcome_activate()
 */
 function welcome_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -45,5 +45,5 @@ function welcome_deactivate()
 */
 function welcome_install()
 {
-	return true;
+	return TRUE;
 }

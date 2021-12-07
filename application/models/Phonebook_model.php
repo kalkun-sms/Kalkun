@@ -295,7 +295,7 @@ class Phonebook_model extends CI_Model {
 			{
 				$group_id = $CI->Phonebook_model->group_id($_grp, $param['id_user']);
 
-				if($group_id !== null)
+				if($group_id !== NULL)
 				{
 					$this->db->set('id_pbk', $pbk_id);
 					$this->db->set('id_pbk_groups', $group_id);

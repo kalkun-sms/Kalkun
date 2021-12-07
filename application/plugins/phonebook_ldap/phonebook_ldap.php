@@ -32,7 +32,7 @@ add_action('phonebook.contact.get', 'phonebook_ldap', 10);
 */
 function phonebook_ldap_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -45,7 +45,7 @@ function phonebook_ldap_activate()
 */
 function phonebook_ldap_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -58,7 +58,7 @@ function phonebook_ldap_deactivate()
 */
 function phonebook_ldap_install()
 {
-	return true;
+	return TRUE;
 }
 
 /**

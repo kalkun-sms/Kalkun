@@ -32,7 +32,7 @@ add_action('message.incoming.before', 'sms_member', 13);
 */
 function sms_member_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -45,7 +45,7 @@ function sms_member_activate()
 */
 function sms_member_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -67,7 +67,7 @@ function sms_member_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH.'plugins/sms_member/media/'.$db_prop['file'].'_sms_member.sql');
 	}
-	return true;
+	return TRUE;
 }
 
 function sms_member($sms)

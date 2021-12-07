@@ -147,7 +147,7 @@ class Messages extends MY_Controller {
 		{
 			$this->load->library('csvreader');
 			$filePath = $_FILES['import_file']['tmp_name'];
-			$csvData = $this->csvreader->parse_file($filePath, true);
+			$csvData = $this->csvreader->parse_file($filePath, TRUE);
 			$csvField = array_keys($csvData[0]);
 			foreach($csvData as $data)
 			{
@@ -303,7 +303,7 @@ class Messages extends MY_Controller {
 		$data['validity'] = $this->input->post('validity');
 		$data['delivery_report'] = $this->Kalkun_model->get_setting()->row('delivery_report');
 		$data['coding'] = ($this->input->post('unicode') === 'unicode') ? 'unicode' : 'default';
-		$data['ncpr'] = ($this->input->post('ncpr') === 'ncpr') ? true : false;
+		$data['ncpr'] = ($this->input->post('ncpr') === 'ncpr') ? TRUE : FALSE;
 		$data['uid'] = $this->session->userdata('id_user');
 		$data['url'] = $this->input->post('url');
 

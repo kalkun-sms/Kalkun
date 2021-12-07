@@ -33,7 +33,7 @@ add_action('message.incoming.before', 'external_script', 12);
 */
 function external_script_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -46,7 +46,7 @@ function external_script_activate()
 */
 function external_script_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -59,7 +59,7 @@ function external_script_deactivate()
 */
 function external_script_install()
 {
-	return true;
+	return TRUE;
 }
 
 function external_script($sms)

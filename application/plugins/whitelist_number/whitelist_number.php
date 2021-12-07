@@ -13,7 +13,7 @@ add_action('message.outgoing', 'whitelist_number_outgoing', 1);
 
 function whitelist_number_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -26,7 +26,7 @@ function whitelist_number_activate()
 */
 function whitelist_number_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -48,7 +48,7 @@ function whitelist_number_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH.'plugins/whitelist_number/media/'.$db_prop['file'].'_whitelist_number.sql');
 	}
-  return true;
+  return TRUE;
 }
 
 function whitelist_number_outgoing($numbers = array())

@@ -19,7 +19,7 @@
 */
 function jsonrpc_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -32,7 +32,7 @@ function jsonrpc_activate()
 */
 function jsonrpc_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -45,5 +45,5 @@ function jsonrpc_deactivate()
 */
 function jsonrpc_install()
 {
-	return true;
+	return TRUE;
 }

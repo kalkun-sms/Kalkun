@@ -32,7 +32,7 @@ add_action('message.incoming.after', 'sms_to_email', 10);
 */
 function sms_to_email_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -45,7 +45,7 @@ function sms_to_email_activate()
 */
 function sms_to_email_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -67,7 +67,7 @@ function sms_to_email_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH.'plugins/sms_to_email/media/'.$db_prop['file'].'_sms_to_email.sql');
 	}
-	return true;
+	return TRUE;
 }
 
 

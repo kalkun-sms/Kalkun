@@ -125,13 +125,13 @@ class Daemon extends CI_Controller {
 			$check = in_array($tag, $msg_word);
 
 			// check user phone number if enabled
-			if($check === false && $this->config->item('inbox_routing_user_phonenumber'))
+			if($check === FALSE && $this->config->item('inbox_routing_user_phonenumber'))
 			{
 				$check = ($tmp_message->SenderNumber === $tmp_user->phone_number) ? TRUE : FALSE;
 			}
 
 			// update ownership
-			if($check !== false)
+			if($check !== FALSE)
 			{
 				$this->Message_model->update_owner($tmp_message->ID, $tmp_user->id_user);
 				$msg_user = $tmp_user->id_user;
@@ -162,7 +162,7 @@ class Daemon extends CI_Controller {
 		}
 
 		// if no matched username, set owner to Inbox Master
-		if($check === false OR ! isset($msg_user))
+		if($check === FALSE OR ! isset($msg_user))
 		{
 			$this->Message_model->update_owner($tmp_message->ID, $this->config->item('inbox_owner_id'));
 			$msg_user = $this->config->item('inbox_owner_id');

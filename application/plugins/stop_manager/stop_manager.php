@@ -14,7 +14,7 @@ add_action('message.incoming.before', 'stop_manager_incoming', 1);
 
 function stop_manager_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -27,7 +27,7 @@ function stop_manager_activate()
 */
 function stop_manager_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -49,7 +49,7 @@ function stop_manager_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH.'plugins/stop_manager/media/'.$db_prop['file'].'_stop_manager.sql');
 	}
-  return true;
+  return TRUE;
 }
 
 
@@ -175,7 +175,7 @@ function stop_manager_incoming($sms)
 		$text = '';
 
 		//var_dump($matches);
-		switch (true) {
+		switch (TRUE) {
 			case in_array($cmd, $optout_keywords):
 				$ret = $CI->Stop_manager_model->add($from, $type, $msg);
 

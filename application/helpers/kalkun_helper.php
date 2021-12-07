@@ -20,7 +20,7 @@ function DNDcheck($mobileno)
 	$response = curl_exec($request);
 	curl_close ($request);
 
-	return (is_int(strpos(strtolower(strip_tags($response)), 'number is not')) ? false : true);
+	return (is_int(strpos(strtolower(strip_tags($response)), 'number is not')) ? FALSE : TRUE);
 }
 
 function filter_data($data)

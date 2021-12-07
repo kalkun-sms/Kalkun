@@ -32,7 +32,7 @@ add_action('message.outgoing_all', 'sms_credit', 10);
 */
 function sms_credit_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -45,7 +45,7 @@ function sms_credit_activate()
 */
 function sms_credit_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -67,7 +67,7 @@ function sms_credit_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH.'plugins/sms_credit/media/'.$db_prop['file'].'_sms_credit.sql');
 	}
-	return true;
+	return TRUE;
 }
 
 function sms_credit($sms)

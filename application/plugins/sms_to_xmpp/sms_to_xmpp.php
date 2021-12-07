@@ -32,7 +32,7 @@ add_action('message.incoming.before', 'sms_to_xmpp', 17);
 */
 function sms_to_xmpp_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -45,7 +45,7 @@ function sms_to_xmpp_activate()
 */
 function sms_to_xmpp_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -67,7 +67,7 @@ function sms_to_xmpp_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH.'plugins/sms_to_xmpp/media/'.$db_prop['file'].'_sms_to_xmpp.sql');
 	}
-	return true;
+	return TRUE;
 }
 
 function sms_to_xmpp($sms)

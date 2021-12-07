@@ -32,7 +32,7 @@ add_action('message.incoming.before', 'simple_autoreply', 11);
 */
 function simple_autoreply_activate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -45,7 +45,7 @@ function simple_autoreply_activate()
 */
 function simple_autoreply_deactivate()
 {
-	return true;
+	return TRUE;
 }
 
 /**
@@ -58,7 +58,7 @@ function simple_autoreply_deactivate()
 */
 function simple_autoreply_install()
 {
-	return true;
+	return TRUE;
 }
 
 function simple_autoreply($sms)

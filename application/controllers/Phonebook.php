@@ -270,7 +270,7 @@ class Phonebook extends MY_Controller {
 	{
 		$this->load->library('csvreader');
 		$filePath = $_FILES['csvfile']['tmp_name'];
-		$csvData = $this->csvreader->parse_file($filePath, true);
+		$csvData = $this->csvreader->parse_file($filePath, TRUE);
 
 		$n = 0;
 		foreach($csvData as $field):
