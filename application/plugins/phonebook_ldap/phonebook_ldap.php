@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 function phonebook_ldap_initialize()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 
 	$CI->load->add_package_path(APPPATH.'plugins/phonebook_ldap', FALSE);
 	$CI->load->config('phonebook_ldap', TRUE);
@@ -73,7 +73,7 @@ function phonebook_ldap($number)
 
 	// specify the LDAP server to connect to
 	$conn = ldap_connect($config['server'], $config['port']);
-	if (!$conn) return FALSE;
+	if ( ! $conn) return FALSE;
 
 	//Set some variables
 	ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
@@ -81,17 +81,17 @@ function phonebook_ldap($number)
 
 	// bind to the LDAP server specified above
 	$bd = ldap_bind($conn, $config['username'], $config['password']);
-	if(!$bd) return FALSE;
+	if( ! $bd) return FALSE;
 	$justthese = array('ou', 'sn', 'givenname', 'telephonenumber');
 	$result = ldap_search($conn, $config['dn'], '(&(objectClass=user)(objectCategory=person))', $justthese);
 
 	//Create result set
 	$entries = ldap_get_entries($conn, $result);
-	$z=0;
-	for ($i=0; $i < $entries['count']; $i++)
+	$z = 0;
+	for ($i = 0; $i < $entries['count']; $i++)
 	{
 		// phone number or name not found, continue iteration
-		if (!array_key_exists('telephonenumber', $entries[$i]) OR !array_key_exists('givenname', $entries[$i]))
+		if ( ! array_key_exists('telephonenumber', $entries[$i]) OR ! array_key_exists('givenname', $entries[$i]))
 		{
 			continue;
 		}

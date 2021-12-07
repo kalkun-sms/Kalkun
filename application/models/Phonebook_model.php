@@ -33,7 +33,7 @@ class Phonebook_model extends CI_Model {
 	function get_phonebook($param)
 	{
 
-	   if( isset($param['id_user']) && !empty($param['id_user']) ) $user_id = $param['id_user'];
+	   if(isset($param['id_user']) && ! empty($param['id_user'])) $user_id = $param['id_user'];
 	   else $user_id = $this->session->userdata('id_user') ;
 
 		switch($param['option'])
@@ -167,11 +167,11 @@ class Phonebook_model extends CI_Model {
 	* @param string $identifier
 	* @return string
 	*/
-	function _protect_identifiers($identifier=NULL)
+	function _protect_identifiers($identifier = NULL)
 	{
 		$this->load->helper('kalkun');
 		$escape_char;
-		$escaped_identifer='';
+		$escaped_identifer = '';
 
 		// get database engine
 		$db_engine = $this->db->platform();
@@ -183,12 +183,12 @@ class Phonebook_model extends CI_Model {
 
 		foreach($sub as $key => $tmp)
 		{
-			$escaped_identifer.=$escape_char.$tmp.$escape_char;
+			$escaped_identifer .= $escape_char.$tmp.$escape_char;
 
 			// if this is not the last
-			if($key!==$sub_count-1)
+			if($key !== $sub_count - 1)
 			{
-				$escaped_identifer.='.';
+				$escaped_identifer .= '.';
 			}
 		}
 
@@ -280,7 +280,7 @@ class Phonebook_model extends CI_Model {
 
 		// now insert the lastest
 		if(isset($param['GroupID']))
-			if(!empty($param['GroupID']))
+			if( ! empty($param['GroupID']))
 			{
 				$this->db->set('id_pbk', $pbk_id);
 				$this->db->set('id_pbk_groups', $param['GroupID']);
@@ -288,12 +288,12 @@ class Phonebook_model extends CI_Model {
 				$this->db->insert('user_group');
 			}
 		if(isset($param['Groups']))
-		if(!empty($param['Groups'])){
+		if( ! empty($param['Groups'])){
 			$groups = array_unique(explode(',', $param['Groups']));
-			$CI =& get_instance();
+			$CI = &get_instance();
 			foreach($groups as $_grp)
 			{
-				$group_id  = $CI->Phonebook_model->group_id($_grp, $param['id_user']);
+				$group_id = $CI->Phonebook_model->group_id($_grp, $param['id_user']);
 
 				if($group_id !== null)
 				{
@@ -316,7 +316,7 @@ class Phonebook_model extends CI_Model {
 	 $id_pbk = $this->input->post('id_pbk');
 
 	 //This case probably never happens because it is filtered out in 'application/views/js_init/phonebook/js_phonebook.php'
-	 if($id_group === 'null' ) die('Invalid Group ID');
+	 if($id_group === 'null') die('Invalid Group ID');
 
 	 //parse group value
 	 if(preg_match('/-/', $id_group)) { $mode = 'delete'; $id_group = substr($id_group, 1);  }
@@ -357,7 +357,7 @@ class Phonebook_model extends CI_Model {
 	{
 		$this->db->set('Name', trim($this->input->post('group_name')));
 		$this->db->set('id_user', trim($this->input->post('pbkgroup_id_user')));
-		$this->db->set('is_public', $this->input->post('is_public')? 'true' : 'false');
+		$this->db->set('is_public', $this->input->post('is_public') ? 'true' : 'false');
 
 		// edit mode
 		if($this->input->post('pbkgroup_id'))
@@ -424,15 +424,15 @@ class Phonebook_model extends CI_Model {
 		$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups');
 		$this->db->where('user_group.id_user', $user_id);
 		$this->db->where('user_group.id_pbk', $pbk_id);
-		$q =  $this->db->get();
+		$q = $this->db->get();
 		$GroupID = $GroupName = '';
 		foreach ($q->result() as $_gp)
 		{
 			$GroupName .= $_gp->GroupName.',';
 			$GroupID .= $_gp->GroupID .',';
 		}
-		$GroupName = substr($GroupName, 0, strlen($GroupName)-1);
-		$GroupID = substr($GroupID, 0, strlen($GroupID)-1);
+		$GroupName = substr($GroupName, 0, strlen($GroupName) - 1);
+		$GroupID = substr($GroupID, 0, strlen($GroupID) - 1);
 		return (object) array('GroupNames' => $GroupName, 'GroupIDs' => $GroupID);
 	}
 
@@ -478,7 +478,7 @@ class Phonebook_model extends CI_Model {
 	 */
 	function convert_phonenumber($param)
 	{
-		if(!isset($param['id_user'])) $param['id_user'] = '';
+		if( ! isset($param['id_user'])) $param['id_user'] = '';
 		$this->load->helper('country_dial_code_helper');
 		$country_code = $this->Kalkun_model->get_setting()->row('country_code');
 		$dial_code = getCountryInformation($country_code);

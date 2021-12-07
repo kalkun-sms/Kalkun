@@ -61,7 +61,7 @@ class Daemon extends CI_Controller {
 			$status = do_action('message.incoming.before', $tmp_message);
 
 			// message deleted, do not process later part
-			if(isset($status) && $status==='break')
+			if(isset($status) && $status === 'break')
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ class Daemon extends CI_Controller {
 			$status = do_action('message.incoming.after', $tmp_message);
 
 			// message deleted, do not process later part
-			if(isset($status) && $status==='break')
+			if(isset($status) && $status === 'break')
 			{
 				continue;
 			}
@@ -131,10 +131,10 @@ class Daemon extends CI_Controller {
 			}
 
 			// update ownership
-			if($check!==false)
+			if($check !== false)
 			{
 				$this->Message_model->update_owner($tmp_message->ID, $tmp_user->id_user);
-				$msg_user =  $tmp_user->id_user;
+				$msg_user = $tmp_user->id_user;
 				break;
 			}
 		}
@@ -151,7 +151,7 @@ class Daemon extends CI_Controller {
 
 				if($check->num_rows() !== 0)
 				{
-					$msg_user[] =  $tmp_user->id_user;
+					$msg_user[] = $tmp_user->id_user;
 				}
 			}
 
@@ -162,10 +162,10 @@ class Daemon extends CI_Controller {
 		}
 
 		// if no matched username, set owner to Inbox Master
-		if($check===false OR !isset($msg_user))
+		if($check === false OR ! isset($msg_user))
 		{
 			$this->Message_model->update_owner($tmp_message->ID, $this->config->item('inbox_owner_id'));
-			$msg_user =  $this->config->item('inbox_owner_id');
+			$msg_user = $this->config->item('inbox_owner_id');
 		}
 
 		return $msg_user;
@@ -185,8 +185,8 @@ class Daemon extends CI_Controller {
 			$filters = $this->Kalkun_model->get_filters($user);
 			foreach($filters->result() as $filter)
 			{
-				if(!empty($filter->from) && ($msg->SenderNumber !== $filter->from)) continue;
-				if(!empty($filter->has_the_words) && (strstr($msg->TextDecoded, $filter->has_the_words) === FALSE)) continue;
+				if( ! empty($filter->from) && ($msg->SenderNumber !== $filter->from)) continue;
+				if( ! empty($filter->has_the_words) && (strstr($msg->TextDecoded, $filter->has_the_words) === FALSE)) continue;
 				$this->Message_model->move_messages(array('type' => 'single', 'folder' => 'inbox', 'id_message' => array($msg->ID), 'id_folder' => $filter->id_folder));
 			}
 		}
@@ -210,7 +210,7 @@ class Daemon extends CI_Controller {
 		foreach($tmp_data->result() as $tmp)
 		{
 			$fp = fsockopen($tmp->ip_address, $tmp->port_number, $errno, $errstr, 60);
-			if(!$fp)
+			if( ! $fp)
 			{
 				$data['coding'] = 'default';
 				$data['message'] = $tmp->respond_message."\n\nKalkun Server Alert";

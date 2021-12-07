@@ -48,7 +48,7 @@ class Blacklist_number extends Plugin_controller {
 
 		$data['main'] = 'index';
 		$data['blacklist'] = $this->plugin_model->get('paginate', $config['per_page'], $this->uri->segment(4, 0));
-		$data['number'] = $this->uri->segment(4, 0)+1;
+		$data['number'] = $this->uri->segment(4, 0) + 1;
 		$this->load->view('main/layout', $data);
 	}
 

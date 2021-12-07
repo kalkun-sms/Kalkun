@@ -101,32 +101,32 @@ class Kalkun extends MY_Controller {
 
 		// generate data points
 		$x = array();
-		for ($i=0; $i<=$days; $i++)
+		for ($i = 0; $i <= $days; $i++)
 		{
-			$key = date($format, mktime(0, 0, 0, date('m'), date('d')-$i, date('Y')));
+			$key = date($format, mktime(0, 0, 0, date('m'), date('d') - $i, date('Y')));
 
 			if (isset($prefix))
 			{
 				$key = $prefix.$key;
 			}
 
-			if(!isset($yout[$key]))
+			if( ! isset($yout[$key]))
 			{
 				$yout[$key] = 0;
 			}
 
-			if(!isset($yin[$key]))
+			if( ! isset($yin[$key]))
 			{
 				$yin[$key] = 0;
 			}
 
-			if(!in_array($key, $x))
+			if( ! in_array($key, $x))
 			{
 				$x[] = $key;
 			}
 
-			$param['sms_date'] = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d')-$i, date('Y')));
-			if ($this->session->userdata('level')!=='admin')
+			$param['sms_date'] = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') - $i, date('Y')));
+			if ($this->session->userdata('level') !== 'admin')
 			{
 				$param['user_id'] = $this->session->userdata('id_user');
 			}
@@ -136,7 +136,7 @@ class Kalkun extends MY_Controller {
 
 		$yout = array_values($yout);
 		$yin = array_values($yin);
-		$points = count($x)-1;
+		$points = count($x) - 1;
 
 		echo '{
 			"labels": '.json_encode(array_reverse($x)).',
@@ -187,13 +187,13 @@ class Kalkun extends MY_Controller {
 	function unread_count()
 	{
 		$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'uid' => $this->session->userdata('id_user')))->num_rows();
-		$in =  ($tmp_unread > 0)? '('.$tmp_unread.')' : '';
+		$in = ($tmp_unread > 0) ? '('.$tmp_unread.')' : '';
 
 		$tmp_unread = 0;
-		$draft =  ($tmp_unread > 0)? '('.$tmp_unread.')' : '';
+		$draft = ($tmp_unread > 0) ? '('.$tmp_unread.')' : '';
 
-		$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => '6', 'uid' => $this->session->userdata('id_user')) )->num_rows();
-		$spam =  ($tmp_unread > 0)? '('.$tmp_unread.')' : '';
+		$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => '6', 'uid' => $this->session->userdata('id_user')))->num_rows();
+		$spam = ($tmp_unread > 0) ? '('.$tmp_unread.')' : '';
 
 		echo $in. '/' . $draft . '/' . $spam;
 	}
@@ -237,7 +237,7 @@ class Kalkun extends MY_Controller {
 	 *
 	 * @access	public
 	 */
-	function delete_folder($id_folder=NULL)
+	function delete_folder($id_folder = NULL)
 	{
 		$this->Kalkun_model->delete_folder($id_folder);
 		redirect('/', 'refresh');
@@ -258,21 +258,21 @@ class Kalkun extends MY_Controller {
 		$data['title'] = 'Settings';
 		$type = $this->uri->segment(2);
 		$valid_type = array('general', 'personal', 'appearance', 'password', 'save', 'filters');
-		if(!in_array($type, $valid_type)) show_404();
+		if( ! in_array($type, $valid_type)) show_404();
 
-		if($_POST && $type==='save') {
+		if($_POST && $type === 'save') {
 			$option = $this->input->post('option');
 			// check password
-			if($option==='password' && !password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password')))
+			if($option === 'password' && ! password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password')))
 			{
 				$this->session->set_flashdata('notif', lang('kalkun_wrong_password'));
 				redirect('settings/'.$option);
 			}
-			else if($option==='personal')
+			else if($option === 'personal')
 			{
-				if($this->input->post('username')!==$this->session->userdata('username'))
+				if($this->input->post('username') !== $this->session->userdata('username'))
 				{
-					if($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows>0)
+					if($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows > 0)
 					{
 						$this->session->set_flashdata('notif', lang('kalkun_username_exists'));
 						redirect('settings/'.$option);
@@ -304,7 +304,7 @@ class Kalkun extends MY_Controller {
 	 *
 	 * @access	public
 	 */
-	function delete_filter($id_filter=NULL)
+	function delete_filter($id_filter = NULL)
 	{
 		$this->Kalkun_model->delete_filter($id_filter);
 	}

@@ -36,11 +36,11 @@ class Spam_model extends CI_Model {
 	{
 		parent::__construct();
 		$b8_config = array('storage' => 'active');
-		$config_database= array(); // not required for activare record, see b8 documentation for mysql/dba methods
-		$this->b8 = new b8($b8_config, $config_database );
+		$config_database = array(); // not required for activare record, see b8 documentation for mysql/dba methods
+		$this->b8 = new b8($b8_config, $config_database);
 		$started_up = $this->b8->validate();
 		if($started_up !== TRUE)
-			die( "<b> Could not initialize b8. error code: ${started_up}</b>");
+			die("<b> Could not initialize b8. error code: ${started_up}</b>");
 	}
 
 	// --------------------------------------------------------------------
@@ -127,7 +127,7 @@ class Spam_model extends CI_Model {
 	 {
 		$this->load->library('curl');
 		$this->curl->create('http://digitalplantation.org/kalkun/cloudspam/report.php');
-		$post = array('type'=>$type, 'msg' => $text);
+		$post = array('type' => $type, 'msg' => $text);
 		$this->curl->post($post);
 
 		if($this->config->item('enable_proxy'))

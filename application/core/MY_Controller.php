@@ -26,7 +26,7 @@ class MY_Controller  extends CI_Controller  {
 	 *
 	 * @access	public
 	 */
-	function __construct($login=TRUE)
+	function __construct($login = TRUE)
 	{
 		parent::__construct();
 
@@ -74,12 +74,12 @@ class MY_Controller  extends CI_Controller  {
 			$id_message = $tmp->id_outbox;
 
 			// if still on outbox, means message not delivered yet
-			if ($this->Message_model->get_messages(array('id_message' => $id_message, 'type' => 'outbox'))->num_rows()>0)
+			if ($this->Message_model->get_messages(array('id_message' => $id_message, 'type' => 'outbox'))->num_rows() > 0)
 			{
 				// do nothing
 			}
 			// if exist on sentitems then update sentitems ownership, else delete user_outbox
-			else if ($this->Message_model->get_messages(array('id_message' => $id_message, 'type' => 'sentitems'))->num_rows()>0)
+			else if ($this->Message_model->get_messages(array('id_message' => $id_message, 'type' => 'sentitems'))->num_rows() > 0)
 			{
 				$this->Message_model->insert_user_sentitems($id_message, $uid);
 				$this->Message_model->delete_user_outbox($id_message);

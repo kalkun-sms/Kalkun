@@ -16,14 +16,14 @@
 $type = array('inbox', 'sentitems');
 
 // Reply to option
-if($val_type=='reply'): ?>
+if($val_type == 'reply'): ?>
 <tr>
 <td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
 <td>
 <?php
 $phone = $dest;
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $phone));
-if($qry->num_rows()!==0):
+if($qry->num_rows() !== 0):
 echo $qry->row('Name').' <'.$phone.'>';
 else:
 echo $phone;
@@ -34,19 +34,19 @@ endif;
 </td>
 </tr>
 
-<?php /* Member */ elseif($val_type=='member'):?>
+<?php /* Member */ elseif($val_type == 'member'):?>
 <tr>
 <td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
 <td><?php echo lang('kalkun_sms_member');?><input type="hidden" name="sendoption" value="member" /></td>    
 </tr>
 
-<?php /* Phonebook contact */ elseif($val_type=='pbk_contact'):?>
+<?php /* Phonebook contact */ elseif($val_type == 'pbk_contact'):?>
 <tr>
 <td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
 <td>
 <?php
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $dest));
-if($qry->num_rows()!==0):
+if($qry->num_rows() !== 0):
 echo $qry->row('Name').' <'.$dest.'>';
 else:
 echo $dest;
@@ -57,7 +57,7 @@ endif;
 </td>    
 </tr>
 
-<?php /* Phonebook group */ elseif($val_type=='pbk_groups'):?>
+<?php /* Phonebook group */ elseif($val_type == 'pbk_groups'):?>
 <tr>
 <td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
 <td>
@@ -67,7 +67,7 @@ endif;
 </td>    
 </tr>
 
-<?php /* All Contacts */ elseif($val_type=='all_contacts'):?>
+<?php /* All Contacts */ elseif($val_type == 'all_contacts'):?>
 <tr>
 <td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
 <td>
@@ -80,7 +80,7 @@ endif;
 <tr>
 <td width="100px" align="right" class="label">
 <?php
-if($val_type=='forward') echo lang('kalkun_forward_to').':';
+if($val_type == 'forward') echo lang('kalkun_forward_to').':';
 else echo lang('kalkun_send_to').':';
 ?>
 </td>
@@ -201,12 +201,12 @@ else echo lang('kalkun_send_to').':';
 <tr valign="top">
 <td align="right" class="label"><?php echo lang('kalkun_message').':';?></td>
 <td>
-<?php if($val_type=='forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo $msg_id;?>" /> <?php endif;?>
+<?php if($val_type == 'forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo $msg_id;?>" /> <?php endif;?>
 <textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;"   id="message" name="message">
 <?php
-if($val_type=='forward') echo $message;
-list($sig_option, $sig)=explode(';', $this->Kalkun_model->get_setting()->row('signature'));
-if($sig_option=='true') echo "\n\n".$sig; ?>
+if($val_type == 'forward') echo $message;
+list($sig_option, $sig) = explode(';', $this->Kalkun_model->get_setting()->row('signature'));
+if($sig_option == 'true') echo "\n\n".$sig; ?>
 </textarea>
 <div>
 	<div style="float: left"><span class="counter"></span></div>

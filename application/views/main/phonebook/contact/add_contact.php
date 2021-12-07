@@ -13,7 +13,7 @@ $(document).ready(function() {
 	foreach($group->result() as $tmp):
 		$grouptext .= $tmp->GroupName.';';
 	endforeach;
-	$grouptext = substr($grouptext, 0, strlen($grouptext)-1);
+	$grouptext = substr($grouptext, 0, strlen($grouptext) - 1);
 	?>
     var grp_data = "<?php echo $grouptext?>".split(";");
     $('#groups').tagsInput({
@@ -37,14 +37,14 @@ $(document).ready(function() {
 <input type="text" name="number" id="number" value="<?php if(isset($contact)) echo $contact->row('Number'); else if(isset($number)) echo $number;?>" class="text ui-widget-content ui-corner-all required phone" />
 
 <div style="margin-bottom:12px">
-<input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if(isset($contact) && $contact->row('is_public')== 'true') echo 'checked="checked"';?> /> 
+<input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if(isset($contact) && $contact->row('is_public') == 'true') echo 'checked="checked"';?> /> 
 <label for="is_public" style="display: inline"><?php echo lang('kalkun_public_contact_set');?></label>
 </div>
 
 <label for="group"><?php echo lang('kalkun_group'); ?></label> 
 <?php if(isset($contact)): ?> 
 <input name="groups" id="groups" value="<?php echo $this->Phonebook_model->get_groups($contact->row('id_pbk'), $this->session->userdata('id_user'))->GroupNames?>" type="hidden" />
-<?php elseif(!empty($group_id)):?>
+<?php elseif( ! empty($group_id)):?>
 <input name="groups" id="groups" value="<?php echo $this->Phonebook_model->group_name($group_id, $this->session->userdata('id_user'))?>" type="hidden" />
 <?php else : ?>
 <input name="groups" id="groups" value=""  type="hidden" />

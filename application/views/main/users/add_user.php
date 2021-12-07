@@ -12,7 +12,7 @@
 <label for="name"><?php echo lang('tni_user_username'); ?></label>
 <input type="text" name="username" id="username" value="<?php if(isset($users)) echo $users->row('username');?>" class="text ui-widget-content ui-corner-all" />
 
-<?php if(!isset($users)): ?> 
+<?php if( ! isset($users)): ?> 
 <label for="password"><?php echo lang('tni_user_password'); ?></label>
 <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
 <label for="confirm_password"><?php echo lang('tni_user_conf_password'); ?></label>

@@ -2,12 +2,12 @@
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.emoticons.min.js"></script>
 <?php endif; ?>
 <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquerycssmenu.css" />
-<?php if($this->uri->segment(2)!='conversation' && $this->uri->segment(2)!='search') $this->load->view('js_init/message/js_function'); ?>
+<?php if($this->uri->segment(2) != 'conversation' && $this->uri->segment(2) != 'search') $this->load->view('js_init/message/js_function'); ?>
 
 <!-- Move To Dialog -->
 <div id="movetodialog" title="<?php echo lang('kalkun_select_folder');?>" class="dialog" style="background: #cce9f2;">
 <?php
-if($this->uri->segment(2)=='my_folder') $folder = $this->Kalkun_model->get_folders('exclude', $this->uri->segment(4));
+if($this->uri->segment(2) == 'my_folder') $folder = $this->Kalkun_model->get_folders('exclude', $this->uri->segment(4));
 else $folder = $this->Kalkun_model->get_folders('all');
 ?>
 <?php foreach($folder->result() as $folder):?>
@@ -15,11 +15,11 @@ else $folder = $this->Kalkun_model->get_folders('all');
 <?php endforeach;?>
 </div>
 
-<?php $this->load->view('main/messages/navigation', array('place'=>'top')); ?>		
+<?php $this->load->view('main/messages/navigation', array('place' => 'top')); ?>		
 
 <?php
 // my folder view
-if($this->uri->segment(2)=='my_folder')
+if($this->uri->segment(2) == 'my_folder')
 { ?>
 
 <!-- Rename Folder Dialog -->
@@ -57,24 +57,24 @@ if($this->uri->segment(2)=='my_folder')
 				break;
 		}
 		echo '<span class="folder_name">'.$folder_name.'</span>';?>
-    <?php if($this->uri->segment(4)=='5' || $this->uri->segment(4)=='6'):?>
+    <?php if($this->uri->segment(4) == '5' || $this->uri->segment(4) == '6'):?>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="padding: 0; cursor: pointer; font-weight: normal;" id="delete-all-link"><?php echo lang('kalkun_delete_all_message_now');?></a>
     <?php endif; ?>
     
-	<?php if($this->uri->segment(4)!='5' && $this->uri->segment(4)!='6'):?>
+	<?php if($this->uri->segment(4) != '5' && $this->uri->segment(4) != '6'):?>
 	<sup>[ 
 	<a href="#" title="<?php echo lang('kalkun_rename_folder_title');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="renamefolder"><?php echo lang('kalkun_rename');?></a> - 
 			<a href="#" title="<?php echo lang('kalkun_delete_folder_title');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="deletefolder"><?php echo lang('kalkun_delete');?></a> ]
 			</sup>
 			<?php endif; ?>
 		</div>
-        <?php if( $this->uri->segment(4)!='6'):?>
+        <?php if($this->uri->segment(4) != '6'):?>
 		<div id="right_column">
 			<?php
-			if($this->uri->segment(3)=='inbox') echo '<span class="currenttab">'.lang('kalkun_inbox').'</span>';
+			if($this->uri->segment(3) == 'inbox') echo '<span class="currenttab">'.lang('kalkun_inbox').'</span>';
 			else echo anchor('messages/my_folder/inbox/'.$this->uri->segment(4).'', lang('kalkun_inbox'));
 
-			if($this->uri->segment(3)=='sentitems') echo '<span class="currenttab">'.lang('kalkun_sentitems').'</span>';
+			if($this->uri->segment(3) == 'sentitems') echo '<span class="currenttab">'.lang('kalkun_sentitems').'</span>';
 			else echo anchor('messages/my_folder/sentitems/'.$this->uri->segment(4).'', lang('kalkun_sentitems'));?>
 		</div>
         <?php endif; ?>
@@ -83,7 +83,7 @@ if($this->uri->segment(2)=='my_folder')
 
 	<div id="message_holder">
 	<?php
-	if($this->uri->segment(2)=='conversation' || $this->uri->segment(2)=='search')
+	if($this->uri->segment(2) == 'conversation' || $this->uri->segment(2) == 'search')
 	{
 		$this->load->view('main/messages/conversation');
 		$this->load->view('js_init/message/js_object');
@@ -97,4 +97,4 @@ if($this->uri->segment(2)=='my_folder')
 	?>
 	</div>
 
-	<?php $this->load->view('main/messages/navigation', array('place'=>'bottom')); ?>
+	<?php $this->load->view('main/messages/navigation', array('place' => 'bottom')); ?>

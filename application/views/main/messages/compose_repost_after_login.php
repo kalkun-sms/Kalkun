@@ -18,7 +18,7 @@ echo doctype('html5');?>
 </style>
 </head>
 
-<?php if (!$this->session->flashdata('bef_login_post_data')) {
+<?php if ( ! $this->session->flashdata('bef_login_post_data')) {
 	// Here the user logged in, but we lost the content of the POST.
 	// So we redirect him to the form he Posted by using the javascript
 	// "history.go" function. That way the content of
@@ -40,7 +40,7 @@ echo doctype('html5');?>
 		<p><?php echo lang('kalkun_msg_login_success_resubmit');?></p>
 		<form name="redirectpost" method="post" action="<?php echo current_url(); ?>">
 		<?php
-			if ( !is_null($this->session->flashdata('bef_login_post_data')) ) {
+			if ( ! is_null($this->session->flashdata('bef_login_post_data'))) {
 foreach ($this->session->flashdata('bef_login_post_data') as $k => $v) {
 echo '<input type="hidden" name="' . $k . '" value="' . $v . '"> ';
 }

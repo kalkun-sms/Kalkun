@@ -48,26 +48,26 @@ class Pluginss extends MY_Controller {
 	 *
 	 * @access	public
 	 */
-	function index($type='installed')
+	function index($type = 'installed')
 	{
 		$this->load->helper('form');
 		$data['main'] = 'main/plugin/index';
 		$data['title'] = 'Plugins';
 		$data['plugins'] = array();
 		$data['type'] = $type;
-		if($type==='installed')
+		if($type === 'installed')
 		{
-			$data['title'].= lang('pluginss_installed');
+			$data['title'] .= lang('pluginss_installed');
 			$data['plugins'] = $this->Plugin_model->get_plugins()->result_array();
 		}
 		else
 		{
-			$data['title'].= lang('pluginss_available');
+			$data['title'] .= lang('pluginss_available');
 			$pluginsObj = new Plugins();
 			$plugins = get_available_plugin();
 			$no = 0;
 
-			if(!empty($plugins)){
+			if( ! empty($plugins)){
 				// do cleanup array key
 				foreach($plugins as $key => $tmp)
 				{

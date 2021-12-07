@@ -23,7 +23,7 @@
                         <div class="left_column">
                             <div id="pbkname">
                                 <span style="font-weight: bold;"><?php echo $tmp->realname;?></span>
-                                <?php if(!is_null($tmp->template_name)): echo "<sup>( {$tmp->template_name} )</sup>"; ?>
+                                <?php if( ! is_null($tmp->template_name)): echo "<sup>( {$tmp->template_name} )</sup>"; ?>
                                 <?php else: echo '<sup>( No package )</sup>'; ?>
                                 <?php endif;?>
                             </div>	

@@ -1,9 +1,9 @@
 <h2>Installation result</h2>
 <p>This is the last step of the installation step.</p>
 <p>Installation status: 
-<?php if($error==0) echo '<span class="green">SUCCESS</span>'; else { echo '<span class="red">FAILED</span>';}?></p>
+<?php if($error == 0) echo '<span class="green">SUCCESS</span>'; else { echo '<span class="red">FAILED</span>';}?></p>
 
-<?php if($error==0):?>
+<?php if($error == 0):?>
 <p>&nbsp;</p>
 <h4>Remove Installation file</h4>
 <p>Before run Kalkun, you <b>MUST</b> remove the <b>install</b> file located on the root of Kalkun directory.</p>

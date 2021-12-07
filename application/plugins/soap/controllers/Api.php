@@ -37,13 +37,13 @@ class Api extends MY_Controller {
 
 		function version()
 		{
-			$CI =& get_instance();
+			$CI = &get_instance();
 			return $CI->getApiVersion();
 		}
 
 		function login($token)
 		{
-			$CI =& get_instance();
+			$CI = &get_instance();
 			$account = $CI->api_model->getAccount($token);
 
 			if ($account['status'] === false)
@@ -63,9 +63,9 @@ class Api extends MY_Controller {
 
 		function sendMessage($destinationNumber = '', $message = '')
 		{
-			$CI =& get_instance();
+			$CI = &get_instance();
 			$message = trim($message);
-			$destinationNumber	= preg_replace('/^\+/', '00', $destinationNumber);
+			$destinationNumber = preg_replace('/^\+/', '00', $destinationNumber);
 
 			if(preg_match('/^\d+$/', $destinationNumber))
 			{
@@ -78,10 +78,10 @@ class Api extends MY_Controller {
 
 		function sendFlashMessage($destinationNumber = '', $message = '')
 		{
-			$CI =& get_instance();
+			$CI = &get_instance();
 			$message = trim($message);
 
-			$destinationNumber	= preg_replace('/^\+/', '00', $destinationNumber);
+			$destinationNumber = preg_replace('/^\+/', '00', $destinationNumber);
 
 			if(preg_match('/^\d+$/', $destinationNumber))
 			{
@@ -94,7 +94,7 @@ class Api extends MY_Controller {
 
 		function logout()
 		{
-			$CI =& get_instance();
+			$CI = &get_instance();
 			$CI->apisession->sess_destroy();
 			return 1;
 		}
@@ -149,7 +149,7 @@ class Api extends MY_Controller {
 				'sendMessage',
 				array('destinationNumber' => 'xsd:string',      // input parameters
 					'message' => 'xsd:string'),
-				array('result'	=> 'xsd:integer'),              // output parameter
+				array('result' => 'xsd:integer'),              // output parameter
 				'urn:Api',                                      // namespace
 				$this->ENDPOINT.'/sendMessage',                 // soapaction
 				'rpc',                                          // style
@@ -161,7 +161,7 @@ class Api extends MY_Controller {
 				'sendFlashMessage',
 				array('destinationNumber' => 'xsd:string',      // input parameters
 					'message' => 'xsd:string'),
-				array('result'	=> 'xsd:integer'),              // output parameter
+				array('result' => 'xsd:integer'),              // output parameter
 				'urn:Api',                                      // namespace
 				$this->ENDPOINT.'/sendFlashMessage',            // soapaction
 				'rpc',                                          // style

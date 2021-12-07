@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 function sms_member_initialize()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 
 	$CI->load->add_package_path(APPPATH.'plugins/sms_member', FALSE);
 	$CI->load->config('sms_member', TRUE);
@@ -58,10 +58,10 @@ function sms_member_deactivate()
 */
 function sms_member_install()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
-	if (!$CI->db->table_exists('plugin_sms_member'))
+	if ( ! $CI->db->table_exists('plugin_sms_member'))
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
@@ -79,11 +79,11 @@ function sms_member($sms)
 	list($code) = explode(' ', $message);
 	$reg_code = $config['reg_code'];
 	$unreg_code = $config['unreg_code'];
-	if (strtoupper($code)===strtoupper($reg_code))
+	if (strtoupper($code) === strtoupper($reg_code))
 	{
 		register_member($number);
 	}
-	else if (strtoupper($code)===strtoupper($unreg_code))
+	else if (strtoupper($code) === strtoupper($unreg_code))
 	{
 		unregister_member($number);
 	}
@@ -98,11 +98,11 @@ function sms_member($sms)
  */
 function register_member($number)
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->model('sms_member/sms_member_model', 'plugin_model');
 
 	//check if number not registered
-	if($CI->plugin_model->check_member($number)===0)
+	if($CI->plugin_model->check_member($number) === 0)
 	$CI->plugin_model->add_member($number);
 }
 
@@ -115,10 +115,10 @@ function register_member($number)
  */
 function unregister_member($number)
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->model('sms_member/sms_member_model', 'plugin_model');
 
 	//check if already registered
-	if($CI->plugin_model->check_member($number)===1)
+	if($CI->plugin_model->check_member($number) === 1)
 	$CI->plugin_model->remove_member($number);
 }

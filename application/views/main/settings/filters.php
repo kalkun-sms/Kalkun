@@ -8,11 +8,11 @@
     <div class="left_column">
         <div id="<?php echo $filter['id_filter'];?>" class="id_filter">
             <span>
-                <?php if(!empty($filter['from'])):?>
+                <?php if( ! empty($filter['from'])):?>
                 <?php echo lang('tni_from');?>: <b class="from"><?php echo $filter['from'];?></b>
                 <?php endif;?>
 
-                <?php if(!empty($filter['has_the_words'])):?>
+                <?php if( ! empty($filter['has_the_words'])):?>
                 <?php echo lang('kalkun_filter_has_the_words');?>: <b class="has_the_words"><?php echo $filter['has_the_words'];?></b>
                 <?php endif;?>
             </span>

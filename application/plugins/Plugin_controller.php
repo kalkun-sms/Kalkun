@@ -26,7 +26,7 @@ class Plugin_controller extends MY_Controller {
 	var $plugin_author = '';
 	var $plugin_view_dir = '';
 
-	function __construct($login=TRUE)
+	function __construct($login = TRUE)
 	{
 		parent::__construct($login);
 
@@ -46,9 +46,9 @@ class Plugin_controller extends MY_Controller {
 		//$this->load->library('plugins', array('plugins_dir' => 'application/plugins/'));
 
 		// Check if plugin is active
-		$CI =& get_instance();
+		$CI = &get_instance();
 		$check = $CI->db->where('plugin_system_name', strtolower(get_class($this)))->get('plugins');
-		if ($check->num_rows()!==1)
+		if ($check->num_rows() !== 1)
 		{
 			$this->session->set_flashdata('notif', 'Plugin '.strtolower(get_class($this)).' is not installed');
 			redirect('pluginss');

@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 function external_script_initialize()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 
 	$CI->load->add_package_path(APPPATH.'plugins/external_script', FALSE);
 	$CI->load->config('external_script', TRUE);
@@ -76,7 +76,7 @@ function external_script($sms)
 	{
 		$intepreter_path = $rule['intepreter_path'];
 		$script_path = $rule['script_path'];
-		$value=$parameter='';
+		$value = $parameter = '';
 
 		// evaluate rule key
 		switch($rule['key'])
@@ -113,7 +113,7 @@ function external_script($sms)
 		if ($is_valid)
 		{
 			// build extra parameters
-			if (!empty($rule['parameter']))
+			if ( ! empty($rule['parameter']))
 			{
 				$valid_param = array('phone', 'content', 'id', 'time', 'match');
 				$param = explode('|', $rule['parameter']);
@@ -122,7 +122,7 @@ function external_script($sms)
 				{
 					if (in_array($tmp, $valid_param))
 					{
-						$parameter.=' '.escapeshellarg(${$tmp});
+						$parameter .= ' '.escapeshellarg(${$tmp});
 					}
 				}
 			}
@@ -135,13 +135,13 @@ function external_script($sms)
 
 function is_equal($subject, $matched)
 {
-	if ($subject===$matched) return TRUE;
+	if ($subject === $matched) return TRUE;
 	else return FALSE;
 }
 
 function is_contain($subject, $matched)
 {
-	if (!strstr($matched, $subject)) return FALSE;
+	if ( ! strstr($matched, $subject)) return FALSE;
 	else return TRUE;
 }
 

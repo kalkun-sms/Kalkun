@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 function phonebook_lookup_initialize()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 
 	$CI->load->add_package_path(APPPATH.'plugins/phonebook_lookup', FALSE);
 	$CI->load->config('phonebook_lookup', TRUE);

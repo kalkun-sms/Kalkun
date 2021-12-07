@@ -13,11 +13,11 @@
 
 <div id="window_content">
 <?php
-if(count($plugins)>0)
+if(count($plugins) > 0)
 {
 	foreach($plugins as $tmp)
 	{
-		if ($type=='installed' AND file_exists(APPPATH . 'plugins/'.$tmp['plugin_system_name'].'/controllers/'.ucfirst($tmp['plugin_system_name']).'.php'))
+		if ($type == 'installed' AND file_exists(APPPATH . 'plugins/'.$tmp['plugin_system_name'].'/controllers/'.ucfirst($tmp['plugin_system_name']).'.php'))
 		{
 			echo '<div style="float: left"><h3>'.anchor('plugin/'.$tmp['plugin_system_name'], $tmp['plugin_name']).'</h3></div>';
 		}
@@ -27,7 +27,7 @@ if(count($plugins)>0)
 		}
 ?>
 		<div style="float: right; margin-top: 15px;">
-			<?php if ($type=='installed'):?>
+			<?php if ($type == 'installed'):?>
 			<a href="<?php echo site_url('pluginss/uninstall/'.$tmp['plugin_system_name']);?>" class="nicebutton">Uninstall</a>
 			<?php else:?>
 			<a href="<?php echo site_url('pluginss/install/'.$tmp['plugin_system_name']);?>" class="nicebutton">Install</a>

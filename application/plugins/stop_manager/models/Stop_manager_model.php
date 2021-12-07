@@ -26,7 +26,7 @@ class Stop_manager_model extends CI_Model {
 		parent::__construct();
 	}
 
-	function get($option=NULL, $limit=NULL, $offset=NULL)
+	function get($option = NULL, $limit = NULL, $offset = NULL)
 	{
 		switch($option)
 		{
@@ -93,7 +93,7 @@ class Stop_manager_model extends CI_Model {
 		}
 		else
 		{
-			if ( $q->num_rows() > 1 )
+			if ($q->num_rows() > 1)
 			{
 				// do DELETE (there is more than 1 row, so remove them)
 				$this->delete($number, $type);

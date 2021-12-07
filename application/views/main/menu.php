@@ -15,7 +15,7 @@
 	</span></li>
 	<li><?php echo anchor('messages/folder/outbox', lang('kalkun_outbox')); ?></li>
     <li><?php echo anchor('messages/folder/sentitems', lang('kalkun_sentitems')); ?>  </li>
-    <?php if( $this->uri->segment(3)=='sentitems' || $this->uri->segment(4)=='sentitems') : ?>
+    <?php if($this->uri->segment(3) == 'sentitems' || $this->uri->segment(4) == 'sentitems') : ?>
     <li style="list-style: none;"><?php echo anchor('messages/conversation/folder/sentitems/sending_error', lang('kalkun_senterroritems')); ?> </li>
      <?php endif; ?>
     <li><?php echo anchor('messages/my_folder/inbox/6', lang('kalkun_spam')); ?>
@@ -50,7 +50,7 @@
 <li><?php echo  anchor('phonebook', lang('kalkun_phonebook')); ?></li>
 <?php
 $level = $this->session->userdata('level');
-if($level==='admin'):?>
+if($level === 'admin'):?>
 	<li><?php echo anchor('users', lang('tni_user_wordp')); ?></li>
 	<?php if($this->config->item('sms_content')): ?> 
 	<li id="bottom"><?php echo anchor('member', 'Member'); ?></li>

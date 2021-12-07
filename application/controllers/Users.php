@@ -30,7 +30,7 @@ class Users extends MY_Controller
 		parent::__construct();
 
 		// check level
-		if($this->session->userdata('level')!=='admin')
+		if($this->session->userdata('level') !== 'admin')
 		{
 			$this->session->set_flashdata('notif', lang('users_access_denied'));
 			redirect('/');
@@ -84,7 +84,7 @@ class Users extends MY_Controller
 		$type = $this->input->post('type');
 		$data['tmp'] = '';
 
-		if($type==='edit')
+		if($type === 'edit')
 		{
 			$id_user = $this->input->post('param1');
 			$data['users'] = $this->User_model->getUsers(array('option' => 'by_iduser', 'id_user' => $id_user));
