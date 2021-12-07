@@ -6,5 +6,3 @@ if(php_sapi_name() !== 'cli' && !empty($_SERVER['REMOTE_ADDR'])) exit("Access De
 $url = "http://localhost/kalkun";
 
 fclose(fopen($url."/index.php/daemon/server_alert_daemon/", "r"));
-
-?>

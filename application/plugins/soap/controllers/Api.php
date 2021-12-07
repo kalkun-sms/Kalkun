@@ -202,4 +202,3 @@ class Api extends MY_Controller {
 		return Api::$VERSION;
 	}
 }
-?>

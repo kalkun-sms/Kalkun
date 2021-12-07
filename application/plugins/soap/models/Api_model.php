@@ -20,5 +20,3 @@ Class Api_model extends CI_Model {
 		return array ('ip'=>$remote_ip, 'id'=> $remote_Id, 'status'=>$status);
 	}
 }
-
-?>
