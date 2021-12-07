@@ -201,7 +201,7 @@
 					<?php
 					$my_folders=$this->Kalkun_model->get_folders('all');
 					foreach ($my_folders->result() as $my_folder):
-					echo "<option value=\"$my_folder->id_folder\">$my_folder->name</option>";
+					echo "<option value=\"{$my_folder->id_folder}\">{$my_folder->name}</option>";
 					endforeach;
 					?>
 				</select>

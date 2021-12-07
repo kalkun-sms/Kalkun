@@ -134,7 +134,7 @@ class Tmobilecz_model extends Nongammu_model {
 	$cache_path = (($path=$this->config->item('cache_path')) === '') ? BASEPATH.'cache/' : $path;
 	$cookies=$cache_path.'cookie_'.__CLASS__.'_'.$uid;
 	if (! is_really_writable($cache_path))
-		return "Cookie file $cookies not writable";
+		return "Cookie file ${cookies} not writable";
 		if ((($cookiemt=filemtime($cookies))!==false)&&((time()-$cookiemt)>300)) //cookies older than 5mins
 			unlink($cookies);
 		curl_setopt($curl, CURLOPT_COOKIEFILE, $cookies);

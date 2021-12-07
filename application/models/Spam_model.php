@@ -40,7 +40,7 @@ class Spam_model extends CI_Model {
 		$this->b8 = new b8($b8_config, $config_database );
 		$started_up = $this->b8->validate();
 		if($started_up !== TRUE)
-			die( "<b> Could not initialize b8. error code: $started_up</b>");
+			die( "<b> Could not initialize b8. error code: ${started_up}</b>");
 	}
 
 	// --------------------------------------------------------------------

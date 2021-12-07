@@ -208,7 +208,7 @@ function stop_manager_incoming($sms)
 					autoreply($from, $text);
 				break;
 			default:
-				$text = lang('sm_command_invalid_short')." ($msg)";
+				$text = lang('sm_command_invalid_short')." (${msg})";
 				if ($config['enable_autoreply_error'])
 					autoreply($from, $text);
 				break;

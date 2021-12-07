@@ -84,11 +84,11 @@ class Nongammu_model extends Gammu_model {
 		}
 
 		$gateway = substr(get_class($this), 0, -6);
-		log_message('debug', "SMS via gateway \"$gateway\" to ".$data['dest'].' length '.strlen($data['message']).' chars');
+		log_message('debug', "SMS via gateway \"${gateway}\" to ".$data['dest'].' length '.strlen($data['message']).' chars');
 
 		$ret=$this->really_send_messages($data);
 		if(is_string($ret)){
-			log_message('error', "Message failed via gateway \"$gateway\" to ".$data['dest'].' Reason: '.$ret);
+			log_message('error', "Message failed via gateway \"${gateway}\" to ".$data['dest'].' Reason: '.$ret);
 			$this->save_sent_messages($data, $ret);
 			return;
 		};
@@ -242,11 +242,11 @@ class Nongammu_model extends Gammu_model {
 				$data['uid']=$res2->row('id_user');
 			};
 
-			log_message('debug', "SMS via gateway \"$gateway\" to ".$data['dest'].
+			log_message('debug', "SMS via gateway \"${gateway}\" to ".$data['dest'].
 								' length '.strlen($data['message']).' chars');
 			$ret=$this->really_send_messages($data);
 			if(is_string($ret)){
-				log_message('error', "Message failed via gateway \"$gateway\" to ".$data['dest'].' Reason: '.$ret);
+				log_message('error', "Message failed via gateway \"${gateway}\" to ".$data['dest'].' Reason: '.$ret);
 				$this->save_sent_messages($data, $ret);
 				return;
 			};

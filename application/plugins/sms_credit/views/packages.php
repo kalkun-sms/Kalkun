@@ -25,7 +25,7 @@
                         <span class="hidden id_package"><?php echo $tmp->id_credit_template;?></span>
                         <span class="package_name"><strong><?php echo $tmp->template_name;?></strong></span>
                         <span class="hidden sms_amount"><?php echo $tmp->sms_numbers;?></span>
-                        <?php echo "<sup>( $tmp->sms_numbers SMS )</sup>"; ?>
+                        <?php echo "<sup>( {$tmp->sms_numbers} SMS )</sup>"; ?>
                     </div>	
                 </div>
 
