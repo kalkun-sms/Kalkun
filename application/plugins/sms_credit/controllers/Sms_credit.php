@@ -59,7 +59,7 @@ class Sms_credit extends Plugin_controller {
 		$config['uri_segment'] = 4;
 		$this->pagination->initialize($config);
 		$param['limit'] = $config['per_page'];
-		$param['offset'] = $this->uri->segment(4,0);
+		$param['offset'] = $this->uri->segment(4, 0);
 
 		$data['main'] = 'index';
 		$data['title'] = 'Users Credit';
@@ -141,7 +141,7 @@ class Sms_credit extends Plugin_controller {
 		$config['uri_segment'] = 4;
 		$this->pagination->initialize($config);
 		$param['limit'] = $config['per_page'];
-		$param['offset'] = $this->uri->segment(4,0);
+		$param['offset'] = $this->uri->segment(4, 0);
 
 		if($_POST)
 		{

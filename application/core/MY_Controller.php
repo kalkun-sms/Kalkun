@@ -43,8 +43,8 @@ class MY_Controller  extends CI_Controller  {
 				$this->session->set_flashdata('bef_login_method', $this->input->method(false));
 				$this->session->set_flashdata('bef_login_history_count', -1);
 				$this->session->set_flashdata('bef_login_requested_url', current_url());
-				if (array_key_exists('HTTP_REFERER',$_SERVER)){
-					$this->session->set_flashdata('bef_login_HTTP_REFERER',$_SERVER['HTTP_REFERER']);
+				if (array_key_exists('HTTP_REFERER', $_SERVER)){
+					$this->session->set_flashdata('bef_login_HTTP_REFERER', $_SERVER['HTTP_REFERER']);
 				}
 				$this->session->set_flashdata('bef_login_post_data', $this->input->post());
 				redirect('login');

@@ -1,5 +1,5 @@
 <ul>
-<li><?php echo anchor('',lang('kalkun_dashboard')); ?></li>
+<li><?php echo anchor('', lang('kalkun_dashboard')); ?></li>
 <li><a href="#" id="compose_sms_normal"><?php echo lang('kalkun_compose');?></a></li>
 <li>
 	<span style="color: #FFF;"><?php echo lang('kalkun_folder');?></span>
@@ -13,12 +13,12 @@
 	if($tmp_unread > 0) echo ' ('.$tmp_unread.')';
 	?>
 	</span></li>
-	<li><?php echo anchor('messages/folder/outbox',lang('kalkun_outbox')); ?></li>
-    <li><?php echo anchor('messages/folder/sentitems',lang('kalkun_sentitems')); ?>  </li>
+	<li><?php echo anchor('messages/folder/outbox', lang('kalkun_outbox')); ?></li>
+    <li><?php echo anchor('messages/folder/sentitems', lang('kalkun_sentitems')); ?>  </li>
     <?php if( $this->uri->segment(3)=='sentitems' || $this->uri->segment(4)=='sentitems') : ?>
-    <li style="list-style: none;"><?php echo anchor('messages/conversation/folder/sentitems/sending_error',lang('kalkun_senterroritems')); ?> </li>
+    <li style="list-style: none;"><?php echo anchor('messages/conversation/folder/sentitems/sending_error', lang('kalkun_senterroritems')); ?> </li>
      <?php endif; ?>
-    <li><?php echo anchor('messages/my_folder/inbox/6',lang('kalkun_spam')); ?>
+    <li><?php echo anchor('messages/my_folder/inbox/6', lang('kalkun_spam')); ?>
     <span class="unread_spam_notif">
 	<?php
 	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => '6', 'uid' => $this->session->userdata('id_user')))->num_rows();
@@ -26,7 +26,7 @@
 	?>
 	</span>
     </li>
-	<li><?php echo anchor('messages/my_folder/inbox/5',lang('kalkun_trash')); ?></li>
+	<li><?php echo anchor('messages/my_folder/inbox/5', lang('kalkun_trash')); ?></li>
     						
 	</ul>
 	</div>
@@ -47,13 +47,13 @@
 	</ul>
 	</div>
 </li>
-<li><?php echo  anchor('phonebook',lang('kalkun_phonebook')); ?></li>
+<li><?php echo  anchor('phonebook', lang('kalkun_phonebook')); ?></li>
 <?php
 $level = $this->session->userdata('level');
 if($level==='admin'):?>
-	<li><?php echo anchor('users',lang('tni_user_wordp')); ?></li>
+	<li><?php echo anchor('users', lang('tni_user_wordp')); ?></li>
 	<?php if($this->config->item('sms_content')): ?> 
-	<li id="bottom"><?php echo anchor('member','Member'); ?></li>
+	<li id="bottom"><?php echo anchor('member', 'Member'); ?></li>
 	<?php endif; ?>
     <li><?php echo anchor('pluginss', 'Plugins'); ?></li>
 <?php endif; ?>

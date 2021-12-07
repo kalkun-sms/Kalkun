@@ -66,7 +66,7 @@ class Spam_model extends CI_Model {
 	  * @param mixed $Text
 	  * @return
 	  */
-	 function apply_spam_filter($ID , $Text)
+	 function apply_spam_filter($ID, $Text)
 	 {
 		$is_spam = $this->_check_spam($Text);
 		if($is_spam->class === 'spam')
@@ -74,7 +74,7 @@ class Spam_model extends CI_Model {
 			if($is_spam->level > $this->ratingcutoff)
 				$this->report_spam(array('ID' => $ID, 'Text' => $Text));
 			//move to spam folder
-			$this->db->where('ID',$ID)->update('inbox', array('id_folder' => '6'));
+			$this->db->where('ID', $ID)->update('inbox', array('id_folder' => '6'));
 
 			return true;
 		}
@@ -92,10 +92,10 @@ class Spam_model extends CI_Model {
 		$this->b8->learn($params['Text'], b8::SPAM);
 
 		//move message to spam folder
-		$this->db->where('ID',$params['ID']);
+		$this->db->where('ID', $params['ID']);
 		$this->db->update('inbox', array('id_folder' => '6'));
 
-		$this->_cloud_report('spam',$params['Text']);
+		$this->_cloud_report('spam', $params['Text']);
 
 	 }
 
@@ -110,10 +110,10 @@ class Spam_model extends CI_Model {
 		$this->b8->learn($params['Text'], b8::HAM);
 
 		//move message to spam folder
-		$this->db->where('ID',$params['ID']);
+		$this->db->where('ID', $params['ID']);
 		$this->db->update('inbox', array('id_folder' => '1'));
 
-		$this->_cloud_report('ham',$params['Text']);
+		$this->_cloud_report('ham', $params['Text']);
 	 }
 
 	 /**
@@ -134,7 +134,7 @@ class Spam_model extends CI_Model {
 		{
 			$this->curl->proxy($this->config->item('proxy_host'), $this->config->item('proxy_port'));
 			if($this->config->item('proxy_username') !== '')
-				$this->curl->proxy_login($this->config->item('proxy_username'),$this->config->item('proxy_password'));
+				$this->curl->proxy_login($this->config->item('proxy_username'), $this->config->item('proxy_password'));
 		}
 
 		echo $this->curl->execute();

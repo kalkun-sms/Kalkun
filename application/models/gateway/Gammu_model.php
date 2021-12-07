@@ -52,7 +52,7 @@ class Gammu_model extends CI_Model {
 		{
 			$cmd = '"'.$this->config->item('gammu_sms_inject').'"' .' -c ' .'"'.$this->config->item('gammu_config').'"'. ' WAPINDICATOR ' . $data['dest']. ' "'. $data['url']. '"  "'.$data['message'].'" ';
 			$ret = exec ($cmd);
-			preg_match('/with ID ([\d]+)/i',$ret,$matches);
+			preg_match('/with ID ([\d]+)/i', $ret, $matches);
 			$insert_id = $matches[1];
 			if(empty($insert_id))
 			{
@@ -242,7 +242,7 @@ class Gammu_model extends CI_Model {
 			'Class' => $class,
 			'TextDecoded' => $message,
 		);
-		$this->db->insert('outbox_multipart',$data);
+		$this->db->insert('outbox_multipart', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -288,7 +288,7 @@ class Gammu_model extends CI_Model {
 		if(isset($options['uid']))
 		{
 			$this->db->join($user_folder, $user_folder.'.id_'.$options['type'].'='.$options['type'].'.ID');
-			$this->db->where($user_folder.'.id_user',$options['uid']);
+			$this->db->where($user_folder.'.id_user', $options['uid']);
 		}
 
 		$result = $this->db->get();
@@ -357,7 +357,7 @@ class Gammu_model extends CI_Model {
 		if(isset($options['uid']))
 		{
 			$this->db->join($user_folder, $user_folder.'.id_'.$options['type'].'='.$options['type'].'.ID');
-			$this->db->where($user_folder.'.id_user',$options['uid']);
+			$this->db->where($user_folder.'.id_user', $options['uid']);
 		}
 
 		$result = $this->db->get();
@@ -505,7 +505,7 @@ class Gammu_model extends CI_Model {
 		if(isset($options['uid']))
 		{
 			$this->db->join($user_folder, $user_folder.'.id_'.$options['type'].'='.$options['type'].'.ID');
-			$this->db->where($user_folder.'.id_user',$options['uid']);
+			$this->db->where($user_folder.'.id_user', $options['uid']);
 
 			// if trash is set
 			if(isset($options['trash']) && is_bool($options['trash'])) $this->db->where($user_folder.'.trash', $options['trash']);
@@ -792,7 +792,7 @@ class Gammu_model extends CI_Model {
 				$this->db->from('inbox');
 				//$this->db->select_max($this->_protect_identifiers('ReceivingDateTime'), $this->_protect_identifiers('maxdate'), FALSE);
 				$this->db->select_max($this->_protect_identifiers('ID'), $this->_protect_identifiers('maxID'), FALSE);
-				$this->db->join('user_inbox','user_inbox.id_inbox=inbox.ID');
+				$this->db->join('user_inbox', 'user_inbox.id_inbox=inbox.ID');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
 				$this->db->group_by('SenderNumber');
@@ -803,7 +803,7 @@ class Gammu_model extends CI_Model {
 				$this->db->distinct();
 				//$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').",inbox");
 				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').',inbox');
-				$this->db->join('user_inbox','user_inbox.id_inbox=inbox.ID');
+				$this->db->join('user_inbox', 'user_inbox.id_inbox=inbox.ID');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
 				$this->db->where('trash', $tmp_trash);
@@ -817,7 +817,7 @@ class Gammu_model extends CI_Model {
 			case 'outbox':
 				$this->db->from('outbox');
 				$this->db->select_max($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxdate'), FALSE);
-				$this->db->join('user_outbox','outbox.ID=user_outbox.id_outbox');
+				$this->db->join('user_outbox', 'outbox.ID=user_outbox.id_outbox');
 				$this->db->where('id_user', $user_id);
 				$this->db->group_by('DestinationNumber');
 
@@ -826,7 +826,7 @@ class Gammu_model extends CI_Model {
 
 				$this->db->distinct();
 				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').',outbox');
-				$this->db->join('user_outbox','outbox.ID=user_outbox.id_outbox');
+				$this->db->join('user_outbox', 'outbox.ID=user_outbox.id_outbox');
 				$this->db->where('id_user', $user_id);
 				$this->db->where($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxresult.maxdate'), FALSE);
 				//$this->db->group_by('DestinationNumber');
@@ -836,7 +836,7 @@ class Gammu_model extends CI_Model {
 			case 'sentitems':
 				$this->db->from('sentitems');
 				$this->db->select_max($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxdate'), FALSE);
-				$this->db->join('user_sentitems','sentitems.ID=user_sentitems.id_sentitems');
+				$this->db->join('user_sentitems', 'sentitems.ID=user_sentitems.id_sentitems');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
 				$this->db->where('SequencePosition', '1');
@@ -847,7 +847,7 @@ class Gammu_model extends CI_Model {
 
 				$this->db->distinct();
 				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').',sentitems');
-				$this->db->join('user_sentitems','sentitems.ID=user_sentitems.id_sentitems');
+				$this->db->join('user_sentitems', 'sentitems.ID=user_sentitems.id_sentitems');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
 				$this->db->where('SequencePosition', '1');
@@ -1340,7 +1340,7 @@ class Gammu_model extends CI_Model {
 		// TODO changed from != to !== to have strict comparison. Couldn't be tested. To double check
 		if ($tmp_check->row('UDH')!=='')
 		{
-			$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'),0,8));
+			$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'), 0, 8));
 			$multipart['phone_number'] = $tmp_check->row('SenderNumber');
 			$multipart['type'] = 'inbox';
 			foreach($this->get_multipart($multipart)->result() as $part)
@@ -1356,7 +1356,7 @@ class Gammu_model extends CI_Model {
 	}
 
 	//Save Canned Response
-	function canned_response($name,$message, $action)
+	function canned_response($name, $message, $action)
 	{
 		if($action === 'list')
 		{
@@ -1392,6 +1392,6 @@ class Gammu_model extends CI_Model {
 	// do nothing for GAMMU (gammu-smsd moves from outbox to sentitems)
 	function process_outbox_queue()
 	{
-	log_message('info','Nothing to do in outbox queue for GAMMU.');
+	log_message('info', 'Nothing to do in outbox queue for GAMMU.');
 	}
 }

@@ -52,7 +52,7 @@ class Daemon extends CI_Controller {
 		foreach($message->result() as $tmp_message)
 		{
 			// check for spam
-			if($this->Spam_model->apply_spam_filter($tmp_message->ID,$tmp_message->TextDecoded))
+			if($this->Spam_model->apply_spam_filter($tmp_message->ID, $tmp_message->TextDecoded))
 			{
 				continue; ////is spam do not process later part
 			}
@@ -68,7 +68,7 @@ class Daemon extends CI_Controller {
 
 			// set message's ownership
 			$msg_user = $this->_set_ownership($tmp_message);
-			$this->Kalkun_model->add_sms_used($msg_user,'in');
+			$this->Kalkun_model->add_sms_used($msg_user, 'in');
 
 			// hook for incoming message (after ownership)
 			$tmp_message->msg_user = $msg_user;
@@ -91,7 +91,7 @@ class Daemon extends CI_Controller {
 						// UDH is stored as text in the database (it can also be NULL)
 			if( ! empty($tmp_check->row('UDH')))
 			{
-				$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'),0,8));
+				$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'), 0, 8));
 				$multipart['phone_number'] = $tmp_check->row('SenderNumber');
 				$multipart['type'] = 'inbox';
 				foreach($this->Message_model->get_multipart($multipart)->result() as $part):

@@ -84,7 +84,7 @@ class Pluginss extends MY_Controller {
 				{
 					foreach($installed as $tmp2)
 					{
-						if(in_array($tmp['plugin_system_name'],$tmp2))
+						if(in_array($tmp['plugin_system_name'], $tmp2))
 						{
 							unset($new_plugin[$key]);
 						}

@@ -48,18 +48,18 @@ class Whitelist_number_model extends CI_Model {
 	function add()
 	{
 		$data = array (
-			'match' => trim($this->input->post('match',TRUE)),
+			'match' => trim($this->input->post('match', TRUE)),
 		);
-		$this->db->insert('plugin_whitelist_number',$data);
+		$this->db->insert('plugin_whitelist_number', $data);
 	}
 
 	function update()
 	{
 		$data = array (
-			'match' => trim($this->input->post('editmatch',TRUE)),
+			'match' => trim($this->input->post('editmatch', TRUE)),
 		);
-		$this->db->where('id_whitelist', $this->input->post('editid_whitelist',TRUE));
-		$this->db->update('plugin_whitelist_number',$data);
+		$this->db->where('id_whitelist', $this->input->post('editid_whitelist', TRUE));
+		$this->db->update('plugin_whitelist_number', $data);
 	}
 
 	function delete($id)

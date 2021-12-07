@@ -47,8 +47,8 @@ class Server_alert extends Plugin_controller {
 		$this->pagination->initialize($config);
 
 		$data['main'] = 'index';
-		$data['alert'] = $this->plugin_model->get('paginate', $config['per_page'], $this->uri->segment(4,0));
-		$data['number'] = $this->uri->segment(4,0)+1;
+		$data['alert'] = $this->plugin_model->get('paginate', $config['per_page'], $this->uri->segment(4, 0));
+		$data['number'] = $this->uri->segment(4, 0)+1;
 
 		$data['time_interval'] = $this->plugin_model->get_time_interval();
 		$this->load->view('main/layout', $data);

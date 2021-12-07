@@ -78,7 +78,7 @@ function nice_date($str, $option=NULL)
 					$current_level+=1;
 				}
 			}
-			$res = implode(' ',$result);
+			$res = implode(' ', $result);
 
 			if ($timestamp > $now) {
 				$text = lang('kalkun_nicedate_remaining');
@@ -119,8 +119,8 @@ function message_preview($str, $n)
 
 function showtags($msg)
 {
-	$msg = preg_replace('/</','&lt;',$msg);
-	$msg = preg_replace('/>/','&gt;',$msg);
+	$msg = preg_replace('/</', '&lt;', $msg);
+	$msg = preg_replace('/>/', '&gt;', $msg);
 	return $msg;
 }
 

@@ -55,7 +55,7 @@ class Phonebook extends MY_Controller {
 
 			$data['title'] = lang('kalkun_public_contact');
 			$data['public_contact'] = TRUE;
-			$param = array('option' => 'paginate', 'public' => TRUE, 'limit' => $config['per_page'], 'offset' => $this->uri->segment(4,0));
+			$param = array('option' => 'paginate', 'public' => TRUE, 'limit' => $config['per_page'], 'offset' => $this->uri->segment(4, 0));
 			$data['phonebook'] = $this->Phonebook_model->get_phonebook($param);
 		}
 		else
@@ -75,7 +75,7 @@ class Phonebook extends MY_Controller {
 			}
 			else
 			{
-				$param = array('option' => 'paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3,0));
+				$param = array('option' => 'paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3, 0));
 				$data['phonebook'] = $this->Phonebook_model->get_phonebook($param);
 			}
 		}
@@ -110,7 +110,7 @@ class Phonebook extends MY_Controller {
 			$config['uri_segment'] = 4;
 			$this->pagination->initialize($config);
 
-			$param = array('option' => 'group_paginate', 'public' => TRUE, 'limit' => $config['per_page'], 'offset' => $this->uri->segment(4,0));
+			$param = array('option' => 'group_paginate', 'public' => TRUE, 'limit' => $config['per_page'], 'offset' => $this->uri->segment(4, 0));
 			$data['group'] = $this->Phonebook_model->get_phonebook($param);
 		}
 		else
@@ -122,7 +122,7 @@ class Phonebook extends MY_Controller {
 			$config['uri_segment'] = 3;
 			$this->pagination->initialize($config);
 
-			$param = array('option' => 'group_paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3,0));
+			$param = array('option' => 'group_paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3, 0));
 			$data['group'] = $this->Phonebook_model->get_phonebook($param);
 		}
 
@@ -151,7 +151,7 @@ class Phonebook extends MY_Controller {
 		$this->pagination->initialize($config);
 
 		$param['limit'] = $config['per_page'];
-		$param['offset'] = $this->uri->segment(4,0);
+		$param['offset'] = $this->uri->segment(4, 0);
 		$contacts = $this->Phonebook_model->get_phonebook($param);
 
 		if($contacts->row('is_public') === 'true') $data['public_contact'] = TRUE;

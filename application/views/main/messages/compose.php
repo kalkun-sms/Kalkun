@@ -205,7 +205,7 @@ else echo lang('kalkun_send_to').':';
 <textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;"   id="message" name="message">
 <?php
 if($val_type=='forward') echo $message;
-list($sig_option, $sig)=explode(';',$this->Kalkun_model->get_setting()->row('signature'));
+list($sig_option, $sig)=explode(';', $this->Kalkun_model->get_setting()->row('signature'));
 if($sig_option=='true') echo "\n\n".$sig; ?>
 </textarea>
 <div>

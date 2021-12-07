@@ -18,10 +18,10 @@ class Api extends MY_Controller {
 	function __construct()
 	{
 		parent::__construct(FALSE);
-		$this->load->model('Api_Model','api_model');
-		$this->load->library('ApiSession','apisession');
+		$this->load->model('Api_Model', 'api_model');
+		$this->load->library('ApiSession', 'apisession');
 		$this->load->model(array('Kalkun_model', 'Message_model'));
-		log_message('info','init remote access api');
+		log_message('info', 'init remote access api');
 
 		$this->ENDPOINT = site_url($this->ENDPOINT);
 
@@ -33,7 +33,7 @@ class Api extends MY_Controller {
 
 	function index()
 	{
-		log_message('debug','index');
+		log_message('debug', 'index');
 
 		function version()
 		{
@@ -52,7 +52,7 @@ class Api extends MY_Controller {
 			if ($account['ip'] === $_SERVER['REMOTE_ADDR'])
 			{
 				$CI->apisession->set_userdata('loggedin', 'TRUE');
-				$CI->apisession->set_userdata('access_id',$account['id']);
+				$CI->apisession->set_userdata('access_id', $account['id']);
 				return $CI->apisession->userdata('session_id');
 			}
 			else
@@ -104,7 +104,7 @@ class Api extends MY_Controller {
 
 	function wsdl()
 	{
-		log_message('debug','wsdl');
+		log_message('debug', 'wsdl');
 		$_SERVER['QUERY_STRING'] = 'wsdl';
 		$this->server->service(file_get_contents('php://input'));
 	}
@@ -117,11 +117,12 @@ class Api extends MY_Controller {
 	// phpcs:disable CodeIgniter.Commenting.InlineComment.LongCommentWithoutSpacing
 	function _initialze_soap_server()
 	{
-		log_message('debug','init');
+		log_message('debug', 'init');
 		$this->server = new soap_server();
-		$this->server->configureWSDL('KalkunRemoteAccess', Api::$NAMESPACE,$this->ENDPOINT);
+		$this->server->configureWSDL('KalkunRemoteAccess', Api::$NAMESPACE, $this->ENDPOINT);
 
-		$this->server->register('version',
+		$this->server->register(
+			'version',
 			array(),                            // input parameters
 			array('result' => 'xsd:string'),    // output parameter
 			'urn:Api',                          // namespace
@@ -133,7 +134,8 @@ class Api extends MY_Controller {
 
 		if ($this->remoteAccessEnabled())
 		{
-			$this->server->register('login',
+			$this->server->register(
+				'login',
 				array('token' => 'xsd:string'),     // input parameters
 				array('result' => 'xsd:string'),    // output parameter
 				'urn:Api',                          // namespace
@@ -143,7 +145,8 @@ class Api extends MY_Controller {
 				'User login'                        // documentation
 			);
 
-			$this->server->register('sendMessage',
+			$this->server->register(
+				'sendMessage',
 				array('destinationNumber' => 'xsd:string',      // input parameters
 					'message' => 'xsd:string'),
 				array('result'	=> 'xsd:integer'),              // output parameter
@@ -154,7 +157,8 @@ class Api extends MY_Controller {
 				'Send SMS Message'                              // documentation
 			);
 
-			$this->server->register('sendFlashMessage',
+			$this->server->register(
+				'sendFlashMessage',
 				array('destinationNumber' => 'xsd:string',      // input parameters
 					'message' => 'xsd:string'),
 				array('result'	=> 'xsd:integer'),              // output parameter
@@ -165,7 +169,8 @@ class Api extends MY_Controller {
 				'Send Flash SMS Message'                        // documentation
 			);
 
-			$this->server->register('logout',
+			$this->server->register(
+				'logout',
 				array(),                                        // input parameters
 				array('result' => 'xsd:integer'),               // output parameter
 				'urn:Api',                                      // namespace

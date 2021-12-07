@@ -123,9 +123,12 @@ class Way2sms_model extends Gammu_model {
 			curl_setopt($curl, CURLOPT_URL, 'http://site'.$autobalancer.'.way2sms.com/quicksms.action');
 			curl_setopt($curl, CURLOPT_REFERER, curl_getinfo($curl, CURLINFO_EFFECTIVE_URL));
 			curl_setopt($curl, CURLOPT_POST, 1);
-			curl_setopt($curl, CURLOPT_POSTFIELDS,
+			curl_setopt(
+				$curl,
+				CURLOPT_POSTFIELDS,
 				'HiddenAction=instantsms&bulidgpwd=*******&bulidguid=username&catnamedis=Birthday&chkall=on&gpwd1=*******&guid1=username&ypwd1=*******&yuid1=username&Action='.
-			$action.'&MobNo='.$p.'&textArea='.$msg);
+			$action.'&MobNo='.$p.'&textArea='.$msg
+			);
 			$contents = curl_exec($curl);
 
 			//Check Message Status

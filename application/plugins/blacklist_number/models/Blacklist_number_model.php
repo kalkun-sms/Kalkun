@@ -48,20 +48,20 @@ class Blacklist_number_model extends CI_Model {
 	function add()
 	{
 		$data = array (
-			'phone_number' => trim($this->input->post('phone_number',TRUE)),
-			'reason' => trim($this->input->post('reason',TRUE)),
+			'phone_number' => trim($this->input->post('phone_number', TRUE)),
+			'reason' => trim($this->input->post('reason', TRUE)),
 		);
-		$this->db->insert('plugin_blacklist_number',$data);
+		$this->db->insert('plugin_blacklist_number', $data);
 	}
 
 	function update()
 	{
 		$data = array (
-			'phone_number' => trim($this->input->post('editphone_number',TRUE)),
-			'reason' => $this->input->post('editreason',TRUE),
+			'phone_number' => trim($this->input->post('editphone_number', TRUE)),
+			'reason' => $this->input->post('editreason', TRUE),
 		);
-		$this->db->where('id_blacklist_number', $this->input->post('editid_blacklist_number',TRUE));
-		$this->db->update('plugin_blacklist_number',$data);
+		$this->db->where('id_blacklist_number', $this->input->post('editid_blacklist_number', TRUE));
+		$this->db->update('plugin_blacklist_number', $data);
 	}
 
 	function delete($id)
