@@ -21,6 +21,7 @@
  * @category	Models
  */
 class User_model extends CI_Model {
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -34,7 +35,7 @@ class User_model extends CI_Model {
 	{
 		$this->db->from('user_settings');
 		$this->db->join('user', 'user.id_user = user_settings.id_user');
-		switch($param['option'])
+		switch ($param['option'])
 		{
 			case 'all':
 				$this->db->select('*');
@@ -74,7 +75,7 @@ class User_model extends CI_Model {
 		$this->db->set('level', $this->input->post('level'));
 
 		// edit mode
-		if($this->input->post('id_user'))
+		if ($this->input->post('id_user'))
 		{
 			$this->db->where('id_user', $this->input->post('id_user'));
 			$this->db->update('user');
@@ -96,7 +97,6 @@ class User_model extends CI_Model {
 			$this->db->set('id_user', $this->db->insert_id());
 
 			$this->db->insert('user_settings');
-
 		}
 	}
 
@@ -128,13 +128,13 @@ class User_model extends CI_Model {
 	 * @param	string $realname
 	 * @return	object
 	 */
-	 function search_user($realname)
-	 {
+	function search_user($realname)
+	{
 		$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $realname)));
 		$this->db->from('user_settings');
 		$this->db->join('user', 'user.id_user = user_settings.id_user');
 		$this->db->like('LOWER('.$this->db->protect_identifiers('realname').')', $search_word);
 		$this->db->order_by('realname');
 		return $this->db->get();
-	 }
+	}
 }

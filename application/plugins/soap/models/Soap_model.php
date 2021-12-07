@@ -1,5 +1,6 @@
 <?php
 Class Soap_model extends CI_Model {
+
 	function __construct()
 	{
 		parent::__construct();
@@ -7,7 +8,7 @@ Class Soap_model extends CI_Model {
 
 	function getRemoteAccess($option = NULL, $limit = NULL, $offset = NULL)
 	{
-		switch($option)
+		switch ($option)
 		{
 			case 'active':
 				$this->db->where('status', 'true');
@@ -52,12 +53,14 @@ Class Soap_model extends CI_Model {
 		$this->db->delete('plugin_remote_access', array('id_remote_access' => $id));
 	}
 
-	function generateUniqueHash() {
+	function generateUniqueHash()
+	{
 		$this->uniquehash->setLength(25);
 		return $this->uniquehash->getHash();
 	}
 
-	function addNotification() {
+	function addNotification()
+	{
 		$nr = ($this->input->post('notifynumber', TRUE));
 		$value = ($this->input->post('notifyvalue', TRUE));
 

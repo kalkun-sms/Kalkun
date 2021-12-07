@@ -73,7 +73,10 @@ function phonebook_ldap($number)
 
 	// specify the LDAP server to connect to
 	$conn = ldap_connect($config['server'], $config['port']);
-	if ( ! $conn) return FALSE;
+	if ( ! $conn)
+	{
+		return FALSE;
+	}
 
 	//Set some variables
 	ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
@@ -81,7 +84,10 @@ function phonebook_ldap($number)
 
 	// bind to the LDAP server specified above
 	$bd = ldap_bind($conn, $config['username'], $config['password']);
-	if( ! $bd) return FALSE;
+	if ( ! $bd)
+	{
+		return FALSE;
+	}
 	$justthese = array('ou', 'sn', 'givenname', 'telephonenumber');
 	$result = ldap_search($conn, $config['dn'], '(&(objectClass=user)(objectCategory=person))', $justthese);
 

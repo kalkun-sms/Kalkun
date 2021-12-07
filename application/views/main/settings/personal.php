@@ -32,10 +32,16 @@ $("#settingsForm").validate();
 <td>
 <?php list($sig_option, $sig) = explode(';', $settings->row('signature'));?>
 <input type="radio" id="signature_off" name="signatureoption" value="false" 
-<?php if($sig_option == 'false') echo 'checked="checked"'; ?>  /> 
+<?php if ($sig_option == 'false')
+{
+	echo 'checked="checked"';
+} ?>  /> 
 <label for="signature_off"><?php echo lang('tni_signature_off'); ?></label><br />
 <input type="radio" id="signature_on" name="signatureoption" value="true"
-<?php if($sig_option == 'true') echo 'checked="checked"'; ?> />
+<?php if ($sig_option == 'true')
+{
+	echo 'checked="checked"';
+} ?> />
 <label for="signature_on"><?php echo lang('tni_signature_on'); ?></label><br />
 <textarea name="signature" rows="5" cols="40"><?php echo $sig; ?></textarea>
 <div class="note"><?php echo lang('tni_signature_hintb'); ?></div>

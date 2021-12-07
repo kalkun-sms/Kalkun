@@ -19,6 +19,7 @@
  * @category	Controllers
  */
 class Pluginss extends MY_Controller {
+
 	/**
 	 * Constructor
 	 *
@@ -29,7 +30,7 @@ class Pluginss extends MY_Controller {
 		parent::__construct();
 
 		// Prevent non-admin user
-		if($this->session->userdata('level') !== 'admin')
+		if ($this->session->userdata('level') !== 'admin')
 		{
 			$this->session->set_flashdata('notif', lang('pluginss_only_admin_can_manage'));
 			redirect('/');
@@ -55,7 +56,7 @@ class Pluginss extends MY_Controller {
 		$data['title'] = 'Plugins';
 		$data['plugins'] = array();
 		$data['type'] = $type;
-		if($type === 'installed')
+		if ($type === 'installed')
 		{
 			$data['title'] .= lang('pluginss_installed');
 			$data['plugins'] = $this->Plugin_model->get_plugins()->result_array();
@@ -67,12 +68,13 @@ class Pluginss extends MY_Controller {
 			$plugins = get_available_plugin();
 			$no = 0;
 
-			if( ! empty($plugins)){
+			if ( ! empty($plugins))
+			{
 				// do cleanup array key
-				foreach($plugins as $key => $tmp)
+				foreach ($plugins as $key => $tmp)
 				{
 					$new_plugin[$no]['plugin_system_name'] = $key;
-					foreach($tmp['plugin_info'] as $key2 => $tmp2)
+					foreach ($tmp['plugin_info'] as $key2 => $tmp2)
 					{
 						$new_plugin[$no][$key2] = $tmp2;
 					}
@@ -80,11 +82,11 @@ class Pluginss extends MY_Controller {
 				}
 				$installed = $this->Plugin_model->get_plugins()->result_array();
 
-				foreach($new_plugin as $key => $tmp)
+				foreach ($new_plugin as $key => $tmp)
 				{
-					foreach($installed as $tmp2)
+					foreach ($installed as $tmp2)
 					{
-						if(in_array($tmp['plugin_system_name'], $tmp2))
+						if (in_array($tmp['plugin_system_name'], $tmp2))
 						{
 							unset($new_plugin[$key]);
 						}
@@ -93,7 +95,6 @@ class Pluginss extends MY_Controller {
 				$result = $new_plugin;
 				$data['plugins'] = $result;
 			}
-
 		}
 		$this->load->view('main/layout', $data);
 	}

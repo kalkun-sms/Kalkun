@@ -133,14 +133,14 @@ $(document).ready(function(){
 
 	// if ads is active
 	<?php
-	if($this->config->item('sms_advertise'))
+	if ($this->config->item('sms_advertise'))
 	{
 		$ads_count = strlen($this->config->item('sms_advertise_message'));
 		echo 'sms_char = sms_char - '.$ads_count.';';
 	}
 
 	// if append @username is active
-	if($this->config->item('append_username'))
+	if ($this->config->item('append_username'))
 	{
 		$append_username_message = $this->config->item('append_username_message');
 		$append_username_message = "\n".str_replace('@username', '@'.$this->session->userdata('username'), $append_username_message);

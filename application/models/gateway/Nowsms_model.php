@@ -24,6 +24,7 @@
 require_once('Nongammu_model.php');
 
 class Nowsms_model extends Nongammu_model {
+
 	/**
 	 * Constructor
 	 *

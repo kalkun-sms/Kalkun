@@ -18,8 +18,8 @@
  * @subpackage	Users
  * @category	Controllers
  */
-class Users extends MY_Controller
-{
+class Users extends MY_Controller {
+
 	/**
 	 * Constructor
 	 *
@@ -30,7 +30,7 @@ class Users extends MY_Controller
 		parent::__construct();
 
 		// check level
-		if($this->session->userdata('level') !== 'admin')
+		if ($this->session->userdata('level') !== 'admin')
 		{
 			$this->session->set_flashdata('notif', lang('users_access_denied'));
 			redirect('/');
@@ -63,8 +63,14 @@ class Users extends MY_Controller
 		$param = array('option' => 'paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3, 0));
 
 		$data['main'] = 'main/users/index';
-		if($_POST) $data['users'] = $this->User_model->getUsers(array('option' => 'search'));
-		else $data['users'] = $this->User_model->getUsers($param);
+		if ($_POST)
+		{
+			$data['users'] = $this->User_model->getUsers(array('option' => 'search'));
+		}
+		else
+		{
+			$data['users'] = $this->User_model->getUsers($param);
+		}
 
 		$this->load->view('main/layout', $data);
 	}
@@ -84,7 +90,7 @@ class Users extends MY_Controller
 		$type = $this->input->post('type');
 		$data['tmp'] = '';
 
-		if($type === 'edit')
+		if ($type === 'edit')
 		{
 			$id_user = $this->input->post('param1');
 			$data['users'] = $this->User_model->getUsers(array('option' => 'by_iduser', 'id_user' => $id_user));
@@ -104,8 +110,14 @@ class Users extends MY_Controller
 	function add_user_process()
 	{
 		$this->User_model->adduser();
-		if($this->input->post('id_user')) echo '<div class="notif">'.lang('users_updated').'</div>';
-		else echo '<div class="notif">'.lang('users_added').'</div>';
+		if ($this->input->post('id_user'))
+		{
+			echo '<div class="notif">'.lang('users_updated').'</div>';
+		}
+		else
+		{
+			echo '<div class="notif">'.lang('users_added').'</div>';
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -124,7 +136,7 @@ class Users extends MY_Controller
 
 		// get and delete all user_outbox
 		$res = $this->Message_model->get_messages(array('uid' => $uid, 'type' => 'outbox'));
-		foreach($res->result as $tmp)
+		foreach ($res->result as $tmp)
 		{
 			$param = array('type' => 'single', 'option' => 'outbox', 'id_message' => $tmp->id_outbox);
 			$this->Message_model->delMessages($param);
@@ -132,7 +144,7 @@ class Users extends MY_Controller
 
 		// get and delete all user_inbox
 		$res = $this->Message_model->get_messages(array('uid' => $uid, 'type' => 'inbox'));
-		foreach($res->result as $tmp)
+		foreach ($res->result as $tmp)
 		{
 			$param = array('type' => 'single', 'option' => 'permanent', 'source' => 'inbox', 'id_message' => $tmp->id_inbox);
 			$this->Message_model->delete_messages($param);
@@ -140,7 +152,7 @@ class Users extends MY_Controller
 
 		// get and delete all user_sentitems
 		$res = $this->Message_model->delete_messages(array('uid' => $uid, 'type' => 'sentitems'));
-		foreach($res->result as $tmp)
+		foreach ($res->result as $tmp)
 		{
 			$param = array('type' => 'single', 'option' => 'permanent', 'source' => 'sentitems', 'id_message' => $tmp->id_sentitems);
 			$this->Message_model->delete_messages($param);

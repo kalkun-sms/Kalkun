@@ -25,6 +25,7 @@
 require_once('Nongammu_model.php');
 
 class Tmobilecz_model extends Nongammu_model {
+
 	/**
 	 * Constructor
 	 *
@@ -56,30 +57,36 @@ class Tmobilecz_model extends Nongammu_model {
 	 */
 	function really_send_messages($data)
 	{
-			$gateway = $this->config->item('gateway');
-		if( ! is_array($gateway['tmobileczauth'])) {
+		$gateway = $this->config->item('gateway');
+		if ( ! is_array($gateway['tmobileczauth']))
+		{
 			log_message('error', 'TMCZ> Authentication not configured in kalkun_settings.php. SMS aborted.');
-		return 'Authentication not configured in kalkun_settings.php.';
+			return 'Authentication not configured in kalkun_settings.php.';
 		};
 		$auth = $gateway['tmobileczauth'];
-		if (($user = $auth[$data['uid']]['user']) && ($pass = $auth[$data['uid']]['pass'])){
+		if (($user = $auth[$data['uid']]['user']) && ($pass = $auth[$data['uid']]['pass']))
+		{
 			log_message('debug', 'TMCZ> Found credentials for user ID '.$data['uid']);
-				// TODO: Changed == to === below for migration to "strict comparison operator". This wasn't tested.
-		$hist = ($auth[$data['uid']]['hist'] === TRUE);
-		$eml = $auth[$data['uid']]['eml'];
-		}elseif(($user = $auth['default']['user']) && ($pass = $auth['default']['pass'])){
+			// TODO: Changed == to === below for migration to "strict comparison operator". This wasn't tested.
+			$hist = ($auth[$data['uid']]['hist'] === TRUE);
+			$eml = $auth[$data['uid']]['eml'];
+		}
+		elseif (($user = $auth['default']['user']) && ($pass = $auth['default']['pass']))
+		{
 			log_message('debug', 'TMCZ> Found default credentials for all users.');
-				// TODO: Changed == to === below for migration to "strict comparison operator". This wasn't tested.
-		$hist = ($auth['default']['hist'] === TRUE);
-				$eml = $auth['default']['eml'];
-		}else{
+			// TODO: Changed == to === below for migration to "strict comparison operator". This wasn't tested.
+			$hist = ($auth['default']['hist'] === TRUE);
+			$eml = $auth['default']['eml'];
+		}
+		else
+		{
 			log_message('error', 'TMCZ> Aborting SMS. No credentials to send SMS via '.
 						__CLASS__.' to '.$data['dest'].' for user ID '.$data['uid']);
-		return 'No credentials to send SMS.';
+			return 'No credentials to send SMS.';
 		};
 		log_message('debug', 'TMCZ> SMS via '.__CLASS__.' user '.$user.' to '.$data['dest'].
 							' length '.strlen($data['message']).' chars');
-			// TODO: Changed both == to === below for migration to "strict comparison operator". This wasn't tested.
+		// TODO: Changed both == to === below for migration to "strict comparison operator". This wasn't tested.
 		$ret = $this->sendTMobileCZ(
 			$user,
 			$pass,
@@ -90,11 +97,12 @@ class Tmobilecz_model extends Nongammu_model {
 			$hist,
 			$eml
 		);
-		if(is_string($ret)){
+		if (is_string($ret))
+		{
 			log_message('error', 'TMCZ> SMS via '.__CLASS__.' to '.$data['dest'].' failed: '.$ret);
-		return $ret;
+			return $ret;
 		};
-		}
+	}
 
 	/**
 	* sendTMobileCZ
@@ -110,11 +118,12 @@ class Tmobilecz_model extends Nongammu_model {
 
 	function sendTMobileCZ($uid, $pwd, $phone, $msg, $isFlash = FALSE, $dRpt = FALSE, $hist = FALSE, $emlCopy = '')
 	{
-
 		if (($curl = curl_init()) === FALSE)
-		return 'TMCZ> CURL init failed!';
-	$cv = curl_version();
-	log_message('debug', 'TMCZ> CURL version: '.$cv['version'].', SSL version: '.$cv['ssl_version'].
+		{
+			return 'TMCZ> CURL init failed!';
+		}
+		$cv = curl_version();
+		log_message('debug', 'TMCZ> CURL version: '.$cv['version'].', SSL version: '.$cv['ssl_version'].
 						', LIBZ version: '.$cv['libz_version'].', protocols: '.implode($cv['protocols'], '+'));
 		$timeout = 30;
 		$result = array();
@@ -131,12 +140,16 @@ class Tmobilecz_model extends Nongammu_model {
 		curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
 		curl_setopt($curl, CURLOPT_MAXREDIRS, 20);
 		// TODO: Changed == to === below for migration to "strict comparison operator". This wasn't tested.
-	$cache_path = (($path = $this->config->item('cache_path')) === '') ? BASEPATH.'cache/' : $path;
-	$cookies = $cache_path.'cookie_'.__CLASS__.'_'.$uid;
-	if ( ! is_really_writable($cache_path))
-		return "Cookie file ${cookies} not writable";
-		if ((($cookiemt = filemtime($cookies)) !== FALSE) && ((time() - $cookiemt) > 300)) //cookies older than 5mins
+		$cache_path = (($path = $this->config->item('cache_path')) === '') ? BASEPATH.'cache/' : $path;
+		$cookies = $cache_path.'cookie_'.__CLASS__.'_'.$uid;
+		if ( ! is_really_writable($cache_path))
+		{
+			return "Cookie file ${cookies} not writable";
+		}
+		if ((($cookiemt = filemtime($cookies)) !== FALSE) && ((time() - $cookiemt) > 300))
+		{ //cookies older than 5mins
 			unlink($cookies);
+		}
 		curl_setopt($curl, CURLOPT_COOKIEFILE, $cookies);
 		curl_setopt($curl, CURLOPT_COOKIEJAR, $cookies);
 		curl_setopt($curl, CURLOPT_URL, 'https://sms.t-mobile.cz/closed.jsp');
@@ -147,14 +160,17 @@ class Tmobilecz_model extends Nongammu_model {
 
 		// Check if any error occured
 		if (curl_errno($curl))
+		{
 			return 'CURL error : '. curl_error($curl);
-	log_message('info', "TMCZ> GET https://sms.t-mobile.cz/closed.jsp RESULT:\n".$text."\n---EOF---");
+		}
+		log_message('info', "TMCZ> GET https://sms.t-mobile.cz/closed.jsp RESULT:\n".$text."\n---EOF---");
 
 		// search if we are already logged in
-		if (strpos($text, '/.gang/logout') === FALSE) {
+		if (strpos($text, '/.gang/logout') === FALSE)
+		{
 			curl_setopt($curl, CURLOPT_REFERER, curl_getinfo($curl, CURLINFO_EFFECTIVE_URL));
 			curl_setopt($curl, CURLOPT_URL, 'https://www.t-mobile.cz/.gang/login/tzones');
-		curl_setopt($curl, CURLOPT_POST, TRUE);
+			curl_setopt($curl, CURLOPT_POST, TRUE);
 			curl_setopt(
 				$curl,
 				CURLOPT_POSTFIELDS,
@@ -167,18 +183,25 @@ class Tmobilecz_model extends Nongammu_model {
 
 			// Check if any error occured
 			if (curl_errno($curl))
+			{
 				return 'CURL error : '. curl_error($curl);
-		log_message('info', "TMCZ> POST https://www.t-mobile.cz/.gang/login/tzones RESULT:\n".$text."\n---EOF---");
+			}
+			log_message('info', "TMCZ> POST https://www.t-mobile.cz/.gang/login/tzones RESULT:\n".$text."\n---EOF---");
 
-			if (strpos($text, '/.gang/logout') === FALSE){
-				if(preg_match('|<p\sclass="text-orange\stext-size-2">(.+)\n|u', $text, $matches))
+			if (strpos($text, '/.gang/logout') === FALSE)
+			{
+				if (preg_match('|<p\sclass="text-orange\stext-size-2">(.+)\n|u', $text, $matches))
+				{
 					return 'Invalid login. Error: '.$matches[1];
+				}
 				return 'Invalid login. Unknown error.';
-		};
+			};
 		};
 
-		if( ! preg_match('|<input\stype="hidden"\sname="counter"\svalue="([0-9a-zA-Z]+)"\s/>|', $text, $matches))
+		if ( ! preg_match('|<input\stype="hidden"\sname="counter"\svalue="([0-9a-zA-Z]+)"\s/>|', $text, $matches))
+		{
 			return 'Security code not found';
+		}
 		log_message('debug', 'TMCZ> Security code: '.$matches[1]);
 
 		curl_setopt($curl, CURLOPT_REFERER, curl_getinfo($curl, CURLINFO_EFFECTIVE_URL));
@@ -201,22 +224,28 @@ class Tmobilecz_model extends Nongammu_model {
 
 		// Check if any error occured
 		if (curl_errno($curl))
+		{
 			return 'CURL error : '. curl_error($curl);
-	log_message('info', "TMCZ> POST https://sms.t-mobile.cz/closed.jsp RESULT:\n".$text."\n---EOF---");
+		}
+		log_message('info', "TMCZ> POST https://sms.t-mobile.cz/closed.jsp RESULT:\n".$text."\n---EOF---");
 
 		// Check for proper SMS sending
 		if ( ! preg_match('|SMS zpr.v. byl. odeslán.|u', $text) && ! preg_match('|SMS was sent|u', $text)
-			&& ! preg_match('|All SMS messages were sent|u', $text)) {
-			if(preg_match('|<p class="text-red text-size-2">(.+)</p>|u', $text, $matches))
-			  return 'Error sending SMS: '.$matches[1];
-		else
-		  return 'Error sending SMS: unknown error.';
-	};
-	log_message('debug', 'TMCZ> SMS sent successfully.');
+			&& ! preg_match('|All SMS messages were sent|u', $text))
+		{
+			if (preg_match('|<p class="text-red text-size-2">(.+)</p>|u', $text, $matches))
+			{
+				return 'Error sending SMS: '.$matches[1];
+			}
+			else
+			{
+				return 'Error sending SMS: unknown error.';
+			}
+		};
+		log_message('debug', 'TMCZ> SMS sent successfully.');
 
 		curl_close($curl);
 		//$result[] = array('phone' => $p, 'msg' => urldecode($msg), 'result' => $res);
 		return $result;
 	}
-
 }

@@ -83,9 +83,12 @@ function sms_member($sms)
 	{
 		register_member($number);
 	}
-	else if (strtoupper($code) === strtoupper($unreg_code))
+	else
 	{
-		unregister_member($number);
+		if (strtoupper($code) === strtoupper($unreg_code))
+		{
+			unregister_member($number);
+		}
 	}
 }
 
@@ -102,8 +105,10 @@ function register_member($number)
 	$CI->load->model('sms_member/sms_member_model', 'plugin_model');
 
 	//check if number not registered
-	if($CI->plugin_model->check_member($number) === 0)
-	$CI->plugin_model->add_member($number);
+	if ($CI->plugin_model->check_member($number) === 0)
+	{
+		$CI->plugin_model->add_member($number);
+	}
 }
 
 // --------------------------------------------------------------------
@@ -119,6 +124,8 @@ function unregister_member($number)
 	$CI->load->model('sms_member/sms_member_model', 'plugin_model');
 
 	//check if already registered
-	if($CI->plugin_model->check_member($number) === 1)
-	$CI->plugin_model->remove_member($number);
+	if ($CI->plugin_model->check_member($number) === 1)
+	{
+		$CI->plugin_model->remove_member($number);
+	}
 }

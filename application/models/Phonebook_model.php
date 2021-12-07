@@ -21,6 +21,7 @@
  * @category	Models
  */
 class Phonebook_model extends CI_Model {
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -32,11 +33,16 @@ class Phonebook_model extends CI_Model {
 	 */
 	function get_phonebook($param)
 	{
+		if (isset($param['id_user']) && ! empty($param['id_user']))
+		{
+			$user_id = $param['id_user'];
+		}
+		else
+		{
+			$user_id = $this->session->userdata('id_user') ;
+		}
 
-	   if(isset($param['id_user']) && ! empty($param['id_user'])) $user_id = $param['id_user'];
-	   else $user_id = $this->session->userdata('id_user') ;
-
-		switch($param['option'])
+		switch ($param['option'])
 		{
 			case 'all':
 				$this->db->select('*');
@@ -53,8 +59,14 @@ class Phonebook_model extends CI_Model {
 				$this->db->select('*');
 				$this->db->select('ID as id_pbk');
 				$this->db->from('pbk');
-				if(isset($param['public']) && $param['public']) $this->db->where('is_public', 'true');
-				else $this->db->where('id_user', $user_id);
+				if (isset($param['public']) && $param['public'])
+				{
+					$this->db->where('is_public', 'true');
+				}
+				else
+				{
+					$this->db->where('id_user', $user_id);
+				}
 				$this->db->order_by('Name');
 				$this->db->limit($param['limit'], $param['offset']);
 				break;
@@ -75,8 +87,14 @@ class Phonebook_model extends CI_Model {
 				$this->db->select('*');
 				$this->db->select('Name as GroupName');
 				$this->db->from('pbk_groups');
-				if(isset($param['public']) && $param['public']) $this->db->where('is_public', 'true');
-				else $this->db->where('id_user', $user_id);
+				if (isset($param['public']) && $param['public'])
+				{
+					$this->db->where('is_public', 'true');
+				}
+				else
+				{
+					$this->db->where('id_user', $user_id);
+				}
 				$this->db->order_by('Name');
 				break;
 
@@ -84,8 +102,14 @@ class Phonebook_model extends CI_Model {
 				$this->db->select('*');
 				$this->db->select('Name as GroupName');
 				$this->db->from('pbk_groups');
-				if(isset($param['public']) && $param['public']) $this->db->where('is_public', 'true');
-				else $this->db->where('id_user', $user_id);
+				if (isset($param['public']) && $param['public'])
+				{
+					$this->db->where('is_public', 'true');
+				}
+				else
+				{
+					$this->db->where('id_user', $user_id);
+				}
 				$this->db->order_by('Name');
 				$this->db->limit($param['limit'], $param['offset']);
 				break;
@@ -125,7 +149,10 @@ class Phonebook_model extends CI_Model {
 				$this->db->where('user_group.id_pbk_groups', $param['group_id']);
 				$this->db->order_by('pbk.Name', 'asc');
 
-				if(isset($param['limit']) && isset($param['offset'])) $this->db->limit($param['limit'], $param['offset']);
+				if (isset($param['limit']) && isset($param['offset']))
+				{
+					$this->db->limit($param['limit'], $param['offset']);
+				}
 				break;
 
 			case 'search':
@@ -181,12 +208,12 @@ class Phonebook_model extends CI_Model {
 		$sub = explode('.', $identifier);
 		$sub_count = count($sub);
 
-		foreach($sub as $key => $tmp)
+		foreach ($sub as $key => $tmp)
 		{
 			$escaped_identifer .= $escape_char.$tmp.$escape_char;
 
 			// if this is not the last
-			if($key !== $sub_count - 1)
+			if ($key !== $sub_count - 1)
 			{
 				$escaped_identifer .= '.';
 			}
@@ -261,88 +288,103 @@ class Phonebook_model extends CI_Model {
 		$this->db->set('is_public', $param['is_public']);
 
 		// edit mode
-		if(isset($param['id_pbk']))
+		if (isset($param['id_pbk']))
 		{
 			$this->db->where('ID', $param['id_pbk']);
 			$this->db->update('pbk');
 		}
-		else $this->db->insert('pbk');
+		else
+		{
+			$this->db->insert('pbk');
+		}
 
 		// optimisation required.
-		if(isset($param['id_pbk']))
+		if (isset($param['id_pbk']))
 		{
 			$pbk_id = $param['id_pbk'];
 		}
-		else $pbk_id = $this->db->insert_id();
+		else
+		{
+			$pbk_id = $this->db->insert_id();
+		}
 
 		//delete past groups
 		$this->db->delete('user_group', array('id_pbk' => $pbk_id));
 
 		// now insert the lastest
-		if(isset($param['GroupID']))
-			if( ! empty($param['GroupID']))
+		if (isset($param['GroupID']))
+		{
+			if ( ! empty($param['GroupID']))
 			{
 				$this->db->set('id_pbk', $pbk_id);
 				$this->db->set('id_pbk_groups', $param['GroupID']);
 				$this->db->set('id_user', $param['id_user']);
 				$this->db->insert('user_group');
 			}
-		if(isset($param['Groups']))
-		if( ! empty($param['Groups'])){
-			$groups = array_unique(explode(',', $param['Groups']));
-			$CI = &get_instance();
-			foreach($groups as $_grp)
+		}
+		if (isset($param['Groups']))
+		{
+			if ( ! empty($param['Groups']))
 			{
-				$group_id = $CI->Phonebook_model->group_id($_grp, $param['id_user']);
-
-				if($group_id !== NULL)
+				$groups = array_unique(explode(',', $param['Groups']));
+				$CI = &get_instance();
+				foreach ($groups as $_grp)
 				{
-					$this->db->set('id_pbk', $pbk_id);
-					$this->db->set('id_pbk_groups', $group_id);
-					$this->db->set('id_user', $param['id_user']);
-					$this->db->insert('user_group');
+					$group_id = $CI->Phonebook_model->group_id($_grp, $param['id_user']);
+
+					if ($group_id !== NULL)
+					{
+						$this->db->set('id_pbk', $pbk_id);
+						$this->db->set('id_pbk_groups', $group_id);
+						$this->db->set('id_user', $param['id_user']);
+						$this->db->insert('user_group');
+					}
 				}
 			}
-
-
 		}
-
 	}
 
-  function multi_attach_group()
-  {
+	function multi_attach_group()
+	{
+		$id_group = $this->input->post('id_group');
+		$id_pbk = $this->input->post('id_pbk');
 
-	 $id_group = $this->input->post('id_group');
-	 $id_pbk = $this->input->post('id_pbk');
-
-	 //This case probably never happens because it is filtered out in 'application/views/js_init/phonebook/js_phonebook.php'
-	 if($id_group === 'null') die('Invalid Group ID');
-
-	 //parse group value
-	 if(preg_match('/-/', $id_group)) { $mode = 'delete'; $id_group = substr($id_group, 1);  }
-	 else $mode = 'add';
-
-	 if($mode === 'delete')
-	 {
-		$this->db->delete('user_group', array('id_pbk' => $id_pbk, 'id_pbk_groups' => $id_group));
-	 }
-	 else // Add Mode
-	 {
-		$this->db->from('user_group');
-		$this->db->where('id_pbk', $id_pbk);
-			$this->db->where('id_pbk_groups', $id_group);
-
-		if($this->db->get()->num_rows() < 1)
+		//This case probably never happens because it is filtered out in 'application/views/js_init/phonebook/js_phonebook.php'
+		if ($id_group === 'null')
 		{
-		   $this->db->set('id_pbk', $id_pbk);
-		   $this->db->set('id_pbk_groups', $id_group);
-		   $this->db->set('id_user', $this->session->userdata('id_user'));
-		   $this->db->insert('user_group');
+			die('Invalid Group ID');
 		}
 
-	 }
+		//parse group value
+		if (preg_match('/-/', $id_group))
+		{
+			$mode = 'delete';
+			$id_group = substr($id_group, 1);
+		}
+		else
+		{
+			$mode = 'add';
+		}
 
-  }
+		if ($mode === 'delete')
+		{
+			$this->db->delete('user_group', array('id_pbk' => $id_pbk, 'id_pbk_groups' => $id_group));
+		}
+		else
+		{ // Add Mode
+			$this->db->from('user_group');
+			$this->db->where('id_pbk', $id_pbk);
+			$this->db->where('id_pbk_groups', $id_group);
+
+			if ($this->db->get()->num_rows() < 1)
+			{
+				$this->db->set('id_pbk', $id_pbk);
+				$this->db->set('id_pbk_groups', $id_group);
+				$this->db->set('id_user', $this->session->userdata('id_user'));
+				$this->db->insert('user_group');
+			}
+		}
+	}
 
 	// --------------------------------------------------------------------
 
@@ -360,46 +402,49 @@ class Phonebook_model extends CI_Model {
 		$this->db->set('is_public', $this->input->post('is_public') ? 'true' : 'false');
 
 		// edit mode
-		if($this->input->post('pbkgroup_id'))
+		if ($this->input->post('pbkgroup_id'))
 		{
 			$this->db->where('ID', $this->input->post('pbkgroup_id'));
 			$this->db->update('pbk_groups');
 		}
-		else $this->db->insert('pbk_groups');
+		else
+		{
+			$this->db->insert('pbk_groups');
+		}
 	}
 
 	// --------------------------------------------------------------------
 
-	 /**
-	 * Get Groups ID for a Group Name
-	 *
-	 * @access	public
-	 * @param	text $group_name
-	 * @param	number $user_id
-	 * @return
-	 */
+	/**
+	* Get Groups ID for a Group Name
+	*
+	* @access	public
+	* @param	text $group_name
+	* @param	number $user_id
+	* @return
+	*/
 	function group_id($group_name, $user_id)
 	{
-			$this->db->select('*');
-			$this->db->from('pbk_groups');
-			$this->db->where('Name', $group_name);
-			$this->db->where('id_user', $user_id);
-			return @$this->db->get()->row()->ID;
+		$this->db->select('*');
+		$this->db->from('pbk_groups');
+		$this->db->where('Name', $group_name);
+		$this->db->where('id_user', $user_id);
+		return @$this->db->get()->row()->ID;
 	}
 
 	// --------------------------------------------------------------------
 
-	 /**
-	 * Get Groups Name for a Group ID
-	 *
-	 * @access	public
-	 * @param	string $group_name
-	 * @param	number $user_id
-	 * @return
-	 */
+	/**
+	* Get Groups Name for a Group ID
+	*
+	* @access	public
+	* @param	string $group_name
+	* @param	number $user_id
+	* @return
+	*/
 	function group_name($group_id, $user_id)
 	{
-		   $this->db->select('*');
+		$this->db->select('*');
 		$this->db->from('pbk_groups');
 		$this->db->where('ID', $group_id);
 		$this->db->where('id_user', $user_id);
@@ -478,7 +523,10 @@ class Phonebook_model extends CI_Model {
 	 */
 	function convert_phonenumber($param)
 	{
-		if( ! isset($param['id_user'])) $param['id_user'] = '';
+		if ( ! isset($param['id_user']))
+		{
+			$param['id_user'] = '';
+		}
 		$this->load->helper('country_dial_code_helper');
 		$country_code = $this->Kalkun_model->get_setting()->row('country_code');
 		$dial_code = getCountryInformation($country_code);

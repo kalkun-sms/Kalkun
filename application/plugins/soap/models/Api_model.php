@@ -6,13 +6,15 @@
 */
 
 Class Api_model extends CI_Model {
+
 	function Plugin_model()
 	{
 		parent::__construct();
 		$this->load->library('Remote_Messages');
 	}
 
-	function getAccount($token) {
+	function getAccount($token)
+	{
 		$sql = "select ip_address,id_remote_access,status from plugin_remote_access where token='".$token."'";
 		$remote_ip = $this->db->query($sql)->row('ip_address');
 		$remote_Id = $this->db->query($sql)->row('id_remote_access');

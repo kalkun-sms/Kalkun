@@ -24,7 +24,7 @@
 	<div id="window_title_left"><?php echo $title; ?></div>
 	<div id="window_title_right">
 	<a href="#" id="addpbkgroup" class="addpbkgroup nicebutton">&#43; <?php echo lang('tni_group_add');?></a>
-    <?php if($this->uri->segment(3) == 'public') : ?>
+    <?php if ($this->uri->segment(3) == 'public') : ?>
 	<a href="<?php echo site_url('phonebook/group/');?>" class="nicebutton">&#43; <?php echo lang('kalkun_my_group');?></a>
     <?php else: ?>  
     <a href="<?php echo site_url('phonebook/group/public');?>" class="nicebutton">&#43; <?php echo lang('kalkun_public_group');?></a>

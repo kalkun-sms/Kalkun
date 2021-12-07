@@ -19,6 +19,7 @@
  * @category	Controllers
  */
 class Daemon extends CI_Controller {
+
 	/**
 	 * Constructor
 	 *
@@ -49,10 +50,10 @@ class Daemon extends CI_Controller {
 		// get unProcessed message
 		$message = $this->Message_model->get_messages(array('processed' => FALSE));
 
-		foreach($message->result() as $tmp_message)
+		foreach ($message->result() as $tmp_message)
 		{
 			// check for spam
-			if($this->Spam_model->apply_spam_filter($tmp_message->ID, $tmp_message->TextDecoded))
+			if ($this->Spam_model->apply_spam_filter($tmp_message->ID, $tmp_message->TextDecoded))
 			{
 				continue; ////is spam do not process later part
 			}
@@ -61,7 +62,7 @@ class Daemon extends CI_Controller {
 			$status = do_action('message.incoming.before', $tmp_message);
 
 			// message deleted, do not process later part
-			if(isset($status) && $status === 'break')
+			if (isset($status) && $status === 'break')
 			{
 				continue;
 			}
@@ -75,7 +76,7 @@ class Daemon extends CI_Controller {
 			$status = do_action('message.incoming.after', $tmp_message);
 
 			// message deleted, do not process later part
-			if(isset($status) && $status === 'break')
+			if (isset($status) && $status === 'break')
 			{
 				continue;
 			}
@@ -88,15 +89,16 @@ class Daemon extends CI_Controller {
 			$multipart = array('type' => 'inbox', 'option' => 'check', 'id_message' => $id_message[0]);
 			$tmp_check = $this->Message_model->get_multipart($multipart);
 
-						// UDH is stored as text in the database (it can also be NULL)
-			if( ! empty($tmp_check->row('UDH')))
+			// UDH is stored as text in the database (it can also be NULL)
+			if ( ! empty($tmp_check->row('UDH')))
 			{
 				$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'), 0, 8));
 				$multipart['phone_number'] = $tmp_check->row('SenderNumber');
 				$multipart['type'] = 'inbox';
-				foreach($this->Message_model->get_multipart($multipart)->result() as $part):
-				$id_message[] = $part->ID;
-				endforeach;
+				foreach ($this->Message_model->get_multipart($multipart)->result() as $part)
+				{
+					$id_message[] = $part->ID;
+				}
 			}
 			$this->Message_model->update_processed($id_message);
 		}
@@ -125,13 +127,13 @@ class Daemon extends CI_Controller {
 			$check = in_array($tag, $msg_word);
 
 			// check user phone number if enabled
-			if($check === FALSE && $this->config->item('inbox_routing_user_phonenumber'))
+			if ($check === FALSE && $this->config->item('inbox_routing_user_phonenumber'))
 			{
 				$check = ($tmp_message->SenderNumber === $tmp_user->phone_number) ? TRUE : FALSE;
 			}
 
 			// update ownership
-			if($check !== FALSE)
+			if ($check !== FALSE)
 			{
 				$this->Message_model->update_owner($tmp_message->ID, $tmp_user->id_user);
 				$msg_user = $tmp_user->id_user;
@@ -140,7 +142,7 @@ class Daemon extends CI_Controller {
 		}
 
 		// If inbox_routing_use_phonebook is enabled
-		if($this->config->item('inbox_routing_use_phonebook'))
+		if ($this->config->item('inbox_routing_use_phonebook'))
 		{
 			foreach ($users->result() as $tmp_user)
 			{
@@ -149,20 +151,20 @@ class Daemon extends CI_Controller {
 				$param['option'] = 'bynumber';
 				$check = $this->Phonebook_model->get_phonebook($param);
 
-				if($check->num_rows() !== 0)
+				if ($check->num_rows() !== 0)
 				{
 					$msg_user[] = $tmp_user->id_user;
 				}
 			}
 
-			if(isset($msg_user))
+			if (isset($msg_user))
 			{
 				$this->Message_model->update_owner($tmp_message->ID, $msg_user);
 			}
 		}
 
 		// if no matched username, set owner to Inbox Master
-		if($check === FALSE OR ! isset($msg_user))
+		if ($check === FALSE OR ! isset($msg_user))
 		{
 			$this->Message_model->update_owner($tmp_message->ID, $this->config->item('inbox_owner_id'));
 			$msg_user = $this->config->item('inbox_owner_id');
@@ -180,13 +182,19 @@ class Daemon extends CI_Controller {
 	 */
 	function _run_user_filters($msg, $users)
 	{
-		foreach($users as $user)
+		foreach ($users as $user)
 		{
 			$filters = $this->Kalkun_model->get_filters($user);
-			foreach($filters->result() as $filter)
+			foreach ($filters->result() as $filter)
 			{
-				if( ! empty($filter->from) && ($msg->SenderNumber !== $filter->from)) continue;
-				if( ! empty($filter->has_the_words) && (strstr($msg->TextDecoded, $filter->has_the_words) === FALSE)) continue;
+				if ( ! empty($filter->from) && ($msg->SenderNumber !== $filter->from))
+				{
+					continue;
+				}
+				if ( ! empty($filter->has_the_words) && (strstr($msg->TextDecoded, $filter->has_the_words) === FALSE))
+				{
+					continue;
+				}
 				$this->Message_model->move_messages(array('type' => 'single', 'folder' => 'inbox', 'id_message' => array($msg->ID), 'id_folder' => $filter->id_folder));
 			}
 		}
@@ -207,10 +215,10 @@ class Daemon extends CI_Controller {
 		$this->load->model('server_alert/server_alert_model', 'plugin_model');
 
 		$tmp_data = $this->plugin_model->get('active');
-		foreach($tmp_data->result() as $tmp)
+		foreach ($tmp_data->result() as $tmp)
 		{
 			$fp = fsockopen($tmp->ip_address, $tmp->port_number, $errno, $errstr, 60);
-			if( ! $fp)
+			if ( ! $fp)
 			{
 				$data['coding'] = 'default';
 				$data['message'] = $tmp->respond_message."\n\nKalkun Server Alert";

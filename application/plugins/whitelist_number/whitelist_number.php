@@ -48,7 +48,7 @@ function whitelist_number_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH.'plugins/whitelist_number/media/'.$db_prop['file'].'_whitelist_number.sql');
 	}
-  return TRUE;
+	return TRUE;
 }
 
 function whitelist_number_outgoing($numbers = array())
@@ -59,22 +59,25 @@ function whitelist_number_outgoing($numbers = array())
 
 	// Get whitelist number
 	$lists = $CI->plugin_model->get('all')->result_array();
-	foreach($lists as $tmp)
+	foreach ($lists as $tmp)
 	{
 		$heaven[] = $tmp['match'];
 	}
 
 	// Delete number if it's on whitelist number
-	foreach($numbers as $key => $number)
+	foreach ($numbers as $key => $number)
 	{
-		foreach($heaven as $match) {
-		if(preg_match($match, $number))
+		foreach ($heaven as $match)
 		{
-			continue;
-		} else {
-		  unset($numbers[$key]);
+			if (preg_match($match, $number))
+			{
+				continue;
+			}
+			else
+			{
+				unset($numbers[$key]);
+			}
 		}
-	  }
 	}
 	return $numbers;
 }

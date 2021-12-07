@@ -39,19 +39,19 @@
 		</tr>
 	    
 		<?php
-		if($whitelist->num_rows() === 0)
+		if ($whitelist->num_rows() === 0)
 		{
 			echo '<tr><td colspan="5" style="border-left: 1px solid #000; border-right: 1px solid #000;">No whitelist number found.</td></tr>';
 		}
 		else
 		{
-			foreach($whitelist->result() as $tmp):
+			foreach ($whitelist->result() as $tmp):
 			?>
-			<tr id="<?php echo $tmp->id_whitelist;?>">
-				<td class="nice-table-left"><?php echo $number;?></td>
-				<td class="phone_number"><?php echo $tmp->match;?></td>
+			<tr id="<?php echo $tmp->id_whitelist; ?>">
+				<td class="nice-table-left"><?php echo $number; ?></td>
+				<td class="phone_number"><?php echo $tmp->match; ?></td>
 				<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
-				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/whitelist_number/delete/<?php echo $tmp->id_whitelist;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
+				<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/whitelist_number/delete/<?php echo $tmp->id_whitelist; ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 			</tr>
 			
 			<?php

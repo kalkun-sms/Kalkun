@@ -49,7 +49,7 @@ function stop_manager_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH.'plugins/stop_manager/media/'.$db_prop['file'].'_stop_manager.sql');
 	}
-  return TRUE;
+	return TRUE;
 }
 
 
@@ -79,27 +79,35 @@ function stop_manager_cleanup_outgoing($all)
 	$msg = $data['message'];
 	// Be careful! Kalkun may append $config['append_username_message'] to all messages.
 	$ret_match = NULL;
-	if($CI->config->item('append_username')) {
+	if ($CI->config->item('append_username'))
+	{
 		$ret_match = preg_match('/^(.*)~(.+)~.*/', $msg, $matches, PREG_UNMATCHED_AS_NULL);
-	} else {
+	}
+	else
+	{
 		$ret_match = preg_match('/^(.*)~(.+)~$/', $msg, $matches, PREG_UNMATCHED_AS_NULL);
 	}
 
 	$type = NULL;
-	if ($ret_match && isset($matches[2]) && $config['enable_type']) {
+	if ($ret_match && isset($matches[2]) && $config['enable_type'])
+	{
 		$type = $matches[2];
 	}
-	if (is_null($type)) {
+	if (is_null($type))
+	{
 		// type of SMS (for filtering) is not set yet.
 		// The message is sent    if we enabled  the use of type ($config['enable_type'])
 		// The message is dropped if we disabled the use of type ($config['enable_type']) and if it is in blacklist
-		if ( ! $config['enable_type']) {
+		if ( ! $config['enable_type'])
+		{
 			// Will drop all numbers that are in stop_manager whatever the value of type
 			//$type = "%";
 
 			// Will drop all numbers that are in stop_manager having been recorded as TYPE_NOT_SET_SO_STOP_ALL
 			$type = 'TYPE_NOT_SET_SO_STOP_ALL';
-		} else {
+		}
+		else
+		{
 			// IGNORE_STOP_MANAGER is just a fake value that should never match something in the table,
 			// this is to keep the message
 			$type = 'IGNORE_STOP_MANAGER';
@@ -111,14 +119,18 @@ function stop_manager_cleanup_outgoing($all)
 	$db_result = $CI->Stop_manager_model->get_num_for_type($type)->result_array();
 	$blocked_numbers = array();
 
-	foreach ($db_result as $row) {
+	foreach ($db_result as $row)
+	{
 		$blocked_numbers[] = $row['destination_number'];
 	}
 
 	// Remove the phone no. if the recipient is in the STOP table for this type of sms
-	foreach($dest as $key => $number) {
-		foreach($blocked_numbers as $n) {
-			if($n === $number) {
+	foreach ($dest as $key => $number)
+	{
+		foreach ($blocked_numbers as $n)
+		{
+			if ($n === $number)
+			{
 				unset($dest[$key]);
 			}
 		}
@@ -126,7 +138,8 @@ function stop_manager_cleanup_outgoing($all)
 
 	// Remove inside the message the "tag" that permits to know what type of message it is
 	// eg. "~rappel~" at the end of the message
-	if ($ret_match && isset($matches[1])) {
+	if ($ret_match && isset($matches[1]))
+	{
 		$data['message'] = trim($matches[1]);
 	}
 	return array($dest, $data);
@@ -153,9 +166,13 @@ function stop_manager_incoming($sms)
 	$cmds_reg = implode('|', $cmds_valides);
 
 	if ($config['enable_type'])
+	{
 		$ret = preg_match('/\b('.$cmds_reg.')\s*('.$types_reg.')\b/i', $msg, $matches, PREG_UNMATCHED_AS_NULL);
+	}
 	else
+	{
 		$ret = preg_match('/\b('.$cmds_reg.')\b/i', $msg, $matches, PREG_UNMATCHED_AS_NULL);
+	}
 
 	$CI = &get_instance();
 
@@ -167,7 +184,8 @@ function stop_manager_incoming($sms)
 	$CI->load->add_package_path(APPPATH.'plugins/stop_manager', FALSE);
 	$CI->load->language('stop_manager', $lang);
 
-	if ($ret) {
+	if ($ret)
+	{
 		$cmd = strtoupper($matches[1]);
 		$type = ($config['enable_type']) ? strtolower($matches[2]) : 'TYPE_NOT_SET_SO_STOP_ALL';
 		$CI->load->model('stop_manager/Stop_manager_model', 'Stop_manager_model');
@@ -181,7 +199,9 @@ function stop_manager_incoming($sms)
 
 				$strTemplate = lang('sm_command_valid_optout_1_taken_into_account');
 				if ($config['enable_optin'])
+				{
 					$strTemplate .= lang('sm_command_valid_optout_2_to_optin_reply');
+				}
 
 				$strParams = [
 					':received_command' => ($config['enable_type']) ? $cmd.' '.$type : $cmd,
@@ -190,7 +210,9 @@ function stop_manager_incoming($sms)
 
 				$text = strtr($strTemplate, $strParams);
 				if ($config['enable_autoreply_info'])
+				{
 					autoreply($from, $text);
+				}
 				break;
 			case (in_array($cmd, $optin_keywords) && $config['enable_optin']) :
 				$ret = $CI->Stop_manager_model->delete($from, $type);
@@ -205,24 +227,36 @@ function stop_manager_incoming($sms)
 
 				$text = strtr($strTemplate, $strParams);
 				if ($config['enable_autoreply_info'])
+				{
 					autoreply($from, $text);
+				}
 				break;
 			default:
 				$text = lang('sm_command_invalid_short')." (${msg})";
 				if ($config['enable_autoreply_error'])
+				{
 					autoreply($from, $text);
+				}
 				break;
 		}
-	} else {
+	}
+	else
+	{
 		$strTemplate = lang('sm_command_invalid_long_1_reply');
 		if ($config['enable_type'])
+		{
 			$strTemplate .= ' <type>';
+		}
 		$strTemplate .= "'";
 		if ($config['enable_optin'])
+		{
 			$strTemplate .= lang('sm_command_invalid_long_2_or');
+		}
 		$strTemplate .= '.';
 		if ($config['enable_type'])
+		{
 			$strTemplate .= lang('sm_command_invalid_long_3_possible_type_values_are');
+		}
 		$strTemplate .= lang('sm_command_invalid_long_4_eg');
 
 		$strParams = [
@@ -235,9 +269,10 @@ function stop_manager_incoming($sms)
 
 		$text = strtr($strTemplate, $strParams);
 		if ($config['enable_autoreply_error'])
+		{
 			autoreply($from, $text);
+		}
 	}
-
 }
 
 function autoreply($tel, $reply_msg)
@@ -245,12 +280,14 @@ function autoreply($tel, $reply_msg)
 	$config = stop_manager_initialize();
 
 	// Filter rule for outgoing SMS
-	if ($config['enable_autoreply_outnumber_filter']) {
+	if ($config['enable_autoreply_outnumber_filter'])
+	{
 		$ret = preg_match($config['autoreply_outnumber_match_rule'], $tel, $matches);
 		//var_dump($ret);
 		//var_dump($matches);
 	}
-	if ($ret) {
+	if ($ret)
+	{
 		$CI = &get_instance();
 		$CI->load->model('Message_model');
 		$data['coding'] = 'default';

@@ -21,6 +21,7 @@
  * @category	Controllers
  */
 class Plugin_controller extends MY_Controller {
+
 	var $plugin_name = '';
 	var $plugin_version = '';
 	var $plugin_author = '';
@@ -31,7 +32,7 @@ class Plugin_controller extends MY_Controller {
 		parent::__construct($login);
 
 		// Prevent non-admin user
-		if($login && $this->session->userdata('level') !== 'admin')
+		if ($login && $this->session->userdata('level') !== 'admin')
 		{
 			$this->session->set_flashdata('notif', 'Only administrator can manage plugin');
 			redirect('/');
@@ -95,5 +96,4 @@ class Plugin_controller extends MY_Controller {
 			$this->load->model('plugin/'.$this->plugin_name.'_model', 'plugin_model');
 		}
 	}
-
 }

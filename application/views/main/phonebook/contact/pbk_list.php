@@ -1,10 +1,16 @@
 <?php //$this->load->view('js_init/phonebook/js_phonebook');
-if($phonebook->num_rows() === 0):
-	if($_POST) echo '<p><i>'.lang('tni_contact_not_found').'</i></p>';
-	else echo '<p><i>'.lang('tni_contact_search_empty').'</i></p>';
+if ($phonebook->num_rows() === 0):
+	if ($_POST)
+	{
+		echo '<p><i>'.lang('tni_contact_not_found').'</i></p>';
+	}
+	else
+	{
+		echo '<p><i>'.lang('tni_contact_search_empty').'</i></p>';
+	}
 else: ?>
 <table>
-<?php foreach($phonebook->result() as $tmp): ?>
+<?php foreach ($phonebook->result() as $tmp): ?>
 <tr id="<?php echo $tmp->id_pbk;?>">
 <td>
 <div class="two_column_container contact_list" style="display: inline-block;">
@@ -19,13 +25,13 @@ else: ?>
 		<?php
 		// hook for contact menu
 		$menu = do_action('phonebook.contact.menu', $tmp);
-		if($menu != $tmp)
+		if ($menu != $tmp)
 		{
 			echo "<a class=\"simplelink\" href=\"{$menu['url']}\">{$menu['title']}</a>&nbsp;";
 			echo "<img src=\"{$this->config->item('img_path')}circle.gif\" />";
 		}
 		?>
-		<?php if(isset($public_contact) && ! $public_contact):?>
+		<?php if (isset($public_contact) && ! $public_contact):?>
 		<a class="editpbkcontact simplelink" href="#"><?php echo lang('tni_edit');?></a>
 		<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
 		<?php endif;?>

@@ -22,6 +22,7 @@
  */
 
 class Sms_credit_model extends CI_Model {
+
 	/**
 	 * Constructor
 	 *
@@ -46,24 +47,24 @@ class Sms_credit_model extends CI_Model {
 		$this->db->join('user', 'user.id_user = plugin_sms_credit.id_user', 'right');
 		$this->db->join('plugin_sms_credit_template', 'plugin_sms_credit_template.id_credit_template = plugin_sms_credit.id_template_credit', 'left');
 
-		if(isset($param['id']))
+		if (isset($param['id']))
 		{
 			$this->db->where('plugin_sms_credit.id_user', $param['id']);
 		}
 
-		if(isset($param['q']))
+		if (isset($param['q']))
 		{
 			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $param['q'])));
 			$this->db->like('LOWER('.$this->db->protect_identifiers('realname').')', $search_word);
 		}
 
-		if(isset($param['valid_start']) && isset($param['valid_end']))
+		if (isset($param['valid_start']) && isset($param['valid_end']))
 		{
 			$this->db->where('valid_start <=', $param['valid_start']);
 			$this->db->where('valid_end >=', $param['valid_end']);
 		}
 
-		if(isset($param['limit']) && isset($param['offset']))
+		if (isset($param['limit']) && isset($param['offset']))
 		{
 			$this->db->limit($param['limit'], $param['offset']);
 		}
@@ -81,7 +82,7 @@ class Sms_credit_model extends CI_Model {
 	 */
 	function add_users($param = array())
 	{
-		if(isset($param['id_template_credit']))
+		if (isset($param['id_template_credit']))
 		{
 			$package['id_template_credit'] = $param['id_template_credit'];
 			$package['valid_start'] = $param['valid_start'];
@@ -168,7 +169,7 @@ class Sms_credit_model extends CI_Model {
 	 */
 	function get_packages($param = array())
 	{
-		if(isset($param['limit']) && isset($param['offset']))
+		if (isset($param['limit']) && isset($param['offset']))
 		{
 			$this->db->limit($param['limit'], $param['offset']);
 		}
@@ -204,7 +205,7 @@ class Sms_credit_model extends CI_Model {
 	 */
 	function add_packages($param = array())
 	{
-		if(isset($param['id_credit_template']))
+		if (isset($param['id_credit_template']))
 		{
 			$this->db->where('id_credit_template', $param['id_credit_template']);
 			unset($param['id_credit_template']);
@@ -232,5 +233,4 @@ class Sms_credit_model extends CI_Model {
 		$this->db->delete('plugin_sms_credit_template', array('id_credit_template' => $id));
 		$this->db->trans_complete();
 	}
-
 }

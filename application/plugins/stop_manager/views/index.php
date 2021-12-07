@@ -26,20 +26,20 @@
         </tr>
 
         <?php
-		if($stoplist->num_rows() === 0)
+		if ($stoplist->num_rows() === 0)
 		{
 			echo '<tr><td colspan="6" style="border-left: 1px solid #000; border-right: 1px solid #000;">No STOP record found.</td></tr>';
 		}
 		else
 		{
-			foreach($stoplist->result() as $tmp):
+			foreach ($stoplist->result() as $tmp):
 			?>
-            <tr id="<?php echo $tmp->id_stop_manager;?>">
-                <td class="nice-table-left"><?php echo $number;?></td>
-                <td class="destination_number"><?php echo $tmp->destination_number;?></td>
-                <td class="stop_type"><?php echo $tmp->stop_type;?></td>
-                <td class="stop_message"><?php echo $tmp->stop_message;?></td>
-                <td class="reg_date"><?php echo $tmp->reg_date;?></td>
+            <tr id="<?php echo $tmp->id_stop_manager; ?>">
+                <td class="nice-table-left"><?php echo $number; ?></td>
+                <td class="destination_number"><?php echo $tmp->destination_number; ?></td>
+                <td class="stop_type"><?php echo $tmp->stop_type; ?></td>
+                <td class="stop_message"><?php echo $tmp->stop_message; ?></td>
+                <td class="reg_date"><?php echo $tmp->reg_date; ?></td>
                 <td class="nice-table-right">
                 <?php if ($tmp->destination_number && $tmp->stop_type) { ?>
                     <a href="<?php echo site_url();?>/plugin/stop_manager/delete/<?php echo urlencode(base64_encode($tmp->destination_number));?>/<?php echo urlencode(base64_encode($tmp->stop_type));?>"><img class="ui-icon ui-icon-close" title="Delete" /></a>
@@ -56,7 +56,9 @@
             <th colspan="6" class="nice-table-footer">
                 <div id="simplepaging">
                 <?php if (is_null($this->input->post('search_name')))
-					echo $this->pagination->create_links();
+		{
+			echo $this->pagination->create_links();
+		}
 				?>
                 </div>
             </th>

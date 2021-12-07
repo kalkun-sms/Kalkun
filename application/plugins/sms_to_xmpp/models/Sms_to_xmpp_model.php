@@ -19,6 +19,7 @@
  * @category	Models
  */
 class Sms_to_xmpp_model extends CI_Model {
+
 	function __construct()
 	{
 		parent::__construct();
@@ -84,5 +85,4 @@ class Sms_to_xmpp_model extends CI_Model {
 	{
 		$this->db->delete('plugin_sms_to_xmpp', array('id_user' => $uid));
 	}
-
 }

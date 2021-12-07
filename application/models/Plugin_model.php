@@ -21,10 +21,10 @@
  * @category	Models
  */
 class Plugin_model extends CI_Model {
+
 	function get_plugins()
 	{
 		$this->db->from('plugins');
 		return $this->db->get();
 	}
-
 }

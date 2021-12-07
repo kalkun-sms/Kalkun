@@ -21,6 +21,7 @@
 include_once(APPPATH.'plugins/Plugin_controller.php');
 
 class Xmlrpc extends Plugin_controller {
+
 	function __construct()
 	{
 		parent::__construct(FALSE);

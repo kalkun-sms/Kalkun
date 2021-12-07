@@ -25,8 +25,14 @@ function DNDcheck($mobileno)
 
 function filter_data($data)
 {
-	if ( ! isset($data)) return '<i>Unknown</i>';
-	else return $data;
+	if ( ! isset($data))
+	{
+		return '<i>Unknown</i>';
+	}
+	else
+	{
+		return $data;
+	}
 }
 
 function nice_date($str, $option = NULL)
@@ -50,13 +56,13 @@ function nice_date($str, $option = NULL)
 
 	$diff = abs($now - $timestamp);
 
-	if($option === 'smsd_check')
+	if ($option === 'smsd_check')
 	{
 		return $diff;
 	}
 	else
 	{
-		if($diff < 60)
+		if ($diff < 60)
 		{
 			return lang('kalkun_nicedate_less1min_ago'); // "Less than a minute ago"
 		}
@@ -65,9 +71,12 @@ function nice_date($str, $option = NULL)
 			$levels = 1;
 			$current_level = 1;
 			$result = array();
-			foreach($blocks as $block)
+			foreach ($blocks as $block)
 			{
-				if ($current_level > $levels) { break; }
+				if ($current_level > $levels)
+				{
+					break;
+				}
 				if ($diff / $block['amount'] >= 1)
 				{
 					$amount = floor($diff / $block['amount']);
@@ -80,9 +89,12 @@ function nice_date($str, $option = NULL)
 			}
 			$res = implode(' ', $result);
 
-			if ($timestamp > $now) {
+			if ($timestamp > $now)
+			{
 				$text = lang('kalkun_nicedate_remaining');
-			} else {
+			}
+			else
+			{
 				$text = lang('kalkun_nicedate_ago');
 			}
 			return str_replace('%nicedate%', $res, $text);
@@ -101,7 +113,7 @@ function get_modem_status($status, $tolerant)
 	$now = time();
 
 	//$diff = abs($now-$timestamp);
-	if($timestamp > $now)
+	if ($timestamp > $now)
 	{
 		return 'connect';
 	}
@@ -113,8 +125,14 @@ function get_modem_status($status, $tolerant)
 
 function message_preview($str, $n)
 {
-	if (strlen($str) <= $n) return showtags($str);
-	else return showtags(substr($str, 0, $n - 3)).'&#8230;';
+	if (strlen($str) <= $n)
+	{
+		return showtags($str);
+	}
+	else
+	{
+		return showtags(substr($str, 0, $n - 3)).'&#8230;';
+	}
 }
 
 function showtags($msg)
@@ -134,7 +152,10 @@ function compare_date_asc($a, $b)
 	$date1 = strtotime($a['globaldate']);
 	$date2 = strtotime($b['globaldate']);
 
-	if($date1 === $date2) return 0;
+	if ($date1 === $date2)
+	{
+		return 0;
+	}
 	return ($date1 < $date2) ? -1 : 1;
 }
 
@@ -143,20 +164,43 @@ function compare_date_desc($a, $b)
 	$date1 = strtotime($a['globaldate']);
 	$date2 = strtotime($b['globaldate']);
 
-	if($date1 === $date2) return 0;
+	if ($date1 === $date2)
+	{
+		return 0;
+	}
 	return ($date1 > $date2) ? -1 : 1;
 }
 
 function check_delivery_report($report)
 {
-	if($report === 'SendingError' OR $report === 'Error' OR $report === 'DeliveryFailed'): $status = lang('tni_msg_stat_fail');
-	elseif($report === 'SendingOKNoReport'): $status = lang('tni_msg_stat_oknr');
-	elseif($report === 'SendingOK'): $status = lang('tni_msg_stat_okwr');
-	elseif($report === 'DeliveryOK'): $status = lang('tni_msg_stat_deliv');
-	elseif($report === 'DeliveryPending'): $status = lang('tni_msg_stat_pend');
-	elseif($report === 'DeliveryUnknown'): $status = lang('tni_msg_stat_unknown');
-	elseif($report === 'Reserved'): $status = lang('tni_msg_stat_reserved');
-	endif;
+	if ($report === 'SendingError' OR $report === 'Error' OR $report === 'DeliveryFailed')
+	{
+		$status = lang('tni_msg_stat_fail');
+	}
+	elseif ($report === 'SendingOKNoReport')
+	{
+		$status = lang('tni_msg_stat_oknr');
+	}
+	elseif ($report === 'SendingOK')
+	{
+		$status = lang('tni_msg_stat_okwr');
+	}
+	elseif ($report === 'DeliveryOK')
+	{
+		$status = lang('tni_msg_stat_deliv');
+	}
+	elseif ($report === 'DeliveryPending')
+	{
+		$status = lang('tni_msg_stat_pend');
+	}
+	elseif ($report === 'DeliveryUnknown')
+	{
+		$status = lang('tni_msg_stat_unknown');
+	}
+	elseif ($report === 'Reserved')
+	{
+		$status = lang('tni_msg_stat_reserved');
+	}
 
 	return $status;
 }
@@ -170,27 +214,33 @@ function simple_date($datetime)
 
 function get_hour()
 {
-	for($i = 0;$i < 24;$i++)
+	for ($i = 0;$i < 24;$i++)
 	{
 		$hour = $i;
-		if($hour < 10) $hour = '0'.$hour;
+		if ($hour < 10)
+		{
+			$hour = '0'.$hour;
+		}
 		echo '<option value="'.$hour.'">'.$hour.'</option>';
 	}
 }
 
 function get_minute()
 {
-	for($i = 0;$i < 60;$i = $i + 5)
+	for ($i = 0;$i < 60;$i = $i + 5)
 	{
 		$min = $i;
-		if($min < 10) $min = '0'.$min;
+		if ($min < 10)
+		{
+			$min = '0'.$min;
+		}
 		echo '<option value="'.$min.'">'.$min.'</option>';
 	}
 }
 
 function is_ajax()
 {
-	if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
+	if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
 	{
 		return TRUE;
 	}
@@ -205,7 +255,10 @@ function get_database_property($driver)
 	// valid and supported driver
 	$valid_driver = array('postgre', 'mysql', 'mysqli', 'pdo');
 
-	if( ! in_array($driver, $valid_driver)) die ("Database driver you're using is not supported");
+	if ( ! in_array($driver, $valid_driver))
+	{
+		die ("Database driver you're using is not supported");
+	}
 
 	$postgre['name'] = 'postgre';
 	$postgre['file'] = 'pgsql';
@@ -250,14 +303,23 @@ function execute_sql($sqlfile)
 		$buff = '';
 		foreach ($lines as $i => $line)
 		{
-			if (preg_match('/^--/', $line)) continue;
+			if (preg_match('/^--/', $line))
+			{
+				continue;
+			}
 			$buff .= $line . "\n";
 			if (preg_match('/;$/', trim($line)))
 			{
 				// if contains TRIGGER
-				if(preg_match('/CREATE TRIGGER$/', trim($line))) $buff .= ' END;';
+				if (preg_match('/CREATE TRIGGER$/', trim($line)))
+				{
+					$buff .= ' END;';
+				}
 				$query = $CI->Kalkun_model->db->query($buff);
-				if( ! $query) $error++;
+				if ( ! $query)
+				{
+					$error++;
+				}
 				$buff = '';
 			}
 		}
@@ -271,10 +333,12 @@ function execute_sql($sqlfile)
  * Convert data that is stored as boolean in the database to
  * a php bool type (true or false)
  */
-function db_boolean_to_php_bool($dbdriver, $db_bool) {
+function db_boolean_to_php_bool($dbdriver, $db_bool)
+{
 	switch ($dbdriver) {
 		case 'postgre':
-			if ($db_bool === 't') {
+			if ($db_bool === 't')
+			{
 				return TRUE;
 			}
 			//if ($db_bool === 'f') {
@@ -294,11 +358,13 @@ function db_boolean_to_php_bool($dbdriver, $db_bool) {
  * This function returns the same result as "$var == NULL" but by using
  * strict comparison operator
   */
-function is_null_loose($input) {
+function is_null_loose($input)
+{
 	// doing $input == NULL is like doing 'empty($input)' except that
 	// empty() returns true if the value is "0".
 	// So in that case, return FALSE so that we can mimic '$input == NULL'
-	if (isset($input) && is_string($input) && $input === '0') {
+	if (isset($input) && is_string($input) && $input === '0')
+	{
 		return FALSE;
 	}
 	return empty($input);

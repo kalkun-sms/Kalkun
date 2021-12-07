@@ -21,6 +21,7 @@
  * @category	Models
  */
 class Server_alert_model extends CI_Model {
+
 	function __construct()
 	{
 		parent::__construct();
@@ -28,7 +29,7 @@ class Server_alert_model extends CI_Model {
 
 	function get($option = NULL, $limit = NULL, $offset = NULL)
 	{
-		switch($option)
+		switch ($option)
 		{
 			case 'active':
 				$this->db->where('status', 'true');
@@ -89,8 +90,10 @@ class Server_alert_model extends CI_Model {
 	{
 		$this->db->select('sum(timeout) as timeout');
 		$interval = $this->db->get('plugin_server_alert')->row('timeout');
-		if (empty($interval)) $interval = 0;
+		if (empty($interval))
+		{
+			$interval = 0;
+		}
 		return $interval;
 	}
-
 }

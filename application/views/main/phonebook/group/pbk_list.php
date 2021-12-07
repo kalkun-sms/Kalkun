@@ -1,9 +1,9 @@
 <?php
-if($group->num_rows() === 0):
+if ($group->num_rows() === 0):
 echo '<p><i>'.lang('tni_group_no_group').'</i></p>';
 else: ?>
 <table>
-<?php foreach($group->result() as $tmp): ?>
+<?php foreach ($group->result() as $tmp): ?>
 <tr id="<?php echo $tmp->ID;?>" public="<?php echo $tmp->is_public;?>">
 <td>
 <div class="two_column_container contact_list">
@@ -15,7 +15,7 @@ else: ?>
 </div>
 <div class="right_column">
 <span class="pbk_menu hidden">
-<?php if(isset($public_group) && ! $public_group):?>
+<?php if (isset($public_group) && ! $public_group):?>
 <a class="editpbkgroup simplelink" href="#"><?php echo lang('tni_edit');?></a>
 <img src="<?php echo $this->config->item('img_path')?>circle.gif" />
 <?php endif;?>	

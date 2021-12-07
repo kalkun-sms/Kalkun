@@ -28,7 +28,7 @@
 <a href="<?php echo site_url('plugin/sms_to_xmpp/delete')?>" class="nicebutton">&#43; Delete XMPP account</a>
 <?php endif;?>
 
-<?php if($xmpp):?>
+<?php if ($xmpp):?>
 <h4>XMPP Account:</h4>
 <p><?php echo $xmpp['xmpp_username'];?></p>
 <?php endif;?>

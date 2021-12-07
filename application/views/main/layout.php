@@ -20,7 +20,7 @@ echo doctype('xhtml1-trans');?>
 			<div id="top_link"><?php echo $this->load->view('main/search');?></div>
 			<div class="clear">&nbsp;</div>
 			<div class="notification_container" align="center"><span class="notification_area hidden"><?php echo lang('tni_loading');?>...</span>
-			<?php if($this->session->flashdata('notif')): ?>
+			<?php if ($this->session->flashdata('notif')): ?>
 			<span class="notification_area"><?php echo $this->session->flashdata('notif');?></span>
 			<?php endif; ?>
 			</div>

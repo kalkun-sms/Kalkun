@@ -24,6 +24,7 @@
 require_once('Nongammu_model.php');
 
 class Ozeking_model extends Nongammu_model {
+
 	/**
 	 * Constructor
 	 *

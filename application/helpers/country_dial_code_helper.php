@@ -5,7 +5,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * <http://ninetwozero.com/2011/12/04/php-country-array-with-dial-codes/>
 **/
 
-function getCountryInformation($filter = '') {
+function getCountryInformation($filter = '')
+{
 
 	//Let's define the array
 	$countryArray = array(
@@ -933,10 +934,10 @@ function getCountryInformation($filter = '') {
 	);
 }
 
-function getCountryDialCode() {
-
+function getCountryDialCode()
+{
 	$countryArray = getCountryInformation();
-	foreach($countryArray as $key => $country)
+	foreach ($countryArray as $key => $country)
 	{
 		$dialCode[$key] = $country['country_name'].' (+'.$country['dial_code'].')';
 	}

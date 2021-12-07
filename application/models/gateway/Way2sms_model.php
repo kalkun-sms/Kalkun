@@ -24,6 +24,7 @@
 require_once('Gammu_model.php');
 
 class Way2sms_model extends Gammu_model {
+
 	/**
 	 * Constructor
 	 *
@@ -61,7 +62,6 @@ class Way2sms_model extends Gammu_model {
 
 	function sendWay2SMS($uid, $pwd, $phone, $msg)
 	{
-
 		$curl = curl_init();
 		$timeout = 30;
 		$result = array();
@@ -87,15 +87,21 @@ class Way2sms_model extends Gammu_model {
 
 		// Check if any error occured
 		if (curl_errno($curl))
+		{
 			return 'access error : '. curl_error($curl);
+		}
 
 		// Check for proper login
 		$pos = stripos(curl_getinfo($curl, CURLINFO_EFFECTIVE_URL), 'Main.action');
 		if ($pos === FALSE OR $pos === 0)
+		{
 			return 'invalid login';
+		}
 
 		if (trim($msg) === '' OR strlen($msg) === 0)
+		{
 			return 'invalid message';
+		}
 
 		$msg = urlencode(substr($msg, 0, 160));
 		$pharr = explode(',', $phone);
@@ -109,8 +115,10 @@ class Way2sms_model extends Gammu_model {
 
 		foreach ($pharr as $p)
 		{
-			if(substr($p, 0, 3) === '+91')
+			if (substr($p, 0, 3) === '+91')
+			{
 				$p = substr($p, 3);
+			}
 
 			if (strlen($p) !== 10 OR ! is_numeric($p) OR strpos($p, '.') !== FALSE)
 			{
@@ -149,5 +157,4 @@ class Way2sms_model extends Gammu_model {
 		curl_close($curl);
 		return $result;
 	}
-
 }

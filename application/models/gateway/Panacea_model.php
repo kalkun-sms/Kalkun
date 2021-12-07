@@ -25,6 +25,7 @@
 require_once('Nongammu_model.php');
 
 class Panacea_model extends Nongammu_model {
+
 	/**
 	 * Constructor
 	 *

@@ -21,6 +21,7 @@
 include_once(APPPATH.'plugins/Plugin_controller.php');
 
 class Blacklist_number extends Plugin_controller {
+
 	function __construct()
 	{
 		parent::__construct();
@@ -30,10 +31,16 @@ class Blacklist_number extends Plugin_controller {
 
 	function index()
 	{
-		if($_POST)
+		if ($_POST)
 		{
-			if($this->input->post('editid_blacklist_number')) $this->plugin_model->update();
-			else $this->plugin_model->add();
+			if ($this->input->post('editid_blacklist_number'))
+			{
+				$this->plugin_model->update();
+			}
+			else
+			{
+				$this->plugin_model->add();
+			}
 			redirect('plugin/blacklist_number');
 		}
 

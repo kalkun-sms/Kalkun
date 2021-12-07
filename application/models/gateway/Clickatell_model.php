@@ -24,6 +24,7 @@
 require_once('Nongammu_model.php');
 
 class Clickatell_model extends Nongammu_model {
+
 	/**
 	 * Constructor
 	 *
@@ -34,7 +35,7 @@ class Clickatell_model extends Nongammu_model {
 		parent::__construct();
 		$this->gateway = $this->config->item('gateway');
 
-		if(empty($this->gateway['url']))
+		if (empty($this->gateway['url']))
 		{
 			$this->gateway['url'] = 'http://api.clickatell.com';
 		}
