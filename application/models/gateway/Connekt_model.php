@@ -81,7 +81,7 @@ class Connekt_model extends Nongammu_model {
 
 		curl_close($curl);
 
-		$is_succes = ($httpcode >= 200 && $httpcode < 300 ) ? true : false;
+		$is_succes = ($httpcode >= 200 && $httpcode < 300) ? true : false;
 		if ($is_succes)
 			return  $result[] = array('phone' => $p, 'msg' => $response, 'result' => $is_succes);
 		else

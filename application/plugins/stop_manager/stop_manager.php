@@ -40,10 +40,10 @@ function stop_manager_deactivate()
 */
 function stop_manager_install()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exists
-	if (!$CI->db->table_exists('plugin_stop_manager'))
+	if ( ! $CI->db->table_exists('plugin_stop_manager'))
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
@@ -58,7 +58,7 @@ function stop_manager_install()
 //--------------------------------------------------------------------------
 function stop_manager_initialize()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 
 	$CI->load->add_package_path(APPPATH.'plugins/stop_manager', FALSE);
 	$CI->load->config('stop_manager', TRUE);
@@ -70,10 +70,10 @@ function stop_manager_cleanup_outgoing($all)
 {
 	$config = stop_manager_initialize();
 
-	$dest=$all[0];
-	$data=$all[1];
+	$dest = $all[0];
+	$data = $all[1];
 
-	$CI =& get_instance();
+	$CI = &get_instance();
 
 	// Get the type of the SMS (rappel, annul...)
 	$msg = $data['message'];
@@ -93,7 +93,7 @@ function stop_manager_cleanup_outgoing($all)
 		// type of SMS (for filtering) is not set yet.
 		// The message is sent    if we enabled  the use of type ($config['enable_type'])
 		// The message is dropped if we disabled the use of type ($config['enable_type']) and if it is in blacklist
-		if (!$config['enable_type']) {
+		if ( ! $config['enable_type']) {
 			// Will drop all numbers that are in stop_manager whatever the value of type
 			//$type = "%";
 
@@ -157,7 +157,7 @@ function stop_manager_incoming($sms)
 	else
 		$ret = preg_match('/\b('.$cmds_reg.')\b/i', $msg, $matches, PREG_UNMATCHED_AS_NULL);
 
-	$CI =& get_instance();
+	$CI = &get_instance();
 
 	// language
 	$CI->load->helper('language');
@@ -251,7 +251,7 @@ function autoreply($tel, $reply_msg)
 		//var_dump($matches);
 	}
 	if ($ret) {
-		$CI =& get_instance();
+		$CI = &get_instance();
 		$CI->load->model('Message_model');
 		$data['coding'] = 'default';
 		$data['class'] = '1';

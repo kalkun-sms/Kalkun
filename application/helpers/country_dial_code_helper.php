@@ -928,7 +928,7 @@ function getCountryInformation($filter = '') {
 	);
 
 	//Return
-	return ( $filter === '' ) ? $countryArray : (
+	return ($filter === '') ? $countryArray : (
 		isset($countryArray[$filter]) ? $countryArray[$filter] : ''
 	);
 }

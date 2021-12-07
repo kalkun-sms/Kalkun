@@ -1,4 +1,4 @@
-<?php $error=0; ?>
+<?php $error = 0; ?>
 <h2>Requirements check</h2>
 <p>This page will check if your system is compatible with Kalkun.</p>
 
@@ -36,7 +36,7 @@
 		</td>
 		<td class="right">
 		<?php
-			if(extension_loaded($db_property['driver'])) $db_msg='';
+			if(extension_loaded($db_property['driver'])) $db_msg = '';
 
 			if(isset($db_msg)) echo '<span class="green">OK</span>';
 			else { echo '<span class="red">Not OK</span>'; $error++; }
@@ -77,7 +77,7 @@
 
 <p>&nbsp;</p>
 
-<?php if($error>0): ?>
+<?php if($error > 0): ?>
 <div>
 <p>Unfortunately, your system does not meet the minimum requirements to run Kalkun. Please ensure your system meets the above requirements and refresh this page.</p>
 </div>

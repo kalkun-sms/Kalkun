@@ -5,7 +5,7 @@ Class Soap_model extends CI_Model {
 		parent::__construct();
 	}
 
-	function getRemoteAccess($option=NULL, $limit=NULL, $offset=NULL)
+	function getRemoteAccess($option = NULL, $limit = NULL, $offset = NULL)
 	{
 		switch($option)
 		{
@@ -37,11 +37,11 @@ Class Soap_model extends CI_Model {
 
 	function updateRemoteAccess()
 	{
-		$status = ($this->input->post('editstatus', TRUE) === 'on')? 'true':'false';
+		$status = ($this->input->post('editstatus', TRUE) === 'on') ? 'true' : 'false';
 		$data = array (
 			'access_name' => $this->input->post('editaccess_name', TRUE),
 			'ip_address' => $this->input->post('editip_address', TRUE),
-			'status'	=> $status
+			'status' => $status
 		);
 		$this->db->where('id_remote_access', $this->input->post('editid_remote_access', TRUE));
 		$this->db->update('plugin_remote_access', $data);

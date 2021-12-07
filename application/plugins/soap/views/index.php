@@ -61,7 +61,7 @@ $this->load->view('js_remote_access');
 		</tr>
 	    
 		<?php
-		if($remote_access->num_rows()===0)
+		if($remote_access->num_rows() === 0)
 		{
 			echo '<tr><td colspan="8" style="border-left: 1px solid #000; border-right: 1px solid #000;">No remote access found.</td></tr>';
 		}
@@ -74,7 +74,7 @@ $this->load->view('js_remote_access');
 				<td class="access_name"><?php echo $tmp->access_name;?></td>
 				<td class="ip_address"><?php echo $tmp->ip_address;?></td>	
 				<td class="token"><?php echo $tmp->token;?></td>
-				<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status == 'false')? '':'checked=\"checked\"'?> disabled/></td>
+				<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status == 'false') ? '' : 'checked=\"checked\"'?> disabled/></td>
 				<td>&nbsp;</td>	
 				<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>			
 				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/soap/delete_remote_access/<?php echo $tmp->id_remote_access;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
@@ -125,7 +125,7 @@ $this->load->view('js_remote_access');
 			<th align="center" class="nice-table-right" colspan="2">Control</th>
 		</tr>
 		<?php
-		if(count($notification)==0)
+		if(count($notification) == 0)
 		{
 			echo '<tr><td colspan="4" style="border-left: 1px solid #000; border-right: 1px solid #000;">No Notification found.</td></tr>';
 		}

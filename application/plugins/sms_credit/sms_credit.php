@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 function sms_credit_initialize()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 
 	$CI->load->add_package_path(APPPATH.'plugins/sms_credit', FALSE);
 	$CI->load->config('sms_credit', TRUE);
@@ -58,10 +58,10 @@ function sms_credit_deactivate()
 */
 function sms_credit_install()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
-	if (!$CI->db->table_exists('plugin_sms_credit'))
+	if ( ! $CI->db->table_exists('plugin_sms_credit'))
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
@@ -72,7 +72,7 @@ function sms_credit_install()
 
 function sms_credit($sms)
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->model('Kalkun_model');
 	$CI->load->model('sms_credit/sms_credit_model', 'plugin_model');
 
@@ -93,7 +93,7 @@ function sms_credit($sms)
 		$has_package = FALSE;
 	}
 
-	if(($has_package && $sms_used >= $user_package['sms_numbers']) OR (!$has_package && !$config['allow_user_with_no_package']))
+	if(($has_package && $sms_used >= $user_package['sms_numbers']) OR ( ! $has_package && ! $config['allow_user_with_no_package']))
 	{
 		echo 'Sorry, your sms credit limit exceeded.';
 		exit;

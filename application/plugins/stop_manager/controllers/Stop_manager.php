@@ -41,7 +41,7 @@ class Stop_manager extends Plugin_controller {
 		}
 
 		$offset = 0;
-		if (!is_null($this->input->post('search_name')))
+		if ( ! is_null($this->input->post('search_name')))
 		{
 			$data['stoplist'] = $this->Stop_manager_model->get('search');
 		}
@@ -57,7 +57,7 @@ class Stop_manager extends Plugin_controller {
 			$this->pagination->initialize($config);
 
 			$offset = ($this->uri->segment(3, 0) === 'index') ? $this->uri->segment(4, 0) : $this->uri->segment(3, 0);
-			if (!is_numeric($offset))
+			if ( ! is_numeric($offset))
 				show_404();
 			if (intval($offset) >= $this->Stop_manager_model->get('count'))
 				$offset = 0;
@@ -65,7 +65,7 @@ class Stop_manager extends Plugin_controller {
 		}
 
 		$data['main'] = 'index';
-		$data['number'] = $offset+1;
+		$data['number'] = $offset + 1;
 
 		$this->load->view('main/layout', $data);
 	}

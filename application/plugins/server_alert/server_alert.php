@@ -45,10 +45,10 @@ function server_alert_deactivate()
 */
 function server_alert_install()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
-	if (!$CI->db->table_exists('plugin_server_alert'))
+	if ( ! $CI->db->table_exists('plugin_server_alert'))
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);

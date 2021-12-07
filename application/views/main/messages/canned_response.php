@@ -1,4 +1,4 @@
-<?php if($canned_list->num_rows()===0):?>
+<?php if($canned_list->num_rows() === 0):?>
 	<div><p><i><?php echo lang('kalkun_canned_empty');?>.</i></p></div>
 <?php else:?>
 <?php foreach($canned_list->result() as $list):?>

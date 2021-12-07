@@ -147,7 +147,7 @@ $("input.select_message").live('click',function()
 	}
 });
     
-<?php if(!is_ajax()) : ?>
+<?php if( ! is_ajax()) : ?>
 // refresh
 $("a.refresh_button").live('click', refresh = function(type){
 	if(type != 'retry') {
@@ -268,7 +268,7 @@ $("#contact_container").dialog('open');
 return false;
 });	
     
-<?php if($this->uri->segment(4)!='6' &&  $this->uri->segment(6)!='6' && !is_ajax()  ) : ?>
+<?php if($this->uri->segment(4) != '6' && $this->uri->segment(6) != '6' && ! is_ajax()) : ?>
 // report spam
 $(".spam_button").live('click', function() {
     var count = $("input:checkbox:checked:visible").length;

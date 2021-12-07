@@ -1,9 +1,9 @@
 <div id="contact_container" class="hidden"></div>
 <?php
-if(count($messages)==0)
+if(count($messages) == 0)
 {
-	if($this->uri->segment(2)=='my_folder') echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.lang('kalkun_no_message_in_folder').'.</i></p>';
-	else if($this->uri->segment(2)=='search') echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.lang('kalkun_no_message_search').'.</i></p>';
+	if($this->uri->segment(2) == 'my_folder') echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.lang('kalkun_no_message_in_folder').'.</i></p>';
+	else if($this->uri->segment(2) == 'search') echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.lang('kalkun_no_message_search').'.</i></p>';
 	else echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.lang('kalkun_no_message').' '.lang('kalkun_'.$this->uri->segment(3)).'.</i></p>';
 }
 else
@@ -15,9 +15,9 @@ else
 	$type = $this->uri->segment(4);
 	if($tmp['source'] == 'inbox')
 	{
-		$qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber', 'number'=>$tmp['SenderNumber']));
-		if($qry->num_rows()!==0) { $senderName = $qry->row('Name'); $on_pbk=TRUE;}
-		else { $senderName = $tmp['SenderNumber']; $on_pbk=FALSE;}
+		$qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $tmp['SenderNumber']));
+		if($qry->num_rows() !== 0) { $senderName = $qry->row('Name'); $on_pbk = TRUE;}
+		else { $senderName = $tmp['SenderNumber']; $on_pbk = FALSE;}
 
 		$message_date = $tmp['ReceivingDateTime'];
 		$number = $tmp['SenderNumber'];
@@ -25,9 +25,9 @@ else
 	}
 	else
 	{
-		$qry = $this->Phonebook_model->get_phonebook(array('option'=>'bynumber', 'number'=>$tmp['DestinationNumber']));
-		if($qry->num_rows()!==0) { $senderName = $qry->row('Name'); $on_pbk=TRUE;}
-		else { $senderName = $tmp['DestinationNumber']; $on_pbk=FALSE;}
+		$qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $tmp['DestinationNumber']));
+		if($qry->num_rows() !== 0) { $senderName = $qry->row('Name'); $on_pbk = TRUE;}
+		else { $senderName = $tmp['DestinationNumber']; $on_pbk = FALSE;}
 
 		$message_date = $tmp['SendingDateTime'];
 		$number = $tmp['DestinationNumber'];
@@ -36,7 +36,7 @@ else
 	}
 
 	// count string for message preview
-	$char_per_line = 100-strlen(nice_date($message_date))-strlen($senderName);
+	$char_per_line = 100 - strlen(nice_date($message_date)) - strlen($senderName);
 ?>
 		
 <div class="messagelist conversation messagelist_conversation" >
@@ -46,7 +46,7 @@ else
     <input  type="hidden" class="item_number" name="item_number<?php echo $tmp['ID'];?>"  id="item_number<?php echo $tmp['ID'];?>"  value="<?php echo $number; ?>" />
 	<input type="checkbox" id="<?php echo $tmp['ID'];?>" class="select_message nicecheckbox" value="<?php echo $tmp['ID'];?>" style="border: none;" />
 	<span class="message_toggle" style="cursor: pointer">
-	<span <?php  if($tmp['source'] == 'inbox' && $tmp['readed']=='false') echo 'style="font-weight: bold"';?>><?php echo nice_date($message_date);?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow;?>.gif" />
+	<span <?php  if($tmp['source'] == 'inbox' && $tmp['readed'] == 'false') echo 'style="font-weight: bold"';?>><?php echo nice_date($message_date);?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow;?>.gif" />
 	&nbsp;&nbsp;<?php echo $senderName;?></span>
 	<span class="message_preview">-&nbsp;<?php echo message_preview($tmp['TextDecoded'], $char_per_line);?></span>
 	</span>
@@ -62,10 +62,10 @@ if($tmp['source'] == 'sentitems'):
 	$multipart['type'] = 'sentitems';
 	$multipart['option'] = 'check';
 	$multipart['id_message'] = $tmp['ID'];
-	if($this->Message_model->get_multipart($multipart)!=0):
+	if($this->Message_model->get_multipart($multipart) != 0):
 		$multipart['option'] = 'all';
 		foreach($this->Message_model->get_multipart($multipart)->result() as $part):
-		$tmp['TextDecoded'].=$part->TextDecoded;
+		$tmp['TextDecoded'] .= $part->TextDecoded;
 		$part_no++;
 		endforeach;
 	endif;
@@ -74,24 +74,24 @@ elseif($tmp['source'] == 'outbox'):
 	$multipart['type'] = 'outbox';
 	$multipart['option'] = 'check';
 	$multipart['id_message'] = $tmp['ID'];
-	if($this->Message_model->get_multipart($multipart)===TRUE):
+	if($this->Message_model->get_multipart($multipart) === TRUE):
 		$part_no = 1;
 		$multipart['option'] = 'all';
 		foreach($this->Message_model->get_multipart($multipart)->result_array() as $part):
-		$tmp['TextDecoded'].=$part['TextDecoded'];
+		$tmp['TextDecoded'] .= $part['TextDecoded'];
 		$part_no++;
 		endforeach;
 	endif;
 elseif($tmp['source'] == 'inbox'):
 	$part_no = 1;
 	// check multipart
-	if(!empty($tmp['UDH'])):
+	if( ! empty($tmp['UDH'])):
 		$multipart['type'] = 'inbox';
 		$multipart['option'] = 'all';
 		$multipart['udh'] = substr($tmp['UDH'], 0, 8);
 		$multipart['phone_number'] = $tmp['SenderNumber'];
 		foreach($this->Message_model->get_multipart($multipart)->result_array() as $part):
-		$tmp['TextDecoded'].=$part['TextDecoded'];
+		$tmp['TextDecoded'] .= $part['TextDecoded'];
 		$part_no++;
 		endforeach;
 	endif;
@@ -101,7 +101,7 @@ endif;
 	<div class="detail_area hidden <?php echo $number;?>" >
 	<table cellspacing="0" cellpadding="0" border="0">
     <tr>
-    <td width="50px"><?php  if($tmp['source']=='inbox') echo lang('tni_from'); else echo lang('tni_to'); ?></td>
+    <td width="50px"><?php  if($tmp['source'] == 'inbox') echo lang('tni_from'); else echo lang('tni_to'); ?></td>
     <td width="10px"> : </td><td><?php echo $number;?></td>
     </tr>
    
@@ -137,12 +137,12 @@ endif;
 	<li><a href="#" class="reply_button"><?php echo lang('kalkun_reply');?></a></li>				
 	<?php endif; ?>
 		
-	<?php if($type!='outbox'): ?>
+	<?php if($type != 'outbox'): ?>
 	<li><img src="<?php echo $this->config->item('img_path');?>circle.gif" /></li>
 	<li><a href="#" class="forward_button"><?php echo lang('kalkun_forward');?></a></li>
 	<?php endif; ?>
 	
-	<?php if(!$on_pbk): ?>
+	<?php if( ! $on_pbk): ?>
 	<li><img src="<?php echo $this->config->item('img_path');?>circle.gif" /></li>
 	<li><a href="#" class="add_to_pbk"><?php echo lang('tni_contact_add'); ?></a></li>	
 	<?php endif; ?>
@@ -162,7 +162,7 @@ endif;
 	</div></div>
 		
 <?php
-	if($tmp['source']=='inbox') if($tmp['readed'] == 'false') $this->Message_model->update_read($tmp['ID']);
+	if($tmp['source'] == 'inbox') if($tmp['readed'] == 'false') $this->Message_model->update_read($tmp['ID']);
 	endforeach;
 }
 ?>

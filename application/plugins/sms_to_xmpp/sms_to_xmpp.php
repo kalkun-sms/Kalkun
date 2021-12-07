@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 function sms_to_xmpp_initialize()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 
 	$CI->load->add_package_path(APPPATH.'plugins/sms_to_xmpp', FALSE);
 	$CI->load->config('sms_to_xmpp', TRUE);
@@ -58,10 +58,10 @@ function sms_to_xmpp_deactivate()
 */
 function sms_to_xmpp_install()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
-	if (!$CI->db->table_exists('plugin_sms_to_xmpp'))
+	if ( ! $CI->db->table_exists('plugin_sms_to_xmpp'))
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
@@ -79,9 +79,9 @@ function sms_to_xmpp($sms)
 	list($code, $to) = explode(' ', $message);
 	$xmpp_code = $config['xmpp_code'];
 	$xmpp_message = trim(str_replace($config['xmpp_code'].' '.$to, '', $message));
-	if (strtoupper($code)===strtoupper($xmpp_code))
+	if (strtoupper($code) === strtoupper($xmpp_code))
 	{
-		$CI =& get_instance();
+		$CI = &get_instance();
 		$CI->load->model('sms_to_xmpp/sms_to_xmpp_model', 'plugin_model');
 
 		// if xmpp account exist

@@ -39,10 +39,10 @@ function whitelist_number_deactivate()
 */
 function whitelist_number_install()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
-	if (!$CI->db->table_exists('plugin_whitelist_number'))
+	if ( ! $CI->db->table_exists('plugin_whitelist_number'))
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
@@ -53,7 +53,7 @@ function whitelist_number_install()
 
 function whitelist_number_outgoing($numbers = array())
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->model('whitelist_number/whitelist_number_model', 'plugin_model');
 	$heaven = array();
 

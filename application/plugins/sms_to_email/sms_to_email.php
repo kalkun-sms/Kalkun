@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 function sms_to_email_initialize()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 
 	$CI->load->add_package_path(APPPATH.'plugins/sms_to_email', FALSE);
 	$CI->load->config('sms_to_email', TRUE);
@@ -58,10 +58,10 @@ function sms_to_email_deactivate()
 */
 function sms_to_email_install()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
-	if (!$CI->db->table_exists('plugin_sms_to_email'))
+	if ( ! $CI->db->table_exists('plugin_sms_to_email'))
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
@@ -77,12 +77,12 @@ function sms_to_email($sms)
 	$message = $sms->TextDecoded;
 	$from = $sms->SenderNumber;
 	$msg_user = $sms->msg_user;
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->library('email');
 	$CI->load->model('Phonebook_model');
 	$CI->load->model('sms_to_email/sms_to_email_model', 'plugin_model');
 
-	if(!is_array($sms->msg_user))
+	if( ! is_array($sms->msg_user))
 	{
 		unset($msg_user);
 		$msg_user[] = $sms->msg_user;
@@ -90,12 +90,12 @@ function sms_to_email($sms)
 
 	foreach($msg_user as $uid)
 	{
-		$active  = $CI->plugin_model->get_setting($uid);
-		if($active->num_rows()===0 OR $active->row('email_forward') !== 'true') continue;
+		$active = $CI->plugin_model->get_setting($uid);
+		if($active->num_rows() === 0 OR $active->row('email_forward') !== 'true') continue;
 		$CI->email->initialize($config);
 		$mail_to = $active->row('email_id');
-		$qry = $CI->Phonebook_model->get_phonebook(array('option'=>'bynumber', 'number'=>$from, 'id_user'=>$uid));
-		if($qry->num_rows()!==0) $from = $qry->row('Name');
+		$qry = $CI->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $from, 'id_user' => $uid));
+		if($qry->num_rows() !== 0) $from = $qry->row('Name');
 		$CI->email->from($config['mail_from'], $from);
 		$CI->email->to($mail_to);
 		$CI->email->subject($config['mail_subject']);

@@ -41,9 +41,9 @@ $config['gateway']['api_id'] = 'xxx1234567890';
 // subkey "hist" - boolean - save copies of SMS in T-Mobile CZ portal
 // subkey "eml" - string - T-Mobile CZ will send copy of SMS to specified e-mail. Leave empty to switch off.
 $config['gateway']['tmobileczauth'] = array(
-	1=>array('user'=>'admins login',   'pass'=>'his_password',  'hist'=>true, 'eml'=>''),
-	2=>array('user'=>'2nd users login', 'pass'=>'her_password',  'hist'=>true, 'eml'=>''),
-	'default'=>array('user'=>'all others',     'pass'=>'their_password', 'hist'=>true, 'eml'=>'')
+	1 => array('user' => 'admins login',   'pass' => 'his_password',  'hist' => true, 'eml' => ''),
+	2 => array('user' => '2nd users login', 'pass' => 'her_password',  'hist' => true, 'eml' => ''),
+	'default' => array('user' => 'all others',     'pass' => 'their_password', 'hist' => true, 'eml' => '')
 );
 
 /*

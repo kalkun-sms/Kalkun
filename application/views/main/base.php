@@ -199,7 +199,7 @@
 					<option value="6"><?php echo lang('kalkun_spam');?></option>
 					<option value="5"><?php echo lang('kalkun_trash');?></option>
 					<?php
-					$my_folders=$this->Kalkun_model->get_folders('all');
+					$my_folders = $this->Kalkun_model->get_folders('all');
 					foreach ($my_folders->result() as $my_folder):
 					echo "<option value=\"{$my_folder->id_folder}\">{$my_folder->name}</option>";
 					endforeach;

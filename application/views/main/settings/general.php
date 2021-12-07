@@ -3,23 +3,23 @@
 <td width="175px"><?php echo lang('tni_language'); ?></td>
 <td>
 <?php
-$lang = array('brazilian_portuguese'	=> 'Brazilian Portuguese',
-	'czech'	=> 'Česky',
-	'danish'	=> 'Danish',
-	'dutch'		=> 'Dutch',
-	'english'	=> 'English',
-	'finnish'	=> 'Finnish',
-	'french'	=> 'French',
-	'german'	=> 'German',
-	'hungarian'	=> 'Hungarian',
-	'indonesian'	=> 'Indonesian',
-	'italian'	=> 'Italian',
-	'polish'        => 'Polski',
-	'portuguese'	=> 'Portuguese',
-	'russian'	=> 'Russian',
-	'spanish'       => 'Español',
-	'slovak'       => 'Slovak',
-	'turkish'	=> 'Turkish',
+$lang = array('brazilian_portuguese' => 'Brazilian Portuguese',
+	'czech' => 'Česky',
+	'danish' => 'Danish',
+	'dutch' => 'Dutch',
+	'english' => 'English',
+	'finnish' => 'Finnish',
+	'french' => 'French',
+	'german' => 'German',
+	'hungarian' => 'Hungarian',
+	'indonesian' => 'Indonesian',
+	'italian' => 'Italian',
+	'polish' => 'Polski',
+	'portuguese' => 'Portuguese',
+	'russian' => 'Russian',
+	'spanish' => 'Español',
+	'slovak' => 'Slovak',
+	'turkish' => 'Turkish',
 );
 $lang_act = $this->Kalkun_model->get_setting()->row('language');
 echo form_dropdown('language', $lang, $lang_act);
@@ -66,10 +66,10 @@ echo form_dropdown('paging', $paging, $paging_act);
 <td>
 <?php $permanent_act = $this->Kalkun_model->get_setting()->row('permanent_delete');?>
 <input type="radio" id="permanent_delete_false" name="permanent_delete" value="false" 
-<?php if($permanent_act=='false') echo 'checked="checked"'; ?> /> 
+<?php if($permanent_act == 'false') echo 'checked="checked"'; ?> /> 
 <label for="permanent_delete_false"><?php echo lang('tni_set_perm_deloff'); ?></label> <small><?php echo lang('tni_set_perm_deloff_hint'); ?></small><br />
 <input type="radio" id="permanent_delete_true" name="permanent_delete" value="true"
-<?php if($permanent_act=='true') echo 'checked="checked"'; ?>/> 
+<?php if($permanent_act == 'true') echo 'checked="checked"'; ?>/> 
 <label for="permanent_delete_true"><?php echo lang('tni_set_perm_delon'); ?></label>
 </td>
 </tr>    

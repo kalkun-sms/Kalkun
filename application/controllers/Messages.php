@@ -52,12 +52,12 @@ class Messages extends MY_Controller {
 		// register valid type
 		$val_type = array('normal', 'reply', 'forward', 'member', 'pbk_contact', 'pbk_groups', 'all_contacts');
 		$type = $this->input->post('type');
-		if(!in_array($type, $val_type)) die('Invalid type on compose');
+		if( ! in_array($type, $val_type)) die('Invalid type on compose');
 
 		$data['val_type'] = $type;
 
 		// Forward option
-		if ($type==='forward')
+		if ($type === 'forward')
 		{
 			$source = $this->input->post('param1');
 			$id = $this->input->post('param2');
@@ -76,7 +76,7 @@ class Messages extends MY_Controller {
 					$multipart['option'] = 'check';
 					$multipart['id_message'] = $id;
 					$tmp_check = $this->Message_model->get_multipart($multipart);
-					if ($tmp_check->row('UDH')!=='')
+					if ($tmp_check->row('UDH') !== '')
 					{
 						$multipart['option'] = 'all';
 						$multipart['udh'] = substr($tmp_check->row('UDH'), 0, 8);
@@ -97,7 +97,7 @@ class Messages extends MY_Controller {
 					$multipart['option'] = 'check';
 					$multipart['id_message'] = $id;
 					$tmp_check = $this->Message_model->get_multipart($multipart);
-					if ($tmp_check===TRUE)
+					if ($tmp_check === TRUE)
 					{
 						$multipart['option'] = 'all';
 						foreach($this->Message_model->get_multipart($multipart)->result() as $part):
@@ -107,9 +107,9 @@ class Messages extends MY_Controller {
 					break;
 			}
 		}
-		else if ($type==='reply') $data['dest'] = $this->input->post('param1');
-		else if ($type==='pbk_contact') $data['dest'] = $this->input->post('param1');
-		else if ($type==='pbk_groups') $data['dest'] = $this->input->post('param1');
+		else if ($type === 'reply') $data['dest'] = $this->input->post('param1');
+		else if ($type === 'pbk_contact') $data['dest'] = $this->input->post('param1');
+		else if ($type === 'pbk_groups') $data['dest'] = $this->input->post('param1');
 
 		$this->load->view('main/messages/compose', $data);
 	}
@@ -128,7 +128,7 @@ class Messages extends MY_Controller {
 		$this->load->helper('kalkun');
 
 		// We need POST variable
-		if(!$_POST)
+		if( ! $_POST)
 		{
 			// Repost the form if we went through login process
 			// Finally, after form submission (call to compose_process), redirect to a result page
@@ -174,11 +174,11 @@ class Messages extends MY_Controller {
 				$tmp_dest = explode(',', $this->input->post('personvalue'));
 				foreach ($tmp_dest as $key => $tmp)
 				{
-					if (trim($tmp)!=='')
+					if (trim($tmp) !== '')
 					{
 						list ($id, $type) = explode(':', $tmp);
 						// Person
-						if ($type==='c')
+						if ($type === 'c')
 						{
 							// Already sent, no need to send again
 							if (in_array($id, $dest))
@@ -188,7 +188,7 @@ class Messages extends MY_Controller {
 							$dest[] = $id;
 						}
 						// Group
-						else if ($type==='g')
+						else if ($type === 'g')
 						{
 							$param = array('option' => 'bygroup', 'group_id' => $id);
 							foreach ($this->Phonebook_model->get_phonebook($param)->result() as $group)
@@ -202,7 +202,7 @@ class Messages extends MY_Controller {
 							}
 						}
 						// User, share mode
-						else if ($type==='u')
+						else if ($type === 'u')
 						{
 							// set share user id, process later
 							$share_uid[] = $id;
@@ -217,7 +217,7 @@ class Messages extends MY_Controller {
 				foreach($tmp_dest as $key => $tmp)
 				{
 					$tmp = trim($tmp); // remove space
-					if(trim($tmp)!=='') {
+					if(trim($tmp) !== '') {
 						$dest[$key] = $tmp;
 					}
 				}
@@ -231,7 +231,7 @@ class Messages extends MY_Controller {
 					foreach($tmp_dest as $key => $tmp)
 					{
 						$tmp = trim($tmp); // remove space
-						if(trim($tmp)!=='') {
+						if(trim($tmp) !== '') {
 							$dest[$key] = $tmp;
 						}
 					}
@@ -287,8 +287,8 @@ class Messages extends MY_Controller {
 			// Delay
 			case 'option3':
 				$date = date('Y-m-d H:i:s', mktime(
-					date('H')+$this->input->post('delayhour'),
-					date('i')+$this->input->post('delayminute'),
+					date('H') + $this->input->post('delayhour'),
+					date('i') + $this->input->post('delayminute'),
 					date('s'),
 					date('m'),
 					date('d'),
@@ -302,8 +302,8 @@ class Messages extends MY_Controller {
 		$data['date'] = $date;
 		$data['validity'] = $this->input->post('validity');
 		$data['delivery_report'] = $this->Kalkun_model->get_setting()->row('delivery_report');
-		$data['coding'] = ($this->input->post('unicode')==='unicode') ? 'unicode' : 'default';
-		$data['ncpr'] = ($this->input->post('ncpr')==='ncpr') ? true : false;
+		$data['coding'] = ($this->input->post('unicode') === 'unicode') ? 'unicode' : 'default';
+		$data['ncpr'] = ($this->input->post('ncpr') === 'ncpr') ? true : false;
 		$data['uid'] = $this->session->userdata('id_user');
 		$data['url'] = $this->input->post('url');
 
@@ -337,7 +337,7 @@ class Messages extends MY_Controller {
 			if($data['ndnc']) {
 				if(is_array($dest))
 				{
-					for ($i= 0 ; $i< count($dest);  $i++)
+					for ($i = 0 ; $i < count($dest);  $i++)
 					{
 						if(DNDcheck($dest[$i]))
 						{
@@ -394,7 +394,7 @@ class Messages extends MY_Controller {
 		}
 
 		// Send the message
-		if(!empty($dest))  // handles if empty numbers after any number removal process
+		if( ! empty($dest))  // handles if empty numbers after any number removal process
 		{
 			$n = 0;
 			$sms_loop = $this->input->post('sms_loop');
@@ -415,15 +415,15 @@ class Messages extends MY_Controller {
 					}
 				}
 
-				for($i=1;$i<=$sms_loop;$i++)
+				for($i = 1;$i <= $sms_loop;$i++)
 				{
 					// Re-schedule if max sms limit occured
 					if($this->config->item('max_sms_sent_by_minute') !== 0)
 					{
-						$minute_added = floor(($n*$sms_loop+$i) / $this->config->item('max_sms_sent_by_minute'));
+						$minute_added = floor(($n * $sms_loop + $i) / $this->config->item('max_sms_sent_by_minute'));
 						$data['date'] = date('Y-m-d H:i:s', mktime(
 							date('H'),
-							date('i')+$minute_added,
+							date('i') + $minute_added,
 							date('s'),
 							date('m'),
 							date('d'),
@@ -434,7 +434,7 @@ class Messages extends MY_Controller {
 					   // if multiple modem is active
 					   if($this->config->item('multiple_modem_state'))
 					   {
-						   $data['SenderID'] = $data['CreatorID'] = $this->_multiple_modem_select($dest, $date, $n*$sms_loop+$i);
+						   $data['SenderID'] = $data['CreatorID'] = $this->_multiple_modem_select($dest, $date, $n * $sms_loop + $i);
 					   }
 					$this->Message_model->send_messages($data);
 				}
@@ -444,7 +444,7 @@ class Messages extends MY_Controller {
 			$return_msg['type'] = 'info';
 			$return_msg['msg'] = lang('kalkun_msg_moved_to_outbox');
 		}
-		if(!isset($return_msg))
+		if( ! isset($return_msg))
 		{
 			$return_msg['type'] = 'error';
 			$return_msg['msg'] = lang('kalkun_msg_no_numberfound');
@@ -487,7 +487,7 @@ class Messages extends MY_Controller {
 	 *
 	 * @access	public
 	 */
-	function folder($type=NULL, $offset=0)
+	function folder($type = NULL, $offset = 0)
 	{
 		$this->load->helper('kalkun');
 
@@ -495,7 +495,7 @@ class Messages extends MY_Controller {
 
 		// validate url
 		$valid_type = array('inbox', 'sentitems', 'outbox');
-		if(!in_array($type, $valid_type)) die('Invalid URL');
+		if( ! in_array($type, $valid_type)) die('Invalid URL');
 
 		$data['folder'] = 'folder';
 		$data['type'] = $type;
@@ -519,7 +519,7 @@ class Messages extends MY_Controller {
 			}
 			else
 			{
-				  $param['order_by'] = ($type==='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
+				  $param['order_by'] = ($type === 'inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
 				  $param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 				  $param['uid'] = $this->session->userdata('id_user');
 				$data['messages'] = $this->Message_model->get_messages($param);
@@ -542,7 +542,7 @@ class Messages extends MY_Controller {
 				$param['type'] = $type;
 				$param['limit'] = $config['per_page'];
 				$param['offset'] = $this->uri->segment(4, 0);
-				  $param['order_by'] = ($type==='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
+				  $param['order_by'] = ($type === 'inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
 				  $param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 				  $param['uid'] = $this->session->userdata('id_user');
 				$data['messages'] = $this->Message_model->get_messages($param);
@@ -566,13 +566,13 @@ class Messages extends MY_Controller {
 	 *
 	 * @access	public
 	 */
-	function my_folder($type=NULL, $id_folder=NULL, $offset=0)
+	function my_folder($type = NULL, $id_folder = NULL, $offset = 0)
 	{
 		$this->load->helper('kalkun');
 
 		// validate url
 		$valid = array('inbox', 'sentitems');
-		if(!in_array($type, $valid)) die('Invalid URL');
+		if( ! in_array($type, $valid)) die('Invalid URL');
 
 		$data['folder'] = 'my_folder';
 		$data['type'] = $type;
@@ -598,7 +598,7 @@ class Messages extends MY_Controller {
 			}
 			else
 			{
-				  $param['order_by'] = ($type==='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
+				  $param['order_by'] = ($type === 'inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
 				  $param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 				  $param['uid'] = $this->session->userdata('id_user');
 				$data['messages'] = $this->Message_model->get_messages($param);
@@ -621,7 +621,7 @@ class Messages extends MY_Controller {
 				$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
 				$param['limit'] = $config['per_page'];
 				$param['offset'] = $this->uri->segment(5, 0);
-				  $param['order_by'] = ($type==='inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
+				  $param['order_by'] = ($type === 'inbox') ? 'ReceivingDateTime' : 'SendingDateTime';
 				  $param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 				  $param['uid'] = $this->session->userdata('id_user');
 				$data['messages'] = $this->Message_model->get_messages($param);
@@ -644,7 +644,7 @@ class Messages extends MY_Controller {
 	 *
 	 * @access	public
 	 */
-	function conversation($source=NULL, $type=NULL, $number=NULL, $id_folder=NULL)
+	function conversation($source = NULL, $type = NULL, $number = NULL, $id_folder = NULL)
 	{
 		$this->load->helper('kalkun');
 
@@ -654,7 +654,7 @@ class Messages extends MY_Controller {
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';
 
-		if ($source==='folder' && isset($type) && $type!=='outbox' && $type!=='phonebook')
+		if ($source === 'folder' && isset($type) && $type !== 'outbox' && $type !== 'phonebook')
 		{
 			$data['main'] = 'main/messages/index';
 			$param['type'] = $type;
@@ -666,7 +666,7 @@ class Messages extends MY_Controller {
 			$this->pagination->initialize($config);
 
 
-			if($param['number']==='sending_error')
+			if($param['number'] === 'sending_error')
 			{
 			$param['type'] = 'sentitems';
 			$param['number'] = trim($number);
@@ -676,7 +676,7 @@ class Messages extends MY_Controller {
 			$sentitems = $this->Message_model->get_messages($param)->result_array();
 
 			// add global date for sorting
-			foreach($sentitems as $key=>$tmp):
+			foreach($sentitems as $key => $tmp):
 			$sentitems[$key]['globaldate'] = $sentitems[$key]['SendingDateTime'];
 			$sentitems[$key]['source'] = 'sentitems';
 			endforeach;
@@ -694,7 +694,7 @@ class Messages extends MY_Controller {
 			  $inbox = $this->Message_model->get_messages($param)->result_array();
 
 			// add global date for sorting
-			foreach($inbox as $key=>$tmp):
+			foreach($inbox as $key => $tmp):
 			$inbox[$key]['globaldate'] = $inbox[$key]['ReceivingDateTime'];
 			$inbox[$key]['source'] = 'inbox';
 			endforeach;
@@ -706,7 +706,7 @@ class Messages extends MY_Controller {
 			$sentitems = $this->Message_model->get_messages($param)->result_array();
 
 			// add global date for sorting
-			foreach($sentitems as $key=>$tmp):
+			foreach($sentitems as $key => $tmp):
 			$sentitems[$key]['globaldate'] = $sentitems[$key]['SendingDateTime'];
 			$sentitems[$key]['source'] = 'sentitems';
 			endforeach;
@@ -732,7 +732,7 @@ class Messages extends MY_Controller {
 				 $this->load->view('main/layout', $data);
 			}
 		}
-		else if ($source==='folder' && $type==='outbox')
+		else if ($source === 'folder' && $type === 'outbox')
 		{
 			$data['main'] = 'main/messages/index';
 			$param['type'] = 'outbox';
@@ -749,7 +749,7 @@ class Messages extends MY_Controller {
 			$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			$outbox = $this->Message_model->get_messages($param)->result_array();
 
-			foreach($outbox as $key=>$tmp):
+			foreach($outbox as $key => $tmp):
 			$outbox[$key]['source'] = 'outbox';
 			endforeach;
 			$data['messages'] = $outbox;
@@ -763,7 +763,7 @@ class Messages extends MY_Controller {
 				 $this->load->view('main/layout', $data);
 			}
 		}
-		else if ($source==='my_folder' ) // my folder
+		else if ($source === 'my_folder') // my folder
 		{
 			$data['main'] = 'main/messages/index';
 			$param['type'] = 'inbox';
@@ -783,7 +783,7 @@ class Messages extends MY_Controller {
 			$inbox = $this->Message_model->get_messages($param)->result_array();
 
 			// add global date for sorting
-			foreach($inbox as $key=>$tmp):
+			foreach($inbox as $key => $tmp):
 			$inbox[$key]['globaldate'] = $inbox[$key]['ReceivingDateTime'];
 			$inbox[$key]['source'] = 'inbox';
 			endforeach;
@@ -796,7 +796,7 @@ class Messages extends MY_Controller {
 			$sentitems = $this->Message_model->get_messages($param)->result_array();
 
 			// add global date for sorting
-			foreach($sentitems as $key=>$tmp):
+			foreach($sentitems as $key => $tmp):
 			$sentitems[$key]['globaldate'] = $sentitems[$key]['SendingDateTime'];
 			$sentitems[$key]['source'] = 'sentitems';
 			endforeach;
@@ -875,16 +875,16 @@ class Messages extends MY_Controller {
 		{
 			case 'basic':
 				$param_needed = 4; // minimal count of segment
-				if($segment_count>=$param_needed)
+				if($segment_count >= $param_needed)
 				{
-					if ($segment[4]!=='_') $param['search_string'] = urldecode($segment[4]);
+					if ($segment[4] !== '_') $param['search_string'] = urldecode($segment[4]);
 					$data['search_string'] = $segment[4];
 					$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
-					$config['uri_segment'] = $param_needed+1;
+					$config['uri_segment'] = $param_needed + 1;
 					$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
 					$this->pagination->initialize($config);
 					$param['limit'] = $config['per_page'];
-					$param['offset'] = $this->uri->segment($param_needed+1, 0);
+					$param['offset'] = $this->uri->segment($param_needed + 1, 0);
 					$param['uid'] = $this->session->userdata('id_user');
 					$data['messages'] = $this->Message_model->search_messages($param)->messages;
 				}
@@ -892,28 +892,28 @@ class Messages extends MY_Controller {
 
 			case 'advanced':
 				$param_needed = 10;
-				if($segment_count>=$param_needed)
+				if($segment_count >= $param_needed)
 				{
-					if ($segment[4]!=='_') $param['search_string'] = urldecode($segment[4]);
-					if ($segment[5]!=='_') $param['number'] = $segment[5];
-					if ($segment[6]!=='_') $param['date_from'] = $segment[6];
-					if ($segment[7]!=='_') $param['date_to'] = $segment[7];
-					if ($segment[8]!=='_') $param['status'] = $segment[8];
-					if ($segment[9]!=='_')
+					if ($segment[4] !== '_') $param['search_string'] = urldecode($segment[4]);
+					if ($segment[5] !== '_') $param['number'] = $segment[5];
+					if ($segment[6] !== '_') $param['date_from'] = $segment[6];
+					if ($segment[7] !== '_') $param['date_to'] = $segment[7];
+					if ($segment[8] !== '_') $param['status'] = $segment[8];
+					if ($segment[9] !== '_')
 					{
 						$param['id_folder'] = $segment[9];
-						if ($segment[9]==='5' OR $segment[9]==='all') $param['trash'] = TRUE;
+						if ($segment[9] === '5' OR $segment[9] === 'all') $param['trash'] = TRUE;
 					}
 					$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
-					if ($segment[10]!=='_')
+					if ($segment[10] !== '_')
 					{
-						$config['per_page'] = ($segment[10]==='all') ? $config['total_rows'] : $segment[10];
+						$config['per_page'] = ($segment[10] === 'all') ? $config['total_rows'] : $segment[10];
 					}
-					$config['uri_segment'] = $param_needed+1;
+					$config['uri_segment'] = $param_needed + 1;
 					$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
 					$this->pagination->initialize($config);
 					$param['limit'] = $config['per_page'];
-					$param['offset'] = $this->uri->segment($param_needed+1, 0);
+					$param['offset'] = $this->uri->segment($param_needed + 1, 0);
 					$param['uid'] = $this->session->userdata('id_user');
 					$data['messages'] = $this->Message_model->search_messages($param)->messages;
 				}
@@ -976,11 +976,11 @@ class Messages extends MY_Controller {
 		if($this->input->post('folder')) $param['folder'] = $this->input->post('folder');
 		if($this->input->post('id_message')) $param['id_message'][0] = $this->input->post('id_message');
 
-		if(isset($param['type']) && $param['type']==='single' && isset($param['folder']) && $param['folder']==='inbox')
+		if(isset($param['type']) && $param['type'] === 'single' && isset($param['folder']) && $param['folder'] === 'inbox')
 		{
 			$multipart = array('type' => 'inbox', 'option' => 'check', 'id_message' => $param['id_message'][0]);
 			$tmp_check = $this->Message_model->get_multipart($multipart);
-			if($tmp_check->row('UDH')!=='')
+			if($tmp_check->row('UDH') !== '')
 			{
 				$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'), 0, 8));
 				$multipart['phone_number'] = $tmp_check->row('SenderNumber');
@@ -1001,21 +1001,21 @@ class Messages extends MY_Controller {
 	 *
 	 * @access	public
 	 */
-	function delete_messages($source=NULL)
+	function delete_messages($source = NULL)
 	{
 		if($this->input->post('type')) $param['type'] = $this->input->post('type');
 		if($this->input->post('current_folder')) $param['current_folder'] = $this->input->post('current_folder');
 		if($this->input->post('id')) $param['id'][0] = $this->input->post('id');
-		if(!is_null($source)) $param['source'] = $source;
+		if( ! is_null($source)) $param['source'] = $source;
 		if($this->input->post('number')) $param['number'] = $this->input->post('number');
 
-		if($param['source']==='outbox') $param['option'] = 'outbox';
+		if($param['source'] === 'outbox') $param['option'] = 'outbox';
 		else
 		{
 			// check trash/permanent delete
-			if ($this->Kalkun_model->get_setting()->row('permanent_delete')==='true') $param['option'] = 'permanent';
-			else if (isset($param['current_folder']) && $param['current_folder']==='5') $param['option'] = 'permanent';
-			else if (isset($param['current_folder']) && $param['current_folder']==='6') $param['option'] = 'permanent';
+			if ($this->Kalkun_model->get_setting()->row('permanent_delete') === 'true') $param['option'] = 'permanent';
+			else if (isset($param['current_folder']) && $param['current_folder'] === '5') $param['option'] = 'permanent';
+			else if (isset($param['current_folder']) && $param['current_folder'] === '6') $param['option'] = 'permanent';
 			else $param['option'] = 'temp';
 		}
 
@@ -1025,13 +1025,13 @@ class Messages extends MY_Controller {
 			exit;
 		}
 
-		if($param['type']==='single' && $param['source']==='inbox')
+		if($param['type'] === 'single' && $param['source'] === 'inbox')
 		{
 			$multipart['type'] = 'inbox';
 			$multipart['option'] = 'check';
 			$multipart['id_message'] = $param['id'][0];
 			$tmp_check = $this->Message_model->get_multipart($multipart);
-			if($tmp_check->row('UDH')!=='')
+			if($tmp_check->row('UDH') !== '')
 			{
 				$multipart['option'] = 'all';
 				$multipart['udh'] = substr($tmp_check->row('UDH'), 0, 8);
@@ -1053,7 +1053,7 @@ class Messages extends MY_Controller {
 	 *
 	 * @access	private
 	 */
-	function _check_folder_privileges($id_folder=NULL)
+	function _check_folder_privileges($id_folder = NULL)
 	{
 		//$this->
 	}
@@ -1098,7 +1098,7 @@ class Messages extends MY_Controller {
 		$strategies = explode(':', $this->config->item('multiple_modem_strategy'));
 		$first_strategy = $strategies[0];
 		$valid_second_strategy = array('round_robin', 'failover', 'recent');
-		if (count($strategies)===2)
+		if (count($strategies) === 2)
 		{
 			$second_strategy = $strategies[1];
 		}
@@ -1135,7 +1135,7 @@ class Messages extends MY_Controller {
 				foreach($modem_list as $modem):
 				$prefix_number = $modem['value'];
 					foreach($prefix_number as $prefix):
-					if(strpos($phone_number, $prefix)!== FALSE) $candidate_modem[] = $modem['id'];
+					if(strpos($phone_number, $prefix) !== FALSE) $candidate_modem[] = $modem['id'];
 					endforeach;
 				endforeach;
 				break;
@@ -1169,7 +1169,7 @@ class Messages extends MY_Controller {
 		}
 
 		// if second strategy exist, and the first strategy is NOT one of them
-		if(isset($second_strategy) && !in_array($first_strategy, $valid_second_strategy))
+		if(isset($second_strategy) && ! in_array($first_strategy, $valid_second_strategy))
 		{
 			switch($second_strategy)
 			{
@@ -1188,7 +1188,7 @@ class Messages extends MY_Controller {
 		}
 		else
 		{
-			if(isset($candidate_modem) && count($candidate_modem)>=1)
+			if(isset($candidate_modem) && count($candidate_modem) >= 1)
 			{
 				$selected_modem = $candidate_modem[0];
 			}
@@ -1208,9 +1208,9 @@ class Messages extends MY_Controller {
 	function _multiple_modem_round_robin($modems, $n)
 	{
 		$modem_count = count($modems);
-		$n = $n%$modem_count;
-		if($n===0) $n = $modem_count;
-		return $modems[$n-1];
+		$n = $n % $modem_count;
+		if($n === 0) $n = $modem_count;
+		return $modems[$n - 1];
 
 		// Currently not used
 		// phpcs:disable CodeIgniter.Commenting.InlineComment.LongCommentWithoutSpacing
@@ -1254,7 +1254,7 @@ class Messages extends MY_Controller {
 		// register valid type
 		$valid_type = array('trash', 'spam');
 		// check if it's valid type
-		if(!in_array($type, $valid_type)) die('Invalid Type');
+		if( ! in_array($type, $valid_type)) die('Invalid Type');
 
 		switch($type){
 			case 'trash':
@@ -1274,7 +1274,7 @@ class Messages extends MY_Controller {
 	 * @param mixed $type
 	 * @return
 	 */
-	function report_spam(  $type = NULL)
+	function report_spam($type = NULL)
 	{
 		if ($type === NULL OR ($type !== 'spam' && $type !== 'ham')) {
 			show_404();
@@ -1288,7 +1288,7 @@ class Messages extends MY_Controller {
 
 		$this->load->Model('Spam_model');
 		$Text = $this->Message_model->get_messages(array('type' => 'inbox', 'id_message' => $ID))->row('TextDecoded');
-		$params = array('ID'=> $ID, 'Text'=> $Text);
+		$params = array('ID' => $ID, 'Text' => $Text);
 		if($type === 'ham')
 			$this->Spam_model->report_ham($params);
 		else

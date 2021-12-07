@@ -36,7 +36,7 @@ class Jsonrpc extends Plugin_controller {
 		$methods = array();
 		$methods['sms.send_sms'] = array();
 		$methods['sms.send_sms']['function'] = 'Jsonrpc.rpc_send_sms';
-		$methods['sms.send_sms']['summary']  = 'Sending an SMS';
+		$methods['sms.send_sms']['summary'] = 'Sending an SMS';
 
 		$server = $this->jsonrpc->get_server();
 		$server->define_methods($methods);

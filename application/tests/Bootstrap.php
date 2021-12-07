@@ -54,7 +54,7 @@
  * NOTE: If you change these, also change the error_reporting() code below
  */
 // This `if` statemant is needed for @runInSeparateProcess
-if (! defined('ENVIRONMENT'))
+if ( ! defined('ENVIRONMENT'))
 {
 	define('ENVIRONMENT', 'testing');
 }

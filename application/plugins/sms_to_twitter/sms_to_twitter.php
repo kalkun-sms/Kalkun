@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 function sms_to_twitter_initialize()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 
 	$CI->load->add_package_path(APPPATH.'plugins/sms_to_twitter', FALSE);
 	$CI->load->config('sms_to_twitter', TRUE);
@@ -58,10 +58,10 @@ function sms_to_twitter_deactivate()
 */
 function sms_to_twitter_install()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
-	if (!$CI->db->table_exists('plugin_sms_to_twitter'))
+	if ( ! $CI->db->table_exists('plugin_sms_to_twitter'))
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
@@ -79,9 +79,9 @@ function sms_to_twitter($sms)
 	list($code) = explode(' ', $message);
 	$twitter_code = $config['twitter_code'];
 	$twitter_msg = trim(str_replace($config['twitter_code'], '', $message));
-	if (strtoupper($code)===strtoupper($twitter_code))
+	if (strtoupper($code) === strtoupper($twitter_code))
 	{
-		$CI =& get_instance();
+		$CI = &get_instance();
 		$CI->load->model('sms_to_twitter/sms_to_twitter_model', 'plugin_model');
 		$CI->load->library('sms_to_twitter/twitter', 'twitter');
 

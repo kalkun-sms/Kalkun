@@ -101,7 +101,7 @@ class Login extends CI_Controller
 		{
 			$token = $this->Kalkun_model->forgot_password();
 
-			if(!$token)
+			if( ! $token)
 			{
 				$this->session->set_flashdata('errorlogin', "Oh, snap! We couldn't find you. Please try again.");
 			}
@@ -132,7 +132,7 @@ class Login extends CI_Controller
 	 *
 	 * @access	public
 	 */
-	function password_reset($token=NULL)
+	function password_reset($token = NULL)
 	{
 		$this->load->helper('form');
 
@@ -145,7 +145,7 @@ class Login extends CI_Controller
 			redirect('login');
 		}
 
-		if(!$this->Kalkun_model->valid_token($token))
+		if( ! $this->Kalkun_model->valid_token($token))
 		{
 			$this->session->set_flashdata('errorlogin', 'Invalid token detected.');
 			redirect('login/forgot_password');

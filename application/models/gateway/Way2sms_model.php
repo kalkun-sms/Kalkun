@@ -112,7 +112,7 @@ class Way2sms_model extends Gammu_model {
 			if(substr($p, 0, 3) === '+91')
 				$p = substr($p, 3);
 
-			if (strlen($p) !== 10 OR !is_numeric($p) OR strpos($p, '.') !== false)
+			if (strlen($p) !== 10 OR ! is_numeric($p) OR strpos($p, '.') !== false)
 			{
 				$result[] = array('phone' => $p, 'msg' => urldecode($msg), 'result' => 'invalid number');
 				continue;

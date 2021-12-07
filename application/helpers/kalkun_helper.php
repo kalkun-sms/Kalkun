@@ -29,7 +29,7 @@ function filter_data($data)
 	else return $data;
 }
 
-function nice_date($str, $option=NULL)
+function nice_date($str, $option = NULL)
 {
 	// convert the date to unix timestamp
 	list($date, $time) = explode(' ', $str);
@@ -39,18 +39,18 @@ function nice_date($str, $option=NULL)
 	$timestamp = mktime($hour, $minute, $second, $month, $day, $year);
 	$now = time();
 	$blocks = array(
-		array('name'=>lang('kalkun_year'), 'amount' => 60*60*24*365),
-		array('name'=>lang('kalkun_month'), 'amount' => 60*60*24*31),
-		array('name'=>lang('kalkun_week'), 'amount' => 60*60*24*7),
-		array('name'=>lang('kalkun_day'), 'amount' => 60*60*24),
-		array('name'=>lang('kalkun_hour'), 'amount' => 60*60),
-		array('name'=>lang('kalkun_minute'), 'amount' => 60),
-		array('name'=>lang('kalkun_second'), 'amount' => 1)
+		array('name' => lang('kalkun_year'), 'amount' => 60 * 60 * 24 * 365),
+		array('name' => lang('kalkun_month'), 'amount' => 60 * 60 * 24 * 31),
+		array('name' => lang('kalkun_week'), 'amount' => 60 * 60 * 24 * 7),
+		array('name' => lang('kalkun_day'), 'amount' => 60 * 60 * 24),
+		array('name' => lang('kalkun_hour'), 'amount' => 60 * 60),
+		array('name' => lang('kalkun_minute'), 'amount' => 60),
+		array('name' => lang('kalkun_second'), 'amount' => 1)
 	);
 
-	$diff = abs($now-$timestamp);
+	$diff = abs($now - $timestamp);
 
-	if($option==='smsd_check')
+	if($option === 'smsd_check')
 	{
 		return $diff;
 	}
@@ -68,14 +68,14 @@ function nice_date($str, $option=NULL)
 			foreach($blocks as $block)
 			{
 				if ($current_level > $levels) { break; }
-				if ($diff/$block['amount'] >= 1)
+				if ($diff / $block['amount'] >= 1)
 				{
-					$amount = floor($diff/$block['amount']);
+					$amount = floor($diff / $block['amount']);
 					$plural = '';
 					//if ($amount>1) {$plural='s';} else {$plural='';}
 					$result[] = $amount.' '.$block['name'].$plural;
-					$diff -= $amount*$block['amount'];
-					$current_level+=1;
+					$diff -= $amount * $block['amount'];
+					$current_level += 1;
 				}
 			}
 			$res = implode(' ', $result);
@@ -97,11 +97,11 @@ function get_modem_status($status, $tolerant)
 	list($year, $month, $day) = explode('-', $date);
 	list($hour, $minute, $second) = explode(':', $time);
 
-	$timestamp = mktime($hour, $minute+$tolerant, $second, $month, $day, $year);
+	$timestamp = mktime($hour, $minute + $tolerant, $second, $month, $day, $year);
 	$now = time();
 
 	//$diff = abs($now-$timestamp);
-	if($timestamp>$now)
+	if($timestamp > $now)
 	{
 		return 'connect';
 	}
@@ -114,7 +114,7 @@ function get_modem_status($status, $tolerant)
 function message_preview($str, $n)
 {
 	if (strlen($str) <= $n) return showtags($str);
-	else return showtags(substr($str, 0, $n-3)).'&#8230;';
+	else return showtags(substr($str, 0, $n - 3)).'&#8230;';
 }
 
 function showtags($msg)
@@ -149,13 +149,13 @@ function compare_date_desc($a, $b)
 
 function check_delivery_report($report)
 {
-	if($report==='SendingError' OR $report==='Error' OR $report==='DeliveryFailed'): $status = lang('tni_msg_stat_fail');
-	elseif($report==='SendingOKNoReport'): $status = lang('tni_msg_stat_oknr');
-	elseif($report==='SendingOK'): $status = lang('tni_msg_stat_okwr');
-	elseif($report==='DeliveryOK'): $status = lang('tni_msg_stat_deliv');
-	elseif($report==='DeliveryPending'): $status = lang('tni_msg_stat_pend');
-	elseif($report==='DeliveryUnknown'): $status = lang('tni_msg_stat_unknown');
-	elseif($report==='Reserved'): $status = lang('tni_msg_stat_reserved');
+	if($report === 'SendingError' OR $report === 'Error' OR $report === 'DeliveryFailed'): $status = lang('tni_msg_stat_fail');
+	elseif($report === 'SendingOKNoReport'): $status = lang('tni_msg_stat_oknr');
+	elseif($report === 'SendingOK'): $status = lang('tni_msg_stat_okwr');
+	elseif($report === 'DeliveryOK'): $status = lang('tni_msg_stat_deliv');
+	elseif($report === 'DeliveryPending'): $status = lang('tni_msg_stat_pend');
+	elseif($report === 'DeliveryUnknown'): $status = lang('tni_msg_stat_unknown');
+	elseif($report === 'Reserved'): $status = lang('tni_msg_stat_reserved');
 	endif;
 
 	return $status;
@@ -170,20 +170,20 @@ function simple_date($datetime)
 
 function get_hour()
 {
-	for($i=0;$i<24;$i++)
+	for($i = 0;$i < 24;$i++)
 	{
 		$hour = $i;
-		if($hour<10) $hour = '0'.$hour;
+		if($hour < 10) $hour = '0'.$hour;
 		echo '<option value="'.$hour.'">'.$hour.'</option>';
 	}
 }
 
 function get_minute()
 {
-	for($i=0;$i<60;$i=$i+5)
+	for($i = 0;$i < 60;$i = $i + 5)
 	{
 		$min = $i;
-		if($min<10) $min = '0'.$min;
+		if($min < 10) $min = '0'.$min;
 		echo '<option value="'.$min.'">'.$min.'</option>';
 	}
 }
@@ -205,7 +205,7 @@ function get_database_property($driver)
 	// valid and supported driver
 	$valid_driver = array('postgre', 'mysql', 'mysqli', 'pdo');
 
-	if(!in_array($driver, $valid_driver)) die ("Database driver you're using is not supported");
+	if( ! in_array($driver, $valid_driver)) die ("Database driver you're using is not supported");
 
 	$postgre['name'] = 'postgre';
 	$postgre['file'] = 'pgsql';
@@ -241,10 +241,10 @@ function get_database_property($driver)
  */
 function execute_sql($sqlfile)
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->model('Kalkun_model');
 
-	$error=0;
+	$error = 0;
 	if ($lines = @file($sqlfile, FILE_SKIP_EMPTY_LINES))
 	{
 		$buff = '';
@@ -257,7 +257,7 @@ function execute_sql($sqlfile)
 				// if contains TRIGGER
 				if(preg_match('/CREATE TRIGGER$/', trim($line))) $buff .= ' END;';
 				$query = $CI->Kalkun_model->db->query($buff);
-				if(!$query) $error++;
+				if( ! $query) $error++;
 				$buff = '';
 			}
 		}

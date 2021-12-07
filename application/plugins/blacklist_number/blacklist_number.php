@@ -50,10 +50,10 @@ function blacklist_number_deactivate()
 */
 function blacklist_number_install()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
-	if (!$CI->db->table_exists('plugin_blacklist_number'))
+	if ( ! $CI->db->table_exists('plugin_blacklist_number'))
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
@@ -64,7 +64,7 @@ function blacklist_number_install()
 
 function blacklist_number_incoming($sms)
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->model('blacklist_number/blacklist_number_model', 'plugin_model');
 	$evil = array();
 
@@ -85,7 +85,7 @@ function blacklist_number_incoming($sms)
 
 function blacklist_number_outgoing($numbers = array())
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->model('blacklist_number/blacklist_number_model', 'plugin_model');
 	$evil = array();
 

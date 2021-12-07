@@ -26,7 +26,7 @@ class Server_alert_model extends CI_Model {
 		parent::__construct();
 	}
 
-	function get($option=NULL, $limit=NULL, $offset=NULL)
+	function get($option = NULL, $limit = NULL, $offset = NULL)
 	{
 		switch($option)
 		{

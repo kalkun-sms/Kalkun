@@ -1,6 +1,6 @@
 <div class="two_column_container toolbar">
 <div class="left_column_big">
-<?php if(isset($public_contact) && !$public_contact):?>
+<?php if(isset($public_contact) && ! $public_contact):?>
 	<a href="#" class="select_all nicebutton"><?php echo lang('kalkun_select_all');?></a>	
 	<a href="#" class="clear_all nicebutton"><?php echo lang('kalkun_clear_all');?></a>
 	<a href="javascript:void(0)" class="delete_contact nicebutton"><?php echo lang('kalkun_delete');?></a>	

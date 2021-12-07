@@ -1,7 +1,7 @@
 <?php $this->load->helper('kalkun'); ?>
 <div id="space_area">
 
-<?php if( isset($alerts) && count($alerts)> 0): ?> 
+<?php if(isset($alerts) && count($alerts) > 0): ?> 
 <div id="dash_box_titlebar"><?php echo lang('kalkun_alerts');?></div>
 <div id="dash_box">
 <?php
@@ -19,7 +19,7 @@ endforeach;
 </div>
 <br />
 
-<?php if($this->session->userdata('level')==='admin'): ?>
+<?php if($this->session->userdata('level') === 'admin'): ?>
 <div id="dash_box_titlebar"><?php echo lang('kalkun_system_information');?></div>
 <div id="dash_box">
 <table>

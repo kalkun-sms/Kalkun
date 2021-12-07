@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 function simple_autoreply_initialize()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 
 	$CI->load->add_package_path(APPPATH.'plugins/simple_autoreply', FALSE);
 	$CI->load->config('simple_autoreply', TRUE);
@@ -64,7 +64,7 @@ function simple_autoreply_install()
 function simple_autoreply($sms)
 {
 	$config = simple_autoreply_initialize();
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->model('Message_model');
 	$data['coding'] = 'default';
 	$data['class'] = '1';

@@ -76,7 +76,7 @@ class Xmlrpc extends Plugin_controller {
 		$request = array('1234', 'Testing XMLRPC');
 		$this->xmlrpc->request($request);
 
-		if (!$this->xmlrpc->send_request())
+		if ( ! $this->xmlrpc->send_request())
 		{
 			echo $this->xmlrpc->display_error();
 		}
