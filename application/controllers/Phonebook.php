@@ -269,13 +269,13 @@ class Phonebook extends MY_Controller {
 	function import_phonebook()
 	{
 		$this->load->library('csvreader');
-		$filePath = $_FILES["csvfile"]["tmp_name"];
+		$filePath = $_FILES['csvfile']['tmp_name'];
 		$csvData = $this->csvreader->parse_file($filePath, true);
 
 		$n=0;
 		foreach($csvData as $field):
-			$pbk['Name'] = $field["Name"];
-			$pbk['Number'] = $field["Number"];
+			$pbk['Name'] = $field['Name'];
+			$pbk['Number'] = $field['Number'];
 			$pbk['GroupID'] = $this->input->post('importgroupvalue');
 			$pbk['id_user'] = $this->input->post('pbk_id_user');
 			$pbk['is_public'] = $this->input->post('is_public')? 'true' : 'false';
@@ -283,7 +283,7 @@ class Phonebook extends MY_Controller {
 			$n++;
 		endforeach;
 
-		$this->session->set_flashdata('notif', str_replace("%count%", $n, lang('pbk_successfully_imported')));
+		$this->session->set_flashdata('notif', str_replace('%count%', $n, lang('pbk_successfully_imported')));
 		redirect('phonebook');
 	}
 
@@ -365,7 +365,7 @@ class Phonebook extends MY_Controller {
 		$q = $this->input->post('q', TRUE);
 		if (isset($q) && strlen($q) > 0)
 		{
-			$user_id = $this->session->userdata("id_user");
+			$user_id = $this->session->userdata('id_user');
 			$param = array('uid' => $user_id, 'query' => $q);
 			$query = $this->Phonebook_model->search_phonebook($param)->result_array();
 
@@ -373,12 +373,12 @@ class Phonebook extends MY_Controller {
 			foreach($query as $key => $q)
 			{
 				$query[$key]['name'] .= ' ('.str_replace('+', '', $q['id']).')';
-				$query[$key]['id'] = $q['id'].":c";
+				$query[$key]['id'] = $q['id'].':c';
 			}
 			$group = $this->Phonebook_model->search_group($param)->result_array();
 			foreach($group as $key => $q)
 			{
-				$group[$key]['id'] = $q['id'].":g";
+				$group[$key]['id'] = $q['id'].':g';
 			}
 
 			// User, currently on inbox only
@@ -388,20 +388,20 @@ class Phonebook extends MY_Controller {
 				$user = $this->User_model->search_user($q)->result_array();
 				foreach($user as $key => $q)
 				{
-					$user[$key]['id'] = $q['id_user'].":u";
+					$user[$key]['id'] = $q['id_user'].':u';
 					$user[$key]['name'] = $q['realname'];
 				}
 			}
 
 			// hook for contact get
-			$contact = do_action("phonebook.contact.get");
+			$contact = do_action('phonebook.contact.get');
 			if (empty($contact))
 			{
 				$contact = array();
 			}
 			foreach($contact as $key => $q)
 			{
-				$contact[$key]['id'] = $q['id'].":c";
+				$contact[$key]['id'] = $q['id'].':c';
 			}
 
 			$combine = array_merge($query, $group, $user, $contact);

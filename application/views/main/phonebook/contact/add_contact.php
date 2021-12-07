@@ -21,7 +21,7 @@ $(document).ready(function() {
         'autocomplete':{matchContains:false, minChars:0},
         'height':'50px',
         'width':'270px',
-       'defaultText':'<?php echo lang("tni_group_select");?>'
+       'defaultText':'<?php echo lang('tni_group_select');?>'
     });
 });
 </script>
@@ -37,7 +37,7 @@ $(document).ready(function() {
 <input type="text" name="number" id="number" value="<?php if(isset($contact)) echo $contact->row('Number'); else if(isset($number)) echo $number;?>" class="text ui-widget-content ui-corner-all required phone" />
 
 <div style="margin-bottom:12px">
-<input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if(isset($contact) && $contact->row('is_public')== 'true') echo "checked=\"checked\"";?> /> 
+<input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if(isset($contact) && $contact->row('is_public')== 'true') echo 'checked="checked"';?> /> 
 <label for="is_public" style="display: inline"><?php echo lang('kalkun_public_contact_set');?></label>
 </div>
 

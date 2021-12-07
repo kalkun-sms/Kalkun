@@ -34,8 +34,8 @@
 </div>
 
 <div id="window_content">
-	<?php $this->load->view("main/phonebook/group/navigation");?>
+	<?php $this->load->view('main/phonebook/group/navigation');?>
 	<div id="pbk_list"><?php $this->load->view('main/phonebook/group/pbk_list');?></div>
-	<?php $this->load->view("main/phonebook/group/navigation");?>
+	<?php $this->load->view('main/phonebook/group/navigation');?>
 </div>
 </div>

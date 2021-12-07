@@ -52,7 +52,7 @@ function soap_install()
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
-		execute_sql(APPPATH."plugins/soap/media/".$db_prop['file']."_remote_access.sql");
+		execute_sql(APPPATH.'plugins/soap/media/'.$db_prop['file'].'_remote_access.sql');
 	}
 	return true;
 }

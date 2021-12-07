@@ -15,7 +15,7 @@ else $folder = $this->Kalkun_model->get_folders('all');
 <?php endforeach;?>
 </div>
 
-<?php $this->load->view("main/messages/navigation",array('place'=>'top')); ?>		
+<?php $this->load->view('main/messages/navigation',array('place'=>'top')); ?>		
 
 <?php
 // my folder view
@@ -71,10 +71,10 @@ if($this->uri->segment(2)=='my_folder')
         <?php if( $this->uri->segment(4)!='6'):?>
 		<div id="right_column">
 			<?php
-			if($this->uri->segment(3)=='inbox') echo "<span class=\"currenttab\">".lang('kalkun_inbox')."</span>";
+			if($this->uri->segment(3)=='inbox') echo '<span class="currenttab">'.lang('kalkun_inbox').'</span>';
 			else echo anchor('messages/my_folder/inbox/'.$this->uri->segment(4).'', lang('kalkun_inbox'));
 
-			if($this->uri->segment(3)=='sentitems') echo "<span class=\"currenttab\">".lang('kalkun_sentitems')."</span>";
+			if($this->uri->segment(3)=='sentitems') echo '<span class="currenttab">'.lang('kalkun_sentitems').'</span>';
 			else echo anchor('messages/my_folder/sentitems/'.$this->uri->segment(4).'', lang('kalkun_sentitems'));?>
 		</div>
         <?php endif; ?>
@@ -97,4 +97,4 @@ if($this->uri->segment(2)=='my_folder')
 	?>
 	</div>
 
-	<?php $this->load->view("main/messages/navigation",array('place'=>'bottom')); ?>
+	<?php $this->load->view('main/messages/navigation',array('place'=>'bottom')); ?>

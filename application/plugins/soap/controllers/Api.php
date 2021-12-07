@@ -8,10 +8,10 @@
 include_once(dirname(__FILE__).'/../libraries/nusoap.php');
 
 class Api extends MY_Controller {
-	public static $VERSION = "0.0.8";
+	public static $VERSION = '0.0.8';
 
-	private static $NAMESPACE = "urn:KalkunRemoteAccess";
-	private $ENDPOINT = "/plugin/soap/api";
+	private static $NAMESPACE = 'urn:KalkunRemoteAccess';
+	private $ENDPOINT = '/plugin/soap/api';
 
 	private $server;
 
@@ -99,14 +99,14 @@ class Api extends MY_Controller {
 			return 1;
 		}
 
-		$this->server->service(file_get_contents("php://input"));
+		$this->server->service(file_get_contents('php://input'));
 	}
 
 	function wsdl()
 	{
 		log_message('debug','wsdl');
-		$_SERVER['QUERY_STRING'] = "wsdl";
-		$this->server->service(file_get_contents("php://input"));
+		$_SERVER['QUERY_STRING'] = 'wsdl';
+		$this->server->service(file_get_contents('php://input'));
 	}
 
 	private function remoteAccessEnabled()
@@ -125,7 +125,7 @@ class Api extends MY_Controller {
 			array(),                            // input parameters
 			array('result' => 'xsd:string'),    // output parameter
 			'urn:Api',                          // namespace
-			$this->ENDPOINT."/getApiVersion",   // soapaction
+			$this->ENDPOINT.'/getApiVersion',   // soapaction
 			'rpc',                              // style
 			'encoded',                          // use
 			'API Version'                       // documentation
@@ -137,7 +137,7 @@ class Api extends MY_Controller {
 				array('token' => 'xsd:string'),     // input parameters
 				array('result' => 'xsd:string'),    // output parameter
 				'urn:Api',                          // namespace
-				$this->ENDPOINT."/login",           // soapaction
+				$this->ENDPOINT.'/login',           // soapaction
 				'rpc',                              // style
 				'encoded',                          // use
 				'User login'                        // documentation
@@ -169,7 +169,7 @@ class Api extends MY_Controller {
 				array(),                                        // input parameters
 				array('result' => 'xsd:integer'),               // output parameter
 				'urn:Api',                                      // namespace
-				$this->ENDPOINT."/logout",                      // soapaction
+				$this->ENDPOINT.'/logout',                      // soapaction
 				'rpc',                                          // style
 				'encoded',                                      // use
 				'User logout'                                   // documentation

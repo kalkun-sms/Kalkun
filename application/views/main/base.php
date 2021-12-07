@@ -12,7 +12,7 @@
 	</center>
 	<table>
 		<tr valign="top"><td><b>Author:</b></td><td>&nbsp;</td><td>See CREDITS page</td></tr>
-		<tr><td><b>Version:</b></td><td>&nbsp;</td><td><?php echo $this->config->item('kalkun_version')." (".$this->config->item('kalkun_codename').")";?></td></tr>		
+		<tr><td><b>Version:</b></td><td>&nbsp;</td><td><?php echo $this->config->item('kalkun_version').' ('.$this->config->item('kalkun_codename').')';?></td></tr>		
 		<tr><td><b>Released:</b></td><td>&nbsp;</td><td><?php echo $this->config->item('kalkun_release_date');?></td>
 		<tr><td><b>License:</b></td><td>&nbsp;</td><td>GNU/GPL</td>		
 		<tr><td><b>Homepage:</b></td><td>&nbsp;</td>
@@ -177,7 +177,7 @@
 <div id="a_search_dialog" title="<?php echo lang('kalkun_advanced_search');?>" class="dialog">
 	<?php
 	$this->load->helper('form');
-	echo form_open("messages/query", array('id' => 'a_search_form'));
+	echo form_open('messages/query', array('id' => 'a_search_form'));
 	echo form_hidden('a_search_trigger', TRUE);
 	?>
 	<table width="100%">

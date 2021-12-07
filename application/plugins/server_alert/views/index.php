@@ -71,7 +71,7 @@
 		<?php
 		if($alert->num_rows()===0)
 		{
-			echo "<tr><td colspan=\"8\" style=\"border-left: 1px solid #000; border-right: 1px solid #000;\">No alert found.</td></tr>";
+			echo '<tr><td colspan="8" style="border-left: 1px solid #000; border-right: 1px solid #000;">No alert found.</td></tr>';
 		}
 		else
 		{
@@ -88,7 +88,7 @@
 				<?php if($tmp->status=='false'):?>
 				<td><a href="<?php echo site_url();?>/plugin/server_alert/change_state/<?php echo $tmp->id_server_alert;?>" class="release"><img class="ui-icon ui-icon-locked" title="Release state" /></a></td>
 				<?php
-				else: echo "<td>&nbsp;</td>";
+				else: echo '<td>&nbsp;</td>';
 				endif;
 				?>
 				<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>				
@@ -106,5 +106,5 @@
 		
 	</table>
 	<br />
-	<?php echo "<div class=\"note\">Total Time Interval : ".$time_interval." seconds</div>"; ?>
+	<?php echo '<div class="note">Total Time Interval : '.$time_interval.' seconds</div>'; ?>
 </div>

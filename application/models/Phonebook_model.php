@@ -123,7 +123,7 @@ class Phonebook_model extends CI_Model {
 				$condition = "({$this->_protect_identifiers('pbk_groups.id_user')} = {$user_id} OR {$this->_protect_identifiers('pbk_groups.is_public')} = 'true')";
 				$this->db->where($condition, NULL, FALSE);
 				$this->db->where('user_group.id_pbk_groups', $param['group_id']);
-				$this->db->order_by("pbk.Name", "asc");
+				$this->db->order_by('pbk.Name', 'asc');
 
 				if(isset($param['limit']) && isset($param['offset'])) $this->db->limit($param['limit'], $param['offset']);
 				break;
@@ -135,8 +135,8 @@ class Phonebook_model extends CI_Model {
 				$this->db->from('pbk');
 				// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
 				$condition1 = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";
-				$condition2_part1 = "LOWER(".$this->db->protect_identifiers('Name').") LIKE '%".$search_word."%'";
-				$condition2_part2 = "LOWER(".$this->db->protect_identifiers('Number').") LIKE '%".$search_word."%'";
+				$condition2_part1 = 'LOWER('.$this->db->protect_identifiers('Name').") LIKE '%".$search_word."%'";
+				$condition2_part2 = 'LOWER('.$this->db->protect_identifiers('Number').") LIKE '%".$search_word."%'";
 				$condition2 = "($condition2_part1 OR $condition2_part2)";
 				$this->db->where($condition1, NULL, FALSE);
 				$this->db->where($condition2, NULL, FALSE);
@@ -171,14 +171,14 @@ class Phonebook_model extends CI_Model {
 	{
 		$this->load->helper('kalkun');
 		$escape_char;
-		$escaped_identifer="";
+		$escaped_identifer='';
 
 		// get database engine
 		$db_engine = $this->db->platform();
 		$escape_char = get_database_property($db_engine);
 		$escape_char = $escape_char['escape_char'];
 
-		$sub = explode(".", $identifier);
+		$sub = explode('.', $identifier);
 		$sub_count = count($sub);
 
 		foreach($sub as $key => $tmp)
@@ -188,7 +188,7 @@ class Phonebook_model extends CI_Model {
 			// if this is not the last
 			if($key!==$sub_count-1)
 			{
-				$escaped_identifer.=".";
+				$escaped_identifer.='.';
 			}
 		}
 
@@ -316,7 +316,7 @@ class Phonebook_model extends CI_Model {
 	 $id_pbk = $this->input->post('id_pbk');
 
 	 //This case probably never happens because it is filtered out in 'application/views/js_init/phonebook/js_phonebook.php'
-	 if($id_group === 'null' ) die("Invalid Group ID");
+	 if($id_group === 'null' ) die('Invalid Group ID');
 
 	 //parse group value
 	 if(preg_match('/-/',$id_group)) { $mode = 'delete'; $id_group = substr($id_group,1);  }
@@ -433,7 +433,7 @@ class Phonebook_model extends CI_Model {
 		}
 		$GroupName = substr($GroupName,0, strlen($GroupName)-1);
 		$GroupID = substr($GroupID,0, strlen($GroupID)-1);
-		return (object) array("GroupNames" => $GroupName, "GroupIDs" => $GroupID);
+		return (object) array('GroupNames' => $GroupName, 'GroupIDs' => $GroupID);
 	}
 
 	// --------------------------------------------------------------------

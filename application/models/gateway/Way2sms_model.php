@@ -71,37 +71,37 @@ class Way2sms_model extends Gammu_model {
 
 		$autobalancer = rand(1, 8);
 
-		curl_setopt($curl, CURLOPT_URL, "http://site".$autobalancer.".way2sms.com/Login1.action");
+		curl_setopt($curl, CURLOPT_URL, 'http://site'.$autobalancer.'.way2sms.com/Login1.action');
 		curl_setopt($curl, CURLOPT_POST, 1);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, "username=".$uid."&password=".$pwd."&button=Login");
+		curl_setopt($curl, CURLOPT_POSTFIELDS, 'username='.$uid.'&password='.$pwd.'&button=Login');
 		//curl_setopt($curl , CURLOPT_PROXY , '144.16.192.218:8080' );
 		curl_setopt($curl, CURLOPT_COOKIESESSION, 1);
-		curl_setopt($curl, CURLOPT_COOKIEFILE, "cookie_way2sms");
+		curl_setopt($curl, CURLOPT_COOKIEFILE, 'cookie_way2sms');
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($curl, CURLOPT_MAXREDIRS, 20);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5");
+		curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5');
 		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
-		curl_setopt($curl, CURLOPT_REFERER, "http://site".$autobalancer.".way2sms.com/");
+		curl_setopt($curl, CURLOPT_REFERER, 'http://site'.$autobalancer.'.way2sms.com/');
 		$text = curl_exec($curl);
 
 		// Check if any error occured
 		if (curl_errno($curl))
-			return "access error : ". curl_error($curl);
+			return 'access error : '. curl_error($curl);
 
 		// Check for proper login
-		$pos = stripos(curl_getinfo($curl, CURLINFO_EFFECTIVE_URL), "Main.action");
+		$pos = stripos(curl_getinfo($curl, CURLINFO_EFFECTIVE_URL), 'Main.action');
 		if ($pos === FALSE OR $pos === 0)
-			return "invalid login";
+			return 'invalid login';
 
-		if (trim($msg) === "" OR strlen($msg) === 0)
-			return "invalid message";
+		if (trim($msg) === '' OR strlen($msg) === 0)
+			return 'invalid message';
 
 		$msg = urlencode(substr($msg, 0, 160));
-		$pharr = explode(",", $phone);
+		$pharr = explode(',', $phone);
 		$refurl = curl_getinfo($curl, CURLINFO_EFFECTIVE_URL);
 		curl_setopt($curl, CURLOPT_REFERER, $refurl);
-		curl_setopt($curl, CURLOPT_URL, "http://site".$autobalancer.".way2sms.com/jsp/InstantSMS.jsp");
+		curl_setopt($curl, CURLOPT_URL, 'http://site'.$autobalancer.'.way2sms.com/jsp/InstantSMS.jsp');
 		$text = curl_exec($curl);
 
 		preg_match_all('/<input[\s]*type="hidden"[\s]*name="Action"[\s]*id="Action"[\s]*value="?([^>]*)?"/si', $text, $match);
@@ -112,9 +112,9 @@ class Way2sms_model extends Gammu_model {
 			if(substr($p, 0, 3) === '+91')
 				$p = substr($p, 3);
 
-			if (strlen($p) !== 10 OR !is_numeric($p) OR strpos($p, ".") !== false)
+			if (strlen($p) !== 10 OR !is_numeric($p) OR strpos($p, '.') !== false)
 			{
-				$result[] = array('phone' => $p, 'msg' => urldecode($msg), 'result' => "invalid number");
+				$result[] = array('phone' => $p, 'msg' => urldecode($msg), 'result' => 'invalid number');
 				continue;
 			}
 			$p = urlencode($p);
@@ -124,8 +124,8 @@ class Way2sms_model extends Gammu_model {
 			curl_setopt($curl, CURLOPT_REFERER, curl_getinfo($curl, CURLINFO_EFFECTIVE_URL));
 			curl_setopt($curl, CURLOPT_POST, 1);
 			curl_setopt($curl, CURLOPT_POSTFIELDS,
-				"HiddenAction=instantsms&bulidgpwd=*******&bulidguid=username&catnamedis=Birthday&chkall=on&gpwd1=*******&guid1=username&ypwd1=*******&yuid1=username&Action=".
-			$action."&MobNo=".$p."&textArea=".$msg);
+				'HiddenAction=instantsms&bulidgpwd=*******&bulidguid=username&catnamedis=Birthday&chkall=on&gpwd1=*******&guid1=username&ypwd1=*******&yuid1=username&Action='.
+			$action.'&MobNo='.$p.'&textArea='.$msg);
 			$contents = curl_exec($curl);
 
 			//Check Message Status
@@ -139,7 +139,7 @@ class Way2sms_model extends Gammu_model {
 		//echo $text;
 
 		// Logout
-		curl_setopt($curl, CURLOPT_URL, "http://site".$autobalancer.".way2sms.com/LogOut");
+		curl_setopt($curl, CURLOPT_URL, 'http://site'.$autobalancer.'.way2sms.com/LogOut');
 		curl_setopt($curl, CURLOPT_REFERER, $refurl);
 		$text = curl_exec($curl);
 

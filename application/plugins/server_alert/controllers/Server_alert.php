@@ -68,7 +68,7 @@ class Server_alert extends Plugin_controller {
 
 	function get_time_interval()
 	{
-		echo "Total Time Interval : ".$this->plugin_model->get_time_interval()." seconds";
+		echo 'Total Time Interval : '.$this->plugin_model->get_time_interval().' seconds';
 	}
 
 }

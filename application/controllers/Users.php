@@ -82,7 +82,7 @@ class Users extends MY_Controller
 	{
 		$this->load->helper('form');
 		$type = $this->input->post('type');
-		$data['tmp'] = "";
+		$data['tmp'] = '';
 
 		if($type==='edit')
 		{

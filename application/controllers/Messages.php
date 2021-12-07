@@ -133,7 +133,7 @@ class Messages extends MY_Controller {
 			// Repost the form if we went through login process
 			// Finally, after form submission (call to compose_process), redirect to a result page
 			// that cannot be POSTed again in case of page refresh.
-			if ($this->session->flashdata('bef_login_method') === "post")
+			if ($this->session->flashdata('bef_login_method') === 'post')
 			{
 				$this->load->view('main/messages/compose_repost_after_login');
 			}
@@ -143,10 +143,10 @@ class Messages extends MY_Controller {
 		$dest = array();
 
 		// Import value from file (currently only CSV)
-		if (isset($_FILES["import_file"]))
+		if (isset($_FILES['import_file']))
 		{
 			$this->load->library('csvreader');
-			$filePath = $_FILES["import_file"]["tmp_name"];
+			$filePath = $_FILES['import_file']['tmp_name'];
 			$csvData = $this->csvreader->parse_file($filePath, true);
 			$csvField = array_keys($csvData[0]);
 			foreach($csvData as $data)
@@ -158,7 +158,7 @@ class Messages extends MY_Controller {
 			}
 			foreach ($csvField as $field)
 			{
-				$csv[$field] = implode(",", $tmp[$field]);
+				$csv[$field] = implode(',', $tmp[$field]);
 			}
 			$csv['Field'] = $csvField;
 			echo json_encode($csv);
@@ -281,7 +281,7 @@ class Messages extends MY_Controller {
 
 			// Date and time
 			case 'option2':
-				$date = $this->input->post('datevalue')." ".$this->input->post('hour').":".$this->input->post('minute').":00";
+				$date = $this->input->post('datevalue').' '.$this->input->post('hour').':'.$this->input->post('minute').':00';
 				break;
 
 			// Delay
@@ -305,7 +305,7 @@ class Messages extends MY_Controller {
 		if($this->config->item('append_username'))
 		{
 			$append_username_message = $this->config->item('append_username_message');
-			$append_username_message = str_replace("@username", "@".$this->session->userdata('username'), $append_username_message);
+			$append_username_message = str_replace('@username', '@'.$this->session->userdata('username'), $append_username_message);
 			$data['message'] .= "\n".$append_username_message;
 		}
 
@@ -353,10 +353,10 @@ class Messages extends MY_Controller {
 		}
 
 		// hook for outgoing message
-		$dest = do_action("message.outgoing", $dest);
-		$sms = do_action("message.outgoing_all", $data);
+		$dest = do_action('message.outgoing', $dest);
+		$sms = do_action('message.outgoing_all', $data);
 
-		$dest_data = do_action("message.outgoing_dest_data", array($dest, $data));
+		$dest_data = do_action('message.outgoing_dest_data', array($dest, $data));
 		if (isset($dest_data) && sizeof($dest_data) === 2) {
 			$dest = $dest_data[0];
 			$data = $dest_data[1];
@@ -450,7 +450,7 @@ class Messages extends MY_Controller {
 				break;
 		}
 
-		if ($this->input->post('redirect_to_form_result') === "1")
+		if ($this->input->post('redirect_to_form_result') === '1')
 		{
 			switch ($return_msg['type'])
 			{
@@ -709,7 +709,7 @@ class Messages extends MY_Controller {
 
 			// sort data
 			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
-			usort($data['messages'], "compare_date_".$sort_option);
+			usort($data['messages'], 'compare_date_'.$sort_option);
 
 			if(is_ajax())
 			{
@@ -798,7 +798,7 @@ class Messages extends MY_Controller {
 
 			// sort data
 			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
-			usort($data['messages'], "compare_date_".$sort_option);
+			usort($data['messages'], 'compare_date_'.$sort_option);
 
 			if(is_ajax())
 			{
@@ -922,13 +922,13 @@ class Messages extends MY_Controller {
 		else if ($this->input->post('a_search_trigger'))
 		{
 			$params[] = 'advanced';
-			$params[] = $this->input->post('a_search_query') ? $this->input->post('a_search_query') : "_";
-			$params[] = $this->input->post('a_search_from_to') ? $this->input->post('a_search_from_to') : "_";
-			$params[] = $this->input->post('a_search_date_from') ? $this->input->post('a_search_date_from') : "_";
-			$params[] = $this->input->post('a_search_date_to') ? $this->input->post('a_search_date_to') : "_";
-			$params[] = $this->input->post('a_search_sentitems_status') ? $this->input->post('a_search_sentitems_status') : "_";
-			$params[] = $this->input->post('a_search_on') ? $this->input->post('a_search_on') : "_";
-			$params[] = $this->input->post('a_search_paging') ? $this->input->post('a_search_paging') : "_";
+			$params[] = $this->input->post('a_search_query') ? $this->input->post('a_search_query') : '_';
+			$params[] = $this->input->post('a_search_from_to') ? $this->input->post('a_search_from_to') : '_';
+			$params[] = $this->input->post('a_search_date_from') ? $this->input->post('a_search_date_from') : '_';
+			$params[] = $this->input->post('a_search_date_to') ? $this->input->post('a_search_date_to') : '_';
+			$params[] = $this->input->post('a_search_sentitems_status') ? $this->input->post('a_search_sentitems_status') : '_';
+			$params[] = $this->input->post('a_search_on') ? $this->input->post('a_search_on') : '_';
+			$params[] = $this->input->post('a_search_paging') ? $this->input->post('a_search_paging') : '_';
 		}
 		else
 		{
@@ -1095,9 +1095,9 @@ class Messages extends MY_Controller {
 		switch($first_strategy)
 		{
 			case 'scheduled_time':
-				list($date, $time) = explode(" ", $date);
+				list($date, $time) = explode(' ', $date);
 				foreach($modem_list as $modem):
-				list($start_time,$end_time) = explode("-", $modem['value']);
+				list($start_time,$end_time) = explode('-', $modem['value']);
 				if($time >= $start_time && $time <= $end_time) $candidate_modem[] = $modem['id'];
 				endforeach;
 				break;
@@ -1106,15 +1106,15 @@ class Messages extends MY_Controller {
 				$this->load->helper('date');
 				$day = date('w', human_to_unix($date));
 				foreach($modem_list as $modem):
-				list($start_day,$end_day) = explode("-", $modem['value']);
+				list($start_day,$end_day) = explode('-', $modem['value']);
 				if($day >= $start_day && $day <= $end_day) $candidate_modem[] = $modem['id'];
 				endforeach;
 				break;
 
 			case 'scheduled_date':
-				list($date, $time) = explode(" ", $date);
+				list($date, $time) = explode(' ', $date);
 				foreach($modem_list as $modem):
-				list($start_date,$end_date) = explode(":", $modem['value']);
+				list($start_date,$end_date) = explode(':', $modem['value']);
 				if($date >= $start_date && $date <= $end_date) $candidate_modem[] = $modem['id'];
 				endforeach;
 				break;
@@ -1242,7 +1242,7 @@ class Messages extends MY_Controller {
 		// register valid type
 		$valid_type = array('trash', 'spam');
 		// check if it's valid type
-		if(!in_array($type, $valid_type)) die("Invalid Type");
+		if(!in_array($type, $valid_type)) die('Invalid Type');
 
 		switch($type){
 			case 'trash':
@@ -1264,7 +1264,7 @@ class Messages extends MY_Controller {
 	 */
 	function report_spam(  $type = NULL)
 	{
-		if ($type === NULL OR ($type !== "spam" && $type !== "ham")) {
+		if ($type === NULL OR ($type !== 'spam' && $type !== 'ham')) {
 			show_404();
 		}
 

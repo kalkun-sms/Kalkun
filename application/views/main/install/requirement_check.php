@@ -17,11 +17,11 @@
 		<td class="right">
 			<?php
 			if(version_compare(PHP_VERSION, '7.0', '>='))
-				echo "<span class=\"green\">OK</span>";
+				echo '<span class="green">OK</span>';
 			else if (version_compare(PHP_VERSION, '5.3.6', '>='))
 				// CI3 recommends 5.6+ (or at very least 5.3.6). We recommend >= 7.0
-				echo "<span class=\"orange\">OK</span>";
-			else { echo "<span class=\"red\">Not OK</span>"; $error++; }
+				echo '<span class="orange">OK</span>';
+			else { echo '<span class="red">Not OK</span>'; $error++; }
 			?>
 		</td>
 	</tr>
@@ -36,42 +36,42 @@
 		</td>
 		<td class="right">
 		<?php
-			if(extension_loaded($db_property['driver'])) $db_msg="";
+			if(extension_loaded($db_property['driver'])) $db_msg='';
 
-			if(isset($db_msg)) echo "<span class=\"green\">OK</span>";
-			else { echo "<span class=\"red\">Not OK</span>"; $error++; }
+			if(isset($db_msg)) echo '<span class="green">OK</span>';
+			else { echo '<span class="red">Not OK</span>'; $error++; }
 		?>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="3">Session - Session Handling</td>
-		<td class="right"><?php if(extension_loaded('session')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
+		<td class="right"><?php if(extension_loaded('session')) echo '<span class="green">OK</span>'; else { echo '<span class="red">Not OK</span>'; $error++; }?></td>
 	</tr>
 
 	<tr>
 		<td colspan="3">HASH - HASH Message Digest Framework</td>
-		<td class="right"><?php if(extension_loaded('hash')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
+		<td class="right"><?php if(extension_loaded('hash')) echo '<span class="green">OK</span>'; else { echo '<span class="red">Not OK</span>'; $error++; }?></td>
 	</tr>
 
 	<tr>
 		<td colspan="3">JSON - JavaScript Object Notation</td>
-		<td class="right"><?php if(extension_loaded('json')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
+		<td class="right"><?php if(extension_loaded('json')) echo '<span class="green">OK</span>'; else { echo '<span class="red">Not OK</span>'; $error++; }?></td>
 	</tr>
 
 	<tr>
 		<td colspan="3">MBString - Multibyte String</td>
-		<td class="right"><?php if(extension_loaded('mbstring')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
+		<td class="right"><?php if(extension_loaded('mbstring')) echo '<span class="green">OK</span>'; else { echo '<span class="red">Not OK</span>'; $error++; }?></td>
 	</tr>
 
 	<tr>
 		<td colspan="3">Ctype - Character type checking</td>
-		<td class="right"><?php if(extension_loaded('ctype')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
+		<td class="right"><?php if(extension_loaded('ctype')) echo '<span class="green">OK</span>'; else { echo '<span class="red">Not OK</span>'; $error++; }?></td>
 	</tr>
 
 	<tr>
 		<td colspan="3" class="bottom">APC or APCu - APC User Cache</td>
-		<td class="right bottom"><?php if(extension_loaded('apc') || extension_loaded('apcu')) echo "<span class=\"green\">OK</span>"; else { echo "<span class=\"red\">Not OK</span>"; $error++; }?></td>
+		<td class="right bottom"><?php if(extension_loaded('apc') || extension_loaded('apcu')) echo '<span class="green">OK</span>'; else { echo '<span class="red">Not OK</span>'; $error++; }?></td>
 	</tr>
 </table>
 

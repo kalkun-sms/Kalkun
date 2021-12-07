@@ -20,7 +20,7 @@ function simple_autoreply_initialize()
 }
 
 // Add hook for incoming message
-add_action("message.incoming.before", "simple_autoreply", 11);
+add_action('message.incoming.before', 'simple_autoreply', 11);
 
 /**
 * Function called when plugin first activated

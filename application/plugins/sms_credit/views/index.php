@@ -14,7 +14,7 @@
     </div>
 
     <div id="window_content">
-        <?php $this->load->view("navigation");?>
+        <?php $this->load->view('navigation');?>
         <table>
             <?php foreach($users->result() as $tmp): ?>
             <tr id="<?php echo $tmp->id_user;?>">
@@ -24,7 +24,7 @@
                             <div id="pbkname">
                                 <span style="font-weight: bold;"><?php echo $tmp->realname;?></span>
                                 <?php if(!is_null($tmp->template_name)): echo "<sup>( $tmp->template_name )</sup>"; ?>
-                                <?php else: echo "<sup>( No package )</sup>"; ?>
+                                <?php else: echo '<sup>( No package )</sup>'; ?>
                                 <?php endif;?>
                             </div>	
                         </div>
@@ -47,7 +47,7 @@
             </tr>
             <?php endforeach;?>
         </table>
-        <?php $this->load->view("navigation");?>
+        <?php $this->load->view('navigation');?>
     </div>
 </div>
 

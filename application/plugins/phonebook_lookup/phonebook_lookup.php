@@ -20,7 +20,7 @@ function phonebook_lookup_initialize()
 }
 
 // Add hook for contact menu
-add_action("phonebook.contact.menu", "phonebook_lookup", 10);
+add_action('phonebook.contact.menu', 'phonebook_lookup', 10);
 
 /**
 * Function called when plugin first activated

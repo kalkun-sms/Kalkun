@@ -9,7 +9,7 @@
 */
 
 // Add hook for outgoing message
-add_action("message.outgoing", "whitelist_number_outgoing", 1);
+add_action('message.outgoing', 'whitelist_number_outgoing', 1);
 
 function whitelist_number_activate()
 {
@@ -46,7 +46,7 @@ function whitelist_number_install()
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
-		execute_sql(APPPATH."plugins/whitelist_number/media/".$db_prop['file']."_whitelist_number.sql");
+		execute_sql(APPPATH.'plugins/whitelist_number/media/'.$db_prop['file'].'_whitelist_number.sql');
 	}
   return true;
 }

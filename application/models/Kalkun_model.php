@@ -53,7 +53,7 @@ class Kalkun_model extends CI_Model {
 			$this->session->set_userdata('username', $query->row('username'));
 			if($this->input->post('remember_me')) $this->session->set_userdata('remember_me', TRUE);
 
-			if ($this->session->flashdata('bef_login_method') === "post" &&
+			if ($this->session->flashdata('bef_login_method') === 'post' &&
 				$this->session->flashdata('bef_login_HTTP_REFERER')) {
 				redirect($this->session->flashdata('bef_login_requested_url'));
 			} else if ($this->session->flashdata('bef_login_requested_url')) {
@@ -112,7 +112,7 @@ class Kalkun_model extends CI_Model {
 				$token = md5(time());
 				$this->db->set('id_user', $query->row('id_user'));
 				$this->db->set('token', $token);
-				$this->db->set('valid_until', date('Y-m-d H:i:s', mktime(date("H"), date("i")+30, date("s"), date("m"), date("d"), date("Y"))));
+				$this->db->set('valid_until', date('Y-m-d H:i:s', mktime(date('H'), date('i')+30, date('s'), date('m'), date('d'), date('Y'))));
 				$this->db->insert('user_forgot_password');
 				return array('phone' => $query->row('phone_number'), 'token' => $token);
 			}
@@ -521,7 +521,7 @@ class Kalkun_model extends CI_Model {
 
 		foreach($user_id as $uid)
 		{
-			$date = date("Y-m-d");
+			$date = date('Y-m-d');
 			$count = $this->_check_sms_used($date, $uid, $type);
 			$this->db->where('sms_date', $date);
 			$this->db->where('id_user', $uid);
@@ -545,7 +545,7 @@ class Kalkun_model extends CI_Model {
 
 	function _check_sms_used($date, $user_id , $type = 'out')
 	{
-		$this->db->select($type."_sms_count");
+		$this->db->select($type.'_sms_count');
 		$this->db->from('sms_used');
 		$this->db->where('sms_date', $date);
 		$this->db->where('id_user', $user_id);

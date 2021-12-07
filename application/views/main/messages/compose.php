@@ -24,7 +24,7 @@ if($val_type=='reply'): ?>
 $phone = $dest;
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $phone));
 if($qry->num_rows()!==0):
-echo $qry->row('Name')." <".$phone.">";
+echo $qry->row('Name').' <'.$phone.'>';
 else:
 echo $phone;
 endif;
@@ -47,7 +47,7 @@ endif;
 <?php
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $dest));
 if($qry->num_rows()!==0):
-echo $qry->row('Name')." <".$dest.">";
+echo $qry->row('Name').' <'.$dest.'>';
 else:
 echo $dest;
 endif;
@@ -80,8 +80,8 @@ endif;
 <tr>
 <td width="100px" align="right" class="label">
 <?php
-if($val_type=='forward') echo lang('kalkun_forward_to').":";
-else echo lang('kalkun_send_to').":";
+if($val_type=='forward') echo lang('kalkun_forward_to').':';
+else echo lang('kalkun_send_to').':';
 ?>
 </td>
 <td>
@@ -120,7 +120,7 @@ else echo lang('kalkun_send_to').":";
 <?php endif; ?>
 
 <tr>
-<td align="right" class="label"><?php echo lang('kalkun_send_date').":";?></td>
+<td align="right" class="label"><?php echo lang('kalkun_send_date').':';?></td>
 <td>
 <input class="left_aligned" type="radio" id="option1" name="senddateoption" value="option1" checked="checked" style="border: none;" />
 <label for="option1"><?php  echo lang('kalkun_now');?></label>
@@ -137,7 +137,7 @@ else echo lang('kalkun_send_to').":";
 <div id="nowoption"></div>
 <div id="dateoption" class="hidden">
 <input type="text" name="datevalue" id="datevalue" class="datepicker" readonly="readonly" />
-<?php echo "&nbsp;&nbsp;";?>
+<?php echo '&nbsp;&nbsp;';?>
 <select name="hour"><?php echo get_hour();?></select> :
 <select name="minute"><?php echo get_minute();?></select> 			
 </div>
@@ -171,7 +171,7 @@ else echo lang('kalkun_send_to').":";
 
 <?php if($this->config->item('sms_bomber')): ?>    
 <tr valign="top">
-<td align="right" class="label"><?php echo lang('kalkun_compose_amount').":";?></td>
+<td align="right" class="label"><?php echo lang('kalkun_compose_amount').':';?></td>
 <td><input type="text" style="width: 25px" name="sms_loop" id="sms_loop" value="1" />&nbsp; <?php echo lang('kalkun_compose_times'); ?>
 </td>
 </tr>
@@ -199,7 +199,7 @@ else echo lang('kalkun_send_to').":";
 </tr>
 
 <tr valign="top">
-<td align="right" class="label"><?php echo lang('kalkun_message').":";?></td>
+<td align="right" class="label"><?php echo lang('kalkun_message').':';?></td>
 <td>
 <?php if($val_type=='forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo $msg_id;?>" /> <?php endif;?>
 <textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;"   id="message" name="message">
@@ -231,6 +231,6 @@ if($sig_option=='true') echo "\n\n".$sig; ?>
 <?php
 if($this->config->item('sms_advertise'))
 {
-	echo "*".lang('kalkun_sms_ads_active');
+	echo '*'.lang('kalkun_sms_ads_active');
 }
 ?>

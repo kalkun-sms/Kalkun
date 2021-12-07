@@ -21,7 +21,7 @@ function external_script_initialize()
 }
 
 // Add hook for incoming message
-add_action("message.incoming.before", "external_script", 12);
+add_action('message.incoming.before', 'external_script', 12);
 
 /**
 * Function called when plugin first activated
@@ -76,7 +76,7 @@ function external_script($sms)
 	{
 		$intepreter_path = $rule['intepreter_path'];
 		$script_path = $rule['script_path'];
-		$value=$parameter="";
+		$value=$parameter='';
 
 		// evaluate rule key
 		switch($rule['key'])
@@ -116,19 +116,19 @@ function external_script($sms)
 			if (!empty($rule['parameter']))
 			{
 				$valid_param = array('phone', 'content', 'id', 'time', 'match');
-				$param = explode("|", $rule['parameter']);
+				$param = explode('|', $rule['parameter']);
 
 				foreach ($param as $tmp)
 				{
 					if (in_array($tmp, $valid_param))
 					{
-						$parameter.=" ".escapeshellarg(${$tmp});
+						$parameter.=' '.escapeshellarg(${$tmp});
 					}
 				}
 			}
 
 			// execute it
-			exec(escapeshellcmd($intepreter_path." ".$script_path." ".$parameter));
+			exec(escapeshellcmd($intepreter_path.' '.$script_path.' '.$parameter));
 		}
 	}
 }

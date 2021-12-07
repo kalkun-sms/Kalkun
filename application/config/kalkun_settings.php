@@ -151,7 +151,7 @@ $config['enable_emoticons'] = FALSE;
 |
 */
 $config['append_username'] = TRUE;
-$config['append_username_message'] = "Sender: @username";
+$config['append_username_message'] = 'Sender: @username';
 
 
 /*
@@ -163,7 +163,7 @@ $config['append_username_message'] = "Sender: @username";
 |
 */
 $config['sms_advertise'] = FALSE;
-$config['sms_advertise_message'] = "This is ads message";
+$config['sms_advertise_message'] = 'This is ads message';
 
 /*
 |--------------------------------------------------------------------------

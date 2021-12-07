@@ -29,15 +29,15 @@
 		<input type="hidden" name="pbk_id_user" id="pbk_id_user" value="<?php echo $this->session->userdata('id_user');?>" />
 		<label for="csvfile"><?php echo lang('kalkun_pbk_add_csv_file');?></label>
 		<input type="file" name="csvfile" id="csvfile" class="text ui-widget-content ui-corner-all" />
-		<p><small><?php echo lang('kalkun_pbk_add_csv_label').":";?> <a href="<?php echo $this->config->item('csv_path');?>contact_sample.csv"><b><?php echo lang('kalkun_valid_example');?></b></a></small></p>
-		<p><input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if(isset($contact) && $contact->row('is_public')== 'true') echo "checked=\"checked\"";?> /> 
+		<p><small><?php echo lang('kalkun_pbk_add_csv_label').':';?> <a href="<?php echo $this->config->item('csv_path');?>contact_sample.csv"><b><?php echo lang('kalkun_valid_example');?></b></a></small></p>
+		<p><input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if(isset($contact) && $contact->row('is_public')== 'true') echo 'checked="checked"';?> /> 
 		<label for="is_public" style="display: inline"><?php echo lang('kalkun_public_contact_set');?></label></p>
 		<label for="group"><?php echo lang('kalkun_group');?></label>
     	<select id="importgroupvalue" name="importgroupvalue">
     	<option value="">-- <?php echo lang('tni_group_select');?> --</option>
     	<?php
 		foreach($pbkgroup as $tmp):
-		echo "<option value=\"".$tmp->ID."\">".$tmp->GroupName."</option>";
+		echo '<option value="'.$tmp->ID.'">'.$tmp->GroupName.'</option>';
 		endforeach;
 		?>
     	</select>
@@ -62,8 +62,8 @@
 </div>
 
 <div id="window_content">
-	<?php $this->load->view("main/phonebook/contact/navigation");?>
+	<?php $this->load->view('main/phonebook/contact/navigation');?>
 	<div id="pbk_list"><?php $this->load->view('main/phonebook/contact/pbk_list');?></div>
-	<?php $this->load->view("main/phonebook/contact/navigation");?>
+	<?php $this->load->view('main/phonebook/contact/navigation');?>
 </div>
 </div>

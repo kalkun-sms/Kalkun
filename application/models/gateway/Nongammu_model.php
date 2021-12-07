@@ -35,7 +35,7 @@ class Nongammu_model extends Gammu_model {
 	{
 		parent::__construct();
 		$this->load->model('Kalkun_model');
-		log_message('debug',"NonGammu Class Initialized");
+		log_message('debug','NonGammu Class Initialized');
 	}
 
 	// --------------------------------------------------------------------
@@ -68,13 +68,13 @@ class Nongammu_model extends Gammu_model {
 
 		// check if wap msg
 		if (isset($data['type']) && $data['type']==='waplink') {
-			log_message('error',"Non-gammu alternate gateways DO NOT support WAP link sending!");
+			log_message('error','Non-gammu alternate gateways DO NOT support WAP link sending!');
 			return ;
 		}
 
 		//check empty message
-		if (trim($data['message']) === "") {
-			log_message('error',"Cannot send empty message!");
+		if (trim($data['message']) === '') {
+			log_message('error','Cannot send empty message!');
 			return;
 		};
 
@@ -84,11 +84,11 @@ class Nongammu_model extends Gammu_model {
 		}
 
 		$gateway = substr(get_class($this),0,-6);
-		log_message('debug',"SMS via gateway \"$gateway\" to ".$data['dest']." length ".strlen($data['message'])." chars");
+		log_message('debug',"SMS via gateway \"$gateway\" to ".$data['dest'].' length '.strlen($data['message']).' chars');
 
 		$ret=$this->really_send_messages($data);
 		if(is_string($ret)){
-			log_message('error',"Message failed via gateway \"$gateway\" to ".$data['dest']." Reason: ".$ret);
+			log_message('error',"Message failed via gateway \"$gateway\" to ".$data['dest'].' Reason: '.$ret);
 			$this->save_sent_messages($data,$ret);
 			return;
 		};
@@ -110,7 +110,7 @@ class Nongammu_model extends Gammu_model {
 
 	function really_send_messages($data)
 	{
-		return "Error. Method really_send_messages not redefined in Class ".get_class($this)."!!!";
+		return 'Error. Method really_send_messages not redefined in Class '.get_class($this).'!!!';
 	}
 
 	/**
@@ -126,14 +126,14 @@ class Nongammu_model extends Gammu_model {
 	function enqueue_messages($tmp_data)
 	{
 		// remove spaces and dashes if any
-		$tmp_data['dest'] = str_replace(" ", "", $tmp_data['dest']);
-		$tmp_data['dest'] = str_replace("-", "", $tmp_data['dest']);
+		$tmp_data['dest'] = str_replace(' ', '', $tmp_data['dest']);
+		$tmp_data['dest'] = str_replace('-', '', $tmp_data['dest']);
 
 		$data = array (
 			'InsertIntoDB' => date('Y-m-d H:i:s'),
 			'SendingDateTime' => $tmp_data['date'],
 			'DestinationNumber' => $tmp_data['dest'],
-			'Coding' => ($tmp_data['coding']==='default'?"Default_No_Compression":"Unicode_No_Compression"),
+			'Coding' => ($tmp_data['coding']==='default'?'Default_No_Compression':'Unicode_No_Compression'),
 			'Class' => $tmp_data['class'],
 			'CreatorID' => $tmp_data['CreatorID'],
 			'SenderID' => $tmp_data['SenderID'],
@@ -146,7 +146,7 @@ class Nongammu_model extends Gammu_model {
 		$this->db->insert('outbox', $data);
 		$this->db->insert('user_outbox', array('id_outbox'=>$this->db->insert_id(),
 			'id_user'=>$tmp_data['uid']));
-		log_message('debug',"Message saved to outbox dest:".$tmp_data['dest']);
+		log_message('debug','Message saved to outbox dest:'.$tmp_data['dest']);
 	}
 
 	/**
@@ -160,21 +160,21 @@ class Nongammu_model extends Gammu_model {
 	* @param	array $data
 	* @return   void
 	**/
-	function save_sent_messages($tmp_data,$err_desc="")
+	function save_sent_messages($tmp_data,$err_desc='')
 	{
 		$data = array (
 			'InsertIntoDB' => date('Y-m-d H:i:s'),
 			'SendingDateTime' => $tmp_data['date'],
 			'DestinationNumber' => $tmp_data['dest'],
-			'Coding' => ($tmp_data['coding']==='default'?"Default_No_Compression":"Unicode_No_Compression"),
+			'Coding' => ($tmp_data['coding']==='default'?'Default_No_Compression':'Unicode_No_Compression'),
 			'Class' => $tmp_data['class'],
 			'CreatorID' => $tmp_data['CreatorID'],
 			'Text' => '',
 			'UDH' => '',
 			'SenderID' => strval($tmp_data['SenderID']),
-			'TextDecoded' => $tmp_data['message'].($err_desc===""?'':' / '.$err_desc),
+			'TextDecoded' => $tmp_data['message'].($err_desc===''?'':' / '.$err_desc),
 			'RelativeValidity' => $tmp_data['validity'],
-			'Status' => ($err_desc===""?'SendingOK':'SendingError'),
+			'Status' => ($err_desc===''?'SendingOK':'SendingError'),
 			'SequencePosition' => 1,
 			'id_folder' => 3
 		);
@@ -193,14 +193,14 @@ class Nongammu_model extends Gammu_model {
 		$this->db->insert('sentitems', $data);
 		$this->db->insert('user_sentitems', array('id_sentitems'=>$data['ID'], 'id_user'=>$tmp_data['uid']));
 		if(array_key_exists('id_outbox',$tmp_data)){
-		log_message('debug',"Deleting from outbox message ID=".$tmp_data['id_outbox']);
+		log_message('debug','Deleting from outbox message ID='.$tmp_data['id_outbox']);
 		$this->db->where('ID', $tmp_data['id_outbox']);
 			$this->db->delete('outbox');
 			$this->db->where('id_outbox', $tmp_data['id_outbox']);
 			$this->db->delete('user_outbox');
 		};
 		$this->db->trans_commit();
-		log_message('debug',"Message saved to sentitems dest:".$tmp_data['dest']);
+		log_message('debug','Message saved to sentitems dest:'.$tmp_data['dest']);
 	}
 
 	// hook function for Alternate Gateways
@@ -208,22 +208,22 @@ class Nongammu_model extends Gammu_model {
 	function process_outbox_queue()
 	{
 		$gateway = substr(get_class($this),0,-6);
-		log_message('debug',"Processing outbox queue in gateway ".$gateway);
+		log_message('debug','Processing outbox queue in gateway '.$gateway);
 		$this->db->from('outbox');
 		$this->db->where('SendingDateTime <=',date('Y-m-d H:i:s'));
 		$this->db->order_by('SendingDateTime', 'ASC');
 		$res=$this->db->get();
 		if($res->num_rows() ===0){
-			log_message('debug',"Nothing to process in outbox queue.");
+			log_message('debug','Nothing to process in outbox queue.');
 			return;
 		};
-		log_message('debug',"Processing ".$res->num_rows()." messages in outbox queue.");
+		log_message('debug','Processing '.$res->num_rows().' messages in outbox queue.');
 		foreach ($res->result_array() as $row)
 		{
 			$data = array (
 				'date' => $row['SendingDateTime'],
 				'dest' => $row['DestinationNumber'],
-				'coding' => ($row['Coding']==="Default_No_Compression"?'default':'unicode'),
+				'coding' => ($row['Coding']==='Default_No_Compression'?'default':'unicode'),
 				'class' => $row['Class'],
 				'CreatorID' => $row['CreatorID'],
 				'SenderID' => $row['SenderID'],
@@ -236,17 +236,17 @@ class Nongammu_model extends Gammu_model {
 			$this->db->where('id_outbox',$row['ID']);
 			$res2=$this->db->get();
 			if ($res2->num_rows() !==1){
-				log_message('error',"outbox ID=".$row['ID']." not found in user_outbox. Sending as user 1.");
+				log_message('error','outbox ID='.$row['ID'].' not found in user_outbox. Sending as user 1.');
 			$data['uid']=1;
 			}else{
 				$data['uid']=$res2->row('id_user');
 			};
 
 			log_message('debug',"SMS via gateway \"$gateway\" to ".$data['dest'].
-								" length ".strlen($data['message'])." chars");
+								' length '.strlen($data['message']).' chars');
 			$ret=$this->really_send_messages($data);
 			if(is_string($ret)){
-				log_message('error',"Message failed via gateway \"$gateway\" to ".$data['dest']." Reason: ".$ret);
+				log_message('error',"Message failed via gateway \"$gateway\" to ".$data['dest'].' Reason: '.$ret);
 				$this->save_sent_messages($data,$ret);
 				return;
 			};

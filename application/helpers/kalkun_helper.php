@@ -8,8 +8,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 function DNDcheck($mobileno)
 {
 	$mobileno = substr($mobileno, -10, 10);
-	$url = "http://www.nccptrai.gov.in/nccpregistry/saveSearchSub.misc";
-	$postString = "phoneno=" . $mobileno;
+	$url = 'http://www.nccptrai.gov.in/nccpregistry/saveSearchSub.misc';
+	$postString = 'phoneno=' . $mobileno;
 	$request = curl_init($url);
 	curl_setopt($request, CURLOPT_HEADER, 0);
 	//curl_setopt($request , CURLOPT_PROXY , '10.3.100.211:8080' );
@@ -20,12 +20,12 @@ function DNDcheck($mobileno)
 	$response = curl_exec($request);
 	curl_close ($request);
 
-	return (is_int(strpos(strtolower(strip_tags($response)), "number is not")) ? false : true);
+	return (is_int(strpos(strtolower(strip_tags($response)), 'number is not')) ? false : true);
 }
 
 function filter_data($data)
 {
-	if ( ! isset($data)) return "<i>Unknown</i>";
+	if ( ! isset($data)) return '<i>Unknown</i>';
 	else return $data;
 }
 
@@ -85,7 +85,7 @@ function nice_date($str, $option=NULL)
 			} else {
 				$text = lang('kalkun_nicedate_ago');
 			}
-			return str_replace("%nicedate%", $res, $text);
+			return str_replace('%nicedate%', $res, $text);
 		}
 	}
 }
@@ -103,11 +103,11 @@ function get_modem_status($status, $tolerant)
 	//$diff = abs($now-$timestamp);
 	if($timestamp>$now)
 	{
-		return "connect";
+		return 'connect';
 	}
 	else
 	{
-		return "disconnect";
+		return 'disconnect';
 	}
 }
 
@@ -119,8 +119,8 @@ function message_preview($str, $n)
 
 function showtags($msg)
 {
-	$msg = preg_replace("/</","&lt;",$msg);
-	$msg = preg_replace("/>/","&gt;",$msg);
+	$msg = preg_replace('/</','&lt;',$msg);
+	$msg = preg_replace('/>/','&gt;',$msg);
 	return $msg;
 }
 
@@ -173,8 +173,8 @@ function get_hour()
 	for($i=0;$i<24;$i++)
 	{
 		$hour = $i;
-		if($hour<10) $hour = "0".$hour;
-		echo "<option value=\"".$hour."\">".$hour."</option>";
+		if($hour<10) $hour = '0'.$hour;
+		echo '<option value="'.$hour.'">'.$hour.'</option>';
 	}
 }
 
@@ -183,8 +183,8 @@ function get_minute()
 	for($i=0;$i<60;$i=$i+5)
 	{
 		$min = $i;
-		if($min<10) $min = "0".$min;
-		echo "<option value=\"".$min."\">".$min."</option>";
+		if($min<10) $min = '0'.$min;
+		echo '<option value="'.$min.'">'.$min.'</option>';
 	}
 }
 
@@ -298,7 +298,7 @@ function is_null_loose($input) {
 	// doing $input == NULL is like doing 'empty($input)' except that
 	// empty() returns true if the value is "0".
 	// So in that case, return FALSE so that we can mimic '$input == NULL'
-	if (isset($input) && is_string($input) && $input === "0") {
+	if (isset($input) && is_string($input) && $input === '0') {
 		return FALSE;
 	}
 	return empty($input);

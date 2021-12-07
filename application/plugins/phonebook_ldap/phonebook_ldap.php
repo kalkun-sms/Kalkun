@@ -20,7 +20,7 @@ function phonebook_ldap_initialize()
 }
 
 // Add hook for contact menu
-add_action("phonebook.contact.get", "phonebook_ldap", 10);
+add_action('phonebook.contact.get', 'phonebook_ldap', 10);
 
 /**
 * Function called when plugin first activated
@@ -82,24 +82,24 @@ function phonebook_ldap($number)
 	// bind to the LDAP server specified above
 	$bd = ldap_bind($conn, $config['username'], $config['password']);
 	if(!$bd) return FALSE;
-	$justthese = array("ou", "sn", "givenname", "telephonenumber");
-	$result = ldap_search($conn, $config['dn'], "(&(objectClass=user)(objectCategory=person))", $justthese);
+	$justthese = array('ou', 'sn', 'givenname', 'telephonenumber');
+	$result = ldap_search($conn, $config['dn'], '(&(objectClass=user)(objectCategory=person))', $justthese);
 
 	//Create result set
 	$entries = ldap_get_entries($conn, $result);
 	$z=0;
-	for ($i=0; $i < $entries["count"]; $i++)
+	for ($i=0; $i < $entries['count']; $i++)
 	{
 		// phone number or name not found, continue iteration
-		if (!array_key_exists("telephonenumber", $entries[$i]) OR !array_key_exists("givenname", $entries[$i]))
+		if (!array_key_exists('telephonenumber', $entries[$i]) OR !array_key_exists('givenname', $entries[$i]))
 		{
 			continue;
 		}
-		$users[$z]['name'] = $entries[$i]["givenname"][0];
-		$users[$z]['id'] = $entries[$i]["telephonenumber"][0];
-		if (array_key_exists("sn", $entries[$i]))
+		$users[$z]['name'] = $entries[$i]['givenname'][0];
+		$users[$z]['id'] = $entries[$i]['telephonenumber'][0];
+		if (array_key_exists('sn', $entries[$i]))
 		{
-			$users[$z]['name'] .= $entries[$i]["sn"][0];
+			$users[$z]['name'] .= $entries[$i]['sn'][0];
 		}
 		$z++;
 	}
