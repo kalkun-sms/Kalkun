@@ -19,53 +19,52 @@
  * @category	Controllers
  */
 class Kalkun extends MY_Controller {
-
 	/**
 	 * Constructor
 	 *
 	 * @access	public
-	 */	
+	 */
 	function __construct()
 	{
 		parent::__construct();
-	}		
-		
+	}
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Index/Dashboard
 	 *
 	 * Display dashboard page
 	 *
-	 * @access	public   		 
-	 */		
-	function index() 
+	 * @access	public
+	 */
+	function index()
 	{
 		$this->load->model('Phonebook_model');
 		$data['main'] = 'main/dashboard/home';
 		$data['title'] = 'Dashboard';
-        $data['data_url'] = site_url('kalkun/get_statistic');
-        if($this->config->item('disable_outgoing'))
-        {
-          $data['alerts'][] = '<div class="warning">'.lang('kalkun_outgoing_sms_disabled_contact_sysadmin').'</div>';
-        }
+		$data['data_url'] = site_url('kalkun/get_statistic');
+		if($this->config->item('disable_outgoing'))
+		{
+		  $data['alerts'][] = '<div class="warning">'.lang('kalkun_outgoing_sms_disabled_contact_sysadmin').'</div>';
+		}
 		$this->load->view('main/layout', $data);
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * About
 	 *
 	 * Display about page
 	 *
-	 * @access	public   		 
+	 * @access	public
 	 */
 	function about()
 	{
 		$data['main'] = 'main/about';
-		$this->load->view('main/layout', $data);		
-	}	
+		$this->load->view('main/layout', $data);
+	}
 
 	// --------------------------------------------------------------------
 
@@ -160,7 +159,7 @@ class Kalkun extends MY_Controller {
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Notification
 	 *
@@ -168,61 +167,61 @@ class Kalkun extends MY_Controller {
 	 * Modem status
 	 * Used by the autoload function and called via AJAX.
 	 *
-	 * @access	public   		 
-	 */		
+	 * @access	public
+	 */
 	function notification()
 	{
 		$this->load->view('main/notification');
-	}	
+	}
 
 	// --------------------------------------------------------------------
-       
-    /**
+
+	/**
 	 * Unread Count
 	 *
 	 * Show unread inbox/spam/draft and alert when new sms arrived
 	 * Used by the autoload function and called via AJAX.
 	 *
-	 * @access	public   		 
+	 * @access	public
 	 */
-    function unread_count()
-    {
-        $tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE , 'uid' => $this->session->userdata('id_user')))->num_rows();
-		$in =  ($tmp_unread > 0)? "(".$tmp_unread.")" : "";	
-        
-        $tmp_unread = 0;
+	function unread_count()
+	{
+		$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'uid' => $this->session->userdata('id_user')))->num_rows();
+		$in =  ($tmp_unread > 0)? "(".$tmp_unread.")" : "";
+
+		$tmp_unread = 0;
 		$draft =  ($tmp_unread > 0)? "(".$tmp_unread.")" : "";
-        
-        $tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE , 'id_folder' => '6' ,'uid' => $this->session->userdata('id_user')) )->num_rows();
+
+		$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => '6', 'uid' => $this->session->userdata('id_user')) )->num_rows();
 		$spam =  ($tmp_unread > 0)? "(".$tmp_unread.")" : "";
-        
-        echo $in. '/' . $draft . '/' . $spam;
-    }
+
+		echo $in. '/' . $draft . '/' . $spam;
+	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Add Folder
 	 *
 	 * Add custom folder
 	 *
-	 * @access	public   		 
-	 */				
+	 * @access	public
+	 */
 	function add_folder()
 	{
-		$this->Kalkun_model->add_folder(); 
+		$this->Kalkun_model->add_folder();
 		redirect($this->input->post('source_url'));
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Rename Folder
 	 *
 	 * Rename custom folder
 	 *
-	 * @access	public   		 
-	 */	
+	 * @access	public
+	 */
 	function rename_folder()
 	{
 		$this->Kalkun_model->rename_folder();
@@ -230,29 +229,29 @@ class Kalkun extends MY_Controller {
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Delete Folder
 	 *
 	 * Delete custom folder
 	 *
-	 * @access	public   		 
-	 */		
+	 * @access	public
+	 */
 	function delete_folder($id_folder=NULL)
 	{
 		$this->Kalkun_model->delete_folder($id_folder);
 		redirect('/', 'refresh');
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Settings
 	 *
 	 * Display and handle change on settings/user preference
 	 *
-	 * @access	public   		 
-	 */	
+	 * @access	public
+	 */
 	function settings()
 	{
 		$this->load->helper('country_dial_code_helper');
@@ -260,23 +259,23 @@ class Kalkun extends MY_Controller {
 		$type = $this->uri->segment(2);
 		$valid_type = array('general', 'personal', 'appearance', 'password', 'save', 'filters');
 		if(!in_array($type, $valid_type)) show_404();
-		
-		if($_POST && $type==='save') { 	
+
+		if($_POST && $type==='save') {
 			$option = $this->input->post('option');
 			// check password
-			if($option==='password' && !password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password'))) 
+			if($option==='password' && !password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password')))
 			{
 				$this->session->set_flashdata('notif', lang('kalkun_wrong_password'));
 				redirect('settings/'.$option);
 			}
-			else if($option==='personal') 
+			else if($option==='personal')
 			{
 				if($this->input->post('username')!==$this->session->userdata('username'))
 				{
-					if($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows>0) 
+					if($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows>0)
 					{
 						$this->session->set_flashdata('notif', lang('kalkun_username_exists'));
-						redirect('settings/'.$option);					
+						redirect('settings/'.$option);
 					}
 				}
 			}
@@ -285,30 +284,29 @@ class Kalkun extends MY_Controller {
 			redirect('settings/'.$option);
 		}
 
-        if($type === 'filters')
-        {
-            $data['filters'] = $this->Kalkun_model->get_filters($this->session->userdata('id_user'));
-            $data['my_folders'] = $this->Kalkun_model->get_folders('all');
-        }
+		if($type === 'filters')
+		{
+			$data['filters'] = $this->Kalkun_model->get_filters($this->session->userdata('id_user'));
+			$data['my_folders'] = $this->Kalkun_model->get_folders('all');
+		}
 
 		$data['main'] = 'main/settings/setting';
 		$data['settings'] = $this->Kalkun_model->get_setting();
 		$data['type'] = 'main/settings/'.$type;
-		
+
 		$this->load->view('main/layout', $data);
 	}
 
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Delete Filter
 	 *
 	 * @access	public
-	 */		
+	 */
 	function delete_filter($id_filter=NULL)
 	{
 		$this->Kalkun_model->delete_filter($id_filter);
 	}
-	
-}
 
+}

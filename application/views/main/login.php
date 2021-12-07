@@ -1,4 +1,4 @@
-<?php 
+<?php
 $this->load->helper('html');
 echo doctype('xhtml1-trans');?>
 <html>

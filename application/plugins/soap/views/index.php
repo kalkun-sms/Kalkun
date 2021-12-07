@@ -60,7 +60,7 @@ $this->load->view('js_remote_access');
 			<th align="center" class="nice-table-right" colspan="3">Control</th>
 		</tr>
 	    
-		<?php 
+		<?php
 		if($remote_access->num_rows()===0)
 		{
 			echo "<tr><td colspan=\"8\" style=\"border-left: 1px solid #000; border-right: 1px solid #000;\">No remote access found.</td></tr>";
@@ -80,10 +80,10 @@ $this->load->view('js_remote_access');
 				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/soap/delete_remote_access/<?php echo $tmp->id_remote_access;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 			</tr>
 			
-			<?php 
+			<?php
 			$number++;
 			endforeach;
-		} 
+		}
 		?>
 		<tr>
 			<th colspan="8" class="nice-table-footer"><div id="simplepaging"><?php echo $this->pagination->create_links();?></div></th>	
@@ -124,7 +124,7 @@ $this->load->view('js_remote_access');
 			<th>Notification Value</th>
 			<th align="center" class="nice-table-right" colspan="2">Control</th>
 		</tr>
-		<?php 
+		<?php
 		if(count($notification)==0)
 		{
 			echo "<tr><td colspan=\"4\" style=\"border-left: 1px solid #000; border-right: 1px solid #000;\">No Notification found.</td></tr>";
@@ -140,8 +140,8 @@ $this->load->view('js_remote_access');
 				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/delete_notification/"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 			</tr>
 			
-			<?php 
-		} 
+			<?php
+		}
 		?>
 		<tr>
 			<th colspan="8" class="nice-table-footer"><div id="simplepaging"></div></th>	

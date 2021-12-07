@@ -6,8 +6,8 @@
 
 <!-- Move To Dialog -->
 <div id="movetodialog" title="<?php echo lang('kalkun_select_folder');?>" class="dialog" style="background: #cce9f2;">
-<?php 
-if($this->uri->segment(2)=='my_folder') $folder = $this->Kalkun_model->get_folders('exclude', $this->uri->segment(4)); 
+<?php
+if($this->uri->segment(2)=='my_folder') $folder = $this->Kalkun_model->get_folders('exclude', $this->uri->segment(4));
 else $folder = $this->Kalkun_model->get_folders('all');
 ?>
 <?php foreach($folder->result() as $folder):?>
@@ -71,9 +71,9 @@ if($this->uri->segment(2)=='my_folder')
         <?php if( $this->uri->segment(4)!='6'):?>
 		<div id="right_column">
 			<?php
-			if($this->uri->segment(3)=='inbox') echo "<span class=\"currenttab\">".lang('kalkun_inbox')."</span>"; 
+			if($this->uri->segment(3)=='inbox') echo "<span class=\"currenttab\">".lang('kalkun_inbox')."</span>";
 			else echo anchor('messages/my_folder/inbox/'.$this->uri->segment(4).'', lang('kalkun_inbox'));
-			
+
 			if($this->uri->segment(3)=='sentitems') echo "<span class=\"currenttab\">".lang('kalkun_sentitems')."</span>";
 			else echo anchor('messages/my_folder/sentitems/'.$this->uri->segment(4).'', lang('kalkun_sentitems'));?>
 		</div>
@@ -82,14 +82,14 @@ if($this->uri->segment(2)=='my_folder')
 	<?php } ?>
 
 	<div id="message_holder">
-	<?php 
+	<?php
 	if($this->uri->segment(2)=='conversation' || $this->uri->segment(2)=='search')
 	{
 		$this->load->view('main/messages/conversation');
 		$this->load->view('js_init/message/js_object');
 		$this->load->view('js_init/message/js_conversation');
 	}
-	else 
+	else
 	{
 		$this->load->view('main/messages/message_list');
 		$this->load->view('js_init/message/js_object');

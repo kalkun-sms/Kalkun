@@ -10,4 +10,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 // phpcs:enable
 $config['allow_user_with_no_package'] = TRUE;
-

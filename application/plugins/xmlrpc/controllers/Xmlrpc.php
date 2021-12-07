@@ -21,25 +21,24 @@
 include_once(APPPATH.'plugins/Plugin_controller.php');
 
 class Xmlrpc extends Plugin_controller {
-	
 	function __construct()
 	{
 		parent::__construct(FALSE);
 		$this->load->library('xmlrpc');
 		$this->load->library('xmlrpcs');
 	}
-	
+
 	/**
 	* XMLRPC server for sending sms
 	*
 	*/
 	function send_sms()
-	{	
+	{
 		$config['functions']['send_sms'] = array('function' => 'Xmlrpc.rpc_send_sms');
 		$this->xmlrpcs->initialize($config);
 		$this->xmlrpcs->serve();
 	}
-	
+
 	/**
 	* RPC for sending sms
 	*
@@ -48,7 +47,7 @@ class Xmlrpc extends Plugin_controller {
 	{
 		$this->load->model(array('Kalkun_model', 'Message_model'));
 		$parameters = $request->output_parameters();
-		
+
 		$data['coding'] = 'default';
 		$data['class'] = '1';
 		$data['dest'] = $parameters[0];
@@ -57,10 +56,10 @@ class Xmlrpc extends Plugin_controller {
 		$data['delivery_report'] = 'default';
 		$data['uid'] = 1;
 		$sms = $this->Message_model->send_messages($data);
-		
+
 		return $this->xmlrpc->send_response($sms);
 	}
-	
+
 	/**
 	* Sample XMLRPC client example
 	* that consume send sms function
@@ -68,12 +67,12 @@ class Xmlrpc extends Plugin_controller {
 	function send_sms_client()
 	{
 		$this->load->helper('url');
-		$server_url = site_url('plugin/xmlrpc/send_sms');		
-		
+		$server_url = site_url('plugin/xmlrpc/send_sms');
+
 		$this->xmlrpc->server($server_url, 80);
 		$this->xmlrpc->method('send_sms');
 		//$this->xmlrpc->set_debug(TRUE);
-		
+
 		$request = array('1234', 'Testing XMLRPC');
 		$this->xmlrpc->request($request);
 

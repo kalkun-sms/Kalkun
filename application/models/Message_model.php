@@ -20,13 +20,12 @@
  * @subpackage	Messages
  * @category	Models
  */
-class Message_model extends CI_Model { 
-	
+class Message_model extends CI_Model {
 	/**
 	 * Constructor
 	 *
 	 * @access	public
-	 */	
+	 */
 	function __construct()
 	{
 		parent::__construct();
@@ -36,12 +35,11 @@ class Message_model extends CI_Model {
 		$this->load->model('gateway/'.$gateway_class,'gate');
 		$this->gateway = $this->gate;
 	}
-	
-	public function __call($name, $arguments)
-    {
-    	$res = call_user_func_array(array($this->gateway, $name), $arguments);    	
-    	return $res;
-    }
-    
-}
 
+	public function __call($name, $arguments)
+	{
+		$res = call_user_func_array(array($this->gateway, $name), $arguments);
+		return $res;
+	}
+
+}

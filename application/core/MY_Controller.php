@@ -21,7 +21,6 @@
  * @category	Controllers
  */
 class MY_Controller  extends CI_Controller  {
-	
 	/**
 	 * Constructor
 	 *
@@ -30,12 +29,12 @@ class MY_Controller  extends CI_Controller  {
 	function __construct($login=TRUE)
 	{
 		parent::__construct();
-		
+
 		// installation mode
-		if(file_exists("install")) redirect('install');	
-		
+		if(file_exists("install")) redirect('install');
+
 		$this->load->library('session');
-		
+
 		if($login)
 		{
 			// session check
@@ -50,37 +49,37 @@ class MY_Controller  extends CI_Controller  {
 				$this->session->set_flashdata('bef_login_post_data', $this->input->post());
 				redirect('login');
 			}
-			
+
 			$this->load->model('Kalkun_model');
-			
+
 			// language
 			$this->load->helper('language');
 			$lang = $this->Kalkun_model->get_setting()->row('language');
 			$this->lang->load('kalkun', $lang);
-				
+
 			// Message routine
 			$this->_message_routine();
 		}
 	}
-		
+
 	function _message_routine()
 	{
 		$this->load->model('User_model');
 		$this->load->model('Message_model');
 		$uid = $this->session->userdata("id_user");
-		
+
 		$outbox = $this->Message_model->get_user_outbox($uid);
 		foreach ($outbox->result() as $tmp)
 		{
 			$id_message = $tmp->id_outbox;
-			
+
 			// if still on outbox, means message not delivered yet
 			if ($this->Message_model->get_messages(array('id_message' => $id_message, 'type' => 'outbox'))->num_rows()>0)
-			{ 
+			{
 				// do nothing
 			}
 			// if exist on sentitems then update sentitems ownership, else delete user_outbox
-			else if ($this->Message_model->get_messages(array('id_message' => $id_message, 'type' => 'sentitems'))->num_rows()>0) 
+			else if ($this->Message_model->get_messages(array('id_message' => $id_message, 'type' => 'sentitems'))->num_rows()>0)
 			{
 				$this->Message_model->insert_user_sentitems($id_message, $uid);
 				$this->Message_model->delete_user_outbox($id_message);
@@ -92,4 +91,3 @@ class MY_Controller  extends CI_Controller  {
 		}
 	}
 }
-

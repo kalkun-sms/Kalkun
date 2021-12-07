@@ -1,4 +1,4 @@
-<?php 
+<?php
 $this->load->helper('form');
 if($this->uri->segment(1)=='phonebook') :
 echo form_open("phonebook", array('class' => 'sms_search_form')); ?>
@@ -9,7 +9,7 @@ echo form_open("phonebook", array('class' => 'sms_search_form')); ?>
 </tr>
 </table>
 <?php echo form_close();
-else: 
+else:
 echo form_open("messages/query", array('class' => 'sms_search_form')); ?>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr valign="top">

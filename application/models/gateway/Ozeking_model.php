@@ -14,7 +14,7 @@
 /**
  * Ozeking_model Class
  *
- * Handle all messages database activity 
+ * Handle all messages database activity
  * for Ozeki NG <http://ozekisms.com>
  *
  * @package		Kalkun
@@ -24,7 +24,6 @@
 require_once('Nongammu_model.php');
 
 class Ozeking_model extends Nongammu_model {
-	
 	/**
 	 * Constructor
 	 *
@@ -34,15 +33,15 @@ class Ozeking_model extends Nongammu_model {
 	{
 		parent::__construct();
 	}
-	
-    // --------------------------------------------------------------------
-	
+
+	// --------------------------------------------------------------------
+
 	/**
 	 * Send Messages (Still POC)
 	 * Using HTTP API <http://ozekisms.com/index.php?ow_page_number=413>
-	 * 
+	 *
 	 * @return void
-	 */	
+	 */
 	function really_send_messages($data)
 	{
 		$gateway = $this->config->item('gateway');
@@ -50,4 +49,3 @@ class Ozeking_model extends Nongammu_model {
 			'&password='.$gateway['password'].'&messagetype=SMS:TEXT&recipient='.$data['dest'].'&messagedata='.urlencode($data['message']));
 	}
 }
-

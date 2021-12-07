@@ -24,7 +24,7 @@ if(count($plugins)>0)
 		else
 		{
 			echo "<div style=\"float: left\"><h3 style=\"color: #000\">".$tmp['plugin_name']."</h3></div>";
-		}		
+		}
 ?>
 		<div style="float: right; margin-top: 15px;">
 			<?php if ($type=="installed"):?>
@@ -40,7 +40,7 @@ if(count($plugins)>0)
 		</small></div>
 		<p><?php echo $tmp['plugin_description'];?></p>
 		<hr />
-<?php 
+<?php
 	}
 }
 else

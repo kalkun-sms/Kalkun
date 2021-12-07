@@ -14,7 +14,7 @@
 /**
  * Clickatell_model Class
  *
- * Handle all messages database activity 
+ * Handle all messages database activity
  * for Clickatell <http://clickatell.com>
  *
  * @package		Kalkun
@@ -24,7 +24,6 @@
 require_once('Nongammu_model.php');
 
 class Clickatell_model extends Nongammu_model {
-	
 	/**
 	 * Constructor
 	 *
@@ -34,21 +33,21 @@ class Clickatell_model extends Nongammu_model {
 	{
 		parent::__construct();
 		$this->gateway = $this->config->item('gateway');
-		
+
 		if(empty($this->gateway['url']))
 		{
 			$this->gateway['url'] = 'http://api.clickatell.com';
 		}
 	}
-	
-    // --------------------------------------------------------------------
-	
+
+	// --------------------------------------------------------------------
+
 	/**
 	 * Send Messages (Still POC)
 	 * Using HTTP API <http://www.clickatell.com/apis-scripts/apis/http-s/>
-	 * 
+	 *
 	 * @return void
-	 */	
+	 */
 	function really_send_messages($data)
 	{
 		$gateway = $this->gateway;
@@ -56,4 +55,3 @@ class Clickatell_model extends Nongammu_model {
 			'&password='.$gateway['password'].'&api_id='.$gateway['api_id'].'&to='.$data['dest'].'&text='.urlencode($data['message']));
 	}
 }
-

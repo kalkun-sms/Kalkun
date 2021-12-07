@@ -26,14 +26,14 @@
         </tr>
 
         <?php
-        if($stoplist->num_rows()===0)
-        {
-            echo "<tr><td colspan=\"6\" style=\"border-left: 1px solid #000; border-right: 1px solid #000;\">No STOP record found.</td></tr>";
-        }
-        else
-        {
-            foreach($stoplist->result() as $tmp):
-            ?>
+		if($stoplist->num_rows()===0)
+		{
+			echo "<tr><td colspan=\"6\" style=\"border-left: 1px solid #000; border-right: 1px solid #000;\">No STOP record found.</td></tr>";
+		}
+		else
+		{
+			foreach($stoplist->result() as $tmp):
+			?>
             <tr id="<?php echo $tmp->id_stop_manager;?>">
                 <td class="nice-table-left"><?php echo $number;?></td>
                 <td class="destination_number"><?php echo $tmp->destination_number;?></td>
@@ -48,16 +48,16 @@
             </tr>
 
             <?php
-            $number++;
-            endforeach;
-        }
-        ?>
+			$number++;
+			endforeach;
+		}
+		?>
         <tr>
             <th colspan="6" class="nice-table-footer">
                 <div id="simplepaging">
                 <?php if (is_null($this->input->post('search_name')))
-                    echo $this->pagination->create_links();
-                ?>
+					echo $this->pagination->create_links();
+				?>
                 </div>
             </th>
         </tr>

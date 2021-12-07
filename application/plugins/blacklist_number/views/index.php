@@ -43,7 +43,7 @@
 			<th class="nice-table-right" colspan="2">Control</th>
 		</tr>
 	    
-		<?php 
+		<?php
 		if($blacklist->num_rows()===0)
 		{
 			echo "<tr><td colspan=\"5\" style=\"border-left: 1px solid #000; border-right: 1px solid #000;\">No blacklist number found.</td></tr>";
@@ -60,10 +60,10 @@
 				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/blacklist_number/delete/<?php echo $tmp->id_blacklist_number;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 			</tr>
 			
-			<?php 
+			<?php
 			$number++;
 			endforeach;
-		} 
+		}
 		?>
 		<tr>
 			<th colspan="5" class="nice-table-footer"><div id="simplepaging"><?php echo $this->pagination->create_links();?></div></th>	

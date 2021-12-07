@@ -39,7 +39,7 @@
 });
 </script>
 
-<?php 
+<?php
 $uid = $this->session->userdata('id_user');
 $inbox = $this->Message_model->get_messages(array('type' => 'inbox', 'uid' => $uid))->num_rows();
 $outbox = $this->Message_model->get_messages(array('type' => 'outbox', 'uid' => $uid))->num_rows();
@@ -59,13 +59,13 @@ $trash = $trash_inbox + $trash_sentitems;
 
 <div style="float: left; width: 250px;">
 <h4><?php echo lang('kalkun_myfolder');?>: </h4>
-<?php  
+<?php
 foreach($this->Kalkun_model->get_folders('all')->result() as $val):
 $folder_count_inbox = $this->Message_model->get_messages(array('type' => 'inbox', 'id_folder' => $val->id_folder))->num_rows();
 $folder_count_sentitems = $this->Message_model->get_messages(array('type' => 'sentitems', 'id_folder' => $val->id_folder))->num_rows();
 $folder_count = $folder_count_inbox + $folder_count_sentitems;
 echo "<p><span>".$val->name.": </span>".$folder_count."</p>";
-endforeach;	
+endforeach;
 ?>
 </div>
 

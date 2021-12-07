@@ -19,36 +19,35 @@
  * @category	Models
  */
 class Sms_to_twitter_model extends CI_Model {
-	
 	function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	function check_token($uid)
 	{
 		$exist = FALSE;
 		$this->db->from('plugin_sms_to_twitter');
 		$this->db->where('id_user', $uid);
-		
+
 		if ($this->db->count_all_results() === 1)
 		{
 			$exist = TRUE;
 		}
 		return $exist;
 	}
-	
+
 	function save_token($param = array())
 	{
 		$this->db->set($param);
 		$this->db->insert('plugin_sms_to_twitter');
 	}
-	
+
 	function delete_token($uid)
 	{
-		$this->db->delete('plugin_sms_to_twitter', array('id_user' => $uid)); 
+		$this->db->delete('plugin_sms_to_twitter', array('id_user' => $uid));
 	}
-	
+
 	function get_token_by_phone($number)
 	{
 		$tokens = FALSE;
@@ -70,4 +69,3 @@ class Sms_to_twitter_model extends CI_Model {
 		return $tokens;
 	}
 }
-

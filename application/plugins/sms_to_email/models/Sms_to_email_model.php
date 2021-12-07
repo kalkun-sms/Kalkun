@@ -19,20 +19,19 @@
  * @category	Models
  */
 class Sms_to_email_model extends CI_Model {
-	
 	function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	function get_setting($uid)
 	{
 		$this->db->from('plugin_sms_to_email');
 		$this->db->where('id_user', $uid);
-		
+
 		return $this->db->get();
 	}
-	
+
 	function save_setting()
 	{
 		$this->db->set('email_id', $this->input->post('email_id'));
@@ -46,8 +45,7 @@ class Sms_to_email_model extends CI_Model {
 		else
 		{
 			$this->db->set('id_user', $this->session->userdata('id_user'));
-			$this->db->insert('plugin_sms_to_email');				
+			$this->db->insert('plugin_sms_to_email');
 		}
 	}
 }
-

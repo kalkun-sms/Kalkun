@@ -8,7 +8,7 @@
 	<li>
 	<?php echo anchor('messages/folder/inbox', lang('kalkun_inbox'));?> 
 	<span class="unread_inbox_notif">
-	<?php 
+	<?php
 	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'uid' => $this->session->userdata('id_user')))->num_rows();
 	if($tmp_unread > 0) echo " (".$tmp_unread.")";
 	?>
@@ -20,8 +20,8 @@
      <?php endif; ?>
     <li><?php echo anchor('messages/my_folder/inbox/6',lang('kalkun_spam')); ?>
     <span class="unread_spam_notif">
-	<?php 
-	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE,'id_folder' => '6', 'uid' => $this->session->userdata('id_user')))->num_rows();
+	<?php
+	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => '6', 'uid' => $this->session->userdata('id_user')))->num_rows();
 	if($tmp_unread > 0) echo " (".$tmp_unread.")";
 	?>
 	</span>
@@ -39,7 +39,7 @@
 	<ul>
 	<?php foreach($this->Kalkun_model->get_folders('all')->result() as $folder):?>
 	<li>
-	<?php echo anchor('messages/my_folder/inbox/'.$folder->id_folder, $folder->name); 
+	<?php echo anchor('messages/my_folder/inbox/'.$folder->id_folder, $folder->name);
 	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => $folder->id_folder))->num_rows();
 	if($tmp_unread > 0) echo " (".$tmp_unread.")";
 	?>
@@ -48,7 +48,7 @@
 	</div>
 </li>
 <li><?php echo  anchor('phonebook',lang('kalkun_phonebook')); ?></li>
-<?php 
+<?php
 $level = $this->session->userdata('level');
 if($level==='admin'):?>
 	<li><?php echo anchor('users',lang('tni_user_wordp')); ?></li>

@@ -208,4 +208,3 @@ $config['rest_enable_limits'] = FALSE;
 */
 // phpcs:enable
 $config['rest_ignore_http_accept'] = FALSE;
-

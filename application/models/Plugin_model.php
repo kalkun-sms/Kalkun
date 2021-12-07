@@ -14,19 +14,17 @@
 /**
  * Plugin_model Class
  *
- * Handle all plugin database activity 
+ * Handle all plugin database activity
  *
  * @package		Kalkun
  * @subpackage	Plugin
  * @category	Models
  */
 class Plugin_model extends CI_Model {
-	
 	function get_plugins()
 	{
 		$this->db->from('plugins');
-		return $this->db->get();	
+		return $this->db->get();
 	}
-	
-}
 
+}

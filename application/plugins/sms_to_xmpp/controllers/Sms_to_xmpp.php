@@ -21,13 +21,12 @@
 include_once(APPPATH.'plugins/Plugin_controller.php');
 
 class Sms_to_xmpp extends Plugin_controller {
-	
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->model('sms_to_xmpp_model', 'plugin_model');
 	}
-	
+
 	function index()
 	{
 		$data['title'] = 'XMPP Account Status';
@@ -36,7 +35,7 @@ class Sms_to_xmpp extends Plugin_controller {
 		$data['xmpp'] = $this->plugin_model->get_xmpp($this->session->userdata('id_user'));
 		$this->load->view('main/layout', $data);
 	}
-	
+
 	function add()
 	{
 		if ($_POST)
@@ -45,10 +44,10 @@ class Sms_to_xmpp extends Plugin_controller {
 			redirect('sms_to_xmpp');
 		}
 	}
-	
+
 	function delete()
 	{
 		$this->plugin_model->delete_xmpp($this->session->userdata('id_user'));
-		redirect('sms_to_xmpp');	
+		redirect('sms_to_xmpp');
 	}
 }

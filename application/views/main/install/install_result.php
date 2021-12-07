@@ -10,7 +10,7 @@
 <p>Removal status: 
 <?php
 	$rm = unlink('./install');
-	if($rm) echo "<span class=\"green\">SUCCESS</span>"; 
+	if($rm) echo "<span class=\"green\">SUCCESS</span>";
 	else echo "<span class=\"red\">FAILED</span> (You have to remove it manually)";
 ?>
 </p>

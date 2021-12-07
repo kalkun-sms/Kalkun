@@ -12,7 +12,7 @@
 
 <?php echo form_open_multipart('messages/compose_process', array('id' => 'composeForm', 'class' => 'composeForm'));?>
 <table width="100%">
-<?php  
+<?php
 $type = array('inbox', 'sentitems');
 
 // Reply to option
@@ -23,7 +23,7 @@ if($val_type=='reply'): ?>
 <?php
 $phone = $dest;
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $phone));
-if($qry->num_rows()!==0): 
+if($qry->num_rows()!==0):
 echo $qry->row('Name')." <".$phone.">";
 else:
 echo $phone;
@@ -46,7 +46,7 @@ endif;
 <td>
 <?php
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $dest));
-if($qry->num_rows()!==0): 
+if($qry->num_rows()!==0):
 echo $qry->row('Name')." <".$dest.">";
 else:
 echo $dest;
@@ -185,7 +185,7 @@ else echo lang('kalkun_send_to').":";
 <input class="left_aligned" type="radio" id="stype1" name="smstype" value="normal" checked="checked" style="border: none;" />
 <label for="stype1"><?php echo lang('kalkun_sms_type_normal');?></label>
 <input type="radio" id="stype2" name="smstype" value="flash" style="border: none;"/>
-<label for="stype2"><?php echo lang('kalkun_sms_type_flash');?><?php //echo lang('kalkun_compose_send_as_flash'); ?></label>
+<label for="stype2"><?php echo lang('kalkun_sms_type_flash');?><?php //echo lang('kalkun_compose_send_as_flash');?></label>
 <input type="radio" id="stype3" name="smstype" value="waplink" style="border: none;"/>
 <label for="stype3"><?php echo lang('kalkun_sms_type_wap');?></label>
 <div style="float: right; text-align: right; padding-right: 10px;"><a href="javascript:void(0)"  id="canned_response"> <?php echo lang('kalkun_canned');?>...</a></div>
@@ -203,7 +203,7 @@ else echo lang('kalkun_send_to').":";
 <td>
 <?php if($val_type=='forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo $msg_id;?>" /> <?php endif;?>
 <textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;"   id="message" name="message">
-<?php 
+<?php
 if($val_type=='forward') echo $message;
 list($sig_option, $sig)=explode(';',$this->Kalkun_model->get_setting()->row('signature'));
 if($sig_option=='true') echo "\n\n".$sig; ?>

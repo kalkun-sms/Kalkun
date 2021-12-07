@@ -553,4 +553,4 @@ $config['proxy_ips'] = '';
 |
 */
 //
-$config['modules_locations'] = array(APPPATH.'plugins/' => '../plugins/',);
+$config['modules_locations'] = array(APPPATH.'plugins/' => '../plugins/', );

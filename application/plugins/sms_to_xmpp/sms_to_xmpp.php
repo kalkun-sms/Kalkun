@@ -26,35 +26,35 @@ add_action("message.incoming.before", "sms_to_xmpp", 17);
 * Function called when plugin first activated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_activate
-* 
+*
 */
 function sms_to_xmpp_activate()
 {
-    return true;
+	return true;
 }
 
 /**
 * Function called when plugin deactivated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_deactivate
-* 
+*
 */
 function sms_to_xmpp_deactivate()
 {
-    return true;
+	return true;
 }
 
 /**
 * Function called when plugin first installed into the database
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_install
-* 
+*
 */
 function sms_to_xmpp_install()
 {
@@ -67,7 +67,7 @@ function sms_to_xmpp_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH."plugins/sms_to_xmpp/media/".$db_prop['file']."_sms_to_xmpp.sql");
 	}
-    return true;
+	return true;
 }
 
 function sms_to_xmpp($sms)
@@ -75,7 +75,7 @@ function sms_to_xmpp($sms)
 	$config = sms_to_xmpp_initialize();
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
-	
+
 	list($code, $to) = explode(" ", $message);
 	$xmpp_code = $config['xmpp_code'];
 	$xmpp_message = trim(str_replace($config['xmpp_code'].' '.$to, '', $message));
@@ -83,17 +83,16 @@ function sms_to_xmpp($sms)
 	{
 		$CI =& get_instance();
 		$CI->load->model('sms_to_xmpp/sms_to_xmpp_model', 'plugin_model');
-				
+
 		// if xmpp account exist
 		$xmpp = $CI->plugin_model->get_xmpp_account_by_phone($number);
 		if (is_array($xmpp))
 		{
 			$CI->load->library('encrypt');
 			$xampp_pass = $CI->encrypt->decode($xmpp['xmpp_password']);
-			
+
 			exec($config['php_path']." ".$config['php_script']." ".$xmpp['xmpp_username']." ".
 				$xampp_pass." ".$xmpp['xmpp_host']." ".$xmpp['xmpp_server']." ".$to." ".$xmpp_message);
 		}
 	}
 }
-

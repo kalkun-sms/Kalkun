@@ -13,37 +13,37 @@
 * Function called when plugin first activated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_activate
-* 
+*
 */
 function jsonrpc_activate()
 {
-    return true;
+	return true;
 }
 
 /**
 * Function called when plugin deactivated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_deactivate
-* 
+*
 */
 function jsonrpc_deactivate()
 {
-    return true;
+	return true;
 }
 
 /**
 * Function called when plugin first installed into the database
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_install
-* 
+*
 */
 function jsonrpc_install()
 {
-    return true;
+	return true;
 }

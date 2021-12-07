@@ -12,4 +12,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $config['plugins_dir'] = APPPATH . 'plugins/';
-

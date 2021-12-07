@@ -68,7 +68,7 @@
 			<th align="center" class="nice-table-right" colspan="3">Control</th>
 		</tr>
 	    
-		<?php 
+		<?php
 		if($alert->num_rows()===0)
 		{
 			echo "<tr><td colspan=\"8\" style=\"border-left: 1px solid #000; border-right: 1px solid #000;\">No alert found.</td></tr>";
@@ -87,18 +87,18 @@
 				<td class="respond_message hidden"><?php echo $tmp->respond_message;?></td>	
 				<?php if($tmp->status=='false'):?>
 				<td><a href="<?php echo site_url();?>/plugin/server_alert/change_state/<?php echo $tmp->id_server_alert;?>" class="release"><img class="ui-icon ui-icon-locked" title="Release state" /></a></td>
-				<?php 
+				<?php
 				else: echo "<td>&nbsp;</td>";
-				endif; 
+				endif;
 				?>
 				<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>				
 				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/server_alert/delete/<?php echo $tmp->id_server_alert;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 			</tr>
 			
-			<?php 
+			<?php
 			$number++;
 			endforeach;
-		} 
+		}
 		?>
 		<tr>
 			<th colspan="8" class="nice-table-footer"><div id="simplepaging"><?php echo $this->pagination->create_links();?></div></th>	

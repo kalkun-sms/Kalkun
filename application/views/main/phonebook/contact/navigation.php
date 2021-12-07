@@ -12,14 +12,14 @@
 	$group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
 	foreach($group->result() as $tmp):
 	echo "<option value='{$tmp->ID}'> {$tmp->GroupName} </option>";
-	endforeach; 
+	endforeach;
 	?>
 	<option value="null">- <?php echo lang('kalkun_delete_from_group');?> -</option>
 	<?php
 	$group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
 	foreach($group->result() as $tmp):
 	echo "<option value='-{$tmp->ID}'> {$tmp->GroupName} </option>";
-	endforeach; 
+	endforeach;
 	?>
 	</select>
 <?php endif;?>

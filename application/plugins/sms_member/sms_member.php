@@ -26,35 +26,35 @@ add_action("message.incoming.before", "sms_member", 13);
 * Function called when plugin first activated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_activate
-* 
+*
 */
 function sms_member_activate()
 {
-    return true;
+	return true;
 }
 
 /**
 * Function called when plugin deactivated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_deactivate
-* 
+*
 */
 function sms_member_deactivate()
 {
-    return true;
+	return true;
 }
 
 /**
 * Function called when plugin first installed into the database
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_install
-* 
+*
 */
 function sms_member_install()
 {
@@ -67,7 +67,7 @@ function sms_member_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH."plugins/sms_member/media/".$db_prop['file']."_sms_member.sql");
 	}
-    return true;
+	return true;
 }
 
 function sms_member($sms)
@@ -75,12 +75,12 @@ function sms_member($sms)
 	$config = sms_member_initialize();
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
-	
+
 	list($code) = explode(" ", $message);
 	$reg_code = $config['reg_code'];
 	$unreg_code = $config['unreg_code'];
 	if (strtoupper($code)===strtoupper($reg_code))
-	{ 
+	{
 		register_member($number);
 	}
 	else if (strtoupper($code)===strtoupper($unreg_code))
@@ -99,8 +99,8 @@ function sms_member($sms)
 function register_member($number)
 {
 	$CI =& get_instance();
-    $CI->load->model('sms_member/sms_member_model', 'plugin_model');
-    	
+	$CI->load->model('sms_member/sms_member_model', 'plugin_model');
+
 	//check if number not registered
 	if($CI->plugin_model->check_member($number)===0)
 	$CI->plugin_model->add_member($number);
@@ -112,14 +112,13 @@ function register_member($number)
  * Unregister member
  *
  * Unregister member's phone number
- */	
+ */
 function unregister_member($number)
-{	
+{
 	$CI =& get_instance();
-    $CI->load->model('sms_member/sms_member_model', 'plugin_model');
-    	
+	$CI->load->model('sms_member/sms_member_model', 'plugin_model');
+
 	//check if already registered
 	if($CI->plugin_model->check_member($number)===1)
 	$CI->plugin_model->remove_member($number);
 }
-

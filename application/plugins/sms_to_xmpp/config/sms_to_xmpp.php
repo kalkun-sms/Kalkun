@@ -14,4 +14,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config['php_path'] = '/usr/bin/php';
 $config['php_script'] = realpath(dirname(__FILE__)).'/libraries/abhinavsingh-JAXL-5829c3b/sendMessage.php';
 $config['xmpp_code'] = 'XMPP';
-

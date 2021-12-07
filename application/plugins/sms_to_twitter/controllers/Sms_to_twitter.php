@@ -21,13 +21,12 @@
 include_once(APPPATH.'plugins/Plugin_controller.php');
 
 class Sms_to_twitter extends Plugin_controller {
-	
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->model('sms_to_twitter_model', 'plugin_model');
 	}
-	
+
 	function index()
 	{
 		$data['title'] = 'Twitter Connect Status';
@@ -35,7 +34,7 @@ class Sms_to_twitter extends Plugin_controller {
 		$data['status'] = $this->plugin_model->check_token($this->session->userdata('id_user'));
 		$this->load->view('main/layout', $data);
 	}
-	
+
 	function connect()
 	{
 		// Database check
@@ -44,16 +43,16 @@ class Sms_to_twitter extends Plugin_controller {
 			$this->session->set_flashdata('notif', 'Already connected to Twitter');
 			redirect('sms_to_twitter');
 		}
-		
+
 		$this->load->library('twitter');
-				
+
 		// Kalkun Twitter keys (DO NOT CHANGE)
 		$consumer_key = '23TbUWvaVRenQcNv6MA';
 		$consumer_key_secret = 'eBYvkk4dpgx6CS1uTWlrWxKZTY791CJ2cEE24JV4MqQ';
 		$tokens['access_token'] = NULL;
 		$tokens['access_token_secret'] = NULL;
 		$callback_url = site_url('sms_to_twitter/connect');
-		
+
 		try
 		{
 			$auth = $this->twitter->oauth($consumer_key, $consumer_key_secret, $tokens['access_token'], $tokens['access_token_secret'], $callback_url);
@@ -63,7 +62,7 @@ class Sms_to_twitter extends Plugin_controller {
 			$this->session->set_flashdata('notif', 'Cannot connect to Twitter');
 			redirect('sms_to_twitter');
 		}
-		
+
 		if (isset($auth['access_token']) && isset($auth['access_token_secret']))
 		{
 			// Save to database
@@ -74,7 +73,7 @@ class Sms_to_twitter extends Plugin_controller {
 			redirect('sms_to_twitter');
 		}
 	}
-	
+
 	function disconnect()
 	{
 		$this->plugin_model->delete_token($this->session->userdata('id_user'));

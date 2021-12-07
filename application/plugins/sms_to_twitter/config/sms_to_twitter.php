@@ -12,4 +12,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 // phpcs:enable
 $config['twitter_code'] = 'TW';
-

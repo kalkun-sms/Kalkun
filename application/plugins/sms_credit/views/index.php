@@ -78,7 +78,7 @@ echo form_dropdown('level', $level, 'user', $option);
 <?php
 foreach($packages->result_array() as $row)
 {
-    $package[$row['id_credit_template']] = $row['template_name'];
+	$package[$row['id_credit_template']] = $row['template_name'];
 }
 $option = 'class="text ui-widget-content ui-corner-all"';
 echo form_dropdown('package', $package, '', $option);
@@ -104,7 +104,7 @@ echo form_dropdown('package', $package, '', $option);
 <?php
 foreach($packages->result_array() as $row)
 {
-    $package[$row['id_credit_template']] = $row['template_name'];
+	$package[$row['id_credit_template']] = $row['template_name'];
 }
 $option = 'id="edit_id_package" class="text ui-widget-content ui-corner-all"';
 echo form_dropdown('package', $package, '', $option);

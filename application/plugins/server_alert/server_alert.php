@@ -13,35 +13,35 @@
 * Function called when plugin first activated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_activate
-* 
+*
 */
 function server_alert_activate()
 {
-    return true;
+	return true;
 }
 
 /**
 * Function called when plugin deactivated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_deactivate
-* 
+*
 */
 function server_alert_deactivate()
 {
-    return true;
+	return true;
 }
 
 /**
 * Function called when plugin first installed into the database
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_install
-* 
+*
 */
 function server_alert_install()
 {
@@ -54,5 +54,5 @@ function server_alert_install()
 		$db_prop = get_database_property($db_driver);
 		execute_sql(APPPATH."plugins/server_alert/media/".$db_prop['file']."_server_alert.sql");
 	}
-    return true;
+	return true;
 }

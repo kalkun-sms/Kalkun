@@ -19,25 +19,24 @@
  * @category	Models
  */
 class Sms_to_xmpp_model extends CI_Model {
-	
 	function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	function check_status($uid)
 	{
 		$exist = FALSE;
 		$this->db->from('plugin_sms_to_xmpp');
 		$this->db->where('id_user', $uid);
-		
+
 		if ($this->db->count_all_results() === 1)
 		{
 			$exist = TRUE;
 		}
 		return $exist;
 	}
-	
+
 	function get_xmpp($uid)
 	{
 		$secret = FALSE;
@@ -54,7 +53,7 @@ class Sms_to_xmpp_model extends CI_Model {
 		}
 		return $secret;
 	}
-	
+
 	function get_xmpp_account_by_phone($number)
 	{
 		$secret = FALSE;
@@ -67,7 +66,7 @@ class Sms_to_xmpp_model extends CI_Model {
 		}
 		return $secret;
 	}
-	
+
 	function save_xmpp()
 	{
 		$this->load->library('encrypt');
@@ -80,11 +79,10 @@ class Sms_to_xmpp_model extends CI_Model {
 		$this->db->set('id_user', $this->session->userdata('id_user'));
 		$this->db->insert('plugin_sms_to_xmpp');
 	}
-	
+
 	function delete_xmpp($uid)
 	{
-		$this->db->delete('plugin_sms_to_xmpp', array('id_user' => $uid)); 
+		$this->db->delete('plugin_sms_to_xmpp', array('id_user' => $uid));
 	}
-	
-}
 
+}
