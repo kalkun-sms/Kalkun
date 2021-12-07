@@ -8,12 +8,12 @@
 
 			// _tni_ added this for translation on the inbox, outbox etc.
 			$theFolder = $this->uri->segment(4);
-			$theFname = "inbox";
-			if($theFolder == "inbox") {
+			$theFname = 'inbox';
+			if($theFolder == 'inbox') {
 			$theFname = lang('kalkun_inbox');
-			} else if($theFolder == "outbox") {
+			} else if($theFolder == 'outbox') {
 			$theFname = lang('kalkun_outbox');
-			} else if($theFolder == "sentitems") {
+			} else if($theFolder == 'sentitems') {
 			$theFname = lang('kalkun_sentitems');
 			} else {
 					//$theFname = $this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name');
@@ -48,7 +48,7 @@
 	<?php endif; ?>
 	<li><a class="global_delete button" href="javascript:void(0);">
 	<?php echo lang('kalkun_delete');
-	if($this->uri->segment(4)=='5' or $this->uri->segment(6)=='5' or $this->uri->segment(4)=='6' or $this->uri->segment(6)=='6') echo " ".lang('kalkun_permanently');?></a></li>	
+	if($this->uri->segment(4)=='5' or $this->uri->segment(6)=='5' or $this->uri->segment(4)=='6' or $this->uri->segment(6)=='6') echo ' '.lang('kalkun_permanently');?></a></li>	
 	<?php if($this->uri->segment(2) != 'search'): ?>
 	<li>&nbsp;</li>
 	<li><a href="javascript:void(0);" class="refresh_button button"><?php echo lang('kalkun_refresh');?></a></li>	

@@ -50,7 +50,7 @@ class Gammu_model extends CI_Model {
 				! is_null_loose($data['message']) &&
 				$data['type'] === 'waplink')
 		{
-			$cmd = '"'.$this->config->item('gammu_sms_inject').'"' ." -c " .'"'.$this->config->item('gammu_config').'"'. " WAPINDICATOR " . $data['dest']. " \"". $data['url']. "\"  \"".$data['message']."\" ";
+			$cmd = '"'.$this->config->item('gammu_sms_inject').'"' .' -c ' .'"'.$this->config->item('gammu_config').'"'. ' WAPINDICATOR ' . $data['dest']. ' "'. $data['url']. '"  "'.$data['message'].'" ';
 			$ret = exec ($cmd);
 			preg_match('/with ID ([\d]+)/i',$ret,$matches);
 			$insert_id = $matches[1];
@@ -129,9 +129,9 @@ class Gammu_model extends CI_Model {
 				$multipart_length = $standar_length - $UDH_length;
 
 				// generate UDH
-				$UDH = "050003";
+				$UDH = '050003';
 				$hex = dechex(mt_rand(0, 255));
-				$hex = str_pad($hex, 2, "0", STR_PAD_LEFT);
+				$hex = str_pad($hex, 2, '0', STR_PAD_LEFT);
 				$UDH .= strtoupper($hex);
 				$data['UDH'] = $UDH;
 
@@ -184,8 +184,8 @@ class Gammu_model extends CI_Model {
 	function _send_message_route($tmp_data)
 	{
 		// remove spaces and dashes if any
-		$tmp_data['dest'] = str_replace(" ", "", $tmp_data['dest']);
-		$tmp_data['dest'] = str_replace("-", "", $tmp_data['dest']);
+		$tmp_data['dest'] = str_replace(' ', '', $tmp_data['dest']);
+		$tmp_data['dest'] = str_replace('-', '', $tmp_data['dest']);
 
 		$data = array (
 			'InsertIntoDB' => date('Y-m-d H:i:s'),
@@ -248,15 +248,15 @@ class Gammu_model extends CI_Model {
 	// --------------------------------------------------------------------
 	function search_messages($options = array())
 	{
-		if(!isset($options['number'])) if(!isset($options['search_string']))  die("No String to Search For");
+		if(!isset($options['number'])) if(!isset($options['search_string']))  die('No String to Search For');
 
 		// Inbox
 		$options['type'] = 'inbox';
-		$user_folder = "user_".$options['type'];
+		$user_folder = 'user_'.$options['type'];
 		$this->db->from('inbox');
 		$tmp_number = 'SenderNumber';
 		$tmp_order = 'ReceivingDateTime';
-		$udh_where = "(".$this->_protect_identifiers("UDH")." = '' OR ".$this->_protect_identifiers("UDH")." LIKE '%1')";
+		$udh_where = '('.$this->_protect_identifiers('UDH')." = '' OR ".$this->_protect_identifiers('UDH')." LIKE '%1')";
 		$this->db->where($udh_where, NULL, FALSE);
 
 		if(isset($options['search_string']))
@@ -303,7 +303,7 @@ class Gammu_model extends CI_Model {
 
 		// Sentitems
 		$options['type'] = 'sentitems';
-		$user_folder = "user_".$options['type'];
+		$user_folder = 'user_'.$options['type'];
 		$this->db->from('sentitems');
 		$tmp_number = 'DestinationNumber';
 		$tmp_order = 'SendingDateTime';
@@ -378,7 +378,7 @@ class Gammu_model extends CI_Model {
 
 		// sort data
 		$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
-		usort($data['messages'], "compare_date_".$sort_option);
+		usort($data['messages'], 'compare_date_'.$sort_option);
 
 		$return_data= array();
 		$return_data['total_rows'] = count($data['messages']);
@@ -435,7 +435,7 @@ class Gammu_model extends CI_Model {
 		// if phone number is set
 		if(isset($options['number']) && $options['number']!=='sending_error') $arr_number = $this->Phonebook_model->convert_phonenumber(array('number' => $options['number']));
 
-		$user_folder = "user_".$options['type'];
+		$user_folder = 'user_'.$options['type'];
 		$this->db->from($options['type']);
 
 		// set valid field name
@@ -444,7 +444,7 @@ class Gammu_model extends CI_Model {
 			$tmp_number = 'SenderNumber';
 			$tmp_order = 'ReceivingDateTime';
 
-			$udh_where = "(".$this->_protect_identifiers("UDH")." = '' OR ".$this->_protect_identifiers("UDH")." LIKE '%1')";
+			$udh_where = '('.$this->_protect_identifiers('UDH')." = '' OR ".$this->_protect_identifiers('UDH')." LIKE '%1')";
 			$this->db->where($udh_where, NULL, FALSE);
 		}
 		else
@@ -536,14 +536,14 @@ class Gammu_model extends CI_Model {
 	{
 		$this->load->helper('kalkun');
 		$escape_char;
-		$escaped_identifer="";
+		$escaped_identifer='';
 
 		// get database engine
 		$db_engine = $this->db->platform();
 		$escape_char = get_database_property($db_engine);
 		$escape_char = $escape_char['escape_char'];
 
-		$sub = explode(".", $identifier);
+		$sub = explode('.', $identifier);
 		$sub_count = count($sub);
 
 		foreach($sub as $key => $tmp)
@@ -553,7 +553,7 @@ class Gammu_model extends CI_Model {
 			// if this is not the last
 			if($key!==$sub_count-1)
 			{
-				$escaped_identifer.=".";
+				$escaped_identifer.='.';
 			}
 		}
 
@@ -574,7 +574,7 @@ class Gammu_model extends CI_Model {
 	function _get_message_length($message=NULL, $coding=NULL)
 	{
 		$msg_length = 0;
-		if($coding==="Default_No_Compression")
+		if($coding==='Default_No_Compression')
 		{
 			$msg_char = $this->_string_split($message);
 			foreach($msg_char as $char)
@@ -686,7 +686,7 @@ class Gammu_model extends CI_Model {
 		if($coding==='Default_No_Compression')
 		{
 			$char = $this->_string_split($message);
-			$string = "";
+			$string = '';
 			$left = 153;
 			$char_taken = 0;
 			$msg = array();
@@ -719,7 +719,7 @@ class Gammu_model extends CI_Model {
 				if($left===0 OR $char_taken===mb_strlen($message))
 				{
 					$msg[] = $string;
-					$string = "";
+					$string = '';
 					$left = 153;
 				}
 			}
@@ -802,7 +802,7 @@ class Gammu_model extends CI_Model {
 
 				$this->db->distinct();
 				//$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').",inbox");
-				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').",inbox");
+				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').',inbox');
 				$this->db->join('user_inbox','user_inbox.id_inbox=inbox.ID');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
@@ -825,7 +825,7 @@ class Gammu_model extends CI_Model {
 				// $this->db->_reset_select();
 
 				$this->db->distinct();
-				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').",outbox");
+				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').',outbox');
 				$this->db->join('user_outbox','outbox.ID=user_outbox.id_outbox');
 				$this->db->where('id_user', $user_id);
 				$this->db->where($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxresult.maxdate'), FALSE);
@@ -846,7 +846,7 @@ class Gammu_model extends CI_Model {
 				// $this->db->_reset_select();
 
 				$this->db->distinct();
-				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').",sentitems");
+				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').',sentitems');
 				$this->db->join('user_sentitems','sentitems.ID=user_sentitems.id_sentitems');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
@@ -960,8 +960,8 @@ class Gammu_model extends CI_Model {
 				$folder = $options['folder'];
 				$id_folder = $options['id_folder'];
 				$id_message = $options['id_message'];
-				$user_folder = "user_".$folder; // add user prefix
-				$id_folder_field = "id_".$folder; // add id prefix
+				$user_folder = 'user_'.$folder; // add user prefix
+				$id_folder_field = 'id_'.$folder; // add id prefix
 
 				foreach($id_message as $tmp):
 					$this->db->trans_start();
@@ -1013,8 +1013,8 @@ class Gammu_model extends CI_Model {
 		if(isset($options['number'])) $number = $options['number'];
 		if(isset($options['current_folder'])) $current_folder = $options['current_folder'];
 
-		$user_source = "user_".$source;
-		$id_source = "id_".$source;
+		$user_source = 'user_'.$source;
+		$id_source = 'id_'.$source;
 
 		switch($type)
 		{
@@ -1119,7 +1119,7 @@ class Gammu_model extends CI_Model {
 						foreach($tmp_id as $tmp):
 							// start transcation
 							$this->db->trans_start();
-							$this->db->delete("user_".$source, array('id_'.$source => $tmp));
+							$this->db->delete('user_'.$source, array('id_'.$source => $tmp));
 							$this->db->delete($source, array('ID' => $tmp));
 							$this->db->trans_complete();
 						endforeach;
@@ -1255,13 +1255,13 @@ class Gammu_model extends CI_Model {
 	function get_user_outbox($user_id)
 	{
 		$this->db->where('id_user', $user_id);
-		return $this->db->get("user_outbox");
+		return $this->db->get('user_outbox');
 	}
 
 	function delete_user_outbox($id_message)
 	{
 		$this->db->where('id_outbox', $id_message);
-		$this->db->delete("user_outbox");
+		$this->db->delete('user_outbox');
 	}
 
 	// Update processed inbox
@@ -1385,13 +1385,13 @@ class Gammu_model extends CI_Model {
 			$this->db->delete('user_templates', array('Name' => $name));
 		}
 		else
-			die("Invalid Option");
+			die('Invalid Option');
 	}
 
 	// hook function for Alternate Gateways
 	// do nothing for GAMMU (gammu-smsd moves from outbox to sentitems)
 	function process_outbox_queue()
 	{
-	log_message('info',"Nothing to do in outbox queue for GAMMU.");
+	log_message('info','Nothing to do in outbox queue for GAMMU.');
 	}
 }

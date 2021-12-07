@@ -2,9 +2,9 @@
 <?php
 if(count($messages)==0)
 {
-	if($this->uri->segment(2)=='my_folder') echo "<p style=\"padding-left: 10px\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message_in_folder').".</i></p>";
-	else if($this->uri->segment(2)=='search') echo "<p style=\"padding-left: 10px\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message_search').".</i></p>";
-	else echo "<p style=\"padding-left: 10px\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_no_message')." ".lang('kalkun_'.$this->uri->segment(3)).".</i></p>";
+	if($this->uri->segment(2)=='my_folder') echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.lang('kalkun_no_message_in_folder').'.</i></p>';
+	else if($this->uri->segment(2)=='search') echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.lang('kalkun_no_message_search').'.</i></p>';
+	else echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.lang('kalkun_no_message').' '.lang('kalkun_'.$this->uri->segment(3)).'.</i></p>';
 }
 else
 {
@@ -46,7 +46,7 @@ else
     <input  type="hidden" class="item_number" name="item_number<?php echo $tmp['ID'];?>"  id="item_number<?php echo $tmp['ID'];?>"  value="<?php echo $number; ?>" />
 	<input type="checkbox" id="<?php echo $tmp['ID'];?>" class="select_message nicecheckbox" value="<?php echo $tmp['ID'];?>" style="border: none;" />
 	<span class="message_toggle" style="cursor: pointer">
-	<span <?php  if($tmp['source'] == 'inbox' && $tmp['readed']=='false') echo "style=\"font-weight: bold\"";?>><?php echo nice_date($message_date);?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow;?>.gif" />
+	<span <?php  if($tmp['source'] == 'inbox' && $tmp['readed']=='false') echo 'style="font-weight: bold"';?>><?php echo nice_date($message_date);?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow;?>.gif" />
 	&nbsp;&nbsp;<?php echo $senderName;?></span>
 	<span class="message_preview">-&nbsp;<?php echo message_preview($tmp['TextDecoded'], $char_per_line);?></span>
 	</span>
@@ -126,7 +126,7 @@ endif;
 	</table>
 	</div>			
 		
-	<?php echo "<div class=\"message_content hidden\" style=\"padding: 5px 10px 5px 20px\">".showmsg($tmp['TextDecoded'])."</div>";?>		
+	<?php echo '<div class="message_content hidden" style="padding: 5px 10px 5px 20px">'.showmsg($tmp['TextDecoded']).'</div>';?>		
 		
 	<div class="optionmenu hidden" style="padding-left: 20px">
 	<ul>

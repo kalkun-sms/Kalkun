@@ -20,7 +20,7 @@ $("#window_sub_header").find("a[href='"+window.location.href+"']").each(function
 </ul>
 </div>
 <div id="window_content">
-<?php if(!empty($notif)): echo "<div class=\"notif\">".$notif."</div>"; endif;?>
+<?php if(!empty($notif)): echo '<div class="notif">'.$notif.'</div>'; endif;?>
 <?php if($type != 'main/settings/filters'):?>
 <?php
 echo form_open('settings/save', array('id' => 'settingsForm'));

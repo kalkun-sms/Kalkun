@@ -20,8 +20,8 @@
 </div>
 
 <div id="window_content">
-	<?php $this->load->view("main/users/navigation");?>
+	<?php $this->load->view('main/users/navigation');?>
 	<div id="users_list"><?php $this->load->view('main/users/users_list');?></div>
-	<?php $this->load->view("main/users/navigation");?>
+	<?php $this->load->view('main/users/navigation');?>
 </div>
 </div>

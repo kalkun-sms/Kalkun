@@ -20,10 +20,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 // phpcs:enable
 $config['protocol'] = 'mail';
-$config['smtp_host'] = "localhost";
-$config['smtp_port'] = "25";
-$config['smtp_user'] = "username";
-$config['smtp_pass'] = "password";
+$config['smtp_host'] = 'localhost';
+$config['smtp_port'] = '25';
+$config['smtp_user'] = 'username';
+$config['smtp_pass'] = 'password';
 $config['charset'] = 'utf-8';
 $config['wordwrap'] = TRUE;
 $config['mail_from'] = 'postmaster@domain.com';

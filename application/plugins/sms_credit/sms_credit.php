@@ -20,7 +20,7 @@ function sms_credit_initialize()
 }
 
 // Add hook for outgoing message
-add_action("message.outgoing_all", "sms_credit", 10);
+add_action('message.outgoing_all', 'sms_credit', 10);
 
 /**
 * Function called when plugin first activated
@@ -65,7 +65,7 @@ function sms_credit_install()
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
-		execute_sql(APPPATH."plugins/sms_credit/media/".$db_prop['file']."_sms_credit.sql");
+		execute_sql(APPPATH.'plugins/sms_credit/media/'.$db_prop['file'].'_sms_credit.sql');
 	}
 	return true;
 }
@@ -95,7 +95,7 @@ function sms_credit($sms)
 
 	if(($has_package && $sms_used >= $user_package['sms_numbers']) OR (!$has_package && !$config['allow_user_with_no_package']))
 	{
-		echo "Sorry, your sms credit limit exceeded.";
+		echo 'Sorry, your sms credit limit exceeded.';
 		exit;
 	}
 }

@@ -1,7 +1,7 @@
 <?php //$this->load->view('js_init/phonebook/js_phonebook');
 if($phonebook->num_rows()===0):
-	if($_POST) echo "<p><i>".lang('tni_contact_not_found')."</i></p>";
-	else echo "<p><i>".lang('tni_contact_search_empty')."</i></p>";
+	if($_POST) echo '<p><i>'.lang('tni_contact_not_found').'</i></p>';
+	else echo '<p><i>'.lang('tni_contact_search_empty').'</i></p>';
 else: ?>
 <table>
 <?php foreach($phonebook->result() as $tmp): ?>
@@ -18,7 +18,7 @@ else: ?>
 		<span class="pbk_menu hidden">
 		<?php
 		// hook for contact menu
-		$menu = do_action("phonebook.contact.menu", $tmp);
+		$menu = do_action('phonebook.contact.menu', $tmp);
 		if($menu != $tmp)
 		{
 			echo "<a class=\"simplelink\" href=\"{$menu['url']}\">{$menu['title']}</a>&nbsp;";

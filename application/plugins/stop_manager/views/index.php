@@ -28,7 +28,7 @@
         <?php
 		if($stoplist->num_rows()===0)
 		{
-			echo "<tr><td colspan=\"6\" style=\"border-left: 1px solid #000; border-right: 1px solid #000;\">No STOP record found.</td></tr>";
+			echo '<tr><td colspan="6" style="border-left: 1px solid #000; border-right: 1px solid #000;">No STOP record found.</td></tr>';
 		}
 		else
 		{

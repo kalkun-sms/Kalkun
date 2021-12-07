@@ -41,7 +41,7 @@
 		<?php
 		if($whitelist->num_rows()===0)
 		{
-			echo "<tr><td colspan=\"5\" style=\"border-left: 1px solid #000; border-right: 1px solid #000;\">No whitelist number found.</td></tr>";
+			echo '<tr><td colspan="5" style="border-left: 1px solid #000; border-right: 1px solid #000;">No whitelist number found.</td></tr>';
 		}
 		else
 		{

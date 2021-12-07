@@ -58,7 +58,7 @@ class Daemon extends CI_Controller {
 			}
 
 			// hook for incoming message (before ownership)
-			$status = do_action("message.incoming.before", $tmp_message);
+			$status = do_action('message.incoming.before', $tmp_message);
 
 			// message deleted, do not process later part
 			if(isset($status) && $status==='break')
@@ -72,7 +72,7 @@ class Daemon extends CI_Controller {
 
 			// hook for incoming message (after ownership)
 			$tmp_message->msg_user = $msg_user;
-			$status = do_action("message.incoming.after", $tmp_message);
+			$status = do_action('message.incoming.after', $tmp_message);
 
 			// message deleted, do not process later part
 			if(isset($status) && $status==='break')
@@ -119,9 +119,9 @@ class Daemon extends CI_Controller {
 		$users = $this->User_model->getUsers(array('option' => 'all'));
 		foreach ($users->result() as $tmp_user)
 		{
-			$tag = "@".$tmp_user->username;
+			$tag = '@'.$tmp_user->username;
 			$msg_word = array();
-			$msg_word = explode(" ", $tmp_message->TextDecoded);
+			$msg_word = explode(' ', $tmp_message->TextDecoded);
 			$check = in_array($tag, $msg_word);
 
 			// check user phone number if enabled

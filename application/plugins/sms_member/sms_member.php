@@ -20,7 +20,7 @@ function sms_member_initialize()
 }
 
 // Add hook for incoming message
-add_action("message.incoming.before", "sms_member", 13);
+add_action('message.incoming.before', 'sms_member', 13);
 
 /**
 * Function called when plugin first activated
@@ -65,7 +65,7 @@ function sms_member_install()
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
-		execute_sql(APPPATH."plugins/sms_member/media/".$db_prop['file']."_sms_member.sql");
+		execute_sql(APPPATH.'plugins/sms_member/media/'.$db_prop['file'].'_sms_member.sql');
 	}
 	return true;
 }
@@ -76,7 +76,7 @@ function sms_member($sms)
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
 
-	list($code) = explode(" ", $message);
+	list($code) = explode(' ', $message);
 	$reg_code = $config['reg_code'];
 	$unreg_code = $config['unreg_code'];
 	if (strtoupper($code)===strtoupper($reg_code))

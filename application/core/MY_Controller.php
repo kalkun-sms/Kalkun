@@ -31,7 +31,7 @@ class MY_Controller  extends CI_Controller  {
 		parent::__construct();
 
 		// installation mode
-		if(file_exists("install")) redirect('install');
+		if(file_exists('install')) redirect('install');
 
 		$this->load->library('session');
 
@@ -43,8 +43,8 @@ class MY_Controller  extends CI_Controller  {
 				$this->session->set_flashdata('bef_login_method', $this->input->method(false));
 				$this->session->set_flashdata('bef_login_history_count', -1);
 				$this->session->set_flashdata('bef_login_requested_url', current_url());
-				if (array_key_exists("HTTP_REFERER",$_SERVER)){
-					$this->session->set_flashdata('bef_login_HTTP_REFERER',$_SERVER["HTTP_REFERER"]);
+				if (array_key_exists('HTTP_REFERER',$_SERVER)){
+					$this->session->set_flashdata('bef_login_HTTP_REFERER',$_SERVER['HTTP_REFERER']);
 				}
 				$this->session->set_flashdata('bef_login_post_data', $this->input->post());
 				redirect('login');
@@ -66,7 +66,7 @@ class MY_Controller  extends CI_Controller  {
 	{
 		$this->load->model('User_model');
 		$this->load->model('Message_model');
-		$uid = $this->session->userdata("id_user");
+		$uid = $this->session->userdata('id_user');
 
 		$outbox = $this->Message_model->get_user_outbox($uid);
 		foreach ($outbox->result() as $tmp)

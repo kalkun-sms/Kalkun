@@ -20,7 +20,7 @@ function sms_to_xmpp_initialize()
 }
 
 // Add hook for incoming message
-add_action("message.incoming.before", "sms_to_xmpp", 17);
+add_action('message.incoming.before', 'sms_to_xmpp', 17);
 
 /**
 * Function called when plugin first activated
@@ -65,7 +65,7 @@ function sms_to_xmpp_install()
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
-		execute_sql(APPPATH."plugins/sms_to_xmpp/media/".$db_prop['file']."_sms_to_xmpp.sql");
+		execute_sql(APPPATH.'plugins/sms_to_xmpp/media/'.$db_prop['file'].'_sms_to_xmpp.sql');
 	}
 	return true;
 }
@@ -76,7 +76,7 @@ function sms_to_xmpp($sms)
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
 
-	list($code, $to) = explode(" ", $message);
+	list($code, $to) = explode(' ', $message);
 	$xmpp_code = $config['xmpp_code'];
 	$xmpp_message = trim(str_replace($config['xmpp_code'].' '.$to, '', $message));
 	if (strtoupper($code)===strtoupper($xmpp_code))
@@ -91,8 +91,8 @@ function sms_to_xmpp($sms)
 			$CI->load->library('encrypt');
 			$xampp_pass = $CI->encrypt->decode($xmpp['xmpp_password']);
 
-			exec($config['php_path']." ".$config['php_script']." ".$xmpp['xmpp_username']." ".
-				$xampp_pass." ".$xmpp['xmpp_host']." ".$xmpp['xmpp_server']." ".$to." ".$xmpp_message);
+			exec($config['php_path'].' '.$config['php_script'].' '.$xmpp['xmpp_username'].' '.
+				$xampp_pass.' '.$xmpp['xmpp_host'].' '.$xmpp['xmpp_server'].' '.$to.' '.$xmpp_message);
 		}
 	}
 }

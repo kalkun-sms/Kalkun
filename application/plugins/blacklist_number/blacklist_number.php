@@ -9,10 +9,10 @@
 */
 
 // Add hook for incoming message
-add_action("message.incoming.before", "blacklist_number_incoming", 10);
+add_action('message.incoming.before', 'blacklist_number_incoming', 10);
 
 // Add hook for outgoing message
-add_action("message.outgoing", "blacklist_number_outgoing", 10);
+add_action('message.outgoing', 'blacklist_number_outgoing', 10);
 
 /**
 * Function called when plugin first activated
@@ -57,7 +57,7 @@ function blacklist_number_install()
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
-		execute_sql(APPPATH."plugins/blacklist_number/media/".$db_prop['file']."_blacklist_number.sql");
+		execute_sql(APPPATH.'plugins/blacklist_number/media/'.$db_prop['file'].'_blacklist_number.sql');
 	}
 	return true;
 }

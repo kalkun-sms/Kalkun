@@ -9,8 +9,8 @@
 */
 
 // Add hook for outgoing message
-add_action("message.outgoing_dest_data", "stop_manager_cleanup_outgoing", 1);
-add_action("message.incoming.before", "stop_manager_incoming", 1);
+add_action('message.outgoing_dest_data', 'stop_manager_cleanup_outgoing', 1);
+add_action('message.incoming.before', 'stop_manager_incoming', 1);
 
 function stop_manager_activate()
 {
@@ -47,7 +47,7 @@ function stop_manager_install()
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
-		execute_sql(APPPATH."plugins/stop_manager/media/".$db_prop['file']."_stop_manager.sql");
+		execute_sql(APPPATH.'plugins/stop_manager/media/'.$db_prop['file'].'_stop_manager.sql');
 	}
   return true;
 }
@@ -61,7 +61,7 @@ function stop_manager_initialize()
 	$CI =& get_instance();
 
 	$CI->load->add_package_path(APPPATH.'plugins/stop_manager', FALSE);
-	$CI->load->config("stop_manager", TRUE);
+	$CI->load->config('stop_manager', TRUE);
 
 	return $CI->config->config['stop_manager'];
 }
@@ -98,11 +98,11 @@ function stop_manager_cleanup_outgoing($all)
 			//$type = "%";
 
 			// Will drop all numbers that are in stop_manager having been recorded as TYPE_NOT_SET_SO_STOP_ALL
-			$type = "TYPE_NOT_SET_SO_STOP_ALL";
+			$type = 'TYPE_NOT_SET_SO_STOP_ALL';
 		} else {
 			// IGNORE_STOP_MANAGER is just a fake value that should never match something in the table,
 			// this is to keep the message
-			$type = "IGNORE_STOP_MANAGER";
+			$type = 'IGNORE_STOP_MANAGER';
 		}
 	}
 
@@ -169,10 +169,10 @@ function stop_manager_incoming($sms)
 
 	if ($ret) {
 		$cmd = strtoupper($matches[1]);
-		$type = ($config['enable_type']) ? strtolower($matches[2]) : "TYPE_NOT_SET_SO_STOP_ALL";
+		$type = ($config['enable_type']) ? strtolower($matches[2]) : 'TYPE_NOT_SET_SO_STOP_ALL';
 		$CI->load->model('stop_manager/Stop_manager_model', 'Stop_manager_model');
 
-		$text = "";
+		$text = '';
 
 		//var_dump($matches);
 		switch (true) {
@@ -216,11 +216,11 @@ function stop_manager_incoming($sms)
 	} else {
 		$strTemplate = lang('sm_command_invalid_long_1_reply');
 		if ($config['enable_type'])
-			$strTemplate .= " <type>";
+			$strTemplate .= ' <type>';
 		$strTemplate .= "'";
 		if ($config['enable_optin'])
 			$strTemplate .= lang('sm_command_invalid_long_2_or');
-		$strTemplate .= ".";
+		$strTemplate .= '.';
 		if ($config['enable_type'])
 			$strTemplate .= lang('sm_command_invalid_long_3_possible_type_values_are');
 		$strTemplate .= lang('sm_command_invalid_long_4_eg');
@@ -228,9 +228,9 @@ function stop_manager_incoming($sms)
 		$strParams = [
 			':received_command' => $msg,
 			':optout_keyword' => $optout_keywords[0],                                   // 1st keyword of the list
-			':optin_keyword' => ($config['enable_optin']) ? $optin_keywords[0] : "",    // 1st keyword of the list
-			':types_valides' => ($config['enable_type']) ? implode(', ',$types_valides) : "",
-			':example' => ($config['enable_type']) ? $optout_keywords[0]." ".$types_valides[0] : $optout_keywords[0],
+			':optin_keyword' => ($config['enable_optin']) ? $optin_keywords[0] : '',    // 1st keyword of the list
+			':types_valides' => ($config['enable_type']) ? implode(', ',$types_valides) : '',
+			':example' => ($config['enable_type']) ? $optout_keywords[0].' '.$types_valides[0] : $optout_keywords[0],
 		];
 
 		$text = strtr($strTemplate, $strParams);

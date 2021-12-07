@@ -13,10 +13,10 @@
 <div id="window_content">
 <?php
 if($total_member==0):
-echo "<p class=\"no_content\"><span class=\"ui-icon ui-icon-alert\" style=\"float:left;\"></span><i>".lang('kalkun_sms_no_member').".</i></p>";
+echo '<p class="no_content"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.lang('kalkun_sms_no_member').'.</i></p>';
 else:
 foreach($member as $tmp_member):
-	echo $tmp_member['phone_number']." - ";
+	echo $tmp_member['phone_number'].' - ';
 endforeach;
 endif;
 ?>

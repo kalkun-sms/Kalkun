@@ -11,7 +11,7 @@ else: ?>
 	<div class="left_column">
 	<div id="pbkname">
 	<input type="checkbox" class="select_user" />&nbsp;<span style="font-weight: bold;"><?php echo $tmp->realname;?></span>
-	<?php if(in_array($tmp->id_user, $this->config->item('inbox_owner_id'))) echo "<sup>( Inbox Master )</sup>"; ?>
+	<?php if(in_array($tmp->id_user, $this->config->item('inbox_owner_id'))) echo '<sup>( Inbox Master )</sup>'; ?>
 	</div>	
 </div>
 <div class="right_column">

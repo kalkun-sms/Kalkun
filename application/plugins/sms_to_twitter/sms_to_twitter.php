@@ -20,7 +20,7 @@ function sms_to_twitter_initialize()
 }
 
 // Add hook for incoming message
-add_action("message.incoming.before", "sms_to_twitter", 15);
+add_action('message.incoming.before', 'sms_to_twitter', 15);
 
 /**
 * Function called when plugin first activated
@@ -65,7 +65,7 @@ function sms_to_twitter_install()
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
-		execute_sql(APPPATH."plugins/sms_to_twitter/media/".$db_prop['file']."_sms_to_twitter.sql");
+		execute_sql(APPPATH.'plugins/sms_to_twitter/media/'.$db_prop['file'].'_sms_to_twitter.sql');
 	}
 	return true;
 }
@@ -76,7 +76,7 @@ function sms_to_twitter($sms)
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
 
-	list($code) = explode(" ", $message);
+	list($code) = explode(' ', $message);
 	$twitter_code = $config['twitter_code'];
 	$twitter_msg = trim(str_replace($config['twitter_code'], '', $message));
 	if (strtoupper($code)===strtoupper($twitter_code))

@@ -1,6 +1,6 @@
 <?php
 if($group->num_rows()===0):
-echo "<p><i>".lang('tni_group_no_group')."</i></p>";
+echo '<p><i>'.lang('tni_group_no_group').'</i></p>';
 else: ?>
 <table>
 <?php foreach($group->result() as $tmp): ?>

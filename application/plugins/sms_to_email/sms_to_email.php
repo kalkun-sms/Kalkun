@@ -20,7 +20,7 @@ function sms_to_email_initialize()
 }
 
 // Add hook for incoming message
-add_action("message.incoming.after", "sms_to_email", 10);
+add_action('message.incoming.after', 'sms_to_email', 10);
 
 /**
 * Function called when plugin first activated
@@ -65,7 +65,7 @@ function sms_to_email_install()
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
-		execute_sql(APPPATH."plugins/sms_to_email/media/".$db_prop['file']."_sms_to_email.sql");
+		execute_sql(APPPATH.'plugins/sms_to_email/media/'.$db_prop['file'].'_sms_to_email.sql');
 	}
 	return true;
 }
@@ -99,7 +99,7 @@ function sms_to_email($sms)
 		$CI->email->from($config['mail_from'], $from);
 		$CI->email->to($mail_to);
 		$CI->email->subject($config['mail_subject']);
-		$CI->email->message($message."\n\n". "- ".$from);
+		$CI->email->message($message."\n\n". '- '.$from);
 		$CI->email->send();
 	}
 }

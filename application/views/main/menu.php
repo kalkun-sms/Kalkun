@@ -10,7 +10,7 @@
 	<span class="unread_inbox_notif">
 	<?php
 	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'uid' => $this->session->userdata('id_user')))->num_rows();
-	if($tmp_unread > 0) echo " (".$tmp_unread.")";
+	if($tmp_unread > 0) echo ' ('.$tmp_unread.')';
 	?>
 	</span></li>
 	<li><?php echo anchor('messages/folder/outbox',lang('kalkun_outbox')); ?></li>
@@ -22,7 +22,7 @@
     <span class="unread_spam_notif">
 	<?php
 	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => '6', 'uid' => $this->session->userdata('id_user')))->num_rows();
-	if($tmp_unread > 0) echo " (".$tmp_unread.")";
+	if($tmp_unread > 0) echo ' ('.$tmp_unread.')';
 	?>
 	</span>
     </li>
@@ -41,7 +41,7 @@
 	<li>
 	<?php echo anchor('messages/my_folder/inbox/'.$folder->id_folder, $folder->name);
 	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => $folder->id_folder))->num_rows();
-	if($tmp_unread > 0) echo " (".$tmp_unread.")";
+	if($tmp_unread > 0) echo ' ('.$tmp_unread.')';
 	?>
 	</li><?php endforeach;?>
 	</ul>

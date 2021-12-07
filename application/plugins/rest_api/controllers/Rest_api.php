@@ -36,7 +36,7 @@ class Rest_api extends REST_Controller {
 	function send_sms_get()
 	{
 		$this->load->model(array('Kalkun_model', 'Message_model'));
-		$data['coding'] = ($this->get('coding') === "unicode") ? $this->get('coding') : 'default';
+		$data['coding'] = ($this->get('coding') === 'unicode') ? $this->get('coding') : 'default';
 		$data['class'] = '1';
 		$data['dest'] = $this->get('phoneNumber');
 		$data['date'] = date('Y-m-d H:i:s');

@@ -1,7 +1,7 @@
 <h2>Installation result</h2>
 <p>This is the last step of the installation step.</p>
 <p>Installation status: 
-<?php if($error==0) echo "<span class=\"green\">SUCCESS</span>"; else { echo "<span class=\"red\">FAILED</span>";}?></p>
+<?php if($error==0) echo '<span class="green">SUCCESS</span>'; else { echo '<span class="red">FAILED</span>';}?></p>
 
 <?php if($error==0):?>
 <p>&nbsp;</p>
@@ -10,8 +10,8 @@
 <p>Removal status: 
 <?php
 	$rm = unlink('./install');
-	if($rm) echo "<span class=\"green\">SUCCESS</span>";
-	else echo "<span class=\"red\">FAILED</span> (You have to remove it manually)";
+	if($rm) echo '<span class="green">SUCCESS</span>';
+	else echo '<span class="red">FAILED</span> (You have to remove it manually)';
 ?>
 </p>
 <p>&nbsp;</p>

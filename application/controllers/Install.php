@@ -27,10 +27,10 @@ class Install extends MX_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		if(!file_exists('./install')) die("Installation disabled.");
+		if(!file_exists('./install')) die('Installation disabled.');
 
 		// check if gammu schema already exist
-		if(!$this->db->table_exists('gammu')) die("Cannot find gammu database schema.");
+		if(!$this->db->table_exists('gammu')) die('Cannot find gammu database schema.');
 	}
 
 	// --------------------------------------------------------------------
@@ -100,8 +100,8 @@ class Install extends MX_Controller {
 	function run_install($type=NULL)
 	{
 		$this->load->helper('kalkun');
-		if($type==='upgrade') $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_upgrade_kalkun.sql";
-		else $sqlfile = $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine')."_kalkun.sql";
+		if($type==='upgrade') $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine').'_upgrade_kalkun.sql';
+		else $sqlfile = $sqlfile = $this->config->item('sql_path').$this->input->post('db_engine').'_kalkun.sql';
 
 		$data['error'] = execute_sql($sqlfile);
 

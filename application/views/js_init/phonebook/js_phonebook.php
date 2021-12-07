@@ -17,7 +17,7 @@ $(document).ready(function() {
 		if($(this).hasClass('addpbkcontact')) {
 			var pbk_title = '<?php echo lang('tni_contact_add'); ?>';
 			var type = 'normal';
-			var param1 = '<?php echo (isset($group_id))? $group_id : "";?>';
+			var param1 = '<?php echo (isset($group_id))? $group_id : '';?>';
 		}	
 		else if($(this).hasClass('editpbkcontact')) {
 			var pbk_title = '<?php echo lang('tni_pbk_edit_contact'); ?>';

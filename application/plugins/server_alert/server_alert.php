@@ -52,7 +52,7 @@ function server_alert_install()
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
-		execute_sql(APPPATH."plugins/server_alert/media/".$db_prop['file']."_server_alert.sql");
+		execute_sql(APPPATH.'plugins/server_alert/media/'.$db_prop['file'].'_server_alert.sql');
 	}
 	return true;
 }

@@ -15,10 +15,10 @@ echo form_dropdown('theme', $theme, $theme_act);
 <td>
 <?php list($bg_act_option, $bg_act) = explode(';',$settings->row('bg_image'));?>
 <input type="radio" id="bg_off" name="bg_image_option" value="false" 
-<?php if($bg_act_option=='false') echo "checked=\"checked\""; ?> /> 
+<?php if($bg_act_option=='false') echo 'checked="checked"'; ?> /> 
 <label for="bg_off">Background Image Off</label> <br />
 <input type="radio" id="bg_on" name="bg_image_option" value="true" 
-<?php if($bg_act_option=='true') echo "checked=\"checked\""; ?> /> 
+<?php if($bg_act_option=='true') echo 'checked="checked"'; ?> /> 
 <label for="bg_on">Background Image On</label>
 </td>
 </tr>

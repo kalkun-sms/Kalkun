@@ -103,7 +103,7 @@ class Kalkun extends MY_Controller {
 		$x = array();
 		for ($i=0; $i<=$days; $i++)
 		{
-			$key = date($format, mktime(0, 0, 0, date("m"), date("d")-$i, date('Y')));
+			$key = date($format, mktime(0, 0, 0, date('m'), date('d')-$i, date('Y')));
 
 			if (isset($prefix))
 			{
@@ -125,7 +125,7 @@ class Kalkun extends MY_Controller {
 				$x[] = $key;
 			}
 
-			$param['sms_date'] = date('Y-m-d', mktime(0,0,0,date("m"),date("d")-$i,date("Y")));
+			$param['sms_date'] = date('Y-m-d', mktime(0,0,0,date('m'),date('d')-$i,date('Y')));
 			if ($this->session->userdata('level')!=='admin')
 			{
 				$param['user_id'] = $this->session->userdata('id_user');
@@ -187,13 +187,13 @@ class Kalkun extends MY_Controller {
 	function unread_count()
 	{
 		$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'uid' => $this->session->userdata('id_user')))->num_rows();
-		$in =  ($tmp_unread > 0)? "(".$tmp_unread.")" : "";
+		$in =  ($tmp_unread > 0)? '('.$tmp_unread.')' : '';
 
 		$tmp_unread = 0;
-		$draft =  ($tmp_unread > 0)? "(".$tmp_unread.")" : "";
+		$draft =  ($tmp_unread > 0)? '('.$tmp_unread.')' : '';
 
 		$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => '6', 'uid' => $this->session->userdata('id_user')) )->num_rows();
-		$spam =  ($tmp_unread > 0)? "(".$tmp_unread.")" : "";
+		$spam =  ($tmp_unread > 0)? '('.$tmp_unread.')' : '';
 
 		echo $in. '/' . $draft . '/' . $spam;
 	}
