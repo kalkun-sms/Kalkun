@@ -61,7 +61,7 @@ class Gammu_model extends CI_Model {
 			}
 			else
 			{
-				$this->db->update('outbox', array('SendingDateTime' => $data['date']), "ID = $insert_id" );
+				$this->db->update('outbox', array('SendingDateTime' => $data['date']), "ID = ${insert_id}" );
 				$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
 				$f_ret = array('status' => lang('gammu_msg_queued'));
 			}
@@ -802,7 +802,7 @@ class Gammu_model extends CI_Model {
 
 				$this->db->distinct();
 				//$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').",inbox");
-				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').',inbox');
+				$this->db->from("(${sub_sql}) as ".$this->_protect_identifiers('maxresult').',inbox');
 				$this->db->join('user_inbox', 'user_inbox.id_inbox=inbox.ID');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
@@ -825,7 +825,7 @@ class Gammu_model extends CI_Model {
 				// $this->db->_reset_select();
 
 				$this->db->distinct();
-				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').',outbox');
+				$this->db->from("(${sub_sql}) as ".$this->_protect_identifiers('maxresult').',outbox');
 				$this->db->join('user_outbox', 'outbox.ID=user_outbox.id_outbox');
 				$this->db->where('id_user', $user_id);
 				$this->db->where($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxresult.maxdate'), FALSE);
@@ -846,7 +846,7 @@ class Gammu_model extends CI_Model {
 				// $this->db->_reset_select();
 
 				$this->db->distinct();
-				$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').',sentitems');
+				$this->db->from("(${sub_sql}) as ".$this->_protect_identifiers('maxresult').',sentitems');
 				$this->db->join('user_sentitems', 'sentitems.ID=user_sentitems.id_sentitems');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);

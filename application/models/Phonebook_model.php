@@ -108,7 +108,7 @@ class Phonebook_model extends CI_Model {
 				$this->db->select('ID as id_pbk');
 				$this->db->from('pbk');
 				// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
-				$this->db->where("({$this->_protect_identifiers('id_user')} = '$user_id' OR {$this->_protect_identifiers('is_public')} = 'true')");
+				$this->db->where("({$this->_protect_identifiers('id_user')} = '${user_id}' OR {$this->_protect_identifiers('is_public')} = 'true')");
 				$this->db->where_in('Number', $arr_number);
 				break;
 
@@ -137,7 +137,7 @@ class Phonebook_model extends CI_Model {
 				$condition1 = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";
 				$condition2_part1 = 'LOWER('.$this->db->protect_identifiers('Name').") LIKE '%".$search_word."%'";
 				$condition2_part2 = 'LOWER('.$this->db->protect_identifiers('Number').") LIKE '%".$search_word."%'";
-				$condition2 = "($condition2_part1 OR $condition2_part2)";
+				$condition2 = "(${condition2_part1} OR ${condition2_part2})";
 				$this->db->where($condition1, NULL, FALSE);
 				$this->db->where($condition2, NULL, FALSE);
 				$this->db->order_by('Name');

@@ -47,7 +47,7 @@
         <select name="id_folder" id="id_folder" style="width: 98%">
         <?php
 		foreach ($my_folders->result() as $my_folder):
-		echo "<option value=\"$my_folder->id_folder\">$my_folder->name</option>";
+		echo "<option value=\"{$my_folder->id_folder}\">{$my_folder->name}</option>";
 		endforeach;
 		?>
         </select>
