@@ -21,6 +21,7 @@
  * @category	Models
  */
 class Sms_member_model extends CI_Model {
+
 	/**
 	 * Constructor
 	 *
@@ -42,7 +43,7 @@ class Sms_member_model extends CI_Model {
 	 */
 	function get_member($option)
 	{
-		switch($option)
+		switch ($option)
 		{
 			case 'all':
 				$this->db->select('*');

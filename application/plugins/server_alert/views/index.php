@@ -69,30 +69,29 @@
 		</tr>
 	    
 		<?php
-		if($alert->num_rows() === 0)
+		if ($alert->num_rows() === 0)
 		{
 			echo '<tr><td colspan="8" style="border-left: 1px solid #000; border-right: 1px solid #000;">No alert found.</td></tr>';
 		}
 		else
 		{
-			foreach($alert->result() as $tmp):
+			foreach ($alert->result() as $tmp):
 			?>
-			<tr id="<?php echo $tmp->id_server_alert;?>">
-				<td class="nice-table-left"><?php echo $number;?></td>
-				<td class="alert_name"><?php echo $tmp->alert_name;?></td>
-				<td class="ip_address"><?php echo $tmp->ip_address;?></td>	
-				<td class="port_number"><?php echo $tmp->port_number;?></td>
-				<td class="timeout hidden"><?php echo $tmp->timeout;?></td>
-				<td class="phone_number"><?php echo $tmp->phone_number;?></td>	
-				<td class="respond_message hidden"><?php echo $tmp->respond_message;?></td>	
-				<?php if($tmp->status == 'false'):?>
-				<td><a href="<?php echo site_url();?>/plugin/server_alert/change_state/<?php echo $tmp->id_server_alert;?>" class="release"><img class="ui-icon ui-icon-locked" title="Release state" /></a></td>
+			<tr id="<?php echo $tmp->id_server_alert; ?>">
+				<td class="nice-table-left"><?php echo $number; ?></td>
+				<td class="alert_name"><?php echo $tmp->alert_name; ?></td>
+				<td class="ip_address"><?php echo $tmp->ip_address; ?></td>	
+				<td class="port_number"><?php echo $tmp->port_number; ?></td>
+				<td class="timeout hidden"><?php echo $tmp->timeout; ?></td>
+				<td class="phone_number"><?php echo $tmp->phone_number; ?></td>	
+				<td class="respond_message hidden"><?php echo $tmp->respond_message; ?></td>	
+				<?php if ($tmp->status == 'false'):?>
+				<td><a href="<?php echo site_url(); ?>/plugin/server_alert/change_state/<?php echo $tmp->id_server_alert; ?>" class="release"><img class="ui-icon ui-icon-locked" title="Release state" /></a></td>
 				<?php
 				else: echo '<td>&nbsp;</td>';
-				endif;
-				?>
+			endif; ?>
 				<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>				
-				<td class="nice-table-right"><a href="<?php echo site_url();?>/plugin/server_alert/delete/<?php echo $tmp->id_server_alert;?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
+				<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/server_alert/delete/<?php echo $tmp->id_server_alert; ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 			</tr>
 			
 			<?php

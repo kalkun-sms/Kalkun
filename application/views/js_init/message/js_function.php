@@ -251,7 +251,7 @@ $(document).ready(function() {
     
     // --------------------------------------------------------------------
 	
-    <?php if($this->uri->segment(4) == '5' || $this->uri->segment(4) == '6'):?>
+    <?php if ($this->uri->segment(4) == '5' || $this->uri->segment(4) == '6'):?>
 	/**
 	 * Delete all
 	 *

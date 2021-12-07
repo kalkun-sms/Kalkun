@@ -21,6 +21,7 @@
  * @category	Models
  */
 class Whitelist_number_model extends CI_Model {
+
 	function __construct()
 	{
 		parent::__construct();
@@ -28,7 +29,7 @@ class Whitelist_number_model extends CI_Model {
 
 	function get($option = NULL, $limit = NULL, $offset = NULL)
 	{
-		switch($option)
+		switch ($option)
 		{
 			case 'all':
 				return $this->db->get('plugin_whitelist_number');

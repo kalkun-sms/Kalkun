@@ -8,6 +8,7 @@
 include_once(dirname(__FILE__).'/../libraries/nusoap.php');
 
 class Api extends MY_Controller {
+
 	public static $VERSION = '0.0.8';
 
 	private static $NAMESPACE = 'urn:KalkunRemoteAccess';
@@ -47,7 +48,9 @@ class Api extends MY_Controller {
 			$account = $CI->api_model->getAccount($token);
 
 			if ($account['status'] === FALSE)
+			{
 				return 0;
+			}
 
 			if ($account['ip'] === $_SERVER['REMOTE_ADDR'])
 			{
@@ -56,7 +59,9 @@ class Api extends MY_Controller {
 				return $CI->apisession->userdata('session_id');
 			}
 			else
+			{
 				$CI->session->set_userdata('loggedin', NULL);
+			}
 
 			return 0;
 		}
@@ -67,7 +72,7 @@ class Api extends MY_Controller {
 			$message = trim($message);
 			$destinationNumber = preg_replace('/^\+/', '00', $destinationNumber);
 
-			if(preg_match('/^\d+$/', $destinationNumber))
+			if (preg_match('/^\d+$/', $destinationNumber))
 			{
 				$CI->sendMessage($destinationNumber, $message, 1);
 				return 1;
@@ -83,7 +88,7 @@ class Api extends MY_Controller {
 
 			$destinationNumber = preg_replace('/^\+/', '00', $destinationNumber);
 
-			if(preg_match('/^\d+$/', $destinationNumber))
+			if (preg_match('/^\d+$/', $destinationNumber))
 			{
 				$CI->sendMessage($destinationNumber, $message, 0);
 				return 1;

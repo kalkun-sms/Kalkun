@@ -19,6 +19,7 @@
  * @category	Controllers
  */
 class Phonebook extends MY_Controller {
+
 	/**
 	 * Constructor
 	 *
@@ -68,10 +69,10 @@ class Phonebook extends MY_Controller {
 			$data['title'] = lang('tni_contacts');
 			$data['public_contact'] = FALSE;
 
-			if($_POST)
+			if ($_POST)
 			{
 				$data['phonebook'] = $this->Phonebook_model->get_phonebook(array('option' => 'search'));
-				  $data['search_string'] = $this->input->post('search_name');
+				$data['search_string'] = $this->input->post('search_name');
 			}
 			else
 			{
@@ -96,7 +97,6 @@ class Phonebook extends MY_Controller {
 	 */
 	function group($type = NULL)
 	{
-
 		$this->load->library('pagination');
 		$config = $this->_get_pagination_style();
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
@@ -154,8 +154,14 @@ class Phonebook extends MY_Controller {
 		$param['offset'] = $this->uri->segment(4, 0);
 		$contacts = $this->Phonebook_model->get_phonebook($param);
 
-		if($contacts->row('is_public') === 'true') $data['public_contact'] = TRUE;
-		else $data['public_contact'] = FALSE;
+		if ($contacts->row('is_public') === 'true')
+		{
+			$data['public_contact'] = TRUE;
+		}
+		else
+		{
+			$data['public_contact'] = FALSE;
+		}
 
 		$data['group_id'] = $group_id;
 		$data['main'] = 'main/phonebook/contact/index';
@@ -175,8 +181,8 @@ class Phonebook extends MY_Controller {
 	 *
 	 * @access	private
 	 */
-	 function _get_pagination_style()
-	 {
+	function _get_pagination_style()
+	{
 		$config['full_tag_open'] = '<ul>';
 		$config['full_tag_close'] = '</ul>';
 		$config['num_tag_open'] = '<li>';
@@ -192,7 +198,7 @@ class Phonebook extends MY_Controller {
 		$config['last_tag_open'] = '<li>';
 		$config['last_tag_close'] = '</li>';
 		return $config;
-	 }
+	}
 
 	// --------------------------------------------------------------------
 
@@ -233,9 +239,10 @@ class Phonebook extends MY_Controller {
 	 */
 	function add_group()
 	{
-		if($_POST)
+		if ($_POST)
 		{
-			$this->Phonebook_model->add_group(); redirect('phonebook/group');
+			$this->Phonebook_model->add_group();
+			redirect('phonebook/group');
 		}
 	}
 
@@ -250,7 +257,7 @@ class Phonebook extends MY_Controller {
 	 */
 	function update_contact_group()
 	{
-		if($_POST)
+		if ($_POST)
 		{
 			$this->Phonebook_model->multi_attach_group();
 		}
@@ -273,7 +280,8 @@ class Phonebook extends MY_Controller {
 		$csvData = $this->csvreader->parse_file($filePath, TRUE);
 
 		$n = 0;
-		foreach($csvData as $field):
+		foreach ($csvData as $field)
+		{
 			$pbk['Name'] = $field['Name'];
 			$pbk['Number'] = $field['Number'];
 			$pbk['GroupID'] = $this->input->post('importgroupvalue');
@@ -281,7 +289,7 @@ class Phonebook extends MY_Controller {
 			$pbk['is_public'] = $this->input->post('is_public') ? 'true' : 'false';
 			$this->Phonebook_model->add_contact($pbk);
 			$n++;
-		endforeach;
+		}
 
 		$this->session->set_flashdata('notif', str_replace('%count%', $n, lang('pbk_successfully_imported')));
 		redirect('phonebook');
@@ -307,13 +315,19 @@ class Phonebook extends MY_Controller {
 			$id_pbk = $this->input->post('param1');
 			$data['contact'] = $this->Phonebook_model->get_phonebook(array('option' => 'by_idpbk', 'id_pbk' => $id_pbk));
 		}
-		else if ($type === 'message')
+		else
 		{
-			$data['number'] = $this->input->post('param1');
-		}
-		else if($type === 'normal')
-		{
-			$data['group_id'] = $this->input->post('param1');
+			if ($type === 'message')
+			{
+				$data['number'] = $this->input->post('param1');
+			}
+			else
+			{
+				if ($type === 'normal')
+				{
+					$data['group_id'] = $this->input->post('param1');
+				}
+			}
 		}
 		$this->load->view('main/phonebook/contact/add_contact', $data);
 	}
@@ -336,13 +350,15 @@ class Phonebook extends MY_Controller {
 		$pbk['id_user'] = $this->input->post('pbk_id_user');
 		$pbk['is_public'] = $this->input->post('is_public') ? 'true' : 'false';
 
-		if($this->input->post('editid_pbk'))
+		if ($this->input->post('editid_pbk'))
 		{
 			$pbk['id_pbk'] = $this->input->post('editid_pbk');
 			$msg = '<div class="notif">'.lang('pbk_contact_updated').'</div>';
 		}
 		else
+		{
 			$msg = '<div class="notif">'.lang('pbk_contact_added').'</div>';
+		}
 
 		$this->Phonebook_model->add_contact($pbk);
 		echo $msg;
@@ -370,13 +386,13 @@ class Phonebook extends MY_Controller {
 			$query = $this->Phonebook_model->search_phonebook($param)->result_array();
 
 			// Add identifier, c for contact, g for group, u for user
-			foreach($query as $key => $q)
+			foreach ($query as $key => $q)
 			{
 				$query[$key]['name'] .= ' ('.str_replace('+', '', $q['id']).')';
 				$query[$key]['id'] = $q['id'].':c';
 			}
 			$group = $this->Phonebook_model->search_group($param)->result_array();
-			foreach($group as $key => $q)
+			foreach ($group as $key => $q)
 			{
 				$group[$key]['id'] = $q['id'].':g';
 			}
@@ -386,7 +402,7 @@ class Phonebook extends MY_Controller {
 			if ($type === 'inbox')
 			{
 				$user = $this->User_model->search_user($q)->result_array();
-				foreach($user as $key => $q)
+				foreach ($user as $key => $q)
 				{
 					$user[$key]['id'] = $q['id_user'].':u';
 					$user[$key]['name'] = $q['realname'];
@@ -399,7 +415,7 @@ class Phonebook extends MY_Controller {
 			{
 				$contact = array();
 			}
-			foreach($contact as $key => $q)
+			foreach ($contact as $key => $q)
 			{
 				$contact[$key]['id'] = $q['id'].':c';
 			}
@@ -408,5 +424,4 @@ class Phonebook extends MY_Controller {
 			echo json_encode($combine);
 		}
 	}
-
 }

@@ -21,6 +21,7 @@
 include_once(APPPATH.'plugins/rest_api/libraries/REST_Controller.php');
 
 class Rest_api extends REST_Controller {
+
 	function __construct()
 	{
 		parent::__construct(FALSE);

@@ -60,7 +60,7 @@ $trash = $trash_inbox + $trash_sentitems;
 <div style="float: left; width: 250px;">
 <h4><?php echo lang('kalkun_myfolder');?>: </h4>
 <?php
-foreach($this->Kalkun_model->get_folders('all')->result() as $val):
+foreach ($this->Kalkun_model->get_folders('all')->result() as $val):
 $folder_count_inbox = $this->Message_model->get_messages(array('type' => 'inbox', 'id_folder' => $val->id_folder))->num_rows();
 $folder_count_sentitems = $this->Message_model->get_messages(array('type' => 'sentitems', 'id_folder' => $val->id_folder))->num_rows();
 $folder_count = $folder_count_inbox + $folder_count_sentitems;

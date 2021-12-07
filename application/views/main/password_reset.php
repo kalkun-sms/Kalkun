@@ -23,7 +23,7 @@ $("#new_password").focus();
 <body>
 <center>
 <div class="login_loading_container">&nbsp;
-<?php if($this->session->flashdata('errorlogin')): ?>
+<?php if ($this->session->flashdata('errorlogin')): ?>
 <span class="loading_area"><?php echo $this->session->flashdata('errorlogin');?></span>
 <?php endif; ?>
 </div>

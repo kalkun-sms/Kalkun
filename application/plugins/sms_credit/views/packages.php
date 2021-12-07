@@ -5,7 +5,10 @@
         <div id="window_title_left"><?php echo $title;?></div>
         <div id="window_title_right">
             <?php echo form_open('plugin/sms_credit/packages', array('class' => 'search_form')); ?>
-            <input type="text" name="query" class="search_packages" size="20" value="<?php if(isset($query)) echo $query;?>" />
+            <input type="text" name="query" class="search_packages" size="20" value="<?php if (isset($query))
+{
+	echo $query;
+}?>" />
             <?php echo form_close(); ?>
             &nbsp;
             <a href="<?php echo site_url('plugin/sms_credit');?>" class="nicebutton">Users</a>
@@ -16,7 +19,7 @@
     <div id="window_content">
         <?php $this->load->view('navigation');?>
         <table>
-        <?php foreach($packages->result() as $tmp): ?>
+        <?php foreach ($packages->result() as $tmp): ?>
         <tr id="<?php echo $tmp->id_credit_template;?>">
             <td>
             <div class="two_column_container contact_list">

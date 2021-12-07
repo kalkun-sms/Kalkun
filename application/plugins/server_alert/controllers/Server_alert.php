@@ -21,6 +21,7 @@
 include_once(APPPATH.'plugins/Plugin_controller.php');
 
 class Server_alert extends Plugin_controller {
+
 	function __construct()
 	{
 		parent::__construct();
@@ -30,10 +31,16 @@ class Server_alert extends Plugin_controller {
 
 	function index()
 	{
-		if($_POST)
+		if ($_POST)
 		{
-			if($this->input->post('editid_server_alert')) $this->plugin_model->update();
-			else $this->plugin_model->add();
+			if ($this->input->post('editid_server_alert'))
+			{
+				$this->plugin_model->update();
+			}
+			else
+			{
+				$this->plugin_model->add();
+			}
 			redirect('plugin/server_alert');
 		}
 
@@ -70,5 +77,4 @@ class Server_alert extends Plugin_controller {
 	{
 		echo 'Total Time Interval : '.$this->plugin_model->get_time_interval().' seconds';
 	}
-
 }

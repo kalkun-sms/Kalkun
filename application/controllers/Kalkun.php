@@ -19,6 +19,7 @@
  * @category	Controllers
  */
 class Kalkun extends MY_Controller {
+
 	/**
 	 * Constructor
 	 *
@@ -44,9 +45,9 @@ class Kalkun extends MY_Controller {
 		$data['main'] = 'main/dashboard/home';
 		$data['title'] = 'Dashboard';
 		$data['data_url'] = site_url('kalkun/get_statistic');
-		if($this->config->item('disable_outgoing'))
+		if ($this->config->item('disable_outgoing'))
 		{
-		  $data['alerts'][] = '<div class="warning">'.lang('kalkun_outgoing_sms_disabled_contact_sysadmin').'</div>';
+			$data['alerts'][] = '<div class="warning">'.lang('kalkun_outgoing_sms_disabled_contact_sysadmin').'</div>';
 		}
 		$this->load->view('main/layout', $data);
 	}
@@ -110,17 +111,17 @@ class Kalkun extends MY_Controller {
 				$key = $prefix.$key;
 			}
 
-			if( ! isset($yout[$key]))
+			if ( ! isset($yout[$key]))
 			{
 				$yout[$key] = 0;
 			}
 
-			if( ! isset($yin[$key]))
+			if ( ! isset($yin[$key]))
 			{
 				$yin[$key] = 0;
 			}
 
-			if( ! in_array($key, $x))
+			if ( ! in_array($key, $x))
 			{
 				$x[] = $key;
 			}
@@ -258,24 +259,31 @@ class Kalkun extends MY_Controller {
 		$data['title'] = 'Settings';
 		$type = $this->uri->segment(2);
 		$valid_type = array('general', 'personal', 'appearance', 'password', 'save', 'filters');
-		if( ! in_array($type, $valid_type)) show_404();
+		if ( ! in_array($type, $valid_type))
+		{
+			show_404();
+		}
 
-		if($_POST && $type === 'save') {
+		if ($_POST && $type === 'save')
+		{
 			$option = $this->input->post('option');
 			// check password
-			if($option === 'password' && ! password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password')))
+			if ($option === 'password' && ! password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password')))
 			{
 				$this->session->set_flashdata('notif', lang('kalkun_wrong_password'));
 				redirect('settings/'.$option);
 			}
-			else if($option === 'personal')
+			else
 			{
-				if($this->input->post('username') !== $this->session->userdata('username'))
+				if ($option === 'personal')
 				{
-					if($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows > 0)
+					if ($this->input->post('username') !== $this->session->userdata('username'))
 					{
-						$this->session->set_flashdata('notif', lang('kalkun_username_exists'));
-						redirect('settings/'.$option);
+						if ($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows > 0)
+						{
+							$this->session->set_flashdata('notif', lang('kalkun_username_exists'));
+							redirect('settings/'.$option);
+						}
 					}
 				}
 			}
@@ -284,7 +292,7 @@ class Kalkun extends MY_Controller {
 			redirect('settings/'.$option);
 		}
 
-		if($type === 'filters')
+		if ($type === 'filters')
 		{
 			$data['filters'] = $this->Kalkun_model->get_filters($this->session->userdata('id_user'));
 			$data['my_folders'] = $this->Kalkun_model->get_folders('all');
@@ -308,5 +316,4 @@ class Kalkun extends MY_Controller {
 	{
 		$this->Kalkun_model->delete_filter($id_filter);
 	}
-
 }

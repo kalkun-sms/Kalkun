@@ -24,6 +24,7 @@
 require_once('Nongammu_model.php');
 
 class Kannel_model extends Nongammu_model {
+
 	/**
 	 * Constructor
 	 *

@@ -21,6 +21,7 @@
 include_once(APPPATH.'plugins/Plugin_controller.php');
 
 class Stop_manager extends Plugin_controller {
+
 	function __construct()
 	{
 		parent::__construct();
@@ -30,7 +31,7 @@ class Stop_manager extends Plugin_controller {
 
 	function index()
 	{
-		if($_POST && is_null($this->input->post('search_name')))
+		if ($_POST && is_null($this->input->post('search_name')))
 		{
 			$this->Stop_manager_model->add(
 				$this->input->post('destination_number', TRUE),
@@ -58,9 +59,13 @@ class Stop_manager extends Plugin_controller {
 
 			$offset = ($this->uri->segment(3, 0) === 'index') ? $this->uri->segment(4, 0) : $this->uri->segment(3, 0);
 			if ( ! is_numeric($offset))
+			{
 				show_404();
+			}
 			if (intval($offset) >= $this->Stop_manager_model->get('count'))
+			{
 				$offset = 0;
+			}
 			$data['stoplist'] = $this->Stop_manager_model->get('paginate', $config['per_page'], $offset);
 		}
 

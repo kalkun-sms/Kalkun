@@ -72,14 +72,14 @@ function external_script($sms)
 	$match = NULL; //The result of a preg_match capture
 
 	// Load all rules
-	foreach($scripts as $rule)
+	foreach ($scripts as $rule)
 	{
 		$intepreter_path = $rule['intepreter_path'];
 		$script_path = $rule['script_path'];
 		$value = $parameter = '';
 
 		// evaluate rule key
-		switch($rule['key'])
+		switch ($rule['key'])
 		{
 			case 'sender':
 				$value = $phone;
@@ -91,7 +91,7 @@ function external_script($sms)
 		}
 
 		// evaluate rule type
-		switch($rule['type'])
+		switch ($rule['type'])
 		{
 			case 'match':
 			case 'equal':
@@ -135,19 +135,37 @@ function external_script($sms)
 
 function is_equal($subject, $matched)
 {
-	if ($subject === $matched) return TRUE;
-	else return FALSE;
+	if ($subject === $matched)
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
 }
 
 function is_contain($subject, $matched)
 {
-	if ( ! strstr($matched, $subject)) return FALSE;
-	else return TRUE;
+	if ( ! strstr($matched, $subject))
+	{
+		return FALSE;
+	}
+	else
+	{
+		return TRUE;
+	}
 }
 
 function is_preg_match($pattern, $subject)
 {
 	$ret = preg_match($pattern, $subject, $matches, PREG_UNMATCHED_AS_NULL);
-	if ($ret === 1) return array(TRUE, $matches);
-	else return array(FALSE, NULL);
+	if ($ret === 1)
+	{
+		return array(TRUE, $matches);
+	}
+	else
+	{
+		return array(FALSE, NULL);
+	}
 }

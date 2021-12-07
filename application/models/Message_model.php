@@ -21,6 +21,7 @@
  * @category	Models
  */
 class Message_model extends CI_Model {
+
 	/**
 	 * Constructor
 	 *
@@ -41,5 +42,4 @@ class Message_model extends CI_Model {
 		$res = call_user_func_array(array($this->gateway, $name), $arguments);
 		return $res;
 	}
-
 }

@@ -21,6 +21,7 @@
 include_once(APPPATH.'plugins/Plugin_controller.php');
 
 class Sms_to_twitter extends Plugin_controller {
+
 	function __construct()
 	{
 		parent::__construct();

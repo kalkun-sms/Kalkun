@@ -21,6 +21,7 @@
 include_once(APPPATH.'plugins/Plugin_controller.php');
 
 class Soap extends Plugin_controller {
+
 	function __construct()
 	{
 		parent::__construct();
@@ -31,13 +32,23 @@ class Soap extends Plugin_controller {
 
 	function index()
 	{
-		if($_POST)
+		if ($_POST)
 		{
-			if($this->input->post('editid_remote_access')) $this->Plugin_model->updateRemoteAccess();
-			else if ($this->input->post('notifiy') === 'on')
-				$i = 0;
+			if ($this->input->post('editid_remote_access'))
+			{
+				$this->Plugin_model->updateRemoteAccess();
+			}
 			else
-				$this->Plugin_model->addRemoteAccess();
+			{
+				if ($this->input->post('notifiy') === 'on')
+				{
+					$i = 0;
+				}
+				else
+				{
+					$this->Plugin_model->addRemoteAccess();
+				}
+			}
 			redirect('plugin/soap');
 		}
 
@@ -66,7 +77,8 @@ class Soap extends Plugin_controller {
 		redirect('plugin/soap');
 	}
 
-	function delete_notification() {
+	function delete_notification()
+	{
 		// TODO - delete notifiy
 	}
 }

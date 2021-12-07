@@ -5,7 +5,10 @@
         <div id="window_title_left"><?php echo $title;?></div>
         <div id="window_title_right">
             <?php echo form_open('plugin/sms_credit', array('class' => 'search_form')); ?>
-            <input type="text" name="search_name" size="20" class="search_name" value="<?php if(isset($query)) echo $query;?>" />
+            <input type="text" name="search_name" size="20" class="search_name" value="<?php if (isset($query))
+{
+	echo $query;
+}?>" />
             <?php echo form_close(); ?>
             &nbsp;
             <a href="<?php echo site_url('plugin/sms_credit/packages');?>" class="nicebutton">Packages</a>	
@@ -16,14 +19,14 @@
     <div id="window_content">
         <?php $this->load->view('navigation');?>
         <table>
-            <?php foreach($users->result() as $tmp): ?>
+            <?php foreach ($users->result() as $tmp): ?>
             <tr id="<?php echo $tmp->id_user;?>">
                 <td>
                     <div class="two_column_container contact_list">
                         <div class="left_column">
                             <div id="pbkname">
                                 <span style="font-weight: bold;"><?php echo $tmp->realname;?></span>
-                                <?php if( ! is_null($tmp->template_name)): echo "<sup>( {$tmp->template_name} )</sup>"; ?>
+                                <?php if ( ! is_null($tmp->template_name)): echo "<sup>( {$tmp->template_name} )</sup>"; ?>
                                 <?php else: echo '<sup>( No package )</sup>'; ?>
                                 <?php endif;?>
                             </div>	
@@ -76,7 +79,7 @@ echo form_dropdown('level', $level, 'user', $option);
 
 <label for="package">Package</label>
 <?php
-foreach($packages->result_array() as $row)
+foreach ($packages->result_array() as $row)
 {
 	$package[$row['id_credit_template']] = $row['template_name'];
 }
@@ -102,7 +105,7 @@ echo form_dropdown('package', $package, '', $option);
 <fieldset>
 <label for="package">Package</label>
 <?php
-foreach($packages->result_array() as $row)
+foreach ($packages->result_array() as $row)
 {
 	$package[$row['id_credit_template']] = $row['template_name'];
 }

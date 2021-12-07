@@ -82,7 +82,7 @@ function sms_credit($sms)
 	// check user credit
 	$user_package = $CI->plugin_model->get_users(array('id' => $uid, 'valid_start' => date('Y-m-d H:i:s'), 'valid_end' => date('Y-m-d H:i:s')))->row_array();
 
-	if(isset($user_package['sms_numbers']))
+	if (isset($user_package['sms_numbers']))
 	{
 		$has_package = TRUE;
 		$sms_used = $CI->Kalkun_model->get_sms_used('date', array('user_id' => $uid,
@@ -93,7 +93,7 @@ function sms_credit($sms)
 		$has_package = FALSE;
 	}
 
-	if(($has_package && $sms_used >= $user_package['sms_numbers']) OR ( ! $has_package && ! $config['allow_user_with_no_package']))
+	if (($has_package && $sms_used >= $user_package['sms_numbers']) OR ( ! $has_package && ! $config['allow_user_with_no_package']))
 	{
 		echo 'Sorry, your sms credit limit exceeded.';
 		exit;

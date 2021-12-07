@@ -21,6 +21,7 @@
  * @category    Models
  */
 class Stop_manager_model extends CI_Model {
+
 	function __construct()
 	{
 		parent::__construct();
@@ -28,7 +29,7 @@ class Stop_manager_model extends CI_Model {
 
 	function get($option = NULL, $limit = NULL, $offset = NULL)
 	{
-		switch($option)
+		switch ($option)
 		{
 			case 'all':
 				$this->db->select('*');

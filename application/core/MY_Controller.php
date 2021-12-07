@@ -20,7 +20,8 @@
  * @subpackage	Base
  * @category	Controllers
  */
-class MY_Controller  extends CI_Controller  {
+class MY_Controller  extends CI_Controller {
+
 	/**
 	 * Constructor
 	 *
@@ -31,19 +32,23 @@ class MY_Controller  extends CI_Controller  {
 		parent::__construct();
 
 		// installation mode
-		if(file_exists('install')) redirect('install');
+		if (file_exists('install'))
+		{
+			redirect('install');
+		}
 
 		$this->load->library('session');
 
-		if($login)
+		if ($login)
 		{
 			// session check
-			if($this->session->userdata('loggedin') === NULL)
+			if ($this->session->userdata('loggedin') === NULL)
 			{
 				$this->session->set_flashdata('bef_login_method', $this->input->method(FALSE));
 				$this->session->set_flashdata('bef_login_history_count', -1);
 				$this->session->set_flashdata('bef_login_requested_url', current_url());
-				if (array_key_exists('HTTP_REFERER', $_SERVER)){
+				if (array_key_exists('HTTP_REFERER', $_SERVER))
+				{
 					$this->session->set_flashdata('bef_login_HTTP_REFERER', $_SERVER['HTTP_REFERER']);
 				}
 				$this->session->set_flashdata('bef_login_post_data', $this->input->post());
@@ -79,14 +84,17 @@ class MY_Controller  extends CI_Controller  {
 				// do nothing
 			}
 			// if exist on sentitems then update sentitems ownership, else delete user_outbox
-			else if ($this->Message_model->get_messages(array('id_message' => $id_message, 'type' => 'sentitems'))->num_rows() > 0)
-			{
-				$this->Message_model->insert_user_sentitems($id_message, $uid);
-				$this->Message_model->delete_user_outbox($id_message);
-			}
 			else
 			{
-				$this->Message_model->delete_user_outbox($id_message);
+				if ($this->Message_model->get_messages(array('id_message' => $id_message, 'type' => 'sentitems'))->num_rows() > 0)
+				{
+					$this->Message_model->insert_user_sentitems($id_message, $uid);
+					$this->Message_model->delete_user_outbox($id_message);
+				}
+				else
+				{
+					$this->Message_model->delete_user_outbox($id_message);
+				}
 			}
 		}
 	}

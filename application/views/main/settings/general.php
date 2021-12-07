@@ -66,10 +66,16 @@ echo form_dropdown('paging', $paging, $paging_act);
 <td>
 <?php $permanent_act = $this->Kalkun_model->get_setting()->row('permanent_delete');?>
 <input type="radio" id="permanent_delete_false" name="permanent_delete" value="false" 
-<?php if($permanent_act == 'false') echo 'checked="checked"'; ?> /> 
+<?php if ($permanent_act == 'false')
+{
+	echo 'checked="checked"';
+} ?> /> 
 <label for="permanent_delete_false"><?php echo lang('tni_set_perm_deloff'); ?></label> <small><?php echo lang('tni_set_perm_deloff_hint'); ?></small><br />
 <input type="radio" id="permanent_delete_true" name="permanent_delete" value="true"
-<?php if($permanent_act == 'true') echo 'checked="checked"'; ?>/> 
+<?php if ($permanent_act == 'true')
+{
+	echo 'checked="checked"';
+} ?>/> 
 <label for="permanent_delete_true"><?php echo lang('tni_set_perm_delon'); ?></label>
 </td>
 </tr>    

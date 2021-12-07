@@ -21,6 +21,7 @@
  * @category	Models
  */
 class Gammu_model extends CI_Model {
+
 	var $udh = '';
 
 	/**
@@ -54,7 +55,7 @@ class Gammu_model extends CI_Model {
 			$ret = exec ($cmd);
 			preg_match('/with ID ([\d]+)/i', $ret, $matches);
 			$insert_id = $matches[1];
-			if(empty($insert_id))
+			if (empty($insert_id))
 			{
 				die('<div class="notif" style="color:red">'.lang('gammu_could_not_send_msg_gammu_path_incorrect').'</div>');
 				$f_ret = array('status' => lang('gammu_could_not_send_msg_gammu_path_incorrect')); //FIXME
@@ -101,12 +102,15 @@ class Gammu_model extends CI_Model {
 		$data = $this->_default(array('SenderID' => NULL, 'CreatorID' => '', 'validity' => '-1'), $data);
 
 		// check if wap msg
-		if(isset($data['type']) && $data['type'] === 'waplink') { return $this->_send_wap_link($data); }
+		if (isset($data['type']) && $data['type'] === 'waplink')
+		{
+			return $this->_send_wap_link($data);
+		}
 
 		if ( ! empty($data['dest']) && ! empty($data['date']) && ! is_null_loose($data['message']))
 		{
 			// Check coding
-			switch($data['coding'])
+			switch ($data['coding'])
 			{
 				case 'default':
 					$standar_length = 160;
@@ -123,7 +127,7 @@ class Gammu_model extends CI_Model {
 			$messagelength = $this->_get_message_length($data['message'], $data['coding']);
 
 			// Multipart message
-			if($messagelength > $standar_length)
+			if ($messagelength > $standar_length)
 			{
 				$UDH_length = 7;
 				$multipart_length = $standar_length - $UDH_length;
@@ -140,7 +144,10 @@ class Gammu_model extends CI_Model {
 
 				// count part message
 				$part = count($tmpmsg);
-				if($part < 10) $part = '0'.$part;
+				if ($part < 10)
+				{
+					$part = '0'.$part;
+				}
 
 				// insert first part to outbox and get last outbox ID
 				$data['option'] = 'multipart';
@@ -150,7 +157,7 @@ class Gammu_model extends CI_Model {
 				$this->Kalkun_model->add_sms_used($data['uid']);	// FIXME
 
 				// insert the rest part to Outbox Multipart
-				for($i = 1; $i < count($tmpmsg); $i++)
+				for ($i = 1; $i < count($tmpmsg); $i++)
 				{
 					$this->_send_message_multipart($outboxid, $tmpmsg[$i], $i, $part, $data['coding'], $data['class'], $UDH);
 					$this->Kalkun_model->add_sms_used($data['uid']);
@@ -201,7 +208,7 @@ class Gammu_model extends CI_Model {
 			'CreatorID' => '🦃 Kalkun '.$this->config->item('kalkun_version')
 		);
 
-		if($tmp_data['option'] === 'multipart')
+		if ($tmp_data['option'] === 'multipart')
 		{
 			$data['MultiPart'] = 'true';
 			$data['UDH'] = $tmp_data['UDH'].$tmp_data['part'].'01';
@@ -216,7 +223,10 @@ class Gammu_model extends CI_Model {
 		);
 		$this->db->insert('user_outbox', $user);
 
-		if($tmp_data['option'] === 'multipart') return $last_outbox_id;
+		if ($tmp_data['option'] === 'multipart')
+		{
+			return $last_outbox_id;
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -232,7 +242,10 @@ class Gammu_model extends CI_Model {
 	function _send_message_multipart($outboxid, $message, $pos, $part, $coding, $class, $UDH)
 	{
 		$code = $pos + 1;
-		if($code < 10) $code = '0'.$code;
+		if ($code < 10)
+		{
+			$code = '0'.$code;
+		}
 
 		$data = array (
 			'ID' => $outboxid,
@@ -248,7 +261,13 @@ class Gammu_model extends CI_Model {
 	// --------------------------------------------------------------------
 	function search_messages($options = array())
 	{
-		if( ! isset($options['number'])) if( ! isset($options['search_string']))  die('No String to Search For');
+		if ( ! isset($options['number']))
+		{
+			if ( ! isset($options['search_string']))
+			{
+				die('No String to Search For');
+			}
+		}
 
 		// Inbox
 		$options['type'] = 'inbox';
@@ -259,33 +278,42 @@ class Gammu_model extends CI_Model {
 		$udh_where = '('.$this->_protect_identifiers('UDH')." = '' OR ".$this->_protect_identifiers('UDH')." LIKE '%1')";
 		$this->db->where($udh_where, NULL, FALSE);
 
-		if(isset($options['search_string']))
+		if (isset($options['search_string']))
 		{
 			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $options['search_string'])));
 			$this->db->like('LOWER('.$this->db->protect_identifiers('TextDecoded').')', $search_word);
 		}
 
 		// if phone number is set
-		if(isset($options['number'])) $this->db->like($tmp_number, $options['number']);
+		if (isset($options['number']))
+		{
+			$this->db->like($tmp_number, $options['number']);
+		}
 
 		// date range
-		if(isset($options['date_from']) && isset($options['date_to']))
+		if (isset($options['date_from']) && isset($options['date_to']))
 		{
 			$this->db->where($tmp_order.' >', $options['date_from']);
 			$this->db->where($tmp_order.' <', $options['date_to']);
 		}
 
 		// custom folder
-		if(isset($options['id_folder']))
+		if (isset($options['id_folder']))
 		{
-			if ($options['id_folder'] !== 'all') $this->db->where('id_folder', $options['id_folder']);
+			if ($options['id_folder'] !== 'all')
+			{
+				$this->db->where('id_folder', $options['id_folder']);
+			}
 		}
 
 		//remove already trashed
-		if( ! isset($options['trash'])) $this->db->where('id_folder !=', '5');
+		if ( ! isset($options['trash']))
+		{
+			$this->db->where('id_folder !=', '5');
+		}
 
 		// join user table
-		if(isset($options['uid']))
+		if (isset($options['uid']))
 		{
 			$this->db->join($user_folder, $user_folder.'.id_'.$options['type'].'='.$options['type'].'.ID');
 			$this->db->where($user_folder.'.id_user', $options['uid']);
@@ -296,10 +324,11 @@ class Gammu_model extends CI_Model {
 		$inbox = $result->result_array();
 
 		// add global date for sorting
-		foreach($inbox as $key => $tmp):
-		$inbox[$key]['globaldate'] = $inbox[$key]['ReceivingDateTime'];
-		$inbox[$key]['source'] = 'inbox';
-		endforeach;
+		foreach ($inbox as $key => $tmp)
+		{
+			$inbox[$key]['globaldate'] = $inbox[$key]['ReceivingDateTime'];
+			$inbox[$key]['source'] = 'inbox';
+		}
 
 		// Sentitems
 		$options['type'] = 'sentitems';
@@ -309,32 +338,38 @@ class Gammu_model extends CI_Model {
 		$tmp_order = 'SendingDateTime';
 		$this->db->where('SequencePosition', '1');
 
-		if(isset($options['search_string']))
+		if (isset($options['search_string']))
 		{
 			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $options['search_string'])));
 			$this->db->like('LOWER('.$this->db->protect_identifiers('TextDecoded').')', $search_word);
 		}
 
 		// if phone number is set
-		if(isset($options['number'])) $this->db->like($tmp_number, $options['number']);
+		if (isset($options['number']))
+		{
+			$this->db->like($tmp_number, $options['number']);
+		}
 
 		// date range
-		if(isset($options['date_from']) && isset($options['date_to']))
+		if (isset($options['date_from']) && isset($options['date_to']))
 		{
 			$this->db->where($tmp_order.' >', $options['date_from']);
 			$this->db->where($tmp_order.' <', $options['date_to']);
 		}
 
 		// custom folder
-		if(isset($options['id_folder']))
+		if (isset($options['id_folder']))
 		{
-			if ($options['id_folder'] !== 'all') $this->db->where('id_folder', $options['id_folder']);
+			if ($options['id_folder'] !== 'all')
+			{
+				$this->db->where('id_folder', $options['id_folder']);
+			}
 		}
 
 		// sending status
-		if(isset($options['status']))
+		if (isset($options['status']))
 		{
-			switch(strtolower($options['status']))
+			switch (strtolower($options['status']))
 			{
 				case 'delivered':
 					$this->db->where_in('Status', array('SendingOK', 'SendingOKNoReport', 'DeliveryOK', 'DeliveryPending'));
@@ -350,11 +385,14 @@ class Gammu_model extends CI_Model {
 			}
 		}
 
-		 //remove already trashed
-		if( ! isset($options['trash'])) $this->db->where('id_folder !=', '5');
+		//remove already trashed
+		if ( ! isset($options['trash']))
+		{
+			$this->db->where('id_folder !=', '5');
+		}
 
 		// join user table
-		if(isset($options['uid']))
+		if (isset($options['uid']))
 		{
 			$this->db->join($user_folder, $user_folder.'.id_'.$options['type'].'='.$options['type'].'.ID');
 			$this->db->where($user_folder.'.id_user', $options['uid']);
@@ -364,17 +402,19 @@ class Gammu_model extends CI_Model {
 		$sentitems = $result->result_array();
 
 		// add global date for sorting
-		foreach($sentitems as $key => $tmp):
+		foreach ($sentitems as $key => $tmp)
+		{
 			$sentitems[$key]['globaldate'] = $sentitems[$key]['SendingDateTime'];
 			$sentitems[$key]['source'] = 'sentitems';
-		endforeach;
+		}
 
 		$data['messages'] = $inbox;
 
 		// merge inbox and sentitems
-		foreach($sentitems as $tmp):
+		foreach ($sentitems as $tmp)
+		{
 			$data['messages'][] = $tmp;
-		endforeach;
+		}
 
 		// sort data
 		$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
@@ -385,16 +425,16 @@ class Gammu_model extends CI_Model {
 		$return_data['messages'] = array();
 
 		//paginate
-		if(isset($options['offset']) && isset($options['limit']))
+		if (isset($options['offset']) && isset($options['limit']))
 		{
-		  for($i = $options['offset'] ; $i < min(($options['offset'] + $options['limit']), $return_data['total_rows']) ;  $i++)
-		  {
-			 $return_data['messages'][] = $data['messages'][$i];
-		  }
+			for ($i = $options['offset'] ; $i < min(($options['offset'] + $options['limit']), $return_data['total_rows']) ;  $i++)
+			{
+				$return_data['messages'][] = $data['messages'][$i];
+			}
 		}
 		else
 		{
-		   $return_data['messages'] = $data['messages'];
+			$return_data['messages'] = $data['messages'];
 		}
 
 		return  (object) $return_data;
@@ -429,17 +469,22 @@ class Gammu_model extends CI_Model {
 		$valid_type = array('inbox', 'outbox', 'sentitems');
 
 		// check if it's valid type
-		if( ! in_array($options['type'], $valid_type))
-		die('Invalid type request on class '.get_class($this).' function '.__FUNCTION__);
+		if ( ! in_array($options['type'], $valid_type))
+		{
+			die('Invalid type request on class '.get_class($this).' function '.__FUNCTION__);
+		}
 
 		// if phone number is set
-		if(isset($options['number']) && $options['number'] !== 'sending_error') $arr_number = $this->Phonebook_model->convert_phonenumber(array('number' => $options['number']));
+		if (isset($options['number']) && $options['number'] !== 'sending_error')
+		{
+			$arr_number = $this->Phonebook_model->convert_phonenumber(array('number' => $options['number']));
+		}
 
 		$user_folder = 'user_'.$options['type'];
 		$this->db->from($options['type']);
 
 		// set valid field name
-		if($options['type'] === 'inbox')
+		if ($options['type'] === 'inbox')
 		{
 			$tmp_number = 'SenderNumber';
 			$tmp_order = 'ReceivingDateTime';
@@ -451,39 +496,57 @@ class Gammu_model extends CI_Model {
 		{
 			$tmp_number = 'DestinationNumber';
 			$tmp_order = 'SendingDateTime';
-			if($options['type'] === 'sentitems') $this->db->where('SequencePosition', '1');
+			if ($options['type'] === 'sentitems')
+			{
+				$this->db->where('SequencePosition', '1');
+			}
 		}
 
 		// if id message is set
-		if(isset($options['id_message'])) $this->db->where('ID', $options['id_message']);
+		if (isset($options['id_message']))
+		{
+			$this->db->where('ID', $options['id_message']);
+		}
 		else
 		{
 			// if id folder is set, else use default value (inbox = 1, sentitems = 3)
-			if(isset($options['id_folder'])) $this->db->where('id_folder', $options['id_folder']);
+			if (isset($options['id_folder']))
+			{
+				$this->db->where('id_folder', $options['id_folder']);
+			}
 			else
 			{
-				if($options['type'] !== 'outbox') $this->db->where('id_folder', array_search($options['type'], $valid_type) + 1);
+				if ($options['type'] !== 'outbox')
+				{
+					$this->db->where('id_folder', array_search($options['type'], $valid_type) + 1);
+				}
 			}
 		}
 
 		//if search string is set
-		if(isset($options['search_string']))
+		if (isset($options['search_string']))
 		{
 			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $options['search_string'])));
 			$this->db->like('LOWER('.$this->db->protect_identifiers('TextDecoded').')', $search_word);
 		}
 
 		// if phone number is set
-		if(isset($options['number']) && $options['number'] !== 'sending_error') $this->db->where_in($tmp_number, $arr_number);
+		if (isset($options['number']) && $options['number'] !== 'sending_error')
+		{
+			$this->db->where_in($tmp_number, $arr_number);
+		}
 
 		// sentitems only error
-		if($options['type'] === 'sentitems' && isset($options['number']) && $options['number'] === 'sending_error') $this->db->where('Status', 'SendingError');
+		if ($options['type'] === 'sentitems' && isset($options['number']) && $options['number'] === 'sending_error')
+		{
+			$this->db->where('Status', 'SendingError');
+		}
 
 		// if readed is set
-		if(isset($options['readed']) && is_bool($options['readed']))
+		if (isset($options['readed']) && is_bool($options['readed']))
 		{
 			// valid only for inbox
-			if($options['type'] === 'inbox')
+			if ($options['type'] === 'inbox')
 			{
 				$readed = ($options['readed']) ? 'true' : 'false';
 				$this->db->where('readed', $readed);
@@ -491,10 +554,10 @@ class Gammu_model extends CI_Model {
 		}
 
 		// if processed is set
-		if(isset($options['processed']) && is_bool($options['processed']))
+		if (isset($options['processed']) && is_bool($options['processed']))
 		{
 			// valid only for inbox
-			if($options['type'] === 'inbox')
+			if ($options['type'] === 'inbox')
 			{
 				$processed = ($options['processed']) ? 'true' : 'false';
 				$this->db->where('Processed', $processed);
@@ -502,18 +565,24 @@ class Gammu_model extends CI_Model {
 		}
 
 		// join user table
-		if(isset($options['uid']))
+		if (isset($options['uid']))
 		{
 			$this->db->join($user_folder, $user_folder.'.id_'.$options['type'].'='.$options['type'].'.ID');
 			$this->db->where($user_folder.'.id_user', $options['uid']);
 
 			// if trash is set
-			if(isset($options['trash']) && is_bool($options['trash'])) $this->db->where($user_folder.'.trash', $options['trash']);
+			if (isset($options['trash']) && is_bool($options['trash']))
+			{
+				$this->db->where($user_folder.'.trash', $options['trash']);
+			}
 		}
 
-		if(isset($options['order_by'])) $this->db->order_by($options['order_by'], isset($options['order_by_type']) ? $options['order_by_type'] : 'DESC');
+		if (isset($options['order_by']))
+		{
+			$this->db->order_by($options['order_by'], isset($options['order_by_type']) ? $options['order_by_type'] : 'DESC');
+		}
 
-		if(isset($options['limit']) && isset($options['offset']))
+		if (isset($options['limit']) && isset($options['offset']))
 		{
 			$this->db->limit($options['limit'], $options['offset']);
 		}
@@ -546,12 +615,12 @@ class Gammu_model extends CI_Model {
 		$sub = explode('.', $identifier);
 		$sub_count = count($sub);
 
-		foreach($sub as $key => $tmp)
+		foreach ($sub as $key => $tmp)
 		{
 			$escaped_identifer .= $escape_char.$tmp.$escape_char;
 
 			// if this is not the last
-			if($key !== $sub_count - 1)
+			if ($key !== $sub_count - 1)
 			{
 				$escaped_identifer .= '.';
 			}
@@ -574,12 +643,12 @@ class Gammu_model extends CI_Model {
 	function _get_message_length($message = NULL, $coding = NULL)
 	{
 		$msg_length = 0;
-		if($coding === 'Default_No_Compression')
+		if ($coding === 'Default_No_Compression')
 		{
 			$msg_char = $this->_string_split($message);
-			foreach($msg_char as $char)
+			foreach ($msg_char as $char)
 			{
-				if($this->_is_special_char($char))
+				if ($this->_is_special_char($char))
 				{
 					$msg_length += 2;
 				}
@@ -587,7 +656,6 @@ class Gammu_model extends CI_Model {
 				{
 					$msg_length += 1;
 				}
-
 			}
 			return $msg_length;
 		}
@@ -610,7 +678,7 @@ class Gammu_model extends CI_Model {
 			'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ñ', '§', '¿', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
 			'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'ñ', 'à');
 
-		if(in_array($char, $special_char))
+		if (in_array($char, $special_char))
 		{
 			return TRUE;
 		}
@@ -624,7 +692,7 @@ class Gammu_model extends CI_Model {
 	{
 		$len = mb_strlen($string);
 		$result = array();
-		for($i = 0;$i < $len;$i += $length)
+		for ($i = 0;$i < $len;$i += $length)
 		{
 			$char = mb_substr($string, $i, $length);
 			array_push($result, $char);
@@ -683,7 +751,7 @@ class Gammu_model extends CI_Model {
 	*/
 	function _get_message_multipart($message = NULL, $coding = NULL, $multipart_length = NULL)
 	{
-		if($coding === 'Default_No_Compression')
+		if ($coding === 'Default_No_Compression')
 		{
 			$char = $this->_string_split($message);
 			$string = '';
@@ -691,12 +759,13 @@ class Gammu_model extends CI_Model {
 			$char_taken = 0;
 			$msg = array();
 
-			foreach ($char as $key => $val) {
-				if($left > 0)
+			foreach ($char as $key => $val)
+			{
+				if ($left > 0)
 				{
-					if($this->_is_special_char($val))
+					if ($this->_is_special_char($val))
 					{
-						if($left > 1)
+						if ($left > 1)
 						{
 							$string .= $val;
 							$left -= 2;
@@ -716,7 +785,7 @@ class Gammu_model extends CI_Model {
 				}
 				$char_taken++;
 
-				if($left === 0 OR $char_taken === mb_strlen($message))
+				if ($left === 0 OR $char_taken === mb_strlen($message))
 				{
 					$msg[] = $string;
 					$string = '';
@@ -774,19 +843,33 @@ class Gammu_model extends CI_Model {
 		$valid_type = array('inbox', 'outbox', 'sentitems');
 
 		// check if it's valid type
-		if( ! in_array($options['type'], $valid_type))
-		die('Invalid type request on class '.get_class($this).' function '.__FUNCTION__);
+		if ( ! in_array($options['type'], $valid_type))
+		{
+			die('Invalid type request on class '.get_class($this).' function '.__FUNCTION__);
+		}
 
 		$user_id = $this->session->userdata('id_user');
 
 		// if id folder is set, else use default value (inbox = 1, outbox = 2, sentitems = 3)
-		if(isset($options['id_folder'])) $tmp_id_folder = $options['id_folder'];
-		else $tmp_id_folder = array_search($options['type'], $valid_type) + 1;
+		if (isset($options['id_folder']))
+		{
+			$tmp_id_folder = $options['id_folder'];
+		}
+		else
+		{
+			$tmp_id_folder = array_search($options['type'], $valid_type) + 1;
+		}
 
-		if(isset($options['id_folder']) && $options['id_folder'] === '5') $tmp_trash = '1';
-		else $tmp_trash = '0';
+		if (isset($options['id_folder']) && $options['id_folder'] === '5')
+		{
+			$tmp_trash = '1';
+		}
+		else
+		{
+			$tmp_trash = '0';
+		}
 
-		switch($options['type'])
+		switch ($options['type'])
 		{
 			case 'inbox':
 				$this->db->from('inbox');
@@ -858,7 +941,7 @@ class Gammu_model extends CI_Model {
 				break;
 		}
 
-		if(isset($options['limit']) && isset($options['offset']))
+		if (isset($options['limit']) && isset($options['offset']))
 		{
 			$this->db->limit($options['limit'], $options['offset']);
 		}
@@ -892,13 +975,13 @@ class Gammu_model extends CI_Model {
 		$options = $this->_default(array('trash' => FALSE), $options);
 		$trash = ($options['trash']) ? 1 : 0;
 
-		switch($options['type'])
+		switch ($options['type'])
 		{
 			case 'conversation':
 				$id_folder = $options['id_folder'];
 				$number = $options['number'];
 
-				if($options['current_folder'] === '')
+				if ($options['current_folder'] === '')
 				{
 					$inbox_folder = 1;
 					$sentitems_folder = 3;
@@ -941,7 +1024,7 @@ class Gammu_model extends CI_Model {
 				$res = $this->db->get();
 				if ($res->num_rows() > 0)
 				{
-					foreach($res->result_array() as $row)
+					foreach ($res->result_array() as $row)
 					{
 						$ids[] = $row['ID'];
 					}
@@ -963,7 +1046,8 @@ class Gammu_model extends CI_Model {
 				$user_folder = 'user_'.$folder; // add user prefix
 				$id_folder_field = 'id_'.$folder; // add id prefix
 
-				foreach($id_message as $tmp):
+				foreach ($id_message as $tmp)
+				{
 					$this->db->trans_start();
 
 					// Update original gammu table (inbox, sentitems...)
@@ -976,7 +1060,7 @@ class Gammu_model extends CI_Model {
 					$this->db->update($user_folder);
 
 					$this->db->trans_complete();
-				endforeach;
+				}
 				break;
 		}
 	}
@@ -1009,32 +1093,51 @@ class Gammu_model extends CI_Model {
 		$source = $options['source'];
 		$option = $options['option'];
 
-		if(isset($options['id'])) $tmp_id = $options['id'];
-		if(isset($options['number'])) $number = $options['number'];
-		if(isset($options['current_folder'])) $current_folder = $options['current_folder'];
+		if (isset($options['id']))
+		{
+			$tmp_id = $options['id'];
+		}
+		if (isset($options['number']))
+		{
+			$number = $options['number'];
+		}
+		if (isset($options['current_folder']))
+		{
+			$current_folder = $options['current_folder'];
+		}
 
 		$user_source = 'user_'.$source;
 		$id_source = 'id_'.$source;
 
-		switch($type)
+		switch ($type)
 		{
 			case 'conversation':
-				if( ! isset($options['current_folder'])) { $inbox_folder = 1; $sentitems_folder = 3; }
-				else $inbox_folder = $sentitems_folder = $current_folder;
+				if ( ! isset($options['current_folder']))
+				{
+					$inbox_folder = 1;
+					$sentitems_folder = 3;
+				}
+				else
+				{
+					$inbox_folder = $sentitems_folder = $current_folder;
+				}
 
 				$trash = 0;
-				switch($option)
+				switch ($option)
 				{
 					case 'permanent':
 
 						// if it's coming from trash
-						if(isset($current_folder) && $current_folder === '5') $trash = 1;
+						if (isset($current_folder) && $current_folder === '5')
+						{
+							$trash = 1;
+						}
 
 						// get inbox
 						$param = array('id_folder' => $inbox_folder, 'number' => $number, 'trash' => $trash, 'uid' => $user_id);
 						$inbox = $this->get_messages($param);
 
-						foreach($inbox->result() as $tmp)
+						foreach ($inbox->result() as $tmp)
 						{
 							// start transcation
 							$this->db->trans_start();
@@ -1060,7 +1163,7 @@ class Gammu_model extends CI_Model {
 						$param = array('id_folder' => $sentitems_folder, 'type' => 'sentitems', 'number' => $number, 'trash' => $trash, 'uid' => $user_id);
 						$sentitems = $this->get_messages($param);
 
-						foreach($sentitems->result() as $tmp)
+						foreach ($sentitems->result() as $tmp)
 						{
 							// start transcation
 							$this->db->trans_start();
@@ -1095,34 +1198,38 @@ class Gammu_model extends CI_Model {
 					case 'outbox':
 						$tmp_sql = $this->get_messages(array('type' => 'outbox', 'number' => $number))->result_array();
 						// looping all message
-						foreach($tmp_sql as $tmp):
-						//check multipart message
-						$multipart = array('type' => 'outbox', 'option' => 'check', 'id_message' => $tmp['ID']);
+						foreach ($tmp_sql as $tmp)
+						{
+							//check multipart message
+							$multipart = array('type' => 'outbox', 'option' => 'check', 'id_message' => $tmp['ID']);
 
-						// start transcation
-						$this->db->trans_start();
+							// start transcation
+							$this->db->trans_start();
 
-						if($this->get_multipart($multipart) === TRUE)
-						$this->db->delete('outbox_multipart', array('ID' => $tmp['ID']));
+							if ($this->get_multipart($multipart) === TRUE)
+							{
+								$this->db->delete('outbox_multipart', array('ID' => $tmp['ID']));
+							}
 
-						$this->db->delete('outbox', array('ID' => $tmp['ID']));
-						$this->db->trans_complete();
-						endforeach;
+							$this->db->delete('outbox', array('ID' => $tmp['ID']));
+							$this->db->trans_complete();
+						}
 						break;
 				}
 				break;
 
 			case 'single':
-				switch($option)
+				switch ($option)
 				{
 					case 'permanent':
-						foreach($tmp_id as $tmp):
+						foreach ($tmp_id as $tmp)
+						{
 							// start transcation
 							$this->db->trans_start();
 							$this->db->delete('user_'.$source, array('id_'.$source => $tmp));
 							$this->db->delete($source, array('ID' => $tmp));
 							$this->db->trans_complete();
-						endforeach;
+						}
 						break;
 
 					case 'temp':
@@ -1141,8 +1248,10 @@ class Gammu_model extends CI_Model {
 
 						// start transcation
 						$this->db->trans_start();
-						if($this->get_multipart($multipart) === TRUE)
-						$this->db->delete('outbox_multipart', array('ID' => $tmp_id[0]));
+						if ($this->get_multipart($multipart) === TRUE)
+						{
+							$this->db->delete('outbox_multipart', array('ID' => $tmp_id[0]));
+						}
 
 						$this->db->delete('outbox', array('ID' => $tmp_id[0]));
 						$this->db->trans_complete();
@@ -1169,50 +1278,62 @@ class Gammu_model extends CI_Model {
 		// default values
 		$param = $this->_default(array('type' => 'inbox'), $param);
 
-		switch($param['option'])
+		switch ($param['option'])
 		{
 			case 'check':
-				if($param['type'] === 'outbox')
+				if ($param['type'] === 'outbox')
 				{
 					$this->db->select('MultiPart');
 					$this->db->where('ID', $param['id_message']);
 					$result = $this->db->get('outbox')->row('MultiPart');
 					return db_boolean_to_php_bool($this->db->dbdriver, $result);
 				}
-				else if($param['type'] === 'inbox')
+				else
 				{
-					$this->db->where('ID', $param['id_message']);
-					return $this->db->get('inbox');
-				}
-				else if($param['type'] === 'sentitems')
-				{
-					$this->db->where('ID', $param['id_message']);
-					$this->db->where('SequencePosition >', 1);
-					return $this->db->get('sentitems')->num_rows();
+					if ($param['type'] === 'inbox')
+					{
+						$this->db->where('ID', $param['id_message']);
+						return $this->db->get('inbox');
+					}
+					else
+					{
+						if ($param['type'] === 'sentitems')
+						{
+							$this->db->where('ID', $param['id_message']);
+							$this->db->where('SequencePosition >', 1);
+							return $this->db->get('sentitems')->num_rows();
+						}
+					}
 				}
 				break;
 
 			case 'all':
-				if($param['type'] === 'outbox')
+				if ($param['type'] === 'outbox')
 				{
 					$this->db->where('ID', $param['id_message']);
 					$this->db->order_by('SequencePosition');
 					return $this->db->get('outbox_multipart');
 				}
-				else if($param['type'] === 'inbox')
+				else
 				{
-					$this->db->where('SenderNumber', $param['phone_number']);
-					$this->db->like('UDH', $param['udh'], 'after');
-					$this->db->not_like('UDH', '1', 'before');
-					$this->db->order_by('UDH');
-					return $this->db->get('inbox');
-				}
-				else if($param['type'] === 'sentitems')
-				{
-					$this->db->where('ID', $param['id_message']);
-					$this->db->where('SequencePosition >', 1);
-					$this->db->order_by('SequencePosition');
-					return $this->db->get('sentitems');
+					if ($param['type'] === 'inbox')
+					{
+						$this->db->where('SenderNumber', $param['phone_number']);
+						$this->db->like('UDH', $param['udh'], 'after');
+						$this->db->not_like('UDH', '1', 'before');
+						$this->db->order_by('UDH');
+						return $this->db->get('inbox');
+					}
+					else
+					{
+						if ($param['type'] === 'sentitems')
+						{
+							$this->db->where('ID', $param['id_message']);
+							$this->db->where('SequencePosition >', 1);
+							$this->db->order_by('SequencePosition');
+							return $this->db->get('sentitems');
+						}
+					}
 				}
 				break;
 		}
@@ -1267,11 +1388,12 @@ class Gammu_model extends CI_Model {
 	// Update processed inbox
 	function update_processed($id)
 	{
-		foreach($id as $tmp):
+		foreach ($id as $tmp)
+		{
 			$data = array ('Processed' => 'true');
 			$this->db->where('ID', $tmp);
 			$this->db->update('inbox', $data);
-		endforeach;
+		}
 	}
 
 	// Update ownership
@@ -1343,7 +1465,7 @@ class Gammu_model extends CI_Model {
 			$multipart = array('option' => 'all', 'udh' => substr($tmp_check->row('UDH'), 0, 8));
 			$multipart['phone_number'] = $tmp_check->row('SenderNumber');
 			$multipart['type'] = 'inbox';
-			foreach($this->get_multipart($multipart)->result() as $part)
+			foreach ($this->get_multipart($multipart)->result() as $part)
 			{
 				unset($part->ID);
 				$part->Processed = 'true';
@@ -1358,40 +1480,54 @@ class Gammu_model extends CI_Model {
 	//Save Canned Response
 	function canned_response($name, $message, $action)
 	{
-		if($action === 'list')
+		if ($action === 'list')
 		{
 			return $this->db->get_where('user_templates', array('id_user' => $this->session->userdata('id_user')));
 		}
-		else if($action === 'get')
+		else
 		{
-			$message = $this->db->get_where('user_templates', array('Name' => $name), 1, 0)->row('Message');
-			echo $message;
-		}
-		else if($action === 'save')
-		{
-			$record = array('Name' => $name, 'Message' => $message, 'id_user' => $this->session->userdata('id_user'));
+			if ($action === 'get')
+			{
+				$message = $this->db->get_where('user_templates', array('Name' => $name), 1, 0)->row('Message');
+				echo $message;
+			}
+			else
+			{
+				if ($action === 'save')
+				{
+					$record = array('Name' => $name, 'Message' => $message, 'id_user' => $this->session->userdata('id_user'));
 
-			$query = $this->db->get_where('user_templates', array('Name' => $name, 'id_user' => $this->session->userdata('id_user')), 1, 0);
-			if ($query->num_rows() === 0) {
-			  // A record does not exist, insert one.
-			  $query = $this->db->insert('user_templates', $record);
-			} else {
-			  // A record does exist, update it.
-			  $query = $this->db->update('user_templates', $record, array('id_template' => $query->row('id_template')));
+					$query = $this->db->get_where('user_templates', array('Name' => $name, 'id_user' => $this->session->userdata('id_user')), 1, 0);
+					if ($query->num_rows() === 0)
+					{
+						// A record does not exist, insert one.
+						$query = $this->db->insert('user_templates', $record);
+					}
+					else
+					{
+						// A record does exist, update it.
+						$query = $this->db->update('user_templates', $record, array('id_template' => $query->row('id_template')));
+					}
+				}
+				else
+				{
+					if ($action === 'delete')
+					{
+						$this->db->delete('user_templates', array('Name' => $name));
+					}
+					else
+					{
+						die('Invalid Option');
+					}
+				}
 			}
 		}
-		else if($action === 'delete')
-		{
-			$this->db->delete('user_templates', array('Name' => $name));
-		}
-		else
-			die('Invalid Option');
 	}
 
 	// hook function for Alternate Gateways
 	// do nothing for GAMMU (gammu-smsd moves from outbox to sentitems)
 	function process_outbox_queue()
 	{
-	log_message('info', 'Nothing to do in outbox queue for GAMMU.');
+		log_message('info', 'Nothing to do in outbox queue for GAMMU.');
 	}
 }

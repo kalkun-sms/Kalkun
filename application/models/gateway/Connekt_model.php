@@ -24,6 +24,7 @@
 require_once('Nongammu_model.php');
 
 class Connekt_model extends Nongammu_model {
+
 	/**
 	 * Constructor
 	 *
@@ -83,12 +84,12 @@ class Connekt_model extends Nongammu_model {
 
 		$is_succes = ($httpcode >= 200 && $httpcode < 300) ? TRUE : FALSE;
 		if ($is_succes)
+		{
 			return  $result[] = array('phone' => $p, 'msg' => $response, 'result' => $is_succes);
+		}
 		else
+		{
 			return $$response;
+		}
 	}
-
-
-
-
 }

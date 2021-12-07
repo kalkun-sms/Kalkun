@@ -13,9 +13,9 @@
 
 <div id="window_content">
 <?php
-if(count($plugins) > 0)
+if (count($plugins) > 0)
 {
-	foreach($plugins as $tmp)
+	foreach ($plugins as $tmp)
 	{
 		if ($type == 'installed' AND file_exists(APPPATH . 'plugins/'.$tmp['plugin_system_name'].'/controllers/'.ucfirst($tmp['plugin_system_name']).'.php'))
 		{
@@ -24,29 +24,28 @@ if(count($plugins) > 0)
 		else
 		{
 			echo '<div style="float: left"><h3 style="color: #000">'.$tmp['plugin_name'].'</h3></div>';
-		}
-?>
+		} ?>
 		<div style="float: right; margin-top: 15px;">
 			<?php if ($type == 'installed'):?>
-			<a href="<?php echo site_url('pluginss/uninstall/'.$tmp['plugin_system_name']);?>" class="nicebutton">Uninstall</a>
+			<a href="<?php echo site_url('pluginss/uninstall/'.$tmp['plugin_system_name']); ?>" class="nicebutton">Uninstall</a>
 			<?php else:?>
-			<a href="<?php echo site_url('pluginss/install/'.$tmp['plugin_system_name']);?>" class="nicebutton">Install</a>
-			<?php endif;?>
+			<a href="<?php echo site_url('pluginss/install/'.$tmp['plugin_system_name']); ?>" class="nicebutton">Install</a>
+			<?php endif; ?>
 		</div>
 
 		<div class="clear"><small>
-		<strong>Version:</strong> <?php echo $tmp['plugin_version'];?>&nbsp;&nbsp;
-		<strong>Author:</strong> <?php echo anchor($tmp['plugin_author_uri'], $tmp['plugin_author']);?>
+		<strong>Version:</strong> <?php echo $tmp['plugin_version']; ?>&nbsp;&nbsp;
+		<strong>Author:</strong> <?php echo anchor($tmp['plugin_author_uri'], $tmp['plugin_author']); ?>
 		</small></div>
-		<p><?php echo $tmp['plugin_description'];?></p>
+		<p><?php echo $tmp['plugin_description']; ?></p>
 		<hr />
 <?php
 	}
 }
 else
 {
-?>
-	<p>There is no <?php echo $type;?> plugin.</p>
+	?>
+	<p>There is no <?php echo $type; ?> plugin.</p>
 <?php
 }
 ?>

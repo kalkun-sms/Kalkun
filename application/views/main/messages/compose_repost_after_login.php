@@ -18,7 +18,8 @@ echo doctype('html5');?>
 </style>
 </head>
 
-<?php if ( ! $this->session->flashdata('bef_login_post_data')) {
+<?php if ( ! $this->session->flashdata('bef_login_post_data'))
+{
 	// Here the user logged in, but we lost the content of the POST.
 	// So we redirect him to the form he Posted by using the javascript
 	// "history.go" function. That way the content of
@@ -29,24 +30,28 @@ echo doctype('html5');?>
 	<body onload="goBackToForm()">
 		<p><?php
 			printf(lang('kalkun_msg_login_success_data_lost'), strtoupper($this->session->flashdata('bef_login_method')));
-			echo ' <br> ';
-			printf(lang('kalkun_msg_go_back_and_submit'), $this->session->flashdata('bef_login_HTTP_REFERER'));
-			?>
+	echo ' <br> ';
+	printf(lang('kalkun_msg_go_back_and_submit'), $this->session->flashdata('bef_login_HTTP_REFERER')); ?>
 	</body>
-<?php } else {
-	// Here the user logged in and we could keep the content of the POST.
-	// So resubmit the POSTed data directly to this page?>
+<?php
+}
+	else
+	{
+		// Here the user logged in and we could keep the content of the POST.
+		// So resubmit the POSTed data directly to this page?>
 	<body onload="submitForm()">
-		<p><?php echo lang('kalkun_msg_login_success_resubmit');?></p>
+		<p><?php echo lang('kalkun_msg_login_success_resubmit'); ?></p>
 		<form name="redirectpost" method="post" action="<?php echo current_url(); ?>">
 		<?php
-			if ( ! is_null($this->session->flashdata('bef_login_post_data'))) {
-foreach ($this->session->flashdata('bef_login_post_data') as $k => $v) {
-echo '<input type="hidden" name="' . $k . '" value="' . $v . '"> ';
-}
-			}
-		?>
+			if ( ! is_null($this->session->flashdata('bef_login_post_data')))
+			{
+				foreach ($this->session->flashdata('bef_login_post_data') as $k => $v)
+				{
+					echo '<input type="hidden" name="' . $k . '" value="' . $v . '"> ';
+				}
+			} ?>
 		</form>
 	</body>
-<?php } ?>
+<?php
+	} ?>
 </html>

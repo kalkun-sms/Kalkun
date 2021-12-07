@@ -21,6 +21,7 @@
 include_once(APPPATH.'plugins/Plugin_controller.php');
 
 class Sms_credit extends Plugin_controller {
+
 	/**
 	 * Constructor
 	 *
@@ -44,7 +45,7 @@ class Sms_credit extends Plugin_controller {
 	function index()
 	{
 		$param = array();
-		if($_POST)
+		if ($_POST)
 		{
 			$param['q'] = $this->input->post('search_name');
 			$data['query'] = $param['q'];
@@ -80,14 +81,14 @@ class Sms_credit extends Plugin_controller {
 	 */
 	function add_users()
 	{
-		if($_POST)
+		if ($_POST)
 		{
 			$param['id_user'] = $this->input->post('id_user');
 			$param['id_template_credit'] = $this->input->post('package');
 			$param['valid_start'] = $this->input->post('package_start');
 			$param['valid_end'] = $this->input->post('package_end');
 
-			if(empty($param['id_user']))
+			if (empty($param['id_user']))
 			{
 				unset($param['id_user']);
 				$param['realname'] = trim($this->input->post('realname'));
@@ -99,7 +100,7 @@ class Sms_credit extends Plugin_controller {
 			}
 			else
 			{
-				 $this->plugin_model->change_users_package($param);
+				$this->plugin_model->change_users_package($param);
 			}
 
 			redirect('plugin/sms_credit');
@@ -143,7 +144,7 @@ class Sms_credit extends Plugin_controller {
 		$param['limit'] = $config['per_page'];
 		$param['offset'] = $this->uri->segment(4, 0);
 
-		if($_POST)
+		if ($_POST)
 		{
 			$data['query'] = $this->input->post('query');
 			$data['packages'] = $this->plugin_model->search_packages($data['query']);
@@ -169,11 +170,12 @@ class Sms_credit extends Plugin_controller {
 	 */
 	function add_packages()
 	{
-		if($_POST)
+		if ($_POST)
 		{
 			$param['id_credit_template'] = $this->input->post('id_package');
 
-			if(empty($param['id_credit_template'])) {
+			if (empty($param['id_credit_template']))
+			{
 				unset($param['id_credit_template']);
 			}
 
@@ -198,5 +200,4 @@ class Sms_credit extends Plugin_controller {
 		$this->plugin_model->delete_packages($id);
 		redirect('plugin/sms_credit/packages');
 	}
-
 }

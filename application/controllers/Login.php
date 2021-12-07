@@ -18,8 +18,8 @@
  * @subpackage	Login
  * @category	Controllers
  */
-class Login extends CI_Controller
-{
+class Login extends CI_Controller {
+
 	/**
 	 * Constructor
 	 *
@@ -64,7 +64,10 @@ class Login extends CI_Controller
 			'bef_login_post_data',
 			$this->session->flashdata('bef_login_post_data')
 		);
-		if($_POST) $this->Kalkun_model->login();
+		if ($_POST)
+		{
+			$this->Kalkun_model->login();
+		}
 		$this->load->view('main/login');
 	}
 
@@ -97,11 +100,11 @@ class Login extends CI_Controller
 		$this->load->model('Message_model');
 		$this->load->helper('form');
 
-		if($_POST)
+		if ($_POST)
 		{
 			$token = $this->Kalkun_model->forgot_password();
 
-			if( ! $token)
+			if ( ! $token)
 			{
 				$this->session->set_flashdata('errorlogin', "Oh, snap! We couldn't find you. Please try again.");
 			}
@@ -136,7 +139,7 @@ class Login extends CI_Controller
 	{
 		$this->load->helper('form');
 
-		if($_POST)
+		if ($_POST)
 		{
 			$token = $this->input->post('token');
 			$user_token = $this->Kalkun_model->valid_token($token);
@@ -145,11 +148,10 @@ class Login extends CI_Controller
 			redirect('login');
 		}
 
-		if( ! $this->Kalkun_model->valid_token($token))
+		if ( ! $this->Kalkun_model->valid_token($token))
 		{
 			$this->session->set_flashdata('errorlogin', 'Invalid token detected.');
 			redirect('login/forgot_password');
-
 		}
 		else
 		{
@@ -157,5 +159,4 @@ class Login extends CI_Controller
 			$this->load->view('main/password_reset', $data);
 		}
 	}
-
 }

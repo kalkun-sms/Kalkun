@@ -70,13 +70,13 @@ function blacklist_number_incoming($sms)
 
 	// Get blacklist number
 	$lists = $CI->plugin_model->get('all')->result_array();
-	foreach($lists as $tmp)
+	foreach ($lists as $tmp)
 	{
 		$evil[] = $tmp['phone_number'];
 	}
 
 	// Delete message if it's on blacklist number
-	if(in_array($sms->SenderNumber, $evil))
+	if (in_array($sms->SenderNumber, $evil))
 	{
 		$CI->db->where('ID', $sms->ID)->delete('inbox');
 		return 'break';
@@ -91,15 +91,15 @@ function blacklist_number_outgoing($numbers = array())
 
 	// Get blacklist number
 	$lists = $CI->plugin_model->get('all')->result_array();
-	foreach($lists as $tmp)
+	foreach ($lists as $tmp)
 	{
 		$evil[] = $tmp['phone_number'];
 	}
 
 	// Delete number if it's on blacklist number
-	foreach($numbers as $key => $number)
+	foreach ($numbers as $key => $number)
 	{
-		if(in_array($number, $evil))
+		if (in_array($number, $evil))
 		{
 			unset($numbers[$key]);
 		}

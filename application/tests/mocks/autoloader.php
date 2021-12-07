@@ -83,7 +83,8 @@ function autoload($class)
 			$dir = SYSTEM_PATH.'libraries'.DIRECTORY_SEPARATOR.$subclass.DIRECTORY_SEPARATOR;
 			$class = $subclass;
 		}
-		elseif (in_array(($parent = strtok($subclass, '_')), $ci_drivers)) {
+		elseif (in_array(($parent = strtok($subclass, '_')), $ci_drivers))
+		{
 			$dir = SYSTEM_PATH.'libraries'.DIRECTORY_SEPARATOR.$parent.DIRECTORY_SEPARATOR.'drivers'.DIRECTORY_SEPARATOR;
 			$class = $subclass;
 		}

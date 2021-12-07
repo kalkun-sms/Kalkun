@@ -21,6 +21,7 @@
  * @category	Models
  */
 class Kalkun_model extends CI_Model {
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -54,23 +55,38 @@ class Kalkun_model extends CI_Model {
 			$this->session->flashdata('bef_login_post_data')
 		);
 
-		if($query->num_rows() === 1 && password_verify($this->input->post('password'), $query->row('password'))) {
+		if ($query->num_rows() === 1 && password_verify($this->input->post('password'), $query->row('password')))
+		{
 			$this->session->set_userdata('loggedin', 'TRUE');
 			$this->session->set_userdata('level', $query->row('level'));
 			$this->session->set_userdata('id_user', $query->row('id_user'));
 			$this->session->set_userdata('username', $query->row('username'));
-			if($this->input->post('remember_me')) $this->session->set_userdata('remember_me', TRUE);
+			if ($this->input->post('remember_me'))
+			{
+				$this->session->set_userdata('remember_me', TRUE);
+			}
 
 			if ($this->session->flashdata('bef_login_method') === 'post'
-				&& $this->session->flashdata('bef_login_HTTP_REFERER')) {
+				&& $this->session->flashdata('bef_login_HTTP_REFERER'))
+			{
 				redirect($this->session->flashdata('bef_login_requested_url'));
-			} else if ($this->session->flashdata('bef_login_requested_url')) {
-				redirect($this->session->flashdata('bef_login_requested_url'));
-			} else {
-				redirect('kalkun');
+			}
+			else
+			{
+				if ($this->session->flashdata('bef_login_requested_url'))
+				{
+					redirect($this->session->flashdata('bef_login_requested_url'));
+				}
+				else
+				{
+					redirect('kalkun');
+				}
 			}
 		}
-		else $this->session->set_flashdata('errorlogin', 'Your username or password are incorrect');
+		else
+		{
+			$this->session->set_flashdata('errorlogin', 'Your username or password are incorrect');
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -91,18 +107,18 @@ class Kalkun_model extends CI_Model {
 		$this->db->or_where('phone_number', $phone);
 		$query = $this->db->get();
 
-		if($query->num_rows() === 1)
+		if ($query->num_rows() === 1)
 		{
 			$this->db->from('user_forgot_password');
 			$this->db->where('id_user', $query->row('id_user'));
 			$user = $this->db->get();
 
-			if($user->num_rows() === 1)
+			if ($user->num_rows() === 1)
 			{
 				$valid_token = (strtotime('now') < strtotime($user->row('valid_until'))) ? TRUE : FALSE;
 
 				// Destroy invalid token
-				if( ! $valid_token)
+				if ( ! $valid_token)
 				{
 					$this->db->from('user_forgot_password');
 					$this->db->where('token', $user->row('token'));
@@ -115,7 +131,7 @@ class Kalkun_model extends CI_Model {
 				}
 			}
 
-			if($user->num_rows() === 0 OR ! $valid_token)
+			if ($user->num_rows() === 0 OR ! $valid_token)
 			{
 				$token = md5(time());
 				$this->db->set('id_user', $query->row('id_user'));
@@ -144,7 +160,7 @@ class Kalkun_model extends CI_Model {
 		$this->db->where('token', $token);
 		$token = $this->db->get();
 
-		if($token->num_rows() === 1)
+		if ($token->num_rows() === 1)
 		{
 			return $token->row_array();
 		}
@@ -167,7 +183,7 @@ class Kalkun_model extends CI_Model {
 	{
 		$this->db->from('user_folders');
 
-		switch($option)
+		switch ($option)
 		{
 			case 'all':
 				$this->db->where('id_folder >', '10');
@@ -182,7 +198,7 @@ class Kalkun_model extends CI_Model {
 
 			case 'name':
 				$this->db->where('id_folder', $id_folder);
-				if($id_folder !== '5' && $id_folder !== '6')
+				if ($id_folder !== '5' && $id_folder !== '6')
 				{
 					$this->db->where('id_user', $this->session->userdata('id_user'));
 				}
@@ -246,7 +262,7 @@ class Kalkun_model extends CI_Model {
 		$inbox = $this->db->get();
 
 		// delete inbox and user_inbox
-		foreach($inbox->result() as $tmp)
+		foreach ($inbox->result() as $tmp)
 		{
 			$this->db->where('ID', $tmp->id_inbox);
 			$this->db->delete('inbox');
@@ -273,7 +289,7 @@ class Kalkun_model extends CI_Model {
 		$sentitems = $this->db->get();
 
 		// delete sentitems and user_sentitems
-		foreach($sentitems->result() as $tmp)
+		foreach ($sentitems->result() as $tmp)
 		{
 			$this->db->where('ID', $tmp->id_sentitems);
 			$this->db->delete('sentitems');
@@ -305,7 +321,7 @@ class Kalkun_model extends CI_Model {
 	 */
 	function update_setting($option)
 	{
-		switch($option)
+		switch ($option)
 		{
 			case 'general':
 				$this->db->set('language', $this->input->post('language'));
@@ -351,11 +367,15 @@ class Kalkun_model extends CI_Model {
 				$this->db->set('id_folder', $this->input->post('id_folder'));
 				$this->db->set('id_user', $this->input->post('id_user'));
 
-				if( ! empty($id_filter)) {
+				if ( ! empty($id_filter))
+				{
 					$this->db->where('id_filter', $id_filter);
 					$this->db->update('user_filters');
 				}
-				else $this->db->insert('user_filters');
+				else
+				{
+					$this->db->insert('user_filters');
+				}
 				break;
 		}
 	}
@@ -387,7 +407,10 @@ class Kalkun_model extends CI_Model {
 	 */
 	function get_setting($id_user = '')
 	{
-		if($id_user === '') $id_user = $this->session->userdata('id_user');
+		if ($id_user === '')
+		{
+			$id_user = $this->session->userdata('id_user');
+		}
 		$this->db->where('user.id_user', $id_user);
 		$this->db->join('user', 'user.id_user = user_settings.id_user');
 		return $this->db->get('user_settings');
@@ -404,7 +427,7 @@ class Kalkun_model extends CI_Model {
 	function check_setting($param)
 	{
 		$this->db->from('user');
-		switch($param['option'])
+		switch ($param['option'])
 		{
 			case 'username':
 				$this->db->where('username', $param['username']);
@@ -428,7 +451,7 @@ class Kalkun_model extends CI_Model {
 	 */
 	function get_gammu_info($option)
 	{
-		switch($option)
+		switch ($option)
 		{
 			case 'gammu_version':
 				$this->db->from('phones');
@@ -484,13 +507,13 @@ class Kalkun_model extends CI_Model {
 	 */
 	function get_sms_used($option, $param, $type = 'out')
 	{
-		switch($option)
+		switch ($option)
 		{
 			case 'date':
 				$this->db->select_sum($type.'_sms_count');
 				$this->db->from('sms_used');
 
-				if(isset($param['sms_date_start']) && isset($param['sms_date_end']))
+				if (isset($param['sms_date_start']) && isset($param['sms_date_end']))
 				{
 					$this->db->where('sms_date >=', $param['sms_date_start']);
 					$this->db->where('sms_date <=', $param['sms_date_end']);
@@ -505,8 +528,14 @@ class Kalkun_model extends CI_Model {
 					$this->db->where('id_user', $param['user_id']);
 				}
 				$res = $this->db->get()->row($type.'_sms_count');
-				if( ! $res) return 0;
-				else return $res;
+				if ( ! $res)
+				{
+					return 0;
+				}
+				else
+				{
+					return $res;
+				}
 				break;
 		}
 	}
@@ -527,14 +556,14 @@ class Kalkun_model extends CI_Model {
 			$user_id = (array) $user_id;
 		}
 
-		foreach($user_id as $uid)
+		foreach ($user_id as $uid)
 		{
 			$date = date('Y-m-d');
 			$count = $this->_check_sms_used($date, $uid, $type);
 			$this->db->where('sms_date', $date);
 			$this->db->where('id_user', $uid);
 
-			if($this->db->count_all_results('sms_used') > 0)
+			if ($this->db->count_all_results('sms_used') > 0)
 			{
 				$this->db->set($type.'_sms_count', $count + 1);
 				$this->db->where('sms_date', $date);
@@ -558,8 +587,14 @@ class Kalkun_model extends CI_Model {
 		$this->db->where('sms_date', $date);
 		$this->db->where('id_user', $user_id);
 		$res = $this->db->get()->row($type.'_sms_count');
-		if( ! $res) return 0;
-		else return $res;
+		if ( ! $res)
+		{
+			return 0;
+		}
+		else
+		{
+			return $res;
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -574,7 +609,8 @@ class Kalkun_model extends CI_Model {
 	{
 		$this->db->from('user_filters');
 
-		if( ! is_null($user_id)) {
+		if ( ! is_null($user_id))
+		{
 			$this->db->where('user_filters.id_user', $user_id);
 		}
 
@@ -596,5 +632,4 @@ class Kalkun_model extends CI_Model {
 		$this->db->where('id_filter', $id_filter);
 		return $this->db->delete();
 	}
-
 }

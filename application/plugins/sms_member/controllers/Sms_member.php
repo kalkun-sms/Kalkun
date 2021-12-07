@@ -21,6 +21,7 @@
 include_once(APPPATH.'plugins/Plugin_controller.php');
 
 class Sms_member extends Plugin_controller {
+
 	/**
 	 * Constructor
 	 *
