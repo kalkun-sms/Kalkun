@@ -64,4 +64,3 @@ Class Soap_model extends CI_Model {
 		//TODO - save notify
 	}
 }
-?>
