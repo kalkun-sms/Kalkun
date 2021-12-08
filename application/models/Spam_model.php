@@ -36,13 +36,45 @@ class Spam_model extends CI_Model {
 	function __construct()
 	{
 		parent::__construct();
-		$b8_config = array('storage' => 'active');
-		$config_database = array(); // not required for activare record, see b8 documentation for mysql/dba methods
-		$this->b8 = new b8($b8_config, $config_database);
-		$started_up = $this->b8->validate();
-		if ($started_up !== TRUE)
+
+		// get database engine
+		$this->load->helper('kalkun');
+		$db_engine = $this->db->platform();
+		$db_driver = get_database_property($db_engine)['name'];
+
+		switch ($db_driver)
 		{
-			die("<b> Could not initialize b8. error code: ${started_up}</b>");
+			case 'mysqli':
+				// value of storage should be then name of the backend file in libraries/b8/storage
+				$config_b8 = ['storage' => 'mysql'];
+				break;
+			case 'postgre':
+				$config_b8 = ['storage' => 'pgsql'];
+				break;
+			case 'sqlite':
+				$config_b8 = ['storage' => 'sqlite'];
+				break;
+			default:
+		}
+
+		$config_storage = [
+			'resource' => $this->db->conn_id,
+			'table' => 'b8_wordlist'];
+
+		// We use the default lexer settings
+		$config_lexer = [];
+
+		// We use the default degenerator configuration
+		$config_degenerator = [];
+
+		try
+		{
+			$this->b8 = new b8\b8($config_b8, $config_storage, $config_lexer, $config_degenerator);
+		}
+		catch (Exception $e)
+		{
+			log_message('error', "Could not initialize b8 library. {$e->getMessage}()");
+			show_message("Could not initialize b8 library. {$e->getMessage}()", 500, '500 Internal Server Error');
 		}
 	}
 
@@ -94,7 +126,7 @@ class Spam_model extends CI_Model {
 	 */
 	function report_spam($params)
 	{
-		$this->b8->learn($params['Text'], b8::SPAM);
+		$this->b8->learn($params['Text'], b8\b8::SPAM);
 
 		//move message to spam folder
 		$this->db->where('ID', $params['ID']);
@@ -109,7 +141,7 @@ class Spam_model extends CI_Model {
 	 */
 	function report_ham($params)
 	{
-		$this->b8->learn($params['Text'], b8::HAM);
+		$this->b8->learn($params['Text'], b8\b8::HAM);
 
 		//move message to spam folder
 		$this->db->where('ID', $params['ID']);
