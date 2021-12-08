@@ -61,18 +61,6 @@ $config['gammu_path'] = 'C:\Gammu 1.29.92\bin';
 $config['gammu_sms_inject'] = $config['gammu_path'].DIRECTORY_SEPARATOR.'gammu-smsd-inject';
 $config['gammu_config'] = $config['gammu_path'].DIRECTORY_SEPARATOR.'config.ini';
 
-
-/*
-|--------------------------------------------------------------------------
-|   Kalkun Cloud Feature Network Settings
-|--------------------------------------------------------------------------
-*/
-$config['enable_proxy'] = FALSE;
-$config['proxy_host'] = 'proxyhost.com';
-$config['proxy_port'] = '8080';
-$config['proxy_username'] = '';
-$config['proxy_password'] = '';
-
 /*
 |--------------------------------------------------------------------------
 | Conversation Grouping
