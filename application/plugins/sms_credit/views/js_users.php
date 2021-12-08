@@ -55,8 +55,6 @@ $(document).ready(function(){
 <script language="javascript">
 $(document).ready(function() {
 
-var inbox_master = '<?php echo $this->config->item('inbox_owner_id');?>';
-	
 // Add User
 $('.addpbkcontact').bind('click', function() {
 
