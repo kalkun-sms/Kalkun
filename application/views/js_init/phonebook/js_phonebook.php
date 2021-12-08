@@ -14,7 +14,7 @@ $(document).ready(function() {
 	}
 	else
 	{
-		$('#pbk_add_wizard_dialog').dialog('close');
+		if ($("#pbk_add_wizard_dialog").hasClass('ui-dialog-content')) { $("#pbk_add_wizard_dialog").dialog('close') };
 		if($(this).hasClass('addpbkcontact')) {
 			var pbk_title = '<?php echo lang('tni_contact_add'); ?>';
 			var type = 'normal';
@@ -198,7 +198,7 @@ $(document).ready(function() {
 		
 	// Contact import
 	$('#importpbk').on("click", function() {
-		$('#pbk_add_wizard_dialog').dialog('close');
+		if ($("#pbk_add_wizard_dialog").hasClass('ui-dialog-content')) { $("#pbk_add_wizard_dialog").dialog('close') };
 		$("#pbkimportdialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
