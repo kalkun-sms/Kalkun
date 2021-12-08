@@ -275,7 +275,7 @@ class Phonebook extends MY_Controller {
 	 */
 	function import_phonebook()
 	{
-		$this->load->library('csvreader');
+		$this->load->library('CSVReader');
 		$filePath = $_FILES['csvfile']['tmp_name'];
 		$csvData = $this->csvreader->parse_file($filePath, TRUE);
 

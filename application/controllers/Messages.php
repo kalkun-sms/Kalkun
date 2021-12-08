@@ -172,7 +172,7 @@ class Messages extends MY_Controller {
 		// Import value from file (currently only CSV)
 		if (isset($_FILES['import_file']))
 		{
-			$this->load->library('csvreader');
+			$this->load->library('CSVReader');
 			$filePath = $_FILES['import_file']['tmp_name'];
 			$csvData = $this->csvreader->parse_file($filePath, TRUE);
 			$csvField = array_keys($csvData[0]);
@@ -259,7 +259,7 @@ class Messages extends MY_Controller {
 
 			// Import from file  (CSV)
 			case 'sendoption4':
-				if (count($this->input->post('import_value_count') > 0))
+				if (intval($this->input->post('import_value_count')) > 0)
 				{
 					$tmp_dest = explode(',', $this->input->post('Number'));
 					foreach ($tmp_dest as $key => $tmp)
