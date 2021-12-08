@@ -83,24 +83,15 @@ class Sms_credit extends Plugin_controller {
 	{
 		if ($_POST)
 		{
-			$param['id_user'] = $this->input->post('id_user');
-			$param['id_template_credit'] = $this->input->post('package');
-			$param['valid_start'] = $this->input->post('package_start');
-			$param['valid_end'] = $this->input->post('package_end');
-
-			if (empty($param['id_user']))
+			if (empty($this->input->post('id_user')))
 			{
-				unset($param['id_user']);
-				$param['realname'] = trim($this->input->post('realname'));
-				$param['username'] = trim($this->input->post('username'));
-				$param['phone_number'] = $this->input->post('phone_number');
-				$param['level'] = $this->input->post('level');
-				$param['password'] = sha1($this->input->post('password'));
-				$this->plugin_model->add_users($param);
+				// add user
+				$this->plugin_model->add_users();
 			}
 			else
 			{
-				$this->plugin_model->change_users_package($param);
+				// edit user
+				$this->plugin_model->change_users_package();
 			}
 
 			redirect('plugin/sms_credit');
