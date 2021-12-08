@@ -13,7 +13,7 @@ else: ?>
 <?php foreach ($phonebook->result() as $tmp): ?>
 <tr id="<?php echo $tmp->id_pbk;?>">
 <td>
-<div class="two_column_container contact_list" style="display: inline-block;">
+<div class="two_column_container contact_list hover_show" style="display: inline-block;">
 	<div class="left_column">
 		<div id="pbkname">
 		<input type="checkbox" class="select_contact" />&nbsp;<span style="font-weight: bold;"><?php echo $tmp->Name  ;?></span>
@@ -21,7 +21,7 @@ else: ?>
 		</div>	
 	</div>
 	<div class="right_column">
-		<span class="pbk_menu">
+		<span class="pbk_menu no-touch-hidden">
 		<?php
 		// hook for contact menu
 		$menu = do_action('phonebook.contact.menu', $tmp);
