@@ -93,6 +93,7 @@ class Pluginss extends MY_Controller {
 					}
 				}
 				$result = $new_plugin;
+				uasort($result, array($this, '_plugins_cmp_plugin_name'));
 				$data['plugins'] = $result;
 			}
 		}
@@ -161,5 +162,15 @@ class Pluginss extends MY_Controller {
 		$data = array('plugin_status' => 'false');
 		$this->db->where('plugin_name', $plugin_name);
 		$this->db->update('plugin', $data);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Callback function used to order the array of plugins by plugin name
+	 */
+	function _plugins_cmp_plugin_name($p1, $p2)
+	{
+		return strcasecmp ($p1['plugin_name'], $p2['plugin_name']);
 	}
 }
