@@ -46,8 +46,7 @@ $this->load->view('js_remote_access');
 <div id="space_area">
 <h3 style="float: left">Remote Access</h3> 
 <div style="float: right">
-<a href="#" title="Add Remote access" id="addremotebutton" class="simplebutton">
-<img src="<?php echo  $this->config->item('img_path');?>alert.png" />Add Remote Access</a>
+<a href="#" title="Add Remote access" id="addremotebutton" class="simplebutton">Add Remote Access</a>
 </div>
 
 	<table class="nice-table" cellpadding="0" cellspacing="0">
@@ -114,8 +113,7 @@ $this->load->view('js_remote_access');
 <div id="space_area">
 <h3 style="float: left">Notification</h3>
 <div style="float: right">
-<a href="#" title="Add Notification" id="addnotificationbutton" class="simplebutton">
-<img src="<?php echo  $this->config->item('img_path');?>alert.png" />Add Notification</a>	
+<a href="#" title="Add Notification" id="addnotificationbutton" class="simplebutton">Add Notification</a>
 </div>
 
 	<table class="nice-table" cellpadding="0" cellspacing="0">
