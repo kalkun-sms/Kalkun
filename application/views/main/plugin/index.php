@@ -17,7 +17,9 @@ if (count($plugins) > 0)
 {
 	foreach ($plugins as $tmp)
 	{
-		if ($type == 'installed' AND file_exists(APPPATH . 'plugins/'.$tmp['plugin_system_name'].'/controllers/'.ucfirst($tmp['plugin_system_name']).'.php'))
+		if ($type === 'installed'
+			&& file_exists(APPPATH . 'plugins/'.$tmp['plugin_system_name'].'/controllers/'.ucfirst($tmp['plugin_system_name']).'.php')
+			&& $tmp['plugin_controller_has_index'] === TRUE)
 		{
 			echo '<div style="float: left"><h3>'.anchor('plugin/'.$tmp['plugin_system_name'], $tmp['plugin_name']).'</h3></div>';
 		}
