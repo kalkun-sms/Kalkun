@@ -2,11 +2,11 @@
 if ($users->num_rows() === 0):
 	if ($_POST)
 	{
-		echo "<p><i><?php echo lang('tni_user_not_found'); ?></i></p>";
+		echo '<p><i>'.lang('tni_user_not_found').'</i></p>';
 	}
 	else
 	{
-		echo "<p><i><?php echo lang('tni_user_search_empty'); ?></i></p>";
+		echo '<p><i>'.lang('tni_user_search_empty').'</i></p>';
 	}
 else: ?>
 <table>
