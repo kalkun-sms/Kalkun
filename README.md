@@ -93,7 +93,16 @@ You need to install and configure this first:
 ## IMPORTANT
   * After install is finished, you need to remove install folder.
   * To improve security, it's higly recommended to change "encryption_key" in application/config/config.php
+    - See https://codeigniter.com/userguide3/libraries/encryption.html#setting-your-encryption-key. On unix/linux you may run
+    ```
+    php -r 'echo bin2hex(random_bytes(16)), "\n";'
+    ```
+    Write the value in application/config/config.php and enclose it in a hex2bin() function.
 
+### Migration Note (to kalkun 0.8)
+  * During migration to codeigniter 3 (done with version 0.8 of Kalkun), it was strongly advised to switch to the Encryption Library for security reasons. This required to change the default encryption key. The Encryption library was used in "sms to wordpress" and "sms to xmpp" plugins. You need to recreate the configuration of these plugins so that they continue to work.
+
+### Launch Kalkun
 Open up your browser and go to http://your-location/kalkun
 
 Default account for the Web Interface (you can change it after you login):  

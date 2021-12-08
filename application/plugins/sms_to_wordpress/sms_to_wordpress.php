@@ -102,9 +102,13 @@ function sms_to_wordpress($sms)
 				'publish' => 1
 			);
 			
-			$CI->load->library('encrypt');
-			$wp_pass = $CI->encrypt->decode($wp['wp_password']);
-			
+			$CI->load->library('encryption');
+			$wp_pass = $CI->encryption->decrypt($wp['wp_password']);
+			if ($wp_pass === FALSE)
+			{
+				log_message('error', 'sms_to_wordpress: problem during decryption.');
+				show_error('sms_to_wordpress: problem during decryption.', 500, '500 Internal Server Error');
+			}
 			// Debug ON. Now you know what's going on.
 			//$client->debug = true;
 			
