@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ruleset name="CodeIgniter-Kalkun">
+    <description>CodeIgniter3 coding standard for Kalkun as described at https://codeigniter.com/userguide3/general/styleguide.html</description>
+
+    <file>../application/plugins/sms_credit/views</file>
+    <file>../application/plugins/sms_to_xmpp/views</file>
+    <file>../application/plugins/server_alert/views</file>
+    <file>../application/plugins/stop_manager/views</file>
+    <file>../application/plugins/sms_to_wordpress/views</file>
+    <file>../application/plugins/sms_to_email/views</file>
+    <file>../application/plugins/sms_member/views</file>
+    <file>../application/plugins/whitelist_number/views</file>
+    <file>../application/plugins/sms_to_twitter/views</file>
+    <file>../application/plugins/blacklist_number/views</file>
+    <file>../application/plugins/soap/views</file>
+    <file>../application/views</file>
+
+    <rule ref="CodeIgniter">
+        <exclude name="CodeIgniter.Files.ClosingLocationComment"/>
+        <exclude name="CodeIgniter.Files.ClosingFileComment"/>
+        <exclude name="CodeIgniter.WhiteSpace.DisallowWitheSpaceAroundPhpTags"/>
+
+        <!-- The one below (CodeIgniter.Strings.DoubleQuoteUsage) is buggued.
+        
+        Either you uncomment the rule below, or you apply the patch below.
+        
+        It invites to change
+            'SELECT foo FROM bar WHERE baz = \'bag\''
+        into
+            "SELECT foo FROM bar WHERE baz = 'bag'"
+        
+        PATCH:
+        ======
+        -\-\- a/CodeIgniter/Sniffs/Strings/DoubleQuoteUsageSniff.php
+        +++ b/CodeIgniter/Sniffs/Strings/DoubleQuoteUsageSniff.php
+        @@ -135,7 +135,7 @@ class DoubleQuoteUsageSniff extends VariableUsageSniff
+                 $smpl_qt_at = strpos($qtString, "'");
+                 if (false === $has_variable && false !== $smpl_qt_at && false === $dbl_qt_at) {
+                     $warning = 'You may also use double-quoted strings if the string contains single quotes, so you do not have to use escape characters.';
+        -            $phpcsFile->addWarning($warning, $stackPtr);
+        +            $phpcsFile->addWarning($warning, $stackPtr, '');
+                 }
+             }//end processSingleQuotedString()
+        -->
+        <!--exclude name="CodeIgniter.Strings.DoubleQuoteUsage"/-->
+    </rule>
+
+    <!-- Reverts the '{' back to the same line as class definition (PHP CS Fixer can't
+    do this and always puts it after the class) -->
+    <rule ref="Generic.Classes.OpeningBraceSameLine"/>
+
+    <!-- Use separate files for each class, unless the classes are closely related.
+    An example of a CodeIgniter file that contains multiple classes is the Xmlrpc library file. -->
+    <rule ref="Generic.Files.OneClassPerFile">
+        <type>warning</type>
+    </rule>
+
+    <rule ref="CodeIgniter.Operators.StrictComparisonOperator">
+        <type>warning</type>
+    </rule>
+
+    <rule ref="CodeIgniter.Commenting.InlineComment">
+        <properties>
+            <property name="longCommentLimit" value="5"/>
+        </properties>
+    </rule>
+
+</ruleset>
