@@ -1085,3 +1085,35 @@ label.error {
 #groups_tag {
 	width: 200px;
 }
+
+/* For autocomplete when setting groups to new contact in phonebook */
+input#groups {
+    position: relative;
+    z-index: 10000;
+}
+.ui-autocomplete {
+     z-index: 9999 !important;
+}
+/* For tagsinput when setting groups to new contact in phonebook */
+div.tagsinput span.tag {
+    border:1px solid #86c0d2;
+    font-family:helvetica;
+}
+
+div.tagsinput {
+    border:0px;
+    background:#FFF;
+    overflow-y:auto;
+    padding:1px;
+    font-size:12px;
+}
+
+div.tagsinput input {
+    font-family:helvetica;
+    border:0px solid transparent;
+    background:transparent;
+    color:#000;
+    outline:0;
+    margin:0 5px 5px 0;
+    padding:1px;
+}

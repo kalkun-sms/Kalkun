@@ -50,7 +50,7 @@ $(document).ready(function(){
             $('#field_option').show();          
             
 			// Field button
-			$('.field_button').click(function() {
+			$('.field_button').on("click", function() {
 				var field = $(this).val();
 				var text = $('#message').val();
 				$('#message').val(text + '[[' + field + ']]');
@@ -121,7 +121,7 @@ $(document).ready(function(){
     }
 
 	// Unicode 
-	$("input#unicode").click(function(){
+	$("input#unicode").on("click", function(){
 		var n = $("input#unicode:checked").length;
 		if(n == 0) { // not checked
 			sms_char = 160;
@@ -174,26 +174,26 @@ $(document).ready(function(){
 	$("#import").hide();
 	$("#manually").hide();
 
-	$("input[name='senddateoption']").click(function() {
+	$("input[name='senddateoption']").on("click", function() {
 		if($(this).val()=='option1')  { $("#nowoption").show(); $("#dateoption").hide(); $("#delayoption").hide(); }
 		if($(this).val()=='option2')  { $("#nowoption").hide(); $("#dateoption").show(); $("#delayoption").hide(); }
 		if($(this).val()=='option3')  { $("#nowoption").hide(); $("#dateoption").hide(); $("#delayoption").show(); }	
 	});
 
-	$("input[name='sendoption']").click(function() {
+	$("input[name='sendoption']").on("click", function() {
 		if($(this).val()=='sendoption1')  { $("#person").show(); $("#import").hide(); $("#manually").hide();}
 		if($(this).val()=='sendoption3')  { $("#person").hide(); $("#import").hide(); $("#manually").show();}
 		if($(this).val()=='sendoption4')  { $("#person").hide(); $("#import").show(); $("#manually").hide();}		
 	});
 	
-	$('#import_file').bind('change', function() {
-		$('#composeForm').submit();
+	$('#import_file').on('change', null, function() {
+		$('#composeForm').trigger('submit');
         return false;
 	});    
 
 });
 
-$('#canned_response').bind('click', function() {
+$('#canned_response').on('click', null, function() {
 
 var url = '<?php echo site_url('messages/canned_response/list')?>';
 
@@ -212,8 +212,8 @@ $("#canned_response_container").load(url,  function() {
 	"<?php echo lang('kalkun_cancel');?>": function() { $(this).dialog('close');}
     }
   });
-});
 $("#canned_response_container").dialog('open');
+});
 return false;
 });    
 	
@@ -269,12 +269,12 @@ function update_canned_responses()
 //tab send message
 var is_tab = false;
 $(document).ready(function() {
-    $('#message').bind('keydown', 'tab', function(){
-        //$('.ui-dialog-buttonpane button:eq(0)').focus(); 
+    $('#message').on('keydown', null, 'tab', function(){
+        //$('.ui-dialog-buttonpane button:eq(0)').trigger('focus'); 
         is_tab = true; 
         setTimeout(function(){is_tab = false;}, "5000");
     });
-    $("#composeForm").bind('keydown', 'return', function(){
+    $("#composeForm").on('keydown', null, 'return', function(){
       if(is_tab == true)   
       { 
         if($("#composeForm").valid()) {
@@ -282,7 +282,7 @@ $(document).ready(function() {
     		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
     		$("#compose_sms_container").html(data);
     		$("#compose_sms_container" ).dialog( "option", "buttons", { "Okay": function() { $(this).dialog("destroy"); } } );
-    		setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+    		setTimeout(function() {if ($("#compose_sms_container").hasClass('ui-dialog-content')) { $("#compose_sms_container").dialog('destroy')}} , 1500);
     	   }); 
         }
       }
@@ -290,7 +290,7 @@ $(document).ready(function() {
     });
 });
 
-$("input[name='smstype']").click(function() {
+$("input[name='smstype']").on("click", function() {
 		if($(this).val()=='normal')  { $("#url-display").hide(); }
 		if($(this).val()=='flash')  { $("#url-display").hide(); }
 		if($(this).val()=='waplink')  { $("#url-display").show(); }	

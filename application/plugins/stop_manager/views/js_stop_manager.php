@@ -12,7 +12,7 @@ $(document).ready(function() {
         modal: true,
         buttons: {
             'Save': function() {
-                $("form.addstopform").submit();
+                $("form.addstopform").trigger('submit');
             },
             Cancel: function() {
                 $(this).dialog('close');
@@ -21,7 +21,7 @@ $(document).ready(function() {
     });
 
     // Add STOP button
-    $('#addstopbutton').click(function() {
+    $('#addstopbutton').on("click", function() {
         $('#stop-dialog').dialog('open');
     });
 

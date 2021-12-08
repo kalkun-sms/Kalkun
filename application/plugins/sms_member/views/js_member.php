@@ -2,7 +2,7 @@
 $(document).ready(function(){
 		
 	// Compose SMS
-	$('#send_member').bind('click', function() {
+	$('#send_member').on('click', null, function() {
 		var member = '<?php echo $total_member;?>';
 		if(member==0)
 		{
@@ -22,14 +22,14 @@ $(document).ready(function(){
 				$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 					$("#compose_sms_container").html(data);
 					$("#compose_sms_container" ).dialog( "option", "buttons", { "Okay": function() { $(this).dialog("destroy"); } } );
-					setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+					setTimeout(function() {if ($("#compose_sms_container").hasClass('ui-dialog-content')) { $("#compose_sms_container").dialog('destroy')}} , 1500);
 				});
 				}			},
 			Cancel: function() { $(this).dialog('destroy');}
 		    }
 		  });
+			$("#compose_sms_container").dialog('open');
 		});
-		$("#compose_sms_container").dialog('open');
 		return false;
 		}
 	});	

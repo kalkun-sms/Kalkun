@@ -9,7 +9,7 @@ echo doctype('html5');?>
 		window.history.go(<?php echo $this->session->flashdata('bef_login_history_count')?>);
 	}
 	function submitForm() {
-		document.forms["redirectpost"].submit();
+		document.forms["redirectpost"].trigger('submit');
 	}
 </script>
 <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>base.css" />

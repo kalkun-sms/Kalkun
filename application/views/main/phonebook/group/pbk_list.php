@@ -14,7 +14,7 @@ else: ?>
 	</div>
 </div>
 <div class="right_column">
-<span class="pbk_menu hidden">
+<span class="pbk_menu">
 <?php if (isset($public_group) && ! $public_group):?>
 <a class="editpbkgroup simplelink" href="#"><?php echo lang('tni_edit');?></a>
 <img src="<?php echo $this->config->item('img_path')?>circle.gif" />

@@ -3,7 +3,7 @@
 <!-- User dialog -->	
 <div id="dialog" class="dialog" style="display: block">
 <p id="validateTips"><?php echo lang('tni_form_fields_required'); ?></p>
-<?php echo form_open('phonebok/add_user_process', array('id' => 'addUser'));?>
+<?php echo form_open('phonebook/add_user_process', array('id' => 'addUser'));?>
 <fieldset>
 <label for="name"><?php echo lang('tni_user_person_name'); ?></label>
 <input type="text" name="realname" id="realname" value="<?php if (isset($users))

@@ -25,11 +25,9 @@ function new_notification(refreshmode)
 		// play the sound
 		if (unreadcount[0] != '')
 		{
-			$.fn.soundPlay({
-				url: "<?php echo $this->config->item('sound_path').$this->config->item('new_incoming_message_sound')?>",
-				playerId: 'embed_player',
-				command: 'play'
-			});
+			// Use HTMLAudioElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
+			var audioElement = new Audio('<?php echo $this->config->item('sound_path').$this->config->item('new_incoming_message_sound')?>');
+			audioElement.play();
 		}
 	});
     
@@ -75,7 +73,7 @@ $(document).ready(function() {
 	});
 	
 	// Compose SMS
-	$('#compose_sms_normal').bind('click', compose_message = function() 
+	$('#compose_sms_normal').on('click', null, compose_message = function() 
 	{
 		$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
 		$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type': "normal" }, function() {
@@ -92,7 +90,7 @@ $(document).ready(function() {
 				$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 					$("#compose_sms_container").html(data);
                     $("#compose_sms_container" ).dialog( "option", "buttons", { "Okay": function() { $(this).dialog("destroy"); } } );
-					setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+					setTimeout(function() {if ($("#compose_sms_container").hasClass('ui-dialog-content')) { $("#compose_sms_container").dialog('destroy')}} , 1500);
 				});
 				}
 			},
@@ -106,16 +104,16 @@ $(document).ready(function() {
 			"<?php echo lang('kalkun_cancel'); ?>": function() { $(this).dialog('destroy');}
 		    },
 		    open: function() {
-            $("#personvalue").focus();
+            $("#personvalue").trigger('focus');
         	}
 		  });
+			$("#compose_sms_container").dialog('open');
 		});
-		$("#compose_sms_container").dialog('open');
 		return false;
 	});	
 		
 	// About
-	$('#about_button').click(function() {
+	$('#about_button').on("click", function() {
 		$("#about").dialog({
 			bgiframe: true,
 			autoOpen: false,
@@ -128,7 +126,7 @@ $(document).ready(function() {
 	});		
 		
 	// Add folder
-	$('#addfolder').click(function() {		
+	$('#addfolder').on("click", function() {
 		$("#addfolderdialog").dialog({
 		bgiframe: true,
 		autoOpen: false,
@@ -136,14 +134,14 @@ $(document).ready(function() {
 		modal: true,
 		buttons: {
 			'Save': function() {
-				$("form.addfolderform").submit();
+				$("form.addfolderform").trigger('submit');
 			},
 			Cancel: function() {
 				$(this).dialog('close');
 			}
 		},
 		open: function() {
-            $("#folder_name").focus();
+            $("#folder_name").trigger('focus');
         }
 		});		
 		$('#addfolderdialog').dialog('open');
@@ -159,19 +157,19 @@ $(document).ready(function() {
 
    	//shift select
  	$("input:checkbox").createCheckboxRange(function(){
-    if($(this).attr('checked')==true) 
+    if($(this).prop('checked')==true)
     {
 		$(this).parents('div:eq(2)').addClass("messagelist_hover");
     }
     else 
    	{
-    	//$(this).attr('checked', true)
+    	//$(this).prop('checked', true)
     	$(this).parents('div:eq(2)').removeClass("messagelist_hover");
     }   
 	}); 
     
     //search
-    $('.sms_search_form').submit(function() {
+    $('.sms_search_form').on('submit', function() {
        if($.trim($('#search').val()) == '')  return false;
     });
 
@@ -180,7 +178,7 @@ $(document).ready(function() {
 		maxDate: 0,
 		dateFormat: 'yy-mm-dd'
 	});
-	$('#a_search').click(function() {
+	$('#a_search').on("click", function() {
 		$("#a_search_dialog").dialog({
 		bgiframe: true,
 		autoOpen: false,
@@ -189,14 +187,14 @@ $(document).ready(function() {
 		modal: true,
 		buttons: {
 			'<?php echo lang('kalkun_search');?>': function() {
-				$('#a_search_form').submit();
+				$('#a_search_form').trigger('submit');
 			},
 			"<?php echo lang('kalkun_cancel');?>": function() {
 				$(this).dialog('close');
 			}
 		},
 		open: function() {
-            $("#a_search_from_to").focus();
+            $("#a_search_from_to").trigger('focus');
         }
 		});		
 		$('#a_search_dialog').dialog('open');
@@ -205,7 +203,7 @@ $(document).ready(function() {
 
 	<?php if ($this->uri->segment(2) != 'folder' AND $this->uri->segment(2) != 'my_folder'): ?>	
 	// logo click 
-	$('div#logo a').click(function() {
+	$('div#logo a').on("click", function() {
 		new_notification('false');
 		return false;
 	});

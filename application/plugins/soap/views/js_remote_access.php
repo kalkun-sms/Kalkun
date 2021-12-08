@@ -52,7 +52,7 @@ $(document).ready(function() {
 		modal: true,
 		buttons: {
 			'Save': function() {
-				$("form.addremoteaccessform").submit();
+				$("form.addremoteaccessform").trigger('submit');
 			},
 			Cancel: function() {
 				$(this).dialog('close');
@@ -67,7 +67,7 @@ $(document).ready(function() {
 		modal: true,
 		buttons: {
 			'Save': function() {
-				$("form.addnotificationform").submit();
+				$("form.addnotificationform").trigger('submit');
 			},
 			Cancel: function() {
 				$(this).dialog('close');
@@ -76,11 +76,11 @@ $(document).ready(function() {
 	});
 
 	// Add remote acces button	
-	$('#addremotebutton').click(function() {
+	$('#addremotebutton').on("click", function() {
 		$('#remoteaccess-dialog').dialog('open');
 	});	
 
-	$('#addnotificationbutton').click(function() {
+	$('#addnotificationbutton').on("click", function() {
 		$('#notification-dialog').dialog('open');
 	});	
 
@@ -92,7 +92,7 @@ $(document).ready(function() {
 		modal: true,
 		buttons: {
 			'Save Changes': function() {
-				$("form.editremoteaccessform").submit();
+				$("form.editremoteaccessform").trigger('submit');
 			},
 			Cancel: function() {
 				$(this).dialog('close');
@@ -101,7 +101,7 @@ $(document).ready(function() {
 	});
 
 	// Edit blacklist - get data
-	$('a.edit').click(function() {
+	$('a.edit').on("click", function() {
 		var editid_remote_access = $(this).parents("tr:first").attr("id");
 		$("#editid_remote_access").val(editid_remote_access);		
 		var editaccess_name = $(this).parents("tr:first").children("td.access_name").text();
@@ -112,9 +112,9 @@ $(document).ready(function() {
 		$("#edittoken").val(edittoken);		
 
 		// FIXME
-		//var editstatus = $('#statusBox').attr('checked');
-		var editstatus = $(this).parents("tr:first").children("td.status").children("input.statusbox").attr('checked');
-		$("#editstatus").attr('checked', editstatus);
+		//var editstatus = $('#statusBox').prop('checked');
+		var editstatus = $(this).parents("tr:first").children("td.status").children("input.statusbox").prop('checked');
+		$("#editstatus").prop('checked', editstatus);
 
 		$('#editremoteaccess-dialog').dialog('open');
 	});

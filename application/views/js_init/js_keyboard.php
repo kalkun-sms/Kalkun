@@ -3,32 +3,32 @@ var current_number = '';
 
 $(document).ready(function() {
 
-$(document).bind('keydown', 'g;i', function(){
+$(document).on('keydown', null, 'g;i', function(){
       window.location = "<?php echo site_url('messages/folder/inbox'); ?>";
 });
 
-$(document).bind('keydown', 'g;o', function(){
+$(document).on('keydown', null, 'g;o', function(){
    window.location = "<?php echo site_url('messages/folder/outbox'); ?>";
 });
  
-$(document).bind('keydown', 'g;s', function(){
+$(document).on('keydown', null, 'g;s', function(){
     window.location = "<?php echo site_url('messages/folder/sentitems'); ?>";
     return false;
 });
 
-$(document).bind('keydown', 's', function(){
-   $("#search").focus();
+$(document).on('keydown', null, 's', function(){
+   $("#search").trigger('focus');
     return false;
 });
 
 
-$(document).bind('keydown', 'g;p', function(){
+$(document).on('keydown', null, 'g;p', function(){
     window.location = "<?php echo site_url('phonebook'); ?>";
 });
  
-$(document).bind('keyup', 'c', function(){  compose_message();});
+$(document).on('keyup', null, 'c', function(){  compose_message();});
 
-$(document).bind('keydown', 'shift+/', function(){
+$(document).on('keydown', null, 'shift+/', function(){
     $("#kbd").dialog({
 			bgiframe: true,
 			autoOpen: false,
@@ -41,17 +41,17 @@ $(document).bind('keydown', 'shift+/', function(){
 
 
 <?php if ($this->uri->segment(1) != ''): ?>
-$(document).bind('keydown', '#', function(){  action_delete(); });
+$(document).on('keydown', null, '#', function(){  action_delete(); });
 
 <?php if ($this->uri->segment(1) != 'phonebook'): ?>
-$(document).bind('keydown', 'm', function(){   message_move(); });
+$(document).on('keydown', null, 'm', function(){   message_move(); });
 <?php endif; ?>
 
  
 <?php if ($this->uri->segment(2) == 'conversation' || $this->uri->segment(2) == 'search'): ?>  
 
 <?php if ($this->uri->segment(2) != 'search'): ?>
-$(document).bind('keydown', 'r', function(){   message_reply(); });
+$(document).on('keydown', null, 'r', function(){   message_reply(); });
 <?php endif; ?>
 
 // for convesation
@@ -59,14 +59,14 @@ var totalmsg = $("#message_holder > div.messagelist").length;
 var current_select =0;
 
 //move next
-$(document).bind('keydown', 'j',go_next =  function(){
+$(document).on('keydown', null, 'j',go_next =  function(){
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').removeClass('infocus'); //selecting child
     current_select ++; if(current_select > totalmsg  ) current_select = 1;
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').addClass('infocus'); //selecting child
 });
 
 //move prev
-$(document).bind('keydown', 'k', go_prev =  function(){
+$(document).on('keydown', null, 'k', go_prev =  function(){
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').removeClass('infocus'); //selecting child
     current_select --;  if(current_select < 1 ) current_select = totalmsg ;
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').children('.message_header').addClass('infocus'); //selecting child   
@@ -74,7 +74,7 @@ $(document).bind('keydown', 'k', go_prev =  function(){
 
 
 //p - Read previous message within a conversation.
-$(document).bind('keydown', 'p', function(){
+$(document).on('keydown', null, 'p', function(){
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.message_content').hide();
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('span.message_preview').hide();
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.optionmenu').hide();
@@ -86,7 +86,7 @@ $(document).bind('keydown', 'p', function(){
 });
 
 //n - Read next message within a conversation.
-$(document).bind('keydown', 'n', function(){  
+$(document).on('keydown', null, 'n', function(){  
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.message_content').hide();
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('span.message_preview').hide();
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.optionmenu').hide();
@@ -98,37 +98,37 @@ $(document).bind('keydown', 'n', function(){
 });
 
 //select
-$(document).bind('keydown', 'o', read_message =  function(){  
+$(document).on('keydown', null, 'o', read_message =  function(){  
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.message_content').toggle();
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('span.message_preview').toggle();
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.optionmenu').toggle();
     return false;
 });
 
-$(document).bind('keydown', 'd', function(){  
+$(document).on('keydown', null, 'd', function(){  
     $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('div.detail_area').toggle();
 });
 
-$(document).bind('keydown', 'u', function(){  
+$(document).on('keydown', null, 'u', function(){  
     var dest = $('#back_threadlist').attr('href');
     document.location = dest;  
 });
 
-$(document).bind('keydown', 'x', function(){  
-    if($("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').attr('checked')==true)
+$(document).on('keydown', null, 'x', function(){  
+    if($("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').prop('checked')==true)
     {
-        $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').removeAttr('checked');
+        $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').prop('checked', false);
         $("#message_holder").children(":eq("+current_select+")").removeClass("messagelist_hover");    
     }
     else
     {
-        $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').attr('checked', true)
+        $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').prop('checked', true)
         $("#message_holder").children(":eq("+current_select+")").addClass("messagelist_hover");    
     }  
     
 });
 
-$(document).bind('keydown', 'f', function(){
+$(document).on('keydown', null, 'f', function(){
     if(current_select < 1) return false;
     var param2 = $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_message').attr('id');
     var param1 = $('#item_source'+param2).val();
@@ -136,7 +136,7 @@ $(document).bind('keydown', 'f', function(){
     $("#compose_sms_container").load('<?php echo site_url('messages/compose') ?>', { 'type': 'forward', 'param1': param1, 'param2': param2}, function() {
       $(this).dialog({
         modal: true,    
-        open: function(event, ui) {$("#message").focus();}, 
+        open: function(event, ui) {$("#message").trigger('focus');}, 
     	width: 550,
     	show: 'fade',
     	hide: 'fade',
@@ -147,15 +147,15 @@ $(document).bind('keydown', 'f', function(){
     		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
     			$("#compose_sms_container").html(data);
     			$("#compose_sms_container" ).dialog( "option", "buttons", { "Okay": function() { $(this).dialog("destroy"); } } );
-    			setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+    			setTimeout(function() {if ($("#compose_sms_container").hasClass('ui-dialog-content')) { $("#compose_sms_container").dialog('destroy')}} , 1500);
     		});
     		}
     	},
     	'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('destroy');}
         }
       });
-    });
     $("#compose_sms_container").dialog('open');
+    });
     return false;
 });
 <?php endif; ?>
@@ -166,7 +166,7 @@ var totalmsg = $("#message_holder > div.messagelist").length;
 var current_select = 0;
 
 //move next
-$(document).bind('keydown', 'j', function(){  
+$(document).on('keydown', null, 'j', function(){  
     $("#message_holder").children(":eq("+current_select+")").removeClass('infocus'); //selecting child
     current_select ++; if(current_select > totalmsg   ) current_select = 1;
     $("#message_holder").children(":eq("+current_select+")").addClass('infocus'); //selecting child
@@ -174,7 +174,7 @@ $(document).bind('keydown', 'j', function(){
 });
 
 //move prev
-$(document).bind('keydown', 'k', function(){  
+$(document).on('keydown', null, 'k', function(){  
     $("#message_holder").children(":eq("+current_select+")").removeClass('infocus'); //selecting child
     current_select --; if(current_select < 0 ) current_select = totalmsg ;
     $("#message_holder").children(":eq("+current_select+")").addClass('infocus'); //selecting child
@@ -182,7 +182,7 @@ $(document).bind('keydown', 'k', function(){
 });
 
 //select
-$(document).bind('keydown', 'o return', function(e){
+$(document).on('keydown', null, 'o return', function(e){
     //var code = (e.keyCode ? e.keyCode : e.which);
     if(current_select < 1) return false;
     var group = "<?php echo $this->uri->segment(2); ?>";
@@ -193,13 +193,13 @@ $(document).bind('keydown', 'o return', function(e){
 });
 
 //quick reply
-$(document).bind('keydown', 'r', function(){ 
+$(document).on('keydown', null, 'r', function(){ 
     if(current_select < 1) return false;
     $("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
     $("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type':'reply', 'param1': current_number, 'param2': ''}, function() {
       $(this).dialog({
         modal: true, 
-        open: function(event, ui) {$("#message").focus();}, 
+        open: function(event, ui) {$("#message").trigger('focus');}, 
     	width: 550,
     	show: 'fade',
     	hide: 'fade',
@@ -210,27 +210,27 @@ $(document).bind('keydown', 'r', function(){
     		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
     			$("#compose_sms_container").html(data);
     			$("#compose_sms_container" ).dialog( "option", "buttons", { "Okay": function() { $(this).dialog("destroy"); } } );
-    			setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+    			setTimeout(function() {if ($("#compose_sms_container").hasClass('ui-dialog-content')) { $("#compose_sms_container").dialog('destroy')}} , 1500);
     		});
     		}
     	},
     	'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('destroy');}
         }
       });
+      $("#compose_sms_container").dialog('open');
     });
-    $("#compose_sms_container").dialog('open');
     return false;
 });
 
-$(document).bind('keydown', 'x', function(){  
-    if($("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_conversation').attr('checked')==true)
+$(document).on('keydown', null, 'x', function(){  
+    if($("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_conversation').prop('checked')==true)
     {
-        $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_conversation').removeAttr('checked');
+        $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_conversation').prop('checked', false);
         $("#message_holder").children(":eq("+current_select+")").removeClass("messagelist_hover");    
     }
     else
     {
-        $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_conversation').attr('checked', true)
+        $("#message_holder").children(":eq("+current_select+")").children('.message_container').find('.message_header').children('input.select_conversation').prop('checked', true)
         $("#message_holder").children(":eq("+current_select+")").addClass("messagelist_hover");    
     }  
     
@@ -238,11 +238,11 @@ $(document).bind('keydown', 'x', function(){
 <?php endif; ?>
 
 <?php if ($this->uri->segment(1) != 'phonebook' && $this->uri->segment(2) != 'search'): ?>
-$(document).bind('keydown', 'f5', function(){   refresh(); current_select =0; return false; });
+$(document).on('keydown', null, 'f5', function(){   refresh(); current_select =0; return false; });
 <?php endif; ?>
 
-$(document).bind('keydown', '*;a', function(){ select_all(); });
-$(document).bind('keydown', '*;n', function(){ clear_all(); });
+$(document).on('keydown', null, '*;a', function(){ select_all(); });
+$(document).on('keydown', null, '*;n', function(){ clear_all(); });
 
 <?php endif; ?>
 });

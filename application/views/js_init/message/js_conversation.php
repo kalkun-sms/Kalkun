@@ -11,7 +11,7 @@ $(".message_content").emoticons("<?php echo   $this->config->item('img_path').'e
 <?php endif; ?>
 
 // Delete messages
-$("a.global_delete").live('click', action_delete = function(){
+$(document).on('click', "a.global_delete", action_delete = function(){
 var count = $("input:checkbox:checked").length;
 if(count==0) { 
 	$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected'); ?>");
@@ -43,7 +43,7 @@ else {
 	 * Recover all messages on selected conversation
 	 *
 	 */	
-	$("a.recover_button").live('click', action_recover = function()
+	$(document).on('click', "a.recover_button", action_recover = function()
 	{
 		var count = $("input.select_message:checkbox:checked:visible").length;
 		if(count==0) 
@@ -67,7 +67,7 @@ else {
 });
     
 // Move messages
-$(".move_to").live('click', function() {
+$(document).on('click', ".move_to", function() {
 var count = $("input:checkbox:checked").length;
 if(count==0) { 
 	$("#movetodialog").dialog('close');
@@ -89,7 +89,7 @@ $("input.select_message:checked").each(function () {
 }
 });    
     
-$(".move_to_button").live('click', message_move = function() {
+$(document).on('click', ".move_to_button", message_move = function() {
 	$('#movetodialog').dialog('open');
 	return false;
 });
@@ -103,7 +103,7 @@ $("#movetodialog").dialog({
     
 
 // message detail
-$("span.message_toggle").live('click', function(){
+$(document).on('click', "span.message_toggle", function(){
 var row = $(this).parents('div:eq(1)');
 $(row).find("div.message_content").toggle();
 $(row).find("span.message_preview").toggle();
@@ -119,23 +119,23 @@ return false;
     
     
 // select all
-$("a.select_all_button").live('click', select_all = function(){
-	$(".select_message").attr('checked', true);
+$(document).on('click', "a.select_all_button", select_all = function(){
+	$(".select_message").prop('checked', true);
 	$(".messagelist").addClass("messagelist_hover");
 	return false;
 });
 
 // clear all
-$("a.clear_all_button").live('click', clear_all =  function(){
-	$(".select_message").attr('checked', false);
+$(document).on('click', "a.clear_all_button", clear_all =  function(){
+	$(".select_message").prop('checked', false);
 	$(".messagelist").removeClass("messagelist_hover");
 	return false;
 });        
 
 // input checkbox
-$("input.select_message").live('click',function()
+$(document).on('click', "input.select_message", function()
 {
-	if($(this).attr('checked')==true) 
+	if($(this).prop('checked')==true)
 	{
 		$(this).parents('div:eq(2)').addClass("messagelist_hover");
         current_number = $(this).val();
@@ -149,7 +149,7 @@ $("input.select_message").live('click',function()
     
 <?php if ( ! is_ajax()) : ?>
 // refresh
-$("a.refresh_button").live('click', refresh = function(type){
+$(document).on('click', "a.refresh_button", refresh = function(type){
 	if(type != 'retry') {
             $('.loading_area').html('Loading...');
             $('.loading_area').fadeIn("slow");
@@ -174,7 +174,7 @@ $("a.refresh_button").live('click', refresh = function(type){
 <?php endif; ?> 
     
 // Reply SMS
-$('a.reply_button, a.forward_button').live('click', message_reply =  function() {
+$(document).on('click', 'a.reply_button, a.forward_button', message_reply =  function() {
 var button = $(this).attr('class');
 var url = '<?php echo site_url('messages/compose')?>';
 
@@ -198,7 +198,7 @@ $("#compose_sms_container").load(url, { 'type': type, 'param1': param1, 'param2'
   $(this).dialog({
     modal: true,
     draggable : true,    
-    open: function(event, ui) {$("#message").focus();}, 
+    open: function(event, ui) {$("#message").trigger('focus');}, 
 	width: 550,
 	show: 'fade',
 	hide: 'fade',
@@ -209,15 +209,15 @@ $("#compose_sms_container").load(url, { 'type': type, 'param1': param1, 'param2'
 		$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 			$("#compose_sms_container").html(data);
 		    $("#compose_sms_container" ).dialog( "option", "buttons", { "Okay": function() { $(this).dialog("destroy"); } } );
-			setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+			setTimeout(function() {if ($("#compose_sms_container").hasClass('ui-dialog-content')) { $("#compose_sms_container").dialog('destroy')}} , 1500);
 		});
 		}
 	},
 	'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('destroy');}
     }
   });
+  $("#compose_sms_container").dialog('open');
 });
-$("#compose_sms_container").dialog('open');
 return false;
 });    
 	
@@ -235,7 +235,7 @@ $(this).parent().find('.counter').html( length + ' characters / ' + message + ' 
 });    
    		
 // Show/hide detail
-$('a.detail_button').live('click', function() {
+$(document).on('click', 'a.detail_button', function() {
 var row = $(this).parents('div:eq(2)');
 $(row).find("div.detail_area").toggle();
 	
@@ -245,7 +245,7 @@ return false;
 });	
 
 // Add contact
-$('.add_to_pbk').live('click', function() {
+$(document).on('click', '.add_to_pbk', function() {
 var param1 = $(this).parents('div:eq(1)').children().children('input.item_number').val();  /* phone number */
 $("#contact_container").load('<?php echo site_url('phonebook/add_contact')?>', { 'type': 'message', 'param1': param1}, function() {
 $(this).dialog({
@@ -263,14 +263,14 @@ $(this).dialog({
 	});
 	}, "<?php echo lang('kalkun_cancel'); ?>": function() { $(this).dialog('close');} }
 	});
+	$("#contact_container").dialog('open');
 });
-$("#contact_container").dialog('open');
 return false;
 });	
     
 <?php if ($this->uri->segment(4) != '6' && $this->uri->segment(6) != '6' && ! is_ajax()) : ?>
 // report spam
-$(".spam_button").live('click', function() {
+$(document).on('click', ".spam_button", function() {
     var count = $("input:checkbox:checked:visible").length;
     
     if(count==0) { 
@@ -291,7 +291,7 @@ $(".spam_button").live('click', function() {
 });   
 <?php else: ?>
  //report ham
-$(".ham_button").live('click', function() {
+$(document).on('click', ".ham_button", function() {
     var count = $("input:checkbox:checked:visible").length;
     if(count==0) { 
     	show_notification("<?php echo lang('tni_msg_no_conv_selected'); ?>");
@@ -311,7 +311,7 @@ $(".ham_button").live('click', function() {
 <?php endif; ?>
 
 // resend
-$(".resend").live('click', function() {
+$(document).on('click', ".resend", function() {
 DestinationNumber = $(this).parents('div:eq(1)').children().children('input.item_number').val();
 TextDecoded = $(this).parents('div:eq(1)').children('div.message_content').text();
 ID = $(this).parents('div:eq(1)').children().children('input.select_message').attr('id');
@@ -358,7 +358,7 @@ $("#compose_sms_container").dialog('open');
 });
 
 //resend_bulk
-$(".resend_bulk").live('click', function() {
+$(document).on('click', ".resend_bulk", function() {
 var count = $("input:checkbox:checked").length;
 if(count==0) { 
 	$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected'); ?>");

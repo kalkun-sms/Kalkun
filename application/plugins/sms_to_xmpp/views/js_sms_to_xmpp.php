@@ -9,7 +9,7 @@ $(document).ready(function() {
 		modal: true,
 		buttons: {
 			'Save': function() {
-				$("form.addxmppform").submit();
+				$("form.addxmppform").trigger('submit');
 			},
 			Cancel: function() {
 				$(this).dialog('close');
@@ -18,7 +18,7 @@ $(document).ready(function() {
 	});
 	
 	// Add blacklist button	
-	$('#addxmppbutton').click(function() {
+	$('#addxmppbutton').on("click", function() {
 		$('#xmpp-dialog').dialog('open');
 	});
 

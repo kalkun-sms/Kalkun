@@ -2,7 +2,7 @@
 $(document).ready(function() {
 	
 	// Add/Edit Contact
-	$('.addpbkcontact, .editpbkcontact').bind('click', function() {
+	$('.addpbkcontact, .editpbkcontact').on('click', null, function() {
 		
 	// check group
 	var group = '<?php echo count($pbkgroup);?>';
@@ -33,7 +33,7 @@ $(document).ready(function() {
 			show: 'fade',
 			hide: 'fade',
 			open: function() {
-				$("#name").focus();
+				$("#name").trigger('focus');
 			},
 			buttons: {
 			'<?php echo lang('kalkun_save')?>': function() {
@@ -47,34 +47,34 @@ $(document).ready(function() {
             
 			}, <?php echo lang('kalkun_cancel')?>: function() { $(this).dialog('close');} }
 			});
-		});
 		$("#contact_container").dialog('open');
+		});
 	}
 	return false;
 	});	
 	
 	// select all
-	$("a.select_all").click(select_all = function(){
-	$(".select_contact").attr('checked', true);
+	$("a.select_all").on("click", select_all = function(){
+	$(".select_contact").prop('checked', true);
 	$(".contact_list").addClass("messagelist_hover");
 	return false;
 	});
 	
 	// clear all
-	$("a.clear_all").click(clear_all = function(){
-	$(".select_contact").attr('checked', false);
+	$("a.clear_all").on("click", clear_all = function(){
+	$(".select_contact").prop('checked', false);
 	$(".contact_list").removeClass("messagelist_hover");
 	return false;
 	}); 
 	
 	// input checkbox
-	$("input.select_contact").click(function(){
-	if($(this).attr('checked')==true) $(this).parents('div:eq(2)').addClass("messagelist_hover");
+	$("input.select_contact").on("click", function(){
+	if($(this).prop('checked')==true) $(this).parents('div:eq(2)').addClass("messagelist_hover");
 	else $(this).parents('div:eq(2)').removeClass("messagelist_hover");
 	});
 	
 	// Delete contact
-	$("a.delete_contact").click(action_delete = function(){
+	$("a.delete_contact").on("click", action_delete = function(){
 	var count = $("input:checkbox:checked:visible").length;
 	var dest_url = '<?php echo site_url('phonebook/delete_contact') ?>';
 	if(count==0) { 
@@ -108,7 +108,7 @@ $(document).ready(function() {
 	});
   
   // Add/Remove from Group
-	$("select.grp_action").change(function(){
+	$("select.grp_action").on('change', function(){
 	 
   var grp_id =  $(this).val();
   if(grp_id == 'null' || grp_id == 'do') return false;
@@ -138,17 +138,8 @@ $(document).ready(function() {
     $(this).val('do');
 	});
   
-	
-	// Show menu on hover
-	$("tr").hover(function() {
-		$(this).find("span.pbk_menu").show();
-	},function() {
-	 	$(this).find("span.pbk_menu").hide();
-	});  
-	
-	
 	// Compose SMS
-	$('.sendmessage').bind('click', function() {
+	$('.sendmessage').on('click', null, function() {
 		var header = $(this).parents('div:eq(1)');
 		var param1 = header.children('.left_column').children('#pbkname').children('#pbknumber').text();
 		$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
@@ -165,20 +156,20 @@ $(document).ready(function() {
 				$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 					$("#compose_sms_container").html(data);
 					$("#compose_sms_container" ).dialog( "option", "buttons", { "Okay": function() { $(this).dialog("destroy"); } } );
-					setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+					setTimeout(function() {if ($("#compose_sms_container").hasClass('ui-dialog-content')) { $("#compose_sms_container").dialog('destroy')}} , 1500);
 				});
 				}
 			},
 			'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('destroy');}
 		    }
 		  });
+		  $("#compose_sms_container").dialog('open');
 		});
-		$("#compose_sms_container").dialog('open');
 		return false;
 	});
 
 	// Send to all
-	$('#sendallcontact').bind('click', function() {
+	$('#sendallcontact').on('click', null, function() {
 		$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
 		$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', { 'type': "all_contacts" }, function() {
 		  $(this).dialog({
@@ -193,20 +184,20 @@ $(document).ready(function() {
 				$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 					$("#compose_sms_container").html(data);
 					$("#compose_sms_container" ).dialog( "option", "buttons", { "Okay": function() { $(this).dialog("destroy"); } } );
-					setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+					setTimeout(function() {if ($("#compose_sms_container").hasClass('ui-dialog-content')) { $("#compose_sms_container").dialog('destroy')}} , 1500);
 				});
 				}
 			},
 			'<?php echo lang('kalkun_cancel'); ?>': function() { $(this).dialog('destroy');}
 		    }
 		  });
-		});
 		$("#compose_sms_container").dialog('open');
+		});
 		return false;
 	});
 		
 	// Contact import
-	$('#importpbk').click(function() {
+	$('#importpbk').on("click", function() {
 		$('#pbk_add_wizard_dialog').dialog('close');
 		$("#pbkimportdialog").dialog({
 			bgiframe: true,
@@ -215,7 +206,7 @@ $(document).ready(function() {
 			modal: true,
 			buttons: {
 				'Import': function() {
-					$("form.importpbkform").submit();
+					$("form.importpbkform").trigger('submit');
 				},
 				"<?php echo lang('kalkun_cancel'); ?>": function() {
 					$(this).dialog('close');
@@ -226,7 +217,7 @@ $(document).ready(function() {
 	});	
 
 	// Add contact wizard
-	$('#addpbkcontact_wizard').click(function() {
+	$('#addpbkcontact_wizard').on("click", function() {
 		$("#pbk_add_wizard_dialog").dialog({
 			autoOpen: false,
 			height: 250,
@@ -244,11 +235,11 @@ $(document).ready(function() {
 	// Search onBlur onFocus
 	/*$('input.search_name').val('<?php echo lang('tni_search_contacts'); ?>');
 	
-	$('input.search_name').blur(function(){
+	$('input.search_name').on("blur", function(){
 		$(this).val('<?php echo lang('tni_search_contacts'); ?>');
 	});
 	
-	$('input.search_name').focus(function(){
+	$('input.search_name').on("focus", function(){
 		$(this).val('');
 	});*/
 	  

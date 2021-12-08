@@ -4,7 +4,7 @@ $(document).ready(function() {
 var inbox_master = '<?php echo $this->config->item('inbox_owner_id')[0];?>';
 	
 // Add/Edit Contact
-$('.addpbkcontact, .edit_user').bind('click', function() {
+$('.addpbkcontact, .edit_user').on('click', null, function() {
 if($(this).hasClass('addpbkcontact')) {
 	var user_title = '<?php echo lang('tni_user_add');?>';
 	var type = 'normal';
@@ -33,34 +33,33 @@ $(this).dialog({
 		}
 	}, '<?php echo lang('kalkun_cancel');?>': function() { $(this).dialog('close');} }
 	});
+	$("#users_container").dialog('open');
 });
-
-$("#users_container").dialog('open');
 return false;
 });	
 
 // select all
-$("a.select_all").click(select_all = function(){
-$(".select_user").attr('checked', true);
+$("a.select_all").on("click", select_all = function(){
+$(".select_user").prop('checked', true);
 $(".contact_list").addClass("messagelist_hover");
 return false;
 });
 
 // clear all
-$("a.clear_all").click(clear_all = function(){
-$(".select_user").attr('checked', false);
+$("a.clear_all").on("click", clear_all = function(){
+$(".select_user").prop('checked', false);
 $(".contact_list").removeClass("messagelist_hover");
 return false;
 }); 
 
 // input checkbox
-$("input.select_user").click(function(){
-if($(this).attr('checked')==true) $(this).parents('div:eq(2)').addClass("messagelist_hover");
+$("input.select_user").on("click", function(){
+if($(this).prop('checked')==true) $(this).parents('div:eq(2)').addClass("messagelist_hover");
 else $(this).parents('div:eq(2)').removeClass("messagelist_hover");
 });
 
 // Delete user
-$("a.delete_user").click(action_delete = function(){
+$("a.delete_user").on("click", action_delete = function(){
 var count = $("input:checkbox:checked").length;
 var dest_url = '<?php echo site_url('users/delete_user') ?>';
 if(count==0) { 
@@ -101,15 +100,8 @@ else {
 }
 });
 
-// Show menu on hover
-$("tr").hover(function() {
-	$(this).find("span.pbk_menu").show();
-},function() {
- 	$(this).find("span.pbk_menu").hide();
-});  
-	
 // Contact import
-$('#pbkimport').click(function() {
+$('#pbkimport').on("click", function() {
 	$("#pbkimportdialog").dialog({
 		bgiframe: true,
 		autoOpen: false,
@@ -122,11 +114,11 @@ $('#pbkimport').click(function() {
 // Search onBlur onFocus
 $('input.search_name').val('<?php echo lang('tni_user_search'); ?>');
 
-$('input.search_name').blur(function(){
+$('input.search_name').on("blur", function(){
 	$(this).val('<?php echo lang('tni_user_search'); ?>');
 });
 
-$('input.search_name').focus(function(){
+$('input.search_name').on("focus", function(){
 	$(this).val('');
 });
 	  

@@ -24,7 +24,7 @@ a:hover, h3 { color: #86C0D2; }
 .simpleform { background-color: #FFF; }
 .simpleform a:hover { color: #000; }
 .box { background-color: #86C0D2; }
-.ui-widget-header { background-color: #86C0D2; color: #222222; }
+.ui-widget-header { background-color: #86C0D2 !important; color: #222222; }
 .primaryColor { background-color: #86C0D2; }
 .header_section { background-color: #ADD8E6; }
 .hover_color { background: #F1F1F1; color: #000;}
@@ -45,3 +45,6 @@ a:hover, h3 { color: #86C0D2; }
 #about { background-color: #EEE; }
 #about a { color: #333333; }
 #about a:hover { color:#000000; }
+
+/*For tagsinput when setting groups to new contact in phonebook*/
+div.tagsinput span.tag { background:#91b9c6; color:#000; border:1px solid #86c0d2;}

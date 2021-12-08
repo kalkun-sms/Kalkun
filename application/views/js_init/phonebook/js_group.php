@@ -2,7 +2,7 @@
 $(document).ready(function() {
 
 // Add group
-$('#addpbkgroup, a.editpbkgroup').bind('click', function() {
+$('#addpbkgroup, a.editpbkgroup').on('click', null, function() {
 if($(this).hasClass('editpbkgroup'))
 {
 	var id = $(this).parents("tr:first").attr("id");
@@ -11,8 +11,8 @@ if($(this).hasClass('editpbkgroup'))
 	var groupname = $(this).parents("div:eq(1)").find("span.groupname").text();
 	$('input#group_name').val(groupname);
 	$('input.pbkgroup_id').val(id);
-	if(public=="true") $("input#is_public").attr('checked', true);
-	else $("input#is_public").attr('checked', false);
+	if(public=="true") $("input#is_public").prop('checked', true);
+	else $("input#is_public").prop('checked', false);
 }
 else
 {
@@ -29,21 +29,21 @@ $("#addgroupdialog").dialog({
 	modal: true,
 	buttons: {
 		'<?php echo lang('kalkun_save')?>': function() {
-			$("form.addgroupform").submit();
+			$("form.addgroupform").trigger('submit');
 		},
 		'<?php echo lang('kalkun_cancel')?>': function() {
 			$(this).dialog('close');
 		}
 	},
 	open: function() {
-		$("#group_name").focus();
+		$("#group_name").trigger('focus');
 	}
 });		
 $('#addgroupdialog').dialog('open');
 });
 		
 // Delete group
-$("a.delete_contact").click(action_delete = function(){
+$("a.delete_contact").on("click", action_delete = function(){
 var count = $("input.select_group:checkbox:checked").length;
 var dest_url = '<?php echo site_url('phonebook/delete_group') ?>';
 if(count==0) { 
@@ -77,7 +77,7 @@ else {
 });
 
 // Compose SMS
-$('.sendmessage').bind('click', function() {
+$('.sendmessage').on('click', null, function() {
 	var row = $(this).parents('tr');
 	var id_group = row.attr('id');
 	$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
@@ -94,44 +94,37 @@ $('.sendmessage').bind('click', function() {
 			$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 				$("#compose_sms_container").html(data);
 				$("#compose_sms_container" ).dialog( "option", "buttons", { "Okay": function() { $(this).dialog("destroy"); } } );
-				setTimeout(function() {$("#compose_sms_container").dialog('destroy')} , 1500);
+				setTimeout(function() {if ($("#compose_sms_container").hasClass('ui-dialog-content')) { $("#compose_sms_container").dialog('destroy')}} , 1500);
 			});
 			}
 		},
 		'<?php echo lang('kalkun_cancel')?>': function() { $(this).dialog('destroy');}
 	    }
 	  });
-	});
 	$("#compose_sms_container").dialog('open');
+	});
 	return false;
 });
 	
 // select all
-$("a.select_all").click(select_all = function(){
-$(".select_group").attr('checked', true);
+$("a.select_all").on("click", select_all = function(){
+$(".select_group").prop('checked', true);
 $(".contact_list").addClass("messagelist_hover");
 return false;
 });
 
 // clear all
-$("a.clear_all").click(clear_all = function(){
-$(".select_group").attr('checked', false);
+$("a.clear_all").on("click", clear_all = function(){
+$(".select_group").prop('checked', false);
 $(".contact_list").removeClass("messagelist_hover");
 return false;
 }); 
 
 // input checkbox
-$("input.select_group").click(function(){
-if($(this).attr('checked')==true) $(this).parents('div:eq(2)').addClass("messagelist_hover");
+$("input.select_group").on("click", function(){
+if($(this).prop('checked')==true) $(this).parents('div:eq(2)').addClass("messagelist_hover");
 else $(this).parents('div:eq(2)').removeClass("messagelist_hover");
 });
-
-// Show menu on hover
-$("tr").hover(function() {
-	$(this).find("span.pbk_menu").show();
-},function() {
- 	$(this).find("span.pbk_menu").hide();
-});  
 
 });    
 </script>

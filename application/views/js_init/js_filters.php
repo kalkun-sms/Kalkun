@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
 
-    $('#addnewfilter, .editfilter').click(function() 
+    $('#addnewfilter, .editfilter').on("click", function() 
     {
         if($(this).hasClass('editfilter'))
         {
@@ -29,21 +29,21 @@ $(document).ready(function() {
         modal: true,
         buttons: {
             'Save': function() {
-                $("form.addfilterform").submit();
+                $("form.addfilterform").trigger('submit');
             },
             Cancel: function() {
                 $(this).dialog('close');
             }
         },
         open: function() {
-            $("#from").focus();
+            $("#from").trigger('focus');
         }
         });		
         $('#filterdialog').dialog('open');
         return false;
     });	
 
-    $("a.deletefilter").live("click", function(){
+    $(document).on("click", "a.deletefilter", function(){
         var dest_url = '<?php echo site_url('kalkun/delete_filter') ?>';
         var row = $(this).parents("div:eq(1)");
         var id_filter = row.find("div.id_filter").attr('id');

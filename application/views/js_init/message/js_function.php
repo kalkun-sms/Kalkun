@@ -34,7 +34,7 @@ $(document).ready(function() {
 	 * Delete all messages on selected conversation
 	 *
 	 */	
-	$("a.global_delete").live('click', action_delete = function()
+	$(document).on('click', "a.global_delete", action_delete = function()
 	{
 		var count = $("input.select_conversation:checkbox:checked").length;
         var notif = count + ' conversation deleted';
@@ -71,7 +71,7 @@ $(document).ready(function() {
 	 * Recover all messages on selected conversation
 	 *
 	 */	
-	$("a.recover_button").live('click', action_recover = function()
+	$(document).on('click', "a.recover_button", action_recover = function()
 	{
 		var count = $("input.select_conversation:checkbox:checked").length;
 		if(count==0) 
@@ -103,7 +103,7 @@ $(document).ready(function() {
 	 * Move all messages on selected conversation from a folder to another folder
 	 *
 	 */		       
-    $(".move_to").live('click', function() {
+    $(document).on('click', ".move_to", function() {
 		var count = $("input.select_conversation:checkbox:checked").length;
 		if(count==0) {
 			$("#movetodialog").dialog('close');
@@ -125,7 +125,7 @@ $(document).ready(function() {
 		count=0;
     });
     
-    $(".move_to_button").live('click', message_move = function() 
+    $(document).on('click', ".move_to_button", message_move = function()
     {
 		$("#movetodialog").dialog({
 			bgiframe: true,
@@ -137,25 +137,25 @@ $(document).ready(function() {
     });
     
     // select all
-    $("a.select_all_button").live('click', select_all = function()
+    $(document).on('click', "a.select_all_button", select_all = function()
     {
-    	$(".select_conversation").attr('checked', true);
+    	$(".select_conversation").prop('checked', true);
     	$(".messagelist").addClass("messagelist_hover");
     	return false;
     });
     
     // clear all
-    $("a.clear_all_button").live('click', clear_all = function()
+    $(document).on('click', "a.clear_all_button", clear_all = function()
     {
-    	$(".select_conversation").attr('checked', false);
+    	$(".select_conversation").prop('checked', false);
     	$(".messagelist").removeClass("messagelist_hover");
     	return false;
     });        
     
     // input checkbox
-    $("input.select_conversation").live('click',function()
+    $(document).on('click', "input.select_conversation", function()
     {
-    	if($(this).attr('checked')==true) 
+    	if($(this).prop('checked')==true)
     	{
     		$(this).parents('div:eq(2)').addClass("messagelist_hover");
             current_number = $(this).val();
@@ -168,7 +168,7 @@ $(document).ready(function() {
     });
     
     // refresh
-    $("a.refresh_button, div#logo a").live('click', refresh = function(type)
+    $(document).on('click', "a.refresh_button, div#logo a", refresh = function(type)
     {  	
     	if(type != 'retry') {
             $('.loading_area').html('Loading...');
@@ -200,7 +200,7 @@ $(document).ready(function() {
 	 * Rename custom folder
 	 *
 	 */	
-	$('#renamefolder').live('click', function() 
+	$(document).on('click', '#renamefolder', function()
 	{
 		$("#renamefolderdialog").dialog({
 			bgiframe: true,
@@ -209,7 +209,7 @@ $(document).ready(function() {
 			modal: true,	
 			buttons: {
 				'<?php echo lang('kalkun_save'); ?>': function() {
-					$("form.renamefolderform").submit();
+					$("form.renamefolderform").trigger('submit');
 				},
 				'<?php echo lang('kalkun_cancel'); ?>': function() {
 					$(this).dialog('close');
@@ -229,7 +229,7 @@ $(document).ready(function() {
 	 * Delete custom folder
 	 *
 	 */	
-	$('#deletefolder').live('click', function()
+	$(document).on('click', '#deletefolder', function()
 	{
 		$("#deletefolderdialog").dialog({
 			bgiframe: true,
@@ -258,7 +258,7 @@ $(document).ready(function() {
 	 * Delete all
 	 *
 	 */	
-	$('#delete-all-link').live('click', function()
+	$(document).on('click', '#delete-all-link', function()
 	{
 		$("#deletealldialog").dialog({
 			bgiframe: true,

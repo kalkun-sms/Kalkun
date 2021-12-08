@@ -24,7 +24,7 @@ else: ?>
 	</div>	
 </div>
 <div class="right_column">
-<span class="pbk_menu hidden">
+<span class="pbk_menu">
 <a class="edit_user simplelink" href="#"><?php echo lang('tni_edit'); ?></a>
 </span>
 </td></tr>

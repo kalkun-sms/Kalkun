@@ -56,7 +56,7 @@ $(document).ready(function(){
 $(document).ready(function() {
 
 // Add User
-$('.addpbkcontact').bind('click', function() {
+$('.addpbkcontact').on('click', null, function() {
 
     $("#users_container").dialog({
         title: '<?php echo lang('tni_user_addp');?>',
@@ -66,7 +66,7 @@ $('.addpbkcontact').bind('click', function() {
         buttons: {
             '<?php echo lang('kalkun_save');?>': function() {
                 if($("#addUser").valid()) {
-                    $("form#addUser").submit()
+                    $("form#addUser").trigger('submit')
                 }
             },
             '<?php echo lang('kalkun_cancel');?>': function() { 
@@ -80,7 +80,7 @@ $('.addpbkcontact').bind('click', function() {
 });
 
 // Edit User
-$('.edit_user').bind('click', function() {
+$('.edit_user').on('click', null, function() {
 
     var id_user = $(this).parents('tr').attr('id');
     var id_package = $(this).parents('div:eq(1)').find('span.id_package').text();
@@ -98,7 +98,7 @@ $('.edit_user').bind('click', function() {
         hide: 'fade',
         buttons: {
         '<?php echo lang('kalkun_save');?>': function() {
-            $("form#editUser").submit()
+            $("form#editUser").trigger('submit')
         },
         '<?php echo lang('kalkun_cancel');?>': function() { 
             $(this).dialog('destroy');}
@@ -110,7 +110,7 @@ $('.edit_user').bind('click', function() {
 });
 
 // Delete user
-$("a.delete_user").click(function(e){
+$("a.delete_user").on("click", function(e){
 
     e.preventDefault();
     var url = $(this).attr('href');
@@ -139,11 +139,11 @@ if($('input.search_name').val() == '') {
     $('input.search_name').val('<?php echo lang('tni_user_search'); ?>');
 }
 
-$('input.search_name').blur(function(){
+$('input.search_name').on("blur", function(){
 	$(this).val('<?php echo lang('tni_user_search'); ?>');
 });
 
-$('input.search_name').focus(function(){
+$('input.search_name').on("focus", function(){
 	$(this).val('');
 });
 	  

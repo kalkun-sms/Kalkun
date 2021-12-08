@@ -9,7 +9,7 @@ $(document).ready(function() {
 		modal: true,
 		buttons: {
 			'Save': function() {
-				$("form.addwpblogform").submit();
+				$("form.addwpblogform").trigger('submit');
 			},
 			Cancel: function() {
 				$(this).dialog('close');
@@ -18,7 +18,7 @@ $(document).ready(function() {
 	});
 	
 	// Add blacklist button	
-	$('#addwpblogbutton').click(function() {
+	$('#addwpblogbutton').on("click", function() {
 		$('#wp-dialog').dialog('open');
 	});
 

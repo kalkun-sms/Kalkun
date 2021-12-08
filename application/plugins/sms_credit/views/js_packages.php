@@ -2,7 +2,7 @@
 $(document).ready(function() {
 
     // Add/ Edit packages	
-    $('#addpackagesbutton, .editpackagesbutton').click(function() {
+    $('#addpackagesbutton, .editpackagesbutton').on("click", function() {
         var title = 'Add Packages';
 
         // Edit mode
@@ -24,7 +24,7 @@ $(document).ready(function() {
             title: title,
             buttons: {
                 'Save': function() {
-                    $("form#addpackagesform").submit();
+                    $("form#addpackagesform").trigger('submit');
                 },
                 Cancel: function() {
                     $(this).dialog('destroy');
@@ -40,16 +40,16 @@ $(document).ready(function() {
         $('input.search_packages').val('Search Packages');
     }
 
-    $('input.search_packages').blur(function(){
+    $('input.search_packages').on("blur", function(){
        $(this).val('Search Packages');
     });
 
-    $('input.search_packages').focus(function(){
+    $('input.search_packages').on("focus", function(){
         $(this).val('');
     });
 
     // Delete package
-    $("a.deletepackagesbutton").click(function(e){
+    $("a.deletepackagesbutton").on("click", function(e){
 
         e.preventDefault();
         var url = $(this).attr('href');

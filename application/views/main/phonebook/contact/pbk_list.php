@@ -21,7 +21,7 @@ else: ?>
 		</div>	
 	</div>
 	<div class="right_column">
-		<span class="pbk_menu hidden">
+		<span class="pbk_menu">
 		<?php
 		// hook for contact menu
 		$menu = do_action('phonebook.contact.menu', $tmp);
