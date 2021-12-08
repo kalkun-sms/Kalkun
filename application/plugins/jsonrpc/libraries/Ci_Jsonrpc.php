@@ -1,7 +1,7 @@
 <?php
 
 
-class Ci_Jsonrpc {	
+class Ci_Jsonrpc {
 	var $server;
 	var $client;
 	
@@ -450,9 +450,9 @@ class JSON_RPC_Server {
 		}
 	}
 	function serve() {
-		global $HTTP_RAW_POST_DATA;
+		$post_data = file_get_contents("php://input");
 		
-		$incoming = new JSON_RPC_Server_Request($HTTP_RAW_POST_DATA);
+		$incoming = new JSON_RPC_Server_Request($post_data);
 		
 		if(!$incoming->parse_response()) {
 			$response = $this->send_error('parse_error');
@@ -540,7 +540,7 @@ class JSON_RPC_Server {
 			$response = $this->$function_name[1]($parameters);
 		} else {
 			if(is_object($this->object)) {
-				$response = $this->object->$function_name[1]($parameters);				
+				$response = $this->object->{$function_name[1]}($parameters);
 			} else {
 				$r = $this->send_error('service_error');
 //				$r->error['code'] = 003;
