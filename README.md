@@ -42,7 +42,7 @@ You need to install and configure this first:
    If you use a specific port with PostgreSQL, you may also need to set
    `$db['default']['port'] = "5432";`
 
-1. Import gammu database schema (it's included on gammu source, eg. `gammu/docs/sql/mysql.sql`)
+1. Import gammu database schema (it's included on gammu source, eg. `gammu/docs/sql/mysql.sql`).
 
     For MySQL : 
     ```

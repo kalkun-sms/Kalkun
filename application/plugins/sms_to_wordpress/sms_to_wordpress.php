@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 /**
 * Plugin Name: SMS to Wordpress
 * Plugin URI: http://azhari.harahap.us
@@ -83,13 +84,18 @@ function sms_to_wordpress($sms)
 	{
 		$CI =& get_instance();
 		$CI->load->model('sms_to_wordpress/sms_to_wordpress_model', 'plugin_model');
-		include_once 'libraries/IXR_Library.php';
-		
+
+		require_once 'vendor/kissifrot/php-ixr/src/Client/Client.php';
+		require_once 'vendor/kissifrot/php-ixr/src/Message/Error.php';
+		require_once 'vendor/kissifrot/php-ixr/src/Message/Message.php';
+		require_once 'vendor/kissifrot/php-ixr/src/Request/Request.php';
+		require_once 'vendor/kissifrot/php-ixr/src/DataType/Value.php';
+
 		// if wp url exist
 		$wp = $CI->plugin_model->get_wp_url_by_phone($number);
 		if (is_array($wp))
 		{
-			$client = new IXR_Client($wp['wp_url']);
+			$client = new IXR\Client\Client($wp['wp_url']);
 			
 			// Post parameter
 			$post = array(
