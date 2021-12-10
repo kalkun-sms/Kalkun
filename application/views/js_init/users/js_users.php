@@ -31,7 +31,7 @@
 									$("#users_container").html(data);
 									$("#users_container").dialog({
 										buttons: {
-											"Okay": function() {
+											"<?php echo tr('Close'); ?>": function() {
 												$(this).dialog("close");
 											}
 										}

@@ -340,3 +340,5 @@ $lang['Parameter invalid'] = 'Parameter invalid';
 
 $lang['403 Forbidden'] = '403 Запрещено';
 $lang['Directory access is forbidden.'] = 'Доступ запрещен.';
+
+$lang['Close'] = 'Close';

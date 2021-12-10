@@ -43,7 +43,7 @@
 										$("#contact_container").html(data);
 										$("#contact_container").dialog({
 											buttons: {
-												"Okay": function() {
+												"<?php echo tr('Close'); ?>": function() {
 													$(this).dialog("close");
 												}
 											}
@@ -179,7 +179,7 @@
 								$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 									$("#compose_sms_container").html(data);
 									$("#compose_sms_container").dialog("option", "buttons", {
-										"Okay": function() {
+										"<?php echo tr('Close'); ?>": function() {
 											$(this).dialog("destroy");
 										}
 									});
@@ -221,7 +221,7 @@
 								$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 									$("#compose_sms_container").html(data);
 									$("#compose_sms_container").dialog("option", "buttons", {
-										"Okay": function() {
+										"<?php echo tr('Close'); ?>": function() {
 											$(this).dialog("destroy");
 										}
 									});
