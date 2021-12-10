@@ -35,24 +35,16 @@ function filter_data($data)
 	}
 }
 
-function nice_date($str, $option = NULL)
+function kalkun_nice_date($str, $option = NULL)
 {
-	// convert the date to unix timestamp
-	list($date, $time) = explode(' ', $str);
-	list($year, $month, $day) = explode('-', $date);
-	list($hour, $minute, $second) = explode(':', $time);
+	$CI = &get_instance();
+	$CI->load->helper('date');
 
-	$timestamp = mktime($hour, $minute, $second, $month, $day, $year);
+	// convert the date to unix timestamp
+	$datetime = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $str);
+	$timestamp = $datetime->getTimestamp();
+
 	$now = time();
-	$blocks = array(
-		array('name' => tr('year'), 'amount' => 60 * 60 * 24 * 365),
-		array('name' => tr('month'), 'amount' => 60 * 60 * 24 * 31),
-		array('name' => tr('week'), 'amount' => 60 * 60 * 24 * 7),
-		array('name' => tr('day'), 'amount' => 60 * 60 * 24),
-		array('name' => tr('hour'), 'amount' => 60 * 60),
-		array('name' => tr('minute'), 'amount' => 60),
-		array('name' => tr('second'), 'amount' => 1)
-	);
 
 	$diff = abs($now - $timestamp);
 
@@ -62,54 +54,35 @@ function nice_date($str, $option = NULL)
 	}
 	else
 	{
-		if ($diff < 60)
+		//if ($diff < 60)
+		//{
+		//	return tr('Less than a minute ago');
+		//}
+		//else
 		{
-			return tr('Less than a minute ago'); // "Less than a minute ago"
-		}
-		else
-		{
-			$levels = 1;
-			$current_level = 1;
-			$result = array();
-			foreach ($blocks as $block)
-			{
-				if ($current_level > $levels)
-				{
-					break;
-				}
-				if ($diff / $block['amount'] >= 1)
-				{
-					$amount = floor($diff / $block['amount']);
-					$plural = '';
-					//if ($amount>1) {$plural='s';} else {$plural='';}
-					$result[] = $amount.' '.$block['name'].$plural;
-					$diff -= $amount * $block['amount'];
-					$current_level += 1;
-				}
-			}
-			$res = implode(' ', $result);
-
+			$units = 2;
 			if ($timestamp > $now)
 			{
-				$text = tr('%nicedate% remaining');
+				return tr('{0} remaining', NULL, timespan($now, $timestamp, $units));
 			}
 			else
 			{
-				$text = tr('%nicedate% ago');
+				return tr('{0} ago', NULL, timespan($timestamp, $now, $units));
 			}
-			return str_replace('%nicedate%', $res, $text);
 		}
 	}
 }
 
+
+
+
 function get_modem_status($status, $tolerant)
 {
 	// convert the date to unix timestamp
-	list($date, $time) = explode(' ', $status);
-	list($year, $month, $day) = explode('-', $date);
-	list($hour, $minute, $second) = explode(':', $time);
+	$datetime = DateTime::createFromFormat('Y-m-d H:i:s', $status);
+	$datetime->add(new DateInterval('PT'.$tolerant.'M'));
+	$timestamp = $datetime->getTimestamp();
 
-	$timestamp = mktime($hour, $minute + $tolerant, $second, $month, $day, $year);
 	$now = time();
 
 	//$diff = abs($now-$timestamp);

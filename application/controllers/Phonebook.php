@@ -291,7 +291,7 @@ class Phonebook extends MY_Controller {
 			$n++;
 		}
 
-		$this->session->set_flashdata('notif', str_replace('%count%', $n, tr('%count% contacts imported successfully.')));
+		$this->session->set_flashdata('notif', tr('{0,number,integer} contacts imported successfully.', NULL, $n));
 		redirect('phonebook');
 	}
 

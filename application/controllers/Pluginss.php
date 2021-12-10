@@ -116,7 +116,7 @@ class Pluginss extends MY_Controller {
 	function install($plugin_name)
 	{
 		activate_plugin($plugin_name);
-		$this->session->set_flashdata('notif', str_replace('%plugin_name%', $plugin_name, tr('Plugin %plugin_name% installed successfully.')));
+		$this->session->set_flashdata('notif', tr('Plugin {0} installed successfully.', NULL, $plugin_name));
 		redirect('pluginss');
 	}
 
@@ -132,7 +132,7 @@ class Pluginss extends MY_Controller {
 	function uninstall($plugin_name)
 	{
 		deactivate_plugin($plugin_name);
-		$this->session->set_flashdata('notif', str_replace('%plugin_name%', $plugin_name, tr('Plugin %plugin_name% uninstalled successfully.')));
+		$this->session->set_flashdata('notif', tr('Plugin {0} uninstalled successfully.', NULL, $plugin_name));
 		redirect('pluginss');
 	}
 

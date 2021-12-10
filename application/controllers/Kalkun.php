@@ -91,7 +91,7 @@ class Kalkun extends MY_Controller {
 			case 'weeks':
 				$days = 30;
 				$format = 'W';
-				$prefix = ucwords(tr('week')).' ';
+				$prefix = tr('date_week').' ';
 				break;
 
 			case 'months':

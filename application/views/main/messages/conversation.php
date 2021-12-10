@@ -87,7 +87,7 @@ else
 	}
 
 	// count string for message preview
-	$char_per_line = 100 - strlen(nice_date($message_date)) - strlen($senderName); ?>
+	$char_per_line = 100 - strlen(kalkun_nice_date($message_date)) - strlen($senderName); ?>
 
 <div class="messagelist conversation messagelist_conversation">
 	<div class="message_container <?php echo $tmp['source']; ?>">
@@ -99,7 +99,7 @@ else
 				<span <?php  if ($tmp['source'] == 'inbox' && $tmp['readed'] == 'false')
 	{
 		echo 'style="font-weight: bold"';
-	} ?>><?php echo nice_date($message_date); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
+	} ?>><?php echo kalkun_nice_date($message_date); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
 					&nbsp;&nbsp;<?php echo $senderName; ?></span>
 				<span class="message_preview">-&nbsp;<?php echo message_preview($tmp['TextDecoded'], $char_per_line); ?></span>
 			</span>

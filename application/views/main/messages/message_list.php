@@ -82,7 +82,7 @@ else
 	}
 
 	// count string for message preview
-	$char_per_line = 100 - strlen(nice_date($message_date)) - strlen($senderName); ?>
+	$char_per_line = 100 - strlen(kalkun_nice_date($message_date)) - strlen($senderName); ?>
 
 <div title="<?php echo $tmp->TextDecoded?>" class="messagelist <?php  if ($type == 'inbox' && $tmp->readed == 'false')
 	{
@@ -98,7 +98,7 @@ else
 				<span <?php  if ($type == 'inbox' && $tmp->readed == 'false')
 	{
 		echo 'style="font-weight: bold"';
-	} ?>><?php echo nice_date($message_date); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
+	} ?>><?php echo kalkun_nice_date($message_date); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
 					&nbsp;&nbsp;<?php echo $senderName; ?>
 					<?php
 			if ($folder == 'folder'):

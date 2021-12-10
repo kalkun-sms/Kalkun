@@ -62,6 +62,7 @@ class MY_Controller  extends CI_Controller {
 			$this->load->helper('i18n');
 			$lang = $this->Kalkun_model->get_setting()->row('language');
 			$this->lang->load('kalkun', $lang);
+			$this->lang->load('date', $lang);
 
 			// Message routine
 			$this->_message_routine();

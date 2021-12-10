@@ -23,14 +23,6 @@ $lang['Filters'] = 'Filters';
 $lang['About'] = 'Om';
 $lang['Logout'] = 'Log ud';
 
-$lang['year'] = 'år';
-$lang['month'] = 'måned';
-$lang['week'] = 'uge';
-$lang['day'] = 'dag';
-$lang['hour'] = 'time';
-$lang['minute'] = 'minut';
-$lang['second'] = 'sekund';
-
 // Dashboard
 $lang['Statistics'] = 'Statistik';
 $lang['System information'] = 'Systeminformation';
@@ -185,8 +177,8 @@ $lang['characters'] = 'tegn';
 $lang['message'] = 'besked';
 
 // Messages controller
-$lang['Login successful. But %s data lost during login process.'] = 'Login successful. But %s data lost during login process.';
-$lang['Please <a href="%s" onclick="goBackToForm()">go back to your form</a> and submit again.'] = 'Please <a href="%s" onclick="goBackToForm()">go back to your form</a> and submit again.';
+$lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
+$lang['Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.'] = 'Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.';
 $lang['Login successful. Resubmitting Form.'] = 'Login successful. Resubmitting Form.';
 $lang['Outgoing SMS disabled'] = 'Outgoing SMS disabled';
 $lang['A number was found in DND Resitry. SMS sending was skipped for it.'] = 'A number was found in DND Resitry. SMS sending was skipped for it.';
@@ -249,8 +241,8 @@ $lang['Email ID'] = 'E-mail-ID';
 $lang['Enable email forwarding'] = 'Slå videresending til e-mail til';
 $lang['Searching...'] = 'Søger...';
 $lang['Less than a minute ago'] = 'Mindre end et minut siden';
-$lang['%nicedate% remaining'] = '%nicedate% remaining';
-$lang['%nicedate% ago'] = '%nicedate% ago';
+$lang['{0} remaining'] = '{0} remaining';
+$lang['{0} ago'] = '{0} ago';
 $lang['Edit contact'] = 'Rediger kontakt';
 $lang['Contact not found'] = 'Kontakt ikke fundet';
 $lang['Contact is empty'] = 'Kontakt er tom';
@@ -343,12 +335,12 @@ $lang['User updated successfully.'] = 'User has been updated';
 $lang['User added successfully.'] = 'User has been added';
 // Pluginss Controller
 $lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Only administrators can manage plugins';
-$lang['Plugin %plugin_name% installed successfully.'] = 'Plugin %plugin_name% successfully installed';
-$lang['Plugin %plugin_name% uninstalled successfully.'] = 'Plugin %plugin_name% successfully uninstalled';
+$lang['Plugin {0} installed successfully.'] = 'Plugin {0} successfully installed';
+$lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} successfully uninstalled';
 $lang[' - Installed'] = ' - Installed';
 $lang[' - Available'] = ' - Available';
 // Phonebook Controller
-$lang['%count% contacts imported successfully.'] = '%count% contacts successfully imported';
+$lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts successfully imported';
 $lang['Contact updated successfully.'] = 'Contact has been updated';
 $lang['Contact added successfully.'] = 'Contact has been added';
 // Gammu Model

@@ -4,9 +4,9 @@
 <script type="text/javascript" src="<?php echo $this->config->item('js_path');?>Chart.bundle.min.js"></script>
 
 <div align="right">
-	<a href="<?php echo site_url('kalkun/get_statistic/days');?>" class="stats-toggle"><?php echo ucwords(tr('day'));?></a>&nbsp; &nbsp;
-	<a href="<?php echo site_url('kalkun/get_statistic/weeks');?>" class="stats-toggle"><?php echo ucwords(tr('week'));?></a>&nbsp; &nbsp;
-	<a href="<?php echo site_url('kalkun/get_statistic/months');?>" class="stats-toggle"><?php echo ucwords(tr('month'));?></a>&nbsp; &nbsp;
+	<a href="<?php echo site_url('kalkun/get_statistic/days');?>" class="stats-toggle"><?php echo tr('date_day');?></a>&nbsp; &nbsp;
+	<a href="<?php echo site_url('kalkun/get_statistic/weeks');?>" class="stats-toggle"><?php echo tr('date_week');?></a>&nbsp; &nbsp;
+	<a href="<?php echo site_url('kalkun/get_statistic/months');?>" class="stats-toggle"><?php echo tr('date_month');?></a>&nbsp; &nbsp;
 </div>
 
 <div align="center" class="chart-container" style="position: relative; height:200px; width:650px">

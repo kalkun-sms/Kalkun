@@ -35,9 +35,9 @@ echo doctype('html5');?>
 
 <body onload="goBackToForm()">
 	<p><?php
-			printf(tr('Login successful. But %s data lost during login process.'), strtoupper($this->session->flashdata('bef_login_method')));
+			echo tr('Login successful. But {0} data lost during login process.', NULL, strtoupper($this->session->flashdata('bef_login_method')));
 	echo ' <br> ';
-	printf(tr('Please <a href="%s" onclick="goBackToForm()">go back to your form</a> and submit again.'), $this->session->flashdata('bef_login_HTTP_REFERER')); ?>
+	echo tr('Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.', NULL, $this->session->flashdata('bef_login_HTTP_REFERER')); ?>
 </body>
 <?php
 }

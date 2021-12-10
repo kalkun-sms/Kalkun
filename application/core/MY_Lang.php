@@ -71,7 +71,19 @@ class MY_Lang extends MX_Lang {
 	 */
 	public function load($langfile, $idiom = '', $return = FALSE, $add_suffix = TRUE, $alt_path = '', $_module = '')
 	{
-		parent::load($langfile, $idiom, $return, $add_suffix, $alt_path, $_module);
+		if ($idiom !== '')
+		{
+			$this->idiom = $idiom;
+		}
+
+		$requested_idiom = $this->idiom;
+		// Check if language file exists
+		if ( ! file_exists(APPPATH.'language/'.$this->idiom.'/'.$langfile.'_lang.php'))
+		{
+			$requested_idiom = 'english';
+		}
+
+		parent::load($langfile, $requested_idiom, $return, $add_suffix, $alt_path, $_module);
 		if ( ! empty($idiom))
 		{
 			$this->locale = MY_LANG::$idiom_to_locale[$idiom];
