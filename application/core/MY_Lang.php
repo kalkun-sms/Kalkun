@@ -20,7 +20,7 @@ class MY_Lang extends MX_Lang {
 	public $locale = 'en';
 
 	public static $idiom_to_locale = [
-		'brazilian_portuguese' => 'pt_BR',
+		'portuguese-brazilian' => 'pt_BR',
 		'czech' => 'cs',
 		'danish' => 'da',
 		'dutch' => 'nl',

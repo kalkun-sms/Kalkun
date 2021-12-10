@@ -3,7 +3,7 @@
 		<td width="175px"><?php echo tr('Language'); ?></td>
 		<td>
 			<?php
-$lang = array('brazilian_portuguese' => 'Brazilian Portuguese',
+$lang = array('portuguese-brazilian' => 'Brazilian Portuguese',
 				'czech' => 'Česky',
 				'danish' => 'Danish',
 				'dutch' => 'Dutch',
