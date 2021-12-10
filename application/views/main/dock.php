@@ -6,7 +6,14 @@
 	</div>
 
 	<div id="top_navigation_center">
-		<?php echo date('l M dS, Y, h:i A');?>
+		<?php
+	$fmt = new IntlDateFormatter(
+	$this->lang->locale,
+	IntlDateFormatter::FULL,
+	IntlDateFormatter::SHORT
+);
+	echo $fmt->format(time());
+?>
 	</div>
 
 	<div id="top_navigation_right">
