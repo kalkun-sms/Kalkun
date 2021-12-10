@@ -60,6 +60,7 @@ class MY_Controller  extends CI_Controller {
 
 			// language
 			$this->load->helper('language');
+			$this->load->helper('i18n');
 			$lang = $this->Kalkun_model->get_setting()->row('language');
 			$this->lang->load('kalkun', $lang);
 
