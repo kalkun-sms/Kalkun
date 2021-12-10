@@ -130,7 +130,6 @@ $lang['Insert'] = 'Vlož';
 $lang['Canned responses'] = 'Automatické odpovede';
 $lang['There are no canned responses. Continue to save your present message as canned response.'] = 'Vyzerá to tak, že tu ešte nieje automatická odpoveď. Vytvorte si nejakú.';
 $lang['Choose response'] = 'Zvoľ odpovede';
-$lang['Save'] = 'Uložiť novú...';
 $lang['Saving...'] = 'Ukladanie...';
 $lang['Are you sure?'] = 'Ste si istý?';
 

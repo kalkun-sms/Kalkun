@@ -130,7 +130,6 @@ $lang['Insert'] = 'Wstaw';
 $lang['Canned responses'] = 'Odpowiedź automatyczna';
 $lang['There are no canned responses. Continue to save your present message as canned response.'] = 'Wygląda na to, że nie ma jeszcze zdefiniowanych odpowiedzi automatycznych. Najpierw utwórz jakieś';
 $lang['Choose response'] = 'Wybierz odpowiedź';
-$lang['Save'] = 'Zapisz jako nową...';
 $lang['Saving...'] = 'Zapisywanie...';
 $lang['Are you sure?'] = 'Czy jesteś pewien?';
 

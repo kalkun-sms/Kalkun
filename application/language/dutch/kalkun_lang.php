@@ -130,7 +130,6 @@ $lang['Insert'] = 'Invoegen';
 $lang['Canned responses'] = 'Sjablonen';
 $lang['There are no canned responses. Continue to save your present message as canned response.'] = 'Het lijkt erop dat er nog geen sjablonen zijn. Sla de eerste sjabloon op';
 $lang['Choose response'] = 'Kies Sjablonen';
-$lang['Save'] = 'Sla nieuwe op...';
 $lang['Saving...'] = 'Opslaan...';
 $lang['Are you sure?'] = 'Weet je het zeker?';
 

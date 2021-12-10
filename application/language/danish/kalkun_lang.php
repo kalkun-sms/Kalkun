@@ -130,7 +130,6 @@ $lang['Insert'] = 'Indsæt';
 $lang['Canned responses'] = 'Standardsvar';
 $lang['There are no canned responses. Continue to save your present message as canned response.'] = 'Det ser ud som om der ikke er angivet nogle standardsvar endnu. Angiv dit første standardsvar nu';
 $lang['Choose response'] = 'Vælg svar';
-$lang['Save'] = 'Gem ny...';
 $lang['Saving...'] = 'Gemmer...';
 $lang['Are you sure?'] = 'Er du sikker?';
 

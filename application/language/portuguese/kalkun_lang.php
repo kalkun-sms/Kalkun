@@ -130,7 +130,6 @@ $lang['Insert'] = 'Inserir';
 $lang['Canned responses'] = 'Mensagens Pré Definidas';
 $lang['There are no canned responses. Continue to save your present message as canned response.'] = 'Não existe nenhuma mensagem pré definida. Deseja gravar a sua primeira mensagem pré definida?';
 $lang['Choose response'] = 'Escolha Mensagem';
-$lang['Save'] = 'Gravar Nova...';
 $lang['Saving...'] = 'Gravando...';
 $lang['Are you sure?'] = 'Tem a certeza?';
 

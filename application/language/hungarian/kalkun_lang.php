@@ -130,7 +130,6 @@ $lang['Insert'] = 'Beszúrás';
 $lang['Canned responses'] = 'Megírt válaszok';
 $lang['There are no canned responses. Continue to save your present message as canned response.'] = 'Úgy tűnik nincs egyetlen előre megírt válasz sem. Mentse el az elsőt most';
 $lang['Choose response'] = 'Válaszok kiválasztása';
-$lang['Save'] = 'Új mentése...';
 $lang['Saving...'] = 'Mentés...';
 $lang['Are you sure?'] = 'Biztos benne?';
 

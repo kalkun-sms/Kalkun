@@ -130,7 +130,6 @@ $lang['Insert'] = 'Masukkan';
 $lang['Canned responses'] = 'Template Pesan';
 $lang['There are no canned responses. Continue to save your present message as canned response.'] = 'Template pesan kosong, silahkan simpan template baru.';
 $lang['Choose response'] = 'Pilih Template';
-$lang['Save'] = 'Simpan...';
 $lang['Saving...'] = 'Menyimpan...';
 $lang['Are you sure?'] = 'Anda yakin?';
 

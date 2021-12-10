@@ -130,7 +130,6 @@ $lang['Insert'] = 'Lisää';
 $lang['Canned responses'] = 'Viestipohjat';
 $lang['There are no canned responses. Continue to save your present message as canned response.'] = 'Näyttäisi siltä, että viestipohjia ei vielä ole. Tallennetaanko ensimmäinen nyt';
 $lang['Choose response'] = 'Valitse vastaukset';
-$lang['Save'] = 'Tallenna uusi...';
 $lang['Saving...'] = 'Tallennetaan...';
 $lang['Are you sure?'] = 'Oletko varma?';
 

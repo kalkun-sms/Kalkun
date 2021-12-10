@@ -130,7 +130,6 @@ $lang['Insert'] = 'Insert';
 $lang['Canned responses'] = 'Canned responses';
 $lang['There are no canned responses. Continue to save your present message as canned response.'] = 'There are no canned responses. Continue to save your present message as canned response.';
 $lang['Choose response'] = 'Choose response';
-$lang['Save'] = 'Save';
 $lang['Saving...'] = 'Saving...';
 $lang['Are you sure?'] = 'Are you sure?';
 

@@ -130,7 +130,6 @@ $lang['Insert'] = 'Einfügen';
 $lang['Canned responses'] = 'Vorlagen';
 $lang['There are no canned responses. Continue to save your present message as canned response.'] = 'Es sind keine Vorlagen vorhanden. Zuerst Vorlage speichern';
 $lang['Choose response'] = 'Antworten auswöhlen';
-$lang['Save'] = 'Als NEU speichern...';
 $lang['Saving...'] = 'Speichern...';
 $lang['Are you sure?'] = 'Sind Sie sich sicher?';
 
