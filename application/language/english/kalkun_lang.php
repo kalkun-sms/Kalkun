@@ -258,7 +258,6 @@ $lang['Confirm password'] = 'Confirm password';
 $lang['Phone number'] = 'Phone number';
 $lang['Action not allowed'] = 'Action not allowed';
 $lang['Field required.'] = 'Field required.';
-$lang['Field required.'] = 'Field required.';
 $lang['Passwords do not match.'] = 'Passwords do not match.';
 $lang['Password is too short.'] = 'Password is too short.';
 $lang['No user selected'] = 'No user selected';
