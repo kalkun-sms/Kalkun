@@ -73,7 +73,7 @@ endforeach;
 	<h4><?php echo tr('Phonebook');?>: </h4>
 	<p><span><?php echo tr('Contact');?>: </span>
 		<?php echo  $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();?></p>
-	<p><span><?php echo tr('Group');?>: </span>
+	<p><span><?php echo tr('Groups');?>: </span>
 		<?php echo  $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();?></p>
 </div>
 

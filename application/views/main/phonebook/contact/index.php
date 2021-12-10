@@ -36,7 +36,7 @@
 }?> />
 				<label for="is_public" style="display: inline"><?php echo tr('Set as public contact');?></label>
 			</p>
-			<label for="group"><?php echo tr('Group');?></label>
+			<label for="group"><?php echo tr('Groups');?></label>
 			<select id="importgroupvalue" name="importgroupvalue">
 				<option value="">-- <?php echo tr('Type group name');?> --</option>
 				<?php

@@ -1,6 +1,6 @@
 <?php $this->load->view('js_init/users/js_users');?>
 <!-- Delete User Confirmation -->
-<div class="dialog" id="confirm_delete_user_dialog" title="<?php echo tr('Delete');?>">
+<div class="dialog" id="confirm_delete_user_dialog" title="<?php echo tr('Delete users confirmation');?>">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
 		<?php echo tr('This deletes the selected users and all their messages and contacts.');?></p>
 </div>

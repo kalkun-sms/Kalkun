@@ -62,7 +62,7 @@
 			<label for="is_public" style="display: inline"><?php echo tr('Set as public contact');?></label>
 		</div>
 
-		<label for="groups"><?php echo tr('Group'); ?></label>
+		<label for="groups"><?php echo tr('Groups'); ?></label>
 		<?php if (isset($contact)): ?>
 		<input name="groups" id="groups" value="<?php echo $this->Phonebook_model->get_groups($contact->row('id_pbk'), $this->session->userdata('id_user'))->GroupNames?>" type="text" />
 		<?php elseif ( ! empty($group_id)):?>
