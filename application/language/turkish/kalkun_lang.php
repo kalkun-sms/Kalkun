@@ -252,7 +252,6 @@ $lang['Delete users confirmation'] = 'Kullanici onaylarini sil';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Kullanici silinsinmi?<br>Bu mesajlardan ve kontaklardan bu kullanicinin silinecegi manasina gelir.';
 $lang['User not found'] = 'Kullanici bulunamadi';
 $lang['Users is empty'] = 'Kullanicilar bos';
-$lang['Name'] = 'Isim';
 $lang['Username'] = 'Kullanici adi';
 $lang['Password'] = 'Parola';
 $lang['Search user'] = 'Kullanici ara';

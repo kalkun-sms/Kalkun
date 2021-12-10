@@ -252,7 +252,6 @@ $lang['Delete users confirmation'] = 'Dialoog Gebruikers Verwijderen';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Gebruiker verwijderen?<br>Hiermee worden alle berichten en mappen van de gebruiker verwijderd.';
 $lang['User not found'] = 'Gebruiker niet gevonden';
 $lang['Users is empty'] = 'Geen Gebruikers';
-$lang['Name'] = 'Naam';
 $lang['Username'] = 'Gebruikersnaam';
 $lang['Password'] = 'Wachtwoord';
 $lang['Search user'] = 'Zoek Gebruiker';

@@ -252,7 +252,6 @@ $lang['Delete users confirmation'] = 'Felhasználó törlésének megerősítés
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Törli a felhasználót?<br>A felhasználó minden adatával együtt (üzenetek és kapcsolatok).';
 $lang['User not found'] = 'Felhasználó nem található';
 $lang['Users is empty'] = 'Üres felhasználó';
-$lang['Name'] = 'Név';
 $lang['Username'] = 'Felhasználónév';
 $lang['Password'] = 'Jelszó';
 $lang['Search user'] = 'Felhasználó keresése';

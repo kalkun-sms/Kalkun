@@ -252,7 +252,6 @@ $lang['Delete users confirmation'] = 'Potvrdenie mazania užívateľov';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Zmazať užívateľa?<br>Taktiež všetky jeho záznamy (ako správy a kontakty).';
 $lang['User not found'] = 'Užívateľ nenájdený';
 $lang['Users is empty'] = 'Užívateľ je prázdny';
-$lang['Name'] = 'Meno';
 $lang['Username'] = 'Užívateľ';
 $lang['Password'] = 'Heslo';
 $lang['Search user'] = 'Vyhľadať užívateľa';

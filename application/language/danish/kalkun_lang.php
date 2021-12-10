@@ -252,7 +252,6 @@ $lang['Delete users confirmation'] = 'Bekræft sletning af brugere';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Slet bruger?<br>Dette inkluderer al data knyttet til denne bruger (beskeder og kontakter).';
 $lang['User not found'] = 'Bruger ikke fundet';
 $lang['Users is empty'] = 'Bruger er tom';
-$lang['Name'] = 'Navn';
 $lang['Username'] = 'Brugernavn';
 $lang['Password'] = 'Kodeord';
 $lang['Search user'] = 'Søg efter bruger';

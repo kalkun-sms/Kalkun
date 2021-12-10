@@ -252,7 +252,6 @@ $lang['Delete users confirmation'] = 'Käyttäjän poiston varmistus';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Poista käyttäjä?<br>Tämä sisältää kaikki merkinnät tältä käyttäjältä (viestit ja yhteystiedot).';
 $lang['User not found'] = 'Käyttäjää ei löydy';
 $lang['Users is empty'] = 'Ei käyttäjiä';
-$lang['Name'] = 'Nimi';
 $lang['Username'] = 'Käyttäjätunnus';
 $lang['Password'] = 'Salasana';
 $lang['Search user'] = 'Etsi käyttäjää';

@@ -252,7 +252,6 @@ $lang['Delete users confirmation'] = 'Confirmaci&oacute;n para eliminar usuarios
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Â¿Desea eliminar el usuario?<br>Este incluye todos los registros de este usuario (mensaje y contactos).';
 $lang['User not found'] = 'Usuario no encontrado';
 $lang['Users is empty'] = 'El usuario est&aacute; vac&iacute;a';
-$lang['Name'] = 'Nombre';
 $lang['Username'] = 'Usuario';
 $lang['Password'] = 'Clave';
 $lang['Search user'] = 'Buscar usuario';

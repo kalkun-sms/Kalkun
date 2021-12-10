@@ -252,7 +252,6 @@ $lang['Delete users confirmation'] = 'Подтвержаю удаления по
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Удалить Пользователя?<br>Также будут удалены все записи этого пользователя (сообщения и контакты).';
 $lang['User not found'] = 'Искомый пользователь не найден';
 $lang['Users is empty'] = 'Список пользователей пуст';//(Users is empty)
-$lang['Name'] = 'Имя';
 $lang['Username'] = 'Логин';
 $lang['Password'] = 'Пароль';
 $lang['Search user'] = 'Поиск пользователя';

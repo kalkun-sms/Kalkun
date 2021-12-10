@@ -252,7 +252,6 @@ $lang['Delete users confirmation'] = 'Konfirmasi hapus pengguna';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Hapus Pengguna ini?<br>Semua data (pesan dan kontak) juga akan terhapus';
 $lang['User not found'] = 'Pengguna tidak ditemukan';
 $lang['Users is empty'] = 'Pengguna kosong';
-$lang['Name'] = 'Nama Lengkap';
 $lang['Username'] = 'Username';
 $lang['Password'] = 'Password';
 $lang['Search user'] = 'Cari Pengguna';
