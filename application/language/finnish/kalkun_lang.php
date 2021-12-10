@@ -266,7 +266,6 @@ $lang['No user selected'] = 'Ei valittua käyttäjää';
 $lang['Level'] = 'Taso';
 $lang['Delete this folder'] = 'Poista tämä kansio';
 $lang['Loading'] = 'Ladataan';
-$lang['Status'] = 'Tila';
 $lang['Connected'] = 'Yhteydessä';
 $lang['Disconnected'] = 'Katkaistu';
 $lang['No group detected, add one first.'] = 'Ryhmiä ei löytynyt, luo sellainen ensin';

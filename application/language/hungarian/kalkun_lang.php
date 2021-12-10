@@ -266,7 +266,6 @@ $lang['No user selected'] = 'Nincs felhasználó kiválasztva';
 $lang['Level'] = 'Szint';
 $lang['Delete this folder'] = 'Mappa törlése';
 $lang['Loading'] = 'Töltés';
-$lang['Status'] = 'Státusz';
 $lang['Connected'] = 'Összekapcsolt';
 $lang['Disconnected'] = 'Szétkapcsolt';
 $lang['No group detected, add one first.'] = 'Nem találhatóak csoportok, hozzon létre egyet először';

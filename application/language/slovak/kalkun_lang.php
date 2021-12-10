@@ -266,7 +266,6 @@ $lang['No user selected'] = 'Nieje zvolený užívateľ';
 $lang['Level'] = 'Úroveň';
 $lang['Delete this folder'] = 'Zmazať tento adresár';
 $lang['Loading'] = 'Načítavanie';
-$lang['Status'] = 'Stav';
 $lang['Connected'] = 'Pripojený';
 $lang['Disconnected'] = 'Odpojený';
 $lang['No group detected, add one first.'] = 'Žiadna skupina nenájdená, vytvorte si nejakú';

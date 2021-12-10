@@ -266,7 +266,6 @@ $lang['No user selected'] = 'Geen gebruiker geselecteerd';
 $lang['Level'] = 'Niveau';
 $lang['Delete this folder'] = 'Verwijder deze map';
 $lang['Loading'] = 'Laden';
-$lang['Status'] = 'Status';
 $lang['Connected'] = 'Verbonden';
 $lang['Disconnected'] = 'Niet Verbonden';
 $lang['No group detected, add one first.'] = 'Geen groep gevonden, voer eerst een groep in';

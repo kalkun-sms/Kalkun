@@ -266,7 +266,6 @@ $lang['No user selected'] = 'Tidak ada pengguna terpilih';
 $lang['Level'] = 'Level';
 $lang['Delete this folder'] = 'Hapus berkas ini';
 $lang['Loading'] = 'Memuat';
-$lang['Status'] = 'Status';
 $lang['Connected'] = 'Tersambung';
 $lang['Disconnected'] = 'Terputus';
 $lang['No group detected, add one first.'] = 'Tidak ada grup, silahkan buat grup terlebih dahulu';

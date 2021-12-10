@@ -266,7 +266,6 @@ $lang['No user selected'] = 'Nenhum usu&aacute;rio selecionado';
 $lang['Level'] = 'N&iacute;vel';
 $lang['Delete this folder'] = 'Apagar esta pasta';
 $lang['Loading'] = 'Carregando';
-$lang['Status'] = 'Status do modem';
 $lang['Connected'] = 'Conectado';
 $lang['Disconnected'] = 'Desconectado';
 $lang['No group detected, add one first.'] = 'Nenhum grupo encontrado, primeiro adicione um (review)';

@@ -266,7 +266,6 @@ $lang['No user selected'] = 'Ingen bruger er valgt';
 $lang['Level'] = 'Niveau';
 $lang['Delete this folder'] = 'Slet denne mappe';
 $lang['Loading'] = 'Indlæser';
-$lang['Status'] = 'Status';
 $lang['Connected'] = 'Forbundet';
 $lang['Disconnected'] = 'Ikke forbundet';
 $lang['No group detected, add one first.'] = 'Ingen grupper fundet. Tilføj en først';

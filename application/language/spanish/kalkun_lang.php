@@ -266,7 +266,6 @@ $lang['No user selected'] = 'NO hay usuario seleccionado';
 $lang['Level'] = 'Nivel';
 $lang['Delete this folder'] = 'Eliminar este directorio';
 $lang['Loading'] = 'Cargando';
-$lang['Status'] = 'Estado';
 $lang['Connected'] = 'Conectado';
 $lang['Disconnected'] = 'Desconectado';
 $lang['No group detected, add one first.'] = 'No se han detectado grupos, agregue uno primero';
