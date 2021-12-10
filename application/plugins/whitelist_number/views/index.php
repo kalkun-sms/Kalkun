@@ -1,6 +1,6 @@
 <?php $this->load->view('js_whitelist_number');?>
 
-<!-- Add Whitelist dialog -->	
+<!-- Add Whitelist dialog -->
 <div id="whitelist-dialog" title="Add Whitelist Number" class="dialog">
 	<p id="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/whitelist_number', array('class' => 'addwhitelistnumberform')); ?>
@@ -13,7 +13,7 @@
 
 
 <!-- Edit Whitelist dialog -->
-<div id="editwhitelist-dialog" title="Edit Whitelist Number"  class="dialog">
+<div id="editwhitelist-dialog" title="Edit Whitelist Number" class="dialog">
 	<p id="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/whitelist_number', array('class' => 'editwhitelistnumberform')); ?>
 	<fieldset>
@@ -26,10 +26,10 @@
 </div>
 
 <div id="space_area">
-<h3 style="float: left">Match</h3> 
-<div style="float: right">
-<a href="#" id="addwhitelistbutton" class="nicebutton">&#43; Add match rule</a>
-</div>
+	<h3 style="float: left">Match</h3>
+	<div style="float: right">
+		<a href="#" id="addwhitelistbutton" class="nicebutton">&#43; Add match rule</a>
+	</div>
 
 	<table class="nice-table" cellpadding="0" cellspacing="0">
 		<tr>
@@ -37,7 +37,7 @@
 			<th>Match</th>
 			<th class="nice-table-right" colspan="2">Control</th>
 		</tr>
-	    
+
 		<?php
 		if ($whitelist->num_rows() === 0)
 		{
@@ -47,22 +47,24 @@
 		{
 			foreach ($whitelist->result() as $tmp):
 			?>
-			<tr id="<?php echo $tmp->id_whitelist; ?>">
-				<td class="nice-table-left"><?php echo $number; ?></td>
-				<td class="phone_number"><?php echo $tmp->match; ?></td>
-				<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
-				<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/whitelist_number/delete/<?php echo $tmp->id_whitelist; ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
-			</tr>
-			
-			<?php
+		<tr id="<?php echo $tmp->id_whitelist; ?>">
+			<td class="nice-table-left"><?php echo $number; ?></td>
+			<td class="phone_number"><?php echo $tmp->match; ?></td>
+			<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
+			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/whitelist_number/delete/<?php echo $tmp->id_whitelist; ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
+		</tr>
+
+		<?php
 			$number++;
 			endforeach;
 		}
 		?>
 		<tr>
-			<th colspan="5" class="nice-table-footer"><div id="simplepaging"><?php echo $this->pagination->create_links();?></div></th>	
+			<th colspan="5" class="nice-table-footer">
+				<div id="simplepaging"><?php echo $this->pagination->create_links();?></div>
+			</th>
 		</tr>
-		
+
 	</table>
 	<br />
 </div>

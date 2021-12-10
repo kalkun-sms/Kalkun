@@ -2,10 +2,10 @@
 <p>This is the last step of the installation process.</p>
 <h4>Database setup:</h4>
 <?php if ($error === 0): ?>
-	<p>Status: <span class="green">Successful</span></p>
+<p>Status: <span class="green">Successful</span></p>
 <?php else: ?>
-	<p>Status: <span class="red">Failed</span></p>
-	<p>Consider manual installation, read the README instruction file.</p>
+<p>Status: <span class="red">Failed</span></p>
+<p>Consider manual installation, read the README instruction file.</p>
 <?php endif; ?>
 
 <?php if ($error === 0): ?>
@@ -36,18 +36,18 @@
 <h4>Configure kalkun internals</h4>
 <p>You may change some parameters in the <code>application/config/kalkun_settings.php</code> file. For example:</p>
 <ul>
-<li>Gammu path &amp; gammu config file. Required to send Wap links.</li>
-<li>Gateway engine (aka backend) in case you want to use an external service provider for your SMS (experimental).</li>
+	<li>Gammu path &amp; gammu config file. Required to send Wap links.</li>
+	<li>Gateway engine (aka backend) in case you want to use an external service provider for your SMS (experimental).</li>
 </ul>
 
 <h4>Default credentials</h4>
 <p>If this is your first setup, please note that default login &amp; password are 'kalkun'.</p>
 
 <p>&nbsp;</p>
-<p align="center"><a href="<?php echo site_url();?>" class="button" >Log-in to kalkun</a>
-<?php if ($needs_manual_install_file_deletion): ?>
-<br>💡 Have you deleted install file?
-<?php endif; ?>
+<p align="center"><a href="<?php echo site_url();?>" class="button">Log-in to kalkun</a>
+	<?php if ($needs_manual_install_file_deletion): ?>
+	<br>💡 Have you deleted install file?
+	<?php endif; ?>
 </p>
 
 <?php endif; ?>

@@ -1,18 +1,18 @@
 <div id="window_container">
-<div id="window_title">
-	<div id="window_title_left"><?php echo $title; ?></div>
-	<div id="window_title_right">
-		<?php /* echo form_open('pluginss', array('class' => 'search_form'));
+	<div id="window_title">
+		<div id="window_title_left"><?php echo $title; ?></div>
+		<div id="window_title_right">
+			<?php /* echo form_open('pluginss', array('class' => 'search_form'));
 		echo '<input type="text" name="search_name" size="20" class="search_name" value="" />';
 		echo form_close(); */?>
-		&nbsp;
-		<a href="<?php echo site_url('pluginss/index/installed');?>" id="addpbkcontact_wizard" class="nicebutton"><?php echo 'Installed'; ?></a>
-		<a href="<?php echo site_url('pluginss/index/available');?>" id="addpbkcontact_wizard" class="nicebutton"><?php echo 'Available'; ?></a>
+			&nbsp;
+			<a href="<?php echo site_url('pluginss/index/installed');?>" id="addpbkcontact_wizard" class="nicebutton"><?php echo 'Installed'; ?></a>
+			<a href="<?php echo site_url('pluginss/index/available');?>" id="addpbkcontact_wizard" class="nicebutton"><?php echo 'Available'; ?></a>
+		</div>
 	</div>
-</div>
 
-<div id="window_content">
-<?php
+	<div id="window_content">
+		<?php
 if (count($plugins) > 0)
 {
 	foreach ($plugins as $tmp)
@@ -36,19 +36,19 @@ if (count($plugins) > 0)
 		</div>
 
 		<div class="clear"><small>
-		<strong>Version:</strong> <?php echo $tmp['plugin_version']; ?>&nbsp;&nbsp;
-		<strong>Author:</strong> <?php echo anchor($tmp['plugin_author_uri'], $tmp['plugin_author']); ?>
-		</small></div>
+				<strong>Version:</strong> <?php echo $tmp['plugin_version']; ?>&nbsp;&nbsp;
+				<strong>Author:</strong> <?php echo anchor($tmp['plugin_author_uri'], $tmp['plugin_author']); ?>
+			</small></div>
 		<p><?php echo $tmp['plugin_description']; ?></p>
 		<hr />
-<?php
+		<?php
 	}
 }
 else
 {
 	?>
-	<p>There is no <?php echo $type; ?> plugin.</p>
-<?php
+		<p>There is no <?php echo $type; ?> plugin.</p>
+		<?php
 }
 ?>
-</div>
+	</div>

@@ -42,11 +42,11 @@
 
 	<tr>
 		<td colspan="3">
-		<?php $db_property = get_database_property($database_driver); ?>
-		<?php echo $db_property['human']; ?> <i>(Read from database configuration)</i>
+			<?php $db_property = get_database_property($database_driver); ?>
+			<?php echo $db_property['human']; ?> <i>(Read from database configuration)</i>
 		</td>
 		<td class="right">
-		<?php
+			<?php
 			if (extension_loaded($db_property['driver']))
 			{
 				$db_msg = '';
@@ -148,13 +148,14 @@
 
 <?php if ($error > 0): ?>
 <div>
-<p>Unfortunately, your system does not meet the minimum requirements to run Kalkun. Please ensure your system meets the above requirements and refresh this page.</p>
+	<p>Unfortunately, your system does not meet the minimum requirements to run Kalkun. Please ensure your system meets the above requirements and refresh this page.</p>
 </div>
 
 <?php else: ?>
 <div>
-<p>Your system is compatible with Kalkun.</p>
-<p><a href="<?php echo site_url();?>/install" class="button">&lsaquo; Back</a>
-<a href="<?php echo site_url();?>/install/database_setup" class="button">Next &rsaquo;</a></p>
+	<p>Your system is compatible with Kalkun.</p>
+	<p><a href="<?php echo site_url();?>/install" class="button">&lsaquo; Back</a>
+		<a href="<?php echo site_url();?>/install/database_setup" class="button">Next &rsaquo;</a>
+	</p>
 </div>
 <?php endif; ?>

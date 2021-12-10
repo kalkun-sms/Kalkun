@@ -4,39 +4,39 @@
 <script type="text/javascript" src="<?php echo $this->config->item('js_path');?>Chart.bundle.min.js"></script>
 
 <div align="right">
-    <a href="<?php echo site_url('kalkun/get_statistic/days');?>" class="stats-toggle"><?php echo ucwords(lang('kalkun_day'));?></a>&nbsp; &nbsp;
-    <a href="<?php echo site_url('kalkun/get_statistic/weeks');?>" class="stats-toggle"><?php echo ucwords(lang('kalkun_week'));?></a>&nbsp; &nbsp;
-    <a href="<?php echo site_url('kalkun/get_statistic/months');?>" class="stats-toggle"><?php echo ucwords(lang('kalkun_month'));?></a>&nbsp; &nbsp;
+	<a href="<?php echo site_url('kalkun/get_statistic/days');?>" class="stats-toggle"><?php echo ucwords(lang('kalkun_day'));?></a>&nbsp; &nbsp;
+	<a href="<?php echo site_url('kalkun/get_statistic/weeks');?>" class="stats-toggle"><?php echo ucwords(lang('kalkun_week'));?></a>&nbsp; &nbsp;
+	<a href="<?php echo site_url('kalkun/get_statistic/months');?>" class="stats-toggle"><?php echo ucwords(lang('kalkun_month'));?></a>&nbsp; &nbsp;
 </div>
 
 <div align="center" class="chart-container" style="position: relative; height:200px; width:650px">
-    <canvas id="myChart" width="650" height="200" aria-label="Statistics chart" role="img" style="background:#fff; border:1px solid #ccc;">
-        <p>Stats Fallback</p>
-    </canvas>
+	<canvas id="myChart" width="650" height="200" aria-label="Statistics chart" role="img" style="background:#fff; border:1px solid #ccc;">
+		<p>Stats Fallback</p>
+	</canvas>
 </div>
 
 <script>
-    var ctx = document.getElementById('myChart');
-    var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: [ "No data" ],
-        datasets: [{
-            label: "No data",
-            data: [0]}
-        ]
-    }
-    ,
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
+	var ctx = document.getElementById('myChart');
+	var myChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: ["No data"],
+			datasets: [{
+				label: "No data",
+				data: [0]
+			}]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		}
+	});
+
 </script>
 
 <?php
@@ -50,16 +50,16 @@ $trash = $trash_inbox + $trash_sentitems;
 ?>
 
 <div style="float: left; width: 200px;">
-<h4><?php echo lang('kalkun_folder');?>: </h4>
-<p><span><?php echo lang('kalkun_inbox');?>:</span> <?php echo $inbox;?></p>
-<p><span><?php echo lang('kalkun_outbox');?>:</span> <?php echo $outbox;?></p>
-<p><span><?php echo lang('kalkun_sentitems');?>:</span> <?php echo $sentitems;?></p>
-<p><span><?php echo lang('kalkun_trash');?>:</span> <?php echo $trash;?></p>
+	<h4><?php echo lang('kalkun_folder');?>: </h4>
+	<p><span><?php echo lang('kalkun_inbox');?>:</span> <?php echo $inbox;?></p>
+	<p><span><?php echo lang('kalkun_outbox');?>:</span> <?php echo $outbox;?></p>
+	<p><span><?php echo lang('kalkun_sentitems');?>:</span> <?php echo $sentitems;?></p>
+	<p><span><?php echo lang('kalkun_trash');?>:</span> <?php echo $trash;?></p>
 </div>
 
 <div style="float: left; width: 250px;">
-<h4><?php echo lang('kalkun_myfolder');?>: </h4>
-<?php
+	<h4><?php echo lang('kalkun_myfolder');?>: </h4>
+	<?php
 foreach ($this->Kalkun_model->get_folders('all')->result() as $val):
 $folder_count_inbox = $this->Message_model->get_messages(array('type' => 'inbox', 'id_folder' => $val->id_folder))->num_rows();
 $folder_count_sentitems = $this->Message_model->get_messages(array('type' => 'sentitems', 'id_folder' => $val->id_folder))->num_rows();
@@ -70,11 +70,11 @@ endforeach;
 </div>
 
 <div style="float: left; width: 200px;">
-<h4><?php echo lang('kalkun_phonebook');?>: </h4>
-<p><span><?php echo lang('kalkun_contact');?>: </span>
-<?php echo  $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();?></p>
-<p><span><?php echo lang('kalkun_group');?>: </span>
-<?php echo  $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();?></p>
+	<h4><?php echo lang('kalkun_phonebook');?>: </h4>
+	<p><span><?php echo lang('kalkun_contact');?>: </span>
+		<?php echo  $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();?></p>
+	<p><span><?php echo lang('kalkun_group');?>: </span>
+		<?php echo  $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();?></p>
 </div>
 
 <div style="clear: both;">&nbsp;</div>

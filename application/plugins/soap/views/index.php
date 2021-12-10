@@ -8,7 +8,7 @@
 
 $this->load->view('js_remote_access');
 ?>
-<!-- Add Remote Access dialog -->	
+<!-- Add Remote Access dialog -->
 <div id="remoteaccess-dialog" title="Add Remote Access" class="dialog">
 	<p id="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/soap', array('class' => 'addremoteaccessform')); ?>
@@ -16,7 +16,7 @@ $this->load->view('js_remote_access');
 		<label for="access_name">Access Name</label>
 		<input type="text" name="access_name" id="access_name" class="text ui-widget-content ui-corner-all" />
 		<label for="ip_address">IP Address</label>
-		<input type="text" name="ip_address" id="ip_address" class="text ui-widget-content ui-corner-all" />			
+		<input type="text" name="ip_address" id="ip_address" class="text ui-widget-content ui-corner-all" />
 		<!-- 
 		<label for="token">Remote Token</label>		
 		<input type="text" name="token" id="token" class="text ui-widget-content ui-corner-all" />	
@@ -25,7 +25,7 @@ $this->load->view('js_remote_access');
 	<?php echo form_close(); ?>
 </div>
 
-<!-- Edit Remote access dialog -->	
+<!-- Edit Remote access dialog -->
 <div id="editremoteaccess-dialog" title="Edit Remote Access" class="dialog">
 	<p id="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/soap', array('class' => 'editremoteaccessform')); ?>
@@ -34,20 +34,20 @@ $this->load->view('js_remote_access');
 		<label for="editaccess_name">Access Name</label>
 		<input type="text" name="editaccess_name" id="editaccess_name" class="text ui-widget-content ui-corner-all" />
 		<label for="editip_address">Remote Host</label>
-		<input type="text" name="editip_address" id="editip_address" class="text ui-widget-content ui-corner-all" />				
+		<input type="text" name="editip_address" id="editip_address" class="text ui-widget-content ui-corner-all" />
 		<label for="editstatus">Active</label>
-		<input type="checkbox" name="editstatus" id="editstatus" class="text ui-widget-content ui-corner-all"/>
-		<label for="edittoken">Remote Token</label>		
-		<input type="text" name="edittoken" id="edittoken" size="30" class="text ui-widget-content ui-corner-all" readonly/>
+		<input type="checkbox" name="editstatus" id="editstatus" class="text ui-widget-content ui-corner-all" />
+		<label for="edittoken">Remote Token</label>
+		<input type="text" name="edittoken" id="edittoken" size="30" class="text ui-widget-content ui-corner-all" readonly />
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>
 
 <div id="space_area">
-<h3 style="float: left">Remote Access</h3> 
-<div style="float: right">
-<a href="#" title="Add Remote access" id="addremotebutton" class="simplebutton">Add Remote Access</a>
-</div>
+	<h3 style="float: left">Remote Access</h3>
+	<div style="float: right">
+		<a href="#" title="Add Remote access" id="addremotebutton" class="simplebutton">Add Remote Access</a>
+	</div>
 
 	<table class="nice-table" cellpadding="0" cellspacing="0">
 		<tr>
@@ -55,10 +55,10 @@ $this->load->view('js_remote_access');
 			<th>Access Name</th>
 			<th>IP Address</th>
 			<th>Remote Token</th>
-			<th>Active</th>	
+			<th>Active</th>
 			<th align="center" class="nice-table-right" colspan="3">Control</th>
 		</tr>
-	    
+
 		<?php
 		if ($remote_access->num_rows() === 0)
 		{
@@ -68,26 +68,28 @@ $this->load->view('js_remote_access');
 		{
 			foreach ($remote_access->result() as $tmp):
 			?>
-			<tr id="<?php echo $tmp->id_remote_access; ?>">
-				<td class="nice-table-left"><?php echo $number; ?></td>
-				<td class="access_name"><?php echo $tmp->access_name; ?></td>
-				<td class="ip_address"><?php echo $tmp->ip_address; ?></td>	
-				<td class="token"><?php echo $tmp->token; ?></td>
-				<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status == 'false') ? '' : 'checked=\"checked\"'?> disabled/></td>
-				<td>&nbsp;</td>	
-				<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>			
-				<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/soap/delete_remote_access/<?php echo $tmp->id_remote_access; ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
-			</tr>
-			
-			<?php
+		<tr id="<?php echo $tmp->id_remote_access; ?>">
+			<td class="nice-table-left"><?php echo $number; ?></td>
+			<td class="access_name"><?php echo $tmp->access_name; ?></td>
+			<td class="ip_address"><?php echo $tmp->ip_address; ?></td>
+			<td class="token"><?php echo $tmp->token; ?></td>
+			<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status == 'false') ? '' : 'checked=\"checked\"'?> disabled /></td>
+			<td>&nbsp;</td>
+			<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
+			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/soap/delete_remote_access/<?php echo $tmp->id_remote_access; ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
+		</tr>
+
+		<?php
 			$number++;
 			endforeach;
 		}
 		?>
 		<tr>
-			<th colspan="8" class="nice-table-footer"><div id="simplepaging"><?php echo $this->pagination->create_links();?></div></th>	
+			<th colspan="8" class="nice-table-footer">
+				<div id="simplepaging"><?php echo $this->pagination->create_links();?></div>
+			</th>
 		</tr>
-		
+
 	</table>
 	<br />
 </div>
@@ -95,7 +97,7 @@ $this->load->view('js_remote_access');
 
 
 <!-- NOTIFICATION -->
-<!-- Add Remote Access dialog -->	
+<!-- Add Remote Access dialog -->
 <div id="notification-dialog" title="Add Notification" class="dialog">
 	<p id="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/soap', array('class' => 'addnotificationform')); ?>
@@ -104,17 +106,17 @@ $this->load->view('js_remote_access');
 		<input type="text" name="notifynumber" id="notifynumber" class="text ui-widget-content ui-corner-all" />
 		<label for="notifyvalue">Value</label>
 		<input type="text" name="notifyvalue" id="notifyvalue" class="text ui-widget-content ui-corner-all" />
-		<input type="hidden" name="notifiy" id="notifiy" value="on" />			
+		<input type="hidden" name="notifiy" id="notifiy" value="on" />
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>
 
 <!--  VIEW  -->
 <div id="space_area">
-<h3 style="float: left">Notification</h3>
-<div style="float: right">
-<a href="#" title="Add Notification" id="addnotificationbutton" class="simplebutton">Add Notification</a>
-</div>
+	<h3 style="float: left">Notification</h3>
+	<div style="float: right">
+		<a href="#" title="Add Notification" id="addnotificationbutton" class="simplebutton">Add Notification</a>
+	</div>
 
 	<table class="nice-table" cellpadding="0" cellspacing="0">
 		<tr>
@@ -130,20 +132,22 @@ $this->load->view('js_remote_access');
 		else
 		{
 			?>
-			<tr id="notification">
-				<td class="nice-table-left"><?php echo $notification['number']; ?></td>
-				<td class="notificationvalue"><?php echo $notification['value']; ?></td>
-				<td>&nbsp;</td>	
-				<!-- <td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td> -->	
-				<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/delete_notification/"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
-			</tr>
-			
-			<?php
+		<tr id="notification">
+			<td class="nice-table-left"><?php echo $notification['number']; ?></td>
+			<td class="notificationvalue"><?php echo $notification['value']; ?></td>
+			<td>&nbsp;</td>
+			<!-- <td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td> -->
+			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/delete_notification/"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
+		</tr>
+
+		<?php
 		}
 		?>
 		<tr>
-			<th colspan="8" class="nice-table-footer"><div id="simplepaging"></div></th>	
+			<th colspan="8" class="nice-table-footer">
+				<div id="simplepaging"></div>
+			</th>
 		</tr>
-		</table>
-		<br />
+	</table>
+	<br />
 </div>
