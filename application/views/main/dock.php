@@ -11,8 +11,8 @@
 
 	<div id="top_navigation_right">
 		<?php echo $this->session->userdata('username');?> |
-		<a href="<?php echo site_url('settings/general');?>" id="setting"><?php echo lang('tni_settings'); ?></a> |
-		<a href="<?php echo site_url('settings/filters');?>" id="filters"><?php echo lang('kalkun_filters'); ?></a> |
-		<a href="<?php echo site_url('logout');?>" id="logout"><?php echo lang('kalkun_logout');?></a>
+		<a href="<?php echo site_url('settings/general');?>" id="setting"><?php echo tr('Settings'); ?></a> |
+		<a href="<?php echo site_url('settings/filters');?>" id="filters"><?php echo tr('Filters'); ?></a> |
+		<a href="<?php echo site_url('logout');?>" id="logout"><?php echo tr('Logout');?></a>
 	</div>
 </div>

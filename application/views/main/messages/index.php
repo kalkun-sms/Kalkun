@@ -8,7 +8,7 @@
 } ?>
 
 <!-- Move To Dialog -->
-<div id="movetodialog" title="<?php echo lang('kalkun_select_folder');?>" class="dialog" style="background: #cce9f2;">
+<div id="movetodialog" title="<?php echo tr('Select folder');?>" class="dialog" style="background: #cce9f2;">
 	<?php
 if ($this->uri->segment(2) == 'my_folder')
 {
@@ -32,9 +32,9 @@ if ($this->uri->segment(2) == 'my_folder')
 { ?>
 
 <!-- Rename Folder Dialog -->
-<div id="renamefolderdialog" title="<?php echo lang('kalkun_rename_folder');?>" class="dialog">
+<div id="renamefolderdialog" title="<?php echo tr('Rename folder');?>" class="dialog">
 	<form class="renamefolderform" method="post" action="<?php echo site_url();?>/kalkun/rename_folder">
-		<label for="name"><?php echo lang('kalkun_folder_name');?></label>
+		<label for="name"><?php echo tr('Folder name');?></label>
 		<input type="hidden" name="id_folder" value="<?php echo $this->uri->segment(4);?>" />
 		<input type="hidden" name="source_url" value="<?php echo $this->uri->uri_string();?>" />
 		<input type="text" name="edit_folder_name" id="edit_folder_name" class="text ui-widget-content ui-corner-all" />
@@ -42,14 +42,14 @@ if ($this->uri->segment(2) == 'my_folder')
 </div>
 
 <!-- Delete Folder Confirmation -->
-<div class="dialog" id="deletefolderdialog" title="<?php echo lang('kalkun_delete_folder_confirmation_header');?>">
+<div class="dialog" id="deletefolderdialog" title="<?php echo tr('Delete folder confirmation');?>">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-		<?php echo lang('kalkun_delete_folder_confirmation');?></p>
+		<?php echo tr('This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?');?></p>
 </div>
 <!-- Delete All Confirmation -->
-<div class="dialog" id="deletealldialog" title="<?php echo lang('kalkun_delete_all_confirmation_header');?>">
+<div class="dialog" id="deletealldialog" title="<?php echo tr('Delete all');?>">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-		<?php echo lang('kalkun_delete_all_confirmation');?></p>
+		<?php echo tr('Are you sure? This will affect all conversations.');?></p>
 </div>
 
 <div id="two_column_container" class="tabbing">
@@ -59,21 +59,21 @@ if ($this->uri->segment(2) == 'my_folder')
 		switch ($folder_name)
 		{
 			case 'Trash': //Trash
-				$folder_name = lang('kalkun_trash');
+				$folder_name = tr('Trash');
 				break;
 			case 'Spam': //Spam
-				$folder_name = lang('kalkun_spam');
+				$folder_name = tr('Spam');
 				break;
 		}
 		echo '<span class="folder_name">'.$folder_name.'</span>';?>
 		<?php if ($this->uri->segment(4) == '5' || $this->uri->segment(4) == '6'):?>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="padding: 0; cursor: pointer; font-weight: normal;" id="delete-all-link"><?php echo lang('kalkun_delete_all_message_now');?></a>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="padding: 0; cursor: pointer; font-weight: normal;" id="delete-all-link"><?php echo tr('Delete all messages now');?></a>
 		<?php endif; ?>
 
 		<?php if ($this->uri->segment(4) != '5' && $this->uri->segment(4) != '6'):?>
 		<sup>[
-			<a href="#" title="<?php echo lang('kalkun_rename_folder_title');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="renamefolder"><?php echo lang('kalkun_rename');?></a> -
-			<a href="#" title="<?php echo lang('kalkun_delete_folder_title');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="deletefolder"><?php echo lang('kalkun_delete');?></a> ]
+			<a href="#" title="<?php echo tr('Click to rename this folder');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="renamefolder"><?php echo tr('Rename');?></a> -
+			<a href="#" title="<?php echo tr('Click to delete this folder');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="deletefolder"><?php echo tr('Delete');?></a> ]
 		</sup>
 		<?php endif; ?>
 	</div>
@@ -82,20 +82,20 @@ if ($this->uri->segment(2) == 'my_folder')
 		<?php
 			if ($this->uri->segment(3) == 'inbox')
 			{
-				echo '<span class="currenttab">'.lang('kalkun_inbox').'</span>';
+				echo '<span class="currenttab">'.tr('Inbox').'</span>';
 			}
 			else
 			{
-				echo anchor('messages/my_folder/inbox/'.$this->uri->segment(4).'', lang('kalkun_inbox'));
+				echo anchor('messages/my_folder/inbox/'.$this->uri->segment(4).'', tr('Inbox'));
 			}
 
 			if ($this->uri->segment(3) == 'sentitems')
 			{
-				echo '<span class="currenttab">'.lang('kalkun_sentitems').'</span>';
+				echo '<span class="currenttab">'.tr('Sent items').'</span>';
 			}
 			else
 			{
-				echo anchor('messages/my_folder/sentitems/'.$this->uri->segment(4).'', lang('kalkun_sentitems'));
+				echo anchor('messages/my_folder/sentitems/'.$this->uri->segment(4).'', tr('Sent items'));
 			}?>
 	</div>
 	<?php endif; ?>

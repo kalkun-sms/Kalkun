@@ -25,14 +25,14 @@
 			},
 			messages: {
 				realname: {
-					required: "<?php echo lang('tni_error_enter_name');?>"
+					required: "<?php echo tr('Field required.');?>"
 				},
 				password: {
-					required: "<?php echo lang('tni_error_enter_password');?>",
-					minlength: "<?php echo lang('tni_error_toshort');?>"
+					required: "<?php echo tr('Field required.');?>",
+					minlength: "<?php echo tr('Password is too short.');?>"
 				},
 				confirm_password: {
-					equalTo: "<?php echo lang('tni_error_password_nomatch');?>"
+					equalTo: "<?php echo tr('Passwords do not match.');?>"
 				}
 			}
 		});

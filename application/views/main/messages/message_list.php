@@ -9,16 +9,16 @@ if ($messages->num_rows() == 0)
 	{
 		if ($this->uri->segment(4) == '5')
 		{
-			echo $no_message_container['start'].lang('tni_msglist_trash_empty').$no_message_container['end'];
+			echo $no_message_container['start'].tr('There is no messages in your trash').$no_message_container['end'];
 		}
 		else
 		{
-			echo $no_message_container['start'].lang('kalkun_no_message_in_folder').$no_message_container['end'];
+			echo $no_message_container['start'].tr('There is no message in this folder').$no_message_container['end'];
 		}
 	}
 	else
 	{
-		echo $no_message_container['start'].lang('kalkun_no_message').' '.lang('kalkun_'.$type).$no_message_container['end'];
+		echo $no_message_container['start'].tr('There is no message in your ').' '.lang('kalkun_'.$type).$no_message_container['end'];
 	}
 }
 else

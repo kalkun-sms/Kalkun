@@ -1,5 +1,5 @@
 <!-- About dialog -->
-<div id="about" title="<?php echo lang('kalkun_about');?> Kalkun" class="dialog">
+<div id="about" title="<?php echo tr('About');?> Kalkun" class="dialog">
 	<div class="mascot" style="float: left;">
 		<img src="<?php echo $this->config->item('img_path');?>mascot.png" />
 	</div>
@@ -42,9 +42,9 @@
 </div>
 
 <!-- Add Folder Dialog -->
-<div id="addfolderdialog" title="<?php echo lang('kalkun_add_folder');?>" class="dialog">
+<div id="addfolderdialog" title="<?php echo tr('Add folder');?>" class="dialog">
 	<form class="addfolderform" method="post" action="<?php echo  site_url();?>/kalkun/add_folder">
-		<label for="name"><?php echo lang('kalkun_folder_name');?></label>
+		<label for="name"><?php echo tr('Folder name');?></label>
 		<input type="hidden" name="source_url" value="<?php echo $this->uri->uri_string();?>" />
 		<input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user');?>" />
 		<input type="text" name="folder_name" id="folder_name" class="text ui-widget-content ui-corner-all" />
@@ -147,7 +147,7 @@
 						</tr>
 						<tr>
 							<td class="align_right">&lt;Tab&gt; then &lt;Enter&gt; :</td>
-							<td><?php echo lang('tni_send_message'); ?></td>
+							<td><?php echo tr('Send message'); ?></td>
 						</tr>
 						<tr>
 							<td class="align_right">d :</td>
@@ -191,7 +191,7 @@
 </div>
 
 <!-- Advanced Search Dialog -->
-<div id="a_search_dialog" title="<?php echo lang('kalkun_advanced_search');?>" class="dialog">
+<div id="a_search_dialog" title="<?php echo tr('Advanced search');?>" class="dialog">
 	<?php
 	$this->load->helper('form');
 	echo form_open('messages/query', array('id' => 'a_search_form'));
@@ -199,22 +199,22 @@
 	?>
 	<table width="100%">
 		<tr>
-			<td align="right"><label for="a_search_from_to"><b><?php echo lang('kalkun_advanced_search_from_to');?></b></label></td>
+			<td align="right"><label for="a_search_from_to"><b><?php echo tr('From/To');?></b></label></td>
 			<td colspan="3"><input style="width: 95%" type="text" id="a_search_from_to" name="a_search_from_to" /></td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_query"><b><?php echo lang('kalkun_advanced_search_query');?></b></label></td>
+			<td align="right"><label for="a_search_query"><b><?php echo tr('Query');?></b></label></td>
 			<td colspan="3"><input style="width: 95%" type="text" id="a_search_query" name="a_search_query" /></td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_on"><b><?php echo lang('kalkun_advanced_search_on');?></b></label></td>
+			<td align="right"><label for="a_search_on"><b><?php echo tr('Folder');?></b></label></td>
 			<td colspan="3">
 				<select name="a_search_on" style="width: 98%">
-					<option value="all"><?php echo lang('kalkun_advanced_search_on_all_folder');?></option>
-					<option value="1"><?php echo lang('kalkun_inbox');?></option>
-					<option value="3"><?php echo lang('kalkun_sentitems');?></option>
-					<option value="6"><?php echo lang('kalkun_spam');?></option>
-					<option value="5"><?php echo lang('kalkun_trash');?></option>
+					<option value="all"><?php echo tr('All');?></option>
+					<option value="1"><?php echo tr('Inbox');?></option>
+					<option value="3"><?php echo tr('Sent items');?></option>
+					<option value="6"><?php echo tr('Spam');?></option>
+					<option value="5"><?php echo tr('Trash');?></option>
 					<?php
 					$my_folders = $this->Kalkun_model->get_folders('all');
 					foreach ($my_folders->result() as $my_folder):
@@ -225,31 +225,31 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_date_from"><b><?php echo lang('kalkun_advanced_search_date_from');?></b></label></td>
+			<td align="right"><label for="a_search_date_from"><b><?php echo tr('Date From');?></b></label></td>
 			<td><input type="text" id="a_search_date_from" name="a_search_date_from" /></td>
-			<td><label for="a_search_date_to"><b><?php echo lang('kalkun_advanced_search_date_to');?></b></label></td>
+			<td><label for="a_search_date_to"><b><?php echo tr('Date To');?></b></label></td>
 			<td><input type="text" id="a_search_date_to" name="a_search_date_to" /></td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_sentitems_status"><b><?php echo lang('kalkun_advanced_search_msg_status');?></b></label></td>
+			<td align="right"><label for="a_search_sentitems_status"><b><?php echo tr('Status');?></b></label></td>
 			<td colspan="3">
 				<select name="a_search_sentitems_status" style="width: 98%">
-					<option><?php echo lang('kalkun_advanced_search_msg_status_any');?></option>
-					<option><?php echo lang('tni_msg_stat_deliv');?></option>
-					<option><?php echo lang('tni_msg_stat_fail');?></option>
+					<option><?php echo tr('Any');?></option>
+					<option><?php echo tr('Delivered');?></option>
+					<option><?php echo tr('Sending failed');?></option>
 				</select>
 			</td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_paging"><b><?php echo lang('kalkun_advanced_search_paging');?></b></label></td>
+			<td align="right"><label for="a_search_paging"><b><?php echo tr('Paging');?></b></label></td>
 			<td colspan="3">
 				<select name="a_search_paging" style="width: 98%">
-					<option value="10">10 <?php echo lang('kalkun_advanced_search_paging_per_page');?></option>
-					<option value="20">20 <?php echo lang('kalkun_advanced_search_paging_per_page');?></option>
-					<option value="30">30 <?php echo lang('kalkun_advanced_search_paging_per_page');?></option>
-					<option value="40">40 <?php echo lang('kalkun_advanced_search_paging_per_page');?></option>
-					<option value="50">50 <?php echo lang('kalkun_advanced_search_paging_per_page');?></option>
-					<option value="all"><?php echo lang('kalkun_advanced_search_no_paging');?></option>
+					<option value="10">10 <?php echo tr('per page');?></option>
+					<option value="20">20 <?php echo tr('per page');?></option>
+					<option value="30">30 <?php echo tr('per page');?></option>
+					<option value="40">40 <?php echo tr('per page');?></option>
+					<option value="50">50 <?php echo tr('per page');?></option>
+					<option value="all"><?php echo tr('No paging');?></option>
 				</select>
 			</td>
 		</tr>

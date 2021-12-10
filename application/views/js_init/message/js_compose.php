@@ -17,9 +17,9 @@
 		//$("input#sms_loop").attr("disabled", true);
 
 		$("#personvalue").tokenInput("<?php echo site_url('phonebook/get_phonebook/').'/'.(isset($source) ? $source : '');?>", {
-			hintText: "<?php echo lang('tni_name_search')?>",
+			hintText: "<?php echo tr('Insert name from contact list')?>",
 			noResultsText: "No results",
-			searchingText: "<?php echo lang('tni_compose_searching'); ?>...",
+			searchingText: "<?php echo tr('Searching...'); ?>...",
 			preventDuplicates: true,
 			method: "POST",
 			classes: {
@@ -87,12 +87,12 @@
 				}
 			},
 			messages: {
-				personvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
-				manualvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
-				import_file: "<?php echo lang('tni_compose_enter_dest'); ?>",
-				message: "<?php echo lang('tni_compose_enter_msg'); ?>",
-				datevalue: "<?php echo lang('tni_compose_enter_sendate'); ?>",
-				url: "<?php echo lang('kalkun_compose_valid_url');?>"
+				personvalue: "<?php echo tr('Please enter recipient'); ?>",
+				manualvalue: "<?php echo tr('Please enter recipient'); ?>",
+				import_file: "<?php echo tr('Please enter recipient'); ?>",
+				message: "<?php echo tr('Please enter message'); ?>",
+				datevalue: "<?php echo tr('Please enter sending date'); ?>",
+				url: "<?php echo tr('Should be a valid URL');?>"
 			}
 		});
 
@@ -152,8 +152,8 @@
 
 		// Character counter
 		$('.word_count').each(function() {
-			text_character = "<?php echo lang('kalkun_compose_counter_character');?>";
-			text_message = "<?php echo lang('kalkun_compose_counter_message');?>";
+			text_character = "<?php echo tr('characters');?>";
+			text_message = "<?php echo tr('message');?>";
 			var length = $(this).val().length;
 			var message = Math.ceil(length / sms_char);
 			$(this).parent().find('.counter').html(length + ' ' + text_character + ' / ' + message + ' ' + text_message);
@@ -228,12 +228,12 @@
 				width: 400,
 				show: 'fade',
 				hide: 'fade',
-				title: '<?php echo lang('kalkun_canned_title')?>',
+				title: '<?php echo tr('Choose response')?>',
 				buttons: {
-					'<?php echo lang('kalkun_canned_save_new');?>': function() {
+					'<?php echo tr('Save');?>': function() {
 						save_canned_response(null);
 					},
-					"<?php echo lang('kalkun_cancel');?>": function() {
+					"<?php echo tr('Cancel');?>": function() {
 						$(this).dialog('close');
 					}
 				}
@@ -255,7 +255,7 @@
 		var dest_url = "<?php echo  site_url();?>/messages/canned_response/save";
 
 		if (name != null) {
-			$('.loading_area').html("<?php echo lang('kalkun_canned_saving');?>");
+			$('.loading_area').html("<?php echo tr('Saving...');?>");
 			$('.loading_area').fadeIn("slow");
 			$.post(dest_url, {
 				'name': name,
@@ -311,7 +311,7 @@
 			if (is_tab == true) {
 				if ($("#composeForm").valid()) {
 					$('.ui-dialog-buttonpane :button').each(function() {
-						if ($(this).text() == '<?php echo lang('tni_send_message'); ?>') $(this).html('<?php echo lang('tni_sending_message'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');
+						if ($(this).text() == '<?php echo tr('Send message'); ?>') $(this).html('<?php echo tr('Sending'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');
 					});
 					$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 						$("#compose_sms_container").html(data);

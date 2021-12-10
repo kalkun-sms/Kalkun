@@ -32,7 +32,7 @@ class Users extends MY_Controller {
 		// check level
 		if ($this->session->userdata('level') !== 'admin')
 		{
-			$this->session->set_flashdata('notif', lang('users_access_denied'));
+			$this->session->set_flashdata('notif', tr('Access denied.'));
 			redirect('/');
 		}
 
@@ -50,7 +50,7 @@ class Users extends MY_Controller {
 	 */
 	function index()
 	{
-		$data['title'] = lang('tni_user_word');
+		$data['title'] = tr('User');
 		$this->load->library('pagination');
 		$config['base_url'] = site_url().'/users/index/';
 		$config['total_rows'] = $this->User_model->getUsers(array('option' => 'all'))->num_rows();
@@ -112,11 +112,11 @@ class Users extends MY_Controller {
 		$this->User_model->adduser();
 		if ($this->input->post('id_user'))
 		{
-			echo '<div class="notif">'.lang('users_updated').'</div>';
+			echo '<div class="notif">'.tr('User updated successfully.').'</div>';
 		}
 		else
 		{
-			echo '<div class="notif">'.lang('users_added').'</div>';
+			echo '<div class="notif">'.tr('User added successfully.').'</div>';
 		}
 	}
 

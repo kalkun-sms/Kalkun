@@ -35,9 +35,9 @@ echo doctype('html5');?>
 
 <body onload="goBackToForm()">
 	<p><?php
-			printf(lang('kalkun_msg_login_success_data_lost'), strtoupper($this->session->flashdata('bef_login_method')));
+			printf(tr('Login successful. But %s data lost during login process.'), strtoupper($this->session->flashdata('bef_login_method')));
 	echo ' <br> ';
-	printf(lang('kalkun_msg_go_back_and_submit'), $this->session->flashdata('bef_login_HTTP_REFERER')); ?>
+	printf(tr('Please <a href="%s" onclick="goBackToForm()">go back to your form</a> and submit again.'), $this->session->flashdata('bef_login_HTTP_REFERER')); ?>
 </body>
 <?php
 }
@@ -47,7 +47,7 @@ echo doctype('html5');?>
 		// So resubmit the POSTed data directly to this page?>
 
 <body onload="submitForm()">
-	<p><?php echo lang('kalkun_msg_login_success_resubmit'); ?></p>
+	<p><?php echo tr('Login successful. Resubmitting Form.'); ?></p>
 	<form name="redirectpost" method="post" action="<?php echo current_url(); ?>">
 		<?php
 			if ( ! is_null($this->session->flashdata('bef_login_post_data')))

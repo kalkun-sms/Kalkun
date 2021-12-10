@@ -1,6 +1,6 @@
 <?php
 if ($group->num_rows() === 0):
-echo '<p><i>'.lang('tni_group_no_group').'</i></p>';
+echo '<p><i>'.tr('No group detected, add one first.').'</i></p>';
 else: ?>
 <table>
 	<?php foreach ($group->result() as $tmp): ?>
@@ -16,10 +16,10 @@ else: ?>
 				<div class="right_column">
 					<span class="pbk_menu no-touch-hidden">
 						<?php if (isset($public_group) && ! $public_group):?>
-						<a class="editpbkgroup simplelink" href="#"><?php echo lang('tni_edit');?></a>
+						<a class="editpbkgroup simplelink" href="#"><?php echo tr('Edit');?></a>
 						<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
 						<?php endif;?>
-						<a class="sendmessage simplelink" href="#"><?php echo lang('tni_send_message');?></a>
+						<a class="sendmessage simplelink" href="#"><?php echo tr('Send message');?></a>
 					</span>
 		</td>
 	</tr>

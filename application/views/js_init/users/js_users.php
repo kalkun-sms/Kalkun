@@ -6,11 +6,11 @@
 		// Add/Edit Contact
 		$('.addpbkcontact, .edit_user').on('click', null, function() {
 			if ($(this).hasClass('addpbkcontact')) {
-				var user_title = '<?php echo lang('tni_user_add');?>';
+				var user_title = '<?php echo tr('Add user');?>';
 				var type = 'normal';
 				var param1 = '';
 			} else if ($(this).hasClass('edit_user')) {
-				var user_title = '<?php echo lang('tni_user_edit');?>';
+				var user_title = '<?php echo tr('Edit user');?>';
 				var type = 'edit';
 				var param1 = $(this).parents("tr:first").attr("id");
 			}
@@ -25,7 +25,7 @@
 					show: 'fade',
 					hide: 'fade',
 					buttons: {
-						'<?php echo lang('kalkun_save');?>': function() {
+						'<?php echo tr('Save');?>': function() {
 							if ($("#addUser").valid()) {
 								$.post("<?php echo site_url('users/add_user_process') ?>", $("#addUser").serialize(), function(data) {
 									$("#users_container").html(data);
@@ -42,7 +42,7 @@
 								});
 							}
 						},
-						'<?php echo lang('kalkun_cancel');?>': function() {
+						'<?php echo tr('Cancel');?>': function() {
 							$(this).dialog('close');
 						}
 					}
@@ -77,7 +77,7 @@
 			var count = $("input:checkbox:checked").length;
 			var dest_url = '<?php echo site_url('users/delete_user') ?>';
 			if (count == 0) {
-				$('.notification_area').text("<?php echo lang('tni_error_nouser_sel'); ?>");
+				$('.notification_area').text("<?php echo tr('No user selected'); ?>");
 				$('.notification_area').show();
 			} else {
 				// confirm first
@@ -87,15 +87,15 @@
 					height: 175,
 					modal: true,
 					buttons: {
-						'<?php echo lang('kalkun_cancel'); ?>': function() {
+						'<?php echo tr('Cancel'); ?>': function() {
 							$(this).dialog('close');
 						},
-						'<?php echo lang('tni_user_confirm_delete'); ?>': function() {
+						'<?php echo tr('Delete'); ?>': function() {
 							$("input.select_user:checked").each(function() {
 								var row = $(this).parents('tr');
 								var id = row.attr('id');
 								if (id == inbox_master) {
-									$('.notification_area').text("<?php echo lang('tni_action_not_allowed'); ?>");
+									$('.notification_area').text("<?php echo tr('Action not allowed'); ?>");
 									$('.notification_area').show();
 								} else {
 									$.post(dest_url, {
@@ -125,10 +125,10 @@
 		});
 
 		// Search onBlur onFocus
-		$('input.search_name').val('<?php echo lang('tni_user_search'); ?>');
+		$('input.search_name').val('<?php echo tr('Search user'); ?>');
 
 		$('input.search_name').on("blur", function() {
-			$(this).val('<?php echo lang('tni_user_search'); ?>');
+			$(this).val('<?php echo tr('Search user'); ?>');
 		});
 
 		$('input.search_name').on("focus", function() {

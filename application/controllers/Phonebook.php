@@ -54,7 +54,7 @@ class Phonebook extends MY_Controller {
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'public'))->num_rows();
 			$this->pagination->initialize($config);
 
-			$data['title'] = lang('kalkun_public_contact');
+			$data['title'] = tr('Public contacts');
 			$data['public_contact'] = TRUE;
 			$param = array('option' => 'paginate', 'public' => TRUE, 'limit' => $config['per_page'], 'offset' => $this->uri->segment(4, 0));
 			$data['phonebook'] = $this->Phonebook_model->get_phonebook($param);
@@ -66,7 +66,7 @@ class Phonebook extends MY_Controller {
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();
 			$this->pagination->initialize($config);
 
-			$data['title'] = lang('tni_contacts');
+			$data['title'] = tr('Contacts');
 			$data['public_contact'] = FALSE;
 
 			if ($_POST)
@@ -103,7 +103,7 @@ class Phonebook extends MY_Controller {
 
 		if ($type === 'public')
 		{
-			$data['title'] = lang('kalkun_public_group');
+			$data['title'] = tr('Public groups');
 			$data['public_group'] = TRUE;
 			$config['base_url'] = site_url().'/phonebook/group/public';
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group', 'public' => TRUE))->num_rows();
@@ -115,7 +115,7 @@ class Phonebook extends MY_Controller {
 		}
 		else
 		{
-			$data['title'] = lang('tni_groups');
+			$data['title'] = tr('Groups');
 			$data['public_group'] = FALSE;
 			$config['base_url'] = site_url().'/phonebook/group/';
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();
@@ -291,7 +291,7 @@ class Phonebook extends MY_Controller {
 			$n++;
 		}
 
-		$this->session->set_flashdata('notif', str_replace('%count%', $n, lang('pbk_successfully_imported')));
+		$this->session->set_flashdata('notif', str_replace('%count%', $n, tr('%count% contacts imported successfully.')));
 		redirect('phonebook');
 	}
 
@@ -353,11 +353,11 @@ class Phonebook extends MY_Controller {
 		if ($this->input->post('editid_pbk'))
 		{
 			$pbk['id_pbk'] = $this->input->post('editid_pbk');
-			$msg = '<div class="notif">'.lang('pbk_contact_updated').'</div>';
+			$msg = '<div class="notif">'.tr('Contact updated successfully.').'</div>';
 		}
 		else
 		{
-			$msg = '<div class="notif">'.lang('pbk_contact_added').'</div>';
+			$msg = '<div class="notif">'.tr('Contact added successfully.').'</div>';
 		}
 
 		$this->Phonebook_model->add_contact($pbk);

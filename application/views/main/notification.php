@@ -1,6 +1,6 @@
 <?php
 $this->load->helper('kalkun');
-echo lang('tni_status').': ';
+echo tr('Status').': ';
 // Get signal and battery value
 //$signal = $this->Kalkun_model->get_gammu_info('phone_signal')->row('Signal');
 //$battery = $this->Kalkun_model->get_gammu_info('phone_battery')->row('Battery');
@@ -12,11 +12,11 @@ if ($status != NULL)
 
 	if ($status == 'connect')
 	{
-		echo '<span class="good">'.lang('tni_connected').'</span>';
+		echo '<span class="good">'.tr('Connected').'</span>';
 	}
 	else
 	{
-		echo '<span class="warning">'.lang('tni_disconnected').'</span>';
+		echo '<span class="warning">'.tr('Disconnected').'</span>';
 	}
 }
 else

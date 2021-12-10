@@ -45,13 +45,13 @@ function nice_date($str, $option = NULL)
 	$timestamp = mktime($hour, $minute, $second, $month, $day, $year);
 	$now = time();
 	$blocks = array(
-		array('name' => lang('kalkun_year'), 'amount' => 60 * 60 * 24 * 365),
-		array('name' => lang('kalkun_month'), 'amount' => 60 * 60 * 24 * 31),
-		array('name' => lang('kalkun_week'), 'amount' => 60 * 60 * 24 * 7),
-		array('name' => lang('kalkun_day'), 'amount' => 60 * 60 * 24),
-		array('name' => lang('kalkun_hour'), 'amount' => 60 * 60),
-		array('name' => lang('kalkun_minute'), 'amount' => 60),
-		array('name' => lang('kalkun_second'), 'amount' => 1)
+		array('name' => tr('year'), 'amount' => 60 * 60 * 24 * 365),
+		array('name' => tr('month'), 'amount' => 60 * 60 * 24 * 31),
+		array('name' => tr('week'), 'amount' => 60 * 60 * 24 * 7),
+		array('name' => tr('day'), 'amount' => 60 * 60 * 24),
+		array('name' => tr('hour'), 'amount' => 60 * 60),
+		array('name' => tr('minute'), 'amount' => 60),
+		array('name' => tr('second'), 'amount' => 1)
 	);
 
 	$diff = abs($now - $timestamp);
@@ -64,7 +64,7 @@ function nice_date($str, $option = NULL)
 	{
 		if ($diff < 60)
 		{
-			return lang('kalkun_nicedate_less1min_ago'); // "Less than a minute ago"
+			return tr('Less than a minute ago'); // "Less than a minute ago"
 		}
 		else
 		{
@@ -91,11 +91,11 @@ function nice_date($str, $option = NULL)
 
 			if ($timestamp > $now)
 			{
-				$text = lang('kalkun_nicedate_remaining');
+				$text = tr('%nicedate% remaining');
 			}
 			else
 			{
-				$text = lang('kalkun_nicedate_ago');
+				$text = tr('%nicedate% ago');
 			}
 			return str_replace('%nicedate%', $res, $text);
 		}
@@ -175,31 +175,31 @@ function check_delivery_report($report)
 {
 	if ($report === 'SendingError' OR $report === 'Error' OR $report === 'DeliveryFailed')
 	{
-		$status = lang('tni_msg_stat_fail');
+		$status = tr('Sending failed');
 	}
 	elseif ($report === 'SendingOKNoReport')
 	{
-		$status = lang('tni_msg_stat_oknr');
+		$status = tr('Sent, no report');
 	}
 	elseif ($report === 'SendingOK')
 	{
-		$status = lang('tni_msg_stat_okwr');
+		$status = tr('Sent, waiting for report');
 	}
 	elseif ($report === 'DeliveryOK')
 	{
-		$status = lang('tni_msg_stat_deliv');
+		$status = tr('Delivered');
 	}
 	elseif ($report === 'DeliveryPending')
 	{
-		$status = lang('tni_msg_stat_pend');
+		$status = tr('Pending');
 	}
 	elseif ($report === 'DeliveryUnknown')
 	{
-		$status = lang('tni_msg_stat_unknown');
+		$status = tr('Unknown');
 	}
 	elseif ($report === 'Reserved')
 	{
-		$status = lang('tni_msg_stat_reserved');
+		$status = tr('Not set yet');
 	}
 
 	return $status;

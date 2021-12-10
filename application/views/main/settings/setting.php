@@ -10,14 +10,14 @@
 </script>
 
 <div id="window_container">
-	<div id="window_title"><?php echo lang('tni_set_title'); ?></div>
+	<div id="window_title"><?php echo tr('User settings'); ?></div>
 	<div id="window_sub_header">
 		<ul>
-			<li><?php echo anchor('settings/general', lang('tni_set_general'));?></li>
-			<li><?php echo anchor('settings/personal', lang('tni_set_personal'));?></li>
+			<li><?php echo anchor('settings/general', tr('General'));?></li>
+			<li><?php echo anchor('settings/personal', tr('Personal'));?></li>
 			<!--<li><?php echo anchor('settings/appearance', 'Appearance');?></li>-->
-			<li><?php echo anchor('settings/password', lang('tni_user_password'));?></li>
-			<li><?php echo anchor('settings/filters', lang('kalkun_filters'));?></li>
+			<li><?php echo anchor('settings/password', tr('Password'));?></li>
+			<li><?php echo anchor('settings/filters', tr('Filters'));?></li>
 		</ul>
 	</div>
 	<div id="window_content">
@@ -28,7 +28,7 @@ echo form_open('settings/save', array('id' => 'settingsForm'));
 $this->load->view($type);
 ?>
 		<br />
-		<div align="center"><input type="submit" id="submit" value="<?php echo lang('kalkun_save'); ?>" /></div>
+		<div align="center"><input type="submit" id="submit" value="<?php echo tr('Save'); ?>" /></div>
 		<?php echo form_close();?>
 
 		<?php else:?>

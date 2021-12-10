@@ -50,10 +50,10 @@
 				height: 150,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_cancel')?>': function() {
+					'<?php echo tr('Cancel')?>': function() {
 						$(this).dialog('destroy');
 					},
-					'<?php echo lang('tni_yes')?>': function() {
+					'<?php echo tr('Yes')?>': function() {
 						$.get(dest_url + '/' + id_filter, function() {
 							$(row).slideUp("slow");
 						});

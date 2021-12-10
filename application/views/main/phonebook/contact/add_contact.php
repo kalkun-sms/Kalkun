@@ -24,7 +24,7 @@
 			'minChars': 0,
 			'interactive': true,
 			'delimiter': ',',
-			'placeholder': '<?php echo lang('tni_group_select');?>'
+			'placeholder': '<?php echo tr('Type group name');?>'
 		});
 
 	});
@@ -32,16 +32,16 @@
 </script>
 
 <div id="dialog" class="dialog" style="display: block">
-	<p id="validateTips"><?php echo lang('tni_form_fields_required'); ?></p>
+	<p id="validateTips"><?php echo tr('All form fields are required'); ?></p>
 	<?php echo form_open('phonebook/add_contact_process', array('id' => 'addContact'));?>
 	<fieldset>
 		<input type="hidden" name="pbk_id_user" id="pbk_id_user" value="<?php echo $this->session->userdata('id_user');?>" />
-		<label for="name"><?php echo lang('tni_contact_name'); ?></label>
+		<label for="name"><?php echo tr('Name'); ?></label>
 		<input type="text" name="name" id="name" value="<?php if (isset($contact))
 	{
 		echo $contact->row('Name');
 	}?>" class="text ui-widget-content ui-corner-all required" />
-		<label for="number"><?php echo lang('tni_contact_phonenumber'); ?></label>
+		<label for="number"><?php echo tr('Telephone number'); ?></label>
 		<input type="text" name="number" id="number" value="<?php if (isset($contact))
 	{
 		echo $contact->row('Number');
@@ -59,10 +59,10 @@
 	{
 		echo 'checked="checked"';
 	}?> />
-			<label for="is_public" style="display: inline"><?php echo lang('kalkun_public_contact_set');?></label>
+			<label for="is_public" style="display: inline"><?php echo tr('Set as public contact');?></label>
 		</div>
 
-		<label for="groups"><?php echo lang('kalkun_group'); ?></label>
+		<label for="groups"><?php echo tr('Group'); ?></label>
 		<?php if (isset($contact)): ?>
 		<input name="groups" id="groups" value="<?php echo $this->Phonebook_model->get_groups($contact->row('id_pbk'), $this->session->userdata('id_user'))->GroupNames?>" type="text" />
 		<?php elseif ( ! empty($group_id)):?>

@@ -26,7 +26,7 @@ $type = array('inbox', 'sentitems');
 // Reply to option
 if ($val_type == 'reply'): ?>
 	<tr>
-		<td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
+		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
 			<?php
 $phone = $dest;
@@ -44,13 +44,13 @@ endif;
 
 	<?php /* Member */ elseif ($val_type == 'member'):?>
 	<tr>
-		<td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
-		<td><?php echo lang('kalkun_sms_member');?><input type="hidden" name="sendoption" value="member" /></td>
+		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
+		<td><?php echo tr('Member');?><input type="hidden" name="sendoption" value="member" /></td>
 	</tr>
 
 	<?php /* Phonebook contact */ elseif ($val_type == 'pbk_contact'):?>
 	<tr>
-		<td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
+		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
 			<?php
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $dest));
@@ -67,7 +67,7 @@ endif;
 
 	<?php /* Phonebook group */ elseif ($val_type == 'pbk_groups'):?>
 	<tr>
-		<td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
+		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
 			<?php echo $this->Phonebook_model->get_phonebook(array('option' => 'groupname', 'id' => $dest))->row('GroupName');?>
 			<input type="hidden" name="sendoption" value="pbk_groups" />
@@ -77,9 +77,9 @@ endif;
 
 	<?php /* All Contacts */ elseif ($val_type == 'all_contacts'):?>
 	<tr>
-		<td width="100px" align="right" class="form_label label"><?php echo lang('kalkun_send_to'); ?>:</td>
+		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
-			<?php echo lang('kalkun_all_contacts'); ?>
+			<?php echo tr('All contacts'); ?>
 			<input type="hidden" name="sendoption" value="all_contacts" />
 		</td>
 	</tr>
@@ -90,11 +90,11 @@ endif;
 			<?php
 if ($val_type == 'forward')
 {
-	echo lang('kalkun_forward_to').':';
+	echo tr('Forward to').':';
 }
 else
 {
-	echo lang('kalkun_send_to').':';
+	echo tr('Send to').':';
 }
 ?>
 		</td>
@@ -102,15 +102,15 @@ else
 			<div class="form_option">
 				<div class="opt">
 					<input type="radio" id="sendoption1" name="sendoption" value="sendoption1" checked="checked" class="left_aligned" style="border: none;" />
-					<label for="sendoption1"><?php echo lang('kalkun_phonebook');?></label>
+					<label for="sendoption1"><?php echo tr('Phonebook');?></label>
 				</div>
 				<div class="opt">
 					<input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;" />
-					<label for="sendoption3"><?php echo lang('kalkun_input_manually');?> </label>
+					<label for="sendoption3"><?php echo tr('Input manually');?> </label>
 				</div>
 				<div class="opt">
 					<input type="radio" id="sendoption4" name="sendoption" value="sendoption4" style="border: none;" />
-					<label for="sendoption4"><?php echo lang('kalkun_compose_import_file');?></label>
+					<label for="sendoption4"><?php echo tr('Import from file');?></label>
 				</div>
 			</div>
 		</td>
@@ -134,14 +134,14 @@ else
 	<?php endif; ?>
 
 	<tr>
-		<td align="right" class="label"><?php echo lang('kalkun_send_date').':';?></td>
+		<td align="right" class="label"><?php echo tr('Send date').':';?></td>
 		<td>
 			<input class="left_aligned" type="radio" id="option1" name="senddateoption" value="option1" checked="checked" style="border: none;" />
-			<label for="option1"><?php  echo lang('kalkun_now');?></label>
+			<label for="option1"><?php  echo tr('Now');?></label>
 			<input type="radio" id="option2" name="senddateoption" value="option2" style="border: none;" />
-			<label for="option2"><?php  echo lang('kalkun_at_date_time');?></label>
+			<label for="option2"><?php  echo tr('At date and time');?></label>
 			<input type="radio" id="option3" name="senddateoption" value="option3" style="border: none;" />
-			<label for="option3"><?php  echo lang('kalkun_after_a_delay');?></label>
+			<label for="option3"><?php  echo tr('After a delay');?></label>
 		</td>
 	</tr>
 
@@ -156,37 +156,37 @@ else
 				<select name="minute"><?php echo get_minute();?></select>
 			</div>
 			<div id="delayoption" class="hidden">
-				<select name="delayhour"><?php echo get_hour();?></select> <?php echo lang('kalkun_compose_hour'); ?>&nbsp;
-				<select name="delayminute"><?php echo get_minute();?></select> <?php echo lang('kalkun_compose_minutes'); ?>
+				<select name="delayhour"><?php echo get_hour();?></select> <?php echo tr('Hour'); ?>&nbsp;
+				<select name="delayminute"><?php echo get_minute();?></select> <?php echo tr('Minutes'); ?>
 			</div>
 		</td>
 	</tr>
 
 	<tr>
-		<td align="right" class="label"><?php echo lang('kalkun_sms_validity'); ?></td>
+		<td align="right" class="label"><?php echo tr('Validity'); ?></td>
 		<td><select size="1" name="validity">
-				<option value="-1"><?php echo lang('kalkun_sms_validity_default'); ?></option>
-				<option value="0"><?php echo lang('kalkun_sms_validity_5min'); ?></option>
-				<option value="1"><?php echo lang('kalkun_sms_validity_10min'); ?></option>
-				<option value="5"><?php echo lang('kalkun_sms_validity_30min'); ?></option>
-				<option value="11"><?php echo lang('kalkun_sms_validity_1h'); ?></option>
-				<option value="23"><?php echo lang('kalkun_sms_validity_2h'); ?></option>
-				<option value="35"><?php echo lang('kalkun_sms_validity_4h'); ?></option>
-				<option value="143"><?php echo lang('kalkun_sms_validity_12h'); ?></option>
-				<option value="167"><?php echo lang('kalkun_sms_validity_1d'); ?></option>
-				<option value="168"><?php echo lang('kalkun_sms_validity_2d'); ?></option>
-				<option value="171"><?php echo lang('kalkun_sms_validity_5d'); ?></option>
-				<option value="173"><?php echo lang('kalkun_sms_validity_1w'); ?></option>
-				<option value="180"><?php echo lang('kalkun_sms_validity_2w'); ?></option>
-				<option value="196"><?php echo lang('kalkun_sms_validity_4w'); ?></option>
-				<option value="255"><?php echo lang('kalkun_sms_validity_max'); ?></option>
+				<option value="-1"><?php echo tr('default'); ?></option>
+				<option value="0"><?php echo tr('5 minutes'); ?></option>
+				<option value="1"><?php echo tr('10 minutes'); ?></option>
+				<option value="5"><?php echo tr('30 minutes'); ?></option>
+				<option value="11"><?php echo tr('1 hour'); ?></option>
+				<option value="23"><?php echo tr('2 hours'); ?></option>
+				<option value="35"><?php echo tr('4 hours'); ?></option>
+				<option value="143"><?php echo tr('12 hours'); ?></option>
+				<option value="167"><?php echo tr('1 day'); ?></option>
+				<option value="168"><?php echo tr('2 days'); ?></option>
+				<option value="171"><?php echo tr('5 days'); ?></option>
+				<option value="173"><?php echo tr('1 week'); ?></option>
+				<option value="180"><?php echo tr('2 weeks'); ?></option>
+				<option value="196"><?php echo tr('4 weeks'); ?></option>
+				<option value="255"><?php echo tr('maximum'); ?></option>
 			</select></td>
 	</tr>
 
 	<?php if ($this->config->item('sms_bomber')): ?>
 	<tr valign="top">
-		<td align="right" class="label"><?php echo lang('kalkun_compose_amount').':';?></td>
-		<td><input type="text" style="width: 25px" name="sms_loop" id="sms_loop" value="1" />&nbsp; <?php echo lang('kalkun_compose_times'); ?>
+		<td align="right" class="label"><?php echo tr('Amount').':';?></td>
+		<td><input type="text" style="width: 25px" name="sms_loop" id="sms_loop" value="1" />&nbsp; <?php echo tr('times'); ?>
 		</td>
 	</tr>
 	<?php else: ?>
@@ -194,26 +194,26 @@ else
 	<?php endif;?>
 
 	<tr>
-		<td align="right" class="label"><?php echo lang('kalkun_sms_type');?></td>
+		<td align="right" class="label"><?php echo tr('SMS type');?></td>
 		<td>
 			<input class="left_aligned" type="radio" id="stype1" name="smstype" value="normal" checked="checked" style="border: none;" />
-			<label for="stype1"><?php echo lang('kalkun_sms_type_normal');?></label>
+			<label for="stype1"><?php echo tr('Normal');?></label>
 			<input type="radio" id="stype2" name="smstype" value="flash" style="border: none;" />
-			<label for="stype2"><?php echo lang('kalkun_sms_type_flash');?><?php //echo lang('kalkun_compose_send_as_flash');?></label>
+			<label for="stype2"><?php echo tr('Flash');?><?php //echo tr('Send as Flash SMS');?></label>
 			<input type="radio" id="stype3" name="smstype" value="waplink" style="border: none;" />
-			<label for="stype3"><?php echo lang('kalkun_sms_type_wap');?></label>
-			<div style="float: right; text-align: right; padding-right: 10px;"><a href="javascript:void(0)" id="canned_response"> <?php echo lang('kalkun_canned');?>...</a></div>
+			<label for="stype3"><?php echo tr('WAP push link');?></label>
+			<div style="float: right; text-align: right; padding-right: 10px;"><a href="javascript:void(0)" id="canned_response"> <?php echo tr('Canned responses');?>...</a></div>
 
 		</td>
 	</tr>
 
 	<tr style="display: none;" id="url-display">
-		<td align="right" class="label"><?php echo lang('kalkun_sms_type_wap_url');?></td>
+		<td align="right" class="label"><?php echo tr('URL');?></td>
 		<td><input type="text" style="width: 97%;" name="url" value="" /></td>
 	</tr>
 
 	<tr valign="top">
-		<td align="right" class="label"><?php echo lang('kalkun_message').':';?></td>
+		<td align="right" class="label"><?php echo tr('Message').':';?></td>
 		<td>
 			<?php if ($val_type == 'forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo $msg_id;?>" /> <?php endif;?>
 			<textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;" id="message" name="message">
@@ -230,10 +230,10 @@ if ($sig_option == 'true')
 </textarea>
 			<div>
 				<div style="float: left"><span class="counter"></span></div>
-				<div style="float: right; padding-right: 5px;"><?php if ($this->config->item('ncpr')) { ?><input class="left_aligned" type="checkbox" value="ndnc" id="ncpr" name="ncpr" style="border: none;" /><label for="ncpr"><?php echo lang('kalkun_sms_ncpr_check');?> </label> <?php }?><input class="left_aligned" type="checkbox" value="unicode" id="unicode" name="unicode" style="border: none;" <?php if ($this->config->item('unicode'))
+				<div style="float: right; padding-right: 5px;"><?php if ($this->config->item('ncpr')) { ?><input class="left_aligned" type="checkbox" value="ndnc" id="ncpr" name="ncpr" style="border: none;" /><label for="ncpr"><?php echo tr('Check DND');?> </label> <?php }?><input class="left_aligned" type="checkbox" value="unicode" id="unicode" name="unicode" style="border: none;" <?php if ($this->config->item('unicode'))
 {
 	echo 'checked="checked"';
-}?> /><label for="unicode"><?php echo lang('kalkun_compose_send_as_unicode'); ?></label></div>
+}?> /><label for="unicode"><?php echo tr('Send as Unicode'); ?></label></div>
 			</div>
 		</td>
 	</tr>
@@ -254,6 +254,6 @@ if ($sig_option == 'true')
 <?php
 if ($this->config->item('sms_advertise'))
 {
-	echo '*'.lang('kalkun_sms_ads_active');
+	echo '*'.tr('Ads is active');
 }
 ?>

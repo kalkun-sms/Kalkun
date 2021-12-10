@@ -36,7 +36,7 @@
 			var notif = count + ' conversation deleted';
 
 			if (count == 0) {
-				show_notification("<?php echo lang('tni_msg_no_conv_selected')?>");
+				show_notification("<?php echo tr('No item selected')?>");
 			} else {
 				$("input.select_conversation:checked").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
@@ -70,7 +70,7 @@
 		$(document).on('click', "a.recover_button", action_recover = function() {
 			var count = $("input.select_conversation:checkbox:checked").length;
 			if (count == 0) {
-				show_notification("<?php echo lang('tni_msg_no_conv_selected')?>");
+				show_notification("<?php echo tr('No item selected')?>");
 			} else {
 
 				var id_folder = (source == 'inbox') ? 1 : 3;
@@ -104,7 +104,7 @@
 			var count = $("input.select_conversation:checkbox:checked").length;
 			if (count == 0) {
 				$("#movetodialog").dialog('close');
-				show_notification("<?php echo lang('tni_msg_no_conv_selected')?>");
+				show_notification("<?php echo tr('No item selected')?>");
 			} else {
 				var id_folder = $(this).attr('id');
 				$("#movetodialog").dialog('close');
@@ -203,10 +203,10 @@
 				height: 100,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_save'); ?>': function() {
+					'<?php echo tr('Save'); ?>': function() {
 						$("form.renamefolderform").trigger('submit');
 					},
-					'<?php echo lang('kalkun_cancel'); ?>': function() {
+					'<?php echo tr('Cancel'); ?>': function() {
 						$(this).dialog('close');
 					}
 				}
@@ -231,10 +231,10 @@
 				height: 165,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_cancel'); ?>': function() {
+					'<?php echo tr('Cancel'); ?>': function() {
 						$(this).dialog('close');
 					},
-					'<?php echo lang('tni_delete_folder'); ?>': function() {
+					'<?php echo tr('Delete this folder'); ?>': function() {
 						location.href = delete_folder_url + id_folder;
 					}
 				}
@@ -259,10 +259,10 @@
 				height: 165,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_cancel'); ?>': function() {
+					'<?php echo tr('Cancel'); ?>': function() {
 						$(this).dialog('close');
 					},
-					'<?php echo lang('kalkun_delete_all_confirmation_header'); ?>': function() {
+					'<?php echo tr('Delete all'); ?>': function() {
 						$.get("<?php echo site_url('messages/delete_all').'/'.strtolower($this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name'));?>");
 						$(this).dialog('close');
 						refresh();

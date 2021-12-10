@@ -34,9 +34,9 @@
 
 						<div class="right_column">
 							<span class="pbk_menu">
-								<a class="deletepackagesbutton simplelink" href="<?php echo site_url('plugin/sms_credit/delete_packages/'.$tmp->id_credit_template);?>"><?php echo lang('kalkun_delete'); ?></a>
+								<a class="deletepackagesbutton simplelink" href="<?php echo site_url('plugin/sms_credit/delete_packages/'.$tmp->id_credit_template);?>"><?php echo tr('Delete'); ?></a>
 								<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
-								<a class="editpackagesbutton simplelink" href="#"><?php echo lang('tni_edit'); ?></a>
+								<a class="editpackagesbutton simplelink" href="#"><?php echo tr('Edit'); ?></a>
 							</span>
 						</div>
 					</div>

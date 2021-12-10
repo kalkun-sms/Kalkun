@@ -47,7 +47,7 @@ class Kalkun extends MY_Controller {
 		$data['data_url'] = site_url('kalkun/get_statistic');
 		if ($this->config->item('disable_outgoing'))
 		{
-			$data['alerts'][] = '<div class="warning">'.lang('kalkun_outgoing_sms_disabled_contact_sysadmin').'</div>';
+			$data['alerts'][] = '<div class="warning">'.tr('Outgoing SMS disabled. Contact system administrator').'</div>';
 		}
 		$this->load->view('main/layout', $data);
 	}
@@ -91,7 +91,7 @@ class Kalkun extends MY_Controller {
 			case 'weeks':
 				$days = 30;
 				$format = 'W';
-				$prefix = ucwords(lang('kalkun_week')).' ';
+				$prefix = ucwords(tr('week')).' ';
 				break;
 
 			case 'months':
@@ -143,14 +143,14 @@ class Kalkun extends MY_Controller {
 			"labels": '.json_encode(array_reverse($x)).',
 			"datasets": [
 				{
-					"label": "'.lang('kalkun_outgoing_sms').'",
+					"label": "'.tr('Outgoing SMS').'",
 					"backgroundColor": "#21759B",
 					"data": '.json_encode(array_reverse($yout)).',
 					"borderWidth": 1
 				}
 				,
 				{
-					"label": "'.lang('kalkun_incoming_sms').'",
+					"label": "'.tr('Incoming SMS').'",
 					"backgroundColor": "#639F45",
 					"data": '.json_encode(array_reverse($yin)).',
 					"borderWidth": 1
@@ -269,7 +269,7 @@ class Kalkun extends MY_Controller {
 			// check password
 			if ($option === 'password' && ! password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password')))
 			{
-				$this->session->set_flashdata('notif', lang('kalkun_wrong_password'));
+				$this->session->set_flashdata('notif', tr('Wrong password'));
 				redirect('settings/'.$option);
 			}
 			else
@@ -280,14 +280,14 @@ class Kalkun extends MY_Controller {
 					{
 						if ($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows > 0)
 						{
-							$this->session->set_flashdata('notif', lang('kalkun_username_exists'));
+							$this->session->set_flashdata('notif', tr('Username already taken'));
 							redirect('settings/'.$option);
 						}
 					}
 				}
 			}
 			$this->Kalkun_model->update_setting($option);
-			$this->session->set_flashdata('notif', lang('kalkun_settings_saved'));
+			$this->session->set_flashdata('notif', tr('Settings saved successfully.'));
 			redirect('settings/'.$option);
 		}
 

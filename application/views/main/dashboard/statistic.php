@@ -4,9 +4,9 @@
 <script type="text/javascript" src="<?php echo $this->config->item('js_path');?>Chart.bundle.min.js"></script>
 
 <div align="right">
-	<a href="<?php echo site_url('kalkun/get_statistic/days');?>" class="stats-toggle"><?php echo ucwords(lang('kalkun_day'));?></a>&nbsp; &nbsp;
-	<a href="<?php echo site_url('kalkun/get_statistic/weeks');?>" class="stats-toggle"><?php echo ucwords(lang('kalkun_week'));?></a>&nbsp; &nbsp;
-	<a href="<?php echo site_url('kalkun/get_statistic/months');?>" class="stats-toggle"><?php echo ucwords(lang('kalkun_month'));?></a>&nbsp; &nbsp;
+	<a href="<?php echo site_url('kalkun/get_statistic/days');?>" class="stats-toggle"><?php echo ucwords(tr('day'));?></a>&nbsp; &nbsp;
+	<a href="<?php echo site_url('kalkun/get_statistic/weeks');?>" class="stats-toggle"><?php echo ucwords(tr('week'));?></a>&nbsp; &nbsp;
+	<a href="<?php echo site_url('kalkun/get_statistic/months');?>" class="stats-toggle"><?php echo ucwords(tr('month'));?></a>&nbsp; &nbsp;
 </div>
 
 <div align="center" class="chart-container" style="position: relative; height:200px; width:650px">
@@ -50,15 +50,15 @@ $trash = $trash_inbox + $trash_sentitems;
 ?>
 
 <div style="float: left; width: 200px;">
-	<h4><?php echo lang('kalkun_folder');?>: </h4>
-	<p><span><?php echo lang('kalkun_inbox');?>:</span> <?php echo $inbox;?></p>
-	<p><span><?php echo lang('kalkun_outbox');?>:</span> <?php echo $outbox;?></p>
-	<p><span><?php echo lang('kalkun_sentitems');?>:</span> <?php echo $sentitems;?></p>
-	<p><span><?php echo lang('kalkun_trash');?>:</span> <?php echo $trash;?></p>
+	<h4><?php echo tr('Folders');?>: </h4>
+	<p><span><?php echo tr('Inbox');?>:</span> <?php echo $inbox;?></p>
+	<p><span><?php echo tr('Outbox');?>:</span> <?php echo $outbox;?></p>
+	<p><span><?php echo tr('Sent items');?>:</span> <?php echo $sentitems;?></p>
+	<p><span><?php echo tr('Trash');?>:</span> <?php echo $trash;?></p>
 </div>
 
 <div style="float: left; width: 250px;">
-	<h4><?php echo lang('kalkun_myfolder');?>: </h4>
+	<h4><?php echo tr('My folders');?>: </h4>
 	<?php
 foreach ($this->Kalkun_model->get_folders('all')->result() as $val):
 $folder_count_inbox = $this->Message_model->get_messages(array('type' => 'inbox', 'id_folder' => $val->id_folder))->num_rows();
@@ -70,10 +70,10 @@ endforeach;
 </div>
 
 <div style="float: left; width: 200px;">
-	<h4><?php echo lang('kalkun_phonebook');?>: </h4>
-	<p><span><?php echo lang('kalkun_contact');?>: </span>
+	<h4><?php echo tr('Phonebook');?>: </h4>
+	<p><span><?php echo tr('Contact');?>: </span>
 		<?php echo  $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();?></p>
-	<p><span><?php echo lang('kalkun_group');?>: </span>
+	<p><span><?php echo tr('Group');?>: </span>
 		<?php echo  $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();?></p>
 </div>
 

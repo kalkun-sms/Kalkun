@@ -2,35 +2,35 @@
 
 <!-- User dialog -->
 <div id="dialog" class="dialog" style="display: block">
-	<p id="validateTips"><?php echo lang('tni_form_fields_required'); ?></p>
+	<p id="validateTips"><?php echo tr('All form fields are required'); ?></p>
 	<?php echo form_open('phonebook/add_user_process', array('id' => 'addUser'));?>
 	<fieldset>
-		<label for="name"><?php echo lang('tni_user_person_name'); ?></label>
+		<label for="name"><?php echo tr('Name'); ?></label>
 		<input type="text" name="realname" id="realname" value="<?php if (isset($users))
 {
 	echo $users->row('realname');
 }?>" class="text ui-widget-content ui-corner-all" />
-		<label for="number"><?php echo lang('tni_user_phone_number'); ?></label>
+		<label for="number"><?php echo tr('Phone number'); ?></label>
 		<input type="text" name="phone_number" id="phone_number" value="<?php if (isset($users))
 {
 	echo $users->row('phone_number');
 }?>" class="text ui-widget-content ui-corner-all" />
-		<label for="name"><?php echo lang('tni_user_username'); ?></label>
+		<label for="name"><?php echo tr('Username'); ?></label>
 		<input type="text" name="username" id="username" value="<?php if (isset($users))
 {
 	echo $users->row('username');
 }?>" class="text ui-widget-content ui-corner-all" />
 
 		<?php if ( ! isset($users)): ?>
-		<label for="password"><?php echo lang('tni_user_password'); ?></label>
+		<label for="password"><?php echo tr('Password'); ?></label>
 		<input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
-		<label for="confirm_password"><?php echo lang('tni_user_conf_password'); ?></label>
+		<label for="confirm_password"><?php echo tr('Confirm password'); ?></label>
 		<input type="password" name="confirm_password" id="confirm_password" value="" class="text ui-widget-content ui-corner-all" />
 		<?php endif;?>
 
-		<label for="level"><?php echo lang('tni_level'); ?></label>
+		<label for="level"><?php echo tr('Level'); ?></label>
 		<?php
-$level = array('admin' => lang('kalkun_level_admin'), 'user' => lang('kalkun_level_user'));
+$level = array('admin' => tr('Administrator'), 'user' => tr('User'));
 $level_act = (isset($users)) ? $users->row('level') : '';
 $option = 'class="text ui-widget-content ui-corner-all"';
 echo form_dropdown('level', $level, $level_act, $option);

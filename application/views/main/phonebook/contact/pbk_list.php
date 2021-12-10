@@ -2,11 +2,11 @@
 if ($phonebook->num_rows() === 0):
 	if ($_POST)
 	{
-		echo '<p><i>'.lang('tni_contact_not_found').'</i></p>';
+		echo '<p><i>'.tr('Contact not found').'</i></p>';
 	}
 	else
 	{
-		echo '<p><i>'.lang('tni_contact_search_empty').'</i></p>';
+		echo '<p><i>'.tr('Contact is empty').'</i></p>';
 	}
 else: ?>
 <table>
@@ -32,12 +32,12 @@ else: ?>
 		}
 		?>
 						<?php if (isset($public_contact) && ! $public_contact):?>
-						<a class="editpbkcontact simplelink" href="#"><?php echo lang('tni_edit');?></a>
+						<a class="editpbkcontact simplelink" href="#"><?php echo tr('Edit');?></a>
 						<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
 						<?php endif;?>
-						<a class="sendmessage simplelink" href="#"><?php echo lang('tni_send_message');?></a>
+						<a class="sendmessage simplelink" href="#"><?php echo tr('Send message');?></a>
 						<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
-						<?php echo anchor('messages/conversation/folder/phonebook/'.$tmp->Number, lang('tni_see_conversation'), 'title="'.lang('tni_see_conversation').'" class="simplelink"') ;?>
+						<?php echo anchor('messages/conversation/folder/phonebook/'.$tmp->Number, tr('See conversation'), 'title="'.tr('See conversation').'" class="simplelink"') ;?>
 					</span>
 				</div>
 			</div>
