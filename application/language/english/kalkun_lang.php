@@ -244,7 +244,6 @@ $lang['Edit contact'] = 'Edit contact';
 $lang['Contact not found'] = 'Contact not found';
 $lang['Contact is empty'] = 'Contact is empty';
 $lang['Add user'] = 'Add user';
-$lang['Add user'] = 'Add user';
 $lang['Edit user'] = 'Edit user';
 $lang['User'] = 'User';
 $lang['Users'] = 'Users';
