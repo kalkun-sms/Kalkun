@@ -293,17 +293,15 @@ $lang['Data per page'] = 'Строк на странице';// (Data per Page)
 $lang['Used for paging in message and phonebook'] = 'Используется для разбиения строк на страници в ссобщениях и телефонной книге';  //Will be used for paging in message and phonebook
 
 $lang['Permanent delete'] = 'Удаление навсегда';
-$lang['Disable'] = 'Удаление навсегда выключено';
+$lang['Disable'] = 'Отключить';
 $lang[' - Always move to trash first'] = ' - Сначала переместить в корзину';   //Always move to Trash first
-$lang['Enable'] = 'Удаление навсегда включено';
+$lang['Enable'] = 'Давать возможность';
 
 $lang['User settings'] = 'Ваши настройки';//(User's settings)
 $lang['General'] = 'Основные';
 $lang['Personal'] = 'Личные';
 
 $lang['Signature'] = 'Подпись';// (Signature)
-$lang['Disable'] = 'Подпись выключена';
-$lang['Enable'] = 'Подпись включена';
 $lang['Max. 50 characters'] = 'Не более 50-ти символов';
 $lang['Signature is added at the end of the message.'] = 'Подпись размещается в конце вашего сообщения';  //Signature will take place at the end of your message
 $lang['Language'] = 'Язык';

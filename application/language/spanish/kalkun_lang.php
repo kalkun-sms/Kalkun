@@ -293,17 +293,15 @@ $lang['Data per page'] = 'Informaci&oacute;n por p&aacute;gina';
 $lang['Used for paging in message and phonebook'] = 'Se utilizar&aacute; para la paginaci&oacute;n en el mensaje y la agenda';
 
 $lang['Permanent delete'] = 'Eliminar permanentemente';
-$lang['Disable'] = 'Deshabilitar eliminar permanentemente';
+$lang['Disable'] = 'Deshabilitar';
 $lang[' - Always move to trash first'] = ' - Siempre mover a la papelera primero';
-$lang['Enable'] = 'Habilitar eliminar permanentemente';
+$lang['Enable'] = 'Habilitar';
 
 $lang['User settings'] = 'Configuraci&oacute;n de usuario';
 $lang['General'] = 'General';
 $lang['Personal'] = 'Personal';
 
 $lang['Signature'] = 'Firma';
-$lang['Disable'] = 'Deshabilitar Firma';
-$lang['Enable'] = 'Habilitar Firma';
 $lang['Max. 50 characters'] = 'M&aacute;ximo 50 caracteres';
 $lang['Signature is added at the end of the message.'] = 'La firma se ubicar&aacute; al final del mensaje';
 $lang['Language'] = 'Lenguaje';

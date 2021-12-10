@@ -293,17 +293,15 @@ $lang['Data per page'] = 'Dados por Página'; // Data per Page
 $lang['Used for paging in message and phonebook'] = 'Utilizado para resultados em mensagens e contactos'; // Will be used for paging in message and phonebook
 
 $lang['Permanent delete'] = 'Eliminar Permanente'; // Permanent delete
-$lang['Disable'] = 'Eliminar Permanente Desligado'; // Permanent delete Off
+$lang['Disable'] = 'Desativar';
 $lang[' - Always move to trash first'] = ' - Mudar para pasta Eliminados primeiro'; //  - Always move to Trash first
-$lang['Enable'] = 'Eliminar Permanente Ligado'; // Permanent delete On
+$lang['Enable'] = 'Ativar';
 
 $lang['User settings'] = 'Preferências do Utilizador'; // User's settings
 $lang['General'] = 'Geral'; // General
 $lang['Personal'] = 'Pessoal'; // Personal
 
 $lang['Signature'] = 'Assinatura'; // Signature
-$lang['Disable'] = 'Assinatura Desligada'; // Signature Off
-$lang['Enable'] = 'Assinatura Ligada'; // Signature On
 $lang['Max. 50 characters'] = 'Max. 50 carateres'; // Max. 50 characters
 $lang['Signature is added at the end of the message.'] = 'As Assinaturas são anexadas no fim das suas mensagens'; //  Signature will take place at the end of your message
 $lang['Language'] = 'Língua'; // Language

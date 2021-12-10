@@ -293,17 +293,15 @@ $lang['Data per page'] = 'Záznamov na stránku';
 $lang['Used for paging in message and phonebook'] = 'Bude použité ako stránkovanie v správach a adresári';
 
 $lang['Permanent delete'] = 'Trvalé mazanie';
-$lang['Disable'] = 'Trvalé mazanie - VYP';
+$lang['Disable'] = 'VYP';
 $lang[' - Always move to trash first'] = ' - Vždy zmaž najskôr do koša';
-$lang['Enable'] = 'Trvalé mazanie - ZAP';
+$lang['Enable'] = 'ZAP';
 
 $lang['User settings'] = 'Nastavenia užívateľa';
 $lang['General'] = 'Všeobecné';
 $lang['Personal'] = 'Osobné';
 
 $lang['Signature'] = 'Podpis';
-$lang['Disable'] = 'Podpis - VYP';
-$lang['Enable'] = 'Podpis - ZAP';
 $lang['Max. 50 characters'] = 'Max. 50 znakov';
 $lang['Signature is added at the end of the message.'] = 'Podpis bude na konci vašej správy';
 $lang['Language'] = 'Jazyk';

@@ -293,17 +293,15 @@ $lang['Data per page'] = 'Tietoa sivulla';
 $lang['Used for paging in message and phonebook'] = 'Käytetään viestien ja puhelinluettelon sivutuksissa';
 
 $lang['Permanent delete'] = 'Pysyvä poistaminen';
-$lang['Disable'] = 'Pysyvä poistaminen pois päältä';
+$lang['Disable'] = 'Poistaa käytöstä';
 $lang[' - Always move to trash first'] = ' - Aina ensin roskakoriin';
-$lang['Enable'] = 'Pysyvä poistaminen päällä';
+$lang['Enable'] = 'Ottaa käyttöön';
 
 $lang['User settings'] = 'Käyttäjän asetukset';
 $lang['General'] = 'Yleiset';
 $lang['Personal'] = 'Henkilökohtaiset';
 
 $lang['Signature'] = 'Allekirjoitus';
-$lang['Disable'] = 'Allekirjoitus Pois';
-$lang['Enable'] = 'Allekirjoitus Päällä';
 $lang['Max. 50 characters'] = 'Max. 50 merkkiä';
 $lang['Signature is added at the end of the message.'] = 'Allekirjoitus lisätään viestisi perään';
 $lang['Language'] = 'Kieli';

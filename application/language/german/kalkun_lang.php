@@ -293,17 +293,15 @@ $lang['Data per page'] = 'Daten pro Seiten';
 $lang['Used for paging in message and phonebook'] = 'Wir für die Anzeige von Nachrichten und Adressbuch benutzt';
 
 $lang['Permanent delete'] = 'Dauerhaft löschen';
-$lang['Disable'] = 'Dauerhaft löschen AUS';
+$lang['Disable'] = 'Aus';
 $lang[' - Always move to trash first'] = ' - Zuerst immer in den Papierkorb verschieben';
-$lang['Enable'] = 'Dauerhaft löschen AN';
+$lang['Enable'] = 'An';
 
 $lang['User settings'] = 'Benutzer Einstellungen';
 $lang['General'] = 'Allgemein';
 $lang['Personal'] = 'Privat';
 
 $lang['Signature'] = 'Signatur';
-$lang['Disable'] = 'Signatur AUS';
-$lang['Enable'] = 'Signature AN';
 $lang['Max. 50 characters'] = 'Max. 50 Zeichen';
 $lang['Signature is added at the end of the message.'] = 'Signatur wird am Ende jeder Nachricht angefügt';
 $lang['Language'] = 'Sprache';

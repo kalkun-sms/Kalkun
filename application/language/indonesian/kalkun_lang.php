@@ -293,17 +293,15 @@ $lang['Data per page'] = 'Data per Halaman';
 $lang['Used for paging in message and phonebook'] = 'Akan digunakan pada pesan dan buku telepon';
 
 $lang['Permanent delete'] = 'Penghapusan Permanen';
-$lang['Disable'] = 'Matikan Penghapusan Permanen';
+$lang['Disable'] = 'Nonaktif';
 $lang[' - Always move to trash first'] = ' - Selalu pindahkan ke tong sampah terlebih dahulu';
-$lang['Enable'] = 'Hidupkan Penghapusan Permanen';
+$lang['Enable'] = 'Aktif';
 
 $lang['User settings'] = 'Setelan Pengguna';
 $lang['General'] = 'Umum';
 $lang['Personal'] = 'Pribadi';
 
 $lang['Signature'] = 'Signature';
-$lang['Disable'] = 'Signature Nonaktif';
-$lang['Enable'] = 'Signature Aktif';
 $lang['Max. 50 characters'] = 'Max. 50 karakter';
 $lang['Signature is added at the end of the message.'] = 'Signature akan ditempatkan di bawah pesan Anda';
 $lang['Language'] = 'Bahasa';

@@ -302,8 +302,6 @@ $lang['General'] = 'Général';
 $lang['Personal'] = 'Personnel';
 
 $lang['Signature'] = 'Signature';
-$lang['Disable'] = 'Signature désactivée';
-$lang['Enable'] = 'Signature activée';
 $lang['Max. 50 characters'] = 'Max. 50 caractères';
 $lang['Signature is added at the end of the message.'] = 'La signature apparaitra à la fin du message';
 $lang['Language'] = 'Langue';

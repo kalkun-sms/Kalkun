@@ -293,17 +293,15 @@ $lang['Data per page'] = 'Her sayfadaki veri';
 $lang['Used for paging in message and phonebook'] = 'rehber ve mesajda sayfalama için kullanilacak';
 
 $lang['Permanent delete'] = 'kalici sil';
-$lang['Disable'] = 'Kalici silmeyi kapat';
+$lang['Disable'] = 'Devre dışı bırakmak';
 $lang[' - Always move to trash first'] = ' - Her zaman çöp kutusuna tasi';
-$lang['Enable'] = 'Kalici silmeyi aç';
+$lang['Enable'] = 'Etkinleştirmek';
 
 $lang['User settings'] = 'Kullanici Ayarlari';
 $lang['General'] = 'Genel';
 $lang['Personal'] = 'Kisisel';
 
 $lang['Signature'] = 'Imza';
-$lang['Disable'] = 'Imza kapali';
-$lang['Enable'] = 'Imza açik';
 $lang['Max. 50 characters'] = 'Maximum 50 karakter';
 $lang['Signature is added at the end of the message.'] = 'Imza mesajin sonunda yer alacak';
 $lang['Language'] = 'Dil';

@@ -293,17 +293,15 @@ $lang['Data per page'] = 'Data pr. side';
 $lang['Used for paging in message and phonebook'] = 'Vil blive brugt til sideinddeling af beskeder og telefonbog';
 
 $lang['Permanent delete'] = 'Slet permanent';
-$lang['Disable'] = 'Deaktiver permanente sletninger';
+$lang['Disable'] = 'Deaktiver';
 $lang[' - Always move to trash first'] = ' - Flyt altid først til papirkurven';
-$lang['Enable'] = 'Aktiver permanente sletninger';
+$lang['Enable'] = 'Aktiver';
 
 $lang['User settings'] = 'Brugerindstillinger';
 $lang['General'] = 'Generel';
 $lang['Personal'] = 'Personlig';
 
 $lang['Signature'] = 'Signatur';
-$lang['Disable'] = 'Slå signatur til';
-$lang['Enable'] = 'Slå signature fra';
 $lang['Max. 50 characters'] = 'Maks. 50 tegn';
 $lang['Signature is added at the end of the message.'] = 'Signaturen vil blive sat ind i til sidst i dine beskeder';
 $lang['Language'] = 'Sprog';

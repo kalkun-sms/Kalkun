@@ -293,17 +293,15 @@ $lang['Data per page'] = 'Adat / Oldal';
 $lang['Used for paging in message and phonebook'] = 'Az üzenetek és a telefonkönyv lapozására lesz használva';
 
 $lang['Permanent delete'] = 'Végleges törlés';
-$lang['Disable'] = 'Végleges törlés kikapcsolva';
+$lang['Disable'] = 'Letilt';
 $lang[' - Always move to trash first'] = ' - Először a szemetesbe kell helyezni';
-$lang['Enable'] = 'Végleges törlés bekapcsolva';
+$lang['Enable'] = 'Engedélyez';
 
 $lang['User settings'] = 'Felhasználó beállítások';
 $lang['General'] = 'Általános';
 $lang['Personal'] = 'Személyes';
 
 $lang['Signature'] = 'Aláírás';
-$lang['Disable'] = 'Aláírás ki';
-$lang['Enable'] = 'Aláírás be';
 $lang['Max. 50 characters'] = 'Maximum 50 karakter';
 $lang['Signature is added at the end of the message.'] = 'Az aláírás az üzenet végére lesz helyezve';
 $lang['Language'] = 'Nyelv';

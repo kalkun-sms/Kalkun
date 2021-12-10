@@ -303,8 +303,6 @@ $lang['General'] = 'General';
 $lang['Personal'] = 'Personal';
 
 $lang['Signature'] = 'Signature';
-$lang['Disable'] = 'Disable';
-$lang['Enable'] = 'Enable';
 $lang['Max. 50 characters'] = 'Max. 50 characters';
 $lang['Signature is added at the end of the message.'] = 'Signature is added at the end of the message.';
 $lang['Language'] = 'Language';

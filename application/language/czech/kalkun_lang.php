@@ -293,17 +293,15 @@ $lang['Data per page'] = 'Data per Page';
 $lang['Used for paging in message and phonebook'] = 'Will be used for paging in message and phonebook';
 
 $lang['Permanent delete'] = 'Permanent delete';
-$lang['Disable'] = 'Permanent delete Off';
+$lang['Disable'] = 'Off';
 $lang[' - Always move to trash first'] = ' - Always move to Trash first';
-$lang['Enable'] = 'Permanent delete On';
+$lang['Enable'] = 'On';
 
 $lang['User settings'] = "User's settings";
 $lang['General'] = 'General';
 $lang['Personal'] = 'Personal';
 
 $lang['Signature'] = 'Signature';
-$lang['Disable'] = 'Signature Off';
-$lang['Enable'] = 'Signature On';
 $lang['Max. 50 characters'] = 'Max. 50 characters';
 $lang['Signature is added at the end of the message.'] = 'Signature will take place at the end of your message';
 $lang['Language'] = 'Language';

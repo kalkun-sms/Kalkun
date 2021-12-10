@@ -293,17 +293,15 @@ $lang['Data per page'] = 'Ilość danych na stronę';
 $lang['Used for paging in message and phonebook'] = 'Użyte w stronicowaniu wiadomości i książki adresowej';
 
 $lang['Permanent delete'] = 'Trwałe usuwanie';
-$lang['Disable'] = 'Trwałe usuwanie wyłączone';
+$lang['Disable'] = 'Wyłączać';
 $lang[' - Always move to trash first'] = ' - Zawsze najpierw usuwaj do kosza';
-$lang['Enable'] = 'Trwałe usuwanie załączone';
+$lang['Enable'] = 'Umożliwiać';
 
 $lang['User settings'] = 'Ustawienia użytkownika';
 $lang['General'] = 'Ogólne';
 $lang['Personal'] = 'Osobiste';
 
 $lang['Signature'] = 'Sygnatura';
-$lang['Disable'] = 'Sygnatura wyłączona';
-$lang['Enable'] = 'Sygnatura załączona';
 $lang['Max. 50 characters'] = 'Maks. 50 znaków';
 $lang['Signature is added at the end of the message.'] = 'Sygnatura będzie dodawana na końcu wiadomości SMS';
 $lang['Language'] = 'Język';

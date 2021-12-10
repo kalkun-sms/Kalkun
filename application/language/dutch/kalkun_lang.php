@@ -293,17 +293,15 @@ $lang['Data per page'] = 'Regels per Pagina';
 $lang['Used for paging in message and phonebook'] = 'Wordt gebruikt voor pagineren in telefoonboek en conversatie';
 
 $lang['Permanent delete'] = 'Permanent Verwijderen';
-$lang['Disable'] = 'Permanent Verwijderen Uit';
+$lang['Disable'] = 'Uit';
 $lang[' - Always move to trash first'] = ' - Altijd eerst naar Prullenbak verplaatsen';
-$lang['Enable'] = 'Permanent Verwijderen Aan';
+$lang['Enable'] = 'Aan';
 
 $lang['User settings'] = 'Gebruikersinstellingen';
 $lang['General'] = 'Algemeen';
 $lang['Personal'] = 'Persoonlijk';
 
 $lang['Signature'] = 'Handtekening';
-$lang['Disable'] = 'Handtekening Uit';
-$lang['Enable'] = 'Handtekening Aan';
 $lang['Max. 50 characters'] = 'Max. 50 tekens';
 $lang['Signature is added at the end of the message.'] = 'Handtekening wordt onderaan het bericht geplaatst';
 $lang['Language'] = 'Taal';
