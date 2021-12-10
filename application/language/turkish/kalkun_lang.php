@@ -91,7 +91,7 @@ $lang['Click to rename this folder'] = 'Dosyayi yeniden adlandirmak için tikla'
 $lang['Delete folder confirmation'] = 'Dosya silme onayi';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Dosya ve mesajlarin hepsi süresiz olarak silinecek ve tekrar geri dönülemiyecek. Emin misiniz?';
 
-$lang['There is no message in your '] = 'Hiç mesaj yok senin ';
+$lang['There is no message in your {0}.'] = 'Hiç mesaj yok senin {0}.';
 $lang['There is no message in this folder'] = 'Bu dosyada hiç mesaj yok';
 
 $lang['Delete all'] = 'Delete All';

@@ -18,7 +18,20 @@ if ($messages->num_rows() == 0)
 	}
 	else
 	{
-		echo $no_message_container['start'].tr('There is no message in your ').' '.lang('kalkun_'.$type).$no_message_container['end'];
+		$folder_type = '';
+		switch ($type)
+		{
+			case 'inbox':
+				$folder_type = tr('Inbox');
+				break;
+			case 'outbox':
+				$folder_type = tr('Outbox');
+				break;
+			case 'sentitems':
+				$folder_type = tr('Sent items');
+				break;
+		}
+		echo $no_message_container['start'].tr('There is no message in your {0}.', NULL, $folder_type).$no_message_container['end'];
 	}
 }
 else

@@ -91,7 +91,7 @@ $lang['Click to rename this folder'] = 'Klik for at omdøbe denne mappe';
 $lang['Delete folder confirmation'] = 'Bekræft sletning af mappe';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Denne mappe og alle beskeder i den vil blive slettet permanent og kan ikke gendannes. Er du sikker?';
 
-$lang['There is no message in your '] = 'Der er ingen beskeder i din ';
+$lang['There is no message in your {0}.'] = 'Der er ingen beskeder i din {0}.';
 $lang['There is no message in this folder'] = 'Der er ingen beskeder i denne mappe';
 
 $lang['Delete all'] = 'Slet alle';

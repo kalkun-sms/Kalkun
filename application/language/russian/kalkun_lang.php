@@ -91,7 +91,7 @@ $lang['Click to rename this folder'] = 'Нажмите, чтобы переим�
 $lang['Delete folder confirmation'] = 'Подтверждение удаления папки';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Эта папка и все сообщения в ней будут на всегда удалены без возможности восстановления. Вы уверены?';//"These folder and all message on it will be permanently deleted and cannot be recovered. Are you sure?"
 
-$lang['There is no message in your '] = 'Нет сообщений в Ваших ';//"There is no messages in your"
+$lang['There is no message in your {0}.'] = 'Нет сообщений в Ваших {0}.';
 $lang['There is no message in this folder'] = 'В этой папке нет сообщений';
 
 $lang['Delete all'] = 'Delete All';

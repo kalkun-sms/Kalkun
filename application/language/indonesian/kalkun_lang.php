@@ -91,7 +91,7 @@ $lang['Click to rename this folder'] = 'Klik untuk mengganti nama berkas ini';
 $lang['Delete folder confirmation'] = 'Konfirmasi hapus berkas';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Berkas ini dan semua pesan di dalamnya akan dihapus selamanya dan tidak bisa di kembalikan lagi. Anda yakin?';
 
-$lang['There is no message in your '] = 'Tidak ada pesan dalam ';
+$lang['There is no message in your {0}.'] = 'Tidak ada pesan dalam {0}.';
 $lang['There is no message in this folder'] = 'Tidak ada pesan dalam berkas ini';
 
 $lang['Delete all'] = 'Hapus Semua';

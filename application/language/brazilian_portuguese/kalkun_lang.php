@@ -91,7 +91,7 @@ $lang['Click to rename this folder'] = 'Clique para renomear esta Pasta';
 $lang['Delete folder confirmation'] = 'Confirmacao para apagar pasta';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Esta pasta e mensagens serao permanentemente apagadas e nao serao recuperadas. Tem certeza?';
 
-$lang['There is no message in your '] = 'N&atilde;o ha mensagens na ';
+$lang['There is no message in your {0}.'] = 'N&atilde;o ha mensagens na {0}.';
 $lang['There is no message in this folder'] = 'N&atilde;o ha mensagens nesta pasta';
 
 $lang['Delete all'] = 'Apagar tudo';

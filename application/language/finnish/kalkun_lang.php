@@ -91,7 +91,7 @@ $lang['Click to rename this folder'] = 'Klikkaa nimetäksesi kansion uudelleen';
 $lang['Delete folder confirmation'] = 'Kansion poiston varmistus';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Kansio ja kaikki viestit sen sisältä poistetaan pysyvästi eikä niitä voi palauttaa. Oletko varma?';
 
-$lang['There is no message in your '] = 'Sinulla ei ole viestejä ';
+$lang['There is no message in your {0}.'] = 'Sinulla ei ole viestejä {0}.';
 $lang['There is no message in this folder'] = 'Tässä kansiossa ei ole viestejä';
 
 $lang['Delete all'] = 'Poista kaikki';

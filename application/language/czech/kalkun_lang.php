@@ -91,7 +91,7 @@ $lang['Click to rename this folder'] = 'Klikněte pro přejmenování složky';
 $lang['Delete folder confirmation'] = 'Potvrzení vymazání složky';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Tato složka a všechny zprávyv ní uložené budou trvale odstraněny. Chcete je opravdu odstranit?';
 
-$lang['There is no message in your '] = 'Žádné zprávy ve složce ';
+$lang['There is no message in your {0}.'] = 'Žádné zprávy ve složce {0}.';
 $lang['There is no message in this folder'] = 'Žádné zprávy v této složce';
 
 $lang['Delete all'] = 'Delete All';

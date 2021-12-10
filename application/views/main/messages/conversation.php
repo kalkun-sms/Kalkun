@@ -14,7 +14,24 @@ if (count($messages) == 0)
 		}
 		else
 		{
-			echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('There is no message in your ').' '.lang('kalkun_'.$this->uri->segment(3)).'.</i></p>';
+			$folder_type = '';
+			switch ($this->uri->segment(3))
+			{
+				case 'inbox':
+					$folder_type = tr('Inbox');
+					break;
+				case 'outbox':
+					$folder_type = tr('Outbox');
+					break;
+				case 'sentitems':
+					$folder_type = tr('Sent items');
+					break;
+			}
+			if ($folder_type === '' && $this->uri->segment(4) === 'sentitems' && $this->uri->segment(5) === 'sending_error')
+			{
+				$folder_type = tr('Sending error');
+			}
+			echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('There is no message in your {0}.', NULL, $folder_type).'</i></p>';
 		}
 	}
 }

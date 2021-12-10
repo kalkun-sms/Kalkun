@@ -91,7 +91,7 @@ $lang['Click to rename this folder'] = 'Klik hier om deze map te hernoemen';
 $lang['Delete folder confirmation'] = 'Dialoog Map Verwijderen';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Deze map en zijn complete inhoud wordt permanent verwijderd en kan niet hersteld worden. Doorgaan?';
 
-$lang['There is no message in your '] = 'Er zijn geen berichten in jouw';
+$lang['There is no message in your {0}.'] = 'Er zijn geen berichten in jouw {0}.';
 $lang['There is no message in this folder'] = 'Deze map bevat geen berichten';
 
 $lang['Delete all'] = 'Allen Verwijderen';

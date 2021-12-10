@@ -91,7 +91,7 @@ $lang['Click to rename this folder'] = 'Hier klicken um diesen Ordner umzubennen
 $lang['Delete folder confirmation'] = 'Ordner Bestätigung löschen';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Dieser Ornder und alle Nachrichten darin werden dauerhaft gelöscht. Sind Sie sich sicher?';
 
-$lang['There is no message in your '] = 'Es sind keine Nachrichten in Ihrem ';
+$lang['There is no message in your {0}.'] = 'Es sind keine Nachrichten in Ihrem {0}.';
 $lang['There is no message in this folder'] = 'Es sind keine Nachrichten in diesem Ordner';
 
 $lang['Delete all'] = 'Alle löschen';

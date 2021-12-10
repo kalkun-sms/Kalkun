@@ -91,7 +91,7 @@ $lang['Click to rename this folder'] = 'Kattintson a mappa átnevezéséhez';
 $lang['Delete folder confirmation'] = 'Mappa törlésének megerősítése';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'A mappa és az abban lévő üzenetek véglegesen törlődnek és nem állíthatóak vissza. Biztos benne?';
 
-$lang['There is no message in your '] = 'Nincs üzenet az ön ';
+$lang['There is no message in your {0}.'] = 'Nincs üzenet az ön {0}.';
 $lang['There is no message in this folder'] = 'Nincs a mappában üzenet';
 
 $lang['Delete all'] = 'Összes törlése';

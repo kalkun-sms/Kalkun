@@ -91,7 +91,7 @@ $lang['Click to rename this folder'] = 'Cliquer pour renommer ce dossier';
 $lang['Delete folder confirmation'] = 'Confirmer la suppression du dossier';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = " Souhaitez-vous vraiment supprimer ce dossier et tous les messages qu'il contient ?";
 
-$lang['There is no message in your '] = "Il n'y a aucun message dans";
+$lang['There is no message in your {0}.'] = "Il n'y a aucun message dans votre {0}.";
 $lang['There is no message in this folder'] = "Il n'y a aucun message dans ce dossier";
 
 $lang['Delete all'] = 'Tout supprimer';

@@ -91,7 +91,7 @@ $lang['Click to rename this folder'] = 'Clicca per rinominare la crtella';
 $lang['Delete folder confirmation'] = 'Conferma eliminazione cartella';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Questa cartella e tutti i messaggi in essa contenuti verrannno cancellati definitivamente e non potranno essere recuperati. Sei sicuro?';
 
-$lang['There is no message in your '] = 'Non ci sono messaggi nella tua cartella';
+$lang['There is no message in your {0}.'] = 'Non ci sono messaggi nella tua cartella {0}.';
 $lang['There is no message in this folder'] = 'Questa cartella non contiene messaggi';
 
 $lang['Delete all'] = 'Delete All';

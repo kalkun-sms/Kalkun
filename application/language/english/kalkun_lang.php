@@ -91,7 +91,7 @@ $lang['Click to rename this folder'] = 'Click to rename this folder';
 $lang['Delete folder confirmation'] = 'Delete folder confirmation';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?';
 
-$lang['There is no message in your '] = 'There is no message in your ';
+$lang['There is no message in your {0}.'] = 'There is no message in your {0}.';
 $lang['There is no message in this folder'] = 'There is no message in this folder';
 
 $lang['Delete all'] = 'Delete all';
