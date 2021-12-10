@@ -194,7 +194,7 @@ $lang['Enter your current password'] = 'Syötä nykyinen salasanasi';
 $lang['Enter your new password'] = 'Syötä uusi salasana';
 
 $lang['Administrator'] = 'Pääkäyttäjä';
-$lang['User'] = 'Käyttäjä';
+$lang['User']['credentials'] = 'Käyttäjä';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
@@ -245,7 +245,7 @@ $lang['Contact not found'] = 'Yhteystietoa ei löydy';
 $lang['Contact is empty'] = 'Yhteystieto on tyhjä';
 $lang['Add user'] = 'Lisää käyttäjä';
 $lang['Edit user'] = 'Muokkaa käyttäjä';
-$lang['User'] = 'Käyttäjä';
+$lang['User']['default'] = 'Käyttäjä';
 $lang['Users'] = 'Käyttäjät';
 $lang['Delete users confirmation'] = 'Käyttäjän poiston varmistus';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Poista käyttäjä?<br>Tämä sisältää kaikki merkinnät tältä käyttäjältä (viestit ja yhteystiedot).';

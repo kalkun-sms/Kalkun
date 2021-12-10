@@ -194,7 +194,7 @@ $lang['Enter your current password'] = 'Voer het huidige wachtwoord in';
 $lang['Enter your new password'] = 'Voer het nieuwe wachtwoord in';
 
 $lang['Administrator'] = 'Administrator';
-$lang['User'] = 'Gebruiker';
+$lang['User']['credentials'] = 'Gebruiker';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
@@ -245,7 +245,7 @@ $lang['Contact not found'] = 'Contact niet gevonden';
 $lang['Contact is empty'] = 'Niets ingevoerd';
 $lang['Add user'] = 'Gebruiker Toevoegen';
 $lang['Edit user'] = 'Gebruikers Aanpassen';
-$lang['User'] = 'Gebruiker';
+$lang['User']['default'] = 'Gebruiker';
 $lang['Users'] = 'Gebruikers';
 $lang['Delete users confirmation'] = 'Dialoog Gebruikers Verwijderen';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Gebruiker verwijderen?<br>Hiermee worden alle berichten en mappen van de gebruiker verwijderd.';

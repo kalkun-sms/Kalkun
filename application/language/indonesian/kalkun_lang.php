@@ -194,7 +194,7 @@ $lang['Enter your current password'] = 'Masukkan password Anda saat ini';
 $lang['Enter your new password'] = 'Masukkan password baru Anda';
 
 $lang['Administrator'] = 'Administrator';
-$lang['User'] = 'Pengguna';
+$lang['User']['credentials'] = 'Pengguna';
 
 $lang['Create a new filter'] = 'Buat saringan baru';
 $lang['Has the words'] = 'Mengandung kata';
@@ -245,7 +245,7 @@ $lang['Contact not found'] = 'Kontak tidak ditemukan';
 $lang['Contact is empty'] = 'Kontak kosong';
 $lang['Add user'] = 'Tambah Pengguna';
 $lang['Edit user'] = 'Sunting Pengguna';
-$lang['User'] = 'Pengguna';
+$lang['User']['default'] = 'Pengguna';
 $lang['Users'] = 'Pengguna';
 $lang['Delete users confirmation'] = 'Konfirmasi hapus pengguna';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Hapus Pengguna ini?<br>Semua data (pesan dan kontak) juga akan terhapus';

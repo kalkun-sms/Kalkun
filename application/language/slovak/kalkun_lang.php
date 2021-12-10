@@ -194,7 +194,7 @@ $lang['Enter your current password'] = 'Zadajte terajšie heslo';
 $lang['Enter your new password'] = 'Zadajte nové heslo';
 
 $lang['Administrator'] = 'Administrátor';
-$lang['User'] = 'Užívateľ';
+$lang['User']['credentials'] = 'Užívateľ';
 
 $lang['Create a new filter'] = 'Vytvoriť nový filter';
 $lang['Has the words'] = 'Má slová';
@@ -245,7 +245,7 @@ $lang['Contact not found'] = 'Užívateľ nenájdený';
 $lang['Contact is empty'] = 'Užívateľ je prázdny';
 $lang['Add user'] = 'Pridať užívateľov';
 $lang['Edit user'] = 'Upraviť užívateľa';
-$lang['User'] = 'Užívateľ';
+$lang['User']['default'] = 'Užívateľ';
 $lang['Users'] = 'Užívatelia';
 $lang['Delete users confirmation'] = 'Potvrdenie mazania užívateľov';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Zmazať užívateľa?<br>Taktiež všetky jeho záznamy (ako správy a kontakty).';

@@ -194,7 +194,7 @@ $lang['Enter your current password'] = 'Enter your current password';
 $lang['Enter your new password'] = 'Enter your new password';
 
 $lang['Administrator'] = 'Administrator';
-$lang['User'] = 'User';
+$lang['User']['credentials'] = 'User';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
@@ -245,7 +245,7 @@ $lang['Contact not found'] = 'Contact not found';
 $lang['Contact is empty'] = 'Contact is empty';
 $lang['Add user'] = 'Add user';
 $lang['Edit user'] = 'Edit user';
-$lang['User'] = 'User';
+$lang['User']['default'] = 'User';
 $lang['Users'] = 'Users';
 $lang['Delete users confirmation'] = 'Delete users confirmation';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'This deletes the selected users and all their messages and contacts.';

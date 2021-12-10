@@ -194,7 +194,7 @@ $lang['Enter your current password'] = 'Indtast dit nuværende kodeord';
 $lang['Enter your new password'] = 'Indtast dit nye kodeord';
 
 $lang['Administrator'] = 'Administrator';
-$lang['User'] = 'Bruger';
+$lang['User']['credentials'] = 'Bruger';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
@@ -245,7 +245,7 @@ $lang['Contact not found'] = 'Kontakt ikke fundet';
 $lang['Contact is empty'] = 'Kontakt er tom';
 $lang['Add user'] = 'Tilføj bruger';
 $lang['Edit user'] = 'Rediger bruger';
-$lang['User'] = 'Bruger';
+$lang['User']['default'] = 'Bruger';
 $lang['Users'] = 'Brugere';
 $lang['Delete users confirmation'] = 'Bekræft sletning af brugere';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Slet bruger?<br>Dette inkluderer al data knyttet til denne bruger (beskeder og kontakter).';

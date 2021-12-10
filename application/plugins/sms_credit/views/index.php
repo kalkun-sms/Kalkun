@@ -71,7 +71,7 @@
 		<input type="password" name="confirm_password" id="confirm_password" class="text ui-widget-content ui-corner-all" />
 		<label for="level"><?php echo tr('Level'); ?></label>
 		<?php
-$level = array('admin' => tr('Administrator'), 'user' => tr('User'));
+$level = array('admin' => tr('Administrator'), 'user' => tr('User', 'credentials'));
 $option = 'class="text ui-widget-content ui-corner-all"';
 echo form_dropdown('level', $level, 'user', $option);
 ?>

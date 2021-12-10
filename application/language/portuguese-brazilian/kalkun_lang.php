@@ -194,7 +194,7 @@ $lang['Enter your current password'] = 'Digite senha atual';
 $lang['Enter your new password'] = 'Digite a senha';
 
 $lang['Administrator'] = 'Administrador';
-$lang['User'] = 'Usu&aacute;rio';
+$lang['User']['credentials'] = 'Usu&aacute;rio';
 
 $lang['Create a new filter'] = 'Criar novo filtro';
 $lang['Has the words'] = 'Cont&eacute;m as palavras (review)';
@@ -245,7 +245,7 @@ $lang['Contact not found'] = 'Contato nao encontrado';
 $lang['Contact is empty'] = 'Contato est&aacute; vazio';
 $lang['Add user'] = 'Adicionar Usuario';
 $lang['Edit user'] = 'Editar Usuario';
-$lang['User'] = 'Usuario';
+$lang['User']['default'] = 'Usuario';
 $lang['Users'] = 'Usu&aacute;rios';
 $lang['Delete users confirmation'] = 'Confirmacao para apagar usuarios';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Apagar Usuario?<br>Isto inclui todos os registros deste usuario (mensagens e contatos).';

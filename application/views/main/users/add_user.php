@@ -30,7 +30,7 @@
 
 		<label for="level"><?php echo tr('Level'); ?></label>
 		<?php
-$level = array('admin' => tr('Administrator'), 'user' => tr('User'));
+$level = array('admin' => tr('Administrator'), 'user' => tr('User', 'credentials'));
 $level_act = (isset($users)) ? $users->row('level') : '';
 $option = 'class="text ui-widget-content ui-corner-all"';
 echo form_dropdown('level', $level, $level_act, $option);

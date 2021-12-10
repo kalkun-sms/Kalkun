@@ -194,7 +194,7 @@ $lang['Enter your current password'] = 'Adja meg az aktuális jelszavát';
 $lang['Enter your new password'] = 'Írja be a jelszavát';
 
 $lang['Administrator'] = 'Adminisztrátor';
-$lang['User'] = 'Felhasználó';
+$lang['User']['credentials'] = 'Felhasználó';
 
 $lang['Create a new filter'] = 'Új szűrő létrehozása';
 $lang['Has the words'] = 'Ilyen szavak vannak';
@@ -245,7 +245,7 @@ $lang['Contact not found'] = 'Kapcsolat nem található';
 $lang['Contact is empty'] = 'Üres kapcsolat';
 $lang['Add user'] = 'Felhasználó hozzáadása';
 $lang['Edit user'] = 'Felhasználó szerkesztése';
-$lang['User'] = 'Felhasználó';
+$lang['User']['default'] = 'Felhasználó';
 $lang['Users'] = 'Felhasználók';
 $lang['Delete users confirmation'] = 'Felhasználó törlésének megerősítése';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Törli a felhasználót?<br>A felhasználó minden adatával együtt (üzenetek és kapcsolatok).';

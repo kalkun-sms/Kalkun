@@ -194,7 +194,7 @@ $lang['Enter your current password'] = 'Enter your current password';
 $lang['Enter your new password'] = 'Enter your new password';
 
 $lang['Administrator'] = 'Administrator';
-$lang['User'] = 'User';
+$lang['User']['credentials'] = 'User';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
@@ -245,7 +245,7 @@ $lang['Contact not found'] = 'Kullanici bulunamadi';
 $lang['Contact is empty'] = 'Kullanicilar bos';
 $lang['Add user'] = 'Kullanicilari ekle';
 $lang['Edit user'] = 'Kullanici düzenle';
-$lang['User'] = 'Kullanici';
+$lang['User']['default'] = 'Kullanici';
 $lang['Users'] = 'Kullanicilar';
 $lang['Delete users confirmation'] = 'Kullanici onaylarini sil';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Kullanici silinsinmi?<br>Bu mesajlardan ve kontaklardan bu kullanicinin silinecegi manasina gelir.';

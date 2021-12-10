@@ -194,7 +194,7 @@ $lang['Enter your current password'] = 'Enter your current password';
 $lang['Enter your new password'] = 'Enter your new password';
 
 $lang['Administrator'] = 'Administrator';
-$lang['User'] = 'User';
+$lang['User']['credentials'] = 'User';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
@@ -245,7 +245,7 @@ $lang['Contact not found'] = 'Искомый контакт не найден';
 $lang['Contact is empty'] = 'Список пользователей пуст';// (Users is empty)
 $lang['Add user'] = 'Добавить пользователей';
 $lang['Edit user'] = 'редактировать пользователя';
-$lang['User'] = 'Пользователь';
+$lang['User']['default'] = 'Пользователь';
 $lang['Users'] = 'Пользователи';
 $lang['Delete users confirmation'] = 'Подтвержаю удаления пользователя';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Удалить Пользователя?<br>Также будут удалены все записи этого пользователя (сообщения и контакты).';

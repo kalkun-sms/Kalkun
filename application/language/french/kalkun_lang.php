@@ -194,7 +194,7 @@ $lang['Enter your current password'] = 'Entrer votre mot de passe actuel';
 $lang['Enter your new password'] = 'Entrer votre nouveau mot de passe';
 
 $lang['Administrator'] = 'Administrateur';
-$lang['User'] = 'Utilisateur';
+$lang['User']['credentials'] = 'Utilisateur';
 
 $lang['Create a new filter'] = 'Créer un nouveau filtre';
 $lang['Has the words'] = 'Contient les mots';
@@ -245,7 +245,7 @@ $lang['Contact not found'] = 'Contact non trouvé';
 $lang['Contact is empty'] = 'Le contact est vide';
 $lang['Add user'] = 'Ajouter un utilisateur';
 $lang['Edit user'] = 'Modifier un utilisateur';
-$lang['User'] = 'Utilisateur';
+$lang['User']['default'] = 'Utilisateur';
 $lang['Users'] = 'Utilisateurs';
 $lang['Delete users confirmation'] = 'Confirmer la suppression des utilisateurs';
 $lang['This deletes the selected users and all their messages and contacts.'] = "Supprimer l'utilisateur ?<br>Cela inclut tous les enregistrements de cet utilisateur (messages et contacts).";
