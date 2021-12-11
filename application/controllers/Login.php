@@ -20,6 +20,8 @@
  */
 class Login extends CI_Controller {
 
+	public $idiom = 'english';
+
 	/**
 	 * Constructor
 	 *
@@ -28,6 +30,27 @@ class Login extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+
+		// language
+		$this->load->helper('i18n');
+		$i18n = new MY_Lang();
+		if ($this->input->post('idiom') !== NULL)
+		{
+			$this->idiom = $this->input->post('idiom');
+		}
+		else
+		{
+			if ($this->input->get('l') !== NULL)
+			{
+				$this->idiom = $this->input->get('l');
+			}
+			else
+			{
+				$this->idiom = $i18n->get_idiom();
+			}
+		}
+		$this->lang->load('kalkun', $this->idiom);
+
 		$this->load->library('session');
 		$this->load->database();
 		$this->load->model('Kalkun_model');
@@ -65,11 +88,14 @@ class Login extends CI_Controller {
 			'bef_login_post_data',
 			$this->session->flashdata('bef_login_post_data')
 		);
-		if ($_POST)
+		if ($_POST && empty($this->input->post('change_language')))
 		{
 			$this->Kalkun_model->login();
 		}
-		$this->load->view('main/login');
+
+		$data['idiom'] = $this->idiom;
+		$data['language_list'] = $this->lang->kalkun_supported_languages();
+		$this->load->view('main/login', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -101,13 +127,13 @@ class Login extends CI_Controller {
 		$this->load->model('Message_model');
 		$this->load->helper('form');
 
-		if ($_POST)
+		if ($_POST && empty($this->input->post('change_language')))
 		{
 			$token = $this->Kalkun_model->forgot_password();
 
 			if ( ! $token)
 			{
-				$this->session->set_flashdata('errorlogin', "Oh, snap! We couldn't find you. Please try again.");
+				// Remain silent
 			}
 			else
 			{
@@ -116,15 +142,20 @@ class Login extends CI_Controller {
 				$data['class'] = '1';
 				$data['dest'] = $token['phone'];
 				$data['date'] = date('Y-m-d H:i:s');
-				$data['message'] = 'To reset your Kalkun password please visit '.site_url('login/password_reset/'.$token['token']);
+				$data['message'] = tr('To reset your Kalkun password please visit {0}', NULL, site_url('login/password_reset/'.$token['token']).'?l='.$this->idiom);
 				$data['delivery_report'] = 'default';
 				$data['uid'] = 1;
 				$this->Message_model->send_messages($data);
-				$this->session->set_flashdata('errorlogin', 'Forgot password information already sent to your phone.');
 			}
-			redirect('login/forgot_password');
+			if (empty($this->session->flashdata('errorlogin')))
+			{
+				$this->session->set_flashdata('errorlogin', tr('If you are a registered user, a SMS has been sent to you.'));
+			}
+			redirect('login/forgot_password?l='.$this->idiom);
 		}
-		$this->load->view('main/forgot_password');
+		$data['language_list'] = $this->lang->kalkun_supported_languages();
+		$data['idiom'] = $this->idiom;
+		$this->load->view('main/forgot_password', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -140,23 +171,27 @@ class Login extends CI_Controller {
 	{
 		$this->load->helper('form');
 
-		if ($_POST)
+		if ($_POST && empty($this->input->post('change_language')))
 		{
 			$token = $this->input->post('token');
 			$user_token = $this->Kalkun_model->valid_token($token);
 			$this->Kalkun_model->update_password($user_token['id_user']);
-			$this->session->set_flashdata('errorlogin', 'Successfully changed your password.');
-			redirect('login');
+			$this->Kalkun_model->delete_token($user_token['id_user']);
+			$this->session->set_flashdata('errorlogin', tr('Password changed successfully.'));
+			redirect('login?l='.$this->idiom);
 		}
 
 		if ( ! $this->Kalkun_model->valid_token($token))
 		{
-			$this->session->set_flashdata('errorlogin', 'Invalid token detected.');
-			redirect('login/forgot_password');
+			$this->session->set_flashdata('errorlogin', tr('Token invalid.'));
+			redirect('login/forgot_password?l='.$this->idiom);
 		}
 		else
 		{
 			$data['token'] = $token;
+			$data['idiom'] = $this->idiom;
+			$data['language_list'] = $this->lang->kalkun_supported_languages();
+			$data['idiom'] = $this->idiom;
 			$this->load->view('main/password_reset', $data);
 		}
 	}

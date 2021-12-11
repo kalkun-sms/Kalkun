@@ -35,7 +35,7 @@ class Install extends CI_Controller {
 			show_error('Installation has been disabled by the administrator.<p>
 			To enable access to it, create a file named <strong>install</strong>
 			in this directory of the server: <strong>'.realpath('.').'</strong>.
-			<p>Otherwise you may <a href="..">log-in</a>.', 403, '403 Forbidden');
+			<p>Otherwise you may <a href="..">log in</a>.', 403, '403 Forbidden');
 		}
 
 		// language

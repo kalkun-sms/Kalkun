@@ -85,7 +85,7 @@ class Kalkun_model extends CI_Model {
 		}
 		else
 		{
-			$this->session->set_flashdata('errorlogin', 'Your username or password are incorrect');
+			$this->session->set_flashdata('errorlogin', tr('Username or password are incorrect.'));
 		}
 	}
 
@@ -101,7 +101,7 @@ class Kalkun_model extends CI_Model {
 	function forgot_password()
 	{
 		$username = $this->input->post('username');
-		$phone = sha1($this->input->post('phone'));
+		$phone = $this->input->post('phone');
 		$this->db->from('user');
 		$this->db->where('username', $username);
 		$this->db->or_where('phone_number', $phone);
@@ -120,20 +120,17 @@ class Kalkun_model extends CI_Model {
 				// Destroy invalid token
 				if ( ! $valid_token)
 				{
-					$this->db->from('user_forgot_password');
-					$this->db->where('token', $user->row('token'));
-					$this->db->delete();
+					$this->Kalkun_model->delete_token($query->row('id_user'));
 				}
 				else
 				{
-					$this->session->set_flashdata('errorlogin', 'Token already generated and still active.');
-					redirect('login/forgot_password');
+					$this->session->set_flashdata('errorlogin', tr('Token already generated and still active.'));
 				}
 			}
 
 			if ($user->num_rows() === 0 OR ! $valid_token)
 			{
-				$token = md5(time());
+				$token = bin2hex(random_bytes(16));
 				$this->db->set('id_user', $query->row('id_user'));
 				$this->db->set('token', $token);
 				$this->db->set('valid_until', date('Y-m-d H:i:s', mktime(date('H'), date('i') + 30, date('s'), date('m'), date('d'), date('Y'))));
@@ -168,6 +165,23 @@ class Kalkun_model extends CI_Model {
 		{
 			return FALSE;
 		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Delete token
+	 *
+	 * Delete token from reset password table
+	 *
+	 * @return CI_DB_query_builder instance (method chaining) or FALSE on failure
+	 * @access	public
+	 */
+	function delete_token($id_user = NULL)
+	{
+		$this->db->from('user_forgot_password');
+		$this->db->where('id_user', $id_user);
+		return $this->db->delete();
 	}
 
 	// --------------------------------------------------------------------
@@ -378,6 +392,8 @@ class Kalkun_model extends CI_Model {
 				}
 				break;
 		}
+		// Refresh language before we display any message.
+		$this->lang->load('kalkun', $this->input->post('language'));
 	}
 
 	// --------------------------------------------------------------------

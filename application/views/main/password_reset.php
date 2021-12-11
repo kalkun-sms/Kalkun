@@ -4,7 +4,7 @@ echo doctype('xhtml1-trans');?>
 <html>
 
 <head>
-	<title>Kalkun / Password Reset</title>
+	<title>Kalkun - <?php echo tr('Password reset'); ?></title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="generator" content="Geany 0.13" />
 	<meta name="robots" content="noindex,nofollow">
@@ -31,26 +31,36 @@ echo doctype('xhtml1-trans');?>
 			<?php endif; ?>
 		</div>
 
-		<div id="login_logo"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></div>
+		<div id="login_logo"><a href="<?php echo site_url().'?l='.$idiom ?>"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></a></div>
+		<div>
+			<?php
+				echo form_open('');
+				echo form_dropdown('idiom', $language_list, $idiom, 'onchange="this.form.submit()"');
+				echo form_hidden('token', $token);
+				echo form_hidden('change_language', 'true');
+				echo form_close();
+			?>
+		</div>
 		<div id="login_container">
 			<?php echo form_open('login/password_reset'); ?>
 			<table id="login" cellpadding="3" cellspacing="2" border="0" class="rounded">
 				<tr>
-					<td><i>Choose your new password</i></td>
+					<td><i><?php echo tr('Enter your new password'); ?></i></td>
 				</tr>
 				<tr>
-					<td><label>New Password</label><input type="password" name="new_password" id="new_password" style="width:95%" /></td>
+					<td><label><?php echo tr('New password'); ?></label><input type="password" name="new_password" id="new_password" minlength="6" style="width:95%" /></td>
 				</tr>
 				<tr>
-					<td><label>Verify Password</label><input type="password" name="password" style="width:95%" /></td>
+					<td><label><?php echo tr('Confirm password'); ?></label><input type="password" name="password" minlength="6" style="width:95%" /></td>
 				</tr>
 				<tr>
 					<td>
-						<div align="center" style="float: right; padding-right: 3px"><input type="submit" id="submit" value="Submit" /></div>
+						<div align="center" style="float: right; padding-right: 3px"><input type="submit" id="submit" value="<?php echo tr('Submit', 'form')?>" /></div>
 					</td>
 				</tr>
 			</table>
 			<?php echo form_hidden('token', $token); ?>
+			<?php echo form_hidden('idiom', $idiom); ?>
 			<?php echo form_close();?>
 		</div>
 

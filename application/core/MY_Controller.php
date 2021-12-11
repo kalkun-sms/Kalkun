@@ -53,6 +53,14 @@ class MY_Controller  extends CI_Controller {
 					$this->session->set_flashdata('bef_login_HTTP_REFERER', $_SERVER['HTTP_REFERER']);
 				}
 				$this->session->set_flashdata('bef_login_post_data', $this->input->post());
+				if ($this->input->post('idiom') !== NULL)
+				{
+					redirect('login?l='.$this->input->post('idiom'));
+				}
+				if ($this->input->get('l') !== NULL)
+				{
+					redirect('login?l='.$this->input->get('l'));
+				}
 				redirect('login');
 			}
 

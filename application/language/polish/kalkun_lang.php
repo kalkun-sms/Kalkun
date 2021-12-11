@@ -342,3 +342,9 @@ $lang['403 Forbidden'] = '403 Forbidden';
 $lang['Directory access is forbidden.'] = 'Directory access is forbidden.';
 
 $lang['Close'] = 'Close';
+$lang['Previous'] = 'Previous';
+$lang['Next'] = 'Next';
+$lang['Continue'] = 'Continue';
+$lang['Submit']['form'] = 'Submit';
+$lang['Log in'] = 'Log in';
+$lang['Log out'] = 'Log out';

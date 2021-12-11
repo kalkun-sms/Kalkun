@@ -3,24 +3,7 @@
 		<td width="175px"><?php echo tr('Language'); ?></td>
 		<td>
 			<?php
-$lang = array('portuguese-brazilian' => 'Brazilian Portuguese',
-				'czech' => 'Česky',
-				'danish' => 'Danish',
-				'dutch' => 'Dutch',
-				'english' => 'English',
-				'finnish' => 'Finnish',
-				'french' => 'French',
-				'german' => 'German',
-				'hungarian' => 'Hungarian',
-				'indonesian' => 'Indonesian',
-				'italian' => 'Italian',
-				'polish' => 'Polski',
-				'portuguese' => 'Portuguese',
-				'russian' => 'Russian',
-				'spanish' => 'Español',
-				'slovak' => 'Slovak',
-				'turkish' => 'Turkish',
-			);
+$lang = $this->lang->kalkun_supported_languages();
 $lang_act = $this->Kalkun_model->get_setting()->row('language');
 echo form_dropdown('language', $lang, $lang_act);
 ?>
