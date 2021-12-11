@@ -8,4 +8,4 @@ if (php_sapi_name() != 'cli' && ! empty($_SERVER['REMOTE_ADDR']))
 // Please configure this
 $url = 'http://localhost/kalkun';
 
-fclose(fopen($url.'/index.php/daemon/outbox_routine/', 'r'));
+file_get_contents($url.'/index.php/daemon/outbox_routine/');
