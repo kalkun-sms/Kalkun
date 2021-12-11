@@ -459,15 +459,9 @@ class Messages extends MY_Controller {
 					if ($this->config->item('max_sms_sent_by_minute') !== 0)
 					{
 						$minute_added = floor(($n * $sms_loop + $i) / $this->config->item('max_sms_sent_by_minute'));
-						$data['date'] = date('Y-m-d H:i:s', mktime(
-							date('H'),
-							date('i') + $minute_added,
-							date('s'),
-							date('m'),
-							date('d'),
-							date('Y')
-						));
-						;
+						$msg_datetime = DateTime::createFromFormat('Y-m-d H:i:s', $date);
+						$msg_datetime->add(new DateInterval('PT'.$minute_added.'M'));
+						$data['date'] = date('Y-m-d H:i:s', $msg_datetime->getTimestamp());
 					}
 
 					// if multiple modem is active
