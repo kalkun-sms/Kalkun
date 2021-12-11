@@ -321,4 +321,15 @@ class MY_Lang extends MX_Lang {
 		$this->idiom = MY_Lang::locale_to_idiom($locale);
 		return $this->idiom;
 	}
+
+	public function kalkun_supported_languages()
+	{
+		$supported_languages = [];
+		foreach (MY_Lang::$idiom_to_locale as $key => $value)
+		{
+			$supported_languages[$key] = Locale::getDisplayName($value, $value);
+		}
+		natcasesort($supported_languages);
+		return $supported_languages;
+	}
 }

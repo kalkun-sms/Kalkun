@@ -20,6 +20,8 @@
  */
 class Install extends CI_Controller {
 
+	public $idiom = 'english';
+
 	/**
 	 * Constructor
 	 *
@@ -35,6 +37,19 @@ class Install extends CI_Controller {
 			in this directory of the server: <strong>'.realpath('.').'</strong>.
 			<p>Otherwise you may <a href="..">log-in</a>.', 403, '403 Forbidden');
 		}
+
+		// language
+		$this->load->helper('i18n');
+		$i18n = new MY_Lang();
+		if ($this->input->post('idiom') !== NULL)
+		{
+			$this->idiom = $this->input->post('idiom');
+		}
+		else
+		{
+			$this->idiom = $i18n->get_idiom();
+		}
+		$this->lang->load('kalkun', $this->idiom);
 
 		require_once(APPPATH.'config/database.php');
 		$this->db_config = $db[$active_group];
@@ -52,6 +67,9 @@ class Install extends CI_Controller {
 	function index()
 	{
 		$data['main'] = 'main/install/welcome';
+		$data['idiom'] = $this->idiom;
+		$data['language_list'] = $this->lang->kalkun_supported_languages();
+		$this->load->helper('form');
 		$this->load->view('main/install/layout', $data);
 	}
 
@@ -66,8 +84,10 @@ class Install extends CI_Controller {
 	 */
 	function requirement_check()
 	{
-		$this->load->helper('kalkun');
+		$this->load->helper(array('form', 'kalkun'));
+
 		$data['main'] = 'main/install/requirement_check';
+		$data['idiom'] = $this->idiom;
 		$data['database_driver'] = $this->db_config['dbdriver'];
 		$this->load->view('main/install/layout', $data);
 	}
@@ -87,6 +107,7 @@ class Install extends CI_Controller {
 		$this->load->helper(array('form', 'kalkun'));
 		$this->load->database();
 		$data['main'] = 'main/install/database_setup';
+		$data['idiom'] = $this->idiom;
 		$data['database_driver'] = $this->db->platform();
 		$data['has_smsd_database'] = $this->db->table_exists('gammu') ? TRUE : FALSE;
 
@@ -136,7 +157,7 @@ class Install extends CI_Controller {
 	 */
 	function run_install($type = NULL)
 	{
-		$this->load->helper('kalkun');
+		$this->load->helper(array('form', 'kalkun'));
 		$this->load->model('Kalkun_model');
 		$this->load->database();
 
@@ -172,6 +193,7 @@ class Install extends CI_Controller {
 		$this->db->insert('kalkun', array('version' => $this->config->item('kalkun_version')));
 
 		$data['main'] = 'main/install/install_result';
+		$data['idiom'] = $this->idiom;
 		$this->load->view('main/install/layout', $data);
 	}
 
