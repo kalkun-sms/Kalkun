@@ -1,26 +1,25 @@
 Build system
 ==============
-CodeIgniter 1.7.2 <http://codeigniter.com/>
+CodeIgniter 3.1.11 <https://www.codeigniter.com/>
 CodeIgniter extra:
-	* PDO driver for SQLite3 by Xintrea <xintrea@gmail.com>
 	* CSVReader Library by Pierre-Jean Turpeau <http://www.codeigniter.com/wiki/CSVReader>
 	* CI-Plugin-System <https://github.com/Vheissu/CI-Plugin-System>
 	* HMVC 5.3.5 commit #2d6d33922276 <https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc>
-jQuery 1.6.2 <http://jquery.com/>
-jQuery UI 1.7.2 <http://jqueryui.com/>
+jQuery 3.6.0 <https://jquery.com/>
+jQuery UI 1.13.0 <https://jqueryui.com/>
+    * On the download page, select: [ Autocomplete, Datepicker, Dialog, Fade Effect, jQuery 1.8+ support (since we use jquery < 3.4 as of jquery-ui 1.13), theme=base] + their dependencies
 jQuery Plugin:
-	* TokenInput 1.6.0 <http://loopj.com/jquery-tokeninput/>
-	* Validate <http://bassistance.de/jquery-plugins/jquery-plugin-validation/>
+	* Hotkeys
+	* TokenInput 1.7.0 <https://loopj.com/jquery-tokeninput/> or <https://github.com/loopj/jquery-tokeninput/>
+	* jQuery Validation 1.19.3 <https://jqueryvalidation.org/> or <https://github.com/jquery-validation/jquery-validation>
 	* Autogrow Textarea
-	* Field 0.9.3 <http://www.pengoworks.com/workshop/jquery/field/field.plugin.htm>
-	* Tags Input 1.2 <http://xoxco.com/clickable/jquery-tags-input>
-	* Autocomplete 1.1 <http://bassistance.de/jquery-plugins/jquery-plugin-autocomplete/>
-	* Emoticon 0.5 <http://www.dcc.uchile.cl/~skreft/emoticon/>
-	* Form 2.85 <http://malsup.com/jquery/form>
+	* Field 0.9.6 <https://pengoworks.com/workshop/jquery/field/field.plugin.htm>
+	* jQuery Tags Input Revisited Plugin 2.1 <https://github.com/underovsky/jquery-tagsinput-revisited>
+	* Emoticon 0.5 <https://users.dcc.uchile.cl/~skreft/emoticon/>
+	* Form 4.3.0 <https://malsup.com/jquery/form/> or <https://github.com/jquery-form/form>
 Chart.js API 2.9.3 <https://www.chartjs.org>
-b8 Bayesian spam filter 0.5.2 <http://nasauber.de/opensource/b8/>
+b8 Bayesian spam filter 0.7 <http://nasauber.de/opensource/b8/>
 Country Dial Code <http://ninetwozero.com/2011/12/04/php-country-array-with-dial-codes/>
-JQuery sound plugin <http://www.esblog.in/2010/08/playing-sound-file-using-jquery-sound-plugin/>
 Bird sound <http://www.ndrr.com/rmr_faq/Sounds/bird1.wav>
 jQuery Word/Character Counter <http://www.jamesfairhurst.co.uk/posts/view/jquery_word_character_counter>
 

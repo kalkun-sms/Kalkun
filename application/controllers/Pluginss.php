@@ -60,6 +60,10 @@ class Pluginss extends MY_Controller {
 		{
 			$data['title'] .= lang('pluginss_installed');
 			$data['plugins'] = $this->Plugin_model->get_plugins()->result_array();
+			foreach ($data['plugins'] as $key => $plugin)
+			{
+				$data['plugins'][$key]['plugin_controller_has_index'] = $this->_plugin_controller_has_index($plugin['plugin_system_name']);
+			}
 		}
 		else
 		{
@@ -93,6 +97,7 @@ class Pluginss extends MY_Controller {
 					}
 				}
 				$result = $new_plugin;
+				uasort($result, array($this, '_plugins_cmp_plugin_name'));
 				$data['plugins'] = $result;
 			}
 		}
@@ -161,5 +166,36 @@ class Pluginss extends MY_Controller {
 		$data = array('plugin_status' => 'false');
 		$this->db->where('plugin_name', $plugin_name);
 		$this->db->update('plugin', $data);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Callback function used to order the array of plugins by plugin name
+	 */
+	function _plugins_cmp_plugin_name($p1, $p2)
+	{
+		return strcasecmp ($p1['plugin_name'], $p2['plugin_name']);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Check if the controller of the plugin has a 'index()' method
+	 */
+	function _plugin_controller_has_index($plugin_system_name)
+	{
+		$controller_class = ucfirst($plugin_system_name);
+		$controller_path = APPPATH . 'plugins/'.$plugin_system_name.'/controllers/'.$controller_class.'.php';
+
+		if ( ! file_exists($controller_path))
+		{
+			return FALSE;
+		}
+
+		require_once $controller_path;
+		$rc = new ReflectionClass($controller_class);
+
+		return $rc->hasMethod('index');
 	}
 }

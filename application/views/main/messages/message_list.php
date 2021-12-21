@@ -70,39 +70,40 @@ else
 
 	// count string for message preview
 	$char_per_line = 100 - strlen(nice_date($message_date)) - strlen($senderName); ?>
-	
-	<div title="<?php echo $tmp->TextDecoded?>" class="messagelist <?php  if ($type == 'inbox' && $tmp->readed == 'false')
+
+<div title="<?php echo $tmp->TextDecoded?>" class="messagelist <?php  if ($type == 'inbox' && $tmp->readed == 'false')
 	{
 		echo 'unreaded';
 	} ?>">
 	<div class="message_container">
 		<div class="message_header" style="color: #444; height: 20px; overflow: hidden">
-		<input type="checkbox" id="<?php echo $number; ?>" class="select_conversation nicecheckbox" value="<?php echo $number; ?>" style="border: none;" />
-		<span class="message_toggle" style="cursor: pointer;" onclick="document.location.href='<?php echo site_url(); ?>/messages/conversation/<?php echo $folder; ?>/<?php echo $type; ?>/<?php echo $number; ?>/<?php if ($folder == 'my_folder')
+			<input type="checkbox" id="<?php echo $number; ?>" class="select_conversation nicecheckbox" value="<?php echo $number; ?>" style="border: none;" />
+			<span class="message_toggle" style="cursor: pointer;" onclick="document.location.href='<?php echo site_url(); ?>/messages/conversation/<?php echo $folder; ?>/<?php echo $type; ?>/<?php echo $number; ?>/<?php if ($folder == 'my_folder')
 	{
 		echo $this->uri->segment(4);
 	} ?>'">
-		<span <?php  if ($type == 'inbox' && $tmp->readed == 'false')
+				<span <?php  if ($type == 'inbox' && $tmp->readed == 'false')
 	{
 		echo 'style="font-weight: bold"';
 	} ?>><?php echo nice_date($message_date); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
-		&nbsp;&nbsp;<?php echo $senderName; ?>
-		<?php
+					&nbsp;&nbsp;<?php echo $senderName; ?>
+					<?php
 			if ($folder == 'folder'):
 			echo '('.$this->Message_model->get_messages(array('type' => $type, 'number' => $number, 'uid' => $this->session->userdata('id_user')))->num_rows().')';
 	else:
 			echo '('.$this->Message_model->get_messages(array('type' => $type, 'number' => $number, 'id_folder' => $this->uri->segment(4), 'uid' => $this->session->userdata('id_user')))->num_rows().')';
 	endif; ?>
-		</span>
-		<span class="message_preview" <?php  if ($type == 'inbox' && $tmp->readed == 'false')
+				</span>
+				<span class="message_preview" <?php  if ($type == 'inbox' && $tmp->readed == 'false')
 	{
 		echo 'style="font-weight: bold"';
 	} ?>>-&nbsp;<?php echo message_preview($tmp->TextDecoded, $char_per_line); ?></span>
-		</span>
-		</div>		
-	</div></div>
-		
-		<?php
+			</span>
+		</div>
+	</div>
+</div>
+
+<?php
 		endforeach;
 }
 ?>

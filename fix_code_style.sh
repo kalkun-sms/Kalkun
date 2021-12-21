@@ -52,13 +52,13 @@ fi
 ############### Check for strict STRICT_COMPARISON operator #########
 
 if [[ "$STRICT_COMPARISON" == "1" ]]; then
-    vendor/bin/php-cs-fixer fix -v --show-progress=dots --allow-risky=yes --dry-run --diff --config "$CS_FIXER_CONF_DIR/php-cs-fixer-5-strict_comparison.php" > "$DIFF_OUTPUT_DIR/php-cs-check-strict_comparison.diff"
+    vendor/bin/php-cs-fixer fix -v --show-progress=dots --allow-risky=yes --dry-run --diff --config "$CS_FIXER_CONF_DIR/php-cs-fixer-5-strict_comparison.php" > "$DIFF_OUTPUT_DIR/code_style_check-strict_comparison.diff"
     EXIT_CODE=$?
     if [ $EXIT_CODE -eq 8 ] || [ $EXIT_CODE -eq 4 ]; then
         # 4 - Some files have invalid syntax (only in dry-run mode).
         # 8 - Some files need fixing (only in dry-run mode).
         if [[ -v GITHUB_ACTIONS ]]; then
-            head -n200 "$DIFF_OUTPUT_DIR/php-cs-check-strict_comparison.diff"
+            head -n200 "$DIFF_OUTPUT_DIR/code_style_check-strict_comparison.diff"
         fi
         echo
         echo "_____________________"
@@ -67,7 +67,7 @@ if [[ "$STRICT_COMPARISON" == "1" ]]; then
         echo "Some code doesn't use strict_comparison operators."
         echo "Please double-check and apply the required changes."
         echo
-        echo "Full diff file is '$DIFF_OUTPUT_DIR/php-cs-check-strict_comparison.diff'"
+        echo "Full diff file is '$DIFF_OUTPUT_DIR/code_style_check-strict_comparison.diff'"
         if [[ -v GITHUB_ACTIONS ]]; then
             echo "The first 200 lines of the diff are shown above."
             echo "You can find the full diff in the artifacts."
@@ -77,11 +77,54 @@ if [[ "$STRICT_COMPARISON" == "1" ]]; then
         echo "_______________________________________________________"
         echo " Code uses strict comparison operators where expected. "
         echo "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"
-        rm "$DIFF_OUTPUT_DIR/php-cs-check-strict_comparison.diff"
+        rm "$DIFF_OUTPUT_DIR/code_style_check-strict_comparison.diff"
     fi
     echo "php-cs-fixer exited with exit-code: $EXIT_CODE"
     exit $EXIT_CODE
 fi
+
+
+############### Beautify HTML/JS/CSS of *.php in views #########
+# This requires js-beautify/html-beautify
+# On debian, package is 'node-js-beautify'
+# This in voluntarily placed before PHP check
+
+if command -v html-beautify >/dev/null ; then
+    echo "Beautifying HTML/JS/CSS style..."
+    while IFS= read -r -d '' file; do
+        html-beautify \
+            --replace \
+            --indent-with-tabs \
+            --templating=php \
+            --end-with-newline=true \
+            --brace-style=collapse \
+            --newline-between-rules=false \
+            --space-around-combinator=true \
+            --space-around-selector-separator=true \
+            --indent-scripts=normal \
+            "$file"
+    done <  <(find application/views/js_init application/views/main -name "*.php" -print0)
+
+    PLUGIN_VIEWS=$(find application/plugins -type d -name views)
+    while IFS= read -r -d '' file; do
+        html-beautify \
+            --replace \
+            --indent-with-tabs \
+            --templating=php \
+            --end-with-newline=true \
+            --brace-style=collapse \
+            --newline-between-rules=false \
+            --space-around-combinator=true \
+            --space-around-selector-separator=true \
+            --indent-scripts=normal \
+            "$file"
+    done <  <(find $PLUGIN_VIEWS -name "*.php" -print0)
+fi
+if [ $DO_GIT_COMMIT -eq 1 ]; then
+    git add application &&
+    git commit -m "[AUTO: html-beautify] Beautify HTML/JS/CSS in views"
+fi
+
 
 # Configure phpcs (add CodeIgniter standard to phpcs)
 vendor/bin/phpcs --config-set installed_paths vendor/ise/php-codingstandards-codeigniter/CodeIgniter
@@ -276,12 +319,12 @@ if [ $DO_GIT_COMMIT -eq 1 ]; then
 fi
 
 if [[ $DO_GIT_DIFF -eq 1 ]]; then
-    git diff --exit-code > "$DIFF_OUTPUT_DIR/php-cs-check.diff"
+    git diff --exit-code > "$DIFF_OUTPUT_DIR/code_style_check.diff"
     DIFF_EXIT_CODE=$?
     git checkout .
     if [[ $DIFF_EXIT_CODE -ne 0 ]]; then
         if [[ -v GITHUB_ACTIONS ]]; then
-            head -n200 "$DIFF_OUTPUT_DIR/php-cs-check.diff"
+            head -n200 "$DIFF_OUTPUT_DIR/code_style_check.diff"
         fi
         echo
         echo "_____________________"
@@ -290,7 +333,7 @@ if [[ $DO_GIT_DIFF -eq 1 ]]; then
         echo "The code doesn't respect the coding guidelines."
         echo "Please double-check and apply the required changes."
         echo
-        echo "Full diff file is '$DIFF_OUTPUT_DIR/php-cs-check.diff'"
+        echo "Full diff file is '$DIFF_OUTPUT_DIR/code_style_check.diff'"
         if [[ -v GITHUB_ACTIONS ]]; then
             echo "The first 200 lines of the diff are shown above."
             echo "You can find the full diff in the artifacts."
@@ -301,7 +344,7 @@ if [[ $DO_GIT_DIFF -eq 1 ]]; then
         echo "___________________________"
         echo " Code Respects Guidelines. "
         echo "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"
-        rm "$DIFF_OUTPUT_DIR/php-cs-check.diff"
+        rm "$DIFF_OUTPUT_DIR/code_style_check.diff"
     fi
 fi
 

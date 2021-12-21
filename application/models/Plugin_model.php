@@ -25,6 +25,7 @@ class Plugin_model extends CI_Model {
 	function get_plugins()
 	{
 		$this->db->from('plugins');
+		$this->db->order_by('plugin_name', 'ASC');
 		return $this->db->get();
 	}
 }

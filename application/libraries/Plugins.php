@@ -363,7 +363,7 @@ class Plugins {
                     }
                     
                     // Store our run hooks in the hooks history array
-                    self::$run_actions[$name][$priority];
+                    self::$run_actions[self::$current_action][$priority] = $names;
                 }
             }
         }

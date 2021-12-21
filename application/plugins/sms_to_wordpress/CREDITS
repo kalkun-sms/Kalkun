@@ -1,6 +1,6 @@
 
 The Incutio XML-RPC Library for PHP v1.7.4 <http://scripts.incutio.com/xmlrpc/>
-
+--> Replaced by a newer implementation: v1.8.3 <https://github.com/kissifrot/php-ixr>
 
 http://www.fromzerotoseo.com/wordpress-xml-rpc-intro/
 http://codex.wordpress.org/XML-RPC_WordPress_API/Posts#wp.newPost

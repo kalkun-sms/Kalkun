@@ -70,8 +70,13 @@ class Sms_to_xmpp_model extends CI_Model {
 
 	function save_xmpp()
 	{
-		$this->load->library('encrypt');
-		$encrypted_pwd = $this->encrypt->encode($this->input->post('xmpp_password'));
+		$this->load->library('encryption');
+		$encrypted_pwd = $this->encryption->encrypt($this->input->post('xmpp_password'));
+		if ($encrypted_pwd === FALSE)
+		{
+			log_message('error', 'sms_to_xmpp: problem during encryption.');
+			show_error('sms_to_xmpp: problem during encryption.', 500, '500 Internal Server Error');
+		}
 		$this->db->set('xmpp_host', $this->input->post('xmpp_host'));
 		$this->db->set('xmpp_port', $this->input->post('xmpp_port'));
 		$this->db->set('xmpp_username', $this->input->post('xmpp_username'));

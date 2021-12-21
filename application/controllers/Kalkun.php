@@ -253,11 +253,10 @@ class Kalkun extends MY_Controller {
 	 *
 	 * @access	public
 	 */
-	function settings()
+	function settings($type = NULL)
 	{
 		$this->load->helper('country_dial_code_helper');
 		$data['title'] = 'Settings';
-		$type = $this->uri->segment(2);
 		$valid_type = array('general', 'personal', 'appearance', 'password', 'save', 'filters');
 		if ( ! in_array($type, $valid_type))
 		{

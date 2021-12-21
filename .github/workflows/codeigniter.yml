@@ -2,7 +2,11 @@
 name: Testing Kalkun
 on:
   push:
-    branches: [ "*" ]
+    branches: 
+      - master
+      - devel
+      - 'release-**'
+      - 'feature-**'
   pull_request:
     branches: [ master, devel ]
 jobs:
@@ -59,10 +63,12 @@ jobs:
         run: vendor/bin/phpunit --coverage-text -c application/tests
       - name : Build Distribution
         run : |
+          set -x
           mkdir -p ~/dist
           rsync -av --progress . ~/dist --exclude vendor --exclude ".*/" --exclude "application/tests"
           mkdir -p  ~/dist/vendor/codeigniter/framework
           rsync -av --progress vendor/codeigniter/framework ~/dist/vendor/codeigniter/framework
+          rsync -av --progress vendor/kissifrot/ ~/dist/vendor/kissifrot
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -98,6 +104,13 @@ jobs:
         run: |
           composer update
           composer install --no-progress --prefer-dist --optimize-autoloader
+          sudo apt-get update
+          # html-beautify from the debian package doesn't work for some reason
+          #   sudo apt-get install -y node-js-beautify
+          # Install npm and install js-beautify from there
+          sudo apt-get install -y npm
+          sudo npm update --verbose -g npm
+          sudo npm install --verbose -g js-beautify
       - id: check_strict_comparison
         name: Check that strict comparison operators are used everywhere
         run: |
@@ -115,6 +128,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: Styling errors to fix
-          path: 'php-cs-check*'
+          name: Code style issues to fix
+          path: 'code_style_check*'
           if-no-files-found: ignore

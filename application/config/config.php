@@ -336,7 +336,7 @@ $config['cache_query_string'] = FALSE;
 |
 */
 // Kalkun default encryption key, you must change it to random 32 characters in length (128 bits)
-$config['encryption_key'] = 'F0af18413d1c9e03A6d8d1273160f5Ed';
+$config['encryption_key'] = hex2bin('F0af18413d1c9e03A6d8d1273160f5Ed');
 
 /*
 |--------------------------------------------------------------------------

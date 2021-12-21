@@ -172,7 +172,7 @@ class Messages extends MY_Controller {
 		// Import value from file (currently only CSV)
 		if (isset($_FILES['import_file']))
 		{
-			$this->load->library('csvreader');
+			$this->load->library('CSVReader');
 			$filePath = $_FILES['import_file']['tmp_name'];
 			$csvData = $this->csvreader->parse_file($filePath, TRUE);
 			$csvField = array_keys($csvData[0]);
@@ -259,7 +259,7 @@ class Messages extends MY_Controller {
 
 			// Import from file  (CSV)
 			case 'sendoption4':
-				if (count($this->input->post('import_value_count') > 0))
+				if (intval($this->input->post('import_value_count')) > 0)
 				{
 					$tmp_dest = explode(',', $this->input->post('Number'));
 					foreach ($tmp_dest as $key => $tmp)
@@ -459,15 +459,9 @@ class Messages extends MY_Controller {
 					if ($this->config->item('max_sms_sent_by_minute') !== 0)
 					{
 						$minute_added = floor(($n * $sms_loop + $i) / $this->config->item('max_sms_sent_by_minute'));
-						$data['date'] = date('Y-m-d H:i:s', mktime(
-							date('H'),
-							date('i') + $minute_added,
-							date('s'),
-							date('m'),
-							date('d'),
-							date('Y')
-						));
-						;
+						$msg_datetime = DateTime::createFromFormat('Y-m-d H:i:s', $date);
+						$msg_datetime->add(new DateInterval('PT'.$minute_added.'M'));
+						$data['date'] = date('Y-m-d H:i:s', $msg_datetime->getTimestamp());
 					}
 
 					// if multiple modem is active

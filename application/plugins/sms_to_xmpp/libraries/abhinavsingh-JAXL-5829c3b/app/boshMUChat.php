@@ -227,7 +227,7 @@ jQuery(function($) {
         $(document).ready(function() {
                 jaxl.payloadHandler = new Array('boshMUChat', 'payloadHandler');
 
-                $('#button input').click(function() {
+                $('#button input').on("click", function() {
                         if($(this).val() == 'Connect') {
                                 $(this).val('Connecting...');
 

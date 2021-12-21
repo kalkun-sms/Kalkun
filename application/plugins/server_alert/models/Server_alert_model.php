@@ -56,6 +56,7 @@ class Server_alert_model extends CI_Model {
 			'timeout' => trim($this->input->post('timeout', TRUE)),
 			'phone_number' => trim($this->input->post('phone_number', TRUE)),
 			'respond_message' => $this->input->post('respond_message', TRUE),
+			'release_code' => '', // Not used for now (db requires NOT NULL)
 		);
 		$this->db->insert('plugin_server_alert', $data);
 	}

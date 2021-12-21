@@ -8,11 +8,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |--------------------------------------------------------------------------
 |
 */
-$config['kalkun_version'] = '0.7.1';
+$config['kalkun_version'] = '0.8-dev';
 $config['kalkun_codename'] = 'Yogyakarta';
 $config['kalkun_release_date'] = '01 February 2013';
-$config['kalkun_upgradeable'] = TRUE;
-$config['kalkun_previous_version'] = '0.6';
 
 /*
 |--------------------------------------------------------------------------
@@ -60,18 +58,6 @@ $config['gateway']['tmobileczauth'] = array(
 $config['gammu_path'] = 'C:\Gammu 1.29.92\bin';
 $config['gammu_sms_inject'] = $config['gammu_path'].DIRECTORY_SEPARATOR.'gammu-smsd-inject';
 $config['gammu_config'] = $config['gammu_path'].DIRECTORY_SEPARATOR.'config.ini';
-
-
-/*
-|--------------------------------------------------------------------------
-|   Kalkun Cloud Feature Network Settings
-|--------------------------------------------------------------------------
-*/
-$config['enable_proxy'] = FALSE;
-$config['proxy_host'] = 'proxyhost.com';
-$config['proxy_port'] = '8080';
-$config['proxy_username'] = '';
-$config['proxy_password'] = '';
 
 /*
 |--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 <?php $this->load->view('js_sms_to_xmpp');?>
 
-<!-- Add Account dialog -->	
+<!-- Add Account dialog -->
 <div id="xmpp-dialog" title="Add XMPP Account" class="dialog">
 	<p id="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/sms_to_xmpp/add', array('class' => 'addxmppform')); ?>
@@ -20,16 +20,16 @@
 </div>
 
 <div id="window_container">
-<div id="window_title"><?php echo $title; ?></div>
-<div id="window_content">
-<?php if ( ! $status):?>
-<a href="#" class="nicebutton" id="addxmppbutton">&#43; Add XMPP account</a>
-<?php else:?>
-<a href="<?php echo site_url('plugin/sms_to_xmpp/delete')?>" class="nicebutton">&#43; Delete XMPP account</a>
-<?php endif;?>
+	<div id="window_title"><?php echo $title; ?></div>
+	<div id="window_content">
+		<?php if ( ! $status):?>
+		<a href="#" class="nicebutton" id="addxmppbutton">&#43; Add XMPP account</a>
+		<?php else:?>
+		<a href="<?php echo site_url('plugin/sms_to_xmpp/delete')?>" class="nicebutton">&#43; Delete XMPP account</a>
+		<?php endif;?>
 
-<?php if ($xmpp):?>
-<h4>XMPP Account:</h4>
-<p><?php echo $xmpp['xmpp_username'];?></p>
-<?php endif;?>
-</div>
+		<?php if ($xmpp):?>
+		<h4>XMPP Account:</h4>
+		<p><?php echo $xmpp['xmpp_username'];?></p>
+		<?php endif;?>
+	</div>

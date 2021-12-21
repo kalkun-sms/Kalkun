@@ -8,7 +8,7 @@ CREATE TABLE "user" (
 	CHECK ("level" IN ('admin','user'))
 );
 
-INSERT INTO "user" VALUES(1, 'kalkun', 'Kalkun SMS', 'f0af18413d1c9e0366d8d1273160f55d5efeddfe', '123456789', 'admin');
+INSERT INTO "user" VALUES(1, 'kalkun', 'Kalkun SMS', '$2y$10$sIXe0JiaTIOsC7OOnox5t.deuJwZoawd5QKpQlSNfywziTDHpmmyy', '123456789', 'admin');
 
 CREATE TABLE "user_settings" (
 	"id_user" INTEGER PRIMARY KEY  NOT NULL, 
@@ -72,29 +72,6 @@ ALTER TABLE "inbox" ADD COLUMN "readed" TEXT NOT NULL DEFAULT 'false';
 
 ALTER TABLE "sentitems" ADD COLUMN "id_folder" INTEGER NOT NULL DEFAULT 3;
 
--- --------------------------------------------------------
--- pbk & pbk_groups tables have been removed from gammu-smsd Databse
--- in schema version 16 (corresponding to gammu 1.37.90)
--- This will create them as they used to be created by gammu.
-
-CREATE TABLE pbk (
-  ID INTEGER PRIMARY KEY AUTOINCREMENT,
-  GroupID INTEGER NOT NULL DEFAULT '-1',
-  Name TEXT NOT NULL,
-  Number TEXT NOT NULL
-);
-
-CREATE TABLE pbk_groups (
-  Name TEXT NOT NULL,
-  ID INTEGER PRIMARY KEY AUTOINCREMENT
-);
-
-ALTER TABLE "pbk" ADD COLUMN "id_user" INTEGER NULL;
-ALTER TABLE "pbk" ADD COLUMN "is_public" TEXT NOT NULL DEFAULT 'false';
-
-ALTER TABLE "pbk_groups" ADD COLUMN "id_user" INTEGER NULL;
-ALTER TABLE "pbk_groups" ADD COLUMN "is_public" TEXT NOT NULL DEFAULT 'false';
-
 CREATE TABLE "user_group" (
   "id_group" INTEGER PRIMARY KEY AUTOINCREMENT,
   "id_pbk" INTEGER NOT NULL,
@@ -113,14 +90,21 @@ CREATE TABLE "user_templates" (
   "Message" TEXT NOT NULL
 );
 
-CREATE TABLE "b8_wordlist" (
-  "token" VARCHAR(255) PRIMARY KEY,
-  "count" VARCHAR(255) DEFAULT NULL
-);
 
-INSERT INTO "b8_wordlist" VALUES('bayes*dbversion', '2');
-INSERT INTO "b8_wordlist" VALUES('bayes*texts.ham', '0');
-INSERT INTO "b8_wordlist" VALUES('bayes*texts.spam', '0');
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `b8_wordlist` v3 (for b8 >= v0.6)
+--
+
+create table "b8_wordlist" (
+  "token" varchar(255) PRIMARY KEY,
+  "count_ham" bigint default null,
+  "count_spam" bigint default null
+);
+insert into b8_wordlist (token, count_ham) values ('b8*dbversion', 3);
+insert into b8_wordlist (token, count_ham, count_spam) values ('b8*texts', 0, 0);
+
 
 CREATE TABLE "plugins" (
   "plugin_id" INTEGER PRIMARY KEY AUTOINCREMENT,

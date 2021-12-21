@@ -88,11 +88,15 @@ function sms_to_xmpp($sms)
 		$xmpp = $CI->plugin_model->get_xmpp_account_by_phone($number);
 		if (is_array($xmpp))
 		{
-			$CI->load->library('encrypt');
-			$xampp_pass = $CI->encrypt->decode($xmpp['xmpp_password']);
-
-			exec($config['php_path'].' '.$config['php_script'].' '.$xmpp['xmpp_username'].' '.
-				$xampp_pass.' '.$xmpp['xmpp_host'].' '.$xmpp['xmpp_server'].' '.$to.' '.$xmpp_message);
+			$CI->load->library('encryption');
+			$xampp_pass = $CI->encryption->decrypt($xmpp['xmpp_password']);
+			if ($xampp_pass === FALSE)
+			{
+				log_message('error', 'sms_to_xmpp: problem during decryption.');
+				show_error('sms_to_xmpp: problem during decryption.', 500, '500 Internal Server Error');
+			}
+			exec($config['php_path'].' '.$config['php_script'].' '.$xmpp['xmpp_username'].' '
+				.$xampp_pass.' '.$xmpp['xmpp_host'].' '.$xmpp['xmpp_server'].' '.$to.' '.$xmpp_message);
 		}
 	}
 }

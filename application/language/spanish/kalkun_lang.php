@@ -357,4 +357,4 @@ $lang['gammu_msg_queued'] = 'Message queued';
 $lang['gammu_parameter_invalid'] = 'Parameter invalid';
 
 $lang['403_forbidden'] = '403 Prohibido';
-$lang['403_forbidden'] = 'El acceso a este directorio está prohibido.';
+$lang['403_dir_access_forbidden'] = 'El acceso a este directorio está prohibido.';

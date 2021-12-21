@@ -29,7 +29,7 @@ CREATE TABLE "user_settings" (
 	CHECK ("conversation_sort" IN ('asc','desc'))
 );
 
-INSERT INTO "user" VALUES(1, 'kalkun', 'Kalkun SMS', 'f0af18413d1c9e0366d8d1273160f55d5efeddfe', '123456789', 'admin');
+INSERT INTO "user" VALUES(1, 'kalkun', 'Kalkun SMS', '$2y$10$sIXe0JiaTIOsC7OOnox5t.deuJwZoawd5QKpQlSNfywziTDHpmmyy', '123456789', 'admin');
 INSERT INTO "user_settings" VALUES (1, 'green', 'false;Put your signature here', 'false', 20, 'true;background.jpg', 'default', 'english', 'asc');
 
 
@@ -73,29 +73,6 @@ ALTER TABLE "inbox" ADD COLUMN "readed" text NOT NULL DEFAULT 'false';
 
 ALTER TABLE "sentitems" ADD COLUMN "id_folder" integer NOT NULL DEFAULT 3;
 
--- --------------------------------------------------------
--- pbk & pbk_groups tables have been removed from gammu-smsd Databse
--- in schema version 16 (corresponding to gammu 1.37.90)
--- This will create them as they used to be created by gammu.
-
-CREATE TABLE pbk (
-  "ID" serial PRIMARY KEY,
-  "GroupID" integer NOT NULL DEFAULT '-1',
-  "Name" text NOT NULL,
-  "Number" text NOT NULL
-);
-
-CREATE TABLE pbk_groups (
-  "Name" text NOT NULL,
-  "ID" serial PRIMARY KEY
-);
-
-ALTER TABLE "pbk" ADD COLUMN "id_user" integer NULL;
-ALTER TABLE "pbk" ADD COLUMN "is_public" text NOT NULL DEFAULT 'false';
-
-ALTER TABLE "pbk_groups" ADD COLUMN "id_user" integer NULL;
-ALTER TABLE "pbk_groups" ADD COLUMN "is_public" text NOT NULL DEFAULT 'false';
-
 CREATE TABLE "user_group" (
   "id_group" serial PRIMARY KEY,
   "id_pbk" integer NOT NULL,
@@ -114,14 +91,21 @@ CREATE TABLE "user_templates" (
   "Message" text NOT NULL
 );
 
-CREATE TABLE "b8_wordlist" (
-  "token" varchar(255) PRIMARY KEY,
-  "count" varchar(255) DEFAULT NULL
-);
 
-INSERT INTO "b8_wordlist" VALUES('bayes*dbversion', '2');
-INSERT INTO "b8_wordlist" VALUES('bayes*texts.ham', '0');
-INSERT INTO "b8_wordlist" VALUES('bayes*texts.spam', '0');
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `b8_wordlist` v3 (for b8 >= v0.6)
+--
+
+create table "b8_wordlist" (
+  "token" varchar(255) primary key,
+  "count_ham" bigint default null,
+  "count_spam" bigint default null
+);
+insert into "b8_wordlist" ("token", "count_ham") values ('b8*dbversion', 3);
+insert into "b8_wordlist" ("token", "count_ham", "count_spam") values ('b8*texts', 0, 0);
+
 
 CREATE TABLE "plugins" (
   "plugin_id" serial PRIMARY KEY,
