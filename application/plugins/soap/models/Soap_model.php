@@ -31,7 +31,7 @@ Class Soap_model extends CI_Model {
 		$data = array (
 			'access_name' => $this->input->post('access_name', TRUE),
 			'ip_address' => $this->input->post('ip_address', TRUE),
-			'token' => $this->generateUniqueHash(),
+			'token' => bin2hex(random_bytes(32)),
 		);
 		$this->db->insert('plugin_remote_access', $data);
 	}
@@ -51,12 +51,6 @@ Class Soap_model extends CI_Model {
 	function delRemoteAccess($id)
 	{
 		$this->db->delete('plugin_remote_access', array('id_remote_access' => $id));
-	}
-
-	function generateUniqueHash()
-	{
-		$this->uniquehash->setLength(25);
-		return $this->uniquehash->getHash();
 	}
 
 	function addNotification()

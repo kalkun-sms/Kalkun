@@ -25,7 +25,6 @@ class Soap extends Plugin_controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->library('uniquehash');
 		$this->load->model('Kalkun_model');
 		$this->load->model('soap_model', 'Plugin_model');
 	}

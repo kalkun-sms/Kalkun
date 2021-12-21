@@ -19,8 +19,17 @@ class Api extends MY_Controller {
 	function __construct()
 	{
 		parent::__construct(FALSE);
+
+		// Hide/Forbid access if soap plugin is not enabled
+		$check = $this->db->where('plugin_system_name', 'soap')->get('plugins');
+		if ($check->num_rows() !== 1)
+		{
+			$this->session->set_flashdata('notif', 'Plugin '.strtolower(get_class($this)).' is not installed');
+			show_404();
+		}
+
 		$this->load->model('Api_Model', 'api_model');
-		$this->load->library('ApiSession', 'apisession');
+		$this->load->library('session');
 		$this->load->model(array('Kalkun_model', 'Message_model'));
 		log_message('info', 'init remote access api');
 
@@ -35,7 +44,6 @@ class Api extends MY_Controller {
 	function index()
 	{
 		log_message('debug', 'index');
-
 		function version()
 		{
 			$CI = &get_instance();
@@ -54,9 +62,9 @@ class Api extends MY_Controller {
 
 			if ($account['ip'] === $_SERVER['REMOTE_ADDR'])
 			{
-				$CI->apisession->set_userdata('loggedin', 'TRUE');
-				$CI->apisession->set_userdata('access_id', $account['id']);
-				return $CI->apisession->userdata('session_id');
+				$CI->session->set_userdata('loggedin', 'TRUE');
+				$CI->session->set_userdata('access_id', $account['id']);
+				return $CI->session->session_id;
 			}
 			else
 			{
@@ -69,12 +77,16 @@ class Api extends MY_Controller {
 		function sendMessage($destinationNumber = '', $message = '')
 		{
 			$CI = &get_instance();
+			if ($CI->session->userdata('loggedin') === NULL OR $CI->session->userdata('loggedin') !== 'TRUE')
+			{
+				return 128; // Unauthorized
+			}
 			$message = trim($message);
 			$destinationNumber = preg_replace('/^\+/', '00', $destinationNumber);
 
 			if (preg_match('/^\d+$/', $destinationNumber))
 			{
-				$CI->sendMessage($destinationNumber, $message, 1);
+				$CI->_sendMessage($destinationNumber, $message, 1);
 				return 1;
 			}
 
@@ -84,13 +96,18 @@ class Api extends MY_Controller {
 		function sendFlashMessage($destinationNumber = '', $message = '')
 		{
 			$CI = &get_instance();
+			$CI = &get_instance();
+			if ($CI->session->userdata('loggedin') === NULL OR $CI->session->userdata('loggedin') !== 'TRUE')
+			{
+				return 128; // Unauthorized
+			}
 			$message = trim($message);
 
 			$destinationNumber = preg_replace('/^\+/', '00', $destinationNumber);
 
 			if (preg_match('/^\d+$/', $destinationNumber))
 			{
-				$CI->sendMessage($destinationNumber, $message, 0);
+				$CI->_sendMessage($destinationNumber, $message, 0);
 				return 1;
 			}
 
@@ -100,7 +117,7 @@ class Api extends MY_Controller {
 		function logout()
 		{
 			$CI = &get_instance();
-			$CI->apisession->sess_destroy();
+			$CI->session->sess_destroy();
 			return 1;
 		}
 
@@ -188,14 +205,14 @@ class Api extends MY_Controller {
 	}
 	// phpcs:enable
 
-	public function sendMessage($dest = '', $message = '', $class = 1)
+	public function _sendMessage($dest = '', $message = '', $class = 1)
 	{
 		//TODO - NOTIFICATIONS
 
-		$this->send($dest, $message, $class);
+		$this->_send($dest, $message, $class);
 	}
 
-	private function send($dest = '', $message = '', $class = 1)
+	private function _send($dest = '', $message = '', $class = 1)
 	{
 		$data['dest'] = $dest;
 		$data['date'] = date('Y-m-d H:i:s');
