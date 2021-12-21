@@ -112,7 +112,7 @@ $this->load->view('js_remote_access');
 </div>
 
 <!--  VIEW  -->
-<div id="space_area">
+<!--div id="space_area">
 	<h3 style="float: left">Notification</h3>
 	<div style="float: right">
 		<a href="#" title="Add Notification" id="addnotificationbutton" class="simplebutton">Add Notification</a>
@@ -136,7 +136,7 @@ $this->load->view('js_remote_access');
 			<td class="nice-table-left"><?php echo $notification['number']; ?></td>
 			<td class="notificationvalue"><?php echo $notification['value']; ?></td>
 			<td>&nbsp;</td>
-			<!-- <td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td> -->
+			<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
 			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/delete_notification/"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 		</tr>
 
@@ -150,4 +150,4 @@ $this->load->view('js_remote_access');
 		</tr>
 	</table>
 	<br />
-</div>
+</div-->
