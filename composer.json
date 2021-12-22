@@ -2,7 +2,7 @@
     "name": "kalkun-sms/kalkun",
     "description": "Kalkun SMS Manager",
     "type": "project",
-    "license": "MIT Licence",
+    "license": "GPL-3.0",
     "repositories": [
         {
             "type": "vcs",
