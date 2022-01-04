@@ -9,8 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['kalkun_version'] = '0.8-dev';
-$config['kalkun_codename'] = 'Yogyakarta';
-$config['kalkun_release_date'] = '01 February 2013';
+$config['kalkun_codename'] = '-';
+$config['kalkun_release_date'] = '-';
 
 /*
 |--------------------------------------------------------------------------
