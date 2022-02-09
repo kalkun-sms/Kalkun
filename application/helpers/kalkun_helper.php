@@ -6,9 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Kalkun
  * An open source web based SMS Manager
  *
- * @package.    Kalkun
- * @author.     Kalkun Dev Team
- * @license.    <https://spdx.org/licenses/GPL-3.0-or-later.html> GPL-3.0-or-later
+ * @package     Kalkun
+ * @author      Kalkun Dev Team
+ * @license     <https://spdx.org/licenses/GPL-3.0-or-later.html> GPL-3.0-or-later
  * @link        https://github.com/kalkun-sms/Kalkun/
  */
 
