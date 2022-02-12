@@ -52,9 +52,9 @@
 		<?php	endif; ?>
 	</tr>
 
-	<?php	if ($this->db->table_exists('user')): ?>
 	<tr valign="top">
 		<td>Kalkun DB version</td>
+		<?php	if ($this->db->table_exists('user')): ?>
 		<td><strong><?php echo $detected_db_version; ?></strong></td>
 		<?php	else: ?>
 		<td><strong class="orange">Missing</strong><br />Click 'Run Database Setup' below to install it.</td>
@@ -63,8 +63,8 @@
 
 	<tr valign="top">
 		<td colspan="2"><br />
-			<?php switch ($type): ?>
-			<?php	case 'install': ?>
+			<?php switch ($type):
+				case 'install': ?>
 			→ Kalkun database is not installed yet. Click 'Run Database Setup' below to install it.
 			<?php		break;?>
 			<?php	case 'upgrade_not_supported': ?>
@@ -77,10 +77,9 @@
 			→ Kalkun database is already up-to-date (database schema of version <?php echo $detected_db_version;?> detected).
 			<?php		break; ?>
 			<?php endswitch; ?>
-
-			<?php endif; ?>
 		</td>
 	</tr>
+	<?php endif; ?>
 </table>
 
 <?php if ($type === 'install' OR $type === 'upgrade' OR ! $this->Kalkun_model->has_table_pbk()):
