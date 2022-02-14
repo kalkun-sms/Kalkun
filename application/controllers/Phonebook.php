@@ -329,6 +329,7 @@ class Phonebook extends MY_Controller {
 				}
 			}
 		}
+		$this->load->model('Kalkun_model');
 		$this->load->view('main/phonebook/contact/add_contact', $data);
 	}
 

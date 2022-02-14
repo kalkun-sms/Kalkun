@@ -1,4 +1,6 @@
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>libphonenumber-1.9.49-max.js"></script>
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.phone.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -13,7 +15,8 @@
 					maxlength: 12
 				},
 				phone_number: {
-					required: true
+					required: true,
+					phone: '<?php echo $this->Kalkun_model->get_setting()->row('country_code'); ?>',
 				},
 				password: {
 					required: true,

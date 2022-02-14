@@ -1,5 +1,6 @@
 <!-- Contact dialog -->
 <script src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
+<script src="<?php echo $this->config->item('js_path');?>libphonenumber-1.9.49-max.js"></script>
 <script src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.phone.js"></script>
 <script src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.tagsinput-revisited.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquery.tagsinput-revisited.min.css" />
@@ -28,6 +29,10 @@
 		});
 
 	});
+
+	jQuery.validator.classRuleSettings.phone = {
+		phone: '<?php echo $this->Kalkun_model->get_setting()->row('country_code'); ?>'
+	};
 
 </script>
 
