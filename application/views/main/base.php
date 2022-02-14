@@ -11,9 +11,9 @@
 		</center>
 		<table>
 			<tr valign="top">
-				<td><b>Author:</b></td>
+				<td><b>Authors:</b></td>
 				<td>&nbsp;</td>
-				<td>See CREDITS page</td>
+				<td>See <a class="base_color underline_link" href="https://raw.githubusercontent.com/kalkun-sms/Kalkun/devel/CREDITS" target="_blank">CREDITS</a> page</td>
 			</tr>
 			<tr>
 				<td><b>Version:</b></td>
@@ -27,17 +27,49 @@
 			<tr>
 				<td><b>License:</b></td>
 				<td>&nbsp;</td>
-				<td>GNU/GPL</td>
+				<td><a href="https://spdx.org/licenses/GPL-3.0-or-later.html">GPL-3.0-or-later</a></td>
 			<tr>
 				<td><b>Homepage:</b></td>
 				<td>&nbsp;</td>
-				<td><a class="base_color underline_link" href="http://kalkun.sourceforge.net" target="_blank">http://kalkun.sourceforge.net</a></td>
+				<td><a class="base_color underline_link" href="https://github.com/kalkun-sms/Kalkun/" target="_blank">https://github.com/kalkun-sms/Kalkun/</a></td>
 			</tr>
 		</table>
 		<br />
-		<center>
+		<!--center>
 			<a class="underline_link" href="http://kalkun.sourceforge.net/contribute.php"><b>~ DONATE THIS PROJECT ~</b></a>
-		</center>
+		</center-->
+		<table style="border-top: 1px solid black;">
+			<tr>
+				<td colspan="2">If you find an issue, please report it on the <a class="base_color underline_link" href="https://github.com/kalkun-sms/Kalkun/issues" target="_blank">issue page of the project</a> and add the information below:</td>
+			</tr>
+			<tr>
+				<td><b>Kalkun version:</b></td>
+				<td><?php echo $this->config->item('kalkun_version');?></td>
+			</tr>
+			<tr>
+				<td><b>Operating system:</b></td>
+				<td><?php echo php_uname(); ?></td>
+			</tr>
+			<tr>
+				<td><b>PHP Version:</b></td>
+				<td><?php echo phpversion(); ?></td>
+			</tr>
+			<tr>
+				<td><b>DB Backend:</b></td>
+				<td>
+					<?php
+				$this->load->helper('kalkun_helper');
+				$db_name_human = get_database_property($this->db->platform())['human'];
+				echo $db_name_human, ' ', $this->db->version(), ' (', $this->db->platform(), ')'; ?></td>
+			</tr>
+			<tr>
+				<td><b>Browser:</b></td>
+				<td>
+					<?php
+					$this->load->library('user_agent');
+					echo $this->agent->browser(), ' ', $this->agent->version() ; ?></td>
+			</tr>
+		</table>
 	</div>
 </div>
 

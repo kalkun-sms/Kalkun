@@ -85,16 +85,12 @@ function sms_to_wordpress($sms)
 		$CI =& get_instance();
 		$CI->load->model('sms_to_wordpress/sms_to_wordpress_model', 'plugin_model');
 
-		require_once 'vendor/kissifrot/php-ixr/src/Client/Client.php';
-		require_once 'vendor/kissifrot/php-ixr/src/Message/Error.php';
-		require_once 'vendor/kissifrot/php-ixr/src/Message/Message.php';
-		require_once 'vendor/kissifrot/php-ixr/src/Request/Request.php';
-		require_once 'vendor/kissifrot/php-ixr/src/DataType/Value.php';
-
 		// if wp url exist
 		$wp = $CI->plugin_model->get_wp_url_by_phone($number);
 		if (is_array($wp))
 		{
+			// Load IXR classes
+			require_once FCPATH . '/vendor/autoload.php';
 			$client = new IXR\Client\Client($wp['wp_url']);
 			
 			// Post parameter

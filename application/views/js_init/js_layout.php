@@ -131,8 +131,8 @@
 			$("#about").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 300,
-				width: 525,
+				height: 400,
+				width: 550,
 				modal: true
 			});
 			$('#about').dialog('open');
