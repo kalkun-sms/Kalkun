@@ -36,7 +36,7 @@
 			?>
 			<tr id="<?php echo $tmp->id_stop_manager; ?>">
 				<td class="nice-table-left"><?php echo $number; ?></td>
-				<td class="destination_number"><?php echo $tmp->destination_number; ?></td>
+				<td class="destination_number"><?php echo phone_format_human($tmp->destination_number); ?></td>
 				<td class="stop_type"><?php echo $tmp->stop_type; ?></td>
 				<td class="stop_message"><?php echo $tmp->stop_message; ?></td>
 				<td class="reg_date"><?php echo $tmp->reg_date; ?></td>

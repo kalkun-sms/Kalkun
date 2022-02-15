@@ -73,7 +73,7 @@ class Xmlrpc extends Plugin_controller {
 		$this->xmlrpc->method('send_sms');
 		//$this->xmlrpc->set_debug(TRUE);
 
-		$request = array('1234', 'Testing XMLRPC');
+		$request = array('+1234', 'Testing XMLRPC');
 		$this->xmlrpc->request($request);
 
 		if ( ! $this->xmlrpc->send_request())

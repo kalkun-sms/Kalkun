@@ -109,6 +109,7 @@ class Users extends MY_Controller {
 	 */
 	function add_user_process()
 	{
+		$this->load->helper('kalkun');
 		$this->User_model->adduser();
 		if ($this->input->post('id_user'))
 		{

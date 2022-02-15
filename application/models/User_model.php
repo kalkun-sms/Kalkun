@@ -69,9 +69,10 @@ class User_model extends CI_Model {
 	 */
 	function addUser()
 	{
+		$this->load->helper('kalkun');
 		$this->db->set('realname', trim($this->input->post('realname')));
 		$this->db->set('username', trim($this->input->post('username')));
-		$this->db->set('phone_number', $this->input->post('phone_number'));
+		$this->db->set('phone_number', phone_format_e164($this->input->post('phone_number')));
 		$this->db->set('level', $this->input->post('level'));
 
 		// edit mode

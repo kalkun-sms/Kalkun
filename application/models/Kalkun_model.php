@@ -22,6 +22,17 @@
  */
 class Kalkun_model extends CI_Model {
 
+	/**
+	 * Constructor
+	 *
+	 * @access	public
+	 */
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->helper('kalkun');
+	}
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -101,7 +112,8 @@ class Kalkun_model extends CI_Model {
 	function forgot_password()
 	{
 		$username = $this->input->post('username');
-		$phone = sha1($this->input->post('phone'));
+		$phone = phone_format_e164($this->input->post('phone'));
+
 		$this->db->from('user');
 		$this->db->where('username', $username);
 		$this->db->or_where('phone_number', $phone);
@@ -337,7 +349,7 @@ class Kalkun_model extends CI_Model {
 			case 'personal':
 				$this->db->set('realname', $this->input->post('realname'));
 				$this->db->set('username', $this->input->post('username'));
-				$this->db->set('phone_number', $this->input->post('phone_number'));
+				$this->db->set('phone_number', phone_format_e164($this->input->post('phone_number')));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user');
 
@@ -434,7 +446,7 @@ class Kalkun_model extends CI_Model {
 				break;
 
 			case 'phone_number':
-				$this->db->where('phone_number', $param['phone_number']);
+				$this->db->where('phone_number', phone_format_e164($param['phone_number']));
 				break;
 		}
 		return $this->db->get();

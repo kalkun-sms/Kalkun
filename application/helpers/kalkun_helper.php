@@ -12,7 +12,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link        https://github.com/kalkun-sms/Kalkun/
  */
 
-
 /**
 *	INDIA NCPR(DND) Registry Check
 *	In order to avoid sending sms to NCPR registered phone numbers
@@ -386,6 +385,62 @@ function is_null_loose($input)
 }
 
 /**
+ * Convert a phone number as input by the user to E164 format
+ * using the region of the user.
+ * Done with libphonenumber
+ *
+ * @param string $phone
+ * @return string
+ */
+function phone_format_e164($phone)
+{
+	$CI = &get_instance();
+	// reformat phone number to E164
+	$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+	$region = $CI->Kalkun_model->get_setting()->row('country_code');
+	$phoneNumberObject = $phoneNumberUtil->parse($phone, $region);
+	$phone_number = $phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::E164);
+	return $phone_number;
+}
+
+/**
+ * Convert a phone number as input to human readable format
+ * NATIONAL if same region as user, otherwise INTERNATIONAL
+ * Done with libphonenumber
+ *
+ * @param string $phone
+ * @return string
+ */
+function phone_format_human($phone)
+{
+	$CI = &get_instance();
+
+	try
+	{
+		$region = $CI->Kalkun_model->get_setting()->row('country_code');
+
+		$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+		$phoneNumberObject = $phoneNumberUtil->parse($phone, $region);
+
+		$phone_region = $phoneNumberUtil->getRegionCodeForNumber($phoneNumberObject);
+
+		if ($region === $phone_region)
+		{
+			$phone_number = $phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::NATIONAL);
+		}
+		else
+		{
+			$phone_number = $phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::INTERNATIONAL);
+		}
+		return $phone_number;
+	}
+	catch (Exception $e)
+	{
+		return $phone;
+	}
+}
+
+/**
  *
  * @author Sergey Shuchkin
  * @link https://stackoverflow.com/a/12196609/15401262
@@ -427,7 +482,6 @@ function is_gsm0338($utf8_string)
 
 	return TRUE;
 }
-
 
 /**
  *

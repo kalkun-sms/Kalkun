@@ -129,14 +129,12 @@ class Nongammu_model extends Gammu_model {
 
 	function enqueue_messages($tmp_data)
 	{
-		// remove spaces and dashes if any
-		$tmp_data['dest'] = str_replace(' ', '', $tmp_data['dest']);
-		$tmp_data['dest'] = str_replace('-', '', $tmp_data['dest']);
+		$this->load->helper('kalkun');
 
 		$data = array (
 			'InsertIntoDB' => date('Y-m-d H:i:s'),
 			'SendingDateTime' => $tmp_data['date'],
-			'DestinationNumber' => $tmp_data['dest'],
+			'DestinationNumber' => phone_format_e164($tmp_data['dest']),
 			'Coding' => get_gammu_coding($tmp_data['message']),
 			'Class' => $tmp_data['class'],
 			'CreatorID' => $tmp_data['CreatorID'],
@@ -166,10 +164,12 @@ class Nongammu_model extends Gammu_model {
 	**/
 	function save_sent_messages($tmp_data, $err_desc = '')
 	{
+		$this->load->helper('kalkun');
+
 		$data = array (
 			'InsertIntoDB' => date('Y-m-d H:i:s'),
 			'SendingDateTime' => $tmp_data['date'],
-			'DestinationNumber' => $tmp_data['dest'],
+			'DestinationNumber' => phone_format_e164($tmp_data['dest']),
 			'Coding' => get_gammu_coding($tmp_data['message']),
 			'Class' => $tmp_data['class'],
 			'CreatorID' => $tmp_data['CreatorID'],
