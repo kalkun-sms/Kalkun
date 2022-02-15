@@ -34,6 +34,14 @@
 		phone: '<?php echo $this->Kalkun_model->get_setting()->row('country_code'); ?>'
 	};
 
+	function toggle_allow_invalid(element) {
+		if ($(element)[0].classList.contains("allow_invalid")) {
+			$(element).removeClass("allow_invalid");
+		} else {
+			$(element).addClass("allow_invalid");
+		}
+	}
+
 </script>
 
 <div id="dialog" class="dialog" style="display: block">
@@ -58,6 +66,9 @@
 			echo $number;
 		}
 	}?>" class="text ui-widget-content ui-corner-all required phone" />
+
+		<input type="checkbox" name="allow_invalid_number" id="allow_invalid_number" style="display: inline" />
+		<label for="allow_invalid_number" style="display: inline" onclick="toggle_allow_invalid('#number')"><?php echo 'Skip phone number validity check'; ?></label>
 
 		<div style="margin-bottom:12px">
 			<input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if (isset($contact) && $contact->row('is_public') == 'true')

@@ -15,6 +15,10 @@
 {
 	echo $users->row('phone_number');
 }?>" class="text ui-widget-content ui-corner-all" />
+
+		<input type="checkbox" name="allow_invalid_number" id="allow_invalid_number" style="display: inline" />
+		<label for="allow_invalid_number" style="display: inline" onclick="toggle_allow_invalid('#phone_number')"><?php echo 'Skip phone number validity check'; ?></label>
+
 		<label for="name"><?php echo lang('tni_user_username'); ?></label>
 		<input type="text" name="username" id="username" value="<?php if (isset($users))
 {

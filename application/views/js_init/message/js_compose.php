@@ -70,7 +70,8 @@
 					minlength: 1
 				},
 				manualvalue: {
-					required: "#sendoption3:checked"
+					required: "#sendoption3:checked",
+					phone: '<?php echo $this->Kalkun_model->get_setting()->row('country_code'); ?>',
 				},
 				import_file: {
 					required: "#sendoption4:checked,#import_value:filled"

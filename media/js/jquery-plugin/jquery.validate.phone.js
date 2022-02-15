@@ -22,6 +22,9 @@ $(document).ready(function() {
 	// Use libphonenumber to check if number is a possible mobile phone number
 	// We by purpose don't check for Validity but for Possibility
 	jQuery.validator.addMethod("phone", function(phone_number, element, country) {
+		if (element.classList.contains("allow_invalid")) {
+			return true;
+		}
 		try {
 			const phoneNumber = libphonenumber.parsePhoneNumber(phone_number, country);
 			var is_mobile = (phoneNumber.getType() === 'MOBILE' || phoneNumber.getType() === 'FIXED_LINE_OR_MOBILE');

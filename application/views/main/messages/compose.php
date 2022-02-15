@@ -1,6 +1,8 @@
 <?php $this->load->helper('html');?>
 <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>jquery-plugin/token-input-facebook.css" />
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>libphonenumber-1.9.49-max.js"></script>
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.phone.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.tokeninput.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.form.min.js"></script>
 <style type="text/css">
