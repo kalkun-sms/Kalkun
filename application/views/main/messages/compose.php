@@ -126,7 +126,11 @@ else
 			</div>
 
 			<div id="manually" class="hidden">
-				<input style="width: 95%;" type="text" name="manualvalue" />
+				<input style="width: 95%;" type="text" name="manualvalue" id="manualvalue" />
+				<div>
+					<input type="checkbox" name="allow_invalid_number" id="allow_invalid_number" style="display: inline" />
+					<label for="allow_invalid_number" style="display: inline" onclick="toggle_allow_invalid('#manualvalue')"><?php echo 'Skip phone number validity check'; ?></label>
+				</div>
 			</div>
 
 			<div id="import" class="hidden"><input type="file" name="import_file" id="import_file" class="text ui-widget-content ui-corner-all" /></div>

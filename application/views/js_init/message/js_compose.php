@@ -345,4 +345,12 @@
 		}
 	});
 
+	function toggle_allow_invalid(element) {
+		if ($(element)[0].classList.contains("allow_invalid")) {
+			$(element).removeClass("allow_invalid");
+		} else {
+			$(element).addClass("allow_invalid");
+		}
+	}
+
 </script>

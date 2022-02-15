@@ -49,4 +49,5 @@
 			$(element).addClass("allow_invalid");
 		}
 	}
+
 </script>
