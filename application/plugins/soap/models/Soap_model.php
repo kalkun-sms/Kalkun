@@ -28,8 +28,6 @@ Class Soap_model extends CI_Model {
 
 	function addRemoteAccess()
 	{
-		// autoload to get paragonie/random_compat (to have random_bytes when using php < 7)
-		require_once FCPATH . '/vendor/autoload.php';
 		$data = array (
 			'access_name' => $this->input->post('access_name', TRUE),
 			'ip_address' => $this->input->post('ip_address', TRUE),
