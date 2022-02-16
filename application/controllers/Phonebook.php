@@ -275,23 +275,25 @@ class Phonebook extends MY_Controller {
 	 */
 	function import_phonebook()
 	{
-		$this->load->library('CSVReader');
 		$filePath = $_FILES['csvfile']['tmp_name'];
-		$csvData = $this->csvreader->parse_file($filePath, TRUE);
 
-		$n = 0;
-		foreach ($csvData as $field)
+		//load the CSV document from a file path
+		$csv = League\Csv\Reader::createFromPath($filePath, 'r');
+		$csv->setHeaderOffset(0);
+
+		$records = $csv->getRecords(); //returns all the CSV records as an Iterator object
+
+		foreach ($records as $offset => $record)
 		{
-			$pbk['Name'] = $field['Name'];
-			$pbk['Number'] = $field['Number'];
+			$pbk['Name'] = $record['Name'];
+			$pbk['Number'] = $record['Number'];
 			$pbk['GroupID'] = $this->input->post('importgroupvalue');
 			$pbk['id_user'] = $this->input->post('pbk_id_user');
 			$pbk['is_public'] = $this->input->post('is_public') ? 'true' : 'false';
 			$this->Phonebook_model->add_contact($pbk);
-			$n++;
 		}
 
-		$this->session->set_flashdata('notif', str_replace('%count%', $n, lang('pbk_successfully_imported')));
+		$this->session->set_flashdata('notif', str_replace('%count%', count($csv), lang('pbk_successfully_imported')));
 		redirect('phonebook');
 	}
 
