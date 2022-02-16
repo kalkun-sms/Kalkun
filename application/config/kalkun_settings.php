@@ -159,7 +159,7 @@ $config['sms_advertise_message'] = 'This is ads message';
 | The sound filename (must be located on media/sound directory)
 |
 */
-$config['new_incoming_message_sound'] = 'bird1.wav';
+$config['new_incoming_message_sound'] = 'ponderous.m4a';
 
 /*
 |--------------------------------------------------------------------------
