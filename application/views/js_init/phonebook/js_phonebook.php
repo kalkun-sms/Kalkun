@@ -45,11 +45,13 @@
 											buttons: {
 												"Okay": function() {
 													$(this).dialog("close");
+													location.reload();
 												}
 											}
 										});
 										setTimeout(function() {
 											$("#contact_container").dialog('close')
+											location.reload();
 										}, 1500);
 									});
 								} else {
