@@ -31,9 +31,18 @@ echo form_dropdown('language', $lang, $lang_act);
 		<td><?php echo lang('tni_set_country_calling_code'); ?></td>
 		<td>
 			<?php
-$dial_code = getCountryDialCode();
+$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+$supported_regions = $phoneNumberUtil->getSupportedRegions();
+$country_calling_codes = [];
+foreach ($supported_regions as $region)
+{
+	$country = Locale::getDisplayRegion('-'.$region, $this->lang->locale);
+	$label = $country . ' (+' . $phoneNumberUtil->getCountryCodeForRegion($region) . ')';
+	$country_calling_codes += [$region => $label];
+}
+asort($country_calling_codes);
 $dial_code_act = $this->Kalkun_model->get_setting()->row('country_code');
-echo form_dropdown('dial_code', $dial_code, $dial_code_act);
+echo form_dropdown('dial_code', $country_calling_codes, $dial_code_act);
 ?>
 		</td>
 	</tr>

@@ -12,14 +12,13 @@ jQuery Plugin:
 	* Hotkeys
 	* TokenInput 1.7.0 <https://loopj.com/jquery-tokeninput/> or <https://github.com/loopj/jquery-tokeninput/>
 	* jQuery Validation 1.19.3 <https://jqueryvalidation.org/> or <https://github.com/jquery-validation/jquery-validation>
-	* Autogrow Textarea
+	* Autosize 5.0.1 <https://github.com/jackmoore/autosize> - © Jack Moore <hello@jacklmoore.com>, License: MIT <http://www.opensource.org/licenses/mit-license.php>
 	* Field 0.9.6 <https://pengoworks.com/workshop/jquery/field/field.plugin.htm>
 	* jQuery Tags Input Revisited Plugin 2.1 <https://github.com/underovsky/jquery-tagsinput-revisited>
 	* Emoticon 0.5 <https://users.dcc.uchile.cl/~skreft/emoticon/>
 	* Form 4.3.0 <https://malsup.com/jquery/form/> or <https://github.com/jquery-form/form>
 Chart.js API 2.9.3 <https://www.chartjs.org>
 b8 Bayesian spam filter 0.7 <http://nasauber.de/opensource/b8/>
-Country Dial Code <http://ninetwozero.com/2011/12/04/php-country-array-with-dial-codes/>
 Notification sound: 'ponderous.m4a' - Converted from Ponderous.ogg to M4A based on the work of Aarni Koskela <akx@iki.fi> at <https://github.com/akx/Notifications/>, License: https://spdx.org/licenses/CC0-1.0.html or https://spdx.org/licenses/CC-BY-3.0.html
 jQuery Word/Character Counter <http://www.jamesfairhurst.co.uk/posts/view/jquery_word_character_counter>
 
