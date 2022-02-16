@@ -172,10 +172,14 @@ class Messages extends MY_Controller {
 		// Import value from file (currently only CSV)
 		if (isset($_FILES['import_file']))
 		{
-			$this->load->library('CSVReader');
 			$filePath = $_FILES['import_file']['tmp_name'];
-			$csvData = $this->csvreader->parse_file($filePath, TRUE);
-			$csvField = array_keys($csvData[0]);
+			//load the CSV document from a file path
+			$reader = League\Csv\Reader::createFromPath($filePath, 'r');
+			$reader->setHeaderOffset(0);
+
+			$csvField = $reader->getHeader(); //returns the CSV header record
+			$csvData = $reader->getRecords(); //returns all the CSV records as an Iterator object
+
 			foreach ($csvData as $data)
 			{
 				foreach ($csvField as $field)
