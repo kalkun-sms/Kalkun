@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d8bbd76cd5ac00e716018d3b9dd324a",
+    "content-hash": "b143d804a0bb78898a0ec790aff77387",
     "packages": [
         {
             "name": "codeigniter/framework",
@@ -38,6 +38,116 @@
             "description": "The CodeIgniter framework",
             "homepage": "https://codeigniter.com",
             "time": "2019-09-19T12:08:45+00:00"
+        },
+        {
+            "name": "datto/json-rpc",
+            "version": "6.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/datto/php-json-rpc.git",
+                "reference": "ad4d735f48d80c6b53f7405e5007d97c996533f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/datto/php-json-rpc/zipball/ad4d735f48d80c6b53f7405e5007d97c996533f6",
+                "reference": "ad4d735f48d80c6b53f7405e5007d97c996533f6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Datto\\JsonRpc\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Spencer Mortensen",
+                    "email": "smortensen@datto.com",
+                    "homepage": "http://spencermortensen.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Fully unit-tested JSON-RPC 2.0 for PHP",
+            "homepage": "http://datto.com",
+            "keywords": [
+                "json",
+                "json-rpc",
+                "jsonrpc",
+                "php",
+                "php-json-rpc",
+                "rpc"
+            ],
+            "support": {
+                "issues": "https://github.com/datto/php-json-rpc/issues",
+                "source": "https://github.com/datto/php-json-rpc/tree/6.1.0"
+            },
+            "time": "2020-02-28T23:54:06+00:00"
+        },
+        {
+            "name": "datto/json-rpc-http",
+            "version": "5.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/datto/php-json-rpc-http.git",
+                "reference": "db15a075f3562c4e8d297b9082acc5b2869bd4b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/datto/php-json-rpc-http/zipball/db15a075f3562c4e8d297b9082acc5b2869bd4b4",
+                "reference": "db15a075f3562c4e8d297b9082acc5b2869bd4b4",
+                "shasum": ""
+            },
+            "require": {
+                "datto/json-rpc": "~6.1",
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Datto\\JsonRpc\\Http\\Examples\\": "examples/src",
+                    "Datto\\JsonRpc\\Http\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Spencer Mortensen",
+                    "email": "smortensen@datto.com",
+                    "homepage": "http://spencermortensen.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "HTTP client and server for JSON-RPC 2.0",
+            "homepage": "http://datto.com",
+            "keywords": [
+                "client",
+                "http",
+                "json",
+                "json-rpc",
+                "jsonrpc",
+                "php",
+                "php-json-rpc",
+                "rpc",
+                "server"
+            ],
+            "support": {
+                "issues": "https://github.com/datto/php-json-rpc-http/issues",
+                "source": "https://github.com/datto/php-json-rpc-http/tree/master"
+            },
+            "time": "2020-03-02T21:27:10+00:00"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
