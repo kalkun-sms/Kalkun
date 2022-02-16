@@ -25,7 +25,6 @@ class Jsonrpc extends Plugin_controller {
 	function __construct()
 	{
 		parent::__construct(FALSE);
-		$this->load->library('Ci_Jsonrpc', NULL, 'jsonrpc');
 	}
 
 	/**
@@ -34,38 +33,12 @@ class Jsonrpc extends Plugin_controller {
 	*/
 	function send_sms()
 	{
-		$methods = array();
-		$methods['sms.send_sms'] = array();
-		$methods['sms.send_sms']['function'] = 'Jsonrpc.rpc_send_sms';
-		$methods['sms.send_sms']['summary'] = 'Sending an SMS';
+		// Json sample for input:
+		// {"jsonrpc":"2.0","id":551,"method":"sms.send_sms","params":{"phoneNumber":"+1234","message":"Testing JSONRPC"}}
 
-		$server = $this->jsonrpc->get_server();
-		$server->define_methods($methods);
-		$server->set_object($this);
-
-		$server->serve();
-	}
-
-	/**
-	* RPC for sending sms
-	*
-	*/
-	function rpc_send_sms($request)
-	{
-		$this->load->model(array('Kalkun_model', 'Message_model'));
-		$server = $this->jsonrpc->get_server();
-		$parameters = $request;
-
-		$data['coding'] = 'default';
-		$data['class'] = '1';
-		$data['dest'] = $parameters->phoneNumber;
-		$data['date'] = date('Y-m-d H:i:s');
-		$data['message'] = $parameters->message;
-		$data['delivery_report'] = 'default';
-		$data['uid'] = 1;
-		$sms = $this->Message_model->send_messages($data);
-
-		return $server->send_response($sms);
+		$evaluator = new Evaluator();
+		$server = new \Datto\JsonRpc\Http\Server($evaluator);
+		$server->reply();
 	}
 
 	/**
@@ -77,16 +50,56 @@ class Jsonrpc extends Plugin_controller {
 		$this->load->helper('url');
 		$server_url = site_url('plugin/jsonrpc/send_sms');
 
-		$client = $this->jsonrpc->get_client();
-		$client->server($server_url);
-		$client->method('sms.send_sms');
-
-		$request = array('phoneNumber' => '1234', 'message' => 'Testing JSONRPC');
-		$client->request($request);
-		$client->send_request();
+		$client = new \Datto\JsonRpc\Http\Client($server_url);
+		$request = array('phoneNumber' => '+1234', 'message' => 'Testing JSONRPC');
+		$client->query('sms.send_sms', $request, $result);
+		try
+		{
+			$client->send();
+		}
+		catch (ErrorException $exception)
+		{
+			echo "Exception sending jsonrpc query: ${exception}.message\n";
+			exit(1);
+		}
 
 		echo '<pre>';
-		print_r($client->get_response_object());
+		print_r($result);
 		echo '</pre>';
+	}
+}
+
+class Evaluator implements Datto\JsonRpc\Evaluator {
+
+	public function evaluate($method, $arguments)
+	{
+		if ($method === 'sms.send_sms')
+		{
+			return self::send_sms($arguments);
+		}
+
+		throw new MethodException();
+	}
+
+	private static function send_sms($arguments)
+	{
+		if (empty($arguments))
+		{
+			throw new ArgumentException();
+		}
+
+		$CI = &get_instance();
+		$CI->load->model(array('Kalkun_model', 'Message_model'));
+
+		$data['coding'] = 'default';
+		$data['class'] = '1';
+		$data['dest'] = $arguments['phoneNumber'];
+		$data['date'] = date('Y-m-d H:i:s');
+		$data['message'] = $arguments['message'];
+		$data['delivery_report'] = 'default';
+		$data['uid'] = 1;
+		$sms = $CI->Message_model->send_messages($data);
+
+		return implode(' ', $sms);
 	}
 }
