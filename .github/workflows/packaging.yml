@@ -1,0 +1,99 @@
+name: Packaging
+on:
+  push:
+    branches: 
+      - master
+      - devel
+      - 'release-**'
+      - 'feature-008-debian'
+jobs:
+  debian:
+    name: Debian package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install required packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git-buildpackage build-essential dh-apache2 pkg-php-tools phpab php-xdebug
+          cd ~
+          # These need to be more recent than the ones shipped in ubuntu focal (to build the dependencies)
+          # We need these versions to build the dependencies. The previous ones don't work well with php 7.4 that is in ubuntu focal.
+          wget http://ftp.us.debian.org/debian/pool/main/p/php-zeta-console-tools/php-zeta-console-tools_1.7.2-2_all.deb
+          wget http://ftp.us.debian.org/debian/pool/main/p/phpab/phpab_1.26.0-1_all.deb
+          # There is this crash with dh_phpcomposer on ubuntu focal
+          # Non-static method Pkgtools\Base\Overrides::override() cannot be called statically in /usr/share/php/pkgtools/base/dependencies.php:45
+          # So we update pkg-php-tools to version 1.40 (focal has 1.38)
+          wget http://ftp.us.debian.org/debian/pool/main/p/pkg-php-tools/pkg-php-tools_1.40_all.deb
+          sudo dpkg -i php-zeta-console-tools_1.7.2-2_all.deb phpab_1.26.0-1_all.deb pkg-php-tools_1.40_all.deb
+      - name: Set env
+        run: |
+          echo "LAST_COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+          echo "LAST_COMMIT_DATE=$(git log -1 --date=format:%Y%m%d --format=%cd)" >> $GITHUB_ENV
+          echo "KALKUN_VERSION=$(grep kalkun_version application/config/kalkun_settings.php | cut -d "'" -f 4)" >> $GITHUB_ENV
+          echo "DEBEMAIL=none@domain.tld" >> $GITHUB_ENV
+          echo "DEBFULLNAME='Deb Builder'" >> $GITHUB_ENV
+      - name: Build kalkun packages
+        run: |
+          set -x
+
+          # Download the only the debian folder from debian salsa servers to be able to build kalkun
+          # This adds only the debian folder to $GITHUB_REF_NAME to be able to build the packages
+          git remote add debian https://salsa.debian.org/bastif/kalkun.git
+          git fetch debian
+          git checkout -b debian_branch debian/master
+          git checkout $GITHUB_REF_NAME
+          git checkout debian_branch -- debian
+          git status
+
+          DEB_VERSION=$(echo $KALKUN_VERSION | sed -e "s/-/~/g")~${LAST_COMMIT_DATE}
+          gbp dch --new-version="$DEB_VERSION" --snapshot --ignore-branch
+          # Append debian version to version number
+          sed -i -e "1s/)/-1)/" debian/changelog
+
+          gbp export-orig --upstream-tree=BRANCH --upstream-branch=$(git rev-parse --abbrev-ref HEAD) --compression=xz
+
+          # depend on debhelper 12 (because ubuntu focal has only debhelper 12)
+          sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control
+
+          dpkg-buildpackage -d
+      - name: Build dependencies
+        run: |
+          set -x
+          # get the packages from debian mentors as they have not entered Debian yet
+
+          mkdir -p ~/deps
+          cd ~/deps
+          dget -du https://mentors.debian.net/debian/pool/main/p/php-codeigniter-framework/php-codeigniter-framework_3.1.11-1.dsc
+          dget -du https://mentors.debian.net/debian/pool/main/p/php-league-csv/php-league-csv_9.8.0-1.dsc
+          dget -du https://mentors.debian.net/debian/pool/main/p/php-datto-json-rpc-http/php-datto-json-rpc-http_5.0.6-1.dsc
+          dget -du https://mentors.debian.net/debian/pool/main/p/php-datto-json-rpc/php-datto-json-rpc_6.1.0-1.dsc
+          dget -du https://mentors.debian.net/debian/pool/main/p/php-giggsey-libphonenumber/php-giggsey-libphonenumber_8.12.43-1.dsc
+          dget -du https://mentors.debian.net/debian/pool/main/p/php-kissifrot-php-ixr/php-kissifrot-php-ixr_1.8.3-1.dsc
+          dget -du https://mentors.debian.net/debian/pool/main/p/php-giggsey-locale/php-giggsey-locale_2.1-1.dsc
+
+          # We apply a change with sed:
+          #  - depend on debhelper 12 (because ubuntu focal has only debhelper 12)
+          for file in $(ls *.dsc); do \
+            dpkg-source -x $file extract-dir ; \
+            cd extract-dir ; \
+            sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control ; \
+            dpkg-buildpackage -d ; \
+            cd ~/deps ; \
+            rm -r  extract-dir ; \
+          done
+      - name: Copy source & binary packages, and dependencies
+        if: always()
+        run: |
+          set -x
+          mkdir -p ~/output
+          dcmd mv ../*.changes ~/output
+          cp ~/deps/*.deb ~/output
+      - name: Archive artifacts
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Debian packages (source & binary)
+          path: '~/output/*'
+          if-no-files-found: ignore
