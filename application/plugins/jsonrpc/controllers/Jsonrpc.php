@@ -19,6 +19,7 @@
  * @category	Controllers
  */
 include_once(APPPATH.'plugins/Plugin_controller.php');
+require_once(__DIR__.'/../libraries/Evaluator.php');
 
 class Jsonrpc extends Plugin_controller {
 
@@ -66,40 +67,5 @@ class Jsonrpc extends Plugin_controller {
 		echo '<pre>';
 		print_r($result);
 		echo '</pre>';
-	}
-}
-
-class Evaluator implements Datto\JsonRpc\Evaluator {
-
-	public function evaluate($method, $arguments)
-	{
-		if ($method === 'sms.send_sms')
-		{
-			return self::send_sms($arguments);
-		}
-
-		throw new MethodException();
-	}
-
-	private static function send_sms($arguments)
-	{
-		if (empty($arguments))
-		{
-			throw new ArgumentException();
-		}
-
-		$CI = &get_instance();
-		$CI->load->model(array('Kalkun_model', 'Message_model'));
-
-		$data['coding'] = 'default';
-		$data['class'] = '1';
-		$data['dest'] = $arguments['phoneNumber'];
-		$data['date'] = date('Y-m-d H:i:s');
-		$data['message'] = $arguments['message'];
-		$data['delivery_report'] = 'default';
-		$data['uid'] = 1;
-		$sms = $CI->Message_model->send_messages($data);
-
-		return implode(' ', $sms);
 	}
 }
