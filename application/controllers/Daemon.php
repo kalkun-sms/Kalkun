@@ -53,28 +53,35 @@ class Daemon extends CI_Controller {
 
 		foreach ($message->result() as $tmp_message)
 		{
+			$is_spam = FALSE;
 			// check for spam
 			if ($this->Spam_model->apply_spam_filter($tmp_message->ID, $tmp_message->TextDecoded))
 			{
-				continue; ////is spam do not process later part
+				$is_spam = TRUE;
 			}
 
-			// hook for incoming message (before ownership)
-			$status = do_action('message.incoming.before', $tmp_message);
-
-			// message deleted, do not process later part
-			if (isset($status) && $status === 'break')
+			if ( ! $is_spam)
 			{
-				continue;
+				// hook for incoming message (before ownership)
+				$status = do_action('message.incoming.before', $tmp_message);
+
+				// message deleted, do not process later part
+				if (isset($status) && $status === 'break')
+				{
+					continue;
+				}
 			}
 
 			// set message's ownership
 			$msg_user = $this->_set_ownership($tmp_message);
 			$this->Kalkun_model->add_sms_used($msg_user, 'in');
 
-			// hook for incoming message (after ownership)
-			$tmp_message->msg_user = $msg_user;
-			$status = do_action('message.incoming.after', $tmp_message);
+			if ( ! $is_spam)
+			{
+				// hook for incoming message (after ownership)
+				$tmp_message->msg_user = $msg_user;
+				$status = do_action('message.incoming.after', $tmp_message);
+			}
 
 			// message deleted, do not process later part
 			if (isset($status) && $status === 'break')
@@ -82,8 +89,11 @@ class Daemon extends CI_Controller {
 				continue;
 			}
 
-			// run user filters
-			$this->_run_user_filters($tmp_message, $msg_user);
+			if ( ! $is_spam)
+			{
+				// run user filters
+				$this->_run_user_filters($tmp_message, $msg_user);
+			}
 
 			// update Processed
 			$id_message[0] = $tmp_message->ID;
