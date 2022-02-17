@@ -694,6 +694,8 @@ class Messages extends MY_Controller {
 	{
 		$this->load->helper('kalkun');
 
+		$number = rawurldecode($number);
+
 		// Pagination
 		$this->load->library('pagination');
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
@@ -706,7 +708,7 @@ class Messages extends MY_Controller {
 			$param['type'] = $type;
 			$param['number'] = trim($number);
 
-			$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.$number);
+			$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.rawurlencode($number));
 			$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
 			$config['uri_segment'] = 6;
 			$this->pagination->initialize($config);
@@ -790,7 +792,7 @@ class Messages extends MY_Controller {
 				$param['type'] = 'outbox';
 				$param['number'] = trim($number);
 				$param['uid'] = $this->session->userdata('id_user');
-				$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.$number);
+				$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.rawurlencode($number));
 				$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
 				$config['uri_segment'] = 6;
 				$this->pagination->initialize($config);
@@ -826,7 +828,7 @@ class Messages extends MY_Controller {
 					$param['number'] = trim($number);
 					$param['uid'] = $this->session->userdata('id_user');
 
-					$config['base_url'] = site_url('/messages/conversation/my_folder/'.$type.'/'.$number.'/'.$id_folder);
+					$config['base_url'] = site_url('/messages/conversation/my_folder/'.$type.'/'.rawurlencode($number).'/'.$id_folder);
 					$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
 					$config['uri_segment'] = 7;
 					$this->pagination->initialize($config);
@@ -887,7 +889,7 @@ class Messages extends MY_Controller {
 					$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 					$config['cur_tag_open'] = '<span id="current">';
 					$config['cur_tag_close'] = '</span>';
-					$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.$number);
+					$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.rawurlencode($number));
 					$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
 					$config['uri_segment'] = 6;
 					$this->pagination->initialize($config);
@@ -939,7 +941,7 @@ class Messages extends MY_Controller {
 				{
 					if ($segment[4] !== '_')
 					{
-						$param['search_string'] = urldecode($segment[4]);
+						$param['search_string'] = rawurldecode($segment[4]);
 					}
 					$data['search_string'] = $segment[4];
 					$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
@@ -959,11 +961,11 @@ class Messages extends MY_Controller {
 				{
 					if ($segment[4] !== '_')
 					{
-						$param['search_string'] = urldecode($segment[4]);
+						$param['search_string'] = rawurldecode($segment[4]);
 					}
 					if ($segment[5] !== '_')
 					{
-						$param['number'] = $segment[5];
+						$param['number'] = rawurldecode($segment[5]);
 					}
 					if ($segment[6] !== '_')
 					{
@@ -1009,7 +1011,7 @@ class Messages extends MY_Controller {
 		if ($this->input->post('search_sms'))
 		{
 			$params[] = 'basic';
-			$params[] = trim($this->input->post('search_sms'));
+			$params[] = rawurlencode(trim($this->input->post('search_sms')));
 		}
 		// advanced search
 		else
@@ -1018,7 +1020,7 @@ class Messages extends MY_Controller {
 			{
 				$params[] = 'advanced';
 				$params[] = $this->input->post('a_search_query') ? $this->input->post('a_search_query') : '_';
-				$params[] = $this->input->post('a_search_from_to') ? $this->input->post('a_search_from_to') : '_';
+				$params[] = $this->input->post('a_search_from_to') ? rawurlencode($this->input->post('a_search_from_to')) : '_';
 				$params[] = $this->input->post('a_search_date_from') ? $this->input->post('a_search_date_from') : '_';
 				$params[] = $this->input->post('a_search_date_to') ? $this->input->post('a_search_date_to') : '_';
 				$params[] = $this->input->post('a_search_sentitems_status') ? $this->input->post('a_search_sentitems_status') : '_';
