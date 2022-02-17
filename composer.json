@@ -12,6 +12,9 @@
     "require": {
         "codeigniter/framework": "^3.1",
         "paragonie/random_compat": "^9.99",
+        "giggsey/libphonenumber-for-php": "^8.12",
+        "league/csv": "^8.2 || ^9.5",
+        "datto/json-rpc-http": "^4.0 || ^5.0",
         "kissifrot/php-ixr": "1.8.*"
     },
     "require-dev": {

@@ -13,16 +13,32 @@
 			$('span.unread_inbox_notif').text(unreadcount[0]);
 			$('span.unread_spam_notif').text(unreadcount[2]);
 
-			var current_title = $(document).attr('title');
-			var stopNumber = current_title.search('\\)');
-			if (stopNumber != '-1') var title = current_title.substr(stopNumber + 1);
-			else var title = current_title;
+			// example of title: "(23) Kalkun"
+			var title = $(document).attr('title');
+			var re_title = title.match('(\\((\\d*)\\) )?(.*)');
+			var unreadcount_inbox_previous = re_title[2] ? re_title[2] : 0;
+			var title_cleaned = re_title[3];
 
-			var newtitle = unreadcount[0] + ' ' + title;
-			$(document).attr('title', newtitle);
+			var re = unreadcount[0].match('\\((.*)\\)');
+			var unreadcount_inbox_current = re[1] ? re[1] : 0;
+
+			var title_new = unreadcount[0] + ' ' + title_cleaned;
+			$(document).attr('title', title_new);
+
+			/*
+			console.debug(
+				"title: " + title +
+				"\ntitle_cleaned: " + title_cleaned +
+				"\nunreadcount_inbox_previous: " + unreadcount_inbox_previous +
+				"\nunreadcount_inbox_current: " + unreadcount_inbox_current +
+				"\ntitle_new: " + title_new
+			);
+			console.debug(re_title);
+			console.debug(re);
+			*/
 
 			// play the sound
-			if (unreadcount[0] != '') {
+			if (unreadcount_inbox_current > 0 && unreadcount_inbox_current !== unreadcount_inbox_previous) {
 				// Use HTMLAudioElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
 				var audioElement = new Audio('<?php echo $this->config->item('sound_path').$this->config->item('new_incoming_message_sound')?>');
 				audioElement.play();

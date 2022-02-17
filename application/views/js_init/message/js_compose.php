@@ -11,7 +11,7 @@
 			buttonImageOnly: true
 		});
 
-		$("#message").autogrow();
+		autosize($("#message"));
 
 		//$(".word_count").text("");
 		//$("input#sms_loop").attr("disabled", true);

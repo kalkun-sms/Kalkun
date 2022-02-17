@@ -2,7 +2,7 @@
 /**
 * Plugin Name: JSONRPC
 * Plugin URI: http://azhari.harahap.us
-* Version: 0.1
+* Version: 1.0
 * Description: JSONRPC Server Plugin
 * Author: Azhari Harahap
 * Author URI: http://azhari.harahap.us

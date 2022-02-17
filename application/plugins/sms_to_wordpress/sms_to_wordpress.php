@@ -89,8 +89,6 @@ function sms_to_wordpress($sms)
 		$wp = $CI->plugin_model->get_wp_url_by_phone($number);
 		if (is_array($wp))
 		{
-			// Load IXR classes
-			require_once FCPATH . '/vendor/autoload.php';
 			$client = new IXR\Client\Client($wp['wp_url']);
 			
 			// Post parameter
