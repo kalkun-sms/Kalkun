@@ -56,7 +56,7 @@ function kalkun_nice_date($str, $option = NULL)
 	$datetime = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $str);
 	$timestamp = $datetime->getTimestamp();
 
-	$now = time();
+	$now = now();
 
 	$diff = abs($now - $timestamp);
 
