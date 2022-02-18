@@ -341,7 +341,6 @@ class Messages extends MY_Controller {
 		$data['date'] = $date;
 		$data['validity'] = $this->input->post('validity');
 		$data['delivery_report'] = $this->Kalkun_model->get_setting()->row('delivery_report');
-		$data['coding'] = ($this->input->post('unicode') === 'unicode') ? 'unicode' : 'default';
 		$data['ncpr'] = ($this->input->post('ncpr') === 'ncpr') ? TRUE : FALSE;
 		$data['uid'] = $this->session->userdata('id_user');
 		$data['url'] = $this->input->post('url');

@@ -1,6 +1,8 @@
 <script type="text/javascript">
 	$(document).ready(function() {
-		var sms_char;
+		var max_chars_per_sms;
+		var message_length_correction;
+
 		var img_path = '<?php echo  $this->config->item('img_path');?>';
 		$(".datepicker").datepicker({
 			minDate: 0,
@@ -114,29 +116,14 @@
 			});
 		*/
 
-		// Default value
-		if ($("input#unicode:checked").length == 1) {
-			sms_char = 70;
-		} else {
-			sms_char = 160;
-		}
-
-		// Unicode 
-		$("input#unicode").on("click", function() {
-			var n = $("input#unicode:checked").length;
-			if (n == 0) { // not checked
-				sms_char = 160;
-			} else { // checked	
-				sms_char = 70;
-			}
-		});
-
-		// if ads is active
 		<?php
+	$message_length_correction = 0;
+
+	// if ads is active
 	if ($this->config->item('sms_advertise'))
 	{
 		$ads_count = strlen($this->config->item('sms_advertise_message'));
-		echo 'sms_char = sms_char - '.$ads_count.';';
+		$message_length_correction += $ads_count;
 	}
 
 	// if append @username is active
@@ -146,25 +133,35 @@
 		$append_username_message = "\n".str_replace('@username', '@'.$this->session->userdata('username'), $append_username_message);
 
 		$append_username_count = strlen($append_username_message);
-		echo 'sms_char = sms_char - '.$append_username_count.';';
+		$message_length_correction += $append_username_count;
 	}
+
+	echo 'message_length_correction = '.$message_length_correction.';';
 	?>
+
+		// From: https://stackoverflow.com/a/12673229/15401262 (Copyright: Lajos Arpad, License: CC-BY-SA-3.0)
+		function isGSMAlphabet(text) {
+			var regexp = new RegExp("^[A-Za-z0-9 \\r\\n@£$¥èéùìòÇØøÅå\u0394_\u03A6\u0393\u039B\u03A9\u03A0\u03A8\u03A3\u0398\u039EÆæßÉ!\"#$%&'()*+,\\-./:;<=>?¡ÄÖÑÜ§¿äöñüà^{}\\\\\\[~\\]|\u20AC]*$");
+			return regexp.test(text);
+		}
 
 		// Character counter
 		$('.word_count').each(function() {
 			text_character = "<?php echo tr('characters');?>";
 			text_message = "<?php echo tr('message');?>";
 			var length = $(this).val().length;
-			var message = Math.ceil(length / sms_char);
-			$(this).parent().find('.counter').html(length + ' ' + text_character + ' / ' + message + ' ' + text_message);
+			max_chars_per_sms = isGSMAlphabet($(this).val()) ? 160 : 70;
+			var message_count = Math.ceil((length + message_length_correction) / max_chars_per_sms);
+			$(this).parent().find('.counter').html(length + ' ' + text_character + ' / ' + message_count + ' ' + text_message);
 			$(this).keyup(function() {
-				var new_length = $(this).val().length;
 				var str = $(this).val();
+				var new_length = str.length;
+				max_chars_per_sms = isGSMAlphabet(str) ? 160 : 70;
 				var n = str.match(/\^|\{|\}|\\|\[|\]|\~|\||\€/g);
 				n = (n) ? n.length : 0;
 				new_length = new_length + n;
-				var message = Math.ceil(new_length / sms_char);
-				$(this).parent().find('.counter').html(new_length + ' ' + text_character + ' / ' + message + ' ' + text_message);
+				var message_count = Math.ceil((new_length + message_length_correction) / max_chars_per_sms);
+				$(this).parent().find('.counter').html(new_length + ' ' + text_character + ' / ' + message_count + ' ' + text_message);
 			});
 		});
 

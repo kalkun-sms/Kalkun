@@ -230,10 +230,12 @@ if ($sig_option == 'true')
 </textarea>
 			<div>
 				<div style="float: left"><span class="counter"></span></div>
-				<div style="float: right; padding-right: 5px;"><?php if ($this->config->item('ncpr')) { ?><input class="left_aligned" type="checkbox" value="ndnc" id="ncpr" name="ncpr" style="border: none;" /><label for="ncpr"><?php echo tr('Check DND');?> </label> <?php }?><input class="left_aligned" type="checkbox" value="unicode" id="unicode" name="unicode" style="border: none;" <?php if ($this->config->item('unicode'))
-{
-	echo 'checked="checked"';
-}?> /><label for="unicode"><?php echo tr('Send as Unicode'); ?></label></div>
+				<div style="float: right; padding-right: 5px;">
+					<?php if ($this->config->item('ncpr')): ?>
+					<input class="left_aligned" type="checkbox" value="ndnc" id="ncpr" name="ncpr" style="border: none;" />
+					<label for="ncpr"><?php echo tr('Check DND');?> </label>
+					<?php endif; ?>
+				</div>
 			</div>
 		</td>
 	</tr>

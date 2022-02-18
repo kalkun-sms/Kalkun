@@ -235,7 +235,6 @@ if ($tmp['source'] == 'sentitems'):
 		</div>
 
 		<div class="message_metadata hidden">
-			<span class="coding"><?php echo $tmp['Coding']; ?></span>
 			<span class="class"><?php echo $tmp['Class']; ?></span>
 		</div>
 

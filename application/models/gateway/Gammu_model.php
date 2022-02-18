@@ -88,7 +88,6 @@ class Gammu_model extends CI_Model {
 	 * dest string, phone number destination
 	 * date datetime
 	 * message string
-	 * coding default, unicode
 	 * class -1, 0, 1
 	 * delivery_report default, yes, no
 	 * uid int
@@ -110,21 +109,16 @@ class Gammu_model extends CI_Model {
 		if ( ! empty($data['dest']) && ! empty($data['date']) && ! is_null_loose($data['message']))
 		{
 			// Check coding
-			switch ($data['coding'])
-			{
-				case 'default':
-					$standar_length = 160;
-					$data['coding'] = 'Default_No_Compression';
-					break;
+			$coding = get_gammu_coding($data['message']);
 
-				case 'unicode':
-					$standar_length = 70;
-					$data['coding'] = 'Unicode_No_Compression';
-					break;
+			$standar_length = 160;
+			if ( ! is_gsm0338($data['message']))
+			{
+				$standar_length = 70;
 			}
 
 			// Check message's length
-			$messagelength = $this->_get_message_length($data['message'], $data['coding']);
+			$messagelength = $this->_get_message_length($data['message'], $coding);
 
 			// Multipart message
 			if ($messagelength > $standar_length)
@@ -140,7 +134,7 @@ class Gammu_model extends CI_Model {
 				$data['UDH'] = $UDH;
 
 				// split string
-				$tmpmsg = $this->_get_message_multipart($data['message'], $data['coding'], $multipart_length);
+				$tmpmsg = $this->_get_message_multipart($data['message'], $coding, $multipart_length);
 
 				// count part message
 				$part = count($tmpmsg);
@@ -159,7 +153,7 @@ class Gammu_model extends CI_Model {
 				// insert the rest part to Outbox Multipart
 				for ($i = 1; $i < count($tmpmsg); $i++)
 				{
-					$this->_send_message_multipart($outboxid, $tmpmsg[$i], $i, $part, $data['coding'], $data['class'], $UDH);
+					$this->_send_message_multipart($outboxid, $tmpmsg[$i], $i, $part, $data['class'], $UDH);
 					$this->Kalkun_model->add_sms_used($data['uid']);
 				}
 			}
@@ -198,7 +192,7 @@ class Gammu_model extends CI_Model {
 			'InsertIntoDB' => date('Y-m-d H:i:s'),
 			'SendingDateTime' => $tmp_data['date'],
 			'DestinationNumber' => $tmp_data['dest'],
-			'Coding' => $tmp_data['coding'],
+			'Coding' => get_gammu_coding($tmp_data['message']),
 			'Class' => $tmp_data['class'],
 			'CreatorID' => $tmp_data['CreatorID'],
 			'SenderID' => $tmp_data['SenderID'],
@@ -239,7 +233,7 @@ class Gammu_model extends CI_Model {
 	 *
 	 * @return
 	 */
-	function _send_message_multipart($outboxid, $message, $pos, $part, $coding, $class, $UDH)
+	function _send_message_multipart($outboxid, $message, $pos, $part, $class, $UDH)
 	{
 		$code = $pos + 1;
 		if ($code < 10)
@@ -251,7 +245,7 @@ class Gammu_model extends CI_Model {
 			'ID' => $outboxid,
 			'UDH' => $UDH.$part.''.$code,
 			'SequencePosition' => $pos + 1,
-			'Coding' => $coding,
+			'Coding' => get_gammu_coding($message),
 			'Class' => $class,
 			'TextDecoded' => $message,
 		);
