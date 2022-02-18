@@ -290,7 +290,6 @@ function autoreply($tel, $reply_msg)
 	{
 		$CI = &get_instance();
 		$CI->load->model('Message_model');
-		$data['coding'] = 'default';
 		$data['class'] = '1';
 		$data['dest'] = $tel;
 		$data['date'] = date('Y-m-d H:i:s');

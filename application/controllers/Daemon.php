@@ -221,7 +221,6 @@ class Daemon extends CI_Controller {
 			$fp = fsockopen($tmp->ip_address, $tmp->port_number, $errno, $errstr, 60);
 			if ( ! $fp)
 			{
-				$data['coding'] = 'default';
 				$data['message'] = $tmp->respond_message."\n\nKalkun Server Alert";
 				$data['date'] = date('Y-m-d H:i:s');
 				$data['dest'] = $tmp->phone_number;

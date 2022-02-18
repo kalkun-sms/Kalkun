@@ -49,7 +49,6 @@ class Xmlrpc extends Plugin_controller {
 		$this->load->model(array('Kalkun_model', 'Message_model'));
 		$parameters = $request->output_parameters();
 
-		$data['coding'] = 'default';
 		$data['class'] = '1';
 		$data['dest'] = $parameters[0];
 		$data['date'] = date('Y-m-d H:i:s');

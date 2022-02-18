@@ -66,7 +66,6 @@ function simple_autoreply($sms)
 	$config = simple_autoreply_initialize();
 	$CI = &get_instance();
 	$CI->load->model('Message_model');
-	$data['coding'] = 'default';
 	$data['class'] = '1';
 	$data['dest'] = $sms->SenderNumber;
 	$data['date'] = date('Y-m-d H:i:s');
