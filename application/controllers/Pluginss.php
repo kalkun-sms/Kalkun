@@ -68,8 +68,7 @@ class Pluginss extends MY_Controller {
 		else
 		{
 			$data['title'] .= lang('pluginss_available');
-			$pluginsObj = new Plugins();
-			$plugins = get_available_plugin();
+			$plugins = $this->plugins->print_plugins();
 			$no = 0;
 
 			if ( ! empty($plugins))
@@ -77,11 +76,11 @@ class Pluginss extends MY_Controller {
 				// do cleanup array key
 				foreach ($plugins as $key => $tmp)
 				{
-					$new_plugin[$no]['plugin_system_name'] = $key;
-					foreach ($tmp['plugin_info'] as $key2 => $tmp2)
-					{
-						$new_plugin[$no][$key2] = $tmp2;
-					}
+					$this->plugins->get_plugin_headers($key);
+					$new_plugin[$no] = array_merge (
+						array ('plugin_system_name' => $key),
+						$this->plugins->plugin_info($key)
+					);
 					$no++;
 				}
 				$installed = $this->Plugin_model->get_plugins()->result_array();
@@ -115,7 +114,7 @@ class Pluginss extends MY_Controller {
 	 */
 	function install($plugin_name)
 	{
-		activate_plugin($plugin_name);
+		$this->plugins->activate_plugin($plugin_name);
 		$this->session->set_flashdata('notif', str_replace('%plugin_name%', $plugin_name, lang('pluginss_successfully_installed')));
 		redirect('pluginss');
 	}
@@ -131,7 +130,7 @@ class Pluginss extends MY_Controller {
 	 */
 	function uninstall($plugin_name)
 	{
-		deactivate_plugin($plugin_name);
+		$this->plugins->deactivate_plugin($plugin_name);
 		$this->session->set_flashdata('notif', str_replace('%plugin_name%', $plugin_name, lang('pluginss_successfully_uninstalled')));
 		redirect('pluginss');
 	}
