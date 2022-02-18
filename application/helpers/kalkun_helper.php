@@ -49,13 +49,16 @@ function filter_data($data)
 
 function nice_date($str, $option = NULL)
 {
+	$CI = &get_instance();
+	$CI->load->helper('date');
+
 	// convert the date to unix timestamp
 	list($date, $time) = explode(' ', $str);
 	list($year, $month, $day) = explode('-', $date);
 	list($hour, $minute, $second) = explode(':', $time);
 
 	$timestamp = mktime($hour, $minute, $second, $month, $day, $year);
-	$now = time();
+	$now = now();
 	$blocks = array(
 		array('name' => lang('kalkun_year'), 'amount' => 60 * 60 * 24 * 365),
 		array('name' => lang('kalkun_month'), 'amount' => 60 * 60 * 24 * 31),
