@@ -13,7 +13,16 @@
 					maxlength: 12
 				},
 				phone_number: {
-					required: true
+					required: true,
+					remote: {
+						url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
+						type: "post",
+						data: {
+							phone: function() {
+								return $("#phone_number").val();
+							}
+						}
+					}
 				},
 				password: {
 					required: true,
