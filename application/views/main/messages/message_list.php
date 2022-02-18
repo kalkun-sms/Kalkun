@@ -82,7 +82,16 @@ else
 	}
 
 	// count string for message preview
-	$char_per_line = 100 - strlen(kalkun_nice_date($message_date)) - strlen($senderName); ?>
+	$char_per_line = 100 - strlen(kalkun_nice_date($message_date)) - strlen($senderName);
+
+	if ($this->config->item('conversation_grouping'))
+	{
+		$checkbox_value = $number;
+	}
+	else
+	{
+		$checkbox_value = $tmp->ID;
+	} ?>
 
 <div title="<?php echo $tmp->TextDecoded?>" class="messagelist <?php  if ($type == 'inbox' && $tmp->readed == 'false')
 	{
@@ -90,7 +99,7 @@ else
 	} ?>">
 	<div class="message_container">
 		<div class="message_header" style="color: #444; height: 20px; overflow: hidden">
-			<input type="checkbox" id="<?php echo $number; ?>" class="select_conversation nicecheckbox" value="<?php echo $number; ?>" style="border: none;" />
+			<input type="checkbox" id="<?php echo $checkbox_value; ?>" class="select_conversation nicecheckbox" value="<?php echo $checkbox_value; ?>" style="border: none;" />
 			<span class="message_toggle" style="cursor: pointer;" onclick="document.location.href='<?php echo site_url(); ?>/messages/conversation/<?php echo $folder; ?>/<?php echo $type; ?>/<?php echo rawurlencode($number); ?>/<?php if ($folder == 'my_folder')
 	{
 		echo $this->uri->segment(4);

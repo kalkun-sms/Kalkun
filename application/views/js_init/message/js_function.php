@@ -44,9 +44,14 @@
 						async: false
 					});
 					$.post(delete_url + source, {
+						<?php if ($this->config->item('conversation_grouping')): ?>
 						type: 'conversation',
 						number: $(this).val(),
 						current_folder: current_folder
+						<?php else: ?>
+						type: 'single',
+						id: $(this).val(),
+						<?php endif; ?>
 					}, function(data) {
 						if (!data) {
 							$(message_row).slideUp("slow");
@@ -78,11 +83,19 @@
 				$("input.select_conversation:checked").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post(move_url, {
+						<?php if ($this->config->item('conversation_grouping')): ?>
 						type: 'conversation',
 						current_folder: current_folder,
 						folder: source,
 						id_folder: id_folder,
 						number: $(this).val()
+						<?php else: ?>
+						type: 'single',
+						current_folder: current_folder,
+						folder: source,
+						id_folder: id_folder,
+						id_message: $(this).val(),
+						<?php endif; ?>
 					}, function() {
 						$(message_row).slideUp("slow");
 					});
@@ -111,11 +124,19 @@
 				$("input.select_conversation:checked").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post(move_url, {
+						<?php if ($this->config->item('conversation_grouping')): ?>
 						type: 'conversation',
 						current_folder: current_folder,
 						folder: source,
 						id_folder: id_folder,
 						number: $(this).val()
+						<?php else: ?>
+						type: 'single',
+						current_folder: current_folder,
+						folder: source,
+						id_folder: id_folder,
+						id_message: $(this).val(),
+						<?php endif; ?>
 					}, function() {
 						$(message_row).slideUp("slow");
 					});
