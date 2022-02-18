@@ -37,7 +37,7 @@ else: ?>
 						<?php endif;?>
 						<a class="sendmessage simplelink" href="#"><?php echo tr('Send message');?></a>
 						<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
-						<?php echo anchor('messages/conversation/folder/phonebook/'.$tmp->Number, tr('See conversation'), 'title="'.tr('See conversation').'" class="simplelink"') ;?>
+						<?php echo anchor('messages/conversation/folder/phonebook/'.rawurlencode($tmp->Number), tr('See conversation'), 'title="'.tr('See conversation').'" class="simplelink"') ;?>
 					</span>
 				</div>
 			</div>
