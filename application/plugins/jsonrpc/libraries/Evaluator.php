@@ -41,7 +41,6 @@ class Evaluator implements Datto\JsonRpc\Evaluator {
 		$CI = &get_instance();
 		$CI->load->model(array('Kalkun_model', 'Message_model'));
 
-		$data['coding'] = 'default';
 		$data['class'] = '1';
 		$data['dest'] = $arguments['phoneNumber'];
 		$data['date'] = date('Y-m-d H:i:s');

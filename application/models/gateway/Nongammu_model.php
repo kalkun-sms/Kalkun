@@ -53,7 +53,6 @@ class Nongammu_model extends Gammu_model {
 	 * dest string, phone number destination
 	 * date datetime
 	 * message string
-	 * coding default, unicode
 	 * class -1, 0, 1
 	 * delivery_report default, yes, no
 	 * uid int
@@ -138,7 +137,7 @@ class Nongammu_model extends Gammu_model {
 			'InsertIntoDB' => date('Y-m-d H:i:s'),
 			'SendingDateTime' => $tmp_data['date'],
 			'DestinationNumber' => $tmp_data['dest'],
-			'Coding' => ($tmp_data['coding'] === 'default' ? 'Default_No_Compression' : 'Unicode_No_Compression'),
+			'Coding' => get_gammu_coding($tmp_data['message']),
 			'Class' => $tmp_data['class'],
 			'CreatorID' => $tmp_data['CreatorID'],
 			'SenderID' => $tmp_data['SenderID'],
@@ -171,7 +170,7 @@ class Nongammu_model extends Gammu_model {
 			'InsertIntoDB' => date('Y-m-d H:i:s'),
 			'SendingDateTime' => $tmp_data['date'],
 			'DestinationNumber' => $tmp_data['dest'],
-			'Coding' => ($tmp_data['coding'] === 'default' ? 'Default_No_Compression' : 'Unicode_No_Compression'),
+			'Coding' => get_gammu_coding($tmp_data['message']),
 			'Class' => $tmp_data['class'],
 			'CreatorID' => $tmp_data['CreatorID'],
 			'Text' => '',
@@ -233,7 +232,6 @@ class Nongammu_model extends Gammu_model {
 			$data = array (
 				'date' => $row['SendingDateTime'],
 				'dest' => $row['DestinationNumber'],
-				'coding' => ($row['Coding'] === 'Default_No_Compression' ? 'default' : 'unicode'),
 				'class' => $row['Class'],
 				'CreatorID' => $row['CreatorID'],
 				'SenderID' => $row['SenderID'],

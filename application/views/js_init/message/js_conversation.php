@@ -359,10 +359,6 @@
 			TextDecoded = $(this).parents('div:eq(1)').children('div.message_content').text();
 			ID = $(this).parents('div:eq(1)').children().children('input.select_message').attr('id');
 			Class = $(this).parents('div:eq(1)').children('div.message_metadata').children('span.class').text();
-			Coding = $(this).parents('div:eq(1)').children('div.message_metadata').children('span.coding').text();
-			if (Coding == 'Unicode_No_Compression') {
-				Coding = 'unicode';
-			}
 			<?php
 $resend_conf_text = lang('kalkun_resend_about_to_resend_to');
 $message_content_text = lang('kalkun_resend_msg_content');
@@ -387,7 +383,6 @@ $delete_dup_text = lang('kalkun_resend_delete_copy');
 							manualvalue: DestinationNumber,
 							senddateoption: 'option1',
 							class: Class,
-							unicode: Coding,
 							validity: '-1',
 							smstype: 'normal',
 							sms_loop: '1',
@@ -455,16 +450,11 @@ $delete_dup_text = lang('kalkun_resend_delete_copy');
 								TextDecoded = $(this).parents('div:eq(1)').children('div.message_content').text();
 								ID = $(this).parents('div:eq(1)').children().children('input.select_message').attr('id');
 								Class = $(this).parents('div:eq(1)').children('div.message_metadata').children('span.class').text();
-								Coding = $(this).parents('div:eq(1)').children('div.message_metadata').children('span.coding').text();
-								if (Coding == 'Unicode_No_Compression') {
-									Coding = 'unicode';
-								}
 								$.post("<?php echo site_url('messages/compose_process') ?>", {
 									sendoption: 'sendoption3',
 									manualvalue: DestinationNumber,
 									senddateoption: 'option1',
 									class: Class,
-									unicode: Coding,
 									validity: '-1',
 									smstype: 'normal',
 									sms_loop: '1',

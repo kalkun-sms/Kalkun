@@ -49,7 +49,6 @@ class Tmobilecz_model extends Nongammu_model {
 	 * dest string, phone number destination
 	 * date datetime
 	 * message string
-	 * coding default, unicode
 	 * class -1, 0, 1
 	 * delivery_report default, yes, no
 	 * uid int

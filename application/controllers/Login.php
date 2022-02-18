@@ -112,7 +112,6 @@ class Login extends CI_Controller {
 			else
 			{
 				// Send token to user
-				$data['coding'] = 'default';
 				$data['class'] = '1';
 				$data['dest'] = $token['phone'];
 				$data['date'] = date('Y-m-d H:i:s');
