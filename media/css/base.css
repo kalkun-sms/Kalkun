@@ -12,7 +12,7 @@ a {
 	text-decoration: none;
 }
 
-a:hover: { text-decoration: underline; }
+a:hover { text-decoration: underline; }
 
 a img {
 	border: none;
@@ -36,8 +36,7 @@ input[type=submit] {
 	font-size: 11px;
 	border: 1px solid #D5D5D5;
 	color: #333;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;	
+	border-radius: 5px;
 }
 
 select {
@@ -96,7 +95,7 @@ textarea {
 
 #top_navigation {
 	background: #666;
-	background-image: -moz-linear-gradient(center bottom , #666, #999);
+	background-image: linear-gradient(to bottom , #666, #999);
 	margin-top: 0px;
 	width: 100%;
 	padding: 10px 0px;	
@@ -325,8 +324,7 @@ textarea {
     font-size:1em;
     margin: 0 0 1.5em 0;
     min-height: 300px;
-	-moz-border-radius: 15px;
-	-webkit-border-radius: 15px;    
+	border-radius: 15px;
 }
 
 /* tabbing */
@@ -351,8 +349,7 @@ textarea {
 	padding: 5px 10px 5px 10px;
 	color: #FFF;
 	font-size: 11px;	
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px; 	
+	border-radius: 5px;
 }
 
 /* message list */
@@ -397,8 +394,7 @@ textarea {
 }
 
 .globalmenu, .globalmenu_bottom {
-	-moz-border-radius: 0px; 
-	-webkit-border-radius : 0px;	
+	border-radius: 0px;
 	padding: 5px 4px;
 }
 
@@ -560,8 +556,7 @@ textarea {
 	font-size: 11px;
 	color: #000;
 	padding: 10px;	
-	-moz-border-radius: 10px; 
-	-webkit-border-radius : 10px;	
+	border-radius: 10px;
 }
 
 /* Footer */
@@ -584,8 +579,7 @@ textarea {
 }
 
 .rounded {
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 
 .unread {
@@ -598,8 +592,7 @@ textarea {
 	padding: 3px;
 	font-size: 9px;	
 	border: 1px solid #D5D5D5;
-	-moz-border-radius: 50px;
-	-webkit-border-radius: 50px;	
+	border-radius: 50px;
 }
 
 
@@ -677,12 +670,9 @@ textarea {
 
 .sms_search_form input[type="submit"] {
 	background: url("../images/bg-button.gif") repeat-x;
-    -moz-border-radius: 0px; 
-	-webkit-border-radius : 0px;
-    -moz-border-radius-topright: 3px;
-    -moz-border-radius-bottomright: 3px; 
-    -webkit-border-top-right-radius: 3px;
-    -webkit-border-bottom-right-radius: 3px;
+    border-radius: 0px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
     margin: 0;
     padding: 3px 10px;
 	border: 1px solid #999; 
@@ -713,8 +703,7 @@ textarea {
 	margin: 5px 10px 5px 20px;
 	border: 1px solid #CCC;
 	font-size: 11px;
-	-moz-border-radius: 5px; 
-	-webkit-border-radius : 5px;
+	border-radius: 5px;
 }
 
 .quick_reply_box textarea {
@@ -732,8 +721,7 @@ textarea {
 	color: #FFF;
 	padding: 8px 5px 5px 5px;
 	border: 1px solid #000;
-	-moz-border-radius: 5px; 
-	-webkit-border-radius : 5px;	
+	border-radius: 5px;
 }
 
 .simplebutton:hover {
@@ -742,8 +730,7 @@ textarea {
 	padding: 8px 5px 5px 5px;
 	border: 1px solid #000;
 	text-decoration: none;
-	-moz-border-radius: 5px; 
-	-webkit-border-radius : 5px;	
+	border-radius: 5px;
 }
 
 .simpleform {
@@ -903,8 +890,7 @@ label.error {
 	width: 250px;
 	border: 2px solid #78A7B5;		
 	color: #FFF;
-	-moz-border-radius: 15px;
-	-webkit-border-radius: 15px;		
+	border-radius: 15px;
 }
 
 #login td {
@@ -924,7 +910,7 @@ label.error {
 #window_title {
 	color: #FFF;
 	padding: 8px 0px;
-	font-weight: 400px;
+	font-weight: 400;
 	font-size: 14px;
 	height: 20px;
 }
@@ -999,7 +985,7 @@ label.error {
 .dialog input.text { margin-bottom:12px; width:95%; padding: .4em; }
 .dialog fieldset { padding:0; border:0; margin-top:25px; }
 .dialog h1 { font-size: 1.2em; margin: .6em 0; }
-.ui-button { outline: 0; margin:0; padding: .4em 1em .5em; text-decoration:none;  !important; cursor:pointer; position: relative; text-align: center; }
+.ui-button { outline: 0; margin:0; padding: .4em 1em .5em; text-decoration:none; cursor:pointer; position: relative; text-align: center; }
 .ui-dialog .ui-state-highlight, .ui-dialog .ui-state-error { padding: .3em;  }
 
 .contact_list {
