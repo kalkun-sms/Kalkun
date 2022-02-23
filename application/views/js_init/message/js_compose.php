@@ -72,7 +72,16 @@
 					minlength: 1
 				},
 				manualvalue: {
-					required: "#sendoption3:checked"
+					required: "#sendoption3:checked",
+					remote: {
+						url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
+						type: "post",
+						data: {
+							phone: function() {
+								return $("#manualvalue").val();
+							},
+						}
+					}
 				},
 				import_file: {
 					required: "#sendoption4:checked,#import_value:filled"

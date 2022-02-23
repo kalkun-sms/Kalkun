@@ -105,7 +105,7 @@ class Messages extends MY_Controller {
 					$multipart['option'] = 'check';
 					$multipart['id_message'] = $id;
 					$tmp_check = $this->Message_model->get_multipart($multipart);
-					if ($tmp_check === TRUE)
+					if ($tmp_check > 0)
 					{
 						$multipart['option'] = 'all';
 						foreach ($this->Message_model->get_multipart($multipart)->result() as $part)

@@ -20,7 +20,10 @@
 			var title_cleaned = re_title[3];
 
 			var re = unreadcount[0].match('\\((.*)\\)');
-			var unreadcount_inbox_current = re[1] ? re[1] : 0;
+			var unreadcount_inbox_current = 0;
+			if (re != null && re[1]) {
+				unreadcount_inbox_current = re[1];
+			}
 
 			var title_new = unreadcount[0] + ' ' + title_cleaned;
 			$(document).attr('title', title_new);

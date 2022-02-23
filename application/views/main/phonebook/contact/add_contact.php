@@ -1,6 +1,5 @@
 <!-- Contact dialog -->
 <script src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
-<script src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.phone.js"></script>
 <script src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.tagsinput-revisited.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquery.tagsinput-revisited.min.css" />
 <script type="text/javascript">
@@ -28,6 +27,18 @@
 		});
 
 	});
+
+	jQuery.validator.classRuleSettings.phone = {
+		remote: {
+			url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
+			type: "post",
+			data: {
+				phone: function() {
+					return $("#number").val();
+				}
+			}
+		}
+	};
 
 </script>
 

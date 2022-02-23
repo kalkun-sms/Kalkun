@@ -124,7 +124,7 @@ else
 			</div>
 
 			<div id="manually" class="hidden">
-				<input style="width: 95%;" type="text" name="manualvalue" />
+				<input style="width: 95%;" type="text" name="manualvalue" id="manualvalue" />
 			</div>
 
 			<div id="import" class="hidden"><input type="file" name="import_file" id="import_file" class="text ui-widget-content ui-corner-all" /></div>

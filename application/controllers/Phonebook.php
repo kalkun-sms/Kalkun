@@ -388,15 +388,15 @@ class Phonebook extends MY_Controller {
 			$query = $this->Phonebook_model->search_phonebook($param)->result_array();
 
 			// Add identifier, c for contact, g for group, u for user
-			foreach ($query as $key => $q)
+			foreach ($query as $key => $val)
 			{
-				$query[$key]['name'] .= ' ('.str_replace('+', '', $q['id']).')';
-				$query[$key]['id'] = $q['id'].':c';
+				$query[$key]['name'] .= ' ('.$val['id'].')';
+				$query[$key]['id'] = $val['id'].':c';
 			}
 			$group = $this->Phonebook_model->search_group($param)->result_array();
-			foreach ($group as $key => $q)
+			foreach ($group as $key => $val)
 			{
-				$group[$key]['id'] = $q['id'].':g';
+				$group[$key]['id'] = $val['id'].':g';
 			}
 
 			// User, currently on inbox only
@@ -404,10 +404,10 @@ class Phonebook extends MY_Controller {
 			if ($type === 'inbox')
 			{
 				$user = $this->User_model->search_user($q)->result_array();
-				foreach ($user as $key => $q)
+				foreach ($user as $key => $val)
 				{
-					$user[$key]['id'] = $q['id_user'].':u';
-					$user[$key]['name'] = $q['realname'];
+					$user[$key]['id'] = $val['id_user'].':u';
+					$user[$key]['name'] = $val['realname'];
 				}
 			}
 
@@ -417,9 +417,9 @@ class Phonebook extends MY_Controller {
 			{
 				$contact = array();
 			}
-			foreach ($contact as $key => $q)
+			foreach ($contact as $key => $val)
 			{
-				$contact[$key]['id'] = $q['id'].':c';
+				$contact[$key]['id'] = $val['id'].':c';
 			}
 
 			$combine = array_merge($query, $group, $user, $contact);
