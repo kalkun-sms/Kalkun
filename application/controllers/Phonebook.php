@@ -390,7 +390,7 @@ class Phonebook extends MY_Controller {
 			// Add identifier, c for contact, g for group, u for user
 			foreach ($query as $key => $val)
 			{
-				$query[$key]['name'] .= ' ('.str_replace('+', '', $val['id']).')';
+				$query[$key]['name'] .= ' ('.$val['id'].')';
 				$query[$key]['id'] = $val['id'].':c';
 			}
 			$group = $this->Phonebook_model->search_group($param)->result_array();
