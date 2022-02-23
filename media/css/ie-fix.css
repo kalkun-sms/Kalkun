@@ -4,11 +4,15 @@
   @author: kinshuk <kinshuk1989@gmail.com> 
 **/
 
-a:focus, input:focus{ border:0px;border-color:transparent!important; outline-width:0!important;}
-
-input[type=checkbox],input[type=radio]{
-    background: transparent;
-    border:0px;
+a:focus,
+input:focus {
+	border: 0px;
+	border-color: transparent !important;
+	outline-width: 0 !important;
 }
 
- 
+input[type=checkbox],
+input[type=radio] {
+	background: transparent;
+	border: 0px;
+}
