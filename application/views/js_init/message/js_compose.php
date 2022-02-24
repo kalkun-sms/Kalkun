@@ -21,7 +21,7 @@
 		$("#personvalue").tokenInput("<?php echo site_url('phonebook/get_phonebook/').'/'.(isset($source) ? $source : '');?>", {
 			hintText: "<?php echo tr('Insert name from contact list')?>",
 			noResultsText: "No results",
-			searchingText: "<?php echo tr('Searching...'); ?>...",
+			searchingText: "<?php echo tr('Searching...'); ?>",
 			preventDuplicates: true,
 			method: "POST",
 			classes: {
@@ -99,7 +99,7 @@
 			},
 			messages: {
 				personvalue: "<?php echo tr('Please enter recipient'); ?>",
-				manualvalue: "<?php echo tr('Please enter recipient'); ?>",
+				manualvalue: "<?php echo tr('Please specify a valid mobile phone number'); ?>",
 				import_file: "<?php echo tr('Please enter recipient'); ?>",
 				message: "<?php echo tr('Please enter message'); ?>",
 				datevalue: "<?php echo tr('Please enter sending date'); ?>",
