@@ -389,3 +389,6 @@ $lang['Delete selected'] = 'Delete selected';
 $lang['Message details'] = 'Message details';
 $lang['Application'] = 'Application';
 $lang['Open shortcut help'] = 'Open shortcut help';
+$lang['Error'] = 'Error';
+$lang['Please specify a valid mobile phone number'] = 'Please specify a valid mobile phone number';
+$lang['Go to {0}'] = 'Go to {0}';
