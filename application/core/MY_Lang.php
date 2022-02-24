@@ -177,7 +177,18 @@ class MY_Lang extends MX_Lang {
 		// Because killer robots like unicorns!
 		if ($value === FALSE)
 		{
-			$value = '🌐 '.$line;
+			if (extension_loaded('intl'))
+			{
+				$value = MessageFormatter::formatMessage(
+					$this->locale,
+					'🌐 '.$line,
+					$msg_params
+				);
+			}
+			else
+			{
+				$value = '🌐 '.$line;
+			}
 			log_message('error', 'Could not find the language line "'.$line.'"');
 		}
 

@@ -353,7 +353,7 @@ class Kalkun extends MY_Controller {
 			}
 			else
 			{
-				$result = 'Please specify a valid mobile phone number';
+				$result = tr('Please specify a valid mobile phone number');
 			}
 		}
 		catch (Exception $e)
