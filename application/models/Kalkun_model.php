@@ -113,7 +113,7 @@ class Kalkun_model extends CI_Model {
 	{
 		$username = $this->input->post('username');
 		$phone = phone_format_e164($this->input->post('phone'));
-    
+
 		$this->db->from('user');
 		$this->db->where('username', $username);
 		$this->db->or_where('phone_number', $phone);
