@@ -167,7 +167,6 @@
 			});
 			$("#compose_sms_container").dialog('open');
 		});
-		return false;
 	}
 
 	$(document).ready(function() {
@@ -180,6 +179,7 @@
 		// Compose SMS
 		$('#compose_sms_normal').on('click', null, function() {
 			compose_message('normal', true, '#personvalue');
+			return false;
 		});
 
 		// About
