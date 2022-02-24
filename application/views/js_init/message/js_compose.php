@@ -66,6 +66,7 @@
 
 		// validation
 		$("#composeForm").validate({
+			ignore: '', // By default, jquery validation ignores hidden fields. Set this to the empty string to not ignore hidden fields (needed for personvalue which is hidden by tokenInput.
 			rules: {
 				personvalue: {
 					required: "#sendoption1:checked",
