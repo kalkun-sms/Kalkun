@@ -8,7 +8,7 @@ echo form_open('phonebook', array('class' => 'sms_search_form')); ?>
 {
 	echo $search_string;
 }?>" class="ui-corner-left" /></td>
-		<td><input type="submit" value="<?php echo lang('tni_search_contacts'); ?>" /></td>
+		<td><input type="submit" value="<?php echo tr('Search contacts'); ?>" /></td>
 	</tr>
 </table>
 <?php echo form_close();
@@ -20,9 +20,9 @@ echo form_open('messages/query', array('class' => 'sms_search_form')); ?>
 {
 	echo urldecode($search_string);
 }?>" class="ui-corner-left" /></td>
-		<td><input type="submit" value="<?php echo lang('tni_search_sms');?>" /></td>
+		<td><input type="submit" value="<?php echo tr('Search messages');?>" /></td>
 		<td valign="middle">
-			<div style="margin-left: 5px"><small><a style="text-decoration: underline" id="a_search" href="#"><?php echo lang('kalkun_advanced_search');?></a></small></div>
+			<div style="margin-left: 5px"><small><a style="text-decoration: underline" id="a_search" href="#"><?php echo tr('Advanced search');?></a></small></div>
 		</td>
 	</tr>
 </table>

@@ -46,27 +46,16 @@ function filter_data($data)
 	}
 }
 
-function nice_date($str, $option = NULL)
+function kalkun_nice_date($str, $option = NULL)
 {
 	$CI = &get_instance();
 	$CI->load->helper('date');
 
 	// convert the date to unix timestamp
-	list($date, $time) = explode(' ', $str);
-	list($year, $month, $day) = explode('-', $date);
-	list($hour, $minute, $second) = explode(':', $time);
+	$datetime = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $str);
+	$timestamp = $datetime->getTimestamp();
 
-	$timestamp = mktime($hour, $minute, $second, $month, $day, $year);
 	$now = now();
-	$blocks = array(
-		array('name' => lang('kalkun_year'), 'amount' => 60 * 60 * 24 * 365),
-		array('name' => lang('kalkun_month'), 'amount' => 60 * 60 * 24 * 31),
-		array('name' => lang('kalkun_week'), 'amount' => 60 * 60 * 24 * 7),
-		array('name' => lang('kalkun_day'), 'amount' => 60 * 60 * 24),
-		array('name' => lang('kalkun_hour'), 'amount' => 60 * 60),
-		array('name' => lang('kalkun_minute'), 'amount' => 60),
-		array('name' => lang('kalkun_second'), 'amount' => 1)
-	);
 
 	$diff = abs($now - $timestamp);
 
@@ -76,54 +65,35 @@ function nice_date($str, $option = NULL)
 	}
 	else
 	{
-		if ($diff < 60)
+		//if ($diff < 60)
+		//{
+		//	return tr('Less than a minute ago');
+		//}
+		//else
 		{
-			return lang('kalkun_nicedate_less1min_ago'); // "Less than a minute ago"
-		}
-		else
-		{
-			$levels = 1;
-			$current_level = 1;
-			$result = array();
-			foreach ($blocks as $block)
-			{
-				if ($current_level > $levels)
-				{
-					break;
-				}
-				if ($diff / $block['amount'] >= 1)
-				{
-					$amount = floor($diff / $block['amount']);
-					$plural = '';
-					//if ($amount>1) {$plural='s';} else {$plural='';}
-					$result[] = $amount.' '.$block['name'].$plural;
-					$diff -= $amount * $block['amount'];
-					$current_level += 1;
-				}
-			}
-			$res = implode(' ', $result);
-
+			$units = 2;
 			if ($timestamp > $now)
 			{
-				$text = lang('kalkun_nicedate_remaining');
+				return tr('{0} remaining', NULL, timespan($now, $timestamp, $units));
 			}
 			else
 			{
-				$text = lang('kalkun_nicedate_ago');
+				return tr('{0} ago', NULL, timespan($timestamp, $now, $units));
 			}
-			return str_replace('%nicedate%', $res, $text);
 		}
 	}
 }
 
+
+
+
 function get_modem_status($status, $tolerant)
 {
 	// convert the date to unix timestamp
-	list($date, $time) = explode(' ', $status);
-	list($year, $month, $day) = explode('-', $date);
-	list($hour, $minute, $second) = explode(':', $time);
+	$datetime = DateTime::createFromFormat('Y-m-d H:i:s', $status);
+	$datetime->add(new DateInterval('PT'.$tolerant.'M'));
+	$timestamp = $datetime->getTimestamp();
 
-	$timestamp = mktime($hour, $minute + $tolerant, $second, $month, $day, $year);
 	$now = time();
 
 	//$diff = abs($now-$timestamp);
@@ -189,31 +159,31 @@ function check_delivery_report($report)
 {
 	if ($report === 'SendingError' OR $report === 'Error' OR $report === 'DeliveryFailed')
 	{
-		$status = lang('tni_msg_stat_fail');
+		$status = tr('Sending failed');
 	}
 	elseif ($report === 'SendingOKNoReport')
 	{
-		$status = lang('tni_msg_stat_oknr');
+		$status = tr('Sent, no report');
 	}
 	elseif ($report === 'SendingOK')
 	{
-		$status = lang('tni_msg_stat_okwr');
+		$status = tr('Sent, waiting for report');
 	}
 	elseif ($report === 'DeliveryOK')
 	{
-		$status = lang('tni_msg_stat_deliv');
+		$status = tr('Delivered');
 	}
 	elseif ($report === 'DeliveryPending')
 	{
-		$status = lang('tni_msg_stat_pend');
+		$status = tr('Pending');
 	}
 	elseif ($report === 'DeliveryUnknown')
 	{
-		$status = lang('tni_msg_stat_unknown');
+		$status = tr('Unknown');
 	}
 	elseif ($report === 'Reserved')
 	{
-		$status = lang('tni_msg_stat_reserved');
+		$status = tr('Not set yet');
 	}
 
 	return $status;

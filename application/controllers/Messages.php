@@ -105,7 +105,7 @@ class Messages extends MY_Controller {
 					$multipart['option'] = 'check';
 					$multipart['id_message'] = $id;
 					$tmp_check = $this->Message_model->get_multipart($multipart);
-					if ($tmp_check === TRUE)
+					if ($tmp_check > 0)
 					{
 						$multipart['option'] = 'all';
 						foreach ($this->Message_model->get_multipart($multipart)->result() as $part)
@@ -365,7 +365,7 @@ class Messages extends MY_Controller {
 		{
 			unset($dest);
 			$return_msg['type'] = 'error';
-			$return_msg['msg'] = lang('kalkun_msg_outgoing_disabled');
+			$return_msg['msg'] = tr('Outgoing SMS disabled');
 		}
 
 		// if ndnc filtering enabled
@@ -382,7 +382,7 @@ class Messages extends MY_Controller {
 						{
 							unset($dest[$i]);
 							$return_msg['type'] = 'error';
-							$return_msg['msg'] = lang('kalkun_msg_number_in_DND');
+							$return_msg['msg'] = tr('A number was found in DND Resitry. SMS sending was skipped for it.');
 						}
 					}
 				}
@@ -392,7 +392,7 @@ class Messages extends MY_Controller {
 					{
 						unset($dest);
 						$return_msg['type'] = 'error';
-						$return_msg['msg'] = lang('kalkun_msg_number_in_DND');
+						$return_msg['msg'] = tr('A number was found in DND Resitry. SMS sending was skipped for it.');
 					}
 				}
 			}
@@ -430,7 +430,7 @@ class Messages extends MY_Controller {
 				$msg_id = $this->Message_model->copy_message($this->input->post('msg_id'));
 				$this->Message_model->update_owner($msg_id, $id);
 				$return_msg['type'] = 'info';
-				$return_msg['msg'] = lang('kalkun_msg_delivered_to_user_inbox');
+				$return_msg['msg'] = tr('Message delivered successfully to user inbox');
 			}
 		}
 
@@ -478,12 +478,12 @@ class Messages extends MY_Controller {
 				$n++;
 			}
 			$return_msg['type'] = 'info';
-			$return_msg['msg'] = lang('kalkun_msg_moved_to_outbox');
+			$return_msg['msg'] = tr('Copy of the message was placed in the outbox and is ready for delivery.');
 		}
 		if ( ! isset($return_msg))
 		{
 			$return_msg['type'] = 'error';
-			$return_msg['msg'] = lang('kalkun_msg_no_numberfound');
+			$return_msg['msg'] = tr('No number found. SMS not sent.');
 		}
 
 		// Display sending status
@@ -1161,7 +1161,7 @@ class Messages extends MY_Controller {
 
 		if ($param['option'] === 'permanent' && $this->config->item('only_admin_can_permanently_delete') && $this->session->userdata('level') !== 'admin')
 		{
-			echo lang('kalkun_msg_only_admin_can_permanently_delete');
+			echo tr('Only administrators can permanently delete messages.');
 			exit;
 		}
 

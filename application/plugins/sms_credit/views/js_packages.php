@@ -61,10 +61,10 @@
 				height: 150,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_cancel')?>': function() {
+					'<?php echo tr('Cancel')?>': function() {
 						$(this).dialog('close');
 					},
-					'<?php echo lang('tni_yes')?>': function() {
+					'<?php echo tr('Yes')?>': function() {
 						window.location.href = url;
 						$(this).dialog('close');
 					}

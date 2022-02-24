@@ -3,7 +3,7 @@
 body {
 	margin: 0px 0px 50px 0px;
 	background: url('../images/background.jpg') repeat-x;
-	font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+	font-family: "Lucida Grande", Verdana, Arial, "Bitstream Vera Sans", sans-serif;
 	font-size: 12px;
 	background-color: #cce9f2;
 	line-height: 1.5em;
@@ -37,23 +37,22 @@ a {
 
 #container {
 	width: 775px;
-	overflow: hidden;	
-	text-align: left;		
+	overflow: hidden;
+	text-align: left;
 	background: transparent;
 }
 
 #left-container {
 	width: 520px;
 	float: left;
-	color: #000;	
-	padding: 20px;	
-	margin: 0;	
+	color: #000;
+	padding: 20px;
+	margin: 0;
 	min-height: 300px;
-	background-color: #FFF;  
-	-moz-border-radius: 15px;
-	-webkit-border-radius: 15px;
-	-moz-border-radius-topright: 0px;
-	-moz-border-radius-bottomright: 0px;	
+	background-color: #FFF;
+	border-radius: 15px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
 }
 
 #right-container {
@@ -62,10 +61,9 @@ a {
 	background-color: #86C0D2;
 	padding: 20px 0px;
 	min-height: 300px;
-	-moz-border-radius: 15px;
-	-webkit-border-radius: 15px;
-	-moz-border-radius-topleft: 0px;
-	-moz-border-radius-bottomleft: 0px;	
+	border-radius: 15px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
 }
 
 #right-container ul {
@@ -103,8 +101,7 @@ a {
 	font-size: 13px;
 	border: 1px solid #D5D5D5;
 	color: #333;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;	
+	border-radius: 5px;
 }
 
 .button:hover {
@@ -123,7 +120,8 @@ a {
 	border-bottom: none;
 }
 
-.simpletable th.right, .simpletable td.right {
+.simpletable th.right,
+.simpletable td.right {
 	border-right: 1px solid #CCC;
 }
 
@@ -136,7 +134,7 @@ a {
 	padding: 5px;
 	border: 1px solid #CCC;
 	border-right: none;
-	border-bottom: none;	
+	border-bottom: none;
 }
 
 .formtable {
@@ -152,7 +150,7 @@ a {
 .formtable select {
 	border: 1px solid #CCC;
 	padding: 3px;
-	font-size: 12px;	
+	font-size: 12px;
 }
 
 .green {
@@ -161,12 +159,11 @@ a {
 }
 
 .orange {
-        color: orange;
-        font-weight: bold;
+	color: orange;
+	font-weight: bold;
 }
 
 .red {
 	color: red;
 	font-weight: bold;
 }
-

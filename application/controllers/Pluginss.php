@@ -32,7 +32,7 @@ class Pluginss extends MY_Controller {
 		// Prevent non-admin user
 		if ($this->session->userdata('level') !== 'admin')
 		{
-			$this->session->set_flashdata('notif', lang('pluginss_only_admin_can_manage'));
+			$this->session->set_flashdata('notif', tr('Access denied. Only administrators are allowed to manage plugins.'));
 			redirect('/');
 		}
 
@@ -58,7 +58,7 @@ class Pluginss extends MY_Controller {
 		$data['type'] = $type;
 		if ($type === 'installed')
 		{
-			$data['title'] .= lang('pluginss_installed');
+			$data['title'] .= tr(' - Installed');
 			$data['plugins'] = $this->Plugin_model->get_plugins()->result_array();
 			foreach ($data['plugins'] as $key => $plugin)
 			{
@@ -67,7 +67,7 @@ class Pluginss extends MY_Controller {
 		}
 		else
 		{
-			$data['title'] .= lang('pluginss_available');
+			$data['title'] .= tr(' - Available');
 			$plugins = $this->plugins->print_plugins();
 			$no = 0;
 
@@ -115,7 +115,7 @@ class Pluginss extends MY_Controller {
 	function install($plugin_name)
 	{
 		$this->plugins->activate_plugin($plugin_name);
-		$this->session->set_flashdata('notif', str_replace('%plugin_name%', $plugin_name, lang('pluginss_successfully_installed')));
+		$this->session->set_flashdata('notif', tr('Plugin {0} installed successfully.', NULL, $plugin_name));
 		redirect('pluginss');
 	}
 
@@ -131,7 +131,7 @@ class Pluginss extends MY_Controller {
 	function uninstall($plugin_name)
 	{
 		$this->plugins->deactivate_plugin($plugin_name);
-		$this->session->set_flashdata('notif', str_replace('%plugin_name%', $plugin_name, lang('pluginss_successfully_uninstalled')));
+		$this->session->set_flashdata('notif', tr('Plugin {0} uninstalled successfully.', NULL, $plugin_name));
 		redirect('pluginss');
 	}
 
