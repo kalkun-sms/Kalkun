@@ -22,9 +22,33 @@ You need to install and configure this first:
 
 ## Installation
 
+Kalkun uses the database that is created by gammu with all the tables created by gammy. Kalkun then add tables and some columns. So there is no such case where one has a gammu database separate from the kalkun database. Both software share the same database.
+
+### Debian, ubuntu & related
+
+You are lucky, the package maintainer did most of the configuration & setup job for you.
+
+1. You can download the latest binaries & source packages in deb format on the
+github actions page:
+    1. go to https://github.com/kalkun-sms/Kalkun/actions?query=workflow%3APackaging++
+    1. filter the branch you wish to have the packages for
+    1. click on the header of the 1st workflow to get the most recent
+    1. download the "Debian packages" artifact
+    1. Then install the packages you wish with `apt install ./kalkun_*.deb`
+    1. The archive also contains some dependencies that you may need if your distribution doesn't ship them. Command to install kalkun and the dependencies would be:
+    ```
+    apt install \
+      ./php-*.deb \
+      kalkun_*.deb
+    ```
+    1. Optionally, you may install plugins.
+1. Finally read /usr/share/doc/kalkun/README.Debian.gz
+
+### Manual Installation
+
 1. Extract to web root folder (eg: /var/www/html => Ubuntu)
-1. Run `composer install` 
-1. Create database named kalkun
+1. Run `composer install` from there
+1. If you haven't created the gammu database yet, create it. It is shared by gammu & kalkun. Here we name it `kalkun`, but by default, gammu may name it `smsd`.
 
    For MySQL (you may do it with mysql console or phpMyAdmin)
      ```
@@ -74,7 +98,7 @@ You need to install and configure this first:
 1. Configure Kalkun
     - _There are 2 ways to configure_
         - Graphic Install (this will also check that all the dependencies are installed)  
-          1. Launch http://your-location/kalkun/index.php/install, and follow instruction there
+          1. Launch http://localhost/kalkun/index.php/install, and follow instruction there
           1. Finally delete file /var/www/html/kalkun/*install* in case the installer didn't do so.
         - Manual Install 
           1. Import sql file located in kalkun/media/db/ to kalkun database.
@@ -90,8 +114,9 @@ You need to install and configure this first:
            2. Delete the file /var/www/html/kalkun/*install* 
            
               `rm /var/www/html/kalkun/install`
+
 ## IMPORTANT
-  * After install is finished, you need to remove install folder.
+  * After install is finished, you may need to remove install file.
   * To improve security, it's higly recommended to change "encryption_key" in application/config/config.php
     - See https://codeigniter.com/userguide3/libraries/encryption.html#setting-your-encryption-key. On unix/linux you may run
     ```
@@ -101,9 +126,10 @@ You need to install and configure this first:
 
 ### Migration Note (to kalkun 0.8)
   * During migration to codeigniter 3 (done with version 0.8 of Kalkun), it was strongly advised to switch to the Encryption Library for security reasons. This required to change the default encryption key. The Encryption library was used in "sms to wordpress" and "sms to xmpp" plugins. You need to recreate the configuration of these plugins so that they continue to work.
+  The password you may have stored with the older version can't be recovered with the new encryption key.
 
 ### Launch Kalkun
-Open up your browser and go to http://your-location/kalkun
+Open up your browser and go to http://localhost/kalkun
 
 Default account for the Web Interface (you can change it after you login):  
 `username = kalkun`  
