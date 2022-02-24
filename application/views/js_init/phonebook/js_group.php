@@ -6,14 +6,14 @@
 			if ($(this).hasClass('editpbkgroup')) {
 				var id = $(this).parents("tr:first").attr("id");
 				var public = $(this).parents("tr:first").attr("public");
-				var dialog_title = '<?php echo lang('tni_group_manage'); ?>';
+				var dialog_title = '<?php echo tr('Manage group'); ?>';
 				var groupname = $(this).parents("div:eq(1)").find("span.groupname").text();
 				$('input#group_name').val(groupname);
 				$('input.pbkgroup_id').val(id);
 				if (public == "true") $("input#is_public").prop('checked', true);
 				else $("input#is_public").prop('checked', false);
 			} else {
-				var dialog_title = '<?php echo lang('tni_group_add'); ?>';
+				var dialog_title = '<?php echo tr('Create group'); ?>';
 				$('input#group_name').val("");
 				$('input.pbkgroup_id').val("");
 			}
@@ -25,10 +25,10 @@
 				height: 175,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_save')?>': function() {
+					'<?php echo tr('Save')?>': function() {
 						$("form.addgroupform").trigger('submit');
 					},
-					'<?php echo lang('kalkun_cancel')?>': function() {
+					'<?php echo tr('Cancel')?>': function() {
 						$(this).dialog('close');
 					}
 				},
@@ -44,7 +44,7 @@
 			var count = $("input.select_group:checkbox:checked").length;
 			var dest_url = '<?php echo site_url('phonebook/delete_group') ?>';
 			if (count == 0) {
-				$('.notification_area').text("<?php echo lang('tni_group_no_selected')?>");
+				$('.notification_area').text("<?php echo tr('No group selected.')?>");
 				$('.notification_area').show();
 			} else {
 				// confirm first
@@ -54,10 +54,10 @@
 					height: 200,
 					modal: true,
 					buttons: {
-						'<?php echo lang('kalkun_cancel')?>': function() {
+						'<?php echo tr('Cancel')?>': function() {
 							$(this).dialog('close');
 						},
-						'<?php echo lang('tni_group_del_button')?>': function() {
+						'<?php echo tr('Yes, delete selected group(s).')?>': function() {
 							$("input.select_group:checked").each(function() {
 								var row = $(this).parents('tr');
 								var id = row.attr('id');

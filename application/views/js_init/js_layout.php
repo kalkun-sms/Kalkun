@@ -105,16 +105,16 @@
 		}
 		$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', data, function() {
 			var buttons = {};
-			buttons['<?php echo lang('tni_send_message'); ?>'] = function() {
+			buttons['<?php echo tr('Send message'); ?>'] = function() {
 				if ($("#composeForm").valid()) {
 					$('.ui-dialog-buttonpane :button').each(function() {
-						if ($(this).text() == '<?php echo lang('tni_send_message'); ?>') $(this).html('<?php echo lang('tni_sending_message'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');
+						if ($(this).text() == '<?php echo tr('Send message'); ?>') $(this).html('<?php echo tr('Sending'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');
 					});
 					$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize())
 						.done(function(data) {
 							$("#compose_sms_container").html(data);
 							$("#compose_sms_container").dialog("option", "buttons", {
-								"Close": function() {
+								"<?php echo tr('Close'); ?>": function() {
 									$(this).dialog("destroy");
 								}
 							});
@@ -126,7 +126,7 @@
 						})
 						.fail(function(data) {
 							$('.ui-dialog-buttonpane :button').each(function() {
-								if ($(this).text() == '<?php echo lang('tni_sending_message'); ?> ') $(this).html('<?php echo lang('tni_send_message'); ?>');
+								if ($(this).text() == '<?php echo tr('Sending'); ?> ') $(this).html('<?php echo tr('Send message'); ?>');
 							});
 							$("#compose_sms_container_error").html($(data.responseText).filter('div'));
 							$("#compose_sms_container_error").dialog({
@@ -135,7 +135,7 @@
 								show: 'fade',
 								hide: 'fade',
 								buttons: {
-									"Close": function() {
+									"<?php echo tr('Close'); ?>": function() {
 										$(this).dialog("destroy");
 									}
 								}
@@ -144,7 +144,7 @@
 				}
 			};
 			if (repeatable) {
-				buttons['<?php echo lang('tni_send_and_repeat'); ?>'] = function() {
+				buttons['<?php echo tr('Send and repeat'); ?>'] = function() {
 					if ($("#composeForm").valid()) {
 						$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 							$("#compose_sms_container").append(data);
@@ -152,7 +152,7 @@
 					}
 				};
 			}
-			buttons["<?php echo lang('kalkun_cancel'); ?>"] = function() {
+			buttons["<?php echo tr('Cancel'); ?>"] = function() {
 				$(this).dialog('destroy');
 			};
 			$(this).dialog({
@@ -219,8 +219,8 @@
 		});
 
 		// languange support
-		var save = '<?php echo lang('kalkun_save')?>';
-		var cancel = '<?php echo lang('kalkun_cancel')?>';
+		var save = '<?php echo tr('Save')?>';
+		var cancel = '<?php echo tr('Cancel')?>';
 
 		$('div.ui-dialog-buttonpane:eq(0) button:eq(1)').text(cancel);
 		$('div.ui-dialog-buttonpane:eq(0) button:eq(0)').text(save);
@@ -253,10 +253,10 @@
 				width: 500,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_search');?>': function() {
+					'<?php echo tr('Search');?>': function() {
 						$('#a_search_form').trigger('submit');
 					},
-					"<?php echo lang('kalkun_cancel');?>": function() {
+					"<?php echo tr('Cancel');?>": function() {
 						$(this).dialog('close');
 					}
 				},

@@ -9,16 +9,29 @@ if ($messages->num_rows() == 0)
 	{
 		if ($this->uri->segment(4) == '5')
 		{
-			echo $no_message_container['start'].lang('tni_msglist_trash_empty').$no_message_container['end'];
+			echo $no_message_container['start'].tr('There is no messages in your trash').$no_message_container['end'];
 		}
 		else
 		{
-			echo $no_message_container['start'].lang('kalkun_no_message_in_folder').$no_message_container['end'];
+			echo $no_message_container['start'].tr('There is no message in this folder').$no_message_container['end'];
 		}
 	}
 	else
 	{
-		echo $no_message_container['start'].lang('kalkun_no_message').' '.lang('kalkun_'.$type).$no_message_container['end'];
+		$folder_type = '';
+		switch ($type)
+		{
+			case 'inbox':
+				$folder_type = tr('Inbox');
+				break;
+			case 'outbox':
+				$folder_type = tr('Outbox');
+				break;
+			case 'sentitems':
+				$folder_type = tr('Sent items');
+				break;
+		}
+		echo $no_message_container['start'].tr('There is no message in your {0}.', NULL, $folder_type).$no_message_container['end'];
 	}
 }
 else
@@ -69,7 +82,7 @@ else
 	}
 
 	// count string for message preview
-	$char_per_line = 100 - strlen(nice_date($message_date)) - strlen($senderName);
+	$char_per_line = 100 - strlen(kalkun_nice_date($message_date)) - strlen($senderName);
 
 	if ($this->config->item('conversation_grouping'))
 	{
@@ -94,7 +107,7 @@ else
 				<span <?php  if ($type == 'inbox' && $tmp->readed == 'false')
 	{
 		echo 'style="font-weight: bold"';
-	} ?>><?php echo nice_date($message_date); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
+	} ?>><?php echo kalkun_nice_date($message_date); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
 					&nbsp;&nbsp;<?php echo $senderName; ?>
 					<?php
 			if ($folder == 'folder'):

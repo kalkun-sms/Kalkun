@@ -14,7 +14,7 @@
 		$(document).on('click', "a.global_delete", action_delete = function() {
 			var count = $("input:checkbox:checked").length;
 			if (count == 0) {
-				$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected'); ?>");
+				$('.notification_area').text("<?php echo tr('No item selected'); ?>");
 				$('.notification_area').show();
 			} else {
 				var notif = count + ' messages deleted';
@@ -50,7 +50,7 @@
 		$(document).on('click', "a.recover_button", action_recover = function() {
 			var count = $("input.select_message:checkbox:checked:visible").length;
 			if (count == 0) {
-				show_notification("<?php echo lang('tni_msg_no_conv_selected')?>");
+				show_notification("<?php echo tr('No item selected')?>");
 			} else {
 
 				var id_folder = (source == 'inbox') ? 1 : 3;
@@ -76,7 +76,7 @@
 			var count = $("input:checkbox:checked").length;
 			if (count == 0) {
 				$("#movetodialog").dialog('close');
-				show_notification("<?php echo lang('tni_msg_no_conv_selected'); ?>");
+				show_notification("<?php echo tr('No item selected'); ?>");
 			} else {
 				var id_folder = $(this).attr('id');
 				$("#movetodialog").dialog('close');
@@ -120,7 +120,7 @@
 
 			if ($(row).find("div.detail_area").is(":visible")) {
 				$(row).find("div.detail_area").toggle();
-				$(row).find("a.detail_button").html('<?php echo lang('tni_show_details'); ?>');
+				$(row).find("a.detail_button").html('<?php echo tr('Show details'); ?>');
 			}
 			return false;
 		});
@@ -220,8 +220,8 @@
 			var row = $(this).parents('div:eq(2)');
 			$(row).find("div.detail_area").toggle();
 
-			if ($(this).text() == '<?php echo lang('tni_hide_details'); ?>') $(this).html('<?php echo lang('tni_show_details'); ?>');
-			else $(this).html('<?php echo lang('tni_hide_details'); ?>');
+			if ($(this).text() == '<?php echo tr('Hide details'); ?>') $(this).html('<?php echo tr('Show details'); ?>');
+			else $(this).html('<?php echo tr('Hide details'); ?>');
 			return false;
 		});
 
@@ -233,7 +233,7 @@
 				'param1': param1
 			}, function() {
 				$(this).dialog({
-					title: '<?php echo lang('tni_contact_add');?>',
+					title: '<?php echo tr('Add contact');?>',
 					modal: true,
 					show: 'fade',
 					hide: 'fade',
@@ -244,7 +244,7 @@
 								$("#contact_container").html(data);
 								$("#contact_container").dialog({
 									buttons: {
-										"Okay": function() {
+										"<?php echo tr('Close'); ?>": function() {
 											$(this).dialog("close");
 										}
 									}
@@ -254,7 +254,7 @@
 								}, 1500);
 							});
 						},
-						"<?php echo lang('kalkun_cancel'); ?>": function() {
+						"<?php echo tr('Cancel'); ?>": function() {
 							$(this).dialog('close');
 						}
 					}
@@ -270,7 +270,7 @@
 			var count = $("input:checkbox:checked:visible").length;
 
 			if (count == 0) {
-				show_notification("<?php echo lang('tni_msg_no_conv_selected'); ?>");
+				show_notification("<?php echo tr('No item selected'); ?>");
 			} else {
 				$("input.select_message:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
@@ -294,7 +294,7 @@
 		$(document).on('click', ".ham_button", function() {
 			var count = $("input:checkbox:checked:visible").length;
 			if (count == 0) {
-				show_notification("<?php echo lang('tni_msg_no_conv_selected'); ?>");
+				show_notification("<?php echo tr('No item selected'); ?>");
 			} else {
 				var id_folder = $(this).attr('id');
 				$("input.select_message:checked:visible").each(function() {
@@ -318,9 +318,9 @@
 			ID = $(this).parents('div:eq(1)').children().children('input.select_message').attr('id');
 			Class = $(this).parents('div:eq(1)').children('div.message_metadata').children('span.class').text();
 			<?php
-$resend_conf_text = lang('kalkun_resend_about_to_resend_to');
-$message_content_text = lang('kalkun_resend_msg_content');
-$delete_dup_text = lang('kalkun_resend_delete_copy');
+$resend_conf_text = tr('You are about to resend message to <strong>%number%</strong>');
+$message_content_text = tr('Message content:');
+$delete_dup_text = tr('Delete copy of this message (prevents duplicates).');
 ?>
 			resend_conf = '<p>' + ("<?php echo $resend_conf_text; ?>").replace('%number%', DestinationNumber) + '</p>';
 			message_content = '<p><strong><?php echo $message_content_text; ?></strong> <br />' + TextDecoded + '</p>';
@@ -349,7 +349,7 @@ $delete_dup_text = lang('kalkun_resend_delete_copy');
 							$("#compose_sms_container").html(data);
 							$("#compose_sms_container").dialog({
 								buttons: {
-									"Okay": function() {
+									"<?php echo tr('Close'); ?>": function() {
 										$(this).dialog("close");
 									}
 								}
@@ -369,7 +369,7 @@ $delete_dup_text = lang('kalkun_resend_delete_copy');
 							});
 						}
 					},
-					"<?php echo lang('kalkun_cancel'); ?>": function() {
+					"<?php echo tr('Cancel'); ?>": function() {
 						$(this).dialog('close');
 					}
 				}
@@ -381,12 +381,12 @@ $delete_dup_text = lang('kalkun_resend_delete_copy');
 		$(document).on('click', ".resend_bulk", function() {
 			var count = $("input:checkbox:checked").length;
 			if (count == 0) {
-				$('.notification_area').text("<?php echo lang('tni_msg_no_conv_selected'); ?>");
+				$('.notification_area').text("<?php echo tr('No item selected'); ?>");
 				$('.notification_area').show();
 			} else {
 				<?php
-	$resend_conf_text = lang('kalkun_resend_about_to_resend_count');
-	$delete_dup_text = lang('kalkun_resend_delete_copy');
+	$resend_conf_text = tr('You are about to resend %message_count% message(s).');
+	$delete_dup_text = tr('Delete copy of this message (prevents duplicates).');
 	?>
 
 				resend_conf = '<p>' + ("<?php echo $resend_conf_text; ?>").replace('%message_count%', count) + '</p>';
@@ -421,7 +421,7 @@ $delete_dup_text = lang('kalkun_resend_delete_copy');
 									$("#compose_sms_container").html(data);
 									$("#compose_sms_container").dialog({
 										buttons: {
-											"Okay": function() {
+											"<?php echo tr('Close'); ?>": function() {
 												$(this).dialog("close");
 											}
 										}
@@ -442,7 +442,7 @@ $delete_dup_text = lang('kalkun_resend_delete_copy');
 								}
 							});
 						},
-						"<?php echo lang('kalkun_cancel'); ?>": function() {
+						"<?php echo tr('Cancel'); ?>": function() {
 							$(this).dialog('close');
 						}
 					}

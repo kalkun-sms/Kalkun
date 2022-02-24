@@ -19,9 +19,9 @@
 		//$("input#sms_loop").attr("disabled", true);
 
 		$("#personvalue").tokenInput("<?php echo site_url('phonebook/get_phonebook/').'/'.(isset($source) ? $source : '');?>", {
-			hintText: "<?php echo lang('tni_name_search')?>",
+			hintText: "<?php echo tr('Insert name from contact list')?>",
 			noResultsText: "No results",
-			searchingText: "<?php echo lang('tni_compose_searching'); ?>...",
+			searchingText: "<?php echo tr('Searching...'); ?>...",
 			preventDuplicates: true,
 			method: "POST",
 			classes: {
@@ -98,12 +98,12 @@
 				}
 			},
 			messages: {
-				personvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
-				manualvalue: "<?php echo lang('tni_compose_enter_dest'); ?>",
-				import_file: "<?php echo lang('tni_compose_enter_dest'); ?>",
-				message: "<?php echo lang('tni_compose_enter_msg'); ?>",
-				datevalue: "<?php echo lang('tni_compose_enter_sendate'); ?>",
-				url: "<?php echo lang('kalkun_compose_valid_url');?>"
+				personvalue: "<?php echo tr('Please enter recipient'); ?>",
+				manualvalue: "<?php echo tr('Please enter recipient'); ?>",
+				import_file: "<?php echo tr('Please enter recipient'); ?>",
+				message: "<?php echo tr('Please enter message'); ?>",
+				datevalue: "<?php echo tr('Please enter sending date'); ?>",
+				url: "<?php echo tr('Should be a valid URL');?>"
 			}
 		});
 
@@ -156,8 +156,8 @@
 
 		// Character counter
 		$('.word_count').each(function() {
-			text_character = "<?php echo lang('kalkun_compose_counter_character');?>";
-			text_message = "<?php echo lang('kalkun_compose_counter_message');?>";
+			text_character = "<?php echo tr('characters');?>";
+			text_message = "<?php echo tr('message');?>";
 			var length = $(this).val().length;
 			max_chars_per_sms = isGSMAlphabet($(this).val()) ? 160 : 70;
 			var message_count = Math.ceil((length + message_length_correction) / max_chars_per_sms);
@@ -234,12 +234,12 @@
 				width: 400,
 				show: 'fade',
 				hide: 'fade',
-				title: '<?php echo lang('kalkun_canned_title')?>',
+				title: '<?php echo tr('Choose response')?>',
 				buttons: {
-					'<?php echo lang('kalkun_canned_save_new');?>': function() {
+					'<?php echo tr('Save');?>': function() {
 						save_canned_response(null);
 					},
-					"<?php echo lang('kalkun_cancel');?>": function() {
+					"<?php echo tr('Cancel');?>": function() {
 						$(this).dialog('close');
 					}
 				}
@@ -261,7 +261,7 @@
 		var dest_url = "<?php echo  site_url();?>/messages/canned_response/save";
 
 		if (name != null) {
-			$('.loading_area').html("<?php echo lang('kalkun_canned_saving');?>");
+			$('.loading_area').html("<?php echo tr('Saving...');?>");
 			$('.loading_area').fadeIn("slow");
 			$.post(dest_url, {
 				'name': name,

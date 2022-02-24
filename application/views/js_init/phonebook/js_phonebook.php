@@ -7,7 +7,7 @@
 			// check group
 			var group = '<?php echo count($pbkgroup);?>';
 			if (group == 0) {
-				$('.notification_area').text("<?php echo lang('tni_group_no_group'); ?>");
+				$('.notification_area').text("<?php echo tr('No group detected, add one first.'); ?>");
 				$('.notification_area').show();
 				setTimeout("	$('.notification_area').fadeOut();", 2000);
 			} else {
@@ -15,11 +15,11 @@
 					$("#pbk_add_wizard_dialog").dialog('close')
 				};
 				if ($(this).hasClass('addpbkcontact')) {
-					var pbk_title = '<?php echo lang('tni_contact_add'); ?>';
+					var pbk_title = '<?php echo tr('Add contact'); ?>';
 					var type = 'normal';
 					var param1 = '<?php echo (isset($group_id)) ? $group_id : '';?>';
 				} else if ($(this).hasClass('editpbkcontact')) {
-					var pbk_title = '<?php echo lang('tni_pbk_edit_contact'); ?>';
+					var pbk_title = '<?php echo tr('Edit contact'); ?>';
 					var type = 'edit';
 					var param1 = $(this).parents("tr:first").attr("id");
 				}
@@ -37,13 +37,13 @@
 							$("#name").trigger('focus');
 						},
 						buttons: {
-							'<?php echo lang('kalkun_save')?>': function() {
+							'<?php echo tr('Save')?>': function() {
 								if ($('#addContact').valid()) {
 									$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize(), function(data) {
 										$("#contact_container").html(data);
 										$("#contact_container").dialog({
 											buttons: {
-												"Okay": function() {
+												"<?php echo tr('Close'); ?>": function() {
 													$(this).dialog("close");
 												}
 											}
@@ -57,7 +57,7 @@
 								}
 
 							},
-							<?php echo lang('kalkun_cancel')?>: function() {
+							<?php echo tr('Cancel')?>: function() {
 								$(this).dialog('close');
 							}
 						}
@@ -93,7 +93,7 @@
 			var count = $("input:checkbox:checked:visible").length;
 			var dest_url = '<?php echo site_url('phonebook/delete_contact') ?>';
 			if (count == 0) {
-				$('.notification_area').text("<?php echo lang('tni_pbk_no_contact_selected')?>");
+				$('.notification_area').text("<?php echo tr('No contact selected')?>");
 				$('.notification_area').show();
 				setTimeout("	$('.notification_area').fadeOut();", 2000);
 			} else {
@@ -113,7 +113,7 @@
 							});
 							$(this).dialog("close");
 						},
-						"<?php echo lang('kalkun_cancel'); ?>": function() {
+						"<?php echo tr('Cancel'); ?>": function() {
 							$(this).dialog("close");
 						}
 					}
@@ -132,7 +132,7 @@
 			var count = $("input:checkbox:checked").length;
 			var dest_url = '<?php echo site_url('phonebook/update_contact_group') ?>';
 			if (count == 0) {
-				$('.notification_area').text("<?php echo lang('tni_pbk_no_contact_selected')?>");
+				$('.notification_area').text("<?php echo tr('No contact selected')?>");
 				$('.notification_area').show();
 				setTimeout("	$('.notification_area').fadeOut();", 2000);
 			} else {
@@ -184,7 +184,7 @@
 					'Import': function() {
 						$("form.importpbkform").trigger('submit');
 					},
-					"<?php echo lang('kalkun_cancel'); ?>": function() {
+					"<?php echo tr('Cancel'); ?>": function() {
 						$(this).dialog('close');
 					}
 				}
@@ -199,7 +199,7 @@
 				height: 250,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_cancel'); ?>': function() {
+					'<?php echo tr('Cancel'); ?>': function() {
 						$(this).dialog('close');
 					}
 				}
@@ -209,10 +209,10 @@
 
 
 		// Search onBlur onFocus
-		/*$('input.search_name').val('<?php echo lang('tni_search_contacts'); ?>');
+		/*$('input.search_name').val('<?php echo tr('Search contacts'); ?>');
 		
 		$('input.search_name').on("blur", function(){
-			$(this).val('<?php echo lang('tni_search_contacts'); ?>');
+			$(this).val('<?php echo tr('Search contacts'); ?>');
 		});
 		
 		$('input.search_name').on("focus", function(){
