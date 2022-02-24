@@ -54,7 +54,7 @@
 			?>
 		<tr id="<?php echo $tmp->id_blacklist_number; ?>">
 			<td class="nice-table-left"><?php echo $number; ?></td>
-			<td class="phone_number"><?php echo $tmp->phone_number; ?></td>
+			<td class="phone_number"><?php echo phone_format_human($tmp->phone_number); ?></td>
 			<td class="reason"><?php echo $tmp->reason; ?></td>
 			<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
 			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/blacklist_number/delete/<?php echo $tmp->id_blacklist_number; ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>

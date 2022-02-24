@@ -184,14 +184,12 @@ class Gammu_model extends CI_Model {
 	 */
 	function _send_message_route($tmp_data)
 	{
-		// remove spaces and dashes if any
-		$tmp_data['dest'] = str_replace(' ', '', $tmp_data['dest']);
-		$tmp_data['dest'] = str_replace('-', '', $tmp_data['dest']);
+		$this->load->helper('kalkun');
 
 		$data = array (
 			'InsertIntoDB' => date('Y-m-d H:i:s'),
 			'SendingDateTime' => $tmp_data['date'],
-			'DestinationNumber' => $tmp_data['dest'],
+			'DestinationNumber' => phone_format_e164($tmp_data['dest']),
 			'Coding' => get_gammu_coding($tmp_data['message']),
 			'Class' => $tmp_data['class'],
 			'CreatorID' => $tmp_data['CreatorID'],

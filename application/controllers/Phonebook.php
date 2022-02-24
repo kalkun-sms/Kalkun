@@ -345,6 +345,7 @@ class Phonebook extends MY_Controller {
 	 */
 	function add_contact_process()
 	{
+		$this->load->helper('kalkun');
 		$pbk['Name'] = trim($this->input->post('name'));
 		$pbk['Number'] = trim($this->input->post('number'));
 		//$pbk['GroupID'] = $this->input->post('groupvalue');

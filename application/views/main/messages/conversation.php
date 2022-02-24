@@ -52,7 +52,7 @@ else
 		}
 		else
 		{
-			$senderName = $tmp['SenderNumber'];
+			$senderName = phone_format_human($tmp['SenderNumber']);
 			$on_pbk = FALSE;
 		}
 
@@ -70,7 +70,7 @@ else
 		}
 		else
 		{
-			$senderName = $tmp['DestinationNumber'];
+			$senderName = phone_format_human($tmp['DestinationNumber']);
 			$on_pbk = FALSE;
 		}
 

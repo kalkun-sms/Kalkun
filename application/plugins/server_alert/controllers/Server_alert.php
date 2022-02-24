@@ -27,6 +27,7 @@ class Server_alert extends Plugin_controller {
 		parent::__construct();
 		$this->load->model('Kalkun_model');
 		$this->load->model('server_alert_model', 'plugin_model');
+		$this->load->helper('kalkun');
 	}
 
 	function index()

@@ -50,7 +50,7 @@ else
 		}
 		else
 		{
-			$senderName = $tmp->SenderNumber;
+			$senderName = phone_format_human($tmp->SenderNumber);
 		}
 		$number = $tmp->SenderNumber;
 
@@ -66,7 +66,7 @@ else
 		}
 		else
 		{
-			$senderName = $tmp->DestinationNumber;
+			$senderName = phone_format_human($tmp->DestinationNumber);
 		}
 		$number = $tmp->DestinationNumber;
 

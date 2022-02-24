@@ -25,6 +25,7 @@ class Blacklist_number_model extends CI_Model {
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->helper('kalkun');
 	}
 
 	function get($option = NULL, $limit = NULL, $offset = NULL)
@@ -49,7 +50,7 @@ class Blacklist_number_model extends CI_Model {
 	function add()
 	{
 		$data = array (
-			'phone_number' => trim($this->input->post('phone_number', TRUE)),
+			'phone_number' => trim(phone_format_e164($this->input->post('phone_number', TRUE))),
 			'reason' => trim($this->input->post('reason', TRUE)),
 		);
 		$this->db->insert('plugin_blacklist_number', $data);
@@ -58,7 +59,7 @@ class Blacklist_number_model extends CI_Model {
 	function update()
 	{
 		$data = array (
-			'phone_number' => trim($this->input->post('editphone_number', TRUE)),
+			'phone_number' => trim(phone_format_e164($this->input->post('editphone_number', TRUE))),
 			'reason' => $this->input->post('editreason', TRUE),
 		);
 		$this->db->where('id_blacklist_number', $this->input->post('editid_blacklist_number', TRUE));

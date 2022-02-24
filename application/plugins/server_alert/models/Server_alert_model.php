@@ -25,6 +25,7 @@ class Server_alert_model extends CI_Model {
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->helper('kalkun');
 	}
 
 	function get($option = NULL, $limit = NULL, $offset = NULL)
@@ -54,7 +55,7 @@ class Server_alert_model extends CI_Model {
 			'ip_address' => $this->input->post('ip_address', TRUE),
 			'port_number' => trim($this->input->post('port_number', TRUE)),
 			'timeout' => trim($this->input->post('timeout', TRUE)),
-			'phone_number' => trim($this->input->post('phone_number', TRUE)),
+			'phone_number' => trim(phone_format_e164($this->input->post('phone_number', TRUE))),
 			'respond_message' => $this->input->post('respond_message', TRUE),
 			'release_code' => '', // Not used for now (db requires NOT NULL)
 		);
@@ -68,7 +69,7 @@ class Server_alert_model extends CI_Model {
 			'ip_address' => $this->input->post('editip_address', TRUE),
 			'port_number' => trim($this->input->post('editport_number', TRUE)),
 			'timeout' => trim($this->input->post('edittimeout', TRUE)),
-			'phone_number' => trim($this->input->post('editphone_number', TRUE)),
+			'phone_number' => trim(phone_format_e164($this->input->post('editphone_number', TRUE))),
 			'respond_message' => $this->input->post('editrespond_message', TRUE),
 		);
 		$this->db->where('id_server_alert', $this->input->post('editid_server_alert', TRUE));
