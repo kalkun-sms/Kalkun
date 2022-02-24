@@ -20,7 +20,7 @@ class MY_Lang extends MX_Lang {
 	public $locale = 'en';
 
 	public static $idiom_to_locale = [
-		'brazilian_portuguese' => 'pt_BR',
+		'portuguese-brazilian' => 'pt_BR',
 		'czech' => 'cs',
 		'danish' => 'da',
 		'dutch' => 'nl',
@@ -71,7 +71,19 @@ class MY_Lang extends MX_Lang {
 	 */
 	public function load($langfile, $idiom = '', $return = FALSE, $add_suffix = TRUE, $alt_path = '', $_module = '')
 	{
-		parent::load($langfile, $idiom, $return, $add_suffix, $alt_path, $_module);
+		if ($idiom !== '')
+		{
+			$this->idiom = $idiom;
+		}
+
+		$requested_idiom = $this->idiom;
+		// Check if language file exists
+		if ( ! file_exists(APPPATH.'language/'.$this->idiom.'/'.$langfile.'_lang.php'))
+		{
+			$requested_idiom = 'english';
+		}
+
+		parent::load($langfile, $requested_idiom, $return, $add_suffix, $alt_path, $_module);
 		if ( ! empty($idiom))
 		{
 			$this->locale = MY_LANG::$idiom_to_locale[$idiom];
@@ -308,5 +320,16 @@ class MY_Lang extends MX_Lang {
 		$locale = $this->locale_matching_browser();
 		$this->idiom = MY_Lang::locale_to_idiom($locale);
 		return $this->idiom;
+	}
+
+	public function kalkun_supported_languages()
+	{
+		$supported_languages = [];
+		foreach (MY_Lang::$idiom_to_locale as $key => $value)
+		{
+			$supported_languages[$key] = Locale::getDisplayName($value, $value);
+		}
+		natcasesort($supported_languages);
+		return $supported_languages;
 	}
 }

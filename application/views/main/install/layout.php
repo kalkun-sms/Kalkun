@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-	<title>Kalkun &rsaquo; Installation</title>
+	<title>Kalkun &rsaquo; <?php echo tr('Installation'); ?></title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="generator" content="Geany 0.13" />
 	<link rel="shortcut icon" href="<?php echo $this->config->item('img_path');?>icon.ico" type="image/x-icon" />
@@ -43,12 +43,12 @@
 			<div id="container">
 				<div id="left-container"><?php $this->load->view($main);?></div>
 				<div id="right-container">
-					<h3 style="padding-left: 20px">Installation steps:</h3>
+					<h3 style="padding-left: 20px"><?php echo tr('Installation steps'); ?></h3>
 					<ul>
-						<li id="step1">Welcome screen</li>
-						<li id="step2">Requirement check</li>
-						<li id="step3">Database setup</li>
-						<li id="step4">Installation result</li>
+						<li id="step1"><?php echo tr('Welcome screen'); ?></li>
+						<li id="step2"><?php echo tr('Requirements check'); ?></li>
+						<li id="step3"><?php echo tr('Database setup'); ?></li>
+						<li id="step4"><?php echo tr('Final configuration steps'); ?></li>
 					</ul>
 				</div>
 			</div>

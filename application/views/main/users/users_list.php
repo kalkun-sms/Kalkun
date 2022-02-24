@@ -2,11 +2,11 @@
 if ($users->num_rows() === 0):
 	if ($_POST)
 	{
-		echo '<p><i>'.lang('tni_user_not_found').'</i></p>';
+		echo '<p><i>'.tr('User not found').'</i></p>';
 	}
 	else
 	{
-		echo '<p><i>'.lang('tni_user_search_empty').'</i></p>';
+		echo '<p><i>'.tr('Users is empty').'</i></p>';
 	}
 else: ?>
 <table>
@@ -25,7 +25,7 @@ else: ?>
 				</div>
 				<div class="right_column">
 					<span class="pbk_menu no-touch-hidden">
-						<a class="edit_user simplelink" href="#"><?php echo lang('tni_edit'); ?></a>
+						<a class="edit_user simplelink" href="#"><?php echo tr('Edit'); ?></a>
 					</span>
 		</td>
 	</tr>

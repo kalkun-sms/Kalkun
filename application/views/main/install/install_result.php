@@ -1,10 +1,10 @@
-<h2>Installation result</h2>
+<h2><?php echo tr('Final configuration steps'); ?></h2>
 <p>This is the last step of the installation process.</p>
-<h4>Database setup:</h4>
+<h4><?php echo tr('Database setup'); ?></h4>
 <?php if ($error === 0): ?>
-<p>Status: <span class="green">Successful</span></p>
+<p><?php echo tr('Status'); ?>: <span class="green"><?php echo tr('Successful'); ?></span></p>
 <?php else: ?>
-<p>Status: <span class="red">Failed</span></p>
+<p><?php echo tr('Status'); ?>: <span class="red"><?php echo tr('Failed'); ?></span></p>
 <p>Consider manual installation, read the README instruction file.</p>
 <?php endif; ?>
 
@@ -41,14 +41,18 @@
 </ul>
 
 <h4>Default credentials</h4>
-<p>If this is your first setup, please note that default login &amp; password are 'kalkun'.</p>
+<p>If this is your first setup, please note that default login &amp; password are 'kalkun' &amp; 'kalkun'.</p>
 
 <p>&nbsp;</p>
-<p align="center"><a href="<?php echo site_url();?>" class="button">Log-in to kalkun</a>
-	<?php if ($needs_manual_install_file_deletion): ?>
-	<br>💡 Have you deleted install file?
-	<?php endif; ?>
-</p>
+<?php
+	echo form_open(site_url(), 'style="display:block; text-align: center"');
+	echo form_hidden('idiom', $idiom);
+	echo form_submit('submit', tr('Log in'), 'class="button"');
+	if ($needs_manual_install_file_deletion):
+		echo '<br>💡 Have you deleted install file?';
+	endif;
+	echo form_close();
+?>
 
 <?php endif; ?>
 <p>&nbsp;</p>

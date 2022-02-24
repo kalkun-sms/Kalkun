@@ -41,14 +41,14 @@
 			},
 			messages: {
 				realname: {
-					required: "<?php echo lang('tni_error_enter_name');?>"
+					required: "<?php echo tr('Field required.');?>"
 				},
 				password: {
-					required: "<?php echo lang('tni_error_enter_password');?>",
-					minlength: "<?php echo lang('tni_error_toshort');?>"
+					required: "<?php echo tr('Field required.');?>",
+					minlength: "<?php echo tr('Password is too short.');?>"
 				},
 				confirm_password: {
-					equalTo: "<?php echo lang('tni_error_password_nomatch');?>"
+					equalTo: "<?php echo tr('Passwords do not match.');?>"
 				}
 			}
 		});
@@ -64,17 +64,17 @@
 		$('.addpbkcontact').on('click', null, function() {
 
 			$("#users_container").dialog({
-				title: '<?php echo lang('tni_user_addp');?>',
+				title: '<?php echo tr('Add user');?>',
 				modal: true,
 				show: 'fade',
 				hide: 'fade',
 				buttons: {
-					'<?php echo lang('kalkun_save');?>': function() {
+					'<?php echo tr('Save');?>': function() {
 						if ($("#addUser").valid()) {
 							$("form#addUser").trigger('submit')
 						}
 					},
-					'<?php echo lang('kalkun_cancel');?>': function() {
+					'<?php echo tr('Cancel');?>': function() {
 						$(this).dialog('destroy');
 					}
 				}
@@ -102,10 +102,10 @@
 				show: 'fade',
 				hide: 'fade',
 				buttons: {
-					'<?php echo lang('kalkun_save');?>': function() {
+					'<?php echo tr('Save');?>': function() {
 						$("form#editUser").trigger('submit')
 					},
-					'<?php echo lang('kalkun_cancel');?>': function() {
+					'<?php echo tr('Cancel');?>': function() {
 						$(this).dialog('destroy');
 					}
 				}
@@ -128,10 +128,10 @@
 				height: 150,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_cancel')?>': function() {
+					'<?php echo tr('Cancel')?>': function() {
 						$(this).dialog('close');
 					},
-					'<?php echo lang('tni_yes')?>': function() {
+					'<?php echo tr('Yes')?>': function() {
 						window.location.href = url;
 						$(this).dialog('close');
 					}
@@ -142,11 +142,11 @@
 
 		// Search onBlur onFocus
 		if ($('input.search_name').val() == '') {
-			$('input.search_name').val('<?php echo lang('tni_user_search'); ?>');
+			$('input.search_name').val('<?php echo tr('Search user'); ?>');
 		}
 
 		$('input.search_name').on("blur", function() {
-			$(this).val('<?php echo lang('tni_user_search'); ?>');
+			$(this).val('<?php echo tr('Search user'); ?>');
 		});
 
 		$('input.search_name').on("focus", function() {
