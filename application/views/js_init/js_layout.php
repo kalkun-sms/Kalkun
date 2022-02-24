@@ -85,64 +85,85 @@
 		$('.notification_area').text(text).fadeIn().delay(1500).fadeOut('slow');
 	}
 
+	function compose_message(type, repeatable = false, focus_element = '#personvalue', param1, param2) {
+		//console.debug('DEBUG: compose_message');
+		//console.debug(type);
+		//console.debug(repeatable);
+		//console.debug(focus_element);
+		//console.debug(param1);
+		//console.debug(param2);
+
+		$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
+		var data = {
+			type: type
+		};
+		if (param1) {
+			data.param1 = param1;
+		}
+		if (param2) {
+			data.param2 = param2;
+		}
+		$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', data, function() {
+			var buttons = {};
+			buttons['<?php echo lang('tni_send_message'); ?>'] = function() {
+				if ($("#composeForm").valid()) {
+					$('.ui-dialog-buttonpane :button').each(function() {
+						if ($(this).text() == '<?php echo lang('tni_send_message'); ?>') $(this).html('<?php echo lang('tni_sending_message'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');
+					});
+					$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
+						$("#compose_sms_container").html(data);
+						$("#compose_sms_container").dialog("option", "buttons", {
+							"Okay": function() {
+								$(this).dialog("destroy");
+							}
+						});
+						setTimeout(function() {
+							if ($("#compose_sms_container").hasClass('ui-dialog-content')) {
+								$("#compose_sms_container").dialog('destroy')
+							}
+						}, 1500);
+					});
+				}
+			};
+			if (repeatable) {
+				buttons['<?php echo lang('tni_send_and_repeat'); ?>'] = function() {
+					if ($("#composeForm").valid()) {
+						$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
+							$("#compose_sms_container").append(data);
+						});
+					}
+				};
+			}
+			buttons["<?php echo lang('kalkun_cancel'); ?>"] = function() {
+				$(this).dialog('destroy');
+			};
+			console.log(buttons);
+			$(this).dialog({
+				modal: true,
+				draggable: true,
+				width: 550,
+				show: 'fade',
+				hide: 'fade',
+				buttons: buttons,
+				open: function() {
+					$(focus_element).trigger('focus');
+				}
+			});
+			$("#compose_sms_container").dialog('open');
+		});
+		return false;
+	}
+
 	$(document).ready(function() {
 
-		// Get current page for styling/css	
+		// Get current page for styling/css
 		$("#menu").find("a[href='" + window.location.href + "']").each(function() {
 			$(this).addClass("current");
 		});
 
 		// Compose SMS
-		$('#compose_sms_normal').on('click', null, compose_message = function() {
-			$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
-			$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', {
-				'type': "normal"
-			}, function() {
-				$(this).dialog({
-					modal: true,
-					draggable: true,
-					width: 550,
-					show: 'fade',
-					hide: 'fade',
-					buttons: {
-						'<?php echo lang('tni_send_message'); ?>': function() {
-							if ($("#composeForm").valid()) {
-								$('.ui-dialog-buttonpane :button').each(function() {
-									if ($(this).text() == '<?php echo lang('tni_send_message'); ?>') $(this).html('<?php echo lang('tni_sending_message'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');
-								});
-								$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
-									$("#compose_sms_container").html(data);
-									$("#compose_sms_container").dialog("option", "buttons", {
-										"Okay": function() {
-											$(this).dialog("destroy");
-										}
-									});
-									setTimeout(function() {
-										if ($("#compose_sms_container").hasClass('ui-dialog-content')) {
-											$("#compose_sms_container").dialog('destroy')
-										}
-									}, 1500);
-								});
-							}
-						},
-						'<?php echo lang('tni_send_and_repeat'); ?>': function() {
-							if ($("#composeForm").valid()) {
-								$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
-									$("#compose_sms_container").append(data);
-								});
-							}
-						},
-						"<?php echo lang('kalkun_cancel'); ?>": function() {
-							$(this).dialog('destroy');
-						}
-					},
-					open: function() {
-						$("#personvalue").trigger('focus');
-					}
-				});
-				$("#compose_sms_container").dialog('open');
-			});
-			return false;
+		$('#compose_sms_normal').on('click', null, function() {
+			compose_message('normal', true, '#personvalue');
 		});
 
 		// About
