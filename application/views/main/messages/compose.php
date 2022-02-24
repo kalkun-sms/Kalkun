@@ -120,7 +120,7 @@ else
 		<td>&nbsp;</td>
 		<td>
 			<div id="person">
-				<textarea id="personvalue" style="width: 95%;" name="personvalue" ></textarea>
+				<textarea id="personvalue" style="width: 95%;" name="personvalue"></textarea>
 			</div>
 
 			<div id="manually" class="hidden">
