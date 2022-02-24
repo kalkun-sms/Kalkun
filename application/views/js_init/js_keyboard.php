@@ -86,11 +86,13 @@
 		//p - Read previous message within a conversation.
 		$(document).on('keydown', null, 'p', function() {
 			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.message_content').hide();
-			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('span.message_preview').hide();
+			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('span.message_preview').show();
 			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.optionmenu').hide();
+			if ($("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.optionmenu').is(":hidden"))
+				$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.detail_area').toggle(false);
 			go_prev();
 			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.message_content').show();
-			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('span.message_preview').show();
+			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('span.message_preview').hide();
 			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.optionmenu').show();
 			return false;
 		});
@@ -98,11 +100,13 @@
 		//n - Read next message within a conversation.
 		$(document).on('keydown', null, 'n', function() {
 			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.message_content').hide();
-			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('span.message_preview').hide();
+			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('span.message_preview').show();
 			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.optionmenu').hide();
+			if ($("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.optionmenu').is(":hidden"))
+				$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.detail_area').toggle(false);
 			go_next();
 			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.message_content').show();
-			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('span.message_preview').show();
+			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('span.message_preview').hide();
 			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.optionmenu').show();
 			return false;
 		});
@@ -112,6 +116,8 @@
 			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.message_content').toggle();
 			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('span.message_preview').toggle();
 			$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.optionmenu').toggle();
+			if ($("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.optionmenu').is(":hidden"))
+				$("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('div.detail_area').toggle(false);
 			return false;
 		});
 
@@ -188,22 +194,22 @@
 		<?php if ($this->uri->segment(1) == 'messages' && $this->uri->segment(2) != 'conversation' && $this->uri->segment(2) != 'search'): ?>
 		// for message_list page
 		var totalmsg = $("#message_holder > div.messagelist").length;
-		var current_select = 0;
+		var current_select = -1;
 
 		//move next
 		$(document).on('keydown', null, 'j', function() {
-			$("#message_holder").children(":eq(" + current_select + ")").removeClass('infocus'); //selecting child
+			$("#message_holder").children(":eq(" + Math.max(current_select, 0) + ")").removeClass('infocus'); //selecting child
 			current_select++;
-			if (current_select > totalmsg) current_select = 1;
+			if (current_select == totalmsg) current_select = 0;
 			$("#message_holder").children(":eq(" + current_select + ")").addClass('infocus'); //selecting child
 			current_number = $("#message_holder").children(":eq(" + current_select + ")").children().children().children('input.select_conversation').val();
 		});
 
 		//move prev
 		$(document).on('keydown', null, 'k', function() {
-			$("#message_holder").children(":eq(" + current_select + ")").removeClass('infocus'); //selecting child
+			$("#message_holder").children(":eq(" + Math.max(current_select, 0) + ")").removeClass('infocus'); //selecting child
 			current_select--;
-			if (current_select < 0) current_select = totalmsg;
+			if (current_select < 0) current_select = totalmsg - 1;
 			$("#message_holder").children(":eq(" + current_select + ")").addClass('infocus'); //selecting child
 			current_number = $("#message_holder").children(":eq(" + current_select + ")").children().children().children('input.select_conversation').val();
 		});
@@ -211,17 +217,17 @@
 		//select
 		$(document).on('keydown', null, 'o return', function(e) {
 			//var code = (e.keyCode ? e.keyCode : e.which);
-			if (current_select < 1) return false;
+			if (current_select < 0) return false;
 			var group = "<?php echo $this->uri->segment(2); ?>";
 			var folder = "<?php echo $this->uri->segment(3); ?>";
 			var fid = "<?php echo $this->uri->segment(4, ''); ?>";
-			document.location = "<?php echo site_url('messages/conversation'); ?>/" + group + "/" + folder + "/" + current_number + "/" + fid;
+			document.location = "<?php echo site_url('messages/conversation'); ?>/" + group + "/" + folder + "/" + encodeURIComponent(current_number) + "/" + fid;
 			return false;
 		});
 
 		//quick reply
 		$(document).on('keydown', null, 'r', function() {
-			if (current_select < 1) return false;
+			if (current_select < 0) return false;
 			$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
 			$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', {
 				'type': 'reply',
@@ -282,7 +288,7 @@
 		<?php if ($this->uri->segment(1) != 'phonebook' && $this->uri->segment(2) != 'search'): ?>
 		$(document).on('keydown', null, 'f5', function() {
 			refresh();
-			current_select = 0;
+			current_select = -1;
 			return false;
 		});
 		<?php endif; ?>
