@@ -303,41 +303,6 @@
 		});
 	}
 
-	//tab send message
-	var is_tab = false;
-	$(document).ready(function() {
-		$('#message').on('keydown', null, 'tab', function() {
-			//$('.ui-dialog-buttonpane button:eq(0)').trigger('focus'); 
-			is_tab = true;
-			setTimeout(function() {
-				is_tab = false;
-			}, "5000");
-		});
-		$("#composeForm").on('keydown', null, 'return', function() {
-			if (is_tab == true) {
-				if ($("#composeForm").valid()) {
-					$('.ui-dialog-buttonpane :button').each(function() {
-						if ($(this).text() == '<?php echo tr('Send message'); ?>') $(this).html('<?php echo tr('Sending'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');
-					});
-					$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
-						$("#compose_sms_container").html(data);
-						$("#compose_sms_container").dialog("option", "buttons", {
-							"<?php echo tr('Close'); ?>": function() {
-								$(this).dialog("destroy");
-							}
-						});
-						setTimeout(function() {
-							if ($("#compose_sms_container").hasClass('ui-dialog-content')) {
-								$("#compose_sms_container").dialog('destroy')
-							}
-						}, 1500);
-					});
-				}
-			}
-			return false;
-		});
-	});
-
 	$("input[name='smstype']").on("click", function() {
 		if ($(this).val() == 'normal') {
 			$("#url-display").hide();
