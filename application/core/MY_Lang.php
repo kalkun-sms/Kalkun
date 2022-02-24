@@ -343,4 +343,17 @@ class MY_Lang extends MX_Lang {
 		natcasesort($supported_languages);
 		return $supported_languages;
 	}
+
+	public static function idom_to_region($idiom)
+	{
+		$locale = MY_LANG::$idiom_to_locale[$idiom];
+		if (strlen($locale) === 2)
+		{
+			return Locale::getRegion('-'.$locale);
+		}
+		else
+		{
+			return Locale::getRegion($locale);
+		}
+	}
 }

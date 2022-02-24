@@ -362,12 +362,12 @@ function is_null_loose($input)
  * @param string $phone
  * @return string
  */
-function phone_format_e164($phone)
+function phone_format_e164($phone, $input_region = NULL)
 {
 	$CI = &get_instance();
 	// reformat phone number to E164
 	$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
-	$region = $CI->Kalkun_model->get_setting()->row('country_code');
+	$region = ($input_region !== NULL) ? $input_region : $CI->Kalkun_model->get_setting()->row('country_code');
 	$phoneNumberObject = $phoneNumberUtil->parse($phone, $region);
 	$phone_number = $phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::E164);
 	return $phone_number;
@@ -381,13 +381,13 @@ function phone_format_e164($phone)
  * @param string $phone
  * @return string
  */
-function phone_format_human($phone)
+function phone_format_human($phone, $input_region = NULL)
 {
 	$CI = &get_instance();
 
 	try
 	{
-		$region = $CI->Kalkun_model->get_setting()->row('country_code');
+		$region = ($input_region !== NULL) ? $input_region : $CI->Kalkun_model->get_setting()->row('country_code');
 
 		$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 		$phoneNumberObject = $phoneNumberUtil->parse($phone, $region);
