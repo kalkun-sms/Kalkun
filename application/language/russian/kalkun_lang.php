@@ -136,7 +136,6 @@ $lang['Are you sure?'] = 'Are you Sure?';
 // Others
 $lang['Amount'] = 'Сумма';
 $lang['Send as Flash SMS'] = 'Послать как Flash SMS';
-$lang['Send as Unicode'] = 'Послать юникодом';
 $lang['times'] = 'раз';// (times)
 $lang['Hour'] = 'Час';
 $lang['Minutes'] = 'Минуты';

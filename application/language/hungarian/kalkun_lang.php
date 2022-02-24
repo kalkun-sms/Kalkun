@@ -136,7 +136,6 @@ $lang['Are you sure?'] = 'Biztos benne?';
 // Others
 $lang['Amount'] = 'Mennyiség';
 $lang['Send as Flash SMS'] = 'Küldés Flash SMS-ként';
-$lang['Send as Unicode'] = 'Küldés mint Unicode';
 $lang['times'] = 'alkalommal';
 $lang['Hour'] = 'Óra';
 $lang['Minutes'] = 'Perc';

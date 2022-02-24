@@ -27,7 +27,7 @@
 		});
 
 		$(document).on('keyup', null, 'c', function() {
-			compose_message();
+			compose_message('normal', true, '#personvalue');
 		});
 
 		$(document).on('keydown', null, 'shift+/', function() {
@@ -145,48 +145,7 @@
 			if (current_select < 1) return false;
 			var param2 = $("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('.message_header').children('input.select_message').attr('id');
 			var param1 = $('#item_source' + param2).val();
-			$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
-			$("#compose_sms_container").load('<?php echo site_url('messages/compose') ?>', {
-				'type': 'forward',
-				'param1': param1,
-				'param2': param2
-			}, function() {
-				$(this).dialog({
-					modal: true,
-					open: function(event, ui) {
-						$("#message").trigger('focus');
-					},
-					width: 550,
-					show: 'fade',
-					hide: 'fade',
-					buttons: {
-						'<?php echo tr('Send message'); ?>': function() {
-							if ($("#composeForm").valid()) {
-								$('.ui-dialog-buttonpane :button').each(function() {
-									if ($(this).text() == '<?php echo tr('Send message'); ?>') $(this).html('<?php echo tr('Sending'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');
-								});
-								$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
-									$("#compose_sms_container").html(data);
-									$("#compose_sms_container").dialog("option", "buttons", {
-										"<?php echo tr('Close'); ?>": function() {
-											$(this).dialog("destroy");
-										}
-									});
-									setTimeout(function() {
-										if ($("#compose_sms_container").hasClass('ui-dialog-content')) {
-											$("#compose_sms_container").dialog('destroy')
-										}
-									}, 1500);
-								});
-							}
-						},
-						'<?php echo tr('Cancel'); ?>': function() {
-							$(this).dialog('destroy');
-						}
-					}
-				});
-				$("#compose_sms_container").dialog('open');
-			});
+			compose_message('forward', false, '#personvalue', param1, param2);
 			return false;
 		});
 		<?php endif; ?>
@@ -228,48 +187,7 @@
 		//quick reply
 		$(document).on('keydown', null, 'r', function() {
 			if (current_select < 0) return false;
-			$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
-			$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', {
-				'type': 'reply',
-				'param1': current_number,
-				'param2': ''
-			}, function() {
-				$(this).dialog({
-					modal: true,
-					open: function(event, ui) {
-						$("#message").trigger('focus');
-					},
-					width: 550,
-					show: 'fade',
-					hide: 'fade',
-					buttons: {
-						'<?php echo tr('Send message'); ?>': function() {
-							if ($("#composeForm").valid()) {
-								$('.ui-dialog-buttonpane :button').each(function() {
-									if ($(this).text() == '<?php echo tr('Send message'); ?>') $(this).html('<?php echo tr('Sending'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');
-								});
-								$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
-									$("#compose_sms_container").html(data);
-									$("#compose_sms_container").dialog("option", "buttons", {
-										"<?php echo tr('Close'); ?>": function() {
-											$(this).dialog("destroy");
-										}
-									});
-									setTimeout(function() {
-										if ($("#compose_sms_container").hasClass('ui-dialog-content')) {
-											$("#compose_sms_container").dialog('destroy')
-										}
-									}, 1500);
-								});
-							}
-						},
-						'<?php echo tr('Cancel'); ?>': function() {
-							$(this).dialog('destroy');
-						}
-					}
-				});
-				$("#compose_sms_container").dialog('open');
-			});
+			compose_message('reply', false, '#message', current_number);
 			return false;
 		});
 

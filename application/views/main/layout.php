@@ -32,7 +32,8 @@ echo doctype('xhtml1-trans');?>
 		<div id="container">
 			<div id="menu"><?php echo $this->load->view('main/menu');?></div>
 			<div id="content">
-				<div id="compose_sms_container" title="<?php echo tr('Compose SMS')?>" class="hidden">&nbsp;</div>
+				<div id="compose_sms_container" title="<?php echo tr('Compose SMS'); ?>" class="hidden">&nbsp;</div>
+				<div id="compose_sms_container_error" title="<?php echo tr('Error'); ?>" class="hidden">&nbsp;</div>
 				<?php echo $this->load->view($main);?>
 			</div>
 		</div>

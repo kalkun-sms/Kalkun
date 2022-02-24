@@ -191,56 +191,14 @@
 				var header = $(this).parents('div:eq(1)');
 				var param1 = header.attr('class').split(' ').slice(-1)['0']; /* source */
 				var param2 = header.children().children('input.select_message').attr('id'); /* message_id */
+				compose_message(type, false, '#personvalue', param1, param2);
 			} else {
 				var type = 'reply';
 				var param1 = '<?php echo $this->uri->segment(5);?>';
 				if (param1 == null || param1 == '')
 					var param1 = $(this).parents('div:eq(1)').children().children('input.item_number').val(); /* phone number */
-
+				compose_message(type, false, '#message', param1);
 			}
-			$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
-			$("#compose_sms_container").load(url, {
-				'type': type,
-				'param1': param1,
-				'param2': param2
-			}, function() {
-				$(this).dialog({
-					modal: true,
-					draggable: true,
-					open: function(event, ui) {
-						$("#message").trigger('focus');
-					},
-					width: 550,
-					show: 'fade',
-					hide: 'fade',
-					buttons: {
-						'<?php echo tr('Send message'); ?>': function() {
-							if ($("#composeForm").valid()) {
-								$('.ui-dialog-buttonpane :button').each(function() {
-									if ($(this).text() == '<?php echo tr('Send message'); ?>') $(this).html('<?php echo tr('Sending'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');
-								});
-								$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
-									$("#compose_sms_container").html(data);
-									$("#compose_sms_container").dialog("option", "buttons", {
-										"<?php echo tr('Close'); ?>": function() {
-											$(this).dialog("destroy");
-										}
-									});
-									setTimeout(function() {
-										if ($("#compose_sms_container").hasClass('ui-dialog-content')) {
-											$("#compose_sms_container").dialog('destroy')
-										}
-									}, 1500);
-								});
-							}
-						},
-						'<?php echo tr('Cancel'); ?>': function() {
-							$(this).dialog('destroy');
-						}
-					}
-				});
-				$("#compose_sms_container").dialog('open');
-			});
 			return false;
 		});
 

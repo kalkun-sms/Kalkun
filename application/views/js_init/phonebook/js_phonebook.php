@@ -160,86 +160,13 @@
 		$('.sendmessage').on('click', null, function() {
 			var header = $(this).parents('div:eq(1)');
 			var param1 = header.children('.left_column').children('#pbkname').children('#pbknumber').text();
-			$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
-			$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', {
-				'type': "pbk_contact",
-				'param1': param1
-			}, function() {
-				$(this).dialog({
-					modal: true,
-					width: 550,
-					show: 'fade',
-					hide: 'fade',
-					buttons: {
-						'<?php echo tr('Send message'); ?>': function() {
-							if ($("#composeForm").valid()) {
-								$('.ui-dialog-buttonpane :button').each(function() {
-									if ($(this).text() == '<?php echo tr('Send message'); ?>') $(this).html('<?php echo tr('Sending'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');
-								});
-								$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
-									$("#compose_sms_container").html(data);
-									$("#compose_sms_container").dialog("option", "buttons", {
-										"<?php echo tr('Close'); ?>": function() {
-											$(this).dialog("destroy");
-										}
-									});
-									setTimeout(function() {
-										if ($("#compose_sms_container").hasClass('ui-dialog-content')) {
-											$("#compose_sms_container").dialog('destroy')
-										}
-									}, 1500);
-								});
-							}
-						},
-						'<?php echo tr('Cancel'); ?>': function() {
-							$(this).dialog('destroy');
-						}
-					}
-				});
-				$("#compose_sms_container").dialog('open');
-			});
+			compose_message('pbk_contact', false, '#message', param1);
 			return false;
 		});
 
 		// Send to all
 		$('#sendallcontact').on('click', null, function() {
-			$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
-			$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', {
-				'type': "all_contacts"
-			}, function() {
-				$(this).dialog({
-					modal: true,
-					width: 550,
-					show: 'fade',
-					hide: 'fade',
-					buttons: {
-						'<?php echo tr('Send message'); ?>': function() {
-							if ($("#composeForm").valid()) {
-								$('.ui-dialog-buttonpane :button').each(function() {
-									if ($(this).text() == '<?php echo tr('Send message'); ?>') $(this).html('<?php echo tr('Sending'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');
-								});
-								$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
-									$("#compose_sms_container").html(data);
-									$("#compose_sms_container").dialog("option", "buttons", {
-										"<?php echo tr('Close'); ?>": function() {
-											$(this).dialog("destroy");
-										}
-									});
-									setTimeout(function() {
-										if ($("#compose_sms_container").hasClass('ui-dialog-content')) {
-											$("#compose_sms_container").dialog('destroy')
-										}
-									}, 1500);
-								});
-							}
-						},
-						'<?php echo tr('Cancel'); ?>': function() {
-							$(this).dialog('destroy');
-						}
-					}
-				});
-				$("#compose_sms_container").dialog('open');
-			});
+			compose_message('all_contacts', false, '#message');
 			return false;
 		});
 
