@@ -93,7 +93,7 @@
 		//console.debug(param1);
 		//console.debug(param2);
 
-		$("#compose_sms_container").html("<div align=\"center\"> Loading...</div>");
+		$("#compose_sms_container").html('<div align="center"> Loading...</div>');
 		var data = {
 			type: type
 		};
@@ -131,7 +131,6 @@
 							$("#compose_sms_container_error").html($(data.responseText).filter('div'));
 							$("#compose_sms_container_error").dialog({
 								modal: true,
-								draggable: true,
 								width: 550,
 								show: 'fade',
 								hide: 'fade',
@@ -158,7 +157,6 @@
 			};
 			$(this).dialog({
 				modal: true,
-				draggable: true,
 				width: 550,
 				show: 'fade',
 				hide: 'fade',
