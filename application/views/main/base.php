@@ -84,12 +84,12 @@
 </div>
 
 <!-- Shortcuts dialog -->
-<div id="kbd" title="Kalkun Keyboard Shortcuts" class="dialog">
+<div id="kbd" title="<?php echo tr('Keyboard shortcuts'); ?>" class="dialog">
 
 
 	<div class="detail" style="float: left">
 		<center>
-			<h1>Keyboard Shortcuts</h1>
+			<h1><?php echo tr('Keyboard shortcuts'); ?></h1>
 		</center>
 
 		<table>
@@ -98,58 +98,59 @@
 
 					<table>
 						<tr>
-							<td colspan="2" align="center"><strong> Jumping</strong> </td>
+							<td colspan="2" align="center"><strong><?php echo tr('Jumping'); ?></strong> </td>
 						</tr>
 						<tr>
-							<td class="align_right">g then i :</td>
-							<td>Goto Inbox</td>
+							<td class="align_right"><?php echo tr('{0} then {1}:', NULL, 'g', 'i'); ?></td>
+							<td><?php echo tr('Go to {0}', NULL, tr('Inbox')); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">g then o :</td>
-							<td>Goto Outbox</td>
+							<td class="align_right"><?php echo tr('{0} then {1}:', NULL, 'g', 'o'); ?></td>
+							<td><?php echo tr('Go to {0}', NULL, tr('Outbox')); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">g then s :</td>
-							<td>Goto Sent Items</td>
+							<td class="align_right"><?php echo tr('{0} then {1}:', NULL, 'g', 's'); ?></td>
+							<td><?php echo tr('Go to {0}', NULL, tr('Sent items')); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">g then p :</td>
-							<td>Goto Phonebook</td>
+							<td class="align_right"><?php echo tr('{0} then {1}:', NULL, 'g', 'p'); ?></td>
+							<td><?php echo tr('Go to {0}', NULL, tr('Phonebook')); ?></td>
 						</tr>
 
 						<tr>
-							<td colspan="2" align="center"><br /><strong> Navigation</strong></td>
+							<td colspan="2" align="center"><br /><strong><?php echo tr('Navigation'); ?></strong></td>
 						</tr>
 						<tr>
-							<td class="align_right">u :</td>
-							<td>Back to threadlist</td>
+							<td class="align_right">u:</td>
+							<td><?php echo tr('Back to conversation list'); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">k / j :</td>
-							<td>Newer/older conversation</td>
+							<td class="align_right">k / j:</td>
+							<td><?php echo tr('Highlight prev/next'); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">p / n :</td>
-							<td>Read Prev/Next conversation</td>
+							<td class="align_right">p / n:</td>
+							<td><?php echo tr('Open prev/next (message only)'); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">o or &lt;Enter&gt; :</td>
-							<td>Open conversation; <br />collapse/expand conversation</td>
+							<td class="align_right"><?php echo tr('{0} or {1}:', NULL, 'o', 'ENTER'); ?></td>
+							<td><?php echo tr('Open'); ?></td>
 						</tr>
 						<tr>
-							<td colspan="2" align="center"><br /><strong> Threadlist selection</strong></td>
+							<td colspan="2" align="center"><br /><strong><?php echo tr('Selection'); ?></strong></td>
 						</tr>
 						<tr>
-							<td class="align_right">* then a :</td>
-							<td>Select all conversations</td>
+							<td class="align_right">x:</td>
+							<td><?php echo tr('Select'); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">* then n :</td>
-							<td>Deselect all conversations</td>
+							<td class="align_right"><?php echo tr('{0} then {1}:', NULL, '*', 'a'); ?></td>
+							<td><?php echo tr('Select all'); ?></td>
 						</tr>
-
-
-
+						<tr>
+							<td class="align_right"><?php echo tr('{0} then {1}:', NULL, '*', 'n'); ?></td>
+							<td><?php echo tr('Deselect all'); ?></td>
+						</tr>
 					</table>
 
 				</td>
@@ -158,54 +159,49 @@
 				<td>
 					<table>
 						<tr>
-							<td colspan="2" align="center"><strong>Actions</strong></td>
+							<td colspan="2" align="center"><strong><?php echo tr('Actions'); ?></strong></td>
 						</tr>
 
 						<tr>
-							<td class="align_right">x :</td>
-							<td>Select Conversation</td>
+							<td class="align_right">m:</td>
+							<td><?php echo tr('Move selected'); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">m :</td>
-							<td>Move To</td>
+							<td class="align_right">#:</td>
+							<td><?php echo tr('Delete selected'); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">r :</td>
-							<td>Reply</td>
+							<td class="align_right">r:</td>
+							<td><?php echo tr('Reply'); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">f :</td>
-							<td>Forward</td>
+							<td class="align_right">f:</td>
+							<td><?php echo tr('Forward'); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">&lt;Tab&gt; then &lt;Enter&gt; :</td>
+							<td class="align_right"><?php echo tr('{0} then {1}:', NULL, 'TAB', 'ENTER'); ?></td>
 							<td><?php echo tr('Send message'); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">d :</td>
-							<td>Show message details</td>
+							<td class="align_right">d:</td>
+							<td><?php echo tr('Message details'); ?></td>
 						</tr>
 
-
 						<tr>
-							<td class="align_right"># :</td>
-							<td>Delete</td>
-						</tr>
-						<tr>
-							<td colspan="2" align="center"> <br /><strong>Application</strong>
+							<td colspan="2" align="center"> <br /><strong><?php echo tr('Application'); ?></strong>
 							</td>
 						</tr>
 						<tr>
-							<td class="align_right">c :</td>
-							<td>Compose</td>
+							<td class="align_right">c:</td>
+							<td><?php echo tr('Compose'); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">s :</td>
-							<td>Search</td>
+							<td class="align_right">s:</td>
+							<td><?php echo tr('Search'); ?></td>
 						</tr>
 						<tr>
-							<td class="align_right">? :</td>
-							<td>Open shortcut help</td>
+							<td class="align_right">Shift + /:</td>
+							<td><?php echo tr('Open shortcut help'); ?></td>
 						</tr>
 						<tr>
 							<td></td>
