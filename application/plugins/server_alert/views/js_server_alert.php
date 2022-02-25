@@ -43,7 +43,7 @@
 		$("#alert-dialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
+			maxHeight: 450,
 			modal: true,
 			buttons: {
 				'Save': function() {
@@ -64,7 +64,7 @@
 		$("#editalert-dialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
+			maxHeight: 450,
 			modal: true,
 			buttons: {
 				'Save Changes': function() {

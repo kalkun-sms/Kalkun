@@ -178,7 +178,6 @@
 			$("#pbkimportdialog").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 350,
 				modal: true,
 				buttons: {
 					'Import': function() {
@@ -196,7 +195,6 @@
 		$('#addpbkcontact_wizard').on("click", function() {
 			$("#pbk_add_wizard_dialog").dialog({
 				autoOpen: false,
-				height: 250,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Cancel'); ?>': function() {

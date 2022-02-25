@@ -8,7 +8,6 @@
 		$("#stop-dialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
 			modal: true,
 			buttons: {
 				'Save': function() {

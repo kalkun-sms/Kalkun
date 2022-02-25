@@ -8,7 +8,6 @@
 		$("#blacklist-dialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
-			height: 250,
 			modal: true,
 			buttons: {
 				'Save': function() {
@@ -20,18 +19,15 @@
 			}
 		});
 
-		// Add blacklist button	
+		// Add blacklist button
 		$('#addblacklistbutton').on("click", function() {
 			$('#blacklist-dialog').dialog('open');
 		});
-
-
 
 		// Edit blacklist dialog
 		$("#editblacklist-dialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
-			height: 250,
 			modal: true,
 			buttons: {
 				'Save Changes': function() {
@@ -42,7 +38,6 @@
 				}
 			}
 		});
-
 
 		// Edit blacklist - get data
 		$('a.edit').on("click", function() {

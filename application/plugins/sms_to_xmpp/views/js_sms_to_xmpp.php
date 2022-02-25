@@ -5,7 +5,6 @@
 		$("#xmpp-dialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
-			height: 405,
 			modal: true,
 			buttons: {
 				'Save': function() {

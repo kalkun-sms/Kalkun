@@ -19,7 +19,6 @@
 			$("#packages-dialog").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 250,
 				modal: true,
 				title: title,
 				buttons: {
@@ -58,7 +57,6 @@
 			$("#confirm_delete_package_dialog").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 150,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Cancel')?>': function() {

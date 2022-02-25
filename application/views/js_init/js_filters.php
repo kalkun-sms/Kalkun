@@ -20,7 +20,6 @@
 			$("#filterdialog").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 250,
 				modal: true,
 				buttons: {
 					'Save': function() {
@@ -47,7 +46,6 @@
 			$("#confirm_delete_filter_dialog").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 150,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Cancel')?>': function() {

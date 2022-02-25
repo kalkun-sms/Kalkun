@@ -65,6 +65,7 @@
 
 			$("#users_container").dialog({
 				title: '<?php echo tr('Add user');?>',
+				maxHeight: 400,
 				modal: true,
 				show: 'fade',
 				hide: 'fade',
@@ -125,7 +126,6 @@
 			$("#confirm_delete_user_dialog").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 150,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Cancel')?>': function() {

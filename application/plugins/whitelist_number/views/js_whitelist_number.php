@@ -8,7 +8,6 @@
 		$("#whitelist-dialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
-			height: 250,
 			modal: true,
 			buttons: {
 				'Save': function() {
@@ -20,18 +19,15 @@
 			}
 		});
 
-		// Add whitelist button	
+		// Add whitelist button
 		$('#addwhitelistbutton').on("click", function() {
 			$('#whitelist-dialog').dialog('open');
 		});
-
-
 
 		// Edit whitelist dialog
 		$("#editwhitelist-dialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
-			height: 250,
 			modal: true,
 			buttons: {
 				'Save Changes': function() {
@@ -42,7 +38,6 @@
 				}
 			}
 		});
-
 
 		// Edit whitelist - get data
 		$('a.edit').on("click", function() {

@@ -48,7 +48,6 @@
 		$("#remoteaccess-dialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
 			modal: true,
 			buttons: {
 				'Save': function() {
@@ -63,7 +62,6 @@
 		$("#notification-dialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
 			modal: true,
 			buttons: {
 				'Save': function() {
@@ -88,7 +86,6 @@
 		$("#editremoteaccess-dialog").dialog({
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
 			modal: true,
 			buttons: {
 				'Save Changes': function() {

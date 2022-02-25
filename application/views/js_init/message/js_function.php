@@ -221,7 +221,6 @@
 			$("#renamefolderdialog").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 100,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Save'); ?>': function() {
@@ -249,7 +248,6 @@
 			$("#deletefolderdialog").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 165,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Cancel'); ?>': function() {
@@ -277,7 +275,6 @@
 			$("#deletealldialog").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 165,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Cancel'); ?>': function() {

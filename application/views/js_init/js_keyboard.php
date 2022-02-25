@@ -34,7 +34,6 @@
 			$("#kbd").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 400,
 				width: 600,
 				modal: true
 			});

@@ -84,7 +84,6 @@
 				$("#confirm_delete_user_dialog").dialog({
 					bgiframe: true,
 					autoOpen: false,
-					height: 175,
 					modal: true,
 					buttons: {
 						'<?php echo tr('Cancel'); ?>': function() {
@@ -118,7 +117,6 @@
 			$("#pbkimportdialog").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 300,
 				modal: true,
 			});
 			$('#pbkimportdialog').dialog('open');

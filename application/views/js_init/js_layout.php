@@ -187,7 +187,6 @@
 			$("#about").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 400,
 				width: 550,
 				modal: true
 			});
@@ -200,7 +199,6 @@
 			$("#addfolderdialog").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 100,
 				modal: true,
 				buttons: {
 					'Save': function() {
@@ -249,7 +247,6 @@
 			$("#a_search_dialog").dialog({
 				bgiframe: true,
 				autoOpen: false,
-				height: 275,
 				width: 500,
 				modal: true,
 				buttons: {
