@@ -365,9 +365,20 @@ function is_null_loose($input)
 function phone_format_e164($phone, $input_region = NULL)
 {
 	$CI = &get_instance();
+
+	// Default value to '' for the case this is called through Daemon or API
+	// This way, we consider number is already in international format.
+	$region = '';
+	// If user is logged in, get the region from the settings
+	if (property_exists($CI, 'session'))
+	{
+		$region = $CI->Kalkun_model->get_setting()->row('country_code');
+	}
+	// region as function parameter has higher precedence
+	$region = ($input_region !== NULL) ? $input_region : $region;
+
 	// reformat phone number to E164
 	$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
-	$region = ($input_region !== NULL) ? $input_region : $CI->Kalkun_model->get_setting()->row('country_code');
 	$phoneNumberObject = $phoneNumberUtil->parse($phone, $region);
 	$phone_number = $phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::E164);
 	return $phone_number;
