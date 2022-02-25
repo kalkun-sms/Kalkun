@@ -279,6 +279,7 @@ function autoreply($tel, $reply_msg)
 {
 	$config = stop_manager_initialize();
 
+	$ret = NULL;
 	// Filter rule for outgoing SMS
 	if ($config['enable_autoreply_outnumber_filter'])
 	{
@@ -286,7 +287,7 @@ function autoreply($tel, $reply_msg)
 		//var_dump($ret);
 		//var_dump($matches);
 	}
-	if ($ret)
+	if ( ! $config['enable_autoreply_outnumber_filter'] || $ret === 1)
 	{
 		$CI = &get_instance();
 		$CI->load->model('Message_model');
