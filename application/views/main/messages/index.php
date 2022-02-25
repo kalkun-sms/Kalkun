@@ -42,7 +42,7 @@ if ($this->uri->segment(2) == 'my_folder')
 </div>
 
 <!-- Delete Folder Confirmation -->
-<div class="dialog" id="deletefolderdialog" title="<?php echo tr('Delete folder confirmation');?>">
+<div class="dialog" id="deletefolderdialog" title="<?php echo tr('Delete folder');?>">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
 		<?php echo tr('This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?');?></p>
 </div>

@@ -40,7 +40,7 @@
 	</li>
 	<li>
 		<div style="float: left"><span style="color: #FFF;"><?php echo tr('My folders');?></span></div>
-		<div style="float: right"><sup><a id="addfolder" href="#" title="Add a new folder"><?php echo tr('Add'); ?></a></sup></div>
+		<div style="float: right"><sup><a id="addfolder" href="#" title="<?php echo tr('Add a new folder');?>"><?php echo tr('Add'); ?></a></sup></div>
 		<div class="clear">&nbsp;</div>
 		<div id="mf_child_menu">
 			<ul>
@@ -63,8 +63,8 @@ $level = $this->session->userdata('level');
 if ($level === 'admin'):?>
 	<li><?php echo anchor('users', tr('Users')); ?></li>
 	<?php if ($this->config->item('sms_content')): ?>
-	<li id="bottom"><?php echo anchor('member', 'Member'); ?></li>
+	<li id="bottom"><?php echo anchor('member', tr('Member')); ?></li>
 	<?php endif; ?>
-	<li><?php echo anchor('pluginss', 'Plugins'); ?></li>
+	<li><?php echo anchor('pluginss', tr('Plugins')); ?></li>
 	<?php endif; ?>
 </ul>

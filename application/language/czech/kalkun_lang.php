@@ -20,7 +20,7 @@ $lang['Action'] = 'Action';
 $lang['Phonebook'] = 'Adresář';
 $lang['Settings'] = 'Nastavení';
 $lang['Filters'] = 'Filters';
-$lang['About'] = 'O programu';
+$lang['About {0}'] = 'O programu {0}';
 $lang['Logout'] = 'Odhlásit';
 
 // Dashboard
@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Import CSV file';
 $lang['Import contact from CSV format file'] = 'Import contact from CSV format file';
 $lang['CSV file'] = 'CSV File';
 $lang['The CSV file must be in valid format'] = 'The CSV file must be in valid format';
-$lang['Are you sure want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Are you sure want to delete <span id='contact-delete-count'></span> contact(s)?";
+$lang['Are you sure you want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Are you sure want to delete <span id='contact-delete-count'></span> contact(s)?";
 $lang['valid example'] = 'Valid Example';
 
 // Message
@@ -88,7 +88,7 @@ $lang['Delete all'] = 'Delete All';
 $lang['Are you sure? This will affect all conversations.'] = 'Are you sure? This will affect all conversations.';
 
 $lang['Select all'] = 'Označit vše';
-$lang['Clear all'] = 'Zrušit označení všech';
+$lang['Deselect all'] = 'Zrušit označení všech';
 $lang['Refresh'] = 'Obnovit';
 
 $lang['Report spam'] = 'Report Spam';
@@ -136,8 +136,8 @@ $lang['Are you sure?'] = 'Are you Sure?';
 // Others
 $lang['Amount'] = 'Amount';
 $lang['Send as Flash SMS'] = 'Send as Flash SMS';
-$lang['times'] = 'times';
-$lang['Hour'] = 'Hour';
+$lang['times']['repetition'] = 'times';
+$lang['Hour(s)'] = 'Hour';
 $lang['Minutes'] = 'Minutes';
 $lang['No result.'] = 'Oops! Your Query doesnt match any records';
 $lang['See conversation'] = 'See conversation';
@@ -210,7 +210,7 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Sending';
 $lang['Insert name from contact list'] = 'Insert Name from Contact List';
 $lang['Delete group(s) confirmation'] = 'Delete Group(s) Confirmation';
-$lang['Delete group(s)?<br>All contacts in this group(s) will also be deleted.'] = 'Delete Gruop(s)?<br>All conaycys in this Group(s) will also be eliminated.';
+$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Delete Gruop(s)?<br>All conaycys in this Group(s) will also be eliminated.';
 $lang['Yes, delete selected group(s).'] = 'Yes, delete selected group(s).';
 $lang['Create group'] = 'Create Group';
 $lang['Group name'] = 'Group Name';
@@ -292,7 +292,7 @@ $lang['Used for paging in message and phonebook'] = 'Will be used for paging in 
 
 $lang['Permanent delete'] = 'Permanent delete';
 $lang['Disable'] = 'Off';
-$lang[' - Always move to trash first'] = ' - Always move to Trash first';
+$lang['Always move to trash first'] = 'Always move to Trash first';
 $lang['Enable'] = 'On';
 
 $lang['User settings'] = "User's settings";
@@ -326,8 +326,8 @@ $lang['User added successfully.'] = 'User has been added';
 $lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Only administrators can manage plugins';
 $lang['Plugin {0} installed successfully.'] = 'Plugin {0} successfully installed';
 $lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} successfully uninstalled';
-$lang[' - Installed'] = ' - Installed';
-$lang[' - Available'] = ' - Available';
+$lang['Installed']['Plural'] = 'Installed';
+$lang['Available']['Plural'] = 'Available';
 // Phonebook Controller
 $lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts successfully imported';
 $lang['Contact updated successfully.'] = 'Contact has been updated';
@@ -382,7 +382,6 @@ $lang['{0} or {1}:'] = '{0} or {1}:';
 $lang['Open'] = 'Open';
 $lang['Selection'] = 'Selection';
 $lang['Select'] = 'Select';
-$lang['Deselect all'] = 'Deselect all';
 $lang['Actions'] = 'Actions';
 $lang['Move selected'] = 'Move selected';
 $lang['Delete selected'] = 'Delete selected';

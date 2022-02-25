@@ -20,7 +20,7 @@ $lang['Action'] = 'Művelet';
 $lang['Phonebook'] = 'Telefonkönyv';
 $lang['Settings'] = 'Beállítások';
 $lang['Filters'] = 'Szűrők';
-$lang['About'] = 'Névjegy';
+$lang['About {0}'] = 'Névjegy {0}';
 $lang['Logout'] = 'Kilépés';
 
 // Dashboard
@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'CSV fájl importálása';
 $lang['Import contact from CSV format file'] = 'Kapcsolatok importálása formázott CSV fájlból';
 $lang['CSV file'] = 'CSV fájl';
 $lang['The CSV file must be in valid format'] = 'A CSV fájl formátumának helyesnek kell lennie';
-$lang['Are you sure want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Biztosan törölni szeretnéd a <span id='contact-delete-count'></span> kapcsolato(ka)t?";
+$lang['Are you sure you want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Biztosan törölni szeretnéd a <span id='contact-delete-count'></span> kapcsolato(ka)t?";
 $lang['valid example'] = 'Érvényes példa';
 
 // Message
@@ -88,7 +88,7 @@ $lang['Delete all'] = 'Összes törlése';
 $lang['Are you sure? This will affect all conversations.'] = 'Biztos benne? Minden beszélgetést érinteni fog!';
 
 $lang['Select all'] = 'Összes kiválasztása';
-$lang['Clear all'] = 'Összes törlés';
+$lang['Deselect all'] = 'Összes törlés';
 $lang['Refresh'] = 'Frissítés';
 
 $lang['Report spam'] = 'Bejelentés SPAM-ként';
@@ -136,8 +136,8 @@ $lang['Are you sure?'] = 'Biztos benne?';
 // Others
 $lang['Amount'] = 'Mennyiség';
 $lang['Send as Flash SMS'] = 'Küldés Flash SMS-ként';
-$lang['times'] = 'alkalommal';
-$lang['Hour'] = 'Óra';
+$lang['times']['repetition'] = 'alkalommal';
+$lang['Hour(s)'] = 'Óra';
 $lang['Minutes'] = 'Perc';
 $lang['No result.'] = 'Oops! A keresés nem egyezik egy rekorddal sem';
 $lang['See conversation'] = 'Beszélgetés megtekintése';
@@ -210,7 +210,7 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Küldés';
 $lang['Insert name from contact list'] = 'Név beszúrása a kapcsolati listából';
 $lang['Delete group(s) confirmation'] = 'Csoport(ok) törlésének megerősítése';
-$lang['Delete group(s)?<br>All contacts in this group(s) will also be deleted.'] = 'Törli a csoporto(ka)t?<br>A csoport(ok) összes kapcsolata törlődni fog.';
+$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Törli a csoporto(ka)t?<br>A csoport(ok) összes kapcsolata törlődni fog.';
 $lang['Yes, delete selected group(s).'] = 'Igen, törölje a kiválasztott csoporto(ka)t';
 $lang['Create group'] = 'Csoport létrehozása';
 $lang['Group name'] = 'Csoport neve';
@@ -292,7 +292,7 @@ $lang['Used for paging in message and phonebook'] = 'Az üzenetek és a telefonk
 
 $lang['Permanent delete'] = 'Végleges törlés';
 $lang['Disable'] = 'Letilt';
-$lang[' - Always move to trash first'] = ' - Először a szemetesbe kell helyezni';
+$lang['Always move to trash first'] = 'Először a szemetesbe kell helyezni';
 $lang['Enable'] = 'Engedélyez';
 
 $lang['User settings'] = 'Felhasználó beállítások';
@@ -326,8 +326,8 @@ $lang['User added successfully.'] = 'User has been added';
 $lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Only administrators can manage plugins';
 $lang['Plugin {0} installed successfully.'] = 'Plugin {0} successfully installed';
 $lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} successfully uninstalled';
-$lang[' - Installed'] = ' - Installed';
-$lang[' - Available'] = ' - Available';
+$lang['Installed']['Plural'] = 'Installed';
+$lang['Available']['Plural'] = 'Available';
 // Phonebook Controller
 $lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts successfully imported';
 $lang['Contact updated successfully.'] = 'Contact has been updated';
@@ -382,7 +382,6 @@ $lang['{0} or {1}:'] = '{0} or {1}:';
 $lang['Open'] = 'Open';
 $lang['Selection'] = 'Selection';
 $lang['Select'] = 'Select';
-$lang['Deselect all'] = 'Deselect all';
 $lang['Actions'] = 'Actions';
 $lang['Move selected'] = 'Move selected';
 $lang['Delete selected'] = 'Delete selected';

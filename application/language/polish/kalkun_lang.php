@@ -20,7 +20,7 @@ $lang['Action'] = 'Akcje';
 $lang['Phonebook'] = 'Książka adresowa';
 $lang['Settings'] = 'Ustawienia';
 $lang['Filters'] = 'Filters';
-$lang['About'] = 'O systemie';
+$lang['About {0}'] = 'O systemie {0}';
 $lang['Logout'] = 'Wyloguj';
 
 // Dashboard
@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Import z pliku CSV';
 $lang['Import contact from CSV format file'] = 'Importuje kontakt z pliku o formacie CSV';
 $lang['CSV file'] = 'Plik CSV';
 $lang['The CSV file must be in valid format'] = 'Plik CSV musi mieć właściwy format';
-$lang['Are you sure want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Czy jesteś pewien, że chcesz usunąć <span id='contact-delete-count'></span> kontaktów?";
+$lang['Are you sure you want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Czy jesteś pewien, że chcesz usunąć <span id='contact-delete-count'></span> kontaktów?";
 $lang['valid example'] = 'Właściwy przykład';
 
 // Message
@@ -88,7 +88,7 @@ $lang['Delete all'] = 'Skasuj Wszystkie';
 $lang['Are you sure? This will affect all conversations.'] = 'Jesteś pewien? Skasuje to wszystkie konwersacje.';
 
 $lang['Select all'] = 'Zaznacz wszystko';
-$lang['Clear all'] = 'Wyczyść zaznaczenie';
+$lang['Deselect all'] = 'Wyczyść zaznaczenie';
 $lang['Refresh'] = 'Odśwież';
 
 $lang['Report spam'] = 'Oznacz jako Spam';
@@ -136,8 +136,8 @@ $lang['Are you sure?'] = 'Czy jesteś pewien?';
 // Others
 $lang['Amount'] = 'Ilość';
 $lang['Send as Flash SMS'] = 'Wyślij jako Flash SMS';
-$lang['times'] = 'razy';
-$lang['Hour'] = 'Godzina';
+$lang['times']['repetition'] = 'razy';
+$lang['Hour(s)'] = 'Godzina';
 $lang['Minutes'] = 'Minuty';
 $lang['No result.'] = 'Twoje zapytanie nie zwróciło wyników!';
 $lang['See conversation'] = 'Zobacz konwersację';
@@ -210,7 +210,7 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Wysyłanie';
 $lang['Insert name from contact list'] = 'Wpisz nazwę z grup kontaktów';
 $lang['Delete group(s) confirmation'] = 'Potwierdzenie usunięcia grup(y)';
-$lang['Delete group(s)?<br>All contacts in this group(s) will also be deleted.'] = 'Usuwanie grup(y)?<br>Wszystkie kontakty z tej grup(y) zostaną także usunięte.';
+$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Usuwanie grup(y)?<br>Wszystkie kontakty z tej grup(y) zostaną także usunięte.';
 $lang['Yes, delete selected group(s).'] = 'Tak, usuń wybraną grupę(y).';
 $lang['Create group'] = 'Utwórz grupę';
 $lang['Group name'] = 'Nazwa grupy';
@@ -292,7 +292,7 @@ $lang['Used for paging in message and phonebook'] = 'Użyte w stronicowaniu wiad
 
 $lang['Permanent delete'] = 'Trwałe usuwanie';
 $lang['Disable'] = 'Wyłączać';
-$lang[' - Always move to trash first'] = ' - Zawsze najpierw usuwaj do kosza';
+$lang['Always move to trash first'] = 'Zawsze najpierw usuwaj do kosza';
 $lang['Enable'] = 'Umożliwiać';
 
 $lang['User settings'] = 'Ustawienia użytkownika';
@@ -326,8 +326,8 @@ $lang['User added successfully.'] = 'User has been added';
 $lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Only administrators can manage plugins';
 $lang['Plugin {0} installed successfully.'] = 'Plugin {0} successfully installed';
 $lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} successfully uninstalled';
-$lang[' - Installed'] = ' - Installed';
-$lang[' - Available'] = ' - Available';
+$lang['Installed']['Plural'] = 'Installed';
+$lang['Available']['Plural'] = 'Available';
 // Phonebook Controller
 $lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts successfully imported';
 $lang['Contact updated successfully.'] = 'Contact has been updated';
@@ -382,7 +382,6 @@ $lang['{0} or {1}:'] = '{0} or {1}:';
 $lang['Open'] = 'Open';
 $lang['Selection'] = 'Selection';
 $lang['Select'] = 'Select';
-$lang['Deselect all'] = 'Deselect all';
 $lang['Actions'] = 'Actions';
 $lang['Move selected'] = 'Move selected';
 $lang['Delete selected'] = 'Delete selected';

@@ -1,5 +1,5 @@
 <!-- About dialog -->
-<div id="about" title="<?php echo tr('About');?> Kalkun" class="dialog">
+<div id="about" title="<?php echo tr('About {0}', NULL, 'Kalkun');?>" class="dialog">
 	<div class="mascot" style="float: left;">
 		<img src="<?php echo $this->config->item('img_path');?>mascot.png" />
 	</div>
@@ -7,29 +7,29 @@
 	<div class="detail" style="float: left">
 		<center>
 			<div class="base_bg rounded"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></div>
-			<h1>PHP Frontend for gammu-smsd</h1>
+			<h1><?php echo tr('PHP Frontend for gammu-smsd'); ?></h1>
 		</center>
 		<table>
 			<tr valign="top">
-				<td><b>Authors:</b></td>
+				<td><b><?php echo tr('Authors'); ?>:</b></td>
 				<td>&nbsp;</td>
-				<td>See <a class="base_color underline_link" href="https://raw.githubusercontent.com/kalkun-sms/Kalkun/devel/CREDITS" target="_blank">CREDITS</a> page</td>
+				<td><?php echo tr('See {0} page', NULL, '<a class="base_color underline_link" href="https://raw.githubusercontent.com/kalkun-sms/Kalkun/devel/CREDITS" target="_blank">CREDITS</a>'); ?></td>
 			</tr>
 			<tr>
-				<td><b>Version:</b></td>
+				<td><b><?php echo tr('Version'); ?>:</b></td>
 				<td>&nbsp;</td>
 				<td><?php echo $this->config->item('kalkun_version').' ('.$this->config->item('kalkun_codename').')';?></td>
 			</tr>
 			<tr>
-				<td><b>Released:</b></td>
+				<td><b><?php echo tr('Released'); ?>:</b></td>
 				<td>&nbsp;</td>
 				<td><?php echo $this->config->item('kalkun_release_date');?></td>
 			<tr>
-				<td><b>License:</b></td>
+				<td><b><?php echo tr('License'); ?>:</b></td>
 				<td>&nbsp;</td>
-				<td><a href="https://spdx.org/licenses/GPL-3.0-or-later.html">GPL-3.0-or-later</a></td>
+				<td><a class="base_color underline_link" href="https://spdx.org/licenses/GPL-3.0-or-later.html">GPL-3.0-or-later</a></td>
 			<tr>
-				<td><b>Homepage:</b></td>
+				<td><b><?php echo tr('Homepage'); ?>:</b></td>
 				<td>&nbsp;</td>
 				<td><a class="base_color underline_link" href="https://github.com/kalkun-sms/Kalkun/" target="_blank">https://github.com/kalkun-sms/Kalkun/</a></td>
 			</tr>
@@ -44,7 +44,7 @@
 			</tr>
 			<tr>
 				<td><b>Kalkun version:</b></td>
-				<td><?php echo $this->config->item('kalkun_version');?></td>
+				<td><?php echo $this->config->item('kalkun_version');?> [Lang: <?php echo $this->Kalkun_model->get_setting()->row('language');?>] [CountryCode: <?php echo $this->Kalkun_model->get_setting()->row('country_code');?>]</td>
 			</tr>
 			<tr>
 				<td><b>Operating system:</b></td>
@@ -61,6 +61,14 @@
 				$this->load->helper('kalkun_helper');
 				$db_name_human = get_database_property($this->db->platform())['human'];
 				echo $db_name_human, ' ', $this->db->version(), ' (', $this->db->platform(), ')'; ?></td>
+			</tr>
+			<tr>
+				<td><b>Gammu version:</b></td>
+				<td><?php echo  filter_data($this->Kalkun_model->get_gammu_info('gammu_version')->row('Client')); ?></td>
+			</tr>
+			<tr>
+				<td><b>Gammu DB schema:</b></td>
+				<td><?php echo  filter_data($this->Kalkun_model->get_gammu_info('db_version')->row('Version')); ?></td>
 			</tr>
 			<tr>
 				<td><b>Browser:</b></td>

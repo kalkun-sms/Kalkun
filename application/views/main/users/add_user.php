@@ -28,7 +28,7 @@
 		<input type="password" name="confirm_password" id="confirm_password" value="" class="text ui-widget-content ui-corner-all" />
 		<?php endif;?>
 
-		<label for="level"><?php echo tr('Level'); ?></label>
+		<label for="level"><?php echo tr('Role'); ?></label>
 		<?php
 $level = array('admin' => tr('Administrator'), 'user' => tr('User', 'credentials'));
 $level_act = (isset($users)) ? $users->row('level') : '';
