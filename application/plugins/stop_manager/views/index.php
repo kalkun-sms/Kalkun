@@ -18,7 +18,7 @@
 		<table class="nice-table" cellpadding="0" cellspacing="0">
 			<tr>
 				<th class="nice-table-left">No.</th>
-				<th>Phone Number</th>
+				<th><?php echo tr('Phone number'); ?></th>
 				<th>Type</th>
 				<th>Original opt-out SMS</th>
 				<th>Insertion date</th>
@@ -76,7 +76,7 @@
 	<p id="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/stop_manager', array('class' => 'addstopform')); ?>
 	<fieldset>
-		<label for="destination_number">Phone Number</label>
+		<label for="destination_number"><?php echo tr('Phone number'); ?></label>
 		<input type="text" name="destination_number" id="destination_number" class="text ui-widget-content ui-corner-all" />
 		<label for="stop_type">Type</label>
 		<input type="text" name="stop_type" id="stop_type" class="text ui-widget-content ui-corner-all" />

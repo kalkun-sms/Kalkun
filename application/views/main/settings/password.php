@@ -17,11 +17,11 @@
 			},
 			messages: {
 				current_password: {
-					required: "<?php echo tr('Enter your current password');?>"
+					required: "<?php echo tr('Field required.');?>",
 				},
 				new_password: {
-					required: "<?php echo tr('Enter your new password');?>",
-					minlength: "<?php echo tr('Password is too short.');?>"
+					required: "<?php echo tr('Field required.');?>",
+					minlength: "<?php echo tr('Value is too short.');?>"
 				},
 				confirm_password: {
 					equalTo: "<?php echo tr('Passwords do not match.');?>"

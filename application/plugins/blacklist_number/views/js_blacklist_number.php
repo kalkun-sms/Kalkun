@@ -11,10 +11,10 @@
 			height: 250,
 			modal: true,
 			buttons: {
-				'Save': function() {
+				'<?php echo tr('Save'); ?>': function() {
 					$("form.addblacklistnumberform").trigger('submit');
 				},
-				Cancel: function() {
+				'<?php echo tr('Cancel'); ?>': function() {
 					$(this).dialog('close');
 				}
 			}
@@ -34,10 +34,10 @@
 			height: 250,
 			modal: true,
 			buttons: {
-				'Save Changes': function() {
+				'<?php echo tr('Save'); ?>': function() {
 					$("form.editblacklistnumberform").trigger('submit');
 				},
-				Cancel: function() {
+				'<?php echo tr('Cancel'); ?>': function() {
 					$(this).dialog('close');
 				}
 			}

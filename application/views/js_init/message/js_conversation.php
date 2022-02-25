@@ -238,7 +238,7 @@
 					show: 'fade',
 					hide: 'fade',
 					buttons: {
-						'Save': function() {
+						'<?php echo tr('Save'); ?>': function() {
 							//if($("#addContact").valid()) {
 							$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize(), function(data) {
 								$("#contact_container").html(data);
