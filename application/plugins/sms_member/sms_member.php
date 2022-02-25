@@ -102,12 +102,12 @@ function sms_member($sms)
 function register_member($number)
 {
 	$CI = &get_instance();
-	$CI->load->model('sms_member/sms_member_model', 'plugin_model');
+	$CI->load->model('sms_member/sms_member_model', 'sms_member_model');
 
 	//check if number not registered
-	if ($CI->plugin_model->check_member($number) === 0)
+	if ($CI->sms_member_model->check_member($number) === 0)
 	{
-		$CI->plugin_model->add_member($number);
+		$CI->sms_member_model->add_member($number);
 	}
 }
 
@@ -121,11 +121,11 @@ function register_member($number)
 function unregister_member($number)
 {
 	$CI = &get_instance();
-	$CI->load->model('sms_member/sms_member_model', 'plugin_model');
+	$CI->load->model('sms_member/sms_member_model', 'sms_member_model');
 
 	//check if already registered
-	if ($CI->plugin_model->check_member($number) === 1)
+	if ($CI->sms_member_model->check_member($number) === 1)
 	{
-		$CI->plugin_model->remove_member($number);
+		$CI->sms_member_model->remove_member($number);
 	}
 }

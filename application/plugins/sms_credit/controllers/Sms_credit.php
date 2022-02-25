@@ -30,7 +30,7 @@ class Sms_credit extends Plugin_controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('sms_credit_model', 'plugin_model');
+		$this->load->model('sms_credit_model');
 	}
 
 	// --------------------------------------------------------------------
@@ -53,7 +53,7 @@ class Sms_credit extends Plugin_controller {
 
 		$this->load->library('pagination');
 		$config['base_url'] = site_url('plugin/sms_credit/index');
-		$config['total_rows'] = $this->plugin_model->get_users()->num_rows();
+		$config['total_rows'] = $this->sms_credit_model->get_users()->num_rows();
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';
@@ -64,8 +64,8 @@ class Sms_credit extends Plugin_controller {
 
 		$data['main'] = 'index';
 		$data['title'] = 'Users Credit';
-		$data['users'] = $this->plugin_model->get_users($param);
-		$data['packages'] = $this->plugin_model->get_packages();
+		$data['users'] = $this->sms_credit_model->get_users($param);
+		$data['packages'] = $this->sms_credit_model->get_packages();
 
 		$this->load->view('main/layout', $data);
 	}
@@ -86,12 +86,12 @@ class Sms_credit extends Plugin_controller {
 			if (empty($this->input->post('id_user')))
 			{
 				// add user
-				$this->plugin_model->add_users();
+				$this->sms_credit_model->add_users();
 			}
 			else
 			{
 				// edit user
-				$this->plugin_model->change_users_package();
+				$this->sms_credit_model->change_users_package();
 			}
 
 			redirect('plugin/sms_credit');
@@ -109,7 +109,7 @@ class Sms_credit extends Plugin_controller {
 	 */
 	function delete_users($id = NULL)
 	{
-		$this->plugin_model->delete_users($id);
+		$this->sms_credit_model->delete_users($id);
 		redirect('plugin/sms_credit');
 	}
 
@@ -126,7 +126,7 @@ class Sms_credit extends Plugin_controller {
 	{
 		$this->load->library('pagination');
 		$config['base_url'] = site_url('plugin/sms_credit/packages');
-		$config['total_rows'] = $this->plugin_model->get_packages()->num_rows();
+		$config['total_rows'] = $this->sms_credit_model->get_packages()->num_rows();
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';
@@ -138,11 +138,11 @@ class Sms_credit extends Plugin_controller {
 		if ($_POST)
 		{
 			$data['query'] = $this->input->post('query');
-			$data['packages'] = $this->plugin_model->search_packages($data['query']);
+			$data['packages'] = $this->sms_credit_model->search_packages($data['query']);
 		}
 		else
 		{
-			$data['packages'] = $this->plugin_model->get_packages($param);
+			$data['packages'] = $this->sms_credit_model->get_packages($param);
 		}
 
 		$data['main'] = 'packages';
@@ -172,7 +172,7 @@ class Sms_credit extends Plugin_controller {
 
 			$param['template_name'] = trim($this->input->post('package_name'));
 			$param['sms_numbers'] = trim($this->input->post('sms_amount'));
-			$this->plugin_model->add_packages($param);
+			$this->sms_credit_model->add_packages($param);
 			redirect('plugin/sms_credit/packages');
 		}
 	}
@@ -188,7 +188,7 @@ class Sms_credit extends Plugin_controller {
 	 */
 	function delete_packages($id = NULL)
 	{
-		$this->plugin_model->delete_packages($id);
+		$this->sms_credit_model->delete_packages($id);
 		redirect('plugin/sms_credit/packages');
 	}
 }

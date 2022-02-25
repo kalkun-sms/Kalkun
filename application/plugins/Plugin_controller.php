@@ -93,7 +93,7 @@ class Plugin_controller extends MY_Controller {
 		// if models exist
 		if (file_exists(APPPATH.'models/plugin/'.$this->plugin_name.'_model.php'))
 		{
-			$this->load->model('plugin/'.$this->plugin_name.'_model', 'plugin_model');
+			$this->load->model('plugin/'.$this->plugin_name.'_model', $this->plugin_name.'_model');
 		}
 	}
 }

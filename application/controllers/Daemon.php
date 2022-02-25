@@ -223,9 +223,9 @@ class Daemon extends CI_Controller {
 	function server_alert_daemon()
 	{
 		$this->load->model(array('Kalkun_model', 'Message_model'));
-		$this->load->model('server_alert/server_alert_model', 'plugin_model');
+		$this->load->model('server_alert/server_alert_model', 'server_alert_model');
 
-		$tmp_data = $this->plugin_model->get('active');
+		$tmp_data = $this->server_alert_model->get('active');
 		foreach ($tmp_data->result() as $tmp)
 		{
 			$fp = fsockopen($tmp->ip_address, $tmp->port_number, $errno, $errstr, 60);
@@ -238,7 +238,7 @@ class Daemon extends CI_Controller {
 				$data['class'] = '1';
 				$data['uid'] = '1';
 				$this->Message_model->send_messages($data);
-				$this->plugin_model->change_state($tmp->id_server_alert, 'false');
+				$this->server_alert_model->change_state($tmp->id_server_alert, 'false');
 			}
 		}
 	}

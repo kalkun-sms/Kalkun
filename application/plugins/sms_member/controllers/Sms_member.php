@@ -30,7 +30,7 @@ class Sms_member extends Plugin_controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('sms_member_model', 'plugin_model');
+		$this->load->model('sms_member_model');
 	}
 
 	// --------------------------------------------------------------------
@@ -46,8 +46,8 @@ class Sms_member extends Plugin_controller {
 	{
 		$data['main'] = 'index';
 		$data['title'] = 'SMS Member';
-		$data['total_member'] = $this->plugin_model->get_member('total')->row('count');
-		$data['member'] = $this->plugin_model->get_member('all')->result_array();
+		$data['total_member'] = $this->sms_member_model->get_member('total')->row('count');
+		$data['member'] = $this->sms_member_model->get_member('all')->result_array();
 
 		$this->load->view('main/layout', $data);
 	}

@@ -25,15 +25,15 @@ class Sms_to_xmpp extends Plugin_controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('sms_to_xmpp_model', 'plugin_model');
+		$this->load->model('sms_to_xmpp_model');
 	}
 
 	function index()
 	{
 		$data['title'] = 'XMPP Account Status';
 		$data['main'] = 'index';
-		$data['status'] = $this->plugin_model->check_status($this->session->userdata('id_user'));
-		$data['xmpp'] = $this->plugin_model->get_xmpp($this->session->userdata('id_user'));
+		$data['status'] = $this->sms_to_xmpp_model->check_status($this->session->userdata('id_user'));
+		$data['xmpp'] = $this->sms_to_xmpp_model->get_xmpp($this->session->userdata('id_user'));
 		$this->load->view('main/layout', $data);
 	}
 
@@ -41,14 +41,14 @@ class Sms_to_xmpp extends Plugin_controller {
 	{
 		if ($_POST)
 		{
-			$this->plugin_model->save_xmpp();
+			$this->sms_to_xmpp_model->save_xmpp();
 			redirect('sms_to_xmpp');
 		}
 	}
 
 	function delete()
 	{
-		$this->plugin_model->delete_xmpp($this->session->userdata('id_user'));
+		$this->sms_to_xmpp_model->delete_xmpp($this->session->userdata('id_user'));
 		redirect('sms_to_xmpp');
 	}
 }

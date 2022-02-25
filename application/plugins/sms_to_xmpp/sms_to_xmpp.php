@@ -82,10 +82,10 @@ function sms_to_xmpp($sms)
 	if (strtoupper($code) === strtoupper($xmpp_code))
 	{
 		$CI = &get_instance();
-		$CI->load->model('sms_to_xmpp/sms_to_xmpp_model', 'plugin_model');
+		$CI->load->model('sms_to_xmpp/sms_to_xmpp_model');
 
 		// if xmpp account exist
-		$xmpp = $CI->plugin_model->get_xmpp_account_by_phone($number);
+		$xmpp = $CI->sms_to_xmpp_model->get_xmpp_account_by_phone($number);
 		if (is_array($xmpp))
 		{
 			$CI->load->library('encryption');
