@@ -25,7 +25,7 @@ class Sms_to_email extends Plugin_controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('sms_to_email_model', 'plugin_model');
+		$this->load->model('sms_to_email_model');
 	}
 
 	function index()
@@ -33,7 +33,7 @@ class Sms_to_email extends Plugin_controller {
 		$this->load->helper('form');
 		$data['title'] = 'SMS to Email Settings';
 		$data['main'] = 'index';
-		$data['settings'] = $this->plugin_model->get_setting($this->session->userdata('id_user'));
+		$data['settings'] = $this->sms_to_email_model->get_setting($this->session->userdata('id_user'));
 		if ($data['settings']->num_rows() === 1)
 		{
 			$data['mode'] = 'edit';
@@ -49,7 +49,7 @@ class Sms_to_email extends Plugin_controller {
 	{
 		if ($_POST)
 		{
-			$this->plugin_model->save_setting();
+			$this->sms_to_email_model->save_setting();
 			redirect('plugin/sms_to_email');
 		}
 	}

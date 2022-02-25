@@ -25,15 +25,15 @@ class Sms_to_wordpress extends Plugin_controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('sms_to_wordpress_model', 'plugin_model');
+		$this->load->model('sms_to_wordpress_model');
 	}
 	
 	function index()
 	{
 		$data['title'] = 'Wordpress Blog Status';
 		$data['main'] = 'index';
-		$data['status'] = $this->plugin_model->check_status($this->session->userdata('id_user'));
-		$data['wp'] = $this->plugin_model->get_wp($this->session->userdata('id_user'));
+		$data['status'] = $this->sms_to_wordpress_model->check_status($this->session->userdata('id_user'));
+		$data['wp'] = $this->sms_to_wordpress_model->get_wp($this->session->userdata('id_user'));
 		$this->load->view('main/layout', $data);
 	}
 	
@@ -41,14 +41,14 @@ class Sms_to_wordpress extends Plugin_controller {
 	{
 		if ($_POST)
 		{
-			$this->plugin_model->save_wp();
+			$this->sms_to_wordpress_model->save_wp();
 			redirect('sms_to_wordpress');
 		}
 	}
 	
 	function delete()
 	{
-		$this->plugin_model->delete_wp($this->session->userdata('id_user'));
+		$this->sms_to_wordpress_model->delete_wp($this->session->userdata('id_user'));
 		redirect('sms_to_wordpress');	
 	}
 }
