@@ -53,13 +53,14 @@
 		function auto_refresh() {
 			$('#message_holder').load("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>", function(response, status, xhr) {
 				if (status == "error" || xhr.status != 200) {
-					show_loading('<nobr>Oops Network Error. <span id="retry-progress-display"> Retrying in <span id="countdown-count">10</span> Seconds.</span></nobr>');
+					var msg = '<?php echo tr('Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>';
+					show_loading('<span style="white-space: nowrap">' + msg + '</span>');
 					var cntdwn = setInterval(function() {
 						current_val = $('#countdown-count').html();
 						if (current_val > 1) $('#countdown-count').html(current_val - 1);
 						else {
 							clearInterval(cntdwn);
-							$('#retry-progress-display').html('Retrying Now...')
+							$('#retry-progress-display').html('<?php echo tr('Retrying now'); ?>')
 						}
 					}, 1000);
 					setTimeout(function() {
@@ -93,7 +94,7 @@
 		//console.debug(param1);
 		//console.debug(param2);
 
-		$("#compose_sms_container").html('<div align="center"> Loading...</div>');
+		$("#compose_sms_container").html('<div align="center"><?php echo tr('Loading'); ?></div>');
 		var data = {
 			type: type
 		};

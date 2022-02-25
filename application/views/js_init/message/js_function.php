@@ -33,8 +33,8 @@
 		 */
 		$(document).on('click', "a.global_delete", action_delete = function() {
 			var count = $("input.select_conversation:checkbox:checked").length;
-			var notif = count + ' conversation deleted';
-
+			var notif = "<?php echo tr('%count% conversation(s) deleted'); ?>";
+			notif = notif.replace('%count%', count);
 			if (count == 0) {
 				show_notification("<?php echo tr('No item selected')?>");
 			} else {
@@ -74,6 +74,8 @@
 		 */
 		$(document).on('click', "a.recover_button", action_recover = function() {
 			var count = $("input.select_conversation:checkbox:checked").length;
+			var notif = "<?php echo tr('%count% conversation(s) recovered'); ?>";
+			notif = notif.replace('%count%', count);
 			if (count == 0) {
 				show_notification("<?php echo tr('No item selected')?>");
 			} else {
@@ -100,7 +102,7 @@
 						$(message_row).slideUp("slow");
 					});
 				});
-				show_notification(count + ' conversation recovered'); // translate
+				show_notification(notif);
 			}
 		});
 
@@ -115,6 +117,8 @@
 		 */
 		$(document).on('click', ".move_to", function() {
 			var count = $("input.select_conversation:checkbox:checked").length;
+			var notif = "<?php echo tr('%count% conversation(s) moved'); ?>";
+			notif = notif.replace('%count%', count);
 			if (count == 0) {
 				$("#movetodialog").dialog('close');
 				show_notification("<?php echo tr('No item selected')?>");
@@ -141,7 +145,7 @@
 						$(message_row).slideUp("slow");
 					});
 				});
-				show_notification(count + ' conversation moved'); // translate
+				show_notification(notif);
 			}
 			count = 0;
 		});
@@ -184,18 +188,19 @@
 		// refresh
 		$(document).on('click', "a.refresh_button, div#logo a", refresh = function(type) {
 			if (type != 'retry') {
-				$('.loading_area').html('Loading...');
+				$('.loading_area').html('<?php echo tr('Loading'); ?>');
 				$('.loading_area').fadeIn("slow");
 			}
 			$('#message_holder').load(refresh_url, function(response, status, xhr) {
 				if (status == "error" || xhr.status != 200) {
-					$('.loading_area').html('<nobr>Oops Network Error. <span id="retry-progress-display"> Retrying in <span id="countdown-count">10</span> Seconds.</span></nobr>');
+					var msg = '<?php echo tr('Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>';
+					$('.loading_area').html('<span style="white-space: nowrap">' + msg + '</span>');
 					var cntdwn = setInterval(function() {
 						current_val = $('#countdown-count').html();
 						if (current_val > 1) $('#countdown-count').html(current_val - 1);
 						else {
 							clearInterval(cntdwn);
-							$('#retry-progress-display').html('Retrying Now...')
+							$('#retry-progress-display').html('<?php echo tr('Retrying now'); ?>')
 						}
 					}, 1000);
 					setTimeout(function() {
