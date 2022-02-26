@@ -8,7 +8,7 @@
 <div id="contact_container" class="hidden"></div>
 
 <!-- Add/Edit Group dialog -->
-<div id="addgroupdialog" title="Add Group" class="dialog">
+<div id="addgroupdialog" title="<?php echo tr('Create group');?>" class="dialog">
 	<form class="addgroupform" method="post" action="<?php echo  site_url();?>/phonebook/add_group">
 		<input type="hidden" name="pbkgroup_id_user" value="<?php echo $this->session->userdata('id_user');?>" />
 		<input type="hidden" name="pbkgroup_id" class="pbkgroup_id" value="" />
