@@ -8,3 +8,7 @@ $lang['Request not valid ({0}). Send "{1} or {2} <type>". Possible values for <t
 $lang['Request not valid ({0}). Send "{1} <type>". Possible values for <type> are: {2}. For example "{3}".'] = 'Request not valid ({0}). Send "{1} <type>". Possible values for <type> are: {2}. For example "{3}".';
 $lang['Request not valid ({0}). Send "{1}" or "{2}". For example "{3}".'] = 'Request not valid ({0}). Send "{1}" or "{2}". For example "{3}".';
 $lang['Request not valid ({0}). Send "{1}".'] = 'Request not valid ({0}). Send "{1}".';
+$lang['Stop Manager records'] = 'Stop Manager records';
+$lang['Add STOP record'] = 'Add STOP record';
+$lang['Type'] = 'Type';
+$lang['Original opt-out SMS'] = 'Original opt-out SMS';
