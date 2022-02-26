@@ -165,6 +165,7 @@ function stop_manager_incoming($sms)
 	$types_reg = implode('|', $types_valides);
 	$cmds_reg = implode('|', $cmds_valides);
 
+	$ret = NULL;
 	if ($config['enable_type'])
 	{
 		$ret = preg_match('/\b('.$cmds_reg.')\s*('.$types_reg.')\b/i', $msg, $matches, PREG_UNMATCHED_AS_NULL);
@@ -177,14 +178,14 @@ function stop_manager_incoming($sms)
 	$CI = &get_instance();
 
 	// language
-	$CI->load->helper('language');
+	$CI->load->helper(['language', 'i18n']);
 	// We cannot determine the language of a specific user since this is called on incoming message
 	// So the language to use by this robot is read from plugin config
 	$lang = $config['autoreply_language'];
 	$CI->load->add_package_path(APPPATH.'plugins/stop_manager', FALSE);
 	$CI->load->language('stop_manager', $lang);
 
-	if ($ret)
+	if ($ret === 1)
 	{
 		$cmd = strtoupper($matches[1]);
 		$type = ($config['enable_type']) ? strtolower($matches[2]) : 'TYPE_NOT_SET_SO_STOP_ALL';
@@ -195,44 +196,50 @@ function stop_manager_incoming($sms)
 		//var_dump($matches);
 		switch (TRUE) {
 			case in_array($cmd, $optout_keywords):
+				// Received opt-out message
 				$ret = $CI->Stop_manager_model->add($from, $type, $msg);
 
-				$strTemplate = lang('sm_command_valid_optout_1_taken_into_account');
 				if ($config['enable_optin'])
 				{
-					$strTemplate .= lang('sm_command_valid_optout_2_to_optin_reply');
+					$text = tr(
+						'{0} taken into account. To opt-in again, send "{1}".',
+						NULL,
+						($config['enable_type']) ? $cmd.' '.$type : $cmd,
+						($config['enable_type']) ? $optin_keywords[0].' '.$type : $optin_keywords[0]
+					);
+				}
+				else
+				{
+					$text = tr(
+						'{0} taken into account.',
+						NULL,
+						($config['enable_type']) ? $cmd.' '.$type : $cmd
+					);
 				}
 
-				$strParams = [
-					':received_command' => ($config['enable_type']) ? $cmd.' '.$type : $cmd,
-					':optin_command' => ($config['enable_type']) ? $optin_keywords[0].' '.$type : $optin_keywords[0],
-				];
-
-				$text = strtr($strTemplate, $strParams);
 				if ($config['enable_autoreply_info'])
 				{
 					autoreply($from, $text);
 				}
 				break;
 			case (in_array($cmd, $optin_keywords) && $config['enable_optin']) :
+				// Received opt-in message
 				$ret = $CI->Stop_manager_model->delete($from, $type);
 
-				$strTemplate = lang('sm_command_valid_optin_1_taken_into_account');
-				$strTemplate .= lang('sm_command_valid_optin_2_to_optout_reply');
+				$text = tr(
+					'{0} taken into account. To opt-out, send "{1}".',
+					NULL,
+					($config['enable_type']) ? $cmd.' '.$type : $cmd,
+					($config['enable_type']) ? $optout_keywords[0].' '.$type : $optout_keywords[0]
+				);
 
-				$strParams = [
-					':received_command' => ($config['enable_type']) ? $cmd.' '.$type : $cmd,
-					':optout_command' => ($config['enable_type']) ? $optout_keywords[0].' '.$type : $optout_keywords[0],
-				];
-
-				$text = strtr($strTemplate, $strParams);
 				if ($config['enable_autoreply_info'])
 				{
 					autoreply($from, $text);
 				}
 				break;
 			default:
-				$text = lang('sm_command_invalid_short')." (${msg})";
+				$text = tr('Invalid request.')." (${msg})";
 				if ($config['enable_autoreply_error'])
 				{
 					autoreply($from, $text);
@@ -242,34 +249,58 @@ function stop_manager_incoming($sms)
 	}
 	else
 	{
-		$strTemplate = lang('sm_command_invalid_long_1_reply');
-		if ($config['enable_type'])
-		{
-			$strTemplate .= ' <type>';
-		}
-		$strTemplate .= "'";
-		if ($config['enable_optin'])
-		{
-			$strTemplate .= lang('sm_command_invalid_long_2_or');
-		}
-		$strTemplate .= '.';
-		if ($config['enable_type'])
-		{
-			$strTemplate .= lang('sm_command_invalid_long_3_possible_type_values_are');
-		}
-		$strTemplate .= lang('sm_command_invalid_long_4_eg');
-
-		$strParams = [
-			':received_command' => $msg,
-			':optout_keyword' => $optout_keywords[0],                                   // 1st keyword of the list
-			':optin_keyword' => ($config['enable_optin']) ? $optin_keywords[0] : '',    // 1st keyword of the list
-			':types_valides' => ($config['enable_type']) ? implode(', ', $types_valides) : '',
-			':example' => ($config['enable_type']) ? $optout_keywords[0].' '.$types_valides[0] : $optout_keywords[0],
-		];
-
-		$text = strtr($strTemplate, $strParams);
 		if ($config['enable_autoreply_error'])
 		{
+			if ($config['enable_type'])
+			{
+				if ($config['enable_optin'])
+				{
+					$text = tr(
+						'Request not valid ({0}). Send "{1} or {2} <type>". Possible values for <type> are: {3}. For example "{4}".',
+						NULL,
+						$msg,
+						$optout_keywords[0],
+						$optin_keywords[0],
+						implode(', ', $types_valides),
+						$optout_keywords[0].' '.$types_valides[0]
+					);
+				}
+				else
+				{
+					$text = tr(
+						'Request not valid ({0}). Send "{1} <type>". Possible values for <type> are: {2}. For example "{3}".',
+						NULL,
+						$msg,
+						$optout_keywords[0],
+						implode(', ', $types_valides),
+						$optout_keywords[0].' '.$types_valides[0]
+					);
+				}
+			}
+			else
+			{
+				if ($config['enable_optin'])
+				{
+					$text = tr(
+						'Request not valid ({0}). Send "{1}" or "{2}". For example "{3}".',
+						NULL,
+						$msg,
+						$optout_keywords[0],
+						$optin_keywords[0],
+						$optout_keywords[0]
+					);
+				}
+				else
+				{
+					$text = tr(
+						'Request not valid ({0}). Send "{1}".',
+						NULL,
+						$msg,
+						$optout_keywords[0]
+					);
+				}
+			}
+
 			autoreply($from, $text);
 		}
 	}
