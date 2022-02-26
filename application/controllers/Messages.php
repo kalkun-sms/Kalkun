@@ -399,14 +399,17 @@ class Messages extends MY_Controller {
 		}
 
 		// hook for outgoing message
-		$dest = do_action('message.outgoing', $dest);
-		$sms = do_action('message.outgoing_all', $data);
-
-		$dest_data = do_action('message.outgoing_dest_data', array($dest, $data));
-		if (isset($dest_data) && sizeof($dest_data) === 2)
+		if (isset($dest))
 		{
-			$dest = $dest_data[0];
-			$data = $dest_data[1];
+			$dest = do_action('message.outgoing', $dest);
+			$sms = do_action('message.outgoing_all', $data);
+
+			$dest_data = do_action('message.outgoing_dest_data', array($dest, $data));
+			if (sizeof($dest_data) === 2)
+			{
+				$dest = $dest_data[0];
+				$data = $dest_data[1];
+			}
 		}
 
 		// check for field
