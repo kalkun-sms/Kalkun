@@ -86,9 +86,13 @@ class MY_Lang extends MX_Lang {
 		$langfile .= '.php';
 
 		$found = FALSE;
+		if (file_exists(BASEPATH.'language/'.$this->idiom.'/'.$langfile))
+		{
+			$found = TRUE;
+		}
 		if ($alt_path !== '')
 		{
-			$alt_path .= 'language/'.$idiom.'/'.$langfile;
+			$alt_path .= 'language/'.$this->idiom.'/'.$langfile;
 			if (file_exists($alt_path))
 			{
 				$found = TRUE;
@@ -98,7 +102,7 @@ class MY_Lang extends MX_Lang {
 		{
 			foreach (get_instance()->load->get_package_paths(TRUE) as $package_path)
 			{
-				$package_path .= 'language/'.$idiom.'/'.$langfile;
+				$package_path .= 'language/'.$this->idiom.'/'.$langfile;
 				if (file_exists($package_path))
 				{
 					$found = TRUE;
