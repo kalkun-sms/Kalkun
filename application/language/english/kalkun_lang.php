@@ -393,3 +393,6 @@ $lang['Open shortcut help'] = 'Open shortcut help';
 $lang['Error'] = 'Error';
 $lang['Please specify a valid mobile phone number'] = 'Please specify a valid mobile phone number';
 $lang['Go to {0}'] = 'Go to {0}';
+$lang['No results'] = 'No results';
+$lang['Please enter a name for your message. This should be unique.'] = 'Please enter a name for your message. This should be unique.';
+$lang['Are you sure? This will overwrite previous message.'] = 'Are you sure? This will overwrite previous message.';

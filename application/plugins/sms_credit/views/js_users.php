@@ -23,7 +23,16 @@
 					maxlength: 12
 				},
 				phone_number: {
-					required: true
+					required: true,
+					remote: {
+						url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
+						type: "post",
+						data: {
+							phone: function() {
+								return $("#phone_number").val();
+							}
+						}
+					}
 				},
 				password: {
 					required: true,
@@ -43,13 +52,26 @@
 				realname: {
 					required: "<?php echo tr('Field required.');?>"
 				},
+				username: {
+					required: "<?php echo tr('Field required.');?>",
+					maxlength: "<?php echo tr('Value is too long.');?>"
+				},
+				phone_number: {
+					required: "<?php echo tr('Field required.');?>",
+				},
 				password: {
 					required: "<?php echo tr('Field required.');?>",
-					minlength: "<?php echo tr('Password is too short.');?>"
+					minlength: "<?php echo tr('Value is too short.');?>"
 				},
 				confirm_password: {
 					equalTo: "<?php echo tr('Passwords do not match.');?>"
-				}
+				},
+				package_start: {
+					required: "<?php echo tr('Field required.');?>"
+				},
+				package_end: {
+					required: "<?php echo tr('Field required.');?>"
+				},
 			}
 		});
 
@@ -65,6 +87,8 @@
 
 			$("#users_container").dialog({
 				title: '<?php echo tr('Add user');?>',
+				closeText: "<?php echo tr('Close'); ?>",
+				maxHeight: 400,
 				modal: true,
 				show: 'fade',
 				hide: 'fade',
@@ -124,9 +148,9 @@
 
 			// confirm first
 			$("#confirm_delete_user_dialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 150,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Cancel')?>': function() {

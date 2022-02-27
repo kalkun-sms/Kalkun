@@ -18,15 +18,15 @@
 			}
 
 			$("#filterdialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 250,
 				modal: true,
 				buttons: {
-					'Save': function() {
+					'<?php echo tr('Save'); ?>': function() {
 						$("form.addfilterform").trigger('submit');
 					},
-					Cancel: function() {
+					'<?php echo tr('Cancel'); ?>': function() {
 						$(this).dialog('close');
 					}
 				},
@@ -45,9 +45,9 @@
 
 			// confirm first
 			$("#confirm_delete_filter_dialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 150,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Cancel')?>': function() {

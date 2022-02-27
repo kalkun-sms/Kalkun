@@ -21,8 +21,8 @@
 			$("#addgroupdialog").dialog({
 				bgiframe: true,
 				title: dialog_title,
+				closeText: "<?php echo tr('Close'); ?>",
 				autoOpen: false,
-				height: 175,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Save')?>': function() {
@@ -49,15 +49,15 @@
 			} else {
 				// confirm first
 				$("#confirm_delete_group_dialog").dialog({
+					closeText: "<?php echo tr('Close'); ?>",
 					bgiframe: true,
 					autoOpen: false,
-					height: 200,
 					modal: true,
 					buttons: {
 						'<?php echo tr('Cancel')?>': function() {
 							$(this).dialog('close');
 						},
-						'<?php echo tr('Yes, delete selected group(s).')?>': function() {
+						'<?php echo tr('Delete')?>': function() {
 							$("input.select_group:checked").each(function() {
 								var row = $(this).parents('tr');
 								var id = row.attr('id');

@@ -27,12 +27,27 @@
 				}
 			},
 			messages: {
-				alert_name: "Please enter alert name",
-				ip_address: "Please enter host",
-				port_number: "Please enter port number",
-				timeout: "Please enter timeout",
-				phone_number: "Please enter phone number",
-				respond_message: "Please enter respond message",
+				alert_name: {
+					required: "<?php echo tr('Field required.');?>",
+				},
+				ip_address: {
+					required: "<?php echo tr('Field required.');?>",
+				},
+				port_number: {
+					required: "<?php echo tr('Field required.');?>",
+					number: "<?php echo tr('Value must be a number.');?>",
+				},
+				timeout: {
+					required: "<?php echo tr('Field required.');?>",
+					number: "<?php echo tr('Value must be a number.');?>",
+				},
+				phone_number: {
+					required: "<?php echo tr('Field required.');?>",
+				},
+				respond_message: {
+					required: "<?php echo tr('Field required.');?>",
+					maxlength: "<?php echo tr('Value is too long.');?>",
+				},
 			}
 		});
 
@@ -41,15 +56,16 @@
 
 		// Add alert dialog
 		$("#alert-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
+			maxHeight: 450,
 			modal: true,
 			buttons: {
-				'Save': function() {
+				'<?php echo tr('Save'); ?>': function() {
 					$("form.addserveralertform").trigger('submit');
 				},
-				Cancel: function() {
+				'<?php echo tr('Cancel'); ?>': function() {
 					$(this).dialog('close');
 				}
 			}
@@ -62,15 +78,16 @@
 
 		// Edit alert dialog
 		$("#editalert-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
+			maxHeight: 450,
 			modal: true,
 			buttons: {
-				'Save Changes': function() {
+				'<?php echo tr('Save'); ?>': function() {
 					$("form.editserveralertform").trigger('submit');
 				},
-				Cancel: function() {
+				'<?php echo tr('Cancel'); ?>': function() {
 					$(this).dialog('close');
 				}
 			}

@@ -35,8 +35,10 @@ $this->load->view('js_remote_access');
 		<input type="text" name="editaccess_name" id="editaccess_name" class="text ui-widget-content ui-corner-all" />
 		<label for="editip_address">Remote Host</label>
 		<input type="text" name="editip_address" id="editip_address" class="text ui-widget-content ui-corner-all" />
-		<label for="editstatus">Active</label>
-		<input type="checkbox" name="editstatus" id="editstatus" class="text ui-widget-content ui-corner-all" />
+		<div style="margin-bottom:12px">
+			<input type="checkbox" name="editstatus" id="editstatus" style="display: inline" />
+			<label for="editstatus" style="display: inline">Active</label>
+		</div>
 		<label for="edittoken">Remote Token</label>
 		<input type="text" name="edittoken" id="edittoken" size="30" class="text ui-widget-content ui-corner-all" readonly />
 	</fieldset>

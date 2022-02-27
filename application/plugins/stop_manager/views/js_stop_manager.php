@@ -6,15 +6,15 @@
 
 		// Add STOP dialog
 		$("#stop-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
 			modal: true,
 			buttons: {
-				'Save': function() {
+				'<?php echo tr('Save'); ?>': function() {
 					$("form.addstopform").trigger('submit');
 				},
-				Cancel: function() {
+				'<?php echo tr('Cancel'); ?>': function() {
 					$(this).dialog('close');
 				}
 			}

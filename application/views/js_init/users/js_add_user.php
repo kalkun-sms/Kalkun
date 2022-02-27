@@ -36,9 +36,16 @@
 				realname: {
 					required: "<?php echo tr('Field required.');?>"
 				},
+				username: {
+					required: "<?php echo tr('Field required.');?>",
+					maxlength: "<?php echo tr('Value is too long.');?>"
+				},
+				phone_number: {
+					required: "<?php echo tr('Field required.');?>",
+				},
 				password: {
 					required: "<?php echo tr('Field required.');?>",
-					minlength: "<?php echo tr('Password is too short.');?>"
+					minlength: "<?php echo tr('Value is too short.');?>"
 				},
 				confirm_password: {
 					equalTo: "<?php echo tr('Passwords do not match.');?>"
