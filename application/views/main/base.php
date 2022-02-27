@@ -38,46 +38,35 @@
 		<!--center>
 			<a class="underline_link" href="http://kalkun.sourceforge.net/contribute.php"><b>~ DONATE THIS PROJECT ~</b></a>
 		</center-->
-		<table style="border-top: 1px solid black;">
-			<tr>
-				<td colspan="2">If you find an issue, please report it on the <a class="base_color underline_link" href="https://github.com/kalkun-sms/Kalkun/issues" target="_blank">issue page of the project</a> and add the information below:</td>
-			</tr>
-			<tr>
-				<td><b>Kalkun version:</b></td>
-				<td><?php echo $this->config->item('kalkun_version');?> [Lang: <?php echo $this->Kalkun_model->get_setting()->row('language');?>] [CountryCode: <?php echo $this->Kalkun_model->get_setting()->row('country_code');?>]</td>
-			</tr>
-			<tr>
-				<td><b>Operating system:</b></td>
-				<td><?php echo php_uname(); ?></td>
-			</tr>
-			<tr>
-				<td><b>PHP Version:</b></td>
-				<td><?php echo phpversion(); ?></td>
-			</tr>
-			<tr>
-				<td><b>DB Backend:</b></td>
-				<td>
-					<?php
+		<hr style="border-style: solid; border-color: #86C0D2;" />
+		<p>If you find an issue, please report it on the <a class="base_color underline_link" href="https://github.com/kalkun-sms/Kalkun/issues" target="_blank">issue page of the project</a> and add the information below:</p>
+		<p>
+			<b>* Kalkun version:</b>
+			`<?php echo $this->config->item('kalkun_version');?> [Lang: <?php echo $this->Kalkun_model->get_setting()->row('language');?>] [CountryCode: <?php echo $this->Kalkun_model->get_setting()->row('country_code');?>]`
+			<br /><b>* Operating system:</b>
+			`<?php echo php_uname(); ?>`
+			<br /><b>* PHP Version:</b>
+			`<?php echo phpversion(); ?>`
+			<br /><b>* DB Backend:</b>
+			`<?php
 				$this->load->helper('kalkun_helper');
 				$db_name_human = get_database_property($this->db->platform())['human'];
-				echo $db_name_human, ' ', $this->db->version(), ' (', $this->db->platform(), ')'; ?></td>
-			</tr>
-			<tr>
-				<td><b>Gammu version:</b></td>
-				<td><?php echo  filter_data($this->Kalkun_model->get_gammu_info('gammu_version')->row('Client')); ?></td>
-			</tr>
-			<tr>
-				<td><b>Gammu DB schema:</b></td>
-				<td><?php echo  filter_data($this->Kalkun_model->get_gammu_info('db_version')->row('Version')); ?></td>
-			</tr>
-			<tr>
-				<td><b>Browser:</b></td>
-				<td>
-					<?php
+				echo $db_name_human, ' ', $this->db->version(), ' (', $this->db->platform(), ')'; ?>`
+			<br /><b>* Gammu version:</b>
+			`<?php echo  filter_data($this->Kalkun_model->get_gammu_info('gammu_version')->row('Client')); ?>`
+			<br /><b>* Gammu DB schema:</b>
+			`<?php echo  filter_data($this->Kalkun_model->get_gammu_info('db_version')->row('Version')); ?>`
+			<br /><b>* Browser:</b>
+			`<?php
 					$this->load->library('user_agent');
-					echo $this->agent->browser(), ' ', $this->agent->version() ; ?></td>
-			</tr>
-		</table>
+					echo $this->agent->browser(), ' ', $this->agent->version() ; ?>`
+			<br /><b>* Plugins:</b>
+			`<?php
+					$this->load->model('Plugin_model');
+					$installed_plugins = array_column($this->Plugin_model->get_plugins()->result_array(), 'plugin_system_name');
+					echo implode(', ', $installed_plugins);
+					?>`
+		</p>
 	</div>
 </div>
 
