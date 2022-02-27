@@ -60,6 +60,7 @@
 					var field = $(this).val();
 					var text = $('#message').val();
 					$('#message').val(text + '[[' + field + ']]');
+					$('#message').focus();
 				});
 			}
 		});
