@@ -65,6 +65,6 @@ function phonebook_lookup($number)
 {
 	$config = phonebook_lookup_initialize();
 	$lookup['url'] = str_replace('#phonenumber#', $number->Number, $config['url']);
-	$lookup['title'] = 'Lookup Number';
+	$lookup['title'] = tr('Lookup Number');
 	return $lookup;
 }
