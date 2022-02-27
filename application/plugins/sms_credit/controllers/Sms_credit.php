@@ -59,6 +59,7 @@ class Sms_credit extends Plugin_controller {
 		$config['cur_tag_close'] = '</span>';
 		$config['uri_segment'] = 4;
 		$this->pagination->initialize($config);
+		$data['pagination_links'] = $this->pagination->create_links();
 		$param['limit'] = $config['per_page'];
 		$param['offset'] = $this->uri->segment(4, 0);
 
@@ -132,6 +133,7 @@ class Sms_credit extends Plugin_controller {
 		$config['cur_tag_close'] = '</span>';
 		$config['uri_segment'] = 4;
 		$this->pagination->initialize($config);
+		$data['pagination_links'] = $this->pagination->create_links();
 		$param['limit'] = $config['per_page'];
 		$param['offset'] = $this->uri->segment(4, 0);
 

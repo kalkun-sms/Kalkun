@@ -5,6 +5,6 @@
 		<a href="#" class="delete_user nicebutton"><?php echo tr('Delete');?></a>
 	</div>
 	<div class="right_column">
-		<?php if (empty($_POST));?><div id="simplepaging" class="paging_grey"><?php echo $this->pagination->create_links();?></div>
+		<?php if (empty($_POST));?><div id="simplepaging" class="paging_grey"><?php echo $pagination_links;?></div>
 	</div>
 </div>
