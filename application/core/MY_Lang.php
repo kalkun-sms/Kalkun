@@ -19,6 +19,8 @@ class MY_Lang extends MX_Lang {
 	// Default to 'en'
 	public $locale = 'en';
 
+	private $jquery_datepicker_regional;
+
 	public static $idiom_to_locale = [
 		'portuguese-brazilian' => 'pt_BR',
 		'czech' => 'cs',
@@ -366,6 +368,34 @@ class MY_Lang extends MX_Lang {
 		$locale = $this->locale_matching_browser();
 		$this->idiom = MY_Lang::locale_to_idiom($locale);
 		return $this->idiom;
+	}
+
+	/**
+	 * Get the region/locale to use for the jquery ui datepicker
+	 * based on the locale of the user settings.
+	 *
+	 * This is used to build the filename of the file containing the
+	 * localized values for datepicker.
+	 *
+	 * Returns empty string if no match found.
+	 *
+	 * @param type $jquery_i18n_path
+	 * @return string
+	 */
+	public function get_jquery_datepicker_regional($jquery_i18n_path)
+	{
+		if ( ! isset($this->jquery_datepicker_regional))
+		{
+			$datepicker_locales = [];
+			foreach (glob("${jquery_i18n_path}/datepicker-*.js") as $filename)
+			{
+				$res = preg_match('/datepicker-(.*)\.js/', $filename, $matches);
+				array_push($datepicker_locales, $matches[1]);
+			}
+			$regional = Locale::lookup($datepicker_locales, $this->locale, FALSE, '');
+			$this->jquery_datepicker_regional = $regional;
+		}
+		return $this->jquery_datepicker_regional;
 	}
 
 	public function kalkun_supported_languages()
