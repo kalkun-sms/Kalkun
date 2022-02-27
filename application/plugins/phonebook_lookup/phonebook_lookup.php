@@ -15,6 +15,7 @@ function phonebook_lookup_initialize()
 
 	$CI->load->add_package_path(APPPATH.'plugins/phonebook_lookup', FALSE);
 	$CI->load->config('phonebook_lookup', TRUE);
+	$CI->load->remove_package_path(APPPATH.'plugins/phonebook_lookup');
 
 	return $CI->config->config['phonebook_lookup'];
 }
