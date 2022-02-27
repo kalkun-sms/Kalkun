@@ -65,6 +65,8 @@
 
 			$("#users_container").dialog({
 				title: '<?php echo tr('Add user');?>',
+				closeText: "<?php echo tr('Close'); ?>",
+				maxHeight: 400,
 				modal: true,
 				show: 'fade',
 				hide: 'fade',
@@ -98,6 +100,7 @@
 
 			$("#edit_users_container").dialog({
 				title: 'Change Package for ',
+				closeText: "<?php echo tr('Close'); ?>",
 				modal: true,
 				show: 'fade',
 				hide: 'fade',
@@ -123,9 +126,9 @@
 
 			// confirm first
 			$("#confirm_delete_user_dialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 150,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Cancel')?>': function() {

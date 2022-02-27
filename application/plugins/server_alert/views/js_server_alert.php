@@ -41,9 +41,10 @@
 
 		// Add alert dialog
 		$("#alert-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
+			maxHeight: 450,
 			modal: true,
 			buttons: {
 				'Save': function() {
@@ -62,9 +63,10 @@
 
 		// Edit alert dialog
 		$("#editalert-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
+			maxHeight: 450,
 			modal: true,
 			buttons: {
 				'Save Changes': function() {

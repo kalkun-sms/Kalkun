@@ -1,23 +1,23 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
-		// Add blacklist dialog
+		// Add WP Blog dialog
 		$("#wp-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
-			height: 300,
 			modal: true,
 			buttons: {
-				'Save': function() {
+				'<?php echo tr('Save'); ?>': function() {
 					$("form.addwpblogform").trigger('submit');
 				},
-				Cancel: function() {
+				'<?php echo tr('Cancel'); ?>': function() {
 					$(this).dialog('close');
 				}
 			}
 		});
 
-		// Add blacklist button	
+		// Add WP Blog button
 		$('#addwpblogbutton').on("click", function() {
 			$('#wp-dialog').dialog('open');
 		});

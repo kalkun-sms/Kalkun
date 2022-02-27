@@ -148,6 +148,7 @@
 
 		$(document).on('click', ".move_to_button", message_move = function() {
 			$("#movetodialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
@@ -219,9 +220,9 @@
 		 */
 		$(document).on('click', '#renamefolder', function() {
 			$("#renamefolderdialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 100,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Save'); ?>': function() {
@@ -247,9 +248,9 @@
 		 */
 		$(document).on('click', '#deletefolder', function() {
 			$("#deletefolderdialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 165,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Cancel'); ?>': function() {
@@ -275,9 +276,9 @@
 		 */
 		$(document).on('click', '#delete-all-link', function() {
 			$("#deletealldialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 165,
 				modal: true,
 				buttons: {
 					'<?php echo tr('Cancel'); ?>': function() {

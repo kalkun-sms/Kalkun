@@ -6,9 +6,9 @@
 
 		// Add STOP dialog
 		$("#stop-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
 			modal: true,
 			buttons: {
 				'Save': function() {
