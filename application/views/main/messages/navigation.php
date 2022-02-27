@@ -75,9 +75,9 @@
 		<li><a href="#" class="resend_bulk button"><?php echo tr('Resend');?></a></li>
 		<?php endif; ?>
 
-		<?php if ($this->pagination->create_links() != ''): ?>
+		<?php if ($pagination_links != ''): ?>
 		<li class="paging">
-			<div id="paging"><?php  echo $this->pagination->create_links();?></div>
+			<div id="paging"><?php  echo $pagination_links;?></div>
 		</li>
 		<?php endif; ?>
 
