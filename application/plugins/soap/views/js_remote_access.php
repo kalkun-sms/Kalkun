@@ -46,6 +46,7 @@
 
 		// Add remote access dialog
 		$("#remoteaccess-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,
@@ -60,6 +61,7 @@
 		});
 
 		$("#notification-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,
@@ -84,6 +86,7 @@
 
 		// Edit remote access dialog
 		$("#editremoteaccess-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,

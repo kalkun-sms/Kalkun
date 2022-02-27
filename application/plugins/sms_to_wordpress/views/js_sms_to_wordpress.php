@@ -3,6 +3,7 @@
 
 		// Add WP Blog dialog
 		$("#wp-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,

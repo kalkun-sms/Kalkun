@@ -6,6 +6,7 @@
 
 		// Add whitelist dialog
 		$("#whitelist-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,
@@ -26,6 +27,7 @@
 
 		// Edit whitelist dialog
 		$("#editwhitelist-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,

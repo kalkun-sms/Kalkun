@@ -6,6 +6,7 @@
 
 		// Add blacklist dialog
 		$("#blacklist-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,
@@ -26,6 +27,7 @@
 
 		// Edit blacklist dialog
 		$("#editblacklist-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,

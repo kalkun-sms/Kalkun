@@ -41,6 +41,7 @@
 
 		// Add alert dialog
 		$("#alert-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			maxHeight: 450,
@@ -62,6 +63,7 @@
 
 		// Edit alert dialog
 		$("#editalert-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			maxHeight: 450,

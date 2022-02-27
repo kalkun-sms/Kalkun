@@ -3,6 +3,7 @@
 
 		// Add blacklist dialog
 		$("#xmpp-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,
