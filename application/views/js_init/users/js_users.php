@@ -21,6 +21,7 @@
 			}, function() {
 				$(this).dialog({
 					title: user_title,
+					closeText: "<?php echo tr('Close'); ?>",
 					modal: true,
 					show: 'fade',
 					hide: 'fade',
@@ -30,6 +31,7 @@
 								$.post("<?php echo site_url('users/add_user_process') ?>", $("#addUser").serialize(), function(data) {
 									$("#users_container").html(data);
 									$("#users_container").dialog({
+										closeText: "<?php echo tr('Close'); ?>",
 										buttons: {
 											"<?php echo tr('Close'); ?>": function() {
 												$(this).dialog("close");
@@ -82,9 +84,9 @@
 			} else {
 				// confirm first
 				$("#confirm_delete_user_dialog").dialog({
+					closeText: "<?php echo tr('Close'); ?>",
 					bgiframe: true,
 					autoOpen: false,
-					height: 175,
 					modal: true,
 					buttons: {
 						'<?php echo tr('Cancel'); ?>': function() {
@@ -116,9 +118,9 @@
 		// Contact import
 		$('#pbkimport').on("click", function() {
 			$("#pbkimportdialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 300,
 				modal: true,
 			});
 			$('#pbkimportdialog').dialog('open');

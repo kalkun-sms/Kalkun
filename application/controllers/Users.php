@@ -60,6 +60,7 @@ class Users extends MY_Controller {
 		$config['uri_segment'] = 3;
 
 		$this->pagination->initialize($config);
+		$data['pagination_links'] = $this->pagination->create_links();
 		$param = array('option' => 'paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3, 0));
 
 		$data['main'] = 'main/users/index';

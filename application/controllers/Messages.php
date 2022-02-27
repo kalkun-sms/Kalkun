@@ -596,6 +596,7 @@ class Messages extends MY_Controller {
 			$config['base_url'] = site_url('messages/folder/'.$type);
 			$config['uri_segment'] = 4;
 			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
 
 			$data['main'] = 'main/messages/index';
 			$this->load->view('main/layout', $data);
@@ -677,6 +678,7 @@ class Messages extends MY_Controller {
 			$config['base_url'] = site_url('/messages/my_folder/'.$type.'/'.$id_folder);
 			$config['uri_segment'] = 5;
 			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
 
 			$data['main'] = 'main/messages/index';
 			$this->load->view('main/layout', $data);
@@ -710,12 +712,6 @@ class Messages extends MY_Controller {
 			$param['type'] = $type;
 			$param['number'] = trim($number);
 
-			$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.rawurlencode($number));
-			$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
-			$config['uri_segment'] = 6;
-			$this->pagination->initialize($config);
-
-
 			if ($param['number'] === 'sending_error')
 			{
 				$param['type'] = 'sentitems';
@@ -737,8 +733,6 @@ class Messages extends MY_Controller {
 			else
 			{
 				$param['type'] = 'inbox';
-				$param['limit'] = $config['per_page'];
-				$param['offset'] = $this->uri->segment(6, 0);
 				$param['order_by'] = 'ReceivingDateTime';
 				$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 				$param['uid'] = $this->session->userdata('id_user');
@@ -777,6 +771,16 @@ class Messages extends MY_Controller {
 			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			usort($data['messages'], 'compare_date_'.$sort_option);
 
+			$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.rawurlencode($number));
+			$config['total_rows'] = sizeof($data['messages']);
+			$config['uri_segment'] = 6;
+			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
+
+			$offset = $this->uri->segment(6, 0);
+			$length = $config['per_page'];
+			$data['messages'] = array_slice($data['messages'], $offset, $length);
+
 			if (is_ajax())
 			{
 				$this->load->view('main/messages/conversation', $data);
@@ -798,6 +802,7 @@ class Messages extends MY_Controller {
 				$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
 				$config['uri_segment'] = 6;
 				$this->pagination->initialize($config);
+				$data['pagination_links'] = $this->pagination->create_links();
 
 				$param['limit'] = $config['per_page'];
 				$param['offset'] = $this->uri->segment(6, 0);
@@ -830,13 +835,6 @@ class Messages extends MY_Controller {
 					$param['number'] = trim($number);
 					$param['uid'] = $this->session->userdata('id_user');
 
-					$config['base_url'] = site_url('/messages/conversation/my_folder/'.$type.'/'.rawurlencode($number).'/'.$id_folder);
-					$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
-					$config['uri_segment'] = 7;
-					$this->pagination->initialize($config);
-
-					$param['limit'] = $config['per_page'];
-					$param['offset'] = $this->uri->segment(7, 0);
 					$param['order_by'] = 'ReceivingDateTime';
 					$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 					$inbox = $this->Message_model->get_messages($param)->result_array();
@@ -874,6 +872,16 @@ class Messages extends MY_Controller {
 					$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 					usort($data['messages'], 'compare_date_'.$sort_option);
 
+					$config['base_url'] = site_url('/messages/conversation/my_folder/'.$type.'/'.rawurlencode($number).'/'.$id_folder);
+					$config['total_rows'] = sizeof($data['messages']);
+					$config['uri_segment'] = 7;
+					$this->pagination->initialize($config);
+					$data['pagination_links'] = $this->pagination->create_links();
+
+					$offset = $this->uri->segment(7, 0);
+					$length = $config['per_page'];
+					$data['messages'] = array_slice($data['messages'], $offset, $length);
+
 					if (is_ajax())
 					{
 						$this->load->view('main/messages/conversation', $data);
@@ -895,6 +903,7 @@ class Messages extends MY_Controller {
 					$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
 					$config['uri_segment'] = 6;
 					$this->pagination->initialize($config);
+					$data['pagination_links'] = $this->pagination->create_links();
 					$param['limit'] = $config['per_page'];
 					$param['offset'] = $this->uri->segment(6, 0);
 					$data['messages'] = $this->Message_model->search_messages($param)->messages;
@@ -950,6 +959,7 @@ class Messages extends MY_Controller {
 					$config['uri_segment'] = $param_needed + 1;
 					$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
 					$this->pagination->initialize($config);
+					$data['pagination_links'] = $this->pagination->create_links();
 					$param['limit'] = $config['per_page'];
 					$param['offset'] = $this->uri->segment($param_needed + 1, 0);
 					$param['uid'] = $this->session->userdata('id_user');
@@ -997,6 +1007,7 @@ class Messages extends MY_Controller {
 					$config['uri_segment'] = $param_needed + 1;
 					$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
 					$this->pagination->initialize($config);
+					$data['pagination_links'] = $this->pagination->create_links();
 					$param['limit'] = $config['per_page'];
 					$param['offset'] = $this->uri->segment($param_needed + 1, 0);
 					$param['uid'] = $this->session->userdata('id_user');

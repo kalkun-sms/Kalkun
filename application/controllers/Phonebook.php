@@ -53,6 +53,7 @@ class Phonebook extends MY_Controller {
 			$config['base_url'] = site_url().'/phonebook/index/public';
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'paginate', 'public' => TRUE))->num_rows();
 			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
 
 			$data['title'] = tr('Public contacts');
 			$data['public_contact'] = TRUE;
@@ -65,6 +66,7 @@ class Phonebook extends MY_Controller {
 			$config['base_url'] = site_url().'/phonebook/index/';
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'paginate'))->num_rows();
 			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
 
 			$data['title'] = tr('Contacts');
 			$data['public_contact'] = FALSE;
@@ -109,6 +111,7 @@ class Phonebook extends MY_Controller {
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group', 'public' => TRUE))->num_rows();
 			$config['uri_segment'] = 4;
 			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
 
 			$param = array('option' => 'group_paginate', 'public' => TRUE, 'limit' => $config['per_page'], 'offset' => $this->uri->segment(4, 0));
 			$data['group'] = $this->Phonebook_model->get_phonebook($param);
@@ -121,6 +124,7 @@ class Phonebook extends MY_Controller {
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();
 			$config['uri_segment'] = 3;
 			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
 
 			$param = array('option' => 'group_paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3, 0));
 			$data['group'] = $this->Phonebook_model->get_phonebook($param);
@@ -149,6 +153,7 @@ class Phonebook extends MY_Controller {
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 		$config['uri_segment'] = 4;
 		$this->pagination->initialize($config);
+		$data['pagination_links'] = $this->pagination->create_links();
 
 		$param['limit'] = $config['per_page'];
 		$param['offset'] = $this->uri->segment(4, 0);

@@ -15,6 +15,7 @@ function phonebook_lookup_initialize()
 
 	$CI->load->add_package_path(APPPATH.'plugins/phonebook_lookup', FALSE);
 	$CI->load->config('phonebook_lookup', TRUE);
+	$CI->load->remove_package_path(APPPATH.'plugins/phonebook_lookup');
 
 	return $CI->config->config['phonebook_lookup'];
 }
@@ -65,6 +66,6 @@ function phonebook_lookup($number)
 {
 	$config = phonebook_lookup_initialize();
 	$lookup['url'] = str_replace('#phonenumber#', $number->Number, $config['url']);
-	$lookup['title'] = 'Lookup Number';
+	$lookup['title'] = tr('Lookup Number');
 	return $lookup;
 }

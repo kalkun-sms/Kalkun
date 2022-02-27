@@ -81,16 +81,13 @@ class Daemon extends CI_Controller {
 				// hook for incoming message (after ownership)
 				$tmp_message->msg_user = $msg_user;
 				$status = do_action('message.incoming.after', $tmp_message);
-			}
 
-			// message deleted, do not process later part
-			if (isset($status) && $status === 'break')
-			{
-				continue;
-			}
+				// message deleted, do not process later part
+				if (isset($status) && $status === 'break')
+				{
+					continue;
+				}
 
-			if ( ! $is_spam)
-			{
 				// run user filters
 				$this->_run_user_filters($tmp_message, $msg_user);
 			}
