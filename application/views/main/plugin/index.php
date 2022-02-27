@@ -28,7 +28,7 @@ if (count($plugins) > 0)
 			echo '<div style="float: left"><h3 style="color: #000">'.$tmp['plugin_name'].'</h3></div>';
 		} ?>
 		<div style="float: right; margin-top: 15px;">
-			<?php if ($type == 'installed'):?>
+			<?php if ($type === 'installed'):?>
 			<a href="<?php echo site_url('pluginss/uninstall/'.$tmp['plugin_system_name']); ?>" class="nicebutton"><?php echo tr('Uninstall'); ?></a>
 			<?php else:?>
 			<a href="<?php echo site_url('pluginss/install/'.$tmp['plugin_system_name']); ?>" class="nicebutton"><?php echo tr('Install'); ?></a>
@@ -47,7 +47,13 @@ if (count($plugins) > 0)
 else
 {
 	?>
-		<p>There is no <?php echo $type; ?> plugin.</p>
+		<p>
+			<?php if ($type === 'available'):
+echo tr('No plugin available.');
+	elseif ($type === 'installed'):
+echo tr('No plugin installed.');
+	endif; ?>
+		</p>
 		<?php
 }
 ?>
