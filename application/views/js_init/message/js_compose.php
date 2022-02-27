@@ -20,7 +20,7 @@
 
 		$("#personvalue").tokenInput("<?php echo site_url('phonebook/get_phonebook/').'/'.(isset($source) ? $source : '');?>", {
 			hintText: "<?php echo tr('Insert name from contact list')?>",
-			noResultsText: "No results",
+			noResultsText: "<?php echo tr('No results'); ?>",
 			searchingText: "<?php echo tr('Searching...'); ?>",
 			preventDuplicates: true,
 			method: "POST",
@@ -66,6 +66,7 @@
 
 		// validation
 		$("#composeForm").validate({
+			ignore: '', // By default, jquery validation ignores hidden fields. Set this to the empty string to not ignore hidden fields (needed for personvalue which is hidden by tokenInput.
 			rules: {
 				personvalue: {
 					required: "#sendoption1:checked",
@@ -108,7 +109,7 @@
 		});
 
 		/*
-		var url = "<?php echo  site_url();?>/messages/get_phonebook";
+		var url = "<?php echo site_url();?>/messages/get_phonebook";
 		$("#input_box").tokenInput(url, {
 			hintText: "Type in the names of your phonebook",
 			noResultsText: "No results",
@@ -117,7 +118,7 @@
 		*/
 
 		// Phonebook autocompleter
-		/*var url = "<?php echo  site_url();?>/messages/get_phonebook";
+		/*var url = "<?php echo site_url();?>/messages/get_phonebook";
 		$("#input_box").autocomplete(url, {
 			multiple: true,
 			multipleSeparator: ", \n",
@@ -252,13 +253,13 @@
 
 	function save_canned_response(name) {
 
-		if (name == null) var name = prompt("Please enter a Name for Your Message. This should be unique.", '', "Message Name");
+		if (name == null) var name = prompt("<?php echo tr('Please enter a name for your message. This should be unique.'); ?>", '', "Message Name");
 		else {
-			var c = confirm("Are you Sure?  This will overwrite previous message");
+			var c = confirm("<?php echo tr('Are you sure? This will overwrite previous message.'); ?>");
 			if (!c) return;
 		}
 
-		var dest_url = "<?php echo  site_url();?>/messages/canned_response/save";
+		var dest_url = "<?php echo site_url();?>/messages/canned_response/save";
 
 		if (name != null) {
 			$('.loading_area').html("<?php echo tr('Saving...');?>");
@@ -275,7 +276,7 @@
 
 	function insert_canned_response(name) {
 
-		var dest_url = "<?php echo  site_url();?>/messages/canned_response/get";
+		var dest_url = "<?php echo site_url();?>/messages/canned_response/get";
 		$.post(dest_url, {
 			'name': name
 		}, function(data) {
@@ -286,9 +287,9 @@
 
 	function delete_canned_response(name) {
 
-		var c = confirm("Are you Sure?");
+		var c = confirm("<?php echo tr('Are you sure?'); ?>");
 		if (!c) return;
-		var dest_url = "<?php echo  site_url();?>/messages/canned_response/delete";
+		var dest_url = "<?php echo site_url();?>/messages/canned_response/delete";
 		$.post(dest_url, {
 			'name': name
 		}, function() {
@@ -297,7 +298,7 @@
 	}
 
 	function update_canned_responses() {
-		var dest_url = "<?php echo  site_url();?>/messages/canned_response/list";
+		var dest_url = "<?php echo site_url();?>/messages/canned_response/list";
 		$.get(dest_url, function(data) {
 			$("#canned_response_container").html(data)
 		});
