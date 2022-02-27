@@ -130,6 +130,7 @@
 							});
 							$("#compose_sms_container_error").html($(data.responseText).filter('div'));
 							$("#compose_sms_container_error").dialog({
+								closeText: "<?php echo tr('Close'); ?>",
 								modal: true,
 								width: 550,
 								show: 'fade',
@@ -156,6 +157,7 @@
 				$(this).dialog('destroy');
 			};
 			$(this).dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				modal: true,
 				width: 550,
 				show: 'fade',
@@ -185,6 +187,7 @@
 		// About
 		$('#about_button').on("click", function() {
 			$("#about").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				width: 550,
@@ -197,6 +200,7 @@
 		// Add folder
 		$('#addfolder').on("click", function() {
 			$("#addfolderdialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
@@ -245,6 +249,7 @@
 		});
 		$('#a_search').on("click", function() {
 			$("#a_search_dialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				width: 500,

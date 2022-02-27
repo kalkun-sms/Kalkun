@@ -21,6 +21,7 @@
 			$("#addgroupdialog").dialog({
 				bgiframe: true,
 				title: dialog_title,
+				closeText: "<?php echo tr('Close'); ?>",
 				autoOpen: false,
 				modal: true,
 				buttons: {
@@ -48,6 +49,7 @@
 			} else {
 				// confirm first
 				$("#confirm_delete_group_dialog").dialog({
+					closeText: "<?php echo tr('Close'); ?>",
 					bgiframe: true,
 					autoOpen: false,
 					modal: true,

@@ -18,6 +18,7 @@
 			}
 
 			$("#filterdialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
@@ -44,6 +45,7 @@
 
 			// confirm first
 			$("#confirm_delete_filter_dialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,

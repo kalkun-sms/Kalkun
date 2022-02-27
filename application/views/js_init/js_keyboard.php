@@ -32,6 +32,7 @@
 
 		$(document).on('keydown', null, 'shift+/', function() {
 			$("#kbd").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				width: 600,

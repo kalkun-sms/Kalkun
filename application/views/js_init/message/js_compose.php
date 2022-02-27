@@ -229,6 +229,7 @@
 
 		$("#canned_response_container").load(url, function() {
 			$(this).dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				modal: true,
 				draggable: true,
 				width: 400,

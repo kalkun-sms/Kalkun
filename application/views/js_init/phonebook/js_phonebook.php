@@ -30,6 +30,7 @@
 				}, function() {
 					$(this).dialog({
 						title: pbk_title,
+						closeText: "<?php echo tr('Close'); ?>",
 						modal: true,
 						show: 'fade',
 						hide: 'fade',
@@ -42,6 +43,7 @@
 									$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize(), function(data) {
 										$("#contact_container").html(data);
 										$("#contact_container").dialog({
+											closeText: "<?php echo tr('Close'); ?>",
 											buttons: {
 												"<?php echo tr('Close'); ?>": function() {
 													$(this).dialog("close");
@@ -98,6 +100,7 @@
 				setTimeout("	$('.notification_area').fadeOut();", 2000);
 			} else {
 				$("#confirm_delete_contact_dialog").dialog({
+					closeText: "<?php echo tr('Close'); ?>",
 					autoOpen: false,
 					modal: true,
 					buttons: {
@@ -176,6 +179,7 @@
 				$("#pbk_add_wizard_dialog").dialog('close')
 			};
 			$("#pbkimportdialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
@@ -194,6 +198,7 @@
 		// Add contact wizard
 		$('#addpbkcontact_wizard').on("click", function() {
 			$("#pbk_add_wizard_dialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				autoOpen: false,
 				modal: true,
 				buttons: {

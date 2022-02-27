@@ -105,6 +105,7 @@
 
 		// Move To dialog
 		$("#movetodialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,
@@ -234,6 +235,7 @@
 			}, function() {
 				$(this).dialog({
 					title: '<?php echo tr('Add contact');?>',
+					closeText: "<?php echo tr('Close'); ?>",
 					modal: true,
 					show: 'fade',
 					hide: 'fade',
@@ -243,6 +245,7 @@
 							$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize(), function(data) {
 								$("#contact_container").html(data);
 								$("#contact_container").dialog({
+									closeText: "<?php echo tr('Close'); ?>",
 									buttons: {
 										"<?php echo tr('Close'); ?>": function() {
 											$(this).dialog("close");
@@ -328,6 +331,7 @@ $delete_dup_text = tr('Delete copy of this message (prevents duplicates).');
 			$("#compose_sms_container").html(resend_conf + message_content + delete_dup);
 			$("#compose_sms_container").dialog({
 				//title: 'Resend SMS',
+				closeText: "<?php echo tr('Close'); ?>",
 				modal: true,
 				draggable: true,
 				width: 550,
@@ -348,6 +352,7 @@ $delete_dup_text = tr('Delete copy of this message (prevents duplicates).');
 						}, function(data) {
 							$("#compose_sms_container").html(data);
 							$("#compose_sms_container").dialog({
+								closeText: "<?php echo tr('Close'); ?>",
 								buttons: {
 									"<?php echo tr('Close'); ?>": function() {
 										$(this).dialog("close");
@@ -394,6 +399,7 @@ $delete_dup_text = tr('Delete copy of this message (prevents duplicates).');
 				$("#compose_sms_container").html(resend_conf + delete_dup);
 				$("#compose_sms_container").dialog({
 					//title: 'Resend SMS',
+					closeText: "<?php echo tr('Close'); ?>",
 					modal: true,
 					draggable: true,
 					width: 550,
@@ -420,6 +426,7 @@ $delete_dup_text = tr('Delete copy of this message (prevents duplicates).');
 								}, function(data) {
 									$("#compose_sms_container").html(data);
 									$("#compose_sms_container").dialog({
+										closeText: "<?php echo tr('Close'); ?>",
 										buttons: {
 											"<?php echo tr('Close'); ?>": function() {
 												$(this).dialog("close");
