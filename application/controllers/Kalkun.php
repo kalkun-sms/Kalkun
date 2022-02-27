@@ -139,24 +139,25 @@ class Kalkun extends MY_Controller {
 		$yin = array_values($yin);
 		$points = count($x) - 1;
 
-		echo '{
-			"labels": '.json_encode(array_reverse($x)).',
-			"datasets": [
-				{
-					"label": "'.tr('Outgoing SMS').'",
-					"backgroundColor": "#21759B",
-					"data": '.json_encode(array_reverse($yout)).',
-					"borderWidth": 1
-				}
-				,
-				{
-					"label": "'.tr('Incoming SMS').'",
-					"backgroundColor": "#639F45",
-					"data": '.json_encode(array_reverse($yin)).',
-					"borderWidth": 1
-				}
-			]
-		}';
+		$result = [
+			'labels' => array_reverse($x),
+			'datasets' => [
+				[
+					'label' => tr('Outgoing SMS'),
+					'backgroundColor' => '#21759B',
+					'data' => array_reverse($yout),
+					'borderWidth' => 1,
+				],
+				[
+					'label' => tr('Incoming SMS'),
+					'backgroundColor' => '#639F45',
+					'data' => array_reverse($yin),
+					'borderWidth' => 1,
+				],
+			],
+		];
+
+		echo json_encode($result);
 	}
 
 	// --------------------------------------------------------------------

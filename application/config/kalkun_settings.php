@@ -104,7 +104,7 @@ $config['inbox_owner_id'] = array('1');
 |
 */
 
-$config['disable_outgoing'] = FALSE ;
+$config['disable_outgoing'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

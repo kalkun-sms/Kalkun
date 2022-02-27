@@ -80,7 +80,7 @@ function sms_to_email($sms)
 	$CI = &get_instance();
 	$CI->load->library('email');
 	$CI->load->model('Phonebook_model');
-	$CI->load->model('sms_to_email/sms_to_email_model', 'plugin_model');
+	$CI->load->model('sms_to_email/sms_to_email_model', 'sms_to_email_model');
 
 	if ( ! is_array($sms->msg_user))
 	{
@@ -90,7 +90,7 @@ function sms_to_email($sms)
 
 	foreach ($msg_user as $uid)
 	{
-		$active = $CI->plugin_model->get_setting($uid);
+		$active = $CI->sms_to_email_model->get_setting($uid);
 		if ($active->num_rows() === 0 OR $active->row('email_forward') !== 'true')
 		{
 			continue;

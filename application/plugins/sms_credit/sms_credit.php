@@ -74,13 +74,13 @@ function sms_credit($sms)
 {
 	$CI = &get_instance();
 	$CI->load->model('Kalkun_model');
-	$CI->load->model('sms_credit/sms_credit_model', 'plugin_model');
+	$CI->load->model('sms_credit/sms_credit_model', 'sms_credit_model');
 
 	$config = sms_credit_initialize();
 	$uid = $sms['uid'];
 
 	// check user credit
-	$user_package = $CI->plugin_model->get_users(array('id' => $uid, 'valid_start' => date('Y-m-d H:i:s'), 'valid_end' => date('Y-m-d H:i:s')))->row_array();
+	$user_package = $CI->sms_credit_model->get_users(array('id' => $uid, 'valid_start' => date('Y-m-d H:i:s'), 'valid_end' => date('Y-m-d H:i:s')))->row_array();
 
 	if (isset($user_package['sms_numbers']))
 	{

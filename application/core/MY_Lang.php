@@ -77,9 +77,44 @@ class MY_Lang extends MX_Lang {
 		}
 
 		$requested_idiom = $this->idiom;
-		// Check if language file exists
-		if ( ! file_exists(APPPATH.'language/'.$this->idiom.'/'.$langfile.'_lang.php'))
+
+		$langfile = str_replace('.php', '', $langfile);
+		if ($add_suffix === TRUE)
 		{
+			$langfile = preg_replace('/_lang$/', '', $langfile).'_lang';
+		}
+		$langfile .= '.php';
+
+		$found = FALSE;
+		if (file_exists(BASEPATH.'language/'.$this->idiom.'/'.$langfile))
+		{
+			$found = TRUE;
+		}
+		if ($alt_path !== '')
+		{
+			$alt_path .= 'language/'.$this->idiom.'/'.$langfile;
+			if (file_exists($alt_path))
+			{
+				$found = TRUE;
+			}
+		}
+		else
+		{
+			foreach (get_instance()->load->get_package_paths(TRUE) as $package_path)
+			{
+				$package_path .= 'language/'.$this->idiom.'/'.$langfile;
+				if (file_exists($package_path))
+				{
+					$found = TRUE;
+					break;
+				}
+			}
+		}
+
+		// Fallback to english if language file is not found
+		if ( ! $found)
+		{
+			log_message('error', "language file ${langfile} not found. Falling back to english.");
 			$requested_idiom = 'english';
 		}
 

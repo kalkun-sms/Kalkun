@@ -83,10 +83,10 @@ function sms_to_wordpress($sms)
 	if (strtoupper($code)===strtoupper($wordpress_code))
 	{
 		$CI =& get_instance();
-		$CI->load->model('sms_to_wordpress/sms_to_wordpress_model', 'plugin_model');
+		$CI->load->model('sms_to_wordpress/sms_to_wordpress_model', 'sms_to_wordpress_model');
 
 		// if wp url exist
-		$wp = $CI->plugin_model->get_wp_url_by_phone($number);
+		$wp = $CI->sms_to_wordpress_model->get_wp_url_by_phone($number);
 		if (is_array($wp))
 		{
 			$client = new IXR\Client\Client($wp['wp_url']);

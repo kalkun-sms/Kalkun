@@ -174,13 +174,8 @@
 		});
 
 		//select
-		$(document).on('keydown', null, 'o return', function(e) {
-			//var code = (e.keyCode ? e.keyCode : e.which);
-			if (current_select < 0) return false;
-			var group = "<?php echo $this->uri->segment(2); ?>";
-			var folder = "<?php echo $this->uri->segment(3); ?>";
-			var fid = "<?php echo $this->uri->segment(4, ''); ?>";
-			document.location = "<?php echo site_url('messages/conversation'); ?>/" + group + "/" + folder + "/" + encodeURIComponent(current_number) + "/" + fid;
+		$(document).on('keydown', null, 'o return', function() {
+			$("#message_holder").children(":eq(" + current_select + ")").children().children().children('span.message_toggle').click();
 			return false;
 		});
 

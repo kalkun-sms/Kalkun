@@ -82,11 +82,11 @@ function sms_to_twitter($sms)
 	if (strtoupper($code) === strtoupper($twitter_code))
 	{
 		$CI = &get_instance();
-		$CI->load->model('sms_to_twitter/sms_to_twitter_model', 'plugin_model');
+		$CI->load->model('sms_to_twitter/sms_to_twitter_model', 'sms_to_twitter_model');
 		$CI->load->library('sms_to_twitter/twitter', 'twitter');
 
 		// if token exist
-		$tokens = $CI->plugin_model->get_token_by_phone($number);
+		$tokens = $CI->sms_to_twitter_model->get_token_by_phone($number);
 		if (is_array($tokens))
 		{
 			// Kalkun Twitter keys (DO NOT CHANGE)

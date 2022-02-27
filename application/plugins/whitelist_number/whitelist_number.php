@@ -54,11 +54,11 @@ function whitelist_number_install()
 function whitelist_number_outgoing($numbers = array())
 {
 	$CI = &get_instance();
-	$CI->load->model('whitelist_number/whitelist_number_model', 'plugin_model');
+	$CI->load->model('whitelist_number/whitelist_number_model', 'whitelist_number_model');
 	$heaven = array();
 
 	// Get whitelist number
-	$lists = $CI->plugin_model->get('all')->result_array();
+	$lists = $CI->whitelist_number_model->get('all')->result_array();
 	foreach ($lists as $tmp)
 	{
 		$heaven[] = $tmp['match'];
