@@ -23,10 +23,10 @@
 				modal: true,
 				title: title,
 				buttons: {
-					'Save': function() {
+					'<?php echo tr('Save'); ?>': function() {
 						$("form#addpackagesform").trigger('submit');
 					},
-					Cancel: function() {
+					'<?php echo tr('Cancel'); ?>': function() {
 						$(this).dialog('destroy');
 					}
 				}

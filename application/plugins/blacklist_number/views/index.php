@@ -5,7 +5,7 @@
 	<p id="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/blacklist_number', array('class' => 'addblacklistnumberform')); ?>
 	<fieldset>
-		<label for="phone_number">Phone Number</label>
+		<label for="phone_number"><?php echo tr('Phone number'); ?></label>
 		<input type="text" name="phone_number" id="phone_number" class="text ui-widget-content ui-corner-all" />
 		<label for="reason">Reason For Blacklisted</label>
 		<input type="text" name="reason" id="reason" value="" class="text ui-widget-content ui-corner-all" />
@@ -20,7 +20,7 @@
 	<?php echo form_open('plugin/blacklist_number', array('class' => 'editblacklistnumberform')); ?>
 	<fieldset>
 		<input type="hidden" name="editid_blacklist_number" id="editid_blacklist_number" />
-		<label for="editphone_number">Phone Number</label>
+		<label for="editphone_number"><?php echo tr('Phone number'); ?></label>
 		<input type="text" name="editphone_number" id="editphone_number" class="text ui-widget-content ui-corner-all" />
 		<label for="editreason">Reason For Blacklisted</label>
 		<input type="text" name="editreason" id="editreason" value="" class="text ui-widget-content ui-corner-all" />
@@ -38,7 +38,7 @@
 	<table class="nice-table" cellpadding="0" cellspacing="0">
 		<tr>
 			<th class="nice-table-left">No.</th>
-			<th>Phone Number</th>
+			<th><?php echo tr('Phone number'); ?></th>
 			<th>Reason For Blacklisted</th>
 			<th class="nice-table-right" colspan="2">Control</th>
 		</tr>

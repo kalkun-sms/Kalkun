@@ -70,7 +70,6 @@
 			rules: {
 				personvalue: {
 					required: "#sendoption1:checked",
-					minlength: 1
 				},
 				manualvalue: {
 					required: "#sendoption3:checked",
@@ -99,12 +98,25 @@
 				}
 			},
 			messages: {
-				personvalue: "<?php echo tr('Please enter recipient'); ?>",
-				manualvalue: "<?php echo tr('Please specify a valid mobile phone number'); ?>",
-				import_file: "<?php echo tr('Please enter recipient'); ?>",
-				message: "<?php echo tr('Please enter message'); ?>",
-				datevalue: "<?php echo tr('Please enter sending date'); ?>",
-				url: "<?php echo tr('Should be a valid URL');?>"
+				personvalue: {
+					required: "<?php echo tr('Field required.');?>"
+				},
+				manualvalue: {
+					required: "<?php echo tr('Field required.');?>",
+				},
+				import_file: {
+					required: "<?php echo tr('Field required.');?>"
+				},
+				message: {
+					required: "<?php echo tr('Field required.');?>"
+				},
+				datevalue: {
+					required: "<?php echo tr('Field required.');?>"
+				},
+				url: {
+					required: "<?php echo tr('Field required.');?>",
+					url: "<?php echo tr('Should be a valid URL');?>"
+				}
 			}
 		});
 
