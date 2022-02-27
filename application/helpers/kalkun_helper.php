@@ -115,7 +115,7 @@ function message_preview($str, $n)
 	}
 	else
 	{
-		return showtags(substr($str, 0, $n - 3)).'&#8230;';
+		return showtags(mb_substr($str, 0, $n - 3)).'&#8230;';
 	}
 }
 
