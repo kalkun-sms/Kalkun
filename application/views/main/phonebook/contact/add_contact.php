@@ -66,11 +66,11 @@
 	}?>" class="text ui-widget-content ui-corner-all required phone" />
 
 		<div style="margin-bottom:12px">
-			<input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if (isset($contact) && $contact->row('is_public') == 'true')
+			<input type="checkbox" name="is_public" id="is_public_contact" style="display: inline" <?php if (isset($contact) && $contact->row('is_public') == 'true')
 	{
 		echo 'checked="checked"';
 	}?> />
-			<label for="is_public" style="display: inline"><?php echo tr('Set as public contact');?></label>
+			<label for="is_public_contact" style="display: inline"><?php echo tr('Set as public contact');?></label>
 		</div>
 
 		<label for="groups"><?php echo tr('Groups'); ?></label>
