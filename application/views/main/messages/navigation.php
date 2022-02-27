@@ -35,7 +35,7 @@
 	?>
 		<li><?php echo anchor('messages/folder/'.$this->uri->segment(4), '&lsaquo;&lsaquo; '.tr('Back to').' '.$theFname, array('class' => 'button', 'id' => 'back_threadlist'));?></li>
 		<?php else: ?>
-		<li><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6), '&lsaquo;&lsaquo; '.tr('Back to').' '.humanize($this->Kalkun_model->get_folders('name', $this->uri->segment(6))->row('name')), array('class' => 'button'));?></li>
+		<li><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6), '&lsaquo;&lsaquo; '.tr('Back to').' '.humanize($this->Kalkun_model->get_folders('name', $this->uri->segment(6))->row('name')), array('class' => 'button', 'id' => 'back_threadlist'));?></li>
 		<li>&nbsp;</li>
 		<?php endif;?>
 		<?php endif;?>
