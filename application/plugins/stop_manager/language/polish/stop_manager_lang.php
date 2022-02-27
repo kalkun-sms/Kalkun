@@ -1,16 +1,14 @@
 <?php
 
-// words starting with colon (like :word) are placeholders which will be replaced
-
-$lang['sm_command_valid_optout_1_taken_into_account'] = ':received_command taken into account.';
-$lang['sm_command_valid_optout_2_to_optin_reply'] = ' To opt-in again, send ":optin_command"';
-
-$lang['sm_command_valid_optin_1_taken_into_account'] = ':received_command taken into account.';
-$lang['sm_command_valid_optin_2_to_optout_reply'] = ' To opt-out, send ":optout_command"';
-
-$lang['sm_command_invalid_short'] = 'Invalid request';
-
-$lang['sm_command_invalid_long_1_reply'] = "Request not valid (:received_command). Send ':optout_keyword";
-$lang['sm_command_invalid_long_2_or'] = " or ':optin_keyword <type>'";
-$lang['sm_command_invalid_long_3_possible_type_values_are'] = ' Possible values for <type> are: :types_valides.';
-$lang['sm_command_invalid_long_4_eg'] = " For example ':example'.";
+$lang['{0} taken into account.'] = '{0} taken into account.';
+$lang['{0} taken into account. To opt-in again, send "{1}".'] = '{0} taken into account. To opt-in again, send "{1}".';
+$lang['{0} taken into account. To opt-out, send "{1}".'] = '{0} taken into account. To opt-out, send "{1}".';
+$lang['Invalid request.'] = 'Invalid request.';
+$lang['Request not valid ({0}). Send "{1} or {2} <type>". Possible values for <type> are: {3}. For example "{4}".'] = 'Request not valid ({0}). Send "{1} or {2} <type>". Possible values for <type> are: {3}. For example "{4}".';
+$lang['Request not valid ({0}). Send "{1} <type>". Possible values for <type> are: {2}. For example "{3}".'] = 'Request not valid ({0}). Send "{1} <type>". Possible values for <type> are: {2}. For example "{3}".';
+$lang['Request not valid ({0}). Send "{1}" or "{2}". For example "{3}".'] = 'Request not valid ({0}). Send "{1}" or "{2}". For example "{3}".';
+$lang['Request not valid ({0}). Send "{1}".'] = 'Request not valid ({0}). Send "{1}".';
+$lang['Stop Manager records'] = 'Stop Manager records';
+$lang['Add STOP record'] = 'Add STOP record';
+$lang['Type'] = 'Type';
+$lang['Original opt-out SMS'] = 'Original opt-out SMS';
