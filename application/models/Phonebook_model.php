@@ -68,7 +68,10 @@ class Phonebook_model extends CI_Model {
 					$this->db->where('id_user', $user_id);
 				}
 				$this->db->order_by('Name');
-				$this->db->limit($param['limit'], $param['offset']);
+				if (isset($param['limit']) && isset($param['offset']))
+				{
+					$this->db->limit($param['limit'], $param['offset']);
+				}
 				break;
 
 			case 'by_idpbk':

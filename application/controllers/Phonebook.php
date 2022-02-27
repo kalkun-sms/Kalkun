@@ -51,7 +51,7 @@ class Phonebook extends MY_Controller {
 		{
 			$config['uri_segment'] = 4;
 			$config['base_url'] = site_url().'/phonebook/index/public';
-			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'public'))->num_rows();
+			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'paginate', 'public' => TRUE))->num_rows();
 			$this->pagination->initialize($config);
 
 			$data['title'] = tr('Public contacts');
@@ -63,7 +63,7 @@ class Phonebook extends MY_Controller {
 		{
 			$config['uri_segment'] = 3;
 			$config['base_url'] = site_url().'/phonebook/index/';
-			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();
+			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'paginate'))->num_rows();
 			$this->pagination->initialize($config);
 
 			$data['title'] = tr('Contacts');
