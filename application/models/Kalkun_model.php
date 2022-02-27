@@ -112,7 +112,11 @@ class Kalkun_model extends CI_Model {
 	function forgot_password()
 	{
 		$username = $this->input->post('username');
-		$phone = phone_format_e164($this->input->post('phone'));
+		if ($this->input->post('phone'))
+		{
+			$region = MY_LANG::idom_to_region($this->input->post('idiom'));
+			$phone = phone_format_e164($this->input->post('phone'), $region);
+		}
 
 		$this->db->from('user');
 		$this->db->where('username', $username);
