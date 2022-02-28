@@ -50,7 +50,6 @@ $lang['valid example'] = 'Príklad platného tvaru';
 
 // Message
 $lang['Message'] = 'Správa';
-$lang['Send'] = 'Odoslať';
 $lang['Send to'] = 'Adresát';
 $lang['Reply'] = 'Odpoveď';
 $lang['Forward'] = 'Preposlať';
@@ -67,7 +66,6 @@ $lang['Now'] = 'Teraz';
 $lang['At date and time'] = 'V zadaný dátum a čas';
 $lang['After a delay'] = 'Po premlčaní';
 
-$lang['Group'] = 'Skupina';
 $lang['Input manually'] = 'Zadať ručne';
 
 $lang['Add folder'] = 'Pridať záložku';
@@ -78,7 +76,6 @@ $lang['Rename'] = 'Premenovať';
 $lang['Rename folder'] = 'Premenovať záložku';
 $lang['Click to rename this folder'] = 'Kliknite pre premenovanie záložky';
 
-$lang['Delete folder confirmation'] = 'Potvrdenie vymazania záložky';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Táto záložka a všetky správy v nej budú trvalo odstránené. Chcete ju naozaj odstrániť?';
 
 $lang['There is no message in {0}.'] = 'Žiadne správy v záložke {0}.';
@@ -94,8 +91,6 @@ $lang['Refresh'] = 'Obnoviť';
 $lang['Report spam'] = 'Nahlásiť Spam';
 $lang['Not spam'] = 'Toto nieje Spam';
 
-$lang['First'] = 'Prvý';
-$lang['Last'] = 'Posledný';
 
 $lang['SMSC'] = 'SMSC';
 $lang['Part'] = 'Časť';
@@ -135,7 +130,6 @@ $lang['Are you sure?'] = 'Ste si istý?';
 
 // Others
 $lang['Amount'] = 'Suma';
-$lang['Send as Flash SMS'] = 'Odoslať ako Flash SMS';
 $lang['times']['repetition'] = 'krát';
 $lang['Hour(s)'] = 'Hodín';
 $lang['Minutes'] = 'Minút';
@@ -169,8 +163,6 @@ $lang['Delete all messages now'] = 'Vymazať všetky správy teraz';
 $lang['Delete contact(s) confirmation'] = 'Potvrdenie zmazania kontaktu/ov';
 $lang['Should be a valid URL'] = 'Mala by byť platná URL';
 $lang['Import from file'] = 'Import zo súboru';
-$lang['characters'] = 'znakov';
-$lang['message'] = 'správa';
 
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
@@ -189,19 +181,15 @@ $lang['Forgot your password?'] = 'Zabudli ste heslo?';
 $lang['New password'] = 'Nové heslo';
 $lang['Must be at least 6 characters long'] = 'Musí mať aspoň 6 znakov';
 
-$lang['Enter your current password'] = 'Zadajte terajšie heslo';
 $lang['Enter your new password'] = 'Zadajte nové heslo';
 
 $lang['Administrator'] = 'Administrátor';
-$lang['User']['credentials'] = 'Užívateľ';
 
 $lang['Create a new filter'] = 'Vytvoriť nový filter';
 $lang['Has the words'] = 'Má slová';
 
 // SMS Content/Member
 $lang['Member'] = 'Člen';
-$lang['Total member'] = 'Spolu členov';
-$lang['There is no registered member yet'] = 'Ešte tu nieje žiaden zaregistrovaný člen';
 
 // tni contribution
 $lang['Add contact'] = 'Pridať kontakt';
@@ -211,7 +199,6 @@ $lang['Sending'] = 'Odosielanie';
 $lang['Insert name from contact list'] = 'Vložte meno z adresára';
 $lang['Delete group(s) confirmation'] = 'Potvrdenie mazania skupiny';
 $lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Zmazať skupinu?<br>Vśetky kontakty v tejto skupine budú taktiež zmazané.';
-$lang['Yes, delete selected group(s).'] = 'Áno, zmazať túto skupinu.';
 $lang['Create group'] = 'Vytvoriť skupinu';
 $lang['Group name'] = 'Meno skupiny';
 $lang['Groups'] = 'Skupiny';
@@ -219,7 +206,6 @@ $lang['Manage groups'] = 'Spravovať skupiny';
 $lang['Manage group'] = 'Spravovať skupinu';
 $lang['Manage contact'] = 'Spravovať kontakt';
 $lang['Type group name'] = 'Zvoliť skupinu';
-$lang['There is no messages in your trash'] = 'Vo vašom koši niesú žiadne správy';
 $lang['No item selected.'] = 'Nieje vybraný záznam.';
 $lang['No contact selected.'] = 'Nieje vybraný kontakt.';
 $lang['Compose SMS'] = 'Vytvoriť SMS';
@@ -233,10 +219,7 @@ $lang['Edit'] = 'Upraviť';
 $lang['All form fields are required.'] = 'Všetky polia formulára sú vyžadované.';
 $lang['Name'] = 'Meno';
 $lang['Telephone number'] = 'Telefónne číslo';
-$lang['Email ID'] = 'ID e-mailu';
-$lang['Enable email forwarding'] = 'Povoliť e-mailové presmerovanie';
 $lang['Searching...'] = 'Vyhľadávanie...';
-$lang['Less than a minute ago'] = 'Menej ako minúta';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';
 $lang['Edit contact'] = 'Upraviť kontakt';
@@ -246,7 +229,6 @@ $lang['Add user'] = 'Pridať užívateľov';
 $lang['Edit user'] = 'Upraviť užívateľa';
 $lang['User']['default'] = 'Užívateľ';
 $lang['Users'] = 'Užívatelia';
-$lang['Delete users confirmation'] = 'Potvrdenie mazania užívateľov';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Zmazať užívateľa?<br>Taktiež všetky jeho záznamy (ako správy a kontakty).';
 $lang['User not found'] = 'Užívateľ nenájdený';
 $lang['Users is empty'] = 'Užívateľ je prázdny';
@@ -258,18 +240,13 @@ $lang['Phone number'] = 'Telefónny prístupový kód';
 $lang['Action not allowed'] = 'Akcia nieje povolená';
 $lang['Field required.'] = 'Field required.';
 $lang['Passwords do not match.'] = 'Heslá sa nezhodujú.';
-$lang['Password is too short.'] = 'Príliš krátke.';
 $lang['No user selected'] = 'Nieje zvolený užívateľ';
-$lang['Level'] = 'Úroveň';
 $lang['Delete this folder'] = 'Zmazať tento adresár';
 $lang['Loading'] = 'Načítavanie';
 $lang['Connected'] = 'Pripojený';
 $lang['Disconnected'] = 'Odpojený';
 $lang['No group detected, add one first.'] = 'Žiadna skupina nenájdená, vytvorte si nejakú.';
 $lang['No group selected.'] = 'Nieje vybraná skupina.';
-$lang['Please enter recipient'] = 'Prosím, zadajte svoju destináciu';
-$lang['Please enter message'] = 'Prosím, zadajte text správy';
-$lang['Please enter sending date'] = 'Prosím, zadajte dátum odoslania';
 $lang['From'] = 'Od';
 $lang['To'] = 'Pre';
 $lang['Inserted'] = 'Vložené';
@@ -283,8 +260,6 @@ $lang['Unknown'] = 'Neznáme';
 
 $lang['Country calling code'] = 'Country calling code';
 
-$lang['Oldest first'] = 'Najstaršie najskôr';
-$lang['Newest first'] = 'Najnovšie najskôr';
 $lang['Conversation sort'] = 'Usporiadanie konverzácií';
 
 $lang['Data per page'] = 'Záznamov na stránku';

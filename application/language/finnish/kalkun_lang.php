@@ -50,7 +50,6 @@ $lang['valid example'] = 'Esimerkki käyvästä muodosta';
 
 // Message
 $lang['Message'] = 'Viesti';
-$lang['Send'] = 'Lähetä';
 $lang['Send to'] = 'Vastaanottaja';
 $lang['Reply'] = 'Vastaa';
 $lang['Forward'] = 'Lähetä edelleen';
@@ -67,7 +66,6 @@ $lang['Now'] = 'Nyt';
 $lang['At date and time'] = 'Valittuna päivänä ja aikana';
 $lang['After a delay'] = 'Viiveellä';
 
-$lang['Group'] = 'Ryhmä';
 $lang['Input manually'] = 'Syötä käsin';
 
 $lang['Add folder'] = 'Lisää kansio';
@@ -78,7 +76,6 @@ $lang['Rename'] = 'Nimeä uudelleen';
 $lang['Rename folder'] = 'Nimeä kansio uudelleen';
 $lang['Click to rename this folder'] = 'Klikkaa nimetäksesi kansion uudelleen';
 
-$lang['Delete folder confirmation'] = 'Kansion poiston varmistus';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Kansio ja kaikki viestit sen sisältä poistetaan pysyvästi eikä niitä voi palauttaa. Oletko varma?';
 
 $lang['There is no message in {0}.'] = 'Sinulla ei ole viestejä {0}.';
@@ -94,8 +91,6 @@ $lang['Refresh'] = 'Päivitä';
 $lang['Report spam'] = 'Merkitse roskapostiksi';
 $lang['Not spam'] = 'Ei roskapostia';
 
-$lang['First'] = 'Ensimmäinen';
-$lang['Last'] = 'Viimeinen';
 
 $lang['SMSC'] = 'SMSC';
 $lang['Part'] = 'Osa';
@@ -135,7 +130,6 @@ $lang['Are you sure?'] = 'Oletko varma?';
 
 // Others
 $lang['Amount'] = 'Määrä';
-$lang['Send as Flash SMS'] = 'Lähetä Flash SMS';
 $lang['times']['repetition'] = 'kertaa';
 $lang['Hour(s)'] = 'Tuntia';
 $lang['Minutes'] = 'Minuuttia';
@@ -169,8 +163,6 @@ $lang['Delete all messages now'] = 'Poista kaikki viestit nyt';
 $lang['Delete contact(s) confirmation'] = 'Poista yhteystietoja varmistus';
 $lang['Should be a valid URL'] = 'Tulee olla käypä URL';
 $lang['Import from file'] = 'Tuo tiedostosta';
-$lang['characters'] = 'merkkiä';
-$lang['message'] = 'viesti';
 
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
@@ -189,19 +181,15 @@ $lang['Forgot your password?'] = 'Unohditko salasanasi?';
 $lang['New password'] = 'Uusi salasana';
 $lang['Must be at least 6 characters long'] = 'Täytyy olla vähintään 6 merkkiä';
 
-$lang['Enter your current password'] = 'Syötä nykyinen salasanasi';
 $lang['Enter your new password'] = 'Syötä uusi salasana';
 
 $lang['Administrator'] = 'Pääkäyttäjä';
-$lang['User']['credentials'] = 'Käyttäjä';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
 
 // SMS Content/Member
 $lang['Member'] = 'Jäsen';
-$lang['Total member'] = 'Käyttäjiä kaikkiaan';
-$lang['There is no registered member yet'] = 'Ei käyttäjiä toistaiseksi';
 
 // tni contribution
 $lang['Add contact'] = 'Lisää yhteystieto';
@@ -211,7 +199,6 @@ $lang['Sending'] = 'Lähetetään';
 $lang['Insert name from contact list'] = 'Insert Name from Contact List';
 $lang['Delete group(s) confirmation'] = 'Delete Group(s) Confirmation';
 $lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Delete Group(s)?<br>All contacts in this Group(s) will also be deleted.';
-$lang['Yes, delete selected group(s).'] = 'Yes, delete selected group(s).';
 $lang['Create group'] = 'Create Group';
 $lang['Group name'] = 'Group Name';
 $lang['Groups'] = 'Ryhmiä';
@@ -219,7 +206,6 @@ $lang['Manage groups'] = 'Hallinnoi ryhmiä';
 $lang['Manage group'] = 'Hallinnoi ryhmää';
 $lang['Manage contact'] = 'Hallinnoi yhteystietoja';
 $lang['Type group name'] = 'Valitse ryhmä';
-$lang['There is no messages in your trash'] = 'Roskakorissasi ei ole viestejä';
 $lang['No item selected.'] = 'No Item selected.';
 $lang['No contact selected.'] = 'No contact selected.';
 $lang['Compose SMS'] = 'Kirjoita SMS';
@@ -233,10 +219,7 @@ $lang['Edit'] = 'Muokkaa';
 $lang['All form fields are required.'] = 'Kaikki lomakkeen kentät vaaditaan.';
 $lang['Name'] = 'Nimi';
 $lang['Telephone number'] = 'Puhelinnumero';
-$lang['Email ID'] = 'Sähköpostiosoite';
-$lang['Enable email forwarding'] = 'Käytä sähköpostivälitystä';
 $lang['Searching...'] = 'Etsitään...';
-$lang['Less than a minute ago'] = 'Alle minuutti sitten';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';
 $lang['Edit contact'] = 'Muokkaa yhteystietoa';
@@ -246,7 +229,6 @@ $lang['Add user'] = 'Lisää käyttäjä';
 $lang['Edit user'] = 'Muokkaa käyttäjä';
 $lang['User']['default'] = 'Käyttäjä';
 $lang['Users'] = 'Käyttäjät';
-$lang['Delete users confirmation'] = 'Käyttäjän poiston varmistus';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Poista käyttäjä?<br>Tämä sisältää kaikki merkinnät tältä käyttäjältä (viestit ja yhteystiedot).';
 $lang['User not found'] = 'Käyttäjää ei löydy';
 $lang['Users is empty'] = 'Ei käyttäjiä';
@@ -258,18 +240,13 @@ $lang['Phone number'] = 'Puhelinnumero';
 $lang['Action not allowed'] = 'Toiminto ei sallittu';
 $lang['Field required.'] = 'Field required.';
 $lang['Passwords do not match.'] = 'Salasanat eivät täsmää.';
-$lang['Password is too short.'] = 'Liian lyhyt.';
 $lang['No user selected'] = 'Ei valittua käyttäjää';
-$lang['Level'] = 'Taso';
 $lang['Delete this folder'] = 'Poista tämä kansio';
 $lang['Loading'] = 'Ladataan';
 $lang['Connected'] = 'Yhteydessä';
 $lang['Disconnected'] = 'Katkaistu';
 $lang['No group detected, add one first.'] = 'Ryhmiä ei löytynyt, luo sellainen ensin.';
 $lang['No group selected.'] = 'Ei valittua ryhmää.';
-$lang['Please enter recipient'] = 'Syötä kohde';
-$lang['Please enter message'] = 'Kirjoita viesti';
-$lang['Please enter sending date'] = 'Anna lähetyspäivä';
 $lang['From'] = 'Keneltä';
 $lang['To'] = 'Kenelle';
 $lang['Inserted'] = 'Lisätty';
@@ -283,8 +260,6 @@ $lang['Unknown'] = 'Tuntematon';
 
 $lang['Country calling code'] = 'Country calling code';
 
-$lang['Oldest first'] = 'Vanhin ensin';
-$lang['Newest first'] = 'Uusin ensin';
 $lang['Conversation sort'] = 'Keskustelujärjestys';
 
 $lang['Data per page'] = 'Tietoa sivulla';

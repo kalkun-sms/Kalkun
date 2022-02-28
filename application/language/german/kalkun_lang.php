@@ -50,7 +50,6 @@ $lang['valid example'] = 'Beispiel';
 
 // Message
 $lang['Message'] = 'Nachricht';
-$lang['Send'] = 'Senden';
 $lang['Send to'] = 'Senden an';
 $lang['Reply'] = 'Antworten';
 $lang['Forward'] = 'Weiterleiten';
@@ -67,7 +66,6 @@ $lang['Now'] = 'Jetzt';
 $lang['At date and time'] = 'Zu bestimmter Uhrzeit';
 $lang['After a delay'] = 'Nach einer Verzögerung';
 
-$lang['Group'] = 'Gruppen';
 $lang['Input manually'] = 'Telefonnummer(n) händisch eingeben';
 
 $lang['Add folder'] = 'Ordner hinzufügen';
@@ -78,7 +76,6 @@ $lang['Rename'] = 'Umbennenen';
 $lang['Rename folder'] = 'Ordner umbennenen';
 $lang['Click to rename this folder'] = 'Hier klicken um diesen Ordner umzubennenen';
 
-$lang['Delete folder confirmation'] = 'Ordner Bestätigung löschen';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Dieser Ornder und alle Nachrichten darin werden dauerhaft gelöscht. Sind Sie sich sicher?';
 
 $lang['There is no message in {0}.'] = 'Es sind keine Nachrichten in Ihrem {0}.';
@@ -94,8 +91,6 @@ $lang['Refresh'] = 'Aktualisieren';
 $lang['Report spam'] = 'Als Spam kennzeichnen';
 $lang['Not spam'] = 'Kein Spam';
 
-$lang['First'] = 'Erste';
-$lang['Last'] = 'Letzte';
 
 $lang['SMSC'] = 'SMSC';
 $lang['Part'] = 'Teil';
@@ -135,7 +130,6 @@ $lang['Are you sure?'] = 'Sind Sie sich sicher?';
 
 // Others
 $lang['Amount'] = 'Menge';
-$lang['Send as Flash SMS'] = 'Als Flash-SMS senden';
 $lang['times']['repetition'] = 'mal';
 $lang['Hour(s)'] = 'Stunden';
 $lang['Minutes'] = 'Minuten';
@@ -169,8 +163,6 @@ $lang['Delete all messages now'] = 'Alle Nachrichten löschen';
 $lang['Delete contact(s) confirmation'] = 'Kontakt(e) löschen Bestätigung';
 $lang['Should be a valid URL'] = 'Muss eine gültige URL sein';
 $lang['Import from file'] = 'Von Datei importieren';
-$lang['characters'] = 'Zeichen';
-$lang['message'] = 'Nachricht';
 
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
@@ -189,19 +181,15 @@ $lang['Forgot your password?'] = 'Passswort vergessen?';
 $lang['New password'] = 'Neues Passwort';
 $lang['Must be at least 6 characters long'] = 'Muss mindestens 6 Zeichen lang sein';
 
-$lang['Enter your current password'] = 'Aktuelles Passwort eingeben';
 $lang['Enter your new password'] = 'Neues Passwort eingeben';
 
 $lang['Administrator'] = 'Administrator';
-$lang['User']['credentials'] = 'Benutzer';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
 
 // SMS Content/Member
 $lang['Member'] = 'Mitglied';
-$lang['Total member'] = 'Mitglieder total';
-$lang['There is no registered member yet'] = 'Es ist keine registriertes Mitglied vorhanden';
 
 // tni contribution
 $lang['Add contact'] = 'Kontakt hinzufügen';
@@ -211,7 +199,6 @@ $lang['Sending'] = 'Senden';
 $lang['Insert name from contact list'] = 'Name von Addressbuch einfügen';
 $lang['Delete group(s) confirmation'] = 'Gruppe(n) löschen Bestätigung';
 $lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Gruppe(n) löschen?<br>Alle Kontakte in dieser Gruppe(n) werden auch gelöscht!.';
-$lang['Yes, delete selected group(s).'] = 'Ja, ausgewählte Gruppe(n) löschen.';
 $lang['Create group'] = 'Gruppe erstellen';
 $lang['Group name'] = 'Gruppen Name';
 $lang['Groups'] = 'Gruppen';
@@ -219,7 +206,6 @@ $lang['Manage groups'] = 'Gruppen verwalten';
 $lang['Manage group'] = 'Gruppe verwalten';
 $lang['Manage contact'] = 'Kontakt verwalten';
 $lang['Type group name'] = 'Gruppe auswählen';
-$lang['There is no messages in your trash'] = 'Es sind keine Nachrichten im Papierkorb';
 $lang['No item selected.'] = 'Kein Element ausgewählt.';
 $lang['No contact selected.'] = 'Kein Kontakt ausgewählt.';
 $lang['Compose SMS'] = 'SMS verfassen';
@@ -233,10 +219,7 @@ $lang['Edit'] = 'Bearbeiten';
 $lang['All form fields are required.'] = 'Alle Felder müssen ausgefüllt werden.';
 $lang['Name'] = 'Name';
 $lang['Telephone number'] = 'Telefonnummer';
-$lang['Email ID'] = 'Email ID';
-$lang['Enable email forwarding'] = 'Email Weiterleitung aktivieren';
 $lang['Searching...'] = 'Suchen...';
-$lang['Less than a minute ago'] = 'Weniger als eine Minute vorbei';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';
 $lang['Edit contact'] = 'Kontakt bearbeiten';
@@ -246,7 +229,6 @@ $lang['Add user'] = 'Benutzer hinzufügen';
 $lang['Edit user'] = 'Benutzer bearbeiten';
 $lang['User']['default'] = 'Benutzer';
 $lang['Users'] = 'Benutzer';
-$lang['Delete users confirmation'] = 'Benutzerbestätigung löschen';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Benutzer löschen?<br>Es werden alle Nachrichten und Kontakte von diesem Benutzer gelöscht.';
 $lang['User not found'] = 'Benutzer nicht gefunden';
 $lang['Users is empty'] = 'Benutzer ist leer';
@@ -258,18 +240,13 @@ $lang['Phone number'] = 'Telefonnummer';
 $lang['Action not allowed'] = 'Aktivität nicht erlaubt';
 $lang['Field required.'] = 'Field required.';
 $lang['Passwords do not match.'] = 'Passwörter stimmen nicht überein.';
-$lang['Password is too short.'] = 'Zu kurz.';
 $lang['No user selected'] = 'Kein Benutzer ausgewählt';
-$lang['Level'] = 'Level';
 $lang['Delete this folder'] = 'Diesen Ordner löschen';
 $lang['Loading'] = 'Laden';
 $lang['Connected'] = 'Verbunden';
 $lang['Disconnected'] = 'Nicht verbunden';
 $lang['No group detected, add one first.'] = 'Keine Gruppe gefunden. Bitte zuerst eine Gruppe hinzufügen.';
 $lang['No group selected.'] = 'Keine Gruppe ausgewählt.';
-$lang['Please enter recipient'] = 'Bitte Ziel eingeben';
-$lang['Please enter message'] = 'Bitte Nachricht eingeben';
-$lang['Please enter sending date'] = 'Bitte Sendedatum eingeben';
 $lang['From'] = 'Von';
 $lang['To'] = 'An';
 $lang['Inserted'] = 'Eingefügt';
@@ -283,8 +260,6 @@ $lang['Unknown'] = 'Unbekannt';
 
 $lang['Country calling code'] = 'Country calling code';
 
-$lang['Oldest first'] = 'Älteste zuerst';
-$lang['Newest first'] = 'Neueste zuerst';
 $lang['Conversation sort'] = 'Konversation sortieren';
 
 $lang['Data per page'] = 'Daten pro Seiten';

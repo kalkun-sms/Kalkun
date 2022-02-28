@@ -50,7 +50,6 @@ $lang['valid example'] = 'Gyldigt eksempel';
 
 // Message
 $lang['Message'] = 'Besked';
-$lang['Send'] = 'Send';
 $lang['Send to'] = 'Send til';
 $lang['Reply'] = 'Svar';
 $lang['Forward'] = 'Videresend';
@@ -67,7 +66,6 @@ $lang['Now'] = 'Nu';
 $lang['At date and time'] = 'På dato og tidspunkt';
 $lang['After a delay'] = 'Med forsinkelse';
 
-$lang['Group'] = 'Gruppe';
 $lang['Input manually'] = 'Indtast manuelt';
 
 $lang['Add folder'] = 'Tilføj mappe';
@@ -78,7 +76,6 @@ $lang['Rename'] = 'Omdøb';
 $lang['Rename folder'] = 'Omdøb mappe';
 $lang['Click to rename this folder'] = 'Klik for at omdøbe denne mappe';
 
-$lang['Delete folder confirmation'] = 'Bekræft sletning af mappe';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Denne mappe og alle beskeder i den vil blive slettet permanent og kan ikke gendannes. Er du sikker?';
 
 $lang['There is no message in {0}.'] = 'Der er ingen beskeder i din {0}.';
@@ -94,8 +91,6 @@ $lang['Refresh'] = 'Opdager';
 $lang['Report spam'] = 'Rapporter spam';
 $lang['Not spam'] = 'Ikke spam';
 
-$lang['First'] = 'Første';
-$lang['Last'] = 'Sidste';
 
 $lang['SMSC'] = 'SMSC';
 $lang['Part'] = 'Del';
@@ -135,7 +130,6 @@ $lang['Are you sure?'] = 'Er du sikker?';
 
 // Others
 $lang['Amount'] = 'Antal';
-$lang['Send as Flash SMS'] = 'Send som Flash SMS';
 $lang['times']['repetition'] = 'gange';
 $lang['Hour(s)'] = 'timer';
 $lang['Minutes'] = 'minutter';
@@ -169,8 +163,6 @@ $lang['Delete all messages now'] = 'Slet alle beskeder nu';
 $lang['Delete contact(s) confirmation'] = 'Bekræft sletning af kontakt(er)';
 $lang['Should be a valid URL'] = 'Skal være en gyldig URL';
 $lang['Import from file'] = 'Importer fra fil';
-$lang['characters'] = 'tegn';
-$lang['message'] = 'besked';
 
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
@@ -189,19 +181,15 @@ $lang['Forgot your password?'] = 'Glemt dit kodeord?';
 $lang['New password'] = 'Nyt kodeord';
 $lang['Must be at least 6 characters long'] = 'Skal være på mindst 6 tegn';
 
-$lang['Enter your current password'] = 'Indtast dit nuværende kodeord';
 $lang['Enter your new password'] = 'Indtast dit nye kodeord';
 
 $lang['Administrator'] = 'Administrator';
-$lang['User']['credentials'] = 'Bruger';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
 
 // SMS Content/Member
 $lang['Member'] = 'Medlem';
-$lang['Total member'] = 'Antal medlemmer';
-$lang['There is no registered member yet'] = 'Der er endnu ingen registrerede medlemmer';
 
 // tni contribution
 $lang['Add contact'] = 'Tilføj kontakt';
@@ -211,7 +199,6 @@ $lang['Sending'] = 'Sender';
 $lang['Insert name from contact list'] = 'Indsæt navn fra kontaktliste';
 $lang['Delete group(s) confirmation'] = 'Bekræft sletning af gruppe(r)';
 $lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Slet gruppe(r)?<br>Alle kontakter i de angivne grupper vil også blive slettet.';
-$lang['Yes, delete selected group(s).'] = 'Ja, slet valgte gruppe(r).';
 $lang['Create group'] = 'Opret gruppe';
 $lang['Group name'] = 'Gruppens navn';
 $lang['Groups'] = 'Grupper';
@@ -219,7 +206,6 @@ $lang['Manage groups'] = 'Administrer grupper';
 $lang['Manage group'] = 'Administrer gruppe';
 $lang['Manage contact'] = 'Administrer kontakt';
 $lang['Type group name'] = 'Vælg gruppe';
-$lang['There is no messages in your trash'] = 'Der er ikke nogen beskeder i papirkurven';
 $lang['No item selected.'] = 'Ingen valgt.';
 $lang['No contact selected.'] = 'Ingen kontakter valgt.';
 $lang['Compose SMS'] = 'Skriv ny SMS';
@@ -233,10 +219,7 @@ $lang['Edit'] = 'Rediger';
 $lang['All form fields are required.'] = 'Alle felterne skal udfyldes.';
 $lang['Name'] = 'Navn';
 $lang['Telephone number'] = 'Telefonnummer';
-$lang['Email ID'] = 'E-mail-ID';
-$lang['Enable email forwarding'] = 'Slå videresending til e-mail til';
 $lang['Searching...'] = 'Søger...';
-$lang['Less than a minute ago'] = 'Mindre end et minut siden';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';
 $lang['Edit contact'] = 'Rediger kontakt';
@@ -246,7 +229,6 @@ $lang['Add user'] = 'Tilføj bruger';
 $lang['Edit user'] = 'Rediger bruger';
 $lang['User']['default'] = 'Bruger';
 $lang['Users'] = 'Brugere';
-$lang['Delete users confirmation'] = 'Bekræft sletning af brugere';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Slet bruger?<br>Dette inkluderer al data knyttet til denne bruger (beskeder og kontakter).';
 $lang['User not found'] = 'Bruger ikke fundet';
 $lang['Users is empty'] = 'Bruger er tom';
@@ -258,18 +240,13 @@ $lang['Phone number'] = 'Telefonnummer';
 $lang['Action not allowed'] = 'Handlingen er ikke tilladt';
 $lang['Field required.'] = 'Field required.';
 $lang['Passwords do not match.'] = 'Kodeordene er ikke ens.';
-$lang['Password is too short.'] = 'For kort.';
 $lang['No user selected'] = 'Ingen bruger er valgt';
-$lang['Level'] = 'Niveau';
 $lang['Delete this folder'] = 'Slet denne mappe';
 $lang['Loading'] = 'Indlæser';
 $lang['Connected'] = 'Forbundet';
 $lang['Disconnected'] = 'Ikke forbundet';
 $lang['No group detected, add one first.'] = 'Ingen grupper fundet. Tilføj en først.';
 $lang['No group selected.'] = 'Ingen grupper valgt.';
-$lang['Please enter recipient'] = 'Indtast venligst din destination';
-$lang['Please enter message'] = 'Indtast venligst din besked';
-$lang['Please enter sending date'] = 'Indtast venligst din afsendelsesdato';
 $lang['From'] = 'Fra';
 $lang['To'] = 'Til';
 $lang['Inserted'] = 'Indsat';
@@ -283,8 +260,6 @@ $lang['Unknown'] = 'Ukendt';
 
 $lang['Country calling code'] = 'Country calling code';
 
-$lang['Oldest first'] = 'Ældste først';
-$lang['Newest first'] = 'Nyeste først';
 $lang['Conversation sort'] = 'Sorter samtaler';
 
 $lang['Data per page'] = 'Data pr. side';

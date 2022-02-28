@@ -50,7 +50,6 @@ $lang['valid example'] = 'Voorbeeld';
 
 // Message
 $lang['Message'] = 'Bericht';
-$lang['Send'] = 'Verzenden';
 $lang['Send to'] = 'Verzenden aan';
 $lang['Reply'] = 'Antwoorden';
 $lang['Forward'] = 'Doorsturen';
@@ -67,7 +66,6 @@ $lang['Now'] = 'Nu';
 $lang['At date and time'] = 'Op Tijd en Datum';
 $lang['After a delay'] = 'Met vertraging';
 
-$lang['Group'] = 'Groep';
 $lang['Input manually'] = 'Handmatige invoer';
 
 $lang['Add folder'] = 'Map toevoegen';
@@ -78,7 +76,6 @@ $lang['Rename'] = 'Hernoemen';
 $lang['Rename folder'] = 'Hernoem map';
 $lang['Click to rename this folder'] = 'Klik hier om deze map te hernoemen';
 
-$lang['Delete folder confirmation'] = 'Dialoog Map Verwijderen';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Deze map en zijn complete inhoud wordt permanent verwijderd en kan niet hersteld worden. Doorgaan?';
 
 $lang['There is no message in {0}.'] = 'Er zijn geen berichten in jouw {0}.';
@@ -94,8 +91,6 @@ $lang['Refresh'] = 'Verversen';
 $lang['Report spam'] = 'Spam ';
 $lang['Not spam'] = 'Geen Spam';
 
-$lang['First'] = 'Eerste';
-$lang['Last'] = 'Laatste';
 
 $lang['SMSC'] = 'SMSC';
 $lang['Part'] = 'Deel';
@@ -135,7 +130,6 @@ $lang['Are you sure?'] = 'Weet je het zeker?';
 
 // Others
 $lang['Amount'] = 'Aantal';
-$lang['Send as Flash SMS'] = 'Verzenden als Flash SMS';
 $lang['times']['repetition'] = 'tijden';
 $lang['Hour(s)'] = 'Uren';
 $lang['Minutes'] = 'Minuten';
@@ -169,8 +163,6 @@ $lang['Delete all messages now'] = 'Verwijder Nu Alle Berichten';
 $lang['Delete contact(s) confirmation'] = 'Dialoog Verwijder Contacten';
 $lang['Should be a valid URL'] = 'Moet een bestaand webadres zijn';
 $lang['Import from file'] = 'Importeer van bestand';
-$lang['characters'] = 'tekens';
-$lang['message'] = 'bericht';
 
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
@@ -189,19 +181,15 @@ $lang['Forgot your password?'] = 'Wachtwoord Vergeten?';
 $lang['New password'] = 'Nieuw Wachtwoord';
 $lang['Must be at least 6 characters long'] = 'Moet minimaal 6 tekens lang zijn';
 
-$lang['Enter your current password'] = 'Voer het huidige wachtwoord in';
 $lang['Enter your new password'] = 'Voer het nieuwe wachtwoord in';
 
 $lang['Administrator'] = 'Administrator';
-$lang['User']['credentials'] = 'Gebruiker';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
 
 // SMS Content/Member
 $lang['Member'] = 'Lid';
-$lang['Total member'] = 'Totaal Leden';
-$lang['There is no registered member yet'] = 'Er zijn nog geen leden';
 
 // tni contribution
 $lang['Add contact'] = 'Contact Toevoegen';
@@ -211,7 +199,6 @@ $lang['Sending'] = 'Zenden';
 $lang['Insert name from contact list'] = 'Naam invoegen uit Contacten';
 $lang['Delete group(s) confirmation'] = 'Dialoog Verwijder Groepen';
 $lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Groepen Verwijderen?<br>Ook de contacpersonen in deze groepen worden verwijderd!.';
-$lang['Yes, delete selected group(s).'] = 'Ja, verwijder geselecteerde groepen.';
 $lang['Create group'] = 'Maak Groep Aan';
 $lang['Group name'] = 'Naam Groep';
 $lang['Groups'] = 'Groepen';
@@ -219,7 +206,6 @@ $lang['Manage groups'] = 'Groepen Onderhouden';
 $lang['Manage group'] = 'Groep Onderhouden';
 $lang['Manage contact'] = 'Contact Onderhouden';
 $lang['Type group name'] = 'Kies Groep';
-$lang['There is no messages in your trash'] = 'Geen berichten in de prullenbak';
 $lang['No item selected.'] = 'Geen object geselecteerd.';
 $lang['No contact selected.'] = 'Geen Contact Geselecteerd.';
 $lang['Compose SMS'] = 'SMS Opstellen';
@@ -233,10 +219,7 @@ $lang['Edit'] = 'Aanpassen';
 $lang['All form fields are required.'] = 'Alle velden in het formulier zijn verplicht.';
 $lang['Name'] = 'Naam';
 $lang['Telephone number'] = 'Telefoonnummer';
-$lang['Email ID'] = 'Email ID';
-$lang['Enable email forwarding'] = 'Gebruik Email Doorsturen';
 $lang['Searching...'] = 'Zoek...';
-$lang['Less than a minute ago'] = 'Minder dan een minuut geleden';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';
 $lang['Edit contact'] = 'Aanpassen Contact';
@@ -246,7 +229,6 @@ $lang['Add user'] = 'Gebruiker Toevoegen';
 $lang['Edit user'] = 'Gebruikers Aanpassen';
 $lang['User']['default'] = 'Gebruiker';
 $lang['Users'] = 'Gebruikers';
-$lang['Delete users confirmation'] = 'Dialoog Gebruikers Verwijderen';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Gebruiker verwijderen?<br>Hiermee worden alle berichten en mappen van de gebruiker verwijderd.';
 $lang['User not found'] = 'Gebruiker niet gevonden';
 $lang['Users is empty'] = 'Geen Gebruikers';
@@ -258,18 +240,13 @@ $lang['Phone number'] = 'Telefoonnummer';
 $lang['Action not allowed'] = 'Actie niet toegestaan';
 $lang['Field required.'] = 'Field required.';
 $lang['Passwords do not match.'] = 'Wachtwoorden zijn ongelijk.';
-$lang['Password is too short.'] = 'Te Kort.';
 $lang['No user selected'] = 'Geen gebruiker geselecteerd';
-$lang['Level'] = 'Niveau';
 $lang['Delete this folder'] = 'Verwijder deze map';
 $lang['Loading'] = 'Laden';
 $lang['Connected'] = 'Verbonden';
 $lang['Disconnected'] = 'Niet Verbonden';
 $lang['No group detected, add one first.'] = 'Geen groep gevonden, voer eerst een groep in.';
 $lang['No group selected.'] = 'Geen groep geselecteerd.';
-$lang['Please enter recipient'] = 'Geef bestemming in';
-$lang['Please enter message'] = 'Geef bericht in';
-$lang['Please enter sending date'] = 'Geef verzenddatum in';
 $lang['From'] = 'Van';
 $lang['To'] = 'Aan';
 $lang['Inserted'] = 'Ingevoegd';
@@ -283,8 +260,6 @@ $lang['Unknown'] = 'Onbekend';
 
 $lang['Country calling code'] = 'Country calling code';
 
-$lang['Oldest first'] = 'Oudste Eerst';
-$lang['Newest first'] = 'Nieuwste Eerst';
 $lang['Conversation sort'] = 'Conversatie Sorteren';
 
 $lang['Data per page'] = 'Regels per Pagina';

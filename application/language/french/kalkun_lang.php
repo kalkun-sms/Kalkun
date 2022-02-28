@@ -50,7 +50,6 @@ $lang['valid example'] = 'Exemple valide';
 
 // Message
 $lang['Message'] = 'Message';
-$lang['Send'] = 'Envoyer';
 $lang['Send to'] = 'Destinataire';
 $lang['Reply'] = 'Répondre';
 $lang['Forward'] = 'Transférer';
@@ -67,7 +66,6 @@ $lang['Now'] = 'Maintenant';
 $lang['At date and time'] = "A la date et l'heure";
 $lang['After a delay'] = 'Après un délai';
 
-$lang['Group'] = 'Groupe';
 $lang['Input manually'] = 'Saisie manuelle';
 
 $lang['Add folder'] = 'Ajouter dossier';
@@ -78,7 +76,6 @@ $lang['Rename'] = 'Renommer';
 $lang['Rename folder'] = 'Renommer le dossier';
 $lang['Click to rename this folder'] = 'Cliquer pour renommer ce dossier';
 
-$lang['Delete folder confirmation'] = 'Confirmer la suppression du dossier';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = " Souhaitez-vous vraiment supprimer ce dossier et tous les messages qu'il contient ?";
 
 $lang['There is no message in {0}.'] = "Il n'y a aucun message dans votre {0}.";
@@ -94,8 +91,6 @@ $lang['Refresh'] = 'Actualiser';
 $lang['Report spam'] = 'Signaler comme spam';
 $lang['Not spam'] = 'Pas du spam';
 
-$lang['First'] = 'Premier';
-$lang['Last'] = 'Dernier';
 
 $lang['SMSC'] = 'SMSC';
 $lang['Part'] = 'Partie';
@@ -135,7 +130,6 @@ $lang['Are you sure?'] = 'Etes-vous sûr ?';
 
 // Others
 $lang['Amount'] = 'Quantité';
-$lang['Send as Flash SMS'] = 'Envoyer en tant que Flash SMS';
 $lang['times']['repetition'] = 'Temps';
 $lang['Hour(s)'] = 'Heure';
 $lang['Minutes'] = 'Minutes';
@@ -169,8 +163,6 @@ $lang['Delete all messages now'] = 'Supprimer tous les messages';
 $lang['Delete contact(s) confirmation'] = 'Confirmation de la suppression du contact';
 $lang['Should be a valid URL'] = "L'URL doit étre valide";
 $lang['Import from file'] = 'Importer à partir du fichier';
-$lang['characters'] = 'caractère(s)';
-$lang['message'] = 'message(s)';
 
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login réussi. Mais données {0} perdues durant le processus de login.';
@@ -189,19 +181,15 @@ $lang['Forgot your password?'] = 'Mot de passe oublié ?';
 $lang['New password'] = 'Nouveau mot de passe';
 $lang['Must be at least 6 characters long'] = 'Doit comprendre au minimum 6 caractères';
 
-$lang['Enter your current password'] = 'Entrer votre mot de passe actuel';
 $lang['Enter your new password'] = 'Entrer votre nouveau mot de passe';
 
 $lang['Administrator'] = 'Administrateur';
-$lang['User']['credentials'] = 'Utilisateur';
 
 $lang['Create a new filter'] = 'Créer un nouveau filtre';
 $lang['Has the words'] = 'Contient les mots';
 
 // SMS Content/Member
 $lang['Member'] = 'Membre';
-$lang['Total member'] = 'Total des membres';
-$lang['There is no registered member yet'] = "Il n'y a pas encore de membre inscrit";
 
 // tni contribution
 $lang['Add contact'] = 'Ajouter un contact';
@@ -211,7 +199,6 @@ $lang['Sending'] = 'Envoi en cours';
 $lang['Insert name from contact list'] = 'Insérer un nom depuis la liste de contact';
 $lang['Delete group(s) confirmation'] = 'Confirmation de la suppression du groupe';
 $lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Supprimer le groupe <br> Tous les contacts de ce groupe seront également supprimés.';
-$lang['Yes, delete selected group(s).'] = 'Oui, supprimer le groupe sélectionné.';
 $lang['Create group'] = 'Créer un groupe';
 $lang['Group name'] = 'Nom du groupe';
 $lang['Groups'] = 'Groupes';
@@ -219,7 +206,6 @@ $lang['Manage groups'] = 'Gérer les groupes';
 $lang['Manage group'] = 'Gérer un groupe';
 $lang['Manage contact'] = 'Géer les contacts';
 $lang['Type group name'] = 'Entrer le nom du groupe';
-$lang['There is no messages in your trash'] = "Il n'y a aucune message dans votre corbeille";
 $lang['No item selected.'] = 'Aucun article sélectionné.';
 $lang['No contact selected.'] = 'Aucun contact sélectionné.';
 $lang['Compose SMS'] = 'Ecrire un sms';
@@ -233,10 +219,7 @@ $lang['Edit'] = 'Editer';
 $lang['All form fields are required.'] = 'Tous les champs sont obligatoires.';
 $lang['Name'] = 'Nom';
 $lang['Telephone number'] = 'Numéro de téléphone';
-$lang['Email ID'] = 'Email';
-$lang['Enable email forwarding'] = "Activer le transfert d'Email";
 $lang['Searching...'] = 'Recherche...';
-$lang['Less than a minute ago'] = "Il y a moins d'une minute";
 $lang['{0} remaining'] = '{0} restant';
 $lang['{0} ago'] = 'Il y a {0}';
 $lang['Edit contact'] = 'Modifier contact';
@@ -246,7 +229,6 @@ $lang['Add user'] = 'Ajouter un utilisateur';
 $lang['Edit user'] = 'Modifier un utilisateur';
 $lang['User']['default'] = 'Utilisateur';
 $lang['Users'] = 'Utilisateurs';
-$lang['Delete users confirmation'] = 'Confirmer la suppression des utilisateurs';
 $lang['This deletes the selected users and all their messages and contacts.'] = "Supprimer l'utilisateur ?<br>Cela inclut tous les enregistrements de cet utilisateur (messages et contacts).";
 $lang['User not found'] = 'Utilisateur introuvable';
 $lang['Users is empty'] = 'Les utilisateurs sont vides';
@@ -258,18 +240,13 @@ $lang['Phone number'] = 'Numéro de téléphone';
 $lang['Action not allowed'] = 'Action non autorisée';
 $lang['Field required.'] = 'Champ requis.';
 $lang['Passwords do not match.'] = 'Les mots de passe ne correspondent pas.';
-$lang['Password is too short.'] = 'Trop court.';
 $lang['No user selected'] = "Pas d'utilisateur sélectionné";
-$lang['Level'] = 'Niveau';
 $lang['Delete this folder'] = 'Supprimer ce dossier';
 $lang['Loading'] = 'Chargement';
 $lang['Connected'] = 'Connecté';
 $lang['Disconnected'] = 'Déconnecté';
 $lang['No group detected, add one first.'] = "Aucun groupe détecté, ajouter d'abord un groupe.";
 $lang['No group selected.'] = 'Pas de groupe sélectionné.';
-$lang['Please enter recipient'] = 'Entrer votre destinataire';
-$lang['Please enter message'] = 'Entrer votre message';
-$lang['Please enter sending date'] = "Entrer la date d'envoi";
 $lang['From'] = 'De';
 $lang['To'] = 'Vers';
 $lang['Inserted'] = 'Inséré';
@@ -283,8 +260,6 @@ $lang['Unknown'] = 'Inconnu';
 
 $lang['Country calling code'] = 'Indicatif tél. international';
 
-$lang['Oldest first'] = 'Le plus ancien';
-$lang['Newest first'] = 'Le plus récent';
 $lang['Conversation sort'] = 'Tri des conversations';
 
 $lang['Data per page'] = 'Données par page';

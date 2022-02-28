@@ -50,7 +50,6 @@ $lang['valid example'] = 'Contoh yang Valid';
 
 // Message
 $lang['Message'] = 'Pesan';
-$lang['Send'] = 'Kirim';
 $lang['Send to'] = 'Kirim ke';
 $lang['Reply'] = 'Balas';
 $lang['Forward'] = 'Teruskan';
@@ -67,7 +66,6 @@ $lang['Now'] = 'Sekarang';
 $lang['At date and time'] = 'Pada tanggal/waktu';
 $lang['After a delay'] = 'Setelah penundaan';
 
-$lang['Group'] = 'Grup';
 $lang['Input manually'] = 'Masukkan secara manual';
 
 $lang['Add folder'] = 'Tambah berkas';
@@ -78,7 +76,6 @@ $lang['Rename'] = 'Ganti nama';
 $lang['Rename folder'] = 'Ganti nama folder';
 $lang['Click to rename this folder'] = 'Klik untuk mengganti nama berkas ini';
 
-$lang['Delete folder confirmation'] = 'Konfirmasi hapus berkas';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Berkas ini dan semua pesan di dalamnya akan dihapus selamanya dan tidak bisa di kembalikan lagi. Anda yakin?';
 
 $lang['There is no message in {0}.'] = 'Tidak ada pesan dalam {0}.';
@@ -94,8 +91,6 @@ $lang['Refresh'] = 'Segarkan';
 $lang['Report spam'] = 'Laporkan Spam';
 $lang['Not spam'] = 'Bukan Spam';
 
-$lang['First'] = 'Awal';
-$lang['Last'] = 'Akhir';
 
 $lang['SMSC'] = 'SMSC';
 $lang['Part'] = 'Bagian';
@@ -135,7 +130,6 @@ $lang['Are you sure?'] = 'Anda yakin?';
 
 // Others
 $lang['Amount'] = 'Jumlah';
-$lang['Send as Flash SMS'] = 'Kirim sebagai Flash SMS';
 $lang['times']['repetition'] = 'kali';
 $lang['Hour(s)'] = 'Jam';
 $lang['Minutes'] = 'Menit';
@@ -169,8 +163,6 @@ $lang['Delete all messages now'] = 'Hapus semua pesan sekarang';
 $lang['Delete contact(s) confirmation'] = 'Konfirmasi hapus Kontak';
 $lang['Should be a valid URL'] = 'URL harus valid';
 $lang['Import from file'] = 'Impor dari dokumen';
-$lang['characters'] = 'karakter';
-$lang['message'] = 'pesan';
 
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
@@ -189,19 +181,15 @@ $lang['Forgot your password?'] = 'Lupa password Anda?';
 $lang['New password'] = 'Password Baru';
 $lang['Must be at least 6 characters long'] = 'Setidaknya harus 6 karakter';
 
-$lang['Enter your current password'] = 'Masukkan password Anda saat ini';
 $lang['Enter your new password'] = 'Masukkan password baru Anda';
 
 $lang['Administrator'] = 'Administrator';
-$lang['User']['credentials'] = 'Pengguna';
 
 $lang['Create a new filter'] = 'Buat saringan baru';
 $lang['Has the words'] = 'Mengandung kata';
 
 // SMS Content/Member
 $lang['Member'] = 'Member';
-$lang['Total member'] = 'Total Member';
-$lang['There is no registered member yet'] = 'There is no registered member yet';
 
 // tni contribution
 $lang['Add contact'] = 'Tambah Kontak';
@@ -211,7 +199,6 @@ $lang['Sending'] = 'Sedang mengirim';
 $lang['Insert name from contact list'] = 'Masukkan nama kontak';
 $lang['Delete group(s) confirmation'] = 'Konfirmasi hapus Grup';
 $lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Hapus Grup ini?<br>Semua kontak dalam grup ini juga akan terhapus.';
-$lang['Yes, delete selected group(s).'] = 'Ya, hapus grup terpilih.';
 $lang['Create group'] = 'Grup Baru';
 $lang['Group name'] = 'Nama Grup';
 $lang['Groups'] = 'Grup';
@@ -219,7 +206,6 @@ $lang['Manage groups'] = 'Kelola Grup';
 $lang['Manage group'] = 'Kelola Grup';
 $lang['Manage contact'] = 'Kelola Kontak';
 $lang['Type group name'] = 'Pilih Grup';
-$lang['There is no messages in your trash'] = 'Tidak ada pesan di kotak sampah';
 $lang['No item selected.'] = 'Tidak ada data terpilih.';
 $lang['No contact selected.'] = 'Tidak ada kontak terpilih.';
 $lang['Compose SMS'] = 'Tulis SMS';
@@ -233,10 +219,7 @@ $lang['Edit'] = 'Sunting';
 $lang['All form fields are required.'] = 'Semua kolom harus diisi.';
 $lang['Name'] = 'Nama';
 $lang['Telephone number'] = 'Nomer Telepon';
-$lang['Email ID'] = 'Alamat Surel';
-$lang['Enable email forwarding'] = 'Aktifkan Terusan Surel';
 $lang['Searching...'] = 'Mencari...';
-$lang['Less than a minute ago'] = 'Beberapa saat yang lalu';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';
 $lang['Edit contact'] = 'Sunting Kontak';
@@ -246,7 +229,6 @@ $lang['Add user'] = 'Tambah Pengguna';
 $lang['Edit user'] = 'Sunting Pengguna';
 $lang['User']['default'] = 'Pengguna';
 $lang['Users'] = 'Pengguna';
-$lang['Delete users confirmation'] = 'Konfirmasi hapus pengguna';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Hapus Pengguna ini?<br>Semua data (pesan dan kontak) juga akan terhapus.';
 $lang['User not found'] = 'Pengguna tidak ditemukan';
 $lang['Users is empty'] = 'Pengguna kosong';
@@ -258,18 +240,13 @@ $lang['Phone number'] = 'Nomer Telepon';
 $lang['Action not allowed'] = 'Action not allowed';
 $lang['Field required.'] = 'Field required.';
 $lang['Passwords do not match.'] = 'Password tidak sesuai.';
-$lang['Password is too short.'] = 'Terlalu Pendek.';
 $lang['No user selected'] = 'Tidak ada pengguna terpilih';
-$lang['Level'] = 'Level';
 $lang['Delete this folder'] = 'Hapus berkas ini';
 $lang['Loading'] = 'Memuat';
 $lang['Connected'] = 'Tersambung';
 $lang['Disconnected'] = 'Terputus';
 $lang['No group detected, add one first.'] = 'Tidak ada grup, silahkan buat grup terlebih dahulu.';
 $lang['No group selected.'] = 'Tidak ada grup terpilih.';
-$lang['Please enter recipient'] = 'Masukkan nomer tujuan';
-$lang['Please enter message'] = 'Masukkan isi pesan';
-$lang['Please enter sending date'] = 'Masukkan tanggal pengiriman';
 $lang['From'] = 'Dari';
 $lang['To'] = 'Ke';
 $lang['Inserted'] = 'Dimasukkan';
@@ -283,8 +260,6 @@ $lang['Unknown'] = 'Tidak diketahui';
 
 $lang['Country calling code'] = 'Country calling code';
 
-$lang['Oldest first'] = 'Terlama lebih dahulu';
-$lang['Newest first'] = 'Terbaru lebih dahulu';
 $lang['Conversation sort'] = 'Urutan percakapan';
 
 $lang['Data per page'] = 'Data per Halaman';

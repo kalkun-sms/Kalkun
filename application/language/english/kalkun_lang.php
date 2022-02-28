@@ -50,7 +50,6 @@ $lang['valid example'] = 'valid example';
 
 // Message
 $lang['Message'] = 'Message';
-$lang['Send'] = 'Send';
 $lang['Send to'] = 'Send to';
 $lang['Reply'] = 'Reply';
 $lang['Forward'] = 'Forward';
@@ -67,7 +66,6 @@ $lang['Now'] = 'Now';
 $lang['At date and time'] = 'At date and time';
 $lang['After a delay'] = 'After a delay';
 
-$lang['Group'] = 'Group';
 $lang['Input manually'] = 'Input manually';
 
 $lang['Add folder'] = 'Add folder';
@@ -78,7 +76,6 @@ $lang['Rename'] = 'Rename';
 $lang['Rename folder'] = 'Rename folder';
 $lang['Click to rename this folder'] = 'Click to rename this folder';
 
-$lang['Delete folder confirmation'] = 'Delete folder confirmation';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?';
 
 $lang['There is no message in {0}.'] = 'There is no message in {0}.';
@@ -94,8 +91,6 @@ $lang['Refresh'] = 'Refresh';
 $lang['Report spam'] = 'Report spam';
 $lang['Not spam'] = 'Not spam';
 
-$lang['First'] = 'First';
-$lang['Last'] = 'Last';
 
 $lang['SMSC'] = 'SMSC';
 $lang['Part'] = 'Part';
@@ -135,7 +130,6 @@ $lang['Are you sure?'] = 'Are you sure?';
 
 // Others
 $lang['Amount'] = 'Amount';
-$lang['Send as Flash SMS'] = 'Send as Flash SMS';
 $lang['times']['repetition'] = 'times';
 $lang['Hour(s)'] = 'Hour(s)';
 $lang['Minutes'] = 'Minutes';
@@ -169,8 +163,6 @@ $lang['Delete all messages now'] = 'Delete all messages now';
 $lang['Delete contact(s) confirmation'] = 'Delete contact(s) confirmation';
 $lang['Should be a valid URL'] = 'Should be a valid URL';
 $lang['Import from file'] = 'Import from file';
-$lang['characters'] = 'characters';
-$lang['message'] = 'message';
 
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
@@ -189,19 +181,15 @@ $lang['Forgot your password?'] = 'Forgot your password?';
 $lang['New password'] = 'New password';
 $lang['Must be at least 6 characters long'] = 'Must be at least 6 characters long';
 
-$lang['Enter your current password'] = 'Enter your current password';
 $lang['Enter your new password'] = 'Enter your new password';
 
 $lang['Administrator'] = 'Administrator';
-$lang['User']['credentials'] = 'User';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
 
 // SMS Content/Member
 $lang['Member'] = 'Member';
-$lang['Total member'] = 'Total member';
-$lang['There is no registered member yet'] = 'There is no registered member yet';
 
 // tni contribution
 $lang['Add contact'] = 'Add contact';
@@ -211,7 +199,6 @@ $lang['Sending'] = 'Sending';
 $lang['Insert name from contact list'] = 'Insert name from contact list';
 $lang['Delete group(s) confirmation'] = 'Delete group(s) confirmation';
 $lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Delete group(s)?<br>All their contacts will also be deleted.';
-$lang['Yes, delete selected group(s).'] = 'Yes, delete selected group(s).';
 $lang['Create group'] = 'Create group';
 $lang['Group name'] = 'Group name';
 $lang['Groups'] = 'Groups';
@@ -219,7 +206,6 @@ $lang['Manage groups'] = 'Manage groups';
 $lang['Manage group'] = 'Manage group';
 $lang['Manage contact'] = 'Manage contact';
 $lang['Type group name'] = 'Type group name';
-$lang['There is no messages in your trash'] = 'There is no messages in your trash';
 $lang['No item selected.'] = 'No item selected.';
 $lang['No contact selected.'] = 'No contact selected.';
 $lang['Compose SMS'] = 'Compose SMS';
@@ -233,10 +219,7 @@ $lang['Edit'] = 'Edit';
 $lang['All form fields are required.'] = 'All form fields are required.';
 $lang['Name'] = 'Name';
 $lang['Telephone number'] = 'Telephone number';
-$lang['Email ID'] = 'Email ID';
-$lang['Enable email forwarding'] = 'Enable email forwarding';
 $lang['Searching...'] = 'Searching...';
-$lang['Less than a minute ago'] = 'Less than a minute ago';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';
 $lang['Edit contact'] = 'Edit contact';
@@ -246,7 +229,6 @@ $lang['Add user'] = 'Add user';
 $lang['Edit user'] = 'Edit user';
 $lang['User']['default'] = 'User';
 $lang['Users'] = 'Users';
-$lang['Delete users confirmation'] = 'Delete users confirmation';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'This deletes the selected users and all their messages and contacts.';
 $lang['User not found'] = 'User not found';
 $lang['Users is empty'] = 'Users is empty';
@@ -258,18 +240,13 @@ $lang['Phone number'] = 'Phone number';
 $lang['Action not allowed'] = 'Action not allowed';
 $lang['Field required.'] = 'Field required.';
 $lang['Passwords do not match.'] = 'Passwords do not match.';
-$lang['Password is too short.'] = 'Password is too short.';
 $lang['No user selected'] = 'No user selected';
-$lang['Level'] = 'Level';
 $lang['Delete this folder'] = 'Delete this folder';
 $lang['Loading'] = 'Loading';
 $lang['Connected'] = 'Connected';
 $lang['Disconnected'] = 'Disconnected';
 $lang['No group detected, add one first.'] = 'No group detected, add one first.';
 $lang['No group selected.'] = 'No group selected.';
-$lang['Please enter recipient'] = 'Please enter recipient';
-$lang['Please enter message'] = 'Please enter message';
-$lang['Please enter sending date'] = 'Please enter sending date';
 $lang['From'] = 'From';
 $lang['To'] = 'To';
 $lang['Inserted'] = 'Inserted';
@@ -284,8 +261,6 @@ $lang['Not set yet'] = 'Not set yet';
 
 $lang['Country calling code'] = 'Country calling code';
 
-$lang['Oldest first'] = 'Oldest first';
-$lang['Newest first'] = 'Newest first';
 $lang['Conversation sort'] = 'Conversation sort';
 
 $lang['Data per page'] = 'Data per page';

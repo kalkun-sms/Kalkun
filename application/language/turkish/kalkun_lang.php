@@ -50,7 +50,6 @@ $lang['valid example'] = 'Valid Example';
 
 // Message
 $lang['Message'] = 'Mesaj';
-$lang['Send'] = 'Gönder';
 $lang['Send to'] = 'Suna gönder';
 $lang['Reply'] = 'Cevapla';
 $lang['Forward'] = 'Yönlendir';
@@ -67,7 +66,6 @@ $lang['Now'] = 'Simdi';
 $lang['At date and time'] = 'Su tarih su zaman';
 $lang['After a delay'] = 'Bir gecikmeden sonra';
 
-$lang['Group'] = 'Grup';
 $lang['Input manually'] = 'Elle giris';
 
 $lang['Add folder'] = 'Klasör ekle';
@@ -78,7 +76,6 @@ $lang['Rename'] = 'Tekrar isimlendir';
 $lang['Rename folder'] = 'Dosyayi yeniden adlandir';
 $lang['Click to rename this folder'] = 'Dosyayi yeniden adlandirmak için tikla';
 
-$lang['Delete folder confirmation'] = 'Dosya silme onayi';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Dosya ve mesajlarin hepsi süresiz olarak silinecek ve tekrar geri dönülemiyecek. Emin misiniz?';
 
 $lang['There is no message in {0}.'] = 'Hiç mesaj yok senin {0}.';
@@ -94,8 +91,6 @@ $lang['Refresh'] = 'Yenile';
 $lang['Report spam'] = 'Report Spam';
 $lang['Not spam'] = 'Not Spam';
 
-$lang['First'] = 'Birinci';
-$lang['Last'] = 'Sonuncu';
 
 $lang['SMSC'] = 'SMSC';
 $lang['Part'] = 'Part';
@@ -135,7 +130,6 @@ $lang['Are you sure?'] = 'Are you Sure?';
 
 // Others
 $lang['Amount'] = 'Amount';
-$lang['Send as Flash SMS'] = 'Send as Flash SMS';
 $lang['times']['repetition'] = 'times';
 $lang['Hour(s)'] = 'Hour';
 $lang['Minutes'] = 'Minutes';
@@ -169,8 +163,6 @@ $lang['Delete all messages now'] = 'Delete All Messages Now';
 $lang['Delete contact(s) confirmation'] = 'Delete Contact(s) Confirmation';
 $lang['Should be a valid URL'] = 'Should be a valid URL';
 $lang['Import from file'] = 'Import from file';
-$lang['characters'] = 'characters';
-$lang['message'] = 'message';
 
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
@@ -189,19 +181,15 @@ $lang['Forgot your password?'] = 'Forgot your password?';
 $lang['New password'] = 'New Password';
 $lang['Must be at least 6 characters long'] = 'Must be at least 6 characters long';
 
-$lang['Enter your current password'] = 'Enter your current password';
 $lang['Enter your new password'] = 'Enter your new password';
 
 $lang['Administrator'] = 'Administrator';
-$lang['User']['credentials'] = 'User';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
 
 // SMS Content/Member
 $lang['Member'] = 'Member';
-$lang['Total member'] = 'Total Member';
-$lang['There is no registered member yet'] = 'There is no registered member yet';
 
 // tni contribution
 $lang['Add contact'] = 'Kontak Ekle';
@@ -211,7 +199,6 @@ $lang['Sending'] = 'Sending';
 $lang['Insert name from contact list'] = 'Kontak listesinden isim ekle';
 $lang['Delete group(s) confirmation'] = 'Grup onayini sil';
 $lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Grup/lari sil?<br>Gruplardaki tüm kontaklar silinecek.';
-$lang['Yes, delete selected group(s).'] = 'Evet seçilen gruplari sil.';
 $lang['Create group'] = 'Grup olustur';
 $lang['Group name'] = 'Grup ismi';
 $lang['Groups'] = 'Gruplar';
@@ -219,7 +206,6 @@ $lang['Manage groups'] = 'Gruplari yönet';
 $lang['Manage group'] = 'Grup yönet';
 $lang['Manage contact'] = 'Kontaklari yönet';
 $lang['Type group name'] = 'Grup Seç';
-$lang['There is no messages in your trash'] = 'Çöp kutusunda hiç mesaj yok';
 $lang['No item selected.'] = 'Herhangi seçilen öge yok.';
 $lang['No contact selected.'] = 'Seçilmis kontak yok.';
 $lang['Compose SMS'] = 'Sms yaz';
@@ -233,10 +219,7 @@ $lang['Edit'] = 'Düzenle';
 $lang['All form fields are required.'] = 'Formdaki tüm elementler gerekli.';
 $lang['Name'] = 'Isim';
 $lang['Telephone number'] = 'Telefon numarasi';
-$lang['Email ID'] = 'Email ID';
-$lang['Enable email forwarding'] = 'Email yönlendirmeyi etkinlestir';
 $lang['Searching...'] = 'Araniyor...';
-$lang['Less than a minute ago'] = 'Bir dakikadan kisa';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';
 $lang['Edit contact'] = 'Kontak bilgilerini düzenle';
@@ -246,7 +229,6 @@ $lang['Add user'] = 'Kullanicilari ekle';
 $lang['Edit user'] = 'Kullanici düzenle';
 $lang['User']['default'] = 'Kullanici';
 $lang['Users'] = 'Kullanicilar';
-$lang['Delete users confirmation'] = 'Kullanici onaylarini sil';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Kullanici silinsinmi?<br>Bu mesajlardan ve kontaklardan bu kullanicinin silinecegi manasina gelir.';
 $lang['User not found'] = 'Kullanici bulunamadi';
 $lang['Users is empty'] = 'Kullanicilar bos';
@@ -258,18 +240,13 @@ $lang['Phone number'] = 'Kullanici telefon numarasi';
 $lang['Action not allowed'] = 'Aktiviteye izin verilmedi';
 $lang['Field required.'] = 'Field required.';
 $lang['Passwords do not match.'] = 'Parolalar uyusmuyor.';
-$lang['Password is too short.'] = 'Çok kisa.';
 $lang['No user selected'] = 'Herhangi bir kullanici secilmedi';
-$lang['Level'] = 'Seviye';
 $lang['Delete this folder'] = 'Bu dosyayi sil';
 $lang['Loading'] = 'Yükleniyor';
 $lang['Connected'] = 'Bagli';
 $lang['Disconnected'] = 'Baglanti kesik';
 $lang['No group detected, add one first.'] = 'Herhangi bi grup bulunamadi ilk önce grup ekleyin.';
 $lang['No group selected.'] = 'Herhangi bir grup seçilmedi.';
-$lang['Please enter recipient'] = 'Lütfen hedefi giriniz';
-$lang['Please enter message'] = 'Lütfen mesaji giriniz';
-$lang['Please enter sending date'] = 'Lütfen gönderim zamanini giriniz';
 $lang['From'] = 'Sundan';
 $lang['To'] = 'Suna';
 $lang['Inserted'] = 'Eklendi';
@@ -283,8 +260,6 @@ $lang['Unknown'] = 'Bilinmeyen';
 
 $lang['Country calling code'] = 'Country calling code';
 
-$lang['Oldest first'] = 'En eski ilk';
-$lang['Newest first'] = 'En yeni ilk';
 $lang['Conversation sort'] = 'Konusma kisa';
 
 $lang['Data per page'] = 'Her sayfadaki veri';

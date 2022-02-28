@@ -50,7 +50,6 @@ $lang['valid example'] = 'Valid Example';
 
 // Message
 $lang['Message'] = 'Сообщение';
-$lang['Send'] = 'Отправить';// (Send)
 $lang['Send to'] = 'Отправить';
 $lang['Reply'] = 'Ответить';// (Reply)
 $lang['Forward'] = 'Переслать';
@@ -67,7 +66,6 @@ $lang['Now'] = 'Сейчас';
 $lang['At date and time'] = 'В определенный день и время';//(At date and time)
 $lang['After a delay'] = 'После задержки';//(After a delay)
 
-$lang['Group'] = 'Группа';
 $lang['Input manually'] = 'Ввести вручную';
 
 $lang['Add folder'] = 'Добавить папку';
@@ -78,7 +76,6 @@ $lang['Rename'] = 'Переименовать';
 $lang['Rename folder'] = 'Переименовать папку';
 $lang['Click to rename this folder'] = 'Нажмите, чтобы переименовать эту папку';// (Click to rename THIS folder)
 
-$lang['Delete folder confirmation'] = 'Подтверждение удаления папки';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Эта папка и все сообщения в ней будут на всегда удалены без возможности восстановления. Вы уверены?';//"These folder and all message on it will be permanently deleted and cannot be recovered. Are you sure?"
 
 $lang['There is no message in {0}.'] = 'Нет сообщений в Ваших {0}.';
@@ -94,8 +91,6 @@ $lang['Refresh'] = 'Обновить';
 $lang['Report spam'] = 'Report Spam';
 $lang['Not spam'] = 'Not Spam';
 
-$lang['First'] = 'Первый';
-$lang['Last'] = 'Последний';
 
 $lang['SMSC'] = 'SMSC';
 $lang['Part'] = 'Part';
@@ -135,7 +130,6 @@ $lang['Are you sure?'] = 'Are you Sure?';
 
 // Others
 $lang['Amount'] = 'Сумма';
-$lang['Send as Flash SMS'] = 'Послать как Flash SMS';
 $lang['times']['repetition'] = 'раз';// (times)
 $lang['Hour(s)'] = 'Час';
 $lang['Minutes'] = 'Минуты';
@@ -169,8 +163,6 @@ $lang['Delete all messages now'] = 'Delete All Messages Now';
 $lang['Delete contact(s) confirmation'] = 'Delete Contact(s) Confirmation';
 $lang['Should be a valid URL'] = 'Should be a valid URL';
 $lang['Import from file'] = 'Import from file';
-$lang['characters'] = 'characters';
-$lang['message'] = 'message';
 
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
@@ -189,19 +181,15 @@ $lang['Forgot your password?'] = 'Forgot your password?';
 $lang['New password'] = 'New Password';
 $lang['Must be at least 6 characters long'] = 'Must be at least 6 characters long';
 
-$lang['Enter your current password'] = 'Enter your current password';
 $lang['Enter your new password'] = 'Enter your new password';
 
 $lang['Administrator'] = 'Administrator';
-$lang['User']['credentials'] = 'User';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
 
 // SMS Content/Member
 $lang['Member'] = 'Member';
-$lang['Total member'] = 'Total Member';
-$lang['There is no registered member yet'] = 'There is no registered member yet';
 
 // tni contribution
 $lang['Add contact'] = 'Добавить контакт';
@@ -211,7 +199,6 @@ $lang['Sending'] = 'Sending';
 $lang['Insert name from contact list'] = 'Начните набирать имя из списка контактов';//Insert Name from Contact List
 $lang['Delete group(s) confirmation'] = 'Подтверждение удаления групп(ы)';
 $lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Удалить группу(ы)?<br>Все контакты в этой(этих) группе(группах) также будут уничтожены.';
-$lang['Yes, delete selected group(s).'] = 'Да, удалить выбранную(ые) группу(ы).';
 $lang['Create group'] = 'Создать группу';
 $lang['Group name'] = 'Название группы';
 $lang['Groups'] = 'Группы';
@@ -219,7 +206,6 @@ $lang['Manage groups'] = 'Управление группами';
 $lang['Manage group'] = 'Управление группой';
 $lang['Manage contact'] = 'Управление контактами';
 $lang['Type group name'] = 'Выбрать группу';
-$lang['There is no messages in your trash'] = 'В корзине нет сообщений';
 $lang['No item selected.'] = 'Не выбран ни один Элемент.';
 $lang['No contact selected.'] = 'Не выбран ни один контакт.';
 $lang['Compose SMS'] = 'Написать SMS';
@@ -233,10 +219,7 @@ $lang['Edit'] = 'Изменить';// (Edit)
 $lang['All form fields are required.'] = 'Все поля формы обязательны для заполнения.';
 $lang['Name'] = 'Имя';
 $lang['Telephone number'] = 'Номер телефона';
-$lang['Email ID'] = 'Email ID';
-$lang['Enable email forwarding'] = 'Enable Email Forwarding';
 $lang['Searching...'] = 'Поиск...';
-$lang['Less than a minute ago'] = 'Менее минуты назад';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';
 $lang['Edit contact'] = 'Изменить контакт';
@@ -246,7 +229,6 @@ $lang['Add user'] = 'Добавить пользователей';
 $lang['Edit user'] = 'редактировать пользователя';
 $lang['User']['default'] = 'Пользователь';
 $lang['Users'] = 'Пользователи';
-$lang['Delete users confirmation'] = 'Подтвержаю удаления пользователя';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Удалить Пользователя?<br>Также будут удалены все записи этого пользователя (сообщения и контакты).';
 $lang['User not found'] = 'Искомый пользователь не найден';
 $lang['Users is empty'] = 'Список пользователей пуст';//(Users is empty)
@@ -258,18 +240,13 @@ $lang['Phone number'] = 'Реальный номер телефона';
 $lang['Action not allowed'] = 'Вам не позволено это делать';
 $lang['Field required.'] = 'Field required.';
 $lang['Passwords do not match.'] = 'Пароли не совпадают.';
-$lang['Password is too short.'] = 'Слишком короткий.';
 $lang['No user selected'] = 'Не выбрано ни одного пользователя';
-$lang['Level'] = 'Уровень';
 $lang['Delete this folder'] = 'Удалить папку';// (Delete this folder)
 $lang['Loading'] = 'Загрузка';
 $lang['Connected'] = 'Соединено';
 $lang['Disconnected'] = 'Отключено';
 $lang['No group detected, add one first.'] = 'Ни одной группы не найдено, для начала добавьте хотя бы одну.';
 $lang['No group selected.'] = 'Ни одной группы не выделено.';
-$lang['Please enter recipient'] = 'Пожалуйста, введите получателя';
-$lang['Please enter message'] = 'Пожалуйста, введите сообщение';
-$lang['Please enter sending date'] = 'Пожалуйста, введите дату отправления';
 $lang['From'] = 'От';
 $lang['To'] = 'Кому';
 $lang['Inserted'] = 'Вставлено';// (Inserted)
@@ -283,8 +260,6 @@ $lang['Unknown'] = 'Неизвестно';
 
 $lang['Country calling code'] = 'Country calling code';
 
-$lang['Oldest first'] = 'Сначала старые';
-$lang['Newest first'] = 'Сначала новые';
 $lang['Conversation sort'] = 'Порядок сортировки';
 
 $lang['Data per page'] = 'Строк на странице';// (Data per Page)

@@ -50,7 +50,6 @@ $lang['valid example'] = 'Érvényes példa';
 
 // Message
 $lang['Message'] = 'Üzenet';
-$lang['Send'] = 'Elküld';
 $lang['Send to'] = 'Küldés';
 $lang['Reply'] = 'Válasz';
 $lang['Forward'] = 'Továbbít';
@@ -67,7 +66,6 @@ $lang['Now'] = 'Most';
 $lang['At date and time'] = 'Adott dátumon és időben';
 $lang['After a delay'] = 'Késleltetés után';
 
-$lang['Group'] = 'Csoport';
 $lang['Input manually'] = 'Manuális bevitel';
 
 $lang['Add folder'] = 'Mappa hozzáadása';
@@ -78,7 +76,6 @@ $lang['Rename'] = 'Átnevezés';
 $lang['Rename folder'] = 'Mappa átnevezése';
 $lang['Click to rename this folder'] = 'Kattintson a mappa átnevezéséhez';
 
-$lang['Delete folder confirmation'] = 'Mappa törlésének megerősítése';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'A mappa és az abban lévő üzenetek véglegesen törlődnek és nem állíthatóak vissza. Biztos benne?';
 
 $lang['There is no message in {0}.'] = 'Nincs üzenet az ön {0}.';
@@ -94,8 +91,6 @@ $lang['Refresh'] = 'Frissítés';
 $lang['Report spam'] = 'Bejelentés SPAM-ként';
 $lang['Not spam'] = 'Nem SPAM';
 
-$lang['First'] = 'Első';
-$lang['Last'] = 'Utolsó';
 
 $lang['SMSC'] = 'SMSC';
 $lang['Part'] = 'Rész';
@@ -135,7 +130,6 @@ $lang['Are you sure?'] = 'Biztos benne?';
 
 // Others
 $lang['Amount'] = 'Mennyiség';
-$lang['Send as Flash SMS'] = 'Küldés Flash SMS-ként';
 $lang['times']['repetition'] = 'alkalommal';
 $lang['Hour(s)'] = 'Óra';
 $lang['Minutes'] = 'Perc';
@@ -169,8 +163,6 @@ $lang['Delete all messages now'] = 'Összes üzenet törlése';
 $lang['Delete contact(s) confirmation'] = 'Kapcsolatok törlésének megerősítése';
 $lang['Should be a valid URL'] = 'Érvényes URL-nek kell lennie';
 $lang['Import from file'] = 'Importálás fájlból';
-$lang['characters'] = 'karakter';
-$lang['message'] = 'üzenet';
 
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
@@ -189,19 +181,15 @@ $lang['Forgot your password?'] = 'Elfelejtette a jelszavát?';
 $lang['New password'] = 'Új jelszó';
 $lang['Must be at least 6 characters long'] = 'Legalább 6 karakter hosszúnak kell lennie';
 
-$lang['Enter your current password'] = 'Adja meg az aktuális jelszavát';
 $lang['Enter your new password'] = 'Írja be a jelszavát';
 
 $lang['Administrator'] = 'Adminisztrátor';
-$lang['User']['credentials'] = 'Felhasználó';
 
 $lang['Create a new filter'] = 'Új szűrő létrehozása';
 $lang['Has the words'] = 'Ilyen szavak vannak';
 
 // SMS Content/Member
 $lang['Member'] = 'Tag';
-$lang['Total member'] = 'Összes tag';
-$lang['There is no registered member yet'] = 'Még nincs regisztrált tag';
 
 // tni contribution
 $lang['Add contact'] = 'Kapcsolat hozzáadása';
@@ -211,7 +199,6 @@ $lang['Sending'] = 'Küldés';
 $lang['Insert name from contact list'] = 'Név beszúrása a kapcsolati listából';
 $lang['Delete group(s) confirmation'] = 'Csoport(ok) törlésének megerősítése';
 $lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Törli a csoporto(ka)t?<br>A csoport(ok) összes kapcsolata törlődni fog.';
-$lang['Yes, delete selected group(s).'] = 'Igen, törölje a kiválasztott csoporto(ka)t.';
 $lang['Create group'] = 'Csoport létrehozása';
 $lang['Group name'] = 'Csoport neve';
 $lang['Groups'] = 'Csoportok';
@@ -219,7 +206,6 @@ $lang['Manage groups'] = 'Csoportok kezelése';
 $lang['Manage group'] = 'Csoport kezelése';
 $lang['Manage contact'] = 'Kapcsolat kezelése';
 $lang['Type group name'] = 'Csoport kiválasztása';
-$lang['There is no messages in your trash'] = 'Nincs üzenet a kukában';
 $lang['No item selected.'] = 'Nincs kiválasztott elem.';
 $lang['No contact selected.'] = 'Nincs kiválasztott kapcsolat.';
 $lang['Compose SMS'] = 'SMS írása';
@@ -233,10 +219,7 @@ $lang['Edit'] = 'Szerkesztés';
 $lang['All form fields are required.'] = 'Minden űrlapmező kötelező.';
 $lang['Name'] = 'Név';
 $lang['Telephone number'] = 'Telefonszám';
-$lang['Email ID'] = 'Email ID';
-$lang['Enable email forwarding'] = 'Email továbbítás engedélyezése';
 $lang['Searching...'] = 'Keresés...';
-$lang['Less than a minute ago'] = 'Kevesebb, mint egy perccel ezelőtt...';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';
 $lang['Edit contact'] = 'Kapcsolat szerkesztése';
@@ -246,7 +229,6 @@ $lang['Add user'] = 'Felhasználó hozzáadása';
 $lang['Edit user'] = 'Felhasználó szerkesztése';
 $lang['User']['default'] = 'Felhasználó';
 $lang['Users'] = 'Felhasználók';
-$lang['Delete users confirmation'] = 'Felhasználó törlésének megerősítése';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Törli a felhasználót?<br>A felhasználó minden adatával együtt (üzenetek és kapcsolatok).';
 $lang['User not found'] = 'Felhasználó nem található';
 $lang['Users is empty'] = 'Üres felhasználó';
@@ -258,18 +240,13 @@ $lang['Phone number'] = 'Telefon hozzáférési szám';
 $lang['Action not allowed'] = 'Nem engedélyezett művelet';
 $lang['Field required.'] = 'Field required.';
 $lang['Passwords do not match.'] = 'Nem egyeznek a jelszavak.';
-$lang['Password is too short.'] = 'Túl rövid.';
 $lang['No user selected'] = 'Nincs felhasználó kiválasztva';
-$lang['Level'] = 'Szint';
 $lang['Delete this folder'] = 'Mappa törlése';
 $lang['Loading'] = 'Töltés';
 $lang['Connected'] = 'Összekapcsolt';
 $lang['Disconnected'] = 'Szétkapcsolt';
 $lang['No group detected, add one first.'] = 'Nem találhatóak csoportok, hozzon létre egyet először.';
 $lang['No group selected.'] = 'Nincs csoport kiválasztva.';
-$lang['Please enter recipient'] = 'Kérjük adja meg a célt';
-$lang['Please enter message'] = 'Kérjük adja meg az üzenetet';
-$lang['Please enter sending date'] = 'Kérjük adja meg a küldés idejét';
 $lang['From'] = 'Honnan';
 $lang['To'] = 'Hová';
 $lang['Inserted'] = 'Beillesztve';
@@ -283,8 +260,6 @@ $lang['Unknown'] = 'Ismeretlen';
 
 $lang['Country calling code'] = 'Country calling code';
 
-$lang['Oldest first'] = 'Legrégebbi előre';
-$lang['Newest first'] = 'Legújabb előre';
 $lang['Conversation sort'] = 'Üzenetek rendezése';
 
 $lang['Data per page'] = 'Adat / Oldal';
