@@ -410,3 +410,7 @@ $lang['{0} conversation(s) moved'] = '{0} conversation(s) moved';
 $lang['Value is too long.'] = 'Value is too long.';
 $lang['Updated'] = 'Updated';
 $lang['Import'] = 'Import';
+$lang['Reset search'] = 'Reset search';
+$lang['No.']['Number abbreviation'] = 'No.';
+$lang['Insertion date'] = 'Insertion date';
+$lang['Control'] = 'Control';
