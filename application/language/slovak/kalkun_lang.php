@@ -94,7 +94,6 @@ $lang['Not spam'] = 'Toto nieje Spam';
 
 $lang['SMSC'] = 'SMSC';
 $lang['Part'] = 'Časť';
-$lang['part messages'] = 'čiastkové správy';
 $lang['Validity'] = 'Platnosť';
 $lang['default'] = 'default';
 $lang['5 minutes'] = '5 minutes';
@@ -420,3 +419,4 @@ $lang['Insertion date'] = 'Insertion date';
 $lang['Control'] = 'Control';
 $lang['Plugin {0} is not installed.'] = 'Plugin {0} is not installed.';
 $lang['Value must be a number.'] = 'Value must be a number.';
+$lang['{0} part messages'] = '{0} part messages';

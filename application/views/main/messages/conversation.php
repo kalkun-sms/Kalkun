@@ -192,7 +192,7 @@ if ($tmp['source'] == 'sentitems'):
 				<tr>
 					<td><?php echo tr('Part'); ?></td>
 					<td> : </td>
-					<td><?php echo $part_no; ?> <?php echo tr('part messages'); ?></td>
+					<td><?php echo tr('{0} part messages', NULL, $part_no); ?></td>
 				</tr>
 				<?php endif; ?>
 				<?php endif; ?>

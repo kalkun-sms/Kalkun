@@ -94,7 +94,6 @@ $lang['Not spam'] = 'Pas du spam';
 
 $lang['SMSC'] = 'SMSC';
 $lang['Part'] = 'Partie';
-$lang['part messages'] = 'part messages';
 $lang['Validity'] = 'Validité';
 $lang['default'] = 'par défaut';
 $lang['5 minutes'] = '5 minutes';
@@ -420,3 +419,4 @@ $lang['Insertion date'] = 'Date d\'insertion';
 $lang['Control'] = 'Contrôle';
 $lang['Plugin {0} is not installed.'] = 'Le plugin {0} n\'est pas installé.';
 $lang['Value must be a number.'] = 'La valeur doit être un nombre.';
+$lang['{0} part messages'] = '{0} part messages';
