@@ -47,7 +47,9 @@
 			action_delete();
 		});
 
-		<?php if ($this->uri->segment(1) != 'phonebook'): ?>
+		<?php if ($this->uri->segment(1) != 'phonebook'
+			&& $this->uri->segment(1) != 'users'
+			&& $this->uri->segment(1) != 'pluginss'): ?>
 		$(document).on('keydown', null, 'm', function() {
 			message_move();
 		});
@@ -198,7 +200,10 @@
 		});
 		<?php endif; ?>
 
-		<?php if ($this->uri->segment(1) != 'phonebook' && $this->uri->segment(2) != 'search'): ?>
+		<?php if ($this->uri->segment(1) != 'phonebook'
+			&& $this->uri->segment(1) != 'users'
+			&& $this->uri->segment(1) != 'pluginss'
+			&& $this->uri->segment(2) != 'search'): ?>
 		$(document).on('keydown', null, 'f5', function() {
 			refresh();
 			current_select = -1;
