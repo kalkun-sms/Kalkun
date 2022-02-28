@@ -4,7 +4,7 @@ if (count($messages) == 0)
 {
 	if ($this->uri->segment(2) == 'my_folder')
 	{
-		echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('There is no message in this folder').'.</i></p>';
+		echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('There is no message in this folder.').'.</i></p>';
 	}
 	else
 	{
@@ -31,7 +31,7 @@ if (count($messages) == 0)
 			{
 				$folder_type = tr('Sending error');
 			}
-			echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('There is no message in your {0}.', NULL, $folder_type).'</i></p>';
+			echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('There is no message in {0}.', NULL, $folder_type).'</i></p>';
 		}
 	}
 }

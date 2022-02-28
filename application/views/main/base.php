@@ -250,9 +250,9 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_date_from"><b><?php echo tr('Date From');?></b></label></td>
+			<td align="right"><label for="a_search_date_from"><b><?php echo tr('Date from');?></b></label></td>
 			<td><input type="text" id="a_search_date_from" name="a_search_date_from" /></td>
-			<td><label for="a_search_date_to"><b><?php echo tr('Date To');?></b></label></td>
+			<td><label for="a_search_date_to"><b><?php echo tr('Date to');?></b></label></td>
 			<td><input type="text" id="a_search_date_to" name="a_search_date_to" /></td>
 		</tr>
 		<tr>

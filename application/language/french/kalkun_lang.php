@@ -314,7 +314,7 @@ $lang['Delete copy of this message (prevents duplicates).'] = 'Supprimer la copi
 $lang['You are about to resend {0} message(s).'] = 'Vous êtes sur le point de renvoyer {0} message(s)';
 
 // Kalkun Controller
-$lang['Outgoing SMS disabled.. Contact system administrator'] = "SMS sortants désactivés. Contactez l'administrateur système";
+$lang['Outgoing SMS disabled. Contact system administrator.'] = "SMS sortants désactivés. Contactez l'administrateur système";
 $lang['Wrong password'] = 'Mot de passe incorrect';
 $lang['Username already taken'] = "Le nom d'utilisateur existe déjà";
 $lang['Settings saved successfully.'] = 'Paramètres sauvegardés';
