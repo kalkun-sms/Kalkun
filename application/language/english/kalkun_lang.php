@@ -420,3 +420,4 @@ $lang['No.']['Number abbreviation'] = 'No.';
 $lang['Insertion date'] = 'Insertion date';
 $lang['Control'] = 'Control';
 $lang['Plugin {0} is not installed.'] = 'Plugin {0} is not installed.';
+$lang['Value must be a number.'] = 'Value must be a number.';
