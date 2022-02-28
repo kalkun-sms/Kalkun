@@ -419,3 +419,4 @@ $lang['Reset search'] = 'Reset search';
 $lang['No.']['Number abbreviation'] = 'No.';
 $lang['Insertion date'] = 'Insertion date';
 $lang['Control'] = 'Control';
+$lang['Plugin {0} is not installed.'] = 'Plugin {0} is not installed.';
