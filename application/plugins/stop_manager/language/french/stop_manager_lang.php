@@ -8,7 +8,7 @@ $lang['Request not valid ({0}). Send "{1} or {2} <type>". Possible values for <t
 $lang['Request not valid ({0}). Send "{1} <type>". Possible values for <type> are: {2}. For example "{3}".'] = 'Demande non valide ({0}). Répondre "{1} <type>". Les valeurs possibles pour <type> sont: {2}. Par exemple "{3}".';
 $lang['Request not valid ({0}). Send "{1}" or "{2}". For example "{3}".'] = 'Demande non valide ({0}). Répondre "{1}" ou "{2}". Par exemple "{3}".';
 $lang['Request not valid ({0}). Send "{1}".'] = 'Demande non valide ({0}). Répondre "{1}".';
-$lang['Stop Manager records'] = 'Stop Manager records';
-$lang['Add STOP record'] = 'Add STOP record';
+$lang['Stop Manager records'] = 'Enregistrements de Stop Manager';
+$lang['Add STOP record'] = 'Ajouter une entrée STOP';
 $lang['Type'] = 'Type';
-$lang['Original opt-out SMS'] = 'Original opt-out SMS';
+$lang['Original opt-out SMS'] = 'Message STOP d\'origine';
