@@ -170,12 +170,11 @@
 
 		// Character counter
 		$('.word_count').each(function() {
-			text_character = "<?php echo tr('characters');?>";
-			text_message = "<?php echo tr('message');?>";
+			var msg = "<?php echo tr('%count_c% character(s) / %count_m% message(s)');?>";
 			var length = $(this).val().length;
 			max_chars_per_sms = isGSMAlphabet($(this).val()) ? 160 : 70;
 			var message_count = Math.ceil((length + message_length_correction) / max_chars_per_sms);
-			$(this).parent().find('.counter').html(length + ' ' + text_character + ' / ' + message_count + ' ' + text_message);
+			$(this).parent().find('.counter').html(msg.replace("%count_c%", length).replace("%count_m%", message_count));
 			$(this).keyup(function() {
 				var str = $(this).val();
 				var new_length = str.length;
@@ -184,7 +183,7 @@
 				n = (n) ? n.length : 0;
 				new_length = new_length + n;
 				var message_count = Math.ceil((new_length + message_length_correction) / max_chars_per_sms);
-				$(this).parent().find('.counter').html(new_length + ' ' + text_character + ' / ' + message_count + ' ' + text_message);
+				$(this).parent().find('.counter').html(msg.replace("%count_c%", new_length).replace("%count_m%", message_count));
 			});
 		});
 

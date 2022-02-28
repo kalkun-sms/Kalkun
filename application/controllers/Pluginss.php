@@ -58,7 +58,7 @@ class Pluginss extends MY_Controller {
 		$data['type'] = $type;
 		if ($type === 'installed')
 		{
-			$data['title'] .= tr(' - Installed');
+			$data['title'] .= ' - '.tr('Installed', 'Plural');
 			$data['plugins'] = $this->Plugin_model->get_plugins()->result_array();
 			foreach ($data['plugins'] as $key => $plugin)
 			{
@@ -67,7 +67,7 @@ class Pluginss extends MY_Controller {
 		}
 		else
 		{
-			$data['title'] .= tr(' - Available');
+			$data['title'] .= ' - '.tr('Available', 'Plural');
 			$plugins = $this->plugins->print_plugins();
 			$no = 0;
 

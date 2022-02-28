@@ -20,7 +20,7 @@ $lang['Action'] = 'Handling';
 $lang['Phonebook'] = 'Telefonbog';
 $lang['Settings'] = 'Indstillinger';
 $lang['Filters'] = 'Filters';
-$lang['About'] = 'Om';
+$lang['About {0}'] = 'Om {0}';
 $lang['Logout'] = 'Log ud';
 
 // Dashboard
@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Importer CSV-fil';
 $lang['Import contact from CSV format file'] = 'Importer kontakt fra fil i CSV-format';
 $lang['CSV file'] = 'CSV-fil';
 $lang['The CSV file must be in valid format'] = 'CSV filen skal være i et gyldigt format';
-$lang['Are you sure want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Er du sikker på du vil slette <span id='contact-delete-count'></span> kontakt(er)?";
+$lang['Are you sure you want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Er du sikker på du vil slette <span id='contact-delete-count'></span> kontakt(er)?";
 $lang['valid example'] = 'Gyldigt eksempel';
 
 // Message
@@ -88,7 +88,7 @@ $lang['Delete all'] = 'Slet alle';
 $lang['Are you sure? This will affect all conversations.'] = 'Er du sikker? Dette vil have indflydelse på alle samtaler.';
 
 $lang['Select all'] = 'Vælg alle';
-$lang['Clear all'] = 'Fravælg alle';
+$lang['Deselect all'] = 'Fravælg alle';
 $lang['Refresh'] = 'Opdager';
 
 $lang['Report spam'] = 'Rapporter spam';
@@ -136,8 +136,8 @@ $lang['Are you sure?'] = 'Er du sikker?';
 // Others
 $lang['Amount'] = 'Antal';
 $lang['Send as Flash SMS'] = 'Send som Flash SMS';
-$lang['times'] = 'gange';
-$lang['Hour'] = 'timer';
+$lang['times']['repetition'] = 'gange';
+$lang['Hour(s)'] = 'timer';
 $lang['Minutes'] = 'minutter';
 $lang['No result.'] = 'Hovsa! Din forespørgsel matcher ingenting';
 $lang['See conversation'] = 'Se samtaler';
@@ -210,7 +210,7 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Sender';
 $lang['Insert name from contact list'] = 'Indsæt navn fra kontaktliste';
 $lang['Delete group(s) confirmation'] = 'Bekræft sletning af gruppe(r)';
-$lang['Delete group(s)?<br>All contacts in this group(s) will also be deleted.'] = 'Slet gruppe(r)?<br>Alle kontakter i de angivne grupper vil også blive slettet.';
+$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Slet gruppe(r)?<br>Alle kontakter i de angivne grupper vil også blive slettet.';
 $lang['Yes, delete selected group(s).'] = 'Ja, slet valgte gruppe(r)';
 $lang['Create group'] = 'Opret gruppe';
 $lang['Group name'] = 'Gruppens navn';
@@ -292,7 +292,7 @@ $lang['Used for paging in message and phonebook'] = 'Vil blive brugt til sideind
 
 $lang['Permanent delete'] = 'Slet permanent';
 $lang['Disable'] = 'Deaktiver';
-$lang[' - Always move to trash first'] = ' - Flyt altid først til papirkurven';
+$lang['Always move to trash first'] = 'Flyt altid først til papirkurven';
 $lang['Enable'] = 'Aktiver';
 
 $lang['User settings'] = 'Brugerindstillinger';
@@ -326,8 +326,8 @@ $lang['User added successfully.'] = 'User has been added';
 $lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Only administrators can manage plugins';
 $lang['Plugin {0} installed successfully.'] = 'Plugin {0} successfully installed';
 $lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} successfully uninstalled';
-$lang[' - Installed'] = ' - Installed';
-$lang[' - Available'] = ' - Available';
+$lang['Installed']['Plural'] = 'Installed';
+$lang['Available']['Plural'] = 'Available';
 // Phonebook Controller
 $lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts successfully imported';
 $lang['Contact updated successfully.'] = 'Contact has been updated';
@@ -382,7 +382,6 @@ $lang['{0} or {1}:'] = '{0} or {1}:';
 $lang['Open'] = 'Open';
 $lang['Selection'] = 'Selection';
 $lang['Select'] = 'Select';
-$lang['Deselect all'] = 'Deselect all';
 $lang['Actions'] = 'Actions';
 $lang['Move selected'] = 'Move selected';
 $lang['Delete selected'] = 'Delete selected';

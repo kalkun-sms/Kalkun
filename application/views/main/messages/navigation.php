@@ -40,7 +40,7 @@
 		<?php endif;?>
 		<?php endif;?>
 		<li><a href="javascript:void(0);" class="select_all_button button"><?php echo tr('Select all');?></a></li>
-		<li><a href="javascript:void(0);" class="clear_all_button button"><?php echo tr('Clear all');?></a></li>
+		<li><a href="javascript:void(0);" class="clear_all_button button"><?php echo tr('Deselect all');?></a></li>
 		<li>&nbsp;</li>
 		<?php if ($this->uri->segment(2) == 'conversation' && $this->uri->segment(4) == 'inbox') :
 			if ($this->uri->segment(6) != '6') : ?>

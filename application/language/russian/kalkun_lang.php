@@ -20,7 +20,7 @@ $lang['Action'] = 'Action';
 $lang['Phonebook'] = 'Телефонная книга';
 $lang['Settings'] = 'Настройки';
 $lang['Filters'] = 'Filters';
-$lang['About'] = 'О программе';
+$lang['About {0}'] = 'О программе {0}';
 $lang['Logout'] = 'Выйти';
 
 // Dashboard
@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Import CSV file';
 $lang['Import contact from CSV format file'] = 'Import contact from CSV format file';
 $lang['CSV file'] = 'CSV File';
 $lang['The CSV file must be in valid format'] = 'The CSV file must be in valid format';
-$lang['Are you sure want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Are you sure want to delete <span id='contact-delete-count'></span> contact(s)?";
+$lang['Are you sure you want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Are you sure want to delete <span id='contact-delete-count'></span> contact(s)?";
 $lang['valid example'] = 'Valid Example';
 
 // Message
@@ -88,7 +88,7 @@ $lang['Delete all'] = 'Delete All';
 $lang['Are you sure? This will affect all conversations.'] = 'Are you sure? This will affect all conversations.';
 
 $lang['Select all'] = 'Выбрать все';
-$lang['Clear all'] = 'Очистить все';
+$lang['Deselect all'] = 'Очистить все';
 $lang['Refresh'] = 'Обновить';
 
 $lang['Report spam'] = 'Report Spam';
@@ -136,8 +136,8 @@ $lang['Are you sure?'] = 'Are you Sure?';
 // Others
 $lang['Amount'] = 'Сумма';
 $lang['Send as Flash SMS'] = 'Послать как Flash SMS';
-$lang['times'] = 'раз';// (times)
-$lang['Hour'] = 'Час';
+$lang['times']['repetition'] = 'раз';// (times)
+$lang['Hour(s)'] = 'Час';
 $lang['Minutes'] = 'Минуты';
 $lang['No result.'] = 'Oops! Your Query doesnt match any records';
 $lang['See conversation'] = 'See conversation';
@@ -210,7 +210,7 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Sending';
 $lang['Insert name from contact list'] = 'Начните набирать имя из списка контактов';//Insert Name from Contact List
 $lang['Delete group(s) confirmation'] = 'Подтверждение удаления групп(ы)';
-$lang['Delete group(s)?<br>All contacts in this group(s) will also be deleted.'] = 'Удалить группу(ы)?<br>Все контакты в этой(этих) группе(группах) также будут уничтожены.';
+$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Удалить группу(ы)?<br>Все контакты в этой(этих) группе(группах) также будут уничтожены.';
 $lang['Yes, delete selected group(s).'] = 'Да, удалить выбранную(ые) группу(ы).';
 $lang['Create group'] = 'Создать группу';
 $lang['Group name'] = 'Название группы';
@@ -292,7 +292,7 @@ $lang['Used for paging in message and phonebook'] = 'Используется д
 
 $lang['Permanent delete'] = 'Удаление навсегда';
 $lang['Disable'] = 'Отключить';
-$lang[' - Always move to trash first'] = ' - Сначала переместить в корзину';   //Always move to Trash first
+$lang['Always move to trash first'] = 'Сначала переместить в корзину';   //Always move to Trash first
 $lang['Enable'] = 'Давать возможность';
 
 $lang['User settings'] = 'Ваши настройки';//(User's settings)
@@ -326,8 +326,8 @@ $lang['User added successfully.'] = 'User has been added';
 $lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Only administrators can manage plugins';
 $lang['Plugin {0} installed successfully.'] = 'Plugin {0} successfully installed';
 $lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} successfully uninstalled';
-$lang[' - Installed'] = ' - Installed';
-$lang[' - Available'] = ' - Available';
+$lang['Installed']['Plural'] = 'Installed';
+$lang['Available']['Plural'] = 'Available';
 // Phonebook Controller
 $lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts successfully imported';
 $lang['Contact updated successfully.'] = 'Contact has been updated';
@@ -382,7 +382,6 @@ $lang['{0} or {1}:'] = '{0} or {1}:';
 $lang['Open'] = 'Open';
 $lang['Selection'] = 'Selection';
 $lang['Select'] = 'Select';
-$lang['Deselect all'] = 'Deselect all';
 $lang['Actions'] = 'Actions';
 $lang['Move selected'] = 'Move selected';
 $lang['Delete selected'] = 'Delete selected';

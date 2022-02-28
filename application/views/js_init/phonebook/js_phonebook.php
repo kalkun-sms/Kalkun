@@ -57,9 +57,8 @@
 								} else {
 									return false;
 								}
-
 							},
-							<?php echo tr('Cancel')?>: function() {
+							"<?php echo tr('Cancel')?>": function() {
 								$(this).dialog('close');
 							}
 						}
@@ -104,7 +103,7 @@
 					autoOpen: false,
 					modal: true,
 					buttons: {
-						"Confirm": function() {
+						"<?php echo tr('Delete'); ?>": function() {
 							$("input.select_contact:checked:visible").each(function() {
 								var row = $(this).parents('tr');
 								var id = row.attr('id');
@@ -137,7 +136,7 @@
 			if (count == 0) {
 				$('.notification_area').text("<?php echo tr('No contact selected')?>");
 				$('.notification_area').show();
-				setTimeout("	$('.notification_area').fadeOut();", 2000);
+				setTimeout("$('.notification_area').fadeOut();", 2000);
 			} else {
 				$("input.select_contact:checked").each(function(i, val) {
 					var row = $(this).parents('tr');
@@ -148,9 +147,9 @@
 					}, function() {
 						if (i == ($("input.select_contact:checked").length - 1)) // execute only after the last one.
 						{
-							$('.notification_area').text("Updated");
+							$('.notification_area').text("<?php echo tr('Updated')?>");
 							$('.notification_area').show();
-							setTimeout("	$('.notification_area').fadeOut();", 2000);
+							setTimeout("$('.notification_area').fadeOut();", 2000);
 						}
 					});
 				});
@@ -184,7 +183,7 @@
 				autoOpen: false,
 				modal: true,
 				buttons: {
-					'Import': function() {
+					"<?php echo tr('Import'); ?>": function() {
 						$("form.importpbkform").trigger('submit');
 					},
 					"<?php echo tr('Cancel'); ?>": function() {

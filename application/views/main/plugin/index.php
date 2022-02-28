@@ -6,8 +6,8 @@
 		echo '<input type="text" name="search_name" size="20" class="search_name" value="" />';
 		echo form_close(); */?>
 			&nbsp;
-			<a href="<?php echo site_url('pluginss/index/installed');?>" id="addpbkcontact_wizard" class="nicebutton"><?php echo 'Installed'; ?></a>
-			<a href="<?php echo site_url('pluginss/index/available');?>" id="addpbkcontact_wizard" class="nicebutton"><?php echo 'Available'; ?></a>
+			<a href="<?php echo site_url('pluginss/index/installed');?>" id="addpbkcontact_wizard" class="nicebutton"><?php echo tr('Installed', 'Plural'); ?></a>
+			<a href="<?php echo site_url('pluginss/index/available');?>" id="addpbkcontact_wizard" class="nicebutton"><?php echo tr('Available', 'Plural'); ?></a>
 		</div>
 	</div>
 
@@ -28,16 +28,16 @@ if (count($plugins) > 0)
 			echo '<div style="float: left"><h3 style="color: #000">'.$tmp['plugin_name'].'</h3></div>';
 		} ?>
 		<div style="float: right; margin-top: 15px;">
-			<?php if ($type == 'installed'):?>
-			<a href="<?php echo site_url('pluginss/uninstall/'.$tmp['plugin_system_name']); ?>" class="nicebutton">Uninstall</a>
+			<?php if ($type === 'installed'):?>
+			<a href="<?php echo site_url('pluginss/uninstall/'.$tmp['plugin_system_name']); ?>" class="nicebutton"><?php echo tr('Uninstall'); ?></a>
 			<?php else:?>
-			<a href="<?php echo site_url('pluginss/install/'.$tmp['plugin_system_name']); ?>" class="nicebutton">Install</a>
+			<a href="<?php echo site_url('pluginss/install/'.$tmp['plugin_system_name']); ?>" class="nicebutton"><?php echo tr('Install'); ?></a>
 			<?php endif; ?>
 		</div>
 
 		<div class="clear"><small>
-				<strong>Version:</strong> <?php echo $tmp['plugin_version']; ?>&nbsp;&nbsp;
-				<strong>Author:</strong> <?php echo anchor($tmp['plugin_author_uri'], $tmp['plugin_author']); ?>
+				<strong><?php echo tr('Version'); ?>:</strong> <?php echo $tmp['plugin_version']; ?>&nbsp;&nbsp;
+				<strong><?php echo tr('Author'); ?>:</strong> <?php echo anchor($tmp['plugin_author_uri'], $tmp['plugin_author']); ?>
 			</small></div>
 		<p><?php echo $tmp['plugin_description']; ?></p>
 		<hr />
@@ -47,7 +47,13 @@ if (count($plugins) > 0)
 else
 {
 	?>
-		<p>There is no <?php echo $type; ?> plugin.</p>
+		<p>
+			<?php if ($type === 'available'):
+echo tr('No plugin available.');
+	elseif ($type === 'installed'):
+echo tr('No plugin installed.');
+	endif; ?>
+		</p>
 		<?php
 }
 ?>

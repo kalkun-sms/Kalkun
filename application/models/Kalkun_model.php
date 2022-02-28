@@ -362,6 +362,9 @@ class Kalkun_model extends CI_Model {
 				$this->db->set('country_code', $this->input->post('dial_code'));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user_settings');
+				// Refresh language before we display any message.
+				// Special case for when the user changes the language on this screen
+				$this->lang->load('kalkun', $this->input->post('language'));
 				break;
 
 			case 'personal':
@@ -408,8 +411,6 @@ class Kalkun_model extends CI_Model {
 				}
 				break;
 		}
-		// Refresh language before we display any message.
-		$this->lang->load('kalkun', $this->input->post('language'));
 	}
 
 	// --------------------------------------------------------------------

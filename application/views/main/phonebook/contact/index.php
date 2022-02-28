@@ -5,7 +5,7 @@
 <!-- Delete Contact Dialog -->
 <div class="dialog" id="confirm_delete_contact_dialog" title="<?php echo tr('Delete contact(s) confirmation');?>">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-		<?php echo tr('Are you sure want to delete <span id=\'contact-delete-count\'></span> contact(s)?');?> </p>
+		<?php echo tr('Are you sure you want to delete <span id=\'contact-delete-count\'></span> contact(s)?');?> </p>
 </div>
 
 <!-- Add contact wizard dialog -->
@@ -38,7 +38,7 @@
 			</p>
 			<label for="group"><?php echo tr('Groups');?></label>
 			<select id="importgroupvalue" name="importgroupvalue">
-				<option value="">-- <?php echo tr('Type group name');?> --</option>
+				<option value="">-- <?php echo tr('Select group name');?> --</option>
 				<?php
 		foreach ($pbkgroup as $tmp):
 		echo '<option value="'.$tmp->ID.'">'.$tmp->GroupName.'</option>';

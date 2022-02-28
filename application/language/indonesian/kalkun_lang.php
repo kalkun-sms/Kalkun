@@ -20,7 +20,7 @@ $lang['Action'] = 'Tindakan';
 $lang['Phonebook'] = 'Daftar Kontak';
 $lang['Settings'] = 'Pengaturan';
 $lang['Filters'] = 'Saringan';
-$lang['About'] = 'Tentang';
+$lang['About {0}'] = 'Tentang {0}';
 $lang['Logout'] = 'Keluar';
 
 // Dashboard
@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Impor berkas CSV';
 $lang['Import contact from CSV format file'] = 'Impor kontak dari berkas format CSV';
 $lang['CSV file'] = 'Berkas CSV';
 $lang['The CSV file must be in valid format'] = 'Berkas CSV harus dalam format yang valid';
-$lang['Are you sure want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Apakah Anda yakin menghapus kontak <span id='contact-delete-count'></span>?";
+$lang['Are you sure you  want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Apakah Anda yakin menghapus kontak <span id='contact-delete-count'></span>?";
 $lang['valid example'] = 'Contoh yang Valid';
 
 // Message
@@ -88,7 +88,7 @@ $lang['Delete all'] = 'Hapus Semua';
 $lang['Are you sure? This will affect all conversations.'] = 'Apakah Anda yakin? Ini akan menghapus semua percakapan.';
 
 $lang['Select all'] = 'Pilih Semua';
-$lang['Clear all'] = 'Bersihkan Semua';
+$lang['Deselect all'] = 'Bersihkan Semua';
 $lang['Refresh'] = 'Segarkan';
 
 $lang['Report spam'] = 'Laporkan Spam';
@@ -136,8 +136,8 @@ $lang['Are you sure?'] = 'Anda yakin?';
 // Others
 $lang['Amount'] = 'Jumlah';
 $lang['Send as Flash SMS'] = 'Kirim sebagai Flash SMS';
-$lang['times'] = 'kali';
-$lang['Hour'] = 'Jam';
+$lang['times']['repetition'] = 'kali';
+$lang['Hour(s)'] = 'Jam';
 $lang['Minutes'] = 'Menit';
 $lang['No result.'] = 'Maaf, Query Anda tidak cocok dengan ';
 $lang['See conversation'] = 'Lihat percakapan';
@@ -210,7 +210,7 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Sedang mengirim';
 $lang['Insert name from contact list'] = 'Masukkan nama kontak';
 $lang['Delete group(s) confirmation'] = 'Konfirmasi hapus Grup';
-$lang['Delete group(s)?<br>All contacts in this group(s) will also be deleted.'] = 'Hapus Grup ini?<br>Semua kontak dalam grup ini juga akan terhapus.';
+$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Hapus Grup ini?<br>Semua kontak dalam grup ini juga akan terhapus.';
 $lang['Yes, delete selected group(s).'] = 'Ya, hapus grup terpilih.';
 $lang['Create group'] = 'Grup Baru';
 $lang['Group name'] = 'Nama Grup';
@@ -292,7 +292,7 @@ $lang['Used for paging in message and phonebook'] = 'Akan digunakan pada pesan d
 
 $lang['Permanent delete'] = 'Penghapusan Permanen';
 $lang['Disable'] = 'Nonaktif';
-$lang[' - Always move to trash first'] = ' - Selalu pindahkan ke tong sampah terlebih dahulu';
+$lang['Always move to trash first'] = 'Selalu pindahkan ke tong sampah terlebih dahulu';
 $lang['Enable'] = 'Aktif';
 
 $lang['User settings'] = 'Setelan Pengguna';
@@ -326,8 +326,8 @@ $lang['User added successfully.'] = 'User has been added';
 $lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Only administrators can manage plugins';
 $lang['Plugin {0} installed successfully.'] = 'Plugin {0} successfully installed';
 $lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} successfully uninstalled';
-$lang[' - Installed'] = ' - Installed';
-$lang[' - Available'] = ' - Available';
+$lang['Installed']['Plural'] = 'Installed';
+$lang['Available']['Plural'] = 'Available';
 // Phonebook Controller
 $lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts successfully imported';
 $lang['Contact updated successfully.'] = 'Contact has been updated';
@@ -382,7 +382,6 @@ $lang['{0} or {1}:'] = '{0} or {1}:';
 $lang['Open'] = 'Open';
 $lang['Selection'] = 'Selection';
 $lang['Select'] = 'Select';
-$lang['Deselect all'] = 'Deselect all';
 $lang['Actions'] = 'Actions';
 $lang['Move selected'] = 'Move selected';
 $lang['Delete selected'] = 'Delete selected';

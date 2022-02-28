@@ -5,7 +5,7 @@ echo doctype('html5');?>
 
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-	<title>Repost message after login</title>
+	<title><?php echo tr('Repost message after login'); ?></title>
 	<script>
 		function goBackToForm() {
 			window.history.go(<?php echo $this->session->flashdata('bef_login_history_count')?>);

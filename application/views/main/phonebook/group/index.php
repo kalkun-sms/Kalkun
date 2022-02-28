@@ -2,13 +2,13 @@
 <!-- Delete Group Confirmation -->
 <div class="dialog" id="confirm_delete_group_dialog" title="<?php echo tr('Delete group(s) confirmation');?>">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-		<?php echo tr('Delete group(s)?<br>All contacts in this group(s) will also be deleted.');?></p>
+		<?php echo tr('Delete group(s)?<br>All their contacts will also be deleted.');?></p>
 </div>
 
 <div id="contact_container" class="hidden"></div>
 
 <!-- Add/Edit Group dialog -->
-<div id="addgroupdialog" title="Add Group" class="dialog">
+<div id="addgroupdialog" title="<?php echo tr('Create group');?>" class="dialog">
 	<form class="addgroupform" method="post" action="<?php echo  site_url();?>/phonebook/add_group">
 		<input type="hidden" name="pbkgroup_id_user" value="<?php echo $this->session->userdata('id_user');?>" />
 		<input type="hidden" name="pbkgroup_id" class="pbkgroup_id" value="" />

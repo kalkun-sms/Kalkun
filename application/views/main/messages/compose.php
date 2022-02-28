@@ -156,7 +156,7 @@ else
 				<select name="minute"><?php echo get_minute();?></select>
 			</div>
 			<div id="delayoption" class="hidden">
-				<select name="delayhour"><?php echo get_hour();?></select> <?php echo tr('Hour'); ?>&nbsp;
+				<select name="delayhour"><?php echo get_hour();?></select> <?php echo tr('Hour(s)'); ?>&nbsp;
 				<select name="delayminute"><?php echo get_minute();?></select> <?php echo tr('Minutes'); ?>
 			</div>
 		</td>
@@ -186,7 +186,7 @@ else
 	<?php if ($this->config->item('sms_bomber')): ?>
 	<tr valign="top">
 		<td align="right" class="label"><?php echo tr('Amount').':';?></td>
-		<td><input type="text" style="width: 25px" name="sms_loop" id="sms_loop" value="1" />&nbsp; <?php echo tr('times'); ?>
+		<td><input type="text" style="width: 25px" name="sms_loop" id="sms_loop" value="1" />&nbsp; <?php echo tr('times', 'repetition'); ?>
 		</td>
 	</tr>
 	<?php else: ?>
@@ -240,7 +240,7 @@ if ($sig_option == 'true')
 		</td>
 	</tr>
 	<tr id="field_option" class="hidden">
-		<td align="right" class="label">Select field :</td>
+		<td align="right" class="label"><?php echo tr('Select field').':'; ?></td>
 		<td>
 			<div style="border: 1px solid #AAA; padding: 5px; width: 96%;">
 				<input type="button" id="field_button" class="hidden field_button" value="Name" />

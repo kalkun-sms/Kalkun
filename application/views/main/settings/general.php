@@ -35,7 +35,7 @@ echo form_dropdown('dial_code', $country_calling_codes, $dial_code_act);
 		<td><?php echo tr('Conversation sort'); ?></td>
 		<td>
 			<?php
-$conv = array('asc' => tr('Oldest first'), 'desc' => tr('Newest first'));
+$conv = array('asc' => tr('Ascending'), 'desc' => tr('Descending'));
 $conv_act = $this->Kalkun_model->get_setting()->row('conversation_sort');
 echo form_dropdown('conversation_sort', $conv, $conv_act);
 ?>
@@ -62,7 +62,7 @@ echo form_dropdown('paging', $paging, $paging_act);
 {
 	echo 'checked="checked"';
 } ?> />
-			<label for="permanent_delete_false"><?php echo tr('Disable'); ?></label> <small><?php echo tr(' - Always move to trash first'); ?></small><br />
+			<label for="permanent_delete_false"><?php echo tr('Disable'); ?></label> <small><?php echo ' - '.tr('Always move to trash first'); ?></small><br />
 			<input type="radio" id="permanent_delete_true" name="permanent_delete" value="true" <?php if ($permanent_act == 'true')
 {
 	echo 'checked="checked"';

@@ -20,7 +20,7 @@ $lang['Action'] = 'Toiminto';
 $lang['Phonebook'] = 'Osoitekirja';
 $lang['Settings'] = 'Asetukset';
 $lang['Filters'] = 'Filters';
-$lang['About'] = 'Tietoja';
+$lang['About {0}'] = 'Tietoja {0}';
 $lang['Logout'] = 'Kirjaudu ulos';
 
 // Dashboard
@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Tuo CSV tiedosto';
 $lang['Import contact from CSV format file'] = 'Tuo yhteystietoja CSV muotoisesta tiedostosta';
 $lang['CSV file'] = 'CSV Tiedosto';
 $lang['The CSV file must be in valid format'] = 'CSV tiedoston pitää olla käypää muotoa';
-$lang['Are you sure want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Oletko varma, että haluat poistaa <span id='contact-delete-count'></span> yhteystietoa?";
+$lang['Are you sure you want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Oletko varma, että haluat poistaa <span id='contact-delete-count'></span> yhteystietoa?";
 $lang['valid example'] = 'Esimerkki käyvästä muodosta';
 
 // Message
@@ -88,7 +88,7 @@ $lang['Delete all'] = 'Poista kaikki';
 $lang['Are you sure? This will affect all conversations.'] = 'Oletko varma? Tämä vaikuttaa kaikkiin keskusteluihin.';
 
 $lang['Select all'] = 'Valitse kaikki';
-$lang['Clear all'] = 'Tyhjennä kaikki';
+$lang['Deselect all'] = 'Tyhjennä kaikki';
 $lang['Refresh'] = 'Päivitä';
 
 $lang['Report spam'] = 'Merkitse roskapostiksi';
@@ -136,8 +136,8 @@ $lang['Are you sure?'] = 'Oletko varma?';
 // Others
 $lang['Amount'] = 'Määrä';
 $lang['Send as Flash SMS'] = 'Lähetä Flash SMS';
-$lang['times'] = 'kertaa';
-$lang['Hour'] = 'Tuntia';
+$lang['times']['repetition'] = 'kertaa';
+$lang['Hour(s)'] = 'Tuntia';
 $lang['Minutes'] = 'Minuuttia';
 $lang['No result.'] = 'Oops! Hakusi ei vastaa yhtään tietuetta';
 $lang['See conversation'] = 'Katso keskustelu';
@@ -210,7 +210,7 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Lähetetään';
 $lang['Insert name from contact list'] = 'Insert Name from Contact List';
 $lang['Delete group(s) confirmation'] = 'Delete Group(s) Confirmation';
-$lang['Delete group(s)?<br>All contacts in this group(s) will also be deleted.'] = 'Delete Group(s)?<br>All contacts in this Group(s) will also be deleted.';
+$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Delete Group(s)?<br>All contacts in this Group(s) will also be deleted.';
 $lang['Yes, delete selected group(s).'] = 'Yes, delete selected group(s).';
 $lang['Create group'] = 'Create Group';
 $lang['Group name'] = 'Group Name';
@@ -292,7 +292,7 @@ $lang['Used for paging in message and phonebook'] = 'Käytetään viestien ja pu
 
 $lang['Permanent delete'] = 'Pysyvä poistaminen';
 $lang['Disable'] = 'Poistaa käytöstä';
-$lang[' - Always move to trash first'] = ' - Aina ensin roskakoriin';
+$lang['Always move to trash first'] = 'Aina ensin roskakoriin';
 $lang['Enable'] = 'Ottaa käyttöön';
 
 $lang['User settings'] = 'Käyttäjän asetukset';
@@ -326,8 +326,8 @@ $lang['User added successfully.'] = 'User has been added';
 $lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Only administrators can manage plugins';
 $lang['Plugin {0} installed successfully.'] = 'Plugin {0} successfully installed';
 $lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} successfully uninstalled';
-$lang[' - Installed'] = ' - Installed';
-$lang[' - Available'] = ' - Available';
+$lang['Installed']['Plural'] = 'Installed';
+$lang['Available']['Plural'] = 'Available';
 // Phonebook Controller
 $lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts successfully imported';
 $lang['Contact updated successfully.'] = 'Contact has been updated';
@@ -382,7 +382,6 @@ $lang['{0} or {1}:'] = '{0} or {1}:';
 $lang['Open'] = 'Open';
 $lang['Selection'] = 'Selection';
 $lang['Select'] = 'Select';
-$lang['Deselect all'] = 'Deselect all';
 $lang['Actions'] = 'Actions';
 $lang['Move selected'] = 'Move selected';
 $lang['Delete selected'] = 'Delete selected';

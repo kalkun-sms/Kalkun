@@ -17,7 +17,8 @@
 				$('.notification_area').text("<?php echo tr('No item selected'); ?>");
 				$('.notification_area').show();
 			} else {
-				var notif = count + ' messages deleted';
+				var notif = "<?php echo tr('%count% message(s) deleted'); ?>";
+				notif = notif.replace('%count%', count);
 				$("input.select_message:checked").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					id_access = '#item_source' + $(this).val();
@@ -38,7 +39,7 @@
 						}
 					});
 				});
-				show_notification(notif); // translate
+				show_notification(notif);
 			}
 		});
 		/**
@@ -67,7 +68,9 @@
 						$(message_row).slideUp("slow");
 					});
 				});
-				show_notification(count + ' conversation recovered'); // translate
+				var notif = "<?php echo tr('%count% conversation(s) recovered'); ?>"
+				notif = notif.replace('%count%', count);
+				show_notification(notif);
 			}
 		});
 
@@ -92,7 +95,7 @@
 						id_message: $(this).val()
 					}, function() {
 						$(message_row).slideUp("slow");
-						show_notification("Messages Moved")
+						show_notification("<?php echo tr('Messages moved successfully')?>")
 					});
 				});
 			}
@@ -156,18 +159,19 @@
 		// refresh
 		$(document).on('click', "a.refresh_button", refresh = function(type) {
 			if (type != 'retry') {
-				$('.loading_area').html('Loading...');
+				$('.loading_area').html('<?php echo tr('Loading'); ?>');
 				$('.loading_area').fadeIn("slow");
 			}
 			$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.preg_replace ('/ /', '%20', $this->uri->segment(5)).'/'.$this->uri->segment(6, 0)) ?>", function(response, status, xhr) {
 				if (status == "error" || xhr.status != 200) {
-					$('.loading_area').html('<nobr>Oops Network Error. <span id="retry-progress-display"> Retrying in <span id="countdown-count">10</span> Seconds.</span></nobr>');
+					var msg = '<?php echo tr('Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>';
+					$('.loading_area').html('<span style="white-space: nowrap">' + msg + '</span>');
 					var cntdwn = setInterval(function() {
 						current_val = $('#countdown-count').html();
 						if (current_val > 1) $('#countdown-count').html(current_val - 1);
 						else {
 							clearInterval(cntdwn);
-							$('#retry-progress-display').html('Retrying Now...')
+							$('#retry-progress-display').html('<?php echo tr('Retrying now'); ?>')
 						}
 					}, 1000);
 					setTimeout(function() {
@@ -201,19 +205,6 @@
 				compose_message(type, false, '#message', param1);
 			}
 			return false;
-		});
-
-
-		// Character counter	
-		$('.word_count').each(function() {
-			var length = $(this).val().length;
-			var message = Math.ceil(length / 160);
-			$(this).parent().find('.counter').html(length + ' characters / ' + message + ' message(s)');
-			$(this).keyup(function() {
-				var new_length = $(this).val().length;
-				var message = Math.ceil(new_length / 160);
-				$(this).parent().find('.counter').html(new_length + ' characters / ' + message + ' message(s)');
-			});
 		});
 
 		// Show/hide detail
@@ -280,7 +271,7 @@
 					id_access = '#item_source' + $(this).val();
 					item_folder = $(id_access).val();
 					if (item_folder != 'inbox') {
-						show_notification("Outgoing Message cannot be spam");
+						show_notification("<?php echo tr('Outgoing message cannot be spam'); ?>");
 						return;
 					}
 					$.post("<?php echo  site_url('messages/report_spam/spam') ?>", {
@@ -289,7 +280,7 @@
 						$(message_row).slideUp("slow");
 					});
 				});
-				show_notification("Spam Reported")
+				show_notification("<?php echo tr('Spam reported'); ?>")
 			}
 		});
 		<?php else: ?>
@@ -309,7 +300,7 @@
 
 					});
 				});
-				show_notification("Messages Marked not Spam")
+				show_notification("<?php echo tr('Message(s) marked non-spam'); ?>")
 			}
 		});
 		<?php endif; ?>
@@ -338,7 +329,7 @@ $delete_dup_text = tr('Delete copy of this message (prevents duplicates).');
 				show: 'fade',
 				hide: 'fade',
 				buttons: {
-					'Continue': function() {
+					'<?php echo tr('Continue'); ?>': function() {
 						delete_dup_status = $("#delete_dup").is(":checked");
 						$.post("<?php echo site_url('messages/compose_process') ?>", {
 							sendoption: 'sendoption3',
@@ -457,7 +448,6 @@ $delete_dup_text = tr('Delete copy of this message (prevents duplicates).');
 				$("#compose_sms_container").dialog('open');
 			}
 		});
-
 	});
 
 </script>
