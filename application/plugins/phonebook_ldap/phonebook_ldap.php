@@ -69,6 +69,11 @@ function phonebook_ldap_install()
 */
 function phonebook_ldap($number)
 {
+	if ( ! extension_loaded('ldap'))
+	{
+		show_error('phonebook_ldap: PHP extension "ldap" is missing. Install it if you want to use phonebook_ldap plugin.', 500, '500 Internal Server Error');
+	}
+
 	$config = phonebook_ldap_initialize();
 
 	// specify the LDAP server to connect to
