@@ -14,7 +14,7 @@
 		$(document).on('click', "a.global_delete", action_delete = function() {
 			var count = $("input:checkbox:checked").length;
 			if (count == 0) {
-				$('.notification_area').text("<?php echo tr('No item selected'); ?>");
+				$('.notification_area').text("<?php echo tr('No item selected.'); ?>");
 				$('.notification_area').show();
 			} else {
 				var notif = "<?php echo tr('{0} message(s) deleted'); ?>";
@@ -51,7 +51,7 @@
 		$(document).on('click', "a.recover_button", action_recover = function() {
 			var count = $("input.select_message:checkbox:checked:visible").length;
 			if (count == 0) {
-				show_notification("<?php echo tr('No item selected')?>");
+				show_notification("<?php echo tr('No item selected.')?>");
 			} else {
 
 				var id_folder = (source == 'inbox') ? 1 : 3;
@@ -79,7 +79,7 @@
 			var count = $("input:checkbox:checked").length;
 			if (count == 0) {
 				$("#movetodialog").dialog('close');
-				show_notification("<?php echo tr('No item selected'); ?>");
+				show_notification("<?php echo tr('No item selected.'); ?>");
 			} else {
 				var id_folder = $(this).attr('id');
 				$("#movetodialog").dialog('close');
@@ -264,7 +264,7 @@
 			var count = $("input:checkbox:checked:visible").length;
 
 			if (count == 0) {
-				show_notification("<?php echo tr('No item selected'); ?>");
+				show_notification("<?php echo tr('No item selected.'); ?>");
 			} else {
 				$("input.select_message:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
@@ -288,7 +288,7 @@
 		$(document).on('click', ".ham_button", function() {
 			var count = $("input:checkbox:checked:visible").length;
 			if (count == 0) {
-				show_notification("<?php echo tr('No item selected'); ?>");
+				show_notification("<?php echo tr('No item selected.'); ?>");
 			} else {
 				var id_folder = $(this).attr('id');
 				$("input.select_message:checked:visible").each(function() {
@@ -376,7 +376,7 @@
 		$(document).on('click', ".resend_bulk", function() {
 			var count = $("input:checkbox:checked").length;
 			if (count == 0) {
-				$('.notification_area').text("<?php echo tr('No item selected'); ?>");
+				$('.notification_area').text("<?php echo tr('No item selected.'); ?>");
 				$('.notification_area').show();
 			} else {
 				resend_conf_label = "<?php echo tr('You are about to resend {0} message(s).'); ?>";

@@ -36,7 +36,7 @@
 			var notif = "<?php echo tr('{0} conversation(s) deleted'); ?>";
 			notif = notif.replace('{0}', count);
 			if (count == 0) {
-				show_notification("<?php echo tr('No item selected')?>");
+				show_notification("<?php echo tr('No item selected.')?>");
 			} else {
 				$("input.select_conversation:checked").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
@@ -77,7 +77,7 @@
 			var notif = "<?php echo tr('{0} conversation(s) recovered'); ?>";
 			notif = notif.replace('{0}', count);
 			if (count == 0) {
-				show_notification("<?php echo tr('No item selected')?>");
+				show_notification("<?php echo tr('No item selected.')?>");
 			} else {
 
 				var id_folder = (source == 'inbox') ? 1 : 3;
@@ -121,7 +121,7 @@
 			notif = notif.replace('{0}', count);
 			if (count == 0) {
 				$("#movetodialog").dialog('close');
-				show_notification("<?php echo tr('No item selected')?>");
+				show_notification("<?php echo tr('No item selected.')?>");
 			} else {
 				var id_folder = $(this).attr('id');
 				$("#movetodialog").dialog('close');

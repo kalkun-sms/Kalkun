@@ -94,7 +94,7 @@
 			var count = $("input:checkbox:checked:visible").length;
 			var dest_url = '<?php echo site_url('phonebook/delete_contact') ?>';
 			if (count == 0) {
-				$('.notification_area').text("<?php echo tr('No contact selected')?>");
+				$('.notification_area').text("<?php echo tr('No contact selected.')?>");
 				$('.notification_area').show();
 				setTimeout("	$('.notification_area').fadeOut();", 2000);
 			} else {
@@ -134,7 +134,7 @@
 			var count = $("input:checkbox:checked").length;
 			var dest_url = '<?php echo site_url('phonebook/update_contact_group') ?>';
 			if (count == 0) {
-				$('.notification_area').text("<?php echo tr('No contact selected')?>");
+				$('.notification_area').text("<?php echo tr('No contact selected.')?>");
 				$('.notification_area').show();
 				setTimeout("$('.notification_area').fadeOut();", 2000);
 			} else {
