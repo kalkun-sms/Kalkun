@@ -184,12 +184,15 @@ $lang['Must be at least 6 characters long'] = 'Täytyy olla vähintään 6 merkk
 $lang['Enter your new password'] = 'Syötä uusi salasana';
 
 $lang['Administrator'] = 'Pääkäyttäjä';
+$lang['User']['credentials'] = 'Käyttäjä';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
 
 // SMS Content/Member
 $lang['Member'] = 'Jäsen';
+$lang['Total member'] = 'Käyttäjiä kaikkiaan';
+$lang['There is no registered member yet'] = 'Ei käyttäjiä toistaiseksi';
 
 // tni contribution
 $lang['Add contact'] = 'Lisää yhteystieto';
@@ -219,6 +222,8 @@ $lang['Edit'] = 'Muokkaa';
 $lang['All form fields are required.'] = 'Kaikki lomakkeen kentät vaaditaan.';
 $lang['Name'] = 'Nimi';
 $lang['Telephone number'] = 'Puhelinnumero';
+$lang['Email ID'] = 'Sähköpostiosoite';
+$lang['Enable email forwarding'] = 'Käytä sähköpostivälitystä';
 $lang['Searching...'] = 'Etsitään...';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';

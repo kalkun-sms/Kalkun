@@ -184,12 +184,15 @@ $lang['Must be at least 6 characters long'] = 'Skal være på mindst 6 tegn';
 $lang['Enter your new password'] = 'Indtast dit nye kodeord';
 
 $lang['Administrator'] = 'Administrator';
+$lang['User']['credentials'] = 'Bruger';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
 
 // SMS Content/Member
 $lang['Member'] = 'Medlem';
+$lang['Total member'] = 'Antal medlemmer';
+$lang['There is no registered member yet'] = 'Der er endnu ingen registrerede medlemmer';
 
 // tni contribution
 $lang['Add contact'] = 'Tilføj kontakt';
@@ -219,6 +222,8 @@ $lang['Edit'] = 'Rediger';
 $lang['All form fields are required.'] = 'Alle felterne skal udfyldes.';
 $lang['Name'] = 'Navn';
 $lang['Telephone number'] = 'Telefonnummer';
+$lang['Email ID'] = 'E-mail-ID';
+$lang['Enable email forwarding'] = 'Slå videresending til e-mail til';
 $lang['Searching...'] = 'Søger...';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';

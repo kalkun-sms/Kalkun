@@ -184,12 +184,15 @@ $lang['Must be at least 6 characters long'] = 'Legalább 6 karakter hosszúnak k
 $lang['Enter your new password'] = 'Írja be a jelszavát';
 
 $lang['Administrator'] = 'Adminisztrátor';
+$lang['User']['credentials'] = 'Felhasználó';
 
 $lang['Create a new filter'] = 'Új szűrő létrehozása';
 $lang['Has the words'] = 'Ilyen szavak vannak';
 
 // SMS Content/Member
 $lang['Member'] = 'Tag';
+$lang['Total member'] = 'Összes tag';
+$lang['There is no registered member yet'] = 'Még nincs regisztrált tag';
 
 // tni contribution
 $lang['Add contact'] = 'Kapcsolat hozzáadása';
@@ -219,6 +222,8 @@ $lang['Edit'] = 'Szerkesztés';
 $lang['All form fields are required.'] = 'Minden űrlapmező kötelező.';
 $lang['Name'] = 'Név';
 $lang['Telephone number'] = 'Telefonszám';
+$lang['Email ID'] = 'Email ID';
+$lang['Enable email forwarding'] = 'Email továbbítás engedélyezése';
 $lang['Searching...'] = 'Keresés...';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';

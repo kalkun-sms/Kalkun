@@ -184,12 +184,15 @@ $lang['Must be at least 6 characters long'] = 'Moet minimaal 6 tekens lang zijn'
 $lang['Enter your new password'] = 'Voer het nieuwe wachtwoord in';
 
 $lang['Administrator'] = 'Administrator';
+$lang['User']['credentials'] = 'Gebruiker';
 
 $lang['Create a new filter'] = 'Create a new filter';
 $lang['Has the words'] = 'Has the words';
 
 // SMS Content/Member
 $lang['Member'] = 'Lid';
+$lang['Total member'] = 'Totaal Leden';
+$lang['There is no registered member yet'] = 'Er zijn nog geen leden';
 
 // tni contribution
 $lang['Add contact'] = 'Contact Toevoegen';
@@ -219,6 +222,8 @@ $lang['Edit'] = 'Aanpassen';
 $lang['All form fields are required.'] = 'Alle velden in het formulier zijn verplicht.';
 $lang['Name'] = 'Naam';
 $lang['Telephone number'] = 'Telefoonnummer';
+$lang['Email ID'] = 'Email ID';
+$lang['Enable email forwarding'] = 'Gebruik Email Doorsturen';
 $lang['Searching...'] = 'Zoek...';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';

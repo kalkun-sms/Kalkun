@@ -184,12 +184,15 @@ $lang['Must be at least 6 characters long'] = 'Musí mať aspoň 6 znakov';
 $lang['Enter your new password'] = 'Zadajte nové heslo';
 
 $lang['Administrator'] = 'Administrátor';
+$lang['User']['credentials'] = 'Užívateľ';
 
 $lang['Create a new filter'] = 'Vytvoriť nový filter';
 $lang['Has the words'] = 'Má slová';
 
 // SMS Content/Member
 $lang['Member'] = 'Člen';
+$lang['Total member'] = 'Spolu členov';
+$lang['There is no registered member yet'] = 'Ešte tu nieje žiaden zaregistrovaný člen';
 
 // tni contribution
 $lang['Add contact'] = 'Pridať kontakt';
@@ -219,6 +222,8 @@ $lang['Edit'] = 'Upraviť';
 $lang['All form fields are required.'] = 'Všetky polia formulára sú vyžadované.';
 $lang['Name'] = 'Meno';
 $lang['Telephone number'] = 'Telefónne číslo';
+$lang['Email ID'] = 'ID e-mailu';
+$lang['Enable email forwarding'] = 'Povoliť e-mailové presmerovanie';
 $lang['Searching...'] = 'Vyhľadávanie...';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';

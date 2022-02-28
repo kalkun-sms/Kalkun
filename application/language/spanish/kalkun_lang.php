@@ -184,12 +184,15 @@ $lang['Must be at least 6 characters long'] = 'Debe tener al menos 6 caracteres 
 $lang['Enter your new password'] = 'Ingrese su nueva clave';
 
 $lang['Administrator'] = 'Administrador';
+$lang['User']['credentials'] = 'Usuario';
 
 $lang['Create a new filter'] = 'Crear un nuevo filtro';
 $lang['Has the words'] = 'contiene las palabras';
 
 // SMS Content/Member
 $lang['Member'] = 'Miembro';
+$lang['Total member'] = 'Total de miembros';
+$lang['There is no registered member yet'] = 'No hay miembros registrados por el momento';
 
 // tni contribution
 $lang['Add contact'] = 'Agregar contacto';
@@ -219,6 +222,8 @@ $lang['Edit'] = 'Editar';
 $lang['All form fields are required.'] = 'Todos los campos son requeridos.';
 $lang['Name'] = 'Nombre';
 $lang['Telephone number'] = 'N&uacute;mero telef&oacute;nico';
+$lang['Email ID'] = 'ID del correo';
+$lang['Enable email forwarding'] = 'Habilitar el reenv&iacute;o de correo';
 $lang['Searching...'] = 'Buscando...';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';

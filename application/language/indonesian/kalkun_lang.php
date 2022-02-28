@@ -184,12 +184,15 @@ $lang['Must be at least 6 characters long'] = 'Setidaknya harus 6 karakter';
 $lang['Enter your new password'] = 'Masukkan password baru Anda';
 
 $lang['Administrator'] = 'Administrator';
+$lang['User']['credentials'] = 'Pengguna';
 
 $lang['Create a new filter'] = 'Buat saringan baru';
 $lang['Has the words'] = 'Mengandung kata';
 
 // SMS Content/Member
 $lang['Member'] = 'Member';
+$lang['Total member'] = 'Total Member';
+$lang['There is no registered member yet'] = 'There is no registered member yet';
 
 // tni contribution
 $lang['Add contact'] = 'Tambah Kontak';
@@ -219,6 +222,8 @@ $lang['Edit'] = 'Sunting';
 $lang['All form fields are required.'] = 'Semua kolom harus diisi.';
 $lang['Name'] = 'Nama';
 $lang['Telephone number'] = 'Nomer Telepon';
+$lang['Email ID'] = 'Alamat Surel';
+$lang['Enable email forwarding'] = 'Aktifkan Terusan Surel';
 $lang['Searching...'] = 'Mencari...';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';
