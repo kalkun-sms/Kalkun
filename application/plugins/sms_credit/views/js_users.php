@@ -121,7 +121,7 @@
 			$('#edit_package_end').val(package_end);
 
 			$("#edit_users_container").dialog({
-				title: 'Change Package for ',
+				title: '<?php echo tr('Edit user package'); ?>',
 				closeText: "<?php echo tr('Close'); ?>",
 				modal: true,
 				show: 'fade',
@@ -167,11 +167,11 @@
 
 		// Search onBlur onFocus
 		if ($('input.search_name').val() == '') {
-			$('input.search_name').val('<?php echo tr('Search user'); ?>');
+			$('input.search_name').val('<?php echo tr('Search'); ?>');
 		}
 
 		$('input.search_name').on("blur", function() {
-			$(this).val('<?php echo tr('Search user'); ?>');
+			$(this).val('<?php echo tr('Search'); ?>');
 		});
 
 		$('input.search_name').on("focus", function() {

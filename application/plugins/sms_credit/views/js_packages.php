@@ -3,11 +3,11 @@
 
 		// Add/ Edit packages	
 		$('#addpackagesbutton, .editpackagesbutton').on("click", function() {
-			var title = 'Add Packages';
+			var title = '<?php echo tr('Add packages'); ?>';
 
 			// Edit mode
 			if ($(this).hasClass('editpackagesbutton')) {
-				title = 'Edit Packages';
+				title = '<?php echo tr('Edit packages'); ?>';
 				var id_package = $(this).parents('div:eq(1)').find('span.id_package').text();
 				var package_name = $(this).parents('div:eq(1)').find('span.package_name').text();
 				var sms_amount = $(this).parents('div:eq(1)').find('span.sms_amount').text();
@@ -37,7 +37,7 @@
 
 		// Search onBlur onFocus
 		if ($('input.search_packages').val() == '') {
-			$('input.search_packages').val('Search Packages');
+			$('input.search_packages').val('<?php echo tr('Search'); ?>');
 		}
 
 		$('input.search_packages').on("blur", function() {
