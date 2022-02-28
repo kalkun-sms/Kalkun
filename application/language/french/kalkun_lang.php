@@ -63,7 +63,7 @@ $lang['Recover'] = 'Récupérer';
 
 $lang['Send date'] = "Date d'envoi";
 $lang['Now'] = 'Maintenant';
-$lang['At date and time'] = "A la date et heure";
+$lang['At date and time'] = 'A la date et heure';
 $lang['After a delay'] = 'Après un délai';
 
 $lang['Input manually'] = 'Saisie manuelle';
