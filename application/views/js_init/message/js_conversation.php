@@ -17,8 +17,8 @@
 				$('.notification_area').text("<?php echo tr('No item selected'); ?>");
 				$('.notification_area').show();
 			} else {
-				var notif = "<?php echo tr('%count% message(s) deleted'); ?>";
-				notif = notif.replace('%count%', count);
+				var notif = "<?php echo tr('{0} message(s) deleted'); ?>";
+				notif = notif.replace('{0}', count);
 				$("input.select_message:checked").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					id_access = '#item_source' + $(this).val();
@@ -68,8 +68,8 @@
 						$(message_row).slideUp("slow");
 					});
 				});
-				var notif = "<?php echo tr('%count% conversation(s) recovered'); ?>"
-				notif = notif.replace('%count%', count);
+				var notif = "<?php echo tr('{0} conversation(s) recovered'); ?>"
+				notif = notif.replace('{0}', count);
 				show_notification(notif);
 			}
 		});
@@ -311,14 +311,13 @@
 			TextDecoded = $(this).parents('div:eq(1)').children('div.message_content').text();
 			ID = $(this).parents('div:eq(1)').children().children('input.select_message').attr('id');
 			Class = $(this).parents('div:eq(1)').children('div.message_metadata').children('span.class').text();
-			<?php
-$resend_conf_text = tr('You are about to resend message to <strong>%number%</strong>');
-$message_content_text = tr('Message content:');
-$delete_dup_text = tr('Delete copy of this message (prevents duplicates).');
-?>
-			resend_conf = '<p>' + ("<?php echo $resend_conf_text; ?>").replace('%number%', DestinationNumber) + '</p>';
-			message_content = '<p><strong><?php echo $message_content_text; ?></strong> <br />' + TextDecoded + '</p>';
-			delete_dup = '<input type="checkbox" id="delete_dup" /> <label for="delete_dup"><?php echo $delete_dup_text; ?></label>';
+			resend_conf_label = "<?php echo tr('You are about to resend message to <strong>{0}</strong>'); ?>";
+			resend_conf_label = resend_conf_label.replace('{0}', DestinationNumber);
+			resend_conf = `<p>${resend_conf_label}</p>`;
+			message_content_label = "<?php echo tr('Message content:'); ?>";
+			message_content = `<p><strong>${message_content_label}</strong> <br />${TextDecoded}</p>`;
+			delete_dup_label = "<?php echo tr('Delete copy of this message (prevents duplicates).'); ?>";
+			delete_dup = `<input type="checkbox" id="delete_dup" /> <label for="delete_dup">${delete_dup_label}; ?></label>`;
 			$("#compose_sms_container").html(resend_conf + message_content + delete_dup);
 			$("#compose_sms_container").dialog({
 				//title: 'Resend SMS',
@@ -380,13 +379,11 @@ $delete_dup_text = tr('Delete copy of this message (prevents duplicates).');
 				$('.notification_area').text("<?php echo tr('No item selected'); ?>");
 				$('.notification_area').show();
 			} else {
-				<?php
-	$resend_conf_text = tr('You are about to resend %message_count% message(s).');
-	$delete_dup_text = tr('Delete copy of this message (prevents duplicates).');
-	?>
-
-				resend_conf = '<p>' + ("<?php echo $resend_conf_text; ?>").replace('%message_count%', count) + '</p>';
-				delete_dup = '<input type="checkbox" id="delete_dup" /> <label for="delete_dup"><?php echo $delete_dup_text; ?></label>';
+				resend_conf_label = "<?php echo tr('You are about to resend {0} message(s).'); ?>";
+				resend_conf_label = resend_conf_label.replace('{0}', count);
+				resend_conf = `<p>${resend_conf_label}</p>`;
+				delete_dup_label = "<?php echo tr('Delete copy of this message (prevents duplicates).'); ?>";
+				delete_dup = `<input type="checkbox" id="delete_dup" /> <label for="delete_dup">${delete_dup_label}</label>`;
 				$("#compose_sms_container").html(resend_conf + delete_dup);
 				$("#compose_sms_container").dialog({
 					//title: 'Resend SMS',

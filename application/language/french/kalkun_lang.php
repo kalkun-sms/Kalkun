@@ -81,8 +81,8 @@ $lang['Click to rename this folder'] = 'Cliquer pour renommer ce dossier';
 $lang['Delete folder confirmation'] = 'Confirmer la suppression du dossier';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = " Souhaitez-vous vraiment supprimer ce dossier et tous les messages qu'il contient ?";
 
-$lang['There is no message in your {0}.'] = "Il n'y a aucun message dans votre {0}.";
-$lang['There is no message in this folder'] = "Il n'y a aucun message dans ce dossier";
+$lang['There is no message in {0}.'] = "Il n'y a aucun message dans votre {0}.";
+$lang['There is no message in this folder.'] = "Il n'y a aucun message dans ce dossier";
 
 $lang['Delete all'] = 'Tout supprimer';
 $lang['Are you sure? This will affect all conversations.'] = "Etes-vous sur ? Ceci s'appliquera à toutes les conversations";
@@ -148,8 +148,8 @@ $lang['From/To'] = 'De/Pour';
 $lang['Query'] = 'Question';
 $lang['Folder'] = 'Rechercher sur';
 $lang['All'] = 'Tous les dossiers';
-$lang['Date From'] = 'Date à partir de';
-$lang['Date To'] = "Jusqu'à la date";
+$lang['Date from'] = 'Date à partir de';
+$lang['Date to'] = "Jusqu'à la date";
 $lang['Status'] = 'Statut';
 $lang['Any'] = 'Tout';
 $lang['Paging'] = 'Résultats par page';
@@ -175,10 +175,10 @@ $lang['message'] = 'message(s)';
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login réussi. Mais données {0} perdues durant le processus de login.';
 $lang['Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.'] = 'Veuillez <a href="{0}" onclick="goBackToForm()">retourner à votre formulaire</a> et le soumettre à nouveau.';
-$lang['Login successful. Resubmitting Form.'] = 'Login réussi. Le formulaire est à nouveau soumis.';
-$lang['Outgoing SMS disabled'] = 'SMS sortants désactivés';
+$lang['Login successful. Resubmitting form.'] = 'Login réussi. Le formulaire est à nouveau soumis.';
+$lang['Outgoing SMS disabled.'] = 'SMS sortants désactivés';
 $lang['A number was found in DND Resitry. SMS sending was skipped for it.'] = "Un numéro a été trouvé dans le registre DND. L'envoi est annulé pour celui-ci.";
-$lang['Message delivered successfully to user inbox'] = "Message placé avec succès dans la boîte de réception de l'utilisateur";
+$lang['Message delivered successfully to user inbox.'] = "Message placé avec succès dans la boîte de réception de l'utilisateur";
 $lang['Copy of the message was placed in the outbox and is ready for delivery.'] = "Message placé dans la boite d'envoi et prêt à être envoyé";
 $lang['No number found. SMS not sent.'] = 'Pas de numéro trouvé. SMS non envoyé';
 $lang['Only administrators can permanently delete messages.'] = 'Seuls les administrateurs peuvent supprimer des messages de façon définitive';
@@ -308,13 +308,13 @@ $lang['No'] = 'Non';
 $lang['Default'] = 'Par défaut';
 $lang['Delivery Report'] = 'Accusé de réception';
 
-$lang['You are about to resend message to <strong>%number%</strong>'] = 'Vous êtes sur le point de renvoyer le message au <strong>%number%</strong>';
+$lang['You are about to resend message to <strong>{0}</strong>'] = 'Vous êtes sur le point de renvoyer le message au <strong>{0}</strong>';
 $lang['Message content:'] = 'Contenu du message:';
 $lang['Delete copy of this message (prevents duplicates).'] = 'Supprimer la copie de ce message (évite les doublons)';
-$lang['You are about to resend %message_count% message(s).'] = 'Vous êtes sur le point de renvoyer %message_count% message(s)';
+$lang['You are about to resend {0} message(s).'] = 'Vous êtes sur le point de renvoyer {0} message(s)';
 
 // Kalkun Controller
-$lang['Outgoing SMS disabled. Contact system administrator'] = "SMS sortants désactivés. Contactez l'administrateur système";
+$lang['Outgoing SMS disabled.. Contact system administrator'] = "SMS sortants désactivés. Contactez l'administrateur système";
 $lang['Wrong password'] = 'Mot de passe incorrect';
 $lang['Username already taken'] = "Le nom d'utilisateur existe déjà";
 $lang['Settings saved successfully.'] = 'Paramètres sauvegardés';

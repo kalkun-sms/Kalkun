@@ -81,8 +81,8 @@ $lang['Click to rename this folder'] = 'Click to rename this folder';
 $lang['Delete folder confirmation'] = 'Delete folder confirmation';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?';
 
-$lang['There is no message in your {0}.'] = 'There is no message in your {0}.';
-$lang['There is no message in this folder'] = 'There is no message in this folder';
+$lang['There is no message in {0}.'] = 'There is no message in {0}.';
+$lang['There is no message in this folder.'] = 'There is no message in this folder.';
 
 $lang['Delete all'] = 'Delete all';
 $lang['Are you sure? This will affect all conversations.'] = 'Are you sure? This will affect all conversations.';
@@ -148,8 +148,8 @@ $lang['From/To'] = 'From/To';
 $lang['Query'] = 'Query';
 $lang['Folder'] = 'Folder';
 $lang['All'] = 'All';
-$lang['Date From'] = 'Date From';
-$lang['Date To'] = 'Date To';
+$lang['Date from'] = 'Date from';
+$lang['Date to'] = 'Date to';
 $lang['Status'] = 'Status';
 $lang['Any'] = 'Any';
 $lang['Paging'] = 'Paging';
@@ -175,10 +175,10 @@ $lang['message'] = 'message';
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
 $lang['Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.'] = 'Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.';
-$lang['Login successful. Resubmitting Form.'] = 'Login successful. Resubmitting Form.';
-$lang['Outgoing SMS disabled'] = 'Outgoing SMS disabled';
+$lang['Login successful. Resubmitting form.'] = 'Login successful. Resubmitting form.';
+$lang['Outgoing SMS disabled.'] = 'Outgoing SMS disabled.';
 $lang['A number was found in DND Resitry. SMS sending was skipped for it.'] = 'A number was found in DND Resitry. SMS sending was skipped for it.';
-$lang['Message delivered successfully to user inbox'] = 'Message delivered successfully to user inbox';
+$lang['Message delivered successfully to user inbox.'] = 'Message delivered successfully to user inbox.';
 $lang['Copy of the message was placed in the outbox and is ready for delivery.'] = 'Copy of the message was placed in the outbox and is ready for delivery.';
 $lang['No number found. SMS not sent.'] = 'No number found. SMS not sent.';
 $lang['Only administrators can permanently delete messages.'] = 'Only administrators can permanently delete messages.';
@@ -309,13 +309,13 @@ $lang['No'] = 'No';
 $lang['Default'] = 'Default';
 $lang['Delivery Report'] = 'Delivery Report';
 
-$lang['You are about to resend message to <strong>%number%</strong>'] = 'You are about to resend message to <strong>%number%</strong>';
+$lang['You are about to resend message to <strong>{0}</strong>'] = 'You are about to resend message to <strong>{0}</strong>';
 $lang['Message content:'] = 'Message content:';
 $lang['Delete copy of this message (prevents duplicates).'] = 'Delete copy of this message (prevents duplicates).';
-$lang['You are about to resend %message_count% message(s).'] = 'You are about to resend %message_count% message(s).';
+$lang['You are about to resend {0} message(s).'] = 'You are about to resend {0} message(s).';
 
 // Kalkun Controller
-$lang['Outgoing SMS disabled. Contact system administrator'] = 'Outgoing SMS disabled. Contact system administrator';
+$lang['Outgoing SMS disabled.. Contact system administrator'] = 'Outgoing SMS disabled.. Contact system administrator';
 $lang['Wrong password'] = 'Wrong password';
 $lang['Username already taken'] = 'Username already taken';
 $lang['Settings saved successfully.'] = 'Settings saved successfully.';

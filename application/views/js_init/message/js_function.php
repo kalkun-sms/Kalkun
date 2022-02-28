@@ -33,8 +33,8 @@
 		 */
 		$(document).on('click', "a.global_delete", action_delete = function() {
 			var count = $("input.select_conversation:checkbox:checked").length;
-			var notif = "<?php echo tr('%count% conversation(s) deleted'); ?>";
-			notif = notif.replace('%count%', count);
+			var notif = "<?php echo tr('{0} conversation(s) deleted'); ?>";
+			notif = notif.replace('{0}', count);
 			if (count == 0) {
 				show_notification("<?php echo tr('No item selected')?>");
 			} else {
@@ -74,8 +74,8 @@
 		 */
 		$(document).on('click', "a.recover_button", action_recover = function() {
 			var count = $("input.select_conversation:checkbox:checked").length;
-			var notif = "<?php echo tr('%count% conversation(s) recovered'); ?>";
-			notif = notif.replace('%count%', count);
+			var notif = "<?php echo tr('{0} conversation(s) recovered'); ?>";
+			notif = notif.replace('{0}', count);
 			if (count == 0) {
 				show_notification("<?php echo tr('No item selected')?>");
 			} else {
@@ -117,8 +117,8 @@
 		 */
 		$(document).on('click', ".move_to", function() {
 			var count = $("input.select_conversation:checkbox:checked").length;
-			var notif = "<?php echo tr('%count% conversation(s) moved'); ?>";
-			notif = notif.replace('%count%', count);
+			var notif = "<?php echo tr('{0} conversation(s) moved'); ?>";
+			notif = notif.replace('{0}', count);
 			if (count == 0) {
 				$("#movetodialog").dialog('close');
 				show_notification("<?php echo tr('No item selected')?>");

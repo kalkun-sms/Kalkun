@@ -81,8 +81,8 @@ $lang['Click to rename this folder'] = 'Нажмите, чтобы переим�
 $lang['Delete folder confirmation'] = 'Подтверждение удаления папки';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Эта папка и все сообщения в ней будут на всегда удалены без возможности восстановления. Вы уверены?';//"These folder and all message on it will be permanently deleted and cannot be recovered. Are you sure?"
 
-$lang['There is no message in your {0}.'] = 'Нет сообщений в Ваших {0}.';
-$lang['There is no message in this folder'] = 'В этой папке нет сообщений';
+$lang['There is no message in {0}.'] = 'Нет сообщений в Ваших {0}.';
+$lang['There is no message in this folder.'] = 'В этой папке нет сообщений';
 
 $lang['Delete all'] = 'Delete All';
 $lang['Are you sure? This will affect all conversations.'] = 'Are you sure? This will affect all conversations.';
@@ -148,8 +148,8 @@ $lang['From/To'] = 'From/To';
 $lang['Query'] = 'Query';
 $lang['Folder'] = 'Search On';
 $lang['All'] = 'All Folders';
-$lang['Date From'] = 'Date From';
-$lang['Date To'] = 'Date To';
+$lang['Date from'] = 'Date from';
+$lang['Date to'] = 'Date to';
 $lang['Status'] = 'Состояние';
 $lang['Any'] = 'Any';
 $lang['Paging'] = 'Paging';
@@ -175,10 +175,10 @@ $lang['message'] = 'message';
 // Messages controller
 $lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
 $lang['Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.'] = 'Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.';
-$lang['Login successful. Resubmitting Form.'] = 'Login successful. Resubmitting Form.';
-$lang['Outgoing SMS disabled'] = 'Outgoing SMS disabled';
+$lang['Login successful. Resubmitting form.'] = 'Login successful. Resubmitting form.';
+$lang['Outgoing SMS disabled.'] = 'Outgoing SMS disabled.';
 $lang['A number was found in DND Resitry. SMS sending was skipped for it.'] = 'A number was found in DND Resitry. SMS sending was skipped for it.';
-$lang['Message delivered successfully to user inbox'] = 'Message successfully delivered to user inbox';
+$lang['Message delivered successfully to user inbox.'] = 'Message successfully delivered to user inbox';
 $lang['Copy of the message was placed in the outbox and is ready for delivery.'] = 'Your message has been moved to outbox and is ready for delivery';
 $lang['No number found. SMS not sent.'] = 'No number found. SMS not sent';
 $lang['Only administrators can permanently delete messages.'] = 'Only administrators can permanently delete messages';
@@ -308,13 +308,13 @@ $lang['No'] = 'Нет';
 $lang['Default'] = 'По умолчанию';
 $lang['Delivery Report'] = 'Отчет о доставке';
 
-$lang['You are about to resend message to <strong>%number%</strong>'] = 'You are about to resend message to <strong>%number%</strong>';
+$lang['You are about to resend message to <strong>{0}</strong>'] = 'You are about to resend message to <strong>{0}</strong>';
 $lang['Message content:'] = 'Message content:';
 $lang['Delete copy of this message (prevents duplicates).'] = 'Delete copy of this message (Prevent Duplicate)';
-$lang['You are about to resend %message_count% message(s).'] = 'You are about to resend %message_count% message(s)';
+$lang['You are about to resend {0} message(s).'] = 'You are about to resend {0} message(s)';
 
 // Kalkun Controller
-$lang['Outgoing SMS disabled. Contact system administrator'] = 'Outgoing SMS Disabled. Contact System Administrator';
+$lang['Outgoing SMS disabled.. Contact system administrator'] = 'Outgoing SMS Disabled. Contact System Administrator';
 $lang['Wrong password'] = 'You entered wrong password';
 $lang['Username already taken'] = 'Username already exists';
 $lang['Settings saved successfully.'] = 'Your settings have been saved';
