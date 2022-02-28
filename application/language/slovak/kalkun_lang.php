@@ -82,7 +82,7 @@ $lang['Delete folder confirmation'] = 'Potvrdenie vymazania záložky';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Táto záložka a všetky správy v nej budú trvalo odstránené. Chcete ju naozaj odstrániť?';
 
 $lang['There is no message in {0}.'] = 'Žiadne správy v záložke {0}.';
-$lang['There is no message in this folder.'] = 'Žiadne správy v tejto záložke';
+$lang['There is no message in this folder.'] = 'Žiadne správy v tejto záložke.';
 
 $lang['Delete all'] = 'Zmazať všetky';
 $lang['Are you sure? This will affect all conversations.'] = 'Ste si istý? Zasiahne to všetky konverzácie.';
@@ -139,7 +139,7 @@ $lang['Send as Flash SMS'] = 'Odoslať ako Flash SMS';
 $lang['times']['repetition'] = 'krát';
 $lang['Hour(s)'] = 'Hodín';
 $lang['Minutes'] = 'Minút';
-$lang['No result.'] = 'Ach! Vašej požiadavke nevyhovuje žiaden záznam';
+$lang['No result.'] = 'Ach! Vašej požiadavke nevyhovuje žiaden záznam.';
 $lang['See conversation'] = 'Zobraz konverzáciu';
 
 $lang['Search'] = 'Vyhľadať';
@@ -178,10 +178,10 @@ $lang['Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> an
 $lang['Login successful. Resubmitting form.'] = 'Login successful. Resubmitting form.';
 $lang['Outgoing SMS disabled.'] = 'Outgoing SMS disabled.';
 $lang['A number was found in DND Resitry. SMS sending was skipped for it.'] = 'A number was found in DND Resitry. SMS sending was skipped for it.';
-$lang['Message delivered successfully to user inbox.'] = 'Message successfully delivered to user inbox';
-$lang['Copy of the message was placed in the outbox and is ready for delivery.'] = 'Your message has been moved to outbox and is ready for delivery';
-$lang['No number found. SMS not sent.'] = 'No number found. SMS not sent';
-$lang['Only administrators can permanently delete messages.'] = 'Only administrators can permanently delete messages';
+$lang['Message delivered successfully to user inbox.'] = 'Message successfully delivered to user inbox.';
+$lang['Copy of the message was placed in the outbox and is ready for delivery.'] = 'Your message has been moved to outbox and is ready for delivery.';
+$lang['No number found. SMS not sent.'] = 'No number found. SMS not sent.';
+$lang['Only administrators can permanently delete messages.'] = 'Only administrators can permanently delete messages.';
 
 // Setting
 $lang['Current password'] = 'Terajšie heslo';
@@ -220,8 +220,8 @@ $lang['Manage group'] = 'Spravovať skupinu';
 $lang['Manage contact'] = 'Spravovať kontakt';
 $lang['Type group name'] = 'Zvoliť skupinu';
 $lang['There is no messages in your trash'] = 'Vo vašom koši niesú žiadne správy';
-$lang['No item selected.'] = 'Nieje vybraný záznam';
-$lang['No contact selected.'] = 'Nieje vybraný kontakt';
+$lang['No item selected.'] = 'Nieje vybraný záznam.';
+$lang['No contact selected.'] = 'Nieje vybraný kontakt.';
 $lang['Compose SMS'] = 'Vytvoriť SMS';
 $lang['Contacts'] = 'Kontakty';
 $lang['Back to {0}'] = 'Späť na {0}';
@@ -230,7 +230,7 @@ $lang['Hide details'] = 'Skry detaily';
 $lang['Search contacts'] = 'Vyhľadať kontakt';
 $lang['Search messages'] = 'Vyhľadať správy';
 $lang['Edit'] = 'Upraviť';
-$lang['All form fields are required.'] = 'Všetky polia formulára sú vyžadované';
+$lang['All form fields are required.'] = 'Všetky polia formulára sú vyžadované.';
 $lang['Name'] = 'Meno';
 $lang['Telephone number'] = 'Telefónne číslo';
 $lang['Email ID'] = 'ID e-mailu';
@@ -257,16 +257,16 @@ $lang['Confirm password'] = 'Potvrdiť heslo';
 $lang['Phone number'] = 'Telefónny prístupový kód';
 $lang['Action not allowed'] = 'Akcia nieje povolená';
 $lang['Field required.'] = 'Field required.';
-$lang['Passwords do not match.'] = 'Heslá sa nezhodujú';
-$lang['Password is too short.'] = 'Príliš krátke';
+$lang['Passwords do not match.'] = 'Heslá sa nezhodujú.';
+$lang['Password is too short.'] = 'Príliš krátke.';
 $lang['No user selected'] = 'Nieje zvolený užívateľ';
 $lang['Level'] = 'Úroveň';
 $lang['Delete this folder'] = 'Zmazať tento adresár';
 $lang['Loading'] = 'Načítavanie';
 $lang['Connected'] = 'Pripojený';
 $lang['Disconnected'] = 'Odpojený';
-$lang['No group detected, add one first.'] = 'Žiadna skupina nenájdená, vytvorte si nejakú';
-$lang['No group selected.'] = 'Nieje vybraná skupina';
+$lang['No group detected, add one first.'] = 'Žiadna skupina nenájdená, vytvorte si nejakú.';
+$lang['No group selected.'] = 'Nieje vybraná skupina.';
 $lang['Please enter recipient'] = 'Prosím, zadajte svoju destináciu';
 $lang['Please enter message'] = 'Prosím, zadajte text správy';
 $lang['Please enter sending date'] = 'Prosím, zadajte dátum odoslania';
@@ -301,7 +301,7 @@ $lang['Personal'] = 'Osobné';
 
 $lang['Signature'] = 'Podpis';
 $lang['Max. 50 characters'] = 'Max. 50 znakov';
-$lang['Signature is added at the end of the message.'] = 'Podpis bude na konci vašej správy';
+$lang['Signature is added at the end of the message.'] = 'Podpis bude na konci vašej správy.';
 $lang['Language'] = 'Jazyk';
 $lang['Yes'] = 'Áno';
 $lang['No'] = 'Nie';
@@ -310,28 +310,28 @@ $lang['Delivery Report'] = 'Oznam o doručení';
 
 $lang['You are about to resend message to <strong>{0}</strong>.'] = 'You are about to resend message to <strong>{0}</strong>.';
 $lang['Message content:'] = 'Message content:';
-$lang['Delete copy of this message (prevents duplicates).'] = 'Delete copy of this message (Prevent Duplicate)';
-$lang['You are about to resend {0} message(s).'] = 'You are about to resend {0} message(s)';
+$lang['Delete copy of this message (prevents duplicates).'] = 'Delete copy of this message (Prevent Duplicate).';
+$lang['You are about to resend {0} message(s).'] = 'You are about to resend {0} message(s).';
 
 // Kalkun Controller
-$lang['Outgoing SMS disabled. Contact system administrator.'] = 'Outgoing SMS Disabled. Contact System Administrator';
+$lang['Outgoing SMS disabled. Contact system administrator.'] = 'Outgoing SMS Disabled. Contact System Administrator.';
 $lang['Wrong password'] = 'You entered wrong password';
 $lang['Username already taken'] = 'Username already exists';
-$lang['Settings saved successfully.'] = 'Your settings have been saved';
+$lang['Settings saved successfully.'] = 'Your settings have been saved.';
 // Users Controller
-$lang['Access denied.'] = 'Access denied';
-$lang['User updated successfully.'] = 'User has been updated';
-$lang['User added successfully.'] = 'User has been added';
+$lang['Access denied.'] = 'Access denied.';
+$lang['User updated successfully.'] = 'User has been updated.';
+$lang['User added successfully.'] = 'User has been added.';
 // Pluginss Controller
-$lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Only administrators can manage plugins';
-$lang['Plugin {0} installed successfully.'] = 'Plugin {0} successfully installed';
-$lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} successfully uninstalled';
+$lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Only administrators can manage plugins.';
+$lang['Plugin {0} installed successfully.'] = 'Plugin {0} successfully installed.';
+$lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} successfully uninstalled.';
 $lang['Installed']['Plural'] = 'Installed';
 $lang['Available']['Plural'] = 'Available';
 // Phonebook Controller
-$lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts successfully imported';
-$lang['Contact updated successfully.'] = 'Contact has been updated';
-$lang['Contact added successfully.'] = 'Contact has been added';
+$lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts successfully imported.';
+$lang['Contact updated successfully.'] = 'Contact has been updated.';
+$lang['Contact added successfully.'] = 'Contact has been added.';
 // Gammu Model
 $lang['Could not send message. Make sure Gammu path is correctly set.'] = 'Could not send message. Make sure Gammu path is correctly set.';
 $lang['Message queued.'] = 'Message queued.';

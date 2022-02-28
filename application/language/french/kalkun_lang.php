@@ -82,10 +82,10 @@ $lang['Delete folder confirmation'] = 'Confirmer la suppression du dossier';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = " Souhaitez-vous vraiment supprimer ce dossier et tous les messages qu'il contient ?";
 
 $lang['There is no message in {0}.'] = "Il n'y a aucun message dans votre {0}.";
-$lang['There is no message in this folder.'] = "Il n'y a aucun message dans ce dossier";
+$lang['There is no message in this folder.'] = "Il n'y a aucun message dans ce dossier.";
 
 $lang['Delete all'] = 'Tout supprimer';
-$lang['Are you sure? This will affect all conversations.'] = "Etes-vous sur ? Ceci s'appliquera à toutes les conversations";
+$lang['Are you sure? This will affect all conversations.'] = "Etes-vous sur ? Ceci s'appliquera à toutes les conversations.";
 
 $lang['Select all'] = 'Tout sélectionner';
 $lang['Deselect all'] = 'Tout désélectionner';
@@ -128,7 +128,7 @@ $lang['Check DND'] = 'Vérifier MDN';
 $lang['Insert'] = 'Insérer';
 
 $lang['Canned responses'] = 'Modèles';
-$lang['There are no canned responses. Continue to save your present message as canned response.'] = "Il semble qu'il n'y ait pas encore de réponse de créé, souhaitez-vous enregistrer cette réponse et la conserver ?";
+$lang['There are no canned responses. Continue to save your present message as canned response.'] = "Il semble qu'il n'y ait pas encore de réponse de créé, souhaitez-vous enregistrer cette réponse et la conserver ?.";
 $lang['Choose response'] = 'Choisissez une réponse';
 $lang['Saving...'] = 'Sauvegarde...';
 $lang['Are you sure?'] = 'Etes-vous sûr ?';
@@ -139,7 +139,7 @@ $lang['Send as Flash SMS'] = 'Envoyer en tant que Flash SMS';
 $lang['times']['repetition'] = 'Temps';
 $lang['Hour(s)'] = 'Heure';
 $lang['Minutes'] = 'Minutes';
-$lang['No result.'] = 'Oops! Votre requête ne correspond à aucun dossier';
+$lang['No result.'] = 'Oops! Votre requête ne correspond à aucun dossier.';
 $lang['See conversation'] = 'Voir la conversation';
 
 $lang['Search'] = 'Rechercher';
@@ -176,12 +176,12 @@ $lang['message'] = 'message(s)';
 $lang['Login successful. But {0} data lost during login process.'] = 'Login réussi. Mais données {0} perdues durant le processus de login.';
 $lang['Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.'] = 'Veuillez <a href="{0}" onclick="goBackToForm()">retourner à votre formulaire</a> et le soumettre à nouveau.';
 $lang['Login successful. Resubmitting form.'] = 'Login réussi. Le formulaire est à nouveau soumis.';
-$lang['Outgoing SMS disabled.'] = 'SMS sortants désactivés';
+$lang['Outgoing SMS disabled.'] = 'SMS sortants désactivés.';
 $lang['A number was found in DND Resitry. SMS sending was skipped for it.'] = "Un numéro a été trouvé dans le registre DND. L'envoi est annulé pour celui-ci.";
-$lang['Message delivered successfully to user inbox.'] = "Message placé avec succès dans la boîte de réception de l'utilisateur";
-$lang['Copy of the message was placed in the outbox and is ready for delivery.'] = "Message placé dans la boite d'envoi et prêt à être envoyé";
-$lang['No number found. SMS not sent.'] = 'Pas de numéro trouvé. SMS non envoyé';
-$lang['Only administrators can permanently delete messages.'] = 'Seuls les administrateurs peuvent supprimer des messages de façon définitive';
+$lang['Message delivered successfully to user inbox.'] = "Message placé avec succès dans la boîte de réception de l'utilisateur.";
+$lang['Copy of the message was placed in the outbox and is ready for delivery.'] = "Message placé dans la boite d'envoi et prêt à être envoyé.";
+$lang['No number found. SMS not sent.'] = 'Pas de numéro trouvé. SMS non envoyé.';
+$lang['Only administrators can permanently delete messages.'] = 'Seuls les administrateurs peuvent supprimer des messages de façon définitive.';
 
 // Setting
 $lang['Current password'] = 'Mot de passe actuel';
@@ -220,8 +220,8 @@ $lang['Manage group'] = 'Gérer un groupe';
 $lang['Manage contact'] = 'Géer les contacts';
 $lang['Type group name'] = 'Entrer le nom du groupe';
 $lang['There is no messages in your trash'] = "Il n'y a aucune message dans votre corbeille";
-$lang['No item selected.'] = 'Aucun article sélectionné';
-$lang['No contact selected.'] = 'Aucun contact sélectionné';
+$lang['No item selected.'] = 'Aucun article sélectionné.';
+$lang['No contact selected.'] = 'Aucun contact sélectionné.';
 $lang['Compose SMS'] = 'Ecrire un sms';
 $lang['Contacts'] = 'Contacts';
 $lang['Back to {0}'] = 'Retour à {0}';
@@ -230,7 +230,7 @@ $lang['Hide details'] = 'Masquer les détails';
 $lang['Search contacts'] = 'Rechercher contact';
 $lang['Search messages'] = 'Rechercher message';
 $lang['Edit'] = 'Editer';
-$lang['All form fields are required.'] = 'Tous les champs sont obligatoires';
+$lang['All form fields are required.'] = 'Tous les champs sont obligatoires.';
 $lang['Name'] = 'Nom';
 $lang['Telephone number'] = 'Numéro de téléphone';
 $lang['Email ID'] = 'Email';
@@ -257,16 +257,16 @@ $lang['Confirm password'] = 'Confirmer mot de passe';
 $lang['Phone number'] = 'Numéro de téléphone';
 $lang['Action not allowed'] = 'Action non autorisée';
 $lang['Field required.'] = 'Champ requis.';
-$lang['Passwords do not match.'] = 'Les mots de passe ne correspondent pas';
-$lang['Password is too short.'] = 'Trop court';
+$lang['Passwords do not match.'] = 'Les mots de passe ne correspondent pas.';
+$lang['Password is too short.'] = 'Trop court.';
 $lang['No user selected'] = "Pas d'utilisateur sélectionné";
 $lang['Level'] = 'Niveau';
 $lang['Delete this folder'] = 'Supprimer ce dossier';
 $lang['Loading'] = 'Chargement';
 $lang['Connected'] = 'Connecté';
 $lang['Disconnected'] = 'Déconnecté';
-$lang['No group detected, add one first.'] = "Aucun groupe détecté, ajouter d'abord un groupe";
-$lang['No group selected.'] = 'Pas de groupe sélectionné';
+$lang['No group detected, add one first.'] = "Aucun groupe détecté, ajouter d'abord un groupe.";
+$lang['No group selected.'] = 'Pas de groupe sélectionné.';
 $lang['Please enter recipient'] = 'Entrer votre destinataire';
 $lang['Please enter message'] = 'Entrer votre message';
 $lang['Please enter sending date'] = "Entrer la date d'envoi";
@@ -301,41 +301,41 @@ $lang['Personal'] = 'Personnel';
 
 $lang['Signature'] = 'Signature';
 $lang['Max. 50 characters'] = 'Max. 50 caractères';
-$lang['Signature is added at the end of the message.'] = 'La signature apparaitra à la fin du message';
+$lang['Signature is added at the end of the message.'] = 'La signature apparaitra à la fin du message.';
 $lang['Language'] = 'Langue';
 $lang['Yes'] = 'Oui';
 $lang['No'] = 'Non';
 $lang['Default'] = 'Par défaut';
 $lang['Delivery Report'] = 'Accusé de réception';
 
-$lang['You are about to resend message to <strong>{0}</strong>.'] = 'Vous êtes sur le point de renvoyer le message au <strong>{0}</strong>';
+$lang['You are about to resend message to <strong>{0}</strong>.'] = 'Vous êtes sur le point de renvoyer le message au <strong>{0}</strong>.';
 $lang['Message content:'] = 'Contenu du message:';
-$lang['Delete copy of this message (prevents duplicates).'] = 'Supprimer la copie de ce message (évite les doublons)';
-$lang['You are about to resend {0} message(s).'] = 'Vous êtes sur le point de renvoyer {0} message(s)';
+$lang['Delete copy of this message (prevents duplicates).'] = 'Supprimer la copie de ce message (évite les doublons).';
+$lang['You are about to resend {0} message(s).'] = 'Vous êtes sur le point de renvoyer {0} message(s).';
 
 // Kalkun Controller
-$lang['Outgoing SMS disabled. Contact system administrator.'] = "SMS sortants désactivés. Contactez l'administrateur système";
+$lang['Outgoing SMS disabled. Contact system administrator.'] = "SMS sortants désactivés. Contactez l'administrateur système.";
 $lang['Wrong password'] = 'Mot de passe incorrect';
 $lang['Username already taken'] = "Le nom d'utilisateur existe déjà";
-$lang['Settings saved successfully.'] = 'Paramètres sauvegardés';
+$lang['Settings saved successfully.'] = 'Paramètres sauvegardés.';
 // Users Controller
-$lang['Access denied.'] = 'Accès refusé';
-$lang['User updated successfully.'] = 'Utilisateur mis à jour';
-$lang['User added successfully.'] = 'Utilisateur ajouté';
+$lang['Access denied.'] = 'Accès refusé.';
+$lang['User updated successfully.'] = 'Utilisateur mis à jour.';
+$lang['User added successfully.'] = 'Utilisateur ajouté.';
 // Pluginss Controller
-$lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Seul un administrateur peut gérer les plugins';
-$lang['Plugin {0} installed successfully.'] = 'Plugin {0} installé avec succès';
-$lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} désinstallé avec succès';
+$lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Seul un administrateur peut gérer les plugins.';
+$lang['Plugin {0} installed successfully.'] = 'Plugin {0} installé avec succès.';
+$lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} désinstallé avec succès.';
 $lang['Installed']['Plural'] = 'Installés';
 $lang['Available']['Plural'] = 'Displonibles';
 // Phonebook Controller
-$lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts importés avec succès';
-$lang['Contact updated successfully.'] = 'Contact mis à jour';
-$lang['Contact added successfully.'] = 'Contact ajouté';
+$lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts importés avec succès.';
+$lang['Contact updated successfully.'] = 'Contact mis à jour.';
+$lang['Contact added successfully.'] = 'Contact ajouté.';
 // Gammu Model
-$lang['Could not send message. Make sure Gammu path is correctly set.'] = "Le message n'a pu être envoyé. Assurez-vous que le chemin vers Gammu est correctement défini";
-$lang['Message queued.'] = "Message mis en file d'attente";
-$lang['Parameter invalid.'] = 'Paramètre invalide';
+$lang['Could not send message. Make sure Gammu path is correctly set.'] = "Le message n'a pu être envoyé. Assurez-vous que le chemin vers Gammu est correctement défini.";
+$lang['Message queued.'] = "Message mis en file d'attente.";
+$lang['Parameter invalid.'] = 'Paramètre invalide.';
 
 $lang['403 Forbidden'] = '403 Forbidden';
 $lang['Directory access is forbidden.'] = 'Directory access is forbidden.';

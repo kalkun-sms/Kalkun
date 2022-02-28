@@ -82,10 +82,10 @@ $lang['Delete folder confirmation'] = 'Mappa törlésének megerősítése';
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'A mappa és az abban lévő üzenetek véglegesen törlődnek és nem állíthatóak vissza. Biztos benne?';
 
 $lang['There is no message in {0}.'] = 'Nincs üzenet az ön {0}.';
-$lang['There is no message in this folder.'] = 'Nincs a mappában üzenet';
+$lang['There is no message in this folder.'] = 'Nincs a mappában üzenet.';
 
 $lang['Delete all'] = 'Összes törlése';
-$lang['Are you sure? This will affect all conversations.'] = 'Biztos benne? Minden beszélgetést érinteni fog!';
+$lang['Are you sure? This will affect all conversations.'] = 'Biztos benne? Minden beszélgetést érinteni fog!.';
 
 $lang['Select all'] = 'Összes kiválasztása';
 $lang['Deselect all'] = 'Összes törlés';
@@ -128,7 +128,7 @@ $lang['Check DND'] = 'DND ellenőrzése';
 $lang['Insert'] = 'Beszúrás';
 
 $lang['Canned responses'] = 'Megírt válaszok';
-$lang['There are no canned responses. Continue to save your present message as canned response.'] = 'Úgy tűnik nincs egyetlen előre megírt válasz sem. Mentse el az elsőt most';
+$lang['There are no canned responses. Continue to save your present message as canned response.'] = 'Úgy tűnik nincs egyetlen előre megírt válasz sem. Mentse el az elsőt most.';
 $lang['Choose response'] = 'Válaszok kiválasztása';
 $lang['Saving...'] = 'Mentés...';
 $lang['Are you sure?'] = 'Biztos benne?';
@@ -139,7 +139,7 @@ $lang['Send as Flash SMS'] = 'Küldés Flash SMS-ként';
 $lang['times']['repetition'] = 'alkalommal';
 $lang['Hour(s)'] = 'Óra';
 $lang['Minutes'] = 'Perc';
-$lang['No result.'] = 'Oops! A keresés nem egyezik egy rekorddal sem';
+$lang['No result.'] = 'Oops! A keresés nem egyezik egy rekorddal sem.';
 $lang['See conversation'] = 'Beszélgetés megtekintése';
 
 $lang['Search'] = 'Keresés';
@@ -178,10 +178,10 @@ $lang['Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> an
 $lang['Login successful. Resubmitting form.'] = 'Login successful. Resubmitting form.';
 $lang['Outgoing SMS disabled.'] = 'Outgoing SMS disabled.';
 $lang['A number was found in DND Resitry. SMS sending was skipped for it.'] = 'A number was found in DND Resitry. SMS sending was skipped for it.';
-$lang['Message delivered successfully to user inbox.'] = 'Message successfully delivered to user inbox';
-$lang['Copy of the message was placed in the outbox and is ready for delivery.'] = 'Your message has been moved to outbox and is ready for delivery';
-$lang['No number found. SMS not sent.'] = 'No number found. SMS not sent';
-$lang['Only administrators can permanently delete messages.'] = 'Only administrators can permanently delete messages';
+$lang['Message delivered successfully to user inbox.'] = 'Message successfully delivered to user inbox.';
+$lang['Copy of the message was placed in the outbox and is ready for delivery.'] = 'Your message has been moved to outbox and is ready for delivery.';
+$lang['No number found. SMS not sent.'] = 'No number found. SMS not sent.';
+$lang['Only administrators can permanently delete messages.'] = 'Only administrators can permanently delete messages.';
 
 // Setting
 $lang['Current password'] = 'Aktuális jelszó';
@@ -211,7 +211,7 @@ $lang['Sending'] = 'Küldés';
 $lang['Insert name from contact list'] = 'Név beszúrása a kapcsolati listából';
 $lang['Delete group(s) confirmation'] = 'Csoport(ok) törlésének megerősítése';
 $lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Törli a csoporto(ka)t?<br>A csoport(ok) összes kapcsolata törlődni fog.';
-$lang['Yes, delete selected group(s).'] = 'Igen, törölje a kiválasztott csoporto(ka)t';
+$lang['Yes, delete selected group(s).'] = 'Igen, törölje a kiválasztott csoporto(ka)t.';
 $lang['Create group'] = 'Csoport létrehozása';
 $lang['Group name'] = 'Csoport neve';
 $lang['Groups'] = 'Csoportok';
@@ -220,8 +220,8 @@ $lang['Manage group'] = 'Csoport kezelése';
 $lang['Manage contact'] = 'Kapcsolat kezelése';
 $lang['Type group name'] = 'Csoport kiválasztása';
 $lang['There is no messages in your trash'] = 'Nincs üzenet a kukában';
-$lang['No item selected.'] = 'Nincs kiválasztott elem';
-$lang['No contact selected.'] = 'Nincs kiválasztott kapcsolat';
+$lang['No item selected.'] = 'Nincs kiválasztott elem.';
+$lang['No contact selected.'] = 'Nincs kiválasztott kapcsolat.';
 $lang['Compose SMS'] = 'SMS írása';
 $lang['Contacts'] = 'Kapcsolatok';
 $lang['Back to {0}'] = 'Vissza {0}';
@@ -230,7 +230,7 @@ $lang['Hide details'] = 'Részletek rejtése';
 $lang['Search contacts'] = 'Kapcsolatok keresése';
 $lang['Search messages'] = 'Üzenetek keresése';
 $lang['Edit'] = 'Szerkesztés';
-$lang['All form fields are required.'] = 'Minden űrlapmező kötelező';
+$lang['All form fields are required.'] = 'Minden űrlapmező kötelező.';
 $lang['Name'] = 'Név';
 $lang['Telephone number'] = 'Telefonszám';
 $lang['Email ID'] = 'Email ID';
@@ -257,16 +257,16 @@ $lang['Confirm password'] = 'Jelszó ellenőrzése';
 $lang['Phone number'] = 'Telefon hozzáférési szám';
 $lang['Action not allowed'] = 'Nem engedélyezett művelet';
 $lang['Field required.'] = 'Field required.';
-$lang['Passwords do not match.'] = 'Nem egyeznek a jelszavak';
-$lang['Password is too short.'] = 'Túl rövid';
+$lang['Passwords do not match.'] = 'Nem egyeznek a jelszavak.';
+$lang['Password is too short.'] = 'Túl rövid.';
 $lang['No user selected'] = 'Nincs felhasználó kiválasztva';
 $lang['Level'] = 'Szint';
 $lang['Delete this folder'] = 'Mappa törlése';
 $lang['Loading'] = 'Töltés';
 $lang['Connected'] = 'Összekapcsolt';
 $lang['Disconnected'] = 'Szétkapcsolt';
-$lang['No group detected, add one first.'] = 'Nem találhatóak csoportok, hozzon létre egyet először';
-$lang['No group selected.'] = 'Nincs csoport kiválasztva';
+$lang['No group detected, add one first.'] = 'Nem találhatóak csoportok, hozzon létre egyet először.';
+$lang['No group selected.'] = 'Nincs csoport kiválasztva.';
 $lang['Please enter recipient'] = 'Kérjük adja meg a célt';
 $lang['Please enter message'] = 'Kérjük adja meg az üzenetet';
 $lang['Please enter sending date'] = 'Kérjük adja meg a küldés idejét';
@@ -301,7 +301,7 @@ $lang['Personal'] = 'Személyes';
 
 $lang['Signature'] = 'Aláírás';
 $lang['Max. 50 characters'] = 'Maximum 50 karakter';
-$lang['Signature is added at the end of the message.'] = 'Az aláírás az üzenet végére lesz helyezve';
+$lang['Signature is added at the end of the message.'] = 'Az aláírás az üzenet végére lesz helyezve.';
 $lang['Language'] = 'Nyelv';
 $lang['Yes'] = 'Igen';
 $lang['No'] = 'Nem';
@@ -310,28 +310,28 @@ $lang['Delivery Report'] = 'Kézbesítési jelentés';
 
 $lang['You are about to resend message to <strong>{0}</strong>.'] = 'You are about to resend message to <strong>{0}</strong>.';
 $lang['Message content:'] = 'Message content:';
-$lang['Delete copy of this message (prevents duplicates).'] = 'Delete copy of this message (Prevent Duplicate)';
-$lang['You are about to resend {0} message(s).'] = 'You are about to resend {0} message(s)';
+$lang['Delete copy of this message (prevents duplicates).'] = 'Delete copy of this message (Prevent Duplicate).';
+$lang['You are about to resend {0} message(s).'] = 'You are about to resend {0} message(s).';
 
 // Kalkun Controller
-$lang['Outgoing SMS disabled. Contact system administrator.'] = 'Outgoing SMS Disabled. Contact System Administrator';
+$lang['Outgoing SMS disabled. Contact system administrator.'] = 'Outgoing SMS Disabled. Contact System Administrator.';
 $lang['Wrong password'] = 'You entered wrong password';
 $lang['Username already taken'] = 'Username already exists';
-$lang['Settings saved successfully.'] = 'Your settings have been saved';
+$lang['Settings saved successfully.'] = 'Your settings have been saved.';
 // Users Controller
-$lang['Access denied.'] = 'Access denied';
-$lang['User updated successfully.'] = 'User has been updated';
-$lang['User added successfully.'] = 'User has been added';
+$lang['Access denied.'] = 'Access denied.';
+$lang['User updated successfully.'] = 'User has been updated.';
+$lang['User added successfully.'] = 'User has been added.';
 // Pluginss Controller
-$lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Only administrators can manage plugins';
-$lang['Plugin {0} installed successfully.'] = 'Plugin {0} successfully installed';
-$lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} successfully uninstalled';
+$lang['Access denied. Only administrators are allowed to manage plugins.'] = 'Only administrators can manage plugins.';
+$lang['Plugin {0} installed successfully.'] = 'Plugin {0} successfully installed.';
+$lang['Plugin {0} uninstalled successfully.'] = 'Plugin {0} successfully uninstalled.';
 $lang['Installed']['Plural'] = 'Installed';
 $lang['Available']['Plural'] = 'Available';
 // Phonebook Controller
-$lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts successfully imported';
-$lang['Contact updated successfully.'] = 'Contact has been updated';
-$lang['Contact added successfully.'] = 'Contact has been added';
+$lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer} contacts successfully imported.';
+$lang['Contact updated successfully.'] = 'Contact has been updated.';
+$lang['Contact added successfully.'] = 'Contact has been added.';
 // Gammu Model
 $lang['Could not send message. Make sure Gammu path is correctly set.'] = 'Could not send message. Make sure Gammu path is correctly set.';
 $lang['Message queued.'] = 'Message queued.';
