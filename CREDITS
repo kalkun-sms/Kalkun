@@ -7,6 +7,7 @@ CodeIgniter extra:
 jQuery 3.6.0 <https://jquery.com/>
 jQuery UI 1.13.0 <https://jqueryui.com/>
     * On the download page, select: [ Autocomplete, Datepicker, Dialog, Fade Effect, jQuery 1.8+ support (since we use jquery < 3.4 as of jquery-ui 1.13), theme=base] + their dependencies
+    * jQuery UI Datepicker i18n (from version 1.13.1): https://github.com/jquery/jquery-ui/tree/master/ui/i18n - License: MIT
 jQuery Plugin:
 	* Hotkeys
 	* TokenInput 1.7.0 <https://loopj.com/jquery-tokeninput/> or <https://github.com/loopj/jquery-tokeninput/>
