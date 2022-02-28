@@ -394,7 +394,7 @@
 					show: 'fade',
 					hide: 'fade',
 					buttons: {
-						'Continue': function() {
+						"<?php echo tr('Continue'); ?>": function() {
 							delete_dup_status = $("#delete_dup").is(":checked");
 
 							$("input.select_message:checked").each(function() {
