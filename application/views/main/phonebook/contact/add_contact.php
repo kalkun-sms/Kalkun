@@ -43,7 +43,7 @@
 </script>
 
 <div id="dialog" class="dialog" style="display: block">
-	<p id="validateTips"><?php echo tr('All form fields are required'); ?></p>
+	<p id="validateTips"><?php echo tr('All form fields are required.'); ?></p>
 	<?php echo form_open('phonebook/add_contact_process', array('id' => 'addContact'));?>
 	<fieldset>
 		<input type="hidden" name="pbk_id_user" id="pbk_id_user" value="<?php echo $this->session->userdata('id_user');?>" />

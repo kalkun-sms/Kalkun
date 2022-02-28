@@ -311,7 +311,7 @@
 			TextDecoded = $(this).parents('div:eq(1)').children('div.message_content').text();
 			ID = $(this).parents('div:eq(1)').children().children('input.select_message').attr('id');
 			Class = $(this).parents('div:eq(1)').children('div.message_metadata').children('span.class').text();
-			resend_conf_label = "<?php echo tr('You are about to resend message to <strong>{0}</strong>'); ?>";
+			resend_conf_label = "<?php echo tr('You are about to resend message to <strong>{0}</strong>.'); ?>";
 			resend_conf_label = resend_conf_label.replace('{0}', DestinationNumber);
 			resend_conf = `<p>${resend_conf_label}</p>`;
 			message_content_label = "<?php echo tr('Message content:'); ?>";

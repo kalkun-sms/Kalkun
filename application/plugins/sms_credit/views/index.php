@@ -56,7 +56,7 @@
 
 <!-- Add User dialog -->
 <div id="users_container" class="dialog" style="display: none">
-	<p id="validateTips"><?php echo tr('All form fields are required'); ?></p>
+	<p id="validateTips"><?php echo tr('All form fields are required.'); ?></p>
 	<?php echo form_open('plugin/sms_credit/add_users', array('id' => 'addUser'));?>
 	<fieldset>
 		<label for="name"><?php echo tr('Name'); ?></label>
@@ -100,7 +100,7 @@ echo form_dropdown('package', $package, '', $option);
 
 <!-- Edit User dialog -->
 <div id="edit_users_container" class="dialog" style="display: none">
-	<p id="validateTips"><?php echo tr('All form fields are required'); ?></p>
+	<p id="validateTips"><?php echo tr('All form fields are required.'); ?></p>
 	<?php echo form_open('plugin/sms_credit/add_users', array('id' => 'editUser'));?>
 	<fieldset>
 		<label for="package"><?php echo tr('Package'); ?></label>

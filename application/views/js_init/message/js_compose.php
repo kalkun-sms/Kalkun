@@ -20,7 +20,7 @@
 
 		$("#personvalue").tokenInput("<?php echo site_url('phonebook/get_phonebook/').'/'.(isset($source) ? $source : '');?>", {
 			hintText: "<?php echo tr('Insert name from contact list')?>",
-			noResultsText: "<?php echo tr('No results'); ?>",
+			noResultsText: "<?php echo tr('No results.'); ?>",
 			searchingText: "<?php echo tr('Searching...'); ?>",
 			preventDuplicates: true,
 			method: "POST",
@@ -266,9 +266,9 @@
 
 	function save_canned_response(name) {
 
-		if (name == null) var name = prompt("<?php echo tr('Please enter a name for your message. This should be unique.'); ?>", '', "Message Name");
+		if (name == null) var name = prompt("<?php echo tr('Please enter a name for your message. It should be unique.'); ?>", '', "Message Name");
 		else {
-			var c = confirm("<?php echo tr('Are you sure? This will overwrite previous message.'); ?>");
+			var c = confirm("<?php echo tr('Are you sure? This will overwrite the previous message.'); ?>");
 			if (!c) return;
 		}
 
