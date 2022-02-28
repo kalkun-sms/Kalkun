@@ -125,7 +125,7 @@ $lang['Canned responses'] = 'Modèles';
 $lang['There are no canned responses. Continue to save your present message as canned response.'] = "Il n'y a pas de modèle. Continuez pour enregistrer cette réponse et la conserver comme modèle.";
 $lang['Choose response'] = 'Choisissez une réponse';
 $lang['Saving...'] = 'Sauvegarde...';
-$lang['Are you sure?'] = 'Etes-vous sûr(e)&nbsp;?';
+$lang['Are you sure?'] = 'Etes-vous sûr(e) ?';
 
 // Others
 $lang['Amount'] = 'Quantité';
@@ -402,7 +402,7 @@ $lang['No plugin installed.'] = 'Pas de plugin installé.';
 $lang['Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'] = 'Erreur réseau. <span id="retry-progress-display">Nouvel essai dans <span id="countdown-count">10</span> secondes.</span>';
 $lang['Retrying now'] = 'Nouvel essai en cours';
 $lang['{0} character(s) / {1} message(s)'] = '{0} caractères(s) / {1} message(s)';
-$lang['{0} message(s) deleted'] = '{0} message(s) supprimés';
+$lang['{0} message(s) deleted'] = '{0} message(s) supprimé(s)';
 $lang['{0} conversation(s) recovered'] = '{0} conversation(s) récupérées';
 $lang['Messages moved successfully'] = 'Messages moved successfully';
 $lang['Outgoing message cannot be spam'] = 'Les messages sortant ne peuvent pas être du spam';
