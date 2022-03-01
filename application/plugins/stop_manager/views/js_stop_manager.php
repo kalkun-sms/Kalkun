@@ -25,6 +25,29 @@
 			$('#stop-dialog').dialog('open');
 		});
 
+		// validation
+		$("#addStopForm").validate({
+			rules: {
+				destination_number: {
+					required: true,
+					remote: {
+						url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
+						type: "post",
+						data: {
+							phone: function() {
+								return $("#destination_number").val();
+							},
+						}
+					}
+				},
+			},
+			messages: {
+				destination_number: {
+					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
+				},
+			}
+		});
+
 	});
 
 </script>
