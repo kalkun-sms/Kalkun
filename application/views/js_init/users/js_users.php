@@ -6,34 +6,34 @@
 		// Add/Edit Contact
 		$('.addpbkcontact, .edit_user').on('click', null, function() {
 			if ($(this).hasClass('addpbkcontact')) {
-				var user_title = '<?php echo tr('Add user');?>';
+				var user_title = "<?php echo tr_addcslashes('"', 'Add user');?>";
 				var type = 'normal';
 				var param1 = '';
 			} else if ($(this).hasClass('edit_user')) {
-				var user_title = '<?php echo tr('Edit user');?>';
+				var user_title = "<?php echo tr_addcslashes('"', 'Edit user');?>";
 				var type = 'edit';
 				var param1 = $(this).parents("tr:first").attr("id");
 			}
 
-			$("#users_container").load('<?php echo site_url('users/add_user')?>', {
+			$("#users_container").load("<?php echo site_url('users/add_user')?>", {
 				'type': type,
 				'param1': param1
 			}, function() {
 				$(this).dialog({
 					title: user_title,
-					closeText: "<?php echo tr('Close'); ?>",
+					closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 					modal: true,
 					show: 'fade',
 					hide: 'fade',
 					buttons: {
-						'<?php echo tr('Save');?>': function() {
+						"<?php echo tr_addcslashes('"', 'Save');?>": function() {
 							if ($("#addUser").valid()) {
 								$.post("<?php echo site_url('users/add_user_process') ?>", $("#addUser").serialize(), function(data) {
 									$("#users_container").html(data);
 									$("#users_container").dialog({
-										closeText: "<?php echo tr('Close'); ?>",
+										closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 										buttons: {
-											"<?php echo tr('Close'); ?>": function() {
+											"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
 												$(this).dialog("close");
 											}
 										}
@@ -44,7 +44,7 @@
 								});
 							}
 						},
-						'<?php echo tr('Cancel');?>': function() {
+						"<?php echo tr_addcslashes('"', 'Cancel');?>": function() {
 							$(this).dialog('close');
 						}
 					}
@@ -79,25 +79,25 @@
 			var count = $("input:checkbox:checked").length;
 			var dest_url = '<?php echo site_url('users/delete_user') ?>';
 			if (count == 0) {
-				$('.notification_area').text("<?php echo tr('No user selected'); ?>");
+				$('.notification_area').text("<?php echo tr_addcslashes('"', 'No user selected'); ?>");
 				$('.notification_area').show();
 			} else {
 				// confirm first
 				$("#confirm_delete_user_dialog").dialog({
-					closeText: "<?php echo tr('Close'); ?>",
+					closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 					bgiframe: true,
 					autoOpen: false,
 					modal: true,
 					buttons: {
-						'<?php echo tr('Cancel'); ?>': function() {
+						"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 							$(this).dialog('close');
 						},
-						'<?php echo tr('Delete'); ?>': function() {
+						"<?php echo tr_addcslashes('"', 'Delete'); ?>": function() {
 							$("input.select_user:checked").each(function() {
 								var row = $(this).parents('tr');
 								var id = row.attr('id');
 								if (id == inbox_master) {
-									$('.notification_area').text("<?php echo tr('Action not allowed'); ?>");
+									$('.notification_area').text("<?php echo tr_addcslashes('"', 'Action not allowed'); ?>");
 									$('.notification_area').show();
 								} else {
 									$.post(dest_url, {
@@ -118,7 +118,7 @@
 		// Contact import
 		$('#pbkimport').on("click", function() {
 			$("#pbkimportdialog").dialog({
-				closeText: "<?php echo tr('Close'); ?>",
+				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
@@ -127,10 +127,10 @@
 		});
 
 		// Search onBlur onFocus
-		$('input.search_name').val('<?php echo tr('Search user'); ?>');
+		$('input.search_name').val("<?php echo tr_addcslashes('"', 'Search user'); ?>");
 
 		$('input.search_name').on("blur", function() {
-			$(this).val('<?php echo tr('Search user'); ?>');
+			$(this).val("<?php echo tr_addcslashes('"', 'Search user'); ?>");
 		});
 
 		$('input.search_name').on("focus", function() {

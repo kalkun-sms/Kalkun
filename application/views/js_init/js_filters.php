@@ -18,15 +18,15 @@
 			}
 
 			$("#filterdialog").dialog({
-				closeText: "<?php echo tr('Close'); ?>",
+				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
 				buttons: {
-					'<?php echo tr('Save'); ?>': function() {
+					"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
 						$("form.addfilterform").trigger('submit');
 					},
-					'<?php echo tr('Cancel'); ?>': function() {
+					"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 						$(this).dialog('close');
 					}
 				},
@@ -45,15 +45,15 @@
 
 			// confirm first
 			$("#confirm_delete_filter_dialog").dialog({
-				closeText: "<?php echo tr('Close'); ?>",
+				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
 				buttons: {
-					'<?php echo tr('Cancel')?>': function() {
+					"<?php echo tr_addcslashes('"', 'Cancel')?>": function() {
 						$(this).dialog('destroy');
 					},
-					'<?php echo tr('Yes')?>': function() {
+					"<?php echo tr_addcslashes('"', 'Yes')?>": function() {
 						$.get(dest_url + '/' + id_filter, function() {
 							$(row).slideUp("slow");
 						});

@@ -33,10 +33,10 @@
 		 */
 		$(document).on('click', "a.global_delete", action_delete = function() {
 			var count = $("input.select_conversation:checkbox:checked").length;
-			var notif = "<?php echo tr('{0} conversation(s) deleted'); ?>";
+			var notif = "<?php echo tr_addcslashes('"', '{0} conversation(s) deleted'); ?>";
 			notif = notif.replace('{0}', count);
 			if (count == 0) {
-				show_notification("<?php echo tr('No item selected.')?>");
+				show_notification("<?php echo tr_addcslashes('"', 'No item selected.')?>");
 			} else {
 				$("input.select_conversation:checked").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
@@ -74,10 +74,10 @@
 		 */
 		$(document).on('click', "a.recover_button", action_recover = function() {
 			var count = $("input.select_conversation:checkbox:checked").length;
-			var notif = "<?php echo tr('{0} conversation(s) recovered'); ?>";
+			var notif = "<?php echo tr_addcslashes('"', '{0} conversation(s) recovered'); ?>";
 			notif = notif.replace('{0}', count);
 			if (count == 0) {
-				show_notification("<?php echo tr('No item selected.')?>");
+				show_notification("<?php echo tr_addcslashes('"', 'No item selected.')?>");
 			} else {
 
 				var id_folder = (source == 'inbox') ? 1 : 3;
@@ -117,11 +117,11 @@
 		 */
 		$(document).on('click', ".move_to", function() {
 			var count = $("input.select_conversation:checkbox:checked").length;
-			var notif = "<?php echo tr('{0} conversation(s) moved'); ?>";
+			var notif = "<?php echo tr_addcslashes('"', '{0} conversation(s) moved'); ?>";
 			notif = notif.replace('{0}', count);
 			if (count == 0) {
 				$("#movetodialog").dialog('close');
-				show_notification("<?php echo tr('No item selected.')?>");
+				show_notification("<?php echo tr_addcslashes('"', 'No item selected.')?>");
 			} else {
 				var id_folder = $(this).attr('id');
 				$("#movetodialog").dialog('close');
@@ -152,7 +152,7 @@
 
 		$(document).on('click', ".move_to_button", message_move = function() {
 			$("#movetodialog").dialog({
-				closeText: "<?php echo tr('Close'); ?>",
+				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
@@ -189,19 +189,19 @@
 		// refresh
 		$(document).on('click', "a.refresh_button, div#logo a", refresh = function(type) {
 			if (type != 'retry') {
-				$('.loading_area').html('<?php echo tr('Loading'); ?>');
+				$('.loading_area').html("<?php echo tr_addcslashes('"', 'Loading'); ?>");
 				$('.loading_area').fadeIn("slow");
 			}
 			$('#message_holder').load(refresh_url, function(response, status, xhr) {
 				if (status == "error" || xhr.status != 200) {
-					var msg = '<?php echo tr('Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>';
+					var msg = "<?php echo tr_addcslashes('"', 'Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>"
 					$('.loading_area').html('<span style="white-space: nowrap">' + msg + '</span>');
 					var cntdwn = setInterval(function() {
 						current_val = $('#countdown-count').html();
 						if (current_val > 1) $('#countdown-count').html(current_val - 1);
 						else {
 							clearInterval(cntdwn);
-							$('#retry-progress-display').html('<?php echo tr('Retrying now'); ?>')
+							$('#retry-progress-display').html("<?php echo tr_addcslashes('"', 'Retrying now'); ?>")
 						}
 					}, 1000);
 					setTimeout(function() {
@@ -225,15 +225,15 @@
 		 */
 		$(document).on('click', '#renamefolder', function() {
 			$("#renamefolderdialog").dialog({
-				closeText: "<?php echo tr('Close'); ?>",
+				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
 				buttons: {
-					'<?php echo tr('Save'); ?>': function() {
+					"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
 						$("form.renamefolderform").trigger('submit');
 					},
-					'<?php echo tr('Cancel'); ?>': function() {
+					"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 						$(this).dialog('close');
 					}
 				}
@@ -253,15 +253,15 @@
 		 */
 		$(document).on('click', '#deletefolder', function() {
 			$("#deletefolderdialog").dialog({
-				closeText: "<?php echo tr('Close'); ?>",
+				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
 				buttons: {
-					'<?php echo tr('Cancel'); ?>': function() {
+					"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 						$(this).dialog('close');
 					},
-					'<?php echo tr('Delete this folder'); ?>': function() {
+					"<?php echo tr_addcslashes('"', 'Delete this folder'); ?>": function() {
 						location.href = delete_folder_url + id_folder;
 					}
 				}
@@ -281,15 +281,15 @@
 		 */
 		$(document).on('click', '#delete-all-link', function() {
 			$("#deletealldialog").dialog({
-				closeText: "<?php echo tr('Close'); ?>",
+				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
 				buttons: {
-					'<?php echo tr('Cancel'); ?>': function() {
+					"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 						$(this).dialog('close');
 					},
-					'<?php echo tr('Delete all'); ?>': function() {
+					"<?php echo tr_addcslashes('"', 'Delete all'); ?>": function() {
 						$.get("<?php echo site_url('messages/delete_all').'/'.strtolower($this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name'));?>");
 						$(this).dialog('close');
 						refresh();

@@ -23,7 +23,7 @@
 			'minChars': 0,
 			'interactive': true,
 			'delimiter': ',',
-			'placeholder': '<?php echo tr('Type group name');?>'
+			'placeholder': '<?php echo tr_addcslashes('"', 'Type group name');?>'
 		});
 
 	});

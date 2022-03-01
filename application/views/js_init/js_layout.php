@@ -53,14 +53,14 @@
 		function auto_refresh() {
 			$('#message_holder').load("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>", function(response, status, xhr) {
 				if (status == "error" || xhr.status != 200) {
-					var msg = '<?php echo tr('Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>';
+					var msg = "<?php echo tr_addcslashes('"', 'Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>";
 					show_loading('<span style="white-space: nowrap">' + msg + '</span>');
 					var cntdwn = setInterval(function() {
 						current_val = $('#countdown-count').html();
 						if (current_val > 1) $('#countdown-count').html(current_val - 1);
 						else {
 							clearInterval(cntdwn);
-							$('#retry-progress-display').html('<?php echo tr('Retrying now'); ?>')
+							$('#retry-progress-display').html("<?php echo tr_addcslashes('"', 'Retrying now'); ?>")
 						}
 					}, 1000);
 					setTimeout(function() {
@@ -94,7 +94,7 @@
 		//console.debug(param1);
 		//console.debug(param2);
 
-		$("#compose_sms_container").html('<div align="center"><?php echo tr('Loading'); ?></div>');
+		$("#compose_sms_container").html("<div align=\"center\"><?php echo tr_addcslashes('"', 'Loading'); ?></div>");
 		var data = {
 			type: type
 		};
@@ -106,16 +106,16 @@
 		}
 		$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', data, function() {
 			var buttons = {};
-			buttons['<?php echo tr('Send message'); ?>'] = function() {
+			buttons["<?php echo tr_addcslashes('"', 'Send message'); ?>"] = function() {
 				if ($("#composeForm").valid()) {
 					$('.ui-dialog-buttonpane :button').each(function() {
-						if ($(this).text() == '<?php echo tr('Send message'); ?>') $(this).html('<?php echo tr('Sending'); ?> <img src="<?php echo $this->config->item('img_path').'processing.gif' ?>" height="12" style="margin:0px; padding:0px;">');
+						if ($(this).text() == "<?php echo tr_addcslashes('"', 'Send message'); ?>") $(this).html("<?php echo tr_addcslashes('"', 'Sending'); ?> <img src=\"<?php echo $this->config->item('img_path').'processing.gif' ?>\" height=\"12\" style=\"margin:0px; padding:0px;\">");
 					});
 					$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize())
 						.done(function(data) {
 							$("#compose_sms_container").html(data);
 							$("#compose_sms_container").dialog("option", "buttons", {
-								"<?php echo tr('Close'); ?>": function() {
+								"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
 									$(this).dialog("destroy");
 								}
 							});
@@ -127,17 +127,17 @@
 						})
 						.fail(function(data) {
 							$('.ui-dialog-buttonpane :button').each(function() {
-								if ($(this).text() == '<?php echo tr('Sending'); ?> ') $(this).html('<?php echo tr('Send message'); ?>');
+								if ($(this).text() == "<?php echo tr_addcslashes('"', 'Sending'); ?> ') $(this).html('<?php echo tr_addcslashes('"', 'Send message'); ?>");
 							});
 							$("#compose_sms_container_error").html($(data.responseText).filter('div'));
 							$("#compose_sms_container_error").dialog({
-								closeText: "<?php echo tr('Close'); ?>",
+								closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 								modal: true,
 								width: 550,
 								show: 'fade',
 								hide: 'fade',
 								buttons: {
-									"<?php echo tr('Close'); ?>": function() {
+									"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
 										$(this).dialog("destroy");
 									}
 								}
@@ -146,7 +146,7 @@
 				}
 			};
 			if (repeatable) {
-				buttons['<?php echo tr('Send and repeat'); ?>'] = function() {
+				buttons["<?php echo tr_addcslashes('"', 'Send and repeat'); ?>"] = function() {
 					if ($("#composeForm").valid()) {
 						$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
 							$("#compose_sms_container").append(data);
@@ -154,11 +154,11 @@
 					}
 				};
 			}
-			buttons["<?php echo tr('Cancel'); ?>"] = function() {
+			buttons["<?php echo tr_addcslashes('"', 'Cancel'); ?>"] = function() {
 				$(this).dialog('destroy');
 			};
 			$(this).dialog({
-				closeText: "<?php echo tr('Close'); ?>",
+				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 				modal: true,
 				width: 550,
 				show: 'fade',
@@ -188,7 +188,7 @@
 		// About
 		$('#about_button').on("click", function() {
 			$("#about").dialog({
-				closeText: "<?php echo tr('Close'); ?>",
+				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				width: 550,
@@ -201,15 +201,15 @@
 		// Add folder
 		$('#addfolder').on("click", function() {
 			$("#addfolderdialog").dialog({
-				closeText: "<?php echo tr('Close'); ?>",
+				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
 				buttons: {
-					'<?php echo tr('Save'); ?>': function() {
+					"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
 						$("form.addfolderform").trigger('submit');
 					},
-					'<?php echo tr('Cancel'); ?>': function() {
+					"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 						$(this).dialog('close');
 					}
 				},
@@ -221,12 +221,8 @@
 			return false;
 		});
 
-		// languange support
-		var save = '<?php echo tr('Save')?>';
-		var cancel = '<?php echo tr('Cancel')?>';
-
-		$('div.ui-dialog-buttonpane:eq(0) button:eq(1)').text(cancel);
-		$('div.ui-dialog-buttonpane:eq(0) button:eq(0)').text(save);
+		$('div.ui-dialog-buttonpane:eq(0) button:eq(1)').text("<?php echo tr_addcslashes('"', 'Cancel')?>");
+		$('div.ui-dialog-buttonpane:eq(0) button:eq(0)').text("<?php echo tr_addcslashes('"', 'Save')?>");
 
 		//shift select
 		$("input:checkbox").createCheckboxRange(function() {
@@ -250,16 +246,16 @@
 		});
 		$('#a_search').on("click", function() {
 			$("#a_search_dialog").dialog({
-				closeText: "<?php echo tr('Close'); ?>",
+				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				width: 500,
 				modal: true,
 				buttons: {
-					'<?php echo tr('Search');?>': function() {
+					"<?php echo tr_addcslashes('"', 'Search');?>": function() {
 						$('#a_search_form').trigger('submit');
 					},
-					"<?php echo tr('Cancel');?>": function() {
+					"<?php echo tr_addcslashes('"', 'Cancel');?>": function() {
 						$(this).dialog('close');
 					}
 				},
