@@ -46,7 +46,7 @@ github actions page:
 
 ### Manual Installation
 
-1. Extract to web root folder (eg: /var/www/html => Ubuntu)
+1. Extract to a folder (eg: `/usr/local/share/kalkun` for Ubuntu, Debian...)
 1. Run `composer install` from there
 1. If you haven't created the gammu database yet, create it. It is shared by gammu & kalkun. Here we name it `kalkun`, but by default, gammu may name it `smsd`.
 
@@ -60,13 +60,13 @@ github actions page:
     CREATE USER username WITH password 'password' NOCREATEDB NOCREATEROLE;
     CREATE DATABASE kalkun WITH OWNER = username;
     ```
-1. Edit database config (application/config/database.php)  
-   Change database value to 'kalkun'.  
-   username and password depends on your database configuration.  
+1. Edit database config (`application/config/database.php`)  
+   Change database value to `kalkun`.  
+   username and password depend on your database configuration.  
    If you use a specific port with PostgreSQL, you may also need to set
    `$db['default']['port'] = "5432";`
 
-1. Import gammu database schema (it's included on gammu source, eg. `gammu/docs/sql/mysql.sql`).
+1. Import gammu database schema (it's included in gammu source, eg. `gammu/docs/sql/mysql.sql`).
 
     For MySQL : 
     ```
@@ -84,36 +84,53 @@ github actions page:
    -  Set path on gammu-smsd configuration at runonreceive directive, e.g:
       ```
       [smsd]
-      runonreceive = /var/www/html/kalkun/scripts/daemon.sh
+      runonreceive = /usr/local/share/kalkun/scripts/daemon.sh
       ```
       or, if you use Windows:
       ```
       [smsd]
       runonreceive = C:\xampp\htdocs\kalkun\scripts\daemon.bat
       ```
-   - set correct path (php-cli path and daemon.php path) on daemon.sh or daemon.bat
-   - set correct path (php-cli path and outbox_queue.php path) on outbox_queue.sh or outbox_queue.bat
+   - set correct path (`php-cli` path and `daemon.php` path) in `daemon.sh` or `daemon.bat`
+   - set correct path (`php-cli` path and `outbox_queue.php` path) in `outbox_queue.sh` or `outbox_queue.bat`
    - make sure that the daemon & outbox_queue scripts are executable
-   - Change URI path in daemon.php & outbox_queue.php. Default is (http://localhost/kalkun)
+   - Change URI path in `daemon.php` & `outbox_queue.php`. Default is (http://localhost/kalkun)
+1. Configure your webserver to point to `/usr/local/share/kalkun/www`
+   - With Apache, on Ubuntu, debian, you may add such a file `/etc/apache2/conf-enabled/kalkun.conf`
+    ```
+    Alias /kalkun /usr/local/share/kalkun/www
+
+    <Directory /usr/local/share/kalkun/www>
+        Options -Indexes
+    </Directory>
+    ```
+   - Then restart the webserver
+   ```
+   systemctl restart apache2.service
+   ```
+1. Set the log directory as writable by the HTTP Server. On Ubuntu, debian:
+   ```
+   chown www-data:www-data /usr/local/share/kalkun/application/logs
+   ```
 1. Configure Kalkun
     - _There are 2 ways to configure_
-        - Graphic Install (this will also check that all the dependencies are installed)  
+        - Graphic Install (this will also check that all the dependencies are installed and update the database schema if this is an upgrade)  
           1. Launch http://localhost/kalkun/index.php/install, and follow instruction there
-          1. Finally delete file /var/www/html/kalkun/*install* in case the installer didn't do so.
-        - Manual Install 
+          1. Finally delete file `/usr/local/share/kalkun/www/install` in case the installer couldn't do so.
+        - Manual Install (only for fresh install)
           1. Import sql file located in kalkun/media/db/ to kalkun database.
         
              For MySQL
              ```
-             mysql -u username -p kalkun < /var/www/html/kalkun/media/db/mysql_kalkun.sql
+             mysql -u username -p kalkun < /usr/local/share/kalkun/media/db/mysql_kalkun.sql
              ```
              For PostgreSQL
              ```
-             psql -U username -h localhost kalkun < /var/www/html/kalkun/media/db/pgsql_kalkun.sql
+             psql -U username -h localhost kalkun < /usr/local/share/kalkun/media/db/pgsql_kalkun.sql
              ```
-           2. Delete the file /var/www/html/kalkun/*install* 
+           2. Delete the file `/usr/local/share/kalkun/www/install`
            
-              `rm /var/www/html/kalkun/install`
+              `rm /usr/local/share/kalkun/www/install`
 
 ## IMPORTANT
   * After install is finished, you may need to remove install file.
@@ -122,7 +139,7 @@ github actions page:
     ```
     php -r 'echo bin2hex(random_bytes(16)), "\n";'
     ```
-    Write the value in application/config/config.php and enclose it in a hex2bin() function.
+    Write the value in `application/config/config.php` and enclose it in a `hex2bin()` function.
 
 ### Migration Note (to kalkun 0.8)
   * During migration to codeigniter 3 (done with version 0.8 of Kalkun), it was strongly advised to switch to the Encryption Library for security reasons. This required to change the default encryption key. The Encryption library was used in "sms to wordpress" and "sms to xmpp" plugins. You need to recreate the configuration of these plugins so that they continue to work.
