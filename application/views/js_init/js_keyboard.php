@@ -49,6 +49,7 @@
 
 		<?php if ($this->uri->segment(1) != 'phonebook'
 			&& $this->uri->segment(1) != 'users'
+			&& $this->uri->segment(1) != 'plugin'
 			&& $this->uri->segment(1) != 'pluginss'): ?>
 		$(document).on('keydown', null, 'm', function() {
 			message_move();
@@ -203,6 +204,7 @@
 		<?php if ($this->uri->segment(1) != 'phonebook'
 			&& $this->uri->segment(1) != 'users'
 			&& $this->uri->segment(1) != 'pluginss'
+			&& $this->uri->segment(1) != 'plugin'
 			&& $this->uri->segment(2) != 'search'): ?>
 		$(document).on('keydown', null, 'f5', function() {
 			refresh();
