@@ -13,12 +13,12 @@
 
 <h3>Remaining manual steps</h3>
 <?php
-	if (file_exists('./install') && is_writable(dirname('./install'))):
-		$rm = unlink('./install');
+	if (file_exists(FCPATH.'install') && is_writable(dirname(FCPATH.'install'))):
+		$rm = unlink(FCPATH.'install');
 		$needs_manual_install_file_deletion = FALSE;
 
 	else:
-		$realpath = realpath('./install');
+		$realpath = realpath(FCPATH.'install');
 		$needs_manual_install_file_deletion = TRUE;
 ?>
 <h4>Remove Installation file</h4>
