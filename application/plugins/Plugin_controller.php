@@ -75,7 +75,6 @@ class Plugin_controller extends MY_Controller {
 
 		// Remove plugin path from package path now that we finished loading language, config...
 		$this->load->remove_package_path(APPPATH.'plugins/'.$this->plugin_name);
-
 	}
 
 	// --------------------------------------------------------------------
