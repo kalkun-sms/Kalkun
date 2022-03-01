@@ -12,3 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 // phpcs:enable
 $config['twitter_code'] = 'TW';
+
+// Fill with your OAuth credentials
+$config['consumer_key'] = '';
+$config['consumer_key_secret'] = '';
