@@ -25,8 +25,7 @@ class Soap extends Plugin_controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Kalkun_model');
-		$this->load->model('soap_model', 'Plugin_model');
+		$this->load->model('soap_model');
 	}
 
 	function index()
@@ -35,7 +34,7 @@ class Soap extends Plugin_controller {
 		{
 			if ($this->input->post('editid_remote_access'))
 			{
-				$this->Plugin_model->updateRemoteAccess();
+				$this->soap_model->updateRemoteAccess();
 			}
 			else
 			{
@@ -45,7 +44,7 @@ class Soap extends Plugin_controller {
 				}
 				else
 				{
-					$this->Plugin_model->addRemoteAccess();
+					$this->soap_model->addRemoteAccess();
 				}
 			}
 			redirect('plugin/soap');
@@ -53,7 +52,7 @@ class Soap extends Plugin_controller {
 
 		$this->load->library('pagination');
 		$config['base_url'] = site_url().'/plugin/soap';
-		$config['total_rows'] = $this->Plugin_model->getRemoteAccess('count');
+		$config['total_rows'] = $this->soap_model->getRemoteAccess('count');
 		$config['per_page'] = 10;
 		//$config['per_page'] = $this->Kalkun_model->getSetting('paging', 'value')->row('value');
 		$config['cur_tag_open'] = '<span id="current">';
@@ -63,7 +62,7 @@ class Soap extends Plugin_controller {
 		$this->pagination->initialize($config);
 
 		$data['main'] = 'index';
-		$data['remote_access'] = $this->Plugin_model->getRemoteAccess('paginate', $config['per_page'], $this->uri->segment(3, 0));
+		$data['remote_access'] = $this->soap_model->getRemoteAccess('paginate', $config['per_page'], $this->uri->segment(3, 0));
 		//TODO - GET NOTIFICATION
 		$data['notification'] = array();
 		$data['number'] = $this->uri->segment(3, 0) + 1;
@@ -72,7 +71,7 @@ class Soap extends Plugin_controller {
 
 	function delete_remote_access($id)
 	{
-		$this->Plugin_model->delRemoteAccess($id);
+		$this->soap_model->delRemoteAccess($id);
 		redirect('plugin/soap');
 	}
 

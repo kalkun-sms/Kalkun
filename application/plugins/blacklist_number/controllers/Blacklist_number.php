@@ -25,7 +25,6 @@ class Blacklist_number extends Plugin_controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Kalkun_model');
 		$this->load->model('blacklist_number_model');
 		$this->load->helper('kalkun');
 	}
