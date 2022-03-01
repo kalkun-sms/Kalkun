@@ -21,7 +21,7 @@
 				},
 				new_password: {
 					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
-					minlength: "<?php echo tr_addcslashes('"', ('Value is too short.');?>"
+					minlength: "<?php echo tr_addcslashes('"', 'Value is too short.');?>"
 				},
 				confirm_password: {
 					equalTo: "<?php echo tr_addcslashes('"', 'Passwords do not match.');?>"
