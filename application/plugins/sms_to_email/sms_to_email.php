@@ -9,15 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://github.com/kingster
 */
 
-function sms_to_email_initialize()
-{
-	$CI = &get_instance();
-
-	$CI->load->add_package_path(APPPATH.'plugins/sms_to_email', FALSE);
-	$CI->load->config('sms_to_email', TRUE);
-
-	return $CI->config->config['sms_to_email'];
-}
+require_once (APPPATH.'plugins/Plugin_helper.php');
 
 // Add hook for incoming message
 add_action('message.incoming.after', 'sms_to_email', 10);
@@ -73,7 +65,7 @@ function sms_to_email_install()
 
 function sms_to_email($sms)
 {
-	$config = sms_to_email_initialize();
+	$config = Plugin_helper::get_plugin_config('sms_to_email');
 	$message = $sms->TextDecoded;
 	$from = $sms->SenderNumber;
 	$msg_user = $sms->msg_user;

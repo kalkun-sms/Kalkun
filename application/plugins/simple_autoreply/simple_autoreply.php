@@ -9,15 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://azhari.harahap.us
 */
 
-function simple_autoreply_initialize()
-{
-	$CI = &get_instance();
-
-	$CI->load->add_package_path(APPPATH.'plugins/simple_autoreply', FALSE);
-	$CI->load->config('simple_autoreply', TRUE);
-
-	return $CI->config->config['simple_autoreply'];
-}
+require_once (APPPATH.'plugins/Plugin_helper.php');
 
 // Add hook for incoming message
 add_action('message.incoming.before', 'simple_autoreply', 11);
@@ -63,7 +55,7 @@ function simple_autoreply_install()
 
 function simple_autoreply($sms)
 {
-	$config = simple_autoreply_initialize();
+	$config = Plugin_helper::get_plugin_config('simple_autoreply');
 	$CI = &get_instance();
 	$CI->load->model('Message_model');
 	$data['class'] = '1';

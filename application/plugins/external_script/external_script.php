@@ -10,15 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://azhari.harahap.us
 */
 
-function external_script_initialize()
-{
-	$CI = &get_instance();
-
-	$CI->load->add_package_path(APPPATH.'plugins/external_script', FALSE);
-	$CI->load->config('external_script', TRUE);
-
-	return $CI->config->item('external_script', 'external_script');
-}
+require_once (APPPATH.'plugins/Plugin_helper.php');
 
 // Add hook for incoming message
 add_action('message.incoming.before', 'external_script', 12);
@@ -64,7 +56,7 @@ function external_script_install()
 
 function external_script($sms)
 {
-	$scripts = external_script_initialize();
+	$scripts = Plugin_helper::get_plugin_config('external_script')['external_script'];
 	$phone = $sms->SenderNumber;
 	$content = $sms->TextDecoded;
 	$id = $sms->ID;

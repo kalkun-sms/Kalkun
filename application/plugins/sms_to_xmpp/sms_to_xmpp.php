@@ -9,15 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://azhari.harahap.us
 */
 
-function sms_to_xmpp_initialize()
-{
-	$CI = &get_instance();
-
-	$CI->load->add_package_path(APPPATH.'plugins/sms_to_xmpp', FALSE);
-	$CI->load->config('sms_to_xmpp', TRUE);
-
-	return $CI->config->config['sms_to_xmpp'];
-}
+require_once (APPPATH.'plugins/Plugin_helper.php');
 
 // Add hook for incoming message
 add_action('message.incoming.before', 'sms_to_xmpp', 17);
@@ -72,7 +64,7 @@ function sms_to_xmpp_install()
 
 function sms_to_xmpp($sms)
 {
-	$config = sms_to_xmpp_initialize();
+	$config = Plugin_helper::get_plugin_config('sms_to_xmpp');
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
 

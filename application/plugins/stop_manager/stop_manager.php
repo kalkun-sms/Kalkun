@@ -8,6 +8,8 @@
 * Author URI: https://github.com/tenzap
 */
 
+require_once (APPPATH.'plugins/Plugin_helper.php');
+
 // Add hook for outgoing message
 add_action('message.outgoing_dest_data', 'stop_manager_cleanup_outgoing', 1);
 add_action('message.incoming.before', 'stop_manager_incoming', 1);
@@ -56,19 +58,9 @@ function stop_manager_install()
 //--------------------------------------------------------------------------
 // CONFIGURATION
 //--------------------------------------------------------------------------
-function stop_manager_initialize()
-{
-	$CI = &get_instance();
-
-	$CI->load->add_package_path(APPPATH.'plugins/stop_manager', FALSE);
-	$CI->load->config('stop_manager', TRUE);
-
-	return $CI->config->config['stop_manager'];
-}
-
 function stop_manager_cleanup_outgoing($all)
 {
-	$config = stop_manager_initialize();
+	$config = Plugin_helper::get_plugin_config('stop_manager');
 
 	$dest = $all[0];
 	$data = $all[1];
@@ -147,7 +139,7 @@ function stop_manager_cleanup_outgoing($all)
 
 function stop_manager_incoming($sms)
 {
-	$config = stop_manager_initialize();
+	$config = Plugin_helper::get_plugin_config('stop_manager');
 
 	$optout_keywords = array_map('strtoupper', $config['optout_keywords']);
 	$optin_keywords = array_map('strtoupper', $config['optin_keywords']);
@@ -308,7 +300,7 @@ function stop_manager_incoming($sms)
 
 function autoreply($tel, $reply_msg)
 {
-	$config = stop_manager_initialize();
+	$config = Plugin_helper::get_plugin_config('stop_manager');
 
 	$ret = NULL;
 	// Filter rule for outgoing SMS

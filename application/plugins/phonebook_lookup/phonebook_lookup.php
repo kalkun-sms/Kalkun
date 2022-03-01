@@ -9,16 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://azhari.harahap.us
 */
 
-function phonebook_lookup_initialize()
-{
-	$CI = &get_instance();
-
-	$CI->load->add_package_path(APPPATH.'plugins/phonebook_lookup', FALSE);
-	$CI->load->config('phonebook_lookup', TRUE);
-	$CI->load->remove_package_path(APPPATH.'plugins/phonebook_lookup');
-
-	return $CI->config->config['phonebook_lookup'];
-}
+require_once (APPPATH.'plugins/Plugin_helper.php');
 
 // Add hook for contact menu
 add_action('phonebook.contact.menu', 'phonebook_lookup', 10);
@@ -64,7 +55,7 @@ function phonebook_lookup_install()
 
 function phonebook_lookup($number)
 {
-	$config = phonebook_lookup_initialize();
+	$config = Plugin_helper::get_plugin_config('phonebook_lookup');
 	$lookup['url'] = str_replace('#phonenumber#', $number->Number, $config['url']);
 	$lookup['title'] = tr('Lookup Number');
 	return $lookup;
