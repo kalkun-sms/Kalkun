@@ -31,9 +31,6 @@ class Sms_credit extends Plugin_controller {
 	{
 		parent::__construct();
 		$this->load->model('sms_credit_model');
-		$this->load->add_package_path(APPPATH.'plugins/sms_credit', FALSE);
-		$this->load->language('sms_credit');
-		$this->load->remove_package_path(APPPATH.'plugins/sms_credit');
 	}
 
 	// --------------------------------------------------------------------

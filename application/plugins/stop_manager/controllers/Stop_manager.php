@@ -25,11 +25,7 @@ class Stop_manager extends Plugin_controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Kalkun_model');
-		$this->load->model('Stop_manager_model');
-		$this->load->add_package_path(APPPATH.'plugins/stop_manager', FALSE);
-		$this->load->language('stop_manager');
-		$this->load->remove_package_path(APPPATH.'plugins/stop_manager');
+		$this->load->model('stop_manager_model');
 	}
 
 	function index()

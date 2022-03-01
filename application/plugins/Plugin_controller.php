@@ -38,6 +38,8 @@ class Plugin_controller extends MY_Controller {
 			redirect('/');
 		}
 
+		$this->plugin_name = strtolower(get_class($this));
+
 		// Prevent this controller from being called directly
 		if (get_class() === get_class($this))
 		{
@@ -48,11 +50,19 @@ class Plugin_controller extends MY_Controller {
 
 		// Check if plugin is active
 		$CI = &get_instance();
-		$check = $CI->db->where('plugin_system_name', strtolower(get_class($this)))->get('plugins');
+		$check = $CI->db->where('plugin_system_name', $this->plugin_name)->get('plugins');
 		if ($check->num_rows() !== 1)
 		{
-			$this->session->set_flashdata('notif', tr('Plugin {0} is not installed.', NULL, strtolower(get_class($this))));
+			$this->session->set_flashdata('notif', tr('Plugin {0} is not installed.', NULL, $this->plugin_name));
 			redirect('pluginss');
+		}
+
+		// Load translations
+		if (file_exists(APPPATH.'plugins/'.$this->plugin_name.'/language/english/'.$this->plugin_name.'_lang.php'))
+		{
+			$this->load->add_package_path(APPPATH.'plugins/'.$this->plugin_name, FALSE);
+			$this->lang->load($this->plugin_name);
+			$this->load->remove_package_path(APPPATH.'plugins/'.$this->plugin_name);
 		}
 	}
 
