@@ -5,14 +5,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Kalkun
  * An open source web based SMS Manager
  *
- * @copyright 2021 Kalkun dev team
- * @author Kalkun dev team
+ * @copyright 2021 Kalkun Dev Team
+ * @author Kalkun Dev Team
  * @license <https://spdx.org/licenses/GPL-3.0-or-later.html> GPL-3.0-or-later
  * @link https://github.com/kalkun-sms/Kalkun/
  */
-  
-class Plugin_helper {
 
+class Plugin_helper {
 
 	public static function get_plugin_config($plugin_name)
 	{
