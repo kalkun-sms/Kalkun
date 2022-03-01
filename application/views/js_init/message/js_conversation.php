@@ -300,7 +300,7 @@
 
 					});
 				});
-				show_notification("<?php echo tr('Message(s) marked non-spam'); ?>")
+				show_notification("<?php echo tr_addcslashes('"', 'Message(s) marked non-spam'); ?>")
 			}
 		});
 		<?php endif; ?>
