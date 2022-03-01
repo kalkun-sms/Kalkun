@@ -57,13 +57,25 @@ class Plugin_controller extends MY_Controller {
 			redirect('pluginss');
 		}
 
+		// Temporarily add the plugin path to package path to load language, config...
+		$this->load->add_package_path(APPPATH.'plugins/'.$this->plugin_name, FALSE);
+
 		// Load translations
 		if (file_exists(APPPATH.'plugins/'.$this->plugin_name.'/language/english/'.$this->plugin_name.'_lang.php'))
 		{
-			$this->load->add_package_path(APPPATH.'plugins/'.$this->plugin_name, FALSE);
 			$this->lang->load($this->plugin_name);
-			$this->load->remove_package_path(APPPATH.'plugins/'.$this->plugin_name);
 		}
+
+		// Load plugin config
+		// Access config items with: $this->config->config[$plugin_name]->item('config_item');
+		if (file_exists(APPPATH.'plugins/'.$this->plugin_name.'/config/'.$this->plugin_name.'.php'))
+		{
+			$this->load->config($this->plugin_name, TRUE);
+		}
+
+		// Remove plugin path from package path now that we finished loading language, config...
+		$this->load->remove_package_path(APPPATH.'plugins/'.$this->plugin_name);
+
 	}
 
 	// --------------------------------------------------------------------
