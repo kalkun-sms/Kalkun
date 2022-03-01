@@ -25,7 +25,6 @@ class Whitelist_number extends Plugin_controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Kalkun_model');
 		$this->load->model('whitelist_number_model');
 	}
 
