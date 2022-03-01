@@ -10,7 +10,7 @@ if (count($messages) == 0)
 	{
 		if ($this->uri->segment(2) == 'search')
 		{
-			echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('No result.').'.</i></p>';
+			echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('No result.').'</i></p>';
 		}
 		else
 		{
