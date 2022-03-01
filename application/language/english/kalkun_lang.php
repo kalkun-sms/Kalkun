@@ -286,7 +286,7 @@ $lang['Delivery Report'] = 'Delivery Report';
 
 $lang['You are about to resend message to <strong>{0}</strong>.'] = 'You are about to resend message to <strong>{0}</strong>.';
 $lang['Message content:'] = 'Message content:';
-$lang['Delete copy of this message (prevents duplicates).'] = 'Delete copy of this message (prevents duplicates).';
+$lang['Delete copy (prevents duplicates).'] = 'Delete copy (prevents duplicates).';
 $lang['You are about to resend {0} message(s).'] = 'You are about to resend {0} message(s).';
 
 // Kalkun Controller

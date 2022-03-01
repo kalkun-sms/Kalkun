@@ -316,8 +316,8 @@
 			resend_conf = `<p>${resend_conf_label}</p>`;
 			message_content_label = "<?php echo tr_addcslashes('"', 'Message content:'); ?>";
 			message_content = `<p><strong>${message_content_label}</strong> <br />${TextDecoded}</p>`;
-			delete_dup_label = "<?php echo tr_addcslashes('"', 'Delete copy of this message (prevents duplicates).'); ?>";
-			delete_dup = `<input type="checkbox" id="delete_dup" /> <label for="delete_dup">${delete_dup_label}; ?></label>`;
+			delete_dup_label = "<?php echo tr_addcslashes('"', 'Delete copy (prevents duplicates).'); ?>";
+			delete_dup = `<input type="checkbox" id="delete_dup" /> <label for="delete_dup">${delete_dup_label}</label>`;
 			$("#compose_sms_container").html(resend_conf + message_content + delete_dup);
 			$("#compose_sms_container").dialog({
 				//title: 'Resend SMS',
@@ -382,7 +382,7 @@
 				resend_conf_label = "<?php echo tr_addcslashes('"', 'You are about to resend {0} message(s).'); ?>";
 				resend_conf_label = resend_conf_label.replace('{0}', count);
 				resend_conf = `<p>${resend_conf_label}</p>`;
-				delete_dup_label = "<?php echo tr_addcslashes('"', 'Delete copy of this message (prevents duplicates).'); ?>";
+				delete_dup_label = "<?php echo tr_addcslashes('"', 'Delete copy (prevents duplicates).'); ?>";
 				delete_dup = `<input type="checkbox" id="delete_dup" /> <label for="delete_dup">${delete_dup_label}</label>`;
 				$("#compose_sms_container").html(resend_conf + delete_dup);
 				$("#compose_sms_container").dialog({

@@ -285,7 +285,7 @@ $lang['Delivery Report'] = 'Accusé de réception';
 
 $lang['You are about to resend message to <strong>{0}</strong>.'] = 'Vous êtes sur le point de renvoyer le message au <strong>{0}</strong>.';
 $lang['Message content:'] = 'Contenu du message&nbsp;:';
-$lang['Delete copy of this message (prevents duplicates).'] = 'Supprimer la copie de ce message (évite les doublons).';
+$lang['Delete copy (prevents duplicates).'] = 'Supprimer la copie (évite les doublons).';
 $lang['You are about to resend {0} message(s).'] = 'Vous êtes sur le point de renvoyer {0} message(s).';
 
 // Kalkun Controller
