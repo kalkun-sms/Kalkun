@@ -137,8 +137,6 @@ $lang['See conversation'] = 'Lihat percakapan';
 
 $lang['Search'] = 'Cari';
 $lang['Advanced search'] = 'Pencarian Lanjut';
-$lang['From/To'] = 'Dari/Ke';
-$lang['Query'] = 'Kata kunci';
 $lang['Folder'] = 'Cari Dalam';
 $lang['All'] = 'Semua Berkas';
 $lang['Date from'] = 'Dari Tanggal';
@@ -420,3 +418,4 @@ $lang['Control'] = 'Control';
 $lang['Plugin {0} is not installed.'] = 'Plugin {0} is not installed.';
 $lang['Value must be a number.'] = 'Value must be a number.';
 $lang['{0} part messages'] = '{0} part messages';
+$lang['Content'] = 'Content';

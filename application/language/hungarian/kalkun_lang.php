@@ -137,8 +137,6 @@ $lang['See conversation'] = 'Beszélgetés megtekintése';
 
 $lang['Search'] = 'Keresés';
 $lang['Advanced search'] = 'Összetett keresés';
-$lang['From/To'] = 'Tól/ig';
-$lang['Query'] = 'Lekérés';
 $lang['Folder'] = 'Keresés be';
 $lang['All'] = 'Minden mappában';
 $lang['Date from'] = 'Dátumtól';
@@ -420,3 +418,4 @@ $lang['Control'] = 'Control';
 $lang['Plugin {0} is not installed.'] = 'Plugin {0} is not installed.';
 $lang['Value must be a number.'] = 'Value must be a number.';
 $lang['{0} part messages'] = '{0} part messages';
+$lang['Content'] = 'Content';

@@ -224,11 +224,11 @@
 	?>
 	<table width="100%">
 		<tr>
-			<td align="right"><label for="a_search_from_to"><b><?php echo tr('From/To');?></b></label></td>
+			<td align="right"><label for="a_search_from_to"><b><?php echo tr('Phone number');?></b></label></td>
 			<td colspan="3"><input style="width: 95%" type="text" id="a_search_from_to" name="a_search_from_to" /></td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_query"><b><?php echo tr('Query');?></b></label></td>
+			<td align="right"><label for="a_search_query"><b><?php echo tr('Content');?></b></label></td>
 			<td colspan="3"><input style="width: 95%" type="text" id="a_search_query" name="a_search_query" /></td>
 		</tr>
 		<tr>

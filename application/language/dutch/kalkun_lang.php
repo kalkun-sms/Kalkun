@@ -137,8 +137,6 @@ $lang['See conversation'] = 'Conversatie bekijken';
 
 $lang['Search'] = 'Zoeken';
 $lang['Advanced search'] = 'Geavanceed Zoeken';
-$lang['From/To'] = 'Van/aan';
-$lang['Query'] = 'Zoekopdracht';
 $lang['Folder'] = 'Zoeken in';
 $lang['All'] = 'Alle Mappen';
 $lang['Date from'] = 'Van Datum';
@@ -420,3 +418,4 @@ $lang['Control'] = 'Control';
 $lang['Plugin {0} is not installed.'] = 'Plugin {0} is not installed.';
 $lang['Value must be a number.'] = 'Value must be a number.';
 $lang['{0} part messages'] = '{0} part messages';
+$lang['Content'] = 'Content';

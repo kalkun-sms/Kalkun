@@ -137,8 +137,6 @@ $lang['See conversation'] = 'Katso keskustelu';
 
 $lang['Search'] = 'Hae';
 $lang['Advanced search'] = 'Laajennettu haku';
-$lang['From/To'] = 'Keneltä/-lle';
-$lang['Query'] = 'Haku';
 $lang['Folder'] = 'Haetaan';
 $lang['All'] = 'Kaikista kansioista';
 $lang['Date from'] = 'Päiväyksestä';
@@ -420,3 +418,4 @@ $lang['Control'] = 'Control';
 $lang['Plugin {0} is not installed.'] = 'Plugin {0} is not installed.';
 $lang['Value must be a number.'] = 'Value must be a number.';
 $lang['{0} part messages'] = '{0} part messages';
+$lang['Content'] = 'Content';

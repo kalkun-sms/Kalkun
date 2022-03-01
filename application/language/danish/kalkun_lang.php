@@ -137,8 +137,6 @@ $lang['See conversation'] = 'Se samtaler';
 
 $lang['Search'] = 'Søg';
 $lang['Advanced search'] = 'Avanceret søgning';
-$lang['From/To'] = 'Fra/til';
-$lang['Query'] = 'Forespørgsel';
 $lang['Folder'] = 'Søg efter';
 $lang['All'] = 'Alle mapper';
 $lang['Date from'] = 'Fra dato';
@@ -420,3 +418,4 @@ $lang['Control'] = 'Control';
 $lang['Plugin {0} is not installed.'] = 'Plugin {0} is not installed.';
 $lang['Value must be a number.'] = 'Value must be a number.';
 $lang['{0} part messages'] = '{0} part messages';
+$lang['Content'] = 'Content';

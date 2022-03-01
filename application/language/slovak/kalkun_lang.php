@@ -137,8 +137,6 @@ $lang['See conversation'] = 'Zobraz konverzáciu';
 
 $lang['Search'] = 'Vyhľadať';
 $lang['Advanced search'] = 'Rozšírené vyhľadávanie';
-$lang['From/To'] = 'Od/Pre';
-$lang['Query'] = 'Požiadavka';
 $lang['Folder'] = 'Vyhľadávanie zapnuté';
 $lang['All'] = 'Všetky adresáre';
 $lang['Date from'] = 'Dátum od';
@@ -420,3 +418,4 @@ $lang['Control'] = 'Control';
 $lang['Plugin {0} is not installed.'] = 'Plugin {0} is not installed.';
 $lang['Value must be a number.'] = 'Value must be a number.';
 $lang['{0} part messages'] = '{0} part messages';
+$lang['Content'] = 'Content';

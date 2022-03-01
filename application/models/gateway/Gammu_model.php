@@ -257,7 +257,7 @@ class Gammu_model extends CI_Model {
 		{
 			if ( ! isset($options['search_string']))
 			{
-				die('No String to Search For');
+				die('Nothing to search for.');
 			}
 		}
 

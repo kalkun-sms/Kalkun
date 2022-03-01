@@ -137,8 +137,6 @@ $lang['See conversation'] = 'Ver la conversaci&oacute;n';
 
 $lang['Search'] = 'B&uacute;squeda';
 $lang['Advanced search'] = 'B&uacute;squeda Avanzada';
-$lang['From/To'] = 'De/Para';
-$lang['Query'] = 'Consulta';
 $lang['Folder'] = 'Buscar en';
 $lang['All'] = 'Todos los directorios';
 $lang['Date from'] = 'Desde';
@@ -420,3 +418,4 @@ $lang['Control'] = 'Control';
 $lang['Plugin {0} is not installed.'] = 'Plugin {0} is not installed.';
 $lang['Value must be a number.'] = 'Value must be a number.';
 $lang['{0} part messages'] = '{0} part messages';
+$lang['Content'] = 'Content';
