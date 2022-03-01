@@ -142,10 +142,8 @@ $lang['All'] = 'All Folders';
 $lang['Date from'] = 'Date from';
 $lang['Date to'] = 'Date to';
 $lang['Status'] = 'Состояние';
-$lang['Any'] = 'Any';
 $lang['Paging'] = 'Paging';
 $lang['{0} per page'] = '{0} Per Page';
-$lang['No paging'] = 'Do not use paging';
 
 $lang['Resend'] = 'Resend';
 $lang['Public contacts'] = 'Public Contacts';

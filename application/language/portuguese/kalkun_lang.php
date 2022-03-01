@@ -142,10 +142,8 @@ $lang['All'] = 'Todas as Pastas';
 $lang['Date from'] = 'Data a partir de';
 $lang['Date to'] = 'até';
 $lang['Status'] = 'Estado';
-$lang['Any'] = 'Qualquer';
 $lang['Paging'] = 'Paginação';
 $lang['{0} per page'] = '{0} Por Página';
-$lang['No paging'] = 'Não use Paginação';
 
 $lang['Resend'] = 'Reenviar';
 $lang['Public contacts'] = 'Contactos Públicos';

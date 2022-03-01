@@ -142,10 +142,8 @@ $lang['All'] = 'Alle mapper';
 $lang['Date from'] = 'Fra dato';
 $lang['Date to'] = 'Til dato';
 $lang['Status'] = 'Status';
-$lang['Any'] = 'alle';
 $lang['Paging'] = 'Sideinddeling';
 $lang['{0} per page'] = '{0} Pr. side';
-$lang['No paging'] = 'Brug ikke sideinddeling';
 
 $lang['Resend'] = 'Send igen';
 $lang['Public contacts'] = 'Offentlige kontakter';

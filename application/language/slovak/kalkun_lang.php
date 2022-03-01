@@ -142,10 +142,8 @@ $lang['All'] = 'Všetky adresáre';
 $lang['Date from'] = 'Dátum od';
 $lang['Date to'] = 'Dátum do';
 $lang['Status'] = 'Stav';
-$lang['Any'] = 'Hociaké';
 $lang['Paging'] = 'Stránkovanie';
 $lang['{0} per page'] = '{0} Na stránku';
-$lang['No paging'] = 'Nepoužiť stránkovanie';
 
 $lang['Resend'] = 'Preposlať';
 $lang['Public contacts'] = 'Verejné kontakty';

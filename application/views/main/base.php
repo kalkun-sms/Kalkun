@@ -259,7 +259,7 @@
 			<td align="right"><label for="a_search_sentitems_status"><b><?php echo tr('Status');?></b></label></td>
 			<td colspan="3">
 				<select name="a_search_sentitems_status" style="width: 98%">
-					<option><?php echo tr('Any');?></option>
+					<option><?php echo tr('All');?></option>
 					<option><?php echo tr('Delivered');?></option>
 					<option><?php echo tr('Sending failed');?></option>
 				</select>
@@ -274,7 +274,7 @@
 					<option value="30"><?php echo tr('{0} per page', NULL, 30);?></option>
 					<option value="40"><?php echo tr('{0} per page', NULL, 40);?></option>
 					<option value="50"><?php echo tr('{0} per page', NULL, 50);?></option>
-					<option value="all"><?php echo tr('No paging');?></option>
+					<option value="all"><?php echo tr('All');?></option>
 				</select>
 			</td>
 		</tr>

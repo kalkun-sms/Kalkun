@@ -137,15 +137,13 @@ $lang['See conversation'] = 'Voir la conversation';
 
 $lang['Search'] = 'Rechercher';
 $lang['Advanced search'] = 'Recherche avancée';
-$lang['Folder'] = 'Rechercher sur';
-$lang['All'] = 'Tous les dossiers';
+$lang['Folder'] = 'Dossier';
+$lang['All'] = 'Tous';
 $lang['Date from'] = 'Date à partir de';
 $lang['Date to'] = "Jusqu'à la date";
 $lang['Status'] = 'Statut';
-$lang['Any'] = 'Tout';
 $lang['Paging'] = 'Résultats par page';
 $lang['{0} per page'] = '{0} par page';
-$lang['No paging'] = 'Ne pas utiliser la pagination';
 
 $lang['Resend'] = 'Renvoyer';
 $lang['Public contacts'] = 'Contacts publics';

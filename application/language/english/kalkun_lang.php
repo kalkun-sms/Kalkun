@@ -142,10 +142,8 @@ $lang['All'] = 'All';
 $lang['Date from'] = 'Date from';
 $lang['Date to'] = 'Date to';
 $lang['Status'] = 'Status';
-$lang['Any'] = 'Any';
 $lang['Paging'] = 'Paging';
 $lang['{0} per page'] = '{0} per page';
-$lang['No paging'] = 'No paging';
 
 $lang['Resend'] = 'Resend';
 $lang['Public contacts'] = 'Public contacts';

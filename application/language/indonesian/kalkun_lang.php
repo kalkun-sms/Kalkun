@@ -142,10 +142,8 @@ $lang['All'] = 'Semua Berkas';
 $lang['Date from'] = 'Dari Tanggal';
 $lang['Date to'] = 'Sampai';
 $lang['Status'] = 'Status';
-$lang['Any'] = 'Semuanya';
 $lang['Paging'] = 'Paging';
 $lang['{0} per page'] = '{0} Per Halaman';
-$lang['No paging'] = 'Jangan gunakan paging';
 
 $lang['Resend'] = 'Kirim Ulang';
 $lang['Public contacts'] = 'Kontak Umum';

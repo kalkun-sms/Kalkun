@@ -142,10 +142,8 @@ $lang['All'] = 'Kaikista kansioista';
 $lang['Date from'] = 'Päiväyksestä';
 $lang['Date to'] = 'Päiväykseen';
 $lang['Status'] = 'Tila';
-$lang['Any'] = 'Mikä tahansa';
 $lang['Paging'] = 'Sivutus';
 $lang['{0} per page'] = '{0} Sivulla';
-$lang['No paging'] = 'Älä käytä sivutusta';
 
 $lang['Resend'] = 'Lähetä uudelleen';
 $lang['Public contacts'] = 'Yhteiset yhteystiedot';
