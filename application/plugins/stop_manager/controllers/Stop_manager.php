@@ -34,7 +34,7 @@ class Stop_manager extends Plugin_controller {
 
 		if ($_POST && is_null($this->input->post('search_name')))
 		{
-			$this->Stop_manager_model->add(
+			$this->stop_manager_model->add(
 				$this->input->post('destination_number', TRUE),
 				$this->input->post('stop_type', TRUE),
 				$this->input->post('stop_message', TRUE)
@@ -45,13 +45,13 @@ class Stop_manager extends Plugin_controller {
 		$offset = 0;
 		if ( ! is_null($this->input->post('search_name')))
 		{
-			$data['stoplist'] = $this->Stop_manager_model->get('search');
+			$data['stoplist'] = $this->stop_manager_model->get('search');
 		}
 		else
 		{
 			$this->load->library('pagination');
 			$config['base_url'] = site_url('plugin/stop_manager');
-			$config['total_rows'] = $this->Stop_manager_model->get('count');
+			$config['total_rows'] = $this->stop_manager_model->get('count');
 			$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 			$config['cur_tag_open'] = '<span id="current">';
 			$config['cur_tag_close'] = '</span>';
@@ -63,11 +63,11 @@ class Stop_manager extends Plugin_controller {
 			{
 				show_404();
 			}
-			if (intval($offset) >= $this->Stop_manager_model->get('count'))
+			if (intval($offset) >= $this->stop_manager_model->get('count'))
 			{
 				$offset = 0;
 			}
-			$data['stoplist'] = $this->Stop_manager_model->get('paginate', $config['per_page'], $offset);
+			$data['stoplist'] = $this->stop_manager_model->get('paginate', $config['per_page'], $offset);
 		}
 
 		$data['main'] = 'index';
@@ -86,7 +86,7 @@ class Stop_manager extends Plugin_controller {
 		{
 			if (is_numeric($method))
 			{
-				if (intval($method) < $this->Stop_manager_model->get('count'))
+				if (intval($method) < $this->stop_manager_model->get('count'))
 				{
 					$this->index($method);
 					return;
@@ -103,7 +103,7 @@ class Stop_manager extends Plugin_controller {
 
 	function delete($from, $type)
 	{
-		$this->Stop_manager_model->delete(base64_decode(urldecode($from)), base64_decode(urldecode($type)));
+		$this->stop_manager_model->delete(base64_decode(urldecode($from)), base64_decode(urldecode($type)));
 		redirect('plugin/stop_manager');
 	}
 }
