@@ -3,11 +3,11 @@
 
 		// Add/ Edit packages	
 		$('#addpackagesbutton, .editpackagesbutton').on("click", function() {
-			var title = '<?php echo tr('Add packages'); ?>';
+			var title = "<?php echo tr_addcslashes('"', 'Add packages'); ?>";
 
 			// Edit mode
 			if ($(this).hasClass('editpackagesbutton')) {
-				title = '<?php echo tr('Edit packages'); ?>';
+				title = "<?php echo tr_addcslashes('"', 'Edit packages'); ?>";
 				var id_package = $(this).parents('div:eq(1)').find('span.id_package').text();
 				var package_name = $(this).parents('div:eq(1)').find('span.package_name').text();
 				var sms_amount = $(this).parents('div:eq(1)').find('span.sms_amount').text();
@@ -17,16 +17,16 @@
 			}
 
 			$("#packages-dialog").dialog({
-				closeText: "<?php echo tr('Close'); ?>",
+				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
 				title: title,
 				buttons: {
-					'<?php echo tr('Save'); ?>': function() {
+					"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
 						$("form#addpackagesform").trigger('submit');
 					},
-					'<?php echo tr('Cancel'); ?>': function() {
+					"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 						$(this).dialog('destroy');
 					}
 				}
@@ -37,7 +37,7 @@
 
 		// Search onBlur onFocus
 		if ($('input.search_packages').val() == '') {
-			$('input.search_packages').val('<?php echo tr('Search'); ?>');
+			$('input.search_packages').val("<?php echo tr_addcslashes('"', 'Search'); ?>");
 		}
 
 		$('input.search_packages').on("blur", function() {
@@ -56,15 +56,15 @@
 
 			// confirm first
 			$("#confirm_delete_package_dialog").dialog({
-				closeText: "<?php echo tr('Close'); ?>",
+				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
 				buttons: {
-					'<?php echo tr('Cancel')?>': function() {
+					"<?php echo tr_addcslashes('"', 'Cancel')?>": function() {
 						$(this).dialog('close');
 					},
-					'<?php echo tr('Yes')?>': function() {
+					"<?php echo tr_addcslashes('"', 'Yes')?>": function() {
 						window.location.href = url;
 						$(this).dialog('close');
 					}

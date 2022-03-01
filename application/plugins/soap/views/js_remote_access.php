@@ -19,8 +19,8 @@
 				},
 			},
 			messages: {
-				access_name: "<?php echo tr('Field required.');?>",
-				ip_address: "<?php echo tr('Field required.');?>",
+				access_name: "<?php echo tr_addcslashes('"', 'Field required.');?>",
+				ip_address: "<?php echo tr_addcslashes('"', 'Field required.');?>",
 			}
 		});
 
@@ -37,12 +37,12 @@
 			},
 			messages: {
 				notifynumber: {
-					required: "<?php echo tr('Field required.');?>",
-					number: "<?php echo tr('Value must be a number.');?>",
+					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
+					number: "<?php echo tr_addcslashes('"', 'Value must be a number.');?>",
 				},
 				notifyvalue: {
-					required: "<?php echo tr('Field required.');?>",
-					number: "<?php echo tr('Value must be a number.');?>",
+					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
+					number: "<?php echo tr_addcslashes('"', 'Value must be a number.');?>",
 				},
 			}
 		});
@@ -52,30 +52,30 @@
 
 		// Add remote access dialog
 		$("#remoteaccess-dialog").dialog({
-			closeText: "<?php echo tr('Close'); ?>",
+			closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,
 			buttons: {
-				'<?php echo tr('Save'); ?>': function() {
+				"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
 					$("form.addremoteaccessform").trigger('submit');
 				},
-				'<?php echo tr('Cancel'); ?>': function() {
+				"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 					$(this).dialog('close');
 				}
 			}
 		});
 
 		$("#notification-dialog").dialog({
-			closeText: "<?php echo tr('Close'); ?>",
+			closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,
 			buttons: {
-				'<?php echo tr('Save'); ?>': function() {
+				"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
 					$("form.addnotificationform").trigger('submit');
 				},
-				'<?php echo tr('Cancel'); ?>': function() {
+				"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 					$(this).dialog('close');
 				}
 			}
@@ -92,15 +92,15 @@
 
 		// Edit remote access dialog
 		$("#editremoteaccess-dialog").dialog({
-			closeText: "<?php echo tr('Close'); ?>",
+			closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,
 			buttons: {
-				'<?php echo tr('Save'); ?>': function() {
+				"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
 					$("form.editremoteaccessform").trigger('submit');
 				},
-				'<?php echo tr('Cancel'); ?>': function() {
+				"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 					$(this).dialog('close');
 				}
 			}
