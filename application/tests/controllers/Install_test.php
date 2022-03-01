@@ -12,7 +12,7 @@ class Install_test extends TestCase
 {
 	public function test_index()
 	{
-		$output = $this->request('GET', 'install');
+		$output = $this->request('GET', 'www/install');
 		$this->assertContains('<title>Kalkun &rsaquo; Installation</title>', $output);
 	}
 
