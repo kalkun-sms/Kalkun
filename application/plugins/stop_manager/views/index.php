@@ -1,3 +1,4 @@
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
 <?php $this->load->view('js_stop_manager');?>
 
 <div id="window_container">
@@ -73,8 +74,8 @@
 
 <!-- Add STOP dialog -->
 <div id="stop-dialog" title="<?php echo tr('Add STOP record'); ?>" class="dialog">
-	<p id="validateTips"><?php echo tr('All form fields are required'); ?></p>
-	<?php echo form_open('plugin/stop_manager', array('class' => 'addstopform')); ?>
+	<p id="validateTips"><?php echo tr('All form fields are required.'); ?></p>
+	<?php echo form_open('plugin/stop_manager', array('id' => 'addStopForm', 'class' => 'addstopform')); ?>
 	<fieldset>
 		<label for="destination_number"><?php echo tr('Phone number'); ?></label>
 		<input type="text" name="destination_number" id="destination_number" class="text ui-widget-content ui-corner-all" />
