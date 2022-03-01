@@ -144,7 +144,7 @@ $lang['Date to'] = 'Sampai';
 $lang['Status'] = 'Status';
 $lang['Any'] = 'Semuanya';
 $lang['Paging'] = 'Paging';
-$lang['per page'] = 'Per Halaman';
+$lang['{0} per page'] = '{0} Per Halaman';
 $lang['No paging'] = 'Jangan gunakan paging';
 
 $lang['Resend'] = 'Kirim Ulang';

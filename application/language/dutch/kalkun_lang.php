@@ -144,7 +144,7 @@ $lang['Date to'] = 'Tot Datum';
 $lang['Status'] = 'Status';
 $lang['Any'] = 'Alle';
 $lang['Paging'] = 'Regels';
-$lang['per page'] = 'Per Pagina';
+$lang['{0} per page'] = '{0} Per Pagina';
 $lang['No paging'] = "Geen Pagina's Maken";
 
 $lang['Resend'] = 'Opnieuw verzenden';

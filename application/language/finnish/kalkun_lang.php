@@ -144,7 +144,7 @@ $lang['Date to'] = 'Päiväykseen';
 $lang['Status'] = 'Tila';
 $lang['Any'] = 'Mikä tahansa';
 $lang['Paging'] = 'Sivutus';
-$lang['per page'] = 'Sivulla';
+$lang['{0} per page'] = '{0} Sivulla';
 $lang['No paging'] = 'Älä käytä sivutusta';
 
 $lang['Resend'] = 'Lähetä uudelleen';

@@ -144,7 +144,7 @@ $lang['Date to'] = "Jusqu'à la date";
 $lang['Status'] = 'Statut';
 $lang['Any'] = 'Tout';
 $lang['Paging'] = 'Résultats par page';
-$lang['per page'] = 'par page';
+$lang['{0} per page'] = '{0} par page';
 $lang['No paging'] = 'Ne pas utiliser la pagination';
 
 $lang['Resend'] = 'Renvoyer';
@@ -418,4 +418,4 @@ $lang['Control'] = 'Contrôle';
 $lang['Plugin {0} is not installed.'] = 'Le plugin {0} n\'est pas installé.';
 $lang['Value must be a number.'] = 'La valeur doit être un nombre.';
 $lang['{0} part messages'] = '{0} part messages';
-$lang['Content'] = 'Content';
+$lang['Content'] = 'Contenu';

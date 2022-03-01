@@ -144,7 +144,7 @@ $lang['Date to'] = 'Data Do';
 $lang['Status'] = 'Stan';
 $lang['Any'] = 'Dowolny';
 $lang['Paging'] = 'Stronicowanie';
-$lang['per page'] = 'Na stronę';
+$lang['{0} per page'] = '{0} Na stronę';
 $lang['No paging'] = 'Nie stronicuj';
 
 $lang['Resend'] = 'Wyślij ponownie';

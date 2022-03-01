@@ -144,7 +144,7 @@ $lang['Date to'] = 'Date to';
 $lang['Status'] = 'Состояние';
 $lang['Any'] = 'Any';
 $lang['Paging'] = 'Paging';
-$lang['per page'] = 'Per Page';
+$lang['{0} per page'] = '{0} Per Page';
 $lang['No paging'] = 'Do not use paging';
 
 $lang['Resend'] = 'Resend';

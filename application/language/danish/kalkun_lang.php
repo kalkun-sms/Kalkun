@@ -144,7 +144,7 @@ $lang['Date to'] = 'Til dato';
 $lang['Status'] = 'Status';
 $lang['Any'] = 'alle';
 $lang['Paging'] = 'Sideinddeling';
-$lang['per page'] = 'Pr. side';
+$lang['{0} per page'] = '{0} Pr. side';
 $lang['No paging'] = 'Brug ikke sideinddeling';
 
 $lang['Resend'] = 'Send igen';

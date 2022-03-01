@@ -144,7 +144,7 @@ $lang['Date to'] = 'Dátum do';
 $lang['Status'] = 'Stav';
 $lang['Any'] = 'Hociaké';
 $lang['Paging'] = 'Stránkovanie';
-$lang['per page'] = 'Na stránku';
+$lang['{0} per page'] = '{0} Na stránku';
 $lang['No paging'] = 'Nepoužiť stránkovanie';
 
 $lang['Resend'] = 'Preposlať';

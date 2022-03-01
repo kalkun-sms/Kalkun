@@ -144,7 +144,7 @@ $lang['Date to'] = 'Dátumig';
 $lang['Status'] = 'Státusz';
 $lang['Any'] = 'Minden';
 $lang['Paging'] = 'Lapozás';
-$lang['per page'] = 'Oldalanként';
+$lang['{0} per page'] = '{0} Oldalanként';
 $lang['No paging'] = 'Ne használjon lapozást';
 
 $lang['Resend'] = 'Újraküldés';

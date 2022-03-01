@@ -269,11 +269,11 @@
 			<td align="right"><label for="a_search_paging"><b><?php echo tr('Paging');?></b></label></td>
 			<td colspan="3">
 				<select name="a_search_paging" style="width: 98%">
-					<option value="10">10 <?php echo tr('per page');?></option>
-					<option value="20">20 <?php echo tr('per page');?></option>
-					<option value="30">30 <?php echo tr('per page');?></option>
-					<option value="40">40 <?php echo tr('per page');?></option>
-					<option value="50">50 <?php echo tr('per page');?></option>
+					<option value="10"><?php echo tr('{0} per page', NULL, 10);?></option>
+					<option value="20"><?php echo tr('{0} per page', NULL, 20);?></option>
+					<option value="30"><?php echo tr('{0} per page', NULL, 30);?></option>
+					<option value="40"><?php echo tr('{0} per page', NULL, 40);?></option>
+					<option value="50"><?php echo tr('{0} per page', NULL, 50);?></option>
 					<option value="all"><?php echo tr('No paging');?></option>
 				</select>
 			</td>
