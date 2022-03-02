@@ -31,6 +31,8 @@ class Stop_manager extends Plugin_controller {
 
 	function index()
 	{
+		$this->load->helper('kalkun');
+
 		if ($_POST && is_null($this->input->post('search_name')))
 		{
 			$this->Stop_manager_model->add(

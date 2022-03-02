@@ -19,8 +19,8 @@
 				},
 			},
 			messages: {
-				access_name: "Please enter access name",
-				ip_address: "Please enter host",
+				access_name: "<?php echo tr('Field required.');?>",
+				ip_address: "<?php echo tr('Field required.');?>",
 			}
 		});
 
@@ -36,8 +36,14 @@
 				},
 			},
 			messages: {
-				notifynumber: "Please enter a notification number",
-				notifyvalue: "Please enter a notification value",
+				notifynumber: {
+					required: "<?php echo tr('Field required.');?>",
+					number: "<?php echo tr('Value must be a number.');?>",
+				},
+				notifyvalue: {
+					required: "<?php echo tr('Field required.');?>",
+					number: "<?php echo tr('Value must be a number.');?>",
+				},
 			}
 		});
 
@@ -46,30 +52,30 @@
 
 		// Add remote access dialog
 		$("#remoteaccess-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
 			modal: true,
 			buttons: {
-				'Save': function() {
+				'<?php echo tr('Save'); ?>': function() {
 					$("form.addremoteaccessform").trigger('submit');
 				},
-				Cancel: function() {
+				'<?php echo tr('Cancel'); ?>': function() {
 					$(this).dialog('close');
 				}
 			}
 		});
 
 		$("#notification-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
 			modal: true,
 			buttons: {
-				'Save': function() {
+				'<?php echo tr('Save'); ?>': function() {
 					$("form.addnotificationform").trigger('submit');
 				},
-				Cancel: function() {
+				'<?php echo tr('Cancel'); ?>': function() {
 					$(this).dialog('close');
 				}
 			}
@@ -86,15 +92,15 @@
 
 		// Edit remote access dialog
 		$("#editremoteaccess-dialog").dialog({
+			closeText: "<?php echo tr('Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
-			height: 350,
 			modal: true,
 			buttons: {
-				'Save Changes': function() {
+				'<?php echo tr('Save'); ?>': function() {
 					$("form.editremoteaccessform").trigger('submit');
 				},
-				Cancel: function() {
+				'<?php echo tr('Cancel'); ?>': function() {
 					$(this).dialog('close');
 				}
 			}

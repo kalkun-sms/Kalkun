@@ -47,7 +47,7 @@ class Kalkun extends MY_Controller {
 		$data['data_url'] = site_url('kalkun/get_statistic');
 		if ($this->config->item('disable_outgoing'))
 		{
-			$data['alerts'][] = '<div class="warning">'.lang('kalkun_outgoing_sms_disabled_contact_sysadmin').'</div>';
+			$data['alerts'][] = '<div class="warning">'.tr('Outgoing SMS disabled. Contact system administrator').'</div>';
 		}
 		$this->load->view('main/layout', $data);
 	}
@@ -91,7 +91,7 @@ class Kalkun extends MY_Controller {
 			case 'weeks':
 				$days = 30;
 				$format = 'W';
-				$prefix = ucwords(lang('kalkun_week')).' ';
+				$prefix = tr('date_week').' ';
 				break;
 
 			case 'months':
@@ -139,24 +139,25 @@ class Kalkun extends MY_Controller {
 		$yin = array_values($yin);
 		$points = count($x) - 1;
 
-		echo '{
-			"labels": '.json_encode(array_reverse($x)).',
-			"datasets": [
-				{
-					"label": "'.lang('kalkun_outgoing_sms').'",
-					"backgroundColor": "#21759B",
-					"data": '.json_encode(array_reverse($yout)).',
-					"borderWidth": 1
-				}
-				,
-				{
-					"label": "'.lang('kalkun_incoming_sms').'",
-					"backgroundColor": "#639F45",
-					"data": '.json_encode(array_reverse($yin)).',
-					"borderWidth": 1
-				}
-			]
-		}';
+		$result = [
+			'labels' => array_reverse($x),
+			'datasets' => [
+				[
+					'label' => tr('Outgoing SMS'),
+					'backgroundColor' => '#21759B',
+					'data' => array_reverse($yout),
+					'borderWidth' => 1,
+				],
+				[
+					'label' => tr('Incoming SMS'),
+					'backgroundColor' => '#639F45',
+					'data' => array_reverse($yin),
+					'borderWidth' => 1,
+				],
+			],
+		];
+
+		echo json_encode($result);
 	}
 
 	// --------------------------------------------------------------------
@@ -268,7 +269,7 @@ class Kalkun extends MY_Controller {
 			// check password
 			if ($option === 'password' && ! password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password')))
 			{
-				$this->session->set_flashdata('notif', lang('kalkun_wrong_password'));
+				$this->session->set_flashdata('notif', tr('Wrong password'));
 				redirect('settings/'.$option);
 			}
 			else
@@ -279,14 +280,14 @@ class Kalkun extends MY_Controller {
 					{
 						if ($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows > 0)
 						{
-							$this->session->set_flashdata('notif', lang('kalkun_username_exists'));
+							$this->session->set_flashdata('notif', tr('Username already taken'));
 							redirect('settings/'.$option);
 						}
 					}
 				}
 			}
 			$this->Kalkun_model->update_setting($option);
-			$this->session->set_flashdata('notif', lang('kalkun_settings_saved'));
+			$this->session->set_flashdata('notif', tr('Settings saved successfully.'));
 			redirect('settings/'.$option);
 		}
 
@@ -313,5 +314,53 @@ class Kalkun extends MY_Controller {
 	function delete_filter($id_filter = NULL)
 	{
 		$this->Kalkun_model->delete_filter($id_filter);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Check phone number validity
+	 *
+	 * returns a json string used by jquery validation plugin
+	 * "true" if phone number is valid
+	 * "an error message" if not
+	 */
+	function phone_number_validation()
+	{
+		$result = 'false'; // Default to "false"
+		try
+		{
+			$phone = $this->input->post('phone');
+			$region = $this->input->post('region');
+
+			// Check if is possible number
+			$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+			$region = ($region !== NULL) ? $region : $this->Kalkun_model->get_setting()->row('country_code');
+			$phoneNumberObject = $phoneNumberUtil->parse($phone, $region);
+			$is_possible = $phoneNumberUtil->isPossibleNumber($phoneNumberObject);
+
+			// Check if is mobile number
+			$type = $phoneNumberUtil->getNumberType($phoneNumberObject);
+			$is_mobile = ($type === \libphonenumber\PhoneNumberType::MOBILE
+				|| $type === \libphonenumber\PhoneNumberType::FIXED_LINE_OR_MOBILE);
+
+			// Check if is possible short number
+			$shortNumberUtil = \libphonenumber\ShortNumberInfo::getInstance();
+			$is_possible_short = $shortNumberUtil->isPossibleShortNumber($phoneNumberObject);
+
+			if ($is_possible && $is_mobile || $is_possible_short)
+			{
+				$result = 'true';
+			}
+			else
+			{
+				$result = tr('Please specify a valid mobile phone number');
+			}
+		}
+		catch (Exception $e)
+		{
+			$result = $e->getMessage();
+		}
+		echo json_encode($result);
 	}
 }

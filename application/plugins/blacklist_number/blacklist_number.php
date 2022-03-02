@@ -65,11 +65,11 @@ function blacklist_number_install()
 function blacklist_number_incoming($sms)
 {
 	$CI = &get_instance();
-	$CI->load->model('blacklist_number/blacklist_number_model', 'plugin_model');
+	$CI->load->model('blacklist_number/blacklist_number_model', 'blacklist_number_model');
 	$evil = array();
 
 	// Get blacklist number
-	$lists = $CI->plugin_model->get('all')->result_array();
+	$lists = $CI->blacklist_number_model->get('all')->result_array();
 	foreach ($lists as $tmp)
 	{
 		$evil[] = $tmp['phone_number'];
@@ -86,11 +86,11 @@ function blacklist_number_incoming($sms)
 function blacklist_number_outgoing($numbers = array())
 {
 	$CI = &get_instance();
-	$CI->load->model('blacklist_number/blacklist_number_model', 'plugin_model');
+	$CI->load->model('blacklist_number/blacklist_number_model', 'blacklist_number_model');
 	$evil = array();
 
 	// Get blacklist number
-	$lists = $CI->plugin_model->get('all')->result_array();
+	$lists = $CI->blacklist_number_model->get('all')->result_array();
 	foreach ($lists as $tmp)
 	{
 		$evil[] = $tmp['phone_number'];

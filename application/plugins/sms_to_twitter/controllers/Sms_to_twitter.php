@@ -25,21 +25,21 @@ class Sms_to_twitter extends Plugin_controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('sms_to_twitter_model', 'plugin_model');
+		$this->load->model('sms_to_twitter_model');
 	}
 
 	function index()
 	{
 		$data['title'] = 'Twitter Connect Status';
 		$data['main'] = 'index';
-		$data['status'] = $this->plugin_model->check_token($this->session->userdata('id_user'));
+		$data['status'] = $this->sms_to_twitter_model->check_token($this->session->userdata('id_user'));
 		$this->load->view('main/layout', $data);
 	}
 
 	function connect()
 	{
 		// Database check
-		if ($this->plugin_model->check_token($this->session->userdata('id_user')))
+		if ($this->sms_to_twitter_model->check_token($this->session->userdata('id_user')))
 		{
 			$this->session->set_flashdata('notif', 'Already connected to Twitter');
 			redirect('sms_to_twitter');
@@ -70,14 +70,14 @@ class Sms_to_twitter extends Plugin_controller {
 			$param['id_user'] = $this->session->userdata('id_user');
 			$param['access_token'] = $auth['access_token'];
 			$param['access_token_secret'] = $auth['access_token_secret'];
-			$this->plugin_model->save_token($param);
+			$this->sms_to_twitter_model->save_token($param);
 			redirect('sms_to_twitter');
 		}
 	}
 
 	function disconnect()
 	{
-		$this->plugin_model->delete_token($this->session->userdata('id_user'));
+		$this->sms_to_twitter_model->delete_token($this->session->userdata('id_user'));
 		redirect('sms_to_twitter');
 	}
 }

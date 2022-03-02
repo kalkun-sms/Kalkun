@@ -33,10 +33,10 @@
 		 */
 		$(document).on('click', "a.global_delete", action_delete = function() {
 			var count = $("input.select_conversation:checkbox:checked").length;
-			var notif = count + ' conversation deleted';
-
+			var notif = "<?php echo tr('%count% conversation(s) deleted'); ?>";
+			notif = notif.replace('%count%', count);
 			if (count == 0) {
-				show_notification("<?php echo lang('tni_msg_no_conv_selected')?>");
+				show_notification("<?php echo tr('No item selected')?>");
 			} else {
 				$("input.select_conversation:checked").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
@@ -44,9 +44,14 @@
 						async: false
 					});
 					$.post(delete_url + source, {
+						<?php if ($this->config->item('conversation_grouping')): ?>
 						type: 'conversation',
 						number: $(this).val(),
 						current_folder: current_folder
+						<?php else: ?>
+						type: 'single',
+						id: $(this).val(),
+						<?php endif; ?>
 					}, function(data) {
 						if (!data) {
 							$(message_row).slideUp("slow");
@@ -69,8 +74,10 @@
 		 */
 		$(document).on('click', "a.recover_button", action_recover = function() {
 			var count = $("input.select_conversation:checkbox:checked").length;
+			var notif = "<?php echo tr('%count% conversation(s) recovered'); ?>";
+			notif = notif.replace('%count%', count);
 			if (count == 0) {
-				show_notification("<?php echo lang('tni_msg_no_conv_selected')?>");
+				show_notification("<?php echo tr('No item selected')?>");
 			} else {
 
 				var id_folder = (source == 'inbox') ? 1 : 3;
@@ -78,16 +85,24 @@
 				$("input.select_conversation:checked").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post(move_url, {
+						<?php if ($this->config->item('conversation_grouping')): ?>
 						type: 'conversation',
 						current_folder: current_folder,
 						folder: source,
 						id_folder: id_folder,
 						number: $(this).val()
+						<?php else: ?>
+						type: 'single',
+						current_folder: current_folder,
+						folder: source,
+						id_folder: id_folder,
+						id_message: $(this).val(),
+						<?php endif; ?>
 					}, function() {
 						$(message_row).slideUp("slow");
 					});
 				});
-				show_notification(count + ' conversation recovered'); // translate
+				show_notification(notif);
 			}
 		});
 
@@ -102,31 +117,42 @@
 		 */
 		$(document).on('click', ".move_to", function() {
 			var count = $("input.select_conversation:checkbox:checked").length;
+			var notif = "<?php echo tr('%count% conversation(s) moved'); ?>";
+			notif = notif.replace('%count%', count);
 			if (count == 0) {
 				$("#movetodialog").dialog('close');
-				show_notification("<?php echo lang('tni_msg_no_conv_selected')?>");
+				show_notification("<?php echo tr('No item selected')?>");
 			} else {
 				var id_folder = $(this).attr('id');
 				$("#movetodialog").dialog('close');
 				$("input.select_conversation:checked").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post(move_url, {
+						<?php if ($this->config->item('conversation_grouping')): ?>
 						type: 'conversation',
 						current_folder: current_folder,
 						folder: source,
 						id_folder: id_folder,
 						number: $(this).val()
+						<?php else: ?>
+						type: 'single',
+						current_folder: current_folder,
+						folder: source,
+						id_folder: id_folder,
+						id_message: $(this).val(),
+						<?php endif; ?>
 					}, function() {
 						$(message_row).slideUp("slow");
 					});
 				});
-				show_notification(count + ' conversation moved'); // translate
+				show_notification(notif);
 			}
 			count = 0;
 		});
 
 		$(document).on('click', ".move_to_button", message_move = function() {
 			$("#movetodialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
@@ -163,18 +189,19 @@
 		// refresh
 		$(document).on('click', "a.refresh_button, div#logo a", refresh = function(type) {
 			if (type != 'retry') {
-				$('.loading_area').html('Loading...');
+				$('.loading_area').html('<?php echo tr('Loading'); ?>');
 				$('.loading_area').fadeIn("slow");
 			}
 			$('#message_holder').load(refresh_url, function(response, status, xhr) {
 				if (status == "error" || xhr.status != 200) {
-					$('.loading_area').html('<nobr>Oops Network Error. <span id="retry-progress-display"> Retrying in <span id="countdown-count">10</span> Seconds.</span></nobr>');
+					var msg = '<?php echo tr('Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>';
+					$('.loading_area').html('<span style="white-space: nowrap">' + msg + '</span>');
 					var cntdwn = setInterval(function() {
 						current_val = $('#countdown-count').html();
 						if (current_val > 1) $('#countdown-count').html(current_val - 1);
 						else {
 							clearInterval(cntdwn);
-							$('#retry-progress-display').html('Retrying Now...')
+							$('#retry-progress-display').html('<?php echo tr('Retrying now'); ?>')
 						}
 					}, 1000);
 					setTimeout(function() {
@@ -198,15 +225,15 @@
 		 */
 		$(document).on('click', '#renamefolder', function() {
 			$("#renamefolderdialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 100,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_save'); ?>': function() {
+					'<?php echo tr('Save'); ?>': function() {
 						$("form.renamefolderform").trigger('submit');
 					},
-					'<?php echo lang('kalkun_cancel'); ?>': function() {
+					'<?php echo tr('Cancel'); ?>': function() {
 						$(this).dialog('close');
 					}
 				}
@@ -226,15 +253,15 @@
 		 */
 		$(document).on('click', '#deletefolder', function() {
 			$("#deletefolderdialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 165,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_cancel'); ?>': function() {
+					'<?php echo tr('Cancel'); ?>': function() {
 						$(this).dialog('close');
 					},
-					'<?php echo lang('tni_delete_folder'); ?>': function() {
+					'<?php echo tr('Delete this folder'); ?>': function() {
 						location.href = delete_folder_url + id_folder;
 					}
 				}
@@ -254,15 +281,15 @@
 		 */
 		$(document).on('click', '#delete-all-link', function() {
 			$("#deletealldialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 165,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_cancel'); ?>': function() {
+					'<?php echo tr('Cancel'); ?>': function() {
 						$(this).dialog('close');
 					},
-					'<?php echo lang('kalkun_delete_all_confirmation_header'); ?>': function() {
+					'<?php echo tr('Delete all'); ?>': function() {
 						$.get("<?php echo site_url('messages/delete_all').'/'.strtolower($this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name'));?>");
 						$(this).dialog('close');
 						refresh();

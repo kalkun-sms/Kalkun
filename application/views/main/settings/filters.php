@@ -1,6 +1,6 @@
 <?php $this->load->view('js_init/js_filters');?>
 <div align="center">
-	<a href="#" id="addnewfilter"><?php echo lang('kalkun_filter_add');?></a>
+	<a href="#" id="addnewfilter"><?php echo tr('Create a new filter');?></a>
 </div>
 
 <?php foreach ($filters->result_array() as $filter):?>
@@ -9,41 +9,41 @@
 		<div id="<?php echo $filter['id_filter'];?>" class="id_filter">
 			<span>
 				<?php if ( ! empty($filter['from'])):?>
-				<?php echo lang('tni_from');?>: <b class="from"><?php echo $filter['from'];?></b>
+				<?php echo tr('From');?>: <b class="from"><?php echo $filter['from'];?></b>
 				<?php endif;?>
 
 				<?php if ( ! empty($filter['has_the_words'])):?>
-				<?php echo lang('kalkun_filter_has_the_words');?>: <b class="has_the_words"><?php echo $filter['has_the_words'];?></b>
+				<?php echo tr('Has the words');?>: <b class="has_the_words"><?php echo $filter['has_the_words'];?></b>
 				<?php endif;?>
 			</span>
-			<div style="padding: 2px 0 5px 24px;" class="<?php echo $filter['id_folder'];?>"><?php echo lang('kalkun_move_to');?>: <b class="id_folder"><?php echo $filter['name'];?></b></div>
+			<div style="padding: 2px 0 5px 24px;" class="<?php echo $filter['id_folder'];?>"><?php echo tr('Move to');?>: <b class="id_folder"><?php echo $filter['name'];?></b></div>
 		</div>
 	</div>
 
 	<div class="right_column">
 		<span>
-			<a href="#" class="editfilter simplelink"><?php echo lang('tni_edit');?></a>
+			<a href="#" class="editfilter simplelink"><?php echo tr('Edit');?></a>
 			<img src="<?php echo $this->config->item('img_path');?>circle.gif" />
-			<a href="#" class="deletefilter simplelink"><?php echo lang('kalkun_delete');?></a>
+			<a href="#" class="deletefilter simplelink"><?php echo tr('Delete');?></a>
 		</span>
 	</div>
 </div>
 <?php endforeach;?>
 
 <!-- Filter Dialog -->
-<div id="filterdialog" title="<?php echo lang('kalkun_filters');?>" class="dialog">
+<div id="filterdialog" title="<?php echo tr('Filters');?>" class="dialog">
 	<form class="addfilterform" method="post" action="<?php echo site_url('settings/save');?>">
 		<input type="hidden" name="option" value="filters" />
 		<input type="hidden" name="id_filter" id="id_filter" value="" />
 		<input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user');?>" />
 
-		<label for="from"><?php echo lang('tni_from');?></label>
+		<label for="from"><?php echo tr('From');?></label>
 		<input type="text" name="from" id="from" class="text ui-widget-content ui-corner-all" />
 
-		<label for="has_the_words"><?php echo lang('kalkun_filter_has_the_words');?></label>
+		<label for="has_the_words"><?php echo tr('Has the words');?></label>
 		<input type="text" name="has_the_words" id="has_the_words" class="text ui-widget-content ui-corner-all" />
 
-		<label for="move_to"><?php echo lang('kalkun_move_to');?></label>
+		<label for="move_to"><?php echo tr('Move to');?></label>
 		<select name="id_folder" id="id_folder" style="width: 98%">
 			<?php
 		foreach ($my_folders->result() as $my_folder):
@@ -55,7 +55,7 @@
 </div>
 
 <!-- Delete Filter Dialog -->
-<div class="dialog" id="confirm_delete_filter_dialog" title="<?php echo lang('kalkun_filters');?>">
+<div class="dialog" id="confirm_delete_filter_dialog" title="<?php echo tr('Filters');?>">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-		<?php echo lang('kalkun_canned_confirm');?> </p>
+		<?php echo tr('Are you sure?');?> </p>
 </div>

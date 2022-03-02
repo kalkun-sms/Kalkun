@@ -3,11 +3,11 @@
 
 		// Add/ Edit packages	
 		$('#addpackagesbutton, .editpackagesbutton').on("click", function() {
-			var title = 'Add Packages';
+			var title = '<?php echo tr('Add packages'); ?>';
 
 			// Edit mode
 			if ($(this).hasClass('editpackagesbutton')) {
-				title = 'Edit Packages';
+				title = '<?php echo tr('Edit packages'); ?>';
 				var id_package = $(this).parents('div:eq(1)').find('span.id_package').text();
 				var package_name = $(this).parents('div:eq(1)').find('span.package_name').text();
 				var sms_amount = $(this).parents('div:eq(1)').find('span.sms_amount').text();
@@ -17,16 +17,16 @@
 			}
 
 			$("#packages-dialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 250,
 				modal: true,
 				title: title,
 				buttons: {
-					'Save': function() {
+					'<?php echo tr('Save'); ?>': function() {
 						$("form#addpackagesform").trigger('submit');
 					},
-					Cancel: function() {
+					'<?php echo tr('Cancel'); ?>': function() {
 						$(this).dialog('destroy');
 					}
 				}
@@ -37,7 +37,7 @@
 
 		// Search onBlur onFocus
 		if ($('input.search_packages').val() == '') {
-			$('input.search_packages').val('Search Packages');
+			$('input.search_packages').val('<?php echo tr('Search'); ?>');
 		}
 
 		$('input.search_packages').on("blur", function() {
@@ -56,15 +56,15 @@
 
 			// confirm first
 			$("#confirm_delete_package_dialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 150,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_cancel')?>': function() {
+					'<?php echo tr('Cancel')?>': function() {
 						$(this).dialog('close');
 					},
-					'<?php echo lang('tni_yes')?>': function() {
+					'<?php echo tr('Yes')?>': function() {
 						window.location.href = url;
 						$(this).dialog('close');
 					}

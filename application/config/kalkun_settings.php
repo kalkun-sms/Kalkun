@@ -104,7 +104,7 @@ $config['inbox_owner_id'] = array('1');
 |
 */
 
-$config['disable_outgoing'] = FALSE ;
+$config['disable_outgoing'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -223,17 +223,6 @@ $config['only_admin_can_permanently_delete'] = FALSE;
 |
 */
 $config['ncpr'] = FALSE;
-
-/*
-|--------------------------------------------------------------------------
-| UNICODE
-|--------------------------------------------------------------------------
-|
-| Enable unicode by default?
-| Send as Unicode checkbox will automatically checked
-|
-*/
-$config['unicode'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

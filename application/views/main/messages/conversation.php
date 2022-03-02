@@ -4,17 +4,34 @@ if (count($messages) == 0)
 {
 	if ($this->uri->segment(2) == 'my_folder')
 	{
-		echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.lang('kalkun_no_message_in_folder').'.</i></p>';
+		echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('There is no message in this folder').'.</i></p>';
 	}
 	else
 	{
 		if ($this->uri->segment(2) == 'search')
 		{
-			echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.lang('kalkun_no_message_search').'.</i></p>';
+			echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('No result.').'.</i></p>';
 		}
 		else
 		{
-			echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.lang('kalkun_no_message').' '.lang('kalkun_'.$this->uri->segment(3)).'.</i></p>';
+			$folder_type = '';
+			switch ($this->uri->segment(3))
+			{
+				case 'inbox':
+					$folder_type = tr('Inbox');
+					break;
+				case 'outbox':
+					$folder_type = tr('Outbox');
+					break;
+				case 'sentitems':
+					$folder_type = tr('Sent items');
+					break;
+			}
+			if ($folder_type === '' && $this->uri->segment(4) === 'sentitems' && $this->uri->segment(5) === 'sending_error')
+			{
+				$folder_type = tr('Sending error');
+			}
+			echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('There is no message in your {0}.', NULL, $folder_type).'</i></p>';
 		}
 	}
 }
@@ -35,7 +52,7 @@ else
 		}
 		else
 		{
-			$senderName = $tmp['SenderNumber'];
+			$senderName = phone_format_human($tmp['SenderNumber']);
 			$on_pbk = FALSE;
 		}
 
@@ -53,7 +70,7 @@ else
 		}
 		else
 		{
-			$senderName = $tmp['DestinationNumber'];
+			$senderName = phone_format_human($tmp['DestinationNumber']);
 			$on_pbk = FALSE;
 		}
 
@@ -70,7 +87,7 @@ else
 	}
 
 	// count string for message preview
-	$char_per_line = 100 - strlen(nice_date($message_date)) - strlen($senderName); ?>
+	$char_per_line = 100 - strlen(kalkun_nice_date($message_date)) - strlen($senderName); ?>
 
 <div class="messagelist conversation messagelist_conversation">
 	<div class="message_container <?php echo $tmp['source']; ?>">
@@ -82,7 +99,7 @@ else
 				<span <?php  if ($tmp['source'] == 'inbox' && $tmp['readed'] == 'false')
 	{
 		echo 'style="font-weight: bold"';
-	} ?>><?php echo nice_date($message_date); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
+	} ?>><?php echo kalkun_nice_date($message_date); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
 					&nbsp;&nbsp;<?php echo $senderName; ?></span>
 				<span class="message_preview">-&nbsp;<?php echo message_preview($tmp['TextDecoded'], $char_per_line); ?></span>
 			</span>
@@ -138,11 +155,11 @@ if ($tmp['source'] == 'sentitems'):
 				<tr>
 					<td width="50px"><?php  if ($tmp['source'] == 'inbox')
 	{
-		echo lang('tni_from');
+		echo tr('From');
 	}
 	else
 	{
-		echo lang('tni_to');
+		echo tr('To');
 	} ?></td>
 					<td width="10px"> : </td>
 					<td><?php echo $number; ?></td>
@@ -150,21 +167,21 @@ if ($tmp['source'] == 'sentitems'):
 
 				<?php  if ($tmp['source'] == 'outbox'): ?>
 				<tr>
-					<td><?php echo lang('tni_inserted'); ?></td>
+					<td><?php echo tr('Inserted'); ?></td>
 					<td> : </td>
 					<td><?php echo simple_date($tmp['InsertIntoDB']); ?></td>
 				</tr>
 				<?php  endif; ?>
 
 				<tr>
-					<td><?php echo lang('tni_date'); ?></td>
+					<td><?php echo tr('Date'); ?></td>
 					<td> : </td>
 					<td><?php echo simple_date($message_date); ?></td>
 				</tr>
 
 				<?php if ($tmp['source'] != 'outbox'): ?>
 				<tr>
-					<td><?php echo lang('kalkun_smsc'); ?></td>
+					<td><?php echo tr('SMSC'); ?></td>
 					<td> : </td>
 					<td><?php echo $tmp['SMSCNumber']; ?></td>
 				</tr>
@@ -173,15 +190,15 @@ if ($tmp['source'] == 'sentitems'):
 				<?php if ($tmp['source'] == 'sentitems' OR $tmp['source'] == 'inbox'): ?>
 				<?php if ($part_no > 1): ?>
 				<tr>
-					<td><?php echo lang('kalkun_sms_part'); ?></td>
+					<td><?php echo tr('Part'); ?></td>
 					<td> : </td>
-					<td><?php echo $part_no; ?> <?php echo lang('kalkun_sms_part_suffix'); ?></td>
+					<td><?php echo $part_no; ?> <?php echo tr('part messages'); ?></td>
 				</tr>
 				<?php endif; ?>
 				<?php endif; ?>
 				<?php if ($tmp['source'] == 'sentitems'): ?>
 				<tr>
-					<td><?php echo lang('tni_status'); ?></td>
+					<td><?php echo tr('Status'); ?></td>
 					<td> : </td>
 					<td><?php echo $status; ?></td>
 				</tr>
@@ -193,32 +210,31 @@ if ($tmp['source'] == 'sentitems'):
 
 		<div class="optionmenu hidden" style="padding-left: 20px">
 			<ul>
-				<li><a class="detail_button" href="#"><?php echo lang('tni_show_details'); ?></a></li>
+				<li><a class="detail_button" href="#"><?php echo tr('Show details'); ?></a></li>
 
 				<?php if ($tmp['source'] == 'inbox'): ?>
 				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" /></li>
-				<li><a href="#" class="reply_button"><?php echo lang('kalkun_reply'); ?></a></li>
+				<li><a href="#" class="reply_button"><?php echo tr('Reply'); ?></a></li>
 				<?php endif; ?>
 
 				<?php if ($type != 'outbox'): ?>
 				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" /></li>
-				<li><a href="#" class="forward_button"><?php echo lang('kalkun_forward'); ?></a></li>
+				<li><a href="#" class="forward_button"><?php echo tr('Forward'); ?></a></li>
 				<?php endif; ?>
 
 				<?php if ( ! $on_pbk): ?>
 				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" /></li>
-				<li><a href="#" class="add_to_pbk"><?php echo lang('tni_contact_add'); ?></a></li>
+				<li><a href="#" class="add_to_pbk"><?php echo tr('Add contact'); ?></a></li>
 				<?php endif; ?>
 
 				<?php if ($tmp['source'] == 'sentitems'): ?>
 				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" /></li>
-				<li><a href="#" class="resend"><?php echo lang('kalkun_resend'); ?></a></li>
+				<li><a href="#" class="resend"><?php echo tr('Resend'); ?></a></li>
 				<?php endif; ?>
 			</ul>
 		</div>
 
 		<div class="message_metadata hidden">
-			<span class="coding"><?php echo $tmp['Coding']; ?></span>
 			<span class="class"><?php echo $tmp['Class']; ?></span>
 		</div>
 

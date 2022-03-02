@@ -51,10 +51,11 @@ class Phonebook extends MY_Controller {
 		{
 			$config['uri_segment'] = 4;
 			$config['base_url'] = site_url().'/phonebook/index/public';
-			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'public'))->num_rows();
+			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'paginate', 'public' => TRUE))->num_rows();
 			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
 
-			$data['title'] = lang('kalkun_public_contact');
+			$data['title'] = tr('Public contacts');
 			$data['public_contact'] = TRUE;
 			$param = array('option' => 'paginate', 'public' => TRUE, 'limit' => $config['per_page'], 'offset' => $this->uri->segment(4, 0));
 			$data['phonebook'] = $this->Phonebook_model->get_phonebook($param);
@@ -63,10 +64,11 @@ class Phonebook extends MY_Controller {
 		{
 			$config['uri_segment'] = 3;
 			$config['base_url'] = site_url().'/phonebook/index/';
-			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();
+			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'paginate'))->num_rows();
 			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
 
-			$data['title'] = lang('tni_contacts');
+			$data['title'] = tr('Contacts');
 			$data['public_contact'] = FALSE;
 
 			if ($_POST)
@@ -111,24 +113,26 @@ class Phonebook extends MY_Controller {
 
 		if ($type === 'public')
 		{
-			$data['title'] = lang('kalkun_public_group');
+			$data['title'] = tr('Public groups');
 			$data['public_group'] = TRUE;
 			$config['base_url'] = site_url().'/phonebook/group/public';
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group', 'public' => TRUE))->num_rows();
 			$config['uri_segment'] = 4;
 			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
 
 			$param = array('option' => 'group_paginate', 'public' => TRUE, 'limit' => $config['per_page'], 'offset' => $this->uri->segment(4, 0));
 			$data['group'] = $this->Phonebook_model->get_phonebook($param);
 		}
 		else
 		{
-			$data['title'] = lang('tni_groups');
+			$data['title'] = tr('Groups');
 			$data['public_group'] = FALSE;
 			$config['base_url'] = site_url().'/phonebook/group/';
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();
 			$config['uri_segment'] = 3;
 			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
 
 			$param = array('option' => 'group_paginate', 'limit' => $config['per_page'], 'offset' => $this->uri->segment(3, 0));
 			$data['group'] = $this->Phonebook_model->get_phonebook($param);
@@ -157,6 +161,7 @@ class Phonebook extends MY_Controller {
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 		$config['uri_segment'] = 4;
 		$this->pagination->initialize($config);
+		$data['pagination_links'] = $this->pagination->create_links();
 
 		$param['limit'] = $config['per_page'];
 		$param['offset'] = $this->uri->segment(4, 0);
@@ -283,23 +288,25 @@ class Phonebook extends MY_Controller {
 	 */
 	function import_phonebook()
 	{
-		$this->load->library('CSVReader');
 		$filePath = $_FILES['csvfile']['tmp_name'];
-		$csvData = $this->csvreader->parse_file($filePath, TRUE);
 
-		$n = 0;
-		foreach ($csvData as $field)
+		//load the CSV document from a file path
+		$csv = League\Csv\Reader::createFromPath($filePath, 'r');
+		$csv->setHeaderOffset(0);
+
+		$records = $csv->getRecords(); //returns all the CSV records as an Iterator object
+
+		foreach ($records as $offset => $record)
 		{
-			$pbk['Name'] = $field['Name'];
-			$pbk['Number'] = $field['Number'];
+			$pbk['Name'] = $record['Name'];
+			$pbk['Number'] = $record['Number'];
 			$pbk['GroupID'] = $this->input->post('importgroupvalue');
 			$pbk['id_user'] = $this->input->post('pbk_id_user');
 			$pbk['is_public'] = $this->input->post('is_public') ? 'true' : 'false';
 			$this->Phonebook_model->add_contact($pbk);
-			$n++;
 		}
 
-		$this->session->set_flashdata('notif', str_replace('%count%', $n, lang('pbk_successfully_imported')));
+		$this->session->set_flashdata('notif', tr('{0,number,integer} contacts imported successfully.', NULL, $n));
 		redirect('phonebook');
 	}
 
@@ -351,6 +358,7 @@ class Phonebook extends MY_Controller {
 	 */
 	function add_contact_process()
 	{
+		$this->load->helper('kalkun');
 		$pbk['Name'] = trim($this->input->post('name'));
 		$pbk['Number'] = trim($this->input->post('number'));
 		//$pbk['GroupID'] = $this->input->post('groupvalue');
@@ -361,11 +369,11 @@ class Phonebook extends MY_Controller {
 		if ($this->input->post('editid_pbk'))
 		{
 			$pbk['id_pbk'] = $this->input->post('editid_pbk');
-			$msg = '<div class="notif">'.lang('pbk_contact_updated').'</div>';
+			$msg = '<div class="notif">'.tr('Contact updated successfully.').'</div>';
 		}
 		else
 		{
-			$msg = '<div class="notif">'.lang('pbk_contact_added').'</div>';
+			$msg = '<div class="notif">'.tr('Contact added successfully.').'</div>';
 		}
 
 		$this->Phonebook_model->add_contact($pbk);
@@ -394,15 +402,15 @@ class Phonebook extends MY_Controller {
 			$query = $this->Phonebook_model->search_phonebook($param)->result_array();
 
 			// Add identifier, c for contact, g for group, u for user
-			foreach ($query as $key => $q)
+			foreach ($query as $key => $val)
 			{
-				$query[$key]['name'] .= ' ('.str_replace('+', '', $q['id']).')';
-				$query[$key]['id'] = $q['id'].':c';
+				$query[$key]['name'] .= ' ('.$val['id'].')';
+				$query[$key]['id'] = $val['id'].':c';
 			}
 			$group = $this->Phonebook_model->search_group($param)->result_array();
-			foreach ($group as $key => $q)
+			foreach ($group as $key => $val)
 			{
-				$group[$key]['id'] = $q['id'].':g';
+				$group[$key]['id'] = $val['id'].':g';
 			}
 
 			// User, currently on inbox only
@@ -410,10 +418,10 @@ class Phonebook extends MY_Controller {
 			if ($type === 'inbox')
 			{
 				$user = $this->User_model->search_user($q)->result_array();
-				foreach ($user as $key => $q)
+				foreach ($user as $key => $val)
 				{
-					$user[$key]['id'] = $q['id_user'].':u';
-					$user[$key]['name'] = $q['realname'];
+					$user[$key]['id'] = $val['id_user'].':u';
+					$user[$key]['name'] = $val['realname'];
 				}
 			}
 
@@ -423,9 +431,9 @@ class Phonebook extends MY_Controller {
 			{
 				$contact = array();
 			}
-			foreach ($contact as $key => $q)
+			foreach ($contact as $key => $val)
 			{
-				$contact[$key]['id'] = $q['id'].':c';
+				$contact[$key]['id'] = $val['id'].':c';
 			}
 
 			$combine = array_merge($query, $group, $user, $contact);

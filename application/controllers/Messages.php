@@ -105,7 +105,7 @@ class Messages extends MY_Controller {
 					$multipart['option'] = 'check';
 					$multipart['id_message'] = $id;
 					$tmp_check = $this->Message_model->get_multipart($multipart);
-					if ($tmp_check === TRUE)
+					if ($tmp_check > 0)
 					{
 						$multipart['option'] = 'all';
 						foreach ($this->Message_model->get_multipart($multipart)->result() as $part)
@@ -172,10 +172,14 @@ class Messages extends MY_Controller {
 		// Import value from file (currently only CSV)
 		if (isset($_FILES['import_file']))
 		{
-			$this->load->library('CSVReader');
 			$filePath = $_FILES['import_file']['tmp_name'];
-			$csvData = $this->csvreader->parse_file($filePath, TRUE);
-			$csvField = array_keys($csvData[0]);
+			//load the CSV document from a file path
+			$reader = League\Csv\Reader::createFromPath($filePath, 'r');
+			$reader->setHeaderOffset(0);
+
+			$csvField = $reader->getHeader(); //returns the CSV header record
+			$csvData = $reader->getRecords(); //returns all the CSV records as an Iterator object
+
 			foreach ($csvData as $data)
 			{
 				foreach ($csvField as $field)
@@ -337,7 +341,6 @@ class Messages extends MY_Controller {
 		$data['date'] = $date;
 		$data['validity'] = $this->input->post('validity');
 		$data['delivery_report'] = $this->Kalkun_model->get_setting()->row('delivery_report');
-		$data['coding'] = ($this->input->post('unicode') === 'unicode') ? 'unicode' : 'default';
 		$data['ncpr'] = ($this->input->post('ncpr') === 'ncpr') ? TRUE : FALSE;
 		$data['uid'] = $this->session->userdata('id_user');
 		$data['url'] = $this->input->post('url');
@@ -362,7 +365,7 @@ class Messages extends MY_Controller {
 		{
 			unset($dest);
 			$return_msg['type'] = 'error';
-			$return_msg['msg'] = lang('kalkun_msg_outgoing_disabled');
+			$return_msg['msg'] = tr('Outgoing SMS disabled');
 		}
 
 		// if ndnc filtering enabled
@@ -379,7 +382,7 @@ class Messages extends MY_Controller {
 						{
 							unset($dest[$i]);
 							$return_msg['type'] = 'error';
-							$return_msg['msg'] = lang('kalkun_msg_number_in_DND');
+							$return_msg['msg'] = tr('A number was found in DND Resitry. SMS sending was skipped for it.');
 						}
 					}
 				}
@@ -389,21 +392,24 @@ class Messages extends MY_Controller {
 					{
 						unset($dest);
 						$return_msg['type'] = 'error';
-						$return_msg['msg'] = lang('kalkun_msg_number_in_DND');
+						$return_msg['msg'] = tr('A number was found in DND Resitry. SMS sending was skipped for it.');
 					}
 				}
 			}
 		}
 
 		// hook for outgoing message
-		$dest = do_action('message.outgoing', $dest);
-		$sms = do_action('message.outgoing_all', $data);
-
-		$dest_data = do_action('message.outgoing_dest_data', array($dest, $data));
-		if (isset($dest_data) && sizeof($dest_data) === 2)
+		if (isset($dest))
 		{
-			$dest = $dest_data[0];
-			$data = $dest_data[1];
+			$dest = do_action('message.outgoing', $dest);
+			$sms = do_action('message.outgoing_all', $data);
+
+			$dest_data = do_action('message.outgoing_dest_data', array($dest, $data));
+			if (sizeof($dest_data) === 2)
+			{
+				$dest = $dest_data[0];
+				$data = $dest_data[1];
+			}
 		}
 
 		// check for field
@@ -427,7 +433,7 @@ class Messages extends MY_Controller {
 				$msg_id = $this->Message_model->copy_message($this->input->post('msg_id'));
 				$this->Message_model->update_owner($msg_id, $id);
 				$return_msg['type'] = 'info';
-				$return_msg['msg'] = lang('kalkun_msg_delivered_to_user_inbox');
+				$return_msg['msg'] = tr('Message delivered successfully to user inbox');
 			}
 		}
 
@@ -475,12 +481,12 @@ class Messages extends MY_Controller {
 				$n++;
 			}
 			$return_msg['type'] = 'info';
-			$return_msg['msg'] = lang('kalkun_msg_moved_to_outbox');
+			$return_msg['msg'] = tr('Copy of the message was placed in the outbox and is ready for delivery.');
 		}
 		if ( ! isset($return_msg))
 		{
 			$return_msg['type'] = 'error';
-			$return_msg['msg'] = lang('kalkun_msg_no_numberfound');
+			$return_msg['msg'] = tr('No number found. SMS not sent.');
 		}
 
 		// Display sending status
@@ -590,6 +596,7 @@ class Messages extends MY_Controller {
 			$config['base_url'] = site_url('messages/folder/'.$type);
 			$config['uri_segment'] = 4;
 			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
 
 			$data['main'] = 'main/messages/index';
 			$this->load->view('main/layout', $data);
@@ -671,6 +678,7 @@ class Messages extends MY_Controller {
 			$config['base_url'] = site_url('/messages/my_folder/'.$type.'/'.$id_folder);
 			$config['uri_segment'] = 5;
 			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
 
 			$data['main'] = 'main/messages/index';
 			$this->load->view('main/layout', $data);
@@ -690,6 +698,8 @@ class Messages extends MY_Controller {
 	{
 		$this->load->helper('kalkun');
 
+		$number = rawurldecode($number);
+
 		// Pagination
 		$this->load->library('pagination');
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
@@ -701,12 +711,6 @@ class Messages extends MY_Controller {
 			$data['main'] = 'main/messages/index';
 			$param['type'] = $type;
 			$param['number'] = trim($number);
-
-			$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.$number);
-			$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
-			$config['uri_segment'] = 6;
-			$this->pagination->initialize($config);
-
 
 			if ($param['number'] === 'sending_error')
 			{
@@ -729,8 +733,6 @@ class Messages extends MY_Controller {
 			else
 			{
 				$param['type'] = 'inbox';
-				$param['limit'] = $config['per_page'];
-				$param['offset'] = $this->uri->segment(6, 0);
 				$param['order_by'] = 'ReceivingDateTime';
 				$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 				$param['uid'] = $this->session->userdata('id_user');
@@ -769,6 +771,16 @@ class Messages extends MY_Controller {
 			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 			usort($data['messages'], 'compare_date_'.$sort_option);
 
+			$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.rawurlencode($number));
+			$config['total_rows'] = sizeof($data['messages']);
+			$config['uri_segment'] = 6;
+			$this->pagination->initialize($config);
+			$data['pagination_links'] = $this->pagination->create_links();
+
+			$offset = $this->uri->segment(6, 0);
+			$length = $config['per_page'];
+			$data['messages'] = array_slice($data['messages'], $offset, $length);
+
 			if (is_ajax())
 			{
 				$this->load->view('main/messages/conversation', $data);
@@ -786,10 +798,11 @@ class Messages extends MY_Controller {
 				$param['type'] = 'outbox';
 				$param['number'] = trim($number);
 				$param['uid'] = $this->session->userdata('id_user');
-				$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.$number);
+				$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.rawurlencode($number));
 				$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
 				$config['uri_segment'] = 6;
 				$this->pagination->initialize($config);
+				$data['pagination_links'] = $this->pagination->create_links();
 
 				$param['limit'] = $config['per_page'];
 				$param['offset'] = $this->uri->segment(6, 0);
@@ -822,13 +835,6 @@ class Messages extends MY_Controller {
 					$param['number'] = trim($number);
 					$param['uid'] = $this->session->userdata('id_user');
 
-					$config['base_url'] = site_url('/messages/conversation/my_folder/'.$type.'/'.$number.'/'.$id_folder);
-					$config['total_rows'] = $this->Message_model->get_messages($param)->num_rows();
-					$config['uri_segment'] = 7;
-					$this->pagination->initialize($config);
-
-					$param['limit'] = $config['per_page'];
-					$param['offset'] = $this->uri->segment(7, 0);
 					$param['order_by'] = 'ReceivingDateTime';
 					$param['order_by_type'] = $this->Kalkun_model->get_setting()->row('conversation_sort');
 					$inbox = $this->Message_model->get_messages($param)->result_array();
@@ -866,6 +872,16 @@ class Messages extends MY_Controller {
 					$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 					usort($data['messages'], 'compare_date_'.$sort_option);
 
+					$config['base_url'] = site_url('/messages/conversation/my_folder/'.$type.'/'.rawurlencode($number).'/'.$id_folder);
+					$config['total_rows'] = sizeof($data['messages']);
+					$config['uri_segment'] = 7;
+					$this->pagination->initialize($config);
+					$data['pagination_links'] = $this->pagination->create_links();
+
+					$offset = $this->uri->segment(7, 0);
+					$length = $config['per_page'];
+					$data['messages'] = array_slice($data['messages'], $offset, $length);
+
 					if (is_ajax())
 					{
 						$this->load->view('main/messages/conversation', $data);
@@ -883,10 +899,11 @@ class Messages extends MY_Controller {
 					$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 					$config['cur_tag_open'] = '<span id="current">';
 					$config['cur_tag_close'] = '</span>';
-					$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.$number);
+					$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.rawurlencode($number));
 					$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
 					$config['uri_segment'] = 6;
 					$this->pagination->initialize($config);
+					$data['pagination_links'] = $this->pagination->create_links();
 					$param['limit'] = $config['per_page'];
 					$param['offset'] = $this->uri->segment(6, 0);
 					$data['messages'] = $this->Message_model->search_messages($param)->messages;
@@ -935,13 +952,14 @@ class Messages extends MY_Controller {
 				{
 					if ($segment[4] !== '_')
 					{
-						$param['search_string'] = urldecode($segment[4]);
+						$param['search_string'] = rawurldecode($segment[4]);
 					}
 					$data['search_string'] = $segment[4];
 					$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
 					$config['uri_segment'] = $param_needed + 1;
 					$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
 					$this->pagination->initialize($config);
+					$data['pagination_links'] = $this->pagination->create_links();
 					$param['limit'] = $config['per_page'];
 					$param['offset'] = $this->uri->segment($param_needed + 1, 0);
 					$param['uid'] = $this->session->userdata('id_user');
@@ -955,11 +973,11 @@ class Messages extends MY_Controller {
 				{
 					if ($segment[4] !== '_')
 					{
-						$param['search_string'] = urldecode($segment[4]);
+						$param['search_string'] = rawurldecode($segment[4]);
 					}
 					if ($segment[5] !== '_')
 					{
-						$param['number'] = $segment[5];
+						$param['number'] = rawurldecode($segment[5]);
 					}
 					if ($segment[6] !== '_')
 					{
@@ -989,6 +1007,7 @@ class Messages extends MY_Controller {
 					$config['uri_segment'] = $param_needed + 1;
 					$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
 					$this->pagination->initialize($config);
+					$data['pagination_links'] = $this->pagination->create_links();
 					$param['limit'] = $config['per_page'];
 					$param['offset'] = $this->uri->segment($param_needed + 1, 0);
 					$param['uid'] = $this->session->userdata('id_user');
@@ -1005,7 +1024,7 @@ class Messages extends MY_Controller {
 		if ($this->input->post('search_sms'))
 		{
 			$params[] = 'basic';
-			$params[] = trim($this->input->post('search_sms'));
+			$params[] = rawurlencode(trim($this->input->post('search_sms')));
 		}
 		// advanced search
 		else
@@ -1014,7 +1033,7 @@ class Messages extends MY_Controller {
 			{
 				$params[] = 'advanced';
 				$params[] = $this->input->post('a_search_query') ? $this->input->post('a_search_query') : '_';
-				$params[] = $this->input->post('a_search_from_to') ? $this->input->post('a_search_from_to') : '_';
+				$params[] = $this->input->post('a_search_from_to') ? rawurlencode($this->input->post('a_search_from_to')) : '_';
 				$params[] = $this->input->post('a_search_date_from') ? $this->input->post('a_search_date_from') : '_';
 				$params[] = $this->input->post('a_search_date_to') ? $this->input->post('a_search_date_to') : '_';
 				$params[] = $this->input->post('a_search_sentitems_status') ? $this->input->post('a_search_sentitems_status') : '_';
@@ -1156,7 +1175,7 @@ class Messages extends MY_Controller {
 
 		if ($param['option'] === 'permanent' && $this->config->item('only_admin_can_permanently_delete') && $this->session->userdata('level') !== 'admin')
 		{
-			echo lang('kalkun_msg_only_admin_can_permanently_delete');
+			echo tr('Only administrators can permanently delete messages.');
 			exit;
 		}
 

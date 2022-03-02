@@ -217,7 +217,6 @@ class Api extends MY_Controller {
 		$data['dest'] = $dest;
 		$data['date'] = date('Y-m-d H:i:s');
 		$data['message'] = $message;
-		$data['coding'] = 'default';
 		$data['uid'] = 1;
 		$data['class'] = $class;
 		$data['delivery_report'] = 'default';

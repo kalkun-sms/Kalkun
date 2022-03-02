@@ -25,8 +25,8 @@ class Blacklist_number extends Plugin_controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Kalkun_model');
-		$this->load->model('blacklist_number_model', 'plugin_model');
+		$this->load->model('blacklist_number_model');
+		$this->load->helper('kalkun');
 	}
 
 	function index()
@@ -35,18 +35,18 @@ class Blacklist_number extends Plugin_controller {
 		{
 			if ($this->input->post('editid_blacklist_number'))
 			{
-				$this->plugin_model->update();
+				$this->blacklist_number_model->update();
 			}
 			else
 			{
-				$this->plugin_model->add();
+				$this->blacklist_number_model->add();
 			}
 			redirect('plugin/blacklist_number');
 		}
 
 		$this->load->library('pagination');
 		$config['base_url'] = site_url('plugin/blacklist_number/index');
-		$config['total_rows'] = $this->plugin_model->get('count');
+		$config['total_rows'] = $this->blacklist_number_model->get('count');
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
 		$config['cur_tag_open'] = '<span id="current">';
 		$config['cur_tag_close'] = '</span>';
@@ -54,14 +54,14 @@ class Blacklist_number extends Plugin_controller {
 		$this->pagination->initialize($config);
 
 		$data['main'] = 'index';
-		$data['blacklist'] = $this->plugin_model->get('paginate', $config['per_page'], $this->uri->segment(4, 0));
+		$data['blacklist'] = $this->blacklist_number_model->get('paginate', $config['per_page'], $this->uri->segment(4, 0));
 		$data['number'] = $this->uri->segment(4, 0) + 1;
 		$this->load->view('main/layout', $data);
 	}
 
 	function delete($id)
 	{
-		$this->plugin_model->delete($id);
+		$this->blacklist_number_model->delete($id);
 		redirect('plugin/blacklist_number');
 	}
 }

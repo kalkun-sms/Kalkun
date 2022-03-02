@@ -13,7 +13,16 @@
 					maxlength: 12
 				},
 				phone_number: {
-					required: true
+					required: true,
+					remote: {
+						url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
+						type: "post",
+						data: {
+							phone: function() {
+								return $("#phone_number").val();
+							}
+						}
+					}
 				},
 				password: {
 					required: true,
@@ -25,14 +34,21 @@
 			},
 			messages: {
 				realname: {
-					required: "<?php echo lang('tni_error_enter_name');?>"
+					required: "<?php echo tr('Field required.');?>"
+				},
+				username: {
+					required: "<?php echo tr('Field required.');?>",
+					maxlength: "<?php echo tr('Value is too long.');?>"
+				},
+				phone_number: {
+					required: "<?php echo tr('Field required.');?>",
 				},
 				password: {
-					required: "<?php echo lang('tni_error_enter_password');?>",
-					minlength: "<?php echo lang('tni_error_toshort');?>"
+					required: "<?php echo tr('Field required.');?>",
+					minlength: "<?php echo tr('Value is too short.');?>"
 				},
 				confirm_password: {
-					equalTo: "<?php echo lang('tni_error_password_nomatch');?>"
+					equalTo: "<?php echo tr('Passwords do not match.');?>"
 				}
 			}
 		});

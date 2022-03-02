@@ -32,7 +32,7 @@ class Pluginss extends MY_Controller {
 		// Prevent non-admin user
 		if ($this->session->userdata('level') !== 'admin')
 		{
-			$this->session->set_flashdata('notif', lang('pluginss_only_admin_can_manage'));
+			$this->session->set_flashdata('notif', tr('Access denied. Only administrators are allowed to manage plugins.'));
 			redirect('/');
 		}
 
@@ -58,7 +58,7 @@ class Pluginss extends MY_Controller {
 		$data['type'] = $type;
 		if ($type === 'installed')
 		{
-			$data['title'] .= lang('pluginss_installed');
+			$data['title'] .= ' - '.tr('Installed', 'Plural');
 			$data['plugins'] = $this->Plugin_model->get_plugins()->result_array();
 			foreach ($data['plugins'] as $key => $plugin)
 			{
@@ -67,9 +67,8 @@ class Pluginss extends MY_Controller {
 		}
 		else
 		{
-			$data['title'] .= lang('pluginss_available');
-			$pluginsObj = new Plugins();
-			$plugins = get_available_plugin();
+			$data['title'] .= ' - '.tr('Available', 'Plural');
+			$plugins = $this->plugins->print_plugins();
 			$no = 0;
 
 			if ( ! empty($plugins))
@@ -77,11 +76,11 @@ class Pluginss extends MY_Controller {
 				// do cleanup array key
 				foreach ($plugins as $key => $tmp)
 				{
-					$new_plugin[$no]['plugin_system_name'] = $key;
-					foreach ($tmp['plugin_info'] as $key2 => $tmp2)
-					{
-						$new_plugin[$no][$key2] = $tmp2;
-					}
+					$this->plugins->get_plugin_headers($key);
+					$new_plugin[$no] = array_merge (
+						array ('plugin_system_name' => $key),
+						$this->plugins->plugin_info($key)
+					);
 					$no++;
 				}
 				$installed = $this->Plugin_model->get_plugins()->result_array();
@@ -115,8 +114,8 @@ class Pluginss extends MY_Controller {
 	 */
 	function install($plugin_name)
 	{
-		activate_plugin($plugin_name);
-		$this->session->set_flashdata('notif', str_replace('%plugin_name%', $plugin_name, lang('pluginss_successfully_installed')));
+		$this->plugins->activate_plugin($plugin_name);
+		$this->session->set_flashdata('notif', tr('Plugin {0} installed successfully.', NULL, $plugin_name));
 		redirect('pluginss');
 	}
 
@@ -131,8 +130,8 @@ class Pluginss extends MY_Controller {
 	 */
 	function uninstall($plugin_name)
 	{
-		deactivate_plugin($plugin_name);
-		$this->session->set_flashdata('notif', str_replace('%plugin_name%', $plugin_name, lang('pluginss_successfully_uninstalled')));
+		$this->plugins->deactivate_plugin($plugin_name);
+		$this->session->set_flashdata('notif', tr('Plugin {0} uninstalled successfully.', NULL, $plugin_name));
 		redirect('pluginss');
 	}
 

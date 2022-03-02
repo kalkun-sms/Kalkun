@@ -23,7 +23,16 @@
 					maxlength: 12
 				},
 				phone_number: {
-					required: true
+					required: true,
+					remote: {
+						url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
+						type: "post",
+						data: {
+							phone: function() {
+								return $("#phone_number").val();
+							}
+						}
+					}
 				},
 				password: {
 					required: true,
@@ -41,15 +50,28 @@
 			},
 			messages: {
 				realname: {
-					required: "<?php echo lang('tni_error_enter_name');?>"
+					required: "<?php echo tr('Field required.');?>"
+				},
+				username: {
+					required: "<?php echo tr('Field required.');?>",
+					maxlength: "<?php echo tr('Value is too long.');?>"
+				},
+				phone_number: {
+					required: "<?php echo tr('Field required.');?>",
 				},
 				password: {
-					required: "<?php echo lang('tni_error_enter_password');?>",
-					minlength: "<?php echo lang('tni_error_toshort');?>"
+					required: "<?php echo tr('Field required.');?>",
+					minlength: "<?php echo tr('Value is too short.');?>"
 				},
 				confirm_password: {
-					equalTo: "<?php echo lang('tni_error_password_nomatch');?>"
-				}
+					equalTo: "<?php echo tr('Passwords do not match.');?>"
+				},
+				package_start: {
+					required: "<?php echo tr('Field required.');?>"
+				},
+				package_end: {
+					required: "<?php echo tr('Field required.');?>"
+				},
 			}
 		});
 
@@ -64,17 +86,19 @@
 		$('.addpbkcontact').on('click', null, function() {
 
 			$("#users_container").dialog({
-				title: '<?php echo lang('tni_user_addp');?>',
+				title: '<?php echo tr('Add user');?>',
+				closeText: "<?php echo tr('Close'); ?>",
+				maxHeight: 400,
 				modal: true,
 				show: 'fade',
 				hide: 'fade',
 				buttons: {
-					'<?php echo lang('kalkun_save');?>': function() {
+					'<?php echo tr('Save');?>': function() {
 						if ($("#addUser").valid()) {
 							$("form#addUser").trigger('submit')
 						}
 					},
-					'<?php echo lang('kalkun_cancel');?>': function() {
+					'<?php echo tr('Cancel');?>': function() {
 						$(this).dialog('destroy');
 					}
 				}
@@ -97,15 +121,16 @@
 			$('#edit_package_end').val(package_end);
 
 			$("#edit_users_container").dialog({
-				title: 'Change Package for ',
+				title: '<?php echo tr('Edit user package'); ?>',
+				closeText: "<?php echo tr('Close'); ?>",
 				modal: true,
 				show: 'fade',
 				hide: 'fade',
 				buttons: {
-					'<?php echo lang('kalkun_save');?>': function() {
+					'<?php echo tr('Save');?>': function() {
 						$("form#editUser").trigger('submit')
 					},
-					'<?php echo lang('kalkun_cancel');?>': function() {
+					'<?php echo tr('Cancel');?>': function() {
 						$(this).dialog('destroy');
 					}
 				}
@@ -123,15 +148,15 @@
 
 			// confirm first
 			$("#confirm_delete_user_dialog").dialog({
+				closeText: "<?php echo tr('Close'); ?>",
 				bgiframe: true,
 				autoOpen: false,
-				height: 150,
 				modal: true,
 				buttons: {
-					'<?php echo lang('kalkun_cancel')?>': function() {
+					'<?php echo tr('Cancel')?>': function() {
 						$(this).dialog('close');
 					},
-					'<?php echo lang('tni_yes')?>': function() {
+					'<?php echo tr('Yes')?>': function() {
 						window.location.href = url;
 						$(this).dialog('close');
 					}
@@ -142,11 +167,11 @@
 
 		// Search onBlur onFocus
 		if ($('input.search_name').val() == '') {
-			$('input.search_name').val('<?php echo lang('tni_user_search'); ?>');
+			$('input.search_name').val('<?php echo tr('Search'); ?>');
 		}
 
 		$('input.search_name').on("blur", function() {
-			$(this).val('<?php echo lang('tni_user_search'); ?>');
+			$(this).val('<?php echo tr('Search'); ?>');
 		});
 
 		$('input.search_name').on("focus", function() {

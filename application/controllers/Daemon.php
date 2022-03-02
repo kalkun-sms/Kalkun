@@ -53,37 +53,44 @@ class Daemon extends CI_Controller {
 
 		foreach ($message->result() as $tmp_message)
 		{
+			$is_spam = FALSE;
 			// check for spam
 			if ($this->Spam_model->apply_spam_filter($tmp_message->ID, $tmp_message->TextDecoded))
 			{
-				continue; ////is spam do not process later part
+				$is_spam = TRUE;
 			}
 
-			// hook for incoming message (before ownership)
-			$status = do_action('message.incoming.before', $tmp_message);
-
-			// message deleted, do not process later part
-			if (isset($status) && $status === 'break')
+			if ( ! $is_spam)
 			{
-				continue;
+				// hook for incoming message (before ownership)
+				$status = do_action('message.incoming.before', $tmp_message);
+
+				// message deleted, do not process later part
+				if (isset($status) && $status === 'break')
+				{
+					continue;
+				}
 			}
 
 			// set message's ownership
 			$msg_user = $this->_set_ownership($tmp_message);
 			$this->Kalkun_model->add_sms_used($msg_user, 'in');
 
-			// hook for incoming message (after ownership)
-			$tmp_message->msg_user = $msg_user;
-			$status = do_action('message.incoming.after', $tmp_message);
-
-			// message deleted, do not process later part
-			if (isset($status) && $status === 'break')
+			if ( ! $is_spam)
 			{
-				continue;
-			}
+				// hook for incoming message (after ownership)
+				$tmp_message->msg_user = $msg_user;
+				$status = do_action('message.incoming.after', $tmp_message);
 
-			// run user filters
-			$this->_run_user_filters($tmp_message, $msg_user);
+				// message deleted, do not process later part
+				if (isset($status) && $status === 'break')
+				{
+					continue;
+				}
+
+				// run user filters
+				$this->_run_user_filters($tmp_message, $msg_user);
+			}
 
 			// update Processed
 			$id_message[0] = $tmp_message->ID;
@@ -213,15 +220,14 @@ class Daemon extends CI_Controller {
 	function server_alert_daemon()
 	{
 		$this->load->model(array('Kalkun_model', 'Message_model'));
-		$this->load->model('server_alert/server_alert_model', 'plugin_model');
+		$this->load->model('server_alert/server_alert_model', 'server_alert_model');
 
-		$tmp_data = $this->plugin_model->get('active');
+		$tmp_data = $this->server_alert_model->get('active');
 		foreach ($tmp_data->result() as $tmp)
 		{
 			$fp = fsockopen($tmp->ip_address, $tmp->port_number, $errno, $errstr, 60);
 			if ( ! $fp)
 			{
-				$data['coding'] = 'default';
 				$data['message'] = $tmp->respond_message."\n\nKalkun Server Alert";
 				$data['date'] = date('Y-m-d H:i:s');
 				$data['dest'] = $tmp->phone_number;
@@ -229,7 +235,7 @@ class Daemon extends CI_Controller {
 				$data['class'] = '1';
 				$data['uid'] = '1';
 				$this->Message_model->send_messages($data);
-				$this->plugin_model->change_state($tmp->id_server_alert, 'false');
+				$this->server_alert_model->change_state($tmp->id_server_alert, 'false');
 			}
 		}
 	}

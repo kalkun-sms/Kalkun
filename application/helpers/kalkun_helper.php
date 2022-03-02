@@ -12,7 +12,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link        https://github.com/kalkun-sms/Kalkun/
  */
 
-
 /**
 *	INDIA NCPR(DND) Registry Check
 *	In order to avoid sending sms to NCPR registered phone numbers
@@ -47,24 +46,16 @@ function filter_data($data)
 	}
 }
 
-function nice_date($str, $option = NULL)
+function kalkun_nice_date($str, $option = NULL)
 {
-	// convert the date to unix timestamp
-	list($date, $time) = explode(' ', $str);
-	list($year, $month, $day) = explode('-', $date);
-	list($hour, $minute, $second) = explode(':', $time);
+	$CI = &get_instance();
+	$CI->load->helper('date');
 
-	$timestamp = mktime($hour, $minute, $second, $month, $day, $year);
-	$now = time();
-	$blocks = array(
-		array('name' => lang('kalkun_year'), 'amount' => 60 * 60 * 24 * 365),
-		array('name' => lang('kalkun_month'), 'amount' => 60 * 60 * 24 * 31),
-		array('name' => lang('kalkun_week'), 'amount' => 60 * 60 * 24 * 7),
-		array('name' => lang('kalkun_day'), 'amount' => 60 * 60 * 24),
-		array('name' => lang('kalkun_hour'), 'amount' => 60 * 60),
-		array('name' => lang('kalkun_minute'), 'amount' => 60),
-		array('name' => lang('kalkun_second'), 'amount' => 1)
-	);
+	// convert the date to unix timestamp
+	$datetime = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $str);
+	$timestamp = $datetime->getTimestamp();
+
+	$now = now();
 
 	$diff = abs($now - $timestamp);
 
@@ -74,54 +65,35 @@ function nice_date($str, $option = NULL)
 	}
 	else
 	{
-		if ($diff < 60)
+		//if ($diff < 60)
+		//{
+		//	return tr('Less than a minute ago');
+		//}
+		//else
 		{
-			return lang('kalkun_nicedate_less1min_ago'); // "Less than a minute ago"
-		}
-		else
-		{
-			$levels = 1;
-			$current_level = 1;
-			$result = array();
-			foreach ($blocks as $block)
-			{
-				if ($current_level > $levels)
-				{
-					break;
-				}
-				if ($diff / $block['amount'] >= 1)
-				{
-					$amount = floor($diff / $block['amount']);
-					$plural = '';
-					//if ($amount>1) {$plural='s';} else {$plural='';}
-					$result[] = $amount.' '.$block['name'].$plural;
-					$diff -= $amount * $block['amount'];
-					$current_level += 1;
-				}
-			}
-			$res = implode(' ', $result);
-
+			$units = 2;
 			if ($timestamp > $now)
 			{
-				$text = lang('kalkun_nicedate_remaining');
+				return tr('{0} remaining', NULL, timespan($now, $timestamp, $units));
 			}
 			else
 			{
-				$text = lang('kalkun_nicedate_ago');
+				return tr('{0} ago', NULL, timespan($timestamp, $now, $units));
 			}
-			return str_replace('%nicedate%', $res, $text);
 		}
 	}
 }
 
+
+
+
 function get_modem_status($status, $tolerant)
 {
 	// convert the date to unix timestamp
-	list($date, $time) = explode(' ', $status);
-	list($year, $month, $day) = explode('-', $date);
-	list($hour, $minute, $second) = explode(':', $time);
+	$datetime = DateTime::createFromFormat('Y-m-d H:i:s', $status);
+	$datetime->add(new DateInterval('PT'.$tolerant.'M'));
+	$timestamp = $datetime->getTimestamp();
 
-	$timestamp = mktime($hour, $minute + $tolerant, $second, $month, $day, $year);
 	$now = time();
 
 	//$diff = abs($now-$timestamp);
@@ -143,7 +115,7 @@ function message_preview($str, $n)
 	}
 	else
 	{
-		return showtags(substr($str, 0, $n - 3)).'&#8230;';
+		return showtags(mb_substr($str, 0, $n - 3)).'&#8230;';
 	}
 }
 
@@ -187,31 +159,31 @@ function check_delivery_report($report)
 {
 	if ($report === 'SendingError' OR $report === 'Error' OR $report === 'DeliveryFailed')
 	{
-		$status = lang('tni_msg_stat_fail');
+		$status = tr('Sending failed');
 	}
 	elseif ($report === 'SendingOKNoReport')
 	{
-		$status = lang('tni_msg_stat_oknr');
+		$status = tr('Sent, no report');
 	}
 	elseif ($report === 'SendingOK')
 	{
-		$status = lang('tni_msg_stat_okwr');
+		$status = tr('Sent, waiting for report');
 	}
 	elseif ($report === 'DeliveryOK')
 	{
-		$status = lang('tni_msg_stat_deliv');
+		$status = tr('Delivered');
 	}
 	elseif ($report === 'DeliveryPending')
 	{
-		$status = lang('tni_msg_stat_pend');
+		$status = tr('Pending');
 	}
 	elseif ($report === 'DeliveryUnknown')
 	{
-		$status = lang('tni_msg_stat_unknown');
+		$status = tr('Unknown');
 	}
 	elseif ($report === 'Reserved')
 	{
-		$status = lang('tni_msg_stat_reserved');
+		$status = tr('Not set yet');
 	}
 
 	return $status;
@@ -380,4 +352,129 @@ function is_null_loose($input)
 		return FALSE;
 	}
 	return empty($input);
+}
+
+/**
+ * Convert a phone number as input by the user to E164 format
+ * using the region of the user.
+ * Done with libphonenumber
+ *
+ * @param string $phone
+ * @return string
+ */
+function phone_format_e164($phone, $input_region = NULL)
+{
+	$CI = &get_instance();
+
+	// Default value to '' for the case this is called through Daemon or API
+	// This way, we consider number is already in international format.
+	$region = '';
+	// If user is logged in, get the region from the settings
+	if (property_exists($CI, 'session'))
+	{
+		$region = $CI->Kalkun_model->get_setting()->row('country_code');
+	}
+	// region as function parameter has higher precedence
+	$region = ($input_region !== NULL) ? $input_region : $region;
+
+	// reformat phone number to E164
+	$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+	$phoneNumberObject = $phoneNumberUtil->parse($phone, $region);
+	$phone_number = $phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::E164);
+	return $phone_number;
+}
+
+/**
+ * Convert a phone number as input to human readable format
+ * NATIONAL if same region as user, otherwise INTERNATIONAL
+ * Done with libphonenumber
+ *
+ * @param string $phone
+ * @return string
+ */
+function phone_format_human($phone, $input_region = NULL)
+{
+	$CI = &get_instance();
+
+	try
+	{
+		$region = ($input_region !== NULL) ? $input_region : $CI->Kalkun_model->get_setting()->row('country_code');
+
+		$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+		$phoneNumberObject = $phoneNumberUtil->parse($phone, $region);
+
+		$phone_region = $phoneNumberUtil->getRegionCodeForNumber($phoneNumberObject);
+
+		if ($region === $phone_region)
+		{
+			$phone_number = $phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::NATIONAL);
+		}
+		else
+		{
+			$phone_number = $phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::INTERNATIONAL);
+		}
+		return $phone_number;
+	}
+	catch (Exception $e)
+	{
+		return $phone;
+	}
+}
+
+/**
+ *
+ * @author Sergey Shuchkin
+ * @link https://stackoverflow.com/a/12196609/15401262
+ * @license CC-BY-SA-3.0.html
+ *
+ * @param type $utf8_string
+ * @return boolean
+ *
+ */
+function is_gsm0338($utf8_string)
+{
+	$gsm0338 = array(
+		'@', 'Δ', ' ', '0', '¡', 'P', '¿', 'p',
+		'£', '_', '!', '1', 'A', 'Q', 'a', 'q',
+		'$', 'Φ', '"', '2', 'B', 'R', 'b', 'r',
+		'¥', 'Γ', '#', '3', 'C', 'S', 'c', 's',
+		'è', 'Λ', '¤', '4', 'D', 'T', 'd', 't',
+		'é', 'Ω', '%', '5', 'E', 'U', 'e', 'u',
+		'ù', 'Π', '&', '6', 'F', 'V', 'f', 'v',
+		'ì', 'Ψ', '\'', '7', 'G', 'W', 'g', 'w',
+		'ò', 'Σ', '(', '8', 'H', 'X', 'h', 'x',
+		'Ç', 'Θ', ')', '9', 'I', 'Y', 'i', 'y',
+		"\n", 'Ξ', '*', ':', 'J', 'Z', 'j', 'z',
+		'Ø', "\x1B", '+', ';', 'K', 'Ä', 'k', 'ä',
+		'ø', 'Æ', ',', '<', 'L', 'Ö', 'l', 'ö',
+		"\r", 'æ', '-', '=', 'M', 'Ñ', 'm', 'ñ',
+		'Å', 'ß', '.', '>', 'N', 'Ü', 'n', 'ü',
+		'å', 'É', '/', '?', 'O', '§', 'o', 'à'
+	);
+	$len = mb_strlen($utf8_string, 'UTF-8');
+
+	for ($i = 0; $i < $len; $i++)
+	{
+		if ( ! in_array(mb_substr($utf8_string, $i, 1, 'UTF-8'), $gsm0338))
+		{
+			return FALSE;
+		}
+	}
+
+	return TRUE;
+}
+
+/**
+ *
+ * @param type $utf8_string
+ * @return string:
+ *  Return the coding as per gammu DB definition
+ *  - Default_No_Compression
+ *  - Unicode_No_Compression
+ *
+ */
+function get_gammu_coding($utf8_string)
+{
+	$coding = is_gsm0338($utf8_string) ? 'Default_No_Compression' : 'Unicode_No_Compression';
+	return $coding;
 }

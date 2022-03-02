@@ -68,7 +68,10 @@ class Phonebook_model extends CI_Model {
 					$this->db->where('id_user', $user_id);
 				}
 				$this->db->order_by('Name');
-				$this->db->limit($param['limit'], $param['offset']);
+				if (isset($param['limit']) && isset($param['offset']))
+				{
+					$this->db->limit($param['limit'], $param['offset']);
+				}
 				break;
 
 			case 'by_idpbk':
@@ -280,10 +283,9 @@ class Phonebook_model extends CI_Model {
 	 */
 	function add_contact($param)
 	{
-		$param['Number'] = str_replace(' ', '', $param['Number']);
-		$param['Number'] = str_replace('-', '', $param['Number']);
+		$this->load->helper('kalkun');
 		$this->db->set('Name', $param['Name']);
-		$this->db->set('Number', $param['Number']);
+		$this->db->set('Number', phone_format_e164($param['Number']));
 		$this->db->set('id_user', $param['id_user']);
 		$this->db->set('is_public', $param['is_public']);
 

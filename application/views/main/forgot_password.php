@@ -4,7 +4,7 @@ echo doctype('xhtml1-trans');?>
 <html>
 
 <head>
-	<title>Kalkun / Forgot Password</title>
+	<title>Kalkun - <?php echo tr('Forgot your password?'); ?></title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="generator" content="Geany 0.13" />
 	<meta name="robots" content="noindex,nofollow">
@@ -31,28 +31,37 @@ echo doctype('xhtml1-trans');?>
 			<?php endif; ?>
 		</div>
 
-		<div id="login_logo"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></div>
+		<div id="login_logo"><a href="<?php echo site_url().'?l='.$idiom ?>"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></a></div>
+		<div>
+			<?php
+				echo form_open('');
+				echo form_dropdown('idiom', $language_list, $idiom, 'onchange="this.form.submit()"');
+				echo form_hidden('change_language', 'true');
+				echo form_close();
+			?>
+		</div>
 		<div id="login_container">
 			<?php echo form_open('login/forgot_password'); ?>
 			<table id="login" cellpadding="3" cellspacing="2" border="0" class="rounded">
 				<tr>
-					<td><big>Forgot your password?</big></td>
+					<td><big><?php echo tr('Forgot your password?'); ?></big></td>
 				</tr>
 				<tr>
-					<td><label>Enter your username</label><input type="text" name="username" id="username" style="width:95%" /></td>
+					<td><label><?php echo tr('Username'); ?></label><input type="text" name="username" id="username" style="width:95%" /></td>
 				</tr>
 				<tr>
-					<td> -- OR --</td>
+					<td>-- <?php echo strtoupper(tr('or')); ?> --</td>
 				</tr>
 				<tr>
-					<td><label>Enter your phone number</label><input type="text" name="phone" style="width:95%" /></td>
+					<td><label><?php echo tr('Phone number'); ?></label><input type="text" name="phone" style="width:95%" /></td>
 				</tr>
 				<tr>
 					<td>
-						<div align="center" style="float: right; padding-right: 3px"><input type="submit" id="submit" value="Submit" /></div>
+						<div align="center" style="float: right; padding-right: 3px"><input type="submit" id="submit" value="<?php echo tr('Submit', 'form') ?>" /></div>
 					</td>
 				</tr>
 			</table>
+			<?php echo form_hidden('idiom', $idiom); ?>
 			<?php echo form_close();?>
 		</div>
 

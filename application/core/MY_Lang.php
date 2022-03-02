@@ -19,8 +19,10 @@ class MY_Lang extends MX_Lang {
 	// Default to 'en'
 	public $locale = 'en';
 
+	private $jquery_datepicker_regional;
+
 	public static $idiom_to_locale = [
-		'brazilian_portuguese' => 'pt_BR',
+		'portuguese-brazilian' => 'pt_BR',
 		'czech' => 'cs',
 		'danish' => 'da',
 		'dutch' => 'nl',
@@ -71,7 +73,54 @@ class MY_Lang extends MX_Lang {
 	 */
 	public function load($langfile, $idiom = '', $return = FALSE, $add_suffix = TRUE, $alt_path = '', $_module = '')
 	{
-		parent::load($langfile, $idiom, $return, $add_suffix, $alt_path, $_module);
+		if ($idiom !== '')
+		{
+			$this->idiom = $idiom;
+		}
+
+		$requested_idiom = $this->idiom;
+
+		$langfile = str_replace('.php', '', $langfile);
+		if ($add_suffix === TRUE)
+		{
+			$langfile = preg_replace('/_lang$/', '', $langfile).'_lang';
+		}
+		$langfile .= '.php';
+
+		$found = FALSE;
+		if (file_exists(BASEPATH.'language/'.$this->idiom.'/'.$langfile))
+		{
+			$found = TRUE;
+		}
+		if ($alt_path !== '')
+		{
+			$alt_path .= 'language/'.$this->idiom.'/'.$langfile;
+			if (file_exists($alt_path))
+			{
+				$found = TRUE;
+			}
+		}
+		else
+		{
+			foreach (get_instance()->load->get_package_paths(TRUE) as $package_path)
+			{
+				$package_path .= 'language/'.$this->idiom.'/'.$langfile;
+				if (file_exists($package_path))
+				{
+					$found = TRUE;
+					break;
+				}
+			}
+		}
+
+		// Fallback to english if language file is not found
+		if ( ! $found)
+		{
+			log_message('error', "language file ${langfile} not found. Falling back to english.");
+			$requested_idiom = 'english';
+		}
+
+		parent::load($langfile, $requested_idiom, $return, $add_suffix, $alt_path, $_module);
 		if ( ! empty($idiom))
 		{
 			$this->locale = MY_LANG::$idiom_to_locale[$idiom];
@@ -165,7 +214,18 @@ class MY_Lang extends MX_Lang {
 		// Because killer robots like unicorns!
 		if ($value === FALSE)
 		{
-			$value = '🌐 '.$line;
+			if (extension_loaded('intl'))
+			{
+				$value = MessageFormatter::formatMessage(
+					$this->locale,
+					'🌐 '.$line,
+					$msg_params
+				);
+			}
+			else
+			{
+				$value = '🌐 '.$line;
+			}
 			log_message('error', 'Could not find the language line "'.$line.'"');
 		}
 
@@ -308,5 +368,57 @@ class MY_Lang extends MX_Lang {
 		$locale = $this->locale_matching_browser();
 		$this->idiom = MY_Lang::locale_to_idiom($locale);
 		return $this->idiom;
+	}
+
+	/**
+	 * Get the region/locale to use for the jquery ui datepicker
+	 * based on the locale of the user settings.
+	 *
+	 * This is used to build the filename of the file containing the
+	 * localized values for datepicker.
+	 *
+	 * Returns empty string if no match found.
+	 *
+	 * @param type $jquery_i18n_path
+	 * @return string
+	 */
+	public function get_jquery_datepicker_regional($jquery_i18n_path)
+	{
+		if ( ! isset($this->jquery_datepicker_regional))
+		{
+			$datepicker_locales = [];
+			foreach (glob("${jquery_i18n_path}/datepicker-*.js") as $filename)
+			{
+				$res = preg_match('/datepicker-(.*)\.js/', $filename, $matches);
+				array_push($datepicker_locales, $matches[1]);
+			}
+			$regional = Locale::lookup($datepicker_locales, $this->locale, FALSE, '');
+			$this->jquery_datepicker_regional = $regional;
+		}
+		return $this->jquery_datepicker_regional;
+	}
+
+	public function kalkun_supported_languages()
+	{
+		$supported_languages = [];
+		foreach (MY_Lang::$idiom_to_locale as $key => $value)
+		{
+			$supported_languages[$key] = Locale::getDisplayName($value, $value);
+		}
+		natcasesort($supported_languages);
+		return $supported_languages;
+	}
+
+	public static function idom_to_region($idiom)
+	{
+		$locale = MY_LANG::$idiom_to_locale[$idiom];
+		if (strlen($locale) === 2)
+		{
+			return Locale::getRegion('-'.$locale);
+		}
+		else
+		{
+			return Locale::getRegion($locale);
+		}
 	}
 }

@@ -11,8 +11,8 @@
 }?>" />
 			<?php echo form_close(); ?>
 			&nbsp;
-			<a href="<?php echo site_url('plugin/sms_credit');?>" class="nicebutton">Users</a>
-			<a href="#" id="addpackagesbutton" class="nicebutton">&#43; Add Packages</a>
+			<a href="<?php echo site_url('plugin/sms_credit');?>" class="nicebutton"><?php echo tr('Users'); ?></a>
+			<a href="#" id="addpackagesbutton" class="nicebutton">&#43; <?php echo tr('Add Packages'); ?></a>
 		</div>
 	</div>
 
@@ -34,9 +34,9 @@
 
 						<div class="right_column">
 							<span class="pbk_menu">
-								<a class="deletepackagesbutton simplelink" href="<?php echo site_url('plugin/sms_credit/delete_packages/'.$tmp->id_credit_template);?>"><?php echo lang('kalkun_delete'); ?></a>
+								<a class="deletepackagesbutton simplelink" href="<?php echo site_url('plugin/sms_credit/delete_packages/'.$tmp->id_credit_template);?>"><?php echo tr('Delete'); ?></a>
 								<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
-								<a class="editpackagesbutton simplelink" href="#"><?php echo lang('tni_edit'); ?></a>
+								<a class="editpackagesbutton simplelink" href="#"><?php echo tr('Edit'); ?></a>
 							</span>
 						</div>
 					</div>
@@ -50,23 +50,22 @@
 
 <!-- Add packages dialog -->
 <div id="packages-dialog" title="Add Packages" class="dialog">
-	<p id="validateTips">All form fields are required.</p>
+	<p id="validateTips"><?php echo tr('All form fields are required'); ?></p>
 	<?php echo form_open('plugin/sms_credit/add_packages', array('id' => 'addpackagesform')); ?>
 	<fieldset>
 		<input type="hidden" name="id_package" id="id_package" class="text ui-widget-content ui-corner-all" />
-		<label for="package_name">Package name</label>
+		<label for="package_name"><?php echo tr('Package name'); ?></label>
 		<input type="text" name="package_name" id="package_name" class="text ui-widget-content ui-corner-all" />
-		<label for="sms_amount">SMS Amount</label>
+		<label for="sms_amount"><?php echo tr('SMS Amount'); ?></label>
 		<input type="text" name="sms_amount" id="sms_amount" value="" class="text ui-widget-content ui-corner-all" />
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>
 
 <!-- Delete Package Confirmation Dialog -->
-<div class="dialog" id="confirm_delete_package_dialog" title="Delete Packages Confirmation">
+<div class="dialog" id="confirm_delete_package_dialog" title="<?php echo tr('Delete Packages Confirmation'); ?>">
 	<p>
 		<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-		Are you sure to delete this package?
-		All users belong to this package will no longer limited.
+		<?php echo tr('Are you sure to delete this package? All users belonging to this package will no longer be limited.'); ?>
 	</p>
 </div>

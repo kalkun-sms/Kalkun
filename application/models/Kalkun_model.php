@@ -22,6 +22,17 @@
  */
 class Kalkun_model extends CI_Model {
 
+	/**
+	 * Constructor
+	 *
+	 * @access	public
+	 */
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->helper('kalkun');
+	}
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -85,7 +96,7 @@ class Kalkun_model extends CI_Model {
 		}
 		else
 		{
-			$this->session->set_flashdata('errorlogin', 'Your username or password are incorrect');
+			$this->session->set_flashdata('errorlogin', tr('Username or password are incorrect.'));
 		}
 	}
 
@@ -101,7 +112,12 @@ class Kalkun_model extends CI_Model {
 	function forgot_password()
 	{
 		$username = $this->input->post('username');
-		$phone = sha1($this->input->post('phone'));
+		if ($this->input->post('phone'))
+		{
+			$region = MY_LANG::idom_to_region($this->input->post('idiom'));
+			$phone = phone_format_e164($this->input->post('phone'), $region);
+		}
+
 		$this->db->from('user');
 		$this->db->where('username', $username);
 		$this->db->or_where('phone_number', $phone);
@@ -120,20 +136,17 @@ class Kalkun_model extends CI_Model {
 				// Destroy invalid token
 				if ( ! $valid_token)
 				{
-					$this->db->from('user_forgot_password');
-					$this->db->where('token', $user->row('token'));
-					$this->db->delete();
+					$this->Kalkun_model->delete_token($query->row('id_user'));
 				}
 				else
 				{
-					$this->session->set_flashdata('errorlogin', 'Token already generated and still active.');
-					redirect('login/forgot_password');
+					$this->session->set_flashdata('errorlogin', tr('Token already generated and still active.'));
 				}
 			}
 
 			if ($user->num_rows() === 0 OR ! $valid_token)
 			{
-				$token = md5(time());
+				$token = bin2hex(random_bytes(16));
 				$this->db->set('id_user', $query->row('id_user'));
 				$this->db->set('token', $token);
 				$this->db->set('valid_until', date('Y-m-d H:i:s', mktime(date('H'), date('i') + 30, date('s'), date('m'), date('d'), date('Y'))));
@@ -168,6 +181,23 @@ class Kalkun_model extends CI_Model {
 		{
 			return FALSE;
 		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Delete token
+	 *
+	 * Delete token from reset password table
+	 *
+	 * @return CI_DB_query_builder instance (method chaining) or FALSE on failure
+	 * @access	public
+	 */
+	function delete_token($id_user = NULL)
+	{
+		$this->db->from('user_forgot_password');
+		$this->db->where('id_user', $id_user);
+		return $this->db->delete();
 	}
 
 	// --------------------------------------------------------------------
@@ -332,12 +362,15 @@ class Kalkun_model extends CI_Model {
 				$this->db->set('country_code', $this->input->post('dial_code'));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user_settings');
+				// Refresh language before we display any message.
+				// Special case for when the user changes the language on this screen
+				$this->lang->load('kalkun', $this->input->post('language'));
 				break;
 
 			case 'personal':
 				$this->db->set('realname', $this->input->post('realname'));
 				$this->db->set('username', $this->input->post('username'));
-				$this->db->set('phone_number', $this->input->post('phone_number'));
+				$this->db->set('phone_number', phone_format_e164($this->input->post('phone_number')));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user');
 
@@ -434,7 +467,7 @@ class Kalkun_model extends CI_Model {
 				break;
 
 			case 'phone_number':
-				$this->db->where('phone_number', $param['phone_number']);
+				$this->db->where('phone_number', phone_format_e164($param['phone_number']));
 				break;
 		}
 		return $this->db->get();

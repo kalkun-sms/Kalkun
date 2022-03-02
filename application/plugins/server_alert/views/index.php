@@ -16,7 +16,7 @@
 		<label for="timeout">Connect Timeout</label>
 		<input type="text" name="timeout" id="timeout" value="30" class="text ui-widget-content ui-corner-all" />
 		<div class="note">(In seconds, default value is 30 seconds, increase this for busy server)</div><br />
-		<label for="phone_number">Phone Number</label>
+		<label for="phone_number"><?php echo tr('Phone number'); ?></label>
 		<input type="text" name="phone_number" id="phone_number" class="text ui-widget-content ui-corner-all" />
 		<div class="note">(Person in charge to receive the alert message)</div><br />
 		<label for="respond_message">Respond Message</label>
@@ -41,7 +41,7 @@
 		<input type="text" name="editport_number" id="editport_number" class="text ui-widget-content ui-corner-all" />
 		<label for="edittimeout">Connect Timeout</label>
 		<input type="text" name="edittimeout" id="edittimeout" class="text ui-widget-content ui-corner-all" />
-		<label for="editphone_number">Phone Number</label>
+		<label for="editphone_number"><?php echo tr('Phone number'); ?></label>
 		<input type="text" name="editphone_number" id="editphone_number" class="text ui-widget-content ui-corner-all" />
 		<label for="editrespond_message">Respond Message</label>
 		<textarea style="width: 96%" name="editrespond_message" id="editrespond_message" class="text ui-widget-content ui-corner-all"></textarea>
@@ -63,7 +63,7 @@
 			<th>Host</th>
 			<th>Service Port</th>
 			<th class="hidden">Connect Timeout</th>
-			<th>Phone Number</th>
+			<th><?php echo tr('Phone number'); ?></th>
 			<th class="hidden">Respond Message</th>
 			<th align="center" class="nice-table-right" colspan="3">Control</th>
 		</tr>
@@ -83,7 +83,7 @@
 			<td class="ip_address"><?php echo $tmp->ip_address; ?></td>
 			<td class="port_number"><?php echo $tmp->port_number; ?></td>
 			<td class="timeout hidden"><?php echo $tmp->timeout; ?></td>
-			<td class="phone_number"><?php echo $tmp->phone_number; ?></td>
+			<td class="phone_number"><?php echo phone_format_human($tmp->phone_number); ?></td>
 			<td class="respond_message hidden"><?php echo $tmp->respond_message; ?></td>
 			<?php if ($tmp->status == 'false'):?>
 			<td><a href="<?php echo site_url(); ?>/plugin/server_alert/change_state/<?php echo $tmp->id_server_alert; ?>" class="release"><img class="ui-icon ui-icon-locked" title="Release state" /></a></td>
