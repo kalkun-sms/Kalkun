@@ -11,21 +11,56 @@
 		array_push($grouptext_array, $tmp->GroupName);
 	endforeach;
 	?>
-		var grp_data = <?php echo json_encode($grouptext_array); ?>;
+		var all_grp = <?php echo json_encode($grouptext_array); ?>;
+
+		function removeFromArray(orig_data, selection) {
+			var source = orig_data.slice(0);
+			selection.forEach(function(value) {
+				var index = source.indexOf(value);
+				if (index !== -1) {
+					source.splice(index, 1);
+				}
+			});
+			return source;
+		}
 
 		$('#groups').tagsInput({
 			'autocomplete': {
-				source: grp_data,
+				source: removeFromArray(all_grp, $('#groups').val().split(",")),
 				minLength: 0,
 				delay: 0,
-				autoFocus: true
+				autoFocus: true,
+				position: {
+					my: "right bottom",
+					at: "left top"
+				},
 			},
 			'minChars': 0,
 			'interactive': true,
 			'delimiter': ',',
-			'placeholder': '<?php echo tr_addcslashes('"', 'Type group name');?>'
-		});
+			'placeholder': '<?php echo tr_addcslashes('"', 'Type group name');?>',
+			"onAddTag": function(element, tag) {
+				source = removeFromArray(all_grp, element.value.split(","));
+				$('#groups_tag').autocomplete("option", "source", source);
+				setTimeout(function() {
+					// Workaround for autocomplete("search") to work without throwing
+					// an exception is to delay it slightly
+					$('#groups_tag').autocomplete("search");
+				}, 1);
 
+			},
+			"onRemoveTag": function(element, tag) {
+				source = removeFromArray(all_grp, element.value.split(","));
+				$('#groups_tag').autocomplete("option", "source", source);
+				$('#groups_tag').autocomplete("search");
+			},
+		});
+		$('#groups_tag').on("focus", function() {
+			$(this).autocomplete("search");
+		});
+		$('#groups_tag').on("click", function() {
+			$(this).autocomplete("search");
+		});
 	});
 
 	jQuery.validator.classRuleSettings.phone = {
