@@ -22,4 +22,14 @@ class Plugin_helper {
 
 		return $CI->config->config[$plugin_name];
 	}
+
+	public static function load_lang($plugin_name)
+	{
+		$CI = &get_instance();
+		$CI->load->add_package_path(APPPATH.'plugins/'.$plugin_name, FALSE);
+		$CI->lang->load($plugin_name);
+		$CI->load->remove_package_path(APPPATH.'plugins/'.$plugin_name, FALSE);
+
+		return $CI->config->config[$plugin_name];
+	}
 }

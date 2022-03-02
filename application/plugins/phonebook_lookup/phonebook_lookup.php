@@ -56,6 +56,7 @@ function phonebook_lookup_install()
 function phonebook_lookup($number)
 {
 	$config = Plugin_helper::get_plugin_config('phonebook_lookup');
+	Plugin_helper::load_lang('phonebook_lookup');
 	$lookup['url'] = str_replace('#phonenumber#', $number->Number, $config['url']);
 	$lookup['title'] = tr('Lookup Number');
 	return $lookup;
