@@ -314,7 +314,6 @@ $lang['Message queued.'] = 'Message queued.';
 $lang['Parameter invalid.'] = 'Parameter invalid.';
 
 $lang['403 Forbidden'] = '403 Forbidden';
-$lang['Directory access is forbidden.'] = 'Directory access is forbidden.';
 
 $lang['Close'] = 'Close';
 $lang['Previous'] = 'Previous';
@@ -322,7 +321,6 @@ $lang['Next'] = 'Next';
 $lang['Continue'] = 'Continue';
 $lang['Submit']['form'] = 'Submit';
 $lang['Log in'] = 'Log in';
-$lang['Log out'] = 'Log out';
 $lang['Username or password are incorrect.'] = 'Username or password are incorrect.';
 $lang['Token already generated and still active.'] = 'Token already generated and still active.';
 $lang['To reset your Kalkun password please visit {0}'] = 'To reset your Kalkun password please visit {0}';
@@ -418,3 +416,4 @@ $lang['Plugin {0} is not installed.'] = 'Plugin {0} is not installed.';
 $lang['Value must be a number.'] = 'Value must be a number.';
 $lang['{0} part messages'] = '{0} part messages';
 $lang['Content'] = 'Content';
+$lang['Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.'] = 'Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.';

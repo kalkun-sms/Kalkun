@@ -312,8 +312,7 @@ $lang['Could not send message. Make sure Gammu path is correctly set.'] = "Le me
 $lang['Message queued.'] = "Message mis en file d'attente.";
 $lang['Parameter invalid.'] = 'Paramètre invalide.';
 
-$lang['403 Forbidden'] = '403 Forbidden';
-$lang['Directory access is forbidden.'] = 'Directory access is forbidden.';
+$lang['403 Forbidden'] = '403 Interdit';
 
 $lang['Close'] = 'Fermer';
 $lang['Previous'] = 'Précédent';
@@ -321,7 +320,6 @@ $lang['Next'] = 'Suivant';
 $lang['Continue'] = 'Continuer';
 $lang['Submit']['form'] = 'Valider';
 $lang['Log in'] = 'Se connecter';
-$lang['Log out'] = 'Se déconnecter';
 $lang['Username or password are incorrect.'] = 'Nom d\'utilisateur ou mot de passe incorrects.';
 $lang['Token already generated and still active.'] = 'Token déjà généré et encore actif.';
 $lang['To reset your Kalkun password please visit {0}'] = 'Pour réinitialiser votre mot de passe Kalkun, veuillez vous rendre à {0}';
@@ -417,3 +415,4 @@ $lang['Plugin {0} is not installed.'] = 'Le plugin {0} n\'est pas installé.';
 $lang['Value must be a number.'] = 'La valeur doit être un nombre.';
 $lang['{0} part messages'] = '{0} part messages';
 $lang['Content'] = 'Contenu';
+$lang['Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.'] = "L'installation a été désactivée par l'administrateur.<p>Pour réactiver l'accès, créer un fichier nommé <strong>install</strong> dans ce répertoire du serveur : <strong>{0}</strong>.<p>Sinon, vous pouvez <a href=\"{1}\">vous connecter</a>.";
