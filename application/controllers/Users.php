@@ -73,7 +73,14 @@ class Users extends MY_Controller {
 			$data['users'] = $this->User_model->getUsers($param);
 		}
 
-		$this->load->view('main/layout', $data);
+		if (is_ajax())
+		{
+			$this->load->view('main/users/users_list', $data);
+		}
+		else
+		{
+			$this->load->view('main/layout', $data);
+		}
 	}
 
 	// --------------------------------------------------------------------

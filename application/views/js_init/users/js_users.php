@@ -43,6 +43,7 @@
 									}, 1500);
 								});
 							}
+							$("#users_list").load(window.location.href);
 						},
 						'<?php echo tr('Cancel');?>': function() {
 							$(this).dialog('close');
