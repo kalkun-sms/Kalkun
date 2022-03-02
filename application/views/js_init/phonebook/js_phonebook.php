@@ -55,7 +55,7 @@
 								} else {
 									return false;
 								}
-
+								$("#pbk_list").load(window.location.href);
 							},
 							<?php echo lang('kalkun_cancel')?>: function() {
 								$(this).dialog('close');

@@ -83,7 +83,15 @@ class Phonebook extends MY_Controller {
 
 		$data['main'] = 'main/phonebook/contact/index';
 		$data['pbkgroup'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->result();
-		$this->load->view('main/layout', $data);
+
+		if (is_ajax())
+		{
+			$this->load->view('main/phonebook/contact/pbk_list', $data);
+		}
+		else
+		{
+			$this->load->view('main/layout', $data);
+		}
 	}
 
 	// --------------------------------------------------------------------
