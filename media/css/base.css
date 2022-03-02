@@ -1129,6 +1129,11 @@ label.error {
 	width: 200px;
 }
 
+.processing_image {
+	background: transparent url(../images/processing.gif) right no-repeat !important;
+	padding-right: 17px !important;
+}
+
 /* For autocomplete when setting groups to new contact in phonebook */
 input#groups {
 	position: relative;
@@ -1137,26 +1142,32 @@ input#groups {
 .ui-autocomplete {
 	z-index: 9999 !important;
 }
-/* For tagsinput when setting groups to new contact in phonebook */
-div.tagsinput span.tag {
-	border: 1px solid #86c0d2;
-	font-family: helvetica;
+
+/* For tagsInput jQuery plugin */
+.tagsinput {
+	font-size: 12px !important;
 }
 
-div.tagsinput {
-	border: 0px;
-	background: #FFF;
-	overflow-y: auto;
-	padding: 1px;
-	font-size: 12px;
+.tagsinput .tag {
+	padding: 0px 20px 0px 5px !important;
+	height: 22px !important;
 }
 
-div.tagsinput input {
-	font-family: helvetica;
-	border: 0px solid transparent;
-	background: transparent;
-	color: #000;
-	outline: 0;
-	margin: 0 5px 5px 0;
-	padding: 1px;
+.tagsinput .tag .tag-remove {
+	width: 14px !important;
+	height: 14px !important;
+	line-height: 12px !important;
+	margin-top: 5px !important
+}
+
+.tagsinput .tag .tag-remove:before,
+.tagsinput .tag .tag-remove:after {
+	height: 3px !important;
+	top: 4px !important;
+	left: 0px !important;
+}
+
+.tagsinput div input {
+	line-height: 10px !important;
+	font-size: 12px !important;
 }

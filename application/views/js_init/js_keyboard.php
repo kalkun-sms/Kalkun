@@ -27,7 +27,7 @@
 		});
 
 		$(document).on('keyup', null, 'c', function() {
-			compose_message('normal', true, '#personvalue');
+			compose_message('normal', true, '#personvalue_tags_tag');
 		});
 
 		$(document).on('keydown', null, 'shift+/', function() {
@@ -148,7 +148,7 @@
 			if (current_select < 1) return false;
 			var param2 = $("#message_holder").children(":eq(" + current_select + ")").children('.message_container').find('.message_header').children('input.select_message').attr('id');
 			var param1 = $('#item_source' + param2).val();
-			compose_message('forward', false, '#personvalue', param1, param2);
+			compose_message('forward', false, '#personvalue_tags_tag', param1, param2);
 			return false;
 		});
 		<?php endif; ?>

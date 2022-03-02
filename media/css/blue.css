@@ -137,9 +137,9 @@ h3 {
 	color: #000000;
 }
 
-/*For tagsinput when setting groups to new contact in phonebook*/
+/* For tagsInput jQuery plugin */
 div.tagsinput span.tag {
-	background: #91b9c6;
-	color: #000;
+	background: #cae8f0;
+	color: black;
 	border: 1px solid #86c0d2;
 }
