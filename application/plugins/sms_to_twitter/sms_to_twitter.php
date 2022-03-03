@@ -81,9 +81,9 @@ function sms_to_twitter($sms)
 		$tokens = $CI->sms_to_twitter_model->get_token_by_phone($number);
 		if (is_array($tokens))
 		{
-			// Kalkun Twitter keys (DO NOT CHANGE)
-			$consumer_key = '23TbUWvaVRenQcNv6MA';
-			$consumer_key_secret = 'eBYvkk4dpgx6CS1uTWlrWxKZTY791CJ2cEE24JV4MqQ';
+			// Kalkun Twitter keys
+			$consumer_key = $config['consumer_key'];
+			$consumer_key_secret = $config['consumer_key_secret'];
 			$CI->twitter->oauth($consumer_key, $consumer_key_secret, $tokens['access_token'], $tokens['access_token_secret']);
 			$CI->twitter->call('statuses/update', array('status' => $twitter_msg));
 		}
