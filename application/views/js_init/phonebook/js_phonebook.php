@@ -2,7 +2,7 @@
 	$(document).ready(function() {
 
 		// Add/Edit Contact
-		$('.addpbkcontact, .editpbkcontact').on('click', null, function() {
+		$(document).on('click', '.addpbkcontact, .editpbkcontact', function() {
 
 			// check group
 			var group = '<?php echo count($pbkgroup);?>';
@@ -57,6 +57,7 @@
 								} else {
 									return false;
 								}
+								$("#pbk_list").load(window.location.href);
 							},
 							"<?php echo tr_addcslashes('"', 'Cancel')?>": function() {
 								$(this).dialog('close');
@@ -159,7 +160,7 @@
 		});
 
 		// Compose SMS
-		$('.sendmessage').on('click', null, function() {
+		$('#pbk_list').on('click', '.sendmessage', function() {
 			var header = $(this).parents('div:eq(1)');
 			var param1 = header.children('.left_column').children('#pbkname').children('#pbknumber').text();
 			compose_message('pbk_contact', false, '#message', param1);
