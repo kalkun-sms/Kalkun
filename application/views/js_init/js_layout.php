@@ -170,6 +170,9 @@
 								}
 								$("#compose_sms_container_notif_area").text(data.msg);
 								$("#compose_sms_container_notif_area").show();
+								setTimeout(function() {
+									$("#compose_sms_container_notif_area").hide();
+								}, 1500);
 							})
 							.fail(function(data) {
 								$("#compose_sms_container_notif_area").hide();
