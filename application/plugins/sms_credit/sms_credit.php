@@ -9,15 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://azhari.harahap.us
 */
 
-function sms_credit_initialize()
-{
-	$CI = &get_instance();
-
-	$CI->load->add_package_path(APPPATH.'plugins/sms_credit', FALSE);
-	$CI->load->config('sms_credit', TRUE);
-
-	return $CI->config->config['sms_credit'];
-}
+require_once (APPPATH.'plugins/Plugin_helper.php');
 
 // Add hook for outgoing message
 add_action('message.outgoing_all', 'sms_credit', 10);
@@ -76,7 +68,7 @@ function sms_credit($sms)
 	$CI->load->model('Kalkun_model');
 	$CI->load->model('sms_credit/sms_credit_model', 'sms_credit_model');
 
-	$config = sms_credit_initialize();
+	$config = Plugin_helper::get_plugin_config('sms_credit');
 	$uid = $sms['uid'];
 
 	// check user credit

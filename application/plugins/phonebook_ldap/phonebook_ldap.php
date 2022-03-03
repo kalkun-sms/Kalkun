@@ -9,15 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://azhari.harahap.us
 */
 
-function phonebook_ldap_initialize()
-{
-	$CI = &get_instance();
-
-	$CI->load->add_package_path(APPPATH.'plugins/phonebook_ldap', FALSE);
-	$CI->load->config('phonebook_ldap', TRUE);
-
-	return $CI->config->config['phonebook_ldap'];
-}
+require_once (APPPATH.'plugins/Plugin_helper.php');
 
 // Add hook for contact menu
 add_action('phonebook.contact.get', 'phonebook_ldap', 10);
@@ -74,7 +66,7 @@ function phonebook_ldap($number)
 		show_error('phonebook_ldap: PHP extension "ldap" is missing. Install it if you want to use phonebook_ldap plugin.', 500, '500 Internal Server Error');
 	}
 
-	$config = phonebook_ldap_initialize();
+	$config = Plugin_helper::get_plugin_config('phonebook_ldap');
 
 	// specify the LDAP server to connect to
 	$conn = ldap_connect($config['server'], $config['port']);

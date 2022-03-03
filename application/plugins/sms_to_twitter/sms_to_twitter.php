@@ -9,15 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://azhari.harahap.us
 */
 
-function sms_to_twitter_initialize()
-{
-	$CI = &get_instance();
-
-	$CI->load->add_package_path(APPPATH.'plugins/sms_to_twitter', FALSE);
-	$CI->load->config('sms_to_twitter', TRUE);
-
-	return $CI->config->config['sms_to_twitter'];
-}
+require_once (APPPATH.'plugins/Plugin_helper.php');
 
 // Add hook for incoming message
 add_action('message.incoming.before', 'sms_to_twitter', 15);
@@ -72,7 +64,7 @@ function sms_to_twitter_install()
 
 function sms_to_twitter($sms)
 {
-	$config = sms_to_twitter_initialize();
+	$config = Plugin_helper::get_plugin_config('sms_to_twitter');
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
 

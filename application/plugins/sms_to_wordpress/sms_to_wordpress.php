@@ -10,15 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://azhari.harahap.us
 */
 
-function sms_to_wordpress_initialize()
-{
-	$CI =& get_instance();
-
-	$CI->load->add_package_path(APPPATH.'plugins/sms_to_wordpress', FALSE);
-	$CI->load->config('sms_to_wordpress', TRUE);
-
-	return $CI->config->config['sms_to_wordpress'];
-}
+require_once (APPPATH.'plugins/Plugin_helper.php');
 
 // Add hook for incoming message
 add_action("message.incoming.before", "sms_to_wordpress", 16);
@@ -73,7 +65,7 @@ function sms_to_wordpress_install()
 
 function sms_to_wordpress($sms)
 {
-	$config = sms_to_wordpress_initialize();
+	$config = Plugin_helper::get_plugin_config('sms_to_wordpress');
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
 	

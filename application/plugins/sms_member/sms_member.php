@@ -9,15 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://azhari.harahap.us
 */
 
-function sms_member_initialize()
-{
-	$CI = &get_instance();
-
-	$CI->load->add_package_path(APPPATH.'plugins/sms_member', FALSE);
-	$CI->load->config('sms_member', TRUE);
-
-	return $CI->config->config['sms_member'];
-}
+require_once (APPPATH.'plugins/Plugin_helper.php');
 
 // Add hook for incoming message
 add_action('message.incoming.before', 'sms_member', 13);
@@ -72,7 +64,7 @@ function sms_member_install()
 
 function sms_member($sms)
 {
-	$config = sms_member_initialize();
+	$config = Plugin_helper::get_plugin_config('sms_member');
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
 
