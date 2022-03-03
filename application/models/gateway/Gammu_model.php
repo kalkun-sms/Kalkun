@@ -61,7 +61,7 @@ class Gammu_model extends MY_Model {
 					'Command: '.$cmd."\n".
 					'Output: '.implode("\n", $output)."\n".
 					'Result code: '.$result_code
-					);
+				);
 				show_error(tr('Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'), 500);
 
 				$f_ret = array('status' => tr('Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.')); //FIXME
