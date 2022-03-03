@@ -17,7 +17,7 @@
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/jquery-ui.min.js"></script>
 <?php
 $jquery_datepicker_regional = $this->lang->get_jquery_datepicker_regional(APPPATH.'../media/js/jquery-ui/i18n');
-$jquery_ui_i18n = APPPATH."../media/js/jquery-ui/i18n/datepicker-${jquery_datepicker_regional}.js";
+$jquery_ui_i18n = FCPATH."media/js/jquery-ui/i18n/datepicker-${jquery_datepicker_regional}.js";
 if ($jquery_datepicker_regional !== '' && file_exists($jquery_ui_i18n)):
 ?>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/i18n/datepicker-<?php echo $jquery_datepicker_regional; ?>.js"></script>
