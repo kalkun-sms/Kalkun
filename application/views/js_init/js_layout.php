@@ -1,4 +1,10 @@
 <script type="text/javascript">
+	// Initial value for inbox unread cound
+	unread_in_count = <?php echo $this->Message_model->get_messages([
+		'readed' => FALSE,
+		'uid' => $this->session->userdata('id_user'),
+	])->num_rows(); ?>;
+
 	var refreshId = setInterval(function() {
 		$('.modem_status').load('<?php echo site_url('kalkun/notification')?>', function(responseText, textStatus, jqXHR) {
 			jqXHR
@@ -7,52 +13,48 @@
 					display_error_container(data);
 				});
 		});
-		//$('.unread_inbox').load('<?php echo site_url('kalkun/unread_inbox')?>');\
-		//var current_title = $(document).attr('title');
 		new_notification('true');
 	}, 60000);
 
+	function play_notification_sound() {
+		// Use HTMLAudioElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
+		var audioElement = new Audio('<?php echo $this->config->item('sound_path').$this->config->item('new_incoming_message_sound')?>');
+		audioElement.play();
+	}
+
 	function new_notification(refreshmode) {
-		$.get("<?php echo site_url('kalkun/unread_count')?>", function(data) {
-			unreadcount = data.split('/');
+		$.get("<?php echo site_url('kalkun/unread_count')?>")
+			.done(function(data) {
+				// Get new unread count for inbox
+				unread_in_count_new = data['in'];
 
-			$('span.unread_inbox_notif').text(unreadcount[0]);
-			$('span.unread_spam_notif').text(unreadcount[2]);
+				// Update UI with new values
+				if (data['in'] > 0) {
+					$('span.unread_inbox_notif').text("(" + data['in'] + ")");
+					// example of title: "(23) Kalkun"
+					var title = $(document).attr('title');
+					var re_title = title.match('(\\((\\d*)\\) )?(.*)');
+					var title_cleaned = re_title[3];
+					var title_new = "(" + data['in'] + ") " + title_cleaned;
+					$(document).attr('title', title_new);
+				} else
+					$('span.unread_inbox_notif').text("");
+				if (data['spam'] > 0)
+					$('span.unread_spam_notif').text("(" + data['spam'] + ")");
+				else
+					$('span.unread_spam_notif').text("");
 
-			// example of title: "(23) Kalkun"
-			var title = $(document).attr('title');
-			var re_title = title.match('(\\((\\d*)\\) )?(.*)');
-			var unreadcount_inbox_previous = re_title[2] ? re_title[2] : 0;
-			var title_cleaned = re_title[3];
+				// play the sound
+				if (unread_in_count_new > unread_in_count) {
+					play_notification_sound();
+				}
 
-			var re = unreadcount[0].match('\\((.*)\\)');
-			var unreadcount_inbox_current = 0;
-			if (re != null && re[1]) {
-				unreadcount_inbox_current = re[1];
-			}
-
-			var title_new = unreadcount[0] + ' ' + title_cleaned;
-			$(document).attr('title', title_new);
-
-			/*
-			console.debug(
-				"title: " + title +
-				"\ntitle_cleaned: " + title_cleaned +
-				"\nunreadcount_inbox_previous: " + unreadcount_inbox_previous +
-				"\nunreadcount_inbox_current: " + unreadcount_inbox_current +
-				"\ntitle_new: " + title_new
-			);
-			console.debug(re_title);
-			console.debug(re);
-			*/
-
-			// play the sound
-			if (unreadcount_inbox_current > 0 && unreadcount_inbox_current !== unreadcount_inbox_previous) {
-				// Use HTMLAudioElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
-				var audioElement = new Audio('<?php echo $this->config->item('sound_path').$this->config->item('new_incoming_message_sound')?>');
-				audioElement.play();
-			}
-		});
+				// Set new value for unread_in_count
+				unread_in_count = unread_in_count_new;
+			})
+			.fail(function(data) {
+				display_error_container(data);
+			});
 
 		<?php if ($this->uri->segment(2) == 'folder' || $this->uri->segment(2) == 'my_folder'): ?>
 

@@ -188,16 +188,19 @@ class Kalkun extends MY_Controller {
 	 */
 	function unread_count()
 	{
-		$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'uid' => $this->session->userdata('id_user')))->num_rows();
-		$in = ($tmp_unread > 0) ? '('.$tmp_unread.')' : '';
+		$unread_count['in'] = $this->Message_model->get_messages([
+			'readed' => FALSE,
+			'uid' => $this->session->userdata('id_user'),
+		])->num_rows();
+		$unread_count['draft'] = 0;
+		$unread_count['spam'] = $this->Message_model->get_messages([
+			'readed' => FALSE,
+			'id_folder' => '6',
+			'uid' => $this->session->userdata('id_user'),
+		])->num_rows();
 
-		$tmp_unread = 0;
-		$draft = ($tmp_unread > 0) ? '('.$tmp_unread.')' : '';
-
-		$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => '6', 'uid' => $this->session->userdata('id_user')))->num_rows();
-		$spam = ($tmp_unread > 0) ? '('.$tmp_unread.')' : '';
-
-		echo $in. '/' . $draft . '/' . $spam;
+		header('Content-type: application/json');
+		echo json_encode($unread_count);
 	}
 
 	// --------------------------------------------------------------------
