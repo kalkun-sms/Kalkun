@@ -1,4 +1,5 @@
-<?php //$this->load->view('js_init/phonebook/js_phonebook');
+<?php
+$this->load->view('js_init/phonebook/js_phonebook');
 if ($phonebook->num_rows() === 0):
 	if ($_POST)
 	{
