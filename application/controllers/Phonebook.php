@@ -436,7 +436,7 @@ class Phonebook extends MY_Controller {
 					array_push($tagInputResult, array(
 						'id' => $val['id_user'].':u',
 						'name' => $val['realname'],
-						'value' => $val['realname'].' ('.tr('User').')',
+						'value' => $val['realname'].' ('.tr('User', 'default').')',
 					));
 					$user[$key]['id'] = $val['id_user'].':u';
 					$user[$key]['name'] = $val['realname'];
