@@ -86,7 +86,7 @@
 		$('.notification_area').text(text).fadeIn().delay(1500).fadeOut('slow');
 	}
 
-	function compose_message(type, repeatable = false, focus_element = '#personvalue', param1, param2) {
+	function compose_message(type, repeatable = false, focus_element = '#personvalue_tags_tag', param1, param2) {
 		//console.debug('DEBUG: compose_message');
 		//console.debug(type);
 		//console.debug(repeatable);
@@ -129,7 +129,7 @@
 							$('.ui-dialog-buttonpane :button').each(function() {
 								if ($(this).text() == "<?php echo tr_addcslashes('"', 'Sending'); ?> ') $(this).html('<?php echo tr_addcslashes('"', 'Send message'); ?>");
 							});
-							$("#compose_sms_container_error").html($(data.responseText).filter('div'));
+							$("#compose_sms_container_error").html($(data.responseText).filter('div').removeAttr("id"));
 							$("#compose_sms_container_error").dialog({
 								closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 								modal: true,
@@ -165,7 +165,11 @@
 				hide: 'fade',
 				buttons: buttons,
 				open: function() {
-					$(focus_element).trigger('focus');
+					setTimeout(function() {
+						// Need to use setTimeout to be able to access focus_element in the case the focus on a tagsInput element.
+						$(focus_element).trigger('focus');
+						return;
+					}, 1);
 				}
 			});
 			$("#compose_sms_container").dialog('open');
@@ -181,7 +185,7 @@
 
 		// Compose SMS
 		$('#compose_sms_normal').on('click', null, function() {
-			compose_message('normal', true, '#personvalue');
+			compose_message('normal', true, '#personvalue_tags_tag');
 			return false;
 		});
 

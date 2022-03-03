@@ -1,8 +1,8 @@
 <?php $this->load->helper('html');?>
-<link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>jquery-plugin/token-input-facebook.css" />
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.tokeninput.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.form.min.js"></script>
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.tagsinput-revisited.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquery.tagsinput-revisited.min.css" />
 <style type="text/css">
 	.left_aligned {
 		margin-left: 0;
@@ -120,7 +120,9 @@ else
 		<td>&nbsp;</td>
 		<td>
 			<div id="person">
-				<textarea id="personvalue" style="width: 95%;" name="personvalue"></textarea>
+				<textarea id="personvalue_tags" style="width: 95%;" name="personvalue_tags"></textarea>
+				<input id="personvalue" style="width: 95%;" name="personvalue" type="hidden"></input>
+				<input id="personvalue_json" style="width: 95%;" name="personvalue_json" type="hidden"></input>
 			</div>
 
 			<div id="manually" class="hidden">

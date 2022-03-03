@@ -386,6 +386,9 @@ class Phonebook extends MY_Controller {
 	{
 		$this->load->model('User_model');
 
+		$tagInputResult = [];
+		$output_format = $this->input->post('output_format');
+
 		$q = $this->input->post('q', TRUE);
 		if (isset($q) && strlen($q) > 0)
 		{
@@ -396,12 +399,22 @@ class Phonebook extends MY_Controller {
 			// Add identifier, c for contact, g for group, u for user
 			foreach ($query as $key => $val)
 			{
+				array_push($tagInputResult, array(
+					'id' => $val['id'].':c',
+					'name' => $val['name'],
+					'value' => $val['name'].' ('.$val['id'].')',
+				));
 				$query[$key]['name'] .= ' ('.$val['id'].')';
 				$query[$key]['id'] = $val['id'].':c';
 			}
 			$group = $this->Phonebook_model->search_group($param)->result_array();
 			foreach ($group as $key => $val)
 			{
+				array_push($tagInputResult, array(
+					'id' => $val['id'].':g',
+					'name' => $val['name'],
+					'value' => $val['name'].' ('.tr('Group').')',
+				));
 				$group[$key]['id'] = $val['id'].':g';
 			}
 
@@ -412,6 +425,11 @@ class Phonebook extends MY_Controller {
 				$user = $this->User_model->search_user($q)->result_array();
 				foreach ($user as $key => $val)
 				{
+					array_push($tagInputResult, array(
+						'id' => $val['id_user'].':u',
+						'name' => $val['realname'],
+						'value' => $val['realname'].' ('.tr('User').')',
+					));
 					$user[$key]['id'] = $val['id_user'].':u';
 					$user[$key]['name'] = $val['realname'];
 				}
@@ -425,11 +443,25 @@ class Phonebook extends MY_Controller {
 			}
 			foreach ($contact as $key => $val)
 			{
+				array_push($tagInputResult, array(
+					'value' => $val['id'].':c',
+					'name' => $val['id'],
+					'label' => $val['id'].' (LDAP)',
+				));
 				$contact[$key]['id'] = $val['id'].':c';
 			}
 
 			$combine = array_merge($query, $group, $user, $contact);
-			echo json_encode($combine);
+
+			switch ($output_format)
+			{
+				case 'tagInput':
+					echo json_encode($tagInputResult);
+					break;
+				default:
+					echo json_encode($combine);
+					break;
+			}
 		}
 	}
 }

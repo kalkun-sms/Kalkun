@@ -196,7 +196,7 @@
 				var header = $(this).parents('div:eq(1)');
 				var param1 = header.attr('class').split(' ').slice(-1)['0']; /* source */
 				var param2 = header.children().children('input.select_message').attr('id'); /* message_id */
-				compose_message(type, false, '#personvalue', param1, param2);
+				compose_message(type, false, '#personvalue_tags_tag', param1, param2);
 			} else {
 				var type = 'reply';
 				var param1 = '<?php echo $this->uri->segment(5);?>';

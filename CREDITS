@@ -10,7 +10,6 @@ jQuery UI 1.13.0 <https://jqueryui.com/>
     * jQuery UI Datepicker i18n (from version 1.13.1): https://github.com/jquery/jquery-ui/tree/master/ui/i18n - License: MIT
 jQuery Plugin:
 	* Hotkeys
-	* TokenInput 1.7.0 <https://loopj.com/jquery-tokeninput/> or <https://github.com/loopj/jquery-tokeninput/>
 	* jQuery Validation 1.19.3 <https://jqueryvalidation.org/> or <https://github.com/jquery-validation/jquery-validation>
 	* Autosize 5.0.1 <https://github.com/jackmoore/autosize> - © Jack Moore <hello@jacklmoore.com>, License: MIT <http://www.opensource.org/licenses/mit-license.php>
 	* Field 0.9.6 <https://pengoworks.com/workshop/jquery/field/field.plugin.htm>

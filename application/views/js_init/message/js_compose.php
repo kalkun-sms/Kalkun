@@ -18,26 +18,157 @@
 		//$(".word_count").text("");
 		//$("input#sms_loop").attr("disabled", true);
 
-		$("#personvalue").tokenInput("<?php echo site_url('phonebook/get_phonebook/').'/'.(isset($source) ? $source : '');?>", {
-			hintText: "<?php echo tr_addcslashes('"', 'Insert name from contact list')?>",
-			noResultsText: "<?php echo tr_addcslashes('"', 'No results.'); ?>",
-			searchingText: "<?php echo tr_addcslashes('"', 'Searching...'); ?>",
-			preventDuplicates: true,
-			method: "POST",
-			classes: {
-				tokenList: "token-input-list-facebook",
-				token: "token-input-token-facebook",
-				tokenDelete: "token-input-delete-token-facebook",
-				selectedToken: "token-input-selected-token-facebook",
-				highlightedToken: "token-input-highlighted-token-facebook",
-				dropdown: "token-input-dropdown-facebook",
-				dropdownItem: "token-input-dropdown-item-facebook",
-				dropdownItem2: "token-input-dropdown-item2-facebook",
-				selectedDropdownItem: "token-input-selected-dropdown-item-facebook",
-				inputToken: "token-input-input-token-facebook"
-			}
+		function removeFromArray(orig_data, key, input_val) {
+			newInput = [];
+			if (input_val != "")
+				newInput = input_val.split(',');
 
+			var source = orig_data.slice(0);
+			newInput.forEach(function(value) {
+				var index = source.findIndex(function(element) {
+					return element[key] == value;
+				});
+				if (index !== -1) {
+					source.splice(index, 1);
+				}
+			});
+			return source;
+		}
+
+		$("#personvalue_tags").tagsInput({
+			"autocomplete": {
+				source: [],
+				minLength: 1,
+				delay: 0,
+				autoFocus: true,
+			},
+			"minChars": 1,
+			"interactive": true,
+			"delimiter": ",",
+			"placeholder": "<?php echo tr_addcslashes('"', 'Insert name from contact list');?>",
+			"onAddTag": function(element, tag) {
+				source = $("#personvalue_tags_tag").autocomplete("option", "source");
+
+				matchIndex = source.findIndex(function(element) {
+					return element["value"] == tag;
+				});
+
+				if (matchIndex !== -1) {
+					id = source[matchIndex]["id"];
+
+					// Add to JSON field
+					var currentJSON = [];
+					if ($("#personvalue_json").val() != "")
+						currentJSON = JSON.parse($("#personvalue_json").val());
+					currentJSON.push(source[matchIndex]);
+					$("#personvalue_json").val(JSON.stringify(currentJSON));
+
+					// Add to submitted input
+					newInput = [];
+					if ($("#personvalue").val() != "")
+						newInput = $("#personvalue").val().split(",");
+
+					newInput.push(id);
+					$("#personvalue").val(newInput.join(","));
+				} else {
+					$("#personvalue_tags").removeTag(tag);
+				}
+			},
+			"onRemoveTag": function(element, tag) {
+				// Search index of removed tag in personvalue_json
+				var currentJSON = [];
+				if ($("#personvalue_json").val() != "")
+					currentJSON = JSON.parse($("#personvalue_json").val());
+
+				matchIndex = currentJSON.findIndex(function(elt) {
+					return elt["value"] == tag;
+				});
+
+				// Remove it from personvalue_json & personvalue
+				if (matchIndex !== -1) {
+					// Remove from personvalue
+					newInput = [];
+					if ($("#personvalue").val() != "")
+						newInput = $("#personvalue").val().split(",");
+					newInput.splice(matchIndex, 1);
+					$("#personvalue").val(newInput.join(","));
+
+					// Remove from personvalue_json
+					currentJSON.splice(matchIndex, 1);
+					$("#personvalue_json").val(JSON.stringify(currentJSON));
+				}
+			},
 		});
+
+		$("#personvalue_tags_tag").on("keydown", function(event) {
+			onTagInputKeydown();
+			$(this).autocomplete("search");
+		});
+
+		onTagInputKeydownRunning = false;
+
+		function onTagInputKeydown(e) {
+			if (onTagInputKeydownRunning) {
+				return;
+			}
+			onTagInputKeydownRunning = true;
+
+			$("#personvalue_tags_tag").autocomplete("close");
+			$("#personvalue_tags_tag").autocomplete("option", "source", []);
+
+			setTimeout(function() {
+				var value = $("#personvalue_tags_tag").val();
+
+				if (value == "") {
+					onTagInputKeydownRunning = false;
+					return;
+				}
+
+				// show loading animation
+				$("#personvalue_tags_tag").addClass("processing_image");
+
+				$.post("<?php echo site_url('phonebook/get_phonebook/').'/'.(isset($source) ? $source : '');?>", {
+						q: value,
+						output_format: "tagInput"
+					})
+					.done(function(data) {
+						result = jQuery.parseJSON(data);
+						result = removeFromArray(result, "id", $("#personvalue").val())
+
+						if (result.length === 0) {
+							var msg = "<?php echo tr_addcslashes('"', 'No results for {0}', NULL, '%arg%'); ?>";
+							msg = msg.replace("%arg%", value);
+							$("#personvalue_tags_tag").autocomplete("option", "source", [msg]);
+							$("#personvalue_tags_tag").autocomplete("search");
+						} else {
+							$("#personvalue_tags_tag").autocomplete("option", "source", result);
+							$("#personvalue_tags_tag").autocomplete("search");
+						}
+						$("#personvalue_tags_tag").removeClass("processing_image");
+						onTagInputKeydownRunning = false;
+						return;
+					})
+					.fail(function(data) {
+						$("#personvalue_tags_tag").removeClass("processing_image");
+						onTagInputKeydownRunning = false;
+						$("#compose_sms_container_error").html($(data.responseText).filter("div").removeAttr("id"));
+						$("#compose_sms_container_error").dialog({
+							closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+							modal: true,
+							width: 550,
+							show: "fade",
+							hide: "fade",
+							buttons: {
+								"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
+									$(this).dialog("destroy");
+								}
+							}
+						});
+						return;
+					});
+				return;
+			}, 300);
+		}
 
 		// Import CSV
 		$('#composeForm').ajaxForm({
@@ -67,7 +198,7 @@
 
 		// validation
 		$("#composeForm").validate({
-			ignore: '', // By default, jquery validation ignores hidden fields. Set this to the empty string to not ignore hidden fields (needed for personvalue which is hidden by tokenInput.
+			ignore: '', // By default, jquery validation ignores hidden fields. Set this to the empty string to not ignore hidden fields (needed for personvalue which is hidden by tagsInput).
 			rules: {
 				personvalue: {
 					required: "#sendoption1:checked",
@@ -120,24 +251,6 @@
 				}
 			}
 		});
-
-		/*
-		var url = "<?php echo site_url();?>/messages/get_phonebook";
-		$("#input_box").tokenInput(url, {
-			hintText: "Type in the names of your phonebook",
-			noResultsText: "No results",
-			searchingText: "Searching..."
-		});
-		*/
-
-		// Phonebook autocompleter
-		/*var url = "<?php echo site_url();?>/messages/get_phonebook";
-		$("#input_box").autocomplete(url, {
-			multiple: true,
-			multipleSeparator: ", \n",
-			matchContains: true,
-			});
-		*/
 
 		<?php
 	$message_length_correction = 0;
