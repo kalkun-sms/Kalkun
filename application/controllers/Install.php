@@ -30,13 +30,6 @@ class Install extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		if ( ! file_exists('./install'))
-		{
-			show_error('Installation has been disabled by the administrator.<p>
-			To enable access to it, create a file named <strong>install</strong>
-			in this directory of the server: <strong>'.realpath('.').'</strong>.
-			<p>Otherwise you may <a href="..">log in</a>.', 403, '403 Forbidden');
-		}
 
 		// language
 		$this->load->helper('i18n');
@@ -50,6 +43,20 @@ class Install extends CI_Controller {
 			$this->idiom = $i18n->get_idiom();
 		}
 		$this->lang->load('kalkun', $this->idiom);
+
+		if ( ! file_exists(FCPATH.'install'))
+		{
+			show_error(
+				tr(
+					'Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.',
+					NULL,
+					realpath(FCPATH),
+					$this->config->item('base_url')
+				),
+				403,
+				tr('403 Forbidden')
+			);
+		}
 
 		require_once(APPPATH.'config/database.php');
 		$this->db_config = $db[$active_group];

@@ -32,7 +32,7 @@ class MY_Controller  extends CI_Controller {
 		parent::__construct();
 
 		// installation mode
-		if (file_exists('install'))
+		if (file_exists(FCPATH.'install'))
 		{
 			redirect('install');
 		}
