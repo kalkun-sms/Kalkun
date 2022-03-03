@@ -100,7 +100,12 @@
 	// Error container
 	function display_error_container(data) {
 		if (data.responseText !== undefined) {
-			$("#error_container").html($(data.responseText).filter('div').removeAttr("id"));
+			attr = $(data.responseText).filter('div').attr("id");
+			if (attr === "container") {
+				$("#error_container").html($(data.responseText).filter('div').removeAttr("id"));
+			} else {
+				$("#error_container").html($(data.responseText));
+			}
 		} else {
 			$("#error_container").html("<p>" + data.statusText + "</p>");
 		}
