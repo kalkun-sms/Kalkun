@@ -261,3 +261,4 @@ if ($this->config->item('sms_advertise'))
 	echo '*'.tr('Ads is active');
 }
 ?>
+<div id="compose_sms_container_notif_area" class="notif" style="display: none;"></div>

@@ -161,12 +161,14 @@
 				buttons["<?php echo tr_addcslashes('"', 'Send and repeat'); ?>"] = function() {
 					if ($("#composeForm").valid()) {
 						$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
+							$("#compose_sms_container_notif_area").text()
 							if (data.type == "error") {
-								html = '<div class="notif" style="color:red">' + data.msg + '</div>';
+								$("#compose_sms_container_notif_area").addClass("error_notif");
 							} else {
-								html = '<div class="notif">' + data.msg + '</div>';
+								$("#compose_sms_container_notif_area").removeClass("error_notif");
 							}
-							$("#compose_sms_container").append(html);
+							$("#compose_sms_container_notif_area").text(data.msg);
+							$("#compose_sms_container_notif_area").show();
 						});
 					}
 				};
