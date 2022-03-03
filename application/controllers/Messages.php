@@ -489,17 +489,9 @@ class Messages extends MY_Controller {
 			$return_msg['msg'] = tr('No number found. SMS not sent.');
 		}
 
-		// Display sending status
-		switch ($return_msg['type'])
-		{
-			case 'error':
-				echo '<div class="notif" style="color:red">'.$return_msg['msg'].'</div>';
-				break;
-			case 'info':
-			default:
-				echo '<div class="notif">'.$return_msg['msg'].'</div>';
-				break;
-		}
+		// Return sending status
+		header('Content-type: application/json');
+		echo json_encode($return_msg);
 
 		if ($this->input->post('redirect_to_form_result') === '1')
 		{

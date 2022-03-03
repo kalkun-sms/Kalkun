@@ -44,24 +44,28 @@
 						async: false
 					});
 					$.post(delete_url + source, {
-						<?php if ($this->config->item('conversation_grouping')): ?>
-						type: 'conversation',
-						number: $(this).val(),
-						current_folder: current_folder
-						<?php else: ?>
-						type: 'single',
-						id: $(this).val(),
-						<?php endif; ?>
-					}, function(data) {
-						if (!data) {
-							$(message_row).slideUp("slow");
-							$(message_row).remove();
-						} else {
-							notif = data;
-						}
-					});
+							<?php if ($this->config->item('conversation_grouping')): ?>
+							type: 'conversation',
+							number: $(this).val(),
+							current_folder: current_folder
+							<?php else: ?>
+							type: 'single',
+							id: $(this).val(),
+							<?php endif; ?>
+						})
+						.done(function(data) {
+							if (!data) {
+								$(message_row).slideUp("slow");
+								$(message_row).remove();
+							} else {
+								notif = data;
+							}
+							show_notification(notif); // translate
+						})
+						.fail(function(data) {
+							display_error_container(data);
+						});
 				});
-				show_notification(notif); // translate
 			}
 		});
 

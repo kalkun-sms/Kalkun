@@ -1,6 +1,12 @@
 <script type="text/javascript">
 	var refreshId = setInterval(function() {
-		$('.modem_status').load('<?php echo site_url('kalkun/notification')?>');
+		$('.modem_status').load('<?php echo site_url('kalkun/notification')?>', function(responseText, textStatus, jqXHR) {
+			jqXHR
+				.done(function(data) {})
+				.fail(function(data) {
+					display_error_container(data);
+				});
+		});
 		//$('.unread_inbox').load('<?php echo site_url('kalkun/unread_inbox')?>');\
 		//var current_title = $(document).attr('title');
 		new_notification('true');
@@ -82,8 +88,35 @@
 		$('.loading_area').fadeIn("slow");
 	}
 
-	function show_notification(text) {
+	function show_notification(text, type) {
+		if (type == "error") {
+			$('.notification_area').addClass("error_notif");
+		} else {
+			$('.notification_area').removeClass("error_notif");
+		}
 		$('.notification_area').text(text).fadeIn().delay(1500).fadeOut('slow');
+	}
+
+	// Error container
+	function display_error_container(data) {
+		if (data.responseText !== undefined) {
+			$("#error_container").html($(data.responseText).filter('div').removeAttr("id"));
+		} else {
+			$("#error_container").html("<p>" + data.statusText + "</p>");
+		}
+		$("#error_container").dialog({
+			closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+			modal: true,
+			width: 550,
+			maxHeight: 450,
+			show: 'fade',
+			hide: 'fade',
+			buttons: {
+				"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
+					$(this).dialog("destroy");
+				}
+			}
+		});
 	}
 
 	function compose_message(type, repeatable = false, focus_element = '#personvalue_tags_tag', param1, param2) {
@@ -113,35 +146,14 @@
 					});
 					$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize())
 						.done(function(data) {
-							$("#compose_sms_container").html(data);
-							$("#compose_sms_container").dialog("option", "buttons", {
-								"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
-									$(this).dialog("destroy");
-								}
-							});
-							setTimeout(function() {
-								if ($("#compose_sms_container").hasClass('ui-dialog-content')) {
-									$("#compose_sms_container").dialog('destroy')
-								}
-							}, 1500);
+							show_notification(data.msg, data.type);
+							$("#compose_sms_container").dialog("destroy");
 						})
 						.fail(function(data) {
 							$('.ui-dialog-buttonpane :button').each(function() {
-								if ($(this).text() == "<?php echo tr_addcslashes('"', 'Sending'); ?> ') $(this).html('<?php echo tr_addcslashes('"', 'Send message'); ?>");
+								if ($(this).text() == "<?php echo tr_addcslashes('"', 'Sending'); ?> ") $(this).html("<?php echo tr_addcslashes('"', 'Send message'); ?>");
 							});
-							$("#compose_sms_container_error").html($(data.responseText).filter('div').removeAttr("id"));
-							$("#compose_sms_container_error").dialog({
-								closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-								modal: true,
-								width: 550,
-								show: 'fade',
-								hide: 'fade',
-								buttons: {
-									"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
-										$(this).dialog("destroy");
-									}
-								}
-							});
+							display_error_container(data);
 						});
 				}
 			};
@@ -149,7 +161,12 @@
 				buttons["<?php echo tr_addcslashes('"', 'Send and repeat'); ?>"] = function() {
 					if ($("#composeForm").valid()) {
 						$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
-							$("#compose_sms_container").append(data);
+							if (data.type == "error") {
+								html = '<div class="notif" style="color:red">' + data.msg + '</div>';
+							} else {
+								html = '<div class="notif">' + data.msg + '</div>';
+							}
+							$("#compose_sms_container").append(html);
 						});
 					}
 				};
