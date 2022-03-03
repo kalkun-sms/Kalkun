@@ -52,19 +52,35 @@ class Gammu_model extends MY_Model {
 				&& $data['type'] === 'waplink')
 		{
 			$cmd = '"'.$this->config->item('gammu_sms_inject').'"' .' -c ' .'"'.$this->config->item('gammu_config').'"'. ' WAPINDICATOR ' . $data['dest']. ' "'. $data['url']. '"  "'.$data['message'].'" ';
-			$ret = exec ($cmd);
-			preg_match('/with ID ([\d]+)/i', $ret, $matches);
-			$insert_id = $matches[1];
-			if (empty($insert_id))
+			$ret = exec ($cmd, $output, $result_code);
+			if ($result_code !== 0)
 			{
-				die('<div class="notif" style="color:red">'.tr('Could not send message. Make sure Gammu path is correctly set.').'</div>');
-				$f_ret = array('status' => tr('Could not send message. Make sure Gammu path is correctly set.')); //FIXME
+				log_message(
+					'error',
+					'Failure to inject message into Gammu with gammu-smsd-inject. '."\n".
+					'Command: '.$cmd."\n".
+					'Output: '.implode("\n", $output)."\n".
+					'Result code: '.$result_code
+					);
+				show_error(tr('Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'), 500);
+
+				$f_ret = array('status' => tr('Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.')); //FIXME
 			}
 			else
 			{
-				$this->db->update('outbox', array('SendingDateTime' => $data['date']), "ID = ${insert_id}");
-				$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
-				$f_ret = array('status' => tr('Message queued.'));
+				$preg_match_ret = preg_match('/with ID ([\d]+)/i', $ret, $matches);
+				$insert_id = $matches[1];
+				if (empty($insert_id))
+				{
+					show_error(tr('Unknown error while sending WAP-LINK.'), 500);
+					$f_ret = array('status' => tr('Unknown error while sending WAP-LINK.')); //FIXME
+				}
+				else
+				{
+					$this->db->update('outbox', array('SendingDateTime' => $data['date']), "ID = ${insert_id}");
+					$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
+					$f_ret = array('status' => tr('Message queued.'));
+				}
 			}
 		}
 		else
