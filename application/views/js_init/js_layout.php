@@ -160,16 +160,21 @@
 			if (repeatable) {
 				buttons["<?php echo tr_addcslashes('"', 'Send and repeat'); ?>"] = function() {
 					if ($("#composeForm").valid()) {
-						$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
-							$("#compose_sms_container_notif_area").text()
-							if (data.type == "error") {
-								$("#compose_sms_container_notif_area").addClass("error_notif");
-							} else {
-								$("#compose_sms_container_notif_area").removeClass("error_notif");
-							}
-							$("#compose_sms_container_notif_area").text(data.msg);
-							$("#compose_sms_container_notif_area").show();
-						});
+						$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize())
+							.done(function(data) {
+								$("#compose_sms_container_notif_area").text()
+								if (data.type == "error") {
+									$("#compose_sms_container_notif_area").addClass("error_notif");
+								} else {
+									$("#compose_sms_container_notif_area").removeClass("error_notif");
+								}
+								$("#compose_sms_container_notif_area").text(data.msg);
+								$("#compose_sms_container_notif_area").show();
+							})
+							.fail(function(data) {
+								$("#compose_sms_container_notif_area").hide();
+								display_error_container(data);
+							});
 					}
 				};
 			}
