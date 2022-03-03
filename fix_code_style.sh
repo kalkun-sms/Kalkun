@@ -104,7 +104,7 @@ if command -v html-beautify >/dev/null ; then
             --indent-scripts=normal \
             "$file"
     done <  <(find application/views/js_init application/views/main -name "*.php" -print0 && \
-                find media/css -name "b*.css" -print0 -or -name "i*.css" -print0 )
+                find www/media/css -name "b*.css" -print0 -or -name "i*.css" -print0 )
 
     PLUGIN_VIEWS=$(find application/plugins -type d -name views)
     while IFS= read -r -d '' file; do
@@ -153,10 +153,10 @@ fi
 # to hide some of this data, but have it in mind that this is not enough to prevent a serious attacker.
 #find application/ -type d -exec cp -a vendor/codeigniter/framework/application/index.html '{}' \;
 find application/ -type d '!' -exec test -e "{}/index.html" ';' -exec cp -a vendor/codeigniter/framework/application/index.html '{}' \; &&
-find media/ -type d '!' -exec test -e "{}/index.html" ';' -exec cp -a vendor/codeigniter/framework/application/index.html '{}' \; &&
+find www/media/ -type d '!' -exec test -e "{}/index.html" ';' -exec cp -a vendor/codeigniter/framework/application/index.html '{}' \; &&
 if [ $DO_GIT_COMMIT -eq 1 ]; then
     git add "application/**index.html" &&
-    git add "media/**index.html" &&
+    git add "www/media/**index.html" &&
     git commit -m "[AUTO] Add missing protective index.html"
 fi
 
