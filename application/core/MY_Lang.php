@@ -51,6 +51,11 @@ class MY_Lang extends MX_Lang {
 	public function __construct()
 	{
 		parent::__construct();
+
+		set_error_handler(function($errno, $errstr, $errfile, $errline) {
+			throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
+		});
+
 		if ( ! extension_loaded('intl'))
 		{
 			log_message('error', 'please install/enable the intl extension of PHP');

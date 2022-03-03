@@ -20,7 +20,7 @@
  * @subpackage	Messages
  * @category	Models
  */
-class Message_model extends CI_Model {
+class Message_model extends MY_Model {
 
 	/**
 	 * Constructor

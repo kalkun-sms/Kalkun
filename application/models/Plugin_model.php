@@ -20,7 +20,7 @@
  * @subpackage	Plugin
  * @category	Models
  */
-class Plugin_model extends CI_Model {
+class Plugin_model extends MY_Model {
 
 	function get_plugins()
 	{

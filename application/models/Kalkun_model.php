@@ -20,7 +20,7 @@
  * @subpackage	Base
  * @category	Models
  */
-class Kalkun_model extends CI_Model {
+class Kalkun_model extends MY_Model {
 
 	/**
 	 * Constructor

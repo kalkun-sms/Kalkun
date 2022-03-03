@@ -20,7 +20,7 @@
  * @subpackage	Messages
  * @category	Models
  */
-class Gammu_model extends CI_Model {
+class Gammu_model extends MY_Model {
 
 	var $udh = '';
 
