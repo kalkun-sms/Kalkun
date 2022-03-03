@@ -243,8 +243,13 @@ class Plugins {
         if (self::$plugins_pool !== false AND !empty(self::$plugins_pool))
         {     
             $plugin = strtolower(trim($plugin)); // Lowercase and trim the plugin name
-            
-            $plugin_data = read_file($this->plugins_dir.$plugin."/".$plugin.".php"); // Load the plugin we want
+
+            $plugin_file = $this->plugins_dir.$plugin."/".$plugin.".php";
+            if ( ! file_exists($plugin_file))
+            {
+                return;
+            }
+            $plugin_data = read_file($plugin_file); // Load the plugin we want
                    
             preg_match ('|Plugin Name:(.*)$|mi', $plugin_data, $name);
             preg_match ('|Plugin URI:(.*)$|mi', $plugin_data, $uri);
@@ -344,7 +349,8 @@ class Plugins {
         if (isset(self::$plugins_active[$name]))
         {
             $this->_ci->db->where('plugin_system_name', $name)->delete('plugins');
-            self::$messages[] = "Plugin ".self::$plugins_pool[$name]['plugin_info']['plugin_name']." has been deactivated!";
+            if (isset(self::$plugins_pool[$name]))
+                self::$messages[] = "Plugin ".self::$plugins_pool[$name]['plugin_info']['plugin_name']." has been deactivated!";
             
             // Deactivate hook
             self::do_action('deactivate_' . $name);
