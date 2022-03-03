@@ -233,20 +233,14 @@
 					buttons: {
 						"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
 							//if($("#addContact").valid()) {
-							$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize(), function(data) {
-								$("#contact_container").html(data);
-								$("#contact_container").dialog({
-									closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-									buttons: {
-										"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
-											$(this).dialog("close");
-										}
-									}
+							$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize())
+								.done(function(data) {
+									show_notification(data.msg, data.type);
+									$("#contact_container").dialog("destroy");
+								})
+								.fail(function(data) {
+									display_error_container(data);
 								});
-								setTimeout(function() {
-									$("#contact_container").dialog('close')
-								}, 1500);
-							});
 						},
 						"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 							$(this).dialog('close');
