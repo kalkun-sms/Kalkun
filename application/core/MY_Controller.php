@@ -31,6 +31,10 @@ class MY_Controller  extends CI_Controller {
 	{
 		parent::__construct();
 
+		set_error_handler(function($errno, $errstr, $errfile, $errline) {
+			throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
+		});
+
 		// installation mode
 		if (file_exists('install'))
 		{

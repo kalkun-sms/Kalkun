@@ -22,7 +22,7 @@ require(dirname(__FILE__) .'/../libraries/b8/b8.php');
  * @subpackage	Spam_model
  * @category	Models
  */
-class Spam_model extends CI_Model {
+class Spam_model extends MY_Model {
 
 	public $classifier;
 	public $ratingcutoff = 0.7;

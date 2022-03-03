@@ -20,7 +20,7 @@
  * @subpackage	Phonebook
  * @category	Models
  */
-class Phonebook_model extends CI_Model {
+class Phonebook_model extends MY_Model {
 
 	// --------------------------------------------------------------------
 
