@@ -47,7 +47,7 @@ echo doctype('html5');?>
 		// So resubmit the POSTed data directly to this page?>
 
 <body onload="submitForm()">
-	<p><?php echo tr('Login successful. Resubmitting Form.'); ?></p>
+	<p><?php echo tr('Login successful. Resubmitting form.'); ?></p>
 	<form name="redirectpost" method="post" action="<?php echo current_url(); ?>">
 		<?php
 			if ( ! is_null($this->session->flashdata('bef_login_post_data')))

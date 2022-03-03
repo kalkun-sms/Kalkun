@@ -365,7 +365,7 @@ class Messages extends MY_Controller {
 		{
 			unset($dest);
 			$return_msg['type'] = 'error';
-			$return_msg['msg'] = tr('Outgoing SMS disabled');
+			$return_msg['msg'] = tr('Outgoing SMS disabled.');
 		}
 
 		// if ndnc filtering enabled
@@ -433,7 +433,7 @@ class Messages extends MY_Controller {
 				$msg_id = $this->Message_model->copy_message($this->input->post('msg_id'));
 				$this->Message_model->update_owner($msg_id, $id);
 				$return_msg['type'] = 'info';
-				$return_msg['msg'] = tr('Message delivered successfully to user inbox');
+				$return_msg['msg'] = tr('Message delivered successfully to user inbox.');
 			}
 		}
 

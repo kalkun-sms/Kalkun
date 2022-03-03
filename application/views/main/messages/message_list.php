@@ -9,11 +9,11 @@ if ($messages->num_rows() == 0)
 	{
 		if ($this->uri->segment(4) == '5')
 		{
-			echo $no_message_container['start'].tr('There is no messages in your trash').$no_message_container['end'];
+			echo $no_message_container['start'].tr('There is no message in {0}.', NULL, tr('Trash')).$no_message_container['end'];
 		}
 		else
 		{
-			echo $no_message_container['start'].tr('There is no message in this folder').$no_message_container['end'];
+			echo $no_message_container['start'].tr('There is no message in this folder.').$no_message_container['end'];
 		}
 	}
 	else
@@ -31,7 +31,7 @@ if ($messages->num_rows() == 0)
 				$folder_type = tr('Sent items');
 				break;
 		}
-		echo $no_message_container['start'].tr('There is no message in your {0}.', NULL, $folder_type).$no_message_container['end'];
+		echo $no_message_container['start'].tr('There is no message in {0}.', NULL, $folder_type).$no_message_container['end'];
 	}
 }
 else

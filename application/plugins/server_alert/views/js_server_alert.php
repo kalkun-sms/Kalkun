@@ -28,25 +28,25 @@
 			},
 			messages: {
 				alert_name: {
-					required: "<?php echo tr('Field required.');?>",
+					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
 				},
 				ip_address: {
-					required: "<?php echo tr('Field required.');?>",
+					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
 				},
 				port_number: {
-					required: "<?php echo tr('Field required.');?>",
-					number: "<?php echo tr('Value must be a number.');?>",
+					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
+					number: "<?php echo tr_addcslashes('"', 'Value must be a number.');?>",
 				},
 				timeout: {
-					required: "<?php echo tr('Field required.');?>",
-					number: "<?php echo tr('Value must be a number.');?>",
+					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
+					number: "<?php echo tr_addcslashes('"', 'Value must be a number.');?>",
 				},
 				phone_number: {
-					required: "<?php echo tr('Field required.');?>",
+					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
 				},
 				respond_message: {
-					required: "<?php echo tr('Field required.');?>",
-					maxlength: "<?php echo tr('Value is too long.');?>",
+					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
+					maxlength: "<?php echo tr_addcslashes('"', 'Value is too long.');?>",
 				},
 			}
 		});
@@ -56,16 +56,16 @@
 
 		// Add alert dialog
 		$("#alert-dialog").dialog({
-			closeText: "<?php echo tr('Close'); ?>",
+			closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			maxHeight: 450,
 			modal: true,
 			buttons: {
-				'<?php echo tr('Save'); ?>': function() {
+				"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
 					$("form.addserveralertform").trigger('submit');
 				},
-				'<?php echo tr('Cancel'); ?>': function() {
+				"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 					$(this).dialog('close');
 				}
 			}
@@ -78,16 +78,16 @@
 
 		// Edit alert dialog
 		$("#editalert-dialog").dialog({
-			closeText: "<?php echo tr('Close'); ?>",
+			closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			maxHeight: 450,
 			modal: true,
 			buttons: {
-				'<?php echo tr('Save'); ?>': function() {
+				"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
 					$("form.editserveralertform").trigger('submit');
 				},
-				'<?php echo tr('Cancel'); ?>': function() {
+				"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 					$(this).dialog('close');
 				}
 			}

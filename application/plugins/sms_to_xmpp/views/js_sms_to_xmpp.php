@@ -3,15 +3,15 @@
 
 		// Add blacklist dialog
 		$("#xmpp-dialog").dialog({
-			closeText: "<?php echo tr('Close'); ?>",
+			closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,
 			buttons: {
-				'<?php echo tr('Save'); ?>': function() {
+				"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
 					$("form.addxmppform").trigger('submit');
 				},
-				'<?php echo tr('Cancel'); ?>': function() {
+				"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 					$(this).dialog('close');
 				}
 			}

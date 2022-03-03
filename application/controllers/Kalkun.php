@@ -47,7 +47,7 @@ class Kalkun extends MY_Controller {
 		$data['data_url'] = site_url('kalkun/get_statistic');
 		if ($this->config->item('disable_outgoing'))
 		{
-			$data['alerts'][] = '<div class="warning">'.tr('Outgoing SMS disabled. Contact system administrator').'</div>';
+			$data['alerts'][] = '<div class="warning">'.tr('Outgoing SMS disabled. Contact system administrator.').'</div>';
 		}
 		$this->load->view('main/layout', $data);
 	}

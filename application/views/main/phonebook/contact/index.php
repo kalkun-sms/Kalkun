@@ -23,7 +23,7 @@
 
 <!-- Import Phonebook dialog -->
 <div id="pbkimportdialog" title="<?php echo tr('From CSV file');?>" class="dialog">
-	<p id="validateTips"><?php echo tr('All form fields are required'); ?></p>
+	<p id="validateTips"><?php echo tr('All form fields are required.'); ?></p>
 	<form class="importpbkform" method="post" enctype="multipart/form-data" action="<?php echo site_url();?>/phonebook/import_phonebook">
 		<fieldset>
 			<input type="hidden" name="pbk_id_user" id="pbk_id_user" value="<?php echo $this->session->userdata('id_user');?>" />

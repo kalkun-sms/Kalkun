@@ -50,7 +50,7 @@
 
 <!-- Add packages dialog -->
 <div id="packages-dialog" title="Add Packages" class="dialog">
-	<p id="validateTips"><?php echo tr('All form fields are required'); ?></p>
+	<p id="validateTips"><?php echo tr('All form fields are required.'); ?></p>
 	<?php echo form_open('plugin/sms_credit/add_packages', array('id' => 'addpackagesform')); ?>
 	<fieldset>
 		<input type="hidden" name="id_package" id="id_package" class="text ui-widget-content ui-corner-all" />

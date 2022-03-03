@@ -1,6 +1,6 @@
 <?php if ($canned_list->num_rows() === 0):?>
 <div>
-	<p><i><?php echo tr('There are no canned responses. Continue to save your present message as canned response.');?>.</i></p>
+	<p><i><?php echo tr('There are no canned responses. Continue to save your present message as canned response.');?></i></p>
 </div>
 <?php else:?>
 <?php foreach ($canned_list->result() as $list):?>

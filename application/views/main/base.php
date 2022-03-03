@@ -224,11 +224,11 @@
 	?>
 	<table width="100%">
 		<tr>
-			<td align="right"><label for="a_search_from_to"><b><?php echo tr('From/To');?></b></label></td>
+			<td align="right"><label for="a_search_from_to"><b><?php echo tr('Phone number');?></b></label></td>
 			<td colspan="3"><input style="width: 95%" type="text" id="a_search_from_to" name="a_search_from_to" /></td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_query"><b><?php echo tr('Query');?></b></label></td>
+			<td align="right"><label for="a_search_query"><b><?php echo tr('Content');?></b></label></td>
 			<td colspan="3"><input style="width: 95%" type="text" id="a_search_query" name="a_search_query" /></td>
 		</tr>
 		<tr>
@@ -250,16 +250,16 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_date_from"><b><?php echo tr('Date From');?></b></label></td>
+			<td align="right"><label for="a_search_date_from"><b><?php echo tr('Date from');?></b></label></td>
 			<td><input type="text" id="a_search_date_from" name="a_search_date_from" /></td>
-			<td><label for="a_search_date_to"><b><?php echo tr('Date To');?></b></label></td>
+			<td><label for="a_search_date_to"><b><?php echo tr('Date to');?></b></label></td>
 			<td><input type="text" id="a_search_date_to" name="a_search_date_to" /></td>
 		</tr>
 		<tr>
 			<td align="right"><label for="a_search_sentitems_status"><b><?php echo tr('Status');?></b></label></td>
 			<td colspan="3">
 				<select name="a_search_sentitems_status" style="width: 98%">
-					<option><?php echo tr('Any');?></option>
+					<option><?php echo tr('All');?></option>
 					<option><?php echo tr('Delivered');?></option>
 					<option><?php echo tr('Sending failed');?></option>
 				</select>
@@ -269,12 +269,12 @@
 			<td align="right"><label for="a_search_paging"><b><?php echo tr('Paging');?></b></label></td>
 			<td colspan="3">
 				<select name="a_search_paging" style="width: 98%">
-					<option value="10">10 <?php echo tr('per page');?></option>
-					<option value="20">20 <?php echo tr('per page');?></option>
-					<option value="30">30 <?php echo tr('per page');?></option>
-					<option value="40">40 <?php echo tr('per page');?></option>
-					<option value="50">50 <?php echo tr('per page');?></option>
-					<option value="all"><?php echo tr('No paging');?></option>
+					<option value="10"><?php echo tr('{0} per page', NULL, 10);?></option>
+					<option value="20"><?php echo tr('{0} per page', NULL, 20);?></option>
+					<option value="30"><?php echo tr('{0} per page', NULL, 30);?></option>
+					<option value="40"><?php echo tr('{0} per page', NULL, 40);?></option>
+					<option value="50"><?php echo tr('{0} per page', NULL, 50);?></option>
+					<option value="all"><?php echo tr('All');?></option>
 				</select>
 			</td>
 		</tr>
