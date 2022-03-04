@@ -529,7 +529,7 @@ class Phonebook_model extends MY_Model {
 		{
 			$param['id_user'] = '';
 		}
-		$country_code = $this->Kalkun_model->get_setting()->row('country_code');
+		$country_code = $this->Kalkun_model->get_setting($param['id_user'])->row('country_code');
 		$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 		$dial_code = '+'.$phoneNumberUtil->getCountryCodeForRegion($country_code);
 		$number_local = str_replace($dial_code, '0', $param['number']);
