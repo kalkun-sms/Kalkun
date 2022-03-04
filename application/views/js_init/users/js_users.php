@@ -28,20 +28,15 @@
 					buttons: {
 						"<?php echo tr_addcslashes('"', 'Save');?>": function() {
 							if ($("#addUser").valid()) {
-								$.post("<?php echo site_url('users/add_user_process') ?>", $("#addUser").serialize(), function(data) {
-									$("#users_container").html(data);
-									$("#users_container").dialog({
-										closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-										buttons: {
-											"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
-												$(this).dialog("close");
-											}
-										}
+								$.post("<?php echo site_url('users/add_user_process') ?>", $("#addUser").serialize())
+									.done(function(data) {
+										show_notification(data.msg, data.type);
+										$("#users_container").dialog("destroy");
+									})
+									.fail(function(data) {
+										display_error_container(data);
 									});
-									setTimeout(function() {
-										$("#users_container").dialog('close')
-									}, 1500);
-								});
+
 							}
 							$("#users_list").load(window.location.href);
 						},

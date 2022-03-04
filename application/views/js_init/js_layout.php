@@ -1,52 +1,60 @@
 <script type="text/javascript">
+	// Initial value for inbox unread cound
+	unread_in_count = <?php echo $this->Message_model->get_messages([
+		'readed' => FALSE,
+		'uid' => $this->session->userdata('id_user'),
+	])->num_rows(); ?>;
+
 	var refreshId = setInterval(function() {
-		$('.modem_status').load('<?php echo site_url('kalkun/notification')?>');
-		//$('.unread_inbox').load('<?php echo site_url('kalkun/unread_inbox')?>');\
-		//var current_title = $(document).attr('title');
+		$('.modem_status').load('<?php echo site_url('kalkun/notification')?>', function(responseText, textStatus, jqXHR) {
+			jqXHR
+				.done(function(data) {})
+				.fail(function(data) {
+					display_error_container(data);
+				});
+		});
 		new_notification('true');
 	}, 60000);
 
+	function play_notification_sound() {
+		// Use HTMLAudioElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
+		var audioElement = new Audio('<?php echo $this->config->item('sound_path').$this->config->item('new_incoming_message_sound')?>');
+		audioElement.play();
+	}
+
 	function new_notification(refreshmode) {
-		$.get("<?php echo site_url('kalkun/unread_count')?>", function(data) {
-			unreadcount = data.split('/');
+		$.get("<?php echo site_url('kalkun/unread_count')?>")
+			.done(function(data) {
+				// Get new unread count for inbox
+				unread_in_count_new = data['in'];
 
-			$('span.unread_inbox_notif').text(unreadcount[0]);
-			$('span.unread_spam_notif').text(unreadcount[2]);
+				// Update UI with new values
+				if (data['in'] > 0) {
+					$('span.unread_inbox_notif').text("(" + data['in'] + ")");
+					// example of title: "(23) Kalkun"
+					var title = $(document).attr('title');
+					var re_title = title.match('(\\((\\d*)\\) )?(.*)');
+					var title_cleaned = re_title[3];
+					var title_new = "(" + data['in'] + ") " + title_cleaned;
+					$(document).attr('title', title_new);
+				} else
+					$('span.unread_inbox_notif').text("");
+				if (data['spam'] > 0)
+					$('span.unread_spam_notif').text("(" + data['spam'] + ")");
+				else
+					$('span.unread_spam_notif').text("");
 
-			// example of title: "(23) Kalkun"
-			var title = $(document).attr('title');
-			var re_title = title.match('(\\((\\d*)\\) )?(.*)');
-			var unreadcount_inbox_previous = re_title[2] ? re_title[2] : 0;
-			var title_cleaned = re_title[3];
+				// play the sound
+				if (unread_in_count_new > unread_in_count) {
+					play_notification_sound();
+				}
 
-			var re = unreadcount[0].match('\\((.*)\\)');
-			var unreadcount_inbox_current = 0;
-			if (re != null && re[1]) {
-				unreadcount_inbox_current = re[1];
-			}
-
-			var title_new = unreadcount[0] + ' ' + title_cleaned;
-			$(document).attr('title', title_new);
-
-			/*
-			console.debug(
-				"title: " + title +
-				"\ntitle_cleaned: " + title_cleaned +
-				"\nunreadcount_inbox_previous: " + unreadcount_inbox_previous +
-				"\nunreadcount_inbox_current: " + unreadcount_inbox_current +
-				"\ntitle_new: " + title_new
-			);
-			console.debug(re_title);
-			console.debug(re);
-			*/
-
-			// play the sound
-			if (unreadcount_inbox_current > 0 && unreadcount_inbox_current !== unreadcount_inbox_previous) {
-				// Use HTMLAudioElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
-				var audioElement = new Audio('<?php echo $this->config->item('sound_path').$this->config->item('new_incoming_message_sound')?>');
-				audioElement.play();
-			}
-		});
+				// Set new value for unread_in_count
+				unread_in_count = unread_in_count_new;
+			})
+			.fail(function(data) {
+				display_error_container(data);
+			});
 
 		<?php if ($this->uri->segment(2) == 'folder' || $this->uri->segment(2) == 'my_folder'): ?>
 
@@ -82,8 +90,40 @@
 		$('.loading_area').fadeIn("slow");
 	}
 
-	function show_notification(text) {
+	function show_notification(text, type) {
+		if (type == "error") {
+			$('.notification_area').addClass("error_notif");
+		} else {
+			$('.notification_area').removeClass("error_notif");
+		}
 		$('.notification_area').text(text).fadeIn().delay(1500).fadeOut('slow');
+	}
+
+	// Error container
+	function display_error_container(data) {
+		if (data.responseText !== undefined) {
+			attr = $(data.responseText).filter('div').attr("id");
+			if (attr === "container") {
+				$("#error_container").html($(data.responseText).filter('div').removeAttr("id"));
+			} else {
+				$("#error_container").html($(data.responseText));
+			}
+		} else {
+			$("#error_container").html("<p>" + data.statusText + "</p>");
+		}
+		$("#error_container").dialog({
+			closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+			modal: true,
+			width: 550,
+			maxHeight: 450,
+			show: 'fade',
+			hide: 'fade',
+			buttons: {
+				"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
+					$(this).dialog("destroy");
+				}
+			}
+		});
 	}
 
 	function compose_message(type, repeatable = false, focus_element = '#personvalue_tags_tag', param1, param2) {
@@ -113,44 +153,38 @@
 					});
 					$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize())
 						.done(function(data) {
-							$("#compose_sms_container").html(data);
-							$("#compose_sms_container").dialog("option", "buttons", {
-								"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
-									$(this).dialog("destroy");
-								}
-							});
-							setTimeout(function() {
-								if ($("#compose_sms_container").hasClass('ui-dialog-content')) {
-									$("#compose_sms_container").dialog('destroy')
-								}
-							}, 1500);
+							show_notification(data.msg, data.type);
+							$("#compose_sms_container").dialog("destroy");
 						})
 						.fail(function(data) {
 							$('.ui-dialog-buttonpane :button').each(function() {
-								if ($(this).text() == "<?php echo tr_addcslashes('"', 'Sending'); ?> ') $(this).html('<?php echo tr_addcslashes('"', 'Send message'); ?>");
+								if ($(this).text() == "<?php echo tr_addcslashes('"', 'Sending'); ?> ") $(this).html("<?php echo tr_addcslashes('"', 'Send message'); ?>");
 							});
-							$("#compose_sms_container_error").html($(data.responseText).filter('div').removeAttr("id"));
-							$("#compose_sms_container_error").dialog({
-								closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-								modal: true,
-								width: 550,
-								show: 'fade',
-								hide: 'fade',
-								buttons: {
-									"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
-										$(this).dialog("destroy");
-									}
-								}
-							});
+							display_error_container(data);
 						});
 				}
 			};
 			if (repeatable) {
 				buttons["<?php echo tr_addcslashes('"', 'Send and repeat'); ?>"] = function() {
 					if ($("#composeForm").valid()) {
-						$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize(), function(data) {
-							$("#compose_sms_container").append(data);
-						});
+						$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize())
+							.done(function(data) {
+								$("#compose_sms_container_notif_area").text()
+								if (data.type == "error") {
+									$("#compose_sms_container_notif_area").addClass("error_notif");
+								} else {
+									$("#compose_sms_container_notif_area").removeClass("error_notif");
+								}
+								$("#compose_sms_container_notif_area").text(data.msg);
+								$("#compose_sms_container_notif_area").show();
+								setTimeout(function() {
+									$("#compose_sms_container_notif_area").hide();
+								}, 1500);
+							})
+							.fail(function(data) {
+								$("#compose_sms_container_notif_area").hide();
+								display_error_container(data);
+							});
 					}
 				};
 			}

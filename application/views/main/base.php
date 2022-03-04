@@ -280,4 +280,8 @@
 		</tr>
 	</table>
 	<?php echo form_close();?>
+
+	<!-- Add Error container Dialog -->
+	<div id="error_container" title="<?php echo tr('Error'); ?>" class="dialog">&nbsp;</div>
+
 </div>

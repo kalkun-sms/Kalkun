@@ -151,19 +151,7 @@
 					.fail(function(data) {
 						$("#personvalue_tags_tag").removeClass("processing_image");
 						onTagInputKeydownRunning = false;
-						$("#compose_sms_container_error").html($(data.responseText).filter("div").removeAttr("id"));
-						$("#compose_sms_container_error").dialog({
-							closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-							modal: true,
-							width: 550,
-							show: "fade",
-							hide: "fade",
-							buttons: {
-								"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
-									$(this).dialog("destroy");
-								}
-							}
-						});
+						display_error_container(data);
 						return;
 					});
 				return;

@@ -233,20 +233,14 @@
 					buttons: {
 						"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
 							//if($("#addContact").valid()) {
-							$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize(), function(data) {
-								$("#contact_container").html(data);
-								$("#contact_container").dialog({
-									closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-									buttons: {
-										"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
-											$(this).dialog("close");
-										}
-									}
+							$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize())
+								.done(function(data) {
+									show_notification(data.msg, data.type);
+									$("#contact_container").dialog("destroy");
+								})
+								.fail(function(data) {
+									display_error_container(data);
 								});
-								setTimeout(function() {
-									$("#contact_container").dialog('close')
-								}, 1500);
-							});
 						},
 						"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
 							$(this).dialog('close');
@@ -331,28 +325,22 @@
 					"<?php echo tr_addcslashes('"', 'Continue'); ?>": function() {
 						delete_dup_status = $("#delete_dup").is(":checked");
 						$.post("<?php echo site_url('messages/compose_process') ?>", {
-							sendoption: 'sendoption3',
-							manualvalue: DestinationNumber,
-							senddateoption: 'option1',
-							class: Class,
-							validity: '-1',
-							smstype: 'normal',
-							sms_loop: '1',
-							message: TextDecoded
-						}, function(data) {
-							$("#compose_sms_container").html(data);
-							$("#compose_sms_container").dialog({
-								closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-								buttons: {
-									"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
-										$(this).dialog("close");
-									}
-								}
+								sendoption: 'sendoption3',
+								manualvalue: DestinationNumber,
+								senddateoption: 'option1',
+								class: Class,
+								validity: '-1',
+								smstype: 'normal',
+								sms_loop: '1',
+								message: TextDecoded
+							})
+							.done(function(data) {
+								show_notification(data.msg, data.type);
+								$("#compose_sms_container").dialog("destroy");
+							})
+							.fail(function(data) {
+								display_error_container(data);
 							});
-							setTimeout(function() {
-								$("#compose_sms_container").dialog('close')
-							}, 1500);
-						});
 
 						// Delete copy
 						if (delete_dup_status) {
@@ -403,28 +391,24 @@
 								ID = $(this).parents('div:eq(1)').children().children('input.select_message').attr('id');
 								Class = $(this).parents('div:eq(1)').children('div.message_metadata').children('span.class').text();
 								$.post("<?php echo site_url('messages/compose_process') ?>", {
-									sendoption: 'sendoption3',
-									manualvalue: DestinationNumber,
-									senddateoption: 'option1',
-									class: Class,
-									validity: '-1',
-									smstype: 'normal',
-									sms_loop: '1',
-									message: TextDecoded
-								}, function(data) {
-									$("#compose_sms_container").html(data);
-									$("#compose_sms_container").dialog({
-										closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-										buttons: {
-											"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
-												$(this).dialog("close");
-											}
-										}
+										sendoption: 'sendoption3',
+										manualvalue: DestinationNumber,
+										senddateoption: 'option1',
+										class: Class,
+										validity: '-1',
+										smstype: 'normal',
+										sms_loop: '1',
+										message: TextDecoded
+									})
+									.done(function(data) {
+										show_notification(data.msg, data.type);
+										$("#compose_sms_container").dialog("close");
+										return;
+									})
+									.fail(function(data) {
+										display_error_container(data);
+										return;
 									});
-									setTimeout(function() {
-										$("#compose_sms_container").dialog('close')
-									}, 1500);
-								});
 
 								// Delete copy
 								if (delete_dup_status) {

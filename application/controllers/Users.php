@@ -119,14 +119,25 @@ class Users extends MY_Controller {
 	{
 		$this->load->helper('kalkun');
 		$this->User_model->adduser();
+
 		if ($this->input->post('id_user'))
 		{
-			echo '<div class="notif">'.tr('User updated successfully.').'</div>';
+			$return_msg = [
+				'type' => 'info',
+				'msg' => tr('User updated successfully.'),
+			];
 		}
 		else
 		{
-			echo '<div class="notif">'.tr('User added successfully.').'</div>';
+			$return_msg = [
+				'type' => 'info',
+				'msg' => tr('User added successfully.'),
+			];
 		}
+
+		// Return status
+		header('Content-type: application/json');
+		echo json_encode($return_msg);
 	}
 
 	// --------------------------------------------------------------------

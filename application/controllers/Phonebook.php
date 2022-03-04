@@ -369,15 +369,24 @@ class Phonebook extends MY_Controller {
 		if ($this->input->post('editid_pbk'))
 		{
 			$pbk['id_pbk'] = $this->input->post('editid_pbk');
-			$msg = '<div class="notif">'.tr('Contact updated successfully.').'</div>';
+			$return_msg = [
+				'type' => 'info',
+				'msg' => tr('Contact updated successfully.'),
+			];
 		}
 		else
 		{
-			$msg = '<div class="notif">'.tr('Contact added successfully.').'</div>';
+			$return_msg = [
+				'type' => 'info',
+				'msg' => tr('Contact added successfully.'),
+			];
 		}
 
 		$this->Phonebook_model->add_contact($pbk);
-		echo $msg;
+
+		// Return status
+		header('Content-type: application/json');
+		echo json_encode($return_msg);
 	}
 
 	// --------------------------------------------------------------------
