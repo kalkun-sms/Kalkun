@@ -32,13 +32,13 @@ if ($val_type == 'reply'): ?>
 $phone = $dest;
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $phone));
 if ($qry->num_rows() !== 0):
-echo $qry->row('Name').' <'.$phone.'>';
+echo htmlentities($qry->row('Name'), ENT_QUOTES).' <'.htmlentities($phone, ENT_QUOTES).'>';
 else:
-echo $phone;
+echo htmlentities($phone, ENT_QUOTES);
 endif;
 ?>
 			<input type="hidden" name="sendoption" value="reply" />
-			<input type="hidden" name="reply_value" value="<?php echo $phone;?>" />
+			<input type="hidden" name="reply_value" value="<?php echo htmlentities($phone, ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
@@ -55,13 +55,13 @@ endif;
 			<?php
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $dest));
 if ($qry->num_rows() !== 0):
-echo $qry->row('Name').' <'.$dest.'>';
+echo htmlentities($qry->row('Name'), ENT_QUOTES).' <'.htmlentities($dest, ENT_QUOTES).'>';
 else:
-echo $dest;
+echo htmlentities($dest, ENT_QUOTES);
 endif;
 ?>
 			<input type="hidden" name="sendoption" value="reply" />
-			<input type="hidden" name="reply_value" value="<?php echo $dest;?>" />
+			<input type="hidden" name="reply_value" value="<?php echo htmlentities($dest, ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
@@ -69,9 +69,9 @@ endif;
 	<tr>
 		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
-			<?php echo $this->Phonebook_model->get_phonebook(array('option' => 'groupname', 'id' => $dest))->row('GroupName');?>
+			<?php echo htmlentities($this->Phonebook_model->get_phonebook(array('option' => 'groupname', 'id' => $dest))->row('GroupName'), ENT_QUOTES);?>
 			<input type="hidden" name="sendoption" value="pbk_groups" />
-			<input type="hidden" name="id_pbk" value="<?php echo $dest;?>" />
+			<input type="hidden" name="id_pbk" value="<?php echo htmlentities($dest, ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
@@ -217,17 +217,17 @@ else
 	<tr valign="top">
 		<td align="right" class="label"><?php echo tr('Message').':';?></td>
 		<td>
-			<?php if ($val_type == 'forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo $msg_id;?>" /> <?php endif;?>
+			<?php if ($val_type == 'forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo htmlentities($msg_id, ENT_QUOTES);?>" /> <?php endif;?>
 			<textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;" id="message" name="message">
 <?php
 if ($val_type == 'forward')
 {
-	echo $message;
+	echo htmlentities($message, ENT_QUOTES);
 }
 list($sig_option, $sig) = explode(';', $this->Kalkun_model->get_setting()->row('signature'));
 if ($sig_option == 'true')
 {
-	echo "\n\n".$sig;
+	echo "\n\n".htmlentities($sig, ENT_QUOTES);
 } ?>
 </textarea>
 			<div>

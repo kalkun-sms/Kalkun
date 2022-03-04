@@ -93,15 +93,15 @@ else
 	<div class="message_container <?php echo $tmp['source']; ?>">
 		<div class="message_header" style="color: #444; height: 20px; overflow: hidden">
 			<input type="hidden" name="item_source<?php echo $tmp['ID']; ?>" id="item_source<?php echo $tmp['ID']; ?>" value="<?php echo $tmp['source']; ?>" />
-			<input type="hidden" class="item_number" name="item_number<?php echo $tmp['ID']; ?>" id="item_number<?php echo $tmp['ID']; ?>" value="<?php echo $number; ?>" />
+			<input type="hidden" class="item_number" name="item_number<?php echo $tmp['ID']; ?>" id="item_number<?php echo $tmp['ID']; ?>" value="<?php echo htmlentities($number, ENT_QUOTES); ?>" />
 			<input type="checkbox" id="<?php echo $tmp['ID']; ?>" class="select_message nicecheckbox" value="<?php echo $tmp['ID']; ?>" style="border: none;" />
 			<span class="message_toggle" style="cursor: pointer">
 				<span <?php  if ($tmp['source'] == 'inbox' && $tmp['readed'] == 'false')
 	{
 		echo 'style="font-weight: bold"';
 	} ?>><?php echo kalkun_nice_date($message_date); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
-					&nbsp;&nbsp;<?php echo $senderName; ?></span>
-				<span class="message_preview">-&nbsp;<?php echo message_preview($tmp['TextDecoded'], $char_per_line); ?></span>
+					&nbsp;&nbsp;<?php echo htmlentities($senderName, ENT_QUOTES); ?></span>
+				<span class="message_preview">-&nbsp;<?php echo message_preview(htmlentities($tmp['TextDecoded'], ENT_QUOTES), $char_per_line); ?></span>
 			</span>
 		</div>
 
@@ -150,7 +150,7 @@ if ($tmp['source'] == 'sentitems'):
 	endif;
 	endif; ?>
 
-		<div class="detail_area hidden <?php echo $number; ?>">
+		<div class="detail_area hidden <?php echo htmlentities($number, ENT_QUOTES); ?>">
 			<table cellspacing="0" cellpadding="0" border="0">
 				<tr>
 					<td width="50px"><?php  if ($tmp['source'] == 'inbox')
@@ -162,28 +162,28 @@ if ($tmp['source'] == 'sentitems'):
 		echo tr('To');
 	} ?></td>
 					<td width="10px"> : </td>
-					<td><?php echo $number; ?></td>
+					<td><?php echo htmlentities($number, ENT_QUOTES); ?></td>
 				</tr>
 
 				<?php  if ($tmp['source'] == 'outbox'): ?>
 				<tr>
 					<td><?php echo tr('Inserted'); ?></td>
 					<td> : </td>
-					<td><?php echo simple_date($tmp['InsertIntoDB']); ?></td>
+					<td><?php echo htmlentities(simple_date($tmp['InsertIntoDB']), ENT_QUOTES); ?></td>
 				</tr>
 				<?php  endif; ?>
 
 				<tr>
 					<td><?php echo tr('Date'); ?></td>
 					<td> : </td>
-					<td><?php echo simple_date($message_date); ?></td>
+					<td><?php echo htmlentities(simple_date($message_date), ENT_QUOTES); ?></td>
 				</tr>
 
 				<?php if ($tmp['source'] != 'outbox'): ?>
 				<tr>
 					<td><?php echo tr('SMSC'); ?></td>
 					<td> : </td>
-					<td><?php echo $tmp['SMSCNumber']; ?></td>
+					<td><?php echo htmlentities($tmp['SMSCNumber'], ENT_QUOTES); ?></td>
 				</tr>
 				<?php endif; ?>
 
@@ -200,7 +200,7 @@ if ($tmp['source'] == 'sentitems'):
 				<tr>
 					<td><?php echo tr('Status'); ?></td>
 					<td> : </td>
-					<td><?php echo $status; ?></td>
+					<td><?php echo htmlentities($status, ENT_QUOTES); ?></td>
 				</tr>
 				<?php endif; ?>
 			</table>
@@ -235,7 +235,7 @@ if ($tmp['source'] == 'sentitems'):
 		</div>
 
 		<div class="message_metadata hidden">
-			<span class="class"><?php echo $tmp['Class']; ?></span>
+			<span class="class"><?php echo htmlentities($tmp['Class'], ENT_QUOTES); ?></span>
 		</div>
 
 	</div>
