@@ -24,9 +24,6 @@
 					id_access = '#item_source' + $(this).val();
 					item_folder = $(id_access).val();
 					dest_url = base + item_folder;
-					$.ajaxSetup({
-						async: false
-					});
 					$.post(dest_url, {
 						type: 'single',
 						id: $(this).val(),

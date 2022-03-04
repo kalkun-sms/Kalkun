@@ -40,9 +40,6 @@
 			} else {
 				$("input.select_conversation:checked").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
-					$.ajaxSetup({
-						async: false
-					});
 					$.post(delete_url + source, {
 						<?php if ($this->config->item('conversation_grouping')): ?>
 						type: 'conversation',
