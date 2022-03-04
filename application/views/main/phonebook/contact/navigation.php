@@ -11,14 +11,14 @@
 			<?php
 	$group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
 	foreach ($group->result() as $tmp):
-	echo "<option value='{$tmp->ID}'>".htmlentities($tmp->GroupName, ENT_QUOTES)."</option>";
+	echo "<option value='{$tmp->ID}'>".htmlentities($tmp->GroupName, ENT_QUOTES).'</option>';
 	endforeach;
 	?>
 			<option value="null">- <?php echo tr('Delete from group');?> -</option>
 			<?php
 	$group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
 	foreach ($group->result() as $tmp):
-	echo "<option value='-{$tmp->ID}'>".htmlentities($tmp->GroupName, ENT_QUOTES)."</option>";
+	echo "<option value='-{$tmp->ID}'>".htmlentities($tmp->GroupName, ENT_QUOTES).'</option>';
 	endforeach;
 	?>
 		</select>
