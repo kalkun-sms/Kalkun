@@ -9,7 +9,7 @@
 
 </style>
 <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>jquery-ui/jquery-ui.min.css" />
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>modernizr.min.js"></script>
+<script defer language="javascript" src="<?php echo $this->config->item('js_path');?>modernizr.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-3.6.0.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.hotkeys.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.field.min.js"></script>
