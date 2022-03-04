@@ -21,7 +21,6 @@
 <?php echo form_open_multipart('messages/compose_process', array('id' => 'composeForm', 'class' => 'composeForm'));?>
 <table width="100%">
 	<?php
-$type = array('inbox', 'sentitems');
 
 // Reply to option
 if ($val_type == 'reply'): ?>
@@ -39,6 +38,25 @@ endif;
 ?>
 			<input type="hidden" name="sendoption" value="reply" />
 			<input type="hidden" name="reply_value" value="<?php echo $phone;?>" />
+		</td>
+	</tr>
+
+	<?php /* Resend */ elseif ($val_type == 'resend'):?>
+	<tr>
+		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
+		<td>
+			<?php
+$phone = $dest;
+$qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $phone));
+if ($qry->num_rows() !== 0):
+echo htmlentities($qry->row('Name'), ENT_QUOTES).' <'.htmlentities($phone, ENT_QUOTES).'>';
+else:
+echo htmlentities($phone, ENT_QUOTES);
+endif;
+?>
+			<input type="hidden" name="sendoption" value="resend" />
+			<input type="hidden" name="resend_value" value="<?php echo htmlentities($phone, ENT_QUOTES);?>" />
+			<input type="hidden" name="orig_msg_id" value="<?php echo htmlentities($orig_msg_id, ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
@@ -220,12 +238,12 @@ else
 			<?php if ($val_type == 'forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo $msg_id;?>" /> <?php endif;?>
 			<textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;" id="message" name="message">
 <?php
-if ($val_type == 'forward')
+if ($val_type === 'forward' || $val_type === 'resend')
 {
 	echo $message;
 }
 list($sig_option, $sig) = explode(';', $this->Kalkun_model->get_setting()->row('signature'));
-if ($sig_option == 'true')
+if ($sig_option == 'true' && $val_type !== 'resend')
 {
 	echo "\n\n".$sig;
 } ?>
@@ -249,6 +267,17 @@ if ($sig_option == 'true')
 			</div>
 		</td>
 	</tr>
+	<?php if ($val_type === 'resend'): ?>
+	<tr>
+		<td align="right" class="label">&nbsp;</td>
+		<td>
+			<div>
+				<input type="checkbox" id="resend_delete_original" name="resend_delete_original" />
+				<label for="resend_delete_original"><?php echo tr('Delete the original message (prevents duplicates).') ?></label>
+			</div>
+		</td>
+	</tr>
+	<?php endif; ?>
 </table>
 <br />
 <?php  echo form_close();?>

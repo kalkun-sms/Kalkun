@@ -43,6 +43,156 @@ class Messages extends MY_Controller {
 	// --------------------------------------------------------------------
 
 	/**
+	 * Compose subfunction for the case of forward
+	 * When processing "inbox"
+	 *
+	 * @param string $id
+	 * @return array
+	 */
+	function _compose_forward_inbox($id)
+	{
+		$data['source'] = 'inbox';
+		$tmp_number = 'SenderNumber';
+		$param['type'] = 'inbox';
+		$param['id_message'] = $id;
+		$data['message'] = $this->Message_model->get_messages($param)->row('TextDecoded');
+		$data['msg_id'] = $id;
+
+		// check multipart
+		$multipart['type'] = 'inbox';
+		$multipart['option'] = 'check';
+		$multipart['id_message'] = $id;
+		$tmp_check = $this->Message_model->get_multipart($multipart);
+		if ($tmp_check->row('UDH') !== '')
+		{
+			$multipart['option'] = 'all';
+			$multipart['udh'] = substr($tmp_check->row('UDH'), 0, 8);
+			$multipart['phone_number'] = $tmp_check->row('SenderNumber');
+			foreach ($this->Message_model->get_multipart($multipart)->result() as $part)
+			{
+				$data['message'] .= $part->TextDecoded;
+			}
+		}
+		return $data;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Compose subfunction for the case of forward
+	 * When processing "sentitems"
+	 *
+	 * @param string $id
+	 * @return array
+	 */
+	function _compose_forward_sentitems($id)
+	{
+		$data['source'] = 'sentitems';
+		$tmp_number = 'DestinationNumber';
+		$param = array('type' => 'sentitems', 'id_message' => $id);
+		$data['message'] = $this->Message_model->get_messages($param)->row('TextDecoded');
+		$data['orig_msg_id'] = $id;
+
+		// check multipart
+		$multipart['type'] = 'sentitems';
+		$multipart['option'] = 'check';
+		$multipart['id_message'] = $id;
+		$tmp_check = $this->Message_model->get_multipart($multipart);
+		if ($tmp_check > 0)
+		{
+			$multipart['option'] = 'all';
+			foreach ($this->Message_model->get_multipart($multipart)->result() as $part)
+			{
+				$data['message'] .= $part->TextDecoded;
+			}
+		}
+		return $data;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Compose subfunction for the case of resend
+	 * When processing "inbox"
+	 *
+	 * @param string $id
+	 * @return array
+	 */
+	function _compose_resend_inbox($id)
+	{
+		return $this->_compose_forward_inbox($id);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Compose subfunction for the case of resend
+	 * When processing "sentitems"
+	 *
+	 * @param string $id
+	 * @return array
+	 */
+	function _compose_resend_sentitems($id)
+	{
+		$data = $this->_compose_forward_sentitems($id);
+
+		$param = array('type' => 'sentitems', 'id_message' => $id);
+		$data['dest'] = $this->Message_model->get_messages($param)->row('DestinationNumber');
+
+		return $data;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Compose subfunction for the case of forward
+	 *
+	 * @param string $source
+	 * @param string $id
+	 * @return array
+	 */
+	function _compose_forward($source, $id)
+	{
+		$data = [];
+		switch ($source)
+		{
+			case 'inbox':
+				$data = $this->_compose_forward_inbox($id);
+				break;
+			case 'sentitems':
+				$data = $this->_compose_forward_sentitems($id);
+				break;
+		}
+		return $data;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Compose subfunction for the case of resend
+	 *
+	 * @param string $source
+	 * @param string $id
+	 * @return array
+	 */
+	function _compose_resend($source, $id)
+	{
+		$data = [];
+		switch ($source)
+		{
+			case 'inbox':
+				$data = $this->_compose_resend_inbox($id);
+				break;
+			case 'sentitems':
+				$data = $this->_compose_resend_sentitems($id);
+				break;
+		}
+		return $data;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
 	 * Compose
 	 *
 	 * Render compose window form
@@ -54,89 +204,35 @@ class Messages extends MY_Controller {
 		$this->load->helper(array('form', 'kalkun'));
 
 		// register valid type
-		$val_type = array('normal', 'reply', 'forward', 'member', 'pbk_contact', 'pbk_groups', 'all_contacts');
+		$val_type = array('normal', 'reply', 'forward', 'member', 'pbk_contact', 'pbk_groups', 'all_contacts', 'resend');
 		$type = $this->input->post('type');
 		if ( ! in_array($type, $val_type))
 		{
-			die('Invalid type on compose');
+			show_error('Invalid type on compose.', 400);
+		}
+
+		switch ($type)
+		{
+			case 'forward':
+				$source = $this->input->post('param1');
+				$id = $this->input->post('param2');
+				$data = $this->_compose_forward($source, $id);
+				break;
+			case 'resend':
+				$source = $this->input->post('param1');
+				$id = $this->input->post('param2');
+				$data = $this->_compose_resend($source, $id);
+				break;
+			case 'reply':
+			case 'pbk_contact':
+			case 'pbk_groups':
+				$data['dest'] = $this->input->post('param1');
+				break;
+			default:
+				break;
 		}
 
 		$data['val_type'] = $type;
-
-		// Forward option
-		if ($type === 'forward')
-		{
-			$source = $this->input->post('param1');
-			$id = $this->input->post('param2');
-			$data['source'] = $source;
-			switch ($source)
-			{
-				case 'inbox':
-					$tmp_number = 'SenderNumber';
-					$param['type'] = 'inbox';
-					$param['id_message'] = $id;
-					$data['message'] = $this->Message_model->get_messages($param)->row('TextDecoded');
-					$data['msg_id'] = $id;
-
-					// check multipart
-					$multipart['type'] = 'inbox';
-					$multipart['option'] = 'check';
-					$multipart['id_message'] = $id;
-					$tmp_check = $this->Message_model->get_multipart($multipart);
-					if ($tmp_check->row('UDH') !== '')
-					{
-						$multipart['option'] = 'all';
-						$multipart['udh'] = substr($tmp_check->row('UDH'), 0, 8);
-						$multipart['phone_number'] = $tmp_check->row('SenderNumber');
-						foreach ($this->Message_model->get_multipart($multipart)->result() as $part)
-						{
-							$data['message'] .= $part->TextDecoded;
-						}
-					}
-					break;
-
-				case 'sentitems':
-					$tmp_number = 'DestinationNumber';
-					$param = array('type' => 'sentitems', 'id_message' => $id);
-					$data['message'] = $this->Message_model->get_messages($param)->row('TextDecoded');
-
-					// check multipart
-					$multipart['type'] = 'sentitems';
-					$multipart['option'] = 'check';
-					$multipart['id_message'] = $id;
-					$tmp_check = $this->Message_model->get_multipart($multipart);
-					if ($tmp_check > 0)
-					{
-						$multipart['option'] = 'all';
-						foreach ($this->Message_model->get_multipart($multipart)->result() as $part)
-						{
-							$data['message'] .= $part->TextDecoded;
-						}
-					}
-					break;
-			}
-		}
-		else
-		{
-			if ($type === 'reply')
-			{
-				$data['dest'] = $this->input->post('param1');
-			}
-			else
-			{
-				if ($type === 'pbk_contact')
-				{
-					$data['dest'] = $this->input->post('param1');
-				}
-				else
-				{
-					if ($type === 'pbk_groups')
-					{
-						$data['dest'] = $this->input->post('param1');
-					}
-				}
-			}
-		}
 
 		$this->load->view('main/messages/compose', $data);
 	}
@@ -282,6 +378,11 @@ class Messages extends MY_Controller {
 				$dest[] = $this->input->post('reply_value');
 				break;
 
+			// Resend
+			case 'resend':
+				$dest[] = $this->input->post('resend_value');
+				break;
+
 			// Member
 			case 'member':
 				$this->load->model('sms_member/sms_member_model', 'Member_model');
@@ -346,7 +447,7 @@ class Messages extends MY_Controller {
 		$data['url'] = $this->input->post('url');
 
 		// if append @username is active
-		if ($this->config->item('append_username'))
+		if ($this->config->item('append_username') && $this->input->post('sendoption') !== 'resend')
 		{
 			$append_username_message = $this->config->item('append_username_message');
 			$append_username_message = str_replace('@username', '@'.$this->session->userdata('username'), $append_username_message);
@@ -354,7 +455,7 @@ class Messages extends MY_Controller {
 		}
 
 		// if ads is active
-		if ($this->config->item('sms_advertise'))
+		if ($this->config->item('sms_advertise') && $this->input->post('sendoption') !== 'resend')
 		{
 			$ads_message = $this->config->item('sms_advertise_message');
 			$data['message'] .= "\n".$ads_message;
@@ -483,6 +584,17 @@ class Messages extends MY_Controller {
 			$return_msg['type'] = 'info';
 			$return_msg['msg'] = tr('Copy of the message was placed in the outbox and is ready for delivery.');
 		}
+
+		// Delete original message in case of resend
+		if ($this->input->post('sendoption') === 'resend' && $this->input->post('resend_delete_original'))
+		{
+			$delete_param['type'] = 'single';
+			$delete_param['option'] = 'permanent';
+			$delete_param['source'] = 'sentitems';
+			$delete_param['id'] = [$this->input->post('orig_msg_id')];
+			$this->Message_model->delete_messages($delete_param);
+		}
+
 		if ( ! isset($return_msg))
 		{
 			$return_msg['type'] = 'error';
