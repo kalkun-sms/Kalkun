@@ -32,13 +32,13 @@
 		 *
 		 */
 		$(document).on('click', "a.global_delete", action_delete = function() {
-			var count = $("input.select_conversation:checkbox:checked").length;
+			var count = $("input.select_conversation:checked:visible").length;
 			var notif = "<?php echo tr_addcslashes('"', '{0} conversation(s) deleted'); ?>";
 			notif = notif.replace('{0}', count);
 			if (count == 0) {
 				show_notification("<?php echo tr_addcslashes('"', 'No item selected.')?>");
 			} else {
-				$("input.select_conversation:checked").each(function() {
+				$("input.select_conversation:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.ajaxSetup({
 						async: false
@@ -73,7 +73,7 @@
 		 *
 		 */
 		$(document).on('click', "a.recover_button", action_recover = function() {
-			var count = $("input.select_conversation:checkbox:checked").length;
+			var count = $("input.select_conversation:checked:visible").length;
 			var notif = "<?php echo tr_addcslashes('"', '{0} conversation(s) recovered'); ?>";
 			notif = notif.replace('{0}', count);
 			if (count == 0) {
@@ -82,7 +82,7 @@
 
 				var id_folder = (source == 'inbox') ? 1 : 3;
 
-				$("input.select_conversation:checked").each(function() {
+				$("input.select_conversation:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post(move_url, {
 						<?php if ($this->config->item('conversation_grouping')): ?>
@@ -116,7 +116,7 @@
 		 *
 		 */
 		$(document).on('click', ".move_to", function() {
-			var count = $("input.select_conversation:checkbox:checked").length;
+			var count = $("input.select_conversation:checked:visible").length;
 			var notif = "<?php echo tr_addcslashes('"', '{0} conversation(s) moved'); ?>";
 			notif = notif.replace('{0}', count);
 			if (count == 0) {
@@ -125,7 +125,7 @@
 			} else {
 				var id_folder = $(this).attr('id');
 				$("#movetodialog").dialog('close');
-				$("input.select_conversation:checked").each(function() {
+				$("input.select_conversation:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post(move_url, {
 						<?php if ($this->config->item('conversation_grouping')): ?>
