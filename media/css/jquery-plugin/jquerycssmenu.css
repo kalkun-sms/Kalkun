@@ -3,7 +3,7 @@ background: #86C0D2;
 font-size: 11px;
 margin: 0px;
 padding: 5px;
-height: 25px;
+overflow: auto;
 color: #444;
 }
 
