@@ -41,7 +41,7 @@
 				<option value="">-- <?php echo tr('Select group name');?> --</option>
 				<?php
 		foreach ($pbkgroup as $tmp):
-		echo '<option value="'.$tmp->ID.'">'.$tmp->GroupName.'</option>';
+		echo '<option value="'.$tmp->ID.'">'.htmlentities($tmp->GroupName, ENT_QUOTES).'</option>';
 		endforeach;
 		?>
 			</select>

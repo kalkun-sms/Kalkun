@@ -8,17 +8,17 @@
 		<label for="name"><?php echo tr('Name'); ?></label>
 		<input type="text" name="realname" id="realname" value="<?php if (isset($users))
 {
-	echo $users->row('realname');
+	echo htmlentities($users->row('realname'), ENT_QUOTES);
 }?>" class="text ui-widget-content ui-corner-all" />
 		<label for="number"><?php echo tr('Phone number'); ?></label>
 		<input type="text" name="phone_number" id="phone_number" value="<?php if (isset($users))
 {
-	echo $users->row('phone_number');
+	echo htmlentities($users->row('phone_number'), ENT_QUOTES);
 }?>" class="text ui-widget-content ui-corner-all" />
 		<label for="name"><?php echo tr('Username'); ?></label>
 		<input type="text" name="username" id="username" value="<?php if (isset($users))
 {
-	echo $users->row('username');
+	echo htmlentities($users->row('username'), ENT_QUOTES);
 }?>" class="text ui-widget-content ui-corner-all" />
 
 		<?php if ( ! isset($users)): ?>
