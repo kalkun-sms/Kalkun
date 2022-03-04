@@ -29,8 +29,8 @@ Class Soap_model extends CI_Model {
 	function addRemoteAccess()
 	{
 		$data = array (
-			'access_name' => $this->input->post('access_name', TRUE),
-			'ip_address' => $this->input->post('ip_address', TRUE),
+			'access_name' => $this->input->post('access_name'),
+			'ip_address' => $this->input->post('ip_address'),
 			'token' => bin2hex(random_bytes(32)),
 		);
 		$this->db->insert('plugin_remote_access', $data);
@@ -38,13 +38,13 @@ Class Soap_model extends CI_Model {
 
 	function updateRemoteAccess()
 	{
-		$status = ($this->input->post('editstatus', TRUE) === 'on') ? 'true' : 'false';
+		$status = ($this->input->post('editstatus') === 'on') ? 'true' : 'false';
 		$data = array (
-			'access_name' => $this->input->post('editaccess_name', TRUE),
-			'ip_address' => $this->input->post('editip_address', TRUE),
+			'access_name' => $this->input->post('editaccess_name'),
+			'ip_address' => $this->input->post('editip_address'),
 			'status' => $status
 		);
-		$this->db->where('id_remote_access', $this->input->post('editid_remote_access', TRUE));
+		$this->db->where('id_remote_access', $this->input->post('editid_remote_access'));
 		$this->db->update('plugin_remote_access', $data);
 	}
 
@@ -55,8 +55,8 @@ Class Soap_model extends CI_Model {
 
 	function addNotification()
 	{
-		$nr = ($this->input->post('notifynumber', TRUE));
-		$value = ($this->input->post('notifyvalue', TRUE));
+		$nr = ($this->input->post('notifynumber'));
+		$value = ($this->input->post('notifyvalue'));
 
 		//TODO - save notify
 	}
