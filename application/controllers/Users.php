@@ -156,7 +156,7 @@ class Users extends MY_Controller {
 
 		// get and delete all user_outbox
 		$res = $this->Message_model->get_messages(array('uid' => $uid, 'type' => 'outbox'));
-		foreach ($res->result as $tmp)
+		foreach ($res->result() as $tmp)
 		{
 			$param = array('type' => 'single', 'option' => 'outbox', 'id_message' => $tmp->id_outbox);
 			$this->Message_model->delMessages($param);
@@ -164,15 +164,15 @@ class Users extends MY_Controller {
 
 		// get and delete all user_inbox
 		$res = $this->Message_model->get_messages(array('uid' => $uid, 'type' => 'inbox'));
-		foreach ($res->result as $tmp)
+		foreach ($res->result() as $tmp)
 		{
 			$param = array('type' => 'single', 'option' => 'permanent', 'source' => 'inbox', 'id_message' => $tmp->id_inbox);
 			$this->Message_model->delete_messages($param);
 		}
 
 		// get and delete all user_sentitems
-		$res = $this->Message_model->delete_messages(array('uid' => $uid, 'type' => 'sentitems'));
-		foreach ($res->result as $tmp)
+		$res = $this->Message_model->get_messages(array('uid' => $uid, 'type' => 'sentitems'));
+		foreach ($res->result() as $tmp)
 		{
 			$param = array('type' => 'single', 'option' => 'permanent', 'source' => 'sentitems', 'id_message' => $tmp->id_sentitems);
 			$this->Message_model->delete_messages($param);
