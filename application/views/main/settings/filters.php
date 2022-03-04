@@ -9,14 +9,14 @@
 		<div id="<?php echo $filter['id_filter'];?>" class="id_filter">
 			<span>
 				<?php if ( ! empty($filter['from'])):?>
-				<?php echo tr('From');?>: <b class="from"><?php echo $filter['from'];?></b>
+				<?php echo tr('From');?>: <b class="from"><?php echo htmlentities($filter['from'], ENT_QUOTES);?></b>
 				<?php endif;?>
 
 				<?php if ( ! empty($filter['has_the_words'])):?>
-				<?php echo tr('Has the words');?>: <b class="has_the_words"><?php echo $filter['has_the_words'];?></b>
+				<?php echo tr('Has the words');?>: <b class="has_the_words"><?php echo htmlentities($filter['has_the_words'], ENT_QUOTES);?></b>
 				<?php endif;?>
 			</span>
-			<div style="padding: 2px 0 5px 24px;" class="<?php echo $filter['id_folder'];?>"><?php echo tr('Move to');?>: <b class="id_folder"><?php echo $filter['name'];?></b></div>
+			<div style="padding: 2px 0 5px 24px;" class="<?php echo $filter['id_folder'];?>"><?php echo tr('Move to');?>: <b class="id_folder"><?php echo htmlentities($filter['name'], ENT_QUOTES);?></b></div>
 		</div>
 	</div>
 
@@ -45,11 +45,9 @@
 
 		<label for="move_to"><?php echo tr('Move to');?></label>
 		<select name="id_folder" id="id_folder" style="width: 98%">
-			<?php
-		foreach ($my_folders->result() as $my_folder):
-		echo "<option value=\"{$my_folder->id_folder}\">{$my_folder->name}</option>";
-		endforeach;
-		?>
+			<?php foreach ($my_folders->result() as $my_folder): ?>
+			<option value="<?php echo $my_folder->id_folder; ?>"><?php echo htmlentities($my_folder->name, ENT_QUOTES); ?></option>
+			<?php endforeach; ?>
 		</select>
 	</form>
 </div>
