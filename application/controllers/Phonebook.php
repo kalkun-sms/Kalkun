@@ -406,7 +406,7 @@ class Phonebook extends MY_Controller {
 		$tagInputResult = [];
 		$output_format = $this->input->post('output_format');
 
-		$q = $this->input->post('q', TRUE);
+		$q = $this->input->post('q');
 		if (isset($q) && strlen($q) > 0)
 		{
 			$user_id = $this->session->userdata('id_user');
