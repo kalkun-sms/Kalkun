@@ -26,6 +26,6 @@
 
 		<?php if($wp):?>
 		<h4>Blog URL:</h4>
-		<p><?php echo $wp['wp_url'];?></p>
+		<p><?php echo htmlentities($wp['wp_url'], ENT_QUOTES);?></p>
 		<?php endif;?>
 	</div>

@@ -77,14 +77,14 @@
 		{
 			foreach ($alert->result() as $tmp):
 			?>
-		<tr id="<?php echo $tmp->id_server_alert; ?>">
-			<td class="nice-table-left"><?php echo $number; ?></td>
-			<td class="alert_name"><?php echo $tmp->alert_name; ?></td>
-			<td class="ip_address"><?php echo $tmp->ip_address; ?></td>
-			<td class="port_number"><?php echo $tmp->port_number; ?></td>
-			<td class="timeout hidden"><?php echo $tmp->timeout; ?></td>
-			<td class="phone_number"><?php echo phone_format_human($tmp->phone_number); ?></td>
-			<td class="respond_message hidden"><?php echo $tmp->respond_message; ?></td>
+		<tr id="<?php echo htmlentities($tmp->id_server_alert, ENT_QUOTES); ?>">
+			<td class="nice-table-left"><?php echo htmlentities($number, ENT_QUOTES); ?></td>
+			<td class="alert_name"><?php echo htmlentities($tmp->alert_name, ENT_QUOTES); ?></td>
+			<td class="ip_address"><?php echo htmlentities($tmp->ip_address, ENT_QUOTES); ?></td>
+			<td class="port_number"><?php echo htmlentities($tmp->port_number, ENT_QUOTES); ?></td>
+			<td class="timeout hidden"><?php echo htmlentities($tmp->timeout, ENT_QUOTES); ?></td>
+			<td class="phone_number"><?php echo htmlentities(phone_format_human($tmp->phone_number), ENT_QUOTES); ?></td>
+			<td class="respond_message hidden"><?php echo htmlentities($tmp->respond_message, ENT_QUOTES); ?></td>
 			<?php if ($tmp->status == 'false'):?>
 			<td><a href="<?php echo site_url(); ?>/plugin/server_alert/change_state/<?php echo $tmp->id_server_alert; ?>" class="release"><img class="ui-icon ui-icon-locked" title="Release state" /></a></td>
 			<?php
@@ -107,5 +107,5 @@
 
 	</table>
 	<br />
-	<?php echo '<div class="note">Total Time Interval : '.$time_interval.' seconds</div>'; ?>
+	<?php echo '<div class="note">Total Time Interval : '.htmlentities($time_interval, ENT_QUOTES).' seconds</div>'; ?>
 </div>

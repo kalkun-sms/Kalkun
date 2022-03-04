@@ -26,13 +26,13 @@ echo form_dropdown('email_forward', $email_forward, $email_forward_act);
 				<td>
 					<input type="text" name="email_id" class="email" value="<?php if ($settings->num_rows() === 1)
 {
-	echo $settings->row('email_id');
+	echo htmlentities($settings->row('email_id'), ENT_QUOTES);
 }?>" />
 				</td>
 			</tr>
 		</table>
 		<br />
-		<input type="hidden" name="mode" value="<?php echo $mode;?>" />
+		<input type="hidden" name="mode" value="<?php echo htmlentities($mode, ENT_QUOTES);?>" />
 		<div align="center"><input type="submit" id="submit" value="<?php echo tr('Save'); ?>" /></div>
 		<?php echo form_close();?>
 

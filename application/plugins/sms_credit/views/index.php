@@ -7,7 +7,7 @@
 			<?php echo form_open('plugin/sms_credit', array('class' => 'search_form')); ?>
 			<input type="text" name="search_name" size="20" class="search_name" value="<?php if (isset($query))
 {
-	echo $query;
+	echo htmlentities($query, ENT_QUOTES);
 }?>" />
 			<?php echo form_close(); ?>
 			&nbsp;
@@ -20,13 +20,13 @@
 		<?php $this->load->view('navigation');?>
 		<table>
 			<?php foreach ($users->result() as $tmp): ?>
-			<tr id="<?php echo $tmp->id_user;?>">
+			<tr id="<?php echo htmlentities($tmp->id_user, ENT_QUOTES);?>">
 				<td>
 					<div class="two_column_container contact_list">
 						<div class="left_column">
 							<div id="pbkname">
-								<span style="font-weight: bold;"><?php echo $tmp->realname;?></span>
-								<?php if ( ! is_null($tmp->template_name)): echo "<sup>( {$tmp->template_name} )</sup>"; ?>
+								<span style="font-weight: bold;"><?php echo htmlentities($tmp->realname, ENT_QUOTES);?></span>
+								<?php if ( ! is_null($tmp->template_name)): echo '<sup>( '.htmlentities($tmp->template_name, ENT_QUOTES).' )</sup>'; ?>
 								<?php else: echo '<sup>( '.tr('No package').' )</sup>'; ?>
 								<?php endif;?>
 							</div>
@@ -41,9 +41,9 @@
 						</div>
 
 						<div class="hidden">
-							<span class="id_package"><?php echo $tmp->id_credit_template;?></span>
-							<span class="package_start"><?php echo $tmp->valid_start;?></span>
-							<span class="package_end"><?php echo $tmp->valid_end;?></span>
+							<span class="id_package"><?php echo htmlentities($tmp->id_credit_template, ENT_QUOTES);?></span>
+							<span class="package_start"><?php echo htmlentities($tmp->valid_start, ENT_QUOTES);?></span>
+							<span class="package_end"><?php echo htmlentities($tmp->valid_end, ENT_QUOTES);?></span>
 						</div>
 					</div>
 				</td>
@@ -81,7 +81,7 @@ echo form_dropdown('level', $level, 'user', $option);
 		<?php
 foreach ($packages->result_array() as $row)
 {
-	$package[$row['id_credit_template']] = $row['template_name'];
+	$package[$row['id_credit_template']] = htmlentities($row['template_name'], ENT_QUOTES);
 }
 $option = 'class="text ui-widget-content ui-corner-all"';
 echo form_dropdown('package', $package, '', $option);
@@ -107,7 +107,7 @@ echo form_dropdown('package', $package, '', $option);
 		<?php
 foreach ($packages->result_array() as $row)
 {
-	$package[$row['id_credit_template']] = $row['template_name'];
+	$package[$row['id_credit_template']] = htmlentities($row['template_name'], ENT_QUOTES);
 }
 $option = 'id="edit_id_package" class="text ui-widget-content ui-corner-all"';
 echo form_dropdown('package', $package, '', $option);

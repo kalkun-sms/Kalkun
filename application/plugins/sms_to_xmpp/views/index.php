@@ -30,6 +30,6 @@
 
 		<?php if ($xmpp):?>
 		<h4>XMPP Account:</h4>
-		<p><?php echo $xmpp['xmpp_username'];?></p>
+		<p><?php echo htmlentities($xmpp['xmpp_username'], ENT_QUOTES);?></p>
 		<?php endif;?>
 	</div>

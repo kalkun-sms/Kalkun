@@ -38,26 +38,24 @@
 			<th class="nice-table-right" colspan="2">Control</th>
 		</tr>
 
-		<?php
-		if ($whitelist->num_rows() === 0)
-		{
-			echo '<tr><td colspan="5" style="border-left: 1px solid #000; border-right: 1px solid #000;">No whitelist number found.</td></tr>';
-		}
-		else
-		{
+		<?php if ($whitelist->num_rows() === 0): ?>
+		<tr>
+			<td colspan="5" style="border-left: 1px solid #000; border-right: 1px solid #000;">No whitelist number found.</td>
+		</tr>
+		<?php else:
 			foreach ($whitelist->result() as $tmp):
 			?>
-		<tr id="<?php echo $tmp->id_whitelist; ?>">
-			<td class="nice-table-left"><?php echo $number; ?></td>
-			<td class="phone_number"><?php echo $tmp->match; ?></td>
+		<tr id="<?php echo htmlentities($tmp->id_whitelist, ENT_QUOTES); ?>">
+			<td class="nice-table-left"><?php echo htmlentities($number, ENT_QUOTES); ?></td>
+			<td class="phone_number"><?php echo htmlentities($tmp->match, ENT_QUOTES); ?></td>
 			<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
-			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/whitelist_number/delete/<?php echo $tmp->id_whitelist; ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
+			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/whitelist_number/delete/<?php echo htmlentities($tmp->id_whitelist, ENT_QUOTES); ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 		</tr>
 
 		<?php
 			$number++;
 			endforeach;
-		}
+		endif;
 		?>
 		<tr>
 			<th colspan="5" class="nice-table-footer">

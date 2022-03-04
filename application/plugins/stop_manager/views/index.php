@@ -6,7 +6,7 @@
 		<div id="window_title_left"><?php echo tr('Stop Manager records'); ?></div>
 		<div id="window_title_right">
 			<?php echo form_open('plugin/stop_manager', array('class' => 'search_form')); ?>
-			<input type="text" name="search_name" size="20" class="search_name" placeholder="<?php echo tr('Search'); ?>" value="<?php echo $this->input->post('search_name');?>" />
+			<input type="text" name="search_name" size="20" class="search_name" placeholder="<?php echo tr('Search'); ?>" value="<?php echo htmlentities($this->input->post('search_name'), ENT_QUOTES);?>" />
 			<?php echo form_close(); ?>
 			&nbsp;
 			<a href="<?php echo current_url();?>" class="nicebutton"><?php echo tr('Reset search'); ?></a>
@@ -26,32 +26,32 @@
 				<th class="nice-table-right" colspan="1"><?php echo tr('Control'); ?></th>
 			</tr>
 
-			<?php
-		if ($stoplist->num_rows() === 0)
-		{
-			echo '<tr><td colspan="6" style="border-left: 1px solid #000; border-right: 1px solid #000;">No STOP record found.</td></tr>';
-		}
-		else
-		{
-			foreach ($stoplist->result() as $tmp):
+			<?php if ($stoplist->num_rows() === 0): ?>
+			<tr>
+				<td colspan="6" style="border-left: 1px solid #000; border-right: 1px solid #000;">No STOP record found.</td>
+			</tr>
+			<?php else:
+				foreach ($stoplist->result() as $tmp):
 			?>
-			<tr id="<?php echo $tmp->id_stop_manager; ?>">
-				<td class="nice-table-left"><?php echo $number; ?></td>
-				<td class="destination_number"><?php echo phone_format_human($tmp->destination_number); ?></td>
-				<td class="stop_type"><?php echo $tmp->stop_type; ?></td>
-				<td class="stop_message"><?php echo $tmp->stop_message; ?></td>
-				<td class="reg_date"><?php echo $tmp->reg_date; ?></td>
+			<tr id="<?php echo htmlentities($tmp->id_stop_manager, ENT_QUOTES); ?>">
+				<td class="nice-table-left"><?php echo htmlentities($number, ENT_QUOTES); ?></td>
+				<td class="destination_number"><?php echo htmlentities(phone_format_human($tmp->destination_number), ENT_QUOTES); ?></td>
+				<td class="stop_type"><?php echo htmlentities($tmp->stop_type, ENT_QUOTES); ?></td>
+				<td class="stop_message"><?php echo htmlentities($tmp->stop_message, ENT_QUOTES); ?></td>
+				<td class="reg_date"><?php echo htmlentities($tmp->reg_date, ENT_QUOTES); ?></td>
 				<td class="nice-table-right">
-					<?php if ($tmp->destination_number && $tmp->stop_type) { ?>
-					<a href="<?php echo site_url();?>/plugin/stop_manager/delete/<?php echo urlencode(base64_encode($tmp->destination_number));?>/<?php echo urlencode(base64_encode($tmp->stop_type));?>"><img class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>" /></a>
-					<?php } ?>
+					<?php if ($tmp->destination_number && $tmp->stop_type): ?>
+					<a href="<?php echo site_url();?>/plugin/stop_manager/delete/<?php echo urlencode(base64_encode($tmp->destination_number));?>/<?php echo urlencode(base64_encode($tmp->stop_type));?>">
+						<img class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>" />
+					</a>
+					<?php endif; ?>
 				</td>
 			</tr>
 
 			<?php
 			$number++;
 			endforeach;
-		}
+		endif;
 		?>
 			<tr>
 				<th colspan="6" class="nice-table-footer">
