@@ -183,8 +183,7 @@ class Gammu_model extends MY_Model {
 		}
 		else
 		{
-			echo 'Parameter invalid.';
-			return array('status' => 'Parameter invalid.');
+			show_error("Parameter invalid.", 400);
 		}
 	}
 
