@@ -12,14 +12,14 @@
 
 		// Delete messages
 		$(document).on('click', "a.global_delete", action_delete = function() {
-			var count = $("input:checkbox:checked").length;
+			var count = $("input.select_message:checked:visible").length;
 			if (count == 0) {
 				$('.notification_area').text("<?php echo tr_addcslashes('"', 'No item selected.'); ?>");
 				$('.notification_area').show();
 			} else {
 				var notif = "<?php echo tr_addcslashes('"', '{0} message(s) deleted'); ?>";
 				notif = notif.replace('{0}', count);
-				$("input.select_message:checked").each(function() {
+				$("input.select_message:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					id_access = '#item_source' + $(this).val();
 					item_folder = $(id_access).val();
@@ -49,7 +49,7 @@
 		 *
 		 */
 		$(document).on('click', "a.recover_button", action_recover = function() {
-			var count = $("input.select_message:checkbox:checked:visible").length;
+			var count = $("input.select_message:checked:visible").length;
 			if (count == 0) {
 				show_notification("<?php echo tr_addcslashes('"', 'No item selected.')?>");
 			} else {
@@ -76,14 +76,14 @@
 
 		// Move messages
 		$(document).on('click', ".move_to", function() {
-			var count = $("input:checkbox:checked").length;
+			var count = $("input.select_message:checked:visible").length;
 			if (count == 0) {
 				$("#movetodialog").dialog('close');
 				show_notification("<?php echo tr_addcslashes('"', 'No item selected.'); ?>");
 			} else {
 				var id_folder = $(this).attr('id');
 				$("#movetodialog").dialog('close');
-				$("input.select_message:checked").each(function() {
+				$("input.select_message:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					id_access = '#item_source' + $(this).val();
 					item_folder = $(id_access).val();
@@ -261,7 +261,7 @@
 		<?php if ($this->uri->segment(4) != '6' && $this->uri->segment(6) != '6' && ! is_ajax()) : ?>
 		// report spam
 		$(document).on('click', ".spam_button", function() {
-			var count = $("input:checkbox:checked:visible").length;
+			var count = $("input.select_message:checked:visible").length;
 
 			if (count == 0) {
 				show_notification("<?php echo tr_addcslashes('"', 'No item selected.'); ?>");
@@ -286,7 +286,7 @@
 		<?php else: ?>
 		//report ham
 		$(document).on('click', ".ham_button", function() {
-			var count = $("input:checkbox:checked:visible").length;
+			var count = $("input.select_message:checked:visible").length;
 			if (count == 0) {
 				show_notification("<?php echo tr_addcslashes('"', 'No item selected.'); ?>");
 			} else {
@@ -374,7 +374,7 @@
 
 		//resend_bulk
 		$(document).on('click', ".resend_bulk", function() {
-			var count = $("input:checkbox:checked").length;
+			var count = $("input.select_message:checked:visible").length;
 			if (count == 0) {
 				$('.notification_area').text("<?php echo tr_addcslashes('"', 'No item selected.'); ?>");
 				$('.notification_area').show();
@@ -397,7 +397,7 @@
 						"<?php echo tr_addcslashes('"', 'Continue'); ?>": function() {
 							delete_dup_status = $("#delete_dup").is(":checked");
 
-							$("input.select_message:checked").each(function() {
+							$("input.select_message:checked:visible").each(function() {
 								DestinationNumber = $(this).parents('div:eq(0)').children('input.item_number').val();
 								TextDecoded = $(this).parents('div:eq(1)').children('div.message_content').text();
 								ID = $(this).parents('div:eq(1)').children().children('input.select_message').attr('id');
