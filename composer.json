@@ -10,7 +10,15 @@
         }
     ],
     "require": {
-        "codeigniter/framework": "^3.1.13",
+        "php": ">5.6",
+        "ext-ctype": "*",
+        "ext-curl": "*",
+        "ext-hash": "*",
+        "ext-intl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-session": "*",
+        "codeigniter/framework": ">=3.1.13 <3.2",
         "paragonie/random_compat": ">=2",
         "giggsey/libphonenumber-for-php": "^8.12",
         "league/csv": "^8.2 || ^9.5",
@@ -23,5 +31,11 @@
         "squizlabs/php_codesniffer": "^3.6",
         "friendsofphp/php-cs-fixer": "^3.3",
         "ise/php-codingstandards-codeigniter": "^1.0"
+    },
+    "suggest": {
+        "ext-ldap": "For phonebook_ldap plugin",
+        "ext-mysqli": "To connect to a MySQL database",
+        "ext-pgsql": "To connect to a PostgreSQL database",
+        "ext-sqlite3": "To connect to a SQLite3 database"
     }
 }

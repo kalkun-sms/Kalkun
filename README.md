@@ -6,19 +6,26 @@ Documentation : http://github.com/back2arie/Kalkun/wiki/
 
 ## Requirements
 You need to install and configure this first:
-* apache 2.x.x
-* PHP 7.x.x (CodeIgniter3 requires 5.6 (or at very least 5.3.6) but we suggest >=7. If you use php>=5.6 and it works, please report back so that we update the minimal requirements)
-* PHP extensions:
-  * mysql/pgsql/pdo_sqlite
-  * session
-  * hash
-  * json
-  * mbstring
-  * APC or APCu
-* PHP-CLI
-* PHP Composer
-* MySQL 5.5.3+ or PostgreSQL or SQLite3
-* gammu-smsd (make sure it is already running and configured)
+* HTTP Server (any of Apache httpd, Lighttpd, NGINX, IIS...)
+* [Composer](https://getcomposer.org/) (Dependency Manager for PHP)
+* [PHP](https://www.php.net) >=5.6, >=7, >=8
+* PHP-CLI (command line interface)
+* PHP extensions (only those that are used only by plugins are optional if you don't install the plugin)
+
+| PHP Extension                   | CI3                             | Kalkun 'Core'                   | Kalkun Plugins                  |
+| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+| ctype                           | X                               |                                 |                                 |
+| curl                            |                                 | X                               | X                               |
+| hash                            | X                               |                                 | sms\_to\_twitter, sms\_to\_xmpp |
+| intl                            |                                 | X                               | X                               |
+| json                            |                                 | X                               | X                               |
+| ldap                            |                                 |                                 | phonebook\_ldap                 |
+| mbstring                        | (X)                             | X                               |                                 |
+| session                         | X                               | X                               |                                 |
+| mysqli or pgsql or sqlite3      | X                               | X                               | X                               |
+
+* MySQL/MariadDB 5.5.3+ (having full UTF-8 support) or PostgreSQL or SQLite3
+* [Gammu SMSD](https://wammu.eu/smsd/) (make sure it is already running and configured)
 
 ## Installation
 
