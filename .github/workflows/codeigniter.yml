@@ -116,14 +116,14 @@ jobs:
         run: |
           git checkout composer.lock
           git status
-          ./fix_code_style.sh strict
+          utils/fix_code_style.sh strict
       - id: check_style
         name: Check that code follows Guidelines
         if: always()
         run: |
           git checkout composer.lock
           git status
-          ./fix_code_style.sh git-diff
+          utils/fix_code_style.sh git-diff
       - name: Archive artifacts
         if: always()
         uses: actions/upload-artifact@v2
