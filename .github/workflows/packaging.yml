@@ -65,7 +65,7 @@ jobs:
 
           mkdir -p ~/deps
           cd ~/deps
-          dget -du https://mentors.debian.net/debian/pool/main/p/php-codeigniter-framework/php-codeigniter-framework_3.1.11-1.dsc
+          dget -du https://mentors.debian.net/debian/pool/main/p/php-codeigniter-framework/php-codeigniter-framework_3.1.13-1.dsc
           dget -du https://mentors.debian.net/debian/pool/main/p/php-league-csv/php-league-csv_9.8.0-1.dsc
           dget -du https://mentors.debian.net/debian/pool/main/p/php-datto-json-rpc-http/php-datto-json-rpc-http_5.0.6-1.dsc
           dget -du https://mentors.debian.net/debian/pool/main/p/php-datto-json-rpc/php-datto-json-rpc_6.1.0-1.dsc
