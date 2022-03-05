@@ -7,14 +7,15 @@ Documentation : http://github.com/back2arie/Kalkun/wiki/
 ## Requirements
 You need to install and configure this first:
 * apache 2.x.x
-* PHP 7.x.x (CodeIgniter3 requires 5.6 (or at very least 5.3.6) but we suggest >=7. If you use php>=5.6 and it works, please report back so that we update the minimal requirements)
+* PHP >=5.6, >=7, >=8
 * PHP extensions:
   * mysql/pgsql/pdo_sqlite
-  * session
+  * ctype
   * hash
+  * intl
   * json
   * mbstring
-  * APC or APCu
+  * session
 * PHP-CLI
 * PHP Composer
 * MySQL 5.5.3+ or PostgreSQL or SQLite3

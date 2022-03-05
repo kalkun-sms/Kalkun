@@ -142,19 +142,6 @@
 			$error++;
 		}?></td>
 	</tr>
-
-	<tr>
-		<td colspan="3" class="bottom">APC or APCu - APC User Cache</td>
-		<td class="right bottom"><?php if (extension_loaded('apc') || extension_loaded('apcu'))
-		{
-			echo '<span class="green">'.tr('Found').'</span>';
-		}
-		else
-		{
-			echo '<span class="orange">'.tr('Missing').' (not mandatory)</span>';
-			//$error++;
-		}?></td>
-	</tr>
 </table>
 
 <p>&nbsp;</p>
