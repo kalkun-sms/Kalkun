@@ -18,13 +18,13 @@
 <div id="window_container">
 	<div id="window_title"><?php echo $title; ?></div>
 	<div id="window_content">
-		<?php if (!$status):?>
+		<?php if ( ! $status):?>
 		<a href="#" class="nicebutton" id="addwpblogbutton">&#43; Add Wordpress blog</a>
 		<?php else:?>
 		<a href="<?php echo site_url('plugin/sms_to_wordpress/delete')?>" class="nicebutton">&#43; Delete Wordpress blog</a>
 		<?php endif;?>
 
-		<?php if($wp):?>
+		<?php if ($wp):?>
 		<h4>Blog URL:</h4>
 		<p><?php echo $wp['wp_url'];?></p>
 		<?php endif;?>
