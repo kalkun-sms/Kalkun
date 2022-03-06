@@ -308,7 +308,6 @@ $lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer
 $lang['Contact updated successfully.'] = 'Contact updated successfully.';
 $lang['Contact added successfully.'] = 'Contact added successfully.';
 // Gammu Model
-$lang['Could not send message. Make sure Gammu path is correctly set.'] = 'Could not send message. Make sure Gammu path is correctly set.';
 $lang['Message queued.'] = 'Message queued.';
 $lang['Parameter invalid.'] = 'Parameter invalid.';
 
@@ -415,3 +414,7 @@ $lang['Value must be a number.'] = 'Value must be a number.';
 $lang['{0} part messages'] = '{0} part messages';
 $lang['Content'] = 'Content';
 $lang['Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.'] = 'Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.';
+$lang['No results for {0}'] = 'No results for {0}';
+$lang['Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'] = 'Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.';
+$lang['Unknown error while sending WAP-LINK.'] = 'Unknown error while sending WAP-LINK.';
+$lang['Group'] = 'Group';
