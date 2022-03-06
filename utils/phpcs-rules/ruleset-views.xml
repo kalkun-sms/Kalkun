@@ -2,18 +2,18 @@
 <ruleset name="CodeIgniter-Kalkun">
     <description>CodeIgniter3 coding standard for Kalkun as described at https://codeigniter.com/userguide3/general/styleguide.html</description>
 
-    <file>../application/plugins/sms_credit/views</file>
-    <file>../application/plugins/sms_to_xmpp/views</file>
-    <file>../application/plugins/server_alert/views</file>
-    <file>../application/plugins/stop_manager/views</file>
-    <file>../application/plugins/sms_to_wordpress/views</file>
-    <file>../application/plugins/sms_to_email/views</file>
-    <file>../application/plugins/sms_member/views</file>
-    <file>../application/plugins/whitelist_number/views</file>
-    <file>../application/plugins/sms_to_twitter/views</file>
-    <file>../application/plugins/blacklist_number/views</file>
-    <file>../application/plugins/soap/views</file>
-    <file>../application/views</file>
+    <file>../../application/plugins/sms_credit/views</file>
+    <file>../../application/plugins/sms_to_xmpp/views</file>
+    <file>../../application/plugins/server_alert/views</file>
+    <file>../../application/plugins/stop_manager/views</file>
+    <file>../../application/plugins/sms_to_wordpress/views</file>
+    <file>../../application/plugins/sms_to_email/views</file>
+    <file>../../application/plugins/sms_member/views</file>
+    <file>../../application/plugins/whitelist_number/views</file>
+    <file>../../application/plugins/sms_to_twitter/views</file>
+    <file>../../application/plugins/blacklist_number/views</file>
+    <file>../../application/plugins/soap/views</file>
+    <file>../../application/views</file>
 
     <rule ref="CodeIgniter">
         <exclude name="CodeIgniter.Files.ClosingLocationComment"/>
