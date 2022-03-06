@@ -5,6 +5,9 @@
 		'uid' => $this->session->userdata('id_user'),
 	])->num_rows(); ?>;
 
+	csrf_name = "<?php echo $this->security->get_csrf_token_name(); ?>";
+	csrf_hash = "<?php echo $this->security->get_csrf_hash() ?>";
+
 	var refreshId = setInterval(function() {
 		$('.modem_status').load('<?php echo site_url('kalkun/notification')?>', function(responseText, textStatus, jqXHR) {
 			jqXHR
@@ -15,6 +18,15 @@
 		});
 		new_notification('true');
 	}, 60000);
+
+	function update_csrf_hash() {
+		$.get('<?php echo site_url('kalkun/get_csrf_hash')?>', function(data) {
+			csrf_hash = data;
+			$('input[name="' + csrf_name + '"]').each(function() {
+				$(this).val(csrf_hash);
+			});
+		});
+	}
 
 	function play_notification_sound() {
 		// Use HTMLAudioElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
