@@ -55,21 +55,6 @@ class Kalkun extends MY_Controller {
 	// --------------------------------------------------------------------
 
 	/**
-	 * About
-	 *
-	 * Display about page
-	 *
-	 * @access	public
-	 */
-	function about()
-	{
-		$data['main'] = 'main/about';
-		$this->load->view('main/layout', $data);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	 * Get Statistic
 	 *
 	 * Get statistic data that used to render the graph
