@@ -42,7 +42,6 @@
 
 	<tr>
 		<td colspan="3">
-			<?php $db_property = get_database_property($database_driver); ?>
 			<?php echo $db_property['human']; ?> <i>(Read from database configuration)</i>
 		</td>
 		<td class="right">

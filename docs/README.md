@@ -108,15 +108,15 @@ github actions page:
           1. Launch http://localhost/kalkun/index.php/install, and follow instruction there
           1. Finally delete file /var/www/html/kalkun/*install* in case the installer didn't do so.
         - Manual Install 
-          1. Import sql file located in kalkun/media/db/ to kalkun database.
-        
+          1. Import sql file located in `application/sql/DB_ENGINE` to kalkun database.
+
              For MySQL
              ```
-             mysql -u username -p kalkun < /var/www/html/kalkun/media/db/mysql_kalkun.sql
+             mysql -u username -p kalkun < /var/www/html/kalkun/application/sql/DB_ENGINE/kalkun.sql
              ```
              For PostgreSQL
              ```
-             psql -U username -h localhost kalkun < /var/www/html/kalkun/media/db/pgsql_kalkun.sql
+             psql -U username -h localhost kalkun < /var/www/html/kalkun/application/sql/DB_ENGINE/kalkun.sql
              ```
            2. Delete the file /var/www/html/kalkun/*install* 
            
