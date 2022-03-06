@@ -58,4 +58,3 @@ $route['translate_uri_dashes'] = FALSE;
 $route['logout'] = 'login/logout';
 $route['plugin/(.+)'] = '$1';
 $route['settings/(:any)'] = 'kalkun/settings/$1';
-$route['about'] = 'kalkun/about';
