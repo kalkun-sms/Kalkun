@@ -18,26 +18,26 @@
  * @subpackage	Plugin
  * @category	Models
  */
-class Sms_to_wordpress_model extends CI_Model {
-	
+class Sms_to_wordpress_model extends CI_Model
+{
 	function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	function check_status($uid)
 	{
 		$exist = FALSE;
 		$this->db->from('plugin_sms_to_wordpress');
 		$this->db->where('id_user', $uid);
-		
+
 		if ($this->db->count_all_results() === 1)
 		{
 			$exist = TRUE;
 		}
 		return $exist;
 	}
-	
+
 	function get_wp($uid)
 	{
 		$secret = FALSE;
@@ -52,7 +52,7 @@ class Sms_to_wordpress_model extends CI_Model {
 		}
 		return $secret;
 	}
-	
+
 	function get_wp_url_by_phone($number)
 	{
 		$secret = FALSE;
@@ -65,7 +65,7 @@ class Sms_to_wordpress_model extends CI_Model {
 		}
 		return $secret;
 	}
-	
+
 	function save_wp()
 	{
 		$this->load->library('encryption');
@@ -81,11 +81,9 @@ class Sms_to_wordpress_model extends CI_Model {
 		$this->db->set('id_user', $this->session->userdata('id_user'));
 		$this->db->insert('plugin_sms_to_wordpress');
 	}
-	
+
 	function delete_wp($uid)
 	{
-		$this->db->delete('plugin_sms_to_wordpress', array('id_user' => $uid)); 
+		$this->db->delete('plugin_sms_to_wordpress', array('id_user' => $uid));
 	}
-	
 }
-
