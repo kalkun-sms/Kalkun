@@ -3,10 +3,8 @@
 $finder = PhpCsFixer\Finder::create()
     //->notPath('file.php')
     ->exclude('libraries')
-    ->exclude('plugins/jsonrpc/libraries/')
     ->exclude('plugins/rest_api/libraries/')
     ->exclude('plugins/sms_to_twitter/libraries/')
-    ->exclude('plugins/sms_to_wordpress/')
     ->exclude('plugins/sms_to_xmpp/libraries/abhinavsingh-JAXL-5829c3b/')
     ->exclude('plugins/soap/libraries/')
     ->exclude('tests/mocks/libraries/')
@@ -27,35 +25,6 @@ $finder = PhpCsFixer\Finder::create()
     //->notPath('config/routes.php')
     ->notPath('config/smileys.php')
     ->notPath('config/user_agents.php')
-
-    ->notPath('views/')  #Exclude all paths that contain "views/"
     ->in('application')
     //->in(__DIR__)
-;
-
-$config = new PhpCsFixer\Config();
-return $config
-    ->setIndent("\t") // As per CI3 coding style
-    ->setLineEnding("\n") // As per CI3 coding style
-    ->setRules([
-        'no_alternative_syntax' => true,
-
-        // Spaces
-        'encoding' => true,
-        'indentation_type' => true,
-        'line_ending' => true,
-        'no_trailing_whitespace' => true,
-        'no_whitespace_in_blank_line' => true,
-        'single_blank_line_at_eof' => true,
-        'no_trailing_whitespace_in_comment' => true,
-
-        'array_indentation' => true,
-        'no_whitespace_before_comma_in_array' => true,
-        'whitespace_after_comma_in_array' => true,
-        'trim_array_spaces' => true,
-        'no_spaces_around_offset' => true,
-        'no_blank_lines_after_class_opening' => true
-    ])
-    ->setFinder($finder)
-
 ;

@@ -20,14 +20,14 @@
  */
 include_once(APPPATH.'plugins/Plugin_controller.php');
 
-class Sms_to_wordpress extends Plugin_controller {
-	
+class Sms_to_wordpress extends Plugin_controller
+{
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->model('sms_to_wordpress_model');
 	}
-	
+
 	function index()
 	{
 		$data['title'] = 'Wordpress Blog Status';
@@ -36,7 +36,7 @@ class Sms_to_wordpress extends Plugin_controller {
 		$data['wp'] = $this->sms_to_wordpress_model->get_wp($this->session->userdata('id_user'));
 		$this->load->view('main/layout', $data);
 	}
-	
+
 	function add()
 	{
 		if ($_POST)
@@ -45,10 +45,10 @@ class Sms_to_wordpress extends Plugin_controller {
 			redirect('sms_to_wordpress');
 		}
 	}
-	
+
 	function delete()
 	{
 		$this->sms_to_wordpress_model->delete_wp($this->session->userdata('id_user'));
-		redirect('sms_to_wordpress');	
+		redirect('sms_to_wordpress');
 	}
 }
