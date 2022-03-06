@@ -19,6 +19,11 @@
 #
 #         Apply the fixes to the project (changes won't be commited)
 #
+#
+#
+#   /!\ THIS MUST BE RUN FROM THE ROOT DIR OF THE PROJECT
+#
+#
 
 if [[ "$1" == "git-co" ]]; then
   DO_GIT_COMMIT=1
@@ -39,8 +44,8 @@ else
   DO_GIT_DIFF=0
 fi
 
-CS_FIXER_CONF_DIR=.php-cs-fixer-configs
-CS_RULESSET_DIR=.phpcs-rules
+CS_FIXER_CONF_DIR=utils/php-cs-fixer-configs
+CS_RULESSET_DIR=utils/phpcs-rules
 TMPDIR=$(mktemp -d)
 
 if [[ -v GITHUB_ACTIONS ]]; then

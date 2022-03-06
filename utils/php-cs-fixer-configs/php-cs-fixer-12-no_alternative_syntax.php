@@ -1,37 +1,10 @@
 <?php
 
-$finder = PhpCsFixer\Finder::create()
-    //->notPath('file.php')
-    ->exclude('libraries')
-    ->exclude('plugins/jsonrpc/libraries/')
-    ->exclude('plugins/rest_api/libraries/')
-    ->exclude('plugins/sms_to_twitter/libraries/')
-    ->exclude('plugins/sms_to_wordpress/')
-    ->exclude('plugins/sms_to_xmpp/libraries/abhinavsingh-JAXL-5829c3b/')
-    ->exclude('plugins/soap/libraries/')
-    ->exclude('tests/mocks/libraries/')
-    ->exclude('third_party/')
-    ->notPath('config/autoload.php')
-    ->notPath('config/config.php')
-    ->notPath('config/constants.php')
-    ->notPath('config/database.php')
-    ->notPath('config/doctypes.php')
-    ->notPath('config/foreign_chars.php')
-    ->notPath('config/hooks.php')
-    //->notPath('config/kalkun_settings.php')
-    ->notPath('config/memcached.php')
-    ->notPath('config/migration.php')
-    ->notPath('config/mimes.php')
-    //->notPath('config/plugins.php')
-    ->notPath('config/profiler.php')
-    //->notPath('config/routes.php')
-    ->notPath('config/smileys.php')
-    ->notPath('config/user_agents.php')
+# Get $finder variable
+include_once 'finder.inc.php';
 
-    ->notPath('views/')  #Exclude all paths that contain "views/"
-    ->in('application')
-    //->in(__DIR__)
-;
+// Finder additions for this specific config
+$finder->exclude('views'); // Don't apply it on views for now
 
 $config = new PhpCsFixer\Config();
 return $config
