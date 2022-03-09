@@ -68,14 +68,22 @@
 				$("input.select_message:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post("<?php echo  site_url('messages/move_message') ?>", {
-						type: 'single',
-						current_folder: current_folder,
-						folder: source,
-						id_folder: id_folder,
-						id_message: $(this).val()
-					}, function() {
-						$(message_row).slideUp("slow");
-					});
+							type: 'single',
+							current_folder: current_folder,
+							folder: source,
+							id_folder: id_folder,
+							id_message: $(this).val(),
+							[csrf_name]: csrf_hash,
+						})
+						.done(function() {
+							$(message_row).slideUp("slow");
+						})
+						.fail(function(data) {
+							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
 				var notif = "<?php echo tr_addcslashes('"', '{0} conversation(s) recovered'); ?>"
 				notif = notif.replace('{0}', count);
@@ -97,15 +105,23 @@
 					id_access = '#item_source' + $(this).val();
 					item_folder = $(id_access).val();
 					$.post("<?php echo  site_url('messages/move_message') ?>", {
-						type: 'single',
-						current_folder: current_folder,
-						folder: item_folder,
-						id_folder: id_folder,
-						id_message: $(this).val()
-					}, function() {
-						$(message_row).slideUp("slow");
-						show_notification("<?php echo tr_addcslashes('"', 'Messages moved successfully')?>")
-					});
+							type: 'single',
+							current_folder: current_folder,
+							folder: item_folder,
+							id_folder: id_folder,
+							id_message: $(this).val(),
+							[csrf_name]: csrf_hash,
+						})
+						.done(function() {
+							$(message_row).slideUp("slow");
+							show_notification("<?php echo tr_addcslashes('"', 'Messages moved successfully')?>")
+						})
+						.fail(function(data) {
+							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
 			}
 		});
