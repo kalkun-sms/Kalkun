@@ -272,7 +272,7 @@ class Gammu_model extends MY_Model {
 		{
 			if ( ! isset($options['search_string']))
 			{
-				die('Nothing to search for.');
+				show_error('Nothing to search for.', 400);
 			}
 		}
 
@@ -478,7 +478,7 @@ class Gammu_model extends MY_Model {
 		// check if it's valid type
 		if ( ! in_array($options['type'], $valid_type))
 		{
-			die('Invalid type request on class '.get_class($this).' function '.__FUNCTION__);
+			show_error('Invalid type request on class '.get_class($this).' function '.__FUNCTION__, 400);
 		}
 
 		// if phone number is set
@@ -852,7 +852,7 @@ class Gammu_model extends MY_Model {
 		// check if it's valid type
 		if ( ! in_array($options['type'], $valid_type))
 		{
-			die('Invalid type request on class '.get_class($this).' function '.__FUNCTION__);
+			show_error('Invalid type request on class '.get_class($this).' function '.__FUNCTION__, 400);
 		}
 
 		$user_id = $this->session->userdata('id_user');
@@ -1524,7 +1524,7 @@ class Gammu_model extends MY_Model {
 					}
 					else
 					{
-						die('Invalid Option');
+						show_error('Invalid Option', 400);
 					}
 				}
 			}

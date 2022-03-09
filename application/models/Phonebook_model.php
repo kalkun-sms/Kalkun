@@ -354,7 +354,7 @@ class Phonebook_model extends MY_Model {
 		//This case probably never happens because it is filtered out in 'application/views/js_init/phonebook/js_phonebook.php'
 		if ($id_group === 'null')
 		{
-			die('Invalid Group ID');
+			show_error('Invalid Group ID', 400);
 		}
 
 		//parse group value
