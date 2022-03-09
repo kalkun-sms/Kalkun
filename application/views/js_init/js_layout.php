@@ -216,6 +216,8 @@
 								.fail(function(data) {
 									$("#compose_sms_container_notif_area").hide();
 									display_error_container(data);
+								}).always(function(data) {
+									update_csrf_hash();
 								});
 						}
 					};
