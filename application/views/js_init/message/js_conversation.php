@@ -305,10 +305,19 @@
 						return;
 					}
 					$.post("<?php echo  site_url('messages/report_spam/spam') ?>", {
-						id_message: $(this).val()
-					}, function() {
-						$(message_row).slideUp("slow");
-					});
+							id_message: $(this).val(),
+							[csrf_name]: csrf_hash,
+						})
+						.done(function() {
+							$(message_row).slideUp("slow");
+						})
+						.fail(function(data) {
+							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
+
 				});
 				show_notification("<?php echo tr_addcslashes('"', 'Spam reported'); ?>")
 			}
@@ -324,11 +333,19 @@
 				$("input.select_message:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post("<?php echo  site_url('messages/report_spam/ham') ?>", {
-						id_message: $(this).val()
-					}, function() {
-						$(message_row).slideUp("slow");
+							id_message: $(this).val(),
+							[csrf_name]: csrf_hash,
+						})
+						.done(function() {
+							$(message_row).slideUp("slow");
 
-					});
+						})
+						.fail(function(data) {
+							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
 				show_notification("<?php echo tr_addcslashes('"', 'Message(s) marked non-spam'); ?>")
 			}
