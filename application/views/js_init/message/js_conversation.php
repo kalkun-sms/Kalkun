@@ -390,7 +390,8 @@
 										validity: '-1',
 										smstype: 'normal',
 										sms_loop: '1',
-										message: TextDecoded
+										message: TextDecoded,
+										[csrf_name]: csrf_hash,
 									})
 									.done(function(data) {
 										show_notification(data.msg, data.type);
@@ -400,16 +401,26 @@
 									.fail(function(data) {
 										display_error_container(data);
 										return;
+									})
+									.always(function(data) {
+										update_csrf_hash();
 									});
 
 								// Delete copy
 								if (delete_dup_status) {
 									dest_url = base + 'sentitems';
 									$.post(dest_url, {
-										type: 'single',
-										id: ID,
-										current_folder: current_folder
-									});
+											type: 'single',
+											id: ID,
+											current_folder: current_folder,
+											[csrf_name]: csrf_hash,
+										})
+										.fail(function(data) {
+											display_error_container(data);
+										})
+										.always(function(data) {
+											update_csrf_hash();
+										});
 								}
 							});
 						},
