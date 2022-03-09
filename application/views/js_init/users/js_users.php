@@ -15,38 +15,43 @@
 				var param1 = $(this).parents("tr:first").attr("id");
 			}
 
-			$("#users_container").load("<?php echo site_url('users/add_user')?>", {
-				'type': type,
-				'param1': param1
-			}, function() {
-				$(this).dialog({
-					title: user_title,
-					closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-					modal: true,
-					show: 'fade',
-					hide: 'fade',
-					buttons: {
-						"<?php echo tr_addcslashes('"', 'Save');?>": function() {
-							if ($("#addUser").valid()) {
-								$.post("<?php echo site_url('users/add_user_process') ?>", $("#addUser").serialize())
-									.done(function(data) {
-										show_notification(data.msg, data.type);
-										$("#users_container").dialog("destroy");
-									})
-									.fail(function(data) {
-										display_error_container(data);
-									});
+			$.get("<?php echo site_url('users/add_user')?>", {
+					'type': type,
+					'param1': param1
+				})
+				.done(function(responseText, textStatus, jqXHR) {
+					$("#users_container").html(responseText);
+					$("#users_container").dialog({
+						title: user_title,
+						closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+						modal: true,
+						show: 'fade',
+						hide: 'fade',
+						buttons: {
+							"<?php echo tr_addcslashes('"', 'Save');?>": function() {
+								if ($("#addUser").valid()) {
+									$.post("<?php echo site_url('users/add_user_process') ?>", $("#addUser").serialize())
+										.done(function(data) {
+											show_notification(data.msg, data.type);
+											$("#users_container").dialog("destroy");
+										})
+										.fail(function(data) {
+											display_error_container(data);
+										});
 
+								}
+								$("#users_list").load(window.location.href);
+							},
+							"<?php echo tr_addcslashes('"', 'Cancel');?>": function() {
+								$(this).dialog('close');
 							}
-							$("#users_list").load(window.location.href);
-						},
-						"<?php echo tr_addcslashes('"', 'Cancel');?>": function() {
-							$(this).dialog('close');
 						}
-					}
+					});
+					$("#users_container").dialog('open');
+				})
+				.fail(function(data) {
+					display_error_container(data);
 				});
-				$("#users_container").dialog('open');
-			});
 			return false;
 		});
 
