@@ -103,6 +103,11 @@ class Install extends CI_Controller {
 		$data['idiom'] = $this->idiom;
 		$data['database_driver'] = $this->db_config['dbdriver'];
 		$data['db_property'] = $this->db_prop;
+		$data['sess_save_path'] = $this->config->item('sess_save_path');
+		if (is_null($data['sess_save_path']))
+		{
+			$data['sess_save_path'] = session_save_path();
+		}
 		$this->load->view('main/install/layout', $data);
 	}
 

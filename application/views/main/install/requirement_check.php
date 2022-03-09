@@ -12,26 +12,18 @@
 
 	<tr>
 		<td>PHP</td>
-		<td>>= 7.0</td>
+		<td>≥ 5.6</td>
 		<td><?php echo PHP_VERSION;?></td>
 		<td class="right">
 			<?php
-			if (version_compare(PHP_VERSION, '7.0', '>='))
+			if (version_compare(PHP_VERSION, '5.6', '>='))
 			{
 				echo '<span class="green">'.tr('Ok').'</span>';
 			}
 			else
 			{
-				if (version_compare(PHP_VERSION, '5.3.6', '>='))
-				{
-					// CI3 recommends 5.6+ (or at very least 5.3.6). We recommend >= 7.0
-					echo '<span class="orange">'.tr('Ok').'</span>';
-				}
-				else
-				{
-					echo '<span class="red">'.tr('Missing').'</span>';
-					$error++;
-				}
+				echo '<span class="red">'.tr('Missing').'</span>';
+				$error++;
 			}
 			?>
 		</td>
@@ -65,8 +57,8 @@
 	</tr>
 
 	<tr>
-		<td colspan="3">Session - Session Handling</td>
-		<td class="right"><?php if (extension_loaded('session'))
+		<td colspan="3">Ctype - Character type checking</td>
+		<td class="right"><?php if (extension_loaded('ctype'))
 		{
 			echo '<span class="green">'.tr('Found').'</span>';
 		}
@@ -78,8 +70,8 @@
 	</tr>
 
 	<tr>
-		<td colspan="3">Intl - Internationalization</td>
-		<td class="right"><?php if (extension_loaded('intl'))
+		<td colspan="3">cURL - Client URL Library</td>
+		<td class="right"><?php if (extension_loaded('curl'))
 		{
 			echo '<span class="green">'.tr('Found').'</span>';
 		}
@@ -93,6 +85,19 @@
 	<tr>
 		<td colspan="3">HASH - HASH Message Digest Framework</td>
 		<td class="right"><?php if (extension_loaded('hash'))
+		{
+			echo '<span class="green">'.tr('Found').'</span>';
+		}
+		else
+		{
+			echo '<span class="red">'.tr('Missing').'</span>';
+			$error++;
+		}?></td>
+	</tr>
+
+	<tr>
+		<td colspan="3">Intl - Internationalization</td>
+		<td class="right"><?php if (extension_loaded('intl'))
 		{
 			echo '<span class="green">'.tr('Found').'</span>';
 		}
@@ -130,8 +135,8 @@
 	</tr>
 
 	<tr>
-		<td colspan="3">Ctype - Character type checking</td>
-		<td class="right"><?php if (extension_loaded('ctype'))
+		<td colspan="3">Session - Session Handling</td>
+		<td class="right"><?php if (extension_loaded('session'))
 		{
 			echo '<span class="green">'.tr('Found').'</span>';
 		}
@@ -141,6 +146,25 @@
 			$error++;
 		}?></td>
 	</tr>
+
+	<?php if (extension_loaded('session') && $this->config->item('sess_driver') === 'files'): ?>
+	<tr>
+		<td colspan="3" class="bottom">Session save path: <code><?php echo $sess_save_path; ?></code><br />
+			<?php if ( ! is_writable($sess_save_path)): ?>
+			→ Set a correct value for '<code>sess_save_path</code>' in the '<code>config.php</code>' file.
+			<?php endif; ?></td>
+		<td colspan="1" class="bottom right">
+			<?php if (is_writable($sess_save_path)):
+		echo '<span class="green">'.tr('Writable').'</span>';
+		else:
+		echo '<span class="red">'.tr('Read-only').'</span>';
+		$error++;
+		endif;
+		?>
+		</td>
+	</tr>
+	<?php endif; ?></td>
+
 </table>
 
 <p>&nbsp;</p>
