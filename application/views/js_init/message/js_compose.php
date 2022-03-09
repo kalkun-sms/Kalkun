@@ -127,7 +127,7 @@
 				// show loading animation
 				$("#personvalue_tags_tag").addClass("processing_image");
 
-				$.post("<?php echo site_url('phonebook/get_phonebook/').'/'.(isset($source) ? $source : '');?>", {
+				$.get("<?php echo site_url('phonebook/get_phonebook/').'/'.(isset($source) ? $source : '');?>", {
 						q: value,
 						output_format: "tagInput"
 					})
