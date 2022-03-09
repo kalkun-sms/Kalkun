@@ -33,12 +33,15 @@ if ($this->uri->segment(2) == 'my_folder')
 
 <!-- Rename Folder Dialog -->
 <div id="renamefolderdialog" title="<?php echo tr('Rename folder');?>" class="dialog">
-	<form class="renamefolderform" method="post" action="<?php echo site_url();?>/kalkun/rename_folder">
-		<label for="name"><?php echo tr('Folder name');?></label>
-		<input type="hidden" name="id_folder" value="<?php echo htmlentities($this->uri->segment(4), ENT_QUOTES);?>" />
-		<input type="hidden" name="source_url" value="<?php echo htmlentities($this->uri->uri_string(), ENT_QUOTES);?>" />
-		<input type="text" name="edit_folder_name" id="edit_folder_name" class="text ui-widget-content ui-corner-all" />
-	</form>
+	<?php
+	$this->load->helper('form');
+	echo form_open('kalkun/rename_folder', array('class' => 'renamefolderform'));
+?>
+	<label for="name"><?php echo tr('Folder name');?></label>
+	<input type="hidden" name="id_folder" value="<?php echo htmlentities($this->uri->segment(4), ENT_QUOTES);?>" />
+	<input type="hidden" name="source_url" value="<?php echo htmlentities($this->uri->uri_string(), ENT_QUOTES);?>" />
+	<input type="text" name="edit_folder_name" id="edit_folder_name" class="text ui-widget-content ui-corner-all" />
+	<?php echo form_close(); ?>
 </div>
 
 <!-- Delete Folder Confirmation -->
