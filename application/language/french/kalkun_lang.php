@@ -58,7 +58,6 @@ $lang['Move to'] = 'Déplacer';
 $lang['Select folder'] = 'Sélectionner le dossier';
 $lang['Delete'] = 'Supprimer';
 $lang['Click to delete this folder'] = 'Cliquer pour supprimer ce dossier';
-$lang['permanently'] = 'définitivement';
 $lang['Recover'] = 'Récupérer';
 
 $lang['Send date'] = "Date d'envoi";
@@ -160,9 +159,6 @@ $lang['Should be a valid URL'] = "L'URL doit étre valide";
 $lang['Import from file'] = 'Importer à partir du fichier';
 
 // Messages controller
-$lang['Login successful. But {0} data lost during login process.'] = 'Connexion réussie. Mais données {0} perdues durant le processus de login.';
-$lang['Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.'] = 'Veuillez <a href="{0}" onclick="goBackToForm()">retourner à votre formulaire</a> et le soumettre à nouveau.';
-$lang['Login successful. Resubmitting form.'] = 'Connexion réussie. Le formulaire est à nouveau soumis.';
 $lang['Outgoing SMS disabled.'] = 'SMS sortants désactivés.';
 $lang['A number was found in DND Resitry. SMS sending was skipped for it.'] = "Un numéro a été trouvé dans le registre DND. L'envoi est annulé pour celui-ci.";
 $lang['Message delivered successfully to user inbox.'] = "Message placé avec succès dans la boîte de réception de l'utilisateur.";
@@ -282,8 +278,6 @@ $lang['No'] = 'Non';
 $lang['Default'] = 'Par défaut';
 $lang['Delivery Report'] = 'Accusé de réception';
 
-$lang['You are about to resend message to <strong>{0}</strong>.'] = 'Vous êtes sur le point de renvoyer le message au <strong>{0}</strong>.';
-$lang['Message content:'] = 'Contenu du message&nbsp;:';
 $lang['Delete copy (prevents duplicates).'] = 'Supprimer la copie (évite les doublons).';
 $lang['You are about to resend {0} message(s).'] = 'Vous êtes sur le point de renvoyer {0} message(s).';
 
@@ -375,7 +369,6 @@ $lang['Add a new folder'] = 'Ajouter un nouveau dossier';
 $lang['Plugins'] = 'Plugins';
 $lang['No data'] = 'Pas de données';
 $lang['Select field'] = 'Sélectionner le champ';
-$lang['Repost message after login'] = 'Renvoyer le message après connexion';
 $lang['Delete folder'] = 'Supprimer le dossier';
 $lang['Role'] = 'Rôle';
 $lang['Delete users'] = 'Supprimer utilisateurs';
@@ -417,3 +410,5 @@ $lang['No results for {0}'] = 'No results for {0}';
 $lang['Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'] = 'Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.';
 $lang['Unknown error while sending WAP-LINK.'] = 'Unknown error while sending WAP-LINK.';
 $lang['Group'] = 'Group';
+$lang['Delete the original message (prevents duplicates).'] = 'Delete the original message (prevents duplicates).';
+$lang['Delete permanently'] = 'Delete permanently';

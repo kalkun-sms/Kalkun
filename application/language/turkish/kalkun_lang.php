@@ -58,7 +58,6 @@ $lang['Move to'] = 'Tasi suraya';
 $lang['Select folder'] = 'Dosya Seç';
 $lang['Delete'] = 'Sil';
 $lang['Click to delete this folder'] = 'Dosyayi silmek için tikla';
-$lang['permanently'] = 'süresiz';
 $lang['Recover'] = 'Recover';
 
 $lang['Send date'] = 'Gönderim tarihi';
@@ -160,9 +159,6 @@ $lang['Should be a valid URL'] = 'Should be a valid URL';
 $lang['Import from file'] = 'Import from file';
 
 // Messages controller
-$lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
-$lang['Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.'] = 'Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.';
-$lang['Login successful. Resubmitting form.'] = 'Login successful. Resubmitting form.';
 $lang['Outgoing SMS disabled.'] = 'Outgoing SMS disabled.';
 $lang['A number was found in DND Resitry. SMS sending was skipped for it.'] = 'A number was found in DND Resitry. SMS sending was skipped for it.';
 $lang['Message delivered successfully to user inbox.'] = 'Message successfully delivered to user inbox.';
@@ -282,8 +278,6 @@ $lang['No'] = 'Hayir';
 $lang['Default'] = 'Ön tanimli';
 $lang['Delivery Report'] = 'Gönderim Raporu';
 
-$lang['You are about to resend message to <strong>{0}</strong>.'] = 'You are about to resend message to <strong>{0}</strong>.';
-$lang['Message content:'] = 'Message content:';
 $lang['Delete copy (prevents duplicates).'] = 'Delete copy of this message (Prevent Duplicate).';
 $lang['You are about to resend {0} message(s).'] = 'You are about to resend {0} message(s).';
 
@@ -375,7 +369,6 @@ $lang['Add a new folder'] = 'Add a new folder';
 $lang['Plugins'] = 'Plugins';
 $lang['No data'] = 'No data';
 $lang['Select field'] = 'Select field';
-$lang['Repost message after login'] = 'Repost message after login';
 $lang['Delete folder'] = 'Delete folder';
 $lang['Role'] = 'Role';
 $lang['Delete users'] = 'Delete users';
@@ -417,3 +410,5 @@ $lang['No results for {0}'] = 'No results for {0}';
 $lang['Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'] = 'Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.';
 $lang['Unknown error while sending WAP-LINK.'] = 'Unknown error while sending WAP-LINK.';
 $lang['Group'] = 'Group';
+$lang['Delete the original message (prevents duplicates).'] = 'Delete the original message (prevents duplicates).';
+$lang['Delete permanently'] = 'Delete permanently';
