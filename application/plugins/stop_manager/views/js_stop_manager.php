@@ -32,7 +32,7 @@
 					required: true,
 					remote: {
 						url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
-						type: "post",
+						type: "get",
 						data: {
 							phone: function() {
 								return $("#destination_number").val();
