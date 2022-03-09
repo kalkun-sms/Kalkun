@@ -385,12 +385,20 @@
 			$('.loading_area').text("<?php echo tr_addcslashes('"', 'Saving...');?>");
 			$('.loading_area').fadeIn("slow");
 			$.post(dest_url, {
-				'name': name,
-				message: $('#message').val()
-			}, function() {
-				$('.loading_area').fadeOut("slow");
-				$("#canned_response_container").dialog('close');
-			});
+					'name': name,
+					message: $('#message').val(),
+					[csrf_name]: csrf_hash,
+				})
+				.done(function(data) {
+					$('.loading_area').fadeOut("slow");
+					$("#canned_response_container").dialog('close');
+				})
+				.fail(function(data) {
+					display_error_container(data);
+				})
+				.always(function(data) {
+					update_csrf_hash();
+				});
 		}
 	}
 
@@ -398,11 +406,19 @@
 
 		var dest_url = "<?php echo site_url();?>/messages/canned_response/get";
 		$.post(dest_url, {
-			'name': name
-		}, function(data) {
-			$('#message').val(data);
-			$("#canned_response_container").dialog('close');
-		});
+				'name': name,
+				[csrf_name]: csrf_hash,
+			})
+			.done(function(data) {
+				$('#message').val(data);
+				$("#canned_response_container").dialog('close');
+			})
+			.fail(function(data) {
+				display_error_container(data);
+			})
+			.always(function(data) {
+				update_csrf_hash();
+			});
 	}
 
 	function delete_canned_response(name) {
@@ -411,10 +427,18 @@
 		if (!c) return;
 		var dest_url = "<?php echo site_url();?>/messages/canned_response/delete";
 		$.post(dest_url, {
-			'name': name
-		}, function() {
-			update_canned_responses();
-		});
+				'name': name,
+				[csrf_name]: csrf_hash,
+			})
+			.done(function(data) {
+				update_canned_responses();
+			})
+			.fail(function(data) {
+				display_error_container(data);
+			})
+			.always(function(data) {
+				update_csrf_hash();
+			});
 	}
 
 	function update_canned_responses() {
