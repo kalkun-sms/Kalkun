@@ -313,27 +313,18 @@ class Kalkun extends MY_Controller {
 	 * "true" if phone number is valid
 	 * "an error message" if not
 	 */
-	function phone_number_validation($phone_get = NULL, $region_get = NULL)
+	function phone_number_validation()
 	{
 		$result = 'false'; // Default to "false"
 
-		if ($phone_get !== NULL)
-		{
-			$phone = rawurldecode($phone_get);
-			$region = rawurldecode($region_get);
-		}
-		else
-		{
-			$phone = $this->input->post('phone');
-			$region = $this->input->post('region');
-		}
+		$phone = $this->input->get_post('phone');
+		$region = $this->input->get_post('region');
 
 		try
 		{
-
 			// Check if is possible number
 			$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
-			$region = ($region !== NULL) ? $region : $this->Kalkun_model->get_setting()->row('country_code');
+			$region = ( ! empty($region)) ? $region : $this->Kalkun_model->get_setting()->row('country_code');
 			$phoneNumberObject = $phoneNumberUtil->parse($phone, $region);
 			$is_possible = $phoneNumberUtil->isPossibleNumber($phoneNumberObject);
 
