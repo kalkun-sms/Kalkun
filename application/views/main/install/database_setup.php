@@ -27,7 +27,7 @@
 	<?php if ($has_smsd_database): ?>
 	<tr valign="top">
 		<td>Gammu DB version</td>
-		<td><strong><?php echo $this->Kalkun_model->get_gammu_info('db_version')->row('Version'); ?></strong>
+		<td><strong><?php echo htmlentities($this->Kalkun_model->get_gammu_info('db_version')->row('Version'), ENT_QUOTES); ?></strong>
 			<br /><small>Read from your gammu database schema.</small>
 		</td>
 	</tr>

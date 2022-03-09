@@ -115,7 +115,7 @@
 						}
 					}
 				});
-				$("#contact-delete-count").html($("input.select_contact:checked:visible").length);
+				$("#contact-delete-count").text($("input.select_contact:checked:visible").length);
 				$('#confirm_delete_contact_dialog').dialog('open');
 			}
 		});

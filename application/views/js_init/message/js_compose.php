@@ -275,7 +275,7 @@
 			var length = $(this).val().length;
 			max_chars_per_sms = isGSMAlphabet($(this).val()) ? 160 : 70;
 			var message_count = Math.ceil((length + message_length_correction) / max_chars_per_sms);
-			$(this).parent().find('.counter').html(msg.replace("{0}", length).replace("{1}", message_count));
+			$(this).parent().find('.counter').text(msg.replace("{0}", length).replace("{1}", message_count));
 			$(this).keyup(function() {
 				var str = $(this).val();
 				var new_length = str.length;
@@ -284,7 +284,7 @@
 				n = (n) ? n.length : 0;
 				new_length = new_length + n;
 				var message_count = Math.ceil((new_length + message_length_correction) / max_chars_per_sms);
-				$(this).parent().find('.counter').html(msg.replace("{0}", new_length).replace("{1}", message_count));
+				$(this).parent().find('.counter').text(msg.replace("{0}", new_length).replace("{1}", message_count));
 			});
 		});
 
@@ -376,7 +376,7 @@
 		var dest_url = "<?php echo site_url();?>/messages/canned_response/save";
 
 		if (name != null) {
-			$('.loading_area').html("<?php echo tr_addcslashes('"', 'Saving...');?>");
+			$('.loading_area').text("<?php echo tr_addcslashes('"', 'Saving...');?>");
 			$('.loading_area').fadeIn("slow");
 			$.post(dest_url, {
 				'name': name,

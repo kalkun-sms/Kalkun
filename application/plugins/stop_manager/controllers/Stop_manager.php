@@ -35,9 +35,9 @@ class Stop_manager extends Plugin_controller {
 		if ($_POST && is_null($this->input->post('search_name')))
 		{
 			$this->stop_manager_model->add(
-				$this->input->post('destination_number', TRUE),
-				$this->input->post('stop_type', TRUE),
-				$this->input->post('stop_message', TRUE)
+				$this->input->post('destination_number'),
+				$this->input->post('stop_type'),
+				$this->input->post('stop_message')
 			);
 			redirect('plugin/stop_manager');
 		}

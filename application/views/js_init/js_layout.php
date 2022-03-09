@@ -64,11 +64,11 @@
 					var msg = "<?php echo tr_addcslashes('"', 'Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>";
 					show_loading('<span style="white-space: nowrap">' + msg + '</span>');
 					var cntdwn = setInterval(function() {
-						current_val = $('#countdown-count').html();
-						if (current_val > 1) $('#countdown-count').html(current_val - 1);
+						current_val = $('#countdown-count').text();
+						if (current_val > 1) $('#countdown-count').text(current_val - 1);
 						else {
 							clearInterval(cntdwn);
-							$('#retry-progress-display').html("<?php echo tr_addcslashes('"', 'Retrying now'); ?>")
+							$('#retry-progress-display').text("<?php echo tr_addcslashes('"', 'Retrying now'); ?>")
 						}
 					}, 1000);
 					setTimeout(function() {
@@ -84,7 +84,7 @@
 	}
 
 	function show_loading(text) {
-		$('.loading_area').html(text);
+		$('.loading_area').text(text);
 		var content_width = ($('.loading_area').width()) / 2;
 		$('.loading_container').css('margin-left', -content_width);
 		$('.loading_area').fadeIn("slow");
@@ -109,7 +109,7 @@
 				$("#error_container").html($(data.responseText));
 			}
 		} else {
-			$("#error_container").html("<p>" + data.statusText + "</p>");
+			$("#error_container").text(data.statusText);
 		}
 		$("#error_container").dialog({
 			closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
@@ -158,7 +158,7 @@
 						})
 						.fail(function(data) {
 							$('.ui-dialog-buttonpane :button').each(function() {
-								if ($(this).text() == "<?php echo tr_addcslashes('"', 'Sending'); ?> ") $(this).html("<?php echo tr_addcslashes('"', 'Send message'); ?>");
+								if ($(this).text() == "<?php echo tr_addcslashes('"', 'Sending'); ?> ") $(this).text("<?php echo tr_addcslashes('"', 'Send message'); ?>");
 							});
 							display_error_container(data);
 						});

@@ -10,21 +10,21 @@
 	<tr valign="top">
 		<td width="175px"><?php echo tr('Name'); ?></td>
 		<td>
-			<input type="text" name="realname" value="<?php echo $settings->row('realname');?>" />
+			<input type="text" name="realname" value="<?php echo htmlentities($settings->row('realname'), ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
 	<tr valign="top">
 		<td><?php echo tr('Username'); ?></td>
 		<td>
-			<input type="text" name="username" value="<?php echo $settings->row('username');?>" />
+			<input type="text" name="username" value="<?php echo htmlentities($settings->row('username'), ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
 	<tr valign="top">
 		<td><?php echo tr('Telephone number'); ?></td>
 		<td>
-			<input type="text" name="phone_number" value="<?php echo $settings->row('phone_number');?>" />
+			<input type="text" name="phone_number" value="<?php echo htmlentities($settings->row('phone_number'), ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
@@ -42,7 +42,7 @@
 	echo 'checked="checked"';
 } ?> />
 			<label for="signature_on"><?php echo tr('Enable'); ?></label><br />
-			<textarea name="signature" rows="5" cols="40"><?php echo $sig; ?></textarea>
+			<textarea name="signature" rows="5" cols="40"><?php echo htmlentities($sig, ENT_QUOTES); ?></textarea>
 			<div class="note"><?php echo tr('Signature is added at the end of the message.'); ?></div>
 		</td>
 	</tr>

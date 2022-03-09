@@ -124,7 +124,7 @@
 
 			if ($(row).find("div.detail_area").is(":visible")) {
 				$(row).find("div.detail_area").toggle();
-				$(row).find("a.detail_button").html("<?php echo tr_addcslashes('"', 'Show details'); ?>");
+				$(row).find("a.detail_button").text("<?php echo tr_addcslashes('"', 'Show details'); ?>");
 			}
 			return false;
 		});
@@ -159,7 +159,7 @@
 		// refresh
 		$(document).on('click', "a.refresh_button", refresh = function(type) {
 			if (type != 'retry') {
-				$('.loading_area').html("<?php echo tr_addcslashes('"', 'Loading'); ?>");
+				$('.loading_area').text("<?php echo tr_addcslashes('"', 'Loading'); ?>");
 				$('.loading_area').fadeIn("slow");
 			}
 			$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.preg_replace ('/ /', '%20', $this->uri->segment(5)).'/'.$this->uri->segment(6, 0)) ?>", function(response, status, xhr) {
@@ -167,11 +167,11 @@
 					var msg = "<?php echo tr_addcslashes('"', 'Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>";
 					$('.loading_area').html('<span style="white-space: nowrap">' + msg + '</span>');
 					var cntdwn = setInterval(function() {
-						current_val = $('#countdown-count').html();
-						if (current_val > 1) $('#countdown-count').html(current_val - 1);
+						current_val = $('#countdown-count').text();
+						if (current_val > 1) $('#countdown-count').text(current_val - 1);
 						else {
 							clearInterval(cntdwn);
-							$('#retry-progress-display').html("<?php echo tr_addcslashes('"', 'Retrying now'); ?>");
+							$('#retry-progress-display').text("<?php echo tr_addcslashes('"', 'Retrying now'); ?>");
 						}
 					}, 1000);
 					setTimeout(function() {
@@ -212,8 +212,8 @@
 			var row = $(this).parents('div:eq(2)');
 			$(row).find("div.detail_area").toggle();
 
-			if ($(this).text() == "<?php echo tr_addcslashes('"', 'Hide details'); ?>") $(this).html("<?php echo tr_addcslashes('"', 'Show details'); ?>");
-			else $(this).html("<?php echo tr_addcslashes('"', 'Hide details'); ?>");
+			if ($(this).text() == "<?php echo tr_addcslashes('"', 'Hide details'); ?>") $(this).text("<?php echo tr_addcslashes('"', 'Show details'); ?>");
+			else $(this).text("<?php echo tr_addcslashes('"', 'Hide details'); ?>");
 			return false;
 		});
 

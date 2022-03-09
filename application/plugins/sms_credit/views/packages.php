@@ -7,7 +7,7 @@
 			<?php echo form_open('plugin/sms_credit/packages', array('class' => 'search_form')); ?>
 			<input type="text" name="query" class="search_packages" size="20" value="<?php if (isset($query))
 {
-	echo $query;
+	echo htmlentities($query, ENT_QUOTES);
 }?>" />
 			<?php echo form_close(); ?>
 			&nbsp;
@@ -20,15 +20,15 @@
 		<?php $this->load->view('navigation');?>
 		<table>
 			<?php foreach ($packages->result() as $tmp): ?>
-			<tr id="<?php echo $tmp->id_credit_template;?>">
+			<tr id="<?php echo htmlentities($tmp->id_credit_template, ENT_QUOTES);?>">
 				<td>
 					<div class="two_column_container contact_list">
 						<div class="left_column">
 							<div id="pbkname">
-								<span class="hidden id_package"><?php echo $tmp->id_credit_template;?></span>
-								<span class="package_name"><strong><?php echo $tmp->template_name;?></strong></span>
-								<span class="hidden sms_amount"><?php echo $tmp->sms_numbers;?></span>
-								<?php echo "<sup>( {$tmp->sms_numbers} SMS )</sup>"; ?>
+								<span class="hidden id_package"><?php echo htmlentities($tmp->id_credit_template, ENT_QUOTES);?></span>
+								<span class="package_name"><strong><?php echo htmlentities($tmp->template_name, ENT_QUOTES);?></strong></span>
+								<span class="hidden sms_amount"><?php echo htmlentities($tmp->sms_numbers, ENT_QUOTES);?></span>
+								<?php echo '<sup>( '.htmlentities($tmp->sms_numbers, ENT_QUOTES).' SMS )</sup>'; ?>
 							</div>
 						</div>
 

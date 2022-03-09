@@ -33,9 +33,9 @@
 				}
 			}
 	?>
-		<li><?php echo anchor('messages/folder/'.$this->uri->segment(4), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, $theFname), array('class' => 'button', 'id' => 'back_threadlist'));?></li>
+		<li><?php echo anchor('messages/folder/'.$this->uri->segment(4), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, htmlentities($theFname, ENT_QUOTES)), array('class' => 'button', 'id' => 'back_threadlist'));?></li>
 		<?php else: ?>
-		<li><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, humanize($this->Kalkun_model->get_folders('name', $this->uri->segment(6))->row('name'))), array('class' => 'button', 'id' => 'back_threadlist'));?></li>
+		<li><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, htmlentities(humanize($this->Kalkun_model->get_folders('name', $this->uri->segment(6))->row('name'))), ENT_QUOTES), array('class' => 'button', 'id' => 'back_threadlist'));?></li>
 		<li>&nbsp;</li>
 		<?php endif;?>
 		<?php endif;?>
@@ -60,11 +60,13 @@
 		<li><a class="move_to_button button" href="#"><?php echo tr('Move to');?></a></li>
 		<?php endif; ?>
 		<li><a class="global_delete button" href="javascript:void(0);">
-				<?php echo tr('Delete');
-	if ($this->uri->segment(4) == '5' or $this->uri->segment(6) == '5' or $this->uri->segment(4) == '6' or $this->uri->segment(6) == '6')
-	{
-		echo ' '.tr('permanently');
-	}?></a></li>
+				<?php
+	if ($this->uri->segment(4) == '5' or $this->uri->segment(6) == '5' or $this->uri->segment(4) == '6' or $this->uri->segment(6) == '6'):
+		echo tr('Delete permanently');
+	else:
+		echo tr('Delete');
+	endif;
+	?></a></li>
 		<?php if ($this->uri->segment(2) != 'search'): ?>
 		<li>&nbsp;</li>
 		<li><a href="javascript:void(0);" class="refresh_button button"><?php echo tr('Refresh');?></a></li>

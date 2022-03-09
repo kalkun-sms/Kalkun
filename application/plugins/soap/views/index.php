@@ -70,15 +70,15 @@ $this->load->view('js_remote_access');
 		{
 			foreach ($remote_access->result() as $tmp):
 			?>
-		<tr id="<?php echo $tmp->id_remote_access; ?>">
-			<td class="nice-table-left"><?php echo $number; ?></td>
-			<td class="access_name"><?php echo $tmp->access_name; ?></td>
-			<td class="ip_address"><?php echo $tmp->ip_address; ?></td>
-			<td class="token"><?php echo $tmp->token; ?></td>
+		<tr id="<?php echo htmlentities($tmp->id_remote_access, ENT_QUOTES); ?>">
+			<td class="nice-table-left"><?php echo htmlentities($number, ENT_QUOTES); ?></td>
+			<td class="access_name"><?php echo htmlentities($tmp->access_name, ENT_QUOTES); ?></td>
+			<td class="ip_address"><?php echo htmlentities($tmp->ip_address, ENT_QUOTES); ?></td>
+			<td class="token"><?php echo htmlentities($tmp->token, ENT_QUOTES); ?></td>
 			<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status == 'false') ? '' : 'checked=\"checked\"'?> disabled /></td>
 			<td>&nbsp;</td>
 			<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
-			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/soap/delete_remote_access/<?php echo $tmp->id_remote_access; ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
+			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/soap/delete_remote_access/<?php echo htmlentities($tmp->id_remote_access, ENT_QUOTES); ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 		</tr>
 
 		<?php
@@ -135,8 +135,8 @@ $this->load->view('js_remote_access');
 		{
 			?>
 		<tr id="notification">
-			<td class="nice-table-left"><?php echo $notification['number']; ?></td>
-			<td class="notificationvalue"><?php echo $notification['value']; ?></td>
+			<td class="nice-table-left"><?php echo htmlentities($notification['number'], ENT_QUOTES); ?></td>
+			<td class="notificationvalue"><?php echo htmlentities($notification['value'], ENT_QUOTES); ?></td>
 			<td>&nbsp;</td>
 			<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
 			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/delete_notification/"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>

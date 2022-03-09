@@ -16,7 +16,7 @@ if ($total_member == 0):
 echo '<p class="no_content"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('There is no registered member yet').'.</i></p>';
 else:
 foreach ($member as $tmp_member):
-	echo $tmp_member['phone_number'].' - ';
+	echo htmlentities($tmp_member['phone_number'], ENT_QUOTES).' - ';
 endforeach;
 endif;
 ?>

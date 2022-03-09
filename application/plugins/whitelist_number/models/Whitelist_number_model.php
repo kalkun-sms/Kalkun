@@ -49,7 +49,7 @@ class Whitelist_number_model extends CI_Model {
 	function add()
 	{
 		$data = array (
-			'match' => trim($this->input->post('match', TRUE)),
+			'match' => trim($this->input->post('match')),
 		);
 		$this->db->insert('plugin_whitelist_number', $data);
 	}
@@ -57,9 +57,9 @@ class Whitelist_number_model extends CI_Model {
 	function update()
 	{
 		$data = array (
-			'match' => trim($this->input->post('editmatch', TRUE)),
+			'match' => trim($this->input->post('editmatch')),
 		);
-		$this->db->where('id_whitelist', $this->input->post('editid_whitelist', TRUE));
+		$this->db->where('id_whitelist', $this->input->post('editid_whitelist'));
 		$this->db->update('plugin_whitelist_number', $data);
 	}
 
