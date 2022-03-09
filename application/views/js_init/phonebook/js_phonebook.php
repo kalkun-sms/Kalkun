@@ -150,16 +150,24 @@
 					var row = $(this).parents('tr');
 					var id = row.attr('id');
 					$.post(dest_url, {
-						id_pbk: id,
-						id_group: grp_id
-					}, function() {
-						if (i == ($("input.select_contact:checked").length - 1)) // execute only after the last one.
-						{
-							$('.notification_area').text("<?php echo tr_addcslashes('"', 'Updated')?>");
-							$('.notification_area').show();
-							setTimeout("$('.notification_area').fadeOut();", 2000);
-						}
-					});
+							id_pbk: id,
+							id_group: grp_id,
+							[csrf_name]: csrf_hash,
+						})
+						.done(function() {
+							if (i == ($("input.select_contact:checked").length - 1)) // execute only after the last one.
+							{
+								$('.notification_area').text("<?php echo tr_addcslashes('"', 'Updated')?>");
+								$('.notification_area').show();
+								setTimeout("$('.notification_area').fadeOut();", 2000);
+							}
+						})
+						.fail(function(data) {
+							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
 
 			}
