@@ -186,23 +186,29 @@
 
 		<?php endif; ?>
 
-		// Reply SMS
-		$(document).on('click', 'a.reply_button, a.forward_button', message_reply = function() {
+		// Reply, forward, resend SMS
+		$(document).on('click', 'a.reply_button, a.forward_button, a.resend', message_reply = function() {
 			var button = $(this).attr('class');
 			var url = '<?php echo site_url('messages/compose')?>';
-
-			if (button == 'forward_button') {
-				var type = 'forward';
-				var header = $(this).parents('div:eq(1)');
-				var param1 = header.attr('class').split(' ').slice(-1)['0']; /* source */
-				var param2 = header.children().children('input.select_message').attr('id'); /* message_id */
-				compose_message(type, false, '#personvalue_tags_tag', param1, param2);
-			} else {
-				var type = 'reply';
-				var param1 = '<?php echo $this->uri->segment(5);?>';
-				if (param1 == null || param1 == '')
-					var param1 = $(this).parents('div:eq(1)').children().children('input.item_number').val(); /* phone number */
-				compose_message(type, false, '#message', param1);
+			switch (button) {
+				case 'forward_button':
+					var header = $(this).parents('div:eq(1)');
+					var source = header.attr('class').split(' ').slice(-1)['0'];
+					var message_id = header.children().children('input.select_message').attr('id');
+					compose_message('forward', false, '#personvalue_tags_tag', source, message_id);
+					break;
+				case 'resend':
+					var header = $(this).parents('div:eq(1)');
+					var source = header.attr('class').split(' ').slice(-1)['0'];
+					var message_id = header.children().children('input.select_message').attr('id');
+					compose_message('resend', false, '#personvalue_tags_tag', source, message_id);
+					break;
+				default:
+					var type = 'reply';
+					var phone = '<?php echo rawurldecode($this->uri->segment(5));?>';
+					if (phone == null || phone == '')
+						var phone = $(this).parents('div:eq(1)').children().children('input.item_number').val();
+					compose_message('reply', false, '#message', phone);
 			}
 			return false;
 		});
@@ -298,67 +304,6 @@
 			}
 		});
 		<?php endif; ?>
-
-		// resend
-		$(document).on('click', ".resend", function() {
-			DestinationNumber = $(this).parents('div:eq(1)').children().children('input.item_number').val();
-			TextDecoded = $(this).parents('div:eq(1)').children('div.message_content').text();
-			ID = $(this).parents('div:eq(1)').children().children('input.select_message').attr('id');
-			Class = $(this).parents('div:eq(1)').children('div.message_metadata').children('span.class').text();
-			resend_conf_label = "<?php echo tr_addcslashes('"', 'You are about to resend message to <strong>{0}</strong>.'); ?>";
-			resend_conf_label = resend_conf_label.replace('{0}', DestinationNumber);
-			resend_conf = `<p>${resend_conf_label}</p>`;
-			message_content_label = "<?php echo tr_addcslashes('"', 'Message content:'); ?>";
-			message_content = `<p><strong>${message_content_label}</strong> <br />${TextDecoded}</p>`;
-			delete_dup_label = "<?php echo tr_addcslashes('"', 'Delete copy (prevents duplicates).'); ?>";
-			delete_dup = `<input type="checkbox" id="delete_dup" /> <label for="delete_dup">${delete_dup_label}</label>`;
-			$("#compose_sms_container").html(resend_conf + message_content + delete_dup);
-			$("#compose_sms_container").dialog({
-				//title: 'Resend SMS',
-				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-				modal: true,
-				draggable: true,
-				width: 550,
-				show: 'fade',
-				hide: 'fade',
-				buttons: {
-					"<?php echo tr_addcslashes('"', 'Continue'); ?>": function() {
-						delete_dup_status = $("#delete_dup").is(":checked");
-						$.post("<?php echo site_url('messages/compose_process') ?>", {
-								sendoption: 'sendoption3',
-								manualvalue: DestinationNumber,
-								senddateoption: 'option1',
-								class: Class,
-								validity: '-1',
-								smstype: 'normal',
-								sms_loop: '1',
-								message: TextDecoded
-							})
-							.done(function(data) {
-								show_notification(data.msg, data.type);
-								$("#compose_sms_container").dialog("destroy");
-							})
-							.fail(function(data) {
-								display_error_container(data);
-							});
-
-						// Delete copy
-						if (delete_dup_status) {
-							dest_url = base + 'sentitems';
-							$.post(dest_url, {
-								type: 'single',
-								id: ID,
-								current_folder: current_folder
-							});
-						}
-					},
-					"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
-						$(this).dialog('close');
-					}
-				}
-			});
-			$("#compose_sms_container").dialog('open');
-		});
 
 		//resend_bulk
 		$(document).on('click', ".resend_bulk", function() {
