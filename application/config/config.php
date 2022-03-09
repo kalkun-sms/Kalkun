@@ -407,7 +407,7 @@ $config['sess_save_path'] = session_save_path() === '' ? '/tmp' : session_save_p
 //$config['sess_save_path'] = 'ci_sessions';
 
 $config['sess_cookie_name'] = 'kalkun_ci_session';
-$config['sess_samesite'] = 'Lax';
+$config['sess_samesite'] = 'Strict';
 $config['sess_expiration'] = 1209600; // 2 weeks
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
@@ -434,7 +434,7 @@ $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
 $config['cookie_httponly'] 	= FALSE;
-$config['cookie_samesite'] 	= 'Lax';
+$config['cookie_samesite'] 	= 'Strict';
 
 /*
 |--------------------------------------------------------------------------
