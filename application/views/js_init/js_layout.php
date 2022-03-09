@@ -216,6 +216,24 @@
 
 	$(document).ready(function() {
 
+		<?php switch ($this->input->get('action')):
+		case NULL:
+			break;
+		case 'compose': ?>
+		compose_message(
+			'<?php echo $this->input->get('type'); ?>',
+			true,
+			'#personvalue_tags_tag',
+			"<?php echo $this->input->get('phone'); ?>",
+			"<?php echo $this->input->get('msg'); ?>"
+		);
+		<?php break;
+		default:
+			// TODO for other actions that show a dialog (add/edit user, add/edit contact...).
+?>
+		<?php break; ?>
+		<?php endswitch; ?>
+
 		// Get current page for styling/css
 		$("#menu").find("a[href='" + window.location.href + "']").each(function() {
 			$(this).addClass("current");
