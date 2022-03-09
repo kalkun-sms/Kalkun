@@ -24,42 +24,47 @@
 					var param1 = $(this).parents("tr:first").attr("id");
 				}
 
-				$("#contact_container").load('<?php echo site_url('phonebook/add_contact')?>', {
-					'type': type,
-					'param1': param1
-				}, function() {
-					$(this).dialog({
-						title: pbk_title,
-						closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-						modal: true,
-						show: 'fade',
-						hide: 'fade',
-						open: function() {
-							$("#name").trigger('focus');
-						},
-						buttons: {
-							"<?php echo tr_addcslashes('"', 'Save')?>": function() {
-								if ($('#addContact').valid()) {
-									$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize())
-										.done(function(data) {
-											show_notification(data.msg, data.type);
-											$("#contact_container").dialog("destroy");
-										})
-										.fail(function(data) {
-											display_error_container(data);
-										});
-								} else {
-									return false;
-								}
-								$("#pbk_list").load(window.location.href);
+				$.get('<?php echo site_url('phonebook/add_contact')?>', {
+						'type': type,
+						'param1': param1
+					})
+					.done(function(responseText, textStatus, jqXHR) {
+						$("#contact_container").html(responseText);
+						$("#contact_container").dialog({
+							title: pbk_title,
+							closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+							modal: true,
+							show: 'fade',
+							hide: 'fade',
+							open: function() {
+								$("#name").trigger('focus');
 							},
-							"<?php echo tr_addcslashes('"', 'Cancel')?>": function() {
-								$(this).dialog('close');
+							buttons: {
+								"<?php echo tr_addcslashes('"', 'Save')?>": function() {
+									if ($('#addContact').valid()) {
+										$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize())
+											.done(function(data) {
+												show_notification(data.msg, data.type);
+												$("#contact_container").dialog("destroy");
+											})
+											.fail(function(data) {
+												display_error_container(data);
+											});
+									} else {
+										return false;
+									}
+									$("#pbk_list").load(window.location.href);
+								},
+								"<?php echo tr_addcslashes('"', 'Cancel')?>": function() {
+									$(this).dialog('close');
+								}
 							}
-						}
+						});
+						$("#contact_container").dialog('open');
+					})
+					.fail(function(data) {
+						display_error_container(data);
 					});
-					$("#contact_container").dialog('open');
-				});
 			}
 			return false;
 		});

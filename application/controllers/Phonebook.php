@@ -323,26 +323,22 @@ class Phonebook extends MY_Controller {
 	{
 		$this->load->helper('form');
 		$data['pbkgroup'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
-		$type = $this->input->post('type');
+		$type = $this->input->get('type');
 
-		if ($type === 'edit')
+		switch ($type)
 		{
-			$id_pbk = $this->input->post('param1');
-			$data['contact'] = $this->Phonebook_model->get_phonebook(array('option' => 'by_idpbk', 'id_pbk' => $id_pbk));
-		}
-		else
-		{
-			if ($type === 'message')
-			{
-				$data['number'] = $this->input->post('param1');
-			}
-			else
-			{
-				if ($type === 'normal')
-				{
-					$data['group_id'] = $this->input->post('param1');
-				}
-			}
+			case 'edit':
+				$id_pbk = $this->input->get('param1');
+				$data['contact'] = $this->Phonebook_model->get_phonebook(array('option' => 'by_idpbk', 'id_pbk' => $id_pbk));
+				break;
+			case 'message':
+				$data['number'] = $this->input->get('param1');
+				break;
+			case 'normal':
+				$data['group_id'] = $this->input->get('param1');
+				break;
+			default:
+				break;
 		}
 		$this->load->view('main/phonebook/contact/add_contact', $data);
 	}

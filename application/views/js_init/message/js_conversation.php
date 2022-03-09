@@ -226,35 +226,40 @@
 		// Add contact
 		$(document).on('click', '.add_to_pbk', function() {
 			var param1 = $(this).parents('div:eq(1)').children().children('input.item_number').val(); /* phone number */
-			$("#contact_container").load('<?php echo site_url('phonebook/add_contact')?>', {
-				'type': 'message',
-				'param1': param1
-			}, function() {
-				$(this).dialog({
-					title: "<?php echo tr_addcslashes('"', 'Add contact');?>",
-					closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-					modal: true,
-					show: 'fade',
-					hide: 'fade',
-					buttons: {
-						"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
-							//if($("#addContact").valid()) {
-							$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize())
-								.done(function(data) {
-									show_notification(data.msg, data.type);
-									$("#contact_container").dialog("destroy");
-								})
-								.fail(function(data) {
-									display_error_container(data);
-								});
-						},
-						"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
-							$(this).dialog('close');
+			$.get('<?php echo site_url('phonebook/add_contact')?>', {
+					'type': 'message',
+					'param1': param1
+				})
+				.done(function(responseText, textStatus, jqXHR) {
+					$("#contact_container").html(responseText);
+					$("#contact_container").dialog({
+						title: "<?php echo tr_addcslashes('"', 'Add contact');?>",
+						closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+						modal: true,
+						show: 'fade',
+						hide: 'fade',
+						buttons: {
+							"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
+								//if($("#addContact").valid()) {
+								$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize())
+									.done(function(data) {
+										show_notification(data.msg, data.type);
+										$("#contact_container").dialog("destroy");
+									})
+									.fail(function(data) {
+										display_error_container(data);
+									});
+							},
+							"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
+								$(this).dialog('close');
+							}
 						}
-					}
+					});
+					$("#contact_container").dialog('open');
+				})
+				.fail(function(data) {
+					display_error_container(data);
 				});
-				$("#contact_container").dialog('open');
-			});
 			return false;
 		});
 
