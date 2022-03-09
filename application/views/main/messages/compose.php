@@ -119,11 +119,11 @@ else
 		<td>
 			<div class="form_option">
 				<div class="opt">
-					<input type="radio" id="sendoption1" name="sendoption" value="sendoption1" checked="checked" class="left_aligned" style="border: none;" />
+					<input type="radio" id="sendoption1" name="sendoption" value="sendoption1" class="left_aligned" style="border: none;" <?php if ($val_type !== 'prefill'): ?> checked="checked" <?php endif; ?> />
 					<label for="sendoption1"><?php echo tr('Phonebook');?></label>
 				</div>
 				<div class="opt">
-					<input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;" />
+					<input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;" <?php if ($val_type === 'prefill'): ?> checked="checked" <?php endif; ?> />
 					<label for="sendoption3"><?php echo tr('Input manually');?> </label>
 				</div>
 				<div class="opt">
@@ -144,7 +144,7 @@ else
 			</div>
 
 			<div id="manually" class="hidden">
-				<input style="width: 95%;" type="text" name="manualvalue" id="manualvalue" />
+				<input style="width: 95%;" type="text" name="manualvalue" id="manualvalue" <?php if ($val_type === 'prefill'): ?> value="<?php echo htmlentities($dest, ENT_QUOTES); ?>" <?php endif; ?> />
 			</div>
 
 			<div id="import" class="hidden"><input type="file" name="import_file" id="import_file" class="text ui-widget-content ui-corner-all" /></div>
@@ -238,7 +238,7 @@ else
 			<?php if ($val_type == 'forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo htmlentities($msg_id, ENT_QUOTES);?>" /> <?php endif;?>
 			<textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;" id="message" name="message">
 <?php
-if ($val_type === 'forward' || $val_type === 'resend')
+if ($val_type === 'forward' || $val_type === 'resend' || $val_type === 'prefill')
 {
 	echo htmlentities($message, ENT_QUOTES);
 }

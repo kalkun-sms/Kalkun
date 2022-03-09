@@ -312,22 +312,28 @@
 			}
 		});
 
-		$("input[name='sendoption']").on("click", function() {
-			if ($(this).val() == 'sendoption1') {
+		function refresh_recipient_input(element) {
+			if (element.val() == 'sendoption1') {
 				$("#person").show();
 				$("#import").hide();
 				$("#manually").hide();
 			}
-			if ($(this).val() == 'sendoption3') {
+			if (element.val() == 'sendoption3') {
 				$("#person").hide();
 				$("#import").hide();
 				$("#manually").show();
 			}
-			if ($(this).val() == 'sendoption4') {
+			if (element.val() == 'sendoption4') {
 				$("#person").hide();
 				$("#import").show();
 				$("#manually").hide();
 			}
+		}
+
+		refresh_recipient_input($("input[name='sendoption']:checked"));
+
+		$("input[name='sendoption']").on("click", function() {
+			refresh_recipient_input($(this));
 		});
 
 		$('#import_file').on('change', null, function() {

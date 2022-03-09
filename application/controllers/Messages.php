@@ -204,7 +204,7 @@ class Messages extends MY_Controller {
 		$this->load->helper(array('form', 'kalkun'));
 
 		// register valid type
-		$val_type = array('normal', 'reply', 'forward', 'member', 'pbk_contact', 'pbk_groups', 'all_contacts', 'resend');
+		$val_type = array('normal', 'reply', 'forward', 'member', 'pbk_contact', 'pbk_groups', 'all_contacts', 'resend', 'prefill');
 		$type = $this->input->get('type');
 		if ( ! in_array($type, $val_type))
 		{
@@ -214,19 +214,23 @@ class Messages extends MY_Controller {
 		switch ($type)
 		{
 			case 'forward':
-				$source = $this->input->get('param1');
-				$id = $this->input->get('param2');
+				$source = $this->input->get('source');
+				$id = $this->input->get('id');
 				$data = $this->_compose_forward($source, $id);
 				break;
 			case 'resend':
-				$source = $this->input->get('param1');
-				$id = $this->input->get('param2');
+				$source = $this->input->get('source');
+				$id = $this->input->get('id');
 				$data = $this->_compose_resend($source, $id);
 				break;
 			case 'reply':
 			case 'pbk_contact':
 			case 'pbk_groups':
-				$data['dest'] = $this->input->get('param1');
+				$data['dest'] = $this->input->get('grp_id');
+				break;
+			case 'prefill':
+				$data['dest'] = $this->input->get('phone');
+				$data['message'] = $this->input->get('message');
 				break;
 			default:
 				break;

@@ -134,14 +134,33 @@
 		//console.debug(param1);
 		//console.debug(param2);
 
-		var data = {
-			type: type
-		};
-		if (param1) {
-			data.param1 = param1;
-		}
-		if (param2) {
-			data.param2 = param2;
+		switch (type) {
+			case 'forward':
+			case 'resend':
+				data = {
+					type: type,
+					source: param1,
+					id: param2,
+				};
+				break;
+			case 'pbk_groups':
+				data = {
+					type: type,
+					grp_id: param1,
+				};
+				break;
+			case 'prefill':
+				data = {
+					type: type,
+					phone: param1,
+					message: param2,
+				};
+				break;
+			default:
+				data = {
+					type: type,
+				};
+				break;
 		}
 		$.get('<?php echo site_url('messages/compose')?>', data)
 			.done(function(responseText, textStatus, jqXHR) {
