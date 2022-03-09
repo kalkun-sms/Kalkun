@@ -21,6 +21,8 @@
 class Install extends CI_Controller {
 
 	public $idiom = 'english';
+	private $db_prop = [];
+	private $db_engine = '';
 
 	/**
 	 * Constructor
@@ -60,6 +62,10 @@ class Install extends CI_Controller {
 
 		require_once(APPPATH.'config/database.php');
 		$this->db_config = $db[$active_group];
+
+		$this->load->helper('kalkun');
+		$this->db_prop = get_database_property($this->db_config['dbdriver']);
+		$this->db_engine = $this->db_prop['file'];
 	}
 
 	// --------------------------------------------------------------------
@@ -91,11 +97,12 @@ class Install extends CI_Controller {
 	 */
 	function requirement_check()
 	{
-		$this->load->helper(array('form', 'kalkun'));
+		$this->load->helper(array('form'));
 
 		$data['main'] = 'main/install/requirement_check';
 		$data['idiom'] = $this->idiom;
 		$data['database_driver'] = $this->db_config['dbdriver'];
+		$data['db_property'] = $this->db_prop;
 		$this->load->view('main/install/layout', $data);
 	}
 
@@ -111,11 +118,12 @@ class Install extends CI_Controller {
 	function database_setup()
 	{
 		$this->load->model('Kalkun_model');
-		$this->load->helper(array('form', 'kalkun'));
+		$this->load->helper(array('form'));
 		$this->load->database();
 		$data['main'] = 'main/install/database_setup';
 		$data['idiom'] = $this->idiom;
 		$data['database_driver'] = $this->db->platform();
+		$data['db_property'] = $this->db_prop;
 		$data['has_smsd_database'] = $this->db->table_exists('gammu') ? TRUE : FALSE;
 
 		// By default we consider Kalkun database schema is not installed
@@ -162,9 +170,9 @@ class Install extends CI_Controller {
 	 *
 	 * @access	public
 	 */
-	function run_install($type = NULL)
+	function run_install()
 	{
-		$this->load->helper(array('form', 'kalkun'));
+		$this->load->helper(array('form'));
 		$this->load->model('Kalkun_model');
 		$this->load->database();
 
@@ -223,7 +231,7 @@ class Install extends CI_Controller {
 		// Update SQL schema to version 0.7
 		if ( ! $this->Kalkun_model->has_table_user_filters())
 		{
-			$error = $this->_execute_kalkun_sql_file('_upgrade_kalkun_0.7.sql');
+			$error = $this->_execute_kalkun_sql_file('upgrade_kalkun_0.7.sql');
 			if ($error !== 0)
 			{
 				return $error;
@@ -233,7 +241,7 @@ class Install extends CI_Controller {
 		// Update SQL schema to version 0.8
 		if ( ! $this->Kalkun_model->has_table_ci_sessions())
 		{
-			$error = $this->_execute_kalkun_sql_file('_upgrade_kalkun_0.8.sql');
+			$error = $this->_execute_kalkun_sql_file('upgrade_kalkun_0.8.sql');
 			if ($error !== 0)
 			{
 				return $error;
@@ -254,7 +262,7 @@ class Install extends CI_Controller {
 			if ($this->db->query('ALTER TABLE b8_wordlist RENAME TO b8_wordlist_v2'))
 			{
 				// Create v3 table
-				$this->_execute_kalkun_sql_file('_b8_v3.sql');
+				$this->_execute_kalkun_sql_file('b8_v3.sql');
 
 				// Fill v3 table with values from v2 table
 				$this->db->trans_start();
@@ -306,23 +314,21 @@ class Install extends CI_Controller {
 
 	function _install()
 	{
-		return $this->_execute_kalkun_sql_file('_kalkun.sql');
+		return $this->_execute_kalkun_sql_file('kalkun.sql');
 	}
 
 	function _install_pbk_tables()
 	{
-		return $this->_execute_kalkun_sql_file('_pbk_gammu.sql');
+		return $this->_execute_kalkun_sql_file('pbk_gammu.sql');
 	}
 
 	function _add_kalkun_fields_to_pbk_tables()
 	{
-		return $this->_execute_kalkun_sql_file('_pbk_kalkun.sql');
+		return $this->_execute_kalkun_sql_file('pbk_kalkun.sql');
 	}
 
-	function _execute_kalkun_sql_file($filename_suffix)
+	function _execute_kalkun_sql_file($sqlfile)
 	{
-		$this->load->helper('kalkun');
-		$sqlfile = $this->input->post('db_engine').$filename_suffix;
-		return execute_sql($this->config->item('sql_path').$sqlfile);
+		return execute_sql(APPPATH.'sql/'.$this->db_engine.'/'.$sqlfile);
 	}
 }
