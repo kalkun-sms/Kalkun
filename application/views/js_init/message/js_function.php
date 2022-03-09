@@ -44,10 +44,11 @@
 						async: false
 					});
 					$.post(delete_url + source, {
+							[csrf_name]: csrf_hash,
 							<?php if ($this->config->item('conversation_grouping')): ?>
 							type: 'conversation',
 							number: $(this).val(),
-							current_folder: current_folder
+							current_folder: current_folder,
 							<?php else: ?>
 							type: 'single',
 							id: $(this).val(),
@@ -64,6 +65,9 @@
 						})
 						.fail(function(data) {
 							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
 						});
 				});
 			}
