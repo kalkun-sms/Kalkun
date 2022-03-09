@@ -250,19 +250,6 @@ class Messages extends MY_Controller {
 	{
 		$this->load->helper('kalkun');
 
-		// We need POST variable
-		if ( ! $_POST)
-		{
-			// Repost the form if we went through login process
-			// Finally, after form submission (call to compose_process), redirect to a result page
-			// that cannot be POSTed again in case of page refresh.
-			if ($this->session->flashdata('bef_login_method') === 'post')
-			{
-				$this->load->view('main/messages/compose_repost_after_login');
-			}
-			return;
-		}
-
 		$dest = array();
 
 		// Import value from file (currently only CSV)
@@ -604,21 +591,6 @@ class Messages extends MY_Controller {
 		// Return sending status
 		header('Content-type: application/json');
 		echo json_encode($return_msg);
-
-		if ($this->input->post('redirect_to_form_result') === '1')
-		{
-			switch ($return_msg['type'])
-			{
-				case 'error':
-					$this->session->set_flashdata('notif', '<span style="color:red">'.$return_msg['msg'].'</span>');
-					break;
-				case 'info':
-				default:
-					$this->session->set_flashdata('notif', $return_msg['msg']);
-					break;
-			}
-			redirect('messages/folder/outbox/');
-		}
 	}
 
 	// --------------------------------------------------------------------
