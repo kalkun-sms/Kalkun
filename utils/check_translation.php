@@ -365,6 +365,7 @@ function display_cmd_to_remove_labels($unused, $basedir)
 		{
 			$escaped_key = $key;
 			$escaped_key = str_replace("'", "\\\'\''", $escaped_key);
+			$escaped_key = str_replace("/", "\\/", $escaped_key);
 			echo "\n";
 			if (is_array($value))
 			{
