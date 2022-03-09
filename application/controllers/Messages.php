@@ -619,7 +619,7 @@ class Messages extends MY_Controller {
 		$valid_type = array('inbox', 'sentitems', 'outbox');
 		if ( ! in_array($type, $valid_type))
 		{
-			die('Invalid URL');
+			show_error('Invalid URL', 400);
 		}
 
 		$data['folder'] = 'folder';
@@ -700,7 +700,7 @@ class Messages extends MY_Controller {
 		$valid = array('inbox', 'sentitems');
 		if ( ! in_array($type, $valid))
 		{
-			die('Invalid URL');
+			show_error('Invalid URL', 400);
 		}
 
 		$data['folder'] = 'my_folder';
@@ -1519,7 +1519,7 @@ class Messages extends MY_Controller {
 		// check if it's valid type
 		if ( ! in_array($type, $valid_type))
 		{
-			die('Invalid Type');
+			show_error('Invalid Type', 400);
 		}
 
 		switch ($type){
