@@ -134,7 +134,6 @@
 		//console.debug(param1);
 		//console.debug(param2);
 
-		$("#compose_sms_container").html("<div align=\"center\"><?php echo tr_addcslashes('"', 'Loading'); ?></div>");
 		var data = {
 			type: type
 		};
@@ -144,70 +143,75 @@
 		if (param2) {
 			data.param2 = param2;
 		}
-		$("#compose_sms_container").load('<?php echo site_url('messages/compose')?>', data, function() {
-			var buttons = {};
-			buttons["<?php echo tr_addcslashes('"', 'Send message'); ?>"] = function() {
-				if ($("#composeForm").valid()) {
-					$('.ui-dialog-buttonpane :button').each(function() {
-						if ($(this).text() == "<?php echo tr_addcslashes('"', 'Send message'); ?>") $(this).html("<?php echo tr_addcslashes('"', 'Sending'); ?> <img src=\"<?php echo $this->config->item('img_path').'processing.gif' ?>\" height=\"12\" style=\"margin:0px; padding:0px;\">");
-					});
-					$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize())
-						.done(function(data) {
-							show_notification(data.msg, data.type);
-							$("#compose_sms_container").dialog("destroy");
-						})
-						.fail(function(data) {
-							$('.ui-dialog-buttonpane :button').each(function() {
-								if ($(this).text() == "<?php echo tr_addcslashes('"', 'Sending'); ?> ") $(this).text("<?php echo tr_addcslashes('"', 'Send message'); ?>");
-							});
-							display_error_container(data);
-						});
-				}
-			};
-			if (repeatable) {
-				buttons["<?php echo tr_addcslashes('"', 'Send and repeat'); ?>"] = function() {
+		$.get('<?php echo site_url('messages/compose')?>', data)
+			.done(function(responseText, textStatus, jqXHR) {
+				$('#compose_sms_container').html(responseText);
+				var buttons = {};
+				buttons["<?php echo tr_addcslashes('"', 'Send message'); ?>"] = function() {
 					if ($("#composeForm").valid()) {
+						$('.ui-dialog-buttonpane :button').each(function() {
+							if ($(this).text() == "<?php echo tr_addcslashes('"', 'Send message'); ?>") $(this).html("<?php echo tr_addcslashes('"', 'Sending'); ?> <img src=\"<?php echo $this->config->item('img_path').'processing.gif' ?>\" height=\"12\" style=\"margin:0px; padding:0px;\">");
+						});
 						$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize())
 							.done(function(data) {
-								$("#compose_sms_container_notif_area").text()
-								if (data.type == "error") {
-									$("#compose_sms_container_notif_area").addClass("error_notif");
-								} else {
-									$("#compose_sms_container_notif_area").removeClass("error_notif");
-								}
-								$("#compose_sms_container_notif_area").text(data.msg);
-								$("#compose_sms_container_notif_area").show();
-								setTimeout(function() {
-									$("#compose_sms_container_notif_area").hide();
-								}, 1500);
+								show_notification(data.msg, data.type);
+								$("#compose_sms_container").dialog("destroy");
 							})
 							.fail(function(data) {
-								$("#compose_sms_container_notif_area").hide();
+								$('.ui-dialog-buttonpane :button').each(function() {
+									if ($(this).text() == "<?php echo tr_addcslashes('"', 'Sending'); ?> ") $(this).text("<?php echo tr_addcslashes('"', 'Send message'); ?>");
+								});
 								display_error_container(data);
 							});
 					}
 				};
-			}
-			buttons["<?php echo tr_addcslashes('"', 'Cancel'); ?>"] = function() {
-				$(this).dialog('destroy');
-			};
-			$(this).dialog({
-				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-				modal: true,
-				width: 550,
-				show: 'fade',
-				hide: 'fade',
-				buttons: buttons,
-				open: function() {
-					setTimeout(function() {
-						// Need to use setTimeout to be able to access focus_element in the case the focus on a tagsInput element.
-						$(focus_element).trigger('focus');
-						return;
-					}, 1);
+				if (repeatable) {
+					buttons["<?php echo tr_addcslashes('"', 'Send and repeat'); ?>"] = function() {
+						if ($("#composeForm").valid()) {
+							$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize())
+								.done(function(data) {
+									$("#compose_sms_container_notif_area").text()
+									if (data.type == "error") {
+										$("#compose_sms_container_notif_area").addClass("error_notif");
+									} else {
+										$("#compose_sms_container_notif_area").removeClass("error_notif");
+									}
+									$("#compose_sms_container_notif_area").text(data.msg);
+									$("#compose_sms_container_notif_area").show();
+									setTimeout(function() {
+										$("#compose_sms_container_notif_area").hide();
+									}, 1500);
+								})
+								.fail(function(data) {
+									$("#compose_sms_container_notif_area").hide();
+									display_error_container(data);
+								});
+						}
+					};
 				}
+				buttons["<?php echo tr_addcslashes('"', 'Cancel'); ?>"] = function() {
+					$(this).dialog('destroy');
+				};
+				$("#compose_sms_container").dialog({
+					closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+					modal: true,
+					width: 550,
+					show: 'fade',
+					hide: 'fade',
+					buttons: buttons,
+					open: function() {
+						setTimeout(function() {
+							// Need to use setTimeout to be able to access focus_element in the case the focus on a tagsInput element.
+							$(focus_element).trigger('focus');
+							return;
+						}, 1);
+					}
+				});
+				$("#compose_sms_container").dialog('open');
+			})
+			.fail(function(data) {
+				display_error_container(data);
 			});
-			$("#compose_sms_container").dialog('open');
-		});
 	}
 
 	$(document).ready(function() {
