@@ -68,26 +68,6 @@ class Login extends CI_Controller {
 	function index()
 	{
 		$this->load->helper('form');
-		$this->session->set_flashdata(
-			'bef_login_method',
-			$this->session->flashdata('bef_login_method')
-		);
-		$this->session->set_flashdata(
-			'bef_login_requested_url',
-			$this->session->flashdata('bef_login_requested_url')
-		);
-		$this->session->set_flashdata(
-			'bef_login_HTTP_REFERER',
-			$this->session->flashdata('bef_login_HTTP_REFERER')
-		);
-		$this->session->set_flashdata(
-			'bef_login_history_count',
-			$this->session->flashdata('bef_login_history_count')
-		);
-		$this->session->set_flashdata(
-			'bef_login_post_data',
-			$this->session->flashdata('bef_login_post_data')
-		);
 		if ($_POST && empty($this->input->post('change_language')))
 		{
 			$this->Kalkun_model->login();
