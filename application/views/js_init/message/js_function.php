@@ -44,10 +44,11 @@
 						async: false
 					});
 					$.post(delete_url + source, {
+							[csrf_name]: csrf_hash,
 							<?php if ($this->config->item('conversation_grouping')): ?>
 							type: 'conversation',
 							number: $(this).val(),
-							current_folder: current_folder
+							current_folder: current_folder,
 							<?php else: ?>
 							type: 'single',
 							id: $(this).val(),
@@ -64,6 +65,9 @@
 						})
 						.fail(function(data) {
 							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
 						});
 				});
 			}
@@ -89,22 +93,31 @@
 				$("input.select_conversation:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post(move_url, {
-						<?php if ($this->config->item('conversation_grouping')): ?>
-						type: 'conversation',
-						current_folder: current_folder,
-						folder: source,
-						id_folder: id_folder,
-						number: $(this).val()
-						<?php else: ?>
-						type: 'single',
-						current_folder: current_folder,
-						folder: source,
-						id_folder: id_folder,
-						id_message: $(this).val(),
-						<?php endif; ?>
-					}, function() {
-						$(message_row).slideUp("slow");
-					});
+							[csrf_name]: csrf_hash,
+							<?php if ($this->config->item('conversation_grouping')): ?>
+							type: 'conversation',
+							current_folder: current_folder,
+							folder: source,
+							id_folder: id_folder,
+							number: $(this).val(),
+							<?php else: ?>
+							type: 'single',
+							current_folder: current_folder,
+							folder: source,
+							id_folder: id_folder,
+							id_message: $(this).val(),
+							<?php endif; ?>
+						})
+						.done(function() {
+							$(message_row).slideUp("slow");
+						})
+						.fail(function(data) {
+							display_error_container(data);
+							return;
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
 				show_notification(notif);
 			}
@@ -132,22 +145,31 @@
 				$("input.select_conversation:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post(move_url, {
-						<?php if ($this->config->item('conversation_grouping')): ?>
-						type: 'conversation',
-						current_folder: current_folder,
-						folder: source,
-						id_folder: id_folder,
-						number: $(this).val()
-						<?php else: ?>
-						type: 'single',
-						current_folder: current_folder,
-						folder: source,
-						id_folder: id_folder,
-						id_message: $(this).val(),
-						<?php endif; ?>
-					}, function() {
-						$(message_row).slideUp("slow");
-					});
+							[csrf_name]: csrf_hash,
+							<?php if ($this->config->item('conversation_grouping')): ?>
+							type: 'conversation',
+							current_folder: current_folder,
+							folder: source,
+							id_folder: id_folder,
+							number: $(this).val(),
+							<?php else: ?>
+							type: 'single',
+							current_folder: current_folder,
+							folder: source,
+							id_folder: id_folder,
+							id_message: $(this).val(),
+							<?php endif; ?>
+						})
+						.done(function() {
+							$(message_row).slideUp("slow");
+						})
+						.fail(function(data) {
+							display_error_container(data);
+							return;
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
 				show_notification(notif);
 			}

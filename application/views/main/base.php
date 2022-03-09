@@ -72,11 +72,14 @@
 
 <!-- Add Folder Dialog -->
 <div id="addfolderdialog" title="<?php echo tr('Add folder');?>" class="dialog">
-	<form class="addfolderform" method="post" action="<?php echo  site_url();?>/kalkun/add_folder">
-		<label for="name"><?php echo tr('Folder name');?></label>
-		<input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user');?>" />
-		<input type="text" name="folder_name" id="folder_name" class="text ui-widget-content ui-corner-all" />
-	</form>
+	<?php
+	$this->load->helper('form');
+	echo form_open('kalkun/add_folder', array('class' => 'addfolderform'));
+?>
+	<label for="name"><?php echo tr('Folder name');?></label>
+	<input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user');?>" />
+	<input type="text" name="folder_name" id="folder_name" class="text ui-widget-content ui-corner-all" />
+	<?php echo form_close(); ?>
 </div>
 
 <!-- Shortcuts dialog -->

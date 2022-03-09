@@ -28,16 +28,25 @@
 						async: false
 					});
 					$.post(dest_url, {
-						type: 'single',
-						id: $(this).val(),
-						current_folder: current_folder
-					}, function(data) {
-						if (!data) {
-							$(message_row).slideUp("slow");
-						} else {
-							notif = data;
-						}
-					});
+							type: 'single',
+							id: $(this).val(),
+							current_folder: current_folder,
+							[csrf_name]: csrf_hash,
+						})
+						.done(
+							function(data) {
+								if (!data) {
+									$(message_row).slideUp("slow");
+								} else {
+									notif = data;
+								}
+							})
+						.fail(function(data) {
+							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
 				show_notification(notif);
 			}
@@ -59,14 +68,22 @@
 				$("input.select_message:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post("<?php echo  site_url('messages/move_message') ?>", {
-						type: 'single',
-						current_folder: current_folder,
-						folder: source,
-						id_folder: id_folder,
-						id_message: $(this).val()
-					}, function() {
-						$(message_row).slideUp("slow");
-					});
+							type: 'single',
+							current_folder: current_folder,
+							folder: source,
+							id_folder: id_folder,
+							id_message: $(this).val(),
+							[csrf_name]: csrf_hash,
+						})
+						.done(function() {
+							$(message_row).slideUp("slow");
+						})
+						.fail(function(data) {
+							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
 				var notif = "<?php echo tr_addcslashes('"', '{0} conversation(s) recovered'); ?>"
 				notif = notif.replace('{0}', count);
@@ -88,15 +105,23 @@
 					id_access = '#item_source' + $(this).val();
 					item_folder = $(id_access).val();
 					$.post("<?php echo  site_url('messages/move_message') ?>", {
-						type: 'single',
-						current_folder: current_folder,
-						folder: item_folder,
-						id_folder: id_folder,
-						id_message: $(this).val()
-					}, function() {
-						$(message_row).slideUp("slow");
-						show_notification("<?php echo tr_addcslashes('"', 'Messages moved successfully')?>")
-					});
+							type: 'single',
+							current_folder: current_folder,
+							folder: item_folder,
+							id_folder: id_folder,
+							id_message: $(this).val(),
+							[csrf_name]: csrf_hash,
+						})
+						.done(function() {
+							$(message_row).slideUp("slow");
+							show_notification("<?php echo tr_addcslashes('"', 'Messages moved successfully')?>")
+						})
+						.fail(function(data) {
+							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
 			}
 		});
@@ -226,35 +251,40 @@
 		// Add contact
 		$(document).on('click', '.add_to_pbk', function() {
 			var param1 = $(this).parents('div:eq(1)').children().children('input.item_number').val(); /* phone number */
-			$("#contact_container").load('<?php echo site_url('phonebook/add_contact')?>', {
-				'type': 'message',
-				'param1': param1
-			}, function() {
-				$(this).dialog({
-					title: "<?php echo tr_addcslashes('"', 'Add contact');?>",
-					closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-					modal: true,
-					show: 'fade',
-					hide: 'fade',
-					buttons: {
-						"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
-							//if($("#addContact").valid()) {
-							$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize())
-								.done(function(data) {
-									show_notification(data.msg, data.type);
-									$("#contact_container").dialog("destroy");
-								})
-								.fail(function(data) {
-									display_error_container(data);
-								});
-						},
-						"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
-							$(this).dialog('close');
+			$.get('<?php echo site_url('phonebook/add_contact')?>', {
+					'type': 'message',
+					'param1': param1
+				})
+				.done(function(responseText, textStatus, jqXHR) {
+					$("#contact_container").html(responseText);
+					$("#contact_container").dialog({
+						title: "<?php echo tr_addcslashes('"', 'Add contact');?>",
+						closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+						modal: true,
+						show: 'fade',
+						hide: 'fade',
+						buttons: {
+							"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
+								//if($("#addContact").valid()) {
+								$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize())
+									.done(function(data) {
+										show_notification(data.msg, data.type);
+										$("#contact_container").dialog("destroy");
+									})
+									.fail(function(data) {
+										display_error_container(data);
+									});
+							},
+							"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
+								$(this).dialog('close');
+							}
 						}
-					}
+					});
+					$("#contact_container").dialog('open');
+				})
+				.fail(function(data) {
+					display_error_container(data);
 				});
-				$("#contact_container").dialog('open');
-			});
 			return false;
 		});
 
@@ -275,10 +305,19 @@
 						return;
 					}
 					$.post("<?php echo  site_url('messages/report_spam/spam') ?>", {
-						id_message: $(this).val()
-					}, function() {
-						$(message_row).slideUp("slow");
-					});
+							id_message: $(this).val(),
+							[csrf_name]: csrf_hash,
+						})
+						.done(function() {
+							$(message_row).slideUp("slow");
+						})
+						.fail(function(data) {
+							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
+
 				});
 				show_notification("<?php echo tr_addcslashes('"', 'Spam reported'); ?>")
 			}
@@ -294,11 +333,19 @@
 				$("input.select_message:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post("<?php echo  site_url('messages/report_spam/ham') ?>", {
-						id_message: $(this).val()
-					}, function() {
-						$(message_row).slideUp("slow");
+							id_message: $(this).val(),
+							[csrf_name]: csrf_hash,
+						})
+						.done(function() {
+							$(message_row).slideUp("slow");
 
-					});
+						})
+						.fail(function(data) {
+							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
 				show_notification("<?php echo tr_addcslashes('"', 'Message(s) marked non-spam'); ?>")
 			}
@@ -343,7 +390,8 @@
 										validity: '-1',
 										smstype: 'normal',
 										sms_loop: '1',
-										message: TextDecoded
+										message: TextDecoded,
+										[csrf_name]: csrf_hash,
 									})
 									.done(function(data) {
 										show_notification(data.msg, data.type);
@@ -353,16 +401,26 @@
 									.fail(function(data) {
 										display_error_container(data);
 										return;
+									})
+									.always(function(data) {
+										update_csrf_hash();
 									});
 
 								// Delete copy
 								if (delete_dup_status) {
 									dest_url = base + 'sentitems';
 									$.post(dest_url, {
-										type: 'single',
-										id: ID,
-										current_folder: current_folder
-									});
+											type: 'single',
+											id: ID,
+											current_folder: current_folder,
+											[csrf_name]: csrf_hash,
+										})
+										.fail(function(data) {
+											display_error_container(data);
+										})
+										.always(function(data) {
+											update_csrf_hash();
+										});
 								}
 							});
 						},

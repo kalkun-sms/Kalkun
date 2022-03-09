@@ -32,24 +32,27 @@
 
 <!-- Filter Dialog -->
 <div id="filterdialog" title="<?php echo tr('Filters');?>" class="dialog">
-	<form class="addfilterform" method="post" action="<?php echo site_url('settings/save');?>">
-		<input type="hidden" name="option" value="filters" />
-		<input type="hidden" name="id_filter" id="id_filter" value="" />
-		<input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user');?>" />
+	<?php
+	$this->load->helper('form');
+	echo form_open('settings/save', array('class' => 'addfilterform'));
+?>
+	<input type="hidden" name="option" value="filters" />
+	<input type="hidden" name="id_filter" id="id_filter" value="" />
+	<input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user');?>" />
 
-		<label for="from"><?php echo tr('From');?></label>
-		<input type="text" name="from" id="from" class="text ui-widget-content ui-corner-all" />
+	<label for="from"><?php echo tr('From');?></label>
+	<input type="text" name="from" id="from" class="text ui-widget-content ui-corner-all" />
 
-		<label for="has_the_words"><?php echo tr('Has the words');?></label>
-		<input type="text" name="has_the_words" id="has_the_words" class="text ui-widget-content ui-corner-all" />
+	<label for="has_the_words"><?php echo tr('Has the words');?></label>
+	<input type="text" name="has_the_words" id="has_the_words" class="text ui-widget-content ui-corner-all" />
 
-		<label for="move_to"><?php echo tr('Move to');?></label>
-		<select name="id_folder" id="id_folder" style="width: 98%">
-			<?php foreach ($my_folders->result() as $my_folder): ?>
-			<option value="<?php echo $my_folder->id_folder; ?>"><?php echo htmlentities($my_folder->name, ENT_QUOTES); ?></option>
-			<?php endforeach; ?>
-		</select>
-	</form>
+	<label for="move_to"><?php echo tr('Move to');?></label>
+	<select name="id_folder" id="id_folder" style="width: 98%">
+		<?php foreach ($my_folders->result() as $my_folder): ?>
+		<option value="<?php echo $my_folder->id_folder; ?>"><?php echo htmlentities($my_folder->name, ENT_QUOTES); ?></option>
+		<?php endforeach; ?>
+	</select>
+	<?php echo form_close(); ?>
 </div>
 
 <!-- Delete Filter Dialog -->

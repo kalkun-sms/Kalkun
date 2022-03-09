@@ -352,4 +352,10 @@ class Kalkun extends MY_Controller {
 		}
 		echo json_encode($result);
 	}
+
+	function get_csrf_hash()
+	{
+		header('Content-type: application/json');
+		echo json_encode($this->security->get_csrf_hash());
+	}
 }

@@ -95,12 +95,12 @@ class Users extends MY_Controller {
 	function add_user()
 	{
 		$this->load->helper('form');
-		$type = $this->input->post('type');
+		$type = $this->input->get('type');
 		$data['tmp'] = '';
 
 		if ($type === 'edit')
 		{
-			$id_user = $this->input->post('param1');
+			$id_user = $this->input->get('param1');
 			$data['users'] = $this->User_model->getUsers(array('option' => 'by_iduser', 'id_user' => $id_user));
 		}
 		$this->load->view('main/users/add_user', $data);

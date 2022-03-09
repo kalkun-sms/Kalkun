@@ -24,29 +24,32 @@
 <!-- Import Phonebook dialog -->
 <div id="pbkimportdialog" title="<?php echo tr('From CSV file');?>" class="dialog">
 	<p id="validateTips"><?php echo tr('All form fields are required.'); ?></p>
-	<form class="importpbkform" method="post" enctype="multipart/form-data" action="<?php echo site_url();?>/phonebook/import_phonebook">
-		<fieldset>
-			<input type="hidden" name="pbk_id_user" id="pbk_id_user" value="<?php echo $this->session->userdata('id_user');?>" />
-			<label for="csvfile"><?php echo tr('CSV file');?></label>
-			<input type="file" name="csvfile" id="csvfile" class="text ui-widget-content ui-corner-all" />
-			<p><small><?php echo tr('The CSV file must be in valid format').':';?> <a href="<?php echo $this->config->item('csv_path');?>contact_sample.csv"><b><?php echo tr('valid example');?></b></a></small></p>
-			<p><input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if (isset($contact) && $contact->row('is_public') == 'true')
+	<?php
+	$this->load->helper('form');
+	echo form_open_multipart('phonebook/import_phonebook', array('class' => 'importpbkform'));
+?>
+	<fieldset>
+		<input type="hidden" name="pbk_id_user" id="pbk_id_user" value="<?php echo $this->session->userdata('id_user');?>" />
+		<label for="csvfile"><?php echo tr('CSV file');?></label>
+		<input type="file" name="csvfile" id="csvfile" class="text ui-widget-content ui-corner-all" />
+		<p><small><?php echo tr('The CSV file must be in valid format').':';?> <a href="<?php echo $this->config->item('csv_path');?>contact_sample.csv"><b><?php echo tr('valid example');?></b></a></small></p>
+		<p><input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if (isset($contact) && $contact->row('is_public') == 'true')
 {
 	echo 'checked="checked"';
 }?> />
-				<label for="is_public" style="display: inline"><?php echo tr('Set as public contact');?></label>
-			</p>
-			<label for="group"><?php echo tr('Groups');?></label>
-			<select id="importgroupvalue" name="importgroupvalue">
-				<option value="">-- <?php echo tr('Select group name');?> --</option>
-				<?php
+			<label for="is_public" style="display: inline"><?php echo tr('Set as public contact');?></label>
+		</p>
+		<label for="group"><?php echo tr('Groups');?></label>
+		<select id="importgroupvalue" name="importgroupvalue">
+			<option value="">-- <?php echo tr('Select group name');?> --</option>
+			<?php
 		foreach ($pbkgroup as $tmp):
 		echo '<option value="'.$tmp->ID.'">'.htmlentities($tmp->GroupName, ENT_QUOTES).'</option>';
 		endforeach;
 		?>
-			</select>
-		</fieldset>
-	</form>
+		</select>
+	</fieldset>
+	<?php echo form_close(); ?>
 </div>
 
 
