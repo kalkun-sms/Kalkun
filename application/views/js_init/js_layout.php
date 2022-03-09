@@ -155,10 +155,12 @@
 					id: param2,
 				};
 				break;
+			case 'reply':
+			case 'pbk_contact':
 			case 'pbk_groups':
 				data = {
 					type: type,
-					grp_id: param1,
+					dest: param1,
 				};
 				break;
 			case 'prefill':

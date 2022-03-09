@@ -226,7 +226,7 @@ class Messages extends MY_Controller {
 			case 'reply':
 			case 'pbk_contact':
 			case 'pbk_groups':
-				$data['dest'] = $this->input->get('grp_id');
+				$data['dest'] = $this->input->get('dest');
 				break;
 			case 'prefill':
 				$data['dest'] = $this->input->get('phone');
