@@ -108,10 +108,18 @@
 								var row = $(this).parents('tr');
 								var id = row.attr('id');
 								$.post(dest_url, {
-									id: id
-								}, function() {
-									$(row).slideUp("slow");
-								});
+										id: id,
+										[csrf_name]: csrf_hash,
+									})
+									.done(function() {
+										$(row).slideUp("slow");
+									})
+									.fail(function(data) {
+										display_error_container(data);
+									})
+									.always(function(data) {
+										update_csrf_hash();
+									});
 							});
 							$(this).dialog("close");
 						},
