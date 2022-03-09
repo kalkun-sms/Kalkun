@@ -28,16 +28,25 @@
 						async: false
 					});
 					$.post(dest_url, {
-						type: 'single',
-						id: $(this).val(),
-						current_folder: current_folder
-					}, function(data) {
-						if (!data) {
-							$(message_row).slideUp("slow");
-						} else {
-							notif = data;
-						}
-					});
+							type: 'single',
+							id: $(this).val(),
+							current_folder: current_folder,
+							[csrf_name]: csrf_hash,
+						})
+						.done(
+							function(data) {
+								if (!data) {
+									$(message_row).slideUp("slow");
+								} else {
+									notif = data;
+								}
+							})
+						.fail(function(data) {
+							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
 				show_notification(notif);
 			}
