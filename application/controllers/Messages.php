@@ -205,7 +205,7 @@ class Messages extends MY_Controller {
 
 		// register valid type
 		$val_type = array('normal', 'reply', 'forward', 'member', 'pbk_contact', 'pbk_groups', 'all_contacts', 'resend');
-		$type = $this->input->post('type');
+		$type = $this->input->get('type');
 		if ( ! in_array($type, $val_type))
 		{
 			show_error('Invalid type on compose.', 400);
@@ -214,19 +214,19 @@ class Messages extends MY_Controller {
 		switch ($type)
 		{
 			case 'forward':
-				$source = $this->input->post('param1');
-				$id = $this->input->post('param2');
+				$source = $this->input->get('param1');
+				$id = $this->input->get('param2');
 				$data = $this->_compose_forward($source, $id);
 				break;
 			case 'resend':
-				$source = $this->input->post('param1');
-				$id = $this->input->post('param2');
+				$source = $this->input->get('param1');
+				$id = $this->input->get('param2');
 				$data = $this->_compose_resend($source, $id);
 				break;
 			case 'reply':
 			case 'pbk_contact':
 			case 'pbk_groups':
-				$data['dest'] = $this->input->post('param1');
+				$data['dest'] = $this->input->get('param1');
 				break;
 			default:
 				break;
