@@ -142,6 +142,7 @@ class Kalkun extends MY_Controller {
 			],
 		];
 
+		header('Content-type: application/json');
 		echo json_encode($result);
 	}
 
@@ -350,6 +351,7 @@ class Kalkun extends MY_Controller {
 		{
 			$result = $e->getMessage();
 		}
+		header('Content-type: application/json');
 		echo json_encode($result);
 	}
 

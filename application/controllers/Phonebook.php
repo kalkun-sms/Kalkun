@@ -469,9 +469,11 @@ class Phonebook extends MY_Controller {
 			switch ($output_format)
 			{
 				case 'tagInput':
+					header('Content-type: application/json');
 					echo json_encode($tagInputResult);
 					break;
 				default:
+					header('Content-type: application/json');
 					echo json_encode($combine);
 					break;
 			}
