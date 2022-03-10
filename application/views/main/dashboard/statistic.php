@@ -20,9 +20,9 @@
 	var myChart = new Chart(ctx, {
 		type: 'bar',
 		data: {
-			labels: ["<?php echo tr_addcslashes('"', 'No data'); ?>"],
+			labels: [<?php echo tr_js('No data'); ?>],
 			datasets: [{
-				label: "<?php echo tr_addcslashes('"', 'No data'); ?>",
+				label: <?php echo tr_js('No data'); ?>,
 				data: [0]
 			}]
 		},

@@ -6,14 +6,14 @@
 			if ($(this).hasClass('editpbkgroup')) {
 				var id = $(this).parents("tr:first").attr("id");
 				var public = $(this).parents("tr:first").attr("public");
-				var dialog_title = "<?php echo tr_addcslashes('"', 'Manage group'); ?>";
+				var dialog_title = <?php echo tr_js('Manage group'); ?>;
 				var groupname = $(this).parents("div:eq(1)").find("span.groupname").text();
 				$('input#group_name').val(groupname);
 				$('input.pbkgroup_id').val(id);
 				if (public == "true") $("input#is_public").prop('checked', true);
 				else $("input#is_public").prop('checked', false);
 			} else {
-				var dialog_title = "<?php echo tr_addcslashes('"', 'Create group'); ?>";
+				var dialog_title = <?php echo tr_js('Create group'); ?>;
 				$('input#group_name').val("");
 				$('input.pbkgroup_id').val("");
 			}
@@ -21,14 +21,14 @@
 			$("#addgroupdialog").dialog({
 				bgiframe: true,
 				title: dialog_title,
-				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+				closeText: <?php echo tr_js('Close'); ?>,
 				autoOpen: false,
 				modal: true,
 				buttons: {
-					"<?php echo tr_addcslashes('"', 'Save')?>": function() {
+					<?php echo tr_js('Save'); ?>: function() {
 						$("form.addgroupform").trigger('submit');
 					},
-					"<?php echo tr_addcslashes('"', 'Cancel')?>": function() {
+					<?php echo tr_js('Cancel'); ?>: function() {
 						$(this).dialog('close');
 					}
 				},
@@ -44,20 +44,20 @@
 			var count = $("input.select_group:checkbox:checked").length;
 			var dest_url = '<?php echo site_url('phonebook/delete_group') ?>';
 			if (count == 0) {
-				$('.notification_area').text("<?php echo tr_addcslashes('"', 'No group selected.')?>");
+				$('.notification_area').text(<?php echo tr_js('No group selected.'); ?>);
 				$('.notification_area').show();
 			} else {
 				// confirm first
 				$("#confirm_delete_group_dialog").dialog({
-					closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+					closeText: <?php echo tr_js('Close'); ?>,
 					bgiframe: true,
 					autoOpen: false,
 					modal: true,
 					buttons: {
-						"<?php echo tr_addcslashes('"', 'Cancel')?>": function() {
+						<?php echo tr_js('Cancel'); ?>: function() {
 							$(this).dialog('close');
 						},
-						"<?php echo tr_addcslashes('"', 'Delete')?>": function() {
+						<?php echo tr_js('Delete'); ?>: function() {
 							$("input.select_group:checked").each(function() {
 								var row = $(this).parents('tr');
 								var id = row.attr('id');

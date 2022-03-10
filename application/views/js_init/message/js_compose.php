@@ -45,7 +45,7 @@
 			"minChars": 1,
 			"interactive": true,
 			"delimiter": ",",
-			"placeholder": "<?php echo tr_addcslashes('"', 'Insert name from contact list');?>",
+			"placeholder": <?php echo tr_js('Insert name from contact list'); ?>,
 			"onAddTag": function(element, tag) {
 				source = $("#personvalue_tags_tag").autocomplete("option", "source");
 
@@ -135,7 +135,7 @@
 						result = removeFromArray(data, "id", $("#personvalue").val());
 
 						if (result.length === 0) {
-							var msg = "<?php echo tr_addcslashes('"', 'No results for {0}', NULL, '%arg%'); ?>";
+							var msg = <?php echo tr_js('No results for {0}', NULL, '%arg%'); ?>;
 							msg = msg.replace("%arg%", value);
 							$("#personvalue_tags_tag").autocomplete("option", "source", [msg]);
 							$("#personvalue_tags_tag").autocomplete("search");
@@ -218,23 +218,23 @@
 			},
 			messages: {
 				personvalue: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>"
+					required: <?php echo tr_js('Field required.'); ?>
 				},
 				manualvalue: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
+					required: <?php echo tr_js('Field required.'); ?>,
 				},
 				import_file: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>"
+					required: <?php echo tr_js('Field required.'); ?>
 				},
 				message: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>"
+					required: <?php echo tr_js('Field required.'); ?>
 				},
 				datevalue: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>"
+					required: <?php echo tr_js('Field required.'); ?>
 				},
 				url: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
-					url: "<?php echo tr_addcslashes('"', 'Should be a valid URL');?>"
+					required: <?php echo tr_js('Field required.'); ?>,
+					url: <?php echo tr_js('Should be a valid URL'); ?>
 				}
 			}
 		});
@@ -270,7 +270,7 @@
 
 		// Character counter
 		$('.word_count').each(function() {
-			var msg = "<?php echo tr_addcslashes('"', '{0} character(s) / {1} message(s)');?>";
+			var msg = <?php echo tr_js('{0} character(s) / {1} message(s)'); ?>;
 			var length = $(this).val().length;
 			max_chars_per_sms = isGSMAlphabet($(this).val()) ? 160 : 70;
 			var message_count = Math.ceil((length + message_length_correction) / max_chars_per_sms);
@@ -349,18 +349,18 @@
 
 		$("#canned_response_container").load(url, function() {
 			$(this).dialog({
-				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+				closeText: <?php echo tr_js('Close'); ?>,
 				modal: true,
 				draggable: true,
 				width: 400,
 				show: 'fade',
 				hide: 'fade',
-				title: "<?php echo tr_addcslashes('"', 'Choose response')?>",
+				title: <?php echo tr_js('Choose response'); ?>,
 				buttons: {
-					"<?php echo tr_addcslashes('"', 'Save');?>": function() {
+					<?php echo tr_js('Save'); ?>: function() {
 						save_canned_response(null);
 					},
-					"<?php echo tr_addcslashes('"', 'Cancel');?>": function() {
+					<?php echo tr_js('Cancel'); ?>: function() {
 						$(this).dialog('close');
 					}
 				}
@@ -373,16 +373,16 @@
 
 	function save_canned_response(name) {
 
-		if (name == null) var name = prompt("<?php echo tr_addcslashes('"', 'Please enter a name for your message. It should be unique.'); ?>", '', "Message Name");
+		if (name == null) var name = prompt(<?php echo tr_js('Please enter a name for your message. It should be unique.'); ?>, '', "Message Name");
 		else {
-			var c = confirm("<?php echo tr_addcslashes('"', 'Are you sure? This will overwrite the previous message.'); ?>");
+			var c = confirm(<?php echo tr_js('Are you sure? This will overwrite the previous message.'); ?>);
 			if (!c) return;
 		}
 
 		var dest_url = "<?php echo site_url();?>/messages/canned_response/save";
 
 		if (name != null) {
-			$('.loading_area').text("<?php echo tr_addcslashes('"', 'Saving...');?>");
+			$('.loading_area').text(<?php echo tr_js('Saving...'); ?>);
 			$('.loading_area').fadeIn("slow");
 			$.post(dest_url, {
 					'name': name,
@@ -423,7 +423,7 @@
 
 	function delete_canned_response(name) {
 
-		var c = confirm("<?php echo tr_addcslashes('"', 'Are you sure?'); ?>");
+		var c = confirm(<?php echo tr_js('Are you sure?'); ?>);
 		if (!c) return;
 		var dest_url = "<?php echo site_url();?>/messages/canned_response/delete";
 		$.post(dest_url, {

@@ -14,10 +14,10 @@
 		$(document).on('click', "a.global_delete", action_delete = function() {
 			var count = $("input.select_message:checked:visible").length;
 			if (count == 0) {
-				show_notification("<?php echo tr_addcslashes('"', 'No item selected.'); ?>");
+				show_notification(<?php echo tr_js('No item selected.'); ?>);
 			} else {
 				var notif = {
-					msg: "<?php echo tr_addcslashes('"', '{0} message(s) deleted'); ?>",
+					msg: <?php echo tr_js('{0} message(s) deleted'); ?>,
 					type: "info",
 				};
 				notif.msg = notif.msg.replace('{0}', count);
@@ -61,7 +61,7 @@
 		$(document).on('click', "a.recover_button", action_recover = function() {
 			var count = $("input.select_message:checked:visible").length;
 			if (count == 0) {
-				show_notification("<?php echo tr_addcslashes('"', 'No item selected.')?>");
+				show_notification(<?php echo tr_js('No item selected.'); ?>);
 			} else {
 
 				var id_folder = (source == 'inbox') ? 1 : 3;
@@ -86,7 +86,7 @@
 							update_csrf_hash();
 						});
 				});
-				var notif = "<?php echo tr_addcslashes('"', '{0} conversation(s) recovered'); ?>"
+				var notif = <?php echo tr_js('{0} conversation(s) recovered'); ?>
 				notif = notif.replace('{0}', count);
 				show_notification(notif);
 			}
@@ -97,7 +97,7 @@
 			var count = $("input.select_message:checked:visible").length;
 			if (count == 0) {
 				$("#movetodialog").dialog('close');
-				show_notification("<?php echo tr_addcslashes('"', 'No item selected.'); ?>");
+				show_notification(<?php echo tr_js('No item selected.'); ?>);
 			} else {
 				var id_folder = $(this).attr('id');
 				$("#movetodialog").dialog('close');
@@ -115,7 +115,7 @@
 						})
 						.done(function() {
 							$(message_row).slideUp("slow");
-							show_notification("<?php echo tr_addcslashes('"', 'Messages moved successfully')?>")
+							show_notification(<?php echo tr_js('Messages moved successfully'); ?>)
 						})
 						.fail(function(data) {
 							display_error_container(data);
@@ -134,7 +134,7 @@
 
 		// Move To dialog
 		$("#movetodialog").dialog({
-			closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+			closeText: <?php echo tr_js('Close'); ?>,
 			bgiframe: true,
 			autoOpen: false,
 			modal: true,
@@ -150,7 +150,7 @@
 
 			if ($(row).find("div.detail_area").is(":visible")) {
 				$(row).find("div.detail_area").toggle();
-				$(row).find("a.detail_button").text("<?php echo tr_addcslashes('"', 'Show details'); ?>");
+				$(row).find("a.detail_button").text(<?php echo tr_js('Show details'); ?>);
 			}
 			return false;
 		});
@@ -185,19 +185,19 @@
 		// refresh
 		$(document).on('click', "a.refresh_button", refresh = function(type) {
 			if (type != 'retry') {
-				$('.loading_area').text("<?php echo tr_addcslashes('"', 'Loading'); ?>");
+				$('.loading_area').text(<?php echo tr_js('Loading'); ?>);
 				$('.loading_area').fadeIn("slow");
 			}
 			$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.preg_replace ('/ /', '%20', $this->uri->segment(5)).'/'.$this->uri->segment(6, 0)) ?>", function(response, status, xhr) {
 				if (status == "error" || xhr.status != 200) {
-					var msg = "<?php echo tr_addcslashes('"', 'Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>";
+					var msg = <?php echo tr_js('Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>;
 					$('.loading_area').html('<span style="white-space: nowrap">' + msg + '</span>');
 					var cntdwn = setInterval(function() {
 						current_val = $('#countdown-count').text();
 						if (current_val > 1) $('#countdown-count').text(current_val - 1);
 						else {
 							clearInterval(cntdwn);
-							$('#retry-progress-display').text("<?php echo tr_addcslashes('"', 'Retrying now'); ?>");
+							$('#retry-progress-display').text(<?php echo tr_js('Retrying now'); ?>);
 						}
 					}, 1000);
 					setTimeout(function() {
@@ -244,10 +244,10 @@
 			var row = $(this).parents('div:eq(2)');
 			$(row).find("div.detail_area").toggle();
 
-			if ($(this).text() == "<?php echo tr_addcslashes('"', 'Hide details'); ?>")
-				$(this).text("<?php echo tr_addcslashes('"', 'Show details'); ?>");
+			if ($(this).text() == <?php echo tr_js('Hide details'); ?>)
+				$(this).text(<?php echo tr_js('Show details'); ?>);
 			else
-				$(this).text("<?php echo tr_addcslashes('"', 'Hide details'); ?>");
+				$(this).text(<?php echo tr_js('Hide details'); ?>);
 			return false;
 		});
 
@@ -261,13 +261,13 @@
 				.done(function(responseText, textStatus, jqXHR) {
 					$("#contact_container").html(responseText);
 					$("#contact_container").dialog({
-						title: "<?php echo tr_addcslashes('"', 'Add contact');?>",
-						closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+						title: <?php echo tr_js('Add contact'); ?>,
+						closeText: <?php echo tr_js('Close'); ?>,
 						modal: true,
 						show: 'fade',
 						hide: 'fade',
 						buttons: {
-							"<?php echo tr_addcslashes('"', 'Save'); ?>": function() {
+							<?php echo tr_js('Save'); ?>: function() {
 								//if($("#addContact").valid()) {
 								$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize())
 									.done(function(data) {
@@ -278,7 +278,7 @@
 										display_error_container(data);
 									});
 							},
-							"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
+							<?php echo tr_js('Cancel'); ?>: function() {
 								$(this).dialog('close');
 							}
 						}
@@ -297,14 +297,14 @@
 			var count = $("input.select_message:checked:visible").length;
 
 			if (count == 0) {
-				show_notification("<?php echo tr_addcslashes('"', 'No item selected.'); ?>");
+				show_notification(<?php echo tr_js('No item selected.'); ?>);
 			} else {
 				$("input.select_message:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					id_access = '#item_source' + $(this).val();
 					item_folder = $(id_access).val();
 					if (item_folder != 'inbox') {
-						show_notification("<?php echo tr_addcslashes('"', 'Outgoing message cannot be spam'); ?>");
+						show_notification(<?php echo tr_js('Outgoing message cannot be spam'); ?>);
 						return;
 					}
 					$.post("<?php echo  site_url('messages/report_spam/spam') ?>", {
@@ -322,7 +322,7 @@
 						});
 
 				});
-				show_notification("<?php echo tr_addcslashes('"', 'Spam reported'); ?>")
+				show_notification(<?php echo tr_js('Spam reported'); ?>)
 			}
 		});
 		<?php else: ?>
@@ -330,7 +330,7 @@
 		$(document).on('click', ".ham_button", function() {
 			var count = $("input.select_message:checked:visible").length;
 			if (count == 0) {
-				show_notification("<?php echo tr_addcslashes('"', 'No item selected.'); ?>");
+				show_notification(<?php echo tr_js('No item selected.'); ?>);
 			} else {
 				var id_folder = $(this).attr('id');
 				$("input.select_message:checked:visible").each(function() {
@@ -350,7 +350,7 @@
 							update_csrf_hash();
 						});
 				});
-				show_notification("<?php echo tr_addcslashes('"', 'Message(s) marked non-spam'); ?>")
+				show_notification(<?php echo tr_js('Message(s) marked non-spam'); ?>)
 			}
 		});
 		<?php endif; ?>
@@ -359,25 +359,25 @@
 		$(document).on('click', ".resend_bulk", function() {
 			var count = $("input.select_message:checked:visible").length;
 			if (count == 0) {
-				$('.notification_area').text("<?php echo tr_addcslashes('"', 'No item selected.'); ?>");
+				$('.notification_area').text(<?php echo tr_js('No item selected.'); ?>);
 				$('.notification_area').show();
 			} else {
-				resend_conf_label = "<?php echo tr_addcslashes('"', 'You are about to resend {0} message(s).'); ?>";
+				resend_conf_label = <?php echo tr_js('You are about to resend {0} message(s).'); ?>;
 				resend_conf_label = resend_conf_label.replace('{0}', count);
 				resend_conf = `<p>${resend_conf_label}</p>`;
-				delete_dup_label = "<?php echo tr_addcslashes('"', 'Delete copy (prevents duplicates).'); ?>";
+				delete_dup_label = <?php echo tr_js('Delete copy (prevents duplicates).'); ?>;
 				delete_dup = `<input type="checkbox" id="delete_dup" /> <label for="delete_dup">${delete_dup_label}</label>`;
 				$("#compose_sms_container").html(resend_conf + delete_dup);
 				$("#compose_sms_container").dialog({
 					//title: 'Resend SMS',
-					closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+					closeText: <?php echo tr_js('Close'); ?>,
 					modal: true,
 					draggable: true,
 					width: 550,
 					show: 'fade',
 					hide: 'fade',
 					buttons: {
-						"<?php echo tr_addcslashes('"', 'Continue'); ?>": function() {
+						<?php echo tr_js('Continue'); ?>: function() {
 							delete_dup_status = $("#delete_dup").is(":checked");
 
 							$("input.select_message:checked:visible").each(function() {
@@ -427,7 +427,7 @@
 								}
 							});
 						},
-						"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
+						<?php echo tr_js('Cancel'); ?>: function() {
 							$(this).dialog('close');
 						}
 					}

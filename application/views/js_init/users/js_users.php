@@ -6,11 +6,11 @@
 		// Add/Edit Contact
 		$('.addpbkcontact, .edit_user').on('click', null, function() {
 			if ($(this).hasClass('addpbkcontact')) {
-				var user_title = "<?php echo tr_addcslashes('"', 'Add user');?>";
+				var user_title = <?php echo tr_js('Add user'); ?>;
 				var type = 'normal';
 				var param1 = '';
 			} else if ($(this).hasClass('edit_user')) {
-				var user_title = "<?php echo tr_addcslashes('"', 'Edit user');?>";
+				var user_title = <?php echo tr_js('Edit user'); ?>;
 				var type = 'edit';
 				var param1 = $(this).parents("tr:first").attr("id");
 			}
@@ -23,12 +23,12 @@
 					$("#users_container").html(responseText);
 					$("#users_container").dialog({
 						title: user_title,
-						closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+						closeText: <?php echo tr_js('Close'); ?>,
 						modal: true,
 						show: 'fade',
 						hide: 'fade',
 						buttons: {
-							"<?php echo tr_addcslashes('"', 'Save');?>": function() {
+							<?php echo tr_js('Save'); ?>: function() {
 								if ($("#addUser").valid()) {
 									$.post("<?php echo site_url('users/add_user_process') ?>", $("#addUser").serialize())
 										.done(function(data) {
@@ -42,7 +42,7 @@
 								}
 								$("#users_list").load(window.location.href);
 							},
-							"<?php echo tr_addcslashes('"', 'Cancel');?>": function() {
+							<?php echo tr_js('Cancel'); ?>: function() {
 								$(this).dialog('close');
 							}
 						}
@@ -80,25 +80,25 @@
 			var count = $("input:checkbox:checked").length;
 			var dest_url = '<?php echo site_url('users/delete_user') ?>';
 			if (count == 0) {
-				$('.notification_area').text("<?php echo tr_addcslashes('"', 'No user selected'); ?>");
+				$('.notification_area').text(<?php echo tr_js('No user selected'); ?>);
 				$('.notification_area').show();
 			} else {
 				// confirm first
 				$("#confirm_delete_user_dialog").dialog({
-					closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+					closeText: <?php echo tr_js('Close'); ?>,
 					bgiframe: true,
 					autoOpen: false,
 					modal: true,
 					buttons: {
-						"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
+						<?php echo tr_js('Cancel'); ?>: function() {
 							$(this).dialog('close');
 						},
-						"<?php echo tr_addcslashes('"', 'Delete'); ?>": function() {
+						<?php echo tr_js('Delete'); ?>: function() {
 							$("input.select_user:checked").each(function() {
 								var row = $(this).parents('tr');
 								var id = row.attr('id');
 								if (id == inbox_master) {
-									$('.notification_area').text("<?php echo tr_addcslashes('"', 'Action not allowed'); ?>");
+									$('.notification_area').text(<?php echo tr_js('Action not allowed'); ?>);
 									$('.notification_area').show();
 								} else {
 									$.post(dest_url, {
@@ -127,7 +127,7 @@
 		// Contact import
 		$('#pbkimport').on("click", function() {
 			$("#pbkimportdialog").dialog({
-				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+				closeText: <?php echo tr_js('Close'); ?>,
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
@@ -136,10 +136,10 @@
 		});
 
 		// Search onBlur onFocus
-		$('input.search_name').val("<?php echo tr_addcslashes('"', 'Search user'); ?>");
+		$('input.search_name').val(<?php echo tr_js('Search user'); ?>);
 
 		$('input.search_name').on("blur", function() {
-			$(this).val("<?php echo tr_addcslashes('"', 'Search user'); ?>");
+			$(this).val(<?php echo tr_js('Search user'); ?>);
 		});
 
 		$('input.search_name').on("focus", function() {

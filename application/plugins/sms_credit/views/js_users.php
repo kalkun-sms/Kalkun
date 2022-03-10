@@ -50,27 +50,27 @@
 			},
 			messages: {
 				realname: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>"
+					required: <?php echo tr_js('Field required.'); ?>
 				},
 				username: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
-					maxlength: "<?php echo tr_addcslashes('"', 'Value is too long.');?>"
+					required: <?php echo tr_js('Field required.'); ?>,
+					maxlength: <?php echo tr_js('Value is too long.'); ?>
 				},
 				phone_number: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
+					required: <?php echo tr_js('Field required.'); ?>,
 				},
 				password: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
-					minlength: "<?php echo tr_addcslashes('"', 'Value is too short.');?>"
+					required: <?php echo tr_js('Field required.'); ?>,
+					minlength: <?php echo tr_js('Value is too short.'); ?>
 				},
 				confirm_password: {
-					equalTo: "<?php echo tr_addcslashes('"', 'Passwords do not match.');?>"
+					equalTo: <?php echo tr_js('Passwords do not match.'); ?>
 				},
 				package_start: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>"
+					required: <?php echo tr_js('Field required.'); ?>
 				},
 				package_end: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>"
+					required: <?php echo tr_js('Field required.'); ?>
 				},
 			}
 		});
@@ -86,19 +86,19 @@
 		$('.addpbkcontact').on('click', null, function() {
 
 			$("#users_container").dialog({
-				title: "<?php echo tr_addcslashes('"', 'Add user');?>",
-				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+				title: <?php echo tr_js('Add user'); ?>,
+				closeText: <?php echo tr_js('Close'); ?>,
 				maxHeight: 400,
 				modal: true,
 				show: 'fade',
 				hide: 'fade',
 				buttons: {
-					"<?php echo tr_addcslashes('"', 'Save');?>": function() {
+					<?php echo tr_js('Save'); ?>: function() {
 						if ($("#addUser").valid()) {
 							$("form#addUser").trigger('submit')
 						}
 					},
-					"<?php echo tr_addcslashes('"', 'Cancel');?>": function() {
+					<?php echo tr_js('Cancel'); ?>: function() {
 						$(this).dialog('destroy');
 					}
 				}
@@ -121,16 +121,16 @@
 			$('#edit_package_end').val(package_end);
 
 			$("#edit_users_container").dialog({
-				title: "<?php echo tr_addcslashes('"', 'Edit user package'); ?>",
-				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+				title: <?php echo tr_js('Edit user package'); ?>,
+				closeText: <?php echo tr_js('Close'); ?>,
 				modal: true,
 				show: 'fade',
 				hide: 'fade',
 				buttons: {
-					"<?php echo tr_addcslashes('"', 'Save');?>": function() {
+					<?php echo tr_js('Save'); ?>: function() {
 						$("form#editUser").trigger('submit')
 					},
-					"<?php echo tr_addcslashes('"', 'Cancel');?>": function() {
+					<?php echo tr_js('Cancel'); ?>: function() {
 						$(this).dialog('destroy');
 					}
 				}
@@ -148,15 +148,15 @@
 
 			// confirm first
 			$("#confirm_delete_user_dialog").dialog({
-				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+				closeText: <?php echo tr_js('Close'); ?>,
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
 				buttons: {
-					"<?php echo tr_addcslashes('"', 'Cancel')?>": function() {
+					<?php echo tr_js('Cancel'); ?>: function() {
 						$(this).dialog('close');
 					},
-					"<?php echo tr_addcslashes('"', 'Yes')?>": function() {
+					<?php echo tr_js('Yes'); ?>: function() {
 						window.location.href = url;
 						$(this).dialog('close');
 					}
@@ -167,11 +167,11 @@
 
 		// Search onBlur onFocus
 		if ($('input.search_name').val() == '') {
-			$('input.search_name').val("<?php echo tr_addcslashes('"', 'Search'); ?>");
+			$('input.search_name').val(<?php echo tr_js('Search'); ?>);
 		}
 
 		$('input.search_name').on("blur", function() {
-			$(this).val("<?php echo tr_addcslashes('"', 'Search'); ?>");
+			$(this).val(<?php echo tr_js('Search'); ?>);
 		});
 
 		$('input.search_name').on("focus", function() {

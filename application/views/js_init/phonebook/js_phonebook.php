@@ -7,7 +7,7 @@
 			// check group
 			var group = '<?php echo count($pbkgroup);?>';
 			if (group == 0) {
-				$('.notification_area').text("<?php echo tr_addcslashes('"', 'No group detected, add one first.'); ?>");
+				$('.notification_area').text(<?php echo tr_js('No group detected, add one first.'); ?>);
 				$('.notification_area').show();
 				setTimeout("	$('.notification_area').fadeOut();", 2000);
 			} else {
@@ -15,11 +15,11 @@
 					$("#pbk_add_wizard_dialog").dialog('close')
 				};
 				if ($(this).hasClass('addpbkcontact')) {
-					var pbk_title = "<?php echo tr_addcslashes('"', 'Add contact'); ?>";
+					var pbk_title = <?php echo tr_js('Add contact'); ?>;
 					var type = 'normal';
 					var param1 = '<?php echo (isset($group_id)) ? $group_id : '';?>';
 				} else if ($(this).hasClass('editpbkcontact')) {
-					var pbk_title = "<?php echo tr_addcslashes('"', 'Edit contact'); ?>";
+					var pbk_title = <?php echo tr_js('Edit contact'); ?>;
 					var type = 'edit';
 					var param1 = $(this).parents("tr:first").attr("id");
 				}
@@ -32,7 +32,7 @@
 						$("#contact_container").html(responseText);
 						$("#contact_container").dialog({
 							title: pbk_title,
-							closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+							closeText: <?php echo tr_js('Close'); ?>,
 							modal: true,
 							show: 'fade',
 							hide: 'fade',
@@ -40,7 +40,7 @@
 								$("#name").trigger('focus');
 							},
 							buttons: {
-								"<?php echo tr_addcslashes('"', 'Save')?>": function() {
+								<?php echo tr_js('Save'); ?>: function() {
 									if ($('#addContact').valid()) {
 										$.post("<?php echo site_url('phonebook/add_contact_process') ?>", $("#addContact").serialize())
 											.done(function(data) {
@@ -55,7 +55,7 @@
 									}
 									$("#pbk_list").load(window.location.href);
 								},
-								"<?php echo tr_addcslashes('"', 'Cancel')?>": function() {
+								<?php echo tr_js('Cancel'); ?>: function() {
 									$(this).dialog('close');
 								}
 							}
@@ -94,16 +94,16 @@
 			var count = $("input:checkbox:checked:visible").length;
 			var dest_url = '<?php echo site_url('phonebook/delete_contact') ?>';
 			if (count == 0) {
-				$('.notification_area').text("<?php echo tr_addcslashes('"', 'No contact selected.')?>");
+				$('.notification_area').text(<?php echo tr_js('No contact selected.'); ?>);
 				$('.notification_area').show();
 				setTimeout("	$('.notification_area').fadeOut();", 2000);
 			} else {
 				$("#confirm_delete_contact_dialog").dialog({
-					closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+					closeText: <?php echo tr_js('Close'); ?>,
 					autoOpen: false,
 					modal: true,
 					buttons: {
-						"<?php echo tr_addcslashes('"', 'Delete'); ?>": function() {
+						<?php echo tr_js('Delete'); ?>: function() {
 							$("input.select_contact:checked:visible").each(function() {
 								var row = $(this).parents('tr');
 								var id = row.attr('id');
@@ -123,7 +123,7 @@
 							});
 							$(this).dialog("close");
 						},
-						"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
+						<?php echo tr_js('Cancel'); ?>: function() {
 							$(this).dialog("close");
 						}
 					}
@@ -142,7 +142,7 @@
 			var count = $("input:checkbox:checked").length;
 			var dest_url = '<?php echo site_url('phonebook/update_contact_group') ?>';
 			if (count == 0) {
-				$('.notification_area').text("<?php echo tr_addcslashes('"', 'No contact selected.')?>");
+				$('.notification_area').text(<?php echo tr_js('No contact selected.'); ?>);
 				$('.notification_area').show();
 				setTimeout("$('.notification_area').fadeOut();", 2000);
 			} else {
@@ -157,7 +157,7 @@
 						.done(function() {
 							if (i == ($("input.select_contact:checked").length - 1)) // execute only after the last one.
 							{
-								$('.notification_area').text("<?php echo tr_addcslashes('"', 'Updated')?>");
+								$('.notification_area').text(<?php echo tr_js('Updated'); ?>);
 								$('.notification_area').show();
 								setTimeout("$('.notification_area').fadeOut();", 2000);
 							}
@@ -194,15 +194,15 @@
 				$("#pbk_add_wizard_dialog").dialog('close')
 			};
 			$("#pbkimportdialog").dialog({
-				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+				closeText: <?php echo tr_js('Close'); ?>,
 				bgiframe: true,
 				autoOpen: false,
 				modal: true,
 				buttons: {
-					"<?php echo tr_addcslashes('"', 'Import'); ?>": function() {
+					<?php echo tr_js('Import'); ?>: function() {
 						$("form.importpbkform").trigger('submit');
 					},
-					"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
+					<?php echo tr_js('Cancel'); ?>: function() {
 						$(this).dialog('close');
 					}
 				}
@@ -213,11 +213,11 @@
 		// Add contact wizard
 		$('#addpbkcontact_wizard').on("click", function() {
 			$("#pbk_add_wizard_dialog").dialog({
-				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+				closeText: <?php echo tr_js('Close'); ?>,
 				autoOpen: false,
 				modal: true,
 				buttons: {
-					"<?php echo tr_addcslashes('"', 'Cancel'); ?>": function() {
+					<?php echo tr_js('Cancel'); ?>: function() {
 						$(this).dialog('close');
 					}
 				}
@@ -227,10 +227,10 @@
 
 
 		// Search onBlur onFocus
-		/*$('input.search_name').val("<?php echo tr_addcslashes('"', 'Search contacts'); ?>");
+		/*$('input.search_name').val(<?php echo tr_js('Search contacts'); ?>);
 		
 		$('input.search_name').on("blur", function(){
-			$(this).val("<?php echo tr_addcslashes('"', 'Search contacts'); ?>");
+			$(this).val(<?php echo tr_js('Search contacts'); ?>);
 		});
 		
 		$('input.search_name').on("focus", function(){
