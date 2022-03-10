@@ -43,3 +43,19 @@ function tr_addcslashes($chars_to_escape, $label, $context = NULL, ...$params)
 	$label = call_user_func_array(array(get_instance()->lang, 'line'), $args);
 	return addcslashes($label, $chars_to_escape);
 }
+
+/**
+ *
+ * translate the label for given context with parameters
+ * and encode to JSON so that it is properly escaped in JS
+ *
+ * @param type $label
+ * @param type $context
+ * @param type $params
+ * @return type
+ */
+function tr_js($label, $context = NULL, ...$params)
+{
+	$label = call_user_func_array(array(get_instance()->lang, 'line'), func_get_args());
+	return json_protect($label);
+}

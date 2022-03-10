@@ -478,3 +478,16 @@ function get_gammu_coding($utf8_string)
 	$coding = is_gsm0338($utf8_string) ? 'Default_No_Compression' : 'Unicode_No_Compression';
 	return $coding;
 }
+
+/**
+ * Return an JSON string or object. Useful for usage in JS/HTML
+ * when input value is from user/insecure source or needs to be escaped.
+ *
+ * @param type $utf8_string
+ * @return json object:
+ *
+ */
+function json_protect($înput)
+{
+	return json_encode($înput, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE);
+}
