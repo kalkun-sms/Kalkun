@@ -11,11 +11,11 @@
 <!-- Add contact wizard dialog -->
 <div id="pbk_add_wizard_dialog" title="<?php echo tr('Select add contact method');?>" class="dialog">
 	<div align="left">
-		<p><a href="#" id="addpbkcontact" class="addpbkcontact"><big><strong><?php echo tr('Manual input');?></strong></big><br />
+		<p><a href="javascript:void(0)" id="addpbkcontact" class="addpbkcontact"><big><strong><?php echo tr('Manual input');?></strong></big><br />
 				<?php echo tr('Manually add contact using contact form');?>
 			</a></p>
 
-		<p><a href="#" id="importpbk"><big><strong><?php echo tr('From CSV file');?></strong></big><br />
+		<p><a href="javascript:void(0)" id="importpbk"><big><strong><?php echo tr('From CSV file');?></strong></big><br />
 				<?php echo tr('Import contact from CSV format file');?>
 			</a></p>
 	</div>
@@ -57,8 +57,8 @@
 	<div id="window_title">
 		<div id="window_title_left"><?php echo $title; ?></div>
 		<div id="window_title_right">
-			<a href="#" id="sendallcontact" class="nicebutton">&#43; <?php echo tr('Send to all contacts'); ?></a>
-			<a href="#" id="addpbkcontact_wizard" class="nicebutton">&#43; <?php echo tr('Add contact'); ?></a>
+			<a href="javascript:void(0)" id="sendallcontact" class="nicebutton">&#43; <?php echo tr('Send to all contacts'); ?></a>
+			<a href="javascript:void(0)" id="addpbkcontact_wizard" class="nicebutton">&#43; <?php echo tr('Add contact'); ?></a>
 			<?php if ($public_contact) : ?>
 			<a href="<?php echo site_url('phonebook/');?>" class="nicebutton">&#43; <?php echo tr('My contacts');?></a>
 			<?php else: ?>
