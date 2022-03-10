@@ -33,8 +33,11 @@
 		 */
 		$(document).on('click', "a.global_delete", action_delete = function() {
 			var count = $("input.select_conversation:checked:visible").length;
-			var notif = "<?php echo tr_addcslashes('"', '{0} conversation(s) deleted'); ?>";
-			notif = notif.replace('{0}', count);
+			var notif = {
+				msg: "<?php echo tr_addcslashes('"', '{0} conversation(s) deleted'); ?>",
+				type: "info",
+			};
+			notif.msg = notif.msg.replace('{0}', count);
 			if (count == 0) {
 				show_notification("<?php echo tr_addcslashes('"', 'No item selected.')?>");
 			} else {
@@ -61,7 +64,6 @@
 							} else {
 								notif = data;
 							}
-							show_notification(notif); // translate
 						})
 						.fail(function(data) {
 							display_error_container(data);
@@ -70,6 +72,7 @@
 							update_csrf_hash();
 						});
 				});
+				show_notification(notif.msg, notif.type);
 			}
 		});
 
