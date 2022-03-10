@@ -23,7 +23,7 @@
 	<div id="window_title"><?php echo $title; ?></div>
 	<div id="window_content">
 		<?php if ( ! $status):?>
-		<a href="javascript:void(0)" class="nicebutton" id="addxmppbutton">&#43; Add XMPP account</a>
+		<a href="#" class="nicebutton" id="addxmppbutton">&#43; Add XMPP account</a>
 		<?php else:?>
 		<a href="<?php echo site_url('plugin/sms_to_xmpp/delete')?>" class="nicebutton">&#43; Delete XMPP account</a>
 		<?php endif;?>

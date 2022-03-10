@@ -26,7 +26,7 @@
 	<div id="window_title">
 		<div id="window_title_left"><?php echo $title; ?></div>
 		<div id="window_title_right">
-			<a href="javascript:void(0)" id="addpbkgroup" class="addpbkgroup nicebutton">&#43; <?php echo tr('Create group');?></a>
+			<a href="#" id="addpbkgroup" class="addpbkgroup nicebutton">&#43; <?php echo tr('Create group');?></a>
 			<?php if ($this->uri->segment(3) == 'public') : ?>
 			<a href="<?php echo site_url('phonebook/group/');?>" class="nicebutton">&#43; <?php echo tr('My groups');?></a>
 			<?php else: ?>

@@ -25,7 +25,7 @@ else: ?>
 				</div>
 				<div class="right_column">
 					<span class="pbk_menu no-touch-hidden">
-						<a class="edit_user simplelink" href="javascript:void(0)"><?php echo tr('Edit'); ?></a>
+						<a class="edit_user simplelink" href="#"><?php echo tr('Edit'); ?></a>
 					</span>
 		</td>
 	</tr>

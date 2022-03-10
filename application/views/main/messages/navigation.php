@@ -57,7 +57,7 @@
 		<?php if ($this->uri->segment(4) == '5' or $this->uri->segment(6) == '5') : ?>
 		<li><a href="javascript:void(0);" class="recover_button button"><?php echo tr('Recover');?></a></li>
 		<?php endif; ?>
-		<li><a class="move_to_button button" href="javascript:void(0)"><?php echo tr('Move to');?></a></li>
+		<li><a class="move_to_button button" href="#"><?php echo tr('Move to');?></a></li>
 		<?php endif; ?>
 		<li><a class="global_delete button" href="javascript:void(0);">
 				<?php
@@ -74,7 +74,7 @@
 
 		<?php if ($this->uri->segment(2) == 'conversation' && $this->uri->segment(4) == 'sentitems'): ?>
 		<li>&nbsp;</li>
-		<li><a href="javascript:void(0)" class="resend_bulk button"><?php echo tr('Resend');?></a></li>
+		<li><a href="#" class="resend_bulk button"><?php echo tr('Resend');?></a></li>
 		<?php endif; ?>
 
 		<?php if ($pagination_links != ''): ?>

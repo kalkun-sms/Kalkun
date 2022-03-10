@@ -1,6 +1,6 @@
 <ul>
 	<li><?php echo anchor('', tr('Dashboard')); ?></li>
-	<li><a href="javascript:void(0)" id="compose_sms_normal"><?php echo tr('Compose');?></a></li>
+	<li><a href="#" id="compose_sms_normal"><?php echo tr('Compose');?></a></li>
 	<li>
 		<span style="color: #FFF;"><?php echo tr('Folders');?></span>
 		<div id="f_child_menu">
@@ -40,7 +40,7 @@
 	</li>
 	<li>
 		<div style="float: left"><span style="color: #FFF;"><?php echo tr('My folders');?></span></div>
-		<div style="float: right"><sup><a id="addfolder" href="javascript:void(0)" title="<?php echo tr('Add a new folder');?>"><?php echo tr('Add'); ?></a></sup></div>
+		<div style="float: right"><sup><a id="addfolder" href="#" title="<?php echo tr('Add a new folder');?>"><?php echo tr('Add'); ?></a></sup></div>
 		<div class="clear">&nbsp;</div>
 		<div id="mf_child_menu">
 			<ul>

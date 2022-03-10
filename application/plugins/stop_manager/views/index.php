@@ -10,7 +10,7 @@
 			<?php echo form_close(); ?>
 			&nbsp;
 			<a href="<?php echo current_url();?>" class="nicebutton"><?php echo tr('Reset search'); ?></a>
-			<a href="javascript:void(0)" id="addstopbutton" class="nicebutton">&#43; <?php echo tr('Add STOP record'); ?></a>
+			<a href="#" id="addstopbutton" class="nicebutton">&#43; <?php echo tr('Add STOP record'); ?></a>
 		</div>
 	</div>
 

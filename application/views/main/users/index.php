@@ -15,7 +15,7 @@
 			<input type="text" name="search_name" size="20" class="search_name" value="" />
 			<?php echo form_close(); ?>
 			&nbsp;
-			<a href="javascript:void(0)" id="addpbkcontact" class="addpbkcontact nicebutton">&#43; <?php echo tr('Add user');?></a>
+			<a href="#" id="addpbkcontact" class="addpbkcontact nicebutton">&#43; <?php echo tr('Add user');?></a>
 		</div>
 	</div>
 

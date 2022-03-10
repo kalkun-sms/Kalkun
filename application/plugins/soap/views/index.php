@@ -48,7 +48,7 @@ $this->load->view('js_remote_access');
 <div id="space_area">
 	<h3 style="float: left">Remote Access</h3>
 	<div style="float: right">
-		<a href="javascript:void(0)" title="Add Remote access" id="addremotebutton" class="simplebutton">Add Remote Access</a>
+		<a href="#" title="Add Remote access" id="addremotebutton" class="simplebutton">Add Remote Access</a>
 	</div>
 
 	<table class="nice-table" cellpadding="0" cellspacing="0">
@@ -77,7 +77,7 @@ $this->load->view('js_remote_access');
 			<td class="token"><?php echo htmlentities($tmp->token, ENT_QUOTES); ?></td>
 			<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status == 'false') ? '' : 'checked=\"checked\"'?> disabled /></td>
 			<td>&nbsp;</td>
-			<td><a href="javascript:void(0)" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
+			<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
 			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/soap/delete_remote_access/<?php echo htmlentities($tmp->id_remote_access, ENT_QUOTES); ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 		</tr>
 
@@ -117,7 +117,7 @@ $this->load->view('js_remote_access');
 <!--div id="space_area">
 	<h3 style="float: left">Notification</h3>
 	<div style="float: right">
-		<a href="javascript:void(0)" title="Add Notification" id="addnotificationbutton" class="simplebutton">Add Notification</a>
+		<a href="#" title="Add Notification" id="addnotificationbutton" class="simplebutton">Add Notification</a>
 	</div>
 
 	<table class="nice-table" cellpadding="0" cellspacing="0">
@@ -138,7 +138,7 @@ $this->load->view('js_remote_access');
 			<td class="nice-table-left"><?php echo htmlentities($notification['number'], ENT_QUOTES); ?></td>
 			<td class="notificationvalue"><?php echo htmlentities($notification['value'], ENT_QUOTES); ?></td>
 			<td>&nbsp;</td>
-			<td><a href="javascript:void(0)" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
+			<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
 			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/delete_notification/"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 		</tr>
 

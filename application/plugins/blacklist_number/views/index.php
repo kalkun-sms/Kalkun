@@ -32,7 +32,7 @@
 <div id="space_area">
 	<h3 style="float: left">Blacklist Number</h3>
 	<div style="float: right">
-		<a href="javascript:void(0)" id="addblacklistbutton" class="nicebutton">&#43; Add Blacklist Number</a>
+		<a href="#" id="addblacklistbutton" class="nicebutton">&#43; Add Blacklist Number</a>
 	</div>
 
 	<table class="nice-table" cellpadding="0" cellspacing="0">
@@ -56,7 +56,7 @@
 			<td class="nice-table-left"><?php echo htmlentities($number, ENT_QUOTES); ?></td>
 			<td class="phone_number"><?php echo htmlentities(phone_format_human($tmp->phone_number), ENT_QUOTES); ?></td>
 			<td class="reason"><?php echo htmlentities($tmp->reason, ENT_QUOTES); ?></td>
-			<td><a href="javascript:void(0)" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
+			<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
 			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/blacklist_number/delete/<?php echo $tmp->id_blacklist_number; ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 		</tr>
 

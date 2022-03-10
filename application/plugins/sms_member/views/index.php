@@ -3,7 +3,7 @@
 	<div id="window_title">
 		<div id="window_title_left"><?php echo tr('Member');?></div>
 		<div id="window_title_right">
-			<a href="javascript:void(0)" id="send_member" class="nicebutton">&#43; <?php echo tr('Send message');?></a>
+			<a href="#" id="send_member" class="nicebutton">&#43; <?php echo tr('Send message');?></a>
 		</div>
 	</div>
 	<div id="member information" style="background: #eee; padding: 5px 10px; border-bottom: 1px solid #ccc;">

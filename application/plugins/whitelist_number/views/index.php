@@ -28,7 +28,7 @@
 <div id="space_area">
 	<h3 style="float: left">Match</h3>
 	<div style="float: right">
-		<a href="javascript:void(0)" id="addwhitelistbutton" class="nicebutton">&#43; Add match rule</a>
+		<a href="#" id="addwhitelistbutton" class="nicebutton">&#43; Add match rule</a>
 	</div>
 
 	<table class="nice-table" cellpadding="0" cellspacing="0">
@@ -48,7 +48,7 @@
 		<tr id="<?php echo htmlentities($tmp->id_whitelist, ENT_QUOTES); ?>">
 			<td class="nice-table-left"><?php echo htmlentities($number, ENT_QUOTES); ?></td>
 			<td class="phone_number"><?php echo htmlentities($tmp->match, ENT_QUOTES); ?></td>
-			<td><a href="javascript:void(0)" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
+			<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
 			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/whitelist_number/delete/<?php echo htmlentities($tmp->id_whitelist, ENT_QUOTES); ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 		</tr>
 

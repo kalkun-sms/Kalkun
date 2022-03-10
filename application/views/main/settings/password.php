@@ -37,7 +37,7 @@
 		<td width="175px" valign="top"><?php echo tr('Current password');?></td>
 		<td>
 			<input type="password" id="current_password" name="current_password" />
-			<div class="note hidden"><a href="javascript:void(0)"><?php echo tr('Forgot your password?');?></a></div>
+			<div class="note hidden"><a href="#"><?php echo tr('Forgot your password?');?></a></div>
 		</td>
 	</tr>
 
