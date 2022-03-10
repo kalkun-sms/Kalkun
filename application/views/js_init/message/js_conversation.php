@@ -244,8 +244,10 @@
 			var row = $(this).parents('div:eq(2)');
 			$(row).find("div.detail_area").toggle();
 
-			if ($(this).text() == "<?php echo tr_addcslashes('"', 'Hide details'); ?>") $(this).text("<?php echo tr_addcslashes('"', 'Show details'); ?>");
-			else $(this).text("<?php echo tr_addcslashes('"', 'Hide details'); ?>");
+			if ($(this).text() == "<?php echo tr_addcslashes('"', 'Hide details'); ?>")
+				$(this).text("<?php echo tr_addcslashes('"', 'Show details'); ?>");
+			else
+				$(this).text("<?php echo tr_addcslashes('"', 'Hide details'); ?>");
 			return false;
 		});
 

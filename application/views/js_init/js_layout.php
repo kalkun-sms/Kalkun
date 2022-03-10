@@ -183,7 +183,12 @@
 				buttons["<?php echo tr_addcslashes('"', 'Send message'); ?>"] = function() {
 					if ($("#composeForm").valid()) {
 						$('.ui-dialog-buttonpane :button').each(function() {
-							if ($(this).text() == "<?php echo tr_addcslashes('"', 'Send message'); ?>") $(this).html("<?php echo tr_addcslashes('"', 'Sending'); ?> <img src=\"<?php echo $this->config->item('img_path').'processing.gif' ?>\" height=\"12\" style=\"margin:0px; padding:0px;\">");
+							if ($(this).text() == "<?php echo tr_addcslashes('"', 'Send message'); ?>") {
+								var sending_html = "<?php echo tr_addcslashes('"', 'Sending'); ?>";
+								sending_html += " <img src=\"<?php echo $this->config->item('img_path').'processing.gif' ?>\" height=\"12\" style=\"margin:0px; padding:0px;\">";
+								$(this).html(sending_html);
+							}
+
 						});
 						$.post("<?php echo site_url('messages/compose_process') ?>", $("#composeForm").serialize())
 							.done(function(data) {
@@ -192,7 +197,8 @@
 							})
 							.fail(function(data) {
 								$('.ui-dialog-buttonpane :button').each(function() {
-									if ($(this).text() == "<?php echo tr_addcslashes('"', 'Sending'); ?> ") $(this).text("<?php echo tr_addcslashes('"', 'Send message'); ?>");
+									if ($(this).text() == "<?php echo tr_addcslashes('"', 'Sending'); ?>" + " ")
+										$(this).text("<?php echo tr_addcslashes('"', 'Send message'); ?>");
 								});
 								display_error_container(data);
 							});
