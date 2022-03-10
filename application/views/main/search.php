@@ -22,7 +22,7 @@ echo form_open('messages/query', array('class' => 'sms_search_form')); ?>
 }?>" class="ui-corner-left" /></td>
 		<td><input type="submit" value="<?php echo tr('Search messages');?>" /></td>
 		<td valign="middle">
-			<div style="margin-left: 5px"><small><a style="text-decoration: underline" id="a_search" href="#"><?php echo tr('Advanced search');?></a></small></div>
+			<div style="margin-left: 5px"><small><a style="text-decoration: underline" id="a_search" href="javascript:void(0);"><?php echo tr('Advanced search');?></a></small></div>
 		</td>
 	</tr>
 </table>

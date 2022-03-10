@@ -20,7 +20,7 @@ else
 }
 ?>
 	<?php foreach ($folder->result() as $folder):?>
-	<div class="move_to" id="<?php echo $folder->id_folder;?>"><a href="#"><?php echo htmlentities($folder->name, ENT_QUOTES);?></a></div>
+	<div class="move_to" id="<?php echo $folder->id_folder;?>"><a href="javascript:void(0);"><?php echo htmlentities($folder->name, ENT_QUOTES);?></a></div>
 	<?php endforeach;?>
 </div>
 
@@ -75,8 +75,8 @@ if ($this->uri->segment(2) == 'my_folder')
 
 		<?php if ($this->uri->segment(4) != '5' && $this->uri->segment(4) != '6'):?>
 		<sup>[
-			<a href="#" title="<?php echo tr('Click to rename this folder');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="renamefolder"><?php echo tr('Rename');?></a> -
-			<a href="#" title="<?php echo tr('Click to delete this folder');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="deletefolder"><?php echo tr('Delete');?></a> ]
+			<a href="javascript:void(0);" title="<?php echo tr('Click to rename this folder');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="renamefolder"><?php echo tr('Rename');?></a> -
+			<a href="javascript:void(0);" title="<?php echo tr('Click to delete this folder');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="deletefolder"><?php echo tr('Delete');?></a> ]
 		</sup>
 		<?php endif; ?>
 	</div>

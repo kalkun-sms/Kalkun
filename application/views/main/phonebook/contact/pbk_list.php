@@ -32,10 +32,10 @@ else: ?>
 		}
 		?>
 						<?php if (isset($public_contact) && ! $public_contact):?>
-						<a class="editpbkcontact simplelink" href="#"><?php echo tr('Edit');?></a>
+						<a class="editpbkcontact simplelink" href="javascript:void(0);"><?php echo tr('Edit');?></a>
 						<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
 						<?php endif;?>
-						<a class="sendmessage simplelink" href="#"><?php echo tr('Send message');?></a>
+						<a class="sendmessage simplelink" href="javascript:void(0);"><?php echo tr('Send message');?></a>
 						<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
 						<?php echo anchor('messages/conversation/folder/phonebook/'.rawurlencode($tmp->Number), tr('See conversation'), 'title="'.tr('See conversation').'" class="simplelink"') ;?>
 					</span>

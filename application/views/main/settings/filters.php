@@ -1,6 +1,6 @@
 <?php $this->load->view('js_init/js_filters');?>
 <div align="center">
-	<a href="#" id="addnewfilter"><?php echo tr('Create a new filter');?></a>
+	<a href="javascript:void(0);" id="addnewfilter"><?php echo tr('Create a new filter');?></a>
 </div>
 
 <?php foreach ($filters->result_array() as $filter):?>
@@ -22,9 +22,9 @@
 
 	<div class="right_column">
 		<span>
-			<a href="#" class="editfilter simplelink"><?php echo tr('Edit');?></a>
+			<a href="javascript:void(0);" class="editfilter simplelink"><?php echo tr('Edit');?></a>
 			<img src="<?php echo $this->config->item('img_path');?>circle.gif" />
-			<a href="#" class="deletefilter simplelink"><?php echo tr('Delete');?></a>
+			<a href="javascript:void(0);" class="deletefilter simplelink"><?php echo tr('Delete');?></a>
 		</span>
 	</div>
 </div>
