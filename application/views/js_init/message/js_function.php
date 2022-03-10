@@ -3,21 +3,21 @@
 
 	$(document).ready(function() {
 
-		var offset = "<?php echo $offset;?>";
-		var folder = "<?php echo $folder;?>";
+		var offset = <?php echo json_protect($offset);?>;
+		var folder = <?php echo json_protect($folder);?>;
 		var base_url = "<?php echo site_url();?>";
-		var source = "<?php echo $type;?>";
+		var source = <?php echo json_protect($type);?>;
 		var delete_url = base_url + '/messages/delete_messages/';
 		var move_url = base_url + '/messages/move_message/';
-		var refresh_url = base_url + '/messages/' + folder + '/' + source;
+		var refresh_url = base_url + '/messages/' + encodeURIComponent(folder) + '/' + encodeURIComponent(source);
 		var delete_folder_url = base_url + '/kalkun/delete_folder/';
 
 		if (folder == 'folder') {
 			var current_folder = '';
 			var id_folder = '';
 		} else {
-			var current_folder = "<?php echo $id_folder;?>";
-			var id_folder = "<?php echo $id_folder;?>";
+			var current_folder = <?php echo json_protect($id_folder);?>;
+			var id_folder = <?php echo json_protect($id_folder);?>;
 			refresh_url = refresh_url + '/' + id_folder;
 		}
 
@@ -309,6 +309,8 @@
 		 *
 		 */
 		$(document).on('click', '#delete-all-link', function() {
+			var url = "<?php echo site_url('messages/delete_all'); ?>";
+			url += <?php echo json_protect(strtolower($this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name'))); ?>;
 			$("#deletealldialog").dialog({
 				closeText: <?php echo tr_js('Close'); ?>,
 				bgiframe: true,
@@ -319,7 +321,7 @@
 						$(this).dialog('close');
 					},
 					<?php echo tr_js('Delete all'); ?>: function() {
-						$.get("<?php echo site_url('messages/delete_all').'/'.strtolower($this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name'));?>");
+						$.get(url);
 						$(this).dialog('close');
 						refresh();
 					}

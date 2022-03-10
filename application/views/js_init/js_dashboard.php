@@ -12,7 +12,7 @@
 
 	$(document).ready(function() {
 		// Load data for the chart
-		reload("<?php echo $data_url;?>");
+		reload("<?php echo site_url('kalkun/get_statistic');?>");
 
 		$('a.stats-toggle').css("color", "#454545");
 		$('a.stats-toggle').on("click", function(e) {

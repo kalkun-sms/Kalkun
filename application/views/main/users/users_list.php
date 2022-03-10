@@ -19,7 +19,7 @@ else: ?>
 						<input type="checkbox" class="select_user" />&nbsp;<span style="font-weight: bold;"><?php echo htmlentities($tmp->realname, ENT_QUOTES);?></span>
 						<?php if (in_array($tmp->id_user, $this->config->item('inbox_owner_id')))
 {
-	echo '<sup>( Inbox Master )</sup>';
+	echo '<sup>('.tr('Inbox Master').')</sup>';
 } ?>
 					</div>
 				</div>

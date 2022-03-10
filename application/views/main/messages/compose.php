@@ -31,7 +31,7 @@ if ($val_type == 'reply'): ?>
 $phone = $dest;
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $phone));
 if ($qry->num_rows() !== 0):
-echo htmlentities($qry->row('Name'), ENT_QUOTES).' <'.htmlentities($phone, ENT_QUOTES).'>';
+echo htmlentities($qry->row('Name'), ENT_QUOTES).' &lt;'.htmlentities($phone, ENT_QUOTES).'&gt;';
 else:
 echo htmlentities($phone, ENT_QUOTES);
 endif;
@@ -49,7 +49,7 @@ endif;
 $phone = $dest;
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $phone));
 if ($qry->num_rows() !== 0):
-echo htmlentities($qry->row('Name'), ENT_QUOTES).' <'.htmlentities($phone, ENT_QUOTES).'>';
+echo htmlentities($qry->row('Name'), ENT_QUOTES).' &lt;'.htmlentities($phone, ENT_QUOTES).'&gt;';
 else:
 echo htmlentities($phone, ENT_QUOTES);
 endif;
@@ -73,7 +73,7 @@ endif;
 			<?php
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $dest));
 if ($qry->num_rows() !== 0):
-echo htmlentities($qry->row('Name'), ENT_QUOTES).' <'.htmlentities($dest, ENT_QUOTES).'>';
+echo htmlentities($qry->row('Name'), ENT_QUOTES).' &lt;'.htmlentities($dest, ENT_QUOTES).'&gt;';
 else:
 echo htmlentities($dest, ENT_QUOTES);
 endif;

@@ -42,11 +42,11 @@
 		<p>If you find an issue, please report it on the <a class="base_color underline_link" href="https://github.com/kalkun-sms/Kalkun/issues" target="_blank">issue page of the project</a> and add the information below:</p>
 		<p>
 			<b>* Kalkun version:</b>
-			`<?php echo $this->config->item('kalkun_version');?> [Lang: <?php echo $this->Kalkun_model->get_setting()->row('language');?>] [CountryCode: <?php echo $this->Kalkun_model->get_setting()->row('country_code');?>]`
+			`<?php echo $this->config->item('kalkun_version');?> [Lang: <?php echo htmlentities($this->Kalkun_model->get_setting()->row('language'), ENT_QUOTES);?>] [CountryCode: <?php echo htmlentities($this->Kalkun_model->get_setting()->row('country_code'), ENT_QUOTES);?>]`
 			<br /><b>* Operating system:</b>
-			`<?php echo php_uname(); ?>`
+			`<?php echo htmlentities(php_uname(), ENT_QUOTES); ?>`
 			<br /><b>* PHP Version:</b>
-			`<?php echo phpversion(); ?>`
+			`<?php echo htmlentities(phpversion(), ENT_QUOTES); ?>`
 			<br /><b>* DB Backend:</b>
 			`<?php
 				$this->load->helper('kalkun_helper');
@@ -59,19 +59,19 @@
 			<br /><b>* Browser:</b>
 			`<?php
 					$this->load->library('user_agent');
-					echo $this->agent->browser(), ' ', $this->agent->version() ; ?>`
+					echo htmlentities($this->agent->browser(), ENT_QUOTES), ' ', htmlentities($this->agent->version(), ENT_QUOTES) ; ?>`
 			<br /><b>* Plugins:</b>
 			`<?php
 					$this->load->model('Plugin_model');
 					$installed_plugins = array_column($this->Plugin_model->get_plugins()->result_array(), 'plugin_system_name');
-					echo implode(', ', $installed_plugins);
+					echo htmlentities(implode(', ', $installed_plugins), ENT_QUOTES);
 					?>`
 		</p>
 	</div>
 </div>
 
 <!-- Add Folder Dialog -->
-<div id="addfolderdialog" title="<?php echo tr('Add folder');?>" class="dialog">
+<div id="addfolderdialog" title="<?php echo htmlentities(tr('Add folder'), ENT_QUOTES);?>" class="dialog">
 	<?php
 	$this->load->helper('form');
 	echo form_open('kalkun/add_folder', array('class' => 'addfolderform'));
@@ -218,7 +218,7 @@
 </div>
 
 <!-- Advanced Search Dialog -->
-<div id="a_search_dialog" title="<?php echo tr('Advanced search');?>" class="dialog">
+<div id="a_search_dialog" title="<?php echo htmlentities(tr('Advanced search'), ENT_QUOTES);?>" class="dialog">
 	<?php
 	$this->load->helper('form');
 	echo form_open('messages/query', array('id' => 'a_search_form'));

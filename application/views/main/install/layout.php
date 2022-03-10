@@ -38,21 +38,21 @@
 
 <body>
 	<center>
-		<div id="logo_only"><img src="<?php echo $this->config->item('img_path');?>logo.png" </div>
-			<div id="arrow">&nbsp;</div>
-			<div id="container">
-				<div id="left-container"><?php $this->load->view($main);?></div>
-				<div id="right-container">
-					<h3 style="padding-left: 20px"><?php echo tr('Installation steps'); ?></h3>
-					<ul>
-						<li id="step1"><?php echo tr('Welcome screen'); ?></li>
-						<li id="step2"><?php echo tr('Requirements check'); ?></li>
-						<li id="step3"><?php echo tr('Database setup'); ?></li>
-						<li id="step4"><?php echo tr('Final configuration steps'); ?></li>
-					</ul>
-				</div>
+		<div id="logo_only"><img src="<?php echo $this->config->item('img_path');?>logo.png"> </div>
+		<div id="arrow">&nbsp;</div>
+		<div id="container">
+			<div id="left-container"><?php $this->load->view($main);?></div>
+			<div id="right-container">
+				<h3 style="padding-left: 20px"><?php echo tr('Installation steps'); ?></h3>
+				<ul>
+					<li id="step1"><?php echo tr('Welcome screen'); ?></li>
+					<li id="step2"><?php echo tr('Requirements check'); ?></li>
+					<li id="step3"><?php echo tr('Database setup'); ?></li>
+					<li id="step4"><?php echo tr('Final configuration steps'); ?></li>
+				</ul>
 			</div>
-			<div id="footer">Powered by Kalkun <?php echo $this->config->item('kalkun_version');?></div>
+		</div>
+		<div id="footer">Powered by Kalkun <?php echo $this->config->item('kalkun_version');?></div>
 	</center>
 </body>
 

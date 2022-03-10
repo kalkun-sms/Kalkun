@@ -8,7 +8,7 @@
 } ?>
 
 <!-- Move To Dialog -->
-<div id="movetodialog" title="<?php echo tr('Select folder');?>" class="dialog" style="background: #cce9f2;">
+<div id="movetodialog" title="<?php echo htmlentities(tr('Select folder'), ENT_QUOTES);?>" class="dialog" style="background: #cce9f2;">
 	<?php
 if ($this->uri->segment(2) == 'my_folder')
 {
@@ -32,12 +32,12 @@ if ($this->uri->segment(2) == 'my_folder')
 { ?>
 
 <!-- Rename Folder Dialog -->
-<div id="renamefolderdialog" title="<?php echo tr('Rename folder');?>" class="dialog">
+<div id="renamefolderdialog" title="<?php echo htmlentities(tr('Rename folder'), ENT_QUOTES);?>" class="dialog">
 	<?php
 	$this->load->helper('form');
 	echo form_open('kalkun/rename_folder', array('class' => 'renamefolderform'));
 ?>
-	<label for="name"><?php echo tr('Folder name');?></label>
+	<label for="name"><?php echo htmlentities(tr('Folder name'), ENT_QUOTES);?></label>
 	<input type="hidden" name="id_folder" value="<?php echo htmlentities($this->uri->segment(4), ENT_QUOTES);?>" />
 	<input type="hidden" name="source_url" value="<?php echo htmlentities($this->uri->uri_string(), ENT_QUOTES);?>" />
 	<input type="text" name="edit_folder_name" id="edit_folder_name" class="text ui-widget-content ui-corner-all" />

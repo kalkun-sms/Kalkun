@@ -21,7 +21,7 @@ foreach ($supported_regions as $region)
 {
 	$country = Locale::getDisplayRegion('-'.$region, $this->lang->locale);
 	$label = $country . ' (+' . $phoneNumberUtil->getCountryCodeForRegion($region) . ')';
-	$country_calling_codes += [$region => $label];
+	$country_calling_codes += [$region => htmlentities($label, ENT_QUOTES)];
 }
 $collator = new Collator($this->lang->locale);
 $collator->asort($country_calling_codes);
