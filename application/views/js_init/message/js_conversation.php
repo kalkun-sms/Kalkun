@@ -86,7 +86,7 @@
 							update_csrf_hash();
 						});
 				});
-				var notif = <?php echo tr_js('{0} conversation(s) recovered'); ?>
+				var notif = <?php echo tr_js('{0} conversation(s) recovered'); ?>;
 				notif = notif.replace('{0}', count);
 				show_notification(notif);
 			}

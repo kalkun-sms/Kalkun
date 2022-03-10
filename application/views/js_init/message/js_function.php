@@ -223,7 +223,7 @@
 			}
 			$('#message_holder').load(refresh_url, function(response, status, xhr) {
 				if (status == "error" || xhr.status != 200) {
-					var msg = <?php echo tr_js('Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>
+					var msg = <?php echo tr_js('Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>;
 					$('.loading_area').html('<span style="white-space: nowrap">' + msg + '</span>');
 					var cntdwn = setInterval(function() {
 						current_val = $('#countdown-count').text();
