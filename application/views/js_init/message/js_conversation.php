@@ -368,8 +368,7 @@
 		$(document).on('click', ".resend_bulk", function() {
 			var count = $("input.select_message:checked:visible").length;
 			if (count == 0) {
-				$('.notification_area').text(<?php echo tr_js('No item selected.'); ?>);
-				$('.notification_area').show();
+				show_notification(<?php echo tr_js('No item selected.'); ?>);
 			} else {
 				resend_conf_label = <?php echo tr_js('You are about to resend {0} message(s).'); ?>;
 				resend_conf_label = resend_conf_label.replace('{0}', count);

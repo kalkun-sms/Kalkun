@@ -44,8 +44,7 @@
 			var count = $("input.select_group:checkbox:checked").length;
 			var dest_url = '<?php echo site_url('phonebook/delete_group') ?>';
 			if (count == 0) {
-				$('.notification_area').text(<?php echo tr_js('No group selected.'); ?>);
-				$('.notification_area').show();
+				show_notification(<?php echo tr_js('No group selected.'); ?>);
 			} else {
 				// confirm first
 				$("#confirm_delete_group_dialog").dialog({

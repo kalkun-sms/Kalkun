@@ -7,9 +7,7 @@
 			// check group
 			var group = '<?php echo count($pbkgroup);?>';
 			if (group == 0) {
-				$('.notification_area').text(<?php echo tr_js('No group detected, add one first.'); ?>);
-				$('.notification_area').show();
-				setTimeout("	$('.notification_area').fadeOut();", 2000);
+				show_notification(<?php echo tr_js('No group detected, add one first.'); ?>);
 			} else {
 				if ($("#pbk_add_wizard_dialog").hasClass('ui-dialog-content')) {
 					$("#pbk_add_wizard_dialog").dialog('close')
@@ -94,9 +92,7 @@
 			var count = $("input:checkbox:checked:visible").length;
 			var dest_url = '<?php echo site_url('phonebook/delete_contact') ?>';
 			if (count == 0) {
-				$('.notification_area').text(<?php echo tr_js('No contact selected.'); ?>);
-				$('.notification_area').show();
-				setTimeout("	$('.notification_area').fadeOut();", 2000);
+				show_notification(<?php echo tr_js('No contact selected.'); ?>);
 			} else {
 				$("#confirm_delete_contact_dialog").dialog({
 					closeText: <?php echo tr_js('Close'); ?>,
@@ -142,9 +138,7 @@
 			var count = $("input:checkbox:checked").length;
 			var dest_url = '<?php echo site_url('phonebook/update_contact_group') ?>';
 			if (count == 0) {
-				$('.notification_area').text(<?php echo tr_js('No contact selected.'); ?>);
-				$('.notification_area').show();
-				setTimeout("$('.notification_area').fadeOut();", 2000);
+				show_notification(<?php echo tr_js('No contact selected.'); ?>);
 			} else {
 				$("input.select_contact:checked").each(function(i, val) {
 					var row = $(this).parents('tr');
@@ -157,9 +151,7 @@
 						.done(function() {
 							if (i == ($("input.select_contact:checked").length - 1)) // execute only after the last one.
 							{
-								$('.notification_area').text(<?php echo tr_js('Updated'); ?>);
-								$('.notification_area').show();
-								setTimeout("$('.notification_area').fadeOut();", 2000);
+								show_notification(<?php echo tr_js('Updated'); ?>);
 							}
 						})
 						.fail(function(data) {

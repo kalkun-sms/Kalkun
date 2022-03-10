@@ -80,8 +80,7 @@
 			var count = $("input:checkbox:checked").length;
 			var dest_url = '<?php echo site_url('users/delete_user') ?>';
 			if (count == 0) {
-				$('.notification_area').text(<?php echo tr_js('No user selected'); ?>);
-				$('.notification_area').show();
+				show_notification(<?php echo tr_js('No user selected'); ?>);
 			} else {
 				// confirm first
 				$("#confirm_delete_user_dialog").dialog({
@@ -98,8 +97,7 @@
 								var row = $(this).parents('tr');
 								var id = row.attr('id');
 								if (id == inbox_master) {
-									$('.notification_area').text(<?php echo tr_js('Action not allowed'); ?>);
-									$('.notification_area').show();
+									show_notification(<?php echo tr_js('Action not allowed'); ?>);
 								} else {
 									$.post(dest_url, {
 											id_user: id,
