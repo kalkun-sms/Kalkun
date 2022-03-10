@@ -1,22 +1,18 @@
 <div id="contact_container" class="hidden"></div>
-<?php
-if (count($messages) == 0)
-{
-	if ($this->uri->segment(2) == 'my_folder')
-	{
-		echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('There is no message in this folder.').'.</i></p>';
-	}
-	else
-	{
-		if ($this->uri->segment(2) == 'search')
-		{
-			echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('No result.').'</i></p>';
-		}
-		else
-		{
+
+<?php if (count($messages) == 0): /* CASE WHEN THERE IS NO MESSAGE IN THIS FOLDER */ ?>
+<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>
+		<?php
+	switch ($this->uri->segment(2)):
+		case 'my_folder':
+			echo tr('There is no message in this folder.');
+			break;
+		case 'search':
+			echo tr('No result.');
+			break;
+		default:
 			$folder_type = '';
-			switch ($this->uri->segment(3))
-			{
+			switch ($this->uri->segment(3)):
 				case 'inbox':
 					$folder_type = tr('Inbox');
 					break;
@@ -26,17 +22,20 @@ if (count($messages) == 0)
 				case 'sentitems':
 					$folder_type = tr('Sent items');
 					break;
-			}
-			if ($folder_type === '' && $this->uri->segment(4) === 'sentitems' && $this->uri->segment(5) === 'sending_error')
+			endswitch;
+			if ($folder_type === ''
+				&& $this->uri->segment(4) === 'sentitems'
+				&& $this->uri->segment(5) === 'sending_error')
 			{
 				$folder_type = tr('Sending error');
 			}
-			echo '<p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('There is no message in {0}.', NULL, $folder_type).'</i></p>';
-		}
-	}
-}
-else
-{
+			echo tr('There is no message in {0}.', NULL, $folder_type);
+			break;
+	endswitch;
+?>
+	</i></p>
+
+<?php else: // CASE WHEN THERE IS AT LEAST ONE MESSAGE IN THIS FOLDER
 	// loop - begin
 	foreach ($messages as $tmp):
 
@@ -90,18 +89,18 @@ else
 	$char_per_line = 100 - strlen(kalkun_nice_date($message_date)) - strlen($senderName); ?>
 
 <div class="messagelist conversation messagelist_conversation">
-	<div class="message_container <?php echo $tmp['source']; ?>">
+	<div class="message_container <?php echo htmlentities($tmp['source'], ENT_QUOTES); ?>">
 		<div class="message_header" style="color: #444; height: 20px; overflow: hidden">
-			<input type="hidden" name="item_source<?php echo $tmp['ID']; ?>" id="item_source<?php echo $tmp['ID']; ?>" value="<?php echo $tmp['source']; ?>" />
-			<input type="hidden" class="item_number" name="item_number<?php echo $tmp['ID']; ?>" id="item_number<?php echo $tmp['ID']; ?>" value="<?php echo htmlentities($number, ENT_QUOTES); ?>" />
-			<input type="checkbox" id="<?php echo $tmp['ID']; ?>" class="select_message nicecheckbox" value="<?php echo $tmp['ID']; ?>" style="border: none;" />
+			<input type="hidden" name="item_source<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" id="item_source<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" value="<?php echo htmlentities($tmp['source'], ENT_QUOTES); ?>" />
+			<input type="hidden" class="item_number" name="item_number<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" id="item_number<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" value="<?php echo htmlentities($number, ENT_QUOTES); ?>" />
+			<input type="checkbox" id="<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" class="select_message nicecheckbox" value="<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" style="border: none;" />
 			<span class="message_toggle" style="cursor: pointer">
 				<span <?php  if ($tmp['source'] == 'inbox' && $tmp['readed'] == 'false')
 	{
 		echo 'style="font-weight: bold"';
-	} ?>><?php echo kalkun_nice_date($message_date); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
+	} ?>><?php echo htmlentities(kalkun_nice_date($message_date), ENT_QUOTES); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
 					&nbsp;&nbsp;<?php echo htmlentities($senderName, ENT_QUOTES); ?></span>
-				<span class="message_preview">-&nbsp;<?php echo message_preview(htmlentities($tmp['TextDecoded'], ENT_QUOTES), $char_per_line); ?></span>
+				<span class="message_preview">-&nbsp;<?php echo htmlentities(message_preview($tmp['TextDecoded'], $char_per_line), ENT_QUOTES); ?></span>
 			</span>
 		</div>
 
@@ -206,7 +205,9 @@ if ($tmp['source'] == 'sentitems'):
 			</table>
 		</div>
 
-		<?php echo '<div class="message_content hidden" style="padding: 5px 10px 5px 20px">'.showmsg($tmp['TextDecoded']).'</div>'; ?>
+		<div class="message_content hidden" style="padding: 5px 10px 5px 20px">
+			<?php echo nl2br(htmlentities($tmp['TextDecoded'], ENT_QUOTES)); ?>
+		</div>
 
 		<div class="optionmenu hidden" style="padding-left: 20px">
 			<ul>
@@ -250,5 +251,5 @@ if ($tmp['source'] == 'sentitems'):
 		}
 	}
 	endforeach;
-}
+endif;
 ?>

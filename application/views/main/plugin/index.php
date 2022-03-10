@@ -21,7 +21,7 @@ if (count($plugins) > 0)
 			&& file_exists(APPPATH . 'plugins/'.$tmp['plugin_system_name'].'/controllers/'.ucfirst($tmp['plugin_system_name']).'.php')
 			&& $tmp['plugin_controller_has_index'] === TRUE)
 		{
-			echo '<div style="float: left"><h3>'.anchor('plugin/'.$tmp['plugin_system_name'], htmlentities($tmp['plugin_name'], ENT_QUOTES)).'</h3></div>';
+			echo '<div style="float: left"><h3>'.anchor('plugin/'.rawurlencode($tmp['plugin_system_name']), htmlentities($tmp['plugin_name'], ENT_QUOTES)).'</h3></div>';
 		}
 		else
 		{
@@ -29,9 +29,9 @@ if (count($plugins) > 0)
 		} ?>
 		<div style="float: right; margin-top: 15px;">
 			<?php if ($type === 'installed'):?>
-			<a href="<?php echo site_url('pluginss/uninstall/'.$tmp['plugin_system_name']); ?>" class="nicebutton"><?php echo tr('Uninstall'); ?></a>
+			<a href="<?php echo site_url('pluginss/uninstall/'.rawurlencode($tmp['plugin_system_name'])); ?>" class="nicebutton"><?php echo tr('Uninstall'); ?></a>
 			<?php else:?>
-			<a href="<?php echo site_url('pluginss/install/'.$tmp['plugin_system_name']); ?>" class="nicebutton"><?php echo tr('Install'); ?></a>
+			<a href="<?php echo site_url('pluginss/install/'.rawurlencode($tmp['plugin_system_name'])); ?>" class="nicebutton"><?php echo tr('Install'); ?></a>
 			<?php endif; ?>
 		</div>
 

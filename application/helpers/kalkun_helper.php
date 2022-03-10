@@ -109,26 +109,14 @@ function get_modem_status($status, $tolerant)
 
 function message_preview($str, $n)
 {
-	if (strlen($str) <= $n)
+	if (mb_strlen($str) <= $n)
 	{
-		return showtags($str);
+		return $str;
 	}
 	else
 	{
-		return showtags(mb_substr($str, 0, $n - 3)).'&#8230;';
+		return mb_substr($str, 0, $n - 3).'…';
 	}
-}
-
-function showtags($msg)
-{
-	$msg = preg_replace('/</', '&lt;', $msg);
-	$msg = preg_replace('/>/', '&gt;', $msg);
-	return $msg;
-}
-
-function showmsg($msg)
-{
-	return nl2br(showtags($msg));
 }
 
 function compare_date_asc($a, $b)

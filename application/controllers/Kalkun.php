@@ -44,7 +44,6 @@ class Kalkun extends MY_Controller {
 		$this->load->model('Phonebook_model');
 		$data['main'] = 'main/dashboard/home';
 		$data['title'] = 'Dashboard';
-		$data['data_url'] = site_url('kalkun/get_statistic');
 		if ($this->config->item('disable_outgoing'))
 		{
 			$data['alerts'][] = tr('Outgoing SMS disabled. Contact system administrator.');

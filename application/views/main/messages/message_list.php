@@ -107,7 +107,7 @@ else
 				<span <?php  if ($type == 'inbox' && $tmp->readed == 'false')
 	{
 		echo 'style="font-weight: bold"';
-	} ?>><?php echo kalkun_nice_date($message_date); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
+	} ?>><?php echo htmlentities(kalkun_nice_date($message_date), ENT_QUOTES); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
 					&nbsp;&nbsp;<?php echo htmlentities($senderName, ENT_QUOTES); ?>
 					<?php
 			if ($folder == 'folder'):
@@ -119,7 +119,7 @@ else
 				<span class="message_preview" <?php  if ($type == 'inbox' && $tmp->readed == 'false')
 	{
 		echo 'style="font-weight: bold"';
-	} ?>>-&nbsp;<?php echo message_preview(htmlentities($tmp->TextDecoded, ENT_QUOTES), $char_per_line); ?></span>
+	} ?>>-&nbsp;<?php echo htmlentities(message_preview($tmp->TextDecoded, $char_per_line), ENT_QUOTES); ?></span>
 			</span>
 		</div>
 	</div>

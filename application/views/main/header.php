@@ -20,26 +20,12 @@ $jquery_datepicker_regional = $this->lang->get_jquery_datepicker_regional(APPPAT
 $jquery_ui_i18n = FCPATH."media/js/jquery-ui/i18n/datepicker-${jquery_datepicker_regional}.js";
 if ($jquery_datepicker_regional !== '' && file_exists($jquery_ui_i18n)):
 ?>
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/i18n/datepicker-<?php echo $jquery_datepicker_regional; ?>.js"></script>
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/i18n/datepicker-<?php echo rawurlencode($jquery_datepicker_regional); ?>.js"></script>
 <?php endif; ?>
 <!--[if IE]>
   <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>ie-fix.css" />
 <![endif]-->
 <?php
-//background image
-list($bg_act_option, $bg_act) = explode(';', $this->Kalkun_model->get_setting()->row('bg_image'));
-if ($bg_act_option == 'true'):?>
-<style type="text/css">
-	body {
-		background-image: url('<?php echo $this->config->item('img_path').''.$bg_act;?>');
-		background-repeat: repeat-x;
-		background-attachment: fixed;
-	}
-
-</style>
-
-<?php
-endif;
 
 $this->load->view('js_init/js_layout');
 $this->load->view('js_init/js_keyboard');

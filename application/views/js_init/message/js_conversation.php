@@ -188,7 +188,16 @@
 				$('.loading_area').text(<?php echo tr_js('Loading'); ?>);
 				$('.loading_area').fadeIn("slow");
 			}
-			$('#message_holder').load("<?php echo  site_url('messages/conversation/'.$this->uri->segment(3).'/'.$this->uri->segment(4).'/'.preg_replace ('/ /', '%20', $this->uri->segment(5)).'/'.$this->uri->segment(6, 0)) ?>", function(response, status, xhr) {
+			var url = "<?php echo site_url(
+	'messages/conversation/'.
+				implode('/', [
+					$this->uri->segment(3),
+					$this->uri->segment(4),
+					$this->uri->segment(5),
+					$this->uri->segment(6, 0),
+				])
+); ?>";
+			$('#message_holder').load(url, function(response, status, xhr) {
 				if (status == "error" || xhr.status != 200) {
 					var msg = <?php echo tr_js('Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>;
 					$('.loading_area').html('<span style="white-space: nowrap">' + msg + '</span>');

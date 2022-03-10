@@ -11,7 +11,7 @@
 		array_push($grouptext_array, $tmp->GroupName);
 	endforeach;
 	?>
-		var all_grp = <?php echo json_encode($grouptext_array); ?>;
+		var all_grp = <?php echo json_protect($grouptext_array); ?>;
 
 		function removeFromArray(orig_data, selection) {
 			var source = orig_data.slice(0);
