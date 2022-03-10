@@ -1255,8 +1255,13 @@ class Messages extends MY_Controller {
 
 		if ($param['option'] === 'permanent' && $this->config->item('only_admin_can_permanently_delete') && $this->session->userdata('level') !== 'admin')
 		{
-			echo tr('Only administrators can permanently delete messages.');
-			exit;
+			$return_msg = [
+				'type' => 'error',
+				'msg' => tr('Only administrators can permanently delete messages.')
+			];
+			header('Content-type: application/json');
+			echo json_encode($return_msg);
+			return;
 		}
 
 		if ($param['type'] === 'single' && $param['source'] === 'inbox')

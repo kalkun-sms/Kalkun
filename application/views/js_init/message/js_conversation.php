@@ -14,11 +14,13 @@
 		$(document).on('click', "a.global_delete", action_delete = function() {
 			var count = $("input.select_message:checked:visible").length;
 			if (count == 0) {
-				$('.notification_area').text("<?php echo tr_addcslashes('"', 'No item selected.'); ?>");
-				$('.notification_area').show();
+				show_notification("<?php echo tr_addcslashes('"', 'No item selected.'); ?>");
 			} else {
-				var notif = "<?php echo tr_addcslashes('"', '{0} message(s) deleted'); ?>";
-				notif = notif.replace('{0}', count);
+				var notif = {
+					msg: "<?php echo tr_addcslashes('"', '{0} message(s) deleted'); ?>",
+					type: "info",
+				};
+				notif.msg = notif.msg.replace('{0}', count);
 				$("input.select_message:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					id_access = '#item_source' + $(this).val();
@@ -33,14 +35,13 @@
 							current_folder: current_folder,
 							[csrf_name]: csrf_hash,
 						})
-						.done(
-							function(data) {
-								if (!data) {
-									$(message_row).slideUp("slow");
-								} else {
-									notif = data;
-								}
-							})
+						.done(function(data) {
+							if (!data) {
+								$(message_row).slideUp("slow");
+							} else {
+								notif = data;
+							}
+						})
 						.fail(function(data) {
 							display_error_container(data);
 						})
@@ -48,7 +49,7 @@
 							update_csrf_hash();
 						});
 				});
-				show_notification(notif);
+				show_notification(notif.msg, notif.type);
 			}
 		});
 		/**
