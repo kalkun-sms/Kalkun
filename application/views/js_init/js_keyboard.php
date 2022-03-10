@@ -32,7 +32,7 @@
 
 		$(document).on('keydown', null, 'shift+/', function() {
 			$("#kbd").dialog({
-				closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
+				closeText: <?php echo tr_js('Close'); ?>,
 				bgiframe: true,
 				autoOpen: false,
 				width: 600,

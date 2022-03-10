@@ -38,7 +38,7 @@
 			'minChars': 0,
 			'interactive': true,
 			'delimiter': ',',
-			'placeholder': '<?php echo tr_addcslashes('"', 'Type group name');?>',
+			'placeholder': <?php echo tr_js('Type group name'); ?>,
 			"onAddTag": function(element, tag) {
 				source = removeFromArray(all_grp, element.value.split(","));
 				$('#groups_tag').autocomplete("option", "source", source);

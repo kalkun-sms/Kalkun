@@ -17,14 +17,14 @@
 			},
 			messages: {
 				current_password: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
+					required: <?php echo tr_js('Field required.'); ?>,
 				},
 				new_password: {
-					required: "<?php echo tr_addcslashes('"', 'Field required.');?>",
-					minlength: "<?php echo tr_addcslashes('"', 'Value is too short.');?>"
+					required: <?php echo tr_js('Field required.'); ?>,
+					minlength: <?php echo tr_js('Value is too short.'); ?>
 				},
 				confirm_password: {
-					equalTo: "<?php echo tr_addcslashes('"', 'Passwords do not match.');?>"
+					equalTo: <?php echo tr_js('Passwords do not match.'); ?>
 				}
 			}
 		});
