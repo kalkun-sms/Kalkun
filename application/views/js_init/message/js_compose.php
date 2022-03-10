@@ -337,6 +337,7 @@
 
 		$('#import_file').on('change', null, function() {
 			$('#composeForm').trigger('submit');
+			update_csrf_hash();
 			return false;
 		});
 
