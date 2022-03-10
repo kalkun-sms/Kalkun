@@ -279,6 +279,8 @@ class Messages extends MY_Controller {
 				$csv[$field] = implode(',', $tmp[$field]);
 			}
 			$csv['Field'] = $csvField;
+
+			header('Content-type: application/json');
 			echo json_encode($csv);
 			return;
 		}

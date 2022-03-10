@@ -6,7 +6,7 @@
 	}
 
 	function updateChartData(content) {
-		myChart.data = JSON.parse(content)
+		myChart.data = content;
 		myChart.update();
 	}
 

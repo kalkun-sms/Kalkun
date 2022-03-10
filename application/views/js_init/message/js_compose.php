@@ -132,8 +132,7 @@
 						output_format: "tagInput"
 					})
 					.done(function(data) {
-						result = jQuery.parseJSON(data);
-						result = removeFromArray(result, "id", $("#personvalue").val())
+						result = removeFromArray(data, "id", $("#personvalue").val());
 
 						if (result.length === 0) {
 							var msg = "<?php echo tr_addcslashes('"', 'No results for {0}', NULL, '%arg%'); ?>";
