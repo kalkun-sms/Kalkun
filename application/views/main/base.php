@@ -262,9 +262,9 @@
 			<td align="right"><label for="a_search_sentitems_status"><b><?php echo tr('Status');?></b></label></td>
 			<td colspan="3">
 				<select name="a_search_sentitems_status" style="width: 98%">
-					<option><?php echo tr('All');?></option>
-					<option><?php echo tr('Delivered');?></option>
-					<option><?php echo tr('Sending failed');?></option>
+					<option value="all"><?php echo tr('All');?></option>
+					<option value="delivered"><?php echo tr('Delivered');?></option>
+					<option value="failed"><?php echo tr('Sending failed');?></option>
 				</select>
 			</td>
 		</tr>
