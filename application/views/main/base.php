@@ -53,9 +53,9 @@
 				$db_name_human = get_database_property($this->db->platform())['human'];
 				echo $db_name_human, ' ', $this->db->version(), ' (', $this->db->platform(), ')'; ?>`
 			<br /><b>* Gammu version:</b>
-			`<?php echo  filter_data($this->Kalkun_model->get_gammu_info('gammu_version')->row('Client')); ?>`
+			`<?php echo  filter_data(htmlentities($this->Kalkun_model->get_gammu_info('gammu_version')->row('Client')), ENT_QUOTES); ?>`
 			<br /><b>* Gammu DB schema:</b>
-			`<?php echo  filter_data($this->Kalkun_model->get_gammu_info('db_version')->row('Version')); ?>`
+			`<?php echo  filter_data(htmlentities($this->Kalkun_model->get_gammu_info('db_version')->row('Version')), ENT_QUOTES); ?>`
 			<br /><b>* Browser:</b>
 			`<?php
 					$this->load->library('user_agent');
@@ -72,12 +72,14 @@
 
 <!-- Add Folder Dialog -->
 <div id="addfolderdialog" title="<?php echo tr('Add folder');?>" class="dialog">
-	<form class="addfolderform" method="post" action="<?php echo  site_url();?>/kalkun/add_folder">
-		<label for="name"><?php echo tr('Folder name');?></label>
-		<input type="hidden" name="source_url" value="<?php echo $this->uri->uri_string();?>" />
-		<input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user');?>" />
-		<input type="text" name="folder_name" id="folder_name" class="text ui-widget-content ui-corner-all" />
-	</form>
+	<?php
+	$this->load->helper('form');
+	echo form_open('kalkun/add_folder', array('class' => 'addfolderform'));
+?>
+	<label for="name"><?php echo tr('Folder name');?></label>
+	<input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user');?>" />
+	<input type="text" name="folder_name" id="folder_name" class="text ui-widget-content ui-corner-all" />
+	<?php echo form_close(); ?>
 </div>
 
 <!-- Shortcuts dialog -->
@@ -242,9 +244,10 @@
 					<option value="5"><?php echo tr('Trash');?></option>
 					<?php
 					$my_folders = $this->Kalkun_model->get_folders('all');
-					foreach ($my_folders->result() as $my_folder):
-					echo "<option value=\"{$my_folder->id_folder}\">{$my_folder->name}</option>";
-					endforeach;
+					foreach ($my_folders->result() as $my_folder): ?>
+					<option value="<?php echo htmlentities($my_folder->id_folder, ENT_QUOTES); ?>"><?php echo htmlentities($my_folder->name, ENT_QUOTES); ?></option>
+					<?php
+					endforeach; ?>
 					?>
 				</select>
 			</td>
@@ -280,4 +283,8 @@
 		</tr>
 	</table>
 	<?php echo form_close();?>
+
+	<!-- Add Error container Dialog -->
+	<div id="error_container" title="<?php echo tr('Error'); ?>" class="dialog">&nbsp;</div>
+
 </div>

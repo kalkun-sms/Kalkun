@@ -64,7 +64,7 @@ foreach ($this->Kalkun_model->get_folders('all')->result() as $val):
 $folder_count_inbox = $this->Message_model->get_messages(array('type' => 'inbox', 'id_folder' => $val->id_folder))->num_rows();
 $folder_count_sentitems = $this->Message_model->get_messages(array('type' => 'sentitems', 'id_folder' => $val->id_folder))->num_rows();
 $folder_count = $folder_count_inbox + $folder_count_sentitems;
-echo '<p><span>'.$val->name.': </span>'.$folder_count.'</p>';
+echo '<p><span>'.htmlentities($val->name, ENT_QUOTES).': </span>'.$folder_count.'</p>';
 endforeach;
 ?>
 </div>

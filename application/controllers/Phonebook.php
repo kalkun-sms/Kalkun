@@ -323,26 +323,22 @@ class Phonebook extends MY_Controller {
 	{
 		$this->load->helper('form');
 		$data['pbkgroup'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
-		$type = $this->input->post('type');
+		$type = $this->input->get('type');
 
-		if ($type === 'edit')
+		switch ($type)
 		{
-			$id_pbk = $this->input->post('param1');
-			$data['contact'] = $this->Phonebook_model->get_phonebook(array('option' => 'by_idpbk', 'id_pbk' => $id_pbk));
-		}
-		else
-		{
-			if ($type === 'message')
-			{
-				$data['number'] = $this->input->post('param1');
-			}
-			else
-			{
-				if ($type === 'normal')
-				{
-					$data['group_id'] = $this->input->post('param1');
-				}
-			}
+			case 'edit':
+				$id_pbk = $this->input->get('param1');
+				$data['contact'] = $this->Phonebook_model->get_phonebook(array('option' => 'by_idpbk', 'id_pbk' => $id_pbk));
+				break;
+			case 'message':
+				$data['number'] = $this->input->get('param1');
+				break;
+			case 'normal':
+				$data['group_id'] = $this->input->get('param1');
+				break;
+			default:
+				break;
 		}
 		$this->load->view('main/phonebook/contact/add_contact', $data);
 	}
@@ -369,15 +365,24 @@ class Phonebook extends MY_Controller {
 		if ($this->input->post('editid_pbk'))
 		{
 			$pbk['id_pbk'] = $this->input->post('editid_pbk');
-			$msg = '<div class="notif">'.tr('Contact updated successfully.').'</div>';
+			$return_msg = [
+				'type' => 'info',
+				'msg' => tr('Contact updated successfully.'),
+			];
 		}
 		else
 		{
-			$msg = '<div class="notif">'.tr('Contact added successfully.').'</div>';
+			$return_msg = [
+				'type' => 'info',
+				'msg' => tr('Contact added successfully.'),
+			];
 		}
 
 		$this->Phonebook_model->add_contact($pbk);
-		echo $msg;
+
+		// Return status
+		header('Content-type: application/json');
+		echo json_encode($return_msg);
 	}
 
 	// --------------------------------------------------------------------
@@ -395,9 +400,9 @@ class Phonebook extends MY_Controller {
 		$this->load->model('User_model');
 
 		$tagInputResult = [];
-		$output_format = $this->input->post('output_format');
+		$output_format = $this->input->get('output_format');
 
-		$q = $this->input->post('q', TRUE);
+		$q = $this->input->get('q');
 		if (isset($q) && strlen($q) > 0)
 		{
 			$user_id = $this->session->userdata('id_user');
@@ -436,7 +441,7 @@ class Phonebook extends MY_Controller {
 					array_push($tagInputResult, array(
 						'id' => $val['id_user'].':u',
 						'name' => $val['realname'],
-						'value' => $val['realname'].' ('.tr('User').')',
+						'value' => $val['realname'].' ('.tr('User', 'default').')',
 					));
 					$user[$key]['id'] = $val['id_user'].':u';
 					$user[$key]['name'] = $val['realname'];

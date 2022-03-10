@@ -135,7 +135,7 @@
 				// show loading animation
 				$("#personvalue_tags_tag").addClass("processing_image");
 
-				$.post("<?php echo site_url('phonebook/get_phonebook/').'/'.(isset($source) ? $source : '');?>", {
+				$.get("<?php echo site_url('phonebook/get_phonebook/').'/'.(isset($source) ? $source : '');?>", {
 						q: value,
 						output_format: "tagInput"
 					})
@@ -159,19 +159,7 @@
 					.fail(function(data) {
 						$("#personvalue_tags_tag").removeClass("processing_image");
 						onTagInputKeydownRunning = false;
-						$("#compose_sms_container_error").html($(data.responseText).filter("div").removeAttr("id"));
-						$("#compose_sms_container_error").dialog({
-							closeText: "<?php echo tr_addcslashes('"', 'Close'); ?>",
-							modal: true,
-							width: 550,
-							show: "fade",
-							hide: "fade",
-							buttons: {
-								"<?php echo tr_addcslashes('"', 'Close'); ?>": function() {
-									$(this).dialog("destroy");
-								}
-							}
-						});
+						display_error_container(data);
 						return;
 					});
 				return;
@@ -215,7 +203,7 @@
 					required: "#sendoption3:checked",
 					remote: {
 						url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
-						type: "post",
+						type: "get",
 						data: {
 							phone: function() {
 								return $("#manualvalue").val();
@@ -295,7 +283,7 @@
 			var length = $(this).val().length;
 			max_chars_per_sms = isGSMAlphabet($(this).val()) ? 160 : 70;
 			var message_count = Math.ceil((length + message_length_correction) / max_chars_per_sms);
-			$(this).parent().find('.counter').html(msg.replace("{0}", length).replace("{1}", message_count));
+			$(this).parent().find('.counter').text(msg.replace("{0}", length).replace("{1}", message_count));
 			$(this).keyup(function() {
 				var str = $(this).val();
 				var new_length = str.length;
@@ -304,7 +292,7 @@
 				n = (n) ? n.length : 0;
 				new_length = new_length + n;
 				var message_count = Math.ceil((new_length + message_length_correction) / max_chars_per_sms);
-				$(this).parent().find('.counter').html(msg.replace("{0}", new_length).replace("{1}", message_count));
+				$(this).parent().find('.counter').text(msg.replace("{0}", new_length).replace("{1}", message_count));
 			});
 		});
 
@@ -332,22 +320,28 @@
 			}
 		});
 
-		$("input[name='sendoption']").on("click", function() {
-			if ($(this).val() == 'sendoption1') {
+		function refresh_recipient_input(element) {
+			if (element.val() == 'sendoption1') {
 				$("#person").show();
 				$("#import").hide();
 				$("#manually").hide();
 			}
-			if ($(this).val() == 'sendoption3') {
+			if (element.val() == 'sendoption3') {
 				$("#person").hide();
 				$("#import").hide();
 				$("#manually").show();
 			}
-			if ($(this).val() == 'sendoption4') {
+			if (element.val() == 'sendoption4') {
 				$("#person").hide();
 				$("#import").show();
 				$("#manually").hide();
 			}
+		}
+
+		refresh_recipient_input($("input[name='sendoption']:checked"));
+
+		$("input[name='sendoption']").on("click", function() {
+			refresh_recipient_input($(this));
 		});
 
 		$('#import_file').on('change', null, function() {
@@ -396,15 +390,23 @@
 		var dest_url = "<?php echo site_url();?>/messages/canned_response/save";
 
 		if (name != null) {
-			$('.loading_area').html("<?php echo tr_addcslashes('"', 'Saving...');?>");
+			$('.loading_area').text("<?php echo tr_addcslashes('"', 'Saving...');?>");
 			$('.loading_area').fadeIn("slow");
 			$.post(dest_url, {
-				'name': name,
-				message: $('#message').val()
-			}, function() {
-				$('.loading_area').fadeOut("slow");
-				$("#canned_response_container").dialog('close');
-			});
+					'name': name,
+					message: $('#message').val(),
+					[csrf_name]: csrf_hash,
+				})
+				.done(function(data) {
+					$('.loading_area').fadeOut("slow");
+					$("#canned_response_container").dialog('close');
+				})
+				.fail(function(data) {
+					display_error_container(data);
+				})
+				.always(function(data) {
+					update_csrf_hash();
+				});
 		}
 	}
 
@@ -412,11 +414,19 @@
 
 		var dest_url = "<?php echo site_url();?>/messages/canned_response/get";
 		$.post(dest_url, {
-			'name': name
-		}, function(data) {
-			$('#message').val(data);
-			$("#canned_response_container").dialog('close');
-		});
+				'name': name,
+				[csrf_name]: csrf_hash,
+			})
+			.done(function(data) {
+				$('#message').val(data);
+				$("#canned_response_container").dialog('close');
+			})
+			.fail(function(data) {
+				display_error_container(data);
+			})
+			.always(function(data) {
+				update_csrf_hash();
+			});
 	}
 
 	function delete_canned_response(name) {
@@ -425,10 +435,18 @@
 		if (!c) return;
 		var dest_url = "<?php echo site_url();?>/messages/canned_response/delete";
 		$.post(dest_url, {
-			'name': name
-		}, function() {
-			update_canned_responses();
-		});
+				'name': name,
+				[csrf_name]: csrf_hash,
+			})
+			.done(function(data) {
+				update_canned_responses();
+			})
+			.fail(function(data) {
+				display_error_container(data);
+			})
+			.always(function(data) {
+				update_csrf_hash();
+			});
 	}
 
 	function update_canned_responses() {

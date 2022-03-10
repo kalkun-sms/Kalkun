@@ -21,11 +21,11 @@ if (count($plugins) > 0)
 			&& file_exists(APPPATH . 'plugins/'.$tmp['plugin_system_name'].'/controllers/'.ucfirst($tmp['plugin_system_name']).'.php')
 			&& $tmp['plugin_controller_has_index'] === TRUE)
 		{
-			echo '<div style="float: left"><h3>'.anchor('plugin/'.$tmp['plugin_system_name'], $tmp['plugin_name']).'</h3></div>';
+			echo '<div style="float: left"><h3>'.anchor('plugin/'.$tmp['plugin_system_name'], htmlentities($tmp['plugin_name'], ENT_QUOTES)).'</h3></div>';
 		}
 		else
 		{
-			echo '<div style="float: left"><h3 style="color: #000">'.$tmp['plugin_name'].'</h3></div>';
+			echo '<div style="float: left"><h3 style="color: #000">'.htmlentities($tmp['plugin_name'], ENT_QUOTES).'</h3></div>';
 		} ?>
 		<div style="float: right; margin-top: 15px;">
 			<?php if ($type === 'installed'):?>
@@ -36,10 +36,10 @@ if (count($plugins) > 0)
 		</div>
 
 		<div class="clear"><small>
-				<strong><?php echo tr('Version'); ?>:</strong> <?php echo $tmp['plugin_version']; ?>&nbsp;&nbsp;
-				<strong><?php echo tr('Author'); ?>:</strong> <?php echo anchor($tmp['plugin_author_uri'], $tmp['plugin_author']); ?>
+				<strong><?php echo tr('Version'); ?>:</strong> <?php echo htmlentities($tmp['plugin_version'], ENT_QUOTES); ?>&nbsp;&nbsp;
+				<strong><?php echo tr('Author'); ?>:</strong> <?php echo anchor(htmlentities($tmp['plugin_author_uri'], ENT_QUOTES), htmlentities($tmp['plugin_author'], ENT_QUOTES)); ?>
 			</small></div>
-		<p><?php echo $tmp['plugin_description']; ?></p>
+		<p><?php echo htmlentities($tmp['plugin_description'], ENT_QUOTES); ?></p>
 		<hr />
 		<?php
 	}

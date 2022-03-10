@@ -47,23 +47,8 @@ class Kalkun extends MY_Controller {
 		$data['data_url'] = site_url('kalkun/get_statistic');
 		if ($this->config->item('disable_outgoing'))
 		{
-			$data['alerts'][] = '<div class="warning">'.tr('Outgoing SMS disabled. Contact system administrator.').'</div>';
+			$data['alerts'][] = tr('Outgoing SMS disabled. Contact system administrator.');
 		}
-		$this->load->view('main/layout', $data);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * About
-	 *
-	 * Display about page
-	 *
-	 * @access	public
-	 */
-	function about()
-	{
-		$data['main'] = 'main/about';
 		$this->load->view('main/layout', $data);
 	}
 
@@ -188,16 +173,19 @@ class Kalkun extends MY_Controller {
 	 */
 	function unread_count()
 	{
-		$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'uid' => $this->session->userdata('id_user')))->num_rows();
-		$in = ($tmp_unread > 0) ? '('.$tmp_unread.')' : '';
+		$unread_count['in'] = $this->Message_model->get_messages([
+			'readed' => FALSE,
+			'uid' => $this->session->userdata('id_user'),
+		])->num_rows();
+		$unread_count['draft'] = 0;
+		$unread_count['spam'] = $this->Message_model->get_messages([
+			'readed' => FALSE,
+			'id_folder' => '6',
+			'uid' => $this->session->userdata('id_user'),
+		])->num_rows();
 
-		$tmp_unread = 0;
-		$draft = ($tmp_unread > 0) ? '('.$tmp_unread.')' : '';
-
-		$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => '6', 'uid' => $this->session->userdata('id_user')))->num_rows();
-		$spam = ($tmp_unread > 0) ? '('.$tmp_unread.')' : '';
-
-		echo $in. '/' . $draft . '/' . $spam;
+		header('Content-type: application/json');
+		echo json_encode($unread_count);
 	}
 
 	// --------------------------------------------------------------------
@@ -328,14 +316,15 @@ class Kalkun extends MY_Controller {
 	function phone_number_validation()
 	{
 		$result = 'false'; // Default to "false"
+
+		$phone = $this->input->get_post('phone');
+		$region = $this->input->get_post('region');
+
 		try
 		{
-			$phone = $this->input->post('phone');
-			$region = $this->input->post('region');
-
 			// Check if is possible number
 			$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
-			$region = ($region !== NULL) ? $region : $this->Kalkun_model->get_setting()->row('country_code');
+			$region = ( ! empty($region)) ? $region : $this->Kalkun_model->get_setting()->row('country_code');
 			$phoneNumberObject = $phoneNumberUtil->parse($phone, $region);
 			$is_possible = $phoneNumberUtil->isPossibleNumber($phoneNumberObject);
 
@@ -362,5 +351,11 @@ class Kalkun extends MY_Controller {
 			$result = $e->getMessage();
 		}
 		echo json_encode($result);
+	}
+
+	function get_csrf_hash()
+	{
+		header('Content-type: application/json');
+		echo json_encode($this->security->get_csrf_hash());
 	}
 }

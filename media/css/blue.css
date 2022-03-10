@@ -143,3 +143,7 @@ div.tagsinput span.tag {
 	color: black;
 	border: 1px solid #86c0d2;
 }
+
+.error_notif {
+	color: red;
+}

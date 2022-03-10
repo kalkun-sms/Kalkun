@@ -95,12 +95,12 @@ class Users extends MY_Controller {
 	function add_user()
 	{
 		$this->load->helper('form');
-		$type = $this->input->post('type');
+		$type = $this->input->get('type');
 		$data['tmp'] = '';
 
 		if ($type === 'edit')
 		{
-			$id_user = $this->input->post('param1');
+			$id_user = $this->input->get('param1');
 			$data['users'] = $this->User_model->getUsers(array('option' => 'by_iduser', 'id_user' => $id_user));
 		}
 		$this->load->view('main/users/add_user', $data);
@@ -119,14 +119,25 @@ class Users extends MY_Controller {
 	{
 		$this->load->helper('kalkun');
 		$this->User_model->adduser();
+
 		if ($this->input->post('id_user'))
 		{
-			echo '<div class="notif">'.tr('User updated successfully.').'</div>';
+			$return_msg = [
+				'type' => 'info',
+				'msg' => tr('User updated successfully.'),
+			];
 		}
 		else
 		{
-			echo '<div class="notif">'.tr('User added successfully.').'</div>';
+			$return_msg = [
+				'type' => 'info',
+				'msg' => tr('User added successfully.'),
+			];
 		}
+
+		// Return status
+		header('Content-type: application/json');
+		echo json_encode($return_msg);
 	}
 
 	// --------------------------------------------------------------------
@@ -145,7 +156,7 @@ class Users extends MY_Controller {
 
 		// get and delete all user_outbox
 		$res = $this->Message_model->get_messages(array('uid' => $uid, 'type' => 'outbox'));
-		foreach ($res->result as $tmp)
+		foreach ($res->result() as $tmp)
 		{
 			$param = array('type' => 'single', 'option' => 'outbox', 'id_message' => $tmp->id_outbox);
 			$this->Message_model->delMessages($param);
@@ -153,15 +164,15 @@ class Users extends MY_Controller {
 
 		// get and delete all user_inbox
 		$res = $this->Message_model->get_messages(array('uid' => $uid, 'type' => 'inbox'));
-		foreach ($res->result as $tmp)
+		foreach ($res->result() as $tmp)
 		{
 			$param = array('type' => 'single', 'option' => 'permanent', 'source' => 'inbox', 'id_message' => $tmp->id_inbox);
 			$this->Message_model->delete_messages($param);
 		}
 
 		// get and delete all user_sentitems
-		$res = $this->Message_model->delete_messages(array('uid' => $uid, 'type' => 'sentitems'));
-		foreach ($res->result as $tmp)
+		$res = $this->Message_model->get_messages(array('uid' => $uid, 'type' => 'sentitems'));
+		foreach ($res->result() as $tmp)
 		{
 			$param = array('type' => 'single', 'option' => 'permanent', 'source' => 'sentitems', 'id_message' => $tmp->id_sentitems);
 			$this->Message_model->delete_messages($param);

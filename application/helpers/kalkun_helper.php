@@ -241,7 +241,7 @@ function get_database_property($driver)
 
 	if ( ! in_array($driver, $valid_driver))
 	{
-		die ("Database driver you're using is not supported");
+		show_error("Database driver you're using is not supported", 500);
 	}
 
 	$postgre['name'] = 'postgre';

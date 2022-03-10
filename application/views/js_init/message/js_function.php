@@ -32,36 +32,44 @@
 		 *
 		 */
 		$(document).on('click', "a.global_delete", action_delete = function() {
-			var count = $("input.select_conversation:checkbox:checked").length;
+			var count = $("input.select_conversation:checked:visible").length;
 			var notif = "<?php echo tr_addcslashes('"', '{0} conversation(s) deleted'); ?>";
 			notif = notif.replace('{0}', count);
 			if (count == 0) {
 				show_notification("<?php echo tr_addcslashes('"', 'No item selected.')?>");
 			} else {
-				$("input.select_conversation:checked").each(function() {
+				$("input.select_conversation:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.ajaxSetup({
 						async: false
 					});
 					$.post(delete_url + source, {
-						<?php if ($this->config->item('conversation_grouping')): ?>
-						type: 'conversation',
-						number: $(this).val(),
-						current_folder: current_folder
-						<?php else: ?>
-						type: 'single',
-						id: $(this).val(),
-						<?php endif; ?>
-					}, function(data) {
-						if (!data) {
-							$(message_row).slideUp("slow");
-							$(message_row).remove();
-						} else {
-							notif = data;
-						}
-					});
+							[csrf_name]: csrf_hash,
+							<?php if ($this->config->item('conversation_grouping')): ?>
+							type: 'conversation',
+							number: $(this).val(),
+							current_folder: current_folder,
+							<?php else: ?>
+							type: 'single',
+							id: $(this).val(),
+							<?php endif; ?>
+						})
+						.done(function(data) {
+							if (!data) {
+								$(message_row).slideUp("slow");
+								$(message_row).remove();
+							} else {
+								notif = data;
+							}
+							show_notification(notif); // translate
+						})
+						.fail(function(data) {
+							display_error_container(data);
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
-				show_notification(notif); // translate
 			}
 		});
 
@@ -73,7 +81,7 @@
 		 *
 		 */
 		$(document).on('click', "a.recover_button", action_recover = function() {
-			var count = $("input.select_conversation:checkbox:checked").length;
+			var count = $("input.select_conversation:checked:visible").length;
 			var notif = "<?php echo tr_addcslashes('"', '{0} conversation(s) recovered'); ?>";
 			notif = notif.replace('{0}', count);
 			if (count == 0) {
@@ -82,25 +90,34 @@
 
 				var id_folder = (source == 'inbox') ? 1 : 3;
 
-				$("input.select_conversation:checked").each(function() {
+				$("input.select_conversation:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post(move_url, {
-						<?php if ($this->config->item('conversation_grouping')): ?>
-						type: 'conversation',
-						current_folder: current_folder,
-						folder: source,
-						id_folder: id_folder,
-						number: $(this).val()
-						<?php else: ?>
-						type: 'single',
-						current_folder: current_folder,
-						folder: source,
-						id_folder: id_folder,
-						id_message: $(this).val(),
-						<?php endif; ?>
-					}, function() {
-						$(message_row).slideUp("slow");
-					});
+							[csrf_name]: csrf_hash,
+							<?php if ($this->config->item('conversation_grouping')): ?>
+							type: 'conversation',
+							current_folder: current_folder,
+							folder: source,
+							id_folder: id_folder,
+							number: $(this).val(),
+							<?php else: ?>
+							type: 'single',
+							current_folder: current_folder,
+							folder: source,
+							id_folder: id_folder,
+							id_message: $(this).val(),
+							<?php endif; ?>
+						})
+						.done(function() {
+							$(message_row).slideUp("slow");
+						})
+						.fail(function(data) {
+							display_error_container(data);
+							return;
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
 				show_notification(notif);
 			}
@@ -116,7 +133,7 @@
 		 *
 		 */
 		$(document).on('click', ".move_to", function() {
-			var count = $("input.select_conversation:checkbox:checked").length;
+			var count = $("input.select_conversation:checked:visible").length;
 			var notif = "<?php echo tr_addcslashes('"', '{0} conversation(s) moved'); ?>";
 			notif = notif.replace('{0}', count);
 			if (count == 0) {
@@ -125,25 +142,34 @@
 			} else {
 				var id_folder = $(this).attr('id');
 				$("#movetodialog").dialog('close');
-				$("input.select_conversation:checked").each(function() {
+				$("input.select_conversation:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
 					$.post(move_url, {
-						<?php if ($this->config->item('conversation_grouping')): ?>
-						type: 'conversation',
-						current_folder: current_folder,
-						folder: source,
-						id_folder: id_folder,
-						number: $(this).val()
-						<?php else: ?>
-						type: 'single',
-						current_folder: current_folder,
-						folder: source,
-						id_folder: id_folder,
-						id_message: $(this).val(),
-						<?php endif; ?>
-					}, function() {
-						$(message_row).slideUp("slow");
-					});
+							[csrf_name]: csrf_hash,
+							<?php if ($this->config->item('conversation_grouping')): ?>
+							type: 'conversation',
+							current_folder: current_folder,
+							folder: source,
+							id_folder: id_folder,
+							number: $(this).val(),
+							<?php else: ?>
+							type: 'single',
+							current_folder: current_folder,
+							folder: source,
+							id_folder: id_folder,
+							id_message: $(this).val(),
+							<?php endif; ?>
+						})
+						.done(function() {
+							$(message_row).slideUp("slow");
+						})
+						.fail(function(data) {
+							display_error_container(data);
+							return;
+						})
+						.always(function(data) {
+							update_csrf_hash();
+						});
 				});
 				show_notification(notif);
 			}
@@ -189,7 +215,7 @@
 		// refresh
 		$(document).on('click', "a.refresh_button, div#logo a", refresh = function(type) {
 			if (type != 'retry') {
-				$('.loading_area').html("<?php echo tr_addcslashes('"', 'Loading'); ?>");
+				$('.loading_area').text("<?php echo tr_addcslashes('"', 'Loading'); ?>");
 				$('.loading_area').fadeIn("slow");
 			}
 			$('#message_holder').load(refresh_url, function(response, status, xhr) {
@@ -197,11 +223,11 @@
 					var msg = "<?php echo tr_addcslashes('"', 'Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>"
 					$('.loading_area').html('<span style="white-space: nowrap">' + msg + '</span>');
 					var cntdwn = setInterval(function() {
-						current_val = $('#countdown-count').html();
-						if (current_val > 1) $('#countdown-count').html(current_val - 1);
+						current_val = $('#countdown-count').text();
+						if (current_val > 1) $('#countdown-count').text(current_val - 1);
 						else {
 							clearInterval(cntdwn);
-							$('#retry-progress-display').html("<?php echo tr_addcslashes('"', 'Retrying now'); ?>")
+							$('#retry-progress-display').text("<?php echo tr_addcslashes('"', 'Retrying now'); ?>")
 						}
 					}, 1000);
 					setTimeout(function() {

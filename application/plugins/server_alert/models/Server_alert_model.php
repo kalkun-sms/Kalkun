@@ -51,12 +51,12 @@ class Server_alert_model extends CI_Model {
 	function add()
 	{
 		$data = array (
-			'alert_name' => $this->input->post('alert_name', TRUE),
-			'ip_address' => $this->input->post('ip_address', TRUE),
-			'port_number' => trim($this->input->post('port_number', TRUE)),
-			'timeout' => trim($this->input->post('timeout', TRUE)),
-			'phone_number' => trim(phone_format_e164($this->input->post('phone_number', TRUE))),
-			'respond_message' => $this->input->post('respond_message', TRUE),
+			'alert_name' => $this->input->post('alert_name'),
+			'ip_address' => $this->input->post('ip_address'),
+			'port_number' => trim($this->input->post('port_number')),
+			'timeout' => trim($this->input->post('timeout')),
+			'phone_number' => trim(phone_format_e164($this->input->post('phone_number'))),
+			'respond_message' => $this->input->post('respond_message'),
 			'release_code' => '', // Not used for now (db requires NOT NULL)
 		);
 		$this->db->insert('plugin_server_alert', $data);
@@ -65,14 +65,14 @@ class Server_alert_model extends CI_Model {
 	function update()
 	{
 		$data = array (
-			'alert_name' => $this->input->post('editalert_name', TRUE),
-			'ip_address' => $this->input->post('editip_address', TRUE),
-			'port_number' => trim($this->input->post('editport_number', TRUE)),
-			'timeout' => trim($this->input->post('edittimeout', TRUE)),
-			'phone_number' => trim(phone_format_e164($this->input->post('editphone_number', TRUE))),
-			'respond_message' => $this->input->post('editrespond_message', TRUE),
+			'alert_name' => $this->input->post('editalert_name'),
+			'ip_address' => $this->input->post('editip_address'),
+			'port_number' => trim($this->input->post('editport_number')),
+			'timeout' => trim($this->input->post('edittimeout')),
+			'phone_number' => trim(phone_format_e164($this->input->post('editphone_number'))),
+			'respond_message' => $this->input->post('editrespond_message'),
 		);
-		$this->db->where('id_server_alert', $this->input->post('editid_server_alert', TRUE));
+		$this->db->where('id_server_alert', $this->input->post('editid_server_alert'));
 		$this->db->update('plugin_server_alert', $data);
 	}
 

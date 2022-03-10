@@ -13,54 +13,54 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require_once (APPPATH.'plugins/Plugin_helper.php');
 
 // Add hook for incoming message
-add_action("message.incoming.before", "sms_to_wordpress", 16);
+add_action('message.incoming.before', 'sms_to_wordpress', 16);
 
 /**
 * Function called when plugin first activated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_activate
-* 
+*
 */
 function sms_to_wordpress_activate()
 {
-    return true;
+	return TRUE;
 }
 
 /**
 * Function called when plugin deactivated
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_deactivate
-* 
+*
 */
 function sms_to_wordpress_deactivate()
 {
-    return true;
+	return TRUE;
 }
 
 /**
 * Function called when plugin first installed into the database
 * Utility function must be prefixed with the plugin name
 * followed by an underscore.
-* 
+*
 * Format: pluginname_install
-* 
+*
 */
 function sms_to_wordpress_install()
 {
-	$CI =& get_instance();
+	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
-	if (!$CI->db->table_exists('plugin_sms_to_wordpress'))
+	if ( ! $CI->db->table_exists('plugin_sms_to_wordpress'))
 	{
 		$db_driver = $CI->db->platform();
 		$db_prop = get_database_property($db_driver);
-		execute_sql(APPPATH."plugins/sms_to_wordpress/media/".$db_prop['file']."_sms_to_wordpress.sql");
+		execute_sql(APPPATH.'plugins/sms_to_wordpress/media/'.$db_prop['file'].'_sms_to_wordpress.sql');
 	}
-    return true;
+	return TRUE;
 }
 
 function sms_to_wordpress($sms)
@@ -68,13 +68,13 @@ function sms_to_wordpress($sms)
 	$config = Plugin_helper::get_plugin_config('sms_to_wordpress');
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
-	
-	list($code) = explode(" ", $message);
+
+	list($code) = explode(' ', $message);
 	$wordpress_code = $config['wordpress_code'];
 	$wordpress_post = trim(str_replace($config['wordpress_code'], '', $message));
-	if (strtoupper($code)===strtoupper($wordpress_code))
+	if (strtoupper($code) === strtoupper($wordpress_code))
 	{
-		$CI =& get_instance();
+		$CI = &get_instance();
 		$CI->load->model('sms_to_wordpress/sms_to_wordpress_model', 'sms_to_wordpress_model');
 
 		// if wp url exist
@@ -82,18 +82,18 @@ function sms_to_wordpress($sms)
 		if (is_array($wp))
 		{
 			$client = new IXR\Client\Client($wp['wp_url']);
-			
+
 			// Post parameter
 			$post = array(
-			    'title' => 'Post from SMS',
-			    'description' => $wordpress_post,
-			    //'dateCreated' => (new IXR_Date(time())),
-			    'post_type' => 'post',
-			    'post_status' => 'publish',
-			    'mt_keywords' => 'sms,kalkun',
+				'title' => 'Post from SMS',
+				'description' => $wordpress_post,
+				//'dateCreated' => (new IXR_Date(time())),
+				'post_type' => 'post',
+				'post_status' => 'publish',
+				'mt_keywords' => 'sms,kalkun',
 				'publish' => 1
 			);
-			
+
 			$CI->load->library('encryption');
 			$wp_pass = $CI->encryption->decrypt($wp['wp_password']);
 			if ($wp_pass === FALSE)
@@ -103,10 +103,9 @@ function sms_to_wordpress($sms)
 			}
 			// Debug ON. Now you know what's going on.
 			//$client->debug = true;
-			
+
 			// Execute
 			$res = $client->query('metaWeblog.newPost', '', $wp['wp_username'], $wp_pass, $post);
 		}
 	}
 }
-

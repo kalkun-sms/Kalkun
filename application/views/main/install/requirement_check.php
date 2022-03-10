@@ -42,7 +42,6 @@
 
 	<tr>
 		<td colspan="3">
-			<?php $db_property = get_database_property($database_driver); ?>
 			<?php echo $db_property['human']; ?> <i>(Read from database configuration)</i>
 		</td>
 		<td class="right">
@@ -140,19 +139,6 @@
 		{
 			echo '<span class="red">'.tr('Missing').'</span>';
 			$error++;
-		}?></td>
-	</tr>
-
-	<tr>
-		<td colspan="3" class="bottom">APC or APCu - APC User Cache</td>
-		<td class="right bottom"><?php if (extension_loaded('apc') || extension_loaded('apcu'))
-		{
-			echo '<span class="green">'.tr('Found').'</span>';
-		}
-		else
-		{
-			echo '<span class="orange">'.tr('Missing').' (not mandatory)</span>';
-			//$error++;
 		}?></td>
 	</tr>
 </table>

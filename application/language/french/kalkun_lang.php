@@ -58,7 +58,6 @@ $lang['Move to'] = 'Déplacer';
 $lang['Select folder'] = 'Sélectionner le dossier';
 $lang['Delete'] = 'Supprimer';
 $lang['Click to delete this folder'] = 'Cliquer pour supprimer ce dossier';
-$lang['permanently'] = 'définitivement';
 $lang['Recover'] = 'Récupérer';
 
 $lang['Send date'] = "Date d'envoi";
@@ -160,9 +159,6 @@ $lang['Should be a valid URL'] = "L'URL doit étre valide";
 $lang['Import from file'] = 'Importer à partir du fichier';
 
 // Messages controller
-$lang['Login successful. But {0} data lost during login process.'] = 'Connexion réussie. Mais données {0} perdues durant le processus de login.';
-$lang['Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.'] = 'Veuillez <a href="{0}" onclick="goBackToForm()">retourner à votre formulaire</a> et le soumettre à nouveau.';
-$lang['Login successful. Resubmitting form.'] = 'Connexion réussie. Le formulaire est à nouveau soumis.';
 $lang['Outgoing SMS disabled.'] = 'SMS sortants désactivés.';
 $lang['A number was found in DND Resitry. SMS sending was skipped for it.'] = "Un numéro a été trouvé dans le registre DND. L'envoi est annulé pour celui-ci.";
 $lang['Message delivered successfully to user inbox.'] = "Message placé avec succès dans la boîte de réception de l'utilisateur.";
@@ -219,7 +215,6 @@ $lang['Name'] = 'Nom';
 $lang['Telephone number'] = 'Numéro de téléphone';
 $lang['Email ID'] = 'Email';
 $lang['Enable email forwarding'] = "Activer le transfert d'Email";
-$lang['Searching...'] = 'Recherche...';
 $lang['{0} remaining'] = '{0} restant';
 $lang['{0} ago'] = 'Il y a {0}';
 $lang['Edit contact'] = 'Modifier contact';
@@ -283,8 +278,6 @@ $lang['No'] = 'Non';
 $lang['Default'] = 'Par défaut';
 $lang['Delivery Report'] = 'Accusé de réception';
 
-$lang['You are about to resend message to <strong>{0}</strong>.'] = 'Vous êtes sur le point de renvoyer le message au <strong>{0}</strong>.';
-$lang['Message content:'] = 'Contenu du message&nbsp;:';
 $lang['Delete copy (prevents duplicates).'] = 'Supprimer la copie (évite les doublons).';
 $lang['You are about to resend {0} message(s).'] = 'Vous êtes sur le point de renvoyer {0} message(s).';
 
@@ -308,7 +301,6 @@ $lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer
 $lang['Contact updated successfully.'] = 'Contact mis à jour.';
 $lang['Contact added successfully.'] = 'Contact ajouté.';
 // Gammu Model
-$lang['Could not send message. Make sure Gammu path is correctly set.'] = "Le message n'a pu être envoyé. Assurez-vous que le chemin vers Gammu est correctement défini.";
 $lang['Message queued.'] = "Message mis en file d'attente.";
 $lang['Parameter invalid.'] = 'Paramètre invalide.';
 
@@ -364,9 +356,8 @@ $lang['Open shortcut help'] = 'Ouvrir l\'aide des raccourcis';
 $lang['Error'] = 'Erreur';
 $lang['Please specify a valid mobile phone number'] = 'Veuillez entrer un numéro de mobile valide';
 $lang['Go to {0}'] = 'Aller à {0}';
-$lang['No results.'] = 'Pas de résultats.';
 $lang['Please enter a name for your message. It should be unique.'] = 'Veuillz entrer un nom pour votre message. Il doit être unique.';
-$lang['Are you sure? This will overwrite the previous message.'] = 'Êtes-vous sûr⋅e&nbsp;? Cela va écraser le message précédent.';
+$lang['Are you sure? This will overwrite the previous message.'] = 'Êtes-vous sûr⋅e ? Cela va écraser le message précédent.';
 $lang['PHP Frontend for gammu-smsd'] = 'PHP Frontend for gammu-smsd';
 $lang['Authors'] = 'Auteurs';
 $lang['See {0} page'] = 'Voir la page {0}';
@@ -378,7 +369,6 @@ $lang['Add a new folder'] = 'Ajouter un nouveau dossier';
 $lang['Plugins'] = 'Plugins';
 $lang['No data'] = 'Pas de données';
 $lang['Select field'] = 'Sélectionner le champ';
-$lang['Repost message after login'] = 'Renvoyer le message après connexion';
 $lang['Delete folder'] = 'Supprimer le dossier';
 $lang['Role'] = 'Rôle';
 $lang['Delete users'] = 'Supprimer utilisateurs';
@@ -398,7 +388,7 @@ $lang['Retrying now'] = 'Nouvel essai en cours';
 $lang['{0} character(s) / {1} message(s)'] = '{0} caractères(s) / {1} message(s)';
 $lang['{0} message(s) deleted'] = '{0} message(s) supprimé(s)';
 $lang['{0} conversation(s) recovered'] = '{0} conversation(s) récupérées';
-$lang['Messages moved successfully'] = 'Messages moved successfully';
+$lang['Messages moved successfully'] = 'Messages déplacés avec succès';
 $lang['Outgoing message cannot be spam'] = 'Les messages sortant ne peuvent pas être du spam';
 $lang['Spam reported'] = 'Déclaré comme Spam';
 $lang['Message(s) marked non-spam'] = 'Message(s) marqué(s) "non-spam"';
@@ -416,3 +406,9 @@ $lang['Value must be a number.'] = 'La valeur doit être un nombre.';
 $lang['{0} part messages'] = '{0} part messages';
 $lang['Content'] = 'Contenu';
 $lang['Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.'] = "L'installation a été désactivée par l'administrateur.<p>Pour réactiver l'accès, créer un fichier nommé <strong>install</strong> dans ce répertoire du serveur : <strong>{0}</strong>.<p>Sinon, vous pouvez <a href=\"{1}\">vous connecter</a>.";
+$lang['No results for {0}'] = 'No results for {0}';
+$lang['Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'] = 'Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.';
+$lang['Unknown error while sending WAP-LINK.'] = 'Unknown error while sending WAP-LINK.';
+$lang['Group'] = 'Group';
+$lang['Delete the original message (prevents duplicates).'] = 'Delete the original message (prevents duplicates).';
+$lang['Delete permanently'] = 'Delete permanently';

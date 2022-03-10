@@ -20,7 +20,7 @@ else
 }
 ?>
 	<?php foreach ($folder->result() as $folder):?>
-	<div class="move_to" id="<?php echo $folder->id_folder;?>"><a href="#"><?php echo $folder->name;?></a></div>
+	<div class="move_to" id="<?php echo $folder->id_folder;?>"><a href="#"><?php echo htmlentities($folder->name, ENT_QUOTES);?></a></div>
 	<?php endforeach;?>
 </div>
 
@@ -33,12 +33,15 @@ if ($this->uri->segment(2) == 'my_folder')
 
 <!-- Rename Folder Dialog -->
 <div id="renamefolderdialog" title="<?php echo tr('Rename folder');?>" class="dialog">
-	<form class="renamefolderform" method="post" action="<?php echo site_url();?>/kalkun/rename_folder">
-		<label for="name"><?php echo tr('Folder name');?></label>
-		<input type="hidden" name="id_folder" value="<?php echo $this->uri->segment(4);?>" />
-		<input type="hidden" name="source_url" value="<?php echo $this->uri->uri_string();?>" />
-		<input type="text" name="edit_folder_name" id="edit_folder_name" class="text ui-widget-content ui-corner-all" />
-	</form>
+	<?php
+	$this->load->helper('form');
+	echo form_open('kalkun/rename_folder', array('class' => 'renamefolderform'));
+?>
+	<label for="name"><?php echo tr('Folder name');?></label>
+	<input type="hidden" name="id_folder" value="<?php echo htmlentities($this->uri->segment(4), ENT_QUOTES);?>" />
+	<input type="hidden" name="source_url" value="<?php echo htmlentities($this->uri->uri_string(), ENT_QUOTES);?>" />
+	<input type="text" name="edit_folder_name" id="edit_folder_name" class="text ui-widget-content ui-corner-all" />
+	<?php echo form_close(); ?>
 </div>
 
 <!-- Delete Folder Confirmation -->
@@ -65,7 +68,7 @@ if ($this->uri->segment(2) == 'my_folder')
 				$folder_name = tr('Spam');
 				break;
 		}
-		echo '<span class="folder_name">'.$folder_name.'</span>';?>
+		echo '<span class="folder_name">'.htmlentities($folder_name, ENT_QUOTES).'</span>';?>
 		<?php if ($this->uri->segment(4) == '5' || $this->uri->segment(4) == '6'):?>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="padding: 0; cursor: pointer; font-weight: normal;" id="delete-all-link"><?php echo tr('Delete all messages now');?></a>
 		<?php endif; ?>
@@ -95,7 +98,7 @@ if ($this->uri->segment(2) == 'my_folder')
 			}
 			else
 			{
-				echo anchor('messages/my_folder/sentitems/'.$this->uri->segment(4).'', tr('Sent items'));
+				echo anchor('messages/my_folder/sentitems/'.htmlentities($this->uri->segment(4), ENT_QUOTES).'', tr('Sent items'));
 			}?>
 	</div>
 	<?php endif; ?>

@@ -58,7 +58,6 @@ $lang['Move to'] = 'Mozgatás ide';
 $lang['Select folder'] = 'Mappa kiválasztása';
 $lang['Delete'] = 'Törlés';
 $lang['Click to delete this folder'] = 'Kattintson a mappa törléséhez';
-$lang['permanently'] = 'véglegesen';
 $lang['Recover'] = 'Visszaállítás';
 
 $lang['Send date'] = 'Küldés dátuma';
@@ -160,9 +159,6 @@ $lang['Should be a valid URL'] = 'Érvényes URL-nek kell lennie';
 $lang['Import from file'] = 'Importálás fájlból';
 
 // Messages controller
-$lang['Login successful. But {0} data lost during login process.'] = 'Login successful. But {0} data lost during login process.';
-$lang['Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.'] = 'Please <a href="{0}" onclick="goBackToForm()">go back to your form</a> and submit again.';
-$lang['Login successful. Resubmitting form.'] = 'Login successful. Resubmitting form.';
 $lang['Outgoing SMS disabled.'] = 'Outgoing SMS disabled.';
 $lang['A number was found in DND Resitry. SMS sending was skipped for it.'] = 'A number was found in DND Resitry. SMS sending was skipped for it.';
 $lang['Message delivered successfully to user inbox.'] = 'Message successfully delivered to user inbox.';
@@ -219,7 +215,6 @@ $lang['Name'] = 'Név';
 $lang['Telephone number'] = 'Telefonszám';
 $lang['Email ID'] = 'Email ID';
 $lang['Enable email forwarding'] = 'Email továbbítás engedélyezése';
-$lang['Searching...'] = 'Keresés...';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';
 $lang['Edit contact'] = 'Kapcsolat szerkesztése';
@@ -283,8 +278,6 @@ $lang['No'] = 'Nem';
 $lang['Default'] = 'Alapértelmezett';
 $lang['Delivery Report'] = 'Kézbesítési jelentés';
 
-$lang['You are about to resend message to <strong>{0}</strong>.'] = 'You are about to resend message to <strong>{0}</strong>.';
-$lang['Message content:'] = 'Message content:';
 $lang['Delete copy (prevents duplicates).'] = 'Delete copy of this message (Prevent Duplicate).';
 $lang['You are about to resend {0} message(s).'] = 'You are about to resend {0} message(s).';
 
@@ -308,7 +301,6 @@ $lang['{0,number,integer} contacts imported successfully.'] = '{0,number,integer
 $lang['Contact updated successfully.'] = 'Contact has been updated.';
 $lang['Contact added successfully.'] = 'Contact has been added.';
 // Gammu Model
-$lang['Could not send message. Make sure Gammu path is correctly set.'] = 'Could not send message. Make sure Gammu path is correctly set.';
 $lang['Message queued.'] = 'Message queued.';
 $lang['Parameter invalid.'] = 'Parameter invalid.';
 
@@ -364,7 +356,6 @@ $lang['Open shortcut help'] = 'Open shortcut help';
 $lang['Error'] = 'Error';
 $lang['Please specify a valid mobile phone number'] = 'Please specify a valid mobile phone number';
 $lang['Go to {0}'] = 'Go to {0}';
-$lang['No results.'] = 'No results.';
 $lang['Please enter a name for your message. It should be unique.'] = 'Please enter a name for your message. It should be unique.';
 $lang['Are you sure? This will overwrite the previous message.'] = 'Are you sure? This will overwrite the previous message.';
 $lang['PHP Frontend for gammu-smsd'] = 'PHP Frontend for gammu-smsd';
@@ -378,7 +369,6 @@ $lang['Add a new folder'] = 'Add a new folder';
 $lang['Plugins'] = 'Plugins';
 $lang['No data'] = 'No data';
 $lang['Select field'] = 'Select field';
-$lang['Repost message after login'] = 'Repost message after login';
 $lang['Delete folder'] = 'Delete folder';
 $lang['Role'] = 'Role';
 $lang['Delete users'] = 'Delete users';
@@ -416,3 +406,9 @@ $lang['Value must be a number.'] = 'Value must be a number.';
 $lang['{0} part messages'] = '{0} part messages';
 $lang['Content'] = 'Content';
 $lang['Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.'] = 'Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.';
+$lang['No results for {0}'] = 'No results for {0}';
+$lang['Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'] = 'Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.';
+$lang['Unknown error while sending WAP-LINK.'] = 'Unknown error while sending WAP-LINK.';
+$lang['Group'] = 'Group';
+$lang['Delete the original message (prevents duplicates).'] = 'Delete the original message (prevents duplicates).';
+$lang['Delete permanently'] = 'Delete permanently';

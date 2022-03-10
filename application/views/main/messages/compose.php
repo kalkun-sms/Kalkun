@@ -18,7 +18,6 @@
 <?php echo form_open_multipart('messages/compose_process', array('id' => 'composeForm', 'class' => 'composeForm'));?>
 <table width="100%">
 	<?php
-$type = array('inbox', 'sentitems');
 
 // Reply to option
 if ($val_type == 'reply'): ?>
@@ -29,13 +28,32 @@ if ($val_type == 'reply'): ?>
 $phone = $dest;
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $phone));
 if ($qry->num_rows() !== 0):
-echo $qry->row('Name').' <'.$phone.'>';
+echo htmlentities($qry->row('Name'), ENT_QUOTES).' <'.htmlentities($phone, ENT_QUOTES).'>';
 else:
-echo $phone;
+echo htmlentities($phone, ENT_QUOTES);
 endif;
 ?>
 			<input type="hidden" name="sendoption" value="reply" />
-			<input type="hidden" name="reply_value" value="<?php echo $phone;?>" />
+			<input type="hidden" name="reply_value" value="<?php echo htmlentities($phone, ENT_QUOTES);?>" />
+		</td>
+	</tr>
+
+	<?php /* Resend */ elseif ($val_type == 'resend'):?>
+	<tr>
+		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
+		<td>
+			<?php
+$phone = $dest;
+$qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $phone));
+if ($qry->num_rows() !== 0):
+echo htmlentities($qry->row('Name'), ENT_QUOTES).' <'.htmlentities($phone, ENT_QUOTES).'>';
+else:
+echo htmlentities($phone, ENT_QUOTES);
+endif;
+?>
+			<input type="hidden" name="sendoption" value="resend" />
+			<input type="hidden" name="resend_value" value="<?php echo htmlentities($phone, ENT_QUOTES);?>" />
+			<input type="hidden" name="orig_msg_id" value="<?php echo htmlentities($orig_msg_id, ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
@@ -52,13 +70,13 @@ endif;
 			<?php
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $dest));
 if ($qry->num_rows() !== 0):
-echo $qry->row('Name').' <'.$dest.'>';
+echo htmlentities($qry->row('Name'), ENT_QUOTES).' <'.htmlentities($dest, ENT_QUOTES).'>';
 else:
-echo $dest;
+echo htmlentities($dest, ENT_QUOTES);
 endif;
 ?>
 			<input type="hidden" name="sendoption" value="reply" />
-			<input type="hidden" name="reply_value" value="<?php echo $dest;?>" />
+			<input type="hidden" name="reply_value" value="<?php echo htmlentities($dest, ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
@@ -66,9 +84,9 @@ endif;
 	<tr>
 		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
-			<?php echo $this->Phonebook_model->get_phonebook(array('option' => 'groupname', 'id' => $dest))->row('GroupName');?>
+			<?php echo htmlentities($this->Phonebook_model->get_phonebook(array('option' => 'groupname', 'id' => $dest))->row('GroupName'), ENT_QUOTES);?>
 			<input type="hidden" name="sendoption" value="pbk_groups" />
-			<input type="hidden" name="id_pbk" value="<?php echo $dest;?>" />
+			<input type="hidden" name="id_pbk" value="<?php echo htmlentities($dest, ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
@@ -98,11 +116,11 @@ else
 		<td>
 			<div class="form_option">
 				<div class="opt">
-					<input type="radio" id="sendoption1" name="sendoption" value="sendoption1" checked="checked" class="left_aligned" style="border: none;" />
+					<input type="radio" id="sendoption1" name="sendoption" value="sendoption1" class="left_aligned" style="border: none;" <?php if ($val_type !== 'prefill'): ?> checked="checked" <?php endif; ?> />
 					<label for="sendoption1"><?php echo tr('Phonebook');?></label>
 				</div>
 				<div class="opt">
-					<input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;" />
+					<input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;" <?php if ($val_type === 'prefill'): ?> checked="checked" <?php endif; ?> />
 					<label for="sendoption3"><?php echo tr('Input manually');?> </label>
 				</div>
 				<div class="opt">
@@ -123,7 +141,7 @@ else
 			</div>
 
 			<div id="manually" class="hidden">
-				<input style="width: 95%;" type="text" name="manualvalue" id="manualvalue" />
+				<input style="width: 95%;" type="text" name="manualvalue" id="manualvalue" <?php if ($val_type === 'prefill'): ?> value="<?php echo htmlentities($dest, ENT_QUOTES); ?>" <?php endif; ?> />
 			</div>
 
 			<div id="import" class="hidden"><input type="file" name="import_file" id="import_file" class="text ui-widget-content ui-corner-all" /></div>
@@ -214,17 +232,17 @@ else
 	<tr valign="top">
 		<td align="right" class="label"><?php echo tr('Message').':';?></td>
 		<td>
-			<?php if ($val_type == 'forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo $msg_id;?>" /> <?php endif;?>
+			<?php if ($val_type == 'forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo htmlentities($msg_id, ENT_QUOTES);?>" /> <?php endif;?>
 			<textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;" id="message" name="message">
 <?php
-if ($val_type == 'forward')
+if ($val_type === 'forward' || $val_type === 'resend' || $val_type === 'prefill')
 {
-	echo $message;
+	echo htmlentities($message, ENT_QUOTES);
 }
 list($sig_option, $sig) = explode(';', $this->Kalkun_model->get_setting()->row('signature'));
-if ($sig_option == 'true')
+if ($sig_option == 'true' && $val_type !== 'resend')
 {
-	echo "\n\n".$sig;
+	echo "\n\n".htmlentities($sig, ENT_QUOTES);
 } ?>
 </textarea>
 			<div>
@@ -246,6 +264,17 @@ if ($sig_option == 'true')
 			</div>
 		</td>
 	</tr>
+	<?php if ($val_type === 'resend'): ?>
+	<tr>
+		<td align="right" class="label">&nbsp;</td>
+		<td>
+			<div>
+				<input type="checkbox" id="resend_delete_original" name="resend_delete_original" />
+				<label for="resend_delete_original"><?php echo tr('Delete the original message (prevents duplicates).') ?></label>
+			</div>
+		</td>
+	</tr>
+	<?php endif; ?>
 </table>
 <br />
 <?php  echo form_close();?>
@@ -258,3 +287,4 @@ if ($this->config->item('sms_advertise'))
 	echo '*'.tr('Ads is active');
 }
 ?>
+<div id="compose_sms_container_notif_area" class="notif" style="display: none;"></div>

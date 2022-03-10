@@ -1,14 +1,12 @@
 <h2><?php echo tr('Database setup'); ?></h2>
 <p>This step sets your database up for Kalkun.</p>
-<?php echo form_open('install/run_install/'.$type, array('class' => 'formtable'));?>
+<?php echo form_open('install/run_install', array('class' => 'formtable'));?>
 <h4 align="center" style="padding-bottom: 5px; border-bottom: 1px solid #999">Database backend engine and gammu database version.</h4>
 <table width="90%">
 	<tr valign="top">
 		<td>Database engine</td>
 		<td>
-			<?php $db_property = get_database_property($database_driver); ?>
 			<strong><?php echo $db_property['human']; ?></strong>
-			<input type="hidden" name="db_engine" value="<?php echo $db_property['file'];?>" />
 			<br /><small>Read from your database configuration.</small>
 		</td>
 	</tr>
@@ -27,7 +25,7 @@
 	<?php if ($has_smsd_database): ?>
 	<tr valign="top">
 		<td>Gammu DB version</td>
-		<td><strong><?php echo $this->Kalkun_model->get_gammu_info('db_version')->row('Version'); ?></strong>
+		<td><strong><?php echo htmlentities($this->Kalkun_model->get_gammu_info('db_version')->row('Version'), ENT_QUOTES); ?></strong>
 			<br /><small>Read from your gammu database schema.</small>
 		</td>
 	</tr>

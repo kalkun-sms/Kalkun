@@ -16,8 +16,8 @@ else: ?>
 			<div class="two_column_container contact_list hover_show" style="display: inline-block;">
 				<div class="left_column">
 					<div id="pbkname">
-						<input type="checkbox" class="select_contact" />&nbsp;<span style="font-weight: bold;"><?php echo $tmp->Name  ;?></span>
-						<div id="pbknumber" style="padding: 2px 0 5px 24px;"><?php echo $tmp->Number;?></div>
+						<input type="checkbox" class="select_contact" />&nbsp;<span style="font-weight: bold;"><?php echo htmlentities($tmp->Name, ENT_QUOTES); ?></span>
+						<div id="pbknumber" style="padding: 2px 0 5px 24px;"><?php echo htmlentities($tmp->Number, ENT_QUOTES);?></div>
 					</div>
 				</div>
 				<div class="right_column">
@@ -27,7 +27,7 @@ else: ?>
 		$menu = do_action('phonebook.contact.menu', $tmp);
 		if ($menu != $tmp)
 		{
-			echo "<a class=\"simplelink\" href=\"{$menu['url']}\">{$menu['title']}</a>&nbsp;";
+			echo '<a class="simplelink" href="'.$menu['url'].'">'.htmlentities($menu['title'], ENT_QUOTES).'</a>&nbsp;';
 			echo "<img src=\"{$this->config->item('img_path')}circle.gif\" />";
 		}
 		?>

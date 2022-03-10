@@ -2,7 +2,7 @@
 <ruleset name="CodeIgniter-Kalkun">
     <description>CodeIgniter3 coding standard for Kalkun as described at https://codeigniter.com/userguide3/general/styleguide.html</description>
 
-    <file>../application</file>
+    <file>../../application</file>
 
     <exclude-pattern>libraries</exclude-pattern>
     <exclude-pattern>plugins/jsonrpc/libraries</exclude-pattern>

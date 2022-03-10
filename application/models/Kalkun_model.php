@@ -49,23 +49,6 @@ class Kalkun_model extends MY_Model {
 		$this->db->where('username', $username);
 		$query = $this->db->get();
 
-		$this->session->set_flashdata(
-			'bef_login_history_count',
-			$this->session->flashdata('bef_login_history_count') - 1
-		);
-		$this->session->set_flashdata(
-			'bef_login_HTTP_REFERER',
-			$this->session->flashdata('bef_login_HTTP_REFERER')
-		);
-		$this->session->set_flashdata(
-			'bef_login_method',
-			$this->session->flashdata('bef_login_method')
-		);
-		$this->session->set_flashdata(
-			'bef_login_post_data',
-			$this->session->flashdata('bef_login_post_data')
-		);
-
 		if ($query->num_rows() === 1 && password_verify($this->input->post('password'), $query->row('password')))
 		{
 			$this->session->set_userdata('loggedin', 'TRUE');
@@ -77,21 +60,13 @@ class Kalkun_model extends MY_Model {
 				$this->session->set_userdata('remember_me', TRUE);
 			}
 
-			if ($this->session->flashdata('bef_login_method') === 'post'
-				&& $this->session->flashdata('bef_login_HTTP_REFERER'))
+			if ($this->input->post('r_url'))
 			{
-				redirect($this->session->flashdata('bef_login_requested_url'));
+				redirect($this->input->post('r_url'));
 			}
 			else
 			{
-				if ($this->session->flashdata('bef_login_requested_url'))
-				{
-					redirect($this->session->flashdata('bef_login_requested_url'));
-				}
-				else
-				{
-					redirect('kalkun');
-				}
+				redirect('kalkun');
 			}
 		}
 		else

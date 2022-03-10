@@ -67,18 +67,19 @@
 			$(this).autocomplete("search");
 		});
 
+		$('#addContact').validate();
+
 		jQuery.validator.classRuleSettings.phone = {
 			remote: {
 				url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
-				type: "post",
+				type: "get",
 				data: {
 					phone: function() {
 						return $("#number").val();
 					}
 				}
-			}
-		};
-
+			};
+		});
 	});
 
 </script>
@@ -91,18 +92,18 @@
 		<label for="name"><?php echo tr('Name'); ?></label>
 		<input type="text" name="name" id="name" value="<?php if (isset($contact))
 	{
-		echo $contact->row('Name');
+		echo htmlentities($contact->row('Name'), ENT_QUOTES);
 	}?>" class="text ui-widget-content ui-corner-all required" />
 		<label for="number"><?php echo tr('Telephone number'); ?></label>
 		<input type="text" name="number" id="number" value="<?php if (isset($contact))
 	{
-		echo $contact->row('Number');
+		echo htmlentities($contact->row('Number'), ENT_QUOTES);
 	}
 	else
 	{
 		if (isset($number))
 		{
-			echo $number;
+			echo htmlentities($number, ENT_QUOTES);
 		}
 	}?>" class="text ui-widget-content ui-corner-all required phone" />
 
@@ -116,9 +117,9 @@
 
 		<label for="groups"><?php echo tr('Groups'); ?></label>
 		<?php if (isset($contact)): ?>
-		<input name="groups" id="groups" value="<?php echo $this->Phonebook_model->get_groups($contact->row('id_pbk'), $this->session->userdata('id_user'))->GroupNames?>" type="text" />
+		<input name="groups" id="groups" value="<?php echo htmlentities($this->Phonebook_model->get_groups($contact->row('id_pbk'), $this->session->userdata('id_user'))->GroupNames, ENT_QUOTES); ?>" type="text" />
 		<?php elseif ( ! empty($group_id)):?>
-		<input name="groups" id="groups" value="<?php echo $this->Phonebook_model->group_name($group_id, $this->session->userdata('id_user'))?>" type="text" />
+		<input name="groups" id="groups" value="<?php echo htmlentities($this->Phonebook_model->group_name($group_id, $this->session->userdata('id_user')), ENT_QUOTES); ?>" type="text" />
 		<?php else : ?>
 		<input name="groups" id="groups" value="" type="text" />
 		<?php endif;?>

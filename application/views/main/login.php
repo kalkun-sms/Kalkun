@@ -41,7 +41,9 @@ echo doctype('xhtml1-trans');?>
 			?>
 		</div>
 		<div id="login_container">
-			<?php echo form_open('login'); ?>
+			<?php echo form_open('login');
+				echo form_hidden('r_url', $this->input->get('r_url'));
+?>
 			<table id="login" cellpadding="3" cellspacing="2" border="0" class="rounded">
 				<tr>
 					<td><i><?php echo tr('Please enter your username and password'); ?></i></td>

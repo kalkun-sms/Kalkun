@@ -93,13 +93,13 @@ else
 		$checkbox_value = $tmp->ID;
 	} ?>
 
-<div title="<?php echo $tmp->TextDecoded?>" class="messagelist <?php  if ($type == 'inbox' && $tmp->readed == 'false')
+<div title="<?php echo htmlentities($tmp->TextDecoded, ENT_QUOTES); ?>" class="messagelist <?php  if ($type === 'inbox' && $tmp->readed === 'false')
 	{
 		echo 'unreaded';
 	} ?>">
 	<div class="message_container">
 		<div class="message_header" style="color: #444; height: 20px; overflow: hidden">
-			<input type="checkbox" id="<?php echo $checkbox_value; ?>" class="select_conversation nicecheckbox" value="<?php echo $checkbox_value; ?>" style="border: none;" />
+			<input type="checkbox" id="<?php echo htmlentities($checkbox_value, ENT_QUOTES); ?>" class="select_conversation nicecheckbox" value="<?php echo htmlentities($checkbox_value, ENT_QUOTES); ?>" style="border: none;" />
 			<span class="message_toggle" style="cursor: pointer;" onclick="document.location.href='<?php echo site_url(); ?>/messages/conversation/<?php echo $folder; ?>/<?php echo $type; ?>/<?php echo rawurlencode($number); ?>/<?php if ($folder == 'my_folder')
 	{
 		echo $this->uri->segment(4);
@@ -108,7 +108,7 @@ else
 	{
 		echo 'style="font-weight: bold"';
 	} ?>><?php echo kalkun_nice_date($message_date); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
-					&nbsp;&nbsp;<?php echo $senderName; ?>
+					&nbsp;&nbsp;<?php echo htmlentities($senderName, ENT_QUOTES); ?>
 					<?php
 			if ($folder == 'folder'):
 			echo '('.$this->Message_model->get_messages(array('type' => $type, 'number' => $number, 'uid' => $this->session->userdata('id_user')))->num_rows().')';
@@ -119,7 +119,7 @@ else
 				<span class="message_preview" <?php  if ($type == 'inbox' && $tmp->readed == 'false')
 	{
 		echo 'style="font-weight: bold"';
-	} ?>>-&nbsp;<?php echo message_preview($tmp->TextDecoded, $char_per_line); ?></span>
+	} ?>>-&nbsp;<?php echo message_preview(htmlentities($tmp->TextDecoded, ENT_QUOTES), $char_per_line); ?></span>
 			</span>
 		</div>
 	</div>

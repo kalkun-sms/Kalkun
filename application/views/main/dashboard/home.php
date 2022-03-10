@@ -6,7 +6,7 @@
 	<div id="dash_box">
 		<?php
 foreach ($alerts as $msg):
-   echo $msg;
+   echo '<div class="warning">'.$msg.'</div>';;
 endforeach;
 ?>
 	</div>
@@ -31,17 +31,17 @@ endforeach;
 			<tr valign="top">
 				<td><?php echo tr('Gammu version');?></td>
 				<td>:</td>
-				<td><?php echo  filter_data($this->Kalkun_model->get_gammu_info('gammu_version')->row('Client')); ?></td>
+				<td><?php echo  filter_data(htmlentities($this->Kalkun_model->get_gammu_info('gammu_version')->row('Client')), ENT_QUOTES); ?></td>
 			</tr>
 			<tr valign="top">
 				<td><?php echo tr('Gammu DB schema');?></td>
 				<td>:</td>
-				<td><?php echo  filter_data($this->Kalkun_model->get_gammu_info('db_version')->row('Version')); ?></td>
+				<td><?php echo  filter_data(htmlentities($this->Kalkun_model->get_gammu_info('db_version')->row('Version')), ENT_QUOTES); ?></td>
 			</tr>
 			<tr valign="top">
 				<td><?php echo tr('Modem IMEI');?></td>
 				<td>:</td>
-				<td><?php echo  filter_data($this->Kalkun_model->get_gammu_info('phone_imei')->row('IMEI')); ?></td>
+				<td><?php echo  filter_data(htmlentities($this->Kalkun_model->get_gammu_info('phone_imei')->row('IMEI')), ENT_QUOTES); ?></td>
 			</tr>
 		</table>
 	</div>
