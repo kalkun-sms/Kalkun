@@ -249,7 +249,7 @@ class Plugins {
             {
                 return;
             }
-            $plugin_data = read_file($plugin_file); // Load the plugin we want
+            $plugin_data = file_get_contents($plugin_file); // Load the plugin we want
                    
             preg_match ('|Plugin Name:(.*)$|mi', $plugin_data, $name);
             preg_match ('|Plugin URI:(.*)$|mi', $plugin_data, $uri);
