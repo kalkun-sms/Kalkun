@@ -12,7 +12,7 @@
 			<?php echo form_close(); ?>
 			&nbsp;
 			<a href="<?php echo site_url('plugin/sms_credit/packages');?>" class="nicebutton"><?php echo tr('Packages'); ?></a>
-			<a href="#" class="nicebutton addpbkcontact">&#43; <?php echo tr('Add user');?></a>
+			<a href="javascript:void(0);" class="nicebutton addpbkcontact">&#43; <?php echo tr('Add user');?></a>
 		</div>
 	</div>
 
@@ -36,7 +36,7 @@
 							<span class="pbk_menu">
 								<a class="delete_user simplelink" href="<?php echo site_url('plugin/sms_credit/delete_users/'.$tmp->id_user);?>"><?php echo tr('Delete'); ?></a>
 								<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
-								<a class="edit_user simplelink" href="#"><?php echo tr('Edit'); ?></a>
+								<a class="edit_user simplelink" href="javascript:void(0);"><?php echo tr('Edit'); ?></a>
 							</span>
 						</div>
 

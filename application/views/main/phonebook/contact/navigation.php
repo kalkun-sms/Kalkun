@@ -1,8 +1,8 @@
 <div class="two_column_container toolbar">
 	<div class="left_column_big">
 		<?php if (isset($public_contact) && ! $public_contact):?>
-		<a href="#" class="select_all nicebutton"><?php echo tr('Select all');?></a>
-		<a href="#" class="clear_all nicebutton"><?php echo tr('Deselect all');?></a>
+		<a href="javascript:void(0);" class="select_all nicebutton"><?php echo tr('Select all');?></a>
+		<a href="javascript:void(0);" class="clear_all nicebutton"><?php echo tr('Deselect all');?></a>
 		<a href="javascript:void(0)" class="delete_contact nicebutton"><?php echo tr('Delete');?></a>
 
 		<select name="grp_action" class="grp_action nicebutton" style="width: 100px;">

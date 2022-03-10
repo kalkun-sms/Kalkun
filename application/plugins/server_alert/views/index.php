@@ -53,7 +53,7 @@
 <div id="space_area">
 	<h3 style="float: left">Server Alert</h3>
 	<div style="float: right">
-		<a href="#" id="addalertbutton" class="nicebutton">&#43; Add Server Alert</a>
+		<a href="javascript:void(0);" id="addalertbutton" class="nicebutton">&#43; Add Server Alert</a>
 	</div>
 
 	<table class="nice-table" cellpadding="0" cellspacing="0">
@@ -90,7 +90,7 @@
 			<?php
 				else: echo '<td>&nbsp;</td>';
 			endif; ?>
-			<td><a href="#" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
+			<td><a href="javascript:void(0);" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
 			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/server_alert/delete/<?php echo $tmp->id_server_alert; ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
 		</tr>
 
