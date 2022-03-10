@@ -61,6 +61,8 @@
 		$('#groups_tag').on("click", function() {
 			$(this).autocomplete("search");
 		});
+
+		$('#addContact').validate();
 	});
 
 	jQuery.validator.classRuleSettings.phone = {
