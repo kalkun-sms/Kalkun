@@ -257,23 +257,26 @@
 
 	$(document).ready(function() {
 
-		<?php switch ($this->input->get('action')):
-		case NULL:
-			break;
-		case 'compose': ?>
-		compose_message(
-			'<?php echo $this->input->get('type'); ?>',
-			true,
-			'#personvalue_tags_tag',
-			"<?php echo $this->input->get('phone'); ?>",
-			"<?php echo $this->input->get('msg'); ?>"
-		);
-		<?php break;
-		default:
-			// TODO for other actions that show a dialog (add/edit user, add/edit contact...).
-?>
-		<?php break; ?>
-		<?php endswitch; ?>
+		// Do the UI action requested by GET or POST
+		var post_get_data = JSON.parse($("#post_get_data").text());
+
+		if ("action" in post_get_data) {
+			switch (post_get_data.action) {
+				case 'compose':
+					if ("type" in post_get_data && post_get_data.type == "prefill" && "phone" in post_get_data && "msg" in post_get_data) {
+						compose_message(
+							post_get_data.type,
+							true,
+							'#manualvalue',
+							post_get_data.phone,
+							post_get_data.msg);
+					}
+					break;
+					// TODO: Support additional UI actions: add/edit user, contact
+				default:
+					break;
+			}
+		}
 
 		// Get current page for styling/css
 		$("#menu").find("a[href='" + window.location.href + "']").each(function() {

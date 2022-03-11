@@ -287,4 +287,32 @@
 	<!-- Add Error container Dialog -->
 	<div id="error_container" title="<?php echo tr('Error'); ?>" class="dialog">&nbsp;</div>
 
+	<!-- POST or GET data container -->
+	<div id="post_get_data" style="display: none;">
+		<?php
+	if ($this->input->post())
+	{
+		echo htmlentities(json_protect($this->input->post(), ENT_QUOTES));
+	}
+	else
+	{
+		if ($this->session->flashdata('bef_login_post_data'))
+		{
+			echo htmlentities(json_protect($this->session->flashdata('bef_login_post_data'), ENT_QUOTES));
+		}
+		else
+		{
+			if ($this->input->get())
+			{
+				echo htmlentities(json_protect($this->input->get(), ENT_QUOTES));
+			}
+			else
+			{
+				echo htmlentities(json_protect([], ENT_QUOTES));
+			}
+		}
+	}
+
+?>
+	</div>
 </div>
