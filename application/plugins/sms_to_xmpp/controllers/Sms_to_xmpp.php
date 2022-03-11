@@ -42,13 +42,13 @@ class Sms_to_xmpp extends Plugin_controller {
 		if ($_POST)
 		{
 			$this->sms_to_xmpp_model->save_xmpp();
-			redirect('sms_to_xmpp');
+			redirect('plugin/sms_to_xmpp');
 		}
 	}
 
 	function delete()
 	{
 		$this->sms_to_xmpp_model->delete_xmpp($this->session->userdata('id_user'));
-		redirect('sms_to_xmpp');
+		redirect('plugin/sms_to_xmpp');
 	}
 }
