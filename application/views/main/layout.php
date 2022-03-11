@@ -7,12 +7,11 @@ echo doctype('xhtml1-trans');?>
 
 <body>
 	<?php $this->load->view('main/base');?>
-	<center>
-		<div class="loading_container"><span class="loading_area hidden"><?php echo tr('Loading');?>...</span></div>
-		<div id="top_navigation"><?php $this->load->view('main/dock');?></div>
 
-		<div style="clear: both">&nbsp;</div>
+	<div class="loading_container"><span class="loading_area hidden"><?php echo tr('Loading');?>...</span></div>
+	<div id="top_navigation"><?php $this->load->view('main/dock');?></div>
 
+	<div id="main_container">
 		<div id="header">
 			<div id="header_left">
 				<div id="logo"><a href="javascript:void(0);"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></a></div>
@@ -37,7 +36,8 @@ echo doctype('xhtml1-trans');?>
 			</div>
 		</div>
 		<div id="footer"><?php $this->load->view('main/footer');?></div>
-	</center>
+	</div>
+
 </body>
 
 </html>
