@@ -25,6 +25,26 @@
 			$('#stop-dialog').dialog('open');
 		});
 
+		// Delete
+		$("a.delete").on('click', function() {
+			var element = this;
+			$.post("<?php echo site_url(); ?>/plugin/stop_manager/delete", {
+					from: $(element).parents("tr:first").children(".destination_number").children(".dest_number_intl").text(),
+					type: $(element).parents("tr:first").children(".stop_type").text(),
+					[csrf_name]: csrf_hash,
+				})
+				.done(function(data) {
+					$(element).parents("tr:first").slideUp("slow");
+					show_notification(<?php echo tr_js('Item deleted.'); ?>, "info");
+				})
+				.fail(function(data) {
+					display_error_container(data);
+				})
+				.always(function(data) {
+					update_csrf_hash();
+				});
+		});
+
 		// validation
 		$("#addStopForm").validate({
 			rules: {

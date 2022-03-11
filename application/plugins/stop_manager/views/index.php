@@ -35,13 +35,14 @@
 			?>
 			<tr id="<?php echo htmlentities($tmp->id_stop_manager, ENT_QUOTES); ?>">
 				<td class="nice-table-left"><?php echo htmlentities($number, ENT_QUOTES); ?></td>
-				<td class="destination_number"><?php echo htmlentities(phone_format_human($tmp->destination_number), ENT_QUOTES); ?></td>
+
+				<td class="destination_number"><span style="display: none;" class="dest_number_intl"><?php echo htmlentities($tmp->destination_number, ENT_QUOTES); ?></span><?php echo htmlentities(phone_format_human($tmp->destination_number), ENT_QUOTES); ?></td>
 				<td class="stop_type"><?php echo htmlentities($tmp->stop_type, ENT_QUOTES); ?></td>
 				<td class="stop_message"><?php echo htmlentities($tmp->stop_message, ENT_QUOTES); ?></td>
 				<td class="reg_date"><?php echo htmlentities($tmp->reg_date, ENT_QUOTES); ?></td>
 				<td class="nice-table-right">
 					<?php if ($tmp->destination_number && $tmp->stop_type): ?>
-					<a href="<?php echo site_url();?>/plugin/stop_manager/delete/<?php echo urlencode(base64_encode($tmp->destination_number));?>/<?php echo urlencode(base64_encode($tmp->stop_type));?>">
+					<a href="javascript:void(0);" class="delete">
 						<img class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>" />
 					</a>
 					<?php endif; ?>
