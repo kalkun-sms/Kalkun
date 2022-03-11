@@ -52,6 +52,24 @@
 			$('#editblacklist-dialog').dialog('open');
 		});
 
+		// Delete
+		$("a.delete").on('click', function() {
+			var element = this;
+			$.post("<?php echo site_url(); ?>/plugin/blacklist_number/delete", {
+					id: $(element).parents("tr:first").attr("id"),
+					[csrf_name]: csrf_hash,
+				})
+				.done(function(data) {
+					$(element).parents("tr:first").slideUp("slow");
+					show_notification(<?php echo tr_js('Item deleted.'); ?>, "info");
+				})
+				.fail(function(data) {
+					display_error_container(data);
+				})
+				.always(function(data) {
+					update_csrf_hash();
+				});
+		});
 	});
 
 </script>
