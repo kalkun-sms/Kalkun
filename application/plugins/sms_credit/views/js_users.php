@@ -140,11 +140,9 @@
 			return false;
 		});
 
-		// Delete user
-		$("a.delete_user").on("click", function(e) {
-
-			e.preventDefault();
-			var url = $(this).attr('href');
+		// Delete
+		$("a.delete_user").on('click', function() {
+			var element = this;
 
 			// confirm first
 			$("#confirm_delete_user_dialog").dialog({
@@ -156,8 +154,21 @@
 					<?php echo tr_js('Cancel'); ?>: function() {
 						$(this).dialog('close');
 					},
-					<?php echo tr_js('Yes'); ?>: function() {
-						window.location.href = url;
+					<?php echo tr_js('Delete'); ?>: function() {
+						$.post("<?php echo site_url(); ?>/plugin/sms_credit/delete_users", {
+								id: $(element).parents("tr:first").attr("id"),
+								[csrf_name]: csrf_hash,
+							})
+							.done(function(data) {
+								$(element).parents("tr:first").slideUp("slow");
+								show_notification(<?php echo tr_js('Item deleted.'); ?>, "info");
+							})
+							.fail(function(data) {
+								display_error_container(data);
+							})
+							.always(function(data) {
+								update_csrf_hash();
+							});
 						$(this).dialog('close');
 					}
 				}
