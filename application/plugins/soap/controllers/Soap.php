@@ -69,10 +69,13 @@ class Soap extends Plugin_controller {
 		$this->load->view('main/layout', $data);
 	}
 
-	function delete_remote_access($id)
+	function delete_remote_access()
 	{
-		$this->soap_model->delRemoteAccess($id);
-		redirect('plugin/soap');
+		if ($_POST)
+		{
+			$id = intval($this->input->post('id'));
+			$this->soap_model->delRemoteAccess($id);
+		}
 	}
 
 	function delete_notification()
