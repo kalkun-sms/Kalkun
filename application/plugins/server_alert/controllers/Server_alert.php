@@ -61,16 +61,22 @@ class Server_alert extends Plugin_controller {
 		$this->load->view('main/layout', $data);
 	}
 
-	function delete($id)
+	function delete()
 	{
-		$this->server_alert_model->delete($id);
-		redirect('plugin/server_alert');
+		if ($_POST)
+		{
+			$id = intval($this->input->post('id'));
+			$this->server_alert_model->delete($id);
+		}
 	}
 
-	function change_state($id)
+	function change_state()
 	{
-		$this->server_alert_model->change_state($id, 'true');
-		redirect('plugin/server_alert');
+		if ($_POST)
+		{
+			$id = intval($this->input->post('id'));
+			$this->server_alert_model->change_state($id, 'true');
+		}
 	}
 
 	function get_time_interval()
