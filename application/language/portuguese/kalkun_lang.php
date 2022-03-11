@@ -419,3 +419,4 @@ $lang['Read-only'] = 'Read-only';
 $lang['Inbox Master'] = 'Inbox Master';
 $lang['Network error.'] = 'Network error.';
 $lang['{0}%'] = '{0}%';
+$lang['Item deleted.'] = 'Item deleted.';
