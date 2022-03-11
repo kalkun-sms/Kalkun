@@ -42,7 +42,7 @@ class Sms_to_twitter extends Plugin_controller {
 		if ($this->sms_to_twitter_model->check_token($this->session->userdata('id_user')))
 		{
 			$this->session->set_flashdata('notif', 'Already connected to Twitter');
-			redirect('sms_to_twitter');
+			redirect('plugin/sms_to_twitter');
 		}
 
 		$this->load->library('twitter');
@@ -61,7 +61,7 @@ class Sms_to_twitter extends Plugin_controller {
 		catch (EpiOAuthException $e)
 		{
 			$this->session->set_flashdata('notif', 'Cannot connect to Twitter');
-			redirect('sms_to_twitter');
+			redirect('plugin/sms_to_twitter');
 		}
 
 		if (isset($auth['access_token']) && isset($auth['access_token_secret']))
@@ -71,13 +71,13 @@ class Sms_to_twitter extends Plugin_controller {
 			$param['access_token'] = $auth['access_token'];
 			$param['access_token_secret'] = $auth['access_token_secret'];
 			$this->sms_to_twitter_model->save_token($param);
-			redirect('sms_to_twitter');
+			redirect('plugin/sms_to_twitter');
 		}
 	}
 
 	function disconnect()
 	{
 		$this->sms_to_twitter_model->delete_token($this->session->userdata('id_user'));
-		redirect('sms_to_twitter');
+		redirect('plugin/sms_to_twitter');
 	}
 }

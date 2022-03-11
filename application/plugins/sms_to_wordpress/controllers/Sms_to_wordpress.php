@@ -42,7 +42,7 @@ class Sms_to_wordpress extends Plugin_controller
 		if ($_POST)
 		{
 			$this->sms_to_wordpress_model->save_wp();
-			redirect('sms_to_wordpress');
+			redirect('plugin/sms_to_wordpress');
 		}
 	}
 
