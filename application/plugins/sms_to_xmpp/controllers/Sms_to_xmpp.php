@@ -48,7 +48,9 @@ class Sms_to_xmpp extends Plugin_controller {
 
 	function delete()
 	{
-		$this->sms_to_xmpp_model->delete_xmpp($this->session->userdata('id_user'));
-		redirect('sms_to_xmpp');
+		if ($_POST)
+		{
+			$this->sms_to_xmpp_model->delete_xmpp($this->session->userdata('id_user'));
+		}
 	}
 }

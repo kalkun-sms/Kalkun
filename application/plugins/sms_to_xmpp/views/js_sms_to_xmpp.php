@@ -22,6 +22,23 @@
 			$('#xmpp-dialog').dialog('open');
 		});
 
+		// Delete
+		$("a.delete").on('click', function() {
+			var element = this;
+			$.post("<?php echo site_url(); ?>/plugin/sms_to_xmpp/delete", {
+					id: "", // Empty value so that we can detect in PHP that $_POST is not empty
+					[csrf_name]: csrf_hash,
+				})
+				.done(function(data) {
+					location.reload();
+				})
+				.fail(function(data) {
+					display_error_container(data);
+				})
+				.always(function(data) {
+					update_csrf_hash();
+				});
+		});
 	});
 
 </script>
