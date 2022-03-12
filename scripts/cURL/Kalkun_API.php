@@ -11,6 +11,7 @@ class Kalkun_API {
 	var $base_url = '';
 	var $login_url = 'login/index';
 	var $sms_url = 'messages/compose_process';
+	var $csrf_hash_url = 'kalkun/get_csrf_hash';
 	var $session_file = '/tmp/cookies.txt'; // must be writable
 	var $username = '';
 	var $password = '';
@@ -18,7 +19,6 @@ class Kalkun_API {
 	var $message = '';
 	var $sms_mode = '0'; // 1 = flash, 0 = normal
 	//var $send_date = date('Y-m-d H:i:s');
-	var $coding = '';
 	var $curl_id = '';
 
 	function Kalkun_API($params = array())
@@ -28,6 +28,7 @@ class Kalkun_API {
 			$this->curl_id = curl_init();
 			$this->login_url = $params['base_url'].''.$this->login_url;
 			$this->sms_url = $params['base_url'].''.$this->sms_url;
+			$this->csrf_hash_url = $params['base_url'].''.$this->csrf_hash_url;
 			$this->initialize($params);
 		}
 	}
@@ -50,7 +51,19 @@ class Kalkun_API {
 	{
 		if ($this->login())
 		{
-			$this->send_sms();
+			$http_code = $this->send_sms();
+			if ($http_code < 400)
+			{
+				$this->show_message("Message queued successfully.\n");
+			}
+			else
+			{
+				$this->show_message("Error queuing the message (HTTP_CODE: ${http_code}).\n");
+			}
+		}
+		else
+		{
+			$this->show_message('Error during login');
 		}
 
 		$this->finish();
@@ -69,6 +82,8 @@ class Kalkun_API {
 
 	function login()
 	{
+		$csrf_hash = $this->get_csrf_hash_from_login_form();
+
 		$ch = $this->curl_id;
 		curl_setopt($ch, CURLOPT_URL, $this->login_url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -79,17 +94,19 @@ class Kalkun_API {
 
 		$fields = array(
 			'username' => urlencode($this->username),
-			'password' => urlencode($this->password)
+			'password' => urlencode($this->password),
+			'csrf_kalkun_tkn' => $csrf_hash,
 		);
+
 		$fields_string = $this->urlify($fields);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
 		$output = curl_exec($ch);
 
-		// Check if URL exist
+		// Check HTTP Response code
 		$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		if ($http_code == 404)
+		if ($http_code >= 400)
 		{
-			$this->show_message('URL not found');
+			$this->show_message('ERROR: HTTP_CODE: '.$http_code);
 			return FALSE;
 		}
 
@@ -106,6 +123,7 @@ class Kalkun_API {
 
 	function send_sms()
 	{
+		$csrf_hash = $this->get_csrf_hash();
 		$ch = $this->curl_id;
 		curl_setopt($ch, CURLOPT_URL, $this->sms_url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -121,12 +139,49 @@ class Kalkun_API {
 			'sms_mode' => urlencode($this->sms_mode),
 			'sms_loop' => urlencode('1'),
 			'validity' => urlencode('-1'),
-			'unicode' => urlencode($this->coding),
-			'message' => urlencode($this->message)
+			'message' => urlencode($this->message),
+			'csrf_kalkun_tkn' => $csrf_hash,
 		);
 		$sms_field = $this->urlify($sms);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $sms_field);
 		$output = curl_exec($ch);
+
+		return curl_getinfo($ch, CURLINFO_HTTP_CODE);
+	}
+
+	function get_csrf_hash()
+	{
+		$ch = $this->curl_id;
+		curl_setopt($ch, CURLOPT_URL, $this->csrf_hash_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+		curl_setopt($ch, CURLOPT_POST, FALSE);
+		curl_setopt($ch, CURLOPT_COOKIEJAR, $this->session_file);
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $this->session_file);
+		$output = curl_exec($ch);
+		return json_decode($output);
+	}
+
+	function get_csrf_hash_from_login_form()
+	{
+		$ch = $this->curl_id;
+		curl_setopt($ch, CURLOPT_URL, $this->login_url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+		curl_setopt($ch, CURLOPT_POST, FALSE);
+		curl_setopt($ch, CURLOPT_COOKIEJAR, $this->session_file);
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $this->session_file);
+
+		$output = curl_exec($ch);
+
+		// Extract the CSRF Hash from the <input> tag of the HTML
+		$dom = new DOMDocument();
+		$dom->loadHTML($output);
+		$xp = new DOMXpath($dom);
+		$nodes = $xp->query('//input[@name="csrf_kalkun_tkn"]');
+		$node = $nodes->item(0);
+
+		return $node->getAttribute('value');
 	}
 
 	//url-ify the data for the POST
