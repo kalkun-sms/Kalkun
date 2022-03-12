@@ -285,7 +285,13 @@
 	<?php echo form_close();?>
 
 	<!-- Add Error container Dialog -->
-	<div id="error_container" title="<?php echo tr('Error'); ?>" class="dialog">&nbsp;</div>
+	<div id="error_container" title="<?php echo tr('Error'); ?>" class="dialog">&nbsp;
+		<div id="error_container_main"></div>
+		<div id="error_container_delay_notif" class="notif" style="display: none;">
+			<span id="retry-progress"><?php echo tr('Retrying in {0} seconds.', NULL, '<span id="countdown-count">unset</span>'); ?></span>
+			<span id="retry-now" style="display: none;"><?php echo tr('Retrying now'); ?></span>
+		</div>
+	</div>
 
 	<!-- POST or GET data container -->
 	<div id="post_get_data" style="display: none;">

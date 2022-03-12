@@ -8,6 +8,8 @@
 	csrf_name = "<?php echo $this->security->get_csrf_token_name(); ?>";
 	csrf_hash = "<?php echo $this->security->get_csrf_hash() ?>";
 
+	let cntdwnId, timeoutIdAutoRefr;
+
 	var refreshId = setInterval(function() {
 		$('.modem_status').load('<?php echo site_url('kalkun/notification')?>', function(responseText, textStatus, jqXHR) {
 			jqXHR
@@ -71,24 +73,26 @@
 		<?php if ($this->uri->segment(2) == 'folder' || $this->uri->segment(2) == 'my_folder'): ?>
 
 		function auto_refresh() {
-			$('#message_holder').load("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>", function(response, status, xhr) {
-				if (status == "error" || xhr.status != 200) {
-					var msg = <?php echo tr_js('Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>;
-					show_loading('<span style="white-space: nowrap">' + msg + '</span>');
-					var cntdwn = setInterval(function() {
-						current_val = $('#countdown-count').text();
-						if (current_val > 1) $('#countdown-count').text(current_val - 1);
-						else {
-							clearInterval(cntdwn);
-							$('#retry-progress-display').text(<?php echo tr_js('Retrying now'); ?>)
-						}
-					}, 1000);
-					setTimeout(function() {
-						auto_refresh();
-					}, 10000);
+			$.get("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>")
+				.done(function(data) {
+					if ($("#error_container").hasClass("ui-dialog-content")) {
+						$("#error_container").dialog("close");
+					}
+					$('#message_holder').html(data.responseText);
+					new_notification('false');
+					hide_loading();
+				})
+				.fail(function(data) {
+					var retry_delay = 10;
+					display_error_container(data, retry_delay);
+					if (!timeoutIdAutoRefr) {
+						timeoutIdAutoRefr = setTimeout(function() {
+							timeoutIdAutoRefr = null;
+							auto_refresh();
+						}, retry_delay * 1000);
+					}
 					return false;
-				}
-			});
+				});
 		}
 		if (refreshmode == 'true') //refresh automatically if in threastlist 
 			auto_refresh();
@@ -102,6 +106,10 @@
 		$('.loading_area').fadeIn("slow");
 	}
 
+	function hide_loading() {
+		$('.loading_area').fadeOut("slow");
+	}
+
 	function show_notification(text, type) {
 		if (type == "error") {
 			$('.notification_area').addClass("error_notif");
@@ -112,16 +120,41 @@
 	}
 
 	// Error container
-	function display_error_container(data) {
-		if (data.responseText !== undefined) {
-			attr = $(data.responseText).filter('div').attr("id");
-			if (attr === "container") {
-				$("#error_container").html($(data.responseText).filter('div').removeAttr("id"));
+	function display_error_container(data, retry_delay) {
+		if (data !== undefined) {
+			if (data.responseText !== undefined) {
+				var attr = $(data.responseText).filter('div').attr("id");
+				if (attr === "container") {
+					$("#error_container_main").html($(data.responseText).filter('div').removeAttr("id"));
+				} else {
+					$("#error_container_main").html($(data.responseText));
+				}
+			} else if (data.statusText !== undefined) {
+				$("#error_container_main").text(data.statusText);
 			} else {
-				$("#error_container").html($(data.responseText));
+				$("#error_container_main").text(data);
 			}
 		} else {
-			$("#error_container").text(data.statusText);
+			$("#error_container_main").text(<?php echo tr_js('Network error.'); ?>);
+		}
+		if (retry_delay) {
+			if (!cntdwnId) {
+				$('#countdown-count').text(retry_delay);
+				$('#error_container_delay_notif').show();
+				$('#retry-progress').show();
+				$('#retry-now').hide();
+				cntdwnId = setInterval(function() {
+					current_val = $('#countdown-count').text();
+					if (current_val > 1) {
+						$('#countdown-count').text(current_val - 1);
+					} else {
+						clearInterval(cntdwnId);
+						cntdwnId = null;
+						$('#retry-progress').hide();
+						$('#retry-now').show();
+					}
+				}, 1000);
+			}
 		}
 		$("#error_container").dialog({
 			closeText: <?php echo tr_js('Close'); ?>,
