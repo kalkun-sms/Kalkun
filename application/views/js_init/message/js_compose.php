@@ -390,15 +390,14 @@
 		var dest_url = "<?php echo site_url();?>/messages/canned_response/save";
 
 		if (name != null) {
-			$('.loading_area').text(<?php echo tr_js('Saving...'); ?>);
-			$('.loading_area').fadeIn("slow");
+			show_loading(<?php echo tr_js('Saving...'); ?>);
 			$.post(dest_url, {
 					'name': name,
 					message: $('#message').val(),
 					[csrf_name]: csrf_hash,
 				})
 				.done(function(data) {
-					$('.loading_area').fadeOut("slow");
+					hide_loading();
 					$("#canned_response_container").dialog('close');
 				})
 				.fail(function(data) {

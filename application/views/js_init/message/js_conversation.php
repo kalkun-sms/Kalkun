@@ -1,5 +1,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
+		let timeoutIdConv;
+
 		var base = "<?php echo  site_url();?>/messages/delete_messages/";
 		var source = "<?php echo $this->uri->segment(4);?>";
 		var current_folder = "<?php echo $this->uri->segment(6);?>";
@@ -185,8 +187,7 @@
 		// refresh
 		$(document).on('click', "a.refresh_button", refresh = function(type) {
 			if (type != 'retry') {
-				$('.loading_area').text(<?php echo tr_js('Loading'); ?>);
-				$('.loading_area').fadeIn("slow");
+				show_loading(<?php echo tr_js('Loading'); ?>);
 			}
 			var url = "<?php echo site_url(
 	'messages/conversation/'.
@@ -197,26 +198,26 @@
 					$this->uri->segment(6, 0),
 				])
 ); ?>";
-			$('#message_holder').load(url, function(response, status, xhr) {
-				if (status == "error" || xhr.status != 200) {
-					var msg = <?php echo tr_js('Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>;
-					$('.loading_area').html('<span style="white-space: nowrap">' + msg + '</span>');
-					var cntdwn = setInterval(function() {
-						current_val = $('#countdown-count').text();
-						if (current_val > 1) $('#countdown-count').text(current_val - 1);
-						else {
-							clearInterval(cntdwn);
-							$('#retry-progress-display').text(<?php echo tr_js('Retrying now'); ?>);
-						}
-					}, 1000);
-					setTimeout(function() {
-						refresh('retry');
-					}, 10000);
+			$.get(url)
+				.done(function(data) {
+					if ($("#error_container").hasClass("ui-dialog-content")) {
+						$("#error_container").dialog("close");
+					}
+					$('#message_holder').html(data.responseText);
+					new_notification('false');
+					hide_loading();
+				})
+				.fail(function(data) {
+					var retry_delay = 10;
+					display_error_container(data, retry_delay);
+					if (!timeoutIdConv) {
+						timeoutIdConv = setTimeout(function() {
+							timeoutIdConv = null;
+							refresh('retry');
+						}, retry_delay * 1000);
+					}
 					return false;
-				}
-				new_notification('false');
-				$('.loading_area').fadeOut("slow");
-			});
+				});
 		});
 
 		<?php endif; ?>

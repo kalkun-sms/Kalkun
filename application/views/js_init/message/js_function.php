@@ -2,6 +2,7 @@
 	var count = 0;
 
 	$(document).ready(function() {
+		let timeoutIdMsg;
 
 		var offset = <?php echo json_protect($offset);?>;
 		var folder = <?php echo json_protect($folder);?>;
@@ -218,29 +219,28 @@
 		// refresh
 		$(document).on('click', "a.refresh_button, div#logo a", refresh = function(type) {
 			if (type != 'retry') {
-				$('.loading_area').text(<?php echo tr_js('Loading'); ?>);
-				$('.loading_area').fadeIn("slow");
+				show_loading(<?php echo tr_js('Loading'); ?>);
 			}
-			$('#message_holder').load(refresh_url, function(response, status, xhr) {
-				if (status == "error" || xhr.status != 200) {
-					var msg = <?php echo tr_js('Network Error. <span id="retry-progress-display">Retrying in <span id="countdown-count">10</span> seconds.</span>'); ?>;
-					$('.loading_area').html('<span style="white-space: nowrap">' + msg + '</span>');
-					var cntdwn = setInterval(function() {
-						current_val = $('#countdown-count').text();
-						if (current_val > 1) $('#countdown-count').text(current_val - 1);
-						else {
-							clearInterval(cntdwn);
-							$('#retry-progress-display').text(<?php echo tr_js('Retrying now'); ?>)
-						}
-					}, 1000);
-					setTimeout(function() {
-						refresh('retry');
-					}, 10000);
+			$.get(refresh_url)
+				.done(function(data) {
+					if ($("#error_container").hasClass("ui-dialog-content")) {
+						$("#error_container").dialog("close");
+					}
+					$('#message_holder').html(data.responseText);
+					new_notification('false');
+					hide_loading();
+				})
+				.fail(function(data) {
+					var retry_delay = 10;
+					display_error_container(data, retry_delay);
+					if (!timeoutIdMsg) {
+						timeoutIdMsg = setTimeout(function() {
+							timeoutIdMsg = null;
+							refresh('retry');
+						}, retry_delay * 1000);
+					}
 					return false;
-				}
-				new_notification('false');
-				$('.loading_area').fadeOut("slow");
-			});
+				});
 			return false;
 		});
 
