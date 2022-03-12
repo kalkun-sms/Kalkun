@@ -60,7 +60,6 @@ textarea {
 	width: 925px;
 	overflow: hidden;
 	padding-bottom: 15px;
-	margin-top: 30px;
 	height: 50px;
 }
 
@@ -100,12 +99,10 @@ textarea {
 #top_navigation {
 	background: #666;
 	background-image: linear-gradient(to bottom, #666, #999);
-	margin-top: 0px;
+	margin: 0px 0px 10px 0px;
 	width: 100%;
 	padding: 10px 0px;
 	color: #DDD;
-	height: 15px;
-	position: fixed;
 	top: 0;
 }
 
@@ -114,25 +111,18 @@ textarea {
 }
 
 #top_navigation_container {
-	width: 925px;
+	padding: 0 30px 0 30px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	height: auto;
 }
 
-#top_navigation_left {
-	float: left;
-	text-align: left;
-	width: 300px;
-}
+#top_navigation_left {}
 
-#top_navigation_center {
-	float: left;
-	text-align: center;
-	width: 250px;
-}
+#top_navigation_center {}
 
-#top_navigation_right {
-	float: right;
-}
-
+#top_navigation_right {}
 
 #dock img {
 	width: 16px;
@@ -163,6 +153,10 @@ textarea {
 }
 
 /* Container */
+#main_container {
+	display: table;
+	margin: 0 auto;
+}
 
 #container {
 	width: 925px;
