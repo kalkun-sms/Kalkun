@@ -1,7 +1,4 @@
-<?php
-	// Values are filled in javascript
-?>
-
+<!-- Values are filled in javascript -->
 <?php echo tr('Status'); ?>:
 <span id="modem_connection_status"><?php echo tr('Unknown'); ?></span>
 | <?php echo tr('Signal'); ?>:
