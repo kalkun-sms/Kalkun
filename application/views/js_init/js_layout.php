@@ -245,7 +245,7 @@
 							// Need to use setTimeout to be able to access focus_element in the case the focus on a tagsInput element.
 							$(focus_element).trigger('focus');
 							return;
-						}, 1);
+						}, 300);
 					}
 				});
 				$("#compose_sms_container").dialog('open');
