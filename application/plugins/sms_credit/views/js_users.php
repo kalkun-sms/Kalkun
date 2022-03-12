@@ -31,7 +31,8 @@
 							phone: function() {
 								return $("#phone_number").val();
 							}
-						}
+						},
+						async: false, // Workaround so that form Submit on unchanged Edit doesn't submit on validation error.
 					}
 				},
 				password: {
