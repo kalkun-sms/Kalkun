@@ -26,6 +26,7 @@ class Sms_to_twitter extends Plugin_controller {
 	{
 		parent::__construct();
 		$this->load->model('sms_to_twitter_model');
+		$this->load->config('sms_to_twitter', TRUE);
 	}
 
 	function index()
@@ -47,9 +48,9 @@ class Sms_to_twitter extends Plugin_controller {
 
 		$this->load->library('twitter');
 
-		// Kalkun Twitter keys (DO NOT CHANGE)
-		$consumer_key = '23TbUWvaVRenQcNv6MA';
-		$consumer_key_secret = 'eBYvkk4dpgx6CS1uTWlrWxKZTY791CJ2cEE24JV4MqQ';
+		// Twitter keys
+		$consumer_key = $this->config->item('consumer_key', 'sms_to_twitter');
+		$consumer_key_secret = $this->config->item('consumer_key_secret', 'sms_to_twitter');
 		$tokens['access_token'] = NULL;
 		$tokens['access_token_secret'] = NULL;
 		$callback_url = site_url('sms_to_twitter/connect');
