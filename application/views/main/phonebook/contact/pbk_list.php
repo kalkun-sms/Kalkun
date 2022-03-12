@@ -6,7 +6,7 @@ if ($phonebook->num_rows() === 0):
 	}
 	else
 	{
-		echo '<p><i>'.tr('No contacts in the database.').'</i></p>';
+		echo '<p><i>'.tr('Contact is empty').'</i></p>';
 	}
 else: ?>
 <table>
