@@ -1,5 +1,13 @@
 <script type="text/javascript">
-	$(document).ready(function() {
+	$.when(
+		$.cachedScript("<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"),
+		$.cachedScript("<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.form.min.js"),
+		$.cachedScript("<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.tagsinput-revisited.min.js"),
+		$.Deferred(function(deferred) {
+			$(deferred.resolve);
+		})
+	).done(function() {
+
 		var max_chars_per_sms;
 		var message_length_correction;
 

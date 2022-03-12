@@ -1,7 +1,4 @@
 <?php $this->load->helper('html');?>
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.form.min.js"></script>
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.tagsinput-revisited.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquery.tagsinput-revisited.min.css" />
 <style type="text/css">
 	.left_aligned {

@@ -1,9 +1,14 @@
 <!-- Contact dialog -->
-<script src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
-<script src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.tagsinput-revisited.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquery.tagsinput-revisited.min.css" />
 <script type="text/javascript">
-	$(document).ready(function() {
+	$.when(
+	$.cachedScript("<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"),
+	$.cachedScript("<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.tagsinput-revisited.min.js"),
+	$.Deferred(function(deferred) {
+		$(deferred.resolve);
+	})
+	).done(function() {
+
 		<?php
 	$group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
 	$grouptext_array = [];
@@ -63,19 +68,19 @@
 		});
 
 		$('#addContact').validate();
-	});
 
-	jQuery.validator.classRuleSettings.phone = {
-		remote: {
-			url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
-			type: "get",
-			data: {
-				phone: function() {
-					return $("#number").val();
+		jQuery.validator.classRuleSettings.phone = {
+			remote: {
+				url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
+				type: "get",
+				data: {
+					phone: function() {
+						return $("#number").val();
+					}
 				}
-			}
-		}
-	};
+			};
+		});
+	});
 
 </script>
 
