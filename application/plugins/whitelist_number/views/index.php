@@ -1,11 +1,12 @@
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
 <?php $this->load->view('js_whitelist_number');?>
 
 <!-- Add Whitelist dialog -->
 <div id="whitelist-dialog" title="Add Whitelist Number" class="dialog">
 	<p id="validateTips">All form fields are required.</p>
-	<?php echo form_open('plugin/whitelist_number', array('class' => 'addwhitelistnumberform')); ?>
+	<?php echo form_open('plugin/whitelist_number', array('class' => 'addwhitelistnumberform', 'id' => 'addwhitelistnumberform')); ?>
 	<fieldset>
-		<label for="phone_number">Match</label>
+		<label for="phone_number">Match pattern as required by PHP's preg_match()</label>
 		<input type="text" name="match" id="phone_number" class="text ui-widget-content ui-corner-all" />
 	</fieldset>
 	<?php echo form_close(); ?>
@@ -15,10 +16,10 @@
 <!-- Edit Whitelist dialog -->
 <div id="editwhitelist-dialog" title="Edit Whitelist Number" class="dialog">
 	<p id="validateTips">All form fields are required.</p>
-	<?php echo form_open('plugin/whitelist_number', array('class' => 'editwhitelistnumberform')); ?>
+	<?php echo form_open('plugin/whitelist_number', array('class' => 'editwhitelistnumberform', 'id' => 'editwhitelistnumberform')); ?>
 	<fieldset>
 		<input type="hidden" name="editid_whitelist" id="editid_whitelist" />
-		<label for="editphone_number">Match</label>
+		<label for="editphone_number">Match pattern as required by PHP's preg_match()</label>
 		<input type="text" name="editmatch" id="editphone_number" class="text ui-widget-content ui-corner-all" />
 	</fieldset>
 	<?php echo form_close(); ?>
