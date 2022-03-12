@@ -1,5 +1,8 @@
 application/config/database.php
-application/logs/*.php
+/application/logs/*
+!/application/logs/index.html
+/application/cache/*
+!/application/cache/index.html
 .DS_Store
 
 /vendor/
