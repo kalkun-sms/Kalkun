@@ -77,9 +77,9 @@
 					phone: function() {
 						return $("#number").val();
 					}
-				}
-			};
-		});
+				},
+			},
+		};
 	});
 
 </script>
