@@ -57,7 +57,14 @@ class MY_Controller  extends CI_Controller {
 				{
 					redirect('login?l='.$this->input->get('l'));
 				}
-				redirect('login?r_url='.urlencode(current_url().'?'.parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)));
+				$this->session->set_flashdata('bef_login_post_data', $this->input->post());
+
+				$request_uri_qry_string = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+				if ( ! empty($request_uri_qry_string))
+				{
+					$request_uri_qry_string = '?'.$request_uri_qry_string;
+				}
+				redirect('login?r_url='.urlencode(current_url().$request_uri_qry_string));
 			}
 
 			$this->load->model('Kalkun_model');

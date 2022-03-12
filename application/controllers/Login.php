@@ -68,6 +68,10 @@ class Login extends CI_Controller {
 	function index()
 	{
 		$this->load->helper('form');
+		$this->session->set_flashdata(
+			'bef_login_post_data',
+			$this->session->flashdata('bef_login_post_data')
+		);
 		if ($_POST && empty($this->input->post('change_language')))
 		{
 			$this->Kalkun_model->login();
