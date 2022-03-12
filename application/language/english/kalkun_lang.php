@@ -416,4 +416,3 @@ $lang['Read-only'] = 'Read-only';
 $lang['No users in the database.'] = 'No users in the database.';
 $lang['Inbox Master'] = 'Inbox Master';
 $lang['No contacts in the database.'] = 'No contacts in the database.';
-$lang['Item deleted.'] = 'Item deleted.';
