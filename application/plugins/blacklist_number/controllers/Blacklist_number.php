@@ -59,9 +59,12 @@ class Blacklist_number extends Plugin_controller {
 		$this->load->view('main/layout', $data);
 	}
 
-	function delete($id)
+	function delete()
 	{
-		$this->blacklist_number_model->delete($id);
-		redirect('plugin/blacklist_number');
+		if ($_POST)
+		{
+			$id = intval($this->input->post('id'));
+			$this->blacklist_number_model->delete($id);
+		}
 	}
 }

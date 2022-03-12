@@ -77,8 +77,8 @@ $this->load->view('js_remote_access');
 			<td class="token"><?php echo htmlentities($tmp->token, ENT_QUOTES); ?></td>
 			<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status == 'false') ? '' : 'checked=\"checked\"'?> disabled /></td>
 			<td>&nbsp;</td>
-			<td><a href="javascript:void(0);" class="edit"><img class="ui-icon ui-icon-pencil" title="Edit" /></a></td>
-			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/soap/delete_remote_access/<?php echo htmlentities($tmp->id_remote_access, ENT_QUOTES); ?>"><img class="ui-icon ui-icon-close" title="Delete" /></a></td>
+			<td><a href="javascript:void(0);" class="edit"><img class="ui-icon ui-icon-pencil" title="<?php echo tr('Edit'); ?>" /></a></td>
+			<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><img class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>" /></a></td>
 		</tr>
 
 		<?php

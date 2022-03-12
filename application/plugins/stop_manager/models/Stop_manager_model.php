@@ -116,9 +116,6 @@ class Stop_manager_model extends CI_Model {
 
 	function delete($number, $type)
 	{
-		$this->load->helper('kalkun');
-		$number = phone_format_e164($number);
-
 		$this->db->delete('plugin_stop_manager', array('destination_number' => trim($number), 'stop_type' => trim($type)));
 	}
 }

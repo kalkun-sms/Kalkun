@@ -42,13 +42,15 @@ class Sms_to_wordpress extends Plugin_controller
 		if ($_POST)
 		{
 			$this->sms_to_wordpress_model->save_wp();
-			redirect('sms_to_wordpress');
+			redirect('plugin/sms_to_wordpress');
 		}
 	}
 
 	function delete()
 	{
-		$this->sms_to_wordpress_model->delete_wp($this->session->userdata('id_user'));
-		redirect('sms_to_wordpress');
+		if ($_POST)
+		{
+			$this->sms_to_wordpress_model->delete_wp($this->session->userdata('id_user'));
+		}
 	}
 }

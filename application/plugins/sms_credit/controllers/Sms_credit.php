@@ -108,10 +108,13 @@ class Sms_credit extends Plugin_controller {
 	 *
 	 * @access  public
 	 */
-	function delete_users($id = NULL)
+	function delete_users()
 	{
-		$this->sms_credit_model->delete_users($id);
-		redirect('plugin/sms_credit');
+		if ($_POST)
+		{
+			$id = intval($this->input->post('id'));
+			$this->sms_credit_model->delete_users($id);
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -188,9 +191,12 @@ class Sms_credit extends Plugin_controller {
 	 *
 	 * @access  public
 	 */
-	function delete_packages($id = NULL)
+	function delete_packages()
 	{
-		$this->sms_credit_model->delete_packages($id);
-		redirect('plugin/sms_credit/packages');
+		if ($_POST)
+		{
+			$id = intval($this->input->post('id'));
+			$this->sms_credit_model->delete_packages($id);
+		}
 	}
 }

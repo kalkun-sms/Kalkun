@@ -21,7 +21,7 @@
 		<?php if ( ! $status):?>
 		<a href="javascript:void(0);" class="nicebutton" id="addwpblogbutton">&#43; Add Wordpress blog</a>
 		<?php else:?>
-		<a href="<?php echo site_url('plugin/sms_to_wordpress/delete')?>" class="nicebutton">&#43; Delete Wordpress blog</a>
+		<a href="javascript:void(0);" class="nicebutton delete">&#43; Delete Wordpress blog</a>
 		<?php endif;?>
 
 		<?php if ($wp):?>
