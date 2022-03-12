@@ -166,7 +166,7 @@ class Kalkun extends MY_Controller {
 		if ( ! empty($status))
 		{
 			$status = get_modem_status($status, $this->config->item('modem_tolerant'));
-			if ($status == 'connect')
+			if ($status === 'connect')
 			{
 				$response['status'] = 'connected';
 				$response['status_lbl'] = tr('Connected');
