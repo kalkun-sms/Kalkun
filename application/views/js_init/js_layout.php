@@ -43,7 +43,7 @@
 				if (textStatus == "parsererror") {
 					console.warn("Call to 'kalkun/notification' didn't return valid JSON.");
 					$("#modem_connection_status").attr("class", "warning");
-					$("#modem_connection_status").text(<?php echo tr_js("Unknown"); ?>);
+					$("#modem_connection_status").text(<?php echo tr_js('Unknown'); ?>);
 				} else {
 					display_error_container(data);
 				}
