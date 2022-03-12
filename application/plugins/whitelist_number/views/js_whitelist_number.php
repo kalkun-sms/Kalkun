@@ -70,6 +70,50 @@
 					update_csrf_hash();
 				});
 		});
+
+		// validation
+		$("#addwhitelistnumberform").validate({
+			rules: {
+				match: {
+					required: true,
+					remote: {
+						url: "<?php echo site_url('plugin/whitelist_number/preg_match_pattern_validation'); ?>",
+						type: "get",
+						data: {
+							pattern: function() {
+								return $("#phone_number").val();
+							},
+						}
+					}
+				},
+			},
+			messages: {
+				match: {
+					required: <?php echo tr_js('Field required.'); ?>,
+				},
+			}
+		});
+		$("#editwhitelistnumberform").validate({
+			rules: {
+				editmatch: {
+					required: true,
+					remote: {
+						url: "<?php echo site_url('plugin/whitelist_number/preg_match_pattern_validation'); ?>",
+						type: "get",
+						data: {
+							pattern: function() {
+								return $("#editphone_number").val();
+							},
+						}
+					}
+				},
+			},
+			messages: {
+				editmatch: {
+					required: <?php echo tr_js('Field required.'); ?>,
+				},
+			}
+		});
 	});
 
 </script>

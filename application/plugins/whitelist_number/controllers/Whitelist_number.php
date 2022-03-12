@@ -66,4 +66,32 @@ class Whitelist_number extends Plugin_controller {
 			$this->whitelist_number_model->delete($id);
 		}
 	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Check pattern validity
+	 *
+	 * returns a json string used by jquery validation plugin
+	 * "true" if pattern is valid for use by preg_match()
+	 * "an error message" if not
+	 */
+	function preg_match_pattern_validation()
+	{
+		$result = 'false'; // Default to "false"
+
+		$pattern = $this->input->get_post('pattern');
+
+		try
+		{
+			preg_match($pattern, 'test string');
+			$result = 'true';
+		}
+		catch (Exception $e)
+		{
+			$result = $e->getMessage();
+		}
+		header('Content-type: application/json');
+		echo json_encode($result);
+	}
 }
