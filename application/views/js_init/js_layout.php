@@ -303,6 +303,11 @@
 							'#manualvalue',
 							post_get_data.phone,
 							post_get_data.msg);
+					} else if ("type" in post_get_data && post_get_data.type == "normal") {
+						compose_message(
+							post_get_data.type,
+							true,
+							'#personvalue_tags_tag');
 					}
 					break;
 					// TODO: Support additional UI actions: add/edit user, contact
