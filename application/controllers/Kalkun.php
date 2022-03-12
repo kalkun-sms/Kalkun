@@ -158,7 +158,40 @@ class Kalkun extends MY_Controller {
 	 */
 	function notification()
 	{
-		$this->load->view('main/notification');
+		$status = $this->Kalkun_model->get_gammu_info('last_activity')->row('UpdatedInDB');
+		$response['signal'] = intval($this->Kalkun_model->get_gammu_info('phone_signal')->row('Signal'));
+		$response['signal_lbl'] = tr('{0}%', NULL, $this->Kalkun_model->get_gammu_info('phone_signal')->row('Signal'));
+		$response['battery'] = intval($this->Kalkun_model->get_gammu_info('phone_battery')->row('Battery'));
+		$response['battery_lbl'] = tr('{0}%', NULL, $this->Kalkun_model->get_gammu_info('phone_battery')->row('Battery'));
+		if ( ! empty($status))
+		{
+			$status = get_modem_status($status, $this->config->item('modem_tolerant'));
+			if ($status == 'connect')
+			{
+				$response['status'] = 'connected';
+				$response['status_lbl'] = tr('Connected');
+			}
+			else
+			{
+				$response['status'] = 'disconnected';
+				$response['status_lbl'] = tr('Disconnected');
+			}
+		}
+		else
+		{
+			$response['status'] = 'Unknown';
+			$response['status_lbl'] = tr('Unknown');
+		}
+
+		if (is_ajax())
+		{
+			header('Content-type: application/json');
+			echo json_encode($response);
+		}
+		else
+		{
+			$this->load->view('main/notification');
+		}
 	}
 
 	// --------------------------------------------------------------------

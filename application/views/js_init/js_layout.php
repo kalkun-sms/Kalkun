@@ -9,13 +9,7 @@
 	csrf_hash = "<?php echo $this->security->get_csrf_hash() ?>";
 
 	var refreshId = setInterval(function() {
-		$('.modem_status').load('<?php echo site_url('kalkun/notification')?>', function(responseText, textStatus, jqXHR) {
-			jqXHR
-				.done(function(data) {})
-				.fail(function(data) {
-					display_error_container(data);
-				});
-		});
+		update_modem_info();
 		new_notification('true');
 	}, 60000);
 
@@ -28,6 +22,34 @@
 		});
 	}
 
+	function update_modem_info() {
+		$.getJSON('<?php echo site_url('kalkun/notification')?>')
+			.done(function(data) {
+				switch (data.status) {
+					case "connected":
+						$("#modem_connection_status").attr("class", "good");
+						break;
+					case "disconnected":
+					case "Unknown":
+					default:
+						$("#modem_connection_status").attr("class", "warning");
+						break;
+				}
+				$("#modem_connection_status").text(data.status_lbl);
+				$("#modem_connection_battery").text(data.battery_lbl);
+				$("#modem_connection_signal").text(data.signal_lbl);
+			})
+			.fail(function(data, textStatus) {
+				if (textStatus == "parsererror") {
+					console.warn("Call to 'kalkun/notification' didn't return valid JSON.");
+					$("#modem_connection_status").attr("class", "warning");
+					$("#modem_connection_status").text(<?php echo tr_js("Unknown"); ?>);
+				} else {
+					display_error_container(data);
+				}
+			});
+	}
+
 	function play_notification_sound() {
 		// Use HTMLAudioElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
 		var audioElement = new Audio('<?php echo $this->config->item('sound_path').$this->config->item('new_incoming_message_sound')?>');
@@ -35,7 +57,7 @@
 	}
 
 	function new_notification(refreshmode) {
-		$.get("<?php echo site_url('kalkun/unread_count')?>")
+		$.getJSON("<?php echo site_url('kalkun/unread_count')?>")
 			.done(function(data) {
 				// Get new unread count for inbox
 				unread_in_count_new = data['in'];
@@ -64,8 +86,12 @@
 				// Set new value for unread_in_count
 				unread_in_count = unread_in_count_new;
 			})
-			.fail(function(data) {
-				display_error_container(data);
+			.fail(function(data, textStatus) {
+				if (textStatus == "parsererror") {
+					console.warn("Call to 'kalkun/unread_count' didn't return valid JSON.");
+				} else {
+					display_error_container(data);
+				}
 			});
 
 		<?php if ($this->uri->segment(2) == 'folder' || $this->uri->segment(2) == 'my_folder'): ?>
@@ -256,6 +282,9 @@
 	}
 
 	$(document).ready(function() {
+
+		// Set Modem status
+		update_modem_info();
 
 		// Do the UI action requested by GET or POST
 		var post_get_data = JSON.parse($("#post_get_data").text());
