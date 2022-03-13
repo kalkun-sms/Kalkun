@@ -1,31 +1,7 @@
-<?php
-$this->load->helper('kalkun');
-echo tr('Status').': ';
-// Get signal and battery value
-//$signal = $this->Kalkun_model->get_gammu_info('phone_signal')->row('Signal');
-//$battery = $this->Kalkun_model->get_gammu_info('phone_battery')->row('Battery');
-
-$status = $this->Kalkun_model->get_gammu_info('last_activity')->row('UpdatedInDB');
-if ($status != NULL)
-{
-	$status = get_modem_status($status, $this->config->item('modem_tolerant'));
-
-	if ($status == 'connect')
-	{
-		echo '<span class="good">'.tr('Connected').'</span>';
-	}
-	else
-	{
-		echo '<span class="warning">'.tr('Disconnected').'</span>';
-	}
-}
-else
-{
-	echo 'Unknown';
-}
-?>
-
-<?php
-//if($status)
-//echo "Signal: ".$signal."%  Battery: ".$battery."%";
-?>
+<!-- Values are filled in javascript -->
+<?php echo tr('Status'); ?>:
+<span id="modem_connection_status"><?php echo tr('Unknown'); ?></span>
+| <?php echo tr('Signal'); ?>:
+<span id="modem_connection_signal"><?php echo tr('Unknown'); ?></span>
+| <?php echo tr('Battery'); ?>:
+<span id="modem_connection_battery"><?php echo tr('Unknown'); ?></span>
