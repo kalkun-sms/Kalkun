@@ -410,6 +410,53 @@ function phone_format_human($phone, $input_region = NULL)
 }
 
 /**
+ * Check phone number validity
+ *
+ * returns TRUE if valid, otherwise a String containing
+ * an error message.
+ *
+ */
+function is_phone_number_valid($phone, $input_region = NULL)
+{
+	$CI = &get_instance();
+
+	$result = 'false'; // Default to "false"
+
+	try
+	{
+		// Check if is possible number
+		$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+		$region = ($input_region !== NULL) ? $input_region : $CI->Kalkun_model->get_setting()->row('country_code');
+		$phoneNumberObject = $phoneNumberUtil->parse($phone, $region);
+		$is_possible = $phoneNumberUtil->isPossibleNumber($phoneNumberObject);
+
+		// Check if is mobile number
+		$type = $phoneNumberUtil->getNumberType($phoneNumberObject);
+		$is_mobile = ($type === \libphonenumber\PhoneNumberType::MOBILE
+			|| $type === \libphonenumber\PhoneNumberType::FIXED_LINE_OR_MOBILE);
+
+		// Check if is possible short number
+		$shortNumberUtil = \libphonenumber\ShortNumberInfo::getInstance();
+		$is_possible_short = $shortNumberUtil->isPossibleShortNumber($phoneNumberObject);
+
+		if ($is_possible && $is_mobile || $is_possible_short)
+		{
+			$result = TRUE;
+		}
+		else
+		{
+			$result = tr('Please specify a valid mobile phone number');
+		}
+	}
+	catch (Exception $e)
+	{
+		$result = $e->getMessage();
+	}
+	return $result;
+}
+
+
+/**
  *
  * @author Sergey Shuchkin
  * @link https://stackoverflow.com/a/12196609/15401262

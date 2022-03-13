@@ -348,41 +348,13 @@ class Kalkun extends MY_Controller {
 	 */
 	function phone_number_validation()
 	{
-		$result = 'false'; // Default to "false"
+		$result = is_phone_number_valid($this->input->get_post('phone'), $this->input->get_post('region'));
 
-		$phone = $this->input->get_post('phone');
-		$region = $this->input->get_post('region');
-
-		try
+		if ($result === TRUE)
 		{
-			// Check if is possible number
-			$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
-			$region = ( ! empty($region)) ? $region : $this->Kalkun_model->get_setting()->row('country_code');
-			$phoneNumberObject = $phoneNumberUtil->parse($phone, $region);
-			$is_possible = $phoneNumberUtil->isPossibleNumber($phoneNumberObject);
-
-			// Check if is mobile number
-			$type = $phoneNumberUtil->getNumberType($phoneNumberObject);
-			$is_mobile = ($type === \libphonenumber\PhoneNumberType::MOBILE
-				|| $type === \libphonenumber\PhoneNumberType::FIXED_LINE_OR_MOBILE);
-
-			// Check if is possible short number
-			$shortNumberUtil = \libphonenumber\ShortNumberInfo::getInstance();
-			$is_possible_short = $shortNumberUtil->isPossibleShortNumber($phoneNumberObject);
-
-			if ($is_possible && $is_mobile || $is_possible_short)
-			{
-				$result = 'true';
-			}
-			else
-			{
-				$result = tr('Please specify a valid mobile phone number');
-			}
+			$result = 'true';
 		}
-		catch (Exception $e)
-		{
-			$result = $e->getMessage();
-		}
+
 		header('Content-type: application/json');
 		echo json_encode($result);
 	}
