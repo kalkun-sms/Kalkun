@@ -73,8 +73,8 @@ class Spam_model extends MY_Model {
 		}
 		catch (Exception $e)
 		{
-			log_message('error', "Could not initialize b8 library. ".$e->getMessage());
-			show_error("Could not initialize b8 library. " . $e->getMessage(), 500, '500 Internal Server Error');
+			log_message('error', 'Could not initialize b8 library. '.$e->getMessage());
+			show_error('Could not initialize b8 library. ' . $e->getMessage(), 500, '500 Internal Server Error');
 		}
 	}
 
