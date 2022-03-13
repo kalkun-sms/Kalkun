@@ -6,7 +6,7 @@ if ($users->num_rows() === 0):
 	}
 	else
 	{
-		echo '<p><i>'.tr('Users is empty').'</i></p>';
+		echo '<p><i>'.tr('No users in the database.').'</i></p>';
 	}
 else: ?>
 <table>
