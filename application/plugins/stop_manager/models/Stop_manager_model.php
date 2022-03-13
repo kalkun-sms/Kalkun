@@ -20,6 +20,9 @@
  * @subpackage  Plugin
  * @category    Models
  */
+include_once(APPPATH.'plugins/Plugin_helper.php');
+Plugin_helper::autoloader();
+
 class Stop_manager_model extends CI_Model {
 
 	function __construct()
@@ -70,7 +73,10 @@ class Stop_manager_model extends CI_Model {
 
 		$this->db->distinct();
 		$this->db->select('destination_number');
-		$this->db->where('LOWER('.$this->db->protect_identifiers('stop_type').')', strtolower(str_replace("'", "''", $type)));
+		if ($type !== NULL)
+		{
+			$this->db->where('LOWER('.$this->db->protect_identifiers('stop_type').')', strtolower(str_replace("'", "''", $type)));
+		}
 		return $this->db->get('plugin_stop_manager');
 	}
 
@@ -79,7 +85,7 @@ class Stop_manager_model extends CI_Model {
 		$this->load->helper('kalkun');
 		$number = phone_format_e164($number);
 
-		$this->db->where('destination_number', trim($number));
+		$this->db->where('destination_number', $number);
 		$this->db->where('stop_type', trim($type));
 		$q = $this->db->get('plugin_stop_manager');
 		$this->db->reset_query();
@@ -91,7 +97,7 @@ class Stop_manager_model extends CI_Model {
 				'stop_message' => trim($msg),
 				'reg_date' => date ('Y-m-d H:i:s'),
 			);
-			$this->db->where('destination_number', trim($number));
+			$this->db->where('destination_number', $number);
 			$this->db->where('stop_type', trim($type));
 			$this->db->update('plugin_stop_manager', $data);
 		}
@@ -105,7 +111,7 @@ class Stop_manager_model extends CI_Model {
 
 			// do INSERT (there is no record for this (number;type))
 			$data = array (
-				'destination_number' => trim($number),
+				'destination_number' => $number,
 				'stop_type' => trim($type),
 				'stop_message' => trim($msg),
 				'reg_date' => date ('Y-m-d H:i:s'),
@@ -116,6 +122,13 @@ class Stop_manager_model extends CI_Model {
 
 	function delete($number, $type)
 	{
-		$this->db->delete('plugin_stop_manager', array('destination_number' => trim($number), 'stop_type' => trim($type)));
+		if ($type === \Kalkun\Plugins\StopManager\MsgIncoming::TYPE_NOT_SET)
+		{
+			$this->db->delete('plugin_stop_manager', array('destination_number' => $number));
+		}
+		else
+		{
+			$this->db->delete('plugin_stop_manager', array('destination_number' => $number, 'stop_type' => trim($type)));
+		}
 	}
 }
