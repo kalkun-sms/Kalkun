@@ -104,7 +104,7 @@
 					if ($("#error_container").hasClass("ui-dialog-content")) {
 						$("#error_container").dialog("close");
 					}
-					$('#message_holder').html(data.responseText);
+					$('#message_holder').html(data);
 					new_notification('false');
 					hide_loading();
 				})
