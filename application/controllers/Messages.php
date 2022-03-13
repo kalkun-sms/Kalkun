@@ -342,11 +342,7 @@ class Messages extends MY_Controller {
 				$tmp_dest = explode(',', $this->input->post('manualvalue'));
 				foreach ($tmp_dest as $key => $tmp)
 				{
-					$tmp = trim($tmp); // remove space
-					if (trim($tmp) !== '')
-					{
-						$dest[$key] = $tmp;
-					}
+					$dest[$key] = phone_format_e164($tmp);
 				}
 				break;
 
@@ -357,11 +353,7 @@ class Messages extends MY_Controller {
 					$tmp_dest = explode(',', $this->input->post('Number'));
 					foreach ($tmp_dest as $key => $tmp)
 					{
-						$tmp = trim($tmp); // remove space
-						if (trim($tmp) !== '')
-						{
-							$dest[$key] = $tmp;
-						}
+						$dest[$key] = phone_format_e164($tmp);
 					}
 				}
 				break;
