@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Import CSV file';
 $lang['Import contact from CSV format file'] = 'Import contact from CSV format file';
 $lang['CSV file'] = 'CSV File';
 $lang['The CSV file must be in valid format'] = 'The CSV file must be in valid format';
-$lang['Are you sure you want to delete {0} contact(s)?'] = "Are you sure want to delete {0} contact(s)?";
+$lang['Are you sure you want to delete {0} contact(s)?'] = 'Are you sure want to delete {0} contact(s)?';
 $lang['valid example'] = 'Valid Example';
 
 // Message

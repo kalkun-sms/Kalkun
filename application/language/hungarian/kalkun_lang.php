@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'CSV fájl importálása';
 $lang['Import contact from CSV format file'] = 'Kapcsolatok importálása formázott CSV fájlból';
 $lang['CSV file'] = 'CSV fájl';
 $lang['The CSV file must be in valid format'] = 'A CSV fájl formátumának helyesnek kell lennie';
-$lang['Are you sure you want to delete {0} contact(s)?'] = "Biztosan törölni szeretnéd a {0} kapcsolato(ka)t?";
+$lang['Are you sure you want to delete {0} contact(s)?'] = 'Biztosan törölni szeretnéd a {0} kapcsolato(ka)t?';
 $lang['valid example'] = 'Érvényes példa';
 
 // Message

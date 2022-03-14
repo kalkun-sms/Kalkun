@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Importovať CSV súbor';
 $lang['Import contact from CSV format file'] = 'Importovať kontakt z CSV súboru';
 $lang['CSV file'] = 'CSV súbor';
 $lang['The CSV file must be in valid format'] = 'CSV musí byť v platnom formáte';
-$lang['Are you sure you want to delete {0} contact(s)?'] = "Ste si istý mazaním {0} kontaktu/ov?";
+$lang['Are you sure you want to delete {0} contact(s)?'] = 'Ste si istý mazaním {0} kontaktu/ov?';
 $lang['valid example'] = 'Príklad platného tvaru';
 
 // Message

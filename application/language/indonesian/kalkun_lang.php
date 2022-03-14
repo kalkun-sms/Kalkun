@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Impor berkas CSV';
 $lang['Import contact from CSV format file'] = 'Impor kontak dari berkas format CSV';
 $lang['CSV file'] = 'Berkas CSV';
 $lang['The CSV file must be in valid format'] = 'Berkas CSV harus dalam format yang valid';
-$lang['Are you sure you  want to delete {0} contact(s)?'] = "Apakah Anda yakin menghapus kontak {0}?";
+$lang['Are you sure you  want to delete {0} contact(s)?'] = 'Apakah Anda yakin menghapus kontak {0}?';
 $lang['valid example'] = 'Contoh yang Valid';
 
 // Message

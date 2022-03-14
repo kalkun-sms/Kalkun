@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Importeer CSV bestand';
 $lang['Import contact from CSV format file'] = 'Importeer contactpersonen mbv CSV bestand';
 $lang['CSV file'] = 'CSV Bestand';
 $lang['The CSV file must be in valid format'] = 'Het CSV file bestand is niet in het juiste formaat';
-$lang['Are you sure you want to delete {0} contact(s)?'] = "Weet je zeker dat je {0} contactpersonen wilt verwijderen?";
+$lang['Are you sure you want to delete {0} contact(s)?'] = 'Weet je zeker dat je {0} contactpersonen wilt verwijderen?';
 $lang['valid example'] = 'Voorbeeld';
 
 // Message
