@@ -342,6 +342,7 @@ class Messages extends MY_Controller {
 				$tmp_dest = explode(',', $this->input->post('manualvalue'));
 				foreach ($tmp_dest as $key => $tmp)
 				{
+					$this->_phone_number_validation($this->input->post('manualvalue'));
 					$dest[$key] = phone_format_e164($tmp);
 				}
 				break;
@@ -1562,6 +1563,24 @@ class Messages extends MY_Controller {
 		else
 		{
 			$this->Spam_model->report_spam($params);
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Check if submitted phone number is valid
+	 *
+	 * @access	public
+	 */
+	function _phone_number_validation($phone)
+	{
+		$this->load->helper('kalkun');
+		$result = is_phone_number_valid($phone);
+
+		if ($result !== TRUE)
+		{
+			show_error($result, 400);
 		}
 	}
 }

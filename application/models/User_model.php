@@ -72,6 +72,7 @@ class User_model extends MY_Model {
 		$this->load->helper('kalkun');
 		$this->db->set('realname', trim($this->input->post('realname')));
 		$this->db->set('username', trim($this->input->post('username')));
+		$this->_phone_number_validation($this->input->post('phone_number'));
 		$this->db->set('phone_number', phone_format_e164($this->input->post('phone_number')));
 		$this->db->set('level', $this->input->post('level'));
 
@@ -137,5 +138,23 @@ class User_model extends MY_Model {
 		$this->db->like('LOWER('.$this->db->protect_identifiers('realname').')', $search_word);
 		$this->db->order_by('realname');
 		return $this->db->get();
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Check if submitted phone number is valid
+	 *
+	 * @access	public
+	 */
+	function _phone_number_validation($phone)
+	{
+		$this->load->helper('kalkun');
+		$result = is_phone_number_valid($phone);
+
+		if ($result !== TRUE)
+		{
+			show_error($result, 400);
+		}
 	}
 }

@@ -356,7 +356,8 @@ class Phonebook extends MY_Controller {
 	{
 		$this->load->helper('kalkun');
 		$pbk['Name'] = trim($this->input->post('name'));
-		$pbk['Number'] = trim($this->input->post('number'));
+		$this->_phone_number_validation($this->input->post('number'));
+		$pbk['Number'] = phone_format_e164($this->input->post('number'));
 		//$pbk['GroupID'] = $this->input->post('groupvalue');
 		$pbk['Groups'] = $this->input->post('groups');
 		$pbk['id_user'] = $this->input->post('pbk_id_user');
@@ -383,6 +384,24 @@ class Phonebook extends MY_Controller {
 		// Return status
 		header('Content-type: application/json');
 		echo json_encode($return_msg);
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Check if submitted phone number is valid
+	 *
+	 * @access	public
+	 */
+	function _phone_number_validation($phone)
+	{
+		$this->load->helper('kalkun');
+		$result = is_phone_number_valid($phone);
+
+		if ($result !== TRUE)
+		{
+			show_error($result, 400);
+		}
 	}
 
 	// --------------------------------------------------------------------

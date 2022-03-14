@@ -37,8 +37,9 @@ class Stop_manager extends Plugin_controller {
 
 		if ($_POST && is_null($this->input->post('search_name')))
 		{
+			$this->_phone_number_validation($this->input->post('destination_number'));
 			$this->stop_manager_model->add(
-				$this->input->post('destination_number'),
+				phone_format_e164($this->input->post('destination_number')),
 				($this->input->post('stop_type')) ? $this->input->post('stop_type') : \Kalkun\Plugins\StopManager\MsgIncoming::TYPE_NOT_SET,
 				$this->input->post('stop_message')
 			);
@@ -111,6 +112,24 @@ class Stop_manager extends Plugin_controller {
 			$from = $this->input->post('from');
 			$type = $this->input->post('type');
 			$this->stop_manager_model->delete($from, $type);
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Check if submitted phone number is valid
+	 *
+	 * @access	public
+	 */
+	function _phone_number_validation($phone)
+	{
+		$this->load->helper('kalkun');
+		$result = is_phone_number_valid($phone);
+
+		if ($result !== TRUE)
+		{
+			show_error($result, 400);
 		}
 	}
 }
