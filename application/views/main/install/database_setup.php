@@ -84,7 +84,7 @@
 			<p class="red">There was a problem when trying to load the database.</p>
 			<p>Reported error is:</p>
 			<p><code><?php echo htmlentities($exception, ENT_QUOTES); ?></code></p>
-			<p>Please check your database configuration in <code>application/config/database.php</code>. Then click on re-check button.</p>
+			<p>Please check your database configuration in <code>application/config/database.php</code>. Then click on button to check again.</p>
 		</td>
 	</tr>
 	<?php endif; ?>
@@ -96,7 +96,7 @@
 	<?php
 	echo form_open('install/database_setup');
 	echo form_hidden('idiom', $idiom);
-	echo '<input type="submit" name="submit" value="'.tr('Re-check').'" class="button" />';
+	echo '<input type="submit" name="submit" value="'.tr('Check again').'" class="button" />';
 	echo form_close();
 ?>
 </div>

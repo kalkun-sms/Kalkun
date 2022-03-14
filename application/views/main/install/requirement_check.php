@@ -171,12 +171,12 @@
 
 <?php if ($error > 0): ?>
 <div>
-	<p>Unfortunately, your system does not meet the minimum requirements to run Kalkun. Please update your system to meet the above requirements. Then click on re-check button.</p>
+	<p>Unfortunately, your system does not meet the minimum requirements to run Kalkun. Please update your system to meet the above requirements. Then click on button to check again.</p>
 	<div align="center">
 		<?php
 	echo form_open('install/requirement_check');
 	echo form_hidden('idiom', $idiom);
-	echo '<input type="submit" name="submit" value="'.tr('Re-check').'" class="button" />';
+	echo '<input type="submit" name="submit" value="'.tr('Check again').'" class="button" />';
 	echo form_close();
 ?>
 	</div>
