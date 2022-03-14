@@ -1,6 +1,6 @@
 <div id="contact_container" class="hidden"></div>
 
-<?php if (count($messages) == 0): /* CASE WHEN THERE IS NO MESSAGE IN THIS FOLDER */ ?>
+<?php if (count($messages) === 0): /* CASE WHEN THERE IS NO MESSAGE IN THIS FOLDER */ ?>
 <p style="padding-left: 10px"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>
 		<?php
 	switch ($this->uri->segment(2)):
@@ -14,22 +14,29 @@
 			$folder_type = '';
 			switch ($this->uri->segment(3)):
 				case 'inbox':
-					$folder_type = tr('Inbox');
+					$folder_type = tr_raw('Inbox');
 					break;
 				case 'outbox':
-					$folder_type = tr('Outbox');
+					$folder_type = tr_raw('Outbox');
 					break;
 				case 'sentitems':
-					$folder_type = tr('Sent items');
+					$folder_type = tr_raw('Sent items');
 					break;
 			endswitch;
 			if ($folder_type === ''
 				&& $this->uri->segment(4) === 'sentitems'
 				&& $this->uri->segment(5) === 'sending_error')
 			{
-				$folder_type = tr('Sending error');
+				$folder_type = tr_raw('Sending error');
 			}
-			echo tr('There is no message in {0}.', NULL, $folder_type);
+			if ($folder_type === '')
+			{
+				echo tr('There is no message in this conversation.');
+			}
+			else
+			{
+				echo tr('There is no message in {0}.', NULL, $folder_type);
+			}
 			break;
 	endswitch;
 ?>
