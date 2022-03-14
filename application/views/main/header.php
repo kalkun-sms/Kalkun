@@ -1,4 +1,4 @@
-<title><?php echo 'Kalkun'; if (isset($title)): echo ' / '.$title; endif;?></title>
+<title><?php echo 'Kalkun'; if (isset($title)): echo ' / '.htmlentities($title, ENT_QUOTES); endif;?></title>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <meta name="generator" content="Geany 0.13" />
 <meta name="robots" content="noindex,nofollow">

@@ -50,7 +50,7 @@ class Users extends MY_Controller {
 	 */
 	function index()
 	{
-		$data['title'] = tr('User', 'default');
+		$data['title'] = tr_raw('User', 'default');
 		$this->load->library('pagination');
 		$config['base_url'] = site_url().'/users/index/';
 		$config['total_rows'] = $this->User_model->getUsers(array('option' => 'all'))->num_rows();
