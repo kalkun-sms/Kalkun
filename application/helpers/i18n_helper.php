@@ -14,6 +14,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  *
  * translate the label for given context with parameters
+ * and escapes the HTML entities with htmlentities
+ * for output in HTML.
  *
  * @param type $label
  * @param type $context
@@ -21,6 +23,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @return type
  */
 function tr($label, $context = NULL, ...$params)
+{
+	return htmlentities(call_user_func_array(array(get_instance()->lang, 'line'), func_get_args()), ENT_QUOTES);
+}
+
+/**
+ *
+ * translate the label for given context with parameters
+ * This doesn't apply any conversion for use in HTML or JS
+ *
+ * @param type $label
+ * @param type $context
+ * @param type $params
+ * @return type
+ */
+function tr_raw($label, $context = NULL, ...$params)
 {
 	return call_user_func_array(array(get_instance()->lang, 'line'), func_get_args());
 }
