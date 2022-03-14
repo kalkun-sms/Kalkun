@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Send and repeat';
 $lang['Sending'] = 'Sending';
 $lang['Insert name from contact list'] = 'Insert name from contact list';
 $lang['Delete group(s) confirmation'] = 'Delete group(s) confirmation';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Delete group(s)?<br>All their contacts will also be deleted.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Delete group(s)?
+All their contacts will also be deleted.';
 $lang['Create group'] = 'Create group';
 $lang['Group name'] = 'Group name';
 $lang['Groups'] = 'Groups';

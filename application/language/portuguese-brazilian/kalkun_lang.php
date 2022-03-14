@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Enviando';
 $lang['Insert name from contact list'] = 'Inserir nome da lista de contatos';
 $lang['Delete group(s) confirmation'] = 'Confirmacao para apagar grupo(s)';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Apagar Grupo(s)?<br>Todos os contatos nestes grupos tambem serao apagados.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Apagar Grupo(s)?
+Todos os contatos nestes grupos tambem serao apagados.';
 $lang['Create group'] = 'Criar Grupo';
 $lang['Group name'] = 'Nome do Grupo';
 $lang['Groups'] = 'Grupos';
@@ -224,7 +226,8 @@ $lang['Add user'] = 'Adicionar Usuario';
 $lang['Edit user'] = 'Editar Usuario';
 $lang['User']['default'] = 'Usuario';
 $lang['Users'] = 'Usu&aacute;rios';
-$lang['This deletes the selected users and all their messages and contacts.'] = 'Apagar Usuario?<br>Isto inclui todos os registros deste usuario (mensagens e contatos).';
+$lang['This deletes the selected users and all their messages and contacts.'] = 'Apagar Usuario?
+Isto inclui todos os registros deste usuario (mensagens e contatos).';
 $lang['User not found'] = 'Usu&aacute;rio nao encontrado';
 $lang['No users in the database.'] = 'Usu&aacute;rios est&aacute; vazio';
 $lang['Username'] = 'Username';

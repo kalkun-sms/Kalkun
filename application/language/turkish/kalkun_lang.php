@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Sending';
 $lang['Insert name from contact list'] = 'Kontak listesinden isim ekle';
 $lang['Delete group(s) confirmation'] = 'Grup onayini sil';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Grup/lari sil?<br>Gruplardaki tüm kontaklar silinecek.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Grup/lari sil?
+Gruplardaki tüm kontaklar silinecek.';
 $lang['Create group'] = 'Grup olustur';
 $lang['Group name'] = 'Grup ismi';
 $lang['Groups'] = 'Gruplar';
@@ -224,7 +226,8 @@ $lang['Add user'] = 'Kullanicilari ekle';
 $lang['Edit user'] = 'Kullanici düzenle';
 $lang['User']['default'] = 'Kullanici';
 $lang['Users'] = 'Kullanicilar';
-$lang['This deletes the selected users and all their messages and contacts.'] = 'Kullanici silinsinmi?<br>Bu mesajlardan ve kontaklardan bu kullanicinin silinecegi manasina gelir.';
+$lang['This deletes the selected users and all their messages and contacts.'] = 'Kullanici silinsinmi?
+Bu mesajlardan ve kontaklardan bu kullanicinin silinecegi manasina gelir.';
 $lang['User not found'] = 'Kullanici bulunamadi';
 $lang['No users in the database.'] = 'Kullanicilar bos';
 $lang['Username'] = 'Kullanici adi';

@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Sender';
 $lang['Insert name from contact list'] = 'Indsæt navn fra kontaktliste';
 $lang['Delete group(s) confirmation'] = 'Bekræft sletning af gruppe(r)';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Slet gruppe(r)?<br>Alle kontakter i de angivne grupper vil også blive slettet.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Slet gruppe(r)?
+Alle kontakter i de angivne grupper vil også blive slettet.';
 $lang['Create group'] = 'Opret gruppe';
 $lang['Group name'] = 'Gruppens navn';
 $lang['Groups'] = 'Grupper';
@@ -224,7 +226,8 @@ $lang['Add user'] = 'Tilføj bruger';
 $lang['Edit user'] = 'Rediger bruger';
 $lang['User']['default'] = 'Bruger';
 $lang['Users'] = 'Brugere';
-$lang['This deletes the selected users and all their messages and contacts.'] = 'Slet bruger?<br>Dette inkluderer al data knyttet til denne bruger (beskeder og kontakter).';
+$lang['This deletes the selected users and all their messages and contacts.'] = 'Slet bruger?
+Dette inkluderer al data knyttet til denne bruger (beskeder og kontakter).';
 $lang['User not found'] = 'Bruger ikke fundet';
 $lang['No users in the database.'] = 'Bruger er tom';
 $lang['Username'] = 'Brugernavn';

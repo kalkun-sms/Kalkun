@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Sending';
 $lang['Insert name from contact list'] = 'Insert Name from Contact List';
 $lang['Delete group(s) confirmation'] = 'Delete Group(s) Confirmation';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Delete Gruop(s)?<br>All conaycys in this Group(s) will also be eliminated.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Delete Gruop(s)?
+All conaycys in this Group(s) will also be eliminated.';
 $lang['Create group'] = 'Create Group';
 $lang['Group name'] = 'Group Name';
 $lang['Groups'] = 'Skupiny';
@@ -224,7 +226,8 @@ $lang['Add user'] = 'Add User';
 $lang['Edit user'] = 'Edit';
 $lang['User']['default'] = 'User';
 $lang['Users'] = 'Users';
-$lang['This deletes the selected users and all their messages and contacts.'] = 'Delete User?<br>This includes all records from this user (messages and contacts).';
+$lang['This deletes the selected users and all their messages and contacts.'] = 'Delete User?
+This includes all records from this user (messages and contacts).';
 $lang['User not found'] = 'User not found';
 $lang['No users in the database.'] = 'Users is empty';
 $lang['Username'] = 'Username';

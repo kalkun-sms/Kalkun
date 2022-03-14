@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Zenden';
 $lang['Insert name from contact list'] = 'Naam invoegen uit Contacten';
 $lang['Delete group(s) confirmation'] = 'Dialoog Verwijder Groepen';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Groepen Verwijderen?<br>Ook de contacpersonen in deze groepen worden verwijderd!.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Groepen Verwijderen?
+Ook de contacpersonen in deze groepen worden verwijderd!.';
 $lang['Create group'] = 'Maak Groep Aan';
 $lang['Group name'] = 'Naam Groep';
 $lang['Groups'] = 'Groepen';
@@ -224,7 +226,8 @@ $lang['Add user'] = 'Gebruiker Toevoegen';
 $lang['Edit user'] = 'Gebruikers Aanpassen';
 $lang['User']['default'] = 'Gebruiker';
 $lang['Users'] = 'Gebruikers';
-$lang['This deletes the selected users and all their messages and contacts.'] = 'Gebruiker verwijderen?<br>Hiermee worden alle berichten en mappen van de gebruiker verwijderd.';
+$lang['This deletes the selected users and all their messages and contacts.'] = 'Gebruiker verwijderen?
+Hiermee worden alle berichten en mappen van de gebruiker verwijderd.';
 $lang['User not found'] = 'Gebruiker niet gevonden';
 $lang['No users in the database.'] = 'Geen Gebruikers';
 $lang['Username'] = 'Gebruikersnaam';

@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Küldés';
 $lang['Insert name from contact list'] = 'Név beszúrása a kapcsolati listából';
 $lang['Delete group(s) confirmation'] = 'Csoport(ok) törlésének megerősítése';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Törli a csoporto(ka)t?<br>A csoport(ok) összes kapcsolata törlődni fog.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Törli a csoporto(ka)t?
+A csoport(ok) összes kapcsolata törlődni fog.';
 $lang['Create group'] = 'Csoport létrehozása';
 $lang['Group name'] = 'Csoport neve';
 $lang['Groups'] = 'Csoportok';
@@ -224,7 +226,8 @@ $lang['Add user'] = 'Felhasználó hozzáadása';
 $lang['Edit user'] = 'Felhasználó szerkesztése';
 $lang['User']['default'] = 'Felhasználó';
 $lang['Users'] = 'Felhasználók';
-$lang['This deletes the selected users and all their messages and contacts.'] = 'Törli a felhasználót?<br>A felhasználó minden adatával együtt (üzenetek és kapcsolatok).';
+$lang['This deletes the selected users and all their messages and contacts.'] = 'Törli a felhasználót?
+A felhasználó minden adatával együtt (üzenetek és kapcsolatok).';
 $lang['User not found'] = 'Felhasználó nem található';
 $lang['No users in the database.'] = 'Üres felhasználó';
 $lang['Username'] = 'Felhasználónév';

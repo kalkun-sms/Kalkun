@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Lähetetään';
 $lang['Insert name from contact list'] = 'Insert Name from Contact List';
 $lang['Delete group(s) confirmation'] = 'Delete Group(s) Confirmation';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Delete Group(s)?<br>All contacts in this Group(s) will also be deleted.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Delete Group(s)?
+All contacts in this Group(s) will also be deleted.';
 $lang['Create group'] = 'Create Group';
 $lang['Group name'] = 'Group Name';
 $lang['Groups'] = 'Ryhmiä';
@@ -224,7 +226,8 @@ $lang['Add user'] = 'Lisää käyttäjä';
 $lang['Edit user'] = 'Muokkaa käyttäjä';
 $lang['User']['default'] = 'Käyttäjä';
 $lang['Users'] = 'Käyttäjät';
-$lang['This deletes the selected users and all their messages and contacts.'] = 'Poista käyttäjä?<br>Tämä sisältää kaikki merkinnät tältä käyttäjältä (viestit ja yhteystiedot).';
+$lang['This deletes the selected users and all their messages and contacts.'] = 'Poista käyttäjä?
+Tämä sisältää kaikki merkinnät tältä käyttäjältä (viestit ja yhteystiedot).';
 $lang['User not found'] = 'Käyttäjää ei löydy';
 $lang['No users in the database.'] = 'Ei käyttäjiä';
 $lang['Username'] = 'Käyttäjätunnus';

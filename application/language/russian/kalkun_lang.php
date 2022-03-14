@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Sending';
 $lang['Insert name from contact list'] = 'Начните набирать имя из списка контактов';//Insert Name from Contact List
 $lang['Delete group(s) confirmation'] = 'Подтверждение удаления групп(ы)';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Удалить группу(ы)?<br>Все контакты в этой(этих) группе(группах) также будут уничтожены.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Удалить группу(ы)?
+Все контакты в этой(этих) группе(группах) также будут уничтожены.';
 $lang['Create group'] = 'Создать группу';
 $lang['Group name'] = 'Название группы';
 $lang['Groups'] = 'Группы';
@@ -224,7 +226,8 @@ $lang['Add user'] = 'Добавить пользователей';
 $lang['Edit user'] = 'редактировать пользователя';
 $lang['User']['default'] = 'Пользователь';
 $lang['Users'] = 'Пользователи';
-$lang['This deletes the selected users and all their messages and contacts.'] = 'Удалить Пользователя?<br>Также будут удалены все записи этого пользователя (сообщения и контакты).';
+$lang['This deletes the selected users and all their messages and contacts.'] = 'Удалить Пользователя?
+Также будут удалены все записи этого пользователя (сообщения и контакты).';
 $lang['User not found'] = 'Искомый пользователь не найден';
 $lang['No users in the database.'] = 'Список пользователей пуст';//(Users is empty)
 $lang['Username'] = 'Логин';

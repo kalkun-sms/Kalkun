@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Sedang mengirim';
 $lang['Insert name from contact list'] = 'Masukkan nama kontak';
 $lang['Delete group(s) confirmation'] = 'Konfirmasi hapus Grup';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Hapus Grup ini?<br>Semua kontak dalam grup ini juga akan terhapus.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Hapus Grup ini?
+Semua kontak dalam grup ini juga akan terhapus.';
 $lang['Create group'] = 'Grup Baru';
 $lang['Group name'] = 'Nama Grup';
 $lang['Groups'] = 'Grup';
@@ -224,7 +226,8 @@ $lang['Add user'] = 'Tambah Pengguna';
 $lang['Edit user'] = 'Sunting Pengguna';
 $lang['User']['default'] = 'Pengguna';
 $lang['Users'] = 'Pengguna';
-$lang['This deletes the selected users and all their messages and contacts.'] = 'Hapus Pengguna ini?<br>Semua data (pesan dan kontak) juga akan terhapus.';
+$lang['This deletes the selected users and all their messages and contacts.'] = 'Hapus Pengguna ini?
+Semua data (pesan dan kontak) juga akan terhapus.';
 $lang['User not found'] = 'Pengguna tidak ditemukan';
 $lang['No users in the database.'] = 'Pengguna kosong';
 $lang['Username'] = 'Username';

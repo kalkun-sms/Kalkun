@@ -2,7 +2,7 @@
 <!-- Delete Group Confirmation -->
 <div class="dialog" id="confirm_delete_group_dialog" title="<?php echo tr('Delete group(s) confirmation');?>">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-		<?php echo tr('Delete group(s)?<br>All their contacts will also be deleted.');?></p>
+		<?php echo nl2br(tr("Delete group(s)?\nAll their contacts will also be deleted."));?></p>
 </div>
 
 <div id="contact_container" class="hidden"></div>

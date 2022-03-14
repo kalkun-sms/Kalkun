@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Odosielanie';
 $lang['Insert name from contact list'] = 'Vložte meno z adresára';
 $lang['Delete group(s) confirmation'] = 'Potvrdenie mazania skupiny';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Zmazať skupinu?<br>Vśetky kontakty v tejto skupine budú taktiež zmazané.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Zmazať skupinu?
+Vśetky kontakty v tejto skupine budú taktiež zmazané.';
 $lang['Create group'] = 'Vytvoriť skupinu';
 $lang['Group name'] = 'Meno skupiny';
 $lang['Groups'] = 'Skupiny';
@@ -224,7 +226,8 @@ $lang['Add user'] = 'Pridať užívateľov';
 $lang['Edit user'] = 'Upraviť užívateľa';
 $lang['User']['default'] = 'Užívateľ';
 $lang['Users'] = 'Užívatelia';
-$lang['This deletes the selected users and all their messages and contacts.'] = 'Zmazať užívateľa?<br>Taktiež všetky jeho záznamy (ako správy a kontakty).';
+$lang['This deletes the selected users and all their messages and contacts.'] = 'Zmazať užívateľa?
+Taktiež všetky jeho záznamy (ako správy a kontakty).';
 $lang['User not found'] = 'Užívateľ nenájdený';
 $lang['No users in the database.'] = 'Užívateľ je prázdny';
 $lang['Username'] = 'Užívateľ';
