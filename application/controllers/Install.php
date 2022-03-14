@@ -49,7 +49,7 @@ class Install extends CI_Controller {
 		if ( ! file_exists(FCPATH.'install'))
 		{
 			show_error(
-				nl2br(tr(
+				nl2br(tr_raw(
 					"Installation has been disabled by the administrator.\nTo enable access to it, create a file named {0} in this directory of the server: {1}.\nOtherwise you may log-in at {2}.",
 					NULL,
 					'<strong>install</strong>',
