@@ -125,7 +125,7 @@ class Login extends CI_Controller {
 				$data['class'] = '1';
 				$data['dest'] = $token['phone'];
 				$data['date'] = date('Y-m-d H:i:s');
-				$data['message'] = tr('To reset your Kalkun password please visit {0}', NULL, site_url('login/password_reset/'.$token['token']).'?l='.$this->idiom);
+				$data['message'] = tr_raw('To reset your Kalkun password please visit {0}', NULL, site_url('login/password_reset/'.$token['token']).'?l='.$this->idiom);
 				$data['delivery_report'] = 'default';
 				$data['uid'] = 1;
 				$this->Message_model->send_messages($data);
