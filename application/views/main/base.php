@@ -71,7 +71,7 @@
 </div>
 
 <!-- Add Folder Dialog -->
-<div id="addfolderdialog" title="<?php echo htmlentities(tr('Add folder'), ENT_QUOTES);?>" class="dialog">
+<div id="addfolderdialog" title="<?php echo tr('Add folder');?>" class="dialog">
 	<?php
 	$this->load->helper('form');
 	echo form_open('kalkun/add_folder', array('class' => 'addfolderform'));
@@ -218,7 +218,7 @@
 </div>
 
 <!-- Advanced Search Dialog -->
-<div id="a_search_dialog" title="<?php echo htmlentities(tr('Advanced search'), ENT_QUOTES);?>" class="dialog">
+<div id="a_search_dialog" title="<?php echo tr('Advanced search');?>" class="dialog">
 	<?php
 	$this->load->helper('form');
 	echo form_open('messages/query', array('id' => 'a_search_form'));
