@@ -171,23 +171,39 @@
 
 <?php if ($error > 0): ?>
 <div>
-	<p>Unfortunately, your system does not meet the minimum requirements to run Kalkun. Please update your system to meet the above requirements and refresh this page.</p>
+	<p>Unfortunately, your system does not meet the minimum requirements to run Kalkun. Please update your system to meet the above requirements. Then click on re-check button.</p>
+	<div align="center">
+		<?php
+	echo form_open('install/requirement_check');
+	echo form_hidden('idiom', $idiom);
+	echo '<input type="submit" name="submit" value="'.tr('Re-check').'" class="button" />';
+	echo form_close();
+?>
+	</div>
+	<p>&nbsp;</p>
+	<?php
+	echo form_open('install', 'style="display:inline"');
+	echo form_hidden('idiom', $idiom);
+	echo '<input type="submit" name="submit" value="‹ '.tr('Previous').'" class="button" />';
+	echo form_close();
+?>
 </div>
 
 <?php else: ?>
 <div>
 	<p>Your system is compatible with Kalkun.</p>
+	<p>&nbsp;</p>
 	<p>
 		<?php
 	echo form_open('install', 'style="display:inline"');
 	echo form_hidden('idiom', $idiom);
-	echo form_submit('submit', '‹ '.tr('Previous'), 'class="button"');
+	echo '<input type="submit" name="submit" value="‹ '.tr('Previous').'" class="button" />';
 	echo form_close();
 ?>
 		<?php
 	echo form_open('install/database_setup', 'style="display:inline"');
 	echo form_hidden('idiom', $idiom);
-	echo form_submit('submit', tr('Next').' ›', 'class="button"');
+	echo '<input type="submit" name="submit" value="'.tr('Next').' ›" class="button" />';
 	echo form_close();
 ?>
 	</p>

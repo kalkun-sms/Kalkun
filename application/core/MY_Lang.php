@@ -408,7 +408,14 @@ class MY_Lang extends MX_Lang {
 		$supported_languages = [];
 		foreach (MY_Lang::$idiom_to_locale as $key => $value)
 		{
-			$supported_languages[$key] = Locale::getDisplayName($value, $value);
+			if (extension_loaded('intl'))
+			{
+				$supported_languages[$key] = Locale::getDisplayName($value, $value);
+			}
+			else
+			{
+				$supported_languages[$key] = $key;
+			}
 		}
 		natcasesort($supported_languages);
 		return $supported_languages;

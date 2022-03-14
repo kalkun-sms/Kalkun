@@ -27,14 +27,14 @@
 <?php	endif; ?>
 
 <h4>Configure Kalkun daemon</h4>
-<p>Please note that you also must configure the PHP daemon script of Kalkun. Otherwise you can't get your inbox, see instructions on README file.</p>
+<p>Please note that you also must configure the PHP daemon script of Kalkun. Otherwise you can't get your inbox, see <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#configure-daemon--outbox_queue-scripts" target="_blank"><strong>instructions on the wiki</strong></a>.</p>
 <p>The daemon scripts are provided in the <code>scripts</code> directory of the kalkun archive. In case they are still located at the root of your webserver (ie. along the <code>application</code> directory), <strong>it is advised to move them to another location</strong>.</p>
 
 <h4>Change encryption key</h4>
-<p>To improve security, it's higly recommended to change the <code>encryption_key</code> in <code>application/config/config.php</code>.</p>
+<p>To improve security, it's higly recommended to change the <code>encryption_key</code> in <code>application/config/config.php</code>.<a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#change-the-default-encryption-key" target="_blank"><strong>See wiki</strong></a> for details.</p>
 
 <h4>Configure kalkun internals</h4>
-<p>You may change some parameters in the <code>application/config/kalkun_settings.php</code> file. For example:</p>
+<p>You may change some parameters in the <code>application/config/kalkun_settings.php</code> file. For example set another gateway engine than Gammu. Find some suggestions of parameters you can change on the <a href="" target="_blank"><strong>configuration page of the wiki</strong></a>.</p>
 <ul>
 	<li>Gammu path &amp; gammu config file. Required to send Wap links.</li>
 	<li>Gateway engine (aka backend) in case you want to use an external service provider for your SMS (experimental).</li>
@@ -47,7 +47,7 @@
 <?php
 	echo form_open(site_url(), 'style="display:block; text-align: center"');
 	echo form_hidden('idiom', $idiom);
-	echo form_submit('submit', tr('Log in'), 'class="button"');
+	echo '<input type="submit" name="submit" value="'.tr('Log in').'" class="button" />';
 	if ($needs_manual_install_file_deletion):
 		echo '<br>💡 Have you deleted install file?';
 	endif;

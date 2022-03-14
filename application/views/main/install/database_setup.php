@@ -97,7 +97,7 @@
 		<?php
 	echo form_open('install/requirement_check', 'style="display:inline"');
 	echo form_hidden('idiom', $idiom);
-	echo form_submit('submit', '‹ '.tr('Previous'), 'class="button"');
+	echo '<input type="submit" name="submit" value="‹ '.tr('Previous').'" class="button" />';
 	echo form_close();
 ?>
 	</p>
