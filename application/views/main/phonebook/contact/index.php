@@ -5,7 +5,7 @@
 <!-- Delete Contact Dialog -->
 <div class="dialog" id="confirm_delete_contact_dialog" title="<?php echo tr('Delete contact(s) confirmation');?>">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-		<?php echo tr('Are you sure you want to delete <span id=\'contact-delete-count\'></span> contact(s)?');?> </p>
+		<?php echo tr('Are you sure you want to delete {0} contact(s)?', NULL, '<span id="contact-delete-count"></span>');?> </p>
 </div>
 
 <!-- Add contact wizard dialog -->

@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Importer CSV-fil';
 $lang['Import contact from CSV format file'] = 'Importer kontakt fra fil i CSV-format';
 $lang['CSV file'] = 'CSV-fil';
 $lang['The CSV file must be in valid format'] = 'CSV filen skal være i et gyldigt format';
-$lang['Are you sure you want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Er du sikker på du vil slette <span id='contact-delete-count'></span> kontakt(er)?";
+$lang['Are you sure you want to delete {0} contact(s)?'] = "Er du sikker på du vil slette {0} kontakt(er)?";
 $lang['valid example'] = 'Gyldigt eksempel';
 
 // Message

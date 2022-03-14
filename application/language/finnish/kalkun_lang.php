@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Tuo CSV tiedosto';
 $lang['Import contact from CSV format file'] = 'Tuo yhteystietoja CSV muotoisesta tiedostosta';
 $lang['CSV file'] = 'CSV Tiedosto';
 $lang['The CSV file must be in valid format'] = 'CSV tiedoston pitää olla käypää muotoa';
-$lang['Are you sure you want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Oletko varma, että haluat poistaa <span id='contact-delete-count'></span> yhteystietoa?";
+$lang['Are you sure you want to delete {0} contact(s)?'] = "Oletko varma, että haluat poistaa {0} yhteystietoa?";
 $lang['valid example'] = 'Esimerkki käyvästä muodosta';
 
 // Message
