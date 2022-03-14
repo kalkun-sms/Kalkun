@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Importovať CSV súbor';
 $lang['Import contact from CSV format file'] = 'Importovať kontakt z CSV súboru';
 $lang['CSV file'] = 'CSV súbor';
 $lang['The CSV file must be in valid format'] = 'CSV musí byť v platnom formáte';
-$lang['Are you sure you want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Ste si istý mazaním <span id='contact-delete-count'></span> kontaktu/ov?";
+$lang['Are you sure you want to delete {0} contact(s)?'] = 'Ste si istý mazaním {0} kontaktu/ov?';
 $lang['valid example'] = 'Príklad platného tvaru';
 
 // Message
@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Odosielanie';
 $lang['Insert name from contact list'] = 'Vložte meno z adresára';
 $lang['Delete group(s) confirmation'] = 'Potvrdenie mazania skupiny';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Zmazať skupinu?<br>Vśetky kontakty v tejto skupine budú taktiež zmazané.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Zmazať skupinu?
+Vśetky kontakty v tejto skupine budú taktiež zmazané.';
 $lang['Create group'] = 'Vytvoriť skupinu';
 $lang['Group name'] = 'Meno skupiny';
 $lang['Groups'] = 'Skupiny';
@@ -224,7 +226,8 @@ $lang['Add user'] = 'Pridať užívateľov';
 $lang['Edit user'] = 'Upraviť užívateľa';
 $lang['User']['default'] = 'Užívateľ';
 $lang['Users'] = 'Užívatelia';
-$lang['This deletes the selected users and all their messages and contacts.'] = 'Zmazať užívateľa?<br>Taktiež všetky jeho záznamy (ako správy a kontakty).';
+$lang['This deletes the selected users and all their messages and contacts.'] = 'Zmazať užívateľa?
+Taktiež všetky jeho záznamy (ako správy a kontakty).';
 $lang['User not found'] = 'Užívateľ nenájdený';
 $lang['No users in the database.'] = 'Užívateľ je prázdny';
 $lang['Username'] = 'Užívateľ';
@@ -404,7 +407,6 @@ $lang['Plugin {0} is not installed.'] = 'Plugin {0} is not installed.';
 $lang['Value must be a number.'] = 'Value must be a number.';
 $lang['{0} part messages'] = '{0} part messages';
 $lang['Content'] = 'Content';
-$lang['Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.'] = 'Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.';
 $lang['No results for {0}'] = 'No results for {0}';
 $lang['Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'] = 'Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.';
 $lang['Unknown error while sending WAP-LINK.'] = 'Unknown error while sending WAP-LINK.';
@@ -420,3 +422,8 @@ $lang['Inbox Master'] = 'Inbox Master';
 $lang['Network error.'] = 'Network error.';
 $lang['{0}%'] = '{0}%';
 $lang['Item deleted.'] = 'Item deleted.';
+$lang['Installation has been disabled by the administrator.
+To enable access to it, create a file named {0} in this directory of the server: {1}.
+Otherwise you may log-in at {2}.'] = 'Installation has been disabled by the administrator.
+To enable access to it, create a file named {0} in this directory of the server: {1}.
+Otherwise you may log-in at {2}.';

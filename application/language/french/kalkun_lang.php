@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Importer un fichier CSV';
 $lang['Import contact from CSV format file'] = "Importer des contacts à partir d'un fichier CSV";
 $lang['CSV file'] = 'Fichier CSV';
 $lang['The CSV file must be in valid format'] = 'Le fichier CSV doit être au bon format';
-$lang['Are you sure you want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Êtes-vous sûr(s) de vouloir supprimer <span id='contact-delete-count'></span> contacts&nbsp;?";
+$lang['Are you sure you want to delete {0} contact(s)?'] = 'Êtes-vous sûr(s) de vouloir supprimer {0} contacts ?';
 $lang['valid example'] = 'Exemple valide';
 
 // Message
@@ -81,7 +81,7 @@ $lang['There is no message in {0}.'] = "Il n'y a aucun message dans {0}.";
 $lang['There is no message in this folder.'] = "Il n'y a aucun message dans ce dossier.";
 
 $lang['Delete all'] = 'Tout supprimer';
-$lang['Are you sure? This will affect all conversations.'] = "Êtes-vous sûr(e)&nbsp;? Ceci s'appliquera à toutes les conversations.";
+$lang['Are you sure? This will affect all conversations.'] = "Êtes-vous sûr(e) ? Ceci s'appliquera à toutes les conversations.";
 
 $lang['Select all'] = 'Tout sélectionner';
 $lang['Deselect all'] = 'Tout désélectionner';
@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Envoyer et répéter';
 $lang['Sending'] = 'Envoi en cours';
 $lang['Insert name from contact list'] = 'Insérer un nom depuis la liste de contact';
 $lang['Delete group(s) confirmation'] = 'Confirmation de la suppression de groupe(s)';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Supprimer le(s) groupe(s)&nbsp;?<br>Tous leurs contacts seront également supprimés.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Supprimer le(s) groupe(s) ?
+Tous leurs contacts seront également supprimés.';
 $lang['Create group'] = 'Créer un groupe';
 $lang['Group name'] = 'Nom du groupe';
 $lang['Groups'] = 'Groupes';
@@ -224,7 +226,8 @@ $lang['Add user'] = 'Ajouter un utilisateur';
 $lang['Edit user'] = 'Modifier un utilisateur';
 $lang['User']['default'] = 'Utilisateur';
 $lang['Users'] = 'Utilisateurs';
-$lang['This deletes the selected users and all their messages and contacts.'] = "Supprimer l'utilisateur ?<br>Cela inclut tous les enregistrements de cet utilisateur (messages et contacts).";
+$lang['This deletes the selected users and all their messages and contacts.'] = "Supprimer l'utilisateur ?
+Cela inclut tous les enregistrements de cet utilisateur (messages et contacts).";
 $lang['User not found'] = 'Utilisateur introuvable';
 $lang['No users in the database.'] = 'Les utilisateurs sont vides';
 $lang['Username'] = "Nom d'utilisateur";
@@ -404,7 +407,6 @@ $lang['Plugin {0} is not installed.'] = 'Le plugin {0} n\'est pas installé.';
 $lang['Value must be a number.'] = 'La valeur doit être un nombre.';
 $lang['{0} part messages'] = '{0} part messages';
 $lang['Content'] = 'Contenu';
-$lang['Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.'] = "L'installation a été désactivée par l'administrateur.<p>Pour réactiver l'accès, créer un fichier nommé <strong>install</strong> dans ce répertoire du serveur : <strong>{0}</strong>.<p>Sinon, vous pouvez <a href=\"{1}\">vous connecter</a>.";
 $lang['No results for {0}'] = 'No results for {0}';
 $lang['Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'] = 'Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.';
 $lang['Unknown error while sending WAP-LINK.'] = 'Unknown error while sending WAP-LINK.';
@@ -420,3 +422,8 @@ $lang['Inbox Master'] = 'Inbox Master';
 $lang['Network error.'] = 'Network error.';
 $lang['{0}%'] = '{0}%';
 $lang['Item deleted.'] = 'Item deleted.';
+$lang['Installation has been disabled by the administrator.
+To enable access to it, create a file named {0} in this directory of the server: {1}.
+Otherwise you may log-in at {2}.'] = 'Installation has been disabled by the administrator.
+To enable access to it, create a file named {0} in this directory of the server: {1}.
+Otherwise you may log-in at {2}.';

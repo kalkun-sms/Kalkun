@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'CSV-Datei importieren';
 $lang['Import contact from CSV format file'] = 'Kontakt aus CSV-Datei importieren';
 $lang['CSV file'] = 'CSV Datei';
 $lang['The CSV file must be in valid format'] = 'Die CSV-Datei muss in einem gültigen Format vorliegen';
-$lang['Are you sure you want to delete <span id=\'contact-delete-count\'></span> contact(s)?'] = "Sind Sie sicher, dass sie <span id='contact-delete-count'></span> Kontakt(e) löschen wollen?";
+$lang['Are you sure you want to delete {0} contact(s)?'] = 'Sind Sie sicher, dass sie {0} Kontakt(e) löschen wollen?';
 $lang['valid example'] = 'Beispiel';
 
 // Message
@@ -192,7 +192,9 @@ $lang['Send and repeat'] = 'Send and Repeat';
 $lang['Sending'] = 'Senden';
 $lang['Insert name from contact list'] = 'Name von Addressbuch einfügen';
 $lang['Delete group(s) confirmation'] = 'Gruppe(n) löschen Bestätigung';
-$lang['Delete group(s)?<br>All their contacts will also be deleted.'] = 'Gruppe(n) löschen?<br>Alle Kontakte in dieser Gruppe(n) werden auch gelöscht!.';
+$lang['Delete group(s)?
+All their contacts will also be deleted.'] = 'Gruppe(n) löschen?
+Alle Kontakte in dieser Gruppe(n) werden auch gelöscht!.';
 $lang['Create group'] = 'Gruppe erstellen';
 $lang['Group name'] = 'Gruppen Name';
 $lang['Groups'] = 'Gruppen';
@@ -224,7 +226,8 @@ $lang['Add user'] = 'Benutzer hinzufügen';
 $lang['Edit user'] = 'Benutzer bearbeiten';
 $lang['User']['default'] = 'Benutzer';
 $lang['Users'] = 'Benutzer';
-$lang['This deletes the selected users and all their messages and contacts.'] = 'Benutzer löschen?<br>Es werden alle Nachrichten und Kontakte von diesem Benutzer gelöscht.';
+$lang['This deletes the selected users and all their messages and contacts.'] = 'Benutzer löschen?
+Es werden alle Nachrichten und Kontakte von diesem Benutzer gelöscht.';
 $lang['User not found'] = 'Benutzer nicht gefunden';
 $lang['No users in the database.'] = 'Benutzer ist leer';
 $lang['Username'] = 'Benutzername';
@@ -404,7 +407,6 @@ $lang['Plugin {0} is not installed.'] = 'Plugin {0} is not installed.';
 $lang['Value must be a number.'] = 'Value must be a number.';
 $lang['{0} part messages'] = '{0} part messages';
 $lang['Content'] = 'Content';
-$lang['Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.'] = 'Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.';
 $lang['No results for {0}'] = 'No results for {0}';
 $lang['Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'] = 'Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.';
 $lang['Unknown error while sending WAP-LINK.'] = 'Unknown error while sending WAP-LINK.';
@@ -420,3 +422,8 @@ $lang['Inbox Master'] = 'Inbox Master';
 $lang['Network error.'] = 'Network error.';
 $lang['{0}%'] = '{0}%';
 $lang['Item deleted.'] = 'Item deleted.';
+$lang['Installation has been disabled by the administrator.
+To enable access to it, create a file named {0} in this directory of the server: {1}.
+Otherwise you may log-in at {2}.'] = 'Installation has been disabled by the administrator.
+To enable access to it, create a file named {0} in this directory of the server: {1}.
+Otherwise you may log-in at {2}.';
