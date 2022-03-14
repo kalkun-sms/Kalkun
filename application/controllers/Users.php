@@ -32,7 +32,7 @@ class Users extends MY_Controller {
 		// check level
 		if ($this->session->userdata('level') !== 'admin')
 		{
-			$this->session->set_flashdata('notif', tr('Access denied.'));
+			$this->session->set_flashdata('notif', tr_raw('Access denied.'));
 			redirect('/');
 		}
 

@@ -34,7 +34,7 @@ class Plugin_controller extends MY_Controller {
 		// Prevent non-admin user
 		if ($login && $this->session->userdata('level') !== 'admin')
 		{
-			$this->session->set_flashdata('notif', tr('Access denied. Only administrators are allowed to manage plugins.'));
+			$this->session->set_flashdata('notif', tr_raw('Access denied. Only administrators are allowed to manage plugins.'));
 			redirect('/');
 		}
 
@@ -53,7 +53,7 @@ class Plugin_controller extends MY_Controller {
 		$check = $CI->db->where('plugin_system_name', $this->plugin_name)->get('plugins');
 		if ($check->num_rows() !== 1)
 		{
-			$this->session->set_flashdata('notif', tr('Plugin {0} is not installed.', NULL, $this->plugin_name));
+			$this->session->set_flashdata('notif', tr_raw('Plugin {0} is not installed.', NULL, $this->plugin_name));
 			redirect('pluginss');
 		}
 

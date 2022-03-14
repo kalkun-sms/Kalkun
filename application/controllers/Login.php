@@ -132,7 +132,7 @@ class Login extends CI_Controller {
 			}
 			if (empty($this->session->flashdata('errorlogin')))
 			{
-				$this->session->set_flashdata('errorlogin', tr('If you are a registered user, a SMS has been sent to you.'));
+				$this->session->set_flashdata('errorlogin', tr_raw('If you are a registered user, a SMS has been sent to you.'));
 			}
 			redirect('login/forgot_password?l='.$this->idiom);
 		}
@@ -160,13 +160,13 @@ class Login extends CI_Controller {
 			$user_token = $this->Kalkun_model->valid_token($token);
 			$this->Kalkun_model->update_password($user_token['id_user']);
 			$this->Kalkun_model->delete_token($user_token['id_user']);
-			$this->session->set_flashdata('errorlogin', tr('Password changed successfully.'));
+			$this->session->set_flashdata('errorlogin', tr_raw('Password changed successfully.'));
 			redirect('login?l='.$this->idiom);
 		}
 
 		if ( ! $this->Kalkun_model->valid_token($token))
 		{
-			$this->session->set_flashdata('errorlogin', tr('Token invalid.'));
+			$this->session->set_flashdata('errorlogin', tr_raw('Token invalid.'));
 			redirect('login/forgot_password?l='.$this->idiom);
 		}
 		else

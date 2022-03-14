@@ -71,7 +71,7 @@ class Kalkun_model extends MY_Model {
 		}
 		else
 		{
-			$this->session->set_flashdata('errorlogin', tr('Username or password are incorrect.'));
+			$this->session->set_flashdata('errorlogin', tr_raw('Username or password are incorrect.'));
 		}
 	}
 
@@ -115,7 +115,7 @@ class Kalkun_model extends MY_Model {
 				}
 				else
 				{
-					$this->session->set_flashdata('errorlogin', tr('Token already generated and still active.'));
+					$this->session->set_flashdata('errorlogin', tr_raw('Token already generated and still active.'));
 				}
 			}
 

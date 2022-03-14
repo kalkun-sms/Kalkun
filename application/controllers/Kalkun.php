@@ -290,7 +290,7 @@ class Kalkun extends MY_Controller {
 			// check password
 			if ($option === 'password' && ! password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password')))
 			{
-				$this->session->set_flashdata('notif', tr('Wrong password'));
+				$this->session->set_flashdata('notif', tr_raw('Wrong password'));
 				redirect('settings/'.$option);
 			}
 			else
@@ -301,14 +301,14 @@ class Kalkun extends MY_Controller {
 					{
 						if ($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows > 0)
 						{
-							$this->session->set_flashdata('notif', tr('Username already taken'));
+							$this->session->set_flashdata('notif', tr_raw('Username already taken'));
 							redirect('settings/'.$option);
 						}
 					}
 				}
 			}
 			$this->Kalkun_model->update_setting($option);
-			$this->session->set_flashdata('notif', tr('Settings saved successfully.'));
+			$this->session->set_flashdata('notif', tr_raw('Settings saved successfully.'));
 			redirect('settings/'.$option);
 		}
 

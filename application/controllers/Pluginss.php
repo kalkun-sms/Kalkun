@@ -32,7 +32,7 @@ class Pluginss extends MY_Controller {
 		// Prevent non-admin user
 		if ($this->session->userdata('level') !== 'admin')
 		{
-			$this->session->set_flashdata('notif', tr('Access denied. Only administrators are allowed to manage plugins.'));
+			$this->session->set_flashdata('notif', tr_raw('Access denied. Only administrators are allowed to manage plugins.'));
 			redirect('/');
 		}
 
@@ -115,7 +115,7 @@ class Pluginss extends MY_Controller {
 	function install($plugin_name)
 	{
 		$this->plugins->activate_plugin($plugin_name);
-		$this->session->set_flashdata('notif', tr('Plugin {0} installed successfully.', NULL, $plugin_name));
+		$this->session->set_flashdata('notif', tr_raw('Plugin {0} installed successfully.', NULL, $plugin_name));
 		redirect('pluginss');
 	}
 
@@ -131,7 +131,7 @@ class Pluginss extends MY_Controller {
 	function uninstall($plugin_name)
 	{
 		$this->plugins->deactivate_plugin($plugin_name);
-		$this->session->set_flashdata('notif', tr('Plugin {0} uninstalled successfully.', NULL, $plugin_name));
+		$this->session->set_flashdata('notif', tr_raw('Plugin {0} uninstalled successfully.', NULL, $plugin_name));
 		redirect('pluginss');
 	}
 

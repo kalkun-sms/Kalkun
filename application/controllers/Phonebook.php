@@ -306,7 +306,7 @@ class Phonebook extends MY_Controller {
 			$this->Phonebook_model->add_contact($pbk);
 		}
 
-		$this->session->set_flashdata('notif', tr('{0,number,integer} contacts imported successfully.', NULL, count($csv)));
+		$this->session->set_flashdata('notif', tr_raw('{0,number,integer} contacts imported successfully.', NULL, count($csv)));
 		redirect('phonebook');
 	}
 
