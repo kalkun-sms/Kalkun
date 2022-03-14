@@ -50,10 +50,10 @@ class Install extends CI_Controller {
 		{
 			show_error(
 				tr(
-					'Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may <a href="{1}">log in</a>.',
+					'Installation has been disabled by the administrator.<p>To enable access to it, create a file named <strong>install</strong> in this directory of the server: <strong>{0}</strong>.<p>Otherwise you may log-in at {1}.',
 					NULL,
 					realpath(FCPATH),
-					$this->config->item('base_url')
+					'<a href="'.$this->config->item('base_url').'">'.$this->config->item('base_url').'</a>'
 				),
 				403,
 				tr('403 Forbidden')
