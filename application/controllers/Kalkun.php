@@ -46,7 +46,7 @@ class Kalkun extends MY_Controller {
 		$data['title'] = 'Dashboard';
 		if ($this->config->item('disable_outgoing'))
 		{
-			$data['alerts'][] = tr('Outgoing SMS disabled. Contact system administrator.');
+			$data['alerts'][] = tr_raw('Outgoing SMS disabled. Contact system administrator.');
 		}
 		$this->load->view('main/layout', $data);
 	}
@@ -75,7 +75,7 @@ class Kalkun extends MY_Controller {
 			case 'weeks':
 				$days = 30;
 				$format = 'W';
-				$prefix = tr('date_week').' ';
+				$prefix = tr_raw('date_week').' ';
 				break;
 
 			case 'months':
@@ -127,13 +127,13 @@ class Kalkun extends MY_Controller {
 			'labels' => array_reverse($x),
 			'datasets' => [
 				[
-					'label' => tr('Outgoing SMS'),
+					'label' => tr_raw('Outgoing SMS'),
 					'backgroundColor' => '#21759B',
 					'data' => array_reverse($yout),
 					'borderWidth' => 1,
 				],
 				[
-					'label' => tr('Incoming SMS'),
+					'label' => tr_raw('Incoming SMS'),
 					'backgroundColor' => '#639F45',
 					'data' => array_reverse($yin),
 					'borderWidth' => 1,
@@ -160,27 +160,27 @@ class Kalkun extends MY_Controller {
 	{
 		$status = $this->Kalkun_model->get_gammu_info('last_activity')->row('UpdatedInDB');
 		$response['signal'] = intval($this->Kalkun_model->get_gammu_info('phone_signal')->row('Signal'));
-		$response['signal_lbl'] = tr('{0}%', NULL, $this->Kalkun_model->get_gammu_info('phone_signal')->row('Signal'));
+		$response['signal_lbl'] = tr_raw('{0}%', NULL, $this->Kalkun_model->get_gammu_info('phone_signal')->row('Signal'));
 		$response['battery'] = intval($this->Kalkun_model->get_gammu_info('phone_battery')->row('Battery'));
-		$response['battery_lbl'] = tr('{0}%', NULL, $this->Kalkun_model->get_gammu_info('phone_battery')->row('Battery'));
+		$response['battery_lbl'] = tr_raw('{0}%', NULL, $this->Kalkun_model->get_gammu_info('phone_battery')->row('Battery'));
 		if ( ! empty($status))
 		{
 			$status = get_modem_status($status, $this->config->item('modem_tolerant'));
 			if ($status === 'connect')
 			{
 				$response['status'] = 'connected';
-				$response['status_lbl'] = tr('Connected');
+				$response['status_lbl'] = tr_raw('Connected');
 			}
 			else
 			{
 				$response['status'] = 'disconnected';
-				$response['status_lbl'] = tr('Disconnected');
+				$response['status_lbl'] = tr_raw('Disconnected');
 			}
 		}
 		else
 		{
 			$response['status'] = 'Unknown';
-			$response['status_lbl'] = tr('Unknown');
+			$response['status_lbl'] = tr_raw('Unknown');
 		}
 
 		if (is_ajax())
