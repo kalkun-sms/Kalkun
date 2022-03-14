@@ -368,14 +368,14 @@ class Phonebook extends MY_Controller {
 			$pbk['id_pbk'] = $this->input->post('editid_pbk');
 			$return_msg = [
 				'type' => 'info',
-				'msg' => tr('Contact updated successfully.'),
+				'msg' => tr_raw('Contact updated successfully.'),
 			];
 		}
 		else
 		{
 			$return_msg = [
 				'type' => 'info',
-				'msg' => tr('Contact added successfully.'),
+				'msg' => tr_raw('Contact added successfully.'),
 			];
 		}
 
@@ -445,7 +445,7 @@ class Phonebook extends MY_Controller {
 				array_push($tagInputResult, array(
 					'id' => $val['id'].':g',
 					'name' => $val['name'],
-					'value' => $val['name'].' ('.tr('Group').')',
+					'value' => $val['name'].' ('.tr_raw('Group').')',
 				));
 				$group[$key]['id'] = $val['id'].':g';
 			}
@@ -460,7 +460,7 @@ class Phonebook extends MY_Controller {
 					array_push($tagInputResult, array(
 						'id' => $val['id_user'].':u',
 						'name' => $val['realname'],
-						'value' => $val['realname'].' ('.tr('User', 'default').')',
+						'value' => $val['realname'].' ('.tr_raw('User', 'default').')',
 					));
 					$user[$key]['id'] = $val['id_user'].':u';
 					$user[$key]['name'] = $val['realname'];

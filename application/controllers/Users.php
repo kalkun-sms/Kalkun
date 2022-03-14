@@ -124,14 +124,14 @@ class Users extends MY_Controller {
 		{
 			$return_msg = [
 				'type' => 'info',
-				'msg' => tr('User updated successfully.'),
+				'msg' => tr_raw('User updated successfully.'),
 			];
 		}
 		else
 		{
 			$return_msg = [
 				'type' => 'info',
-				'msg' => tr('User added successfully.'),
+				'msg' => tr_raw('User added successfully.'),
 			];
 		}
 
