@@ -55,7 +55,7 @@ class Phonebook extends MY_Controller {
 			$this->pagination->initialize($config);
 			$data['pagination_links'] = $this->pagination->create_links();
 
-			$data['title'] = tr('Public contacts');
+			$data['title'] = tr_raw('Public contacts');
 			$data['public_contact'] = TRUE;
 			$param = array('option' => 'paginate', 'public' => TRUE, 'limit' => $config['per_page'], 'offset' => $this->uri->segment(4, 0));
 			$data['phonebook'] = $this->Phonebook_model->get_phonebook($param);
@@ -68,7 +68,7 @@ class Phonebook extends MY_Controller {
 			$this->pagination->initialize($config);
 			$data['pagination_links'] = $this->pagination->create_links();
 
-			$data['title'] = tr('Contacts');
+			$data['title'] = tr_raw('Contacts');
 			$data['public_contact'] = FALSE;
 
 			if ($_POST)
@@ -113,7 +113,7 @@ class Phonebook extends MY_Controller {
 
 		if ($type === 'public')
 		{
-			$data['title'] = tr('Public groups');
+			$data['title'] = tr_raw('Public groups');
 			$data['public_group'] = TRUE;
 			$config['base_url'] = site_url().'/phonebook/group/public';
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group', 'public' => TRUE))->num_rows();
@@ -126,7 +126,7 @@ class Phonebook extends MY_Controller {
 		}
 		else
 		{
-			$data['title'] = tr('Groups');
+			$data['title'] = tr_raw('Groups');
 			$data['public_group'] = FALSE;
 			$config['base_url'] = site_url().'/phonebook/group/';
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();

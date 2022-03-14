@@ -55,7 +55,7 @@
 
 <div id="window_container">
 	<div id="window_title">
-		<div id="window_title_left"><?php echo $title; ?></div>
+		<div id="window_title_left"><?php echo htmlentities($title, ENT_QUOTES); ?></div>
 		<div id="window_title_right">
 			<a href="javascript:void(0);" id="sendallcontact" class="nicebutton">&#43; <?php echo tr('Send to all contacts'); ?></a>
 			<a href="javascript:void(0);" id="addpbkcontact_wizard" class="nicebutton">&#43; <?php echo tr('Add contact'); ?></a>
