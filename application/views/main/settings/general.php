@@ -21,10 +21,14 @@ foreach ($supported_regions as $region)
 {
 	$country = Locale::getDisplayRegion('-'.$region, $this->lang->locale);
 	$label = $country . ' (+' . $phoneNumberUtil->getCountryCodeForRegion($region) . ')';
-	$country_calling_codes += [$region => htmlentities($label, ENT_QUOTES)];
+	$country_calling_codes += [$region => $label];
 }
 $collator = new Collator($this->lang->locale);
 $collator->asort($country_calling_codes);
+foreach ($country_calling_codes as $region => $label)
+{
+	$country_calling_codes[$region] = htmlentities($label, ENT_QUOTES);
+}
 $dial_code_act = $this->Kalkun_model->get_setting()->row('country_code');
 echo form_dropdown('dial_code', $country_calling_codes, $dial_code_act);
 ?>
