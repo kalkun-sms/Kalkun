@@ -25,10 +25,10 @@ $lang['Logout'] = 'Sair';
 
 // Dashboard
 $lang['Statistics'] = 'Estatisticas';
-$lang['System information'] = 'Informa&ccedil;&otilde;es do Sistema';
+$lang['System information'] = 'Informações do Sistema';
 $lang['Alerts'] = 'Alertas';
 $lang['Operating system'] = 'Sistema Operacional';
-$lang['Gammu version'] = 'Vers&atilde;o Gammu';
+$lang['Gammu version'] = 'Versão Gammu';
 $lang['Gammu DB schema'] = 'Gammu DB';
 $lang['Modem IMEI'] = 'IMEI';
 
@@ -65,7 +65,7 @@ $lang['Now'] = 'Agora';
 $lang['At date and time'] = 'Na data';
 $lang['After a delay'] = 'Daqui a...';
 
-$lang['Input manually'] = 'Digitar n&uacute;mero';
+$lang['Input manually'] = 'Digitar número';
 
 $lang['Add folder'] = 'Adicionar Pasta';
 $lang['Folder name'] = 'Nome de Pasta';
@@ -77,8 +77,8 @@ $lang['Click to rename this folder'] = 'Clique para renomear esta Pasta';
 
 $lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = 'Esta pasta e mensagens serao permanentemente apagadas e nao serao recuperadas. Tem certeza?';
 
-$lang['There is no message in {0}.'] = 'N&atilde;o ha mensagens na {0}.';
-$lang['There is no message in this folder.'] = 'N&atilde;o ha mensagens nesta pasta.';
+$lang['There is no message in {0}.'] = 'Não ha mensagens na {0}.';
+$lang['There is no message in this folder.'] = 'Não ha mensagens nesta pasta.';
 
 $lang['Delete all'] = 'Apagar tudo';
 $lang['Are you sure? This will affect all conversations.'] = 'Tem certeza? Isto vai afetar todas as mensagens.';
@@ -87,8 +87,8 @@ $lang['Select all'] = 'Selecionar tudo';
 $lang['Deselect all'] = 'Limpar tudo';
 $lang['Refresh'] = 'Atualizar';
 
-$lang['Report spam'] = '&Eacute; Spam';
-$lang['Not spam'] = 'N&atilde;o e Spam';
+$lang['Report spam'] = 'É Spam';
+$lang['Not spam'] = 'Não e Spam';
 
 
 $lang['SMSC'] = 'SMSC';
@@ -117,11 +117,11 @@ $lang['WAP push link'] = 'Link WAP Push';
 $lang['URL'] = 'URL';
 
 $lang['Ads is active'] = 'Propagandas ativas';
-$lang['Check DND'] = 'N&atilde;o Perturbe';
+$lang['Check DND'] = 'Não Perturbe';
 $lang['Insert'] = 'Inserir';
 
 $lang['Canned responses'] = 'Respostas prontas';
-$lang['There are no canned responses. Continue to save your present message as canned response.'] = 'Aparentemente n&atilde;o h&aacute; respostas criadas. Grave a primeira resposta agora.';
+$lang['There are no canned responses. Continue to save your present message as canned response.'] = 'Aparentemente não há respostas criadas. Grave a primeira resposta agora.';
 $lang['Choose response'] = 'Escolher Respostas';
 $lang['Saving...'] = 'Salvando...';
 $lang['Are you sure?'] = 'Tem certeza?';
@@ -175,15 +175,15 @@ $lang['Must be at least 6 characters long'] = 'Deve ter pelo menos 6 caracteres'
 $lang['Enter your new password'] = 'Digite a senha';
 
 $lang['Administrator'] = 'Administrador';
-$lang['User']['credentials'] = 'Usu&aacute;rio';
+$lang['User']['credentials'] = 'Usuário';
 
 $lang['Create a new filter'] = 'Criar novo filtro';
-$lang['Has the words'] = 'Cont&eacute;m as palavras (review)';
+$lang['Has the words'] = 'Contém as palavras (review)';
 
 // SMS Content/Member
 $lang['Member'] = 'Membro';
 $lang['Total member'] = 'Total de membros';
-$lang['There is no registered member yet'] = 'Ainda n&atilde;o h&aacute; membros registrados';
+$lang['There is no registered member yet'] = 'Ainda não há membros registrados';
 
 // tni contribution
 $lang['Add contact'] = 'Adicionar Contato';
@@ -212,33 +212,33 @@ $lang['Hide details'] = 'Esconder Detalhes';
 $lang['Search contacts'] = 'Pesquisar Contatos';
 $lang['Search messages'] = 'Pesquisar Mensagens';
 $lang['Edit'] = 'Editar';
-$lang['All form fields are required.'] = 'Todos os campos s&atilde;o necess&aacute;rios.';
+$lang['All form fields are required.'] = 'Todos os campos são necessários.';
 $lang['Name'] = 'Nome';
-$lang['Telephone number'] = 'N&uacute;mero de Telefone';
+$lang['Telephone number'] = 'Número de Telefone';
 $lang['Email ID'] = 'Email ID';
 $lang['Enable email forwarding'] = 'Ativar Encaminhamento de Email';
 $lang['{0} remaining'] = '{0} remaining';
 $lang['{0} ago'] = '{0} ago';
 $lang['Edit contact'] = 'Editar Contato';
 $lang['Contact not found'] = 'Contato nao encontrado';
-$lang['No contacts in the database.'] = 'Contato est&aacute; vazio';
+$lang['No contacts in the database.'] = 'Contato está vazio';
 $lang['Add user'] = 'Adicionar Usuario';
 $lang['Edit user'] = 'Editar Usuario';
 $lang['User']['default'] = 'Usuario';
-$lang['Users'] = 'Usu&aacute;rios';
+$lang['Users'] = 'Usuários';
 $lang['This deletes the selected users and all their messages and contacts.'] = 'Apagar Usuario?
 Isto inclui todos os registros deste usuario (mensagens e contatos).';
-$lang['User not found'] = 'Usu&aacute;rio nao encontrado';
-$lang['No users in the database.'] = 'Usu&aacute;rios est&aacute; vazio';
+$lang['User not found'] = 'Usuário nao encontrado';
+$lang['No users in the database.'] = 'Usuários está vazio';
 $lang['Username'] = 'Username';
 $lang['Password'] = 'Password';
-$lang['Search user'] = 'Pesquisar Usu&aacute;rio';
+$lang['Search user'] = 'Pesquisar Usuário';
 $lang['Confirm password'] = 'Confirmar Senha';
 $lang['Phone number'] = 'Numero de acesso telefonico (review)';
 $lang['Action not allowed'] = 'Acao nao permitida';
 $lang['Field required.'] = 'Field required.';
-$lang['Passwords do not match.'] = 'Senhas n&atilde;o conferem.';
-$lang['No user selected'] = 'Nenhum usu&aacute;rio selecionado';
+$lang['Passwords do not match.'] = 'Senhas não conferem.';
+$lang['No user selected'] = 'Nenhum usuário selecionado';
 $lang['Delete this folder'] = 'Apagar esta pasta';
 $lang['Loading'] = 'Carregando';
 $lang['Connected'] = 'Conectado';
@@ -261,25 +261,25 @@ $lang['Country calling code'] = 'Country calling code';
 $lang['Conversation sort'] = 'Ordem das conversas';
 
 $lang['Data per page'] = 'Data por Pagina (review)';
-$lang['Used for paging in message and phonebook'] = 'Ser&aacute; usado para pagina&ccedil;&atilde;o em mensagem e agenda (review)';
+$lang['Used for paging in message and phonebook'] = 'Será usado para paginação em mensagem e agenda (review)';
 
 $lang['Permanent delete'] = 'Exclusao Definitiva';
 $lang['Disable'] = 'Desabilitar';
 $lang['Always move to trash first'] = 'Sempre mover para lixeira';
 $lang['Enable'] = 'Habilitar';
 
-$lang['User settings'] = 'Configura&ccedil;&otilde;es de usu&aacute;rio';
+$lang['User settings'] = 'Configurações de usuário';
 $lang['General'] = 'Geral';
 $lang['Personal'] = 'Pessoal';
 
 $lang['Signature'] = 'Assinatura';
 $lang['Max. 50 characters'] = 'Max. 50 caracteres';
-$lang['Signature is added at the end of the message.'] = 'A assinatura ser&aacute; inserida ao final da mensagem.';
+$lang['Signature is added at the end of the message.'] = 'A assinatura será inserida ao final da mensagem.';
 $lang['Language'] = 'Idioma';
 $lang['Yes'] = 'Sim';
-$lang['No'] = 'N&atilde;o';
+$lang['No'] = 'Não';
 $lang['Default'] = 'Default';
-$lang['Delivery Report'] = 'Relat&oacute;rio de entrega';
+$lang['Delivery Report'] = 'Relatório de entrega';
 
 $lang['Delete copy (prevents duplicates).'] = 'Delete copy of this message (Prevent Duplicate).';
 $lang['You are about to resend {0} message(s).'] = 'You are about to resend {0} message(s).';

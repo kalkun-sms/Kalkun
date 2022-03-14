@@ -45,7 +45,7 @@ $lang['From CSV file'] = 'Importer un fichier CSV';
 $lang['Import contact from CSV format file'] = "Importer des contacts à partir d'un fichier CSV";
 $lang['CSV file'] = 'Fichier CSV';
 $lang['The CSV file must be in valid format'] = 'Le fichier CSV doit être au bon format';
-$lang['Are you sure you want to delete {0} contact(s)?'] = 'Êtes-vous sûr(s) de vouloir supprimer {0} contacts&nbsp;?';
+$lang['Are you sure you want to delete {0} contact(s)?'] = 'Êtes-vous sûr(s) de vouloir supprimer {0} contacts ?';
 $lang['valid example'] = 'Exemple valide';
 
 // Message
@@ -81,7 +81,7 @@ $lang['There is no message in {0}.'] = "Il n'y a aucun message dans {0}.";
 $lang['There is no message in this folder.'] = "Il n'y a aucun message dans ce dossier.";
 
 $lang['Delete all'] = 'Tout supprimer';
-$lang['Are you sure? This will affect all conversations.'] = "Êtes-vous sûr(e)&nbsp;? Ceci s'appliquera à toutes les conversations.";
+$lang['Are you sure? This will affect all conversations.'] = "Êtes-vous sûr(e) ? Ceci s'appliquera à toutes les conversations.";
 
 $lang['Select all'] = 'Tout sélectionner';
 $lang['Deselect all'] = 'Tout désélectionner';
@@ -193,7 +193,7 @@ $lang['Sending'] = 'Envoi en cours';
 $lang['Insert name from contact list'] = 'Insérer un nom depuis la liste de contact';
 $lang['Delete group(s) confirmation'] = 'Confirmation de la suppression de groupe(s)';
 $lang['Delete group(s)?
-All their contacts will also be deleted.'] = 'Supprimer le(s) groupe(s)&nbsp;?
+All their contacts will also be deleted.'] = 'Supprimer le(s) groupe(s) ?
 Tous leurs contacts seront également supprimés.';
 $lang['Create group'] = 'Créer un groupe';
 $lang['Group name'] = 'Nom du groupe';
