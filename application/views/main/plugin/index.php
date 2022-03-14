@@ -1,6 +1,6 @@
 <div id="window_container">
 	<div id="window_title">
-		<div id="window_title_left"><?php echo $title; ?></div>
+		<div id="window_title_left"><?php echo htmlentities($title, ENT_QUOTES); ?></div>
 		<div id="window_title_right">
 			<?php /* echo form_open('pluginss', array('class' => 'search_form'));
 		echo '<input type="text" name="search_name" size="20" class="search_name" value="" />';
