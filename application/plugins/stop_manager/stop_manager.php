@@ -1,7 +1,7 @@
 <?php
 /**
 * Plugin Name: Stop Manager
-* Plugin URI: --
+* Plugin URI: https://github.com/kalkun-sms/Kalkun/wiki/Plugin%3A-Stop-manager
 * Version: 1.0
 * Description: Manage incoming SMS containing STOP
 * Author: tenzap
@@ -9,6 +9,11 @@
 */
 
 require_once (APPPATH.'plugins/Plugin_helper.php');
+Plugin_helper::autoloader();
+
+use Kalkun\Plugins\StopManager\Config;
+use Kalkun\Plugins\StopManager\MsgIncoming;
+use Kalkun\Plugins\StopManager\MsgOutgoing;
 
 // Add hook for outgoing message
 add_action('message.outgoing_dest_data', 'stop_manager_cleanup_outgoing', 1);
@@ -55,59 +60,26 @@ function stop_manager_install()
 }
 
 
-//--------------------------------------------------------------------------
-// CONFIGURATION
-//--------------------------------------------------------------------------
+/**
+ * Cleanup the outgoing message
+ *  - the list of recipient (remove those who have opted out)
+ *  - the content (remove the type)
+ *
+ * @param array $all (an array containing $dest & $data)
+ * @return array (an array containing $dest & $data)
+ */
 function stop_manager_cleanup_outgoing($all)
 {
-	$config = Plugin_helper::get_plugin_config('stop_manager');
+	$stopCfg = Config::getInstance();
+	$stopMsgOutgoing = new MsgOutgoing($all);
 
 	$dest = $all[0];
 	$data = $all[1];
 
 	$CI = &get_instance();
-
-	// Get the type of the SMS (rappel, annul...)
-	$msg = $data['message'];
-	// Be careful! Kalkun may append $config['append_username_message'] to all messages.
-	$ret_match = NULL;
-	if ($CI->config->item('append_username'))
-	{
-		$ret_match = preg_match('/^(.*)~(.+)~.*/', $msg, $matches, PREG_UNMATCHED_AS_NULL);
-	}
-	else
-	{
-		$ret_match = preg_match('/^(.*)~(.+)~$/', $msg, $matches, PREG_UNMATCHED_AS_NULL);
-	}
-
-	$type = NULL;
-	if ($ret_match && isset($matches[2]) && $config['enable_type'])
-	{
-		$type = $matches[2];
-	}
-	if (is_null($type))
-	{
-		// type of SMS (for filtering) is not set yet.
-		// The message is sent    if we enabled  the use of type ($config['enable_type'])
-		// The message is dropped if we disabled the use of type ($config['enable_type']) and if it is in blacklist
-		if ( ! $config['enable_type'])
-		{
-			// Will drop all numbers that are in stop_manager whatever the value of type
-			//$type = "%";
-
-			// Will drop all numbers that are in stop_manager having been recorded as TYPE_NOT_SET_SO_STOP_ALL
-			$type = 'TYPE_NOT_SET_SO_STOP_ALL';
-		}
-		else
-		{
-			// IGNORE_STOP_MANAGER is just a fake value that should never match something in the table,
-			// this is to keep the message
-			$type = 'IGNORE_STOP_MANAGER';
-		}
-	}
-
-	// Get ths list of numbers having "STOP" for this type of SMS
+	// Get the list of numbers having "STOP" for this type of SMS
 	$CI->load->model('stop_manager/Stop_manager_model', 'Stop_manager_model');
+	$type = $stopCfg->isTypeEnabled() ? $stopMsgOutgoing->getType() : NULL;
 	$db_result = $CI->Stop_manager_model->get_num_for_type($type)->result_array();
 	$blocked_numbers = array();
 
@@ -128,179 +100,60 @@ function stop_manager_cleanup_outgoing($all)
 		}
 	}
 
-	// Remove inside the message the "tag" that permits to know what type of message it is
-	// eg. "~rappel~" at the end of the message
-	if ($ret_match && isset($matches[1]))
-	{
-		$data['message'] = trim($matches[1]);
-	}
+	$data['message'] = $stopMsgOutgoing->getCleanedMsg();
+
 	return array($dest, $data);
 }
 
+/**
+ * Analyse an incoming message and store/remove in the Stop_manager database
+ *
+ * @param
+ * @return void
+ */
 function stop_manager_incoming($sms)
 {
-	$config = Plugin_helper::get_plugin_config('stop_manager');
-
-	$optout_keywords = array_map('strtoupper', $config['optout_keywords']);
-	$optin_keywords = array_map('strtoupper', $config['optin_keywords']);
-	$type_keywords = array_map('strtolower', $config['type_keywords']);
-
 	// On message reception, if it is a STOP message (eg STOP rappel)
 	// Put it to the STOP table
-	$msg = $sms->TextDecoded;
-	$from = $sms->SenderNumber;
-	//$msg_user = $sms->msg_user;
 
-	$cmds_valides = array_merge($optout_keywords, $optin_keywords);
-	$types_valides = $type_keywords;
+	$stopCfg = Config::getInstance();
+	$stopMsgIncoming = new MsgIncoming($sms);
 
-	$types_reg = implode('|', $types_valides);
-	$cmds_reg = implode('|', $cmds_valides);
-
-	$ret = NULL;
-	if ($config['enable_type'])
+	if ($stopMsgIncoming->isValidStopMessage())
 	{
-		$ret = preg_match('/\b('.$cmds_reg.')\s*('.$types_reg.')\b/i', $msg, $matches, PREG_UNMATCHED_AS_NULL);
-	}
-	else
-	{
-		$ret = preg_match('/\b('.$cmds_reg.')\b/i', $msg, $matches, PREG_UNMATCHED_AS_NULL);
-	}
-
-	$CI = &get_instance();
-
-	// language
-	$CI->load->helper(['language', 'i18n']);
-	// We cannot determine the language of a specific user since this is called on incoming message
-	// So the language to use by this robot is read from plugin config
-	$lang = $config['autoreply_language'];
-	$CI->load->add_package_path(APPPATH.'plugins/stop_manager', FALSE);
-	$CI->load->language('stop_manager', $lang);
-
-	if ($ret === 1)
-	{
-		$cmd = strtoupper($matches[1]);
-		$type = ($config['enable_type']) ? strtolower($matches[2]) : 'TYPE_NOT_SET_SO_STOP_ALL';
+		$CI = &get_instance();
 		$CI->load->model('stop_manager/Stop_manager_model', 'Stop_manager_model');
 
-		$text = '';
+		// Add to DB in case of OptOut
+		if ($stopMsgIncoming->isOptOut())
+		{
+			$ret = $CI->Stop_manager_model->add($stopMsgIncoming->getParty(), $stopMsgIncoming->getType(), $stopMsgIncoming->getOrigMsg());
+		}
 
-		//var_dump($matches);
-		switch (TRUE) {
-			case in_array($cmd, $optout_keywords):
-				// Received opt-out message
-				$ret = $CI->Stop_manager_model->add($from, $type, $msg);
+		// Delete From DB in case of OptIn
+		if ($stopMsgIncoming->isOptIn())
+		{
+			$ret = $CI->Stop_manager_model->delete($stopMsgIncoming->getParty(), $stopMsgIncoming->getType());
+		}
 
-				if ($config['enable_optin'])
-				{
-					$text = tr(
-						'{0} taken into account. To opt-in again, send "{1}".',
-						NULL,
-						($config['enable_type']) ? $cmd.' '.$type : $cmd,
-						($config['enable_type']) ? $optin_keywords[0].' '.$type : $optin_keywords[0]
-					);
-				}
-				else
-				{
-					$text = tr(
-						'{0} taken into account.',
-						NULL,
-						($config['enable_type']) ? $cmd.' '.$type : $cmd
-					);
-				}
-
-				if ($config['enable_autoreply_info'])
-				{
-					autoreply($from, $text);
-				}
-				break;
-			case (in_array($cmd, $optin_keywords) && $config['enable_optin']) :
-				// Received opt-in message
-				$ret = $CI->Stop_manager_model->delete($from, $type);
-
-				$text = tr(
-					'{0} taken into account. To opt-out, send "{1}".',
-					NULL,
-					($config['enable_type']) ? $cmd.' '.$type : $cmd,
-					($config['enable_type']) ? $optout_keywords[0].' '.$type : $optout_keywords[0]
-				);
-
-				if ($config['enable_autoreply_info'])
-				{
-					autoreply($from, $text);
-				}
-				break;
-			default:
-				$text = tr('Invalid request.')." (${msg})";
-				if ($config['enable_autoreply_error'])
-				{
-					autoreply($from, $text);
-				}
-				break;
+		// Send auto reply
+		if ($stopCfg->isAutoreplyInfoEnabled())
+		{
+			autoreply($stopMsgIncoming->getParty(), $stopMsgIncoming->getAutoReplyMsg());
 		}
 	}
 	else
 	{
-		if ($config['enable_autoreply_error'])
+		if ($stopCfg->isAutoreplyErrorEnabled())
 		{
-			if ($config['enable_type'])
-			{
-				if ($config['enable_optin'])
-				{
-					$text = tr(
-						'Request not valid ({0}). Send "{1} or {2} <type>". Possible values for <type> are: {3}. For example "{4}".',
-						NULL,
-						$msg,
-						$optout_keywords[0],
-						$optin_keywords[0],
-						implode(', ', $types_valides),
-						$optout_keywords[0].' '.$types_valides[0]
-					);
-				}
-				else
-				{
-					$text = tr(
-						'Request not valid ({0}). Send "{1} <type>". Possible values for <type> are: {2}. For example "{3}".',
-						NULL,
-						$msg,
-						$optout_keywords[0],
-						implode(', ', $types_valides),
-						$optout_keywords[0].' '.$types_valides[0]
-					);
-				}
-			}
-			else
-			{
-				if ($config['enable_optin'])
-				{
-					$text = tr(
-						'Request not valid ({0}). Send "{1}" or "{2}". For example "{3}".',
-						NULL,
-						$msg,
-						$optout_keywords[0],
-						$optin_keywords[0],
-						$optout_keywords[0]
-					);
-				}
-				else
-				{
-					$text = tr(
-						'Request not valid ({0}). Send "{1}".',
-						NULL,
-						$msg,
-						$optout_keywords[0]
-					);
-				}
-			}
-
-			autoreply($from, $text);
+			autoreply($stopMsgIncoming->getParty(), $stopMsgIncoming->getAutoReplyMsg());
 		}
 	}
 }
 
 function autoreply($tel, $reply_msg)
 {
-	$config = Plugin_helper::get_plugin_config('stop_manager');
+	$config = Config::getInstance()->getConfig();
 
 	$ret = NULL;
 	// Filter rule for outgoing SMS

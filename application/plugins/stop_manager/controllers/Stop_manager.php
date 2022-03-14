@@ -19,6 +19,9 @@
  * @category    Controllers
  */
 include_once(APPPATH.'plugins/Plugin_controller.php');
+include_once(APPPATH.'plugins/Plugin_helper.php');
+
+Plugin_helper::autoloader();
 
 class Stop_manager extends Plugin_controller {
 
@@ -36,7 +39,7 @@ class Stop_manager extends Plugin_controller {
 		{
 			$this->stop_manager_model->add(
 				$this->input->post('destination_number'),
-				$this->input->post('stop_type'),
+				($this->input->post('stop_type')) ? $this->input->post('stop_type') : \Kalkun\Plugins\StopManager\MsgIncoming::TYPE_NOT_SET,
 				$this->input->post('stop_message')
 			);
 			redirect('plugin/stop_manager');
