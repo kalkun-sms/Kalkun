@@ -13,7 +13,7 @@
 			<tr valign="top">
 				<td><b><?php echo tr('Authors'); ?>:</b></td>
 				<td>&nbsp;</td>
-				<td><?php echo tr('See {0} page', NULL, '<a class="base_color underline_link" href="https://raw.githubusercontent.com/kalkun-sms/Kalkun/devel/CREDITS" target="_blank">CREDITS</a>'); ?></td>
+				<td><?php echo tr_raw('See {0} page', NULL, '<a class="base_color underline_link" href="https://raw.githubusercontent.com/kalkun-sms/Kalkun/devel/CREDITS" target="_blank">CREDITS</a>'); ?></td>
 			</tr>
 			<tr>
 				<td><b><?php echo tr('Version'); ?>:</b></td>
@@ -287,7 +287,7 @@
 	<!-- Add Error container Dialog -->
 	<div id="error_container" title="<?php echo tr('Error'); ?>" class="dialog">
 		<div id="error_container_delay_notif" class="notif" style="display: none;">
-			<span id="retry-progress"><?php echo tr('Retrying in {0} seconds.', NULL, '<span id="countdown-count">unset</span>'); ?></span>
+			<span id="retry-progress"><?php echo tr_raw('Retrying in {0} seconds.', NULL, '<span id="countdown-count">unset</span>'); ?></span>
 			<span id="retry-now" style="display: none;"><?php echo tr('Retrying now'); ?></span>
 		</div>
 		<div id="error_container_main"></div>
