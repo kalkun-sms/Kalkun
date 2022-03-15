@@ -33,6 +33,7 @@ where password = 'f0af18413d1c9e0366d8d1273160f55d5efeddfe';
 --
 ALTER TABLE `kalkun` CONVERT TO CHARACTER SET utf8mb4;
 ALTER TABLE `sms_used` CONVERT TO CHARACTER SET utf8mb4;
+ALTER TABLE `user` MODIFY `password`  VARCHAR(191);
 ALTER TABLE `user` CONVERT TO CHARACTER SET utf8mb4;
 ALTER TABLE `user_folders` CONVERT TO CHARACTER SET utf8mb4;
 ALTER TABLE `user_inbox` CONVERT TO CHARACTER SET utf8mb4;
@@ -42,7 +43,10 @@ ALTER TABLE `user_settings` CONVERT TO CHARACTER SET utf8mb4;
 ALTER TABLE `user_group` CONVERT TO CHARACTER SET utf8mb4;
 ALTER TABLE `user_templates` CONVERT TO CHARACTER SET utf8mb4;
 ALTER TABLE `b8_wordlist` CONVERT TO CHARACTER SET utf8mb4;
+ALTER TABLE `plugins` MODIFY `plugin_system_name`  VARCHAR(191);
+ALTER TABLE `plugins` MODIFY `plugin_name`  VARCHAR(191);
 ALTER TABLE `plugins` CONVERT TO CHARACTER SET utf8mb4;
+ALTER TABLE `user_forgot_password` MODIFY `token`  VARCHAR(191);
 ALTER TABLE `user_forgot_password` CONVERT TO CHARACTER SET utf8mb4;
 ALTER TABLE `user_filters` CONVERT TO CHARACTER SET utf8mb4;
 
