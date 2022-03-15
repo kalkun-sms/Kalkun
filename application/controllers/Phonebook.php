@@ -55,7 +55,7 @@ class Phonebook extends MY_Controller {
 			$this->pagination->initialize($config);
 			$data['pagination_links'] = $this->pagination->create_links();
 
-			$data['title'] = tr('Public contacts');
+			$data['title'] = tr_raw('Public contacts');
 			$data['public_contact'] = TRUE;
 			$param = array('option' => 'paginate', 'public' => TRUE, 'limit' => $config['per_page'], 'offset' => $this->uri->segment(4, 0));
 			$data['phonebook'] = $this->Phonebook_model->get_phonebook($param);
@@ -68,7 +68,7 @@ class Phonebook extends MY_Controller {
 			$this->pagination->initialize($config);
 			$data['pagination_links'] = $this->pagination->create_links();
 
-			$data['title'] = tr('Contacts');
+			$data['title'] = tr_raw('Contacts');
 			$data['public_contact'] = FALSE;
 
 			if ($_POST)
@@ -113,7 +113,7 @@ class Phonebook extends MY_Controller {
 
 		if ($type === 'public')
 		{
-			$data['title'] = tr('Public groups');
+			$data['title'] = tr_raw('Public groups');
 			$data['public_group'] = TRUE;
 			$config['base_url'] = site_url().'/phonebook/group/public';
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group', 'public' => TRUE))->num_rows();
@@ -126,7 +126,7 @@ class Phonebook extends MY_Controller {
 		}
 		else
 		{
-			$data['title'] = tr('Groups');
+			$data['title'] = tr_raw('Groups');
 			$data['public_group'] = FALSE;
 			$config['base_url'] = site_url().'/phonebook/group/';
 			$config['total_rows'] = $this->Phonebook_model->get_phonebook(array('option' => 'group'))->num_rows();
@@ -306,7 +306,7 @@ class Phonebook extends MY_Controller {
 			$this->Phonebook_model->add_contact($pbk);
 		}
 
-		$this->session->set_flashdata('notif', tr('{0,number,integer} contacts imported successfully.', NULL, count($csv)));
+		$this->session->set_flashdata('notif', tr_raw('{0,number,integer} contacts imported successfully.', NULL, count($csv)));
 		redirect('phonebook');
 	}
 
@@ -368,14 +368,14 @@ class Phonebook extends MY_Controller {
 			$pbk['id_pbk'] = $this->input->post('editid_pbk');
 			$return_msg = [
 				'type' => 'info',
-				'msg' => tr('Contact updated successfully.'),
+				'msg' => tr_raw('Contact updated successfully.'),
 			];
 		}
 		else
 		{
 			$return_msg = [
 				'type' => 'info',
-				'msg' => tr('Contact added successfully.'),
+				'msg' => tr_raw('Contact added successfully.'),
 			];
 		}
 
@@ -445,7 +445,7 @@ class Phonebook extends MY_Controller {
 				array_push($tagInputResult, array(
 					'id' => $val['id'].':g',
 					'name' => $val['name'],
-					'value' => $val['name'].' ('.tr('Group').')',
+					'value' => $val['name'].' ('.tr_raw('Group').')',
 				));
 				$group[$key]['id'] = $val['id'].':g';
 			}
@@ -460,7 +460,7 @@ class Phonebook extends MY_Controller {
 					array_push($tagInputResult, array(
 						'id' => $val['id_user'].':u',
 						'name' => $val['realname'],
-						'value' => $val['realname'].' ('.tr('User', 'default').')',
+						'value' => $val['realname'].' ('.tr_raw('User', 'default').')',
 					));
 					$user[$key]['id'] = $val['id_user'].':u';
 					$user[$key]['name'] = $val['realname'];

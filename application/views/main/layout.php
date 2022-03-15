@@ -22,7 +22,7 @@ echo doctype('xhtml1-trans');?>
 				<div class="clear">&nbsp;</div>
 				<div class="notification_container" align="center"><span class="notification_area hidden"><?php echo tr('Loading');?>...</span>
 					<?php if ($this->session->flashdata('notif')): ?>
-					<span class="notification_area"><?php echo $this->session->flashdata('notif');?></span>
+					<span class="notification_area"><?php echo htmlentities($this->session->flashdata('notif'), ENT_QUOTES);?></span>
 					<?php endif; ?>
 				</div>
 			</div>

@@ -9,7 +9,7 @@ if ($messages->num_rows() == 0)
 	{
 		if ($this->uri->segment(4) == '5')
 		{
-			echo $no_message_container['start'].tr('There is no message in {0}.', NULL, tr('Trash')).$no_message_container['end'];
+			echo $no_message_container['start'].tr('There is no message in {0}.', NULL, tr_raw('Trash')).$no_message_container['end'];
 		}
 		else
 		{
@@ -22,13 +22,13 @@ if ($messages->num_rows() == 0)
 		switch ($type)
 		{
 			case 'inbox':
-				$folder_type = tr('Inbox');
+				$folder_type = tr_raw('Inbox');
 				break;
 			case 'outbox':
-				$folder_type = tr('Outbox');
+				$folder_type = tr_raw('Outbox');
 				break;
 			case 'sentitems':
-				$folder_type = tr('Sent items');
+				$folder_type = tr_raw('Sent items');
 				break;
 		}
 		echo $no_message_container['start'].tr('There is no message in {0}.', NULL, $folder_type).$no_message_container['end'];

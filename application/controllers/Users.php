@@ -32,7 +32,7 @@ class Users extends MY_Controller {
 		// check level
 		if ($this->session->userdata('level') !== 'admin')
 		{
-			$this->session->set_flashdata('notif', tr('Access denied.'));
+			$this->session->set_flashdata('notif', tr_raw('Access denied.'));
 			redirect('/');
 		}
 
@@ -50,7 +50,7 @@ class Users extends MY_Controller {
 	 */
 	function index()
 	{
-		$data['title'] = tr('User', 'default');
+		$data['title'] = tr_raw('User', 'default');
 		$this->load->library('pagination');
 		$config['base_url'] = site_url().'/users/index/';
 		$config['total_rows'] = $this->User_model->getUsers(array('option' => 'all'))->num_rows();
@@ -124,14 +124,14 @@ class Users extends MY_Controller {
 		{
 			$return_msg = [
 				'type' => 'info',
-				'msg' => tr('User updated successfully.'),
+				'msg' => tr_raw('User updated successfully.'),
 			];
 		}
 		else
 		{
 			$return_msg = [
 				'type' => 'info',
-				'msg' => tr('User added successfully.'),
+				'msg' => tr_raw('User added successfully.'),
 			];
 		}
 

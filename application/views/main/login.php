@@ -28,7 +28,7 @@ echo doctype('xhtml1-trans');?>
 	<center>
 		<div class="login_loading_container">&nbsp;
 			<?php if ($this->session->flashdata('errorlogin')): ?>
-			<span class="loading_area"><?php echo $this->session->flashdata('errorlogin');?></span>
+			<span class="loading_area"><?php echo htmlentities($this->session->flashdata('errorlogin'), ENT_QUOTES);?></span>
 			<?php endif; ?>
 		</div>
 

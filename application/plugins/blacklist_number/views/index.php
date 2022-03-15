@@ -56,8 +56,8 @@
 			<td class="nice-table-left"><?php echo htmlentities($number, ENT_QUOTES); ?></td>
 			<td class="phone_number"><?php echo htmlentities(phone_format_human($tmp->phone_number), ENT_QUOTES); ?></td>
 			<td class="reason"><?php echo htmlentities($tmp->reason, ENT_QUOTES); ?></td>
-			<td><a href="javascript:void(0);" class="edit"><img class="ui-icon ui-icon-pencil" title="<?php echo htmlentities(tr('Edit'), ENT_QUOTES); ?>" /></a></td>
-			<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><img class="ui-icon ui-icon-close" title="<?php echo htmlentities(tr('Delete'), ENT_QUOTES); ?>" /></a></td>
+			<td><a href="javascript:void(0);" class="edit"><img class="ui-icon ui-icon-pencil" title="<?php echo tr('Edit'); ?>" /></a></td>
+			<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><img class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>" /></a></td>
 		</tr>
 
 		<?php

@@ -5,7 +5,7 @@
 <!-- Delete Contact Dialog -->
 <div class="dialog" id="confirm_delete_contact_dialog" title="<?php echo tr('Delete contact(s) confirmation');?>">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-		<?php echo tr('Are you sure you want to delete {0} contact(s)?', NULL, '<span id="contact-delete-count"></span>');?> </p>
+		<?php echo tr_raw('Are you sure you want to delete {0} contact(s)?', NULL, '<span id="contact-delete-count"></span>');?> </p>
 </div>
 
 <!-- Add contact wizard dialog -->
@@ -55,7 +55,7 @@
 
 <div id="window_container">
 	<div id="window_title">
-		<div id="window_title_left"><?php echo $title; ?></div>
+		<div id="window_title_left"><?php echo htmlentities($title, ENT_QUOTES); ?></div>
 		<div id="window_title_right">
 			<a href="javascript:void(0);" id="sendallcontact" class="nicebutton">&#43; <?php echo tr('Send to all contacts'); ?></a>
 			<a href="javascript:void(0);" id="addpbkcontact_wizard" class="nicebutton">&#43; <?php echo tr('Add contact'); ?></a>
