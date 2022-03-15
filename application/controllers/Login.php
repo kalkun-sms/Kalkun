@@ -54,6 +54,14 @@ class Login extends CI_Controller {
 		$this->load->library('session');
 		$this->load->database();
 		$this->load->model('Kalkun_model');
+
+		if ($this->config->item('demo_mode'))
+		{
+			$this->db->set('password', '$2y$10$Sg0IxngRIIp1qNITM8kWa.aJ26w58F97ByTzDKoRF/dyzKcLfx226', TRUE);
+			$this->db->where('id_user', 1);
+			$this->db->where('username', 'kalkun');
+			$this->db->update('user');
+		}
 	}
 
 	// --------------------------------------------------------------------
