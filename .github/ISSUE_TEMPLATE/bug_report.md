@@ -7,6 +7,11 @@ assignees: ''
 
 ---
 
+<!--
+Please enable error logging and reproduce the issue on your setup.
+Do so by setting CI_ENV to 'development' in the .htaccess file.
+-->
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
@@ -30,8 +35,9 @@ To open the about screen, go to the dashboard and at the bottom right click on t
 - Operating system:
 - PHP Version:
 - DB Backend:
+- Gammu version & DB Schema:
 - Browser:
-- Gammu version:
+- Installed plugins:
 
 **Additional context**
 Add any other context about the problem here.
