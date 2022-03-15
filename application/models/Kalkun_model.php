@@ -87,10 +87,11 @@ class Kalkun_model extends MY_Model {
 	function forgot_password()
 	{
 		$username = $this->input->post('username');
-		if ($this->input->post('phone'))
+		$phone = $this->input->post('phone');
+		if ($phone)
 		{
 			$region = MY_LANG::idom_to_region($this->input->post('idiom'));
-			$phone = phone_format_e164($this->input->post('phone'), $region);
+			$phone = phone_format_e164($phone, $region);
 		}
 
 		$this->db->from('user');
