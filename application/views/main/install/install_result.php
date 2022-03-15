@@ -38,6 +38,11 @@
 <p>To improve security, it's recommended to set the CI_ENV variable in the configuration of your web server to <code>production</code>. If set to <code>production</code> no errors will be reported. While if set to <code>development</code>, the errors will be reported, what may be a security risk. See more details in the <a href="https://codeigniter.com/userguide3/general/environments.html">CodeIgniter documentation</a>.</p>
 <?php endif; ?>
 
+<?php if (isset($_SERVER['CI_ENV']) && $_SERVER['CI_ENV'] !== 'production'): ?>
+<h4>Set the CodeIgniter environment variable</h4>
+<p>To improve security, it's recommended to set the CI_ENV variable in the configuration of your web server to <code>production</code> (for apache it's in <code>.htaccess</code>). If set to <code>production</code> no errors will be reported. While if set to <code>development</code>, the errors will be reported, what may be a security risk. See more details in the <a href="https://codeigniter.com/userguide3/general/environments.html">CodeIgniter documentation</a>.</p>
+<?php endif; ?>
+
 <h4>Configure kalkun internals</h4>
 <p>You may change some parameters in the <code>application/config/kalkun_settings.php</code> file. For example:</p>
 <ul>
