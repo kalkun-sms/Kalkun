@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @package     Kalkun
  * @author      Kalkun Dev Team
  * @license     <https://spdx.org/licenses/GPL-3.0-or-later.html> GPL-3.0-or-later
- * @link        https://kalkun-sms.github.io/
+ * @link        https://kalkun.sourceforge.io/
  */
 
 /**

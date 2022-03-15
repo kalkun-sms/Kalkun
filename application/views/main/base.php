@@ -31,12 +31,12 @@
 			<tr>
 				<td><b><?php echo tr('Homepage'); ?>:</b></td>
 				<td>&nbsp;</td>
-				<td><a class="base_color underline_link" href="https://kalkun-sms.github.io/" target="_blank">https://kalkun-sms.github.io/</a></td>
+				<td><a class="base_color underline_link" href="https://kalkun.sourceforge.io/" target="_blank">https://kalkun.sourceforge.io/</a></td>
 			</tr>
 		</table>
 		<br />
 		<!--center>
-			<a class="underline_link" href="https://kalkun-sms.github.io/contribute.php"><b>~ DONATE THIS PROJECT ~</b></a>
+			<a class="underline_link" href="https://kalkun.sourceforge.io/contribute.php"><b>~ DONATE THIS PROJECT ~</b></a>
 		</center-->
 		<hr style="border-style: solid; border-color: #86C0D2;" />
 		<p>If you find an issue, please report it on the <a class="base_color underline_link" href="https://github.com/kalkun-sms/Kalkun/issues" target="_blank">issue page of the project</a> and add the information below:</p>

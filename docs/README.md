@@ -1,7 +1,7 @@
 ## Kalkun - Open Source Web-based SMS Manager
 Kalkun is an open source web-based SMS (Short Message Service) manager. It uses gammu-smsd (part of gammu family) as SMS gateway engine to deliver and retrieve messages from your phone/modem.
 
-* **Homepage** : https://kalkun-sms.github.io/
+* **Homepage** : https://kalkun.sourceforge.io/
 * **Documentation** : https://github.com/kalkun-sms/Kalkun/wiki/
 
 ### Features
