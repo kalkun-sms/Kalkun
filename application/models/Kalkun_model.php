@@ -363,9 +363,12 @@ class Kalkun_model extends MY_Model {
 				break;
 
 			case 'password':
-				$this->db->set('password', password_hash($this->input->post('new_password'), PASSWORD_BCRYPT));
-				$this->db->where('id_user', $this->session->userdata('id_user'));
-				$this->db->update('user');
+				if ( ! ($this->config->item('demo_mode') && intval($this->session->userdata('id_user')) === 1))
+				{
+					$this->db->set('password', password_hash($this->input->post('new_password'), PASSWORD_BCRYPT));
+					$this->db->where('id_user', $this->session->userdata('id_user'));
+					$this->db->update('user');
+				}
 				break;
 
 			case 'filters':

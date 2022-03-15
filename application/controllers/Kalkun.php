@@ -288,10 +288,18 @@ class Kalkun extends MY_Controller {
 		{
 			$option = $this->input->post('option');
 			// check password
-			if ($option === 'password' && ! password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password')))
+			if ($option === 'password')
 			{
-				$this->session->set_flashdata('notif', tr_raw('Wrong password'));
-				redirect('settings/'.$option);
+				if ($this->config->item('demo_mode') && intval($this->session->userdata('id_user')) === 1)
+				{
+					$this->session->set_flashdata('notif', tr_raw('Password modification forbidden in demo mode.'));
+					redirect('settings/'.$option);
+				}
+				if ( ! password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password')))
+				{
+					$this->session->set_flashdata('notif', tr_raw('Wrong password'));
+					redirect('settings/'.$option);
+				}
 			}
 			else
 			{
