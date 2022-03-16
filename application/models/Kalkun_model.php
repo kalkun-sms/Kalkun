@@ -6,7 +6,7 @@
  * @package		Kalkun
  * @author		Kalkun Dev Team
  * @license		https://spdx.org/licenses/GPL-3.0-or-later.html
- * @link		http://kalkun.sourceforge.net
+ * @link		https://kalkun.sourceforge.io/
  */
 
 // ------------------------------------------------------------------------
@@ -71,7 +71,7 @@ class Kalkun_model extends MY_Model {
 		}
 		else
 		{
-			$this->session->set_flashdata('errorlogin', tr('Username or password are incorrect.'));
+			$this->session->set_flashdata('errorlogin', tr_raw('Username or password are incorrect.'));
 		}
 	}
 
@@ -87,10 +87,11 @@ class Kalkun_model extends MY_Model {
 	function forgot_password()
 	{
 		$username = $this->input->post('username');
-		if ($this->input->post('phone'))
+		$phone = $this->input->post('phone');
+		if ($phone)
 		{
 			$region = MY_LANG::idom_to_region($this->input->post('idiom'));
-			$phone = phone_format_e164($this->input->post('phone'), $region);
+			$phone = phone_format_e164($phone, $region);
 		}
 
 		$this->db->from('user');
@@ -115,7 +116,7 @@ class Kalkun_model extends MY_Model {
 				}
 				else
 				{
-					$this->session->set_flashdata('errorlogin', tr('Token already generated and still active.'));
+					$this->session->set_flashdata('errorlogin', tr_raw('Token already generated and still active.'));
 				}
 			}
 
@@ -363,9 +364,12 @@ class Kalkun_model extends MY_Model {
 				break;
 
 			case 'password':
-				$this->db->set('password', password_hash($this->input->post('new_password'), PASSWORD_BCRYPT));
-				$this->db->where('id_user', $this->session->userdata('id_user'));
-				$this->db->update('user');
+				if ( ! ($this->config->item('demo_mode') && intval($this->session->userdata('id_user')) === 1))
+				{
+					$this->db->set('password', password_hash($this->input->post('new_password'), PASSWORD_BCRYPT));
+					$this->db->where('id_user', $this->session->userdata('id_user'));
+					$this->db->update('user');
+				}
 				break;
 
 			case 'filters':

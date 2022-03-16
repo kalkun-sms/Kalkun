@@ -6,7 +6,7 @@
  * @package		Kalkun
  * @author		Kalkun Dev Team
  * @license		https://spdx.org/licenses/GPL-3.0-or-later.html
- * @link		http://kalkun.sourceforge.net
+ * @link		https://kalkun.sourceforge.io/
  */
 
 // ------------------------------------------------------------------------
@@ -452,7 +452,7 @@ class Messages extends MY_Controller {
 		{
 			unset($dest);
 			$return_msg['type'] = 'error';
-			$return_msg['msg'] = tr('Outgoing SMS disabled.');
+			$return_msg['msg'] = tr_raw('Outgoing SMS disabled.');
 		}
 
 		// if ndnc filtering enabled
@@ -469,7 +469,7 @@ class Messages extends MY_Controller {
 						{
 							unset($dest[$i]);
 							$return_msg['type'] = 'error';
-							$return_msg['msg'] = tr('A number was found in DND Resitry. SMS sending was skipped for it.');
+							$return_msg['msg'] = tr_raw('A number was found in DND Resitry. SMS sending was skipped for it.');
 						}
 					}
 				}
@@ -479,7 +479,7 @@ class Messages extends MY_Controller {
 					{
 						unset($dest);
 						$return_msg['type'] = 'error';
-						$return_msg['msg'] = tr('A number was found in DND Resitry. SMS sending was skipped for it.');
+						$return_msg['msg'] = tr_raw('A number was found in DND Resitry. SMS sending was skipped for it.');
 					}
 				}
 			}
@@ -520,7 +520,7 @@ class Messages extends MY_Controller {
 				$msg_id = $this->Message_model->copy_message($this->input->post('msg_id'));
 				$this->Message_model->update_owner($msg_id, $id);
 				$return_msg['type'] = 'info';
-				$return_msg['msg'] = tr('Message delivered successfully to user inbox.');
+				$return_msg['msg'] = tr_raw('Message delivered successfully to user inbox.');
 			}
 		}
 
@@ -568,7 +568,7 @@ class Messages extends MY_Controller {
 				$n++;
 			}
 			$return_msg['type'] = 'info';
-			$return_msg['msg'] = tr('Copy of the message was placed in the outbox and is ready for delivery.');
+			$return_msg['msg'] = tr_raw('Copy of the message was placed in the outbox and is ready for delivery.');
 		}
 
 		// Delete original message in case of resend
@@ -584,7 +584,7 @@ class Messages extends MY_Controller {
 		if ( ! isset($return_msg))
 		{
 			$return_msg['type'] = 'error';
-			$return_msg['msg'] = tr('No number found. SMS not sent.');
+			$return_msg['msg'] = tr_raw('No number found. SMS not sent.');
 		}
 
 		// Return sending status
@@ -1252,7 +1252,7 @@ class Messages extends MY_Controller {
 		{
 			$return_msg = [
 				'type' => 'error',
-				'msg' => tr('Only administrators can permanently delete messages.')
+				'msg' => tr_raw('Only administrators can permanently delete messages.')
 			];
 			header('Content-type: application/json');
 			echo json_encode($return_msg);

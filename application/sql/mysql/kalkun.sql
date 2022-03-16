@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(12) NOT NULL,
   `realname` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(191) NOT NULL,
   `phone_number` varchar(15) NOT NULL,
   `level` enum('admin','user') NOT NULL DEFAULT 'user',
   PRIMARY KEY (`id_user`),
@@ -236,8 +236,8 @@ INSERT INTO `b8_wordlist` (`token`, `count_ham`, `count_spam`) VALUES ('b8*texts
 
 CREATE TABLE IF NOT EXISTS `plugins` (
   `plugin_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `plugin_system_name` varchar(255) NOT NULL,
-  `plugin_name` varchar(255) NOT NULL,
+  `plugin_system_name` varchar(191) NOT NULL,
+  `plugin_name` varchar(191) NOT NULL,
   `plugin_uri` varchar(120) DEFAULT NULL,
   `plugin_version` varchar(30) NOT NULL,
   `plugin_description` text,
@@ -257,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `plugins` (
 
 CREATE TABLE IF NOT EXISTS `user_forgot_password` (
   `id_user` int(11) NOT NULL,
-  `token` varchar(255) NOT NULL,
+  `token` varchar(191) NOT NULL,
   `valid_until` datetime NOT NULL,
   PRIMARY KEY (`id_user`)
 ) DEFAULT CHARSET=utf8mb4;

@@ -6,7 +6,7 @@
 	<div id="dash_box">
 		<?php
 foreach ($alerts as $msg):
-   echo '<div class="warning">'.$msg.'</div>';;
+   echo '<div class="warning">'.htmlentities($msg, ENT_QUOTES).'</div>';;
 endforeach;
 ?>
 	</div>

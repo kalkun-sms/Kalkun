@@ -86,12 +86,12 @@
 			<td class="phone_number"><?php echo htmlentities(phone_format_human($tmp->phone_number), ENT_QUOTES); ?></td>
 			<td class="respond_message hidden"><?php echo htmlentities($tmp->respond_message, ENT_QUOTES); ?></td>
 			<?php if ($tmp->status == 'false'):?>
-			<td><a href="javascript:void(0);" class="release"><img class="ui-icon ui-icon-locked" title="<?php echo htmlentities(tr('Release state'), ENT_QUOTES); ?>" /></a></td>
+			<td><a href="javascript:void(0);" class="release"><img class="ui-icon ui-icon-locked" title="<?php echo tr('Release state'); ?>" /></a></td>
 			<?php
 				else: echo '<td>&nbsp;</td>';
 			endif; ?>
-			<td><a href="javascript:void(0);" class="edit"><img class="ui-icon ui-icon-pencil" title="<?php echo htmlentities(tr('Edit'), ENT_QUOTES); ?>" /></a></td>
-			<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><img class="ui-icon ui-icon-close" title="<?php echo htmlentities(tr('Delete'), ENT_QUOTES); ?>" /></a></td>
+			<td><a href="javascript:void(0);" class="edit"><img class="ui-icon ui-icon-pencil" title="<?php echo tr('Edit'); ?>" /></a></td>
+			<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><img class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>" /></a></td>
 		</tr>
 
 		<?php

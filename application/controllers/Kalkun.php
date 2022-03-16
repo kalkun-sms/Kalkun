@@ -6,7 +6,7 @@
  * @package		Kalkun
  * @author		Kalkun Dev Team
  * @license		https://spdx.org/licenses/GPL-3.0-or-later.html
- * @link		http://kalkun.sourceforge.net
+ * @link		https://kalkun.sourceforge.io/
  */
 
 // ------------------------------------------------------------------------
@@ -46,7 +46,7 @@ class Kalkun extends MY_Controller {
 		$data['title'] = 'Dashboard';
 		if ($this->config->item('disable_outgoing'))
 		{
-			$data['alerts'][] = tr('Outgoing SMS disabled. Contact system administrator.');
+			$data['alerts'][] = tr_raw('Outgoing SMS disabled. Contact system administrator.');
 		}
 		$this->load->view('main/layout', $data);
 	}
@@ -75,7 +75,7 @@ class Kalkun extends MY_Controller {
 			case 'weeks':
 				$days = 30;
 				$format = 'W';
-				$prefix = tr('date_week').' ';
+				$prefix = tr_raw('date_week').' ';
 				break;
 
 			case 'months':
@@ -127,13 +127,13 @@ class Kalkun extends MY_Controller {
 			'labels' => array_reverse($x),
 			'datasets' => [
 				[
-					'label' => tr('Outgoing SMS'),
+					'label' => tr_raw('Outgoing SMS'),
 					'backgroundColor' => '#21759B',
 					'data' => array_reverse($yout),
 					'borderWidth' => 1,
 				],
 				[
-					'label' => tr('Incoming SMS'),
+					'label' => tr_raw('Incoming SMS'),
 					'backgroundColor' => '#639F45',
 					'data' => array_reverse($yin),
 					'borderWidth' => 1,
@@ -160,27 +160,27 @@ class Kalkun extends MY_Controller {
 	{
 		$status = $this->Kalkun_model->get_gammu_info('last_activity')->row('UpdatedInDB');
 		$response['signal'] = intval($this->Kalkun_model->get_gammu_info('phone_signal')->row('Signal'));
-		$response['signal_lbl'] = tr('{0}%', NULL, $this->Kalkun_model->get_gammu_info('phone_signal')->row('Signal'));
+		$response['signal_lbl'] = tr_raw('{0}%', NULL, $this->Kalkun_model->get_gammu_info('phone_signal')->row('Signal'));
 		$response['battery'] = intval($this->Kalkun_model->get_gammu_info('phone_battery')->row('Battery'));
-		$response['battery_lbl'] = tr('{0}%', NULL, $this->Kalkun_model->get_gammu_info('phone_battery')->row('Battery'));
+		$response['battery_lbl'] = tr_raw('{0}%', NULL, $this->Kalkun_model->get_gammu_info('phone_battery')->row('Battery'));
 		if ( ! empty($status))
 		{
 			$status = get_modem_status($status, $this->config->item('modem_tolerant'));
 			if ($status === 'connect')
 			{
 				$response['status'] = 'connected';
-				$response['status_lbl'] = tr('Connected');
+				$response['status_lbl'] = tr_raw('Connected');
 			}
 			else
 			{
 				$response['status'] = 'disconnected';
-				$response['status_lbl'] = tr('Disconnected');
+				$response['status_lbl'] = tr_raw('Disconnected');
 			}
 		}
 		else
 		{
 			$response['status'] = 'Unknown';
-			$response['status_lbl'] = tr('Unknown');
+			$response['status_lbl'] = tr_raw('Unknown');
 		}
 
 		if (is_ajax())
@@ -288,10 +288,18 @@ class Kalkun extends MY_Controller {
 		{
 			$option = $this->input->post('option');
 			// check password
-			if ($option === 'password' && ! password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password')))
+			if ($option === 'password')
 			{
-				$this->session->set_flashdata('notif', tr('Wrong password'));
-				redirect('settings/'.$option);
+				if ($this->config->item('demo_mode') && intval($this->session->userdata('id_user')) === 1)
+				{
+					$this->session->set_flashdata('notif', tr_raw('Password modification forbidden in demo mode.'));
+					redirect('settings/'.$option);
+				}
+				if ( ! password_verify($this->input->post('current_password'), $this->Kalkun_model->get_setting()->row('password')))
+				{
+					$this->session->set_flashdata('notif', tr_raw('Wrong password'));
+					redirect('settings/'.$option);
+				}
 			}
 			else
 			{
@@ -301,14 +309,14 @@ class Kalkun extends MY_Controller {
 					{
 						if ($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows > 0)
 						{
-							$this->session->set_flashdata('notif', tr('Username already taken'));
+							$this->session->set_flashdata('notif', tr_raw('Username already taken'));
 							redirect('settings/'.$option);
 						}
 					}
 				}
 			}
 			$this->Kalkun_model->update_setting($option);
-			$this->session->set_flashdata('notif', tr('Settings saved successfully.'));
+			$this->session->set_flashdata('notif', tr_raw('Settings saved successfully.'));
 			redirect('settings/'.$option);
 		}
 

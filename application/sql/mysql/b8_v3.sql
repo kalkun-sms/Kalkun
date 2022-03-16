@@ -23,7 +23,7 @@
 --
 
 CREATE TABLE `b8_wordlist` (
-  `token` varchar(255) character set utf8mb4 collate utf8mb4_bin NOT NULL,
+  `token` varchar(190) character set utf8mb4 collate utf8mb4_bin NOT NULL,
   `count_ham` int unsigned default NULL,
   `count_spam` int unsigned default NULL,
   PRIMARY KEY (`token`)

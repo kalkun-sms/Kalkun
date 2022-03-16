@@ -6,7 +6,7 @@
  * @package		Kalkun
  * @author		Kalkun Dev Team
  * @license		https://spdx.org/licenses/GPL-3.0-or-later.html
- * @link		http://kalkun.sourceforge.net
+ * @link		https://kalkun.sourceforge.io/
  */
 
 // ------------------------------------------------------------------------
@@ -64,7 +64,7 @@ class Gammu_model extends MY_Model {
 				);
 				show_error(tr('Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'), 500);
 
-				$f_ret = array('status' => tr('Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.')); //FIXME
+				$f_ret = array('status' => tr_raw('Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.')); //FIXME
 			}
 			else
 			{
@@ -73,20 +73,20 @@ class Gammu_model extends MY_Model {
 				if (empty($insert_id))
 				{
 					show_error(tr('Unknown error while sending WAP-LINK.'), 500);
-					$f_ret = array('status' => tr('Unknown error while sending WAP-LINK.')); //FIXME
+					$f_ret = array('status' => tr_raw('Unknown error while sending WAP-LINK.')); //FIXME
 				}
 				else
 				{
 					$this->db->update('outbox', array('SendingDateTime' => $data['date']), "ID = ${insert_id}");
 					$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
-					$f_ret = array('status' => tr('Message queued.'));
+					$f_ret = array('status' => tr_raw('Message queued.'));
 				}
 			}
 		}
 		else
 		{
 			echo tr('Parameter invalid.');
-			$f_ret = array('status' => tr('Parameter invalid.'));
+			$f_ret = array('status' => tr_raw('Parameter invalid.'));
 		}
 		return $f_ret;
 	}

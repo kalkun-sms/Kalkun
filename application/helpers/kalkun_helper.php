@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @package     Kalkun
  * @author      Kalkun Dev Team
  * @license     <https://spdx.org/licenses/GPL-3.0-or-later.html> GPL-3.0-or-later
- * @link        https://github.com/kalkun-sms/Kalkun/
+ * @link        https://kalkun.sourceforge.io/
  */
 
 /**
@@ -74,11 +74,11 @@ function kalkun_nice_date($str, $option = NULL)
 			$units = 2;
 			if ($timestamp > $now)
 			{
-				return tr('{0} remaining', NULL, timespan($now, $timestamp, $units));
+				return tr_raw('{0} remaining', NULL, timespan($now, $timestamp, $units));
 			}
 			else
 			{
-				return tr('{0} ago', NULL, timespan($timestamp, $now, $units));
+				return tr_raw('{0} ago', NULL, timespan($timestamp, $now, $units));
 			}
 		}
 	}
@@ -147,31 +147,31 @@ function check_delivery_report($report)
 {
 	if ($report === 'SendingError' OR $report === 'Error' OR $report === 'DeliveryFailed')
 	{
-		$status = tr('Sending failed');
+		$status = tr_raw('Sending failed');
 	}
 	elseif ($report === 'SendingOKNoReport')
 	{
-		$status = tr('Sent, no report');
+		$status = tr_raw('Sent, no report');
 	}
 	elseif ($report === 'SendingOK')
 	{
-		$status = tr('Sent, waiting for report');
+		$status = tr_raw('Sent, waiting for report');
 	}
 	elseif ($report === 'DeliveryOK')
 	{
-		$status = tr('Delivered');
+		$status = tr_raw('Delivered');
 	}
 	elseif ($report === 'DeliveryPending')
 	{
-		$status = tr('Pending');
+		$status = tr_raw('Pending');
 	}
 	elseif ($report === 'DeliveryUnknown')
 	{
-		$status = tr('Unknown');
+		$status = tr_raw('Unknown');
 	}
 	elseif ($report === 'Reserved')
 	{
-		$status = tr('Not set yet');
+		$status = tr_raw('Not set yet');
 	}
 
 	return $status;
