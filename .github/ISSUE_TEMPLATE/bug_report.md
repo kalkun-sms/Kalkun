@@ -8,8 +8,9 @@ assignees: ''
 ---
 
 <!--
-Please enable error logging and reproduce the issue on your setup.
-Do so by setting CI_ENV to 'development' in the .htaccess file.
+If you don't have error messages but blank pages or content, check
+that error logging is enabled. The setting CI_ENV in the .htaccess
+file must be set to 'development' to see errors.
 -->
 
 **Describe the bug**
