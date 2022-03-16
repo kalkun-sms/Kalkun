@@ -1,8 +1,7 @@
 <h2><?php echo tr('Database setup'); ?></h2>
 <p>This step sets your database up for Kalkun.</p>
-<?php echo form_open('install/run_install', array('class' => 'formtable'));?>
 <h4 align="center" style="padding-bottom: 5px; border-bottom: 1px solid #999">Database backend engine and gammu database version.</h4>
-<table width="90%">
+<table class="formtable">
 	<tr valign="top">
 		<td>Database engine</td>
 		<td>
@@ -10,6 +9,7 @@
 			<br /><small>Read from your database configuration.</small>
 		</td>
 	</tr>
+	<?php if ($exception === NULL): ?>
 	<tr valign="top">
 		<td>Gammu DB schema</td>
 		<td>
@@ -78,18 +78,29 @@
 		</td>
 	</tr>
 	<?php endif; ?>
+	<?php else: /* $exception !== NULL */ ?>
+	<tr valign="top">
+		<td colspan="2">
+			<p class="red">There was a problem when trying to load the database.</p>
+			<p>Reported error is:</p>
+			<p><code><?php echo htmlentities($exception, ENT_QUOTES); ?></code></p>
+			<p>Please check your database configuration in <code>application/config/database.php</code>. Then click on button to check again.</p>
+		</td>
+	</tr>
+	<?php endif; ?>
 </table>
+<p>&nbsp;</p>
 
-<?php if ($type === 'install' OR $type === 'upgrade' OR ! $this->Kalkun_model->has_table_pbk()):
-		$btn_text = 'Run Database Setup';
-	else:
-		$btn_text = tr('Continue');
-	endif; ?>
-<?php if ($type !== 'upgrade_not_supported'): ?>
-<p align="center"><input type="submit" class="button" value="<?php echo $btn_text; ?>" /></p>
+<?php if ($exception !== NULL): ?>
+<div align="center">
+	<?php
+	echo form_open('install/database_setup');
+	echo form_hidden('idiom', $idiom);
+	echo form_submit('submit', tr_raw('Check again'), 'class="button"');
+	echo form_close();
+?>
+</div>
 <?php endif; ?>
-<?php echo form_hidden('idiom', $idiom); ?>
-<?php echo form_close();?>
 
 <p>&nbsp;</p>
 <div>
@@ -97,8 +108,22 @@
 		<?php
 	echo form_open('install/requirement_check', 'style="display:inline"');
 	echo form_hidden('idiom', $idiom);
-	echo form_submit('submit', '‹ '.tr('Previous'), 'class="button"');
+	echo form_submit('submit', '‹ '.tr_raw('Previous'), 'class="button"');
 	echo form_close();
 ?>
+		<?php if ($exception === NULL): ?>
+		<?php if ($type === 'install' OR $type === 'upgrade' OR ! $this->Kalkun_model->has_table_pbk()):
+		$btn_text = 'Run Database Setup'.' ›';
+	else:
+		$btn_text = tr_raw('Continue').' ›';
+	endif; ?>
+		<?php if ($type !== 'upgrade_not_supported'): ?>
+		<?php echo form_open('install/run_install', 'style="display:inline"');?>
+		<?php echo form_hidden('idiom', $idiom); ?>
+		<?php echo form_submit('submit', $btn_text, 'class="button"');
+	</p>
+	<?php echo form_close();?>
+		<?php endif; ?>
+		<?php endif; ?>
 	</p>
 </div>

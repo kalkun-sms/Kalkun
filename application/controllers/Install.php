@@ -125,16 +125,29 @@ class Install extends CI_Controller {
 	{
 		$this->load->model('Kalkun_model');
 		$this->load->helper(array('form'));
-		$this->load->database();
+
 		$data['main'] = 'main/install/database_setup';
 		$data['idiom'] = $this->idiom;
-		$data['database_driver'] = $this->db->platform();
 		$data['db_property'] = $this->db_prop;
-		$data['has_smsd_database'] = $this->db->table_exists('gammu') ? TRUE : FALSE;
 
 		// By default we consider Kalkun database schema is not installed
 		$detected_db_version = '0';
 		$data['type'] = 'install';
+
+		$data['exception'] = NULL;
+		try
+		{
+			$this->load->database();
+		}
+		catch (Exception $e)
+		{
+			$data['exception'] = $e->getMessage();
+			$this->load->view('main/install/layout', $data);
+			return;
+		}
+
+		$data['database_driver'] = $this->db->platform();
+		$data['has_smsd_database'] = $this->db->table_exists('gammu') ? TRUE : FALSE;
 
 		// Now check if it is installed, and which version it is.
 		// plugins table appeared in 0.4
