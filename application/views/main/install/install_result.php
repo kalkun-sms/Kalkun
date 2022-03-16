@@ -31,7 +31,7 @@
 <p>The daemon scripts are provided in the <code>scripts</code> directory of the kalkun archive. In case they are still located at the root of your webserver (ie. along the <code>application</code> directory), <strong>it is advised to move them to another location</strong>.</p>
 
 <h4>Change encryption key</h4>
-<p>To improve security, it's higly recommended to change the <code>encryption_key</code> in <code>application/config/config.php</code>.<a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#change-the-default-encryption-key" target="_blank"><strong>See wiki</strong></a> for details.</p>
+<p>To improve security, it's higly recommended to change the <code>encryption_key</code> in <code>application/config/config.php</code>. <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#change-the-default-encryption-key" target="_blank"><strong>See wiki</strong></a> for details.</p>
 
 <?php if (isset($_SERVER['CI_ENV']) && $_SERVER['CI_ENV'] !== 'production'): ?>
 <h4>Set the CodeIgniter environment variable</h4>
