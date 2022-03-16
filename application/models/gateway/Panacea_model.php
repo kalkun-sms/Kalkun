@@ -6,7 +6,7 @@
  * @package		Kalkun
  * @author		joseph mazigo
  * @license		https://spdx.org/licenses/GPL-3.0-or-later.html
- * @link		http://kalkun.sourceforge.net
+ * @link		https://kalkun.sourceforge.io/
  * @link        http://josephmazigo.com
  */
 
