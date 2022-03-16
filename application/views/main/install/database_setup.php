@@ -123,7 +123,7 @@
 		<?php echo form_submit('submit', $btn_text, 'class="button"'); ?>
 	</p>
 	<?php echo form_close();?>
-		<?php endif; ?>
-		<?php endif; ?>
+	<?php endif; ?>
+	<?php endif; ?>
 	</p>
 </div>
