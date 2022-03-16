@@ -47,7 +47,7 @@
 <?php
 	echo form_open(site_url(), 'style="display:block; text-align: center"');
 	echo form_hidden('idiom', $idiom);
-	echo '<input type="submit" name="submit" value="'.tr('Log in').'" class="button" />';
+	echo form_submit('submit', tr_raw('Log in'), 'class="button"');
 	if ($needs_manual_install_file_deletion):
 		echo '<br>💡 Have you deleted install file?';
 	endif;

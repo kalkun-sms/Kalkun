@@ -96,7 +96,7 @@
 	<?php
 	echo form_open('install/database_setup');
 	echo form_hidden('idiom', $idiom);
-	echo '<input type="submit" name="submit" value="'.tr('Check again').'" class="button" />';
+	echo form_submit('submit', tr_raw('Check again'), 'class="button"');
 	echo form_close();
 ?>
 </div>
@@ -108,22 +108,22 @@
 		<?php
 	echo form_open('install/requirement_check', 'style="display:inline"');
 	echo form_hidden('idiom', $idiom);
-	echo '<input type="submit" name="submit" value="‹ '.tr('Previous').'" class="button" />';
+	echo form_submit('submit', '‹ '.tr_raw('Previous'), 'class="button"');
 	echo form_close();
 ?>
 		<?php if ($exception === NULL): ?>
 		<?php if ($type === 'install' OR $type === 'upgrade' OR ! $this->Kalkun_model->has_table_pbk()):
 		$btn_text = 'Run Database Setup'.' ›';
 	else:
-		$btn_text = tr('Continue').' ›';
+		$btn_text = tr_raw('Continue').' ›';
 	endif; ?>
 		<?php if ($type !== 'upgrade_not_supported'): ?>
 		<?php echo form_open('install/run_install', 'style="display:inline"');?>
 		<?php echo form_hidden('idiom', $idiom); ?>
-		<input type="submit" class="button" value="<?php echo $btn_text; ?>" />
+		<?php echo form_submit('submit', $btn_text, 'class="button"');
 	</p>
 	<?php echo form_close();?>
-	<?php endif; ?>
-	<?php endif; ?>
+		<?php endif; ?>
+		<?php endif; ?>
 	</p>
 </div>

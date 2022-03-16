@@ -176,7 +176,7 @@
 		<?php
 	echo form_open('install/requirement_check');
 	echo form_hidden('idiom', $idiom);
-	echo '<input type="submit" name="submit" value="'.tr('Check again').'" class="button" />';
+	echo form_submit('submit', tr_raw('Check again'), 'class="button"');
 	echo form_close();
 ?>
 	</div>
@@ -184,7 +184,7 @@
 	<?php
 	echo form_open('install', 'style="display:inline"');
 	echo form_hidden('idiom', $idiom);
-	echo '<input type="submit" name="submit" value="‹ '.tr('Previous').'" class="button" />';
+	echo form_submit('submit', '‹ '.tr_raw('Previous'), 'class="button"');
 	echo form_close();
 ?>
 </div>
@@ -197,13 +197,13 @@
 		<?php
 	echo form_open('install', 'style="display:inline"');
 	echo form_hidden('idiom', $idiom);
-	echo '<input type="submit" name="submit" value="‹ '.tr('Previous').'" class="button" />';
+	echo form_submit('submit', '‹ '.tr_raw('Previous'), 'class="button"');
 	echo form_close();
 ?>
 		<?php
 	echo form_open('install/database_setup', 'style="display:inline"');
 	echo form_hidden('idiom', $idiom);
-	echo '<input type="submit" name="submit" value="'.tr('Next').' ›" class="button" />';
+	echo form_submit('submit', tr_raw('Next').' ›', 'class="button"');
 	echo form_close();
 ?>
 	</p>

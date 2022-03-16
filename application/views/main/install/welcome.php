@@ -28,7 +28,7 @@
 	<?php
 	echo form_open('install/requirement_check');
 	echo form_hidden('idiom', $idiom);
-	echo '<input type="submit" name="submit" value="'.tr('Continue').' ›" class="button" />';
+	echo form_submit('submit', tr_raw('Continue').' ›', 'class="button"');
 	echo form_close();
 ?>
 </div>
