@@ -33,6 +33,11 @@
 <h4>Change encryption key</h4>
 <p>To improve security, it's higly recommended to change the <code>encryption_key</code> in <code>application/config/config.php</code>.<a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#change-the-default-encryption-key" target="_blank"><strong>See wiki</strong></a> for details.</p>
 
+<?php if (isset($_SERVER['CI_ENV']) && $_SERVER['CI_ENV'] !== 'production'): ?>
+<h4>Set the CodeIgniter environment variable</h4>
+<p>To improve security, it's recommended to set the CI_ENV variable in the configuration of your web server to <code>production</code> (for apache it's in <code>.htaccess</code>). If set to <code>production</code> no errors will be reported. While if set to <code>development</code>, the errors will be reported, what may be a security risk. See more details in the <a href="https://codeigniter.com/userguide3/general/environments.html">CodeIgniter documentation</a>.</p>
+<?php endif; ?>
+
 <h4>Configure kalkun internals</h4>
 <p>You may change some parameters in the <code>application/config/kalkun_settings.php</code> file. For example set another gateway engine than Gammu. Find some suggestions of parameters you can change on the <a href="" target="_blank"><strong>configuration page of the wiki</strong></a>.</p>
 <ul>

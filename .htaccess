@@ -1,1 +1,6 @@
 Options -Indexes
+<IfModule mod_env.c>
+    # Set this value to one of: development testing production
+    # See: https://codeigniter.com/userguide3/general/environments.html
+    SetEnv CI_ENV development
+</IfModule>

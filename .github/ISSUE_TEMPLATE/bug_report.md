@@ -7,6 +7,12 @@ assignees: ''
 
 ---
 
+<!--
+If you don't have error messages but blank pages or content, check
+that error logging is enabled. The setting CI_ENV in the .htaccess
+file must be set to 'development' to see errors.
+-->
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
@@ -30,8 +36,9 @@ To open the about screen, go to the dashboard and at the bottom right click on t
 - Operating system:
 - PHP Version:
 - DB Backend:
+- Gammu version & DB Schema:
 - Browser:
-- Gammu version:
+- Installed plugins:
 
 **Additional context**
 Add any other context about the problem here.
