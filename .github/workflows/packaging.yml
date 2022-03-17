@@ -6,6 +6,8 @@ on:
       - devel
       - 'release-**'
       - 'feature-008-debian'
+    tags:
+      - 'v*'
 jobs:
   debian:
     name: Debian package
@@ -33,7 +35,7 @@ jobs:
           echo "LAST_COMMIT_DATE=$(git log -1 --date=format:%Y%m%d --format=%cd)" >> $GITHUB_ENV
           echo "KALKUN_VERSION=$(grep kalkun_version application/config/kalkun_settings.php | cut -d "'" -f 4)" >> $GITHUB_ENV
           echo "DEBEMAIL=none@domain.tld" >> $GITHUB_ENV
-          echo "DEBFULLNAME='Deb Builder'" >> $GITHUB_ENV
+          echo "DEBFULLNAME='Github Actions Deb Builder for Kalkun'" >> $GITHUB_ENV
       - name: Build kalkun packages
         run: |
           set -x
@@ -47,12 +49,19 @@ jobs:
           git checkout debian_branch -- debian
           git status
 
-          DEB_VERSION=$(echo $KALKUN_VERSION | sed -e "s/-/~/g")~${LAST_COMMIT_DATE}
-          gbp dch --new-version="$DEB_VERSION" --snapshot --ignore-branch
-          # Append debian version to version number
-          sed -i -e "1s/)/-1)/" debian/changelog
-
-          gbp export-orig --upstream-tree=BRANCH --upstream-branch=$(git rev-parse --abbrev-ref HEAD) --compression=xz
+          if [[ "$(git tag --points-at ${GIT_BRANCH})" != "" ]]; then \
+            KALKUN_VERSION="$(git tag --points-at ${GIT_BRANCH} | sed "s/^v//")" ; \
+            DEB_VERSION=$(echo ${KALKUN_VERSION} | sed -e "s/-/~/g")-1 ; \
+            rm debian/changelog
+            dch --package kalkun --newversion="$DEB_VERSION" --create $DEB_VERSION ; \
+            gbp export-orig --upstream-tag=$(git tag --points-at ${GIT_BRANCH}) --compression=xz ; \
+          else \
+            DEB_VERSION=$(echo $KALKUN_VERSION | sed -e "s/-/~/g")~${LAST_COMMIT_DATE} ; \
+            gbp dch --new-version="$DEB_VERSION" --snapshot --ignore-branch ; \
+            # Append debian version to version number ; \
+            sed -i -e "1s/)/-1)/" debian/changelog ; \
+            gbp export-orig --upstream-tree=BRANCH --upstream-branch=$(git rev-parse --abbrev-ref HEAD) --compression=xz ; \
+          fi
 
           # depend on debhelper 12 (because ubuntu focal has only debhelper 12)
           sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control
@@ -87,16 +96,24 @@ jobs:
         if: always()
         run: |
           set -x
-          mkdir -p ~/output
-          dcmd mv ../*.changes ~/output
-          cp ~/deps/*.deb ~/output
+          mkdir -p ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
+          dcmd mv ../*.changes ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
+          cp ~/deps/*.deb ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
+          cd ~ && tar -cvf Kalkun_${GITHUB_REF_NAME}_debianBundle.tar Kalkun_${GITHUB_REF_NAME}_debianBundle
+          echo "my_home=$HOME" >> $GITHUB_ENV
       - name: Archive artifacts
         if: always()
         uses: actions/upload-artifact@v2
         with:
           name: Debian packages (source & binary)
-          path: '~/output/*'
+          path: ~/Kalkun_${{ github.ref_name }}_debianBundle/*
           if-no-files-found: ignore
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ${{ env.my_home }}/Kalkun_${{ github.ref_name }}_debianBundle.tar
   prebuilt:
     name: Prebuilt packages by PHP version
     runs-on: ubuntu-latest
@@ -183,3 +200,8 @@ jobs:
           name: Prebuilt package for PHP 8.1
           path: 'dist/*forPHP8.1*'
           if-no-files-found: ignore
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: "dist/*"
