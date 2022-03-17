@@ -1,7 +1,7 @@
 name: Packaging
 on:
   push:
-    branches: 
+    branches:
       - master
       - devel
       - 'release-**'
@@ -96,4 +96,90 @@ jobs:
         with:
           name: Debian packages (source & binary)
           path: '~/output/*'
+          if-no-files-found: ignore
+  prebuilt:
+    name: Prebuilt packages by PHP version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Composer (php-actions)
+        uses: php-actions/composer@v6
+        with:
+            dev: no
+            php_version: "7.4"
+            php_extensions: ctype curl hash intl json mbstring session
+      - name: Install required packages
+        run: |
+          if ! command -v jq; then sudo apt-get update && sudo apt-get install -y jq; fi
+      - name: Build prebuilt packages with Composer dependencies
+        run: |
+          set -x
+          git fetch --prune --unshallow --tags
+          # Start with 7.1.24 since this is for the DEMO we publish on sourceforge.
+          ./utils/build.single.dist.sh 7.1.24
+          # They build for all versions.
+          ./utils/build.single.dist.sh 5.6
+          ./utils/build.single.dist.sh 7.0
+          ./utils/build.single.dist.sh 7.2
+          ./utils/build.single.dist.sh 7.3
+          ./utils/build.single.dist.sh 7.4
+          ./utils/build.single.dist.sh 8.0
+          ./utils/build.single.dist.sh 8.1
+          ls dist
+      - name: Archive artifacts for PHP 5.6
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Prebuilt package for PHP 5.6
+          path: 'dist/*forPHP5.6*'
+          if-no-files-found: ignore
+      - name: Archive artifacts for PHP 7.0
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Prebuilt package for PHP 7.0
+          path: 'dist/*forPHP7.0*'
+          if-no-files-found: ignore
+      - name: Archive artifacts for PHP 7.1.24
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Prebuilt package for PHP 7.1.24
+          path: 'dist/*forPHP7.1.24*'
+          if-no-files-found: ignore
+      - name: Archive artifacts for PHP 7.2
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Prebuilt package for PHP 7.2
+          path: 'dist/*forPHP7.2*'
+          if-no-files-found: ignore
+      - name: Archive artifacts for PHP 7.3
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Prebuilt package for PHP 7.3
+          path: 'dist/*forPHP7.3*'
+          if-no-files-found: ignore
+      - name: Archive artifacts for PHP 7.4
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Prebuilt package for PHP 7.4
+          path: 'dist/*forPHP7.4*'
+          if-no-files-found: ignore
+      - name: Archive artifacts for PHP 8.0
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Prebuilt package for PHP 8.0
+          path: 'dist/*forPHP8.0*'
+          if-no-files-found: ignore
+      - name: Archive artifacts for PHP 8.1
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Prebuilt package for PHP 8.1
+          path: 'dist/*forPHP8.1*'
           if-no-files-found: ignore
