@@ -7,3 +7,4 @@ application/config/database.php
 
 /vendor/
 .php-cs-fixer.cache
+/dist
