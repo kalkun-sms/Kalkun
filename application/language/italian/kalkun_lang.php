@@ -427,3 +427,6 @@ To enable access to it, create a file named {0} in this directory of the server:
 Otherwise you may log-in at {2}.'] = 'Installation has been disabled by the administrator.
 To enable access to it, create a file named {0} in this directory of the server: {1}.
 Otherwise you may log-in at {2}.';
+$lang['There is no message in this conversation.'] = 'There is no message in this conversation.';
+$lang['Check again'] = 'Check again';
+$lang['Password modification forbidden in demo mode.'] = 'Password modification forbidden in demo mode.';
