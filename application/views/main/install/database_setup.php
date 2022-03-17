@@ -120,10 +120,10 @@
 		<?php if ($type !== 'upgrade_not_supported'): ?>
 		<?php echo form_open('install/run_install', 'style="display:inline"');?>
 		<?php echo form_hidden('idiom', $idiom); ?>
-		<?php echo form_submit('submit', $btn_text, 'class="button"');
+		<?php echo form_submit('submit', $btn_text, 'class="button"'); ?>
 	</p>
 	<?php echo form_close();?>
-		<?php endif; ?>
-		<?php endif; ?>
+	<?php endif; ?>
+	<?php endif; ?>
 	</p>
 </div>
