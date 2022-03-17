@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e1fc0001de38e3428784cce899134bbc",
+    "content-hash": "aa6830eecfc5a4ce024a062134611aa4",
     "packages": [
         {
             "name": "codeigniter/framework",
@@ -306,6 +306,7 @@
                     "IXR\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -324,8 +325,8 @@
                 "xmlrpc"
             ],
             "support": {
-                "source": "https://github.com/kissifrot/php-ixr/tree/1.8.3",
-                "issues": "https://github.com/kissifrot/php-ixr/issues"
+                "issues": "https://github.com/kissifrot/php-ixr/issues",
+                "source": "https://github.com/kissifrot/php-ixr/tree/master"
             },
             "time": "2016-11-17T12:00:18+00:00"
         },
