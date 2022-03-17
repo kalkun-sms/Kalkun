@@ -25,6 +25,11 @@ if [ ! -e .git ]; then
     exit 1;
 fi
 
+if ! command -v jq > /dev/null; then
+    echo "jq command is required. Exiting."
+    exit 1;
+fi
+
 TARGET_PHP_VERSION="$1"
 PROJECT="Kalkun"
 GIT_BRANCH=$(git rev-parse --abbrev-ref "$2")
