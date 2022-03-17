@@ -20,7 +20,17 @@
 #        }
 #    },
 
+if [ ! -e .git ]; then
+    echo "This must be run from the root of the git project."
+    exit 1;
+fi
+
 TARGET_PHP_VERSION="$1"
+PROJECT="Kalkun"
+GIT_BRANCH=$(git rev-parse --abbrev-ref "$2")
+GIT_VER=$(git describe --tags "$2")
+
+echo "Building '$GIT_BRANCH' for PHP $TARGET_PHP_VERSION..."
 
 if [ -e dist/build ]; then
     rm -r dist/build
@@ -30,7 +40,9 @@ mkdir -p dist/build
 
 git archive --format=tar "$2" | tar -x -C dist/build
 
-rm dist/build/composer.lock
+if [ -e dist/build/composer.lock ]; then
+    rm -f dist/build/composer.lock
+fi
 
 # Add config.platform.php & config.platform."ext-mbstring" to composer.json
 jq \
@@ -41,29 +53,31 @@ jq \
 # If we targe PHP5, we have to remove require-dev
 if [[ "$TARGET_PHP_VERSION" =~ ^5\..* ]]; then
     tmp=$(mktemp)
-    cp dist/build/composer.json $tmp
-    jq 'del(."require-dev")' $tmp > dist/build/composer.json
-    rm $tmp
+    cp dist/build/composer.json "$tmp"
+    jq 'del(."require-dev")' "$tmp" > dist/build/composer.json
+    rm "$tmp"
 fi
 
 # Update package with correct composer dependencies
-cd dist/build
+cd dist/build || exit
 composer update --no-dev
+cd ..
 
 # Set output dirname/filename
-cd ..
 if [[ "$2" =~ ^v.* ]] || [[ "$2" =~ ^[0-9].* ]]; then
     # For a tagged version
-    FILENAME="kalkun_$2_PHP${1}"
+    FILENAME="${PROJECT}_${GIT_VER}_forPHP${1}"
 else
     # For any other branch
-    FILENAME="kalkun_$2_$(date +%Y-%m-%d-%H%M)_PHP${1}"
+    FILENAME="${PROJECT}_${GIT_BRANCH}_${GIT_VER}_forPHP${1}"
 fi
+
+echo "$FILENAME" > "build/BUILD.info"
 
 mv build "$FILENAME"
 
-# Create ZIP & tar.xz archives
-zip -qr "${FILENAME}.zip" "$FILENAME"
+# Create new ZIP & tar.xz archives
+zip -qr - "$FILENAME" >  "${FILENAME}.zip"
 tar -cJf "${FILENAME}.tar.xz" "$FILENAME"
 
 # Cleanup
