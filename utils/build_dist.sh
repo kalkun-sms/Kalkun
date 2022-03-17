@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Usage: ./utils/build.dist.sh [branch|tag|tree-ish]
+# Usage: ./utils/build_dist.sh [branch|tag|tree-ish]
 #
 #  This will build archives for specific versions of PHP
 #  holding the correct composer dependencies for that PHP version.
@@ -10,9 +10,9 @@
 #
 #  THIS MUST BE CALLED FROM THE ROOT OF THE GIT REPO LIKE THIS.
 #   for example :
-#       ./utils/build.dist.sh
-#       ./utils/build.dist.sh devel
-#       ./utils/build.dist.sh v0.8
+#       ./utils/build_dist.sh
+#       ./utils/build_dist.sh devel
+#       ./utils/build_dist.sh v0.8
 #
 
 if [ ! -e .git ]; then
@@ -31,5 +31,5 @@ else
 fi
 
 for ver in 7.1.24 5.6; do
-    ./utils/build.single.dist.sh $ver "$TREEISH"
+    ./utils/build_single_dist.sh $ver "$TREEISH"
 done

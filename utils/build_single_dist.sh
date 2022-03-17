@@ -2,9 +2,9 @@
 
 # Usage:
 #
-#   This file should be called from "build.dist.sh"
+#   This file should be called from "build_dist.sh"
 #
-# ./build.single.dist.sh <PHP_VER> <branch|tag...|tree-ish>
+# ./build_single_dist.sh <PHP_VER> <branch|tag...|tree-ish>
 
 
 # We add this element to composer.json to fix the version of PHP for which
