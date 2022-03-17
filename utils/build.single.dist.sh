@@ -65,13 +65,12 @@ jq \
     '.config.platform.php = $TARGET_PHP_VERSION | .config.platform."ext-mbstring" = $TARGET_PHP_VERSION' \
     composer.json > dist/build/composer.json
 
-# If we targe PHP5, we have to remove require-dev
-if [[ "$TARGET_PHP_VERSION" =~ ^5\..* ]]; then
-    tmp=$(mktemp)
-    cp dist/build/composer.json "$tmp"
-    jq 'del(."require-dev")' "$tmp" > dist/build/composer.json
-    rm "$tmp"
-fi
+# Remove require-dev (otherwise would fail with PHP 5, PHP 7.0... because
+# some require-dev packages need a more recent version of PHP)
+tmp=$(mktemp)
+cp dist/build/composer.json "$tmp"
+jq 'del(."require-dev")' "$tmp" > dist/build/composer.json
+rm "$tmp"
 
 # Update package with correct composer dependencies
 cd dist/build || exit
