@@ -30,10 +30,20 @@ if ! command -v jq > /dev/null; then
     exit 1;
 fi
 
+if [ "$2" == "" ]; then
+    if [ "$GITHUB_REF_NAME" == "" ]; then
+        TREEISH=$(git rev-parse --abbrev-ref HEAD)
+    else
+        TREEISH=$(git rev-parse --abbrev-ref "$GITHUB_REF_NAME")
+    fi
+else
+    TREEISH="$2"
+fi
+
 TARGET_PHP_VERSION="$1"
 PROJECT="Kalkun"
-GIT_BRANCH=$(git rev-parse --abbrev-ref "$2")
-GIT_VER=$(git describe --tags "$2")
+GIT_BRANCH=$(git rev-parse --abbrev-ref "$TREEISH")
+GIT_VER=$(git describe --tags "$TREEISH")
 
 echo "Building '$GIT_BRANCH' for PHP $TARGET_PHP_VERSION..."
 
@@ -43,7 +53,7 @@ fi
 
 mkdir -p dist/build
 
-git archive --format=tar "$2" | tar -x -C dist/build
+git archive --format=tar "$TREEISH" | tar -x -C dist/build
 
 if [ -e dist/build/composer.lock ]; then
     rm -f dist/build/composer.lock
@@ -69,7 +79,7 @@ composer update --no-dev
 cd ..
 
 # Set output dirname/filename
-if [[ "$2" =~ ^v.* ]] || [[ "$2" =~ ^[0-9].* ]]; then
+if [[ "$TREEISH" =~ ^v.* ]] || [[ "$TREEISH" =~ ^[0-9].* ]]; then
     # For a tagged version
     FILENAME="${PROJECT}_${GIT_VER}_forPHP${1}"
 else
