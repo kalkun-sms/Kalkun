@@ -10,7 +10,7 @@ on:
   pull_request:
     branches: [ master, devel ]
 jobs:
-  build:
+  test:
     strategy:
       matrix:
         operating-system: [ubuntu-latest]
@@ -61,19 +61,6 @@ jobs:
         run: mysql -h"127.0.0.1" -P"3306" -uroot -ppassword kalkun < gammu.sql
       - name: Test with phpunit
         run: vendor/bin/phpunit --coverage-text -c application/tests
-      - name : Build Distribution
-        run : |
-          set -x
-          mkdir -p ~/dist
-          rsync -av --progress . ~/dist --exclude vendor --exclude ".*/" --exclude "application/tests"
-          mkdir -p  ~/dist/vendor/codeigniter/framework
-          rsync -av --progress vendor/codeigniter/framework ~/dist/vendor/codeigniter/framework
-          rsync -av --progress vendor/kissifrot/ ~/dist/vendor/kissifrot
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: '~/dist'
   check-code:
     strategy:
       matrix:
