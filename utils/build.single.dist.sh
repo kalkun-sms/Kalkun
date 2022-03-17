@@ -78,7 +78,7 @@ composer update --no-dev
 cd ..
 
 # Set output dirname/filename
-if [[ "$TREEISH" =~ ^v.* ]] || [[ "$TREEISH" =~ ^[0-9].* ]]; then
+if [[ "$(git tag --points-at ${GIT_BRANCH})" != "" ]]; then
     # For a tagged version
     FILENAME="${PROJECT}_${GIT_VER}_forPHP${1}"
 else
