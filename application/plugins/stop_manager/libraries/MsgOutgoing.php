@@ -98,25 +98,25 @@ class MsgOutgoing {
 		$ret_match = NULL;
 		if ($CI->config->item('append_username'))
 		{
-			$ret_match = preg_match('/^(.*)~(.+)~.*/', $this->origMsg, $matches, PREG_UNMATCHED_AS_NULL);
+			$ret_match = preg_match('/^(.*)~(.+)~.*/', $this->origMsg, $matches);
 		}
 		else
 		{
-			$ret_match = preg_match('/^(.*)~(.+)~$/', $this->origMsg, $matches, PREG_UNMATCHED_AS_NULL);
+			$ret_match = preg_match('/^(.*)~(.+)~$/', $this->origMsg, $matches);
 		}
 
 		// Get the type of the SMS (rappel, annul...)
 		if ($ret_match)
 		{
 			if ($this->config->isTypeEnabled()
-				&& isset($matches[2])
+				&& (! empty($matches[2]))
 				&& in_array($matches[2], $this->config->getKeywordsType()))
 			{
 				$this->type = $matches[2];
 			}
 
 
-			$this->cleanedMsg = isset($matches[1]) ? trim($matches[1]) : $this->origMsg;
+			$this->cleanedMsg = (! empty($matches[1])) ? trim($matches[1]) : $this->origMsg;
 		}
 
 		if (is_null($this->type))
@@ -143,9 +143,9 @@ class MsgOutgoing {
 		// type of the outgoing message.
 		// eg. "~rappel~" at the end of the message
 		if ($ret_match
-			&& isset($matches[1])
+			&& (! empty($matches[1]))
 			&& $this->config->isTypeEnabled()
-			&& isset($matches[2])
+			&& (! empty($matches[2]))
 			&& in_array($matches[2], $this->config->getKeywordsType()))
 		{
 			$this->cleanedMsg = trim($matches[1]);

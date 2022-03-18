@@ -113,11 +113,11 @@ class MsgIncoming {
 
 		if ($this->config->isTypeEnabled())
 		{
-			$ret = preg_match('/\b(' . $cmds_reg . ')\s*(' . $types_reg . ')\b/i', $this->origMsg, $matches, PREG_UNMATCHED_AS_NULL);
+			$ret = preg_match('/\b(' . $cmds_reg . ')\s*(' . $types_reg . ')\b/i', $this->origMsg, $matches);
 		}
 		else
 		{
-			$ret = preg_match('/\b(' . $cmds_reg . ')\b/i', $this->origMsg, $matches, PREG_UNMATCHED_AS_NULL);
+			$ret = preg_match('/\b(' . $cmds_reg . ')\b/i', $this->origMsg, $matches);
 		}
 
 		if ($ret === 1)
