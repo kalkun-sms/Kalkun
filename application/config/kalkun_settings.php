@@ -7,10 +7,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Kalkun Metadata (DO NOT CHANGE!!!)
 |--------------------------------------------------------------------------
 |
+| Prior to changing version here, see:
+| https://github.com/kalkun-sms/Kalkun/wiki/Developing#Version-numbering-guidelines
+|
 */
-$config['kalkun_version'] = '0.8-dev';
+$config['kalkun_version'] = '0.8.0-beta-1';
 $config['kalkun_codename'] = '-';
-$config['kalkun_release_date'] = '-';
+$config['kalkun_release_date'] = '2022-03-19';
 
 /*
 |--------------------------------------------------------------------------
