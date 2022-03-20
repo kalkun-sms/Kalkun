@@ -245,6 +245,7 @@ class Install extends CI_Controller {
 	function _upgrade()
 	{
 		$this->load->model('Kalkun_model');
+		$this->load->dbforge();
 		$error = 0;
 
 		// Update SQL schema to version 0.7
@@ -278,7 +279,7 @@ class Install extends CI_Controller {
 		if ($b8_db_version === '2')
 		{
 			// Rename old table to b8_wordlist_v2
-			if ($this->db->query('ALTER TABLE b8_wordlist RENAME TO b8_wordlist_v2'))
+			if ($this->dbforge->rename_table('b8_wordlist', 'b8_wordlist_v2'))
 			{
 				// Create v3 table
 				$this->_execute_kalkun_sql_file('b8_v3.sql');
@@ -287,8 +288,13 @@ class Install extends CI_Controller {
 				$this->db->trans_start();
 
 				// 1. Inserting internal variables
-				$texts_ham_count = $this->db->query("SELECT count FROM b8_wordlist_v2 WHERE token='bayes*texts.ham'")->row()->count;
-				$texts_spam_count = $this->db->query("SELECT count FROM b8_wordlist_v2 WHERE token='bayes*texts.spam'")->row()->count;
+				$this->db->select('count');
+				$this->db->where('token', 'bayes*texts.ham');
+				$texts_ham_count = $this->db->get('b8_wordlist_v2')->row()->count;
+
+				$this->db->select('count');
+				$this->db->where('token', 'bayes*texts.spam');
+				$texts_spam_count = $this->db->get('b8_wordlist_v2')->row()->count;
 
 				$data = array(
 					'token' => 'b8*texts',
