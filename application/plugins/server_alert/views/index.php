@@ -85,7 +85,7 @@
 			<td class="timeout hidden"><?php echo htmlentities($tmp->timeout, ENT_QUOTES); ?></td>
 			<td class="phone_number"><?php echo htmlentities(phone_format_human($tmp->phone_number), ENT_QUOTES); ?></td>
 			<td class="respond_message hidden"><?php echo htmlentities($tmp->respond_message, ENT_QUOTES); ?></td>
-			<?php if ($tmp->status == 'false'):?>
+			<?php if ($tmp->status === 'false'):?>
 			<td><a href="javascript:void(0);" class="release"><img class="ui-icon ui-icon-locked" title="<?php echo tr('Release state'); ?>" /></a></td>
 			<?php
 				else: echo '<td>&nbsp;</td>';

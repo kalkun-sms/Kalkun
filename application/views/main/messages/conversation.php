@@ -48,7 +48,7 @@
 
 	// initialization
 	$type = $this->uri->segment(4);
-	if ($tmp['source'] == 'inbox')
+	if ($tmp['source'] === 'inbox')
 	{
 		$qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $tmp['SenderNumber']));
 		if ($qry->num_rows() !== 0)
@@ -82,7 +82,7 @@
 
 		$message_date = $tmp['SendingDateTime'];
 		$number = $tmp['DestinationNumber'];
-		if ($type == 'outbox')
+		if ($type === 'outbox')
 		{
 			$arrow = 'circle';
 		}
@@ -102,7 +102,7 @@
 			<input type="hidden" class="item_number" name="item_number<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" id="item_number<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" value="<?php echo htmlentities($number, ENT_QUOTES); ?>" />
 			<input type="checkbox" id="<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" class="select_message nicecheckbox" value="<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" style="border: none;" />
 			<span class="message_toggle" style="cursor: pointer">
-				<span <?php  if ($tmp['source'] == 'inbox' && $tmp['readed'] == 'false')
+				<span <?php  if ($tmp['source'] === 'inbox' && $tmp['readed'] === 'false')
 	{
 		echo 'style="font-weight: bold"';
 	} ?>><?php echo htmlentities(kalkun_nice_date($message_date), ENT_QUOTES); ?>&nbsp;&nbsp;<img src="<?php echo $this->config->item('img_path').$arrow; ?>.gif" />
@@ -113,7 +113,7 @@
 
 
 		<?php
-if ($tmp['source'] == 'sentitems'):
+if ($tmp['source'] === 'sentitems'):
 	// check delivery status
 	$status = check_delivery_report($tmp['Status']);
 	$part_no = 1;
@@ -121,14 +121,14 @@ if ($tmp['source'] == 'sentitems'):
 	$multipart['type'] = 'sentitems';
 	$multipart['option'] = 'check';
 	$multipart['id_message'] = $tmp['ID'];
-	if ($this->Message_model->get_multipart($multipart) != 0):
+	if ($this->Message_model->get_multipart($multipart) !== 0):
 		$multipart['option'] = 'all';
 	foreach ($this->Message_model->get_multipart($multipart)->result() as $part):
 		$tmp['TextDecoded'] .= $part->TextDecoded;
 	$part_no++;
 	endforeach;
 	endif;
-	elseif ($tmp['source'] == 'outbox'):
+	elseif ($tmp['source'] === 'outbox'):
 	//check multipart
 	$multipart['type'] = 'outbox';
 	$multipart['option'] = 'check';
@@ -141,7 +141,7 @@ if ($tmp['source'] == 'sentitems'):
 	$part_no++;
 	endforeach;
 	endif;
-	elseif ($tmp['source'] == 'inbox'):
+	elseif ($tmp['source'] === 'inbox'):
 	$part_no = 1;
 	// check multipart
 	if ( ! empty($tmp['UDH'])):
@@ -159,7 +159,7 @@ if ($tmp['source'] == 'sentitems'):
 		<div class="detail_area hidden <?php echo htmlentities($number, ENT_QUOTES); ?>">
 			<table cellspacing="0" cellpadding="0" border="0">
 				<tr>
-					<td width="50px"><?php  if ($tmp['source'] == 'inbox')
+					<td width="50px"><?php  if ($tmp['source'] === 'inbox')
 	{
 		echo tr('From');
 	}
@@ -171,7 +171,7 @@ if ($tmp['source'] == 'sentitems'):
 					<td><?php echo htmlentities($number, ENT_QUOTES); ?></td>
 				</tr>
 
-				<?php  if ($tmp['source'] == 'outbox'): ?>
+				<?php  if ($tmp['source'] === 'outbox'): ?>
 				<tr>
 					<td><?php echo tr('Inserted'); ?></td>
 					<td> : </td>
@@ -185,7 +185,7 @@ if ($tmp['source'] == 'sentitems'):
 					<td><?php echo htmlentities(simple_date($message_date), ENT_QUOTES); ?></td>
 				</tr>
 
-				<?php if ($tmp['source'] != 'outbox'): ?>
+				<?php if ($tmp['source'] !== 'outbox'): ?>
 				<tr>
 					<td><?php echo tr('SMSC'); ?></td>
 					<td> : </td>
@@ -193,7 +193,7 @@ if ($tmp['source'] == 'sentitems'):
 				</tr>
 				<?php endif; ?>
 
-				<?php if ($tmp['source'] == 'sentitems' OR $tmp['source'] == 'inbox'): ?>
+				<?php if ($tmp['source'] === 'sentitems' OR $tmp['source'] === 'inbox'): ?>
 				<?php if ($part_no > 1): ?>
 				<tr>
 					<td><?php echo tr('Part'); ?></td>
@@ -202,7 +202,7 @@ if ($tmp['source'] == 'sentitems'):
 				</tr>
 				<?php endif; ?>
 				<?php endif; ?>
-				<?php if ($tmp['source'] == 'sentitems'): ?>
+				<?php if ($tmp['source'] === 'sentitems'): ?>
 				<tr>
 					<td><?php echo tr('Status'); ?></td>
 					<td> : </td>
@@ -220,12 +220,12 @@ if ($tmp['source'] == 'sentitems'):
 			<ul>
 				<li><a class="detail_button" href="javascript:void(0);"><?php echo tr('Show details'); ?></a></li>
 
-				<?php if ($tmp['source'] == 'inbox'): ?>
+				<?php if ($tmp['source'] === 'inbox'): ?>
 				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" /></li>
 				<li><a href="javascript:void(0);" class="reply_button"><?php echo tr('Reply'); ?></a></li>
 				<?php endif; ?>
 
-				<?php if ($type != 'outbox'): ?>
+				<?php if ($type !== 'outbox'): ?>
 				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" /></li>
 				<li><a href="javascript:void(0);" class="forward_button"><?php echo tr('Forward'); ?></a></li>
 				<?php endif; ?>
@@ -235,7 +235,7 @@ if ($tmp['source'] == 'sentitems'):
 				<li><a href="javascript:void(0);" class="add_to_pbk"><?php echo tr('Add contact'); ?></a></li>
 				<?php endif; ?>
 
-				<?php if ($tmp['source'] == 'sentitems'): ?>
+				<?php if ($tmp['source'] === 'sentitems'): ?>
 				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" /></li>
 				<li><a href="javascript:void(0);" class="resend"><?php echo tr('Resend'); ?></a></li>
 				<?php endif; ?>
@@ -250,9 +250,9 @@ if ($tmp['source'] == 'sentitems'):
 </div>
 
 <?php
-	if ($tmp['source'] == 'inbox')
+	if ($tmp['source'] === 'inbox')
 	{
-		if ($tmp['readed'] == 'false')
+		if ($tmp['readed'] === 'false')
 		{
 			$this->Message_model->update_read($tmp['ID']);
 		}

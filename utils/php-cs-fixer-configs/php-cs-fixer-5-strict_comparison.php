@@ -3,9 +3,6 @@
 # Get $finder variable
 include_once 'finder.inc.php';
 
-// Finder additions for this specific config
-$finder->exclude('views'); // Don't apply it on views for now
-
 $config = new PhpCsFixer\Config();
 return $config
     ->setIndent("\t") // As per CI3 coding style

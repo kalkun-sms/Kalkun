@@ -42,25 +42,25 @@
 		});
 
 
-		<?php if ($this->uri->segment(1) != ''): ?>
+		<?php if ($this->uri->segment(1) !== ''): ?>
 		$(document).on('keydown', null, '#', function() {
 			action_delete();
 		});
 
-		<?php if ($this->uri->segment(1) != 'phonebook'
-			&& $this->uri->segment(1) != 'users'
-			&& $this->uri->segment(1) != 'plugin'
-			&& $this->uri->segment(1) != 'settings'
-			&& $this->uri->segment(1) != 'pluginss'): ?>
+		<?php if ($this->uri->segment(1) !== 'phonebook'
+			&& $this->uri->segment(1) !== 'users'
+			&& $this->uri->segment(1) !== 'plugin'
+			&& $this->uri->segment(1) !== 'settings'
+			&& $this->uri->segment(1) !== 'pluginss'): ?>
 		$(document).on('keydown', null, 'm', function() {
 			message_move();
 		});
 		<?php endif; ?>
 
 
-		<?php if ($this->uri->segment(2) == 'conversation' || $this->uri->segment(2) == 'search'): ?>
+		<?php if ($this->uri->segment(2) === 'conversation' || $this->uri->segment(2) === 'search'): ?>
 
-		<?php if ($this->uri->segment(2) != 'search'): ?>
+		<?php if ($this->uri->segment(2) !== 'search'): ?>
 		$(document).on('keydown', null, 'r', function() {
 			message_reply();
 		});
@@ -154,7 +154,7 @@
 		});
 		<?php endif; ?>
 
-		<?php if ($this->uri->segment(1) == 'messages' && $this->uri->segment(2) != 'conversation' && $this->uri->segment(2) != 'search'): ?>
+		<?php if ($this->uri->segment(1) === 'messages' && $this->uri->segment(2) !== 'conversation' && $this->uri->segment(2) !== 'search'): ?>
 		// for message_list page
 		var totalmsg = $("#message_holder > div.messagelist").length;
 		var current_select = -1;
@@ -202,12 +202,12 @@
 		});
 		<?php endif; ?>
 
-		<?php if ($this->uri->segment(1) != 'phonebook'
-			&& $this->uri->segment(1) != 'users'
-			&& $this->uri->segment(1) != 'pluginss'
-			&& $this->uri->segment(1) != 'plugin'
-			&& $this->uri->segment(1) != 'settings'
-			&& $this->uri->segment(2) != 'search'): ?>
+		<?php if ($this->uri->segment(1) !== 'phonebook'
+			&& $this->uri->segment(1) !== 'users'
+			&& $this->uri->segment(1) !== 'pluginss'
+			&& $this->uri->segment(1) !== 'plugin'
+			&& $this->uri->segment(1) !== 'settings'
+			&& $this->uri->segment(2) !== 'search'): ?>
 		$(document).on('keydown', null, 'f5', function() {
 			refresh();
 			current_select = -1;

@@ -12,7 +12,7 @@
 
 	<div id="window_content">
 		<?php
-if ($total_member == 0):
+if ($total_member === 0):
 echo '<p class="no_content"><span class="ui-icon ui-icon-alert" style="float:left;"></span><i>'.tr('There is no registered member yet').'.</i></p>';
 else:
 foreach ($member as $tmp_member):

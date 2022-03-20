@@ -301,7 +301,7 @@
 			return false;
 		});
 
-		<?php if ($this->uri->segment(4) != '6' && $this->uri->segment(6) != '6' && ! is_ajax()) : ?>
+		<?php if ($this->uri->segment(4) !== '6' && $this->uri->segment(6) !== '6' && ! is_ajax()) : ?>
 		// report spam
 		$(document).on('click', ".spam_button", function() {
 			var count = $("input.select_message:checked:visible").length;

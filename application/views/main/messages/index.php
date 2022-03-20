@@ -2,7 +2,7 @@
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.emoticons.min.js"></script>
 <?php endif; ?>
 <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquerycssmenu.css" />
-<?php if ($this->uri->segment(2) != 'conversation' && $this->uri->segment(2) != 'search')
+<?php if ($this->uri->segment(2) !== 'conversation' && $this->uri->segment(2) !== 'search')
 {
 	$this->load->view('js_init/message/js_function');
 } ?>
@@ -10,7 +10,7 @@
 <!-- Move To Dialog -->
 <div id="movetodialog" title="<?php echo tr('Select folder');?>" class="dialog" style="background: #cce9f2;">
 	<?php
-if ($this->uri->segment(2) == 'my_folder')
+if ($this->uri->segment(2) === 'my_folder')
 {
 	$folder = $this->Kalkun_model->get_folders('exclude', $this->uri->segment(4));
 }
@@ -28,7 +28,7 @@ else
 
 <?php
 // my folder view
-if ($this->uri->segment(2) == 'my_folder')
+if ($this->uri->segment(2) === 'my_folder')
 { ?>
 
 <!-- Rename Folder Dialog -->
@@ -69,21 +69,21 @@ if ($this->uri->segment(2) == 'my_folder')
 				break;
 		}
 		echo '<span class="folder_name">'.htmlentities($folder_name, ENT_QUOTES).'</span>';?>
-		<?php if ($this->uri->segment(4) == '5' || $this->uri->segment(4) == '6'):?>
+		<?php if ($this->uri->segment(4) === '5' || $this->uri->segment(4) === '6'):?>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" style="padding: 0; cursor: pointer; font-weight: normal;" id="delete-all-link"><?php echo tr('Delete all messages now');?></a>
 		<?php endif; ?>
 
-		<?php if ($this->uri->segment(4) != '5' && $this->uri->segment(4) != '6'):?>
+		<?php if ($this->uri->segment(4) !== '5' && $this->uri->segment(4) !== '6'):?>
 		<sup>[
 			<a href="javascript:void(0);" title="<?php echo tr('Click to rename this folder');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="renamefolder"><?php echo tr('Rename');?></a> -
 			<a href="javascript:void(0);" title="<?php echo tr('Click to delete this folder');?>" style="padding: 0; cursor: pointer; font-weight: normal;" id="deletefolder"><?php echo tr('Delete');?></a> ]
 		</sup>
 		<?php endif; ?>
 	</div>
-	<?php if ($this->uri->segment(4) != '6'):?>
+	<?php if ($this->uri->segment(4) !== '6'):?>
 	<div id="right_column">
 		<?php
-			if ($this->uri->segment(3) == 'inbox')
+			if ($this->uri->segment(3) === 'inbox')
 			{
 				echo '<span class="currenttab">'.tr('Inbox').'</span>';
 			}
@@ -92,7 +92,7 @@ if ($this->uri->segment(2) == 'my_folder')
 				echo anchor('messages/my_folder/inbox/'.$this->uri->segment(4).'', tr('Inbox'));
 			}
 
-			if ($this->uri->segment(3) == 'sentitems')
+			if ($this->uri->segment(3) === 'sentitems')
 			{
 				echo '<span class="currenttab">'.tr('Sent items').'</span>';
 			}
@@ -107,7 +107,7 @@ if ($this->uri->segment(2) == 'my_folder')
 
 <div id="message_holder">
 	<?php
-	if ($this->uri->segment(2) == 'conversation' || $this->uri->segment(2) == 'search')
+	if ($this->uri->segment(2) === 'conversation' || $this->uri->segment(2) === 'search')
 	{
 		$this->load->view('main/messages/conversation');
 		$this->load->view('js_init/message/js_conversation');

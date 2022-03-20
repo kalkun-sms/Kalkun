@@ -33,7 +33,7 @@
 		<label for="csvfile"><?php echo tr('CSV file');?></label>
 		<input type="file" name="csvfile" id="csvfile" class="text ui-widget-content ui-corner-all" />
 		<p><small><?php echo tr('The CSV file must be in valid format').':';?> <a href="<?php echo $this->config->item('csv_path');?>contact_sample.csv"><b><?php echo tr('valid example');?></b></a></small></p>
-		<p><input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if (isset($contact) && $contact->row('is_public') == 'true')
+		<p><input type="checkbox" name="is_public" id="is_public" style="display: inline" <?php if (isset($contact) && $contact->row('is_public') === 'true')
 {
 	echo 'checked="checked"';
 }?> />

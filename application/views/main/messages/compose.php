@@ -20,7 +20,7 @@
 	<?php
 
 // Reply to option
-if ($val_type == 'reply'): ?>
+if ($val_type === 'reply'): ?>
 	<tr>
 		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
@@ -38,7 +38,7 @@ endif;
 		</td>
 	</tr>
 
-	<?php /* Resend */ elseif ($val_type == 'resend'):?>
+	<?php /* Resend */ elseif ($val_type === 'resend'):?>
 	<tr>
 		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
@@ -57,13 +57,13 @@ endif;
 		</td>
 	</tr>
 
-	<?php /* Member */ elseif ($val_type == 'member'):?>
+	<?php /* Member */ elseif ($val_type === 'member'):?>
 	<tr>
 		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td><?php echo tr('Member');?><input type="hidden" name="sendoption" value="member" /></td>
 	</tr>
 
-	<?php /* Phonebook contact */ elseif ($val_type == 'pbk_contact'):?>
+	<?php /* Phonebook contact */ elseif ($val_type === 'pbk_contact'):?>
 	<tr>
 		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
@@ -80,7 +80,7 @@ endif;
 		</td>
 	</tr>
 
-	<?php /* Phonebook group */ elseif ($val_type == 'pbk_groups'):?>
+	<?php /* Phonebook group */ elseif ($val_type === 'pbk_groups'):?>
 	<tr>
 		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
@@ -90,7 +90,7 @@ endif;
 		</td>
 	</tr>
 
-	<?php /* All Contacts */ elseif ($val_type == 'all_contacts'):?>
+	<?php /* All Contacts */ elseif ($val_type === 'all_contacts'):?>
 	<tr>
 		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
@@ -103,7 +103,7 @@ endif;
 	<tr>
 		<td width="100px" align="right" class="label">
 			<?php
-if ($val_type == 'forward')
+if ($val_type === 'forward')
 {
 	echo tr('Forward to').':';
 }
@@ -232,7 +232,7 @@ else
 	<tr valign="top">
 		<td align="right" class="label"><?php echo tr('Message').':';?></td>
 		<td>
-			<?php if ($val_type == 'forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo htmlentities($msg_id, ENT_QUOTES);?>" /> <?php endif;?>
+			<?php if ($val_type === 'forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo htmlentities($msg_id, ENT_QUOTES);?>" /> <?php endif;?>
 			<textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;" id="message" name="message">
 <?php
 if ($val_type === 'forward' || $val_type === 'resend' || $val_type === 'prefill')
@@ -240,7 +240,7 @@ if ($val_type === 'forward' || $val_type === 'resend' || $val_type === 'prefill'
 	echo htmlentities($message, ENT_QUOTES);
 }
 list($sig_option, $sig) = explode(';', $this->Kalkun_model->get_setting()->row('signature'));
-if ($sig_option == 'true' && $val_type !== 'resend')
+if ($sig_option === 'true' && $val_type !== 'resend')
 {
 	echo "\n\n".htmlentities($sig, ENT_QUOTES);
 } ?>

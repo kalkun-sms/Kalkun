@@ -62,12 +62,12 @@ echo form_dropdown('paging', $paging, $paging_act);
 		<td><?php echo tr('Permanent delete'); ?></td>
 		<td>
 			<?php $permanent_act = $this->Kalkun_model->get_setting()->row('permanent_delete');?>
-			<input type="radio" id="permanent_delete_false" name="permanent_delete" value="false" <?php if ($permanent_act == 'false')
+			<input type="radio" id="permanent_delete_false" name="permanent_delete" value="false" <?php if ($permanent_act === 'false')
 {
 	echo 'checked="checked"';
 } ?> />
 			<label for="permanent_delete_false"><?php echo tr('Disable'); ?></label> <small><?php echo ' - '.tr('Always move to trash first'); ?></small><br />
-			<input type="radio" id="permanent_delete_true" name="permanent_delete" value="true" <?php if ($permanent_act == 'true')
+			<input type="radio" id="permanent_delete_true" name="permanent_delete" value="true" <?php if ($permanent_act === 'true')
 {
 	echo 'checked="checked"';
 } ?> />
