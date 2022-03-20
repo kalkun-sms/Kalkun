@@ -21,7 +21,7 @@
 		</ul>
 	</div>
 	<div id="window_content">
-		<?php if ($type != 'main/settings/filters'):?>
+		<?php if ($type !== 'main/settings/filters'):?>
 		<?php
 echo form_open('settings/save', array('id' => 'settingsForm'));
 $this->load->view($type);

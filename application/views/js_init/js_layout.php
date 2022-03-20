@@ -96,7 +96,7 @@
 				}
 			});
 
-		<?php if ($this->uri->segment(2) == 'folder' || $this->uri->segment(2) == 'my_folder'): ?>
+		<?php if ($this->uri->segment(2) === 'folder' || $this->uri->segment(2) === 'my_folder'): ?>
 
 		function auto_refresh() {
 			$.get("<?php echo site_url('messages').'/'.$folder.'/'.$type.'/'.$id_folder ?>")
@@ -438,7 +438,7 @@
 			return false;
 		});
 
-		<?php if ($this->uri->segment(2) != 'folder' AND $this->uri->segment(2) != 'my_folder'): ?>
+		<?php if ($this->uri->segment(2) !== 'folder' AND $this->uri->segment(2) !== 'my_folder'): ?>
 		// logo click 
 		$('div#logo a').on("click", function() {
 			new_notification('false');

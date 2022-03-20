@@ -75,7 +75,7 @@ $this->load->view('js_remote_access');
 			<td class="access_name"><?php echo htmlentities($tmp->access_name, ENT_QUOTES); ?></td>
 			<td class="ip_address"><?php echo htmlentities($tmp->ip_address, ENT_QUOTES); ?></td>
 			<td class="token"><?php echo htmlentities($tmp->token, ENT_QUOTES); ?></td>
-			<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status == 'false') ? '' : 'checked=\"checked\"'?> disabled /></td>
+			<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status === 'false') ? '' : 'checked=\"checked\"'?> disabled /></td>
 			<td>&nbsp;</td>
 			<td><a href="javascript:void(0);" class="edit"><img class="ui-icon ui-icon-pencil" title="<?php echo tr('Edit'); ?>" /></a></td>
 			<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><img class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>" /></a></td>
@@ -127,7 +127,7 @@ $this->load->view('js_remote_access');
 			<th align="center" class="nice-table-right" colspan="2">Control</th>
 		</tr>
 		<?php
-		if (count($notification) == 0)
+		if (count($notification) === 0)
 		{
 			echo '<tr><td colspan="4" style="border-left: 1px solid #000; border-right: 1px solid #000;">No Notification found.</td></tr>';
 		}

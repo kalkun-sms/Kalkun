@@ -3,25 +3,25 @@
 <div class="jquerycssmenu">
 	<ul>
 		<?php
-	if ($this->uri->segment(2) == 'conversation'):
-		if ($this->uri->segment(3) == 'folder'):
+	if ($this->uri->segment(2) === 'conversation'):
+		if ($this->uri->segment(3) === 'folder'):
 
 			// _tni_ added this for translation on the inbox, outbox etc.
 			$theFolder = $this->uri->segment(4);
 			$theFname = 'inbox';
-			if ($theFolder == 'inbox')
+			if ($theFolder === 'inbox')
 			{
 				$theFname = tr('Inbox');
 			}
 			else
 			{
-				if ($theFolder == 'outbox')
+				if ($theFolder === 'outbox')
 				{
 					$theFname = tr('Outbox');
 				}
 				else
 				{
-					if ($theFolder == 'sentitems')
+					if ($theFolder === 'sentitems')
 					{
 						$theFname = tr('Sent items');
 					}
@@ -42,42 +42,42 @@
 		<li><a href="javascript:void(0);" class="select_all_button button"><?php echo tr('Select all');?></a></li>
 		<li><a href="javascript:void(0);" class="clear_all_button button"><?php echo tr('Deselect all');?></a></li>
 		<li>&nbsp;</li>
-		<?php if ($this->uri->segment(2) == 'conversation' && $this->uri->segment(4) == 'inbox') :
-			if ($this->uri->segment(6) != '6') : ?>
+		<?php if ($this->uri->segment(2) === 'conversation' && $this->uri->segment(4) === 'inbox') :
+			if ($this->uri->segment(6) !== '6') : ?>
 		<li><a href="javascript:void(0);" class="spam_button button"><?php echo tr('Report spam');?></a></li>
 		<?php   else : ?>
 		<li><a href="javascript:void(0);" class="ham_button button"><?php echo tr('Not spam');?></a></li>
 		<?php   endif;
 		endif;?>
 		<?php
-	if ($this->uri->segment(2) == 'folder' && $this->uri->segment(3) == 'outbox'):
-	elseif ($this->uri->segment(2) == 'conversation' && $this->uri->segment(4) == 'outbox'):
+	if ($this->uri->segment(2) === 'folder' && $this->uri->segment(3) === 'outbox'):
+	elseif ($this->uri->segment(2) === 'conversation' && $this->uri->segment(4) === 'outbox'):
 	else:?>
 		<li>&nbsp;</li>
-		<?php if ($this->uri->segment(4) == '5' or $this->uri->segment(6) == '5') : ?>
+		<?php if ($this->uri->segment(4) === '5' or $this->uri->segment(6) === '5') : ?>
 		<li><a href="javascript:void(0);" class="recover_button button"><?php echo tr('Recover');?></a></li>
 		<?php endif; ?>
 		<li><a class="move_to_button button" href="javascript:void(0);"><?php echo tr('Move to');?></a></li>
 		<?php endif; ?>
 		<li><a class="global_delete button" href="javascript:void(0);">
 				<?php
-	if ($this->uri->segment(4) == '5' or $this->uri->segment(6) == '5' or $this->uri->segment(4) == '6' or $this->uri->segment(6) == '6'):
+	if ($this->uri->segment(4) === '5' or $this->uri->segment(6) === '5' or $this->uri->segment(4) === '6' or $this->uri->segment(6) === '6'):
 		echo tr('Delete permanently');
 	else:
 		echo tr('Delete');
 	endif;
 	?></a></li>
-		<?php if ($this->uri->segment(2) != 'search'): ?>
+		<?php if ($this->uri->segment(2) !== 'search'): ?>
 		<li>&nbsp;</li>
 		<li><a href="javascript:void(0);" class="refresh_button button"><?php echo tr('Refresh');?></a></li>
 		<?php endif; ?>
 
-		<?php if ($this->uri->segment(2) == 'conversation' && $this->uri->segment(4) == 'sentitems'): ?>
+		<?php if ($this->uri->segment(2) === 'conversation' && $this->uri->segment(4) === 'sentitems'): ?>
 		<li>&nbsp;</li>
 		<li><a href="javascript:void(0);" class="resend_bulk button"><?php echo tr('Resend');?></a></li>
 		<?php endif; ?>
 
-		<?php if ($pagination_links != ''): ?>
+		<?php if ($pagination_links !== ''): ?>
 		<li class="paging">
 			<div id="paging"><?php  echo $pagination_links;?></div>
 		</li>

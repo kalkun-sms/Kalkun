@@ -108,7 +108,7 @@
 	}?>" class="text ui-widget-content ui-corner-all required phone" />
 
 		<div style="margin-bottom:12px">
-			<input type="checkbox" name="is_public" id="is_public_contact" style="display: inline" <?php if (isset($contact) && $contact->row('is_public') == 'true')
+			<input type="checkbox" name="is_public" id="is_public_contact" style="display: inline" <?php if (isset($contact) && $contact->row('is_public') === 'true')
 	{
 		echo 'checked="checked"';
 	}?> />

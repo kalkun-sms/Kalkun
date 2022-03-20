@@ -19,7 +19,7 @@
 				</li>
 				<li><?php echo anchor('messages/folder/outbox', tr('Outbox')); ?></li>
 				<li><?php echo anchor('messages/folder/sentitems', tr('Sent items')); ?> </li>
-				<?php if ($this->uri->segment(3) == 'sentitems' || $this->uri->segment(4) == 'sentitems') : ?>
+				<?php if ($this->uri->segment(3) === 'sentitems' || $this->uri->segment(4) === 'sentitems') : ?>
 				<li style="list-style: none;"><?php echo anchor('messages/conversation/folder/sentitems/sending_error', tr('Sending error')); ?> </li>
 				<?php endif; ?>
 				<li><?php echo anchor('messages/my_folder/inbox/6', tr('Spam')); ?>
