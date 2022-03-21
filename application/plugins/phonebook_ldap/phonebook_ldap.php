@@ -78,9 +78,24 @@ function phonebook_ldap($number)
 	//Set some variables
 	ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
 	ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
+	// Set timeout to 1sec
+	ldap_set_option($conn, LDAP_OPT_NETWORK_TIMEOUT, 1);
+	//ldap_set_option($conn, LDAP_OPT_TIMELIMIT, 1);
 
 	// bind to the LDAP server specified above
-	$bd = ldap_bind($conn, $config['username'], $config['password']);
+
+	try
+	{
+		$bd = ldap_bind($conn, $config['username'], $config['password']);
+	}
+	catch (ErrorException $e)
+	{
+		if ($e->getMessage() === "ldap_bind(): Unable to bind to server: Can't contact LDAP server")
+		{
+			return FALSE;
+		}
+	}
+
 	if ( ! $bd)
 	{
 		return FALSE;
