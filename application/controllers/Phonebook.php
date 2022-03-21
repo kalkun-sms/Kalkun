@@ -292,9 +292,17 @@ class Phonebook extends MY_Controller {
 
 		//load the CSV document from a file path
 		$csv = League\Csv\Reader::createFromPath($filePath, 'r');
-		$csv->setHeaderOffset(0);
-
-		$records = $csv->getRecords(); //returns all the CSV records as an Iterator object
+		if (method_exists($csv, 'setHeaderOffset'))
+		{
+			// setHeaderOffset and following methods appeared with CSV League 9.x
+			$csv->setHeaderOffset(0);
+			$records = $csv->getRecords(); //returns all the CSV records as an Iterator object
+		}
+		else
+		{
+			// Case for CSV League 8.x
+			$records = $csv->fetchAssoc();
+		}
 
 		foreach ($records as $offset => $record)
 		{
