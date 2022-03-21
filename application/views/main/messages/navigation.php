@@ -11,19 +11,19 @@
 			$theFname = 'inbox';
 			if ($theFolder == 'inbox')
 			{
-				$theFname = tr('Inbox');
+				$theFname = tr_raw('Inbox');
 			}
 			else
 			{
 				if ($theFolder == 'outbox')
 				{
-					$theFname = tr('Outbox');
+					$theFname = tr_raw('Outbox');
 				}
 				else
 				{
 					if ($theFolder == 'sentitems')
 					{
-						$theFname = tr('Sent items');
+						$theFname = tr_raw('Sent items');
 					}
 					else
 					{
@@ -33,9 +33,9 @@
 				}
 			}
 	?>
-		<li><?php echo anchor('messages/folder/'.$this->uri->segment(4), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, htmlentities($theFname, ENT_QUOTES)), array('class' => 'button', 'id' => 'back_threadlist'));?></li>
+		<li><?php echo anchor('messages/folder/'.$this->uri->segment(4), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, $theFname), array('class' => 'button', 'id' => 'back_threadlist'));?></li>
 		<?php else: ?>
-		<li><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, htmlentities(humanize($this->Kalkun_model->get_folders('name', $this->uri->segment(6))->row('name'))), ENT_QUOTES), array('class' => 'button', 'id' => 'back_threadlist'));?></li>
+		<li><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, humanize($this->Kalkun_model->get_folders('name', $this->uri->segment(6))->row('name'))), array('class' => 'button', 'id' => 'back_threadlist'));?></li>
 		<li>&nbsp;</li>
 		<?php endif;?>
 		<?php endif;?>
