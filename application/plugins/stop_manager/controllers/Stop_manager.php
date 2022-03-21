@@ -76,6 +76,7 @@ class Stop_manager extends Plugin_controller {
 
 		$data['main'] = 'index';
 		$data['number'] = $offset + 1;
+		$data['search_name'] = $this->input->post('search_name') ? $this->input->post('search_name') : '';
 
 		$this->load->view('main/layout', $data);
 	}
