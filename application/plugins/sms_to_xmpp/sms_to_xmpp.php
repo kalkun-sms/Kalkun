@@ -78,7 +78,7 @@ function sms_to_xmpp($sms)
 
 		// if xmpp account exist
 		$xmpp = $CI->sms_to_xmpp_model->get_xmpp_account_by_phone($number);
-		if (is_array($xmpp))
+		if ( ! empty($xmpp))
 		{
 			$CI->load->library('encryption');
 			$xampp_pass = $CI->encryption->decrypt($xmpp['xmpp_password']);

@@ -40,7 +40,7 @@ class Sms_to_xmpp_model extends CI_Model {
 
 	function get_xmpp($uid)
 	{
-		$secret = FALSE;
+		$secret = [];
 		$this->db->from('plugin_sms_to_xmpp');
 		$this->db->where('id_user', $uid);
 		$user_xmpp = $this->db->get();
@@ -57,7 +57,7 @@ class Sms_to_xmpp_model extends CI_Model {
 
 	function get_xmpp_account_by_phone($number)
 	{
-		$secret = FALSE;
+		$secret = [];
 		$this->db->from('user');
 		$this->db->where('phone_number', $number);
 		$user = $this->db->get();

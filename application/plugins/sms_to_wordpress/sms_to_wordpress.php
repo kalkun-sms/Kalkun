@@ -79,7 +79,7 @@ function sms_to_wordpress($sms)
 
 		// if wp url exist
 		$wp = $CI->sms_to_wordpress_model->get_wp_url_by_phone($number);
-		if (is_array($wp))
+		if ( ! empty($wp))
 		{
 			$client = new IXR\Client\Client($wp['wp_url']);
 

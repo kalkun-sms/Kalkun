@@ -28,7 +28,7 @@
 		<a href="javascript:void(0);" class="nicebutton delete">&#43; Delete XMPP account</a>
 		<?php endif;?>
 
-		<?php if ($xmpp):?>
+		<?php if ( ! empty($xmpp)):?>
 		<h4>XMPP Account:</h4>
 		<p><?php echo htmlentities($xmpp['xmpp_username'], ENT_QUOTES);?></p>
 		<?php endif;?>
