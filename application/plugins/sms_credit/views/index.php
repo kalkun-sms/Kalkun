@@ -41,9 +41,9 @@
 						</div>
 
 						<div class="hidden">
-							<span class="id_package"><?php echo htmlentities($tmp->id_credit_template, ENT_QUOTES);?></span>
-							<span class="package_start"><?php echo htmlentities($tmp->valid_start, ENT_QUOTES);?></span>
-							<span class="package_end"><?php echo htmlentities($tmp->valid_end, ENT_QUOTES);?></span>
+							<span class="id_package"><?php echo htmlentities(strval($tmp->id_credit_template), ENT_QUOTES);?></span>
+							<span class="package_start"><?php echo htmlentities(strval($tmp->valid_start), ENT_QUOTES);?></span>
+							<span class="package_end"><?php echo htmlentities(strval($tmp->valid_end), ENT_QUOTES);?></span>
 						</div>
 					</div>
 				</td>
