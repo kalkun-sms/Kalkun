@@ -95,7 +95,7 @@ class Kalkun_API {
 		$fields = array(
 			'username' => urlencode($this->username),
 			'password' => urlencode($this->password),
-			'csrf_kalkun_tkn' => $csrf_hash,
+			'kalkun_csrf_tkn' => $csrf_hash,
 		);
 
 		$fields_string = $this->urlify($fields);
@@ -140,7 +140,7 @@ class Kalkun_API {
 			'sms_loop' => urlencode('1'),
 			'validity' => urlencode('-1'),
 			'message' => urlencode($this->message),
-			'csrf_kalkun_tkn' => $csrf_hash,
+			'kalkun_csrf_tkn' => $csrf_hash,
 		);
 		$sms_field = $this->urlify($sms);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $sms_field);
@@ -178,7 +178,7 @@ class Kalkun_API {
 		$dom = new DOMDocument();
 		$dom->loadHTML($output);
 		$xp = new DOMXpath($dom);
-		$nodes = $xp->query('//input[@name="csrf_kalkun_tkn"]');
+		$nodes = $xp->query('//input[@name="kalkun_csrf_tkn"]');
 		$node = $nodes->item(0);
 
 		return $node->getAttribute('value');
