@@ -40,7 +40,7 @@ class Sms_to_wordpress_model extends CI_Model
 
 	function get_wp($uid)
 	{
-		$secret = FALSE;
+		$secret = [];
 		$this->db->from('plugin_sms_to_wordpress');
 		$this->db->where('id_user', $uid);
 		$user_wp = $this->db->get();
@@ -55,7 +55,7 @@ class Sms_to_wordpress_model extends CI_Model
 
 	function get_wp_url_by_phone($number)
 	{
-		$secret = FALSE;
+		$secret = [];
 		$this->db->from('user');
 		$this->db->where('phone_number', $number);
 		$user = $this->db->get();

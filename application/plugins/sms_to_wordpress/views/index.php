@@ -24,7 +24,7 @@
 		<a href="javascript:void(0);" class="nicebutton delete">&#43; Delete Wordpress blog</a>
 		<?php endif;?>
 
-		<?php if ($wp):?>
+		<?php if ( ! empty($wp)):?>
 		<h4>Blog URL:</h4>
 		<p><?php echo htmlentities($wp['wp_url'], ENT_QUOTES);?></p>
 		<?php endif;?>
