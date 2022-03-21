@@ -6,7 +6,7 @@
 		<div id="window_title_left"><?php echo tr('Stop Manager records'); ?></div>
 		<div id="window_title_right">
 			<?php echo form_open('plugin/stop_manager', array('class' => 'search_form')); ?>
-			<input type="text" name="search_name" size="20" class="search_name" placeholder="<?php echo tr('Search'); ?>" value="<?php echo htmlentities($this->input->post('search_name'), ENT_QUOTES);?>" />
+			<input type="text" name="search_name" size="20" class="search_name" placeholder="<?php echo tr('Search'); ?>" value="<?php echo htmlentities($search_name, ENT_QUOTES);?>" />
 			<?php echo form_close(); ?>
 			&nbsp;
 			<a href="<?php echo current_url();?>" class="nicebutton"><?php echo tr('Reset search'); ?></a>
