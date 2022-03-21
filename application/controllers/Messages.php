@@ -262,10 +262,20 @@ class Messages extends MY_Controller {
 			$filePath = $_FILES['import_file']['tmp_name'];
 			//load the CSV document from a file path
 			$reader = League\Csv\Reader::createFromPath($filePath, 'r');
-			$reader->setHeaderOffset(0);
+			if (method_exists($reader, 'setHeaderOffset'))
+			{
+				// setHeaderOffset and following methods appeared with CSV League 9.x
+				$reader->setHeaderOffset(0);
 
-			$csvField = $reader->getHeader(); //returns the CSV header record
-			$csvData = $reader->getRecords(); //returns all the CSV records as an Iterator object
+				$csvField = $reader->getHeader(); //returns the CSV header record
+				$csvData = $reader->getRecords(); //returns all the CSV records as an Iterator object
+			}
+			else
+			{
+				// Case for CSV League 8.x
+				$csvField = $reader->fetchOne();
+				$csvData = $reader->fetchAssoc();
+			}
 
 			foreach ($csvData as $data)
 			{
