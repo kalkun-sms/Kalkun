@@ -75,7 +75,7 @@ $lang['Rename'] = 'Renommer';
 $lang['Rename folder'] = 'Renommer le dossier';
 $lang['Click to rename this folder'] = 'Cliquer pour renommer ce dossier';
 
-$lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = " Souhaitez-vous vraiment supprimer de façon définitive ce dossier et tous les messages qu'il contient ?";
+$lang['This folder and all messages in it will be deleted permanently and cannot be recovered. Are you sure?'] = "Ce dossier et tous les messages qu'il contient sera supprimé définitivement et ne pourra être restauré. Êtes-vous sûr(e) ?";
 
 $lang['There is no message in {0}.'] = "Il n'y a aucun message dans {0}.";
 $lang['There is no message in this folder.'] = "Il n'y a aucun message dans ce dossier.";
@@ -124,7 +124,7 @@ $lang['Canned responses'] = 'Modèles';
 $lang['There are no canned responses. Continue to save your present message as canned response.'] = "Il n'y a pas de modèle. Continuez pour enregistrer cette réponse et la conserver comme modèle.";
 $lang['Choose response'] = 'Choisissez une réponse';
 $lang['Saving...'] = 'Sauvegarde...';
-$lang['Are you sure?'] = 'Etes-vous sûr(e) ?';
+$lang['Are you sure?'] = 'Etes-vous sûr(e) ?';
 
 // Others
 $lang['Amount'] = 'Quantité';
@@ -168,7 +168,7 @@ $lang['Only administrators can permanently delete messages.'] = 'Seuls les admin
 
 // Setting
 $lang['Current password'] = 'Mot de passe actuel';
-$lang['Forgot your password?'] = 'Mot de passe oublié ?';
+$lang['Forgot your password?'] = 'Mot de passe oublié ?';
 $lang['New password'] = 'Nouveau mot de passe';
 $lang['Must be at least 6 characters long'] = 'Doit comprendre au minimum 6 caractères';
 
@@ -226,7 +226,7 @@ $lang['Add user'] = 'Ajouter un utilisateur';
 $lang['Edit user'] = 'Modifier un utilisateur';
 $lang['User']['default'] = 'Utilisateur';
 $lang['Users'] = 'Utilisateurs';
-$lang['This deletes the selected users and all their messages and contacts.'] = "Supprimer l'utilisateur ?
+$lang['This deletes the selected users and all their messages and contacts.'] = "Supprimer l'utilisateur ?
 Cela inclut tous les enregistrements de cet utilisateur (messages et contacts).";
 $lang['User not found'] = 'Utilisateur introuvable';
 $lang['No users in the database.'] = 'Les utilisateurs sont vides';
@@ -360,7 +360,7 @@ $lang['Error'] = 'Erreur';
 $lang['Please specify a valid mobile phone number'] = 'Veuillez entrer un numéro de mobile valide';
 $lang['Go to {0}'] = 'Aller à {0}';
 $lang['Please enter a name for your message. It should be unique.'] = 'Veuillz entrer un nom pour votre message. Il doit être unique.';
-$lang['Are you sure? This will overwrite the previous message.'] = 'Êtes-vous sûr⋅e ? Cela va écraser le message précédent.';
+$lang['Are you sure? This will overwrite the previous message.'] = 'Êtes-vous sûr(e) ? Cela va écraser le message précédent.';
 $lang['PHP Frontend for gammu-smsd'] = 'PHP Frontend for gammu-smsd';
 $lang['Authors'] = 'Auteurs';
 $lang['See {0} page'] = 'Voir la page {0}';
@@ -407,26 +407,26 @@ $lang['Plugin {0} is not installed.'] = 'Le plugin {0} n\'est pas installé.';
 $lang['Value must be a number.'] = 'La valeur doit être un nombre.';
 $lang['{0} part messages'] = '{0} part messages';
 $lang['Content'] = 'Contenu';
-$lang['No results for {0}'] = 'No results for {0}';
-$lang['Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'] = 'Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.';
-$lang['Unknown error while sending WAP-LINK.'] = 'Unknown error while sending WAP-LINK.';
-$lang['Group'] = 'Group';
-$lang['Delete the original message (prevents duplicates).'] = 'Delete the original message (prevents duplicates).';
-$lang['Delete permanently'] = 'Delete permanently';
-$lang['Retrying in {0} seconds.'] = 'Retrying in {0} seconds.';
+$lang['No results for {0}'] = 'Pas de résultat pour {0}';
+$lang['Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'] = "Echec d'injection du message dans Gammu avec gammu-smsd-inject. Voir le journal de Kalkun.";
+$lang['Unknown error while sending WAP-LINK.'] = "Erreur inconnue lors de l'envoi du WAP-LINK.";
+$lang['Group'] = 'Groupe';
+$lang['Delete the original message (prevents duplicates).'] = "Supprimer le message d'origine (évite les doublons).";
+$lang['Delete permanently'] = 'Suppr. définitivement';
+$lang['Retrying in {0} seconds.'] = 'Nouvel essai dans {0} secondes.';
 $lang['Signal'] = 'Signal';
-$lang['Battery'] = 'Battery';
-$lang['Writable'] = 'Writable';
-$lang['Read-only'] = 'Read-only';
+$lang['Battery'] = 'Batterie';
+$lang['Writable'] = 'Accessible en écriture';
+$lang['Read-only'] = 'En lecture seule';
 $lang['Inbox Master'] = 'Inbox Master';
-$lang['Network error.'] = 'Network error.';
+$lang['Network error.'] = 'Erreur réseau.';
 $lang['{0}%'] = '{0}%';
-$lang['Item deleted.'] = 'Item deleted.';
+$lang['Item deleted.'] = 'Elément supprimé.';
 $lang['Installation has been disabled by the administrator.
 To enable access to it, create a file named {0} in this directory of the server: {1}.
-Otherwise you may log-in at {2}.'] = 'Installation has been disabled by the administrator.
-To enable access to it, create a file named {0} in this directory of the server: {1}.
-Otherwise you may log-in at {2}.';
-$lang['There is no message in this conversation.'] = 'There is no message in this conversation.';
-$lang['Check again'] = 'Check again';
-$lang['Password modification forbidden in demo mode.'] = 'Password modification forbidden in demo mode.';
+Otherwise you may log-in at {2}.'] = "L'installation a été désactivée par l'administrateur.
+Pour activer l'accès, créer un fichier nommé {0} dans ce répertoire du serveur: {1}.
+Sinon, vous pouvez aussi vous connecter à {2}.";
+$lang['There is no message in this conversation.'] = "Il n'y a pas de message dans cette conversation.";
+$lang['Check again'] = 'Vérifier à nouveau';
+$lang['Password modification forbidden in demo mode.'] = 'Modification du mot de passe interdite en mode "démo".';
