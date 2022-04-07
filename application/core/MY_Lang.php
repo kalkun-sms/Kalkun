@@ -19,6 +19,8 @@ class MY_Lang extends MX_Lang {
 	// Default to 'en'
 	public $locale = 'en';
 
+	private $idiom = '';
+
 	private $jquery_datepicker_regional;
 
 	public static $idiom_to_locale = [
