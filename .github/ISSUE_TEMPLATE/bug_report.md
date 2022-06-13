@@ -11,6 +11,10 @@ assignees: ''
 If you don't have error messages but blank pages or content, check
 that error logging is enabled. The setting CI_ENV in the .htaccess
 file must be set to 'development' to see errors.
+
+If you use the Debian package, CI_ENV is set in file
+`/etc/apache2/conf-available/kalkun.conf` (and not in .htaccess)
+
 -->
 
 **Describe the bug**
