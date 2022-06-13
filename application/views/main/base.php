@@ -53,7 +53,7 @@
 				$db_name_human = get_database_property($this->db->platform())['human'];
 				echo $db_name_human, ' ', $this->db->version(), ' (', $this->db->platform(), ')'; ?>`
 			<br /><b>* Gammu version:</b>
-			`<?php echo  filter_data(htmlentities($this->Kalkun_model->get_gammu_info('gammu_version')->row('Client')), ENT_QUOTES); ?>`
+			`<?php echo  filter_data(htmlentities(strval($this->Kalkun_model->get_gammu_info('gammu_version')->row('Client'))), ENT_QUOTES); ?>`
 			<br /><b>* Gammu DB schema:</b>
 			`<?php echo  filter_data(htmlentities($this->Kalkun_model->get_gammu_info('db_version')->row('Version')), ENT_QUOTES); ?>`
 			<br /><b>* Browser:</b>
