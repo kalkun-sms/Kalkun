@@ -94,7 +94,7 @@ jobs:
           cd ~/deps ; \
           rm -r  extract-dir ; \
           # Install php-giggsey-locale
-          sudo apt install php-giggsey-locale*.deb
+          sudo apt install ./php-giggsey-locale*.deb
 
           # We apply a change with sed:
           #  - depend on debhelper 12 (because ubuntu focal has only debhelper 12)
