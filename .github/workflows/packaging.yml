@@ -82,6 +82,20 @@ jobs:
           dget -du https://mentors.debian.net/debian/pool/main/p/php-kissifrot-php-ixr/php-kissifrot-php-ixr_1.8.3-1.dsc
           dget -du https://mentors.debian.net/debian/pool/main/p/php-giggsey-locale/php-giggsey-locale_2.2-1.dsc
 
+          # Install some dependencies to be able to build the packages (for php-giggsey-locale & php-league-csv)
+          sudo apt-get install -y phpunit php-symfony-console php-symfony-filesystem
+          sudo apt-get install -y php-curl php-xdebug
+
+          # First build php-giggsey-locale because it is a dependency to build php-giggsey-libphonenumber
+          dpkg-source -x php-giggsey-locale_*.dsc extract-dir ; \
+          cd extract-dir ; \
+          sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control ; \
+          dpkg-buildpackage -d ; \
+          cd ~/deps ; \
+          rm -r  extract-dir ; \
+          # Install php-giggsey-locale
+          sudo apt install php-giggsey-locale*.deb
+
           # We apply a change with sed:
           #  - depend on debhelper 12 (because ubuntu focal has only debhelper 12)
           for file in $(ls *.dsc); do \
