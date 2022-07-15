@@ -345,7 +345,11 @@ class Kalkun_model extends MY_Model {
 
 			case 'personal':
 				$this->db->set('realname', $this->input->post('realname'));
-				$this->db->set('username', $this->input->post('username'));
+				if ( ! ($this->config->item('demo_mode')
+					&& intval($this->session->userdata('id_user')) === 1))
+				{
+					$this->db->set('username', $this->input->post('username'));
+				}
 				$this->db->set('phone_number', phone_format_e164($this->input->post('phone_number')));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user');

@@ -316,7 +316,16 @@ class Kalkun extends MY_Controller {
 				}
 			}
 			$this->Kalkun_model->update_setting($option);
-			$this->session->set_flashdata('notif', tr_raw('Settings saved successfully.'));
+			if ($this->config->item('demo_mode')
+				&& intval($this->session->userdata('id_user')) === 1
+				&& $this->input->post('username') !== 'kalkun')
+			{
+				$this->session->set_flashdata('notif', tr_raw('Settings saved successfully (except username for kalkun user which can\'t be changed in demo mode)'));
+			}
+			else
+			{
+				$this->session->set_flashdata('notif', tr_raw('Settings saved successfully.'));
+			}
 			redirect('settings/'.$option);
 		}
 
