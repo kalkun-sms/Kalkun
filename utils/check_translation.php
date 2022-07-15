@@ -449,13 +449,15 @@ function display_cmd_to_add_labels($missings, $basedir)
 	echo "export KALKUN_LANG_OUTPUT_FILE=\$(basename \$(find ${basedir}/language -name '*_lang.php' | rev | cut -d '/' -f 1 | rev | sort -u | grep -v date_lang | head -1))\n";
 	foreach ($missings as $key => $value)
 	{
+		$escaped_key = $key;
+		$escaped_key = str_replace("'", "\\'\''", $escaped_key);
 		if (is_array($value))
 		{
-			echo "for lang in $(find ${basedir}/language -mindepth 1 -type d | sort); do echo '\$lang['\''${key}'\'']['\''".key($value)."'\''] = '\''${key}'\'';' >> \$lang/\$KALKUN_LANG_OUTPUT_FILE; done";
+			echo "for lang in $(find ${basedir}/language -mindepth 1 -type d | sort); do echo '\$lang['\''${escaped_key}'\'']['\''".key($value)."'\''] = '\''${escaped_key}'\'';' >> \$lang/\$KALKUN_LANG_OUTPUT_FILE; done";
 		}
 		else
 		{
-			echo "for lang in $(find ${basedir}/language -mindepth 1 -type d | sort); do echo '\$lang['\''${key}'\''] = '\''${key}'\'';' >> \$lang/\$KALKUN_LANG_OUTPUT_FILE; done";
+			echo "for lang in $(find ${basedir}/language -mindepth 1 -type d | sort); do echo '\$lang['\''${escaped_key}'\''] = '\''${escaped_key}'\'';' >> \$lang/\$KALKUN_LANG_OUTPUT_FILE; done";
 		}
 		echo "\n";
 	}
