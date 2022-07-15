@@ -350,6 +350,7 @@ class Kalkun_model extends MY_Model {
 				{
 					$this->db->set('username', $this->input->post('username'));
 				}
+				$this->_phone_number_validation($this->input->post('phone_number'));
 				$this->db->set('phone_number', phone_format_e164($this->input->post('phone_number')));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user');
@@ -676,5 +677,21 @@ class Kalkun_model extends MY_Model {
 	function has_table_pbk_with_kalkun_fields()
 	{
 		return $this->db->field_exists('id_user', 'pbk');
+	}
+
+	/**
+	 * Check if submitted phone number is valid
+	 *
+	 * @access	public
+	 */
+	function _phone_number_validation($phone)
+	{
+		$this->load->helper('kalkun');
+		$result = is_phone_number_valid($phone);
+
+		if ($result !== TRUE)
+		{
+			show_error($result, 400);
+		}
 	}
 }

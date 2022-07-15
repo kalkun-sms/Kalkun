@@ -2,7 +2,27 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		// validation
-		$("#settingsForm").validate();
+		$("#settingsForm").validate({
+			rules: {
+				phone_number: {
+					required: true,
+					remote: {
+						url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
+						type: "get",
+						data: {
+							phone: function() {
+								return $("#phone_number").val();
+							},
+						}
+					}
+				},
+			},
+			messages: {
+				phone_number: {
+					required: <?php echo tr_js('Field required.'); ?>,
+				},
+			}
+		});
 	});
 
 </script>
@@ -24,7 +44,7 @@
 	<tr valign="top">
 		<td><?php echo tr('Telephone number'); ?></td>
 		<td>
-			<input type="text" name="phone_number" value="<?php echo htmlentities($settings->row('phone_number'), ENT_QUOTES);?>" />
+			<input type="text" id="phone_number" name="phone_number" value="<?php echo htmlentities($settings->row('phone_number'), ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
