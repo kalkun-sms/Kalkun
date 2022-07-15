@@ -122,10 +122,22 @@ class Users extends MY_Controller {
 
 		if ($this->input->post('id_user'))
 		{
-			$return_msg = [
-				'type' => 'info',
-				'msg' => tr_raw('User updated successfully.'),
-			];
+			if ($this->config->item('demo_mode')
+				&& intval($this->input->post('id_user')) === 1
+				&& $this->input->post('username') !== 'kalkun')
+			{
+				$return_msg = [
+					'type' => 'error',
+					'msg' => tr_raw('Modification of username of "kalkun" user forbidden in demo mode. Username was restored.'),
+				];
+			}
+			else
+			{
+				$return_msg = [
+					'type' => 'info',
+					'msg' => tr_raw('User updated successfully.'),
+				];
+			}
 		}
 		else
 		{

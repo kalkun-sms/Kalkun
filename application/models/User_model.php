@@ -79,6 +79,13 @@ class User_model extends MY_Model {
 		// edit mode
 		if ($this->input->post('id_user'))
 		{
+			if ($this->config->item('demo_mode')
+				&& intval($this->input->post('id_user')) === 1
+				&& $this->input->post('username') !== 'kalkun')
+			{
+				// Restore username to 'kalkun'
+				$this->db->set('username', 'kalkun');
+			}
 			$this->db->where('id_user', $this->input->post('id_user'));
 			$this->db->update('user');
 		}
