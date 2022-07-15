@@ -430,3 +430,5 @@ Otherwise you may log-in at {2}.';
 $lang['There is no message in this conversation.'] = 'There is no message in this conversation.';
 $lang['Check again'] = 'Check again';
 $lang['Password modification forbidden in demo mode.'] = 'Password modification forbidden in demo mode.';
+$lang['Settings saved successfully (except username for kalkun user which can\'t be changed in demo mode)'] = 'Settings saved successfully (except username for kalkun user which can\'t be changed in demo mode)';
+$lang['Modification of username of "kalkun" user forbidden in demo mode. Username was restored.'] = 'Modification of username of "kalkun" user forbidden in demo mode. Username was restored.';
