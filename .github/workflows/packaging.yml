@@ -28,7 +28,10 @@ jobs:
           # Non-static method Pkgtools\Base\Overrides::override() cannot be called statically in /usr/share/php/pkgtools/base/dependencies.php:45
           # So we update pkg-php-tools to version 1.40 (focal has 1.38)
           wget http://ftp.us.debian.org/debian/pool/main/p/pkg-php-tools/pkg-php-tools_1.40_all.deb
-          sudo dpkg -i php-zeta-console-tools_1.7.2-2_all.deb phpab_1.26.0-1_all.deb pkg-php-tools_1.40_all.deb
+          # Get php-random-compat (build dependency on >= 2.0.20)
+          wget http://mirrors.kernel.org/ubuntu/pool/universe/p/php-random-compat/php-random-compat_2.0.21-1_all.deb
+          # Install the packages
+          sudo dpkg -i php-zeta-console-tools_1.7.2-2_all.deb phpab_1.26.0-1_all.deb pkg-php-tools_1.40_all.deb php-random-compat_2.0.21-1_all.deb
       - name: Set env
         run: |
           echo "LAST_COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
@@ -36,6 +39,43 @@ jobs:
           echo "KALKUN_VERSION=$(grep kalkun_version application/config/kalkun_settings.php | cut -d "'" -f 4)" >> $GITHUB_ENV
           echo "DEBEMAIL=none@domain.tld" >> $GITHUB_ENV
           echo "DEBFULLNAME='Github Actions Deb Builder for Kalkun'" >> $GITHUB_ENV
+      - name: Build dependencies
+        run: |
+          set -x
+          # get the packages from debian salsa servers as they have not entered Debian yet
+
+          mkdir -p ~/deps
+          cd ~/deps
+          gbp clone https://salsa.debian.org/php-team/pear/php-codeigniter-framework
+          gbp clone https://salsa.debian.org/php-team/pear/php-datto-json-rpc
+          gbp clone https://salsa.debian.org/php-team/pear/php-datto-json-rpc-http
+          gbp clone https://salsa.debian.org/php-team/pear/php-giggsey-locale
+          gbp clone https://salsa.debian.org/php-team/pear/php-giggsey-libphonenumber
+          gbp clone https://salsa.debian.org/php-team/pear/php-kissifrot-php-ixr
+          gbp clone https://salsa.debian.org/php-team/pear/php-league-csv
+
+          # Install some dependencies to be able to build the packages (for php-giggsey-locale & php-league-csv)
+          sudo apt-get install -y phpunit php-symfony-console php-symfony-filesystem
+          sudo apt-get install -y php-curl php-xdebug
+
+          # First build php-giggsey-locale because it is a dependency to build php-giggsey-libphonenumber
+          cd php-giggsey-locale ; \
+          gbp export-orig ; \
+          sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control ; \
+          dpkg-buildpackage -d ; \
+          cd ~/deps ; \
+          # Install php-giggsey-locale
+          sudo apt-get install ./php-giggsey-locale*.deb
+
+          # We apply a change with sed:
+          #  - depend on debhelper 12 (because ubuntu focal has only debhelper 12)
+          for dir in $(find -type d -maxdepth 1 -mindepth 1); do \
+            cd $dir; \
+            gbp export-orig ; \
+            sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control ; \
+            dpkg-buildpackage -d ; \
+            cd ~/deps ; \
+          done
       - name: Build kalkun packages
         run: |
           set -x
@@ -67,45 +107,6 @@ jobs:
           sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control
 
           dpkg-buildpackage -d
-      - name: Build dependencies
-        run: |
-          set -x
-          # get the packages from debian mentors as they have not entered Debian yet
-
-          mkdir -p ~/deps
-          cd ~/deps
-          dget -du https://mentors.debian.net/debian/pool/main/p/php-codeigniter-framework/php-codeigniter-framework_3.1.13-1.dsc
-          dget -du https://mentors.debian.net/debian/pool/main/p/php-league-csv/php-league-csv_9.8.0-1.dsc
-          dget -du https://mentors.debian.net/debian/pool/main/p/php-datto-json-rpc-http/php-datto-json-rpc-http_5.0.6-1.dsc
-          dget -du https://mentors.debian.net/debian/pool/main/p/php-datto-json-rpc/php-datto-json-rpc_6.1.0-1.dsc
-          dget -du https://mentors.debian.net/debian/pool/main/p/php-giggsey-libphonenumber/php-giggsey-libphonenumber_8.12.50-1.dsc
-          dget -du https://mentors.debian.net/debian/pool/main/p/php-kissifrot-php-ixr/php-kissifrot-php-ixr_1.8.3-1.dsc
-          dget -du https://mentors.debian.net/debian/pool/main/p/php-giggsey-locale/php-giggsey-locale_2.2-1.dsc
-
-          # Install some dependencies to be able to build the packages (for php-giggsey-locale & php-league-csv)
-          sudo apt-get install -y phpunit php-symfony-console php-symfony-filesystem
-          sudo apt-get install -y php-curl php-xdebug
-
-          # First build php-giggsey-locale because it is a dependency to build php-giggsey-libphonenumber
-          dpkg-source -x php-giggsey-locale_*.dsc extract-dir ; \
-          cd extract-dir ; \
-          sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control ; \
-          dpkg-buildpackage -d ; \
-          cd ~/deps ; \
-          rm -r  extract-dir ; \
-          # Install php-giggsey-locale
-          sudo apt install ./php-giggsey-locale*.deb
-
-          # We apply a change with sed:
-          #  - depend on debhelper 12 (because ubuntu focal has only debhelper 12)
-          for file in $(ls *.dsc); do \
-            dpkg-source -x $file extract-dir ; \
-            cd extract-dir ; \
-            sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control ; \
-            dpkg-buildpackage -d ; \
-            cd ~/deps ; \
-            rm -r  extract-dir ; \
-          done
       - name: Copy source & binary packages, and dependencies
         if: always()
         run: |
