@@ -358,7 +358,7 @@ function phone_format_e164($phone, $input_region = NULL)
 	// This way, we consider number is already in international format.
 	$region = '';
 	// If user is logged in, get the region from the settings
-	if (property_exists($CI, 'session'))
+	if ($CI->session->userdata('loggedin') === 'TRUE')
 	{
 		$region = $CI->Kalkun_model->get_setting()->row('country_code');
 	}
