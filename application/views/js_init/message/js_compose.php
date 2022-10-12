@@ -201,7 +201,7 @@
 				manualvalue: {
 					required: "#sendoption3:checked",
 					remote: {
-						url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
+						url: "<?php echo site_url('kalkun/phone_number_validation_multiple'); ?>",
 						type: "get",
 						data: {
 							phone: function() {
