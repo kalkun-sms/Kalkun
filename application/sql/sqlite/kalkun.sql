@@ -26,7 +26,7 @@ CREATE TABLE "user_settings" (
 	CHECK ("conversation_sort" IN ('asc','desc'))
 );
 
-INSERT INTO "user_settings" VALUES (1, 'green', 'false;--\nPut your signature here', 'false', 20, 'true;background.jpg', 'default', 'english', 'asc');
+INSERT INTO "user_settings" VALUES (1, 'green', 'false;--\nPut your signature here', 'false', 20, 'true;background.jpg', 'default', 'english', 'asc', 'US');
 
 CREATE TABLE "user_outbox" (
 	"id_outbox" INTEGER PRIMARY KEY  NOT NULL, 
