@@ -64,7 +64,7 @@ echo doctype('xhtml1-trans');?>
 					</td>
 				</tr>
 				<tr>
-					<td align="center"><a style="color: #fff" href="<?php echo site_url('login/forgot_password')."?l=${idiom}"; ?>"><?php echo tr('Forgot your password?'); ?></a></td>
+					<td align="center"><a style="color: #fff" href="<?php echo site_url('login/forgot_password')."?l={$idiom}"; ?>"><?php echo tr('Forgot your password?'); ?></a></td>
 				</tr>
 			</table>
 			<?php echo form_hidden('idiom', $idiom); ?>

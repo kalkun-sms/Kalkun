@@ -123,7 +123,7 @@ class MY_Lang extends MX_Lang {
 		// Fallback to english if language file is not found
 		if ( ! $found)
 		{
-			log_message('error', "language file ${langfile} not found. Falling back to english.");
+			log_message('error', "language file {$langfile} not found. Falling back to english.");
 			$requested_idiom = 'english';
 		}
 
@@ -394,7 +394,7 @@ class MY_Lang extends MX_Lang {
 		if ( ! isset($this->jquery_datepicker_regional))
 		{
 			$datepicker_locales = [];
-			foreach (glob("${jquery_i18n_path}/datepicker-*.js") as $filename)
+			foreach (glob("{$jquery_i18n_path}/datepicker-*.js") as $filename)
 			{
 				$res = preg_match('/datepicker-(.*)\.js/', $filename, $matches);
 				array_push($datepicker_locales, $matches[1]);
