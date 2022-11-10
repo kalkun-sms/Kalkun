@@ -30,8 +30,8 @@ CREATE TABLE "user_settings" (
 );
 
 INSERT INTO "user" VALUES(1, 'kalkun', 'Kalkun SMS', '$2y$10$sIXe0JiaTIOsC7OOnox5t.deuJwZoawd5QKpQlSNfywziTDHpmmyy', '123456789', 'admin');
-INSERT INTO "user_settings" VALUES (1, 'green', 'false;Put your signature here', 'false', 20, 'true;background.jpg', 'default', 'english', 'asc');
-
+INSERT INTO "user_settings" VALUES (1, 'green', 'false;--
+Put your signature here', 'false', 20, 'true;background.jpg', 'default', 'english', 'asc', 'US');
 
 CREATE TABLE "user_outbox" (
 	"id_outbox" integer PRIMARY KEY, 
