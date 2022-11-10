@@ -11,27 +11,15 @@ on:
 jobs:
   debian:
     name: Debian package
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install required packages
         run: |
           sudo apt-get update
-          sudo apt-get install -y git-buildpackage build-essential dh-apache2 pkg-php-tools phpab php-xdebug
+          sudo apt-get install -y git-buildpackage build-essential equivs
           cd ~
-          # These need to be more recent than the ones shipped in ubuntu focal (to build the dependencies)
-          # We need these versions to build the dependencies. The previous ones don't work well with php 7.4 that is in ubuntu focal.
-          wget http://ftp.us.debian.org/debian/pool/main/p/php-zeta-console-tools/php-zeta-console-tools_1.7.2-2_all.deb
-          wget http://ftp.us.debian.org/debian/pool/main/p/phpab/phpab_1.26.0-1_all.deb
-          # There is this crash with dh_phpcomposer on ubuntu focal
-          # Non-static method Pkgtools\Base\Overrides::override() cannot be called statically in /usr/share/php/pkgtools/base/dependencies.php:45
-          # So we update pkg-php-tools to version 1.40 (focal has 1.38)
-          wget http://ftp.us.debian.org/debian/pool/main/p/pkg-php-tools/pkg-php-tools_1.40_all.deb
-          # Get php-random-compat (build dependency on >= 2.0.20)
-          wget http://mirrors.kernel.org/ubuntu/pool/universe/p/php-random-compat/php-random-compat_2.0.21-1_all.deb
-          # Install the packages
-          sudo dpkg -i php-zeta-console-tools_1.7.2-2_all.deb phpab_1.26.0-1_all.deb pkg-php-tools_1.40_all.deb php-random-compat_2.0.21-1_all.deb
       - name: Set env
         run: |
           echo "LAST_COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
@@ -54,25 +42,21 @@ jobs:
           gbp clone https://salsa.debian.org/php-team/pear/php-kissifrot-php-ixr
           gbp clone https://salsa.debian.org/php-team/pear/php-league-csv
 
-          # Install some dependencies to be able to build the packages (for php-giggsey-locale & php-league-csv)
-          sudo apt-get install -y phpunit php-symfony-console php-symfony-filesystem
-          sudo apt-get install -y php-curl php-xdebug
-
           # First build php-giggsey-locale because it is a dependency to build php-giggsey-libphonenumber
           cd php-giggsey-locale ; \
+          mk-build-deps --install --remove --root-cmd sudo --tool='apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes' debian/control ; \
+          rm -f $(dpkg-parsechangelog -S Source)-build-deps_* ; \
           gbp export-orig ; \
-          sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control ; \
           dpkg-buildpackage -d ; \
           cd ~/deps ; \
           # Install php-giggsey-locale
           sudo apt-get install ./php-giggsey-locale*.deb
 
-          # We apply a change with sed:
-          #  - depend on debhelper 12 (because ubuntu focal has only debhelper 12)
           for dir in $(find -type d -maxdepth 1 -mindepth 1); do \
             cd $dir; \
+            mk-build-deps --install --remove --root-cmd sudo --tool='apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes' debian/control ; \
+            rm -f $(dpkg-parsechangelog -S Source)-build-deps_* ; \
             gbp export-orig ; \
-            sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control ; \
             dpkg-buildpackage -d ; \
             cd ~/deps ; \
           done
@@ -84,7 +68,7 @@ jobs:
           # This adds only the debian folder to $GITHUB_REF_NAME to be able to build the packages
           git remote add debian https://salsa.debian.org/bastif/kalkun.git
           git fetch debian
-          git checkout -b debian_branch debian/master
+          git checkout -b debian_branch debian/debian/latest
           git checkout $GITHUB_REF_NAME
           git checkout debian_branch -- debian
           git status
@@ -100,11 +84,8 @@ jobs:
             gbp dch --new-version="$DEB_VERSION" --snapshot --ignore-branch ; \
             # Append debian version to version number ; \
             sed -i -e "1s/)/-1)/" debian/changelog ; \
-            gbp export-orig --upstream-tree=BRANCH --upstream-branch=$(git rev-parse --abbrev-ref HEAD) --compression=xz ; \
+            gbp export-orig --no-pristine-tar --upstream-tree=BRANCH --upstream-branch=$(git rev-parse --abbrev-ref HEAD) --compression=xz ; \
           fi
-
-          # depend on debhelper 12 (because ubuntu focal has only debhelper 12)
-          sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control
 
           dpkg-buildpackage -d
       - name: Copy source & binary packages, and dependencies
