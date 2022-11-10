@@ -376,6 +376,32 @@ class Kalkun extends MY_Controller {
 		echo json_encode($result);
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * Check multiple phone number validity
+	 *
+	 * returns a json string used by jquery validation plugin
+	 * "true" if all phone numbers are valid
+	 * "an error message with the faulty number" if not
+	 */
+	function phone_number_validation_multiple()
+	{
+		$tmp_dest = explode(',', $this->input->get_post('phone'));
+		foreach ($tmp_dest as $key => $val)
+		{
+			$result = is_phone_number_valid($val, $this->input->get_post('region'));
+			if ($result !== TRUE)
+			{
+				header('Content-type: application/json');
+				echo json_encode($result.' ('.trim($val).')');
+				return;
+			}
+		}
+		header('Content-type: application/json');
+		echo json_encode('true');
+	}
+
 	function get_csrf_hash()
 	{
 		header('Content-type: application/json');
