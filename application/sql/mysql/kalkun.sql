@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `user_settings` (
 --
 
 INSERT INTO `user_settings` VALUES (1, 'green', 'false;--
-Put your signature here', 'false', 20, 'true;background.jpg', 'default' , 'english', 'asc', 'US');
+Put your signature here', 'false', 20, 'true;background.jpg', 'default', 'english', 'asc', 'US');
 
 -- --------------------------------------------------------
 
