@@ -35,6 +35,7 @@ class MY_Lang extends MX_Lang {
 		'hungarian' => 'hu',
 		'indonesian' => 'in',
 		'italian' => 'it',
+		'norwegian' => 'no',
 		'polish' => 'pl',
 		'portuguese' => 'pt',
 		'russian' => 'ru',
