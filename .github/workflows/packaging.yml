@@ -129,8 +129,8 @@ jobs:
         run: |
           set -x
           git fetch --prune --unshallow --tags
-          # Start with 7.1.24 since this is for the DEMO we publish on sourceforge.
-          ./utils/build_single_dist.sh 7.1.24
+          # Start with 7.4.30 since this is for the DEMO we publish on sourceforge.
+          ./utils/build_single_dist.sh 7.4.30
           # They build for all versions.
           ./utils/build_single_dist.sh 5.6
           ./utils/build_single_dist.sh 7.0
@@ -154,12 +154,12 @@ jobs:
           name: Prebuilt package for PHP 7.0
           path: 'dist/*forPHP7.0*'
           if-no-files-found: ignore
-      - name: Archive artifacts for PHP 7.1.24
+      - name: Archive artifacts for PHP 7.4.30
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: Prebuilt package for PHP 7.1.24
-          path: 'dist/*forPHP7.1.24*'
+          name: Prebuilt package for PHP 7.4.30
+          path: 'dist/*forPHP7.4.30*'
           if-no-files-found: ignore
       - name: Archive artifacts for PHP 7.2
         if: always()
