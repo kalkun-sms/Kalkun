@@ -140,6 +140,7 @@ jobs:
           ./utils/build_single_dist.sh 7.4
           ./utils/build_single_dist.sh 8.0
           ./utils/build_single_dist.sh 8.1
+          ./utils/build_single_dist.sh 8.2
           ls dist
       - name: Archive artifacts for PHP 5.6
         if: always()
@@ -203,6 +204,13 @@ jobs:
         with:
           name: Prebuilt package for PHP 8.1
           path: 'dist/*forPHP8.1*'
+          if-no-files-found: ignore
+      - name: Archive artifacts for PHP 8.2
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Prebuilt package for PHP 8.2
+          path: 'dist/*forPHP8.2*'
           if-no-files-found: ignore
       - name: Release
         uses: softprops/action-gh-release@v1
