@@ -134,6 +134,7 @@ jobs:
           # They build for all versions.
           ./utils/build_single_dist.sh 5.6
           ./utils/build_single_dist.sh 7.0
+          ./utils/build_single_dist.sh 7.1
           ./utils/build_single_dist.sh 7.2
           ./utils/build_single_dist.sh 7.3
           ./utils/build_single_dist.sh 7.4
@@ -160,6 +161,13 @@ jobs:
         with:
           name: Prebuilt package for PHP 7.4.30
           path: 'dist/*forPHP7.4.30*'
+          if-no-files-found: ignore
+      - name: Archive artifacts for PHP 7.1
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Prebuilt package for PHP 7.1
+          path: 'dist/*forPHP7.1*'
           if-no-files-found: ignore
       - name: Archive artifacts for PHP 7.2
         if: always()
