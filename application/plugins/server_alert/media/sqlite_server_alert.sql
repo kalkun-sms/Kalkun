@@ -1,4 +1,4 @@
-CREATE TABLE "plugin_server_alert" (
+CREATE TABLE IF NOT EXISTS "plugin_server_alert" (
 	"id_server_alert" INTEGER PRIMARY KEY AUTOINCREMENT, 
 	"alert_name" VARCHAR(100) NOT NULL, 
 	"ip_address" VARCHAR(20) NOT NULL,

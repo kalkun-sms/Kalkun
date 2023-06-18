@@ -1,4 +1,4 @@
-CREATE TABLE "plugin_server_alert" (
+CREATE TABLE IF NOT EXISTS "plugin_server_alert" (
 	"id_server_alert" serial PRIMARY KEY,
 	"alert_name" varchar(100) NOT NULL,
 	"ip_address" varchar(20) NOT NULL,
