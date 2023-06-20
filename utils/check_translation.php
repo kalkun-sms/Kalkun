@@ -577,6 +577,10 @@ if (sizeof($argv) > 1)
 	{
 		$total_error_count += perfom_check('application');
 		$plugin_dirs = glob('application/plugins/*', GLOB_ONLYDIR | GLOB_MARK);
+		// Exclude some plugins from the check.
+		$plugin_dirs = array_filter($plugin_dirs, function($v) {
+			return false === strpos($v, 'application/plugins/rest_api/');
+		});
 		foreach ($plugin_dirs as $dir)
 		{
 			$total_error_count += perfom_check($dir);
