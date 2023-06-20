@@ -4,7 +4,7 @@ CodeIgniter 3.1.11 <https://www.codeigniter.com/>
 CodeIgniter extra:
 	* CI-Plugin-System commit c7c6b6d19b198cff6f1723f6911d317232a97fdd (2013-09-23) <https://github.com/Vheissu/CI-Plugin-System>
 	* HMVC 5.3.5 commit #2d6d33922276 <https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc>
-jQuery 3.6.1 <https://jquery.com/>
+jQuery 3.7.0 <https://jquery.com/>
 jQuery UI 1.13.2 <https://jqueryui.com/>
     * On the download page, select: [ Autocomplete, Datepicker, Dialog, Fade Effect, jQuery 1.8+ support (since we use jquery < 3.4 as of jquery-ui 1.13), theme=base] + their dependencies
     * jQuery UI Datepicker i18n (from version 1.13.2): https://github.com/jquery/jquery-ui/tree/master/ui/i18n - License: MIT
