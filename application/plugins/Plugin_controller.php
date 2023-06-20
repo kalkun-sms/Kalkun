@@ -31,6 +31,8 @@ class Plugin_controller extends MY_Controller {
 	{
 		parent::__construct($login);
 
+		$this->load->helper('i18n');
+
 		// Prevent non-admin user
 		if ($login && $this->session->userdata('level') !== 'admin')
 		{
