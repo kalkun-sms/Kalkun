@@ -1,12 +1,12 @@
 <?php
 
-namespace chriskacerguis\RestServer;
+/*namespace chriskacerguis\RestServer;
 
 use Exception;
 use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
 use stdClass;
-
+*/
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
@@ -17,7 +17,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *
  * @version         4.0.0
  */
-class RestController extends \CI_Controller
+
+include_once(APPPATH.'plugins/Plugin_controller.php');
+include_once('Format.php');
+
+class RestController extends Plugin_controller
 {
     /**
      * This defines the rest format
@@ -256,7 +260,7 @@ class RestController extends \CI_Controller
      */
     public function __construct($config = 'rest')
     {
-        parent::__construct();
+        parent::__construct(NULL);
 
         // Set the default value of global xss filtering. Same approach as CodeIgniter 3
         $this->_enable_xss = ($this->config->item('global_xss_filtering') === true);
@@ -266,7 +270,9 @@ class RestController extends \CI_Controller
         $this->output->parse_exec_vars = false;
 
         // Load the rest.php configuration file
-        $this->get_local_config($config);
+        $this->load->add_package_path(APPPATH.'plugins/rest_api', false);
+        $this->load->config($config, false);
+        $this->load->remove_package_path(APPPATH.'plugins/rest_api', false);
 
         // Log the loading time to the log table
         if ($this->config->item('rest_enable_logging') === true) {
