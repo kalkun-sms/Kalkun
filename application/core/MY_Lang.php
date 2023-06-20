@@ -102,8 +102,7 @@ class MY_Lang extends MX_Lang {
 		}
 		if ($alt_path !== '')
 		{
-			$alt_path .= 'language/'.$this->idiom.'/'.$langfile;
-			if (file_exists($alt_path))
+			if (file_exists($alt_path.'language/'.$this->idiom.'/'.$langfile))
 			{
 				$found = TRUE;
 			}
