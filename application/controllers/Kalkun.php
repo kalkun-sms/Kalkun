@@ -233,7 +233,7 @@ class Kalkun extends MY_Controller {
 	function add_folder()
 	{
 		$this->Kalkun_model->add_folder();
-		redirect($this->input->post('source_url'));
+		redirect($this->input->post('source_url') !== NULL ? $this->input->post('source_url') : '');
 	}
 
 	// --------------------------------------------------------------------
