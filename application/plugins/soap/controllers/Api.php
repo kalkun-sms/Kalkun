@@ -5,7 +5,6 @@
  *	@License: GNU General Public License
 */
 //include_once(APPPATH.'plugins/Plugin_controller.php');
-include_once(dirname(__FILE__).'/../libraries/nusoap.php');
 
 class Api extends MY_Controller {
 
