@@ -41,6 +41,7 @@ jobs:
           gbp clone https://salsa.debian.org/php-team/pear/php-giggsey-libphonenumber
           gbp clone https://salsa.debian.org/php-team/pear/php-kissifrot-php-ixr
           gbp clone https://salsa.debian.org/php-team/pear/php-league-csv
+          gbp clone https://salsa.debian.org/bastif/sphinxcontrib-phpdomain
 
           # First build php-giggsey-locale because it is a dependency to build php-giggsey-libphonenumber
           cd php-giggsey-locale ; \
@@ -51,6 +52,16 @@ jobs:
           cd ~/deps ; \
           # Install php-giggsey-locale
           sudo apt-get install ./php-giggsey-locale*.deb
+
+          # Build sphinxcontrib-phpdomain (required by php-codeigniter-framework)
+          cd sphinxcontrib-phpdomain ; \
+          mk-build-deps --install --remove --root-cmd sudo --tool='apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes' debian/control ; \
+          rm -f $(dpkg-parsechangelog -S Source)-build-deps_* ; \
+          gbp export-orig ; \
+          dpkg-buildpackage -d ; \
+          cd ~/deps ; \
+          # Install python3-sphinxcontrib.phpdomain
+          sudo apt-get install ./python3-sphinxcontrib.phpdomain*.deb
 
           for dir in $(find -type d -maxdepth 1 -mindepth 1); do \
             cd $dir; \
