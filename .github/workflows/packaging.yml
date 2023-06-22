@@ -121,8 +121,49 @@ jobs:
         with:
           files: |
             ${{ env.my_home }}/Kalkun_${{ github.ref_name }}_debianBundle.tar
+
+  required_php_versions:
+    name: Get PHP versions to pack for
+    runs-on: ubuntu-latest
+    outputs:
+      php_versions: ${{ steps.php_ver_step.outputs.PHP_VERSIONS }}
+      php_versions_matrix: ${{ steps.php_ver_step.outputs.PHP_VERSIONS_matrix }}
+    steps:
+      - name: Install required packages
+        run: |
+          if ! command -v jq; then sudo apt-get update && sudo apt-get install -y jq; fi
+      - name: Build PHP_VERSIONS array & PHP_VERSIONS_matrix
+        id: php_ver_step
+        run: |
+          set -x
+
+          # Set array that will store the PHP versions for which we create a package.
+          PHP_VERSIONS=()
+
+          # Start with 7.4.30 since this is for the DEMO we publish on sourceforge.
+          PHP_VERSIONS+=("7.4.30")
+
+          # Get all released php versions above 5.6 (in the format X.Y)
+          for upstream_ver in $(curl https://www.php.net/releases/?json | jq -r '.[].version' | cut -f -2 -d .); do
+            major=$(cut -f 1 -d . <<< "$upstream_ver")
+            for minor in {0..20}; do
+              if dpkg --compare-versions ${major}.$minor le $upstream_ver &&  dpkg --compare-versions ${major}.$minor ge 5.6; then
+                PHP_VERSIONS+=("${major}.$minor")
+              fi
+            done
+          done
+
+          PHP_VERSIONS_matrix=$(sed 's/\ /", "/g' <<<  [\"${PHP_VERSIONS[*]}\"])
+
+          echo "PHP_VERSIONS=${PHP_VERSIONS[*]}" >> "$GITHUB_OUTPUT"
+          echo "PHP_VERSIONS_matrix=$PHP_VERSIONS_matrix" >> "$GITHUB_OUTPUT"
+
+          echo "PHP_VERSIONS=${PHP_VERSIONS[*]}"
+          echo "PHP_VERSIONS_matrix=$PHP_VERSIONS_matrix"
+
   prebuilt:
-    name: Prebuilt packages by PHP version
+    name: Prebuild packages by PHP version
+    needs: [ required_php_versions ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -133,25 +174,18 @@ jobs:
             dev: no
             php_version: "7.4"
             php_extensions: ctype curl hash intl json mbstring session
-      - name: Install required packages
-        run: |
-          if ! command -v jq; then sudo apt-get update && sudo apt-get install -y jq; fi
       - name: Build prebuilt packages with Composer dependencies
+        env:
+          PHP_VERSIONS: ${{needs.required_php_versions.outputs.php_versions}}
         run: |
           set -x
+
           git fetch --prune --unshallow --tags
-          # Start with 7.4.30 since this is for the DEMO we publish on sourceforge.
-          ./utils/build_single_dist.sh 7.4.30
-          # They build for all versions.
-          ./utils/build_single_dist.sh 5.6
-          ./utils/build_single_dist.sh 7.0
-          ./utils/build_single_dist.sh 7.1
-          ./utils/build_single_dist.sh 7.2
-          ./utils/build_single_dist.sh 7.3
-          ./utils/build_single_dist.sh 7.4
-          ./utils/build_single_dist.sh 8.0
-          ./utils/build_single_dist.sh 8.1
-          ./utils/build_single_dist.sh 8.2
+
+          for version in $PHP_VERSIONS; do
+            ./utils/build_single_dist.sh "$version"
+          done
+
           ls dist
       - name: Archive artifacts for PHP 5.6
         if: always()
