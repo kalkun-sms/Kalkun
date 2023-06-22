@@ -243,11 +243,20 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         run: ls -R
         working-directory: 'dist'
+      - name: Check if is prerelease
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          if [[ "$GITHUB_REF_NAME" =~ alpha|beta|rc ]]; then
+            echo "is_prerelease=true" >> $GITHUB_ENV
+          else
+            echo "is_prerelease=false" >> $GITHUB_ENV
+          fi
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           fail_on_unmatched_files: true
+          prerelease: ${{ env.is_prerelease }}
           files: |
             dist/*
 
