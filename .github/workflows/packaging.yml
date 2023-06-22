@@ -218,7 +218,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: Prebuilt package for ${{ matrix.version }}
+          name: Prebuilt package for PHP ${{ matrix.version }}
           path: 'dist/*forPHP${{ matrix.version }}.[tz]*'
           if-no-files-found: ignore
 
