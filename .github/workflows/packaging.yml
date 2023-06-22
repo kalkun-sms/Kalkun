@@ -187,78 +187,69 @@ jobs:
           done
 
           ls dist
-      - name: Archive artifacts for PHP 5.6
+      - name: Archive artifacts (all prebuilt packages)
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: Prebuilt package for PHP 5.6
-          path: 'dist/*forPHP5.6*'
+          name: Prebuilt packages (all)
+          path: 'dist/'
           if-no-files-found: ignore
-      - name: Archive artifacts for PHP 7.0
+
+  individual_artifacts:
+    name: Create artifacts for ${{ matrix.version }}
+    needs: [ prebuilt, required_php_versions ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        #version: ["5.6", "7.0", "7.4.30"]
+        version: ${{fromJson(needs.required_php_versions.outputs.php_versions_matrix)}}
+    steps:
+      - name: Download artifact of 'prebuilt packages'
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/download-artifact@v3
         with:
-          name: Prebuilt package for PHP 7.0
-          path: 'dist/*forPHP7.0*'
-          if-no-files-found: ignore
-      - name: Archive artifacts for PHP 7.4.30
+          name: Prebuilt packages (all)
+          path: 'dist/'
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: 'dist'
+      - name: Archive artifacts for ${{ matrix.version }}
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: Prebuilt package for PHP 7.4.30
-          path: 'dist/*forPHP7.4.30*'
+          name: Prebuilt package for ${{ matrix.version }}
+          path: 'dist/*forPHP${{ matrix.version }}.[tz]*'
           if-no-files-found: ignore
-      - name: Archive artifacts for PHP 7.1
+
+  release:
+    name: Create release and add packages
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [ prebuilt ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact of 'prebuilt packages'
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/download-artifact@v3
         with:
-          name: Prebuilt package for PHP 7.1
-          path: 'dist/*forPHP7.1*'
-          if-no-files-found: ignore
-      - name: Archive artifacts for PHP 7.2
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: Prebuilt package for PHP 7.2
-          path: 'dist/*forPHP7.2*'
-          if-no-files-found: ignore
-      - name: Archive artifacts for PHP 7.3
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: Prebuilt package for PHP 7.3
-          path: 'dist/*forPHP7.3*'
-          if-no-files-found: ignore
-      - name: Archive artifacts for PHP 7.4
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: Prebuilt package for PHP 7.4
-          path: 'dist/*forPHP7.4*'
-          if-no-files-found: ignore
-      - name: Archive artifacts for PHP 8.0
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: Prebuilt package for PHP 8.0
-          path: 'dist/*forPHP8.0*'
-          if-no-files-found: ignore
-      - name: Archive artifacts for PHP 8.1
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: Prebuilt package for PHP 8.1
-          path: 'dist/*forPHP8.1*'
-          if-no-files-found: ignore
-      - name: Archive artifacts for PHP 8.2
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: Prebuilt package for PHP 8.2
-          path: 'dist/*forPHP8.2*'
-          if-no-files-found: ignore
+          name: Prebuilt packages (all)
+          path: 'dist/'
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: 'dist'
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: "dist/*"
+          files: |
+            "dist/*"
+
+  delete_artifacts:
+    needs: [ individual_artifacts, release ]
+    if: ${{ always() }}
+    name: Delete temporary artifact
+    runs-on: ubuntu-latest
+    steps:
+      - uses: geekyeggo/delete-artifact@v2
+        with:
+          name: Prebuilt packages (all)
+          failOnError: false
