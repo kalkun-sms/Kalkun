@@ -89,7 +89,7 @@ jobs:
             DEB_VERSION=$(echo ${KALKUN_VERSION} | sed -e "s/-/~/g")-1 ; \
             rm debian/changelog
             dch --package kalkun --newversion="$DEB_VERSION" --create $DEB_VERSION ; \
-            gbp export-orig --upstream-tag=$(git tag --points-at ${GIT_BRANCH}) --compression=xz ; \
+            gbp export-orig --no-pristine-tar --upstream-tag=$(git tag --points-at ${GIT_BRANCH}) --compression=xz ; \
           else \
             DEB_VERSION=$(echo $KALKUN_VERSION | sed -e "s/-/~/g")~${LAST_COMMIT_DATE} ; \
             gbp dch --new-version="$DEB_VERSION" --snapshot --ignore-branch ; \
