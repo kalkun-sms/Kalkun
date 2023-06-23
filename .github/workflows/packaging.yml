@@ -12,6 +12,8 @@ jobs:
   debian:
     name: Debian package
     runs-on: ubuntu-22.04
+    env:
+      KEY_ID: ${{ vars.KALKUN_GITHUB_WORKFLOW_PACKAGER_KEY_FINGERPRINT }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -19,104 +21,276 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y git-buildpackage build-essential equivs
+
+          # For kalkun source build dependency
+          sudo apt-get install -y pkg-php-tools dh-apache2
+
+          # For sphinxcontrib-phpdomain source build dependency
+          sudo apt-get install -y dh-python
+
+          # For backportpackage
+          sudo apt-get install -y ubuntu-dev-tools
+
           cd ~
+      - name: Import GPG key & related stuff
+        env:
+          PUB_KEY: ${{ secrets.KALKUN_GITHUB_WORKFLOW_PACKAGER_KEY_PRIVATE }}
+          PUB_KEY_PASS: ${{ secrets.KALKUN_GITHUB_WORKFLOW_PACKAGER_KEY_PASSPHRASE }}
+          KEYGRIP: ${{ secrets.KALKUN_GITHUB_WORKFLOW_PACKAGER_KEY_KEYGRIP }}
+        run: |
+          # As per: https://stackoverflow.com/a/55032706/15401262
+          export GPG_TTY=$(tty)
+
+          # Import private key
+          echo "$PUB_KEY" | gpg --batch --import
+
+          # List secret keys
+          gpg --list-secret-keys --with-keygrip
+
+          # Preset Password
+          echo "allow-preset-passphrase" >> ~/.gnupg/gpg-agent.conf
+          gpg-connect-agent reloadagent /bye
+          echo "$PUB_KEY_PASS" | /usr/lib/gnupg/gpg-preset-passphrase --preset "$KEYGRIP"
+      - name: Configure dput
+        run: |
+          cp -a utils/launchpad/dput.cf ~/.dput.cf
+          sed -i "s/%LAUNCHPAD_USER_NAME%/${{ vars.LAUNCHPAD_USER_NAME }}/" ~/.dput.cf
       - name: Set env
         run: |
-          echo "LAST_COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-          echo "LAST_COMMIT_DATE=$(git log -1 --date=format:%Y%m%d --format=%cd)" >> $GITHUB_ENV
-          echo "KALKUN_VERSION=$(grep kalkun_version application/config/kalkun_settings.php | cut -d "'" -f 4)" >> $GITHUB_ENV
-          echo "DEBEMAIL=none@domain.tld" >> $GITHUB_ENV
-          echo "DEBFULLNAME='Github Actions Deb Builder for Kalkun'" >> $GITHUB_ENV
-      - name: Build dependencies
+          echo "DEBEMAIL=packager@kalkun.invalid" >> $GITHUB_ENV
+          echo "DEBFULLNAME=Kalkun github workflow packager" >> $GITHUB_ENV
+          if [[ "$(git tag --points-at ${GIT_BRANCH})" != "" ]]; then \
+            echo "DPUT_UPLOAD_SERVER=kalkun-releases" >> $GITHUB_ENV
+          else \
+            echo "DPUT_UPLOAD_SERVER=kalkun-snapshots" >> $GITHUB_ENV
+          fi
+      - name: Git config user
+        run: |
+          git config user.name "$DEBFULLNAME"
+          git config user.email "$DEBEMAIL"
+      - name: Build kalkun build-dependencies
         run: |
           set -x
+
           # get the packages from debian salsa servers as they have not entered Debian yet
+
+          REPOS_TO_BUILD=()
+
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-datto-json-rpc")
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-datto-json-rpc-http")
+
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-giggsey-locale")
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-giggsey-libphonenumber")
+
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-kissifrot-php-ixr")
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-league-csv")
+
+          REPOS_TO_BUILD+=("https://salsa.debian.org/bastif/sphinxcontrib-phpdomain")
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-codeigniter-framework")
 
           mkdir -p ~/deps
           cd ~/deps
-          gbp clone https://salsa.debian.org/php-team/pear/php-codeigniter-framework
-          gbp clone https://salsa.debian.org/php-team/pear/php-datto-json-rpc
-          gbp clone https://salsa.debian.org/php-team/pear/php-datto-json-rpc-http
-          gbp clone https://salsa.debian.org/php-team/pear/php-giggsey-locale
-          gbp clone https://salsa.debian.org/php-team/pear/php-giggsey-libphonenumber
-          gbp clone https://salsa.debian.org/php-team/pear/php-kissifrot-php-ixr
-          gbp clone https://salsa.debian.org/php-team/pear/php-league-csv
-          gbp clone https://salsa.debian.org/bastif/sphinxcontrib-phpdomain
 
-          # First build php-giggsey-locale because it is a dependency to build php-giggsey-libphonenumber
-          cd php-giggsey-locale ; \
-          mk-build-deps --install --remove --root-cmd sudo --tool='apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes' debian/control ; \
-          rm -f $(dpkg-parsechangelog -S Source)-build-deps_* ; \
-          gbp export-orig ; \
-          dpkg-buildpackage -d ; \
-          cd ~/deps ; \
-          # Install php-giggsey-locale
-          sudo apt-get install ./php-giggsey-locale*.deb
+          DL_DIR="$(realpath .)"
 
-          # Build sphinxcontrib-phpdomain (required by php-codeigniter-framework)
-          cd sphinxcontrib-phpdomain ; \
-          mk-build-deps --install --remove --root-cmd sudo --tool='apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes' debian/control ; \
-          rm -f $(dpkg-parsechangelog -S Source)-build-deps_* ; \
-          gbp export-orig ; \
-          dpkg-buildpackage -d ; \
-          cd ~/deps ; \
-          # Install python3-sphinxcontrib.phpdomain
-          sudo apt-get install ./python3-sphinxcontrib.phpdomain*.deb
+          BUILD_DEPS_DSC=()
+          # debhelper13 for focal (from focal-backports)
+          BUILD_DEPS_DSC+=("focal|http://archive.ubuntu.com/ubuntu/pool/main/d/debhelper/debhelper_13.6ubuntu1~bpo20.04.1.dsc")
+          # pkg-php-tools for focal (from jammy) - Don't use it, because it requires the dependencies to conform to the new way php-pkg-tools work, and in focal, the packages don't support that.
+          #BUILD_DEPS_DSC+=("focal|http://archive.ubuntu.com/ubuntu/pool/main/p/pkg-php-tools/pkg-php-tools_1.42build1.dsc")
+          # Upload somes dependencies to the "kalkun-build-deps" PPA for focal
 
-          for dir in $(find -type d -maxdepth 1 -mindepth 1); do \
-            cd $dir; \
-            mk-build-deps --install --remove --root-cmd sudo --tool='apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes' debian/control ; \
-            rm -f $(dpkg-parsechangelog -S Source)-build-deps_* ; \
-            gbp export-orig ; \
-            dpkg-buildpackage -d ; \
-            cd ~/deps ; \
+          for dep in "${BUILD_DEPS_DSC[@]}"; do
+            dep_distrib="$(cut -d "|" -f 1 <<< "$dep")"
+            dep_dsc="$(cut -d "|" -f 2- <<< "$dep")"
+            if [[ $(ubuntu-distro-info --supported) =~ $dep_distrib ]]; then
+              # Don't fail on error (for example in case the URL throws 404 error)
+              set +e
+
+              backportpackage \
+                --upload "kalkun-build-deps" \
+                --yes \
+                --release-pocket \
+                --suffix "~ppa1" \
+                --destination "$dep_distrib" \
+                --key "$KEY_ID" \
+                "$dep_dsc"
+
+              set -e
+            fi
           done
-      - name: Build kalkun packages
+
+          for repo in "${REPOS_TO_BUILD[@]}"; do
+            repo_dir="$(echo "$repo" | rev | cut -d "/" -f 1 | rev)"
+
+            cd "$DL_DIR"
+            gbp clone "$repo" $repo_dir
+
+            cd "$DL_DIR/$repo_dir"
+            DCH_DISTRIB=$(dpkg-parsechangelog -S Distribution)
+            if [ ${DCH_DISTRIB,,} = "unreleased" ]; then
+              LAST_COMMIT_HASH="$(git rev-parse --short HEAD)"
+              LAST_COMMIT_DATE="$(git log -1 --date=format:%Y%m%d%H%M --format=%cd)"
+              LAST_COMMIT_DATE_H="$(git log -1 --date=format:%Y-%m-%d\ %H:%M --format=%cd)"
+              dch --local "~~${LAST_COMMIT_DATE}.${LAST_COMMIT_HASH}." ""
+              dch "Snapshot based on package source repository at commit $LAST_COMMIT_HASH, dated $LAST_COMMIT_DATE_H."
+              git add debian/changelog
+              git commit -m "update changelog"
+            fi
+
+            gbp export-orig
+            dpkg-buildpackage -d -S --sign-key="$KEY_ID"
+
+            for suite in $(ubuntu-distro-info --supported); do
+
+              if [ "$suite" = "focal" ]; then
+                if [ "$(dpkg-parsechangelog -S Source)" = "php-league-csv" ]; then
+                  # focal runs PHP 7.4, league/csv 9.8.0 is the last version supporting php7.4
+                  git checkout debian/9.8.0-1
+                  gbp export-orig
+                  currently_marked_released=1
+                fi
+
+                sed -i 's/dh-sequence-phpcomposer/pkg-php-tools/' debian/control
+                sed -i 's/\(pkg-php-tools\).*/\1,/' debian/control
+                if grep -q pkg-php-tools debian/control; then
+                  sed -i 's/dh $@/dh $@ --with phpcomposer/' debian/rules
+                fi
+
+                if [ ${DCH_DISTRIB,,} != "unreleased" ] || [ "a$currently_marked_released" = "a1" ]; then
+                  dch --local "~" ""
+                  currently_marked_released=0
+                else
+                  dch --local "~~${suite}" ""
+                fi
+                dch "Fix Build-Depends in d/control & d/rules to work on $suite"
+                dpkg-buildpackage -d -S --sign-key="$KEY_ID"
+              fi
+
+              backportpackage \
+                --upload "${DPUT_UPLOAD_SERVER}" \
+                --yes \
+                --workdir $(mktemp -d /tmp/$(dpkg-parsechangelog -S Source).XXX) \
+                --release-pocket \
+                --suffix "~ppa1" \
+                --destination "$suite" \
+                --key "$KEY_ID" \
+                ../"$(dpkg-parsechangelog -S Source)"_$(dpkg-parsechangelog -S Version).dsc
+
+              if [ "$suite" = "focal" ]; then
+                # Revert the changes for focal
+                git checkout debian/rules debian/control debian/changelog
+                if [ "$(dpkg-parsechangelog -S Source)" = "php-league-csv" ]; then
+                  git checkout debian/latest
+                fi
+              fi
+            done
+
+          done
+
+          cd "$DL_DIR"
+          ls -1 *.dsc
+
+      - name: Build kalkun
         run: |
           set -x
 
-          # Download the only the debian folder from debian salsa servers to be able to build kalkun
+          LAST_U_COMMIT_HASH="$(git rev-parse --short HEAD)"
+          LAST_U_COMMIT_DATE="$(git log -1 --date=format:%Y%m%d%H%M --format=%cd)"
+          LAST_U_COMMIT_DATE_H="$(git log -1 --date=format:%Y-%m-%d\ %H:%M --format=%cd)"
+          UVERSION="$(grep kalkun_version application/config/kalkun_settings.php | cut -d "'" -f 4)"
+
+          # Download only the debian folder from debian salsa servers to be able to build kalkun
           # This adds only the debian folder to $GITHUB_REF_NAME to be able to build the packages
           git remote add debian https://salsa.debian.org/bastif/kalkun.git
           git fetch debian
           git checkout -b debian_branch debian/debian/latest
+          LAST_D_COMMIT_HASH="$(git rev-parse --short HEAD)"
+          LAST_D_COMMIT_DATE="$(git log -1 --date=format:%Y%m%d%H%M --format=%cd)"
+          LAST_D_COMMIT_DATE_H="$(git log -1 --date=format:%Y-%m-%d\ %H:%M --format=%cd)"
           git checkout $GITHUB_REF_NAME
           git checkout debian_branch -- debian
           git status
 
-          if [[ "$(git tag --points-at ${GIT_BRANCH})" != "" ]]; then \
-            KALKUN_VERSION="$(git tag --points-at ${GIT_BRANCH} | sed "s/^v//")" ; \
-            DEB_VERSION=$(echo ${KALKUN_VERSION} | sed -e "s/-/~/g")-1 ; \
-            rm debian/changelog
-            dch --package kalkun --newversion="$DEB_VERSION" --create $DEB_VERSION ; \
-            gbp export-orig --no-pristine-tar --upstream-tag=$(git tag --points-at ${GIT_BRANCH}) --compression=xz ; \
+          if [[ "$(git tag --points-at ${GIT_BRANCH})" != "" ]]; then
+            TAG_VERSION="$(git tag --points-at ${GIT_BRANCH} | sed "s/^v//")"
+            UVERSIONMANGLED=$(echo ${TAG_VERSION} | sed -e "s/-/~/g")
+            dch -v "${UVERSIONMANGLED}-1~${LAST_D_COMMIT_DATE}.${LAST_D_COMMIT_HASH}" --force-bad-version ""
+            dch "Snapshot based on:"
+            dch "  upstream tag v$TAG_VERSION."
+            dch "  debianization from package source repository at commit $LAST_D_COMMIT_HASH, dated $LAST_D_COMMIT_DATE_H."
+            gbp export-orig --no-pristine-tar --upstream-tag=$(git tag --points-at ${GIT_BRANCH}) --compression=xz
           else \
-            DEB_VERSION=$(echo $KALKUN_VERSION | sed -e "s/-/~/g")~${LAST_COMMIT_DATE} ; \
-            gbp dch --new-version="$DEB_VERSION" --snapshot --ignore-branch ; \
-            # Append debian version to version number ; \
-            sed -i -e "1s/)/-1)/" debian/changelog ; \
+            UVERSIONMANGLED=$(echo "${UVERSION}" | sed -e "s/-/~/g" -e "s/~dev/~~dev/")
+            gbp dch \
+              --new-version="${UVERSIONMANGLED}" \
+              --snapshot \
+              --snapshot-number "${LAST_U_COMMIT_DATE}" \
+              --ignore-branch \
+              --no-git-author \
+              --since=HEAD \
+              debian \
+            # Append debian version to version number (this is because we use --snapshot)
+            dch --local "-1~${LAST_D_COMMIT_DATE}.${LAST_D_COMMIT_HASH}" ""
+            dch "Snapshot based on:"
+            dch "  upstream repository at commit $LAST_U_COMMIT_HASH, dated $LAST_U_COMMIT_DATE_H."
+            dch "  debianization from package source repository at commit $LAST_D_COMMIT_HASH, dated $LAST_D_COMMIT_DATE_H."
             gbp export-orig --no-pristine-tar --upstream-tree=BRANCH --upstream-branch=$(git rev-parse --abbrev-ref HEAD) --compression=xz ; \
           fi
 
-          dpkg-buildpackage -d
-      - name: Copy source & binary packages, and dependencies
-        if: always()
+          git add debian/changelog
+          git commit -m "update changelog"
+          dpkg-buildpackage -d -S --sign-key="$KEY_ID"
+
+          for suite in $(ubuntu-distro-info --supported); do
+            if [ "$suite" = "focal" ]; then
+              sed -i 's/dh-sequence-phpcomposer/pkg-php-tools/' debian/control
+              sed -i 's/\(pkg-php-tools\).*/\1,/' debian/control
+              if grep -q pkg-php-tools debian/control; then
+                sed -i 's/dh $@/dh $@ --with phpcomposer/' debian/rules
+              fi
+
+              sed -i 's/\(php-random-compat\).*/\1,/' debian/control
+
+              dch --local "~~${suite}" ""
+              dch "Fix Build-Depends in d/control & d/rules to work on $suite"
+              dpkg-buildpackage -d -S --sign-key="$KEY_ID"
+            fi
+
+            backportpackage \
+              --upload "${DPUT_UPLOAD_SERVER}" \
+              --yes \
+              --workdir $(mktemp -d /tmp/$(dpkg-parsechangelog -S Source).XXX) \
+              --release-pocket \
+              --suffix "~ppa1" \
+              --destination "$suite" \
+              --key "$KEY_ID" \
+              ../"$(dpkg-parsechangelog -S Source)"_$(dpkg-parsechangelog -S Version).dsc
+
+            if [ "$suite" = "focal" ]; then
+              # Revert the changes for focal
+              git checkout debian/rules debian/control debian/changelog
+            fi
+          done
+
+      - name: Copy source packages
+        if: true == false
         run: |
           set -x
           mkdir -p ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
           dcmd mv ../*.changes ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
-          cp ~/deps/*.deb ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
+          dcmd mv ~/deps/*.changes ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
           cd ~ && tar -cvf Kalkun_${GITHUB_REF_NAME}_debianBundle.tar Kalkun_${GITHUB_REF_NAME}_debianBundle
           echo "my_home=$HOME" >> $GITHUB_ENV
       - name: Archive artifacts
-        if: always()
+        if: true == false
         uses: actions/upload-artifact@v3
         with:
           name: Debian packages (source & binary)
           path: ~/Kalkun_${{ github.ref_name }}_debianBundle/*
           if-no-files-found: ignore
       - name: Archive artifacts
-        if: always()
+        if: true == false
         uses: actions/upload-artifact@v3
         with:
           name: Debian packages (source & binary) tarball
@@ -224,7 +398,7 @@ jobs:
 
   release:
     name: Create release and add packages
-    needs: [ prebuilt, debian ]
+    needs: [ prebuilt ]
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact of 'prebuilt packages'
@@ -232,12 +406,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: Prebuilt packages (all)
-          path: 'dist/'
-      - name: Download artifact of 'Debian packages'
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/download-artifact@v3
-        with:
-          name: Debian packages (source & binary) tarball
           path: 'dist/'
       - name: Display structure of downloaded files
         if: startsWith(github.ref, 'refs/tags/')
@@ -268,8 +436,4 @@ jobs:
       - uses: geekyeggo/delete-artifact@v2
         with:
           name: Prebuilt packages (all)
-          failOnError: false
-      - uses: geekyeggo/delete-artifact@v2
-        with:
-          name: Debian packages (source & binary) tarball
           failOnError: false
