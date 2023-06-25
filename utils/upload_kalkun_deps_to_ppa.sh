@@ -220,7 +220,28 @@ else
 
 fi
 
-dpkg-buildpackage -d -S --sign-key="$KEY_ID"
+if [ "a$CI" == "atrue" ]; then
+  # Build binary package
+  export DEB_BUILD_PROFILES="nocheck"
+  export DEB_BUILD_OPTIONS="nocheck"
+
+  # Install build dependencies
+  mk-build-deps --install --remove --root-cmd sudo --tool='apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes' debian/control
+  rm -f "$(dpkg-parsechangelog -S Source)"-build-deps_*
+
+  # Build binary packages
+  dpkg-buildpackage -d --sign-key="$KEY_ID"
+
+  # Install binary packages in case they are required for the next steps.
+  dcmd --deb sudo apt-get install -y ../"$(dpkg-parsechangelog -S Source)"_"$(dpkg-parsechangelog -S Version)"_amd64.changes
+
+  # Copy build products
+  mkdir -p ~/build_products
+  dcmd cp ../"$(dpkg-parsechangelog -S Source)"_"$(dpkg-parsechangelog -S Version)"_amd64.changes ~/build_products
+else
+  # Build only source package
+  dpkg-buildpackage -d -S --sign-key="$KEY_ID"
+fi
 
 set +x
 

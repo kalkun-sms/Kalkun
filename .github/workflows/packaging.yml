@@ -87,6 +87,7 @@ jobs:
 
           REPOS_TO_BUILD=()
 
+          # Order matters so that build dependencies are installed before the packages requiring them.
           REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-datto-json-rpc")
           REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-datto-json-rpc-http")
 
@@ -109,24 +110,26 @@ jobs:
 
           ./utils/upload_kalkun_deps_to_ppa.sh -r "kalkun" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}"
 
-      - name: Copy source packages
-        if: true == false
+      - name: Copy source & binary packages, and dependencies
+        if: always()
         run: |
           set -x
           mkdir -p ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
-          dcmd mv ../*.changes ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
-          dcmd mv ~/deps/*.changes ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
+          # Copy kalkun source & binary packages
+          dcmd mv ~/build_products/kalkun*.changes ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
+          # Copy binary packages of dependencies
+          dcmd --deb mv ~/build_products/*.changes ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
           cd ~ && tar -cvf Kalkun_${GITHUB_REF_NAME}_debianBundle.tar Kalkun_${GITHUB_REF_NAME}_debianBundle
           echo "my_home=$HOME" >> $GITHUB_ENV
       - name: Archive artifacts
-        if: true == false
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: Debian packages (source & binary)
           path: ~/Kalkun_${{ github.ref_name }}_debianBundle/*
           if-no-files-found: ignore
       - name: Archive artifacts
-        if: true == false
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: Debian packages (source & binary) tarball
@@ -234,7 +237,7 @@ jobs:
 
   release:
     name: Create release and add packages
-    needs: [ prebuilt ]
+    needs: [ prebuilt, debian ]
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact of 'prebuilt packages'
@@ -242,6 +245,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: Prebuilt packages (all)
+          path: 'dist/'
+      - name: Download artifact of 'Debian packages'
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/download-artifact@v3
+        with:
+          name: Debian packages (source & binary) tarball
           path: 'dist/'
       - name: Display structure of downloaded files
         if: startsWith(github.ref, 'refs/tags/')
@@ -272,4 +281,8 @@ jobs:
       - uses: geekyeggo/delete-artifact@v2
         with:
           name: Prebuilt packages (all)
+          failOnError: false
+      - uses: geekyeggo/delete-artifact@v2
+        with:
+          name: Debian packages (source & binary) tarball
           failOnError: false
