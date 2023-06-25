@@ -555,7 +555,10 @@ class Plugins {
     public function trigger_activate_plugin($name)
     {
         // Call plugin activate function
-        @call_user_func($name."_activate");
+        if (function_exists($name."_install"))
+        {
+            @call_user_func($name."_activate");
+        }
     }
 
     /**
@@ -566,7 +569,10 @@ class Plugins {
     public function trigger_deactivate_plugin($name)
     {
         // Call our plugin deactivate function
-        @call_user_func($name."_deactivate");
+        if (function_exists($name."_install"))
+        {
+            @call_user_func($name."_deactivate");
+        }
     }
 
     /**
@@ -577,7 +583,10 @@ class Plugins {
     public function trigger_install_plugin($name)
     {
         // Call our plugin deactivate function
-        @call_user_func($name."_install");
+        if (function_exists($name."_install"))
+        {
+            @call_user_func($name."_install");
+        }
     }
 
     /**
