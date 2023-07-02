@@ -280,13 +280,13 @@ for suite in "${distribs[@]}"; do
     git checkout -b "bpp_$suite"
 
     sed -i 's/dh-sequence-phpcomposer/pkg-php-tools/' debian/control
-    sed -i 's/\(pkg-php-tools\).*/\1,/' debian/control
+    perl -pi -e 's/(pkg-php-tools).*?,(.*)/\1,\2/' debian/control
     if grep -q pkg-php-tools debian/control; then
       sed -i 's/dh $@/dh $@ --with phpcomposer/' debian/rules
     fi
 
     if [ "$(dpkg-parsechangelog -S Source)" = "kalkun" ]; then
-      sed -i 's/\(php-random-compat\).*/\1,/' debian/control
+      perl -pi -e 's/(php-random-compat).*?,(.*)/\1,\2/' debian/control
     fi
 
     git add debian/control debian/rules
