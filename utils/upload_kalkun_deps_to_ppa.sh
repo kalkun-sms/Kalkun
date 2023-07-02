@@ -97,6 +97,8 @@ if [ -z "$KEY_ID" ]; then
   exit 1
 fi
 
+vendor="$(dpkg-vendor --query vendor)"
+vendor="${vendor,,}"
 package="$(basename "$repo")"
 
 workdir="$(mktemp -d "/tmp/workdir_${package}.XXX")" || exit 1
@@ -254,10 +256,9 @@ for suite in "${distribs[@]}"; do
   set -x
 
   if [ "$suite" = "focal" ]; then
-    if [ "$(dpkg-parsechangelog -S Source)" = "php-league-csv" ]; then
-      # focal runs PHP 7.4, league/csv 9.8.0 is the last version supporting php7.4
-      git checkout -b "bpp_$suite" debian/9.8.0-1
-      DCH_DISTRIB="$(git show debian/9.8.0-1:debian/changelog | dpkg-parsechangelog -l - -S Distribution)"
+    if git rev-parse --quiet --verify "origin/$vendor/$suite" > /dev/null; then
+      git checkout -b "bpp_$suite" "origin/$vendor/$suite"
+      DCH_DISTRIB="$(git show "bpp_$suite":debian/changelog | dpkg-parsechangelog -l - -S Distribution)"
       gbp export-orig
     else
       git checkout -b "bpp_$suite" bpp_general
