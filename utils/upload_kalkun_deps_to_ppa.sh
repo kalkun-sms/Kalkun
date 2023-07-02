@@ -255,15 +255,29 @@ for suite in "${distribs[@]}"; do
   echo
   set -x
 
-  if [ "$suite" = "focal" ]; then
-    if git rev-parse --quiet --verify "origin/$vendor/$suite" > /dev/null; then
-      git checkout -b "bpp_$suite" "origin/$vendor/$suite"
-      DCH_DISTRIB="$(git show "bpp_$suite":debian/changelog | dpkg-parsechangelog -l - -S Distribution)"
-      gbp export-orig
-    else
-      git checkout -b "bpp_$suite" bpp_general
-      DCH_DISTRIB="$(git show "$ORIGINAL_BRANCH":debian/changelog | dpkg-parsechangelog -l - -S Distribution)"
+  # If there exists a branch for this suite in the repo, switch to it
+  if git rev-parse --quiet --verify "origin/$vendor/$suite" > /dev/null; then
+    git checkout -f "origin/$vendor/$suite"
+    DCH_DISTRIB="$(git show "origin/$vendor/$suite":debian/changelog | dpkg-parsechangelog -l - -S Distribution)"
+    if [ "${DCH_DISTRIB,,}" = "unreleased" ]; then
+      LAST_COMMIT_HASH="$(git rev-parse --short HEAD)"
+      LAST_COMMIT_DATE="$(git log -1 --date=format:%Y%m%d%H%M --format=%cd)"
+      LAST_COMMIT_DATE_H="$(git log -1 --date=format:%Y-%m-%d\ %H:%M --format=%cd)"
+      dch --local "~~${LAST_COMMIT_DATE}.${LAST_COMMIT_HASH}." ""
+      dch "Snapshot based on package source repository at branch '$vendor/$suite', commit $LAST_COMMIT_HASH, dated $LAST_COMMIT_DATE_H."
+      git add debian/changelog
+      git commit -m "update changelog"
     fi
+    git checkout -f
+    gbp export-orig
+  else
+    git checkout -f bpp_general
+    DCH_DISTRIB=$(git show "$ORIGINAL_BRANCH":debian/changelog | dpkg-parsechangelog -l - -S Distribution)
+  fi
+
+  # Apply some changes when suite is 'focal'
+  if [ "$suite" = "focal" ]; then
+    git checkout -b "bpp_$suite"
 
     sed -i 's/dh-sequence-phpcomposer/pkg-php-tools/' debian/control
     sed -i 's/\(pkg-php-tools\).*/\1,/' debian/control
@@ -292,9 +306,6 @@ for suite in "${distribs[@]}"; do
 
     git checkout -f
     dpkg-buildpackage -d -S --sign-key="$KEY_ID"
-  else
-    # Be sure we are on the bpp_general branch (needed for subsequent calls to dpkg-parsechangelog)
-    git checkout -f bpp_general
   fi
 
   workdir_bpp="$workdir/bpp_$suite"
