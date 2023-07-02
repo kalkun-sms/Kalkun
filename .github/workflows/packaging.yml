@@ -94,6 +94,7 @@ jobs:
           REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-giggsey-locale")
           REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-giggsey-libphonenumber")
 
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-econea-nusoap")
           REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-kissifrot-php-ixr")
           REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-league-csv")
 
