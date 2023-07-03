@@ -33,12 +33,12 @@ class Plugins {
     public static $instance;
     
     // Action statics
-    public static $actions;
+    public static $actions = [];
     public static $current_action;
     public static $run_actions;
     
     // Plugins
-    public static $plugins_pool;
+    public static $plugins_pool = [];
     public static $plugins_active;
     
     // Directory
