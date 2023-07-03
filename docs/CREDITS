@@ -20,6 +20,7 @@ Chart.js API 4.3.0 <https://www.chartjs.org>
 b8 Bayesian spam filter 0.7 <http://nasauber.de/opensource/b8/>
 Notification sound: 'ponderous.m4a' - Converted from Ponderous.ogg to M4A based on the work of Aarni Koskela <akx@iki.fi> at <https://github.com/akx/Notifications/>, License: https://spdx.org/licenses/CC0-1.0.html or https://spdx.org/licenses/CC-BY-3.0.html
 jQuery Word/Character Counter <http://www.jamesfairhurst.co.uk/posts/view/jquery_word_character_counter>
+Modernizr 2.8.3 <https://github.com/Modernizr/Modernizr> - License: BSD and MIT
 
 Developer
 ==========
