@@ -143,7 +143,7 @@ class Tmobilecz_model extends Nongammu_model {
 		$cookies = $cache_path.'cookie_'.__CLASS__.'_'.$uid;
 		if ( ! is_really_writable($cache_path))
 		{
-			return "Cookie file ${cookies} not writable";
+			return "Cookie file {$cookies} not writable";
 		}
 		if ((($cookiemt = filemtime($cookies)) !== FALSE) && ((time() - $cookiemt) > 300))
 		{ //cookies older than 5mins

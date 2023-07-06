@@ -4,7 +4,7 @@ CodeIgniter 3.1.11 <https://www.codeigniter.com/>
 CodeIgniter extra:
 	* CI-Plugin-System commit c7c6b6d19b198cff6f1723f6911d317232a97fdd (2013-09-23) <https://github.com/Vheissu/CI-Plugin-System>
 	* HMVC 5.3.5 commit #2d6d33922276 <https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc>
-jQuery 3.6.1 <https://jquery.com/>
+jQuery 3.7.0 <https://jquery.com/>
 jQuery UI 1.13.2 <https://jqueryui.com/>
     * On the download page, select: [ Autocomplete, Datepicker, Dialog, Fade Effect, jQuery 1.8+ support (since we use jquery < 3.4 as of jquery-ui 1.13), theme=base] + their dependencies
     * jQuery UI Datepicker i18n (from version 1.13.2): https://github.com/jquery/jquery-ui/tree/master/ui/i18n - License: MIT
@@ -16,10 +16,11 @@ jQuery Plugin:
 	* jQuery Tags Input Revisited Plugin 2.1 <https://github.com/underovsky/jquery-tagsinput-revisited>
 	* Emoticon 0.5 <https://users.dcc.uchile.cl/~skreft/emoticon/>
 	* Form 4.3.0 <https://malsup.com/jquery/form/> or <https://github.com/jquery-form/form>
-Chart.js API 2.9.3 <https://www.chartjs.org>
+Chart.js API 4.3.0 <https://www.chartjs.org>
 b8 Bayesian spam filter 0.7 <http://nasauber.de/opensource/b8/>
 Notification sound: 'ponderous.m4a' - Converted from Ponderous.ogg to M4A based on the work of Aarni Koskela <akx@iki.fi> at <https://github.com/akx/Notifications/>, License: https://spdx.org/licenses/CC0-1.0.html or https://spdx.org/licenses/CC-BY-3.0.html
 jQuery Word/Character Counter <http://www.jamesfairhurst.co.uk/posts/view/jquery_word_character_counter>
+Modernizr 2.8.3 <https://github.com/Modernizr/Modernizr> - License: BSD and MIT
 
 Developer
 ==========
@@ -47,3 +48,4 @@ Spanish - Augusto Gerardo Sotelo Labarca <augusto.sotelo@dreamcode.cl>
 Turkish - Hasan Ozkul <hasanozkul@gmail.com>
 Polish - Mariusz Białończyk <manio@skyboo.net>
 Slovak - Max Samael <max.samael@gmail.com>
+Norwegian - Syvert Fossdal <syvert@online.no>

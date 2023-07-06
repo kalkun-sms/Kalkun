@@ -157,9 +157,8 @@ CREATE TABLE IF NOT EXISTS `user_settings` (
 -- Dumping data for table `user_settings`
 --
 
-INSERT INTO `user_settings` (`id_user`, `theme`, `signature`, `permanent_delete`, `paging`, `bg_image`, `delivery_report`, `language`, `conversation_sort`) VALUES
-(1, 'green', 'false;--\nPut your signature here', 'false', 20, 'true;background.jpg', 'default' , 'english', 'asc');
-
+INSERT INTO `user_settings` VALUES (1, 'green', 'false;--
+Put your signature here', 'false', 20, 'true;background.jpg', 'default', 'english', 'asc', 'US');
 
 -- --------------------------------------------------------
 

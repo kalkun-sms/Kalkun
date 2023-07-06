@@ -44,7 +44,7 @@ Briefly, this is what has to be installed & configured prior to installing Kalku
 ### Installation
 You can find [detailed installation instructions on the wiki](https://github.com/kalkun-sms/Kalkun/wiki/Installation).
 
-There are also Debian packages produced on every commit. Find them on the [github actions](https://github.com/kalkun-sms/Kalkun/actions?query=workflow%3APackaging++) page. [Detailed installation instructions of the Debian package](https://github.com/kalkun-sms/Kalkun/wiki/Installation#Debian-and-related) are on the wiki.
+There are also Debian & derivatives (Ubuntu...) packages produced for releases and snapshots on every commit. [Detailed installation instructions to use the Debian package](https://github.com/kalkun-sms/Kalkun/wiki/Installation#Debian-and-related) are on the wiki.
 
 #### Brief installation steps
 Find the [detailed installation steps](https://github.com/kalkun-sms/Kalkun/wiki/Installation) on the wiki.

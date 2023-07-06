@@ -18,13 +18,13 @@
  * @subpackage	Plugin
  * @category	Controllers
  */
-include_once(APPPATH.'plugins/rest_api/libraries/REST_Controller.php');
+include_once(APPPATH.'plugins/rest_api/libraries/RestController.php');
 
-class Rest_api extends REST_Controller {
+class Rest_api extends RestController {
 
 	function __construct()
 	{
-		parent::__construct(FALSE);
+		parent::__construct();
 	}
 
 	/**

@@ -352,7 +352,7 @@ class Messages extends MY_Controller {
 				$tmp_dest = explode(',', $this->input->post('manualvalue'));
 				foreach ($tmp_dest as $key => $tmp)
 				{
-					$this->_phone_number_validation($this->input->post('manualvalue'));
+					$this->_phone_number_validation($tmp);
 					$dest[$key] = phone_format_e164($tmp);
 				}
 				break;

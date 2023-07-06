@@ -1,0 +1,20 @@
+[kalkun-snapshots]
+fqdn = ppa.launchpad.net
+method = ftp
+incoming = ~%LAUNCHPAD_USER_NAME%/ubuntu/kalkun-snapshots/
+login = anonymous
+allow_unsigned_uploads = 0
+
+[kalkun-releases]
+fqdn = ppa.launchpad.net
+method = ftp
+incoming = ~%LAUNCHPAD_USER_NAME%/ubuntu/kalkun-releases/
+login = anonymous
+allow_unsigned_uploads = 0
+
+[kalkun-build-deps]
+fqdn = ppa.launchpad.net
+method = ftp
+incoming = ~%LAUNCHPAD_USER_NAME%/ubuntu/kalkun-build-deps/
+login = anonymous
+allow_unsigned_uploads = 0

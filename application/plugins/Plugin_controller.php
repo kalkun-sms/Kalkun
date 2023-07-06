@@ -31,6 +31,8 @@ class Plugin_controller extends MY_Controller {
 	{
 		parent::__construct($login);
 
+		$this->load->helper('i18n');
+
 		// Prevent non-admin user
 		if ($login && $this->session->userdata('level') !== 'admin')
 		{
@@ -53,8 +55,19 @@ class Plugin_controller extends MY_Controller {
 		$check = $CI->db->where('plugin_system_name', $this->plugin_name)->get('plugins');
 		if ($check->num_rows() !== 1)
 		{
-			$this->session->set_flashdata('notif', tr_raw('Plugin {0} is not installed.', NULL, $this->plugin_name));
-			redirect('pluginss');
+			$message = tr_raw('Plugin {0} is not installed.', NULL, $this->plugin_name);
+			$this->session->set_flashdata('notif', $message);
+			if ($this->plugin_name === 'rest_api')
+			{
+				// Special case for rest_api. If one makes a call to the rest_api while the plugin
+				// is not installed, the user wouldn't be notified because with rest_api plugin
+				// we don't use Kalkun's built-in authentification mechanism.
+				show_error($message, 503);
+			}
+			else
+			{
+				redirect('pluginss');
+			}
 		}
 
 		// Temporarily add the plugin path to package path to load language, config...

@@ -33,12 +33,12 @@ class Plugins {
     public static $instance;
     
     // Action statics
-    public static $actions;
+    public static $actions = [];
     public static $current_action;
     public static $run_actions;
     
     // Plugins
-    public static $plugins_pool;
+    public static $plugins_pool = [];
     public static $plugins_active;
     
     // Directory
@@ -224,7 +224,8 @@ class Plugins {
                 }
             
                 // Run the install action for this plugin
-                self::do_action('install_' . $name); 
+                $this->trigger_install_plugin($name);
+
             }   
         }
     }
@@ -328,9 +329,6 @@ class Plugins {
             {
                 $this->_ci->db->insert('plugins', array('plugin_system_name' => $name));   
             }
-            
-            // Run the activate hook
-            self::do_action('activate_' . $name);
         }
     }
     
@@ -351,9 +349,6 @@ class Plugins {
             $this->_ci->db->where('plugin_system_name', $name)->delete('plugins');
             if (isset(self::$plugins_pool[$name]))
                 self::$messages[] = "Plugin ".self::$plugins_pool[$name]['plugin_info']['plugin_name']." has been deactivated!";
-            
-            // Deactivate hook
-            self::do_action('deactivate_' . $name);
         }        
     }
     
@@ -444,7 +439,7 @@ class Plugins {
         {
             return $arguments;
         }
-        
+
         // Set the current running hook to this
         self::$current_action = $name;
         
@@ -551,8 +546,49 @@ class Plugins {
             return false;
         }
     }
-    
-    
+
+    /**
+    * Triggers the functionname_activate function when a plugin is activated
+    *
+    * @param mixed $name
+    */
+    public function trigger_activate_plugin($name)
+    {
+        // Call plugin activate function
+        if (function_exists($name."_install"))
+        {
+            @call_user_func($name."_activate");
+        }
+    }
+
+    /**
+    * Triggers the functionname_deactivate function when a plugin is deactivated
+    *
+    * @param mixed $name
+    */
+    public function trigger_deactivate_plugin($name)
+    {
+        // Call our plugin deactivate function
+        if (function_exists($name."_install"))
+        {
+            @call_user_func($name."_deactivate");
+        }
+    }
+
+    /**
+    * Triggers the functionname_install function when a plugin is first installed
+    *
+    * @param mixed $name
+    */
+    public function trigger_install_plugin($name)
+    {
+        // Call our plugin deactivate function
+        if (function_exists($name."_install"))
+        {
+            @call_user_func($name."_install");
+        }
+    }
+
     /**
     * Will print our information about all plugins and actions
     * neatly presented to the user.

@@ -1,7 +1,7 @@
 <?php $this->load->view('js_init/js_dashboard');?>
 
 <base href="<?= $this->config->item('base_url') ?>" />
-<script type="text/javascript" src="<?php echo $this->config->item('js_path');?>Chart.bundle.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->config->item('js_path');?>chart.umd.js"></script>
 
 <div align="right">
 	<a href="<?php echo site_url('kalkun/get_statistic/days');?>" class="stats-toggle"><?php echo tr('date_day');?></a>&nbsp; &nbsp;
@@ -16,26 +16,66 @@
 </div>
 
 <script>
-	var ctx = document.getElementById('myChart');
-	var myChart = new Chart(ctx, {
-		type: 'bar',
-		data: {
-			labels: [<?php echo tr_js('No data'); ?>],
-			datasets: [{
-				label: <?php echo tr_js('No data'); ?>,
-				data: [0]
-			}]
-		},
-		options: {
-			scales: {
-				yAxes: [{
-					ticks: {
-						beginAtZero: true
+	var chart_version_major;
+	if (typeof Chart.version === 'undefined') {
+		chart_version_major = 2;
+	} else {
+		// chartjs >= 3 does set the version variable
+		chart_version_major = parseInt(Chart.version.split(".")[0]);
+	}
+	//alert("version: " + chart_version_major );
+
+	var canvas = document.getElementById('myChart');
+
+	switch (chart_version_major) {
+		case 2:
+			var myChart = new Chart(canvas, {
+				type: 'bar',
+				data: {
+					labels: [<?php echo tr_js('No data'); ?>],
+					datasets: [{
+						label: <?php echo tr_js('No data'); ?>,
+						data: [0]
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
 					}
-				}]
-			}
-		}
-	});
+				}
+			});
+			break;
+		case 3:
+		case 4:
+			var myChart = new Chart(canvas, {
+				type: 'bar',
+				data: {
+					labels: [<?php echo tr_js('No data'); ?>],
+					datasets: [{
+						label: <?php echo tr_js('No data'); ?>,
+						data: [0]
+					}]
+				},
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true
+						}
+					}
+				}
+			});
+			break;
+		default:
+			var context = canvas.getContext("2d");
+			context.textAlign = 'center';
+			context.textBaseline = 'middle';
+			context.fillText("chartjs version " + chart_version_major + " is not supported.", (canvas.width / 2), (canvas.height / 2));
+			break;
+	}
 
 </script>
 

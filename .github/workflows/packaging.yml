@@ -11,126 +11,174 @@ on:
 jobs:
   debian:
     name: Debian package
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    env:
+      KEY_ID: ${{ vars.KALKUN_GITHUB_WORKFLOW_PACKAGER_KEY_FINGERPRINT }}
+      DPUT_CF: /home/runner/dput.cf
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install required packages
         run: |
           sudo apt-get update
-          sudo apt-get install -y git-buildpackage build-essential dh-apache2 pkg-php-tools phpab php-xdebug
+          sudo apt-get install -y git-buildpackage build-essential equivs
+
+          # For kalkun source build dependency
+          sudo apt-get install -y pkg-php-tools dh-apache2
+
+          # For sphinxcontrib-phpdomain source build dependency
+          sudo apt-get install -y dh-python
+
+          # For backportpackage
+          sudo apt-get install -y ubuntu-dev-tools
+
           cd ~
-          # These need to be more recent than the ones shipped in ubuntu focal (to build the dependencies)
-          # We need these versions to build the dependencies. The previous ones don't work well with php 7.4 that is in ubuntu focal.
-          wget http://ftp.us.debian.org/debian/pool/main/p/php-zeta-console-tools/php-zeta-console-tools_1.7.2-2_all.deb
-          wget http://ftp.us.debian.org/debian/pool/main/p/phpab/phpab_1.26.0-1_all.deb
-          # There is this crash with dh_phpcomposer on ubuntu focal
-          # Non-static method Pkgtools\Base\Overrides::override() cannot be called statically in /usr/share/php/pkgtools/base/dependencies.php:45
-          # So we update pkg-php-tools to version 1.40 (focal has 1.38)
-          wget http://ftp.us.debian.org/debian/pool/main/p/pkg-php-tools/pkg-php-tools_1.40_all.deb
-          # Get php-random-compat (build dependency on >= 2.0.20)
-          wget http://mirrors.kernel.org/ubuntu/pool/universe/p/php-random-compat/php-random-compat_2.0.21-1_all.deb
-          # Install the packages
-          sudo dpkg -i php-zeta-console-tools_1.7.2-2_all.deb phpab_1.26.0-1_all.deb pkg-php-tools_1.40_all.deb php-random-compat_2.0.21-1_all.deb
+      - name: Import GPG key & related stuff
+        env:
+          PUB_KEY: ${{ secrets.KALKUN_GITHUB_WORKFLOW_PACKAGER_KEY_PRIVATE }}
+          PUB_KEY_PASS: ${{ secrets.KALKUN_GITHUB_WORKFLOW_PACKAGER_KEY_PASSPHRASE }}
+          KEYGRIP: ${{ secrets.KALKUN_GITHUB_WORKFLOW_PACKAGER_KEY_KEYGRIP }}
+        run: |
+          # As per: https://stackoverflow.com/a/55032706/15401262
+          export GPG_TTY=$(tty)
+
+          # Import private key
+          echo "$PUB_KEY" | gpg --batch --import
+
+          # List secret keys
+          gpg --list-secret-keys --with-keygrip
+
+          # Preset Password
+          echo "allow-preset-passphrase" >> ~/.gnupg/gpg-agent.conf
+          gpg-connect-agent reloadagent /bye
+          echo "$PUB_KEY_PASS" | /usr/lib/gnupg/gpg-preset-passphrase --preset "$KEYGRIP"
+      - name: Configure dput
+        run: |
+          sed "s/%LAUNCHPAD_USER_NAME%/${{ vars.LAUNCHPAD_USER_NAME }}/" utils/launchpad/dput.cf.in > $DPUT_CF
       - name: Set env
         run: |
-          echo "LAST_COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-          echo "LAST_COMMIT_DATE=$(git log -1 --date=format:%Y%m%d --format=%cd)" >> $GITHUB_ENV
-          echo "KALKUN_VERSION=$(grep kalkun_version application/config/kalkun_settings.php | cut -d "'" -f 4)" >> $GITHUB_ENV
-          echo "DEBEMAIL=none@domain.tld" >> $GITHUB_ENV
-          echo "DEBFULLNAME='Github Actions Deb Builder for Kalkun'" >> $GITHUB_ENV
-      - name: Build dependencies
-        run: |
-          set -x
-          # get the packages from debian salsa servers as they have not entered Debian yet
-
-          mkdir -p ~/deps
-          cd ~/deps
-          gbp clone https://salsa.debian.org/php-team/pear/php-codeigniter-framework
-          gbp clone https://salsa.debian.org/php-team/pear/php-datto-json-rpc
-          gbp clone https://salsa.debian.org/php-team/pear/php-datto-json-rpc-http
-          gbp clone https://salsa.debian.org/php-team/pear/php-giggsey-locale
-          gbp clone https://salsa.debian.org/php-team/pear/php-giggsey-libphonenumber
-          gbp clone https://salsa.debian.org/php-team/pear/php-kissifrot-php-ixr
-          gbp clone https://salsa.debian.org/php-team/pear/php-league-csv
-
-          # Install some dependencies to be able to build the packages (for php-giggsey-locale & php-league-csv)
-          sudo apt-get install -y phpunit php-symfony-console php-symfony-filesystem
-          sudo apt-get install -y php-curl php-xdebug
-
-          # First build php-giggsey-locale because it is a dependency to build php-giggsey-libphonenumber
-          cd php-giggsey-locale ; \
-          gbp export-orig ; \
-          sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control ; \
-          dpkg-buildpackage -d ; \
-          cd ~/deps ; \
-          # Install php-giggsey-locale
-          sudo apt-get install ./php-giggsey-locale*.deb
-
-          # We apply a change with sed:
-          #  - depend on debhelper 12 (because ubuntu focal has only debhelper 12)
-          for dir in $(find -type d -maxdepth 1 -mindepth 1); do \
-            cd $dir; \
-            gbp export-orig ; \
-            sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control ; \
-            dpkg-buildpackage -d ; \
-            cd ~/deps ; \
-          done
-      - name: Build kalkun packages
-        run: |
-          set -x
-
-          # Download the only the debian folder from debian salsa servers to be able to build kalkun
-          # This adds only the debian folder to $GITHUB_REF_NAME to be able to build the packages
-          git remote add debian https://salsa.debian.org/bastif/kalkun.git
-          git fetch debian
-          git checkout -b debian_branch debian/master
-          git checkout $GITHUB_REF_NAME
-          git checkout debian_branch -- debian
-          git status
-
+          echo "DEBEMAIL=packager@kalkun.invalid" >> $GITHUB_ENV
+          echo "DEBFULLNAME=Kalkun github workflow packager" >> $GITHUB_ENV
           if [[ "$(git tag --points-at ${GIT_BRANCH})" != "" ]]; then \
-            KALKUN_VERSION="$(git tag --points-at ${GIT_BRANCH} | sed "s/^v//")" ; \
-            DEB_VERSION=$(echo ${KALKUN_VERSION} | sed -e "s/-/~/g")-1 ; \
-            rm debian/changelog
-            dch --package kalkun --newversion="$DEB_VERSION" --create $DEB_VERSION ; \
-            gbp export-orig --upstream-tag=$(git tag --points-at ${GIT_BRANCH}) --compression=xz ; \
+            echo "DPUT_UPLOAD_SERVER=kalkun-releases" >> $GITHUB_ENV
           else \
-            DEB_VERSION=$(echo $KALKUN_VERSION | sed -e "s/-/~/g")~${LAST_COMMIT_DATE} ; \
-            gbp dch --new-version="$DEB_VERSION" --snapshot --ignore-branch ; \
-            # Append debian version to version number ; \
-            sed -i -e "1s/)/-1)/" debian/changelog ; \
-            gbp export-orig --upstream-tree=BRANCH --upstream-branch=$(git rev-parse --abbrev-ref HEAD) --compression=xz ; \
+            echo "DPUT_UPLOAD_SERVER=kalkun-snapshots" >> $GITHUB_ENV
           fi
+      - name: Git config user
+        run: |
+          git config user.name "$DEBFULLNAME"
+          git config user.email "$DEBEMAIL"
+      - name: Build kalkun build-dependencies
+        run: |
+          set -x
 
-          # depend on debhelper 12 (because ubuntu focal has only debhelper 12)
-          sed -i -e "s/debhelper-compat (= 13)/debhelper-compat (= 12)/" debian/control
+          # Don't error out to not fail the github job if a dsc is not available anymore.
+          set +e
 
-          dpkg-buildpackage -d
+          # Upload somes dependencies to the "kalkun-build-deps" PPA for focal
+          # debhelper13 for focal (from focal-backports)
+          ./utils/upload_build_deps_to_ppa.sh -d focal http://archive.ubuntu.com/ubuntu/pool/main/d/debhelper/debhelper_13.6ubuntu1~bpo20.04.1.dsc
+
+          # pkg-php-tools for focal (from jammy) - Don't use it, because it requires the dependencies to conform to the new way php-pkg-tools work, and in focal, the packages don't support that.
+          # ./utils/upload_build_deps_to_ppa.sh -d focal http://archive.ubuntu.com/ubuntu/pool/main/p/pkg-php-tools/pkg-php-tools_1.42build1.dsc
+
+          # Error out again
+          set -e
+
+          REPOS_TO_BUILD=()
+
+          # Order matters so that build dependencies are installed before the packages requiring them.
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-datto-json-rpc")
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-datto-json-rpc-http")
+
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-giggsey-locale")
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-giggsey-libphonenumber")
+
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-econea-nusoap")
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-kissifrot-php-ixr")
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-league-csv")
+
+          REPOS_TO_BUILD+=("https://salsa.debian.org/bastif/sphinxcontrib-phpdomain")
+          REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-codeigniter-framework")
+
+          for repo in "${REPOS_TO_BUILD[@]}"; do
+            ./utils/upload_kalkun_deps_to_ppa.sh -r "$repo" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}"
+          done
+
+      - name: Build kalkun
+        run: |
+          set -x
+
+          ./utils/upload_kalkun_deps_to_ppa.sh -r "kalkun" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}"
+
       - name: Copy source & binary packages, and dependencies
         if: always()
         run: |
           set -x
           mkdir -p ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
-          dcmd mv ../*.changes ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
-          cp ~/deps/*.deb ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
+          # Copy kalkun source & binary packages
+          dcmd mv ~/build_products/kalkun*.changes ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
+          # Copy binary packages of dependencies
+          dcmd --deb mv ~/build_products/*.changes ~/Kalkun_${GITHUB_REF_NAME}_debianBundle
           cd ~ && tar -cvf Kalkun_${GITHUB_REF_NAME}_debianBundle.tar Kalkun_${GITHUB_REF_NAME}_debianBundle
           echo "my_home=$HOME" >> $GITHUB_ENV
       - name: Archive artifacts
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Debian packages (source & binary)
           path: ~/Kalkun_${{ github.ref_name }}_debianBundle/*
           if-no-files-found: ignore
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Archive artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
         with:
-          files: |
-            ${{ env.my_home }}/Kalkun_${{ github.ref_name }}_debianBundle.tar
+          name: Debian packages (source & binary) tarball
+          path: ~/Kalkun_${{ github.ref_name }}_debianBundle.tar
+          if-no-files-found: ignore
+
+  required_php_versions:
+    name: Get PHP versions to pack for
+    runs-on: ubuntu-latest
+    outputs:
+      php_versions: ${{ steps.php_ver_step.outputs.PHP_VERSIONS }}
+      php_versions_matrix: ${{ steps.php_ver_step.outputs.PHP_VERSIONS_matrix }}
+    steps:
+      - name: Install required packages
+        run: |
+          if ! command -v jq; then sudo apt-get update && sudo apt-get install -y jq; fi
+      - name: Build PHP_VERSIONS array & PHP_VERSIONS_matrix
+        id: php_ver_step
+        run: |
+          set -x
+
+          # Set array that will store the PHP versions for which we create a package.
+          PHP_VERSIONS=()
+
+          # Start with 7.4.30 since this is for the DEMO we publish on sourceforge.
+          PHP_VERSIONS+=("7.4.30")
+
+          # Get all released php versions above 5.6 (in the format X.Y)
+          for upstream_ver in $(curl https://www.php.net/releases/?json | jq -r '.[].version' | cut -f -2 -d .); do
+            major=$(cut -f 1 -d . <<< "$upstream_ver")
+            for minor in {0..20}; do
+              if dpkg --compare-versions ${major}.$minor le $upstream_ver &&  dpkg --compare-versions ${major}.$minor ge 5.6; then
+                PHP_VERSIONS+=("${major}.$minor")
+              fi
+            done
+          done
+
+          PHP_VERSIONS_matrix=$(sed 's/\ /", "/g' <<<  [\"${PHP_VERSIONS[*]}\"])
+
+          echo "PHP_VERSIONS=${PHP_VERSIONS[*]}" >> "$GITHUB_OUTPUT"
+          echo "PHP_VERSIONS_matrix=$PHP_VERSIONS_matrix" >> "$GITHUB_OUTPUT"
+
+          echo "PHP_VERSIONS=${PHP_VERSIONS[*]}"
+          echo "PHP_VERSIONS_matrix=$PHP_VERSIONS_matrix"
+
   prebuilt:
-    name: Prebuilt packages by PHP version
+    name: Prebuild packages by PHP version
+    needs: [ required_php_versions ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -141,82 +189,101 @@ jobs:
             dev: no
             php_version: "7.4"
             php_extensions: ctype curl hash intl json mbstring session
-      - name: Install required packages
-        run: |
-          if ! command -v jq; then sudo apt-get update && sudo apt-get install -y jq; fi
       - name: Build prebuilt packages with Composer dependencies
+        env:
+          PHP_VERSIONS: ${{needs.required_php_versions.outputs.php_versions}}
         run: |
           set -x
+
           git fetch --prune --unshallow --tags
-          # Start with 7.1.24 since this is for the DEMO we publish on sourceforge.
-          ./utils/build_single_dist.sh 7.1.24
-          # They build for all versions.
-          ./utils/build_single_dist.sh 5.6
-          ./utils/build_single_dist.sh 7.0
-          ./utils/build_single_dist.sh 7.2
-          ./utils/build_single_dist.sh 7.3
-          ./utils/build_single_dist.sh 7.4
-          ./utils/build_single_dist.sh 8.0
-          ./utils/build_single_dist.sh 8.1
+
+          for version in $PHP_VERSIONS; do
+            ./utils/build_single_dist.sh "$version"
+          done
+
           ls dist
-      - name: Archive artifacts for PHP 5.6
+      - name: Archive artifacts (all prebuilt packages)
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: Prebuilt package for PHP 5.6
-          path: 'dist/*forPHP5.6*'
+          name: Prebuilt packages (all)
+          path: 'dist/'
           if-no-files-found: ignore
-      - name: Archive artifacts for PHP 7.0
+
+  individual_artifacts:
+    name: Create artifacts for ${{ matrix.version }}
+    needs: [ prebuilt, required_php_versions ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        #version: ["5.6", "7.0", "7.4.30"]
+        version: ${{fromJson(needs.required_php_versions.outputs.php_versions_matrix)}}
+    steps:
+      - name: Download artifact of 'prebuilt packages'
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/download-artifact@v3
         with:
-          name: Prebuilt package for PHP 7.0
-          path: 'dist/*forPHP7.0*'
-          if-no-files-found: ignore
-      - name: Archive artifacts for PHP 7.1.24
+          name: Prebuilt packages (all)
+          path: 'dist/'
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: 'dist'
+      - name: Archive artifacts for ${{ matrix.version }}
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: Prebuilt package for PHP 7.1.24
-          path: 'dist/*forPHP7.1.24*'
+          name: Prebuilt package for PHP ${{ matrix.version }}
+          path: 'dist/*forPHP${{ matrix.version }}.[tz]*'
           if-no-files-found: ignore
-      - name: Archive artifacts for PHP 7.2
-        if: always()
-        uses: actions/upload-artifact@v2
+
+  release:
+    name: Create release and add packages
+    needs: [ prebuilt, debian ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact of 'prebuilt packages'
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/download-artifact@v3
         with:
-          name: Prebuilt package for PHP 7.2
-          path: 'dist/*forPHP7.2*'
-          if-no-files-found: ignore
-      - name: Archive artifacts for PHP 7.3
-        if: always()
-        uses: actions/upload-artifact@v2
+          name: Prebuilt packages (all)
+          path: 'dist/'
+      - name: Download artifact of 'Debian packages'
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/download-artifact@v3
         with:
-          name: Prebuilt package for PHP 7.3
-          path: 'dist/*forPHP7.3*'
-          if-no-files-found: ignore
-      - name: Archive artifacts for PHP 7.4
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: Prebuilt package for PHP 7.4
-          path: 'dist/*forPHP7.4*'
-          if-no-files-found: ignore
-      - name: Archive artifacts for PHP 8.0
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: Prebuilt package for PHP 8.0
-          path: 'dist/*forPHP8.0*'
-          if-no-files-found: ignore
-      - name: Archive artifacts for PHP 8.1
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: Prebuilt package for PHP 8.1
-          path: 'dist/*forPHP8.1*'
-          if-no-files-found: ignore
+          name: Debian packages (source & binary) tarball
+          path: 'dist/'
+      - name: Display structure of downloaded files
+        if: startsWith(github.ref, 'refs/tags/')
+        run: ls -R
+        working-directory: 'dist'
+      - name: Check if is prerelease
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          if [[ "$GITHUB_REF_NAME" =~ alpha|beta|rc ]]; then
+            echo "is_prerelease=true" >> $GITHUB_ENV
+          else
+            echo "is_prerelease=false" >> $GITHUB_ENV
+          fi
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: "dist/*"
+          fail_on_unmatched_files: true
+          prerelease: ${{ env.is_prerelease }}
+          files: |
+            dist/*
+
+  delete_artifacts:
+    needs: [ individual_artifacts, release ]
+    name: Delete temporary artifact
+    runs-on: ubuntu-latest
+    steps:
+      - uses: geekyeggo/delete-artifact@v2
+        with:
+          name: Prebuilt packages (all)
+          failOnError: false
+      - uses: geekyeggo/delete-artifact@v2
+        with:
+          name: Debian packages (source & binary) tarball
+          failOnError: false

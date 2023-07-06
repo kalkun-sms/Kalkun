@@ -1,4 +1,4 @@
-CREATE TABLE "plugin_sms_to_xmpp" (
+CREATE TABLE IF NOT EXISTS "plugin_sms_to_xmpp" (
 	"id_user" integer PRIMARY KEY, 
 	"xmpp_host" varchar(100) NOT NULL, 
 	"xmpp_port" varchar(5) NOT NULL,
