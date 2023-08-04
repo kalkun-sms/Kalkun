@@ -1,12 +1,12 @@
 <?php
 
-/*namespace chriskacerguis\RestServer;
+namespace chriskacerguis\RestServer;
 
 use Exception;
 use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
 use stdClass;
-*/
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
@@ -17,11 +17,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *
  * @version         4.0.0
  */
-
-include_once(APPPATH.'plugins/Plugin_controller.php');
-include_once('Format.php');
-
-class RestController extends Plugin_controller
+class RestController extends \CI_Controller
 {
     /**
      * This defines the rest format
@@ -260,7 +256,7 @@ class RestController extends Plugin_controller
      */
     public function __construct($config = 'rest')
     {
-        parent::__construct(NULL);
+        parent::__construct();
 
         // Set the default value of global xss filtering. Same approach as CodeIgniter 3
         $this->_enable_xss = ($this->config->item('global_xss_filtering') === true);
@@ -270,9 +266,7 @@ class RestController extends Plugin_controller
         $this->output->parse_exec_vars = false;
 
         // Load the rest.php configuration file
-        $this->load->add_package_path(APPPATH.'plugins/rest_api', false);
-        $this->load->config($config, false);
-        $this->load->remove_package_path(APPPATH.'plugins/rest_api', false);
+        $this->get_local_config($config);
 
         // Log the loading time to the log table
         if ($this->config->item('rest_enable_logging') === true) {
@@ -703,7 +697,7 @@ class RestController extends Plugin_controller
                 }
             }
             ob_end_flush();
-        // Otherwise dump the output automatically
+            // Otherwise dump the output automatically
         } else {
             echo json_encode($data);
         }
@@ -872,12 +866,12 @@ class RestController extends Plugin_controller
         $this->rest->ignore_limits = false;
 
         // Find the key from server or arguments
-        if (($key = isset($this->_args[$api_key_variable]) ? $this->_args[$api_key_variable] : $this->input->server($key_name))) {
+        if ($key = isset($this->_args[$api_key_variable]) ? $this->_args[$api_key_variable] : $this->input->server($key_name)) {
+            $this->rest->key = $key;
+
             if (!($row = $this->rest->db->where($this->config->item('rest_key_column'), $key)->get($this->config->item('rest_keys_table'))->row())) {
                 return false;
             }
-
-            $this->rest->key = $row->{$this->config->item('rest_key_column')};
 
             isset($row->user_id) && $this->rest->user_id = $row->user_id;
             isset($row->level) && $this->rest->level = $row->level;

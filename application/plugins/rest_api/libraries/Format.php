@@ -1,5 +1,9 @@
 <?php
 
+namespace chriskacerguis\RestServer;
+
+use Exception;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
@@ -7,7 +11,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * Help convert between various formats such as XML, JSON, CSV, etc.
  *
  * @author    Phil Sturgeon, Chris Kacerguis, @softwarespot
- * @license   http://www.dbad-license.org/
+ * @license   MIT (See LICENSE)
  */
 class Format
 {
@@ -179,7 +183,6 @@ class Format
         }
 
         foreach ($data as $key => $value) {
-
             //change false/true to 0/1
             if (is_bool($value)) {
                 $value = (int) $value;
