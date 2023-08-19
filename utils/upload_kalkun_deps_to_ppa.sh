@@ -176,7 +176,7 @@ if [ "$repo" = "kalkun" ]; then
   else \
     UVERSIONMANGLED=$(echo "${UVERSION}" | sed -e "s/-/~/" -e "s/-dev/~dev/" -e "s/~dev/~~dev/")
     gbp dch \
-      --new-version="${UVERSIONMANGLED}" \
+      --new-version="${UVERSIONMANGLED}-1" \
       --snapshot \
       --snapshot-number "${LAST_U_COMMIT_DATE}" \
       --ignore-branch \
