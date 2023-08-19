@@ -174,7 +174,7 @@ if [ "$repo" = "kalkun" ]; then
     dch "  debianization from package source repository at commit $LAST_D_COMMIT_HASH, dated $LAST_D_COMMIT_DATE_H."
     gbp export-orig --no-pristine-tar --upstream-tree=TAG --upstream-tag="$REF_NAME" --compression=xz
   else \
-    UVERSIONMANGLED=$(echo "${UVERSION}" | sed -e "s/-/~/" -e "s/~dev/~~dev/")
+    UVERSIONMANGLED=$(echo "${UVERSION}" | sed -e "s/-/~/" -e "s/-dev/~dev/" -e "s/~dev/~~dev/")
     gbp dch \
       --new-version="${UVERSIONMANGLED}" \
       --snapshot \
