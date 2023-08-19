@@ -118,7 +118,7 @@ if [ "$repo" = "kalkun" ]; then
   if [ "a$CI" != "atrue" ]; then
     # Case when this is run locally
     if [ -z "$KALKUN_REPO_PATH" ]; then
-      echo -e "${RED}path to local kalkun repo not set. Set it with -k <path>${RESET}"
+      echo -e "${RED}path to local kalkun repo not set. Set it with -p <path>${RESET}"
       exit 1
     fi
     git clone --depth 1 "file://$KALKUN_REPO_PATH" "$workdir/repo"
@@ -174,7 +174,7 @@ if [ "$repo" = "kalkun" ]; then
     dch "  debianization from package source repository at commit $LAST_D_COMMIT_HASH, dated $LAST_D_COMMIT_DATE_H."
     gbp export-orig --no-pristine-tar --upstream-tree=TAG --upstream-tag="$REF_NAME" --compression=xz
   else \
-    UVERSIONMANGLED=$(echo "${UVERSION}" | sed -e "s/-/~/g" -e "s/~dev/~~dev/")
+    UVERSIONMANGLED=$(echo "${UVERSION}" | sed -e "s/-/~/" -e "s/~dev/~~dev/")
     gbp dch \
       --new-version="${UVERSIONMANGLED}" \
       --snapshot \
