@@ -149,7 +149,7 @@ if [ "$repo" = "kalkun" ]; then
 
   # Download only the debian folder from debian salsa servers to be able to build kalkun
   # This adds only the debian folder to the branch to be able to build the packages
-  git remote add debian https://salsa.debian.org/bastif/kalkun.git
+  git remote add debian https://salsa.debian.org/php-team/pear/kalkun.git
   git fetch debian
 
   git checkout -b debian_branch debian/debian/latest
