@@ -69,7 +69,7 @@ function phonebook_ldap($number)
 	$config = Plugin_helper::get_plugin_config('phonebook_ldap');
 
 	// specify the LDAP server to connect to
-	$conn = ldap_connect($config['server'], $config['port']);
+	$conn = ldap_connect($config['ldap_connect_uri']);
 	if ( ! $conn)
 	{
 		return FALSE;
