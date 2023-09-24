@@ -414,7 +414,7 @@ class EpiOAuth
     if(isset($this->nonce)) // for unit testing
       return $this->nonce;
 
-    return md5(uniqid(rand(), true));
+    return md5(uniqid(random_int(0, PHP_INT_MAX), true));
   }
 
   // parameters should already have been passed through prepareParameters

@@ -210,7 +210,7 @@
             $this->clocked = $this->startTime = time();
             
             /* Parse configuration parameter */
-            $this->lastid = rand(1, 9);
+            $this->lastid = random_int(1, 9);
             $this->streamTimeout = isset($config['streamTimeout']) ? $config['streamTimeout'] : 20;
             $this->rateLimit = isset($config['rateLimit']) ? $config['rateLimit'] : true;
             $this->getPktSize = isset($config['getPktSize']) ? $config['getPktSize'] : 4096;

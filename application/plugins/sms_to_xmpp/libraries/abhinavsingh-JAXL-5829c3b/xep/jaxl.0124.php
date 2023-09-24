@@ -142,7 +142,7 @@
         }
         
         public static function loadSession($jaxl) {
-            $jaxl->bosh['rid'] = isset($_SESSION['jaxl_rid']) ? (string) $_SESSION['jaxl_rid'] : rand(1000, 10000);
+            $jaxl->bosh['rid'] = isset($_SESSION['jaxl_rid']) ? (string) $_SESSION['jaxl_rid'] : random_int(1000, 10000);
             $jaxl->bosh['sid'] = isset($_SESSION['jaxl_sid']) ? (string) $_SESSION['jaxl_sid'] : false;
             $jaxl->lastid = isset($_SESSION['jaxl_id']) ? $_SESSION['jaxl_id'] : $jaxl->lastid;
             $jaxl->jid = isset($_SESSION['jaxl_jid']) ? $_SESSION['jaxl_jid'] : $jaxl->jid;
