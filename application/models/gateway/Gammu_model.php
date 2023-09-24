@@ -144,7 +144,7 @@ class Gammu_model extends MY_Model {
 
 				// generate UDH
 				$UDH = '050003';
-				$hex = dechex(mt_rand(0, 255));
+				$hex = dechex(random_int(0, 255));
 				$hex = str_pad($hex, 2, '0', STR_PAD_LEFT);
 				$UDH .= strtoupper($hex);
 				$data['UDH'] = $UDH;
@@ -1455,7 +1455,7 @@ class Gammu_model extends MY_Model {
 			$newUDH = '';
 			for ($j = 1; $j <= 4; $j++)
 			{
-				$newUDH .= strtoupper(dechex(mt_rand(0, 255)));
+				$newUDH .= strtoupper(dechex(random_int(0, 255)));
 			}
 			$data->UDH = $newUDH.substr($data->UDH, -4);
 		}

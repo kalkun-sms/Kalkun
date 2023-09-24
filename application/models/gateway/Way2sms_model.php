@@ -69,7 +69,7 @@ class Way2sms_model extends Gammu_model {
 		$uid = urlencode($uid);
 		$pwd = urlencode($pwd);
 
-		$autobalancer = rand(1, 8);
+		$autobalancer = random_int(1, 8);
 
 		curl_setopt($curl, CURLOPT_URL, 'http://site'.$autobalancer.'.way2sms.com/Login1.action');
 		curl_setopt($curl, CURLOPT_POST, 1);
