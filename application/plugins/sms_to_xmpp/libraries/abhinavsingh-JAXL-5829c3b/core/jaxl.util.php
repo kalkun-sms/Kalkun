@@ -41,6 +41,31 @@
  * @link http://code.google.com/p/jaxl
  */
 
+// Based on: https://3v4l.org/B18he from https://wiki.php.net/rfc/deprecations_php_8_3
+function my_mt_srand($seed = null) {
+    if (version_compare(PHP_VERSION, '8.2.0') >= 0) {
+        $GLOBALS['my_mt_rand'] = new \Random\Randomizer(new \Random\Engine\Mt19937($seed));
+    } else {
+        mt_srand($seed);
+    }
+}
+
+function my_mt_rand($min = null, $max = null) {
+    if (version_compare(PHP_VERSION, '8.2.0') >= 0) {
+        if (!isset($GLOBALS['my_mt_rand'])) {
+            $GLOBALS['my_mt_rand'] = new \Random\Randomizer(new \Random\Engine\Mt19937());
+        }
+
+        if ($min === null && $max === null) {
+            return $GLOBALS['my_mt_rand']->nextInt();
+        }
+
+        return $GLOBALS['my_mt_rand']->getInt($min, $max);
+    } else {
+        return mt_rand($min, $max);
+    }
+}
+
     /**
      * Jaxl Utility Class
     */
@@ -128,9 +153,9 @@
         
         public static function generateNonce() {
             $str = '';
-            mt_srand((double) microtime()*10000000);
+            my_mt_srand((double) microtime()*10000000);
             for($i=0; $i<32; $i++)
-                $str .= chr(mt_rand(0, 255));
+                $str .= chr(my_mt_rand(0, 255));
             return $str;
         }
         
