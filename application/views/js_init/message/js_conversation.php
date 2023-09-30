@@ -7,11 +7,6 @@
 		var current_folder = "<?php echo $this->uri->segment(6);?>";
 		//var dest_url = base + source;
 
-		<?php if ($this->config->item('enable_emoticons')) : ?>
-		$(".message_preview").emoticons("<?php echo   $this->config->item('img_path').'emoticons/'; ?>");
-		$(".message_content").emoticons("<?php echo   $this->config->item('img_path').'emoticons/'; ?>");
-		<?php endif; ?>
-
 		// Delete messages
 		$(document).on('click', "a.global_delete", action_delete = function() {
 			var count = $("input.select_message:checked:visible").length;
