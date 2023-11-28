@@ -27,7 +27,7 @@
 			<tr>
 				<td><b><?php echo tr('License'); ?>:</b></td>
 				<td>&nbsp;</td>
-				<td><a class="base_color underline_link" href="https://spdx.org/licenses/GPL-3.0-or-later.html">GPL-3.0-or-later</a></td>
+				<td><a class="base_color underline_link" href="https://spdx.org/licenses/GPL-2.0-or-later.html">GPL-2.0-or-later</a></td>
 			<tr>
 				<td><b><?php echo tr('Homepage'); ?>:</b></td>
 				<td>&nbsp;</td>

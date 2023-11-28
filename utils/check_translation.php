@@ -5,7 +5,7 @@ if (php_sapi_name() !== 'cli') exit;
 /**
  * This is part of kalkun - a web based SMS manager
  * Copyright: 2021 Fab Stz <fabstz-it@yahoo.fr>
- * License: GPL-3-or-later
+ * License: GPL-2.0-or-later
  *
  * This script will recursively check the PHP files in a directory for
  * translation inconsistencies

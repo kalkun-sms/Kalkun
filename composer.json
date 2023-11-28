@@ -2,7 +2,7 @@
     "name": "kalkun-sms/kalkun",
     "description": "Kalkun SMS Manager",
     "type": "project",
-    "license": "GPL-3.0-or-later",
+    "license": "GPL-2.0-or-later",
     "require": {
         "php": ">=5.6",
         "ext-ctype": "*",
