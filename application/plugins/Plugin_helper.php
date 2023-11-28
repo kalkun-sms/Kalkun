@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @copyright 2021 Kalkun Dev Team
  * @author Kalkun Dev Team
- * @license <https://spdx.org/licenses/GPL-3.0-or-later.html> GPL-3.0-or-later
+ * @license <https://spdx.org/licenses/GPL-2.0-or-later.html> GPL-2.0-or-later
  * @link https://kalkun.sourceforge.io/
  */
 

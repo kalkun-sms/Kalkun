@@ -5,7 +5,7 @@
  *
  * @package     Kalkun
  * @author      Kalkun Dev Team
- * @license     https://spdx.org/licenses/GPL-3.0-or-later.html
+ * @license     https://spdx.org/licenses/GPL-2.0-or-later.html
  * @link        https://kalkun.sourceforge.io/
  */
 
