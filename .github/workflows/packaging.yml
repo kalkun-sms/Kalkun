@@ -155,8 +155,8 @@ jobs:
           # Set array that will store the PHP versions for which we create a package.
           PHP_VERSIONS=()
 
-          # Start with 7.4.30 since this is for the DEMO we publish on sourceforge.
-          PHP_VERSIONS+=("7.4.30")
+          # Set version of PHP running on the sourceforge server (for the DEMO).
+          PHP_VERSIONS+=("$(curl https://kalkun.sourceforge.io/phpver.php)")
 
           # Get all released php versions above 5.6 (in the format X.Y)
           for upstream_ver in $(curl https://www.php.net/releases/?json | jq -r '.[].version' | cut -f -2 -d .); do
