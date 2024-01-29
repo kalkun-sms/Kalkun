@@ -12,7 +12,7 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-session": "*",
-        "codeigniter/framework": ">=3.1.13 <3.2",
+        "codeigniter/framework": "dev-develop",
         "paragonie/random_compat": ">=2",
         "giggsey/libphonenumber-for-php": "^8.12",
         "league/csv": "^8.2 || ^9.5",
