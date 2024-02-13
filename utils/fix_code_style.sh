@@ -25,6 +25,8 @@
 #
 #
 
+VENDOR_DIR="utils/vendor"
+
 if [[ "$1" == "git-co" ]]; then
   DO_GIT_COMMIT=1
   DO_GIT_DIFF=0
@@ -57,7 +59,7 @@ fi
 ############### Check for strict STRICT_COMPARISON operator #########
 
 if [[ "$STRICT_COMPARISON" == "1" ]]; then
-    vendor/bin/php-cs-fixer fix -v --show-progress=dots --allow-risky=yes --dry-run --diff --config "$CS_FIXER_CONF_DIR/php-cs-fixer-5-strict_comparison.php" > "$DIFF_OUTPUT_DIR/code_style_check-strict_comparison.diff"
+    ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --allow-risky=yes --dry-run --diff --config "$CS_FIXER_CONF_DIR/php-cs-fixer-5-strict_comparison.php" > "$DIFF_OUTPUT_DIR/code_style_check-strict_comparison.diff"
     EXIT_CODE=$?
     if [ $EXIT_CODE -eq 8 ] || [ $EXIT_CODE -eq 4 ]; then
         # 4 - Some files have invalid syntax (only in dry-run mode).
@@ -133,7 +135,7 @@ fi
 
 
 # Configure phpcs (add CodeIgniter standard to phpcs)
-vendor/bin/phpcs --config-set installed_paths vendor/ise/php-codingstandards-codeigniter/CodeIgniter
+${VENDOR_DIR}/bin/phpcs --config-set installed_paths ${VENDOR_DIR}/ise/php-codingstandards-codeigniter/CodeIgniter
 
 ############ Various change to harmonize code  #########
 
@@ -156,9 +158,9 @@ fi
 # https://codeigniter.com/userguide3/general/security.html?highlight=index%20html#hide-your-files
 # CodeIgniter will have an index.html file in all of its directories in an attempt
 # to hide some of this data, but have it in mind that this is not enough to prevent a serious attacker.
-#find application/ -type d -exec cp -a vendor/codeigniter/framework/application/index.html '{}' \;
-find application/ -type d '!' -exec test -e "{}/index.html" ';' -exec cp -a vendor/codeigniter/framework/application/index.html '{}' \; &&
-find media/ -type d '!' -exec test -e "{}/index.html" ';' -exec cp -a vendor/codeigniter/framework/application/index.html '{}' \; &&
+#find application/ -type d -exec cp -a ${VENDOR_DIR}/codeigniter/framework/application/index.html '{}' \;
+find application/ -type d '!' -exec test -e "{}/index.html" ';' -exec cp -a ${VENDOR_DIR}/codeigniter/framework/application/index.html '{}' \; &&
+find media/ -type d '!' -exec test -e "{}/index.html" ';' -exec cp -a ${VENDOR_DIR}/codeigniter/framework/application/index.html '{}' \; &&
 if [ $DO_GIT_COMMIT -eq 1 ]; then
     git add "application/**index.html" &&
     git add "media/**index.html" &&
@@ -187,7 +189,7 @@ unset OLD_CI_HEADER
 if [ $DO_GIT_DIFF -eq 0 ]; then
 
     # Correct spaces, end of line, tabs, indentation...
-    vendor/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-0-spaces.php" &&
+    ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-0-spaces.php" &&
     if [ $DO_GIT_COMMIT -eq 1 ]; then
         git add application &&
         git commit -m "[AUTO: PHP-CS-Fixer] spaces...
@@ -207,23 +209,23 @@ no_spaces_around_offset"
     fi
 
      # linebreak_after_opening_tag
-    vendor/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-9-linebreak_after_opening_tag.php" &&
+    ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-9-linebreak_after_opening_tag.php" &&
      # no_closing_tag
-    vendor/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-8-no_closing_tag.php" &&
+    ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-8-no_closing_tag.php" &&
     if [ $DO_GIT_COMMIT -eq 1 ]; then
         git add application &&
         git commit -m "[AUTO: PHP-CS-Fixer] no_closing_tag, linebreak_after_opening_tag"
     fi
 
     # single_quote
-    vendor/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-1-single_quote.php" &&
+    ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-1-single_quote.php" &&
     if [ $DO_GIT_COMMIT -eq 1 ]; then
         git add application &&
         git commit -m "[AUTO: PHP-CS-Fixer] single_quote"
     fi
 
     # method_argument_space
-    vendor/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-6-method_argument_space.php" &&
+    ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-6-method_argument_space.php" &&
     if [ $DO_GIT_COMMIT -eq 1 ]; then
         git add application &&
         git commit -m "[AUTO: PHP-CS-Fixer] method_argument_space
@@ -232,14 +234,14 @@ no_spaces_around_offset"
     fi
 
     # explicit_string_variable
-    vendor/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-7-explicit_string_variable.php" &&
+    ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-7-explicit_string_variable.php" &&
     if [ $DO_GIT_COMMIT -eq 1 ]; then
         git add application &&
         git commit -m "[AUTO: PHP-CS-Fixer] explicit_string_variable"
     fi
 
     # operator spacing (except some config files)
-    vendor/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-11-operator.php" &&
+    ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-11-operator.php" &&
     if [ $DO_GIT_COMMIT -eq 1 ]; then
         git add application &&
         git commit -m "[AUTO: PHP-CS-Fixer] operator & parenthesis spacing
@@ -258,7 +260,7 @@ no_spaces_around_offset"
     fi
 
     # constant_case  TRUE, FALSE
-    vendor/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-3-constant_case.php" &&
+    ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-3-constant_case.php" &&
     if [ $DO_GIT_COMMIT -eq 1 ]; then
         git add application &&
         git commit -m "[AUTO: PHP-CS-Fixer] constant_case
@@ -267,19 +269,19 @@ no_spaces_around_offset"
     fi
 
     # single_line_comment_style
-    vendor/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-10-single_line_comment_style.php" &&
+    ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-10-single_line_comment_style.php" &&
     if [ $DO_GIT_COMMIT -eq 1 ]; then
         git add application &&
         git commit -m "[AUTO: PHP-CS-Fixer] single_line_comment_style"
     fi
 
     # no_alternative_syntax (EXCEPT views)
-    vendor/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-12-no_alternative_syntax.php" &&
+    ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-12-no_alternative_syntax.php" &&
     # braces & control_structure_continuation_position & no_alternative_syntax
-    vendor/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-4-braces.php" &&
+    ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --config "$CS_FIXER_CONF_DIR/php-cs-fixer-4-braces.php" &&
     # Run phpcs immediately with sniffs=Generic.Classes.OpeningBraceSameLine to fix
     # php-cs-fixer not inline with what we want
-    vendor/bin/phpcbf -p --standard="$CS_RULESSET_DIR/ruleset.xml" --sniffs=Generic.Classes.OpeningBraceSameLine
+    ${VENDOR_DIR}/bin/phpcbf -p --standard="$CS_RULESSET_DIR/ruleset.xml" --sniffs=Generic.Classes.OpeningBraceSameLine
     if [ $DO_GIT_COMMIT -eq 1 ]; then
         git add application &&
         git commit -m "[AUTO: PHP-CS-Fixer] braces, no_alt_syntax and related...
@@ -297,8 +299,8 @@ fi
 
 
 # Rerun php-cs-fixer with all fixes + the fix on classes opening braces
-vendor/bin/php-cs-fixer fix -v --show-progress=dots &&
-vendor/bin/phpcbf -p --standard="$CS_RULESSET_DIR/ruleset.xml" --sniffs=Generic.Classes.OpeningBraceSameLine
+${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots &&
+${VENDOR_DIR}/bin/phpcbf -p --standard="$CS_RULESSET_DIR/ruleset.xml" --sniffs=Generic.Classes.OpeningBraceSameLine
 if [ $DO_GIT_COMMIT -eq 1 ]; then
     git add application &&
     git commit -m "[AUTO: PHP-CS-Fixer] EMPTY?"
@@ -306,8 +308,8 @@ fi
 
 
 # Process also the scripts directory
-vendor/bin/php-cs-fixer fix -v --show-progress=dots scripts &&
-vendor/bin/phpcbf -p --standard="$CS_RULESSET_DIR/ruleset.xml" --sniffs=Generic.Classes.OpeningBraceSameLine scripts
+${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots scripts &&
+${VENDOR_DIR}/bin/phpcbf -p --standard="$CS_RULESSET_DIR/ruleset.xml" --sniffs=Generic.Classes.OpeningBraceSameLine scripts
 if [ $DO_GIT_COMMIT -eq 1 ]; then
     git add scripts &&
     git commit -m "[AUTO: PHP-CS-Fixer] scripts directory"
@@ -316,9 +318,9 @@ fi
 
 ############# PHP_CodeSniffer #############
 # First we check the errors
-vendor/bin/phpcs -p -s --standard="$CS_RULESSET_DIR/ruleset.xml" 2>&1 | tee "$TMPDIR/phpcs.log" &&
+${VENDOR_DIR}/bin/phpcs -p -s --standard="$CS_RULESSET_DIR/ruleset.xml" 2>&1 | tee "$TMPDIR/phpcs.log" &&
 # Then we fix them
-vendor/bin/phpcbf -p --standard="$CS_RULESSET_DIR/ruleset.xml" 2>&1 | tee "$TMPDIR/phpcbf.log"
+${VENDOR_DIR}/bin/phpcbf -p --standard="$CS_RULESSET_DIR/ruleset.xml" 2>&1 | tee "$TMPDIR/phpcbf.log"
 if [ $DO_GIT_COMMIT -eq 1 ]; then
     git add application &&
     git commit -m "[AUTO: CodeSniffer] Fixes to fit to to CI3 coding style"
@@ -356,7 +358,7 @@ fi
 
 # Check the views for any errors
 # Disabled for now
-#vendor/bin/phpcs -p -s --standard="$CS_RULESSET_DIR/ruleset-views.xml" 2>&1 | tee "$TMPDIR/phpcs-views.log"
+#${VENDOR_DIR}/bin/phpcs -p -s --standard="$CS_RULESSET_DIR/ruleset-views.xml" 2>&1 | tee "$TMPDIR/phpcs-views.log"
 #grep "| ERROR" phpcs-views.log | cut -d '|' -f 3- | sort | uniq -c
 #grep "| WARNING" phpcs-views.log | cut -d '|' -f 3- | sort | uniq -c
 #
