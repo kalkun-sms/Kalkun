@@ -18,6 +18,7 @@
         "league/csv": "^8.2 || ^9.5",
         "datto/json-rpc-http": "^4.0 || ^5.0",
         "kissifrot/php-ixr": "1.8.*",
+        "vaimo/composer-patches": "4.22.4 || ^5",
         "econea/nusoap": "^0.9.5.1"
     },
     "require-dev": {
@@ -29,5 +30,37 @@
         "ext-mysqli": "To connect to a MySQL database",
         "ext-pgsql": "To connect to a PostgreSQL database",
         "ext-sqlite3": "To connect to a SQLite3 database"
+    },
+    "extra": {
+        "patches-base": "patches/{{VendorName}}_{{ModuleName}}/{{version}}/{{file}}",
+        "patches": {
+            "codeigniter/framework": {
+                "Add support for PHP 8.2 (part1)": {
+                    "source": "10-php82_support.patch",
+                    "version": [
+                        "=v3.1.13"
+                        ]
+                },
+                "Add support for PHP 8.2 (part2)": {
+                    "source": "10-php82_support-part2.patch",
+                    "version": [
+                        "=v3.1.13"
+                        ]
+                }
+            },
+            "kenjis/ci-phpunit-test": {
+                "Add support for PHP 8.2": {
+                    "source": "support_php-8.2.patch",
+                    "version": [
+                        "=v3.0.4"
+                        ]
+                }
+            }
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "vaimo/composer-patches": true
+        }
     }
 }
