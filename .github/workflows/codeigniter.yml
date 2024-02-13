@@ -10,11 +10,51 @@ on:
   pull_request:
     branches: [ master, devel ]
 jobs:
+  required_php_versions:
+    name: Get PHP versions to test
+    runs-on: ubuntu-latest
+    outputs:
+      php_versions: ${{ steps.php_ver_step.outputs.PHP_VERSIONS }}
+      php_versions_matrix: ${{ steps.php_ver_step.outputs.PHP_VERSIONS_matrix }}
+    steps:
+      - name: Install required packages
+        run: |
+          if ! command -v jq; then sudo apt-get update && sudo apt-get install -y jq; fi
+      - name: Build PHP_VERSIONS array & PHP_VERSIONS_matrix
+        id: php_ver_step
+        run: |
+          set -x
+
+          # Set array that will store the PHP versions for which we create a package.
+          PHP_VERSIONS=()
+
+          # Get all released php versions above 5.6 (in the format X.Y)
+          for upstream_ver in $(curl https://www.php.net/releases/?json | jq -r '.[].version' | cut -f -2 -d .); do
+            major=$(cut -f 1 -d . <<< "$upstream_ver")
+            for minor in {0..20}; do
+              if dpkg --compare-versions ${major}.$minor le $upstream_ver &&  dpkg --compare-versions ${major}.$minor ge 5.6; then
+                PHP_VERSIONS+=("${major}.$minor")
+              fi
+            done
+          done
+
+          PHP_VERSIONS_matrix=$(sed 's/\ /", "/g' <<<  [\"${PHP_VERSIONS[*]}\"])
+
+          echo "PHP_VERSIONS=${PHP_VERSIONS[*]}" >> "$GITHUB_OUTPUT"
+          echo "PHP_VERSIONS_matrix=$PHP_VERSIONS_matrix" >> "$GITHUB_OUTPUT"
+
+          echo "PHP_VERSIONS=${PHP_VERSIONS[*]}"
+          echo "PHP_VERSIONS_matrix=$PHP_VERSIONS_matrix"
+
   test:
+    continue-on-error: false
+    needs: [ required_php_versions ]
     strategy:
+      fail-fast: false
       matrix:
         operating-system: [ubuntu-latest]
-        php-versions: ['7.2']
+        #php-versions: ['5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3']
+        php-versions: ${{fromJson(needs.required_php_versions.outputs.php_versions_matrix)}}
     runs-on: ${{ matrix.operating-system }}
     steps:
       - name: Checkout
