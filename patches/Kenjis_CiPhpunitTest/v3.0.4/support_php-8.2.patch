@@ -1,0 +1,10 @@
+--- a/application/tests/_ci_phpunit_test/CIPHPUnitTestCase.php
++++ b/application/tests/_ci_phpunit_test/CIPHPUnitTestCase.php
+@@ -21,6 +21,7 @@
+  * @property CIPHPUnitTestDouble     $double
+  * @property CIPHPUnitTestReflection $reflection
+  */
++#[AllowDynamicProperties]
+ class CIPHPUnitTestCase extends TestCase
+ {
+ 	protected $_error_reporting = -1;

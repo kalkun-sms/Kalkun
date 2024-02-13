@@ -1,0 +1,123 @@
+From fb1256a5b009b6264fbc85be44e0d97654d3fcd9 Mon Sep 17 00:00:00 2001
+From: George Petculescu <gxgpet@gmail.com>
+Date: Sun, 6 Nov 2022 16:13:43 +0200
+Subject: [PATCH] Adding PHP 8.2 support
+
+---
+ .github/workflows/test-phpunit.yml          | 20 +++++++++++++++++++-
+ system/core/Loader.php                      |  1 +
+ system/core/URI.php                         |  7 +++++++
+ system/database/DB_driver.php               |  1 +
+ system/libraries/Driver.php                 |  1 +
+ system/libraries/Table.php                  |  4 ++--
+ tests/codeigniter/core/Loader_test.php      |  2 +-
+ tests/codeigniter/libraries/Upload_test.php |  7 ++++---
+ tests/mocks/ci_testcase.php                 |  1 +
+ 9 files changed, 37 insertions(+), 7 deletions(-)
+
+--- a/system/core/Loader.php
++++ b/system/core/Loader.php
+@@ -49,6 +49,7 @@
+  * @author		EllisLab Dev Team
+  * @link		https://codeigniter.com/userguide3/libraries/loader.html
+  */
++#[AllowDynamicProperties]
+ class CI_Loader {
+ 
+ 	// All these are set automatically. Don't mess with them.
+--- a/system/core/URI.php
++++ b/system/core/URI.php
+@@ -52,6 +52,13 @@
+ class CI_URI {
+ 
+ 	/**
++	 * CI_Config instance
++	 *
++	 * @var	CI_Config
++	 */
++	public $config;
++
++	/**
+ 	 * List of cached URI segments
+ 	 *
+ 	 * @var	array
+--- a/system/database/DB_driver.php
++++ b/system/database/DB_driver.php
+@@ -51,6 +51,7 @@
+  * @author		EllisLab Dev Team
+  * @link		https://codeigniter.com/userguide3/database/
+  */
++#[AllowDynamicProperties]
+ abstract class CI_DB_driver {
+ 
+ 	/**
+--- a/system/libraries/Driver.php
++++ b/system/libraries/Driver.php
+@@ -50,6 +50,7 @@
+  * @author		EllisLab Dev Team
+  * @link
+  */
++#[AllowDynamicProperties]
+ class CI_Driver_Library {
+ 
+ 	/**
+--- a/system/libraries/Table.php
++++ b/system/libraries/Table.php
+@@ -489,12 +489,12 @@
+ 			return;
+ 		}
+ 
+-		$this->temp = $this->_default_template();
++		$temp = $this->_default_template();
+ 		foreach (array('table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start', 'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end', 'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val)
+ 		{
+ 			if ( ! isset($this->template[$val]))
+ 			{
+-				$this->template[$val] = $this->temp[$val];
++				$this->template[$val] = $temp[$val];
+ 			}
+ 		}
+ 	}
+--- a/system/core/Controller.php
++++ b/system/core/Controller.php
+@@ -50,6 +50,7 @@
+  * @author		EllisLab Dev Team
+  * @link		https://codeigniter.com/userguide3/general/controllers.html
+  */
++#[AllowDynamicProperties]
+ class CI_Controller {
+ 
+ 	/**
+--- a/system/core/Router.php
++++ b/system/core/Router.php
+@@ -59,6 +59,13 @@
+ 	public $config;
+ 
+ 	/**
++	 * CI_URI class object
++	 *
++	 * @var	object
++	 */
++	public $uri;
++
++	/**
+ 	 * List of routes
+ 	 *
+ 	 * @var	array
+--- a/system/libraries/Image_lib.php
++++ b/system/libraries/Image_lib.php
+@@ -85,6 +85,14 @@
+ 	 */
+ 	public $new_image		= '';
+ 
++
++	/**
++	 * Path to destination image
++	 *
++	 * @var string
++	 */
++	public $dest_image		= '';
++
+ 	/**
+ 	 * Image width
+ 	 *

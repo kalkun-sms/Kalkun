@@ -1,0 +1,20 @@
+From 2fc2d480d0d3fc778a46ded0e093fef7a0d84257 Mon Sep 17 00:00:00 2001
+From: George Petculescu <gxgpet@gmail.com>
+Date: Fri, 3 Nov 2023 11:59:40 +0200
+Subject: [PATCH] Fixes the usage of `_create_table_if` in Postgres forge class
+
+---
+ system/database/drivers/postgre/postgre_forge.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/system/database/drivers/postgre/postgre_forge.php
++++ b/system/database/drivers/postgre/postgre_forge.php
+@@ -87,7 +87,7 @@
+ 
+ 		if (version_compare($this->db->version(), '9.0', '>'))
+ 		{
+-			$this->create_table_if = 'CREATE TABLE IF NOT EXISTS';
++			$this->_create_table_if = 'CREATE TABLE IF NOT EXISTS';
+ 		}
+ 	}
+ 
