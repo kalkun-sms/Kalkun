@@ -12,13 +12,13 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-session": "*",
-        "codeigniter/framework": ">=3.1.13 <3.2",
+        "codeigniter/framework": "=3.1.13",
         "paragonie/random_compat": ">=2",
         "giggsey/libphonenumber-for-php": "^8.12",
         "league/csv": "^8.2 || ^9.5",
         "datto/json-rpc-http": "^4.0 || ^5.0",
         "kissifrot/php-ixr": "1.8.*",
-        "vaimo/composer-patches": "4.22.4 || ^5",
+        "cweagans/composer-patches": "~1.0",
         "econea/nusoap": "^0.9.5.1"
     },
     "require-dev": {
@@ -32,35 +32,19 @@
         "ext-sqlite3": "To connect to a SQLite3 database"
     },
     "extra": {
-        "patches-base": "patches/{{VendorName}}_{{ModuleName}}/{{version}}/{{file}}",
         "patches": {
             "codeigniter/framework": {
-                "Add support for PHP 8.2 (part1)": {
-                    "source": "10-php82_support.patch",
-                    "version": [
-                        "=v3.1.13"
-                        ]
-                },
-                "Add support for PHP 8.2 (part2)": {
-                    "source": "10-php82_support-part2.patch",
-                    "version": [
-                        "=v3.1.13"
-                        ]
-                }
+                "Add support for PHP 8.2 (part1)": "patches/Codeigniter_Framework/v3.1.13/10-php82_support.patch",
+                "Add support for PHP 8.2 (part2)": "patches/Codeigniter_Framework/v3.1.13/10-php82_support-part2.patch"
             },
             "kenjis/ci-phpunit-test": {
-                "Add support for PHP 8.2": {
-                    "source": "support_php-8.2.patch",
-                    "version": [
-                        "=v3.0.4"
-                        ]
-                }
+                "Add support for PHP 8.2": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.2.patch"
             }
         }
     },
     "config": {
         "allow-plugins": {
-            "vaimo/composer-patches": true
+            "cweagans/composer-patches": true
         }
     }
 }
