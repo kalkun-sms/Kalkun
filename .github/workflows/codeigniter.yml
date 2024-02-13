@@ -99,6 +99,43 @@ jobs:
           args: -O gammu.sql https://raw.githubusercontent.com/gammu/gammu/master/docs/sql/mysql.sql
       - name: Import Gammu DB Schema
         run: mysql -h"127.0.0.1" -P"3306" -uroot -ppassword kalkun < gammu.sql
+      - name: Install/Update ci-phpunit-test
+        run: |
+          php vendor/kenjis/ci-phpunit-test/install.php --from-composer
+          # Workaround a bug in phpunit < 7 where the absence of application/tests/_ci_phpunit_test/ makes it fail
+          # with strpos(): Empty needle in vendor/phpunit/php-file-iterator/src/Iterator.php
+          if ! vendor/bin/phpunit --atleast-version 7; then
+            mkdir -vp application/tests/_ci_phpunit_test
+            # Below the alternative is to remove the culprit line from phpunit.xml
+            #sed -i -e "/<exclude>.\/_ci_phpunit_test\/<\/exclude>/ d" application/tests/phpunit.xml
+          fi
+
+          # Uncomment the monkey patcher function. This will search the line matching "Enabling Monkey Patching"
+          # then search the next "/*", delete that line, search the next "*/" and delete the line, write, and quit.
+          ed -s application/tests/Bootstrap.php <<EOF
+          /Enabling Monkey Patching/
+          /^\/\*$/
+          n
+          d
+          /^\*\/$/
+          n
+          d
+          w
+          q
+          EOF
+
+          rm application/tests/controllers/Welcome_test.php
+
+          # exlude the full application/view dir from coverage, otherwise coverage would fail.
+          # See: https://github.com/kenjis/ci-phpunit-test/issues/412
+          sed -i -e 's|<directory suffix=".php">../views/errors</directory>|<directory suffix=".php">../views</directory>|' application/tests/phpunit.xml
+
+          # the void return type of setUp() methods in phpunit (required since phpunit8) isn't supported
+          # with phpunit <= 6. For these, we remove the ": void" part of the tests
+          if [ $(composer show phpunit/phpunit | grep "^versions : " | rev | cut -d " " -f 1 | rev | cut -d . -f 1) -le 6 ]; then
+            sed -i "/public function setUp()/ s/ : void$//" application/tests/controllers/Install_test.php
+          fi
+
       - name: Test with phpunit
         run: vendor/bin/phpunit --coverage-text -c application/tests
   check-code:
