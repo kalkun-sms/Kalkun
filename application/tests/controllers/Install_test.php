@@ -10,10 +10,21 @@
 
 class Install_test extends TestCase
 {
+	private $realAssertStringContainsString;
+
+	public function setUp() : void
+	{
+		// Using assertContains() with string haystacks is deprecated and will not be supported in PHPUnit 9
+		// Refactor your test to use assertStringContainsString() or assertStringContainsStringIgnoringCase() instead.
+		$this->realAssertStringContainsString = method_exists($this, 'assertStringContainsString')
+			? 'assertStringContainsString'
+			: 'assertContains';
+	}
+
 	public function test_index()
 	{
 		$output = $this->request('GET', 'install');
-		$this->assertContains('<title>Kalkun &rsaquo; Installation</title>', $output);
+		call_user_func_array(array($this, $this->realAssertStringContainsString), array('<title>Kalkun &rsaquo; Installation</title>', $output));
 	}
 
 	public function test_method_404()
