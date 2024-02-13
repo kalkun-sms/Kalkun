@@ -37,6 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class MX_Loader extends CI_Loader
 {
 	protected $_module;
+	private $controller;
 	
 	public $_ci_plugins = array();
 	public $_ci_cached_vars = array();
