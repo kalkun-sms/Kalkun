@@ -21,8 +21,8 @@
         "econea/nusoap": "^0.9.5.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7",
-        "kenjis/ci-phpunit-test": "^0.17.3"
+        "phpunit/phpunit": ">=4",
+        "kenjis/ci-phpunit-test": ">=1"
     },
     "suggest": {
         "ext-ldap": "For phonebook_ldap plugin",
