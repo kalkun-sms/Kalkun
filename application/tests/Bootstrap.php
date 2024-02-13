@@ -359,9 +359,9 @@ MonkeyPatchManager::init([
 	// All patchers you use.
 	'patcher_list' => [
 		'ExitPatcher',
-		// 'FunctionPatcher',
-		// 'MethodPatcher',
-		// 'ConstantPatcher',
+		'FunctionPatcher',
+		'MethodPatcher',
+		'ConstantPatcher',
 	],
 	// Additional functions to patch
 	'functions_to_patch' => [
