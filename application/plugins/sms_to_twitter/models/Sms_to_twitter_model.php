@@ -22,7 +22,6 @@ class Sms_to_twitter_model extends CI_Model {
 
 	function __construct()
 	{
-		parent::__construct();
 	}
 
 	function check_token($uid)
