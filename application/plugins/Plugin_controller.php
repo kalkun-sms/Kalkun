@@ -43,7 +43,7 @@ class Plugin_controller extends MY_Controller {
 		$this->plugin_name = strtolower(get_class($this));
 
 		// Prevent this controller from being called directly
-		if ("Plugin_controller" === get_class($this))
+		if (__CLASS__  === get_class($this))
 		{
 			redirect(site_url('/'), 'location', 301);
 		}
