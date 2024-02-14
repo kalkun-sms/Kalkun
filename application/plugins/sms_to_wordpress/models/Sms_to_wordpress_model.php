@@ -22,7 +22,6 @@ class Sms_to_wordpress_model extends CI_Model
 {
 	function __construct()
 	{
-		parent::__construct();
 	}
 
 	function check_status($uid)
