@@ -27,7 +27,6 @@ class Stop_manager_model extends CI_Model {
 
 	function __construct()
 	{
-		parent::__construct();
 	}
 
 	function get($option = NULL, $limit = NULL, $offset = NULL)
