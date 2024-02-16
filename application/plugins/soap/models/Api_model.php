@@ -9,7 +9,6 @@ Class Api_model extends CI_Model {
 
 	function Plugin_model()
 	{
-		parent::__construct();
 		$this->load->library('Remote_Messages');
 	}
 

@@ -1,11 +1,6 @@
 <?php
 Class Soap_model extends CI_Model {
 
-	function __construct()
-	{
-		parent::__construct();
-	}
-
 	function getRemoteAccess($option = NULL, $limit = NULL, $offset = NULL)
 	{
 		switch ($option)

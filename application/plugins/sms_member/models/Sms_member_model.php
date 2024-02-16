@@ -23,18 +23,6 @@
 class Sms_member_model extends CI_Model {
 
 	/**
-	 * Constructor
-	 *
-	 * @access	public
-	 */
-	function __construct()
-	{
-		parent::__construct();
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	 * Get Member
 	 *
 	 * @access	public
