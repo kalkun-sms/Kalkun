@@ -19,7 +19,7 @@
  * @category	Models
  */
 class Sms_to_email_model extends CI_Model {
-	
+
 	function get_setting($uid)
 	{
 		$this->db->from('plugin_sms_to_email');
