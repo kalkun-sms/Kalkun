@@ -168,15 +168,17 @@ if [ "$repo" = "kalkun" ]; then
   if [ "$TAG_AT_HEAD" != "" ]; then
     TAG_VERSION="$(git tag --points-at "$TAG_AT_HEAD" | sed "s/^v//")"
     UVERSIONMANGLED="${TAG_VERSION//-/\~}"
-    dch -v "${UVERSIONMANGLED}-1~${LAST_D_COMMIT_DATE}.${LAST_D_COMMIT_HASH}" --force-bad-version ""
+    REPACK_SUFFIX="$(head -n1 debian/changelog | sed "s/.*(\(.*\)).*/\1/" | cut -f 1 -d - | sed "s/$UVERSIONMANGLED//")"
+    dch -v "${UVERSIONMANGLED}${REPACK_SUFFIX}-1~${LAST_D_COMMIT_DATE}.${LAST_D_COMMIT_HASH}" --force-bad-version ""
     dch "Snapshot based on:"
     dch "  upstream tag v$TAG_VERSION."
     dch "  debianization from package source repository at commit $LAST_D_COMMIT_HASH, dated $LAST_D_COMMIT_DATE_H."
     gbp export-orig --no-pristine-tar --upstream-tree=TAG --upstream-tag="$REF_NAME" --compression=xz
   else \
     UVERSIONMANGLED=$(echo "${UVERSION}" | sed -e "s/-/~/" -e "s/-dev/~dev/" -e "s/~dev/~~dev/")
+    REPACK_SUFFIX="$(head -n1 debian/changelog | sed "s/.*(\(.*\)).*/\1/" | cut -f 1 -d - | sed "s/$UVERSIONMANGLED//")"
     gbp dch \
-      --new-version="${UVERSIONMANGLED}-1" \
+      --new-version="${UVERSIONMANGLED}${REPACK_SUFFIX}-1" \
       --snapshot \
       --snapshot-number "${LAST_U_COMMIT_DATE}" \
       --ignore-branch \
