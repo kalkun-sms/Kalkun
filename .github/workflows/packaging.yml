@@ -17,7 +17,7 @@ jobs:
       DPUT_CF: /home/runner/dput.cf
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install required packages
         run: |
           sudo apt-get update
@@ -124,14 +124,14 @@ jobs:
           echo "my_home=$HOME" >> $GITHUB_ENV
       - name: Archive artifacts
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Debian packages (source & binary)
           path: ~/Kalkun_${{ github.ref_name }}_debianBundle/*
           if-no-files-found: ignore
       - name: Archive artifacts
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Debian packages (source & binary) tarball
           path: ~/Kalkun_${{ github.ref_name }}_debianBundle.tar
@@ -182,7 +182,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Composer (php-actions)
         uses: php-actions/composer@v6
         with:
@@ -204,7 +204,7 @@ jobs:
           ls dist
       - name: Archive artifacts (all prebuilt packages)
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Prebuilt packages (all)
           path: 'dist/'
@@ -221,7 +221,7 @@ jobs:
     steps:
       - name: Download artifact of 'prebuilt packages'
         if: always()
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Prebuilt packages (all)
           path: 'dist/'
@@ -230,7 +230,7 @@ jobs:
         working-directory: 'dist'
       - name: Archive artifacts for ${{ matrix.version }}
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Prebuilt package for PHP ${{ matrix.version }}
           path: 'dist/*forPHP${{ matrix.version }}.[tz]*'
@@ -243,13 +243,13 @@ jobs:
     steps:
       - name: Download artifact of 'prebuilt packages'
         if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Prebuilt packages (all)
           path: 'dist/'
       - name: Download artifact of 'Debian packages'
         if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Debian packages (source & binary) tarball
           path: 'dist/'
