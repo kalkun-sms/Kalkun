@@ -23,8 +23,6 @@ class MY_Model extends CI_Model {
 	 */
 	public function __construct()
 	{
-		parent::__construct();
-
 		set_error_handler(function($errno, $errstr, $errfile, $errline) {
 			throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
 		});

@@ -24,18 +24,6 @@
 class Sms_credit_model extends CI_Model {
 
 	/**
-	 * Constructor
-	 *
-	 * @access	public
-	 */
-	function __construct()
-	{
-		parent::__construct();
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	 * Get Users
 	 *
 	 * @access  public

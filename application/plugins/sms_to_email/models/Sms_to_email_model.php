@@ -20,11 +20,6 @@
  */
 class Sms_to_email_model extends CI_Model {
 
-	function __construct()
-	{
-		parent::__construct();
-	}
-
 	function get_setting($uid)
 	{
 		$this->db->from('plugin_sms_to_email');
