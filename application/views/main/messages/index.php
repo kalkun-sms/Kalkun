@@ -1,4 +1,3 @@
-<link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquerycssmenu.css" />
 <?php if ($this->uri->segment(2) !== 'conversation' && $this->uri->segment(2) !== 'search')
 {
 	$this->load->view('js_init/message/js_function');

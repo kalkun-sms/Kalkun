@@ -1,8 +1,7 @@
 <?php $this->load->helper('inflector'); ?>
 
-<div class="jquerycssmenu">
-	<ul>
-		<?php
+<div class="bttn-container">
+	<?php
 	if ($this->uri->segment(2) === 'conversation'):
 		if ($this->uri->segment(3) === 'folder'):
 
@@ -33,55 +32,69 @@
 				}
 			}
 	?>
-		<li><?php echo anchor('messages/folder/'.$this->uri->segment(4), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, $theFname), array('class' => 'button', 'id' => 'back_threadlist'));?></li>
-		<?php else: ?>
-		<li><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, humanize($this->Kalkun_model->get_folders('name', $this->uri->segment(6))->row('name'))), array('class' => 'button', 'id' => 'back_threadlist'));?></li>
-		<li>&nbsp;</li>
-		<?php endif;?>
-		<?php endif;?>
-		<li><a href="javascript:void(0);" class="select_all_button button"><?php echo tr('Select all');?></a></li>
-		<li><a href="javascript:void(0);" class="clear_all_button button"><?php echo tr('Deselect all');?></a></li>
-		<li>&nbsp;</li>
+	<div class="bttn-group">
+		<button><?php echo anchor('messages/folder/'.$this->uri->segment(4), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, $theFname), array('class' => 'button', 'id' => 'back_threadlist'));?></button>
+	</div>
+	<?php else: ?>
+	<div class="bttn-group">
+		<button><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, humanize($this->Kalkun_model->get_folders('name', $this->uri->segment(6))->row('name'))), array('class' => 'button', 'id' => 'back_threadlist'));?></button>
+	</div>
+
+	<?php endif;?>
+	<?php endif;?>
+	<div class="bttn-group">
+		<button><a href="javascript:void(0);" class="select_all_button button"><?php echo tr('Select all');?></a></button>
+		<button><a href="javascript:void(0);" class="clear_all_button button"><?php echo tr('Deselect all');?></a></button>
+	</div>
+
+	<div class="bttn-group">
 		<?php if ($this->uri->segment(2) === 'conversation' && $this->uri->segment(4) === 'inbox') :
 			if ($this->uri->segment(6) !== '6') : ?>
-		<li><a href="javascript:void(0);" class="spam_button button"><?php echo tr('Report spam');?></a></li>
+		<button><a href="javascript:void(0);" class="spam_button button"><?php echo tr('Report spam');?></a></button>
 		<?php   else : ?>
-		<li><a href="javascript:void(0);" class="ham_button button"><?php echo tr('Not spam');?></a></li>
+		<button><a href="javascript:void(0);" class="ham_button button"><?php echo tr('Not spam');?></a></button>
 		<?php   endif;
 		endif;?>
+	</div>
+
+	<div class="bttn-group">
 		<?php
 	if ($this->uri->segment(2) === 'folder' && $this->uri->segment(3) === 'outbox'):
 	elseif ($this->uri->segment(2) === 'conversation' && $this->uri->segment(4) === 'outbox'):
 	else:?>
-		<li>&nbsp;</li>
+
 		<?php if ($this->uri->segment(4) === '5' or $this->uri->segment(6) === '5') : ?>
-		<li><a href="javascript:void(0);" class="recover_button button"><?php echo tr('Recover');?></a></li>
+		<button><a href="javascript:void(0);" class="recover_button button"><?php echo tr('Recover');?></a></button>
 		<?php endif; ?>
-		<li><a class="move_to_button button" href="javascript:void(0);"><?php echo tr('Move to');?></a></li>
+		<button><a class="move_to_button button" href="javascript:void(0);"><?php echo tr('Move to');?></a></button>
 		<?php endif; ?>
-		<li><a class="global_delete button" href="javascript:void(0);">
+		<button><a class="global_delete button" href="javascript:void(0);">
 				<?php
 	if ($this->uri->segment(4) === '5' or $this->uri->segment(6) === '5' or $this->uri->segment(4) === '6' or $this->uri->segment(6) === '6'):
 		echo tr('Delete permanently');
 	else:
 		echo tr('Delete');
 	endif;
-	?></a></li>
-		<?php if ($this->uri->segment(2) !== 'search'): ?>
-		<li>&nbsp;</li>
-		<li><a href="javascript:void(0);" class="refresh_button button"><?php echo tr('Refresh');?></a></li>
-		<?php endif; ?>
+	?></a></button>
+	</div>
+	<?php if ($this->uri->segment(2) !== 'search'): ?>
 
+	<div class="bttn-group">
+		<button><a href="javascript:void(0);" class="refresh_button button"><?php echo tr('Refresh');?></a></button>
+	</div>
+	<?php endif; ?>
+
+	<div class="bttn-group">
 		<?php if ($this->uri->segment(2) === 'conversation' && $this->uri->segment(4) === 'sentitems'): ?>
-		<li>&nbsp;</li>
-		<li><a href="javascript:void(0);" class="resend_bulk button"><?php echo tr('Resend');?></a></li>
+
+		<button><a href="javascript:void(0);" class="resend_bulk button"><?php echo tr('Resend');?></a></button>
 		<?php endif; ?>
 
 		<?php if ($pagination_links !== ''): ?>
-		<li class="paging">
+		<button class="paging">
 			<div id="paging"><?php  echo $pagination_links;?></div>
-		</li>
+		</button>
 		<?php endif; ?>
+	</div>
 
-	</ul>
 </div>
