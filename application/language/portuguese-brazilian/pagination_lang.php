@@ -7,7 +7,7 @@
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('Nenhum acesso direto ao script é permitido');
 
 $lang['pagination_first_link'] = '&lsaquo; Primeiro';
 $lang['pagination_next_link'] = '&gt;';

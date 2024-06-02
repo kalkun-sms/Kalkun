@@ -7,7 +7,7 @@
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('Nenhum acesso direto ao script é permitido');
 
 $lang['date_year'] = 'Ano';
 $lang['date_years'] = 'Anos';
