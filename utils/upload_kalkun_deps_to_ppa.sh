@@ -257,6 +257,15 @@ for suite in "${distribs[@]}"; do
   echo
   set -x
 
+  if ubuntu-distro-info --series "$suite" > /dev/null; then
+    vendor=ubuntu
+  elif debian-distro-info --series "$suite" > /dev/null; then
+    vendor=debian
+  else
+    echo "could not find vendor for $suite"
+    exit 1
+  fi
+
   # If there exists a branch for this suite in the repo, switch to it
   if git rev-parse --quiet --verify "origin/$vendor/$suite" > /dev/null; then
     git checkout -f "origin/$vendor/$suite"
