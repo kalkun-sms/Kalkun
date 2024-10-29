@@ -215,6 +215,17 @@
 				});
 		});
 
+		// check new message
+		$(document).on('click', "a.process_incoming_msgs_button, div#logo a", refresh = function(type) {
+			$.get("<?php echo site_url('daemon/message_routine');?>")
+				.done(function(data) {
+					$('a.refresh_button').trigger('click');
+				})
+				.fail(function(data) {
+					display_error_container(data);
+				});
+			return false;
+		});
 		<?php endif; ?>
 
 		// Reply, forward, resend SMS
