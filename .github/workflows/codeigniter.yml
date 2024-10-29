@@ -224,8 +224,8 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install dependencies
         run: |
-          composer update
-          composer install --no-progress --prefer-dist --optimize-autoloader
+          composer update --working-dir=utils
+          composer install --working-dir=utils --no-progress --prefer-dist --optimize-autoloader
       - id: translation
         name: Check translations
         run: |
