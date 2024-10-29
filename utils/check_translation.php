@@ -28,7 +28,7 @@ if (php_sapi_name() !== 'cli') exit;
  */
 
 // The script needs PhpParser to parse kalkun's PHP code
-include_once 'vendor/autoload.php';
+include_once realpath(__DIR__).'/vendor/autoload.php';
 
 use PhpParser\Error;
 use PhpParser\ParserFactory;
