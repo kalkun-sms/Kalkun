@@ -81,6 +81,10 @@
 
 	<div class="bttn-group">
 		<button><a href="javascript:void(0);" class="refresh_button button"><?php echo tr('Refresh');?></a></button>
+		<?php if (($this->uri->segment(2) === 'folder' && $this->uri->segment(3) === 'inbox')
+			|| ($this->uri->segment(2) === 'conversation' && $this->uri->segment(4) === 'inbox')): ?>
+		<button><a href="javascript:void(0);" class="process_incoming_msgs_button button"><?php echo tr('Process incoming messages');?></a></button>
+		<?php endif; ?>
 	</div>
 	<?php endif; ?>
 
