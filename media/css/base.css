@@ -1165,3 +1165,35 @@ input#groups {
 	line-height: 10px !important;
 	font-size: 12px !important;
 }
+
+.bttn-container {
+	background: #86C0D2;
+	margin: 0px;
+	padding: 5px;
+	overflow: auto;
+	color: #444;
+}
+
+.bttn-container:after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+.bttn-group button {
+	padding: 3px 8px;
+	background: linear-gradient(to bottom, white, rgba(222, 222, 222, 1));
+	border: 1px outset #F0F0F0;
+	float: left;
+	font-family: inherit;
+}
+
+.bttn-group button:last-child {
+	margin-right: 0.7ex;
+}
+
+.bttn-group button a {
+	text-decoration: none;
+	font-size: 11px;
+	color: #000;
+}
