@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://azhari.harahap.us
 */
 
-require_once (APPPATH.'plugins/Plugin_helper.php');
+require_once (APPPATH . 'plugins/Plugin_helper.php');
 
 class Phonebook_ldap_plugin extends CI3_plugin_system {
 
@@ -30,67 +30,66 @@ class Phonebook_ldap_plugin extends CI3_plugin_system {
 	 */
 	function phonebook_ldap($number)
 	{
-	if ( ! extension_loaded('ldap'))
-	{
-		show_error('phonebook_ldap: PHP extension "ldap" is missing. Install it if you want to use phonebook_ldap plugin.', 500, '500 Internal Server Error');
-	}
+		if ( ! extension_loaded('ldap'))
+		{
+			show_error('phonebook_ldap: PHP extension "ldap" is missing. Install it if you want to use phonebook_ldap plugin.', 500, '500 Internal Server Error');
+		}
 
-	$config = Plugin_helper::get_plugin_config('phonebook_ldap');
+		$config = Plugin_helper::get_plugin_config('phonebook_ldap');
 
-	// specify the LDAP server to connect to
-	$conn = ldap_connect($config['ldap_connect_uri']);
-	if ( ! $conn)
-	{
-		return FALSE;
-	}
-
-	//Set some variables
-	ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
-	ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
-	// Set timeout to 1sec
-	ldap_set_option($conn, LDAP_OPT_NETWORK_TIMEOUT, 1);
-	//ldap_set_option($conn, LDAP_OPT_TIMELIMIT, 1);
-
-	// bind to the LDAP server specified above
-
-	try
-	{
-		$bd = ldap_bind($conn, $config['username'], $config['password']);
-	}
-	catch (ErrorException $e)
-	{
-		if ($e->getMessage() === "ldap_bind(): Unable to bind to server: Can't contact LDAP server")
+		// specify the LDAP server to connect to
+		$conn = ldap_connect($config['ldap_connect_uri']);
+		if ( ! $conn)
 		{
 			return FALSE;
 		}
-	}
 
-	if ( ! $bd)
-	{
-		return FALSE;
-	}
-	$justthese = array('ou', 'sn', 'givenname', 'telephonenumber');
-	$result = ldap_search($conn, $config['dn'], '(&(objectClass=user)(objectCategory=person))', $justthese);
+		//Set some variables
+		ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
+		ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
+		// Set timeout to 1sec
+		ldap_set_option($conn, LDAP_OPT_NETWORK_TIMEOUT, 1);
+		//ldap_set_option($conn, LDAP_OPT_TIMELIMIT, 1);
+		// bind to the LDAP server specified above
 
-	//Create result set
-	$entries = ldap_get_entries($conn, $result);
-	$z = 0;
-	for ($i = 0; $i < $entries['count']; $i++)
-	{
-		// phone number or name not found, continue iteration
-		if ( ! array_key_exists('telephonenumber', $entries[$i]) OR ! array_key_exists('givenname', $entries[$i]))
+		try
 		{
-			continue;
+			$bd = ldap_bind($conn, $config['username'], $config['password']);
 		}
-		$users[$z]['name'] = $entries[$i]['givenname'][0];
-		$users[$z]['id'] = $entries[$i]['telephonenumber'][0];
-		if (array_key_exists('sn', $entries[$i]))
+		catch (ErrorException $e)
 		{
-			$users[$z]['name'] .= $entries[$i]['sn'][0];
+			if ($e->getMessage() === "ldap_bind(): Unable to bind to server: Can't contact LDAP server")
+			{
+				return FALSE;
+			}
 		}
-		$z++;
-	}
-	ldap_close($conn);
-	return $users;
+
+		if ( ! $bd)
+		{
+			return FALSE;
+		}
+		$justthese = array('ou', 'sn', 'givenname', 'telephonenumber');
+		$result = ldap_search($conn, $config['dn'], '(&(objectClass=user)(objectCategory=person))', $justthese);
+
+		//Create result set
+		$entries = ldap_get_entries($conn, $result);
+		$z = 0;
+		for ($i = 0; $i < $entries['count']; $i ++ )
+		{
+			// phone number or name not found, continue iteration
+			if ( ! array_key_exists('telephonenumber', $entries[$i]) OR ! array_key_exists('givenname', $entries[$i]))
+			{
+				continue;
+			}
+			$users[$z]['name'] = $entries[$i]['givenname'][0];
+			$users[$z]['id'] = $entries[$i]['telephonenumber'][0];
+			if (array_key_exists('sn', $entries[$i]))
+			{
+				$users[$z]['name'] .= $entries[$i]['sn'][0];
+			}
+			$z ++;
+		}
+		ldap_close($conn);
+		return $users;
 	}
 }

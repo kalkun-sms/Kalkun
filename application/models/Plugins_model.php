@@ -42,8 +42,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author		Justin Hyland www.justinhyland.com
  * @link        https://github.com/jhyland87/CI3_Plugin_System
  */
-class Plugins_model extends MY_Model
-{
+class Plugins_model extends MY_Model {
+
     /**
      * @var CI_Controller|object Codeigniter instance (get_instance())
      */
@@ -86,7 +86,7 @@ class Plugins_model extends MY_Model
 
         if( ! $result = $query->result())
         {
-            log_message('error','Error retrieving plugins from database');
+            log_message('error', 'Error retrieving plugins from database');
 
             return FALSE;
         }
@@ -140,7 +140,7 @@ class Plugins_model extends MY_Model
      */
     public function set_status($plugin, $status)
     {
-        log_message("error","PLUGIN: $plugin; STATUS: $status");
+        log_message("error", "PLUGIN: $plugin; STATUS: $status");
 
         if( ! static::$db
             ->where('system_name', $plugin)

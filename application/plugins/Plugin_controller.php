@@ -49,11 +49,10 @@ class Plugin_controller extends MY_Controller {
 		}
 		//$this->load->library('Plugins');
 		//$this->load->library('plugins', array('plugins_dir' => 'application/plugins/'));
-
 		// Check if plugin is active
 		$CI = &get_instance();
 		$this->load->library('Plugins_lib_kalkun');
-		if (!isset($this->plugins_lib_kalkun->get_enabled_plugins()[$this->plugin_name]))
+		if ( ! isset($this->plugins_lib_kalkun->get_enabled_plugins()[$this->plugin_name]))
 		{
 			$message = tr_raw('Plugin {0} is not installed.', NULL, $this->plugin_name);
 			$this->session->set_flashdata('notif', $message);
@@ -71,23 +70,23 @@ class Plugin_controller extends MY_Controller {
 		}
 
 		// Temporarily add the plugin path to package path to load language, config...
-		$this->load->add_package_path(APPPATH.'plugins/'.$this->plugin_name, FALSE);
+		$this->load->add_package_path(APPPATH . 'plugins/' . $this->plugin_name, FALSE);
 
 		// Load translations
-		if (file_exists(APPPATH.'plugins/'.$this->plugin_name.'/language/english/'.$this->plugin_name.'_lang.php'))
+		if (file_exists(APPPATH . 'plugins/' . $this->plugin_name . '/language/english/' . $this->plugin_name . '_lang.php'))
 		{
 			$this->lang->load($this->plugin_name);
 		}
 
 		// Load plugin config
 		// Access config items with: $this->config->config[$plugin_name]->item('config_item');
-		if (file_exists(APPPATH.'plugins/'.$this->plugin_name.'/config/'.$this->plugin_name.'.php'))
+		if (file_exists(APPPATH . 'plugins/' . $this->plugin_name . '/config/' . $this->plugin_name . '.php'))
 		{
 			$this->load->config($this->plugin_name, TRUE);
 		}
 
 		// Remove plugin path from package path now that we finished loading language, config...
-		$this->load->remove_package_path(APPPATH.'plugins/'.$this->plugin_name);
+		$this->load->remove_package_path(APPPATH . 'plugins/' . $this->plugin_name);
 	}
 
 	// --------------------------------------------------------------------
@@ -114,20 +113,17 @@ class Plugin_controller extends MY_Controller {
 
 		// Check if all required value already set, otherwise thrown error
 		// ...
-
 		// Check if plugin already installed
 		// ..
-
 		// Check if plugin activated
 		// ..
-
 		// Set plugin view directory
-		$this->plugin_view_dir = 'plugin/'.$this->plugin_name.'/';
+		$this->plugin_view_dir = 'plugin/' . $this->plugin_name . '/';
 
 		// if models exist
-		if (file_exists(APPPATH.'models/plugin/'.$this->plugin_name.'_model.php'))
+		if (file_exists(APPPATH . 'models/plugin/' . $this->plugin_name . '_model.php'))
 		{
-			$this->load->model('plugin/'.$this->plugin_name.'_model', $this->plugin_name.'_model');
+			$this->load->model('plugin/' . $this->plugin_name . '_model', $this->plugin_name . '_model');
 		}
 	}
 }

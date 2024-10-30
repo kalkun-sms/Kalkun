@@ -15,7 +15,8 @@ class Plugin_helper {
 
 	public static function autoloader()
 	{
-		spl_autoload_register(function ($class_name) {
+		spl_autoload_register(function ($class_name)
+		{
 			if (strpos($class_name, 'Kalkun\\Plugins') === 0)
 			{
 				$class = array_slice(explode('\\', $class_name), -1)[0];
@@ -36,7 +37,7 @@ class Plugin_helper {
 				$dirs = explode(DIRECTORY_SEPARATOR, $path);
 				$plugin_dir_path = implode(DIRECTORY_SEPARATOR, array_slice($dirs, 0, 2));
 
-				$fullpath = APPPATH.$plugin_dir_path.'/libraries/'.$class.'.php';
+				$fullpath = APPPATH . $plugin_dir_path . '/libraries/' . $class . '.php';
 				if (file_exists($fullpath))
 				{
 					require_once $fullpath;
@@ -48,9 +49,9 @@ class Plugin_helper {
 	public static function get_plugin_config($plugin_name)
 	{
 		$CI = &get_instance();
-		$CI->load->add_package_path(APPPATH.'plugins/'.$plugin_name, FALSE);
+		$CI->load->add_package_path(APPPATH . 'plugins/' . $plugin_name, FALSE);
 		$CI->load->config($plugin_name, TRUE);
-		$CI->load->remove_package_path(APPPATH.'plugins/'.$plugin_name, FALSE);
+		$CI->load->remove_package_path(APPPATH . 'plugins/' . $plugin_name, FALSE);
 
 		return $CI->config->config[$plugin_name];
 	}
@@ -58,9 +59,9 @@ class Plugin_helper {
 	public static function load_lang($plugin_name, $idiom = NULL)
 	{
 		$CI = &get_instance();
-		$CI->load->add_package_path(APPPATH.'plugins/'.$plugin_name, FALSE);
+		$CI->load->add_package_path(APPPATH . 'plugins/' . $plugin_name, FALSE);
 		$CI->lang->load($plugin_name, $idiom);
-		$CI->load->remove_package_path(APPPATH.'plugins/'.$plugin_name, FALSE);
+		$CI->load->remove_package_path(APPPATH . 'plugins/' . $plugin_name, FALSE);
 
 		return $CI->config->config[$plugin_name];
 	}

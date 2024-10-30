@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://azhari.harahap.us
 */
 
-require_once (APPPATH.'plugins/Plugin_helper.php');
+require_once (APPPATH . 'plugins/Plugin_helper.php');
 
 class External_script_plugin extends CI3_plugin_system {
 
@@ -25,109 +25,108 @@ class External_script_plugin extends CI3_plugin_system {
 
 	function external_script($sms)
 	{
-	$scripts = Plugin_helper::get_plugin_config('external_script')['external_script'];
-	$phone = $sms->SenderNumber;
-	$content = $sms->TextDecoded;
-	$id = $sms->ID;
-	$time = $sms->ReceivingDateTime;
-	$match = NULL; //The result of a preg_match capture
-
-	// Load all rules
-	foreach ($scripts as $rule)
-	{
-		$intepreter_path = $rule['intepreter_path'];
-		$script_path = $rule['script_path'];
-		$value = $parameter = '';
-
-		// evaluate rule key
-		switch ($rule['key'])
+		$scripts = Plugin_helper::get_plugin_config('external_script')['external_script'];
+		$phone = $sms->SenderNumber;
+		$content = $sms->TextDecoded;
+		$id = $sms->ID;
+		$time = $sms->ReceivingDateTime;
+		$match = NULL; //The result of a preg_match capture
+		// Load all rules
+		foreach ($scripts as $rule)
 		{
-			case 'sender':
-				$value = $phone;
-				break;
+			$intepreter_path = $rule['intepreter_path'];
+			$script_path = $rule['script_path'];
+			$value = $parameter = '';
 
-			case 'content':
-				$value = $content;
-				break;
-		}
-
-		// evaluate rule type
-		switch ($rule['type'])
-		{
-			case 'match':
-			case 'equal':
-				$is_valid = is_equal($rule['value'], $value);
-				break;
-
-			case 'contain':
-				$is_valid = is_contain($rule['value'], $value);
-				break;
-
-			case 'preg_match':
-				$ret = is_preg_match($rule['value'], $value);
-				$is_valid = $ret[0];
-				$match = $ret[1][1];
-				break;
-		}
-
-		// if we got valid rules
-		if ($is_valid)
-		{
-			// build extra parameters
-			if ( ! empty($rule['parameter']))
+			// evaluate rule key
+			switch ($rule['key'])
 			{
-				$valid_param = array('phone', 'content', 'id', 'time', 'match');
-				$param = explode('|', $rule['parameter']);
+				case 'sender':
+					$value = $phone;
+					break;
 
-				foreach ($param as $tmp)
-				{
-					if (in_array($tmp, $valid_param))
-					{
-						$parameter .= ' '.escapeshellarg(${$tmp});
-					}
-				}
+				case 'content':
+					$value = $content;
+					break;
 			}
 
-			// execute it
-			exec(escapeshellcmd($intepreter_path.' '.$script_path.' '.$parameter));
+			// evaluate rule type
+			switch ($rule['type'])
+			{
+				case 'match':
+				case 'equal':
+					$is_valid = is_equal($rule['value'], $value);
+					break;
+
+				case 'contain':
+					$is_valid = is_contain($rule['value'], $value);
+					break;
+
+				case 'preg_match':
+					$ret = is_preg_match($rule['value'], $value);
+					$is_valid = $ret[0];
+					$match = $ret[1][1];
+					break;
+			}
+
+			// if we got valid rules
+			if ($is_valid)
+			{
+				// build extra parameters
+				if ( ! empty($rule['parameter']))
+				{
+					$valid_param = array('phone', 'content', 'id', 'time', 'match');
+					$param = explode('|', $rule['parameter']);
+
+					foreach ($param as $tmp)
+					{
+						if (in_array($tmp, $valid_param))
+						{
+							$parameter .= ' ' . escapeshellarg(${$tmp});
+						}
+					}
+				}
+
+				// execute it
+				exec(escapeshellcmd($intepreter_path . ' ' . $script_path . ' ' . $parameter));
+			}
 		}
-	}
 	}
 
 	function is_equal($subject, $matched)
 	{
-	if ($subject === $matched)
-	{
-		return TRUE;
-	}
-	else
-	{
-		return FALSE;
-	}
+		if ($subject === $matched)
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
 	}
 
 	function is_contain($subject, $matched)
 	{
-	if ( ! strstr($matched, $subject))
-	{
-		return FALSE;
-	}
-	else
-	{
-		return TRUE;
-	}
+		if ( ! strstr($matched, $subject))
+		{
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
 	}
 
 	function is_preg_match($pattern, $subject)
 	{
-	$ret = preg_match($pattern, $subject, $matches, PREG_UNMATCHED_AS_NULL);
-	if ($ret === 1)
-	{
-		return array(TRUE, $matches);
-	}
-	else
-	{
-		return array(FALSE, NULL);
-	}
+		$ret = preg_match($pattern, $subject, $matches, PREG_UNMATCHED_AS_NULL);
+		if ($ret === 1)
+		{
+			return array(TRUE, $matches);
+		}
+		else
+		{
+			return array(FALSE, NULL);
+		}
 	}
 }

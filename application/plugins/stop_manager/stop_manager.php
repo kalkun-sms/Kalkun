@@ -8,7 +8,7 @@
 * Author URI: https://github.com/tenzap
 */
 
-require_once (APPPATH.'plugins/Plugin_helper.php');
+require_once (APPPATH . 'plugins/Plugin_helper.php');
 Plugin_helper::autoloader();
 
 use Kalkun\Plugins\StopManager\Config;
@@ -31,28 +31,28 @@ class Stop_manager_plugin extends CI3_plugin_system {
 
 	// ------------------------------------------------------------------------
 
-    /**
-     * Install Plugin
-     *
-     * Anything that needs to happen when this plugin gets installed
-     *
-     * @access public
-     * @since   0.1.0
-     * @return bool    TRUE by default
-     */
-    public static function install($data = NULL)
-    {
-	$CI = &get_instance();
-	$CI->load->helper('kalkun');
-	// check if table already exists
-	if ( ! $CI->db->table_exists('plugin_stop_manager'))
+	/**
+	 * Install Plugin
+	 *
+	 * Anything that needs to happen when this plugin gets installed
+	 *
+	 * @access public
+	 * @since   0.1.0
+	 * @return bool    TRUE by default
+	 */
+	public static function install($data = NULL)
 	{
-		$db_driver = $CI->db->platform();
-		$db_prop = get_database_property($db_driver);
-		execute_sql(APPPATH.'plugins/stop_manager/media/'.$db_prop['file'].'_stop_manager.sql');
+		$CI = &get_instance();
+		$CI->load->helper('kalkun');
+		// check if table already exists
+		if ( ! $CI->db->table_exists('plugin_stop_manager'))
+		{
+			$db_driver = $CI->db->platform();
+			$db_prop = get_database_property($db_driver);
+			execute_sql(APPPATH . 'plugins/stop_manager/media/' . $db_prop['file'] . '_stop_manager.sql');
+		}
+		return TRUE;
 	}
-	return TRUE;
-    }
 
 	/**
 	 * Cleanup the outgoing message
@@ -64,39 +64,39 @@ class Stop_manager_plugin extends CI3_plugin_system {
 	 */
 	public function cleanup_outgoing($all)
 	{
-	$stopCfg = Config::getInstance();
-	$stopMsgOutgoing = new MsgOutgoing($all);
+		$stopCfg = Config::getInstance();
+		$stopMsgOutgoing = new MsgOutgoing($all);
 
-	$dest = $all[0];
-	$data = $all[1];
+		$dest = $all[0];
+		$data = $all[1];
 
-	$CI = &get_instance();
-	// Get the list of numbers having "STOP" for this type of SMS
-	$CI->load->model('stop_manager/Stop_manager_model', 'Stop_manager_model');
-	$type = $stopCfg->isTypeEnabled() ? $stopMsgOutgoing->getType() : NULL;
-	$db_result = $CI->Stop_manager_model->get_num_for_type($type)->result_array();
-	$blocked_numbers = array();
+		$CI = &get_instance();
+		// Get the list of numbers having "STOP" for this type of SMS
+		$CI->load->model('stop_manager/Stop_manager_model', 'Stop_manager_model');
+		$type = $stopCfg->isTypeEnabled() ? $stopMsgOutgoing->getType() : NULL;
+		$db_result = $CI->Stop_manager_model->get_num_for_type($type)->result_array();
+		$blocked_numbers = array();
 
-	foreach ($db_result as $row)
-	{
-		$blocked_numbers[] = $row['destination_number'];
-	}
-
-	// Remove the phone no. if the recipient is in the STOP table for this type of sms
-	foreach ($dest as $key => $number)
-	{
-		foreach ($blocked_numbers as $n)
+		foreach ($db_result as $row)
 		{
-			if ($n === $number)
+			$blocked_numbers[] = $row['destination_number'];
+		}
+
+		// Remove the phone no. if the recipient is in the STOP table for this type of sms
+		foreach ($dest as $key => $number)
+		{
+			foreach ($blocked_numbers as $n)
 			{
-				unset($dest[$key]);
+				if ($n === $number)
+				{
+					unset($dest[$key]);
+				}
 			}
 		}
-	}
 
-	$data['message'] = $stopMsgOutgoing->getCleanedMsg();
+		$data['message'] = $stopMsgOutgoing->getCleanedMsg();
 
-	return array($dest, $data);
+		return array($dest, $data);
 	}
 
 	/**
@@ -107,67 +107,67 @@ class Stop_manager_plugin extends CI3_plugin_system {
 	 */
 	public function incoming($sms)
 	{
-	// On message reception, if it is a STOP message (eg STOP rappel)
-	// Put it to the STOP table
+		// On message reception, if it is a STOP message (eg STOP rappel)
+		// Put it to the STOP table
 
-	$stopCfg = Config::getInstance();
-	$stopMsgIncoming = new MsgIncoming($sms);
+		$stopCfg = Config::getInstance();
+		$stopMsgIncoming = new MsgIncoming($sms);
 
-	if ($stopMsgIncoming->isValidStopMessage())
-	{
-		$CI = &get_instance();
-		$CI->load->model('stop_manager/Stop_manager_model', 'Stop_manager_model');
-
-		// Add to DB in case of OptOut
-		if ($stopMsgIncoming->isOptOut())
+		if ($stopMsgIncoming->isValidStopMessage())
 		{
-			$ret = $CI->Stop_manager_model->add($stopMsgIncoming->getParty(), $stopMsgIncoming->getType(), $stopMsgIncoming->getOrigMsg());
-		}
+			$CI = &get_instance();
+			$CI->load->model('stop_manager/Stop_manager_model', 'Stop_manager_model');
 
-		// Delete From DB in case of OptIn
-		if ($stopMsgIncoming->isOptIn())
-		{
-			$ret = $CI->Stop_manager_model->delete($stopMsgIncoming->getParty(), $stopMsgIncoming->getType());
-		}
+			// Add to DB in case of OptOut
+			if ($stopMsgIncoming->isOptOut())
+			{
+				$ret = $CI->Stop_manager_model->add($stopMsgIncoming->getParty(), $stopMsgIncoming->getType(), $stopMsgIncoming->getOrigMsg());
+			}
 
-		// Send auto reply
-		if ($stopCfg->isAutoreplyInfoEnabled())
-		{
-			$this->autoreply($stopMsgIncoming->getParty(), $stopMsgIncoming->getAutoReplyMsg());
+			// Delete From DB in case of OptIn
+			if ($stopMsgIncoming->isOptIn())
+			{
+				$ret = $CI->Stop_manager_model->delete($stopMsgIncoming->getParty(), $stopMsgIncoming->getType());
+			}
+
+			// Send auto reply
+			if ($stopCfg->isAutoreplyInfoEnabled())
+			{
+				$this->autoreply($stopMsgIncoming->getParty(), $stopMsgIncoming->getAutoReplyMsg());
+			}
 		}
-	}
-	else
-	{
-		if ($stopCfg->isAutoreplyErrorEnabled())
+		else
 		{
-			$this->autoreply($stopMsgIncoming->getParty(), $stopMsgIncoming->getAutoReplyMsg());
+			if ($stopCfg->isAutoreplyErrorEnabled())
+			{
+				$this->autoreply($stopMsgIncoming->getParty(), $stopMsgIncoming->getAutoReplyMsg());
+			}
 		}
-	}
 	}
 
 	private function autoreply($tel, $reply_msg)
 	{
-	$config = Config::getInstance()->getConfig();
+		$config = Config::getInstance()->getConfig();
 
-	$ret = NULL;
-	// Filter rule for outgoing SMS
-	if ($config['enable_autoreply_outnumber_filter'])
-	{
-		$ret = preg_match($config['autoreply_outnumber_match_rule'], $tel, $matches);
-		//var_dump($ret);
-		//var_dump($matches);
-	}
-	if ( ! $config['enable_autoreply_outnumber_filter'] || $ret === 1)
-	{
-		$CI = &get_instance();
-		$CI->load->model('Message_model');
-		$data['class'] = '1';
-		$data['dest'] = $tel;
-		$data['date'] = date('Y-m-d H:i:s');
-		$data['message'] = $reply_msg;
-		$data['delivery_report'] = 'default';
-		$data['uid'] = '1';
-		$CI->Message_model->send_messages($data);
-	}
+		$ret = NULL;
+		// Filter rule for outgoing SMS
+		if ($config['enable_autoreply_outnumber_filter'])
+		{
+			$ret = preg_match($config['autoreply_outnumber_match_rule'], $tel, $matches);
+			//var_dump($ret);
+			//var_dump($matches);
+		}
+		if ( ! $config['enable_autoreply_outnumber_filter'] || $ret === 1)
+		{
+			$CI = &get_instance();
+			$CI->load->model('Message_model');
+			$data['class'] = '1';
+			$data['dest'] = $tel;
+			$data['date'] = date('Y-m-d H:i:s');
+			$data['message'] = $reply_msg;
+			$data['delivery_report'] = 'default';
+			$data['uid'] = '1';
+			$CI->Message_model->send_messages($data);
+		}
 	}
 }
