@@ -15,38 +15,33 @@ use Kalkun\Plugins\StopManager\Config;
 use Kalkun\Plugins\StopManager\MsgIncoming;
 use Kalkun\Plugins\StopManager\MsgOutgoing;
 
-// Add hook for outgoing message
-add_action('message.outgoing_dest_data', 'stop_manager_cleanup_outgoing', 1);
-add_action('message.incoming.before', 'stop_manager_incoming', 1);
+class Stop_manager_plugin extends CI3_plugin_system {
 
-function stop_manager_activate()
-{
-	return TRUE;
-}
+	use plugin_trait;
 
-/**
-* Function called when plugin deactivated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_deactivate
-*
-*/
-function stop_manager_deactivate()
-{
-	return TRUE;
-}
+	public function __construct()
+	{
+		parent::__construct();
+		// Add hook for outgoing message
+		//add_action('message.outgoing_dest_data', 'stop_manager_cleanup_outgoing', 1);
+		add_filter('message.outgoing_dest_data', array($this, 'cleanup_outgoing'), 1);
+		//add_action('message.incoming.before', 'stop_manager_incoming', 1);
+		add_action('message.incoming.before', array($this, 'incoming'), 1);
+	}
 
-/**
-* Function called when plugin first installed into the database
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_install
-*
-*/
-function stop_manager_install()
-{
+	// ------------------------------------------------------------------------
+
+    /**
+     * Install Plugin
+     *
+     * Anything that needs to happen when this plugin gets installed
+     *
+     * @access public
+     * @since   0.1.0
+     * @return bool    TRUE by default
+     */
+    public static function install($data = NULL)
+    {
 	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exists
@@ -57,19 +52,18 @@ function stop_manager_install()
 		execute_sql(APPPATH.'plugins/stop_manager/media/'.$db_prop['file'].'_stop_manager.sql');
 	}
 	return TRUE;
-}
+    }
 
-
-/**
- * Cleanup the outgoing message
- *  - the list of recipient (remove those who have opted out)
- *  - the content (remove the type)
- *
- * @param array $all (an array containing $dest & $data)
- * @return array (an array containing $dest & $data)
- */
-function stop_manager_cleanup_outgoing($all)
-{
+	/**
+	 * Cleanup the outgoing message
+	 *  - the list of recipient (remove those who have opted out)
+	 *  - the content (remove the type)
+	 *
+	 * @param array $all (an array containing $dest & $data)
+	 * @return array (an array containing $dest & $data)
+	 */
+	public function cleanup_outgoing($all)
+	{
 	$stopCfg = Config::getInstance();
 	$stopMsgOutgoing = new MsgOutgoing($all);
 
@@ -103,16 +97,16 @@ function stop_manager_cleanup_outgoing($all)
 	$data['message'] = $stopMsgOutgoing->getCleanedMsg();
 
 	return array($dest, $data);
-}
+	}
 
-/**
- * Analyse an incoming message and store/remove in the Stop_manager database
- *
- * @param
- * @return void
- */
-function stop_manager_incoming($sms)
-{
+	/**
+	 * Analyse an incoming message and store/remove in the Stop_manager database
+	 *
+	 * @param
+	 * @return void
+	 */
+	public function incoming($sms)
+	{
 	// On message reception, if it is a STOP message (eg STOP rappel)
 	// Put it to the STOP table
 
@@ -139,20 +133,20 @@ function stop_manager_incoming($sms)
 		// Send auto reply
 		if ($stopCfg->isAutoreplyInfoEnabled())
 		{
-			autoreply($stopMsgIncoming->getParty(), $stopMsgIncoming->getAutoReplyMsg());
+			$this->autoreply($stopMsgIncoming->getParty(), $stopMsgIncoming->getAutoReplyMsg());
 		}
 	}
 	else
 	{
 		if ($stopCfg->isAutoreplyErrorEnabled())
 		{
-			autoreply($stopMsgIncoming->getParty(), $stopMsgIncoming->getAutoReplyMsg());
+			$this->autoreply($stopMsgIncoming->getParty(), $stopMsgIncoming->getAutoReplyMsg());
 		}
 	}
-}
+	}
 
-function autoreply($tel, $reply_msg)
-{
+	private function autoreply($tel, $reply_msg)
+	{
 	$config = Config::getInstance()->getConfig();
 
 	$ret = NULL;
@@ -174,5 +168,6 @@ function autoreply($tel, $reply_msg)
 		$data['delivery_report'] = 'default';
 		$data['uid'] = '1';
 		$CI->Message_model->send_messages($data);
+	}
 	}
 }

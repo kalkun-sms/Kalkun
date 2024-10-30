@@ -15,31 +15,31 @@
 		<?php
 if (count($plugins) > 0)
 {
-	foreach ($plugins as $tmp)
+	foreach ($plugins as $plugin)
 	{
 		if ($type === 'installed'
-			&& file_exists(APPPATH . 'plugins/'.$tmp['plugin_system_name'].'/controllers/'.ucfirst($tmp['plugin_system_name']).'.php')
-			&& $tmp['plugin_controller_has_index'] === TRUE)
+			&& file_exists(APPPATH . 'plugins/'.$plugin->system_name.'/controllers/'.ucfirst($plugin->system_name).'.php')
+			&& $plugin->controller_has_index === TRUE)
 		{
-			echo '<div style="float: left"><h3>'.anchor('plugin/'.rawurlencode($tmp['plugin_system_name']), htmlentities($tmp['plugin_name'], ENT_QUOTES)).'</h3></div>';
+			echo '<div style="float: left"><h3>'.anchor('plugin/'.rawurlencode($plugin->system_name), htmlentities($plugin->name, ENT_QUOTES)).'</h3></div>';
 		}
 		else
 		{
-			echo '<div style="float: left"><h3 style="color: #000">'.htmlentities($tmp['plugin_name'], ENT_QUOTES).'</h3></div>';
+			echo '<div style="float: left"><h3 style="color: #000">'.htmlentities($plugin->name, ENT_QUOTES).'</h3></div>';
 		} ?>
 		<div style="float: right; margin-top: 15px;">
 			<?php if ($type === 'installed'):?>
-			<a href="<?php echo site_url('pluginss/uninstall/'.rawurlencode($tmp['plugin_system_name'])); ?>" class="nicebutton"><?php echo tr('Uninstall'); ?></a>
+			<a href="<?php echo site_url('pluginss/uninstall/'.rawurlencode($plugin->system_name)); ?>" class="nicebutton"><?php echo tr('Uninstall'); ?></a>
 			<?php else:?>
-			<a href="<?php echo site_url('pluginss/install/'.rawurlencode($tmp['plugin_system_name'])); ?>" class="nicebutton"><?php echo tr('Install'); ?></a>
+			<a href="<?php echo site_url('pluginss/install/'.rawurlencode($plugin->system_name)); ?>" class="nicebutton"><?php echo tr('Install'); ?></a>
 			<?php endif; ?>
 		</div>
 
 		<div class="clear"><small>
-				<strong><?php echo tr('Version'); ?>:</strong> <?php echo htmlentities($tmp['plugin_version'], ENT_QUOTES); ?>&nbsp;&nbsp;
-				<strong><?php echo tr('Author'); ?>:</strong> <?php echo anchor(htmlentities($tmp['plugin_author_uri'], ENT_QUOTES), htmlentities($tmp['plugin_author'], ENT_QUOTES)); ?>
+				<strong><?php echo tr('Version'); ?>:</strong> <?php echo htmlentities($plugin->version, ENT_QUOTES); ?>&nbsp;&nbsp;
+				<strong><?php echo tr('Author'); ?>:</strong> <?php echo anchor(htmlentities($plugin->author_uri, ENT_QUOTES), htmlentities($plugin->author, ENT_QUOTES)); ?>
 			</small></div>
-		<p><?php echo htmlentities($tmp['plugin_description'], ENT_QUOTES); ?></p>
+		<p><?php echo htmlentities($plugin->description, ENT_QUOTES); ?></p>
 		<hr />
 		<?php
 	}

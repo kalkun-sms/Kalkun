@@ -29,7 +29,7 @@ class Phonebook extends MY_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Phonebook_model');
-		$this->load->library('Plugins');
+		$this->load->library('Plugins_lib_kalkun');
 	}
 
 	// --------------------------------------------------------------------
@@ -476,7 +476,7 @@ class Phonebook extends MY_Controller {
 			}
 
 			// hook for contact get
-			$contact = do_action('phonebook.contact.get');
+			$contact = do_action_kalkun('phonebook.contact.get');
 			if (empty($contact))
 			{
 				$contact = array();

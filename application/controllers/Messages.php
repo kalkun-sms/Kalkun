@@ -37,7 +37,7 @@ class Messages extends MY_Controller {
 		$param['uid'] = $this->session->userdata('id_user');
 
 		$this->load->model('Phonebook_model');
-		$this->load->library('Plugins');
+		$this->load->library('Plugins_lib_kalkun');
 	}
 
 	// --------------------------------------------------------------------
@@ -498,10 +498,10 @@ class Messages extends MY_Controller {
 		// hook for outgoing message
 		if (isset($dest))
 		{
-			$dest = do_action('message.outgoing', $dest);
-			$sms = do_action('message.outgoing_all', $data);
+			$dest = do_action_kalkun('message.outgoing', $dest);
+			$sms = do_action_kalkun('message.outgoing_all', $data);
 
-			$dest_data = do_action('message.outgoing_dest_data', array($dest, $data));
+			$dest_data = do_action_kalkun('message.outgoing_dest_data', array($dest, $data));
 			if (sizeof($dest_data) === 2)
 			{
 				$dest = $dest_data[0];

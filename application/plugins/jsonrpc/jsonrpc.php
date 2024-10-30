@@ -8,42 +8,7 @@
 * Author URI: http://azhari.harahap.us
 */
 
+class Jsonrpc_plugin extends CI3_plugin_system {
 
-/**
-* Function called when plugin first activated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_activate
-*
-*/
-function jsonrpc_activate()
-{
-	return TRUE;
-}
-
-/**
-* Function called when plugin deactivated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_deactivate
-*
-*/
-function jsonrpc_deactivate()
-{
-	return TRUE;
-}
-
-/**
-* Function called when plugin first installed into the database
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_install
-*
-*/
-function jsonrpc_install()
-{
-	return TRUE;
+    use plugin_trait;
 }

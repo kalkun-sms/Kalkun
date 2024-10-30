@@ -109,15 +109,16 @@ insert into "b8_wordlist" ("token", "count_ham", "count_spam") values ('b8*texts
 
 CREATE TABLE "plugins" (
   "plugin_id" serial PRIMARY KEY,
-  "plugin_system_name" varchar(255) NOT NULL,
-  "plugin_name" varchar(255) DEFAULT NULL,
-  "plugin_uri" varchar(120) DEFAULT NULL,
-  "plugin_version" varchar(30) DEFAULT NULL,
-  "plugin_description" text,
-  "plugin_author" varchar(120) DEFAULT NULL,
-  "plugin_author_uri" varchar(120) DEFAULT NULL,
-  "plugin_data" text,
-  UNIQUE("plugin_system_name")
+  "system_name" varchar(255) NOT NULL,
+  "name" varchar(255) DEFAULT NULL,
+  "status" smallint NOT NULL DEFAULT 1,
+  "uri" varchar(120) DEFAULT NULL,
+  "version" varchar(30) DEFAULT NULL,
+  "description" text,
+  "author" varchar(120) DEFAULT NULL,
+  "author_uri" varchar(120) DEFAULT NULL,
+  "data" text,
+  UNIQUE("system_name")
 );
 
 CREATE TABLE "user_forgot_password" (

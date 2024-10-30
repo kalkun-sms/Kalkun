@@ -8,42 +8,61 @@
 * Author URI: http://azhari.harahap.us
 */
 
+class Welcome_plugin extends CI3_plugin_system {
 
-/**
-* Function called when plugin first activated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_activate
-*
-*/
-function welcome_activate()
-{
-	return TRUE;
-}
+	use plugin_trait;
 
-/**
-* Function called when plugin deactivated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_deactivate
-*
-*/
-function welcome_deactivate()
-{
-	return TRUE;
-}
+	public function __construct()
+	{
+		parent::__construct();
+		// Add hooks here like add_action, or add_filter...
+	}
 
-/**
-* Function called when plugin first installed into the database
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_install
-*
-*/
-function welcome_install()
-{
-	return TRUE;
+	// ------------------------------------------------------------------------
+
+    /**
+     * Install Plugin
+     *
+     * Anything that needs to happen when this plugin gets installed
+     *
+     * @access public
+     * @since   0.1.0
+     * @return bool    TRUE by default
+     */
+    public static function install($data = NULL)
+    {
+        return TRUE;
+    }
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Activate Plugin
+     *
+     * Anything that needs to happen when this plugin gets activate
+     *
+     * @access public
+     * @since   0.1.0
+     * @return bool    TRUE by default
+     */
+    public function activate($data = NULL)
+    {
+        return TRUE;
+    }
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Deactivate Plugin
+     *
+     * Anything that needs to happen when this plugin gets deactivate
+     *
+     * @access public
+     * @since   0.1.0
+     * @return bool    TRUE by default
+     */
+    public function deactivate($data = NULL)
+    {
+        return TRUE;
+    }
 }

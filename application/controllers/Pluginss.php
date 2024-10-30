@@ -36,8 +36,12 @@ class Pluginss extends MY_Controller {
 			redirect('/');
 		}
 
-		$this->load->library('Plugins');
-		$this->load->model('Plugin_model');
+		$this->load->library('Plugins_lib_kalkun');
+		$this->load->model('Plugins_kalkun_model');
+		
+		$this->plugins_lib_kalkun->restore_orphaned_plugins();
+		$this->plugins_lib_kalkun->update_all_plugin_headers();
+
 	}
 
 	// --------------------------------------------------------------------
@@ -59,47 +63,27 @@ class Pluginss extends MY_Controller {
 		if ($type === 'installed')
 		{
 			$data['title'] .= ' - '.tr_raw('Installed', 'Plural');
-			$data['plugins'] = $this->Plugin_model->get_plugins()->result_array();
-			foreach ($data['plugins'] as $key => $plugin)
+			foreach ($this->Plugins_kalkun_model->get_plugins() as $key => $plugin)
 			{
-				$data['plugins'][$key]['plugin_controller_has_index'] = $this->_plugin_controller_has_index($plugin['plugin_system_name']);
+				if (intval($plugin->status) === 1)
+				{
+					$data['plugins'][$key] = $plugin;
+					$data['plugins'][$key]->controller_has_index = $this->_plugin_controller_has_index($plugin->system_name);
+				}
 			}
 		}
 		else
 		{
 			$data['title'] .= ' - '.tr_raw('Available', 'Plural');
-			$plugins = $this->plugins->print_plugins();
-			$no = 0;
-
-			if ( ! empty($plugins))
+			foreach ($this->Plugins_kalkun_model->get_plugins() as $key => $plugin)
 			{
-				// do cleanup array key
-				foreach ($plugins as $key => $tmp)
+				if (intval($plugin->status) !== 1)
 				{
-					$this->plugins->get_plugin_headers($key);
-					$new_plugin[$no] = array_merge (
-						array ('plugin_system_name' => $key),
-						$this->plugins->plugin_info($key)
-					);
-					$no++;
+					$data['plugins'][$key] = $plugin;
 				}
-				$installed = $this->Plugin_model->get_plugins()->result_array();
-
-				foreach ($new_plugin as $key => $tmp)
-				{
-					foreach ($installed as $tmp2)
-					{
-						if (in_array($tmp['plugin_system_name'], $tmp2))
-						{
-							unset($new_plugin[$key]);
-						}
-					}
-				}
-				$result = $new_plugin;
-				uasort($result, array($this, '_plugins_cmp_plugin_name'));
-				$data['plugins'] = $result;
 			}
 		}
+		uasort($data['plugins'], array($this, '_plugins_cmp_plugin_name'));
 		$this->load->view('main/layout', $data);
 	}
 
@@ -114,7 +98,7 @@ class Pluginss extends MY_Controller {
 	 */
 	function install($plugin_name)
 	{
-		$this->plugins->activate_plugin($plugin_name);
+		$this->plugins_lib_kalkun->enable_plugin($plugin_name);
 		$this->session->set_flashdata('notif', tr_raw('Plugin {0} installed successfully.', NULL, $plugin_name));
 		redirect('pluginss');
 	}
@@ -130,41 +114,9 @@ class Pluginss extends MY_Controller {
 	 */
 	function uninstall($plugin_name)
 	{
-		$this->plugins->deactivate_plugin($plugin_name);
+		$this->plugins_lib_kalkun->disable_plugin($plugin_name);
 		$this->session->set_flashdata('notif', tr_raw('Plugin {0} uninstalled successfully.', NULL, $plugin_name));
 		redirect('pluginss');
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Activate
-	 *
-	 * Activated a plugin
-	 *
-	 * @access	public
-	 */
-	function activate($plugin_name)
-	{
-		$data = array('plugin_status' => 'true');
-		$this->db->where('plugin_name', $plugin_name);
-		$this->db->update('plugin', $data);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Deactivate
-	 *
-	 * Deactivated a plugin
-	 *
-	 * @access	public
-	 */
-	function deactivate($plugin_name)
-	{
-		$data = array('plugin_status' => 'false');
-		$this->db->where('plugin_name', $plugin_name);
-		$this->db->update('plugin', $data);
 	}
 
 	// --------------------------------------------------------------------
@@ -174,7 +126,7 @@ class Pluginss extends MY_Controller {
 	 */
 	function _plugins_cmp_plugin_name($p1, $p2)
 	{
-		return strcasecmp ($p1['plugin_name'], $p2['plugin_name']);
+		return strcasecmp ($p1->name, $p2->name);
 	}
 
 	// --------------------------------------------------------------------

@@ -235,16 +235,17 @@ INSERT INTO `b8_wordlist` (`token`, `count_ham`, `count_spam`) VALUES ('b8*texts
 
 CREATE TABLE IF NOT EXISTS `plugins` (
   `plugin_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `plugin_system_name` varchar(191) NOT NULL,
-  `plugin_name` varchar(191) NOT NULL,
-  `plugin_uri` varchar(120) DEFAULT NULL,
-  `plugin_version` varchar(30) NOT NULL,
-  `plugin_description` text,
-  `plugin_author` varchar(120) DEFAULT NULL,
-  `plugin_author_uri` varchar(120) DEFAULT NULL,
-  `plugin_data` longtext,
+  `system_name` varchar(191) NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `uri` varchar(120) DEFAULT NULL,
+  `version` varchar(30) NOT NULL,
+  `description` text,
+  `author` varchar(120) DEFAULT NULL,
+  `author_uri` varchar(120) DEFAULT NULL,
+  `data` longtext,
   PRIMARY KEY (`plugin_id`),
-  UNIQUE KEY `plugin_index` (`plugin_system_name`) USING BTREE
+  UNIQUE KEY `plugin_index` (`system_name`) USING BTREE
 )  DEFAULT CHARSET=utf8mb4;
 
 

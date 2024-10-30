@@ -11,45 +11,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once (APPPATH.'plugins/Plugin_helper.php');
 
-// Add hook for incoming message
-add_action('message.incoming.before', 'sms_to_twitter', 15);
+class Sms_to_twitter_plugin extends CI3_plugin_system {
 
-/**
-* Function called when plugin first activated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_activate
-*
-*/
-function sms_to_twitter_activate()
-{
-	return TRUE;
-}
+	use plugin_trait;
 
-/**
-* Function called when plugin deactivated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_deactivate
-*
-*/
-function sms_to_twitter_deactivate()
-{
-	return TRUE;
-}
+	public function __construct()
+	{
+		parent::__construct();
+		// Add hook for incoming message
+		add_filter('message.incoming.before', array($this, 'sms_to_twitter'), 15);
+	}
 
-/**
-* Function called when plugin first installed into the database
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_install
-*
-*/
-function sms_to_twitter_install()
-{
+	// ------------------------------------------------------------------------
+
+    /**
+     * Install Plugin
+     *
+     * Anything that needs to happen when this plugin gets installed
+     *
+     * @access public
+     * @since   0.1.0
+     * @return bool    TRUE by default
+     */
+    public static function install($data = NULL)
+    {
 	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
@@ -60,10 +45,10 @@ function sms_to_twitter_install()
 		execute_sql(APPPATH.'plugins/sms_to_twitter/media/'.$db_prop['file'].'_sms_to_twitter.sql');
 	}
 	return TRUE;
-}
+    }
 
-function sms_to_twitter($sms)
-{
+	function sms_to_twitter($sms)
+	{
 	$config = Plugin_helper::get_plugin_config('sms_to_twitter');
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
@@ -87,5 +72,6 @@ function sms_to_twitter($sms)
 			$CI->twitter->oauth($consumer_key, $consumer_key_secret, $tokens['access_token'], $tokens['access_token_secret']);
 			$CI->twitter->call('statuses/update', array('status' => $twitter_msg));
 		}
+	}
 	}
 }

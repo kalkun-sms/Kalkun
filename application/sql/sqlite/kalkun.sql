@@ -109,14 +109,15 @@ insert into b8_wordlist (token, count_ham, count_spam) values ('b8*texts', 0, 0)
 
 CREATE TABLE "plugins" (
   "plugin_id" INTEGER PRIMARY KEY AUTOINCREMENT,
-  "plugin_system_name" VARCHAR(255) NOT NULL UNIQUE,
-  "plugin_name" VARCHAR(255) NOT NULL,
-  "plugin_uri" VARCHAR(120) DEFAULT NULL,
-  "plugin_version" VARCHAR(30) NOT NULL,
-  "plugin_description" TEXT,
-  "plugin_author" VARCHAR(120) DEFAULT NULL,
-  "plugin_author_uri" VARCHAR(120) DEFAULT NULL,
-  "plugin_data" TEXT
+  "system_name" VARCHAR(255) NOT NULL UNIQUE,
+  "name" VARCHAR(255) NOT NULL,
+  "status" TINYINT(1) NOT NULL DEFAULT '1',
+  "uri" VARCHAR(120) DEFAULT NULL,
+  "version" VARCHAR(30) NOT NULL,
+  "description" TEXT,
+  "author" VARCHAR(120) DEFAULT NULL,
+  "author_uri" VARCHAR(120) DEFAULT NULL,
+  "data" TEXT
 );
 
 CREATE TABLE "user_forgot_password" (

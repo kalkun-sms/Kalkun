@@ -8,43 +8,23 @@
 * Author URI: http://azhari.harahap.us
 */
 
+class Server_alert_plugin extends CI3_plugin_system {
 
-/**
-* Function called when plugin first activated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_activate
-*
-*/
-function server_alert_activate()
-{
-	return TRUE;
-}
+	use plugin_trait;
 
-/**
-* Function called when plugin deactivated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_deactivate
-*
-*/
-function server_alert_deactivate()
-{
-	return TRUE;
-}
+// ------------------------------------------------------------------------
 
-/**
-* Function called when plugin first installed into the database
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_install
-*
-*/
-function server_alert_install()
-{
+	/**
+	 * Install Plugin
+	 *
+	 * Anything that needs to happen when this plugin gets installed
+	 *
+	 * @access public
+	 * @since   0.1.0
+	 * @return bool    TRUE by default
+	 */
+	public static function install($data = NULL)
+ {
 	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
@@ -55,4 +35,5 @@ function server_alert_install()
 		execute_sql(APPPATH.'plugins/server_alert/media/'.$db_prop['file'].'_server_alert.sql');
 	}
 	return TRUE;
+    }
 }

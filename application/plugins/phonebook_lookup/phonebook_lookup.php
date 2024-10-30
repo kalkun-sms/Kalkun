@@ -11,53 +11,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once (APPPATH.'plugins/Plugin_helper.php');
 
-// Add hook for contact menu
-add_action('phonebook.contact.menu', 'phonebook_lookup', 10);
+class Phonebook_lookup_plugin extends CI3_plugin_system {
 
-/**
-* Function called when plugin first activated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_activate
-*
-*/
-function phonebook_lookup_activate()
-{
-	return TRUE;
-}
+	use plugin_trait;
 
-/**
-* Function called when plugin deactivated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_deactivate
-*
-*/
-function phonebook_lookup_deactivate()
-{
-	return TRUE;
-}
+	public function __construct()
+	{
+		parent::__construct();
+		// Add hook for contact menu
+		add_filter('phonebook.contact.menu', array($this, 'phonebook_lookup'), 10);
+	}
 
-/**
-* Function called when plugin first installed into the database
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_install
-*
-*/
-function phonebook_lookup_install()
-{
-	return TRUE;
-}
-
-function phonebook_lookup($number)
-{
+	function phonebook_lookup($number)
+	{
 	$config = Plugin_helper::get_plugin_config('phonebook_lookup');
 	Plugin_helper::load_lang('phonebook_lookup');
 	$lookup['url'] = str_replace('#phonenumber#', $number->Number, $config['url']);
 	$lookup['title'] = tr('Lookup Number');
 	return $lookup;
+	}
 }
