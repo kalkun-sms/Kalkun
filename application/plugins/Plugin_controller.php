@@ -52,8 +52,8 @@ class Plugin_controller extends MY_Controller {
 
 		// Check if plugin is active
 		$CI = &get_instance();
-		$check = $CI->db->where('plugin_system_name', $this->plugin_name)->get('plugins');
-		if ($check->num_rows() !== 1)
+		$this->load->library('Plugins_lib_kalkun');
+		if (!isset($this->plugins_lib_kalkun->get_enabled_plugins()[$this->plugin_name]))
 		{
 			$message = tr_raw('Plugin {0} is not installed.', NULL, $this->plugin_name);
 			$this->session->set_flashdata('notif', $message);

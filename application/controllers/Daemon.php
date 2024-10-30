@@ -30,7 +30,7 @@ class Daemon extends CI_Controller {
 		// Commented this for allow access from other machine
 		// if($_SERVER['REMOTE_ADDR']!='127.0.0.1') exit("Access Denied.");
 		parent::__construct();
-		$this->load->library('Plugins');
+		$this->load->library('Plugins_lib_kalkun');
 		$this->load->database();
 	}
 
@@ -63,7 +63,7 @@ class Daemon extends CI_Controller {
 			if ( ! $is_spam)
 			{
 				// hook for incoming message (before ownership)
-				$status = do_action('message.incoming.before', $tmp_message);
+				$status = do_action_kalkun('message.incoming.before', $tmp_message);
 
 				// message deleted, do not process later part
 				if (isset($status) && $status === 'break')
@@ -80,7 +80,7 @@ class Daemon extends CI_Controller {
 			{
 				// hook for incoming message (after ownership)
 				$tmp_message->msg_user = $msg_user;
-				$status = do_action('message.incoming.after', $tmp_message);
+				$status = do_action_kalkun('message.incoming.after', $tmp_message);
 
 				// message deleted, do not process later part
 				if (isset($status) && $status === 'break')

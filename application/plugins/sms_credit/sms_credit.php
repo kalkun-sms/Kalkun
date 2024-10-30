@@ -11,45 +11,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once (APPPATH.'plugins/Plugin_helper.php');
 
-// Add hook for outgoing message
-add_action('message.outgoing_all', 'sms_credit', 10);
+class Sms_credit_plugin extends CI3_plugin_system {
 
-/**
-* Function called when plugin first activated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_activate
-*
-*/
-function sms_credit_activate()
-{
-	return TRUE;
-}
+	use plugin_trait;
 
-/**
-* Function called when plugin deactivated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_deactivate
-*
-*/
-function sms_credit_deactivate()
-{
-	return TRUE;
-}
+	public function __construct()
+	{
+		parent::__construct();
+		// Add hook for outgoing message
+		add_filter('message.outgoing_all', array($this, 'sms_credit'), 10);
+	}
 
-/**
-* Function called when plugin first installed into the database
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_install
-*
-*/
-function sms_credit_install()
-{
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Install Plugin
+	 *
+	 * Anything that needs to happen when this plugin gets installed
+	 *
+	 * @access public
+	 * @since   0.1.0
+	 * @return bool    TRUE by default
+	 */
+	public static function install($data = NULL)
+	{
 	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
@@ -60,10 +45,10 @@ function sms_credit_install()
 		execute_sql(APPPATH.'plugins/sms_credit/media/'.$db_prop['file'].'_sms_credit.sql');
 	}
 	return TRUE;
-}
+    }
 
-function sms_credit($sms)
-{
+	function sms_credit($sms)
+	{
 	$CI = &get_instance();
 	$CI->load->model('Kalkun_model');
 	$CI->load->model('sms_credit/sms_credit_model', 'sms_credit_model');
@@ -89,5 +74,6 @@ function sms_credit($sms)
 	{
 		echo 'Sorry, your sms credit limit exceeded.';
 		exit;
+	}
 	}
 }

@@ -8,48 +8,34 @@
 * Author URI: http://azhari.harahap.us
 */
 
-// Add hook for incoming message
-add_action('message.incoming.before', 'blacklist_number_incoming', 10);
+class Blacklist_number_plugin extends CI3_plugin_system {
 
-// Add hook for outgoing message
-add_action('message.outgoing', 'blacklist_number_outgoing', 10);
+    use plugin_trait;
 
-/**
-* Function called when plugin first activated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_activate
-*
-*/
-function blacklist_number_activate()
-{
-	return TRUE;
-}
+    public function __construct()
+    {
+        parent::__construct();
 
-/**
-* Function called when plugin deactivated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_deactivate
-*
-*/
-function blacklist_number_deactivate()
-{
-	return TRUE;
-}
+		// Add hook for incoming message
+		add_action('message.incoming.before', array($this, 'blacklist_number_incoming'), 10);
 
-/**
-* Function called when plugin first installed into the database
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_install
-*
-*/
-function blacklist_number_install()
-{
+		// Add hook for outgoing message
+		add_action('message.outgoing', array($this, 'blacklist_number_outgoing'), 10);
+    }
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Install Plugin
+     *
+     * Anything that needs to happen when this plugin gets installed
+     *
+     * @access public
+     * @since   0.1.0
+     * @return bool    TRUE by default
+     */
+    public static function install($data = NULL)
+    {
 	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
@@ -60,10 +46,10 @@ function blacklist_number_install()
 		execute_sql(APPPATH.'plugins/blacklist_number/media/'.$db_prop['file'].'_blacklist_number.sql');
 	}
 	return TRUE;
-}
+	}
 
-function blacklist_number_incoming($sms)
-{
+	function blacklist_number_incoming($sms)
+	{
 	$CI = &get_instance();
 	$CI->load->model('blacklist_number/blacklist_number_model', 'blacklist_number_model');
 	$evil = array();
@@ -81,10 +67,10 @@ function blacklist_number_incoming($sms)
 		$CI->db->where('ID', $sms->ID)->delete('inbox');
 		return 'break';
 	}
-}
+	}
 
-function blacklist_number_outgoing($numbers = array())
-{
+	function blacklist_number_outgoing($numbers = array())
+	{
 	$CI = &get_instance();
 	$CI->load->model('blacklist_number/blacklist_number_model', 'blacklist_number_model');
 	$evil = array();
@@ -105,4 +91,5 @@ function blacklist_number_outgoing($numbers = array())
 		}
 	}
 	return $numbers;
+	}
 }

@@ -11,45 +11,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once (APPPATH.'plugins/Plugin_helper.php');
 
-// Add hook for incoming message
-add_action('message.incoming.before', 'sms_member', 13);
+class Sms_member_plugin extends CI3_plugin_system {
 
-/**
-* Function called when plugin first activated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_activate
-*
-*/
-function sms_member_activate()
-{
-	return TRUE;
-}
+	use plugin_trait;
 
-/**
-* Function called when plugin deactivated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_deactivate
-*
-*/
-function sms_member_deactivate()
-{
-	return TRUE;
-}
+	public function __construct()
+	{
+		parent::__construct();
+		// Add hook for incoming message
+		add_filter('message.incoming.before', array($this, 'sms_member'), 13);
+	}
 
-/**
-* Function called when plugin first installed into the database
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_install
-*
-*/
-function sms_member_install()
-{
+	// ------------------------------------------------------------------------
+
+    /**
+     * Install Plugin
+     *
+     * Anything that needs to happen when this plugin gets installed
+     *
+     * @access public
+     * @since   0.1.0
+     * @return bool    TRUE by default
+     */
+    public static function install($data = NULL)
+    {
 	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
@@ -60,10 +45,10 @@ function sms_member_install()
 		execute_sql(APPPATH.'plugins/sms_member/media/'.$db_prop['file'].'_sms_member.sql');
 	}
 	return TRUE;
-}
+	}
 
-function sms_member($sms)
-{
+	function sms_member($sms)
+	{
 	$config = Plugin_helper::get_plugin_config('sms_member');
 	$message = $sms->TextDecoded;
 	$number = $sms->SenderNumber;
@@ -82,17 +67,17 @@ function sms_member($sms)
 			unregister_member($number);
 		}
 	}
-}
+	}
 
-// --------------------------------------------------------------------
+	// --------------------------------------------------------------------
 
-/**
- * Register member
- *
- * Register member's phone number
- */
-function register_member($number)
-{
+	/**
+	 * Register member
+	 *
+	 * Register member's phone number
+	 */
+	function register_member($number)
+	{
 	$CI = &get_instance();
 	$CI->load->model('sms_member/sms_member_model', 'sms_member_model');
 
@@ -101,17 +86,17 @@ function register_member($number)
 	{
 		$CI->sms_member_model->add_member($number);
 	}
-}
+	}
 
-// --------------------------------------------------------------------
+	// --------------------------------------------------------------------
 
-/**
- * Unregister member
- *
- * Unregister member's phone number
- */
-function unregister_member($number)
-{
+	/**
+	 * Unregister member
+	 *
+	 * Unregister member's phone number
+	 */
+	function unregister_member($number)
+	{
 	$CI = &get_instance();
 	$CI->load->model('sms_member/sms_member_model', 'sms_member_model');
 
@@ -119,5 +104,6 @@ function unregister_member($number)
 	if ($CI->sms_member_model->check_member($number) === 1)
 	{
 		$CI->sms_member_model->remove_member($number);
+	}
 	}
 }

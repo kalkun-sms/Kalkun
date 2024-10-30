@@ -332,6 +332,16 @@ class Install extends CI_Controller {
 			}
 		}
 
+		// Update SQL schema to version 0.8.3
+		if ( ! $this->Kalkun_model->plugins_table_has_status_column())
+		{
+			$error = $this->_execute_kalkun_sql_file('upgrade_kalkun_0.8.3.sql');
+			if ($error !== 0)
+			{
+				return $error;
+			}
+		}
+
 		// Add here equivalent code as above for the future upgrades
 
 		return $error;

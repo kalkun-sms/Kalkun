@@ -694,4 +694,9 @@ class Kalkun_model extends MY_Model {
 			show_error($result, 400);
 		}
 	}
+
+	function plugins_table_has_status_column()
+	{
+		return $this->db->field_exists('status', 'plugins');
+	}
 }

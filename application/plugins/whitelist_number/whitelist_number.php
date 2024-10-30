@@ -8,37 +8,30 @@
 * Author URI: https://bitbucket.org/maxsamael
 */
 
-// Add hook for outgoing message
-add_action('message.outgoing', 'whitelist_number_outgoing', 1);
+class Whitelist_number_plugin extends CI3_plugin_system {
 
-function whitelist_number_activate()
-{
-	return TRUE;
-}
+	use plugin_trait;
 
-/**
-* Function called when plugin deactivated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_deactivate
-*
-*/
-function whitelist_number_deactivate()
-{
-	return TRUE;
-}
+	public function __construct()
+	{
+		parent::__construct();
+		// Add hook for outgoing message
+		add_filter('message.outgoing', array($this, 'whitelist_number_outgoing'), 1);
+	}
 
-/**
-* Function called when plugin first installed into the database
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_install
-*
-*/
-function whitelist_number_install()
-{
+	// ------------------------------------------------------------------------
+
+    /**
+     * Install Plugin
+     *
+     * Anything that needs to happen when this plugin gets installed
+     *
+     * @access public
+     * @since   0.1.0
+     * @return bool    TRUE by default
+     */
+    public static function install($data = NULL)
+    {
 	$CI = &get_instance();
 	$CI->load->helper('kalkun');
 	// check if table already exist
@@ -49,10 +42,10 @@ function whitelist_number_install()
 		execute_sql(APPPATH.'plugins/whitelist_number/media/'.$db_prop['file'].'_whitelist_number.sql');
 	}
 	return TRUE;
-}
+    }
 
-function whitelist_number_outgoing($numbers = array())
-{
+	function whitelist_number_outgoing($numbers = array())
+	{
 	$CI = &get_instance();
 	$CI->load->model('whitelist_number/whitelist_number_model', 'whitelist_number_model');
 	$heaven = array();
@@ -80,4 +73,5 @@ function whitelist_number_outgoing($numbers = array())
 		}
 	}
 	return $numbers;
+	}
 }

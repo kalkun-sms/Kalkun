@@ -24,7 +24,7 @@ else: ?>
 					<span class="pbk_menu no-touch-hidden">
 						<?php
 		// hook for contact menu
-		$menu = do_action('phonebook.contact.menu', $tmp);
+		$menu = do_action_kalkun('phonebook.contact.menu', $tmp);
 		if ($menu !== $tmp)
 		{
 			echo '<a class="simplelink" href="'.$menu['url'].'">'.htmlentities($menu['title'], ENT_QUOTES).'</a>&nbsp;';

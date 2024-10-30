@@ -27,6 +27,7 @@ $finder = PhpCsFixer\Finder::create()
     //->notPath('config/routes.php')
     ->notPath('config/smileys.php')
     ->notPath('config/user_agents.php')
+    ->notPath('models/Plugins_model.php')
     ->in('application')
     //->in(__DIR__)
 ;

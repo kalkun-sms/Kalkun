@@ -62,9 +62,8 @@
 					echo htmlentities($this->agent->browser(), ENT_QUOTES), ' ', htmlentities($this->agent->version(), ENT_QUOTES) ; ?>`
 			<br /><b>* Plugins:</b>
 			`<?php
-					$this->load->model('Plugin_model');
-					$installed_plugins = array_column($this->Plugin_model->get_plugins()->result_array(), 'plugin_system_name');
-					echo htmlentities(implode(', ', $installed_plugins), ENT_QUOTES);
+					$this->load->library('Plugins_lib_kalkun');
+					echo htmlentities(implode(', ', array_keys($this->plugins_lib_kalkun->get_enabled_plugins())), ENT_QUOTES);
 					?>`
 		</p>
 	</div>

@@ -12,50 +12,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once (APPPATH.'plugins/Plugin_helper.php');
 
-// Add hook for incoming message
-add_action('message.incoming.before', 'external_script', 12);
+class External_script_plugin extends CI3_plugin_system {
 
-/**
-* Function called when plugin first activated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_activate
-*
-*/
-function external_script_activate()
-{
-	return TRUE;
-}
+	use plugin_trait;
 
-/**
-* Function called when plugin deactivated
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_deactivate
-*
-*/
-function external_script_deactivate()
-{
-	return TRUE;
-}
+	public function __construct()
+	{
+		parent::__construct();
+		// Add hook for incoming message
+		add_filter('message.incoming.before', array($this, 'external_script'), 12);
+	}
 
-/**
-* Function called when plugin first installed into the database
-* Utility function must be prefixed with the plugin name
-* followed by an underscore.
-*
-* Format: pluginname_install
-*
-*/
-function external_script_install()
-{
-	return TRUE;
-}
-
-function external_script($sms)
-{
+	function external_script($sms)
+	{
 	$scripts = Plugin_helper::get_plugin_config('external_script')['external_script'];
 	$phone = $sms->SenderNumber;
 	$content = $sms->TextDecoded;
@@ -123,10 +92,10 @@ function external_script($sms)
 			exec(escapeshellcmd($intepreter_path.' '.$script_path.' '.$parameter));
 		}
 	}
-}
+	}
 
-function is_equal($subject, $matched)
-{
+	function is_equal($subject, $matched)
+	{
 	if ($subject === $matched)
 	{
 		return TRUE;
@@ -135,10 +104,10 @@ function is_equal($subject, $matched)
 	{
 		return FALSE;
 	}
-}
+	}
 
-function is_contain($subject, $matched)
-{
+	function is_contain($subject, $matched)
+	{
 	if ( ! strstr($matched, $subject))
 	{
 		return FALSE;
@@ -147,10 +116,10 @@ function is_contain($subject, $matched)
 	{
 		return TRUE;
 	}
-}
+	}
 
-function is_preg_match($pattern, $subject)
-{
+	function is_preg_match($pattern, $subject)
+	{
 	$ret = preg_match($pattern, $subject, $matches, PREG_UNMATCHED_AS_NULL);
 	if ($ret === 1)
 	{
@@ -159,5 +128,6 @@ function is_preg_match($pattern, $subject)
 	else
 	{
 		return array(FALSE, NULL);
+	}
 	}
 }
