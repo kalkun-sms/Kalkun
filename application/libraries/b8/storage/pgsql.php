@@ -55,7 +55,7 @@ class pgsql extends storage_base
 
         $escaped = [];
         foreach ($tokens as $token) {
-            $escaped[] = pg_escape_string($token);
+            $escaped[] = pg_escape_string($this->pgsql, $token);
         }
         $result = pg_query($this->pgsql, 'SELECT token, count_ham, count_spam'
                                       . ' FROM ' . $this->table
