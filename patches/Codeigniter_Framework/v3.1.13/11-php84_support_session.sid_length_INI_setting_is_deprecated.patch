@@ -1,0 +1,18 @@
+Description: skip deprecated setting of session.sid_length on php8.4
+ On php 8.4, this will use the default values of php 8.4
+ as per the recommended way to do it.
+Bug: https://github.com/bcit-ci/CodeIgniter/issues/6300
+Author: Fab Stz <fabstz-it@yahoo.fr>
+Last-Update: 2024-10-15
+
+--- a/system/libraries/Session/Session.php
++++ b/system/libraries/Session/Session.php
+@@ -419,7 +419,7 @@
+ 		{
+ 			$bits_per_character = (int) ini_get('session.sid_bits_per_character');
+ 			$sid_length         = (int) ini_get('session.sid_length');
+-			if (($bits = $sid_length * $bits_per_character) < 160)
++			if (($bits = $sid_length * $bits_per_character) < 160 && PHP_VERSION_ID < 80400)
+ 			{
+ 				// Add as many more characters as necessary to reach at least 160 bits
+ 				$sid_length += (int) ceil((160 % $bits) / $bits_per_character);

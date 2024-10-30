@@ -1,0 +1,36 @@
+Origin: https://github.com/pocketarc/codeigniter/commit/d310726565c12ba99b8037e8fb231ed739258e6e
+Bug: https://github.com/bcit-ci/CodeIgniter/issues/6302
+From d310726565c12ba99b8037e8fb231ed739258e6e Mon Sep 17 00:00:00 2001
+From: Bruno Moreira <git@pocketarc.com>
+Date: Tue, 29 Oct 2024 06:34:00 -0600
+Subject: [PATCH] Fixes a few more PHP 8.4 compatibility issues.
+Last-Update: 2024-10-30
+
+--- a/system/libraries/Encryption.php
++++ b/system/libraries/Encryption.php
+@@ -366,10 +366,10 @@
+ 	 * Encrypt
+ 	 *
+ 	 * @param	string	$data	Input data
+-	 * @param	array	$params	Input parameters
++	 * @param	array|null	$params	Input parameters
+ 	 * @return	string
+ 	 */
+-	public function encrypt($data, array $params = NULL)
++	public function encrypt($data, $params = NULL)
+ 	{
+ 		if (($params = $this->_get_params($params)) === FALSE)
+ 		{
+@@ -501,10 +501,10 @@
+ 	 * Decrypt
+ 	 *
+ 	 * @param	string	$data	Encrypted data
+-	 * @param	array	$params	Input parameters
++	 * @param	array|null	$params	Input parameters
+ 	 * @return	string
+ 	 */
+-	public function decrypt($data, array $params = NULL)
++	public function decrypt($data, $params = NULL)
+ 	{
+ 		if (($params = $this->_get_params($params)) === FALSE)
+ 		{
