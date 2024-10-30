@@ -10,5 +10,5 @@
 
 class Jsonrpc_plugin extends CI3_plugin_system {
 
-    use plugin_trait;
+	use plugin_trait;
 }

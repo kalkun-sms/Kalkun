@@ -24,16 +24,16 @@ class Server_alert_plugin extends CI3_plugin_system {
 	 * @return bool    TRUE by default
 	 */
 	public static function install($data = NULL)
- {
-	$CI = &get_instance();
-	$CI->load->helper('kalkun');
-	// check if table already exist
-	if ( ! $CI->db->table_exists('plugin_server_alert'))
 	{
-		$db_driver = $CI->db->platform();
-		$db_prop = get_database_property($db_driver);
-		execute_sql(APPPATH.'plugins/server_alert/media/'.$db_prop['file'].'_server_alert.sql');
+		$CI = &get_instance();
+		$CI->load->helper('kalkun');
+		// check if table already exist
+		if ( ! $CI->db->table_exists('plugin_server_alert'))
+		{
+			$db_driver = $CI->db->platform();
+			$db_prop = get_database_property($db_driver);
+			execute_sql(APPPATH . 'plugins/server_alert/media/' . $db_prop['file'] . '_server_alert.sql');
+		}
+		return TRUE;
 	}
-	return TRUE;
-    }
 }

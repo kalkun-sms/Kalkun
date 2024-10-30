@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://azhari.harahap.us
 */
 
-require_once (APPPATH.'plugins/Plugin_helper.php');
+require_once (APPPATH . 'plugins/Plugin_helper.php');
 
 class Simple_autoreply_plugin extends CI3_plugin_system {
 
@@ -24,15 +24,15 @@ class Simple_autoreply_plugin extends CI3_plugin_system {
 
 	function simple_autoreply($sms)
 	{
-	$config = Plugin_helper::get_plugin_config('simple_autoreply');
-	$CI = &get_instance();
-	$CI->load->model('Message_model');
-	$data['class'] = '1';
-	$data['dest'] = $sms->SenderNumber;
-	$data['date'] = date('Y-m-d H:i:s');
-	$data['message'] = $config['message'];
-	$data['delivery_report'] = 'default';
-	$data['uid'] = $config['uid'];
-	$CI->Message_model->send_messages($data);
+		$config = Plugin_helper::get_plugin_config('simple_autoreply');
+		$CI = &get_instance();
+		$CI->load->model('Message_model');
+		$data['class'] = '1';
+		$data['dest'] = $sms->SenderNumber;
+		$data['date'] = date('Y-m-d H:i:s');
+		$data['message'] = $config['message'];
+		$data['delivery_report'] = 'default';
+		$data['uid'] = $config['uid'];
+		$CI->Message_model->send_messages($data);
 	}
 }

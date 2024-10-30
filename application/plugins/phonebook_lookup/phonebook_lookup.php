@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * Author URI: http://azhari.harahap.us
 */
 
-require_once (APPPATH.'plugins/Plugin_helper.php');
+require_once (APPPATH . 'plugins/Plugin_helper.php');
 
 class Phonebook_lookup_plugin extends CI3_plugin_system {
 
@@ -24,10 +24,10 @@ class Phonebook_lookup_plugin extends CI3_plugin_system {
 
 	function phonebook_lookup($number)
 	{
-	$config = Plugin_helper::get_plugin_config('phonebook_lookup');
-	Plugin_helper::load_lang('phonebook_lookup');
-	$lookup['url'] = str_replace('#phonenumber#', $number->Number, $config['url']);
-	$lookup['title'] = tr('Lookup Number');
-	return $lookup;
+		$config = Plugin_helper::get_plugin_config('phonebook_lookup');
+		Plugin_helper::load_lang('phonebook_lookup');
+		$lookup['url'] = str_replace('#phonenumber#', $number->Number, $config['url']);
+		$lookup['title'] = tr('Lookup Number');
+		return $lookup;
 	}
 }
