@@ -61,6 +61,12 @@ fi
 if [[ "$STRICT_COMPARISON" == "1" ]]; then
     ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --allow-risky=yes --dry-run --diff --config "$CS_FIXER_CONF_DIR/php-cs-fixer-5-strict_comparison.php" > "$DIFF_OUTPUT_DIR/code_style_check-strict_comparison.diff"
     EXIT_CODE=$?
+    if [ $EXIT_CODE = 1 ]; then
+        # Relaunch with PHP_CS_FIXER_IGNORE_ENV=1 to be sure that the error si related to env.
+        # See: https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/blob/master/doc/usage.rst#environment-options
+        PHP_CS_FIXER_IGNORE_ENV=1 ${VENDOR_DIR}/bin/php-cs-fixer fix -v --show-progress=dots --allow-risky=yes --dry-run --diff --config "$CS_FIXER_CONF_DIR/php-cs-fixer-5-strict_comparison.php" > /dev/null 2>&1
+        EXIT_CODE=$?
+    fi
     if [ $EXIT_CODE -eq 8 ] || [ $EXIT_CODE -eq 4 ]; then
         # 4 - Some files have invalid syntax (only in dry-run mode).
         # 8 - Some files need fixing (only in dry-run mode).
