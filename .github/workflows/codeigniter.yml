@@ -142,7 +142,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest]
-        php-versions: ['7.2']
+        php-versions: ['8.2']
     runs-on: ${{ matrix.operating-system }}
     steps:
       - name: Checkout
