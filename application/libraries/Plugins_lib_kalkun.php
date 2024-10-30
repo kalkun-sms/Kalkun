@@ -32,6 +32,9 @@ class Plugins_lib_kalkun extends Plugins_lib {
 
     // ------------------------------------------------------------------------
 
+	const P_STATUS_ENABLED = 1; // Bitflag:   0: disabled          1: enabled
+	const P_STATUS_MISSING = 2; // Bitflag:   0: files present     1: files missing
+
     /**
      * Plugin Constructor
      *
@@ -196,8 +199,8 @@ class Plugins_lib_kalkun extends Plugins_lib {
      * Look in the plugin directory for any folders that do not have an associated entry
      * in the plugins table
 	 *
-	 * Upstream bug here it that it doesn't check only for folders, but also for files.
-	 * So we have to skip the loop for files.
+	 * Upstream bug here is that it doesn't check only for folders, but also for files.
+	 * So we have to skip the files in the loop.
      *
      * @access public
      * @since   0.1.0
@@ -359,5 +362,72 @@ class Plugins_lib_kalkun extends Plugins_lib {
 		return ucfirst($system_name).'_plugin';
 	}
 
+    /**
+     * Get Enabled Plugins
+	 * 
+	 * Override upstream's method so that we can support an additional status
+	 * being whether the files for the plugin are present on the filesystem.
+     *
+     * Retrieve the enabled plugins from the database and load them into the enabled_plugins
+     * array. This does not initiate the plugins, thats done in a different method
+	 * 
+     * @access private
+     */
+    protected function get_plugins()
+	{
+		// Fetch all plugins
+		if ( ! $plugins = static::$PM->get_plugins())
+		{
+			return FALSE;
+		}
 
+		// Load the plugins
+		foreach ($plugins as $p)
+		{
+			// Update plugin status to current real state
+			$this->update_plugin_presence_status($p);
+
+			if (isset(static::$plugins[$p->system_name]))
+			{
+				continue;
+			}
+
+			// Skip the plugins that are missing on the filesystem
+			if ($p->status & self::P_STATUS_MISSING)
+			{
+				continue;
+			}
+
+			// Add the others to the list of plugins.
+			$this->_debug("Adding plugin {$p->system_name}");
+
+			static::$plugins[$p->system_name] = array(
+				'data' => $p->data
+			);
+
+			// If its enabled, add it to $enabled_plugins referencing the plugin in $plugins
+			if ($p->status & self::P_STATUS_ENABLED)
+			{
+				$this->_debug("Enabling plugin {$p->system_name}");
+
+				static::$enabled_plugins[$p->system_name] = &static::$plugins[$p->system_name];
+			}
+		}
+	}
+
+	protected function update_plugin_presence_status($p)
+	{
+		$plugin_path = static::$plugin_path . "{$p->system_name}/{$p->system_name}.php";
+		if (file_exists($plugin_path))
+		{
+			// set plugin as present on the filesystem
+			$p->status = $p->status & ~self::P_STATUS_MISSING;
+		}
+		else
+		{
+			// set plugin as missing on the filesystem
+			$p->status = $p->status | self::P_STATUS_MISSING;
+		}
+		static::$PM->set_status($p->system_name, $p->status);
+	}
 }

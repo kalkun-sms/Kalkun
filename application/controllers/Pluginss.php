@@ -56,6 +56,7 @@ class Pluginss extends MY_Controller {
 	function index($type = 'installed')
 	{
 		$this->load->helper('form');
+		$plugins_lib = $this->plugins_lib_kalkun;
 		$data['main'] = 'main/plugin/index';
 		$data['title'] = 'Plugins';
 		$data['plugins'] = array();
@@ -65,7 +66,11 @@ class Pluginss extends MY_Controller {
 			$data['title'] .= ' - '.tr_raw('Installed', 'Plural');
 			foreach ($this->Plugins_kalkun_model->get_plugins() as $key => $plugin)
 			{
-				if (intval($plugin->status) === 1)
+				if ($plugin->status & $plugins_lib::P_STATUS_MISSING)
+				{
+					continue;
+				}
+				if ($plugin->status & $plugins_lib::P_STATUS_ENABLED)
 				{
 					$data['plugins'][$key] = $plugin;
 					$data['plugins'][$key]->controller_has_index = $this->_plugin_controller_has_index($plugin->system_name);
@@ -77,7 +82,11 @@ class Pluginss extends MY_Controller {
 			$data['title'] .= ' - '.tr_raw('Available', 'Plural');
 			foreach ($this->Plugins_kalkun_model->get_plugins() as $key => $plugin)
 			{
-				if (intval($plugin->status) !== 1)
+				if ($plugin->status & $plugins_lib::P_STATUS_MISSING)
+				{
+					continue;
+				}
+				if (! ($plugin->status & $plugins_lib::P_STATUS_ENABLED))
 				{
 					$data['plugins'][$key] = $plugin;
 				}
