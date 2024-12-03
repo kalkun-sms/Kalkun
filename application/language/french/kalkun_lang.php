@@ -433,3 +433,4 @@ $lang['Password modification forbidden in demo mode.'] = 'Modification du mot de
 $lang['Settings saved successfully (except username for kalkun user which can\'t be changed in demo mode)'] = 'Settings saved successfully (except username for kalkun user which can\'t be changed in demo mode)';
 $lang['Modification of username of "kalkun" user forbidden in demo mode. Username was restored.'] = 'Modification of username of "kalkun" user forbidden in demo mode. Username was restored.';
 $lang['Process incoming messages'] = 'Process incoming messages';
+$lang['Changing role of "kalkun" user forbidden in demo mode. Role was restored.'] = 'Changing role of "kalkun" user forbidden in demo mode. Role was restored.';
