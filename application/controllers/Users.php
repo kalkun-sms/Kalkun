@@ -123,15 +123,24 @@ class Users extends MY_Controller {
 		if ($this->input->post('id_user'))
 		{
 			if ($this->config->item('demo_mode')
-				&& intval($this->input->post('id_user')) === 1
-				&& $this->input->post('username') !== 'kalkun')
+				&& intval($this->input->post('id_user')) === 1)
 			{
-				$return_msg = [
-					'type' => 'error',
-					'msg' => tr_raw('Modification of username of "kalkun" user forbidden in demo mode. Username was restored.'),
-				];
+				if ($this->input->post('username') !== 'kalkun')
+				{
+					$return_msg = [
+						'type' => 'error',
+						'msg' => tr_raw('Modification of username of "kalkun" user forbidden in demo mode. Username was restored.'),
+					];
+				}
+				else if ($this->input->post('level') !== 'admin')
+				{
+					$return_msg = [
+						'type' => 'error',
+						'msg' => tr_raw('Changing role of "kalkun" user forbidden in demo mode. Role was restored.'),
+					];
+				}
 			}
-			else
+			if (! isset($return_msg))
 			{
 				$return_msg = [
 					'type' => 'info',

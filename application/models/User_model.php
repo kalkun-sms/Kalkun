@@ -80,11 +80,18 @@ class User_model extends MY_Model {
 		if ($this->input->post('id_user'))
 		{
 			if ($this->config->item('demo_mode')
-				&& intval($this->input->post('id_user')) === 1
-				&& $this->input->post('username') !== 'kalkun')
+				&& intval($this->input->post('id_user')) === 1)
 			{
-				// Restore username to 'kalkun'
-				$this->db->set('username', 'kalkun');
+				if ($this->input->post('username') !== 'kalkun')
+				{
+					// Restore username to 'kalkun'
+					$this->db->set('username', 'kalkun');
+				}
+				else if ($this->input->post('level') !== 'admin')
+				{
+					// Restore level to 'admin'
+					$this->db->set('level', 'admin');
+				}
 			}
 			$this->db->where('id_user', $this->input->post('id_user'));
 			$this->db->update('user');
