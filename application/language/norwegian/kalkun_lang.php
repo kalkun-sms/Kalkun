@@ -432,3 +432,4 @@ $lang['Check again'] = 'Prøv igjen';
 $lang['Password modification forbidden in demo mode.'] = 'Endring av passord er ikke tillatt i demo-mode.';
 $lang['Settings saved successfully (except username for kalkun user which can\'t be changed in demo mode)'] = 'Innstillnger lagret (bortsett fra brukernavn for kalkun bruker, som ikke kan endres i demo-mode.)';
 $lang['Modification of username of "kalkun" user forbidden in demo mode. Username was restored.'] = 'Endring av brukernavn "kalkun" er ikke tillatt i demo-mode. Brukernavn ble gjenopprettet.';
+$lang['Process incoming messages'] = 'Process incoming messages';

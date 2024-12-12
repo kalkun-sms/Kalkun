@@ -429,3 +429,4 @@ $lang['Check again'] = 'Verifique novamente';
 $lang['Password modification forbidden in demo mode.'] = 'Alteracao de senha proibida no modo de demonstração.';
 $lang['Settings saved successfully (except username for kalkun user which can\'t be changed in demo mode)'] = 'Configurações salvas com sucesso (exceto nome de usuário do usuário kalkun que não pode ser alterado no modo de demonstração)';
 $lang['Modification of username of "kalkun" user forbidden in demo mode. Username was restored.'] = 'Modificação do nome de usuário do usuário "kalkun" proibida no modo de demonstração. O nome de usuário foi restaurado.';
+$lang['Process incoming messages'] = 'Process incoming messages';
