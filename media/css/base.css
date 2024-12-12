@@ -617,8 +617,10 @@ textarea {
 	display: none;
 }
 
-.no-touch .no-touch-hidden {
-	display: none;
+@media (any-hover: hover) {
+	.no-touch-hidden {
+		display: none;
+	}
 }
 
 .hover_show:hover .no-touch-hidden {
