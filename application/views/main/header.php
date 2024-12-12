@@ -13,7 +13,7 @@
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-3.7.1.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.hotkeys.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.field.min.js"></script>
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>autosize-5.0.1.min.js"></script>
+<script language="javascript" src="<?php echo $this->config->item('js_path');?>autosize-6.0.1.min.js"></script>
 <script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-ui/jquery-ui.min.js"></script>
 <?php
 $jquery_datepicker_regional = $this->lang->get_jquery_datepicker_regional(APPPATH.'../media/js/jquery-ui/i18n');
