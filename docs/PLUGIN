@@ -5,7 +5,7 @@ All plugins is stored at /application/plugins.
 
 Plugin can have it's own controller, model, library, etc.
 
-For more information please visit our wiki <http://github.com/back2arie/Kalkun/wiki>
+For more information please visit our wiki <https://github.com/kalkun-sms/Kalkun/wiki>
 
 
 Official Plugin:
