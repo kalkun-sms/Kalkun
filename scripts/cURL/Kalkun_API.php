@@ -63,7 +63,7 @@ class Kalkun_API {
 		}
 		else
 		{
-			$this->show_message('Error during login');
+			$this->show_message("Error during login.\n");
 		}
 
 		$this->finish();
@@ -106,13 +106,13 @@ class Kalkun_API {
 		$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		if ($http_code >= 400)
 		{
-			$this->show_message('ERROR: HTTP_CODE: '.$http_code);
+			$this->show_message('ERROR: HTTP_CODE: '.$http_code."\n");
 			return FALSE;
 		}
 
 		if (strpos($output, 'Please enter your username and password') !== FALSE)
 		{
-			$this->show_message('Login failed');
+			$this->show_message("Login failed.\n");
 			return FALSE;
 		}
 		else
