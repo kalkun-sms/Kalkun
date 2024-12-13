@@ -8,7 +8,7 @@ CREATE TABLE "user" (
 	CHECK ("level" IN ('admin','user'))
 );
 
-INSERT INTO "user" VALUES(1, 'kalkun', 'Kalkun SMS', '$2y$10$sIXe0JiaTIOsC7OOnox5t.deuJwZoawd5QKpQlSNfywziTDHpmmyy', '123456789', 'admin');
+INSERT INTO "user" VALUES(1, 'kalkun', 'Kalkun SMS', '$2y$10$sIXe0JiaTIOsC7OOnox5t.deuJwZoawd5QKpQlSNfywziTDHpmmyy', '+123456', 'admin');
 
 CREATE TABLE "user_settings" (
 	"id_user" INTEGER PRIMARY KEY  NOT NULL, 
