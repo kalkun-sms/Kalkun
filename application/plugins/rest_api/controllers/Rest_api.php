@@ -31,7 +31,7 @@ class Rest_api extends RestController {
 	* Send SMS using GET method
 	*
 	* Sample call:
-	* http://kalkun-url/index.php/plugin/rest_api/send_sms?phoneNumber=123456&message=testing
+	* http://kalkun-url/index.php/plugin/rest_api/send_sms?phoneNumber=%2B123456&message=testing
 	*
 	*/
 	function send_sms_get()
