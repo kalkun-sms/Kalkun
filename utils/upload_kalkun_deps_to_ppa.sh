@@ -167,8 +167,9 @@ if [ "$repo" = "kalkun" ]; then
 
   if [ "$TAG_AT_HEAD" != "" ]; then
     TAG_VERSION="$(git tag --points-at "$TAG_AT_HEAD" | sed "s/^v//")"
-    UVERSIONMANGLED="${TAG_VERSION//-/\~}"
-    REPACK_SUFFIX="$(head -n1 debian/changelog | sed "s/.*(\(.*\)).*/\1/" | cut -f 1 -d - | sed "s/$UVERSIONMANGLED//")"
+    UVERSIONMANGLED="${TAG_VERSION/-/\~}"
+    REPACK_SUFFIX="$(head -n1 debian/changelog | sed "s/.*(\(.*\)).*/\1/" | rev | cut -f 2- -d - | rev | sed "s/$UVERSIONMANGLED//")"
+    REPACK_SUFFIX="" #Actually we don't want repack suffix because the origtar is not cleaned up in this build
     dch -v "${UVERSIONMANGLED}${REPACK_SUFFIX}-1~${LAST_D_COMMIT_DATE}.${LAST_D_COMMIT_HASH}" --force-bad-version ""
     dch "Snapshot based on:"
     dch "  upstream tag v$TAG_VERSION."
@@ -176,7 +177,8 @@ if [ "$repo" = "kalkun" ]; then
     gbp export-orig --no-pristine-tar --upstream-tree=TAG --upstream-tag="$REF_NAME" --compression=xz
   else \
     UVERSIONMANGLED=$(echo "${UVERSION}" | sed -e "s/-/~/" -e "s/-dev/~dev/" -e "s/~dev/~~dev/")
-    REPACK_SUFFIX="$(head -n1 debian/changelog | sed "s/.*(\(.*\)).*/\1/" | cut -f 1 -d - | sed "s/$UVERSIONMANGLED//")"
+    REPACK_SUFFIX="$(head -n1 debian/changelog | sed "s/.*(\(.*\)).*/\1/" | rev | cut -f 2- -d - | rev | sed "s/$UVERSIONMANGLED//")"
+    REPACK_SUFFIX="" #Actually we don't want repack suffix because the origtar is not cleaned up in this build
     gbp dch \
       --new-version="${UVERSIONMANGLED}${REPACK_SUFFIX}-1" \
       --snapshot \
