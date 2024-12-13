@@ -8,20 +8,20 @@
 
 class Kalkun_API {
 
-	var $base_url = '';
-	var $login_url = 'login/index';
-	var $sms_url = 'messages/compose_process';
-	var $csrf_hash_url = 'kalkun/get_csrf_hash';
-	var $session_file = '/tmp/cookies.txt'; // must be writable
-	var $username = '';
-	var $password = '';
-	var $phone_number = '';
-	var $message = '';
-	var $sms_mode = '0'; // 1 = flash, 0 = normal
-	//var $send_date = date('Y-m-d H:i:s');
-	var $curl_id = '';
+	protected $base_url = '';
+	protected $login_url = 'login/index';
+	protected $sms_url = 'messages/compose_process';
+	protected $csrf_hash_url = 'kalkun/get_csrf_hash';
+	protected $session_file = '/tmp/cookies.txt'; // must be writable
+	protected $username = '';
+	protected $password = '';
+	protected $phone_number = '';
+	protected $message = '';
+	protected $sms_mode = '0'; // 1 = flash, 0 = normal
+	//protected $send_date = date('Y-m-d H:i:s');
+	protected $curl_id = '';
 
-	function Kalkun_API($params = array())
+	function __construct($params = array())
 	{
 		if (count($params) > 0)
 		{
