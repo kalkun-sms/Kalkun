@@ -37,6 +37,9 @@
 <p>Please note that you also must configure the PHP daemon script of Kalkun. Otherwise you can't get your inbox, see <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#configure-daemon--outbox_queue-scripts" target="_blank"><strong>instructions on the wiki</strong></a>.</p>
 <p>The daemon scripts are provided in the <code>scripts</code> directory of the kalkun archive. In case they are still located at the root of your webserver (ie. along the <code>application</code> directory), <strong>it is advised to move them to another location</strong>.</p>
 
+<h4>Configure gammu-smsd</h4>
+<p>In the configuration file of gammu-smsd, you have to set the <code>runonreceive</code> directive and set its value to the path of the daemon script. <code>runonreceive</code> must be in the <code>[smsd]</code> section of the configuration file. The wiki explains <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#configure-gammu-smsd" target="_blank">how to configure gammu-smsd</a> more in details.
+
 <h4>Change encryption key</h4>
 <p>To improve security, it's highly recommended to change the <code>encryption_key</code> in <code><?php echo realpath(APPPATH.'config/config.php'); ?></code>. <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#change-the-default-encryption-key" target="_blank"><strong>See wiki</strong></a> for details.</p>
 
