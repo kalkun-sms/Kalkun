@@ -91,7 +91,7 @@
 </table>
 <p>&nbsp;</p>
 
-<?php if ($exception !== NULL): ?>
+<?php if ($exception !== NULL || ! $has_smsd_database): ?>
 <div align="center">
 	<?php
 	echo form_open('install/database_setup');
@@ -111,7 +111,7 @@
 	echo form_submit('submit', '‹ '.tr_raw('Previous'), 'class="button"');
 	echo form_close();
 ?>
-		<?php if ($exception === NULL): ?>
+		<?php if ($exception === NULL && $has_smsd_database): ?>
 		<?php if ($type === 'install' OR $type === 'upgrade' OR ! $this->Kalkun_model->has_table_pbk()):
 		$btn_text = 'Run Database Setup'.' ›';
 	else:
