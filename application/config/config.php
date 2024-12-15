@@ -483,7 +483,10 @@ $config['csrf_token_name'] = 'kalkun_csrf_tkn';
 $config['csrf_cookie_name'] = 'kalkun_csrf_cookie';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array();
+$config['csrf_exclude_uris'] = array(
+    "install/requirement_check",
+    "install/database_setup",
+    "install/run_install");
 
 /*
 |--------------------------------------------------------------------------
