@@ -21,11 +21,11 @@ require_once('Plugins_model.php');
  */
 class Plugins_kalkun_model extends Plugins_model {
 
-	function __construct()
- {
+    function __construct()
+    {
         parent::__construct();
     }
-	
+
     /**
      * Insert Plugin
      *
