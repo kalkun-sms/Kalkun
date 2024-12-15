@@ -39,7 +39,7 @@
 <?php endif; ?>
 
 <h4>Configure kalkun internals</h4>
-<p>You may change some parameters in the <code>application/config/kalkun_settings.php</code> file. For example set another gateway engine than Gammu. Find some suggestions of parameters you can change on the <a href="" target="_blank"><strong>configuration page of the wiki</strong></a>.</p>
+<p>You may change some parameters in the <code>application/config/kalkun_settings.php</code> file. For example set another gateway engine than Gammu. Find some suggestions of parameters you can change on the <a href="https://github.com/kalkun-sms/Kalkun/wiki/Configuration" target="_blank"><strong>configuration page of the wiki</strong></a>.</p>
 <ul>
 	<li>Gammu path &amp; gammu config file. Required to send Wap links.</li>
 	<li>Gateway engine (aka backend) in case you want to use an external service provider for your SMS (experimental).</li>
