@@ -171,7 +171,13 @@ class Install extends CI_Controller {
 		// ci_sessions table appeared in 0.8
 		if ($this->Kalkun_model->has_table_ci_sessions())
 		{
-			$detected_db_version = '0.8';
+			$detected_db_version = '0.8.0';
+			$data['type'] = 'upgrade';
+		}
+		// plugins_table_has_status_column appeared in 0.8.3
+		if ($this->Kalkun_model->plugins_table_has_status_column())
+		{
+			$detected_db_version = '0.8.3';
 			$data['type'] = 'up_to_date';
 		}
 
