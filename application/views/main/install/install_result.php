@@ -31,7 +31,7 @@
 <p>The daemon scripts are provided in the <code>scripts</code> directory of the kalkun archive. In case they are still located at the root of your webserver (ie. along the <code>application</code> directory), <strong>it is advised to move them to another location</strong>.</p>
 
 <h4>Change encryption key</h4>
-<p>To improve security, it's highly recommended to change the <code>encryption_key</code> in <code>application/config/config.php</code>. <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#change-the-default-encryption-key" target="_blank"><strong>See wiki</strong></a> for details.</p>
+<p>To improve security, it's highly recommended to change the <code>encryption_key</code> in <code><?php echo realpath(APPPATH.'config/config.php'); ?></code>. <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#change-the-default-encryption-key" target="_blank"><strong>See wiki</strong></a> for details.</p>
 
 <?php if (isset($_SERVER['CI_ENV']) && $_SERVER['CI_ENV'] !== 'production'): ?>
 <h4>Set the CodeIgniter environment variable</h4>
@@ -39,10 +39,10 @@
 <?php endif; ?>
 
 <h4>Configure kalkun internals</h4>
-<p>You may change some parameters in the <code>application/config/kalkun_settings.php</code> file. For example set another gateway engine than Gammu. Find some suggestions of parameters you can change on the <a href="https://github.com/kalkun-sms/Kalkun/wiki/Configuration" target="_blank"><strong>configuration page of the wiki</strong></a>.</p>
+<p>You may change some parameters in the <code><?php echo realpath(APPPATH.'config/kalkun_settings.php'); ?></code> file. For example set another gateway engine than Gammu. Find some suggestions of parameters you can change on the <a href="https://github.com/kalkun-sms/Kalkun/wiki/Configuration" target="_blank"><strong>configuration page of the wiki</strong></a>.</p>
 <ul>
 	<li>Gammu path &amp; gammu config file. Required to send Wap links.</li>
-	<li>Gateway engine (aka backend) in case you want to use an external service provider for your SMS (experimental).</li>
+	<li>Gateway engine (also known as backend) in case you want to use an external service provider for your SMS (experimental).</li>
 </ul>
 
 <h4>Default credentials</h4>
