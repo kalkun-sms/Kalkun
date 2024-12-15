@@ -41,4 +41,45 @@ class Plugins_kalkun_model extends Plugins_model {
     {
         return static::$db->where('system_name', $plugin)->insert('plugins', $settings);
     }
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Get Plugins
+     *
+     * Get all plugins, return an array of the plugins from the database, with the system_name
+     * as the keys
+     * The override here is so that it returns FALSE only if the result is not an array.
+     * ie. if the resultset is emtpy (ie. an empty array), it will not return FALSE but the empty array.
+     *
+     * @access public
+     * @since   0.1.0
+     * @return array|bool
+     */
+    public function get_plugins()
+    {
+        $query = static::$db->get('plugins');
+
+        if( ! is_array($result = $query->result()))
+        {
+            log_message('error', 'Error retrieving plugins from database');
+
+            return FALSE;
+        }
+
+        $return = array();
+
+        foreach($result as $r)
+        {
+            if( ! empty($r->data))
+            {
+                $r->data = unserialize($r->data);
+            }
+
+            $return[$r->system_name] = $r;
+        }
+
+        return $return;
+    }
+
 }
