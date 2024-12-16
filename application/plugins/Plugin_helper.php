@@ -15,8 +15,7 @@ class Plugin_helper {
 
 	public static function autoloader()
 	{
-		spl_autoload_register(function ($class_name)
-		{
+		spl_autoload_register(function ($class_name) {
 			if (strpos($class_name, 'Kalkun\\Plugins') === 0)
 			{
 				$class = array_slice(explode('\\', $class_name), -1)[0];

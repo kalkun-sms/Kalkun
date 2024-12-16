@@ -132,15 +132,18 @@ class Users extends MY_Controller {
 						'msg' => tr_raw('Modification of username of "kalkun" user forbidden in demo mode. Username was restored.'),
 					];
 				}
-				else if ($this->input->post('level') !== 'admin')
+				else
 				{
-					$return_msg = [
-						'type' => 'error',
-						'msg' => tr_raw('Changing role of "kalkun" user forbidden in demo mode. Role was restored.'),
-					];
+					if ($this->input->post('level') !== 'admin')
+					{
+						$return_msg = [
+							'type' => 'error',
+							'msg' => tr_raw('Changing role of "kalkun" user forbidden in demo mode. Role was restored.'),
+						];
+					}
 				}
 			}
-			if (! isset($return_msg))
+			if ( ! isset($return_msg))
 			{
 				$return_msg = [
 					'type' => 'info',

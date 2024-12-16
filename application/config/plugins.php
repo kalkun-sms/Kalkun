@@ -15,5 +15,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // Plugins_lib.php of upstream. Using 'plugin_dir' is actually a bug in upstream.
 $config['plugin_path'] = APPPATH . 'plugins/';
 
-require_once( APPPATH . 'libraries/abstract.plugins.php' );
-require_once( APPPATH . 'libraries/trait.plugins.php' );
+require_once(APPPATH . 'libraries/abstract.plugins.php');
+require_once(APPPATH . 'libraries/trait.plugins.php');

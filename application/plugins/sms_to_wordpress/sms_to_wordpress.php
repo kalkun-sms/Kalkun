@@ -12,8 +12,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once (APPPATH . 'plugins/Plugin_helper.php');
 
-class Sms_to_wordpress_plugin extends CI3_plugin_system {
-
+class Sms_to_wordpress_plugin extends CI3_plugin_system
+{
 	use plugin_trait;
 
 	public function __construct()

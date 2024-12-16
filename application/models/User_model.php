@@ -87,10 +87,13 @@ class User_model extends MY_Model {
 					// Restore username to 'kalkun'
 					$this->db->set('username', 'kalkun');
 				}
-				else if ($this->input->post('level') !== 'admin')
+				else
 				{
-					// Restore level to 'admin'
-					$this->db->set('level', 'admin');
+					if ($this->input->post('level') !== 'admin')
+					{
+						// Restore level to 'admin'
+						$this->db->set('level', 'admin');
+					}
 				}
 			}
 			$this->db->where('id_user', $this->input->post('id_user'));

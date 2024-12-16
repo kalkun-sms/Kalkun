@@ -38,10 +38,9 @@ class Pluginss extends MY_Controller {
 
 		$this->load->library('Plugins_lib_kalkun');
 		$this->load->model('Plugins_kalkun_model');
-		
+
 		$this->plugins_lib_kalkun->restore_orphaned_plugins();
 		$this->plugins_lib_kalkun->update_all_plugin_headers();
-
 	}
 
 	// --------------------------------------------------------------------
@@ -86,7 +85,7 @@ class Pluginss extends MY_Controller {
 				{
 					continue;
 				}
-				if (! ($plugin->status & $plugins_lib::P_STATUS_ENABLED))
+				if ( ! ($plugin->status & $plugins_lib::P_STATUS_ENABLED))
 				{
 					$data['plugins'][$key] = $plugin;
 				}

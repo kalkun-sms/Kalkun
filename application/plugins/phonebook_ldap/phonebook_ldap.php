@@ -74,7 +74,7 @@ class Phonebook_ldap_plugin extends CI3_plugin_system {
 		//Create result set
 		$entries = ldap_get_entries($conn, $result);
 		$z = 0;
-		for ($i = 0; $i < $entries['count']; $i ++ )
+		for ($i = 0; $i < $entries['count']; $i++)
 		{
 			// phone number or name not found, continue iteration
 			if ( ! array_key_exists('telephonenumber', $entries[$i]) OR ! array_key_exists('givenname', $entries[$i]))
@@ -87,7 +87,7 @@ class Phonebook_ldap_plugin extends CI3_plugin_system {
 			{
 				$users[$z]['name'] .= $entries[$i]['sn'][0];
 			}
-			$z ++;
+			$z++;
 		}
 		ldap_close($conn);
 		return $users;

@@ -12,7 +12,7 @@
 	IntlDateFormatter::FULL,
 	IntlDateFormatter::SHORT
 );
-	echo $fmt->format(time()) . " " . IntlTimeZone::createDefault()->getDisplayName(false, IntlTimeZone::DISPLAY_SHORT, $this->lang->locale);
+	echo $fmt->format(time()) . ' ' . IntlTimeZone::createDefault()->getDisplayName(FALSE, IntlTimeZone::DISPLAY_SHORT, $this->lang->locale);
 ?>
 	</div>
 
