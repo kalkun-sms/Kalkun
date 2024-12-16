@@ -207,6 +207,56 @@ class Install extends CI_Controller {
 	function config_setup()
 	{
 		$this->load->helper(array('form'));
+
+		// install file
+		if (file_exists(FCPATH.'install') && is_writable(dirname(FCPATH.'install')))
+		{
+			if ($this->input->post('remove_install_file') === 'remove')
+			{
+				$rm = unlink(FCPATH.'install');
+			}
+			$data['needs_manual_install_file_deletion'] = FALSE;
+		}
+		else
+		{
+			$data['needs_manual_install_file_deletion'] = TRUE;
+		}
+		$data['install_realpath'] = realpath(FCPATH.'install');
+
+
+		// Daemon & Oubox queue scripts
+		$data['is_windows'] = $this->_is_windows();
+		$data['daemon_path'] = $this->_daemon_get_path('daemon');
+		$data['daemon_path_is_executable'] = is_executable($data['daemon_path']);
+		$data['daemon_php_path'] = $this->_daemon_get_var_path('daemon', 'PHP');
+		$data['daemon_php_path_exists'] = $this->_daemon_var_path_exists($data['daemon_php_path']);
+		$data['daemon_daemon_path'] = $this->_daemon_get_var_path('daemon', 'DAEMON');
+		$data['daemon_daemon_path_exists'] = $this->_daemon_var_path_exists($data['daemon_daemon_path']);
+		$data['daemon_url'] = $this->_daemon_get_url($data['daemon_daemon_path']);
+		$data['daemon_url_matches_config'] = (trim($data['daemon_url'], '/') === trim($this->config->item('base_url'), '/')) ? TRUE : FALSE;
+		$data['outbox_queue_path'] = $this->_daemon_get_path('outbox_queue');
+		$data['outbox_queue_path_is_executable'] = is_executable($data['outbox_queue_path']);
+		$data['outbox_queue_php_path'] = $this->_daemon_get_var_path('outbox_queue', 'PHP');
+		$data['outbox_queue_php_path_exists'] = $this->_daemon_var_path_exists($data['outbox_queue_php_path']);
+		$data['outbox_queue_daemon_path'] = $this->_daemon_get_var_path('outbox_queue', 'DAEMON');
+		$data['outbox_queue_daemon_path_exists'] = $this->_daemon_var_path_exists($data['outbox_queue_daemon_path']);
+		$data['outbox_queue_url'] = $this->_daemon_get_url($data['outbox_queue_daemon_path']);
+		$data['outbox_queue_url_matches_config'] = (trim($data['outbox_queue_url'], '/') === trim($this->config->item('base_url'), '/')) ? TRUE : FALSE;
+
+		// Gammu-smsd
+
+		// Kalkun
+		$data['config_gammu_path'] = $this->config->item('gammu_path');
+		$data['config_gammu_sms_inject'] = $this->config->item('gammu_sms_inject');
+		$data['config_gammu_config'] = $this->config->item('gammu_config');
+
+		// encryption key
+		$data['uses_default_encryption_key'] = $this->_uses_default_encryption_key();
+
+		// htaccess for CI_ENV
+		$data['htaccess_location'] = $this->_htaccess_CI_ENV_path();
+		$data['CI_ENV'] = $this->_get_CI_ENV();
+
 		$data['main'] = 'main/install/config_setup';
 		$data['idiom'] = $this->idiom;
 		$this->load->view('main/install/layout', $data);
@@ -223,7 +273,6 @@ class Install extends CI_Controller {
 	 */
 	function _run_db_setup()
 	{
-
 		$error = 0;
 
 		// Check for phonebook tables
@@ -260,7 +309,6 @@ class Install extends CI_Controller {
 		$this->db->data_cache = array();
 
 		return $error;
-
 	}
 
 	// --------------------------------------------------------------------
@@ -397,5 +445,182 @@ class Install extends CI_Controller {
 	function _execute_kalkun_sql_file($sqlfile)
 	{
 		return execute_sql(APPPATH.'sql/'.$this->db_engine.'/'.$sqlfile);
+	}
+
+	function _uses_default_encryption_key()
+	{
+		$enc_key = $this->config->item('encryption_key');
+
+		if ($enc_key === hex2bin('F0af18413d1c9e03A6d8d1273160f5Ed'))
+		{
+			return TRUE;
+		}
+
+		if ($enc_key === 'F0af18413d1c9e03A6d8d1273160f5Ed')
+		{
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	function _get_CI_ENV()
+	{
+		return isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : '';
+	}
+
+	function _htaccess_CI_ENV_path()
+	{
+		$htaccess_paths = [
+			FCPATH.'.htaccess',
+			'/etc/apache2/conf-available/kalkun.conf',
+			'/etc/apache2/apache2.conf'
+		];
+
+		foreach ($htaccess_paths as $path)
+		{
+			if ( ! is_readable($path))
+			{
+				continue;
+			}
+
+			$contents = file($path);
+
+			if ($contents === FALSE)
+			{
+				continue;
+			}
+
+			$CI_ENV = $this->_get_CI_ENV();
+			if ($CI_ENV === '')
+			{
+				$pattern = '^\s*((?i)SetEnv)\s+CI_ENV$';
+			}
+			else
+			{
+				$pattern = '^\s*((?i)SetEnv)\s+CI_ENV\s+'.$CI_ENV.'\s*$';
+			}
+			$matches = preg_grep('/'.$pattern.'/', $contents);
+
+			if ($matches === FALSE || count($matches) === 0)
+			{
+				continue;
+			}
+
+			return realpath($path);
+		}
+
+		return '';
+	}
+
+	function _daemon_get_path($file)
+	{
+		if ($this->_is_windows())
+		{
+			$extension = '.bat';
+		}
+		else
+		{
+			$extension = '.sh';
+		}
+
+		$daemon_path = [
+			FCPATH.'scripts/'.$file.$extension,
+			FCPATH.'../scripts/'.$file.$extension
+		];
+
+		foreach ($daemon_path as $path)
+		{
+			if ( ! is_readable($path))
+			{
+				continue;
+			}
+			return realpath($path);
+		}
+
+		return FALSE;
+	}
+
+	function _daemon_get_var_path($file, $var)
+	{
+		$path = $this->_daemon_get_path($file);
+
+		if ( ! $path)
+		{
+			return FALSE;
+		}
+
+		if ( ! is_readable($path))
+		{
+			return FALSE;
+		}
+
+		$contents = file_get_contents($path);
+
+		if ($contents === FALSE)
+		{
+			return FALSE;
+		}
+
+		$pattern = '/\b'.$var.'=(.*)(?:\s#.*)?$/mU';
+		$ret = preg_match($pattern, $contents, $matches);
+
+		if ($ret === FALSE || count($matches) === 0)
+		{
+			return FALSE;
+		}
+
+		return trim(trim($matches[1]), '"');
+	}
+
+
+	function _daemon_var_path_exists($path)
+	{
+		if ($path === FALSE)
+		{
+			return FALSE;
+		}
+
+		if (is_readable($path))
+		{
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	function _daemon_get_url($path)
+	{
+		if ( ! $path)
+		{
+			return FALSE;
+		}
+
+		if ( ! is_readable($path))
+		{
+			return FALSE;
+		}
+
+		$contents = file_get_contents($path);
+
+		if ($contents === FALSE)
+		{
+			return FALSE;
+		}
+
+		$pattern = '/^\s*\$url\s*=\s*[\'"](.*)[\'"].*$/mU';
+		$ret = preg_match($pattern, $contents, $matches);
+
+		if ($ret === FALSE || count($matches) === 0)
+		{
+			return FALSE;
+		}
+
+		return trim(trim($matches[1]), '"');
+	}
+
+	function _is_windows()
+	{
+		return strcasecmp(substr(PHP_OS, 0, 3), 'WIN') === 0;
 	}
 }
