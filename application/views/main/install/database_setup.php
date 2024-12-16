@@ -6,7 +6,7 @@
 		<td>Database engine</td>
 		<td>
 			<strong><?php echo $db_property['human']; ?></strong>
-			<br /><small>Read from your database configuration.</small>
+			<br /><small>As per your database configuration.</small>
 		</td>
 	</tr>
 	<?php if ($exception === NULL): ?>
@@ -26,13 +26,13 @@
 	<tr valign="top">
 		<td>Gammu DB version</td>
 		<td><strong><?php echo htmlentities($this->Kalkun_model->get_gammu_info('db_version')->row('Version'), ENT_QUOTES); ?></strong>
-			<br /><small>Read from your gammu database schema.</small>
+			<br /><small>As per the version stored in gammu database.</small>
 		</td>
 	</tr>
 	<tr valign="top">
 		<td>Gammu phonebook table</td>
 		<td>
-			<?php 	if ($this->Kalkun_model->has_table_pbk()): ?>
+			<?php 	if ($has_table_pbk): ?>
 			<strong class="green"><?php echo tr('Found'); ?></strong>
 			<?php 	else: ?>
 			<strong class="orange"><?php echo tr('Missing'); ?></strong><br />
@@ -43,40 +43,34 @@
 
 	<tr valign="top">
 		<td>Kalkun DB</td>
-		<?php	if ($this->db->table_exists('user')): ?>
+		<?php	if ($has_gammu_database): ?>
 		<td><strong class="green"><?php echo tr('Found'); ?></strong></td>
 		<?php	else: ?>
-		<td><strong class="orange"><?php echo tr('Missing'); ?></strong><br />Click 'Run Database Setup' below to install it.</td>
+		<td><strong class="orange"><?php echo tr('Missing'); ?></strong><br /><small>Click 'Run Database Setup' below to install it.</small></td>
 		<?php	endif; ?>
 	</tr>
 
+	<?php	if ($has_gammu_database): ?>
 	<tr valign="top">
 		<td>Kalkun DB version</td>
-		<?php	if ($this->db->table_exists('user')): ?>
-		<td><strong><?php echo $detected_db_version; ?></strong></td>
-		<?php	else: ?>
-		<td><strong class="orange"><?php echo tr('Missing'); ?></strong><br />Click 'Run Database Setup' below to install it.</td>
-		<?php	endif; ?>
-	</tr>
-
-	<tr valign="top">
-		<td colspan="2"><br />
-			<?php switch ($type):
-				case 'install': ?>
-			→ Kalkun database is not installed yet. Click 'Run Database Setup' below to install it.
-			<?php		break;?>
-			<?php	case 'upgrade_not_supported': ?>
-			<strong class="red">→ Upgrade of your version of kalkun database is not supported. You will need to proceed manually.</strong>
-			<?php		break;?>
-			<?php	case 'upgrade': ?>
-			→ Kalkun database is installed in a former version (database schema of version <?php echo $detected_db_version;?> detected). Click 'Run Database Setup' below to upgrade it.
-			<?php		break; ?>
-			<?php	case 'up_to_date': ?>
-			→ Kalkun database is up-to-date (database schema of version <?php echo $detected_db_version;?> detected).
-			<?php		break; ?>
-			<?php endswitch; ?>
+		<?php switch ($type):
+				case 'upgrade_not_supported':
+					$message = 'Upgrade of your version of kalkun database is not supported. You will need to proceed manually.';
+					break;
+				case 'upgrade':
+					$message = 'Click \'Run Database Setup\' below to upgrade.';
+					break;
+				default:
+					$message = '';
+					break;
+			endswitch; ?>
+		<td>
+			<strong class="<?php echo ($message !== '') ? 'orange' : ''; ?>"><?php echo $detected_db_version; ?></strong>
+			<br /><small><?php echo $message ?></small>
 		</td>
 	</tr>
+	<?php	endif; ?>
+
 	<?php endif; ?>
 	<?php else: /* $exception !== NULL */ ?>
 	<tr valign="top">
@@ -99,7 +93,7 @@
 	echo form_submit('submit', tr_raw('Check again'), 'class="button"');
 	echo form_close();
 else:
-	if ($type === 'install' OR $type === 'upgrade' OR ! $this->Kalkun_model->has_table_pbk()):
+	if ($type === 'install' OR $type === 'upgrade' OR ! $has_table_pbk):
 		if ($type !== 'upgrade_not_supported'):
 			echo form_open('install/database_setup');
 			echo form_hidden('idiom', $idiom);
@@ -130,7 +124,7 @@ endif; ?>
 	echo form_submit('submit', '‹ '.tr_raw('Previous'), 'class="button"');
 	echo form_close();
 
-	if ($exception === NULL && $has_smsd_database && $type !== 'install' && $type !== 'upgrade' && $this->Kalkun_model->has_table_pbk() && $type !== 'upgrade_not_supported'):
+	if ($exception === NULL && $has_smsd_database && $type !== 'install' && $type !== 'upgrade' && $has_table_pbk && $type !== 'upgrade_not_supported'):
 		echo form_open('install/config_setup', 'style="display:inline"');
 		echo form_hidden('idiom', $idiom);
 		echo form_submit('submit', tr_raw('Continue').' ›', 'class="button"');
