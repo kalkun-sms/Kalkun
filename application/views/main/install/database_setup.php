@@ -78,7 +78,7 @@
 			<p class="red">There was a problem when trying to load the database.</p>
 			<p>Reported error is:</p>
 			<p><code><?php echo htmlentities($exception, ENT_QUOTES); ?></code></p>
-			<p>Please check your database configuration in <code>application/config/database.php</code>. Then click on button to check again.</p>
+			<p>Please check your database configuration in <code><?php echo realpath(APPPATH.'config/database.php'); ?></code>. Then click on button to check again.</p>
 		</td>
 	</tr>
 	<?php endif; ?>
