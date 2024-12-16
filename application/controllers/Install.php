@@ -146,6 +146,13 @@ class Install extends CI_Controller {
 			return;
 		}
 
+		$data['error'] = 0;
+
+		if ($this->input->post('action') === 'run_db_setup')
+		{
+			$data['error'] = $this->_run_db_setup();
+		}
+
 		$data['database_driver'] = $this->db->platform();
 		$data['has_smsd_database'] = $this->db->table_exists('gammu') ? TRUE : FALSE;
 
@@ -189,52 +196,69 @@ class Install extends CI_Controller {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Run install
+	 * Run configuration setup
 	 *
-	 * Dumping data drom SQL file
+	 * Check remaining configuration steps
 	 *
 	 * @access	public
 	 */
-	function run_install()
+	function config_setup()
 	{
 		$this->load->helper(array('form'));
-		$this->load->model('Kalkun_model');
-		$this->load->database();
+		$data['main'] = 'main/install/config_setup';
+		$data['idiom'] = $this->idiom;
+		$this->load->view('main/install/layout', $data);
+	}
 
-		$data['error'] = 0;
+	// --------------------------------------------------------------------
+
+	/**
+	 * Run DB setup
+	 *
+	 * Install/update tables that are specific to Kalkun.
+	 *
+	 * @access	private
+	 */
+	function _run_db_setup()
+	{
+
+		$error = 0;
 
 		// Check for phonebook tables
 		// they have been dropped in Gammu (schema v16) but we need them for Phonebook feature
 		if ( ! $this->Kalkun_model->has_table_pbk())
 		{
-			$data['error'] += $this->_install_pbk_tables();
+			$error += $this->_install_pbk_tables();
 		}
 
 		// Add kalkun's specific fields to pbk table.
 		if ( ! $this->Kalkun_model->has_table_pbk_with_kalkun_fields())
 		{
-			$data['error'] += $this->_add_kalkun_fields_to_pbk_tables();
+			$error += $this->_add_kalkun_fields_to_pbk_tables();
 		}
 
 
 		if ( ! $this->db->table_exists('user'))
 		{
 			// Install
-			$data['error'] += $this->_install('');
+			$error += $this->_install('');
 		}
 		else
 		{
 			// Upgrade
-			$data['error'] += $this->_upgrade();
+			$error += $this->_upgrade();
 		}
 
 		// Set current version of kalkun in database
 		$ret = $this->db->empty_table('kalkun');
 		$this->db->insert('kalkun', array('version' => $this->config->item('kalkun_version')));
 
-		$data['main'] = 'main/install/install_result';
-		$data['idiom'] = $this->idiom;
-		$this->load->view('main/install/layout', $data);
+		// Clear data_cache, otherwise, the list of tables in CI3 would not be up to date.
+		// for example when checking later on if the pbk table exists.
+		$this->db->data_cache = array();
+
+		return $error;
+
 	}
 
 	// --------------------------------------------------------------------

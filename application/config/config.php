@@ -486,7 +486,7 @@ $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
     "install/requirement_check",
     "install/database_setup",
-    "install/run_install");
+    "install/config_setup");
 
 /*
 |--------------------------------------------------------------------------

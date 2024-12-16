@@ -69,10 +69,10 @@
 			<strong class="red">→ Upgrade of your version of kalkun database is not supported. You will need to proceed manually.</strong>
 			<?php		break;?>
 			<?php	case 'upgrade': ?>
-			→ Kalkun database is already installed in a former version (database schema of version <?php echo $detected_db_version;?> detected). Click 'Run Database Setup' below to upgrade it.
+			→ Kalkun database is installed in a former version (database schema of version <?php echo $detected_db_version;?> detected). Click 'Run Database Setup' below to upgrade it.
 			<?php		break; ?>
 			<?php	case 'up_to_date': ?>
-			→ Kalkun database is already up-to-date (database schema of version <?php echo $detected_db_version;?> detected).
+			→ Kalkun database is up-to-date (database schema of version <?php echo $detected_db_version;?> detected).
 			<?php		break; ?>
 			<?php endswitch; ?>
 		</td>
@@ -91,15 +91,34 @@
 </table>
 <p>&nbsp;</p>
 
-<?php if ($exception !== NULL || ! $has_smsd_database): ?>
 <div align="center">
+	<?php if ($exception !== NULL || ! $has_smsd_database): ?>
 	<?php
 	echo form_open('install/database_setup');
 	echo form_hidden('idiom', $idiom);
 	echo form_submit('submit', tr_raw('Check again'), 'class="button"');
 	echo form_close();
-?>
+else:
+	if ($type === 'install' OR $type === 'upgrade' OR ! $this->Kalkun_model->has_table_pbk()):
+		if ($type !== 'upgrade_not_supported'):
+			echo form_open('install/database_setup');
+			echo form_hidden('idiom', $idiom);
+			echo form_hidden('action', 'run_db_setup');
+			echo form_submit('submit', 'Run Database Setup', 'class="button"');
+			echo form_close();
+		endif;
+	endif;
+endif; ?>
 </div>
+
+<?php if ($this->input->post('action') === 'run_db_setup'): ?>
+<h4><?php echo tr('Database setup'); ?></h4>
+<?php  if ($error === 0): ?>
+<p><?php echo tr('Status'); ?>: <span class="green"><?php echo tr('Successful'); ?></span></p>
+<?php else: ?>
+<p><?php echo tr('Status'); ?>: <span class="red"><?php echo tr('Failed'); ?></span></p>
+<p>Consider manual installation, read the README instruction file.</p>
+<?php endif; ?>
 <?php endif; ?>
 
 <p>&nbsp;</p>
@@ -110,20 +129,12 @@
 	echo form_hidden('idiom', $idiom);
 	echo form_submit('submit', '‹ '.tr_raw('Previous'), 'class="button"');
 	echo form_close();
-?>
-		<?php if ($exception === NULL && $has_smsd_database): ?>
-		<?php if ($type === 'install' OR $type === 'upgrade' OR ! $this->Kalkun_model->has_table_pbk()):
-		$btn_text = 'Run Database Setup'.' ›';
-	else:
-		$btn_text = tr_raw('Continue').' ›';
+
+	if ($exception === NULL && $has_smsd_database && $type !== 'install' && $type !== 'upgrade' && $this->Kalkun_model->has_table_pbk() && $type !== 'upgrade_not_supported'):
+		echo form_open('install/config_setup', 'style="display:inline"');
+		echo form_hidden('idiom', $idiom);
+		echo form_submit('submit', tr_raw('Continue').' ›', 'class="button"');
+		echo form_close();
 	endif; ?>
-		<?php if ($type !== 'upgrade_not_supported'): ?>
-		<?php echo form_open('install/run_install', 'style="display:inline"');?>
-		<?php echo form_hidden('idiom', $idiom); ?>
-		<?php echo form_submit('submit', $btn_text, 'class="button"'); ?>
-	</p>
-	<?php echo form_close();?>
-	<?php endif; ?>
-	<?php endif; ?>
 	</p>
 </div>
