@@ -27,7 +27,7 @@
 			} else if (step == 'database_setup') {
 				$('li.active').removeClass("active");
 				$('li#step3').addClass("active");
-			} else if (step == "run_install") {
+			} else if (step == "config_setup") {
 				$('li.active').removeClass("active");
 				$('li#step4').addClass("active");
 			}

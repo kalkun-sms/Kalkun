@@ -1,15 +1,6 @@
 <h2><?php echo tr('Final configuration steps'); ?></h2>
 <p>This is the last step of the installation process.</p>
-<h4><?php echo tr('Database setup'); ?></h4>
-<?php if ($error === 0): ?>
-<p><?php echo tr('Status'); ?>: <span class="green"><?php echo tr('Successful'); ?></span></p>
-<?php else: ?>
-<p><?php echo tr('Status'); ?>: <span class="red"><?php echo tr('Failed'); ?></span></p>
-<p>Consider manual installation, read the README instruction file.</p>
-<?php endif; ?>
 
-<?php if ($error === 0): ?>
-<p>&nbsp;</p>
 
 <h3>Remaining manual steps</h3>
 <?php
@@ -73,5 +64,4 @@
 	echo form_close();
 ?>
 
-<?php endif; ?>
 <p>&nbsp;</p>
