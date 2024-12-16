@@ -165,6 +165,25 @@ if [ "$repo" = "kalkun" ]; then
   git branch -f bpp_general_orig
   ORIGINAL_BRANCH=bpp_general_orig
 
+  # Disable patches in the Debian package that are taken from upstream
+  # exported by git format-patch, and that don't need to be reapplied.
+  # They are identified as reversed patches, so we use that to detect them.
+  for file in $(QUILT_PATCHES=debian/patches quilt series | sed "s#debian/patches/##"); do
+    if head -n1 "debian/patches/$file" | grep "From "; then
+      if patch -R -r - -p1 < debian/patches/$file; then
+        patch -p1 < debian/patches/$file
+        sed -i "/$file/ s/^/#/" debian/patches/series
+        git add debian/patches/series
+        git commit -m "disable patch $file"
+      fi
+      #patch_commit="$(head -n1 "debian/patches/$file" | cut -d " " -f 2)"
+      # There is no git log in a shallow clone
+      #if git log | grep "$patch_commit"; then
+      #  sed -i "/$file/ s/^/#/" debian/patches/series
+      #fi
+    fi
+  done
+
   if [ "$TAG_AT_HEAD" != "" ]; then
     TAG_VERSION="$(git tag --points-at "$TAG_AT_HEAD" | sed "s/^v//")"
     UVERSIONMANGLED="${TAG_VERSION/-/\~}"
