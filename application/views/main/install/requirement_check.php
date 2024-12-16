@@ -34,7 +34,7 @@
 
 	<tr>
 		<td colspan="3">
-			<?php echo $db_property['human']; ?> <i>(Read from database configuration)</i>
+			<?php echo $db_property['human']; ?> <i>(As per the database configuration file of kalkun)</i>
 		</td>
 		<td class="right">
 			<?php
