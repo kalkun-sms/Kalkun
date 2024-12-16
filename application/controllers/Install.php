@@ -155,6 +155,8 @@ class Install extends CI_Controller {
 
 		$data['database_driver'] = $this->db->platform();
 		$data['has_smsd_database'] = $this->db->table_exists('gammu') ? TRUE : FALSE;
+		$data['has_table_pbk'] = $this->Kalkun_model->has_table_pbk() ? TRUE : FALSE;
+		$data['has_gammu_database'] = $this->db->table_exists('user') ? TRUE : FALSE;
 
 		// Now check if it is installed, and which version it is.
 		// plugins table appeared in 0.4
