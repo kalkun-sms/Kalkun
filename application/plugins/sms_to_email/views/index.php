@@ -37,3 +37,4 @@ echo form_dropdown('email_forward', $email_forward, $email_forward_act);
 		<?php echo form_close();?>
 
 	</div>
+</div>

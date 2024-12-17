@@ -70,7 +70,6 @@
 		<br />
 	</div>
 </div>
-</div>
 
 
 <!-- Add STOP dialog -->

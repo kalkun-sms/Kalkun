@@ -29,3 +29,4 @@
 		<p><?php echo htmlentities($wp['wp_url'], ENT_QUOTES);?></p>
 		<?php endif;?>
 	</div>
+</div>

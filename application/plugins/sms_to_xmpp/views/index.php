@@ -33,3 +33,4 @@
 		<p><?php echo htmlentities($xmpp['xmpp_username'], ENT_QUOTES);?></p>
 		<?php endif;?>
 	</div>
+</div>

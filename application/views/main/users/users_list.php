@@ -27,6 +27,8 @@ else: ?>
 					<span class="pbk_menu no-touch-hidden">
 						<a class="edit_user simplelink" href="javascript:void(0);"><?php echo tr('Edit'); ?></a>
 					</span>
+				</div>
+			</div>
 		</td>
 	</tr>
 	<?php endforeach;?>

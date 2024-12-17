@@ -26,7 +26,6 @@
 		<input type="text" name="editreason" id="editreason" value="" class="text ui-widget-content ui-corner-all" />
 	</fieldset>
 	<?php echo form_close(); ?>
-	</form>
 </div>
 
 <div id="space_area">

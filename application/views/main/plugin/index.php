@@ -58,3 +58,4 @@ echo tr('No plugin installed.');
 }
 ?>
 	</div>
+</div>
