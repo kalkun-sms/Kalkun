@@ -7,3 +7,4 @@
 		<a href="<?php echo site_url('sms_to_twitter/disconnect')?>" class="nicebutton">&#43; Disconnect from Twitter</a>
 		<?php endif;?>
 	</div>
+</div>

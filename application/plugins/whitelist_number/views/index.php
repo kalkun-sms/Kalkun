@@ -23,7 +23,6 @@
 		<input type="text" name="editmatch" id="editphone_number" class="text ui-widget-content ui-corner-all" />
 	</fieldset>
 	<?php echo form_close(); ?>
-	</form>
 </div>
 
 <div id="space_area">

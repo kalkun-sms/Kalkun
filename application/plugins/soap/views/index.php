@@ -40,7 +40,7 @@ $this->load->view('js_remote_access');
 			<label for="editstatus" style="display: inline">Active</label>
 		</div>
 		<label for="edittoken">Remote Token</label>
-		<input type="text" name="edittoken" id="edittoken" size="30" class="text ui-widget-content ui-corner-all" readonly />
+		<input type="text" name="edittoken" id="edittoken" size="30" class="text ui-widget-content ui-corner-all" readonly="readonly" />
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>
@@ -75,7 +75,7 @@ $this->load->view('js_remote_access');
 			<td class="access_name"><?php echo htmlentities($tmp->access_name, ENT_QUOTES); ?></td>
 			<td class="ip_address"><?php echo htmlentities($tmp->ip_address, ENT_QUOTES); ?></td>
 			<td class="token"><?php echo htmlentities($tmp->token, ENT_QUOTES); ?></td>
-			<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status === 'false') ? '' : 'checked=\"checked\"'?> disabled /></td>
+			<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status === 'false') ? '' : 'checked="checked"'?> disabled="disabled" /></td>
 			<td>&nbsp;</td>
 			<td><a href="javascript:void(0);" class="edit"><img class="ui-icon ui-icon-pencil" title="<?php echo tr('Edit'); ?>" /></a></td>
 			<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><img class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>" /></a></td>

@@ -34,3 +34,4 @@ $this->load->view($type);
 		<?php $this->load->view($type);?>
 		<?php endif;?>
 	</div>
+</div>
