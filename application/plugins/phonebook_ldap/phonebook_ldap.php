@@ -28,7 +28,7 @@ class Phonebook_ldap_plugin extends CI3_plugin_system {
 	 * with modification
 	 *
 	 */
-	function phonebook_ldap($number)
+	function phonebook_ldap()
 	{
 		if ( ! extension_loaded('ldap'))
 		{
