@@ -122,7 +122,7 @@ if command -v html-beautify >/dev/null ; then
             --indent-scripts=normal \
             "$file"
     done <  <(find application/views/js_init application/views/main -name "*.php" -print0 && \
-                find media/css -name "b*.css" -print0 -or -name "i*.css" -print0 )
+                find media/css -maxdepth 1 -name "*.css" -print0 )
 
     PLUGIN_VIEWS=$(find application/plugins -type d -name views)
     while IFS= read -r -d '' file; do
