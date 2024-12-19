@@ -147,16 +147,22 @@ class Kalkun_model extends MY_Model {
 	{
 		$this->db->from('user_forgot_password');
 		$this->db->where('token', $token);
-		$token = $this->db->get();
+		$token_result = $this->db->get();
 
-		if ($token->num_rows() === 1)
+		if ($token_result->num_rows() === 1)
 		{
-			return $token->row_array();
+			if (strtotime('now') < strtotime($token_result->row('valid_until')))
+			{
+				return $token_result->row_array();
+			}
+			else
+			{
+				$this->db->from('user_forgot_password');
+				$this->db->where('token', $token);
+				$this->db->delete();
+			}
 		}
-		else
-		{
-			return FALSE;
-		}
+		return FALSE;
 	}
 
 	// --------------------------------------------------------------------
