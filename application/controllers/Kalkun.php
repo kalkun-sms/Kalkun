@@ -248,7 +248,7 @@ class Kalkun extends MY_Controller {
 	function rename_folder()
 	{
 		$this->Kalkun_model->rename_folder();
-		redirect($this->input->post('source_url'));
+		redirect(strval($this->input->post('source_url')));
 	}
 
 	// --------------------------------------------------------------------
