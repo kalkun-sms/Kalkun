@@ -1553,7 +1553,7 @@ class Messages extends MY_Controller {
 	{
 		if ($type === NULL OR ($type !== 'spam' && $type !== 'ham'))
 		{
-			show_404();
+			show_error('Invalid Type', 400);
 		}
 
 		$ID = $this->input->post('id_message');
