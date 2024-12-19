@@ -34,8 +34,10 @@
     "extra": {
         "patches": {
             "codeigniter/framework": {
+                "Add support for PHP 8.1 (Fixes XML-RPC compatibility with PHP 8)": "patches/Codeigniter_Framework/v3.1.13/10-php81_Fixes_XML-RPC_compatibility_with_PHP_8.patch",
                 "Add support for PHP 8.2 (part1)": "patches/Codeigniter_Framework/v3.1.13/10-php82_support.patch",
                 "Add support for PHP 8.2 (part2)": "patches/Codeigniter_Framework/v3.1.13/10-php82_support-part2.patch",
+                "Add support for PHP 8.2 (part3)": "patches/Codeigniter_Framework/v3.1.13/10-php82_support-part3-fix_string_interpolation.patch",
                 "Add support for PHP 8.4 (E_STRICT)": "patches/Codeigniter_Framework/v3.1.13/11-php84_support_E_STRICT.patch",
                 "Add support for PHP 8.4 (implicit nullable type)": "patches/Codeigniter_Framework/v3.1.13/11-php84_support_fix_implicit_nullable_type_error.patch",
                 "Add support for PHP 8.4 (session sid)": "patches/Codeigniter_Framework/v3.1.13/11-php84_support_session.sid_length_INI_setting_is_deprecated.patch"

@@ -1,0 +1,60 @@
+From 8d80bef64b79f6cddc1e631760d862c563b525bf Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?L=C3=A1szl=C3=B3=20B=C3=B3ra?= <boralaszlo@gmail.com>
+Date: Sun, 24 Jul 2022 14:48:31 +0200
+Subject: [PATCH] fixes #6149 remove deprecated variable variables / string
+ interpolation in variable names
+Origin: https://github.com/bcit-ci/CodeIgniter/commit/8d80bef64b79f6cddc1e631760d862c563b525bf
+
+---
+ system/database/DB_query_builder.php | 6 +++---
+ system/libraries/Xmlrpc.php          | 2 +-
+ system/libraries/Xmlrpcs.php         | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/system/database/DB_query_builder.php b/system/database/DB_query_builder.php
+index e57333ff963..de6aa04fc08 100644
+--- a/system/database/DB_query_builder.php
++++ b/system/database/DB_query_builder.php
+@@ -692,11 +692,11 @@ protected function _wh($qb_key, $key, $value = NULL, $type = 'AND ', $escape = N
+ 				$k = substr($k, 0, $match[0][1]).($match[1][0] === '=' ? ' IS NULL' : ' IS NOT NULL');
+ 			}
+ 
+-			${$qb_key} = array('condition' => $prefix.$k, 'value' => $v, 'escape' => $escape);
+-			$this->{$qb_key}[] = ${$qb_key};
++			$$qb_key = array('condition' => $prefix.$k, 'value' => $v, 'escape' => $escape);
++			$this->{$qb_key}[] = $$qb_key;
+ 			if ($this->qb_caching === TRUE)
+ 			{
+-				$this->{$qb_cache_key}[] = ${$qb_key};
++				$this->{$qb_cache_key}[] = $$qb_key;
+ 				$this->qb_cache_exists[] = substr($qb_key, 3);
+ 			}
+ 
+diff --git a/system/libraries/Xmlrpc.php b/system/libraries/Xmlrpc.php
+index 876232c5cfd..8587015e877 100644
+--- a/system/libraries/Xmlrpc.php
++++ b/system/libraries/Xmlrpc.php
+@@ -1719,7 +1719,7 @@ public function addScalar($val, $type = 'string')
+ 
+ 		if ($typeof != 1)
+ 		{
+-			echo '<strong>XML_RPC_Values</strong>: not a scalar type (${typeof})<br />';
++			echo "<strong>XML_RPC_Values</strong>: not a scalar type ($typeof)<br />";
+ 			return 0;
+ 		}
+ 
+diff --git a/system/libraries/Xmlrpcs.php b/system/libraries/Xmlrpcs.php
+index b91d3fcb362..eb5a24c4917 100644
+--- a/system/libraries/Xmlrpcs.php
++++ b/system/libraries/Xmlrpcs.php
+@@ -551,8 +551,8 @@ public function multicall($m)
+ 	 */
+ 	public function multicall_error($err)
+ 	{
+-		$str = is_string($err) ? $this->xmlrpcstr["multicall_${err}"] : $err->faultString();
+-		$code = is_string($err) ? $this->xmlrpcerr["multicall_${err}"] : $err->faultCode();
++		$str = is_string($err) ? $this->xmlrpcstr["multicall_$err"] : $err->faultString();
++		$code = is_string($err) ? $this->xmlrpcerr["multicall_$err"] : $err->faultCode();
+ 
+ 		$struct['faultCode'] = new XML_RPC_Values($code, 'int');
+ 		$struct['faultString'] = new XML_RPC_Values($str, 'string');
