@@ -154,28 +154,37 @@ class Login extends CI_Controller {
 	{
 		$this->load->helper('form');
 
-		if ($_POST && empty($this->input->post('change_language')))
+		$password_submitted = ($_POST && empty($this->input->post('change_language')));
+
+		if ($password_submitted)
 		{
 			$token = $this->input->post('token');
-			$user_token = $this->Kalkun_model->valid_token($token);
-			$this->Kalkun_model->update_password($user_token['id_user']);
-			$this->Kalkun_model->delete_token($user_token['id_user']);
-			$this->session->set_flashdata('errorlogin', tr_raw('Password changed successfully.'));
-			redirect('login?l='.$this->idiom);
 		}
 
-		if ( ! $this->Kalkun_model->valid_token($token))
+		$user_token = $this->Kalkun_model->valid_token($token);
+
+		if ($user_token === FALSE)
 		{
 			$this->session->set_flashdata('errorlogin', tr_raw('Token invalid.'));
 			redirect('login/forgot_password?l='.$this->idiom);
 		}
 		else
 		{
-			$data['token'] = $token;
-			$data['idiom'] = $this->idiom;
-			$data['language_list'] = $this->lang->kalkun_supported_languages();
-			$data['idiom'] = $this->idiom;
-			$this->load->view('main/password_reset', $data);
+			if ($password_submitted)
+			{
+				$this->Kalkun_model->update_password($user_token['id_user']);
+				$this->Kalkun_model->delete_token($user_token['id_user']);
+				$this->session->set_flashdata('errorlogin', tr_raw('Password changed successfully.'));
+				redirect('login?l='.$this->idiom);
+			}
+			else
+			{
+				$data['token'] = $token;
+				$data['idiom'] = $this->idiom;
+				$data['language_list'] = $this->lang->kalkun_supported_languages();
+				$data['idiom'] = $this->idiom;
+				$this->load->view('main/password_reset', $data);
+			}
 		}
 	}
 }
