@@ -485,6 +485,7 @@ $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
     "install/requirement_check",
+    "plugin/soap/api", // we make a POST request when using soap api so skip csrf check (api requires login through token)
     "install/database_setup",
     "install/run_install");
 
