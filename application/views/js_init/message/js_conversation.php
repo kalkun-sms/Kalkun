@@ -247,7 +247,7 @@
 					break;
 				default:
 					var type = 'reply';
-					var phone = '<?php echo rawurldecode($this->uri->segment(5));?>';
+					var phone = '<?php echo rawurldecode(strval($this->uri->segment(5)));?>';
 					if (phone == null || phone == '')
 						var phone = $(this).parents('div:eq(1)').children().children('input.item_number').val();
 					compose_message('reply', false, '#message', phone);
