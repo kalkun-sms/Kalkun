@@ -20,8 +20,8 @@ class Api extends MY_Controller {
 		parent::__construct(FALSE);
 
 		// Hide/Forbid access if soap plugin is not enabled
-		$check = $this->db->where('plugin_system_name', 'soap')->get('plugins');
-		if ($check->num_rows() !== 1)
+		$this->load->library('Plugins_lib_kalkun');
+		if ( ! isset($this->plugins_lib_kalkun->get_enabled_plugins()['soap']))
 		{
 			$this->session->set_flashdata('notif', 'Plugin '.strtolower(get_class($this)).' is not installed');
 			show_404();
