@@ -1,0 +1,46 @@
+From cb5487171e7a883f4a0c6346ef0efb8ee7acb2bf Mon Sep 17 00:00:00 2001
+From: Niel Buys <nbuys@ncomp.co.za>
+Date: Fri, 20 Dec 2024 15:32:22 +0200
+Subject: [PATCH] Fix PHP 8.4 deprecated warnings Github issue 6306
+Origin: https://github.com/NielBuys/CodeIgniter/pull/2/commits/cb5487171e7a883f4a0c6346ef0efb8ee7acb2bf
+Origin: https://github.com/NielBuys/CodeIgniter/pull/2/commits/6a139066bcebf03026ac0b9f0f3f2b548c73aa22
+
+--- a/system/libraries/Xmlrpc.php
++++ b/system/libraries/Xmlrpc.php
+@@ -1162,10 +1162,9 @@
+ 			'isf_reason'	=> 0
+ 		);
+ 
+-		xml_set_object($parser, $this);
+ 		xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, TRUE);
+-		xml_set_element_handler($parser, 'open_tag', 'closing_tag');
+-		xml_set_character_data_handler($parser, 'character_data');
++		xml_set_element_handler($parser, [$this, 'open_tag'], [$this, 'closing_tag']);
++		xml_set_character_data_handler($parser, [$this, 'character_data']);
+ 		//xml_set_default_handler($parser, 'default_handler');
+ 
+ 		// Get headers
+--- a/system/libraries/Xmlrpcs.php
++++ b/system/libraries/Xmlrpcs.php
+@@ -233,7 +233,7 @@
+ 		//-------------------------------------
+ 
+ 		$parser = xml_parser_create($this->xmlrpc_defencoding);
+-		$parser_object = new XML_RPC_Message('filler');
++		$parser_object = new XML_RPC_Message('default_method', FALSE);
+ 
+ 		$parser_object->xh = array(
+ 			'isf' => 0,
+@@ -244,10 +244,9 @@
+ 			'method' => ''
+ 		);
+ 
+-		xml_set_object($parser, $parser_object);
+ 		xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, TRUE);
+-		xml_set_element_handler($parser, 'open_tag', 'closing_tag');
+-		xml_set_character_data_handler($parser, 'character_data');
++		xml_set_element_handler($parser, [$parser_object, 'open_tag'], [$parser_object, 'closing_tag']);
++		xml_set_character_data_handler($parser, [$parser_object, 'character_data']);
+ 		//xml_set_default_handler($parser, 'default_handler');
+ 
+ 		//-------------------------------------
