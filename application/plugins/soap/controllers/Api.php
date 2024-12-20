@@ -81,9 +81,10 @@ class Api extends MY_Controller {
 				return 128; // Unauthorized
 			}
 			$message = trim($message);
-			$destinationNumber = preg_replace('/^\+/', '00', $destinationNumber);
 
-			if (preg_match('/^\d+$/', $destinationNumber))
+			$CI->load->helper('i18n');
+			$CI->load->helper('kalkun');
+			if (is_phone_number_valid($destinationNumber) === TRUE)
 			{
 				$CI->_sendMessage($destinationNumber, $message, 1);
 				return 1;
@@ -102,9 +103,9 @@ class Api extends MY_Controller {
 			}
 			$message = trim($message);
 
-			$destinationNumber = preg_replace('/^\+/', '00', $destinationNumber);
-
-			if (preg_match('/^\d+$/', $destinationNumber))
+			$CI->load->helper('i18n');
+			$CI->load->helper('kalkun');
+			if (is_phone_number_valid($destinationNumber) === TRUE)
 			{
 				$CI->_sendMessage($destinationNumber, $message, 0);
 				return 1;
