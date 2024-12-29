@@ -127,7 +127,6 @@ class Install extends CI_Controller {
 	 */
 	function database_setup()
 	{
-		$this->load->model('Kalkun_model');
 		$this->load->helper(array('form'));
 
 		$data['main'] = 'main/install/database_setup';
@@ -149,6 +148,13 @@ class Install extends CI_Controller {
 			$this->load->view('main/install/layout', $data);
 			return;
 		}
+
+		$this->load->model('Kalkun_model');
+		// Replace the values set in constructor now that we know that the
+		// configuration of the database is correct.
+		$this->db_prop = get_database_property($this->db->platform());
+		$this->db_engine = $this->db_prop['file'];
+		$data['db_property'] = $this->db_prop;
 
 		$data['error'] = 0;
 
