@@ -15,7 +15,7 @@ class MY_Pagination extends CI_Pagination {
 
 	public function create_links()
 	{
-		if (version_compare(PHP_VERSION, '8.1.0') >= 0 && version_compare(CI_VERSION, '3.1.13') <= 0 )
+		if (version_compare(PHP_VERSION, '8.1.0') >= 0 && version_compare(CI_VERSION, '3.1.13') <= 0)
 		{
 			return $this->create_links_for_php81();
 		}
@@ -183,13 +183,13 @@ class MY_Pagination extends CI_Pagination {
 		// to a page number, so we can generate the surrounding number links.
 		if ( ! $this->use_page_numbers)
 		{
-			$this->cur_page = (int) floor(($this->cur_page/$this->per_page) + 1);
+			$this->cur_page = (int) floor(($this->cur_page / $this->per_page) + 1);
 		}
 
 		// Calculate the start and end numbers. These determine
 		// which number to start and end the digit links with.
-		$start	= (($this->cur_page - $this->num_links) > 0) ? $this->cur_page - ($this->num_links - 1) : 1;
-		$end	= (($this->cur_page + $this->num_links) < $num_pages) ? $this->cur_page + $this->num_links : $num_pages;
+		$start = (($this->cur_page - $this->num_links) > 0) ? $this->cur_page - ($this->num_links - 1) : 1;
+		$end = (($this->cur_page + $this->num_links) < $num_pages) ? $this->cur_page + $this->num_links : $num_pages;
 
 		// And here we go...
 		$output = '';
@@ -223,7 +223,6 @@ class MY_Pagination extends CI_Pagination {
 				$output .= $this->prev_tag_open.'<a href="'.$base_url.$append.'"'.$attributes.$this->_attr_rel('prev').'>'
 					.$this->prev_link.'</a>'.$this->prev_tag_close;
 			}
-
 		}
 
 		// Render the pages

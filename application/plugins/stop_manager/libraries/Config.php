@@ -22,7 +22,7 @@ require_once (APPPATH . '/plugins/Plugin_helper.php');
  */
 class Config {
 
-	private static $instance = null;
+	private static $instance = NULL;
 	private $config = NULL;
 	private $keywordsOptOut = NULL;
 	private $keywordsOptIn = NULL;
@@ -36,8 +36,7 @@ class Config {
 		$this->keywordsType = array_map('strtolower', $this->config['type_keywords']);
 	}
 
-	public static
-			function getInstance()
+	public static function getInstance()
 	{
 		if (self::$instance === NULL)
 		{
@@ -81,9 +80,13 @@ class Config {
 	public function getConfig($item = NULL)
 	{
 		if ($item !== NULL)
+		{
 			return $this->config[$item];
+		}
 		else
+		{
 			return $this->config;
+		}
 	}
 
 	public function isAutoreplyInfoEnabled()
@@ -95,5 +98,4 @@ class Config {
 	{
 		return $this->config['enable_autoreply_error'];
 	}
-
 }

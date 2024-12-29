@@ -24,8 +24,8 @@ require_once (APPPATH . 'plugins/Plugin_helper.php');
 
 class MsgIncoming {
 
-	const TYPE_NOT_SET = "TYPE_NOT_SET_SO_STOP_ALL";
-	const IGNORE_STOP_MANAGER = "IGNORE_STOP_MANAGER";
+	const TYPE_NOT_SET = 'TYPE_NOT_SET_SO_STOP_ALL';
+	const IGNORE_STOP_MANAGER = 'IGNORE_STOP_MANAGER';
 
 	private $party = NULL;
 	private $cmd = NULL;
@@ -68,8 +68,7 @@ class MsgIncoming {
 		$this->party = $party;
 	}
 
-	public
-			function getCmd()
+	public function getCmd()
 	{
 		return $this->cmd;
 	}
@@ -132,7 +131,7 @@ class MsgIncoming {
 			}
 			else
 			{
-				$this->setType("EMPTY?");
+				$this->setType('EMPTY?');
 			}
 		}
 	}
@@ -162,10 +161,10 @@ class MsgIncoming {
 	private function getAutoReplyMsgConfirmOptIn()
 	{
 		return tr(
-				'{0} taken into account. To opt-out, send "{1}".',
-				NULL,
-				($this->config->getConfig('enable_type')) ? $this->cmd . ' ' . $this->type : $this->cmd,
-				($this->config->getConfig('enable_type')) ? $this->config->getKeywordsOptOut()[0] . ' ' . $this->type : $this->config->getKeywordsOptOut()[0]
+			'{0} taken into account. To opt-out, send "{1}".',
+			NULL,
+			($this->config->getConfig('enable_type')) ? $this->cmd . ' ' . $this->type : $this->cmd,
+			($this->config->getConfig('enable_type')) ? $this->config->getKeywordsOptOut()[0] . ' ' . $this->type : $this->config->getKeywordsOptOut()[0]
 		);
 	}
 
@@ -174,18 +173,18 @@ class MsgIncoming {
 		if ($this->config->getConfig('enable_optin'))
 		{
 			return tr(
-					'{0} taken into account. To opt-in again, send "{1}".',
-					NULL,
-					($this->config->getConfig('enable_type')) ? $this->cmd . ' ' . $this->type : $this->cmd,
-					($this->config->getConfig('enable_type')) ? $this->config->getKeywordsOptIn()[0] . ' ' . $this->type : $this->config->getKeywordsOptIn()[0]
+				'{0} taken into account. To opt-in again, send "{1}".',
+				NULL,
+				($this->config->getConfig('enable_type')) ? $this->cmd . ' ' . $this->type : $this->cmd,
+				($this->config->getConfig('enable_type')) ? $this->config->getKeywordsOptIn()[0] . ' ' . $this->type : $this->config->getKeywordsOptIn()[0]
 			);
 		}
 		else
 		{
 			return tr(
-					'{0} taken into account.',
-					NULL,
-					($this->config->getConfig('enable_type')) ? $this->cmd . ' ' . $this->type : $this->cmd
+				'{0} taken into account.',
+				NULL,
+				($this->config->getConfig('enable_type')) ? $this->cmd . ' ' . $this->type : $this->cmd
 			);
 		}
 	}
@@ -193,47 +192,47 @@ class MsgIncoming {
 	private function getAutoReplyMsgInvalidWithOptInWithType()
 	{
 		return tr(
-				'Request not valid ({0}). Send "{1} or {2} <type>". Possible values for <type> are: {3}. For example "{4}".',
-				NULL,
-				$this->getOrigMsg(),
-				$this->config->getKeywordsOptOut()[0],
-				$this->config->getKeywordsOptIn()[0],
-				implode(', ', $this->config->getValidTypes()),
-				$this->config->getKeywordsOptOut()[0] . ' ' . $this->config->getValidTypes()[0]
+			'Request not valid ({0}). Send "{1} or {2} <type>". Possible values for <type> are: {3}. For example "{4}".',
+			NULL,
+			$this->getOrigMsg(),
+			$this->config->getKeywordsOptOut()[0],
+			$this->config->getKeywordsOptIn()[0],
+			implode(', ', $this->config->getValidTypes()),
+			$this->config->getKeywordsOptOut()[0] . ' ' . $this->config->getValidTypes()[0]
 		);
 	}
 
 	private function getAutoReplyMsgInvalidWithOptInWithoutType()
 	{
 		return tr(
-				'Request not valid ({0}). Send "{1}" or "{2}". For example "{3}".',
-				NULL,
-				$this->getOrigMsg(),
-				$this->config->getKeywordsOptOut()[0],
-				$this->config->getKeywordsOptIn()[0],
-				$this->config->getKeywordsOptOut()[0]
+			'Request not valid ({0}). Send "{1}" or "{2}". For example "{3}".',
+			NULL,
+			$this->getOrigMsg(),
+			$this->config->getKeywordsOptOut()[0],
+			$this->config->getKeywordsOptIn()[0],
+			$this->config->getKeywordsOptOut()[0]
 		);
 	}
 
 	private function getAutoReplyMsgInvalidWithoutOptInWithType()
 	{
 		return tr(
-				'Request not valid ({0}). Send "{1} <type>". Possible values for <type> are: {2}. For example "{3}".',
-				NULL,
-				$this->getOrigMsg(),
-				$this->config->getKeywordsOptOut()[0],
-				implode(', ', $this->config->getValidTypes()),
-				$this->config->getKeywordsOptOut()[0] . ' ' . $this->config->getValidTypes()[0]
+			'Request not valid ({0}). Send "{1} <type>". Possible values for <type> are: {2}. For example "{3}".',
+			NULL,
+			$this->getOrigMsg(),
+			$this->config->getKeywordsOptOut()[0],
+			implode(', ', $this->config->getValidTypes()),
+			$this->config->getKeywordsOptOut()[0] . ' ' . $this->config->getValidTypes()[0]
 		);
 	}
 
 	private function getAutoReplyMsgInvalidWithoutOptInWithoutType()
 	{
 		return tr(
-				'Request not valid ({0}). Send "{1}".',
-				NULL,
-				$this->getOrigMsg(),
-				$this->config->getKeywordsOptOut()[0]
+			'Request not valid ({0}). Send "{1}".',
+			NULL,
+			$this->getOrigMsg(),
+			$this->config->getKeywordsOptOut()[0]
 		);
 	}
 
@@ -285,5 +284,4 @@ class MsgIncoming {
 			return $this->getAutoReplyMsgInvalid();
 		}
 	}
-
 }
