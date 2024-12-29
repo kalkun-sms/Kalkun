@@ -3,6 +3,9 @@
 # Get $finder variable
 include_once 'finder.inc.php';
 
+# Add this file because see notice line 36 of that file
+$finder->NotPath('libraries/MY_Pagination.php');
+
 $config = new PhpCsFixer\Config();
 return $config
     ->setIndent("\t") // As per CI3 coding style
