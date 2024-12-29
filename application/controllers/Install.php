@@ -62,6 +62,10 @@ class Install extends CI_Controller {
 		}
 
 		require(APPPATH.'config/database.php');
+		if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/database.php'))
+		{
+			require(APPPATH.'config/'.ENVIRONMENT.'/database.php');
+		}
 		$this->db_config = $db[$active_group];
 
 		$this->load->helper('kalkun');
