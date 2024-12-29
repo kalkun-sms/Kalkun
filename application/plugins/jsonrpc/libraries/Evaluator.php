@@ -19,8 +19,8 @@
  * @category	Controllers
  */
 
-class Evaluator implements Datto\JsonRpc\Evaluator {
-
+class Evaluator implements Datto\JsonRpc\Evaluator
+{
 	public function evaluate($method, $arguments)
 	{
 		if ($method === 'sms.send_sms')

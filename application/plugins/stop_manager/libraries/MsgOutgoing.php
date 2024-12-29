@@ -109,14 +109,14 @@ class MsgOutgoing {
 		if ($ret_match)
 		{
 			if ($this->config->isTypeEnabled()
-				&& (! empty($matches[2]))
+				&& ( ! empty($matches[2]))
 				&& in_array($matches[2], $this->config->getKeywordsType()))
 			{
 				$this->type = $matches[2];
 			}
 
 
-			$this->cleanedMsg = (! empty($matches[1])) ? trim($matches[1]) : $this->origMsg;
+			$this->cleanedMsg = ( ! empty($matches[1])) ? trim($matches[1]) : $this->origMsg;
 		}
 
 		if (is_null($this->type))
@@ -143,9 +143,9 @@ class MsgOutgoing {
 		// type of the outgoing message.
 		// eg. "~rappel~" at the end of the message
 		if ($ret_match
-			&& (! empty($matches[1]))
+			&& ( ! empty($matches[1]))
 			&& $this->config->isTypeEnabled()
-			&& (! empty($matches[2]))
+			&& ( ! empty($matches[2]))
 			&& in_array($matches[2], $this->config->getKeywordsType()))
 		{
 			$this->cleanedMsg = trim($matches[1]);
@@ -155,5 +155,4 @@ class MsgOutgoing {
 			$this->cleanedMsg = $this->origMsg;
 		}
 	}
-
 }
