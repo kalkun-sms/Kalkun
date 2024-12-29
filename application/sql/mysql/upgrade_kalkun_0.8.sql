@@ -42,6 +42,7 @@ ALTER TABLE `user_sentitems` CONVERT TO CHARACTER SET utf8mb4;
 ALTER TABLE `user_settings` CONVERT TO CHARACTER SET utf8mb4;
 ALTER TABLE `user_group` CONVERT TO CHARACTER SET utf8mb4;
 ALTER TABLE `user_templates` CONVERT TO CHARACTER SET utf8mb4;
+ALTER TABLE `b8_wordlist` MODIFY `token` VARCHAR(190);
 ALTER TABLE `b8_wordlist` CONVERT TO CHARACTER SET utf8mb4;
 ALTER TABLE `plugins` MODIFY `plugin_system_name`  VARCHAR(191);
 ALTER TABLE `plugins` MODIFY `plugin_name`  VARCHAR(191);
