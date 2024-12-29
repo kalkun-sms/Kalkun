@@ -2,7 +2,11 @@
 
 $finder = PhpCsFixer\Finder::create()
     //->notPath('file.php')
-    ->exclude('libraries')
+    ->notPath('libraries/abstract.plugins.php')
+    ->exclude('libraries/b8/')
+    ->notPath('libraries/Plugins_lib.php')
+    ->notPath('libraries/Plugins_lib_kalkun.php')
+    ->notPath('libraries/trait.plugins.php')
     ->exclude('plugins/rest_api/language/')
     ->exclude('plugins/rest_api/libraries/')
     ->notPath('plugins/rest_api/config/rest.php')
