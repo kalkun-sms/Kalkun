@@ -4,7 +4,11 @@
 
     <file>../../application</file>
 
-    <exclude-pattern>libraries</exclude-pattern>
+    <exclude-pattern>libraries/abstract.plugins.php</exclude-pattern>
+    <exclude-pattern>libraries/b8</exclude-pattern>
+    <exclude-pattern>libraries/Plugins_lib.php</exclude-pattern>
+    <exclude-pattern>libraries/Plugins_lib_kalkun.php</exclude-pattern>
+    <exclude-pattern>libraries/trait.plugins.php</exclude-pattern>
     <exclude-pattern>plugins/jsonrpc/libraries</exclude-pattern>
     <exclude-pattern>plugins/rest_api/libraries</exclude-pattern>
     <exclude-pattern>plugins/sms_to_twitter/libraries/</exclude-pattern>
