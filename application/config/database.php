@@ -142,12 +142,12 @@ $db['kalkun_postgresql'] = array(
 );
 
 $db['kalkun_sqlite3'] = array(
-	'dsn'	=> 'sqlite:/path/to/kalkun.sqlite',
-	'hostname' => 'localhost',
+	'dsn'	=> '',
+	'hostname' => '',
 	'username' => '',
 	'password' => '',
-	'database' => '',
-	'dbdriver' => 'pdo',
+	'database' => '/path/to/kalkun.sqlite',
+	'dbdriver' => 'sqlite3',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
