@@ -110,10 +110,10 @@ insert into "b8_wordlist" ("token", "count_ham", "count_spam") values ('b8*texts
 CREATE TABLE "plugins" (
   "plugin_id" serial PRIMARY KEY,
   "system_name" varchar(255) NOT NULL,
-  "name" varchar(255) DEFAULT NULL,
+  "name" varchar(255) NOT NULL,
   "status" smallint NOT NULL DEFAULT 1,
   "uri" varchar(120) DEFAULT NULL,
-  "version" varchar(30) DEFAULT NULL,
+  "version" varchar(30) NOT NULL,
   "description" text,
   "author" varchar(120) DEFAULT NULL,
   "author_uri" varchar(120) DEFAULT NULL,
