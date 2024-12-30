@@ -140,6 +140,7 @@ class Plugins_lib_kalkun extends Plugins_lib {
 		{
 			$arr['system_name'] = $plugin;
 			$arr['name'] = $plugin;
+			$arr['version'] = 'not_set';
 			$arr['status'] = 0;
 			if (self::$PM->insert_plugin($plugin, $arr))
 			{
