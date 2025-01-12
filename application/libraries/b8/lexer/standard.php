@@ -181,7 +181,7 @@ class standard
      * @param string $word_to_remove Word to remove from the processed string
      * @return void
      */
-    private function add_token(string $token, string $word_to_remove = null)
+    private function add_token(string $token, $word_to_remove = null)
     {
         // Check the validity of the token
         if (! $this->is_valid($token)) {
