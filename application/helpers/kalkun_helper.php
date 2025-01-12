@@ -308,19 +308,27 @@ function db_boolean_to_php_bool($dbdriver, $db_bool)
 {
 	switch ($dbdriver) {
 		case 'postgre':
+		case 'pgsql':
 			if ($db_bool === 't')
 			{
 				return TRUE;
 			}
-			//if ($db_bool === 'f') {
-			return FALSE;
-			//}
+			if ($db_bool === 'f')
+			{
+				return FALSE;
+			}
+			$bool_val = NULL;
 		case 'mysql':
 		case 'mysqli':
 		case 'pdo':
 		default:
-			return boolval($db_bool);
+			$bool_val = filter_var($db_bool, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
 	}
+	if ($bool_val === NULL)
+	{
+		throw new Exception('Unsupported boolean value. Database returned "' . $db_bool . '" which could not be converted to boolean value by PHP.');
+	}
+	return $bool_val;
 }
 
 /**
