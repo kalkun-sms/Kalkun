@@ -160,8 +160,8 @@ class Users extends MY_Controller {
 		}
 
 		// Return status
-		header('Content-type: application/json');
-		echo json_encode($return_msg);
+		$this->output->set_content_type('application/json');
+		$this->output->set_output(json_encode($return_msg));
 	}
 
 	// --------------------------------------------------------------------

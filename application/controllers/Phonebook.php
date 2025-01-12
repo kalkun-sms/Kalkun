@@ -390,8 +390,8 @@ class Phonebook extends MY_Controller {
 		$this->Phonebook_model->add_contact($pbk);
 
 		// Return status
-		header('Content-type: application/json');
-		echo json_encode($return_msg);
+		$this->output->set_content_type('application/json');
+		$this->output->set_output(json_encode($return_msg));
 	}
 
 	// --------------------------------------------------------------------
@@ -496,12 +496,12 @@ class Phonebook extends MY_Controller {
 			switch ($output_format)
 			{
 				case 'tagInput':
-					header('Content-type: application/json');
-					echo json_encode($tagInputResult);
+					$this->output->set_content_type('application/json');
+					$this->output->set_output(json_encode($tagInputResult));
 					break;
 				default:
-					header('Content-type: application/json');
-					echo json_encode($combine);
+					$this->output->set_content_type('application/json');
+					$this->output->set_output(json_encode($combine));
 					break;
 			}
 		}
