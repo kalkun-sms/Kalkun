@@ -21,6 +21,9 @@
 				phone_number: {
 					required: <?php echo tr_js('Field required.'); ?>,
 				},
+			},
+			submitHandler: function(form) {
+				document.getElementById('settingsForm').submit();
 			}
 		});
 	});
