@@ -226,7 +226,10 @@ class Plugins_lib_kalkun extends Plugins_lib {
 			{
 				continue;
 			}
-
+			if ( ! file_exists(static::$plugin_path . "/" . $f . "/" . $f . ".php"))
+			{
+				continue;
+			}
 			if( ! isset($plugins[$f]))
             {
                 array_push($orphaned, $f);
