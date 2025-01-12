@@ -79,6 +79,7 @@
 ?>
 	<label for="name"><?php echo tr('Folder name');?></label>
 	<input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user');?>" />
+	<input type="hidden" name="source_url" value="<?php echo htmlentities($this->uri->uri_string(), ENT_QUOTES);?>" />
 	<input type="text" name="folder_name" id="folder_name" class="text ui-widget-content ui-corner-all" />
 	<?php echo form_close(); ?>
 </div>
