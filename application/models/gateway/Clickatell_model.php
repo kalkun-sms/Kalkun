@@ -25,6 +25,7 @@ require_once('Nongammu_model.php');
 
 class Clickatell_model extends Nongammu_model {
 
+	private $gateway;
 	/**
 	 * Constructor
 	 *
