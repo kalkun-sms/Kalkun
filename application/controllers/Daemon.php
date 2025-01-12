@@ -142,7 +142,7 @@ class Daemon extends MY_Controller {
 			if ($check !== FALSE)
 			{
 				$this->Message_model->update_owner($tmp_message->ID, $tmp_user->id_user);
-				$msg_user = $tmp_user->id_user;
+				$msg_user[] = $tmp_user->id_user;
 				break;
 			}
 		}
