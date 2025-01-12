@@ -28,7 +28,7 @@ namespace b8\storage;
  * @author Tobias Leupold <tobias.leupold@gmx.de>
  */
 
-class sqlite extends storage_base
+class sqlite3 extends storage_base
 {
 
     private $sqlite = null;
@@ -37,14 +37,14 @@ class sqlite extends storage_base
     protected function setup_backend(array $config)
     {
         if (! isset($config['resource'])
-            || get_class($config['resource']) !== 'sqlite') {
+            || get_class($config['resource']) !== 'SQLite3') {
 
-            throw new \Exception(sqlite::class . ": No valid sqlite object passed");
+            throw new \Exception(sqlite3::class . ": No valid sqlite object passed");
         }
         $this->sqlite = $config['resource'];
 
         if (! isset($config['table'])) {
-            throw new \Exception(sqlite::class . ": No b8 wordlist table name passed");
+            throw new \Exception(sqlite3::class . ": No b8 wordlist table name passed");
         }
         $this->table = $config['table'];
     }
@@ -67,7 +67,7 @@ class sqlite extends storage_base
                                \b8\b8::KEY_COUNT_SPAM => $row[2] ];
         }
 
-        $result->free_result();
+        //$result->free_result();
 
         return $data;
     }
@@ -104,12 +104,12 @@ class sqlite extends storage_base
 
     protected function start_transaction()
     {
-        //$this->sqlite->begin_transaction();
+        $this->sqlite->exec('BEGIN');
     }
 
     protected function finish_transaction()
     {
-        //$this->sqlite->commit();
+        $this->sqlite->exec('COMMIT');
     }
 
 }

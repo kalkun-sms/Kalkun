@@ -52,7 +52,7 @@ class Spam_model extends MY_Model {
 				$config_b8 = ['storage' => 'pgsql'];
 				break;
 			case 'sqlite':
-				$config_b8 = ['storage' => 'sqlite'];
+				$config_b8 = ['storage' => 'sqlite3'];
 				break;
 			default:
 		}
