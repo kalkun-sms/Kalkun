@@ -27,7 +27,7 @@ echo form_open('settings/save', array('id' => 'settingsForm'));
 $this->load->view($type);
 ?>
 		<br />
-		<div align="center"><input type="submit" id="submit" value="<?php echo tr('Save'); ?>" /></div>
+		<div align="center"><input type="submit" id="submitBtn" value="<?php echo tr('Save'); ?>" /></div>
 		<?php echo form_close();?>
 
 		<?php else:?>
