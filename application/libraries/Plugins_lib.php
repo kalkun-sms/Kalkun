@@ -72,7 +72,7 @@ class Plugins_lib {
      * Plugin messages (Errors, debugging, warnings)
      * @var array
      */
-    private static $messages;
+    protected static $messages;
 
     /**
      * Plugins List
