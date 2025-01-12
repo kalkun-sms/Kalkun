@@ -59,7 +59,7 @@ abstract class storage_base
                                                        \b8\b8::KEY_COUNT_SPAM => int ]
      * @return bool true on success or false on failure
      */
-    abstract protected function add_token(string $token, array $count);
+    abstract protected function add_token($token, array $count);
 
     /**
      * Updates an existing token
@@ -70,7 +70,7 @@ abstract class storage_base
                                                        \b8\b8::KEY_COUNT_SPAM => int ]
      * @return bool true on success or false on failure
      */
-    abstract protected function update_token(string $token, array $count);
+    abstract protected function update_token($token, array $count);
 
     /**
      * Removes a token from the database
@@ -79,7 +79,7 @@ abstract class storage_base
      * @param string $token The token's name
      * @return bool true on success or false on failure
      */
-    abstract protected function delete_token(string $token);
+    abstract protected function delete_token($token);
 
     /**
      * Starts a transaction (if the underlying database supports/needs this)
@@ -222,7 +222,7 @@ abstract class storage_base
      * @param string Either \b8\b8::LEARN or \b8\b8::UNLEARN
      * @return void
      */
-    public function process_text(array $tokens, string $category, string $action)
+    public function process_text(array $tokens, $category, $action)
     {
         // No matter what we do, we first have to check what data we have.
 

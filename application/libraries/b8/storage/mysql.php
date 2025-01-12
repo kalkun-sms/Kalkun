@@ -72,7 +72,7 @@ class mysql extends storage_base
         return $data;
     }
 
-    protected function add_token(string $token, array $count)
+    protected function add_token($token, array $count)
     {
         $query = $this->mysql->prepare('INSERT INTO ' . $this->table
                                        . '(token, count_ham, count_spam) VALUES(?, ?, ?)');
@@ -81,7 +81,7 @@ class mysql extends storage_base
         $query->execute();
     }
 
-    protected function update_token(string $token, array $count)
+    protected function update_token($token, array $count)
     {
         $query = $this->mysql->prepare('UPDATE ' . $this->table
                                        . ' SET count_ham = ?, count_spam = ? WHERE token = ?');
@@ -90,7 +90,7 @@ class mysql extends storage_base
         $query->execute();
     }
 
-    protected function delete_token(string $token)
+    protected function delete_token($token)
     {
         $query = $this->mysql->prepare('DELETE FROM ' . $this->table . ' WHERE token = ?');
         $query->bind_param('s', $token);

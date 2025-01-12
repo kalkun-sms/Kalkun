@@ -72,7 +72,7 @@ class pgsql extends storage_base
         return $data;
     }
 
-    protected function add_token(string $token, array $count)
+    protected function add_token($token, array $count)
     {
         // Check if statement has already been prepared:
         $result = pg_query_params($this->pgsql, 'SELECT name FROM pg_prepared_statements WHERE name = $1', array('add_token'));
@@ -85,7 +85,7 @@ class pgsql extends storage_base
                                           $count[\b8\b8::KEY_COUNT_SPAM]));
     }
 
-    protected function update_token(string $token, array $count)
+    protected function update_token($token, array $count)
     {
         // Check if statement has already been prepared:
         $result = pg_query_params($this->pgsql, 'SELECT name FROM pg_prepared_statements WHERE name = $1', array('update_token'));
@@ -98,7 +98,7 @@ class pgsql extends storage_base
                                   $token));
     }
 
-    protected function delete_token(string $token)
+    protected function delete_token($token)
     {
         // Check if statement has already been prepared:
         $result = pg_query_params($this->pgsql, 'SELECT name FROM pg_prepared_statements WHERE name = $1', array('delete_token'));
