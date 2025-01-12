@@ -307,7 +307,7 @@ class Kalkun extends MY_Controller {
 				{
 					if ($this->input->post('username') !== $this->session->userdata('username'))
 					{
-						if ($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows > 0)
+						if ($this->Kalkun_model->check_setting(array('option' => 'username', 'username' => $this->input->post('username')))->num_rows() > 0)
 						{
 							$this->session->set_flashdata('notif', tr_raw('Username already taken'));
 							redirect('settings/'.$option);
