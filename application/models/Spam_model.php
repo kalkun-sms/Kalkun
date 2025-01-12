@@ -10,7 +10,7 @@
  */
 
 // ------------------------------------------------------------------------
-require(dirname(__FILE__) .'/../libraries/b8/b8.php');
+require_once(dirname(__FILE__) .'/../libraries/b8/b8.php');
 
 
 /**
@@ -38,6 +38,7 @@ class Spam_model extends MY_Model {
 		parent::__construct();
 
 		// get database engine
+		$this->load->database();
 		$this->load->helper('kalkun');
 		$db_engine = $this->db->platform();
 		$db_driver = get_database_property($db_engine)['name'];
