@@ -72,7 +72,7 @@ class Pluginss extends MY_Controller {
 				if ($plugin->status & $plugins_lib::P_STATUS_ENABLED)
 				{
 					$data['plugins'][$key] = $plugin;
-					$data['plugins'][$key]->controller_has_index = $this->_plugin_controller_has_index($plugin->system_name);
+					$data['plugins'][$key]->controller_has_index = self::_plugin_controller_has_index($plugin->system_name);
 				}
 			}
 		}
@@ -142,7 +142,7 @@ class Pluginss extends MY_Controller {
 	/**
 	 * Check if the controller of the plugin has a 'index()' method
 	 */
-	function _plugin_controller_has_index($plugin_system_name)
+	static function _plugin_controller_has_index($plugin_system_name)
 	{
 		$controller_class = ucfirst($plugin_system_name);
 		$controller_path = APPPATH . 'plugins/'.$plugin_system_name.'/controllers/'.$controller_class.'.php';
