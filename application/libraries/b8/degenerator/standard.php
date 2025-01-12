@@ -87,7 +87,7 @@ class standard
      * @param array $list The list to process
      * @return array The list without duplicates
      */
-    private function delete_duplicates(string $word, array $list)
+    private function delete_duplicates($word, array $list)
     {
         $list_processed = [];
 
@@ -108,7 +108,7 @@ class standard
      * @param string $word The word
      * @return array An array of degenerated words
      */
-    private function degenerate_word(string $word)
+    private function degenerate_word($word)
     {
         // Check for any stored words so the process doesn't have to repeat
         if (isset($this->degenerates[$word]) === true) {

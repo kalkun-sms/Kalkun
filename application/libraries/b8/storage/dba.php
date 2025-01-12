@@ -77,17 +77,17 @@ class dba extends storage_base
         return(rtrim($count_value));
     }
 
-    protected function add_token(string $token, array $count)
+    protected function add_token($token, array $count)
     {
         return dba_insert($token, $this->assemble_count_value($count), $this->db);
     }
 
-    protected function update_token(string $token, array $count)
+    protected function update_token($token, array $count)
     {
         return dba_replace($token, $this->assemble_count_value($count), $this->db);
     }
 
-    protected function delete_token(string $token)
+    protected function delete_token($token)
     {
         return dba_delete($token, $this->db);
     }

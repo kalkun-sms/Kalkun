@@ -72,7 +72,7 @@ class sqlite3 extends storage_base
         return $data;
     }
 
-    protected function add_token(string $token, array $count)
+    protected function add_token($token, array $count)
     {
         $query = $this->sqlite->prepare('INSERT INTO ' . $this->table
                                        . '(token, count_ham, count_spam) VALUES(:tok, :ch, :cs)');
@@ -83,7 +83,7 @@ class sqlite3 extends storage_base
         $query->reset();
     }
 
-    protected function update_token(string $token, array $count)
+    protected function update_token($token, array $count)
     {
         $query = $this->sqlite->prepare('UPDATE ' . $this->table
                                        . ' SET count_ham = :ch, count_spam = :cs WHERE token = :tok');
@@ -94,7 +94,7 @@ class sqlite3 extends storage_base
         $query->reset();
     }
 
-    protected function delete_token(string $token)
+    protected function delete_token($token)
     {
         $query = $this->sqlite->prepare('DELETE FROM ' . $this->table . ' WHERE token = :tok');
         $query->bindParam(':tok', $token, SQLITE3_TEXT);

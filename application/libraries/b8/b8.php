@@ -250,7 +250,7 @@ class b8
      * @param array The "internals" array
      * @return float The word's rating
      */
-    private function get_probability(string $word, array $internals)
+    private function get_probability($word, array $internals)
     {
         // Let's see what we have!
         if (isset($this->token_data['tokens'][$word])) {
@@ -329,7 +329,7 @@ class b8
      * @param string The category
      * @return void
      */
-    private function check_category(string $category)
+    private function check_category($category)
     {
         return $category === \b8\b8::HAM || $category === \b8\b8::SPAM;
     }
@@ -385,7 +385,7 @@ class b8
      * @param string Either b8::LEARN or b8::UNLEARN
      * @return mixed void or an error code
      */
-    private function process_text(string $text, string $category, string $action)
+    private function process_text($text, $category, $action)
     {
         // Look if the request is okay
         if (! $this->check_category($category)) {

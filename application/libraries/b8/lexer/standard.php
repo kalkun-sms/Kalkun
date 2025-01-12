@@ -96,7 +96,7 @@ class standard
      * @param string $text The text to disassemble
      * @return mixed Returns a list of tokens or an error code
      */
-    public function get_tokens(string $text)
+    public function get_tokens($text)
     {
         // Check if we actually have a string ...
         if (is_string($text) === false) {
@@ -149,7 +149,7 @@ class standard
      * @param string $token The token string
      * @return bool Returns true if the token is valid, otherwise returns false.
      */
-    private function is_valid(string $token)
+    private function is_valid($token)
     {
         // Just to be sure that the token's name won't collide with b8's internal variables
         if (substr($token, 0, 3) == 'b8*') {
@@ -181,7 +181,7 @@ class standard
      * @param string $word_to_remove Word to remove from the processed string
      * @return void
      */
-    private function add_token(string $token, $word_to_remove = null)
+    private function add_token($token, $word_to_remove = null)
     {
         // Check the validity of the token
         if (! $this->is_valid($token)) {
@@ -208,7 +208,7 @@ class standard
      * @param string $text
      * @return void
      */
-    private function get_uris(string $text)
+    private function get_uris($text)
     {
         // Find URIs
         preg_match_all($this->regexp['uris'], $text, $raw_tokens);
@@ -230,7 +230,7 @@ class standard
      * @param string $regexp
      * @return void
      */
-    private function get_markup(string $text, string $regexp)
+    private function get_markup($text, $regexp)
     {
         // Search for the markup
         preg_match_all($regexp, $text, $raw_tokens);
@@ -256,7 +256,7 @@ class standard
      * @param string $text
      * @return void
      */
-    private function raw_split(string $text)
+    private function raw_split($text)
     {
         foreach (preg_split($this->regexp['raw_split'], $text) as $word) {
             // Check the word and add it to the token list if it's valid
