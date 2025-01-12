@@ -17,10 +17,10 @@ class Blacklist_number_plugin extends CI3_plugin_system {
 		parent::__construct();
 
 		// Add hook for incoming message
-		add_action('message.incoming.before', array($this, 'blacklist_number_incoming'), 10);
+		add_filter('message.incoming.before', array($this, 'blacklist_number_incoming'), 10);
 
 		// Add hook for outgoing message
-		add_action('message.outgoing', array($this, 'blacklist_number_outgoing'), 10);
+		add_filter('message.outgoing', array($this, 'blacklist_number_outgoing'), 10);
 	}
 
 	// ------------------------------------------------------------------------
