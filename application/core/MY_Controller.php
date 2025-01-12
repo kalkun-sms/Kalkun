@@ -41,11 +41,11 @@ class MY_Controller  extends CI_Controller {
 			redirect('install');
 		}
 
-		$this->load->library('session');
 		$this->load->database();
 
 		if ($login)
 		{
+			$this->load->library('session');
 			// session check
 			if ($this->session->userdata('loggedin') === NULL)
 			{
