@@ -89,7 +89,7 @@ class Connekt_model extends Nongammu_model {
 		}
 		else
 		{
-			return $$response;
+			return $response;
 		}
 	}
 }
