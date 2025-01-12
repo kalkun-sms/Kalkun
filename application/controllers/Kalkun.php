@@ -141,8 +141,8 @@ class Kalkun extends MY_Controller {
 			],
 		];
 
-		header('Content-type: application/json');
-		echo json_encode($result);
+		$this->output->set_content_type('application/json');
+		$this->output->set_output(json_encode($result));
 	}
 
 	// --------------------------------------------------------------------
@@ -185,8 +185,8 @@ class Kalkun extends MY_Controller {
 
 		if (is_ajax())
 		{
-			header('Content-type: application/json');
-			echo json_encode($response);
+			$this->output->set_content_type('application/json');
+			$this->output->set_output(json_encode($response));
 		}
 		else
 		{
@@ -217,8 +217,8 @@ class Kalkun extends MY_Controller {
 			'uid' => $this->session->userdata('id_user'),
 		])->num_rows();
 
-		header('Content-type: application/json');
-		echo json_encode($unread_count);
+		$this->output->set_content_type('application/json');
+		$this->output->set_output(json_encode($unread_count));
 	}
 
 	// --------------------------------------------------------------------
@@ -372,8 +372,8 @@ class Kalkun extends MY_Controller {
 			$result = 'true';
 		}
 
-		header('Content-type: application/json');
-		echo json_encode($result);
+		$this->output->set_content_type('application/json');
+		$this->output->set_output(json_encode($result));
 	}
 
 	// --------------------------------------------------------------------
@@ -393,18 +393,18 @@ class Kalkun extends MY_Controller {
 			$result = is_phone_number_valid($val, $this->input->get_post('region'));
 			if ($result !== TRUE)
 			{
-				header('Content-type: application/json');
-				echo json_encode($result.' ('.trim($val).')');
+				$this->output->set_content_type('application/json');
+				$this->output->set_output(json_encode($result.' ('.trim($val).')'));
 				return;
 			}
 		}
-		header('Content-type: application/json');
-		echo json_encode('true');
+		$this->output->set_content_type('application/json');
+		$this->output->set_output(json_encode('true'));
 	}
 
 	function get_csrf_hash()
 	{
-		header('Content-type: application/json');
-		echo json_encode($this->security->get_csrf_hash());
+		$this->output->set_content_type('application/json');
+		$this->output->set_output(json_encode($this->security->get_csrf_hash()));
 	}
 }

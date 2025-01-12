@@ -91,7 +91,7 @@ class Whitelist_number extends Plugin_controller {
 		{
 			$result = $e->getMessage();
 		}
-		header('Content-type: application/json');
-		echo json_encode($result);
+		$this->output->set_content_type('application/json');
+		$this->output->set_output(json_encode($result));
 	}
 }

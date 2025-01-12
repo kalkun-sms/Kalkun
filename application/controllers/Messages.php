@@ -290,8 +290,8 @@ class Messages extends MY_Controller {
 			}
 			$csv['Field'] = $csvField;
 
-			header('Content-type: application/json');
-			echo json_encode($csv);
+			$this->output->set_content_type('application/json');
+			$this->output->set_output(json_encode($csv));
 			return;
 		}
 
@@ -598,8 +598,8 @@ class Messages extends MY_Controller {
 		}
 
 		// Return sending status
-		header('Content-type: application/json');
-		echo json_encode($return_msg);
+		$this->output->set_content_type('application/json');
+		$this->output->set_output(json_encode($return_msg));
 	}
 
 	// --------------------------------------------------------------------
@@ -1264,8 +1264,8 @@ class Messages extends MY_Controller {
 				'type' => 'error',
 				'msg' => tr_raw('Only administrators can permanently delete messages.')
 			];
-			header('Content-type: application/json');
-			echo json_encode($return_msg);
+			$this->output->set_content_type('application/json');
+			$this->output->set_output(json_encode($return_msg));
 			return;
 		}
 
