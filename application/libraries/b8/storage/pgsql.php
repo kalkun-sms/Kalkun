@@ -111,12 +111,12 @@ class pgsql extends storage_base
 
     protected function start_transaction()
     {
-        //$this->pgsql->begin_transaction();
+        pg_query($this->pgsql, 'BEGIN');
     }
 
     protected function finish_transaction()
     {
-        //$this->pgsql->commit();
+        pg_query($this->pgsql, 'COMMIT');
     }
 
 }
