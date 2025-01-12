@@ -225,7 +225,7 @@ class Daemon extends MY_Controller {
 		{
 			try
 			{
-				$fp = fsockopen($tmp->ip_address, $tmp->port_number, $errno, $errstr, 60);
+				$fp = fsockopen($tmp->ip_address, $tmp->port_number, $errno, $errstr, $tmp->timeout);
 			}
 			catch (ErrorException $exception)
 			{
