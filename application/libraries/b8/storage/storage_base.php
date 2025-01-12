@@ -102,10 +102,10 @@ abstract class storage_base
      *
      * @access public
      * @param array The respective backen's configuration
-     * @param object The degenerator to use
+     * @param object The degenerator to use // Kalkun: setting argument of type 'object' is only available since PHP 7.2
      * @return void
      */
-    public function __construct(array $config, object $degenerator)
+    public function __construct(array $config, $degenerator)
     {
         $this->degenerator = $degenerator;
         $this->setup_backend($config);
