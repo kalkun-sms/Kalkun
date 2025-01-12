@@ -18,7 +18,7 @@
  * @subpackage	Daemon
  * @category	Controllers
  */
-class Daemon extends CI_Controller {
+class Daemon extends MY_Controller {
 
 	/**
 	 * Constructor
@@ -29,9 +29,8 @@ class Daemon extends CI_Controller {
 	{
 		// Commented this for allow access from other machine
 		// if($_SERVER['REMOTE_ADDR']!='127.0.0.1') exit("Access Denied.");
-		parent::__construct();
+		parent::__construct(FALSE);
 		$this->load->library('Plugins_lib_kalkun');
-		$this->load->database();
 	}
 
 	// --------------------------------------------------------------------
@@ -130,7 +129,6 @@ class Daemon extends CI_Controller {
 		foreach ($users->result() as $tmp_user)
 		{
 			$tag = '@'.$tmp_user->username;
-			$msg_word = array();
 			$msg_word = explode(' ', $tmp_message->TextDecoded);
 			$check = in_array($tag, $msg_word);
 
@@ -225,8 +223,11 @@ class Daemon extends CI_Controller {
 		$tmp_data = $this->server_alert_model->get('active');
 		foreach ($tmp_data->result() as $tmp)
 		{
-			$fp = fsockopen($tmp->ip_address, $tmp->port_number, $errno, $errstr, 60);
-			if ( ! $fp)
+			try
+			{
+				$fp = fsockopen($tmp->ip_address, $tmp->port_number, $errno, $errstr, 60);
+			}
+			catch (ErrorException $exception)
 			{
 				$data['message'] = $tmp->respond_message."\n\nKalkun Server Alert";
 				$data['date'] = date('Y-m-d H:i:s');
