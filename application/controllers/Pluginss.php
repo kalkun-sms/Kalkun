@@ -122,8 +122,11 @@ class Pluginss extends MY_Controller {
 	 */
 	function uninstall($plugin_name)
 	{
-		$this->plugins_lib_kalkun->disable_plugin($plugin_name);
-		$this->session->set_flashdata('notif', tr_raw('Plugin {0} uninstalled successfully.', NULL, $plugin_name));
+		if (array_key_exists($plugin_name, Plugins_lib_kalkun::$enabled_plugins))
+		{
+			$this->plugins_lib_kalkun->disable_plugin($plugin_name);
+			$this->session->set_flashdata('notif', tr_raw('Plugin {0} uninstalled successfully.', NULL, $plugin_name));
+		}
 		redirect('pluginss');
 	}
 
