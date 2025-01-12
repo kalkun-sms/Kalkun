@@ -123,7 +123,7 @@ class Tmobilecz_model extends Nongammu_model {
 		}
 		$cv = curl_version();
 		log_message('debug', 'TMCZ> CURL version: '.$cv['version'].', SSL version: '.$cv['ssl_version'].
-						', LIBZ version: '.$cv['libz_version'].', protocols: '.implode($cv['protocols'], '+'));
+						', LIBZ version: '.$cv['libz_version'].', protocols: '.implode('+', $cv['protocols']));
 		$timeout = 30;
 		$result = array();
 
