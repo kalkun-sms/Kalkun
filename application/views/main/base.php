@@ -44,7 +44,7 @@
 		<p>If you find an issue, please report it on the <a class="base_color underline_link" href="https://github.com/kalkun-sms/Kalkun/issues" target="_blank">issue page of the project</a> and add the information below:</p>
 		<p>
 			<b>* Kalkun version:</b>
-			`<?php echo $this->config->item('kalkun_version');?> [Lang: <?php echo htmlentities($this->Kalkun_model->get_setting()->row('language'), ENT_QUOTES);?>] [CountryCode: <?php echo htmlentities($this->Kalkun_model->get_setting()->row('country_code'), ENT_QUOTES);?>]`
+			`<?php echo $this->config->item('kalkun_version');?> [Lang: <?php echo htmlentities(strval($this->Kalkun_model->get_setting()->row('language')), ENT_QUOTES);?>] [CountryCode: <?php echo htmlentities(strval($this->Kalkun_model->get_setting()->row('country_code')), ENT_QUOTES);?>]`
 			<br /><b>* Operating system:</b>
 			`<?php echo htmlentities(php_uname(), ENT_QUOTES); ?>`
 			<br /><b>* PHP Version:</b>
