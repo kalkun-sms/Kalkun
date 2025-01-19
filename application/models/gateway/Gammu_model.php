@@ -1225,7 +1225,7 @@ class Gammu_model extends MY_Model {
 						// use move_messages function
 						$param['type'] = 'conversation';
 						$param['number'] = $number;
-						$param['current_folder'] = $options['current_folder'];
+						$param['current_folder'] = isset($options['current_folder']) ? $options['current_folder'] : '';
 						$param['id_folder'] = '5';
 						$param['trash'] = TRUE;
 						$this->move_messages($param);
