@@ -223,7 +223,7 @@ class Gammu_model extends MY_Model {
 		if ($tmp_data['option'] === 'multipart')
 		{
 			$data['MultiPart'] = 'true';
-			$data['UDH'] = $tmp_data['UDH'].$tmp_data['part'].'01';
+			$data['UDH'] = $tmp_data['UDH'] . sprintf('%02X', $tmp_data['part']) . '01';
 		}
 
 		$this->db->insert('outbox', $data);
@@ -253,15 +253,12 @@ class Gammu_model extends MY_Model {
 	 */
 	function _send_message_multipart($outboxid, $message, $pos, $part, $coding, $class, $UDH)
 	{
-		$code = $pos + 1;
-		if ($code < 10)
-		{
-			$code = '0'.$code;
-		}
+		$hex_part_count = sprintf('%02X', $part); // convert decimal value to Hex string
+		$hex_cur_part = sprintf('%02X', ($pos + 1));
 
 		$data = array (
 			'ID' => $outboxid,
-			'UDH' => $UDH.$part.''.$code,
+			'UDH' => $UDH . $hex_part_count . $hex_cur_part,
 			'SequencePosition' => $pos + 1,
 			'Coding' => $coding,
 			'Class' => $class,
