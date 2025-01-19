@@ -910,8 +910,8 @@ class Gammu_model extends MY_Model {
 		{
 			case 'inbox':
 				$this->db->from('inbox');
-				//$this->db->select_max('ReceivingDateTime', 'maxdate');
-				$this->db->select_max('ID', 'maxID');
+				$this->db->select_max('ReceivingDateTime', 'maxdate');
+				//$this->db->select_max('ID', 'maxID');
 				$this->db->join('user_inbox', 'user_inbox.id_inbox=inbox.ID');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
@@ -927,8 +927,8 @@ class Gammu_model extends MY_Model {
 				$this->db->where('id_folder', $tmp_id_folder);
 				$this->db->where('trash', $tmp_trash);
 
-				//$this->db->where($this->db->protect_identifiers('ReceivingDateTime'), $this->db->protect_identifiers('maxresult.maxdate'), FALSE);
-				$this->db->where($this->db->protect_identifiers('ID'), $this->db->protect_identifiers('maxresult.maxID'), FALSE);
+				$this->db->where($this->db->protect_identifiers('ReceivingDateTime'), $this->db->protect_identifiers('maxresult.maxdate'), FALSE);
+				//$this->db->where($this->db->protect_identifiers('ID'), $this->db->protect_identifiers('maxresult.maxID'), FALSE);
 				//$this->db->group_by('SenderNumber');
 				$this->db->order_by('ReceivingDateTime', 'DESC');
 				break;
