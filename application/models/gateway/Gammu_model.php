@@ -41,7 +41,7 @@ class Gammu_model extends MY_Model {
 
 	function _send_wap_link($data)
 	{
-		$this->load->helper('kalkun');
+		$this->load->helper(['kalkun', 'i18n']);
 
 		$f_ret = array();
 
@@ -51,8 +51,13 @@ class Gammu_model extends MY_Model {
 				&& ! is_null_loose($data['message'])
 				&& $data['type'] === 'waplink')
 		{
-			$cmd = '"'.$this->config->item('gammu_sms_inject').'"' .' -c ' .'"'.$this->config->item('gammu_config').'"'. ' WAPINDICATOR ' . $data['dest']. ' "'. $data['url']. '"  "'.$data['message'].'" ';
-			$ret = exec ($cmd, $output, $result_code);
+			$cmd = escapeshellarg($this->config->item('gammu_sms_inject'))
+					. ' -c ' .escapeshellarg($this->config->item('gammu_config'))
+					. ' WAPINDICATOR '
+					. ' ' . escapeshellarg($data['dest'])
+					. ' ' . escapeshellarg($data['url'])
+					. ' ' . escapeshellarg($data['message']);
+			$ret = exec ($cmd . ' 2>&1', $output, $result_code);
 			if ($result_code !== 0)
 			{
 				log_message(
@@ -68,24 +73,23 @@ class Gammu_model extends MY_Model {
 			}
 			else
 			{
-				$preg_match_ret = preg_match('/with ID ([\d]+)/i', $ret, $matches);
-				$insert_id = $matches[1];
-				if (empty($insert_id))
+				// On success, gammu-smsd-inject returns "Written message with ID [0-9]*"
+				// unless the gamu-smsd config file has [smsd] service = NULL. In which case it return "Written message without ID"
+				// See: https://github.com/gammu/gammu/blob/1.42.0/smsd/inject.c#L244
+				// See: https://github.com/gammu/gammu/blob/1.42.0/smsd/core.c#L462
+				$preg_match_ret = preg_match('/Written message with ID ([\d]+)/i', $ret, $matches);
+				if ( ! empty($matches))
 				{
-					show_error(tr('Unknown error while sending WAP-LINK.'), 500);
-					$f_ret = array('status' => tr_raw('Unknown error while sending WAP-LINK.')); //FIXME
+					$this->db->where('ID', $matches[1])
+							->set('SendingDateTime', $data['date'])
+							->update('outbox');
 				}
-				else
-				{
-					$this->db->update('outbox', array('SendingDateTime' => $data['date']), "ID = {$insert_id}");
-					$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
-					$f_ret = array('status' => tr_raw('Message queued.'));
-				}
+				$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
+				$f_ret = array('status' => tr_raw('Message queued.'));
 			}
 		}
 		else
 		{
-			echo tr('Parameter invalid.');
 			$f_ret = array('status' => tr_raw('Parameter invalid.'));
 		}
 		return $f_ret;
