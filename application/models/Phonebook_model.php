@@ -159,14 +159,14 @@ class Phonebook_model extends MY_Model {
 				break;
 
 			case 'search':
-				$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $this->input->post('search_name'))));
+				$search_word = $this->db->escape_like_str(strtolower($this->input->post('search_name')));
 				$this->db->select('*');
 				$this->db->select('ID as id_pbk');
 				$this->db->from('pbk');
 				// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
 				$condition1 = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";
-				$condition2_part1 = 'LOWER('.$this->db->protect_identifiers('Name').") LIKE '%".$search_word."%'";
-				$condition2_part2 = 'LOWER('.$this->db->protect_identifiers('Number').") LIKE '%".$search_word."%'";
+				$condition2_part1 = 'LOWER('.$this->db->protect_identifiers('Name').") LIKE '%".$search_word."%' ESCAPE '!'";
+				$condition2_part2 = 'LOWER('.$this->db->protect_identifiers('Number').") LIKE '%".$search_word."%' ESCAPE '!'";
 				$condition2 = "({$condition2_part1} OR {$condition2_part2})";
 				$this->db->where($condition1, NULL, FALSE);
 				$this->db->where($condition2, NULL, FALSE);
