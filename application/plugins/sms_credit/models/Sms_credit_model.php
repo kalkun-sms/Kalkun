@@ -42,7 +42,7 @@ class Sms_credit_model extends CI_Model {
 
 		if (isset($param['q']))
 		{
-			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $param['q'])));
+			$search_word = strtolower($param['q']);
 			$this->db->like('LOWER('.$this->db->protect_identifiers('realname').')', $search_word);
 		}
 
@@ -160,7 +160,7 @@ class Sms_credit_model extends CI_Model {
 	 */
 	function search_packages($query = '')
 	{
-		$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $query)));
+		$search_word = strtolower($query);
 		$this->db->from('plugin_sms_credit_template');
 		$this->db->like('LOWER('.$this->db->protect_identifiers('template_name').')', $search_word);
 		return $this->db->get();
