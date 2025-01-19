@@ -60,12 +60,13 @@ class Gammu_model extends MY_Model {
 			$ret = exec ($cmd . ' 2>&1', $output, $result_code);
 			if ($result_code !== 0)
 			{
+				log_message('error', 'Failure to inject message into Gammu with gammu-smsd-inject.');
 				log_message(
 					'error',
-					'Failure to inject message into Gammu with gammu-smsd-inject. '."\n".
-					'Command: '.$cmd."\n".
-					'Output: '.implode("\n", $output)."\n".
-					'Result code: '.$result_code
+					"Details:\n"
+						. 'Command: ' . $cmd . "\n"
+						. 'Output: ' . implode("\n", $output) . "\n"
+						. 'Result code: ' . $result_code
 				);
 				show_error(tr('Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'), 500);
 
@@ -80,6 +81,7 @@ class Gammu_model extends MY_Model {
 				$preg_match_ret = preg_match('/Written message with ID ([\d]+)/i', $ret, $matches);
 				if ( ! empty($matches))
 				{
+					// Overwrite SendingDateTime with the one selected by the user.
 					$this->db->where('ID', $matches[1])
 							->set('SendingDateTime', $data['date'])
 							->update('outbox');
