@@ -140,7 +140,7 @@ class Gammu_model extends MY_Model {
 			if ($messagelength > $standar_length)
 			{
 				$UDH_length = 7;
-				$multipart_length = $standar_length - $UDH_length;
+				$multipart_length = ($standar_length === 70) ? 67 : $standar_length - $UDH_length;
 
 				// generate UDH
 				$UDH = '050003';
@@ -634,8 +634,14 @@ class Gammu_model extends MY_Model {
 		}
 		else
 		{
-			return mb_strlen($message);
+			return $this->utf16_code_units_count($message);
 		}
+	}
+
+	function utf16_code_units_count($str)
+	{
+		// https://stackoverflow.com/a/30607540
+		return strlen(iconv('utf-8', 'utf-16le', $str)) / 2;
 	}
 
 	function _is_special_char($char)
@@ -768,9 +774,57 @@ class Gammu_model extends MY_Model {
 		}
 		else
 		{
-			$msg = $this->_string_split($message, $multipart_length);
+			$msg = $this->split_multipart_unicode($message, $multipart_length);
 		}
 		return $msg;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * split_multipart_unicode
+	 *
+	 * Split unicode encoded message into multipart (eg. having emojis)
+	 * Max length per multipart submessage should be 67 UTF-16 code units
+	 * See also: https://charactercounter.com/sms
+	 *
+	 * @param string $str
+	 * @param int $multipart_length
+	 * @return array
+	 */
+	function split_multipart_unicode($str, $multipart_length = 67)
+	{
+		$next = 0;
+		$char_count = 0;
+		$msg_id = 0;
+		$messages = [];
+		while ($next < strlen($str))
+		{
+			$char = grapheme_extract($str, 1, GRAPHEME_EXTR_COUNT, $next, $next);
+			if ($char === FALSE)
+			{
+				continue;
+			}
+
+			$length_of_added_char = (strlen($char) === 1) ? 1 : $this->utf16_code_units_count($char);
+			if ($char_count + $length_of_added_char <= $multipart_length)
+			{
+				$char_count += $length_of_added_char;
+			}
+			else
+			{
+				$char_count = $length_of_added_char;
+				$msg_id++;
+			}
+			$messages[$msg_id][] = $char;
+		}
+
+		foreach ($messages as $msg)
+		{
+			$result[] = implode('', $msg);
+		}
+
+		return $result;
 	}
 
 	// --------------------------------------------------------------------
