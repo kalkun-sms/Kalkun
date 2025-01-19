@@ -465,11 +465,10 @@ class Messages extends MY_Controller {
 			$return_msg['msg'] = tr_raw('Outgoing SMS disabled.');
 		}
 
-		// if ndnc filtering enabled
-		$ndnc_msg = '';
+		// if ncpr filtering enabled
 		if ($this->config->item('ncpr'))
 		{
-			if ($data['ndnc'])
+			if ($data['ncpr'])
 			{
 				if (is_array($dest))
 				{

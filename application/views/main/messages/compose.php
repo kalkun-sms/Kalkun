@@ -249,7 +249,7 @@ if ($sig_option === 'true' && $val_type !== 'resend')
 				<div style="float: left"><span class="counter"></span></div>
 				<div style="float: right; padding-right: 5px;">
 					<?php if ($this->config->item('ncpr')): ?>
-					<input class="left_aligned" type="checkbox" value="ndnc" id="ncpr" name="ncpr" style="border: none;" />
+					<input class="left_aligned" type="checkbox" value="ncpr" id="ncpr" name="ncpr" style="border: none;" />
 					<label for="ncpr"><?php echo tr('Check DND');?> </label>
 					<?php endif; ?>
 				</div>
