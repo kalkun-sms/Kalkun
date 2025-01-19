@@ -1128,6 +1128,7 @@ class Messages extends MY_Controller {
 			else
 			{
 				// nothing to search
+				show_error('Bad Request', 400);
 			}
 		}
 
