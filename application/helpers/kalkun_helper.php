@@ -489,11 +489,15 @@ function is_gsm0338($utf8_string)
 		'Å', 'ß', '.', '>', 'N', 'Ü', 'n', 'ü',
 		'å', 'É', '/', '?', 'O', '§', 'o', 'à'
 	);
+
+	// GSM Default 7-bit special character (count as 2 char)
+	$special_char = array('^', '{', '}', '[', ']', '~', '|', '€', '\\', "\f");
+
 	$len = mb_strlen($utf8_string, 'UTF-8');
 
 	for ($i = 0; $i < $len; $i++)
 	{
-		if ( ! in_array(mb_substr($utf8_string, $i, 1, 'UTF-8'), $gsm0338))
+		if ( ! in_array(mb_substr($utf8_string, $i, 1, 'UTF-8'), array_merge($gsm0338, $special_char)))
 		{
 			return FALSE;
 		}
