@@ -1346,7 +1346,7 @@ class Gammu_model extends MY_Model {
 					{
 						$this->db->where('SenderNumber', $param['phone_number']);
 						$this->db->like('UDH', $param['udh'], 'after');
-						$this->db->not_like('UDH', '1', 'before');
+						$this->db->not_like('UDH', '01', 'before');
 						$this->db->order_by('UDH');
 						return $this->db->get('inbox');
 					}
