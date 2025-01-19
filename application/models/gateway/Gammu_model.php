@@ -169,7 +169,7 @@ class Gammu_model extends MY_Model {
 				// insert the rest part to Outbox Multipart
 				for ($i = 1; $i < count($tmpmsg); $i++)
 				{
-					$this->_send_message_multipart($outboxid, $tmpmsg[$i], $i, $part, $data['class'], $UDH);
+					$this->_send_message_multipart($outboxid, $tmpmsg[$i], $i, $part, $coding, $data['class'], $UDH);
 					$this->Kalkun_model->add_sms_used($data['uid']);
 				}
 			}
@@ -246,7 +246,7 @@ class Gammu_model extends MY_Model {
 	 *
 	 * @return
 	 */
-	function _send_message_multipart($outboxid, $message, $pos, $part, $class, $UDH)
+	function _send_message_multipart($outboxid, $message, $pos, $part, $coding, $class, $UDH)
 	{
 		$code = $pos + 1;
 		if ($code < 10)
@@ -258,7 +258,7 @@ class Gammu_model extends MY_Model {
 			'ID' => $outboxid,
 			'UDH' => $UDH.$part.''.$code,
 			'SequencePosition' => $pos + 1,
-			'Coding' => get_gammu_coding($message),
+			'Coding' => $coding,
 			'Class' => $class,
 			'TextDecoded' => $message,
 		);
