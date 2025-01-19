@@ -121,9 +121,10 @@ class Phonebook_model extends MY_Model {
 				$this->db->select('ID');
 				$this->db->select('Name as GroupName');
 				$this->db->from('pbk_groups');
-				// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
-				$condition = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";
-				$this->db->where($condition, NULL, FALSE);
+				$this->db->group_start()
+					->where('id_user', $user_id)
+					->or_where('is_public', 'true')
+					->group_end();
 				$this->db->where('ID', $param['id']);
 				break;
 
@@ -134,8 +135,10 @@ class Phonebook_model extends MY_Model {
 				$this->db->select('*');
 				$this->db->select('ID as id_pbk');
 				$this->db->from('pbk');
-				// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
-				$this->db->where("({$this->_protect_identifiers('id_user')} = '{$user_id}' OR {$this->_protect_identifiers('is_public')} = 'true')");
+				$this->db->group_start()
+					->where('id_user', $user_id)
+					->or_where('is_public', 'true')
+					->group_end();
 				$this->db->where_in('Number', $arr_number);
 				break;
 
@@ -146,9 +149,10 @@ class Phonebook_model extends MY_Model {
 				$this->db->select('pbk_groups.Name as GroupName');
 				$this->db->join('user_group', 'user_group.id_pbk=pbk.ID');
 				$this->db->join('pbk_groups', 'pbk_groups.ID=user_group.id_pbk_groups');
-				// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
-				$condition = "({$this->_protect_identifiers('pbk_groups.id_user')} = {$user_id} OR {$this->_protect_identifiers('pbk_groups.is_public')} = 'true')";
-				$this->db->where($condition, NULL, FALSE);
+				$this->db->group_start()
+					->where('pbk_groups.id_user', $user_id)
+					->or_where('pbk_groups.is_public', 'true')
+					->group_end();
 				$this->db->where('user_group.id_pbk_groups', $param['group_id']);
 				$this->db->order_by('pbk.Name', 'asc');
 
@@ -159,17 +163,18 @@ class Phonebook_model extends MY_Model {
 				break;
 
 			case 'search':
-				$search_word = $this->db->escape_like_str(strtolower($this->input->post('search_name')));
+				$search_word = strtolower($this->input->post('search_name'));
 				$this->db->select('*');
 				$this->db->select('ID as id_pbk');
 				$this->db->from('pbk');
-				// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
-				$condition1 = "({$this->_protect_identifiers('id_user')} = {$user_id} OR {$this->_protect_identifiers('is_public')} = 'true')";
-				$condition2_part1 = 'LOWER('.$this->db->protect_identifiers('Name').") LIKE '%".$search_word."%' ESCAPE '!'";
-				$condition2_part2 = 'LOWER('.$this->db->protect_identifiers('Number').") LIKE '%".$search_word."%' ESCAPE '!'";
-				$condition2 = "({$condition2_part1} OR {$condition2_part2})";
-				$this->db->where($condition1, NULL, FALSE);
-				$this->db->where($condition2, NULL, FALSE);
+				$this->db->group_start()
+						  ->where('id_user', $user_id)
+						  ->or_where('is_public', 'true')
+					->group_end();
+				$this->db->group_start()
+						->like('LOWER('.$this->db->protect_identifiers('Name').')', $search_word)
+						->or_like('LOWER('.$this->db->protect_identifiers('Number').')', $search_word)
+					->group_end();
 				$this->db->order_by('Name');
 				break;
 
@@ -187,43 +192,6 @@ class Phonebook_model extends MY_Model {
 		//echo $this->db->last_query();
 		return $this->db->get();
 	}
-	// --------------------------------------------------------------------
-
-	/**
-	* _protect_identifiers
-	*
-	* Ugly hack to add backticks to database field
-	*
-	* @param string $identifier
-	* @return string
-	*/
-	function _protect_identifiers($identifier = NULL)
-	{
-		$this->load->helper('kalkun');
-		$escape_char;
-		$escaped_identifer = '';
-
-		// get database engine
-		$db_engine = $this->db->platform();
-		$escape_char = get_database_property($db_engine);
-		$escape_char = $escape_char['escape_char'];
-
-		$sub = explode('.', $identifier);
-		$sub_count = count($sub);
-
-		foreach ($sub as $key => $tmp)
-		{
-			$escaped_identifer .= $escape_char.$tmp.$escape_char;
-
-			// if this is not the last
-			if ($key !== $sub_count - 1)
-			{
-				$escaped_identifer .= '.';
-			}
-		}
-
-		return $escaped_identifer;
-	}
 
 	// --------------------------------------------------------------------
 
@@ -240,8 +208,10 @@ class Phonebook_model extends MY_Model {
 		$this->db->from('pbk');
 		$this->db->select('Number as id');
 		$this->db->select('Name as name');
-		// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
-		$this->db->where("({$this->_protect_identifiers('id_user')} = '{$param['uid']}'  OR {$this->_protect_identifiers('is_public')} = 'true' )");
+		$this->db->group_start()
+			->where('id_user', $param['uid'])
+			->or_where('is_public', 'true')
+			->group_end();
 		$this->db->like('LOWER('.$this->db->protect_identifiers('Name').')', $search_word);
 		$this->db->order_by('Name');
 		return $this->db->get();
@@ -262,8 +232,10 @@ class Phonebook_model extends MY_Model {
 		$this->db->from('pbk_groups');
 		$this->db->select('ID as id');
 		$this->db->select('Name as name');
-		// phpcs:ignore CodeIgniter.Strings.DoubleQuoteUsage
-		$this->db->where("({$this->_protect_identifiers('pbk_groups')}.{$this->_protect_identifiers('id_user')} = '{$param['uid']}'  OR {$this->_protect_identifiers('is_public')} = 'true' )");
+		$this->db->group_start()
+			->where('pbk_groups.id_user', $param['uid'])
+			->or_where('is_public', 'true')
+			->group_end();
 		$this->db->like('LOWER('.$this->db->protect_identifiers('Name').')', $search_word);
 		$this->db->order_by('Name');
 		$this->db->join('user_group', 'user_group.id_pbk_groups=pbk_groups.ID');
