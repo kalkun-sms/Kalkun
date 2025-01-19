@@ -1040,6 +1040,7 @@ class Messages extends MY_Controller {
 						$param['search_string'] = rawurldecode($segment[4]);
 					}
 					$data['search_string'] = $segment[4];
+					$param['uid'] = $this->session->userdata('id_user');
 					$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
 					$config['uri_segment'] = $param_needed + 1;
 					$config['base_url'] = site_url(array_slice($segment, 0, $param_needed));
@@ -1047,7 +1048,6 @@ class Messages extends MY_Controller {
 					$data['pagination_links'] = $this->pagination->create_links();
 					$param['limit'] = $config['per_page'];
 					$param['offset'] = $this->uri->segment($param_needed + 1, 0);
-					$param['uid'] = $this->session->userdata('id_user');
 					$data['messages'] = $this->Message_model->search_messages($param)->messages;
 				}
 				break;
@@ -1084,6 +1084,7 @@ class Messages extends MY_Controller {
 							$param['trash'] = TRUE;
 						}
 					}
+					$param['uid'] = $this->session->userdata('id_user');
 					$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
 					if ($segment[10] !== '_')
 					{
@@ -1095,7 +1096,6 @@ class Messages extends MY_Controller {
 					$data['pagination_links'] = $this->pagination->create_links();
 					$param['limit'] = $config['per_page'];
 					$param['offset'] = $this->uri->segment($param_needed + 1, 0);
-					$param['uid'] = $this->session->userdata('id_user');
 					$data['messages'] = $this->Message_model->search_messages($param)->messages;
 				}
 				break;
