@@ -282,7 +282,7 @@ class Gammu_model extends MY_Model {
 		$this->db->from('inbox');
 		$tmp_number = 'SenderNumber';
 		$tmp_order = 'ReceivingDateTime';
-		$udh_where = '('.$this->_protect_identifiers('UDH')." = '' OR ".$this->_protect_identifiers('UDH')." LIKE '%1')";
+		$udh_where = '('.$this->_protect_identifiers('UDH')." = '' OR ".$this->_protect_identifiers('UDH')." LIKE '%01')";
 		$this->db->where($udh_where, NULL, FALSE);
 
 		if (isset($options['search_string']))
@@ -496,7 +496,7 @@ class Gammu_model extends MY_Model {
 			$tmp_number = 'SenderNumber';
 			$tmp_order = 'ReceivingDateTime';
 
-			$udh_where = '('.$this->_protect_identifiers('UDH')." = '' OR ".$this->_protect_identifiers('UDH')." LIKE '%1')";
+			$udh_where = '('.$this->_protect_identifiers('UDH')." = '' OR ".$this->_protect_identifiers('UDH')." LIKE '%01')";
 			$this->db->where($udh_where, NULL, FALSE);
 		}
 		else
