@@ -363,6 +363,7 @@ function phone_format_e164($phone, $input_region = NULL)
 	// If user is logged in, get the region from the settings
 	if (isset($CI->session) && $CI->session->userdata('loggedin') === 'TRUE')
 	{
+		$CI->load->model('Kalkun_model');
 		$region = $CI->Kalkun_model->get_setting()->row('country_code');
 	}
 	// region as function parameter has higher precedence
