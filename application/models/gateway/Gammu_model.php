@@ -738,27 +738,27 @@ class Gammu_model extends MY_Model {
 			$char_taken = 0;
 			$msg = array();
 
-			foreach ($char as $key => $val)
+			for ($i = 0; $i < count($char); $i++)
 			{
 				if ($left > 0)
 				{
-					if ($this->_is_special_char($val))
+					if ($this->_is_special_char($char[$i]))
 					{
 						if ($left > 1)
 						{
-							$string .= $val;
+							$string .= $char[$i];
 							$left -= 2;
 						}
 						else
 						{
 							$left = 0;
-							prev($char);
+							$i--;
 							$char_taken--;
 						}
 					}
 					else
 					{
-						$string .= $val;
+						$string .= $char[$i];
 						$left -= 1;
 					}
 				}

@@ -280,16 +280,25 @@
 		$('.word_count').each(function() {
 			var msg = <?php echo tr_js('{0} character(s) / {1} message(s)'); ?>;
 			var length = $(this).val().length;
+			if (isGSMAlphabet($(this).val())) {
+				max_chars_per_sms = (length <= 160) ? 160 : 153;
+			} else {
+				max_chars_per_sms = (length <= 70) ? 70 : 67;
+			}
 			max_chars_per_sms = isGSMAlphabet($(this).val()) ? 160 : 70;
 			var message_count = Math.ceil((length + message_length_correction) / max_chars_per_sms);
 			$(this).parent().find('.counter').text(msg.replace("{0}", length).replace("{1}", message_count));
 			$(this).keyup(function() {
 				var str = $(this).val();
 				var new_length = str.length;
-				max_chars_per_sms = isGSMAlphabet(str) ? 160 : 70;
-				var n = str.match(/\^|\{|\}|\\|\[|\]|\~|\||\€/g);
-				n = (n) ? n.length : 0;
-				new_length = new_length + n;
+				if (isGSMAlphabet($(this).val())) {
+					var n = str.match(/\^|\{|\}|\\|\[|\]|\~|\||\€/g);
+					n = (n) ? n.length : 0;
+					new_length = new_length + n;
+					max_chars_per_sms = (new_length <= 160) ? 160 : 153;
+				} else {
+					max_chars_per_sms = (new_length <= 70) ? 70 : 67;
+				}
 				var message_count = Math.ceil((new_length + message_length_correction) / max_chars_per_sms);
 				$(this).parent().find('.counter').text(msg.replace("{0}", new_length).replace("{1}", message_count));
 			});
