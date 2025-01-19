@@ -42,7 +42,7 @@ class Stop_manager_model extends CI_Model {
 			break;
 
 			case 'search':
-				$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $this->input->post('search_name'))));
+				$search_word = strtolower($this->input->post('search_name'));
 				$this->db->select('*');
 				$this->db->from('plugin_stop_manager');
 				$this->db->like('LOWER('.$this->db->protect_identifiers('destination_number').')', $search_word);

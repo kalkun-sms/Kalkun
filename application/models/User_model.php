@@ -50,7 +50,7 @@ class User_model extends MY_Model {
 				break;
 
 			case 'search':
-				$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $this->input->post('search_name'))));
+				$search_word = strtolower($this->input->post('search_name'));
 				$this->db->like('LOWER('.$this->db->protect_identifiers('realname').')', $search_word);
 				break;
 		}
@@ -146,7 +146,7 @@ class User_model extends MY_Model {
 	 */
 	function search_user($realname)
 	{
-		$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $realname)));
+		$search_word = strtolower($realname);
 		$this->db->from('user_settings');
 		$this->db->join('user', 'user.id_user = user_settings.id_user');
 		$this->db->like('LOWER('.$this->db->protect_identifiers('realname').')', $search_word);

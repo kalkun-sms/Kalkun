@@ -236,7 +236,7 @@ class Phonebook_model extends MY_Model {
 	 */
 	function search_phonebook($param)
 	{
-		$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $param['query'])));
+		$search_word = strtolower($param['query']);
 		$this->db->from('pbk');
 		$this->db->select('Number as id');
 		$this->db->select('Name as name');
@@ -258,7 +258,7 @@ class Phonebook_model extends MY_Model {
 	 */
 	function search_group($param)
 	{
-		$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $param['query'])));
+		$search_word = strtolower($param['query']);
 		$this->db->from('pbk_groups');
 		$this->db->select('ID as id');
 		$this->db->select('Name as name');
