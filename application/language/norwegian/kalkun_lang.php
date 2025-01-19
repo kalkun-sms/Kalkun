@@ -409,7 +409,6 @@ $lang['{0} part messages'] = '{0} delbeskjeder';
 $lang['Content'] = 'Innhold';
 $lang['No results for {0}'] = 'Ingen resultater for {0}';
 $lang['Failure to inject message into Gammu with gammu-smsd-inject. See kalkun logs.'] = 'Feilet i å legge inn melding til Gammu med gammu-smsd-inject.  Se Kalkun logg.';
-$lang['Unknown error while sending WAP-LINK.'] = 'Ukjent feil ved sending av WAP-LINK.';
 $lang['Group'] = 'Gruppe';
 $lang['Delete the original message (prevents duplicates).'] = 'Slett den opprinnelige meldingen (unngå duplikater).';
 $lang['Delete permanently'] = 'Slett permanent';
