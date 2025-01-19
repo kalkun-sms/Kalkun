@@ -235,25 +235,21 @@ function get_database_property($driver)
 	$postgre['name'] = 'postgre';
 	$postgre['file'] = 'pgsql';
 	$postgre['human'] = 'PostgreSQL';
-	$postgre['escape_char'] = '"';
 	$postgre['driver'] = 'pgsql';
 
 	$mysql['name'] = 'mysql';
 	$mysql['file'] = 'mysql';
 	$mysql['human'] = 'MySQL';
-	$mysql['escape_char'] = '`';
 	$mysql['driver'] = 'mysql';
 
 	$mysqli['name'] = 'mysqli';
 	$mysqli['file'] = 'mysql';
 	$mysqli['human'] = 'MySQLi';
-	$mysqli['escape_char'] = '`';
 	$mysqli['driver'] = 'mysqli';
 
 	$sqlite3['name'] = 'sqlite';
 	$sqlite3['file'] = 'sqlite';
 	$sqlite3['human'] = 'SQLite3';
-	$sqlite3['escape_char'] = '';
 	$sqlite3['driver'] = 'sqlite3';
 	return ${$driver};
 }

@@ -605,44 +605,6 @@ class Gammu_model extends MY_Model {
 	// --------------------------------------------------------------------
 
 	/**
-	* _protect_identifiers
-	*
-	* Ugly hack to add backticks to database field
-	*
-	* @param string $identifier
-	* @return string
-	*/
-	function _protect_identifiers($identifier = NULL)
-	{
-		$this->load->helper('kalkun');
-		$escape_char;
-		$escaped_identifer = '';
-
-		// get database engine
-		$db_engine = $this->db->platform();
-		$escape_char = get_database_property($db_engine);
-		$escape_char = $escape_char['escape_char'];
-
-		$sub = explode('.', $identifier);
-		$sub_count = count($sub);
-
-		foreach ($sub as $key => $tmp)
-		{
-			$escaped_identifer .= $escape_char.$tmp.$escape_char;
-
-			// if this is not the last
-			if ($key !== $sub_count - 1)
-			{
-				$escaped_identifer .= '.';
-			}
-		}
-
-		return $escaped_identifer;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
 	* _get_message_length
 	*
 	* Get message length
@@ -884,8 +846,8 @@ class Gammu_model extends MY_Model {
 		{
 			case 'inbox':
 				$this->db->from('inbox');
-				//$this->db->select_max($this->_protect_identifiers('ReceivingDateTime'), $this->_protect_identifiers('maxdate'), FALSE);
-				$this->db->select_max($this->_protect_identifiers('ID'), $this->_protect_identifiers('maxID'), FALSE);
+				//$this->db->select_max('ReceivingDateTime', 'maxdate');
+				$this->db->select_max('ID', 'maxID');
 				$this->db->join('user_inbox', 'user_inbox.id_inbox=inbox.ID');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
@@ -895,22 +857,21 @@ class Gammu_model extends MY_Model {
 				//$this->db->_reset_select();
 
 				$this->db->distinct();
-				//$this->db->from("($sub_sql) as ".$this->_protect_identifiers('maxresult').",inbox");
-				$this->db->from("({$sub_sql}) as ".$this->_protect_identifiers('maxresult').',inbox');
+				$this->db->from("({$sub_sql}) as ".$this->db->protect_identifiers('maxresult').',inbox');
 				$this->db->join('user_inbox', 'user_inbox.id_inbox=inbox.ID');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
 				$this->db->where('trash', $tmp_trash);
 
-				//$this->db->where($this->_protect_identifiers('ReceivingDateTime'), $this->_protect_identifiers('maxresult.maxdate'), FALSE);
-				$this->db->where($this->_protect_identifiers('ID'), $this->_protect_identifiers('maxresult.maxID'), FALSE);
+				//$this->db->where($this->db->protect_identifiers('ReceivingDateTime'), $this->db->protect_identifiers('maxresult.maxdate'), FALSE);
+				$this->db->where($this->db->protect_identifiers('ID'), $this->db->protect_identifiers('maxresult.maxID'), FALSE);
 				//$this->db->group_by('SenderNumber');
 				$this->db->order_by('ReceivingDateTime', 'DESC');
 				break;
 
 			case 'outbox':
 				$this->db->from('outbox');
-				$this->db->select_max($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxdate'), FALSE);
+				$this->db->select_max('SendingDateTime', 'maxdate');
 				$this->db->join('user_outbox', 'outbox.ID=user_outbox.id_outbox');
 				$this->db->where('id_user', $user_id);
 				$this->db->group_by('DestinationNumber');
@@ -919,17 +880,17 @@ class Gammu_model extends MY_Model {
 				// $this->db->_reset_select();
 
 				$this->db->distinct();
-				$this->db->from("({$sub_sql}) as ".$this->_protect_identifiers('maxresult').',outbox');
+				$this->db->from("({$sub_sql}) as ".$this->db->protect_identifiers('maxresult').',outbox');
 				$this->db->join('user_outbox', 'outbox.ID=user_outbox.id_outbox');
 				$this->db->where('id_user', $user_id);
-				$this->db->where($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxresult.maxdate'), FALSE);
+				$this->db->where($this->db->protect_identifiers('SendingDateTime'), $this->db->protect_identifiers('maxresult.maxdate'), FALSE);
 				//$this->db->group_by('DestinationNumber');
 				$this->db->order_by('SendingDateTime', 'DESC');
 				break;
 
 			case 'sentitems':
 				$this->db->from('sentitems');
-				$this->db->select_max($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxdate'), FALSE);
+				$this->db->select_max('SendingDateTime', 'maxdate');
 				$this->db->join('user_sentitems', 'sentitems.ID=user_sentitems.id_sentitems');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
@@ -940,13 +901,13 @@ class Gammu_model extends MY_Model {
 				// $this->db->_reset_select();
 
 				$this->db->distinct();
-				$this->db->from("({$sub_sql}) as ".$this->_protect_identifiers('maxresult').',sentitems');
+				$this->db->from("({$sub_sql}) as ".$this->db->protect_identifiers('maxresult').',sentitems');
 				$this->db->join('user_sentitems', 'sentitems.ID=user_sentitems.id_sentitems');
 				$this->db->where('id_user', $user_id);
 				$this->db->where('id_folder', $tmp_id_folder);
 				$this->db->where('SequencePosition', '1');
 				$this->db->where('trash', $tmp_trash);
-				$this->db->where($this->_protect_identifiers('SendingDateTime'), $this->_protect_identifiers('maxresult.maxdate'), FALSE);
+				$this->db->where($this->db->protect_identifiers('SendingDateTime'), $this->db->protect_identifiers('maxresult.maxdate'), FALSE);
 				//$this->db->group_by('DestinationNumber');
 				$this->db->order_by('SendingDateTime', 'DESC');
 				break;
