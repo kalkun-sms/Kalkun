@@ -200,6 +200,7 @@ class Gammu_model extends MY_Model {
 	function _send_message_route($tmp_data)
 	{
 		$this->load->helper('kalkun');
+		$this->load->config('kalkun_settings');
 
 		$data = array (
 			'InsertIntoDB' => date('Y-m-d H:i:s'),
