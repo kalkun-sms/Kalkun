@@ -1117,7 +1117,7 @@ class Messages extends MY_Controller {
 			if ($this->input->post('a_search_trigger'))
 			{
 				$params[] = 'advanced';
-				$params[] = $this->input->post('a_search_query') ? $this->input->post('a_search_query') : '_';
+				$params[] = $this->input->post('a_search_query') ? rawurlencode($this->input->post('a_search_query')) : '_';
 				$params[] = $this->input->post('a_search_from_to') ? rawurlencode($this->input->post('a_search_from_to')) : '_';
 				$params[] = $this->input->post('a_search_date_from') ? $this->input->post('a_search_date_from') : '_';
 				$params[] = $this->input->post('a_search_date_to') ? $this->input->post('a_search_date_to') : '_';
