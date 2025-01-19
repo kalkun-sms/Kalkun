@@ -300,8 +300,8 @@ class Gammu_model extends MY_Model {
 		// date range
 		if (isset($options['date_from']) && isset($options['date_to']))
 		{
-			$this->db->where($tmp_order.' >', $options['date_from']);
-			$this->db->where($tmp_order.' <', $options['date_to']);
+			$this->db->where($tmp_order.' >', date('Y-m-d', strtotime($options['date_from'].' -1 day')));
+			$this->db->where($tmp_order.' <', date('Y-m-d', strtotime($options['date_to'].' +1 day')));
 		}
 
 		// custom folder
@@ -360,8 +360,8 @@ class Gammu_model extends MY_Model {
 		// date range
 		if (isset($options['date_from']) && isset($options['date_to']))
 		{
-			$this->db->where($tmp_order.' >', $options['date_from']);
-			$this->db->where($tmp_order.' <', $options['date_to']);
+			$this->db->where($tmp_order.' >', date('Y-m-d', strtotime($options['date_from'].' -1 day')));
+			$this->db->where($tmp_order.' <', date('Y-m-d', strtotime($options['date_to'].' +1 day')));
 		}
 
 		// custom folder
