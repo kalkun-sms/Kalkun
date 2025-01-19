@@ -287,7 +287,7 @@ class Gammu_model extends MY_Model {
 
 		if (isset($options['search_string']))
 		{
-			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $options['search_string'])));
+			$search_word = strtolower(str_replace("'", "''", $options['search_string']));
 			$this->db->like('LOWER('.$this->db->protect_identifiers('TextDecoded').')', $search_word);
 		}
 
@@ -347,7 +347,7 @@ class Gammu_model extends MY_Model {
 
 		if (isset($options['search_string']))
 		{
-			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $options['search_string'])));
+			$search_word = strtolower(str_replace("'", "''", $options['search_string']));
 			$this->db->like('LOWER('.$this->db->protect_identifiers('TextDecoded').')', $search_word);
 		}
 
@@ -533,7 +533,7 @@ class Gammu_model extends MY_Model {
 		//if search string is set
 		if (isset($options['search_string']))
 		{
-			$search_word = $this->db->escape_like_str(strtolower(str_replace("'", "''", $options['search_string'])));
+			$search_word = strtolower(str_replace("'", "''", $options['search_string']));
 			$this->db->like('LOWER('.$this->db->protect_identifiers('TextDecoded').')', $search_word);
 		}
 
