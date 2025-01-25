@@ -81,10 +81,16 @@ class Gammu_model extends CI_Model {
 				$preg_match_ret = preg_match('/Written message with ID ([\d]+)/i', $ret, $matches);
 				if ( ! empty($matches))
 				{
-					// Overwrite SendingDateTime with the one selected by the user.
+					// Overwrite some fields with the parameters selected by the user.
 					$this->db->where('ID', $matches[1])
 							->set('SendingDateTime', $data['date'])
+							->set('RelativeValidity', $data['validity'])
+							->set('DeliveryReport', $data['delivery_report'])
 							->update('outbox');
+					// Add message to user_outbox
+					$this->db->set('id_outbox', $matches[1])
+							->set('id_user', $data['uid'])
+							->insert('user_outbox');
 				}
 				$this->Kalkun_model->add_sms_used($this->session->userdata('id_user'));
 				$f_ret = array('status' => tr_raw('Message queued.'));
