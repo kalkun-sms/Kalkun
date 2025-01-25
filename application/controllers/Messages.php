@@ -532,7 +532,7 @@ class Messages extends MY_Controller {
 		if ( ! empty($dest))
 		{  // handles if empty numbers after any number removal process
 			$n = 0;
-			$sms_loop = $this->input->post('sms_loop');
+			$sms_loop = $this->config->item('sms_bomber') ? $this->input->post('sms_loop') : 1;
 			foreach ($dest as $dest)
 			{
 				$backup['message'] = $data['message'];
