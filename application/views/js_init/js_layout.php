@@ -260,6 +260,7 @@
 										$(this).text(<?php echo tr_js('Send message'); ?>);
 								});
 								display_error_container(data);
+								update_csrf_hash();
 							});
 					}
 				};
