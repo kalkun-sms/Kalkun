@@ -432,6 +432,23 @@ class Install extends CI_Controller {
 			}
 		}
 
+		if ($this->db_engine === 'pgsql')
+		{
+			$res = $this->db->select('column_name')
+				->select('column_default')
+				->where('table_name', 'user_settings')
+				->where('column_name', 'id_user')
+				->get('information_schema.columns');
+			if ($res->row()->column_default !== NULL)
+			{
+				$error = $this->_execute_kalkun_sql_file('upgrade_kalkun_0.8.3-part2.sql');
+				if ($error !== 0)
+				{
+					return $error;
+				}
+			}
+		}
+
 		// Add here equivalent code as above for the future upgrades
 
 		return $error;
