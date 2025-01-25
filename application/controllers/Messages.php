@@ -501,15 +501,18 @@ class Messages extends MY_Controller {
 		}
 
 		// check for field
-		$field_status = FALSE;
+		$valid_fields = [];
 		preg_match_all('/\[\[(.*?)\]\]/', $data['message'], $field_count);
 		if (count($field_count[1]) > 0)
 		{
-			$field_status = TRUE;
 			$field_name = $field_count[1];
 			foreach ($field_name as $field)
 			{
-				$$field = explode(',', $this->input->post($field));
+				if ($this->input->post($field) !== NULL)
+				{
+					$$field = explode(',', $this->input->post($field));
+					$valid_fields[] = $field;
+				}
 			}
 		}
 
@@ -538,13 +541,10 @@ class Messages extends MY_Controller {
 				$data['CreatorID'] = '';
 
 				// change field to value
-				if ($field_status)
+				foreach ($valid_fields as $field)
 				{
-					foreach ($field_name as $field)
-					{
-						$field_tag = $$field;
-						$data['message'] = str_replace("[[{$field}]]", $field_tag[$n], $data['message']);
-					}
+					$field_tag = $$field;
+					$data['message'] = str_replace("[[{$field}]]", $field_tag[$n], $data['message']);
 				}
 
 				for ($i = 1;$i <= $sms_loop;$i++)
