@@ -14,8 +14,4 @@ ALTER TABLE "plugins" RENAME COLUMN "plugin_author" TO "author";
 ALTER TABLE "plugins" RENAME COLUMN "plugin_author_uri" TO "author_uri";
 ALTER TABLE "plugins" RENAME COLUMN "plugin_data" TO "data";
 ALTER TABLE "plugins" ADD COLUMN "status" smallint NOT NULL DEFAULT 1;
-
-ALTER TABLE "plugins" ALTER COLUMN "name" SET NOT NULL;
-ALTER TABLE "plugins" ALTER COLUMN "version" SET NOT NULL;
-
 COMMIT;

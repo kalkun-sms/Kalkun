@@ -1,6 +1,5 @@
 
 CREATE SEQUENCE "user_id_user_seq" START 2;
-CREATE SEQUENCE "user_settings_id_user_seq" START 2;
 
 CREATE TABLE "user" (
 	"id_user" integer PRIMARY KEY DEFAULT nextval('user_id_user_seq'), 
@@ -14,7 +13,7 @@ CREATE TABLE "user" (
 );
 
 CREATE TABLE "user_settings" (
-	"id_user" integer PRIMARY KEY DEFAULT nextval('user_settings_id_user_seq'), 
+	"id_user" integer PRIMARY KEY NOT NULL,
 	"theme" varchar(10) NOT NULL DEFAULT 'blue',
 	"signature" varchar(50) NOT NULL, 
 	"permanent_delete" text NOT NULL DEFAULT 'false', 
