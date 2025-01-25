@@ -79,6 +79,7 @@ echo form_dropdown('level', $level, 'user', $option);
 
 		<label for="package"><?php echo tr('Package'); ?></label>
 		<?php
+$package = [];
 foreach ($packages->result_array() as $row)
 {
 	$package[$row['id_credit_template']] = htmlentities($row['template_name'], ENT_QUOTES);
