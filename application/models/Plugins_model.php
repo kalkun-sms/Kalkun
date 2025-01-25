@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author		Justin Hyland www.justinhyland.com
  * @link        https://github.com/jhyland87/CI3_Plugin_System
  */
-class Plugins_model extends MY_Model {
+class Plugins_model extends CI_Model {
 
     /**
      * @var CI_Controller|object Codeigniter instance (get_instance())
