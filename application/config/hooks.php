@@ -13,3 +13,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // phpcs:enable
+$hook['pre_controller'] = array(
+        'class'    => 'MY_Hooks',
+        'function' => 'kalkun_set_error_handler',
+        'filename' => 'MY_Hooks.php',
+        'filepath' => 'hooks',
+        'params'   => array()
+);
+
+$hook['post_controller'] = array(
+        'class'    => 'MY_Hooks',
+        'function' => 'kalkun_restore_error_handler',
+        'filename' => 'MY_Hooks.php',
+        'filepath' => 'hooks',
+        'params'   => array()
+);
