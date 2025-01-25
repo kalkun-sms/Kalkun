@@ -197,6 +197,7 @@ class MY_Lang extends MX_Lang {
 					else
 					{
 						$value = parent::line($line);
+						$value = $value[$context];
 					}
 				}
 				else
