@@ -381,6 +381,10 @@ class Messages extends MY_Controller {
 
 			// Member
 			case 'member':
+				if ($this->session->userdata('level') !== 'admin')
+				{
+					show_error(tr('403 Forbidden'), 403);
+				}
 				$this->load->model('sms_member/sms_member_model', 'Member_model');
 				foreach ($this->Member_model->get_member('all')->result() as $tmp)
 				{
