@@ -93,12 +93,12 @@
 
 		<button><a href="javascript:void(0);" class="resend_bulk button"><?php echo tr('Resend');?></a></button>
 		<?php endif; ?>
-
-		<?php if ($pagination_links !== ''): ?>
-		<button class="paging">
-			<div id="paging"><?php  echo $pagination_links;?></div>
-		</button>
-		<?php endif; ?>
 	</div>
+
+	<?php if ($pagination_links !== ''): ?>
+	<div class="paging">
+		<div id="paging"><?php  echo $pagination_links;?></div>
+	</div>
+	<?php endif; ?>
 
 </div>
