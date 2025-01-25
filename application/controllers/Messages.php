@@ -421,7 +421,7 @@ class Messages extends MY_Controller {
 
 			// Date and time
 			case 'option2':
-				$date = $this->input->post('datevalue').' '.$this->input->post('hour').':'.$this->input->post('minute').':00';
+				$date = date('Y-m-d H:i:s', strtotime($this->input->post('datevalue').' '.$this->input->post('hour').':'.$this->input->post('minute')));
 				break;
 
 			// Delay
