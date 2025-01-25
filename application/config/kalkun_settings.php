@@ -137,7 +137,7 @@ $config['sms_bomber'] = FALSE;
 | @username will be automatically replaced by username who sent the messages
 |
 */
-$config['append_username'] = TRUE;
+$config['append_username'] = FALSE;
 $config['append_username_message'] = 'Sender: @username';
 
 
