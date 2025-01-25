@@ -474,23 +474,11 @@ class Messages extends MY_Controller {
 		{
 			if ($data['ncpr'])
 			{
-				if (is_array($dest))
+				for ($i = 0; $i < count($dest); $i++)
 				{
-					for ($i = 0 ; $i < count($dest);  $i++)
+					if (DNDcheck($dest[$i]))
 					{
-						if (DNDcheck($dest[$i]))
-						{
-							unset($dest[$i]);
-							$return_msg['type'] = 'error';
-							$return_msg['msg'] = tr_raw('A number was found in DND Resitry. SMS sending was skipped for it.');
-						}
-					}
-				}
-				else
-				{
-					if (DNDcheck($dest))
-					{
-						unset($dest);
+						unset($dest[$i]);
 						$return_msg['type'] = 'error';
 						$return_msg['msg'] = tr_raw('A number was found in DND Resitry. SMS sending was skipped for it.');
 					}
