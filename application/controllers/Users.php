@@ -73,6 +73,7 @@ class Users extends MY_Controller {
 			$data['users'] = $this->User_model->getUsers($param);
 		}
 
+		$this->load->helper('kalkun');
 		if (is_ajax())
 		{
 			$this->load->view('main/users/users_list', $data);

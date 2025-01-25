@@ -1,4 +1,6 @@
-<?php if ($canned_list->num_rows() === 0):?>
+<?php
+	$this->load->helper('kalkun');
+	if ($canned_list->num_rows() === 0):?>
 <div>
 	<p><i><?php echo tr('There are no canned responses. Continue to save your present message as canned response.');?></i></p>
 </div>

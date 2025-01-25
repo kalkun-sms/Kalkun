@@ -22,17 +22,6 @@
  */
 class Kalkun_model extends CI_Model {
 
-	/**
-	 * Constructor
-	 *
-	 * @access	public
-	 */
-	function __construct()
-	{
-		parent::__construct();
-		$this->load->helper('kalkun');
-	}
-
 	// --------------------------------------------------------------------
 
 	/**
@@ -91,6 +80,7 @@ class Kalkun_model extends CI_Model {
 		if ($phone)
 		{
 			$region = MY_LANG::idom_to_region($this->input->post('idiom'));
+			$this->load->helper('kalkun');
 			$phone = phone_format_e164($phone, $region);
 		}
 
@@ -357,6 +347,7 @@ class Kalkun_model extends CI_Model {
 					$this->db->set('username', $this->input->post('username'));
 				}
 				$this->_phone_number_validation($this->input->post('phone_number'));
+				$this->load->helper('kalkun');
 				$this->db->set('phone_number', phone_format_e164($this->input->post('phone_number')));
 				$this->db->where('id_user', $this->session->userdata('id_user'));
 				$this->db->update('user');
@@ -457,6 +448,7 @@ class Kalkun_model extends CI_Model {
 				break;
 
 			case 'phone_number':
+				$this->load->helper('kalkun');
 				$this->db->where('phone_number', phone_format_e164($param['phone_number']));
 				break;
 		}

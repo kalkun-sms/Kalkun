@@ -165,6 +165,7 @@ class Kalkun extends MY_Controller {
 		$response['battery_lbl'] = tr_raw('{0}%', NULL, $this->Kalkun_model->get_gammu_info('phone_battery')->row('Battery'));
 		if ( ! empty($status))
 		{
+			$this->load->helper('kalkun');
 			$status = get_modem_status($status, $this->config->item('modem_tolerant'));
 			if ($status === 'connect')
 			{
@@ -183,6 +184,7 @@ class Kalkun extends MY_Controller {
 			$response['status_lbl'] = tr_raw('Unknown');
 		}
 
+		$this->load->helper('kalkun');
 		if (is_ajax())
 		{
 			$this->output->set_content_type('application/json');
@@ -365,6 +367,7 @@ class Kalkun extends MY_Controller {
 	 */
 	function phone_number_validation()
 	{
+		$this->load->helper('kalkun');
 		$result = is_phone_number_valid($this->input->get_post('phone'), $this->input->get_post('region'));
 
 		if ($result === TRUE)
@@ -387,6 +390,7 @@ class Kalkun extends MY_Controller {
 	 */
 	function phone_number_validation_multiple()
 	{
+		$this->load->helper('kalkun');
 		$tmp_dest = explode(',', $this->input->get_post('phone'));
 		foreach ($tmp_dest as $key => $val)
 		{
