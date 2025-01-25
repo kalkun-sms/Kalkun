@@ -54,6 +54,8 @@ class Sms_credit_plugin extends CI3_plugin_system {
 		$CI->load->model('sms_credit/sms_credit_model', 'sms_credit_model');
 
 		$config = Plugin_helper::get_plugin_config('sms_credit');
+		Plugin_helper::load_lang('sms_credit', $CI->Kalkun_model->get_setting()->row('language'));
+
 		$uid = $sms['uid'];
 
 		// check user credit
@@ -72,8 +74,9 @@ class Sms_credit_plugin extends CI3_plugin_system {
 
 		if (($has_package && $sms_used >= $user_package['sms_numbers']) OR ( ! $has_package && ! $config['allow_user_with_no_package']))
 		{
-			echo 'Sorry, your sms credit limit exceeded.';
-			exit;
+			$return_msg['type'] = 'error';
+			$return_msg['msg'] = tr_raw('Sorry, your sms credit limit exceeded.');
+			return ['return_msg' => $return_msg, 'data' => NULL];
 		}
 	}
 }
