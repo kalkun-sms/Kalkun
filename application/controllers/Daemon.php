@@ -227,7 +227,7 @@ class Daemon extends MY_Controller {
 			{
 				$fp = fsockopen($tmp->ip_address, $tmp->port_number, $errno, $errstr, $tmp->timeout);
 			}
-			catch (ErrorException $exception)
+			catch (WarningException $exception)
 			{
 				$data['message'] = $tmp->respond_message."\n\nKalkun Server Alert";
 				$data['date'] = date('Y-m-d H:i:s');
