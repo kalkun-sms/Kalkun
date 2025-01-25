@@ -10,6 +10,7 @@
 	).done(function() {
 
 		<?php
+	$this->load->helper('kalkun');
 	$group = $this->Phonebook_model->get_phonebook(array('option' => 'group'));
 	$grouptext_array = [];
 	foreach ($group->result() as $tmp):

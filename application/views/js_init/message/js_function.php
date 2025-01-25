@@ -3,7 +3,8 @@
 
 	$(document).ready(function() {
 		let timeoutIdMsg;
-
+		<?php 	$this->load->helper('kalkun');
+?>
 		var offset = <?php echo json_protect($offset);?>;
 		var folder = <?php echo json_protect($folder);?>;
 		var base_url = "<?php echo site_url();?>";

@@ -1306,6 +1306,7 @@ class Messages extends MY_Controller {
 	 */
 	function canned_response($action = NULL)
 	{
+		$this->load->helper('kalkun');
 		$name = $this->input->post('name');
 		$message = $this->input->post('message');
 

@@ -74,5 +74,7 @@ function tr_addcslashes($chars_to_escape, $label, $context = NULL, ...$params)
 function tr_js($label, $context = NULL, ...$params)
 {
 	$label = call_user_func_array(array(get_instance()->lang, 'line'), func_get_args());
+	$CI = &get_instance();
+	$CI->load->helper('kalkun');
 	return json_protect($label);
 }

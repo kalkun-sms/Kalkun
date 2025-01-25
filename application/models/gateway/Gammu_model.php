@@ -437,6 +437,7 @@ class Gammu_model extends CI_Model {
 
 		// sort data
 		$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
+		$this->load->helper('kalkun');
 		usort($data['messages'], 'compare_date_'.$sort_option);
 
 		$return_data = array();
