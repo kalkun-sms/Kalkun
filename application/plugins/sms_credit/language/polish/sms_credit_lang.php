@@ -14,3 +14,4 @@ $lang['Package name'] = 'Package name';
 $lang['SMS Amount'] = 'SMS Amount';
 $lang['Delete Packages Confirmation'] = 'Delete Packages Confirmation';
 $lang['Are you sure to delete this package? All users belonging to this package will no longer be limited.'] = 'Are you sure to delete this package? All users belonging to this package will no longer be limited.';
+$lang['Sorry, your sms credit limit exceeded.'] = 'Sorry, your sms credit limit exceeded.';

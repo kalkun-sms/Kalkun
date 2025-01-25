@@ -490,7 +490,18 @@ class Messages extends MY_Controller {
 		if (isset($dest))
 		{
 			$dest = do_action_kalkun('message.outgoing', $dest);
-			$sms = do_action_kalkun('message.outgoing_all', $data);
+			$hook_output = do_action_kalkun('message.outgoing_all', $data);
+			if (isset($hook_output['return_msg']))
+			{
+				$return_msg = $hook_output['return_msg'];
+				// Return sending status
+				$this->output->set_content_type('application/json');
+				$this->output->set_output(json_encode($return_msg));
+				if ($hook_output['data'] === NULL)
+				{
+					$dest = [];
+				}
+			}
 
 			$dest_data = do_action_kalkun('message.outgoing_dest_data', array($dest, $data));
 			if (sizeof($dest_data) === 2)
