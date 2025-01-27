@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script type="text/javascript" id="js_layout">
 	// Initial value for inbox unread cound
 	unread_in_count = <?php echo $this->Message_model->get_messages([
 		'readed' => FALSE,
