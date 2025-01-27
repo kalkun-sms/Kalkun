@@ -1,4 +1,4 @@
-<script language="javascript">
+<script language="javascript" id="js_dashboard">
 	function reload(url) {
 		$.get(url).done(function(data) {
 			updateChartData(data);

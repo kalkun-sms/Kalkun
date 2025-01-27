@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script type="text/javascript" id="js_conversation">
 	$(document).ready(function() {
 		let timeoutIdConv;
 

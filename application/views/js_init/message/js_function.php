@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script type="text/javascript" id="js_function">
 	var count = 0;
 
 	$(document).ready(function() {

@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script type="text/javascript" id="js_keyboard">
 	var current_number = '';
 
 	$(document).ready(function() {

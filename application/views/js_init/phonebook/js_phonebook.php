@@ -1,4 +1,4 @@
-<script language="javascript">
+<script language="javascript" id="js_phonebook">
 	$(document).ready(function() {
 
 		// Add/Edit Contact
