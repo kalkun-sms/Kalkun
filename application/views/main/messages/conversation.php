@@ -151,8 +151,8 @@ if ($tmp['source'] === 'sentitems'):
 	$multipart['phone_number'] = $tmp['SenderNumber'];
 	foreach ($this->Message_model->get_multipart($multipart)->result_array() as $part):
 		$tmp['TextDecoded'] .= $part['TextDecoded'];
-	$part_no++;
 	endforeach;
+	$part_no = intval(substr($tmp['UDH'], 8, 2));
 	endif;
 	endif; ?>
 
