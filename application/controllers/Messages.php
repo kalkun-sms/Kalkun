@@ -861,7 +861,7 @@ class Messages extends MY_Controller {
 
 			// sort data
 			$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
-			usort($data['messages'], 'compare_date_'.$sort_option);
+			stable_usort($data['messages'], 'compare_date_'.$sort_option);
 
 			$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.rawurlencode($number));
 			$config['total_rows'] = sizeof($data['messages']);
@@ -962,7 +962,7 @@ class Messages extends MY_Controller {
 
 					// sort data
 					$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
-					usort($data['messages'], 'compare_date_'.$sort_option);
+					stable_usort($data['messages'], 'compare_date_'.$sort_option);
 
 					$config['base_url'] = site_url('/messages/conversation/my_folder/'.$type.'/'.rawurlencode($number).'/'.$id_folder);
 					$config['total_rows'] = sizeof($data['messages']);
