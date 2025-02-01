@@ -1334,6 +1334,7 @@ class Gammu_model extends CI_Model {
 					$this->db->select('MultiPart');
 					$this->db->where('ID', $param['id_message']);
 					$result = $this->db->get('outbox')->row('MultiPart');
+					$this->load->helper('kalkun_helper');
 					return db_boolean_to_php_bool($this->db->dbdriver, $result);
 				}
 				else
