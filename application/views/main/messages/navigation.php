@@ -35,7 +35,7 @@
 	<div class="bttn-group">
 		<button><?php echo anchor('messages/folder/'.$this->uri->segment(4), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, $theFname), array('class' => 'button', 'id' => 'back_threadlist'));?></button>
 	</div>
-	<?php else: ?>
+	<?php elseif ($this->uri->segment(3) === 'my_folder'): ?>
 	<div class="bttn-group">
 		<button><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, humanize($this->Kalkun_model->get_folders('name', $this->uri->segment(6))->row('name'))), array('class' => 'button', 'id' => 'back_threadlist'));?></button>
 	</div>
