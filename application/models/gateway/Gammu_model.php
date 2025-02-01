@@ -621,6 +621,10 @@ class Gammu_model extends CI_Model {
 			$this->db->limit($options['limit'], $options['offset']);
 		}
 
+		// Normally we always have a order by clause, but not in tests
+		// So define a fallback sort order to have consistent results.
+		$this->db->order_by('ID', 'ASC');
+
 		$result = $this->db->get();
 		return $result;
 	}
