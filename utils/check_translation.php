@@ -203,6 +203,8 @@ function get_tr_labels($ast)
 	$labels2 = [];
 	foreach ($expr as $f)
 	{
+		if (! $f->name instanceof Node\Name)
+			continue;
 		$fn_name = $f->name->toCodeString();
 		//var_dump($fn_name);
 
