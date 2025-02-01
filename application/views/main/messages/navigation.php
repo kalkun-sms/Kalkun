@@ -7,40 +7,35 @@
 
 			// _tni_ added this for translation on the inbox, outbox etc.
 			$theFolder = $this->uri->segment(4);
-			$theFname = 'inbox';
-			if ($theFolder === 'inbox')
+			switch ($theFolder)
 			{
-				$theFname = tr_raw('Inbox');
-			}
-			else
-			{
-				if ($theFolder === 'outbox')
-				{
+				case 'inbox':
+					$theFname = tr_raw('Inbox');
+					break;
+				case 'outbox':
 					$theFname = tr_raw('Outbox');
-				}
-				else
-				{
-					if ($theFolder === 'sentitems')
-					{
-						$theFname = tr_raw('Sent items');
-					}
-					else
-					{
-						//$theFname = $this->Kalkun_model->get_folders('name', $this->uri->segment(4))->row('name');
-						$theFname = $this->uri->segment(4);
-					}
-				}
+					break;
+				case 'sentitems':
+					$theFname = tr_raw('Sent items');
+					break;
+				case 'phonebook':
+					$theFname = tr_raw('Phonebook');
+					break;
+				default:
+					$theFname = $this->uri->segment(4);
+					break;
 			}
+			$anchor_url = 'messages/folder/'.$this->uri->segment(4);
+			$anchor_text = '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, $theFname);
+		elseif ($this->uri->segment(3) === 'my_folder'):
+			$anchor_url = 'messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6);
+			$anchor_text = '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, humanize($this->Kalkun_model->get_folders('name', $this->uri->segment(6))->row('name')));
+		endif;
 	?>
 	<div class="bttn-group">
-		<button><?php echo anchor('messages/folder/'.$this->uri->segment(4), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, $theFname), array('class' => 'button', 'id' => 'back_threadlist'));?></button>
-	</div>
-	<?php elseif ($this->uri->segment(3) === 'my_folder'): ?>
-	<div class="bttn-group">
-		<button><?php echo anchor('messages/my_folder/'.$this->uri->segment(4).'/'.$this->uri->segment(6), '&lsaquo;&lsaquo; '.tr('Back to {0}', NULL, humanize($this->Kalkun_model->get_folders('name', $this->uri->segment(6))->row('name'))), array('class' => 'button', 'id' => 'back_threadlist'));?></button>
+		<button><?php echo anchor($anchor_url, $anchor_text, array('class' => 'button', 'id' => 'back_threadlist'));?></button>
 	</div>
 
-	<?php endif;?>
 	<?php endif;?>
 	<div class="bttn-group">
 		<button><a href="javascript:void(0);" class="select_all_button button"><?php echo tr('Select all');?></a></button>
