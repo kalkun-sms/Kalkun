@@ -286,6 +286,8 @@ class Gammu_model extends CI_Model {
 			}
 		}
 
+		$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
+
 		// Inbox
 		$options['type'] = 'inbox';
 		$user_folder = 'user_'.$options['type'];
@@ -337,6 +339,11 @@ class Gammu_model extends CI_Model {
 			$this->db->join($user_folder, $user_folder.'.id_'.$options['type'].'='.$options['type'].'.ID');
 			$this->db->where($user_folder.'.id_user', $options['uid']);
 		}
+
+		// Items are reorder later on by php sorting, but in case dates are identical,
+		// having a pre-ordered resultset permits to have deterministic order
+		// Typically with pgsql, order wouldn't be determistic without adding this.
+		$this->db->order_by('ID', $sort_option);
 
 		$result = $this->db->get();
 
@@ -417,6 +424,11 @@ class Gammu_model extends CI_Model {
 			$this->db->where($user_folder.'.id_user', $options['uid']);
 		}
 
+		// Items are reorder later on by php sorting, but in case dates are identical,
+		// having a pre-ordered resultset permits to have deterministic order
+		// Typically with pgsql, order wouldn't be determistic without adding this.
+		$this->db->order_by('ID', $sort_option);
+
 		$result = $this->db->get();
 		$sentitems = $result->result_array();
 
@@ -436,7 +448,6 @@ class Gammu_model extends CI_Model {
 		}
 
 		// sort data
-		$sort_option = $this->Kalkun_model->get_setting()->row('conversation_sort');
 		$this->load->helper('kalkun');
 		usort($data['messages'], 'compare_date_'.$sort_option);
 
