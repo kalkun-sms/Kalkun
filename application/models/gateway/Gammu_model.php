@@ -497,6 +497,7 @@ class Gammu_model extends CI_Model {
 		// if phone number is set
 		if (isset($options['number']) && $options['number'] !== 'sending_error')
 		{
+			$this->load->model('Phonebook_model');
 			$arr_number = $this->Phonebook_model->convert_phonenumber(array('number' => $options['number']));
 		}
 
