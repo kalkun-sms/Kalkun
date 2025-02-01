@@ -540,3 +540,29 @@ function json_protect($înput)
 {
 	return json_encode($înput, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE);
 }
+
+function stable_usort(array &$array, callable $compare)
+{
+	if (is_php('8.0'))
+	{
+		usort($array, $compare);
+	}
+	else
+	{
+		$arrayAndPos = [];
+		$pos = 0;
+		foreach ($array as $value)
+		{
+			$arrayAndPos[] = [$value, $pos++];
+		}
+		usort($arrayAndPos, function($a, $b) use ($compare) {
+			//return $compare($a[0], $b[0]) ?: $a[1] <=> $b[1]; // syntax requires php 7.0
+			return $compare($a[0], $b[0]) ?: (($a[1] < $b[1]) ? -1 : (($a[1] > $b[1]) ? 1 : 0));
+		});
+		$array = [];
+		foreach ($arrayAndPos as $elem)
+		{
+			$array[] = $elem[0];
+		}
+	}
+}

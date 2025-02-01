@@ -449,7 +449,7 @@ class Gammu_model extends CI_Model {
 
 		// sort data
 		$this->load->helper('kalkun');
-		usort($data['messages'], 'compare_date_'.$sort_option);
+		stable_usort($data['messages'], 'compare_date_'.$sort_option);
 
 		$return_data = array();
 		$return_data['total_rows'] = count($data['messages']);
