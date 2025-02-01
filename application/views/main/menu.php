@@ -47,7 +47,7 @@
 				<?php foreach ($this->Kalkun_model->get_folders('all')->result() as $folder):?>
 				<li>
 					<?php echo anchor('messages/my_folder/inbox/'.$folder->id_folder, htmlentities($folder->name, ENT_QUOTES));
-	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => $folder->id_folder))->num_rows();
+	$tmp_unread = $this->Message_model->get_messages(array('readed' => FALSE, 'id_folder' => $folder->id_folder, 'uid' => $this->session->userdata('id_user')))->num_rows();
 	if ($tmp_unread > 0)
 	{
 		echo ' ('.$tmp_unread.')';
