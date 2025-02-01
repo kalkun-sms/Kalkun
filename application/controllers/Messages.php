@@ -785,6 +785,11 @@ class Messages extends MY_Controller {
 	{
 		$this->load->helper('kalkun');
 
+		if ( ! in_array($type, ['inbox', 'outbox', 'sentitems', 'phonebook']))
+		{
+			show_error('Invalid type: ' . $type, 400);
+		}
+
 		$number = rawurldecode($number);
 
 		// Pagination
