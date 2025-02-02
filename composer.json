@@ -43,7 +43,8 @@
                 "Add support for PHP 8.4 (E_STRICT)": "patches/Codeigniter_Framework/v3.1.13/11-php84_support_E_STRICT.patch",
                 "Add support for PHP 8.4 (implicit nullable type)": "patches/Codeigniter_Framework/v3.1.13/11-php84_support_fix_implicit_nullable_type_error.patch",
                 "Add support for PHP 8.4 (xmlrpc)": "patches/Codeigniter_Framework/v3.1.13/11-php84_xmlrpc.patch",
-                "Add support for PHP 8.4 (session sid)": "patches/Codeigniter_Framework/v3.1.13/11-php84_support_session.sid_length_INI_setting_is_deprecated.patch"
+                "Add support for PHP 8.4 (session sid)": "patches/Codeigniter_Framework/v3.1.13/11-php84_support_session.sid_length_INI_setting_is_deprecated.patch",
+                "Reinitialize static variable when switching database": "patches/Codeigniter_Framework/v3.1.13/20-reinit_static_variable_when_switching_db_in_tests.patch"
             },
             "kenjis/ci-phpunit-test": {
                 "Add support for PHP 8.2": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.2.patch"

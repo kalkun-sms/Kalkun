@@ -1,0 +1,30 @@
+Description: Reinitialize static variable when switching database
+ In the tests, we run each test on the three supported DBMS (database systems)
+ namely pgsql, mysql & sqlite3.
+ .
+ Codeigniter stores the escape characters in a static variable which never
+ changes even when switching driver and hence use another DBMS. So it would
+ use the escape character of the 1st DBMS with all subsequent engines.
+ .
+ This will reset the static variable when in testing environment and when
+ the DBMS changed.
+Author: Fab Stz <fabstz-it@yahoo.fr>
+Last-Update: 2025-02-02
+
+--- a/vendor/codeigniter/framework/system/database/DB_driver.php
++++ b/vendor/codeigniter/framework/system/database/DB_driver.php
+@@ -1417,6 +1417,14 @@
+ 
+ 		static $preg_ec = array();
+ 
++		static $local_dbdriver = NULL;
++		if (ENVIRONMENT === 'testing' && $this->dbdriver !== $local_dbdriver)
++		{
++			$local_dbdriver = $this->dbdriver;
++			// Reinitialize static variable when switching to another database driver.
++			$preg_ec = array();
++		}
++
+ 		if (empty($preg_ec))
+ 		{
+ 			if (is_array($this->_escape_char))
