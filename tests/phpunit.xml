@@ -9,12 +9,12 @@
 	</testsuites>
 	<filter>
 		<whitelist>
-			<directory suffix=".php">../controllers</directory>
-			<directory suffix=".php">../models</directory>
-			<directory suffix=".php">../views</directory>
-			<directory suffix=".php">../libraries</directory>
-			<directory suffix=".php">../helpers</directory>
-			<directory suffix=".php">../hooks</directory>
+			<directory suffix=".php">../application/controllers</directory>
+			<directory suffix=".php">../application/models</directory>
+			<directory suffix=".php">../application/views</directory>
+			<directory suffix=".php">../application/libraries</directory>
+			<directory suffix=".php">../application/helpers</directory>
+			<directory suffix=".php">../application/hooks</directory>
 		</whitelist>
 	</filter>
 	<logging>
