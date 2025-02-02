@@ -204,7 +204,9 @@ function get_tr_labels($ast)
 	foreach ($expr as $f)
 	{
 		if (! $f->name instanceof Node\Name)
+		{
 			continue;
+		}
 		$fn_name = $f->name->toCodeString();
 		//var_dump($fn_name);
 
@@ -219,6 +221,18 @@ function get_tr_labels($ast)
 				$tr_args = array_slice($f->args, 1);
 			}
 
+			if ( ! property_exists($tr_args[0]->value, "value") || ! $tr_args[0]->value instanceof PhpParser\Node\Scalar\String_)
+			{
+				echo "\033[31mERROR:\033[0m ";
+				echo "Function: $fn_name().";
+				if (property_exists($tr_args[0]->value, "name"))
+				{
+					echo " Argument name: " . $tr_args[0]->value->name . ".";
+				}
+				echo " Argument is not a string or doesn't have a value. Type: ".get_class($tr_args[0]->value).".";
+				echo "\n";
+				continue;
+			}
 			$label = $tr_args[0]->value->value;
 			$item['label'] = $label;
 			//var_dump($label);
