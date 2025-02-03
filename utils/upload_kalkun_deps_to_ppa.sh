@@ -302,6 +302,7 @@ for suite in "${distribs[@]}"; do
     fi
     git checkout -f
     gbp export-orig
+    dpkg-buildpackage -d -S --sign-key="$KEY_ID"
   else
     git checkout -f bpp_general
     DCH_DISTRIB=$(git show "$ORIGINAL_BRANCH":debian/changelog | dpkg-parsechangelog -l - -S Distribution)
