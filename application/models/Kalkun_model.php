@@ -695,6 +695,10 @@ class Kalkun_model extends CI_Model {
 
 	function plugins_table_has_status_column()
 	{
+		if ( ! $this->db->table_exists('plugins'))
+		{
+			return FALSE;
+		}
 		return $this->db->field_exists('status', 'plugins');
 	}
 }
