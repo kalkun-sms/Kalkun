@@ -187,7 +187,7 @@ jobs:
         uses: php-actions/composer@v6
         with:
             dev: no
-            php_version: "7.4"
+            php_version: "8.2"
             php_extensions: ctype curl hash intl json mbstring session
       - name: Build prebuilt packages with Composer dependencies
         env:
