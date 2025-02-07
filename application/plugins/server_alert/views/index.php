@@ -47,7 +47,6 @@
 		<textarea style="width: 96%" name="editrespond_message" id="editrespond_message" class="text ui-widget-content ui-corner-all"></textarea>
 	</fieldset>
 	<?php echo form_close(); ?>
-	</form>
 </div>
 
 <div id="space_area">
