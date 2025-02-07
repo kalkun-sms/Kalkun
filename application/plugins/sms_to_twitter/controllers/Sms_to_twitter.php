@@ -26,7 +26,6 @@ class Sms_to_twitter extends Plugin_controller {
 	{
 		parent::__construct();
 		$this->load->model('sms_to_twitter_model');
-		$this->load->config('sms_to_twitter', TRUE);
 	}
 
 	function index()
