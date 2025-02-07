@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $protocol = ((isset($_SERVER['HTTPS']) && ! empty($_SERVER['HTTPS'])) ? 'https' : 'http');
 $domain = array_key_exists('HTTP_HOST', $_SERVER) ? $_SERVER['HTTP_HOST'] : 'localhost';
 $config['base_url'] = $protocol. '://'.$domain ;
-$config['base_url'] .= preg_replace('@/+$@', '', dirname($_SERVER['SCRIPT_NAME'])).'/';
+$config['base_url'] .= '/'.trim(dirname($_SERVER['SCRIPT_NAME']), '/').'/';
 
 $config['css_path'] = $config['base_url'].'media/css/';
 $config['js_path']  = $config['base_url'].'media/js/';
