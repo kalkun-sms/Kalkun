@@ -1,0 +1,53 @@
+From f79374bdc560c579e081140adbe39aca73490ffc Mon Sep 17 00:00:00 2001
+From: Fab Stz <fabstz-it@yahoo.fr>
+Date: Fri, 7 Feb 2025 14:09:40 +0100
+Subject: [PATCH] fix deprecation error on PHP 8.4
+
+Implicitly marking parameter $arguments as nullable is deprecated, the explicit nullable type must be used instead
+---
+ src/Client.php | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/Client.php b/src/Client.php
+index d1d2e53..ba038e2 100644
+--- a/src/Client.php
++++ b/src/Client.php
+@@ -63,7 +63,7 @@ class Client
+      * @return self
+      * Returns the object handle (so you can chain method calls, if you like)
+      */
+-    public function query($id, string $method, array $arguments = null): self
++    public function query($id, string $method, $arguments = null): self
+     {
+         $request = self::getRequest($method, $arguments);
+         $request['id'] = $id;
+@@ -80,7 +80,7 @@ class Client
+      * @return self
+      * Returns the object handle (so you can chain method calls, if you like)
+      */
+-    public function notify($method, array $arguments = null): self
++    public function notify($method, $arguments = null): self
+     {
+         $request = self::getRequest($method, $arguments);
+ 
+@@ -209,7 +209,7 @@ class Client
+         return $responses;
+     }
+ 
+-    private static function getRequest(string $method, array $arguments = null): array
++    private static function getRequest(string $method, $arguments = null): array
+     {
+         $request = [
+             'jsonrpc' => self::VERSION,
+@@ -238,7 +238,7 @@ class Client
+         return var_export($value, true);
+     }
+ 
+-    private function getResponses($input, array &$responses = null): bool
++    private function getResponses($input, &$responses = null): bool
+     {
+         if ($this->getResponse($input, $response)) {
+             $responses = [$response];
+-- 
+2.39.5
+
