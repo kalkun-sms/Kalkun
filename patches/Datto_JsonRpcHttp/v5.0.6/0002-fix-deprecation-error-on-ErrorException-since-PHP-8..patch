@@ -1,0 +1,26 @@
+From 01778127baa075a6178036f5e417f3d5a28373de Mon Sep 17 00:00:00 2001
+From: Fab Stz <fabstz-it@yahoo.fr>
+Date: Fri, 7 Feb 2025 14:11:35 +0100
+Subject: [PATCH 2/4] fix deprecation error on ErrorException (since PHP 8.1)
+
+Passing null to parameter #2 ($code) of type int is deprecated in vendor/datto/json-rpc-http/src/Client.php on line 461
+---
+ src/Client.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/Client.php b/src/Client.php
+index 0226e47..2ed93e6 100644
+--- a/src/Client.php
++++ b/src/Client.php
+@@ -449,7 +449,7 @@ class Client
+     public static function onError($level, $message, $file, $line)
+     {
+         $message = trim($message);
+-        $code = null;
++        $code = 0;
+ 
+         throw new ErrorException($message, $code, $level, $file, $line);
+     }
+-- 
+2.39.5
+

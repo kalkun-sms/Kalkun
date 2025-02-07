@@ -1,0 +1,35 @@
+From 666b9bb3413517ff5503643c2d60a44216b929e7 Mon Sep 17 00:00:00 2001
+From: Fab Stz <fabstz-it@yahoo.fr>
+Date: Fri, 7 Feb 2025 14:11:00 +0100
+Subject: [PATCH 3/4] fix deprecation error on PHP 8.3 on
+ stream_context_set_options()
+
+"Calling stream_context_set_option() with 2 arguments is deprecated, use stream_context_set_options() instead" at
+vendor/datto/json-rpc-http/src/Client.php:223
+---
+ src/Client.php | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/src/Client.php b/src/Client.php
+index 2ed93e6..3e83210 100644
+--- a/src/Client.php
++++ b/src/Client.php
+@@ -220,7 +220,14 @@ class Client
+ 
+         try {
+             $options = $this->getStreamOptions();
+-            stream_context_set_option($this->context, $options);
++            if (PHP_VERSION_ID >= 80300)
++            {
++                stream_context_set_options($this->context, $options);
++            }
++            else
++            {
++                stream_context_set_option($this->context, $options);
++            }
+             $message = file_get_contents($this->uri, false, $this->context);
+ 
+             $this->throwHttpExceptionOnHttpError($http_response_header ?? null);
+-- 
+2.39.5
+

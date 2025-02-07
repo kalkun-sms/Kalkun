@@ -46,6 +46,19 @@
                 "Add support for PHP 8.4 (session sid)": "patches/Codeigniter_Framework/v3.1.13/11-php84_support_session.sid_length_INI_setting_is_deprecated.patch",
                 "Reinitialize static variable when switching database": "patches/Codeigniter_Framework/v3.1.13/20-reinit_static_variable_when_switching_db_in_tests.patch"
             },
+            "datto/json-rpc": {
+                "Fix PHP8.4 deprecation": "patches/Datto_JsonRpc/v6.1.0/0001-fix-deprecation-error-on-PHP-8.4.patch"
+            },
+            "datto/json-rpc-http": {
+                "Fix 'Undefined variable $http_response_header'": "patches/Datto_JsonRpcHttp/v5.0.6/0001-Fix-Undefined-variable-http_response_header.patch",
+                "Fix PHP8.1 deprecation": "patches/Datto_JsonRpcHttp/v5.0.6/0002-fix-deprecation-error-on-ErrorException-since-PHP-8..patch",
+                "Fix PHP8.3 deprecation on stream_context_set_options()": "patches/Datto_JsonRpcHttp/v5.0.6/0003-fix-deprecation-error-on-PHP-8.3-on-stream_context_s.patch",
+                "Fix PHP8.4 deprecation": "patches/Datto_JsonRpcHttp/v5.0.6/0004-fix-deprecation-error-on-PHP-8.4.patch"
+            },
+            "econea/nusoap": {
+                "Fix PHP8.4 deprecation on xml_set_object()": "patches/Econea_Nusoap/v0.9.17/0001-fix-deprecation-warning-on-PHP-8.4-with-xml_set_obje.patch",
+                "Check if $_SERVER['SERVER_NAME'] is set": "patches/Econea_Nusoap/v0.9.17/0002-check-if-SERVER_NAME-is-set.patch"
+            },
             "kenjis/ci-phpunit-test": {
                 "Add support for PHP 8.2": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.2.patch"
             }

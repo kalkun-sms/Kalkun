@@ -1,0 +1,30 @@
+From ed9ba102701c302aff9f65b16d1c9cfab93e3877 Mon Sep 17 00:00:00 2001
+From: Frank Rochlitzer <f.rochlitzer@b3-it.de>
+Date: Mon, 8 Mar 2021 12:35:27 +0100
+Subject: [PATCH 1/4] Fix 'Undefined variable $http_response_header'
+
+Source: https://github.com/datto/php-json-rpc-http/pull/11
+---
+ src/Client.php | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/Client.php b/src/Client.php
+index ca58357..0226e47 100644
+--- a/src/Client.php
++++ b/src/Client.php
+@@ -223,10 +223,10 @@ class Client
+             stream_context_set_option($this->context, $options);
+             $message = file_get_contents($this->uri, false, $this->context);
+ 
+-            $this->throwHttpExceptionOnHttpError($http_response_header);
++            $this->throwHttpExceptionOnHttpError($http_response_header ?? null);
+             $this->deliverResponses($message);
+         } catch (ErrorException $exception) {
+-            $this->throwHttpExceptionOnHttpError($http_response_header);
++            $this->throwHttpExceptionOnHttpError($http_response_header ?? null);
+             throw $exception;
+         } finally {
+             restore_error_handler();
+-- 
+2.39.5
+

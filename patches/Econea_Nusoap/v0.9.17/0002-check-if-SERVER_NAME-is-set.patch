@@ -1,0 +1,27 @@
+From ef53541e25b10f9a09d61d14e28ffda3994edd53 Mon Sep 17 00:00:00 2001
+From: Fab Stz <fabstz-it@yahoo.fr>
+Date: Fri, 7 Feb 2025 14:07:18 +0100
+Subject: [PATCH 2/2] check if ['SERVER_NAME'] is set
+
+When running from CLI (eg for tests), ['SERVER_NAME'] is not set.
+Check its presence to avoir missing array key
+---
+ src/nusoap.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/nusoap.php b/src/nusoap.php
+index f975f5f..337cd25 100644
+--- a/src/nusoap.php
++++ b/src/nusoap.php
+@@ -4643,7 +4643,7 @@ class nusoap_server extends nusoap_base
+     {
+         global $HTTP_SERVER_VARS;
+ 
+-        if (isset($_SERVER)) {
++        if (isset($_SERVER['SERVER_NAME'])) {
+             $SERVER_NAME = $_SERVER['SERVER_NAME'];
+             $SERVER_PORT = $_SERVER['SERVER_PORT'];
+             $SCRIPT_NAME = $_SERVER['SCRIPT_NAME'];
+-- 
+2.39.5
+

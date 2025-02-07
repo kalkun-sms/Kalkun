@@ -1,0 +1,26 @@
+From 9d0888026209665cc556510065a11acf8a8589db Mon Sep 17 00:00:00 2001
+From: Fab Stz <fabstz-it@yahoo.fr>
+Date: Fri, 7 Feb 2025 14:10:45 +0100
+Subject: [PATCH 4/4] fix deprecation error on PHP 8.4
+
+Implicitly marking parameter $headers as nullable is deprecated, the explicit nullable type must be used instead on line 117 in file vendor/datto/json-rpc-http/src/Client.php
+---
+ src/Client.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/Client.php b/src/Client.php
+index 3e83210..b1a35d5 100644
+--- a/src/Client.php
++++ b/src/Client.php
+@@ -114,7 +114,7 @@ class Client
+      *
+      * @see http://php.net/manual/en/context.http.php HTTP options
+      */
+-    public function __construct($uri, array $headers = null, array $options = null)
++    public function __construct($uri, $headers = null, $options = null)
+     {
+         $this->requiredHttpHeaders = array(
+             'Accept' => self::$CONTENT_TYPE,
+-- 
+2.39.5
+
