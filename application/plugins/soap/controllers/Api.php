@@ -121,7 +121,7 @@ class Api extends MY_Controller {
 			return 1;
 		}
 
-		$this->server->service(file_get_contents('php://input'));
+		$this->server->service($this->input->raw_input_stream);
 	}
 
 	function wsdl()
