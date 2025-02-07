@@ -53,6 +53,7 @@ class Jsonrpc extends Plugin_controller {
 
 		$client = new \Datto\JsonRpc\Http\Client($server_url);
 		$request = array('phoneNumber' => '+1234', 'message' => 'Testing JSONRPC');
+		$result = [];
 		$client->query('sms.send_sms', $request, $result);
 		try
 		{
