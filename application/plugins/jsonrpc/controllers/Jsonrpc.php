@@ -60,8 +60,7 @@ class Jsonrpc extends Plugin_controller {
 		}
 		catch (Exception $exception)
 		{
-			echo "Exception sending jsonrpc query: {$exception}.message\n";
-			exit(1);
+			throw $exception;
 		}
 
 		echo '<pre>';
