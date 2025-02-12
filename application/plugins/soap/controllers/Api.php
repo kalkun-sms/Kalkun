@@ -128,7 +128,7 @@ class Api extends MY_Controller {
 	{
 		log_message('debug', 'wsdl');
 		$_SERVER['QUERY_STRING'] = 'wsdl';
-		$this->server->service(file_get_contents('php://input'));
+		$this->server->service($this->input->raw_input_stream);
 	}
 
 	private function remoteAccessEnabled()
