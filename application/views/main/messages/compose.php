@@ -196,7 +196,9 @@ else
 		</td>
 	</tr>
 	<?php else: ?>
-	<input type="hidden" name="sms_loop" id="sms_loop" value="1" />
+	<tr style="display:none">
+		<td colspan="2"><input type="hidden" name="sms_loop" id="sms_loop" value="1" /></td>
+	</tr>
 	<?php endif;?>
 
 	<tr>
