@@ -96,7 +96,7 @@ CREATE TABLE `outbox` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 CREATE INDEX outbox_date ON outbox(SendingDateTime, SendingTimeOut);
-CREATE INDEX outbox_sender ON outbox(SenderID);
+CREATE INDEX outbox_sender ON outbox(SenderID(250));
 
 -- 
 -- Dumping data for table `outbox`
@@ -221,7 +221,7 @@ CREATE TABLE `sentitems` (
 CREATE INDEX sentitems_date ON sentitems(DeliveryDateTime);
 CREATE INDEX sentitems_tpmr ON sentitems(TPMR);
 CREATE INDEX sentitems_dest ON sentitems(DestinationNumber);
-CREATE INDEX sentitems_sender ON sentitems(SenderID);
+CREATE INDEX sentitems_sender ON sentitems(SenderID(250));
 
 -- 
 -- Dumping data for table `sentitems`
