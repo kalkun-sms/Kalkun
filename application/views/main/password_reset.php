@@ -1,6 +1,6 @@
 <?php
 $this->load->helper('html');
-echo doctype('xhtml1-trans');?>
+echo doctype('html5');?>
 <html>
 
 <head>
