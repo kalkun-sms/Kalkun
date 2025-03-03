@@ -6,8 +6,8 @@
 		echo '<input type="text" name="search_name" size="20" class="search_name" value="" />';
 		echo form_close(); */?>
 			&nbsp;
-			<a href="<?php echo site_url('pluginss/index/installed');?>" id="addpbkcontact_wizard" class="nicebutton"><?php echo tr('Installed', 'Plural'); ?></a>
-			<a href="<?php echo site_url('pluginss/index/available');?>" id="addpbkcontact_wizard" class="nicebutton"><?php echo tr('Available', 'Plural'); ?></a>
+			<a href="<?php echo site_url('pluginss/index/installed');?>" class="nicebutton"><?php echo tr('Installed', 'Plural'); ?></a>
+			<a href="<?php echo site_url('pluginss/index/available');?>" class="nicebutton"><?php echo tr('Available', 'Plural'); ?></a>
 		</div>
 	</div>
 
