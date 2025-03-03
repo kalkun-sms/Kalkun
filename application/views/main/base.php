@@ -77,7 +77,7 @@
 	$this->load->helper('form');
 	echo form_open('kalkun/add_folder', array('class' => 'addfolderform'));
 ?>
-	<label for="name"><?php echo tr('Folder name');?></label>
+	<label for="folder_name"><?php echo tr('Folder name');?></label>
 	<input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user');?>" />
 	<input type="hidden" name="source_url" value="<?php echo htmlentities($this->uri->uri_string(), ENT_QUOTES);?>" />
 	<input type="text" name="folder_name" id="folder_name" class="text ui-widget-content ui-corner-all" />
@@ -238,7 +238,7 @@
 		<tr>
 			<td class="align_right"><label for="a_search_on"><b><?php echo tr('Folder');?></b></label></td>
 			<td colspan="3">
-				<select name="a_search_on" style="width: 98%">
+				<select name="a_search_on" id="a_search_on" style="width: 98%">
 					<option value="all"><?php echo tr('All');?></option>
 					<option value="1"><?php echo tr('Inbox');?></option>
 					<option value="3"><?php echo tr('Sent items');?></option>
@@ -262,7 +262,7 @@
 		<tr>
 			<td class="align_right"><label for="a_search_sentitems_status"><b><?php echo tr('Status');?></b></label></td>
 			<td colspan="3">
-				<select name="a_search_sentitems_status" style="width: 98%">
+				<select name="a_search_sentitems_status" id="a_search_sentitems_status" style="width: 98%">
 					<option value="all"><?php echo tr('All');?></option>
 					<option value="delivered"><?php echo tr('Delivered');?></option>
 					<option value="failed"><?php echo tr('Sending failed');?></option>
@@ -272,7 +272,7 @@
 		<tr>
 			<td class="align_right"><label for="a_search_paging"><b><?php echo tr('Paging');?></b></label></td>
 			<td colspan="3">
-				<select name="a_search_paging" style="width: 98%">
+				<select name="a_search_paging" id="a_search_paging" style="width: 98%">
 					<option value="10"><?php echo tr('{0} per page', NULL, 10);?></option>
 					<option value="20"><?php echo tr('{0} per page', NULL, 20);?></option>
 					<option value="30"><?php echo tr('{0} per page', NULL, 30);?></option>
