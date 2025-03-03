@@ -55,7 +55,7 @@ class Users extends MY_Controller {
 		$config['base_url'] = site_url().'/users/index/';
 		$config['total_rows'] = $this->User_model->getUsers(array('option' => 'all'))->num_rows();
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-		$config['cur_tag_open'] = '<span id="current">';
+		$config['cur_tag_open'] = '<span class="current_page">';
 		$config['cur_tag_close'] = '</span>';
 		$config['uri_segment'] = 3;
 

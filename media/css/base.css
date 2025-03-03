@@ -465,18 +465,18 @@ textarea {
 
 /* Paging */
 
-#paging,
+.paging,
 .align_right {
 	text-align: right;
 }
 
-#paging a {
+.paging a {
 	padding: 2px 3px;
 	font-size: 11px;
 	text-decoration: underline;
 }
 
-#paging #current {
+.paging .current_page {
 	margin: 2px 0px 2px 5px;
 	padding: 2px 5px 2px 5px;
 	font-size: 11px;
@@ -502,12 +502,12 @@ textarea {
 	display: inline;
 }
 
-.simplepaging #current {
+.simplepaging .current_page {
 	text-decoration: overline;
 }
 
 .simplepaging a,
-.simplepaging #current {
+.simplepaging .current_page {
 	background: url("../images/bg-button.gif");
 	color: #000;
 	padding: 3px 5px;
@@ -522,7 +522,7 @@ textarea {
 	border-right: 1px solid #999;
 }
 
-.simplepaging #current {
+.simplepaging .current_page {
 	font-weight: normal;
 }
 

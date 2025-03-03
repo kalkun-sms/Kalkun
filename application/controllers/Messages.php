@@ -637,7 +637,7 @@ class Messages extends MY_Controller {
 		// Pagination
 		$this->load->library('pagination');
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-		$config['cur_tag_open'] = '<span id="current">';
+		$config['cur_tag_open'] = '<span class="current_page">';
 		$config['cur_tag_close'] = '</span>';
 
 		if (is_ajax())
@@ -718,7 +718,7 @@ class Messages extends MY_Controller {
 		// Pagination
 		$this->load->library('pagination');
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-		$config['cur_tag_open'] = '<span id="current">';
+		$config['cur_tag_open'] = '<span class="current_page">';
 		$config['cur_tag_close'] = '</span>';
 
 		if (is_ajax())
@@ -795,7 +795,7 @@ class Messages extends MY_Controller {
 		// Pagination
 		$this->load->library('pagination');
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-		$config['cur_tag_open'] = '<span id="current">';
+		$config['cur_tag_open'] = '<span class="current_page">';
 		$config['cur_tag_close'] = '</span>';
 
 		if ($source === 'folder' && isset($type) && $type !== 'outbox' && $type !== 'phonebook')
@@ -989,7 +989,7 @@ class Messages extends MY_Controller {
 					$param['number'] = $number;
 					$param['uid'] = $this->session->userdata('id_user');
 					$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-					$config['cur_tag_open'] = '<span id="current">';
+					$config['cur_tag_open'] = '<span class="current_page">';
 					$config['cur_tag_close'] = '</span>';
 					$config['base_url'] = site_url('/messages/conversation/folder/'.$type.'/'.rawurlencode($number));
 					$config['total_rows'] = $this->Message_model->search_messages($param)->total_rows;
@@ -1033,7 +1033,7 @@ class Messages extends MY_Controller {
 		// Pagination
 		$this->load->library('pagination');
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-		$config['cur_tag_open'] = '<span id="current">';
+		$config['cur_tag_open'] = '<span class="current_page">';
 		$config['cur_tag_close'] = '</span>';
 
 		switch ($segment[3])

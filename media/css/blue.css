@@ -36,11 +36,11 @@ h3 {
 	background-color: #86C0D2;
 	border-color: #EEE;
 }
-#paging a {
+.paging a {
 	color: #FFF;
 	background-color: #86C0D2;
 }
-#current {
+.current_page {
 	color: #000;
 	background: #86C0D2;
 }

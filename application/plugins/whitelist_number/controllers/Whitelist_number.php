@@ -47,7 +47,7 @@ class Whitelist_number extends Plugin_controller {
 		$config['base_url'] = site_url('plugin/whitelist_number');
 		$config['total_rows'] = $this->whitelist_number_model->get('count');
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-		$config['cur_tag_open'] = '<span id="current">';
+		$config['cur_tag_open'] = '<span class="current_page">';
 		$config['cur_tag_close'] = '</span>';
 		$config['uri_segment'] = 3;
 		$this->pagination->initialize($config);
