@@ -16,7 +16,7 @@
 
 	<div id="window_content">
 
-		<table class="nice-table" cellpadding="0" cellspacing="0">
+		<table class="nice-table">
 			<tr>
 				<th class="nice-table-left"><?php echo tr('No.', 'Number abbreviation'); ?></th>
 				<th><?php echo tr('Phone number'); ?></th>
@@ -43,7 +43,7 @@
 				<td class="nice-table-right">
 					<?php if ($tmp->destination_number && $tmp->stop_type): ?>
 					<a href="javascript:void(0);" class="delete">
-						<img class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>" />
+						<span class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>"></span>
 					</a>
 					<?php endif; ?>
 				</td>

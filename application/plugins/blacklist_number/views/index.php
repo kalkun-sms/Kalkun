@@ -34,7 +34,7 @@
 		<a href="javascript:void(0);" id="addblacklistbutton" class="nicebutton">&#43; Add Blacklist Number</a>
 	</div>
 
-	<table class="nice-table" cellpadding="0" cellspacing="0">
+	<table class="nice-table">
 		<tr>
 			<th class="nice-table-left">No.</th>
 			<th><?php echo tr('Phone number'); ?></th>
@@ -55,8 +55,8 @@
 			<td class="nice-table-left"><?php echo htmlentities($number, ENT_QUOTES); ?></td>
 			<td class="phone_number"><?php echo htmlentities(phone_format_human($tmp->phone_number), ENT_QUOTES); ?></td>
 			<td class="reason"><?php echo htmlentities($tmp->reason, ENT_QUOTES); ?></td>
-			<td><a href="javascript:void(0);" class="edit"><img class="ui-icon ui-icon-pencil" title="<?php echo tr('Edit'); ?>" /></a></td>
-			<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><img class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>" /></a></td>
+			<td><a href="javascript:void(0);" class="edit"><span class="ui-icon ui-icon-pencil" title="<?php echo tr('Edit'); ?>"></span></a></td>
+			<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><span class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>"></span></a></td>
 		</tr>
 
 		<?php

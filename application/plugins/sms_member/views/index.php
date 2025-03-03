@@ -6,7 +6,7 @@
 			<a href="javascript:void(0);" id="send_member" class="nicebutton">&#43; <?php echo tr('Send message');?></a>
 		</div>
 	</div>
-	<div id="member information" style="background: #eee; padding: 5px 10px; border-bottom: 1px solid #ccc;">
+	<div id="member_information" style="background: #eee; padding: 5px 10px; border-bottom: 1px solid #ccc;">
 		<?php echo tr('Total member');?>: <?php echo $total_member;?>
 	</div>
 

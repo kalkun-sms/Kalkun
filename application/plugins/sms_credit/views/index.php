@@ -59,11 +59,11 @@
 	<p id="validateTips"><?php echo tr('All form fields are required.'); ?></p>
 	<?php echo form_open('plugin/sms_credit/add_users', array('id' => 'addUser'));?>
 	<fieldset>
-		<label for="name"><?php echo tr('Name'); ?></label>
+		<label for="realname"><?php echo tr('Name'); ?></label>
 		<input type="text" name="realname" id="realname" class="text ui-widget-content ui-corner-all" />
-		<label for="number"><?php echo tr('Phone number'); ?></label>
+		<label for="phone_number"><?php echo tr('Phone number'); ?></label>
 		<input type="text" name="phone_number" id="phone_number" class="text ui-widget-content ui-corner-all" />
-		<label for="name"><?php echo tr('Username'); ?></label>
+		<label for="username"><?php echo tr('Username'); ?></label>
 		<input type="text" name="username" id="username" class="text ui-widget-content ui-corner-all" />
 		<label for="password"><?php echo tr('Password'); ?></label>
 		<input type="password" name="password" id="password" class="text ui-widget-content ui-corner-all" />
@@ -72,7 +72,7 @@
 		<label for="level"><?php echo tr('Role'); ?></label>
 		<?php
 $level = array('admin' => tr('Administrator'), 'user' => tr('User', 'credentials'));
-$option = 'class="text ui-widget-content ui-corner-all"';
+$option = 'class="text ui-widget-content ui-corner-all" id="level"';
 echo form_dropdown('level', $level, 'user', $option);
 ?>
 		<br /><br />
@@ -84,7 +84,7 @@ foreach ($packages->result_array() as $row)
 {
 	$package[$row['id_credit_template']] = htmlentities($row['template_name'], ENT_QUOTES);
 }
-$option = 'class="text ui-widget-content ui-corner-all"';
+$option = 'class="text ui-widget-content ui-corner-all" id="package"';
 echo form_dropdown('package', $package, '', $option);
 ?>
 		<br /><br />
@@ -104,7 +104,7 @@ echo form_dropdown('package', $package, '', $option);
 	<p id="validateTips"><?php echo tr('All form fields are required.'); ?></p>
 	<?php echo form_open('plugin/sms_credit/add_users', array('id' => 'editUser'));?>
 	<fieldset>
-		<label for="package"><?php echo tr('Package'); ?></label>
+		<label for="edit_id_package"><?php echo tr('Package'); ?></label>
 		<?php
 foreach ($packages->result_array() as $row)
 {
@@ -115,10 +115,10 @@ echo form_dropdown('package', $package, '', $option);
 ?>
 		<br /><br />
 
-		<label for="package_start"><?php echo tr('Start date'); ?></label>
+		<label for="edit_package_start"><?php echo tr('Start date'); ?></label>
 		<input type="text" style="display: inline; width: 80%" name="package_start" id="edit_package_start" class="text datepicker ui-widget-content ui-corner-all" />
 
-		<label for="package_end"><?php echo tr('End date'); ?></label>
+		<label for="edit_package_end"><?php echo tr('End date'); ?></label>
 		<input type="text" style="display: inline; width: 80%" name="package_end" id="edit_package_end" class="text datepicker ui-widget-content ui-corner-all" />
 
 		<input type="hidden" name="id_user" id="id_user" />
