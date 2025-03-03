@@ -57,7 +57,8 @@
             },
             "econea/nusoap": {
                 "Fix PHP8.4 deprecation on xml_set_object()": "patches/Econea_Nusoap/v0.9.17/0001-fix-deprecation-warning-on-PHP-8.4-with-xml_set_obje.patch",
-                "Check if $_SERVER['SERVER_NAME'] is set": "patches/Econea_Nusoap/v0.9.17/0002-check-if-SERVER_NAME-is-set.patch"
+                "Check if $_SERVER['SERVER_NAME'] is set": "patches/Econea_Nusoap/v0.9.17/0002-check-if-SERVER_NAME-is-set.patch",
+                "Revert & fix regression in 0.9.18": "patches/Econea_Nusoap/v0.9.18/0002-revert_fix_in_0.9.18.patch"
             },
             "kenjis/ci-phpunit-test": {
                 "Add support for PHP 8.2": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.2.patch"
