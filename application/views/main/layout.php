@@ -20,7 +20,7 @@ echo doctype('html5');?>
 			<div id="header_right">
 				<div id="top_link"><?php $this->load->view('main/search');?></div>
 				<div class="clear">&nbsp;</div>
-				<div class="notification_container" align="center"><span class="notification_area hidden"><?php echo tr('Loading');?>...</span>
+				<div class="notification_container" style="text-align: center;"><span class="notification_area hidden"><?php echo tr('Loading');?>...</span>
 					<?php if ($this->session->flashdata('notif')): ?>
 					<span class="notification_area"><?php echo htmlentities($this->session->flashdata('notif'), ENT_QUOTES);?></span>
 					<?php endif; ?>
