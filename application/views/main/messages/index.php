@@ -16,7 +16,7 @@ else
 }
 ?>
 	<?php foreach ($folder->result() as $folder):?>
-	<div class="move_to" id="<?php echo $folder->id_folder;?>"><a href="javascript:void(0);"><?php echo htmlentities($folder->name, ENT_QUOTES);?></a></div>
+	<div class="move_to" data-id_folder="<?php echo $folder->id_folder;?>"><a href="javascript:void(0);"><?php echo htmlentities($folder->name, ENT_QUOTES);?></a></div>
 	<?php endforeach;?>
 </div>
 

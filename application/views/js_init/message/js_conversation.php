@@ -96,7 +96,7 @@
 				$("#movetodialog").dialog('close');
 				show_notification(<?php echo tr_js('No item selected.'); ?>);
 			} else {
-				var id_folder = $(this).attr('id');
+				var id_folder = $(this).attr('data-id_folder');
 				$("#movetodialog").dialog('close');
 				$("input.select_message:checked:visible").each(function() {
 					var message_row = $(this).parents('div:eq(2)');
