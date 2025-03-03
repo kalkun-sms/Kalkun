@@ -130,7 +130,7 @@
 		});
 
 		$(document).on('keydown', null, 'u', function() {
-			var dest = $('#back_threadlist').attr('href');
+			var dest = $('.back_threadlist').first().attr('href');
 			document.location = dest;
 		});
 
