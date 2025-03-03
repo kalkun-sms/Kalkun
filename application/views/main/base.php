@@ -10,7 +10,7 @@
 			<h1 style><?php echo tr('PHP Frontend for gammu-smsd'); ?></h1>
 		</div>
 		<table>
-			<tr valign="top">
+			<tr>
 				<td><b><?php echo tr('Authors'); ?>:</b></td>
 				<td>&nbsp;</td>
 				<td><?php echo tr_raw('See {0} page', NULL, '<a class="base_color underline_link" href="https://raw.githubusercontent.com/kalkun-sms/Kalkun/devel/docs/CREDITS" target="_blank">CREDITS</a>'); ?></td>
@@ -93,13 +93,13 @@
 			<h1><?php echo tr('Keyboard shortcuts'); ?></h1>
 		</div>
 
-		<table>
-			<tr valign="top">
+		<table class="shortcuts">
+			<tr style="vertical-align: top;">
 				<td>
 
 					<table>
 						<tr>
-							<td colspan="2" align="center"><strong><?php echo tr('Jumping'); ?></strong> </td>
+							<td colspan="2" class="section"><strong><?php echo tr('Jumping'); ?></strong> </td>
 						</tr>
 						<tr>
 							<td class="align_right"><?php echo tr('{0} then {1}:', NULL, 'g', 'i'); ?></td>
@@ -119,7 +119,7 @@
 						</tr>
 
 						<tr>
-							<td colspan="2" align="center"><br /><strong><?php echo tr('Navigation'); ?></strong></td>
+							<td colspan="2" class="section"><br /><strong><?php echo tr('Navigation'); ?></strong></td>
 						</tr>
 						<tr>
 							<td class="align_right">u:</td>
@@ -138,7 +138,7 @@
 							<td><?php echo tr('Open'); ?></td>
 						</tr>
 						<tr>
-							<td colspan="2" align="center"><br /><strong><?php echo tr('Selection'); ?></strong></td>
+							<td colspan="2" class="section"><br /><strong><?php echo tr('Selection'); ?></strong></td>
 						</tr>
 						<tr>
 							<td class="align_right">x:</td>
@@ -160,7 +160,7 @@
 				<td>
 					<table>
 						<tr>
-							<td colspan="2" align="center"><strong><?php echo tr('Actions'); ?></strong></td>
+							<td colspan="2" class="section"><strong><?php echo tr('Actions'); ?></strong></td>
 						</tr>
 
 						<tr>
@@ -189,7 +189,7 @@
 						</tr>
 
 						<tr>
-							<td colspan="2" align="center"> <br /><strong><?php echo tr('Application'); ?></strong>
+							<td colspan="2" class="section"> <br /><strong><?php echo tr('Application'); ?></strong>
 							</td>
 						</tr>
 						<tr>
@@ -226,17 +226,17 @@
 	echo form_open('messages/query', array('id' => 'a_search_form'));
 	echo form_hidden('a_search_trigger', TRUE);
 	?>
-	<table width="100%">
+	<table style="width: 100%;">
 		<tr>
-			<td align="right"><label for="a_search_from_to"><b><?php echo tr('Phone number');?></b></label></td>
+			<td class="align_right"><label for="a_search_from_to"><b><?php echo tr('Phone number');?></b></label></td>
 			<td colspan="3"><input style="width: 95%" type="text" id="a_search_from_to" name="a_search_from_to" /></td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_query"><b><?php echo tr('Content');?></b></label></td>
+			<td class="align_right"><label for="a_search_query"><b><?php echo tr('Content');?></b></label></td>
 			<td colspan="3"><input style="width: 95%" type="text" id="a_search_query" name="a_search_query" /></td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_on"><b><?php echo tr('Folder');?></b></label></td>
+			<td class="align_right"><label for="a_search_on"><b><?php echo tr('Folder');?></b></label></td>
 			<td colspan="3">
 				<select name="a_search_on" style="width: 98%">
 					<option value="all"><?php echo tr('All');?></option>
@@ -250,18 +250,17 @@
 					<option value="<?php echo htmlentities($my_folder->id_folder, ENT_QUOTES); ?>"><?php echo htmlentities($my_folder->name, ENT_QUOTES); ?></option>
 					<?php
 					endforeach; ?>
-					?>
 				</select>
 			</td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_date_from"><b><?php echo tr('Date from');?></b></label></td>
+			<td class="align_right"><label for="a_search_date_from"><b><?php echo tr('Date from');?></b></label></td>
 			<td><input type="text" id="a_search_date_from" name="a_search_date_from" /></td>
 			<td><label for="a_search_date_to"><b><?php echo tr('Date to');?></b></label></td>
 			<td><input type="text" id="a_search_date_to" name="a_search_date_to" /></td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_sentitems_status"><b><?php echo tr('Status');?></b></label></td>
+			<td class="align_right"><label for="a_search_sentitems_status"><b><?php echo tr('Status');?></b></label></td>
 			<td colspan="3">
 				<select name="a_search_sentitems_status" style="width: 98%">
 					<option value="all"><?php echo tr('All');?></option>
@@ -271,7 +270,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right"><label for="a_search_paging"><b><?php echo tr('Paging');?></b></label></td>
+			<td class="align_right"><label for="a_search_paging"><b><?php echo tr('Paging');?></b></label></td>
 			<td colspan="3">
 				<select name="a_search_paging" style="width: 98%">
 					<option value="10"><?php echo tr('{0} per page', NULL, 10);?></option>

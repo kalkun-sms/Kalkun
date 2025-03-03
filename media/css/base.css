@@ -1214,3 +1214,11 @@ input#groups {
 	font-size: 11px;
 	color: #000;
 }
+
+.shortcuts tr {
+	vertical-align: top;
+}
+
+.shortcuts td.section {
+	text-align: center;
+}
