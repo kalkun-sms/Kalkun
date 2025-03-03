@@ -50,7 +50,7 @@ sed -i -e 's|<directory suffix=".php">../application/views/errors</directory>|<d
 # with phpunit <= 6. For these, we remove the ": void" part of the tests
 if [ "$(composer show phpunit/phpunit | grep "^versions : " | rev | cut -d " " -f 1 | rev | cut -d . -f 1)" -le 6 ]; then
   for func in setUp tearDown setUpBeforeClass tearDownAfterClass; do
-    sed -i "/ function $func()/ s/:\s*void$//" "${TESTSDIR}"*/*_test.php
+    sed -i "/ function $func()/ s/:\s*void$//" "${TESTSDIR}"*/*_test.php "${TESTSDIR}"testutils/KalkunTestCase.php
   done
 fi
 
