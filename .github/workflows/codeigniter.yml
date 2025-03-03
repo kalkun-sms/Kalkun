@@ -84,10 +84,32 @@ jobs:
         run: sudo apt-get -y install libdbd-sqlite3 gammu-smsd
       - name: Start MySQL & PostgreSQL + create DB users
         run: ./utils/db_create_user.sh
+      - name: Check availability of java, otherwise install it
+        run: |
+          set -x
+          /usr/bin/java -version || true
+          java -version || true
+          ${JAVA_HOME}/bin/java -version || true
+          ${JAVA_HOME_17_X64}/bin/java -version || true
+          java -version || sudo apt-get -y install default-jre
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: 'validator/validator'
+          latest: true
+          tag: '20.6.30'
+          fileName: 'vnu.jar_20.6.30.zip'
+          tarBall: false
+          zipBall: false
+          out-file-path: '../vnu'
+          extract: true
+      - name: Install tidy, v.Nu (Nu Html Checker)
+        run: |
+          sudo apt-get -y install tidy
+          find ../vnu -name vnu.jar -exec mv '{}' utils \;
       - name: Install/Update ci-phpunit-test
         run: ./utils/prepare_tests_for_phpunit.sh
       - name: Test with phpunit
-        run: vendor/bin/phpunit --coverage-text -c tests
+        run: HTML=4 vendor/bin/phpunit --coverage-text -c tests
   check-code:
     strategy:
       matrix:

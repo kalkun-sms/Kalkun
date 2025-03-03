@@ -13,3 +13,4 @@ application/config/database.php
 
 /utils/composer.lock
 /utils/vendor/
+/utils/vnu.jar

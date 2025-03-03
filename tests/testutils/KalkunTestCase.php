@@ -9,9 +9,17 @@
  * @link https://kalkun.sourceforge.io/
  */
 
+require_once __DIR__.'/../testutils/Html4Validator.php';
+require_once __DIR__.'/../testutils/Html5Validator.php';
+
 class KalkunTestCase extends TestCase {
 
 	protected static $phpunit_version;
+	public $request_http_method;
+	public $request_url;
+	public $request_params;
+	public $request_is_ajax = FALSE;
+	public static $html_version = NULL;
 
 	public static function setUpBeforeClass() : void
 	{
@@ -96,5 +104,90 @@ class KalkunTestCase extends TestCase {
 			return trim(preg_replace('/(?:\s{2,}+|[^\S ])/', ' ', $crawler->text(NULL, TRUE)));
 		}
 		return $crawler->text();
+	}
+
+	public function _nameWithDataSet()
+	{
+		if (version_compare(self::$phpunit_version, '10.0', '>=') === TRUE)
+		{
+			return parent::nameWithDataSet();
+		}
+		else
+		{
+			return $this->getName(TRUE);
+		}
+	}
+
+	public function request($http_method, $argv, $params = [])
+	{
+		$this->request_http_method = $http_method;
+
+		if (is_string($argv))
+		{
+			$url = ltrim($argv, '/');
+		}
+		else
+		{
+			$url = implode('/', $argv);
+		}
+
+		$this->request_url = $url;
+		$this->request_params = (is_string($params)) ? $params : NULL;
+
+		return parent::request($http_method, $argv, $params);
+	}
+
+	public function ajaxRequest($http_method, $argv, $params = [])
+	{
+		$this->ajax = TRUE;
+		return parent::ajaxRequest($http_method, $argv, $params);
+	}
+
+	public function assertValidHtml($html)
+	{
+		if (self::$html_version === NULL)
+		{
+			self::$html_version = getenv('HTML');
+		}
+		switch (self::$html_version)
+		{
+			case '4':
+				$validator = new Html4Validator($this);
+				break;
+			case '5':
+				$validator = new Html5Validator($this);
+				break;
+			case FALSE:
+			default:
+				return;
+		}
+		if ($this->request_is_ajax)
+		{
+			$validator->wrap_snippet();
+		}
+		$validator->validate($html);
+	}
+
+	public function assertValidHtmlSnippet($html)
+	{
+		if (self::$html_version === NULL)
+		{
+			self::$html_version = getenv('HTML');
+		}
+		switch (self::$html_version)
+		{
+			case '4':
+				$validator = new Html4Validator($this);
+				break;
+			case '5':
+				$validator = new Html5Validator($this);
+				break;
+			case FALSE:
+			default:
+				return;
+		}
+		$validator
+				->wrap_snippet()
+				->validate($html);
 	}
 }
