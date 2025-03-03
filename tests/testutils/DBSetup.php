@@ -11,6 +11,7 @@
 
 require_once __DIR__.'/ConfigFile.php';
 require_once __DIR__.'/DBVars.php';
+require_once __DIR__.'/../controllers/Pluginss_test.php';
 
 class DBSetup {
 
@@ -978,6 +979,38 @@ password=' . $this->password);
 				return $UDHprefix;
 			}
 		}
+	}
+
+	public function install_plugin($testcase, $plugin)
+	{
+		// Reset static members in Plugins_lib_kalkun
+		// otherwise their value is not correct when we switch db_engine
+		Pluginss_test::reset_plugins_lib_static_members();
+
+		// We need to have a session open to install plugins
+		$testcase->request->setCallablePreConstructor(
+			function () {
+				if (session_status() === PHP_SESSION_NONE && is_cli() === FALSE)
+				{
+					session_start();
+				}
+				$_SESSION['loggedin'] = 'TRUE';
+				$_SESSION['id_user'] = '1';
+				$_SESSION['level'] = 'admin';
+				$_SESSION['username'] = 'kalkun';
+			}
+		);
+
+		$testcase->request('GET', 'pluginss/install/' . $plugin);
+		// Remove all callables that were added.
+		$testcase->request->setCallable(function () {
+		});
+		$_SESSION = [];
+		if (session_status() === PHP_SESSION_ACTIVE && is_cli() === FALSE)
+		{
+			session_destroy();
+		}
+		$testcase->resetInstance();
 	}
 
 	public function insert($label, $input = [], $use_standard_text = TRUE)
