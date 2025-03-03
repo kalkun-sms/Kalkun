@@ -15,9 +15,9 @@ else: ?>
 		<td>
 			<div class="two_column_container contact_list hover_show" style="display: inline-block;">
 				<div class="left_column">
-					<div id="pbkname">
+					<div class="pbkname">
 						<input type="checkbox" class="select_contact" />&nbsp;<span style="font-weight: bold;"><?php echo htmlentities($tmp->Name, ENT_QUOTES); ?></span>
-						<div id="pbknumber" style="padding: 2px 0 5px 24px;"><?php echo htmlentities($tmp->Number, ENT_QUOTES);?></div>
+						<div class="pbknumber" style="padding: 2px 0 5px 24px;"><?php echo htmlentities($tmp->Number, ENT_QUOTES);?></div>
 					</div>
 				</div>
 				<div class="right_column">
