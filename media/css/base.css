@@ -1232,3 +1232,18 @@ input#groups {
 .sysinfo tr {
 	vertical-align: top;
 }
+
+.detail_area > table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.detail_area > table th,
+.detail_area > table td {
+	padding: 0;
+}
+.detail_area td:first-child {
+	width: 50px;
+}
+.detail_area td:nth-child(2) {
+	width: 10px;
+}
