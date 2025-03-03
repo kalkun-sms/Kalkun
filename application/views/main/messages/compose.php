@@ -1,28 +1,17 @@
 <?php $this->load->helper('html');?>
 <link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquery.tagsinput-revisited.min.css" />
-<style type="text/css">
-	.left_aligned {
-		margin-left: 0;
-		padding-left: 0;
-	}
-	.form_option {
-		display: flex
-	}
-	.opt {
-		flex-grow: 1
-	}
+<link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>compose.css" />
 
-</style>
 <?php $this->load->view('js_init/message/js_compose'); ?>
 
 <?php echo form_open_multipart('messages/compose_process', array('id' => 'composeForm', 'class' => 'composeForm'));?>
-<table width="100%">
+<table class="compose">
 	<?php
 
 // Reply to option
 if ($val_type === 'reply'): ?>
 	<tr>
-		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
+		<td class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
 			<?php
 $phone = $dest;
@@ -40,7 +29,7 @@ endif;
 
 	<?php /* Resend */ elseif ($val_type === 'resend'):?>
 	<tr>
-		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
+		<td class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
 			<?php
 $phone = $dest;
@@ -59,13 +48,13 @@ endif;
 
 	<?php /* Member */ elseif ($val_type === 'member'):?>
 	<tr>
-		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
+		<td class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td><?php echo tr('Member');?><input type="hidden" name="sendoption" value="member" /></td>
 	</tr>
 
 	<?php /* Phonebook contact */ elseif ($val_type === 'pbk_contact'):?>
 	<tr>
-		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
+		<td class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
 			<?php
 $qry = $this->Phonebook_model->get_phonebook(array('option' => 'bynumber', 'number' => $dest));
@@ -82,7 +71,7 @@ endif;
 
 	<?php /* Phonebook group */ elseif ($val_type === 'pbk_groups'):?>
 	<tr>
-		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
+		<td class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
 			<?php echo htmlentities($this->Phonebook_model->get_phonebook(array('option' => 'groupname', 'id' => $dest))->row('GroupName'), ENT_QUOTES);?>
 			<input type="hidden" name="sendoption" value="pbk_groups" />
@@ -92,7 +81,7 @@ endif;
 
 	<?php /* All Contacts */ elseif ($val_type === 'all_contacts'):?>
 	<tr>
-		<td width="100px" align="right" class="form_label label"><?php echo tr('Send to'); ?>:</td>
+		<td class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
 			<?php echo tr('All contacts'); ?>
 			<input type="hidden" name="sendoption" value="all_contacts" />
@@ -101,7 +90,7 @@ endif;
 
 	<?php /* Forward to option */ else: ?>
 	<tr>
-		<td width="100px" align="right" class="label">
+		<td class="label">
 			<?php
 if ($val_type === 'forward')
 {
@@ -136,8 +125,8 @@ else
 		<td>
 			<div id="person">
 				<textarea id="personvalue_tags" style="width: 95%;" name="personvalue_tags"></textarea>
-				<input id="personvalue" style="width: 95%;" name="personvalue" type="hidden"></input>
-				<input id="personvalue_json" style="width: 95%;" name="personvalue_json" type="hidden"></input>
+				<input id="personvalue" style="width: 95%;" name="personvalue" type="hidden" />
+				<input id="personvalue_json" style="width: 95%;" name="personvalue_json" type="hidden" />
 			</div>
 
 			<div id="manually" class="hidden">
@@ -151,7 +140,7 @@ else
 	<?php endif; ?>
 
 	<tr>
-		<td align="right" class="label"><?php echo tr('Send date').':';?></td>
+		<td class="label"><?php echo tr('Send date').':';?></td>
 		<td>
 			<input class="left_aligned" type="radio" id="option1" name="senddateoption" value="option1" checked="checked" style="border: none;" />
 			<label for="option1"><?php  echo tr('Now');?></label>
@@ -180,7 +169,7 @@ else
 	</tr>
 
 	<tr>
-		<td align="right" class="label"><?php echo tr('Validity'); ?></td>
+		<td class="label"><?php echo tr('Validity'); ?></td>
 		<td><select size="1" name="validity">
 				<option value="-1"><?php echo tr('default'); ?></option>
 				<option value="0"><?php echo tr('5 minutes'); ?></option>
@@ -201,8 +190,8 @@ else
 	</tr>
 
 	<?php if ($this->config->item('sms_bomber')): ?>
-	<tr valign="top">
-		<td align="right" class="label"><?php echo tr('Amount').':';?></td>
+	<tr style="vertical-align: top;">
+		<td class="label"><?php echo tr('Amount').':';?></td>
 		<td><input type="text" style="width: 25px" name="sms_loop" id="sms_loop" value="1" />&nbsp; <?php echo tr('times', 'repetition'); ?>
 		</td>
 	</tr>
@@ -211,7 +200,7 @@ else
 	<?php endif;?>
 
 	<tr>
-		<td align="right" class="label"><?php echo tr('SMS type');?></td>
+		<td class="label"><?php echo tr('SMS type');?></td>
 		<td>
 			<input class="left_aligned" type="radio" id="stype1" name="smstype" value="normal" checked="checked" style="border: none;" />
 			<label for="stype1"><?php echo tr('Normal');?></label>
@@ -225,12 +214,12 @@ else
 	</tr>
 
 	<tr style="display: none;" id="url-display">
-		<td align="right" class="label"><?php echo tr('URL');?></td>
+		<td class="label"><?php echo tr('URL');?></td>
 		<td><input type="text" style="width: 97%;" name="url" value="" /></td>
 	</tr>
 
-	<tr valign="top">
-		<td align="right" class="label"><?php echo tr('Message').':';?></td>
+	<tr style="vertical-align: top;">
+		<td class="label"><?php echo tr('Message').':';?></td>
 		<td>
 			<?php if ($val_type === 'forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo htmlentities($msg_id, ENT_QUOTES);?>" /> <?php endif;?>
 			<textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;" id="message" name="message">
@@ -257,7 +246,7 @@ if ($sig_option === 'true' && $val_type !== 'resend')
 		</td>
 	</tr>
 	<tr id="field_option" class="hidden">
-		<td align="right" class="label"><?php echo tr('Select field').':'; ?></td>
+		<td class="label"><?php echo tr('Select field').':'; ?></td>
 		<td>
 			<div style="border: 1px solid #AAA; padding: 5px; width: 96%;">
 				<input type="button" id="field_button" class="hidden field_button" value="Name" />
@@ -266,7 +255,7 @@ if ($sig_option === 'true' && $val_type !== 'resend')
 	</tr>
 	<?php if ($val_type === 'resend'): ?>
 	<tr>
-		<td align="right" class="label">&nbsp;</td>
+		<td class="label">&nbsp;</td>
 		<td>
 			<div>
 				<input type="checkbox" id="resend_delete_original" name="resend_delete_original" />

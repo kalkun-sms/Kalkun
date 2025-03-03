@@ -1,0 +1,23 @@
+/* Kalkun CSS for compose.php */
+
+.left_aligned {
+	margin-left: 0;
+	padding-left: 0;
+}
+.form_option {
+	display: flex
+}
+.opt {
+	flex-grow: 1
+}
+table.compose {
+	width: 100%;
+}
+.compose th,
+.compose td {
+	padding: 1px;
+}
+.compose td:first-child {
+	width: 100px;
+	text-align: right
+}
