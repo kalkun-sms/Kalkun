@@ -43,9 +43,9 @@ echo doctype('html5');?>
 		</div>
 		<div id="login_container">
 			<?php echo form_open('login/forgot_password'); ?>
-			<table id="login" cellpadding="3" cellspacing="2" border="0" class="rounded">
+			<table id="login" class="rounded">
 				<tr>
-					<td><big><?php echo tr('Forgot your password?'); ?></big></td>
+					<td><span style="font-size: larger"><?php echo tr('Forgot your password?'); ?></span></td>
 				</tr>
 				<tr>
 					<td><label><?php echo tr('Username'); ?></label><input type="text" name="username" id="username" style="width:95%" /></td>
@@ -58,7 +58,7 @@ echo doctype('html5');?>
 				</tr>
 				<tr>
 					<td>
-						<div align="center" style="float: right; padding-right: 3px"><input type="submit" id="submit" value="<?php echo tr('Submit', 'form') ?>" /></div>
+						<div style="float: right; padding-right: 3px"><input type="submit" id="submit" value="<?php echo tr('Submit', 'form') ?>" /></div>
 					</td>
 				</tr>
 			</table>
