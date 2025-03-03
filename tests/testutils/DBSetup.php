@@ -114,13 +114,36 @@ password=' . $this->password);
 		switch ($this->engine)
 		{
 			case 'pgsql':
-				shell_exec('PGPASSWORD=' . escapeshellarg($this->password)
-						. ' dropdb'
-						. ' -h localhost'
-						. ' -U ' . escapeshellarg($this->user)
-						. ' --force'
-						. ' --if-exists'
-						. ' ' . escapeshellarg($this->db_name));
+				$output = NULL;
+				$retval = NULL;
+				for ($i = 0; $i < 2; $i++)
+				{
+					$ret = putenv('PGPASSWORD=' . $this->password);
+					if ($ret === FALSE)
+					{
+						throw new Exception('Could not set environment variable PGPASSWORD');
+					}
+					putenv('LC_ALL=C');
+					exec(
+						'dropdb'
+							. ' -h localhost'
+							. ' -U ' . escapeshellarg($this->user)
+							. ' --force'
+							. ' --if-exists'
+							. ' ' . escapeshellarg($this->db_name),
+						$output,
+						$retval
+					);
+					if ($retval === 0)
+					{
+						break;
+					}
+					usleep(500000);
+				}
+				if ($retval !== 0)
+				{
+					throw new Exception('Could not drop database. (tried ' . ($i + 1) . ' times). Output: ' . implode("\n", $output));
+				}
 				break;
 			case 'mysql':
 				shell_exec(
