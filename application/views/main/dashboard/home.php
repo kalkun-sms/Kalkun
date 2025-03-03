@@ -2,8 +2,8 @@
 <div id="space_area">
 
 	<?php if (isset($alerts) && count($alerts) > 0): ?>
-	<div id="dash_box_titlebar"><?php echo tr('Alerts');?></div>
-	<div id="dash_box">
+	<div class="dash_box_titlebar"><?php echo tr('Alerts');?></div>
+	<div class="dash_box">
 		<?php
 foreach ($alerts as $msg):
    echo '<div class="warning">'.htmlentities($msg, ENT_QUOTES).'</div>';;
@@ -13,15 +13,15 @@ endforeach;
 	<br />
 	<?php endif; ?>
 
-	<div id="dash_box_titlebar"><?php echo tr('Statistics');?></div>
-	<div id="dash_box">
+	<div class="dash_box_titlebar"><?php echo tr('Statistics');?></div>
+	<div class="dash_box">
 		<?php $this->load->view('main/dashboard/statistic');?>
 	</div>
 	<br />
 
 	<?php if ($this->session->userdata('level') === 'admin'): ?>
-	<div id="dash_box_titlebar"><?php echo tr('System information');?></div>
-	<div id="dash_box">
+	<div class="dash_box_titlebar"><?php echo tr('System information');?></div>
+	<div class="dash_box">
 		<table>
 			<tr>
 				<td width="125px"><?php echo tr('Operating system');?></td>

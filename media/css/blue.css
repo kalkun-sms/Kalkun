@@ -44,16 +44,16 @@ h3 {
 	color: #000;
 	background: #86C0D2;
 }
-#dash_box_titlebar {
+.dash_box_titlebar {
 	background-color: #86C0D2;
 	color: #FFF;
 }
-#dash_box {
+.dash_box {
 	background-color: #F5F5F5;
 	;
 	color: #333;
 }
-#dash_box a {
+.dash_box a {
 	color: #FFF;
 }
 .search_form {
