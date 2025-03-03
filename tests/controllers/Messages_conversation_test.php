@@ -1809,8 +1809,8 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(2, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(0, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$db->update('inbox', ['TextDecoded' => '%User 4%'], ['readed' => 'false']);
 		$db->execute($this->CI);
@@ -1895,8 +1895,8 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(0, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(0, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$db->update('inbox', ['TextDecoded' => '%User 4%'], ['readed' => 'false']);
 		$db->execute($this->CI);
@@ -1981,8 +1981,8 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(0, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(2, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$db->update('inbox', ['TextDecoded' => '%User 4%'], ['readed' => 'false']);
 		$db->execute($this->CI);
@@ -2067,8 +2067,8 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(2, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(0, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$db->update('inbox', ['TextDecoded' => '%User '.$id_user.'%'], ['readed' => 'false']);
 		$db->execute($this->CI);
@@ -2153,8 +2153,8 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(2, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(0, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$db->update('inbox', ['TextDecoded' => '%User '.$id_user.'%'], ['readed' => 'false']);
 		$db->execute($this->CI);
@@ -2239,8 +2239,8 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(0, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(2, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$db->update('inbox', ['TextDecoded' => '%User '.$id_user.'%'], ['readed' => 'false']);
 		$db->execute($this->CI);
@@ -2326,8 +2326,8 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(2, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(0, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$db->update('inbox', ['TextDecoded' => '%User '.$id_user.'%'], ['readed' => 'false']);
 		$db->execute($this->CI);
@@ -2412,8 +2412,8 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(0, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(2, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$db->update('inbox', ['TextDecoded' => '%User '.$id_user.'%'], ['readed' => 'false']);
 		$db->execute($this->CI);
@@ -2499,8 +2499,8 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(0, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(0, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$db->update('inbox', ['TextDecoded' => '%User '.$id_user.'%'], ['readed' => 'false']);
 		$db->execute($this->CI);
