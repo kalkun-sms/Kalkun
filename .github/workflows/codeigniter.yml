@@ -76,10 +76,12 @@ jobs:
           # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
-      - name: Install dependencies
+      - name: Install composer dependencies
         run: |
           composer update
           composer install --no-progress --prefer-dist --optimize-autoloader
+      - name: Install system dependencies
+        run: sudo apt-get -y install libdbd-sqlite3 gammu-smsd
       - name: Start MySQL & PostgreSQL + create DB users
         run: ./utils/db_create_user.sh
       - name: Install/Update ci-phpunit-test
