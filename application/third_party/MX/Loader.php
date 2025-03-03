@@ -45,6 +45,13 @@ class MX_Loader extends CI_Loader
 	/** Initialize the loader variables **/
 	public function initialize($controller = NULL) 
 	{
+		// See: https://github.com/kenjis/ci-phpunit-test/issues/34#issuecomment-149083614
+		if (ENVIRONMENT === 'testing')
+		{
+			// Rest CI::$APP
+			CI::$APP = CI_Controller::get_instance();
+		}
+
 		/* set the module name */
 		$this->_module = CI::$APP->router->fetch_module();
 		
