@@ -1794,9 +1794,9 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(DBSetup::messages_per_recipient + DBSetup::messages_per_sender - $offset, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(2, $crawler->filter('#back_threadlist')->count());
-		$this->assertEquals('‹‹ Back to Inbox', $this->crawler_text($crawler->filter('#back_threadlist')));
-		$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(2, $crawler->filter('.back_threadlist')->count());
+		$this->assertEquals('‹‹ Back to Inbox', $this->crawler_text($crawler->filter('.back_threadlist')));
+		$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		// marker of conversation + inbox + spam/ham button
@@ -1880,9 +1880,9 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(DBSetup::messages_per_recipient - $offset, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(2, $crawler->filter('#back_threadlist')->count());
-		$this->assertEquals('‹‹ Back to Outbox', $this->crawler_text($crawler->filter('#back_threadlist')));
-		$this->assertEquals(site_url().'/messages/folder/outbox', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(2, $crawler->filter('.back_threadlist')->count());
+		$this->assertEquals('‹‹ Back to Outbox', $this->crawler_text($crawler->filter('.back_threadlist')));
+		$this->assertEquals(site_url().'/messages/folder/outbox', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		// marker of conversation + inbox + spam/ham button
@@ -1966,9 +1966,9 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(DBSetup::messages_per_sender + DBSetup::messages_per_recipient - $offset, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(2, $crawler->filter('#back_threadlist')->count());
-		$this->assertEquals('‹‹ Back to Sent items', $this->crawler_text($crawler->filter('#back_threadlist')));
-		$this->assertEquals(site_url().'/messages/folder/sentitems', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(2, $crawler->filter('.back_threadlist')->count());
+		$this->assertEquals('‹‹ Back to Sent items', $this->crawler_text($crawler->filter('.back_threadlist')));
+		$this->assertEquals(site_url().'/messages/folder/sentitems', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		// marker of conversation + inbox + spam/ham button
@@ -2052,9 +2052,9 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(DBSetup::messages_per_sender - $offset, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(2, $crawler->filter('#back_threadlist')->count());
-		$this->assertEquals('‹‹ Back to Spam', $this->crawler_text($crawler->filter('#back_threadlist')));
-		$this->assertEquals(site_url().'/messages/my_folder/inbox/6', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(2, $crawler->filter('.back_threadlist')->count());
+		$this->assertEquals('‹‹ Back to Spam', $this->crawler_text($crawler->filter('.back_threadlist')));
+		$this->assertEquals(site_url().'/messages/my_folder/inbox/6', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		// marker of conversation + inbox + spam/ham button
@@ -2138,9 +2138,9 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(DBSetup::messages_per_recipient + DBSetup::messages_per_sender - $offset, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(2, $crawler->filter('#back_threadlist')->count());
-		$this->assertEquals('‹‹ Back to Trash', $this->crawler_text($crawler->filter('#back_threadlist')));
-		$this->assertEquals(site_url().'/messages/my_folder/inbox/5', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(2, $crawler->filter('.back_threadlist')->count());
+		$this->assertEquals('‹‹ Back to Trash', $this->crawler_text($crawler->filter('.back_threadlist')));
+		$this->assertEquals(site_url().'/messages/my_folder/inbox/5', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		// marker of conversation + inbox + spam/ham button
@@ -2224,9 +2224,9 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(DBSetup::messages_per_recipient + DBSetup::messages_per_sender - $offset, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(2, $crawler->filter('#back_threadlist')->count());
-		$this->assertEquals('‹‹ Back to Trash', $this->crawler_text($crawler->filter('#back_threadlist')));
-		$this->assertEquals(site_url().'/messages/my_folder/sentitems/5', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(2, $crawler->filter('.back_threadlist')->count());
+		$this->assertEquals('‹‹ Back to Trash', $this->crawler_text($crawler->filter('.back_threadlist')));
+		$this->assertEquals(site_url().'/messages/my_folder/sentitems/5', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		// marker of conversation + inbox + spam/ham button
@@ -2311,9 +2311,9 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(DBSetup::messages_per_recipient + DBSetup::messages_per_sender - $offset, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(2, $crawler->filter('#back_threadlist')->count());
-		$this->assertEquals('‹‹ Back to User3, Folder1 (id:15)', $this->crawler_text($crawler->filter('#back_threadlist')));
-		$this->assertEquals(site_url().'/messages/my_folder/inbox/'.$id_folder, $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(2, $crawler->filter('.back_threadlist')->count());
+		$this->assertEquals('‹‹ Back to User3, Folder1 (id:15)', $this->crawler_text($crawler->filter('.back_threadlist')));
+		$this->assertEquals(site_url().'/messages/my_folder/inbox/'.$id_folder, $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		// marker of conversation + inbox + spam/ham button
@@ -2397,9 +2397,9 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals(DBSetup::messages_per_recipient + DBSetup::messages_per_sender - $offset, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(2, $crawler->filter('#back_threadlist')->count());
-		$this->assertEquals('‹‹ Back to User3, Folder1 (id:15)', $this->crawler_text($crawler->filter('#back_threadlist')));
-		$this->assertEquals(site_url().'/messages/my_folder/sentitems/'.$id_folder, $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(2, $crawler->filter('.back_threadlist')->count());
+		$this->assertEquals('‹‹ Back to User3, Folder1 (id:15)', $this->crawler_text($crawler->filter('.back_threadlist')));
+		$this->assertEquals(site_url().'/messages/my_folder/sentitems/'.$id_folder, $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		// marker of conversation + inbox + spam/ham button
@@ -2484,9 +2484,9 @@ class Messages_conversation_test extends KalkunTestCase {
 		$this->assertEquals($total_number_of_records - $offset, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(2, $crawler->filter('#back_threadlist')->count());
-		$this->assertEquals('‹‹ Back to Phonebook', $this->crawler_text($crawler->filter('#back_threadlist')));
-		$this->assertEquals(site_url().'/messages/folder/phonebook', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(2, $crawler->filter('.back_threadlist')->count());
+		$this->assertEquals('‹‹ Back to Phonebook', $this->crawler_text($crawler->filter('.back_threadlist')));
+		$this->assertEquals(site_url().'/messages/folder/phonebook', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		// marker of conversation + inbox + spam/ham button

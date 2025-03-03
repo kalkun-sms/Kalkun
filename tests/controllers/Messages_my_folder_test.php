@@ -1250,9 +1250,9 @@ class Messages_my_folder_test extends KalkunTestCase {
 		$this->assertEquals(0, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(0, $crawler->filter('#back_threadlist')->count());
-		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('#back_threadlist')));
-		//$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(0, $crawler->filter('.back_threadlist')->count());
+		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('.back_threadlist')));
+		//$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		$this->assertEquals(0, $crawler->filter('.recover_button')->count());
@@ -1340,9 +1340,9 @@ class Messages_my_folder_test extends KalkunTestCase {
 		$this->assertEquals(0, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(0, $crawler->filter('#back_threadlist')->count());
-		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('#back_threadlist')));
-		//$this->_assertStringContainsString(site_url().'/messages/folder/inbox', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(0, $crawler->filter('.back_threadlist')->count());
+		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('.back_threadlist')));
+		//$this->_assertStringContainsString(site_url().'/messages/folder/inbox', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		$this->assertEquals(0, $crawler->filter('.recover_button')->count());
@@ -1431,9 +1431,9 @@ class Messages_my_folder_test extends KalkunTestCase {
 		$this->assertEquals(0, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(0, $crawler->filter('#back_threadlist')->count());
-		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('#back_threadlist')));
-		//$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(0, $crawler->filter('.back_threadlist')->count());
+		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('.back_threadlist')));
+		//$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		$this->assertEquals(0, $crawler->filter('.recover_button')->count());
@@ -1522,9 +1522,9 @@ class Messages_my_folder_test extends KalkunTestCase {
 		$this->assertEquals(0, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(0, $crawler->filter('#back_threadlist')->count());
-		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('#back_threadlist')));
-		//$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(0, $crawler->filter('.back_threadlist')->count());
+		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('.back_threadlist')));
+		//$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		$this->assertEquals(0, $crawler->filter('.recover_button')->count());
@@ -1610,9 +1610,9 @@ class Messages_my_folder_test extends KalkunTestCase {
 		$this->assertEquals(0, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(0, $crawler->filter('#back_threadlist')->count());
-		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('#back_threadlist')));
-		//$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(0, $crawler->filter('.back_threadlist')->count());
+		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('.back_threadlist')));
+		//$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.recover_button')->count());
@@ -1698,9 +1698,9 @@ class Messages_my_folder_test extends KalkunTestCase {
 		$this->assertEquals(0, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(0, $crawler->filter('#back_threadlist')->count());
-		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('#back_threadlist')));
-		//$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(0, $crawler->filter('.back_threadlist')->count());
+		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('.back_threadlist')));
+		//$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.recover_button')->count());
@@ -1783,9 +1783,9 @@ class Messages_my_folder_test extends KalkunTestCase {
 		$this->assertEquals(0, $crawler->filter('div.messagelist_conversation')->count());
 
 		// navigation.php (buttons)
-		$this->assertEquals(0, $crawler->filter('#back_threadlist')->count());
-		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('#back_threadlist')));
-		//$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('#back_threadlist')->attr('href'));
+		$this->assertEquals(0, $crawler->filter('.back_threadlist')->count());
+		//$this->assertEquals('Back to Inbox', $this->crawler_text($crawler->filter('.back_threadlist')));
+		//$this->assertEquals(site_url().'/messages/folder/inbox', $crawler->filter('.back_threadlist')->attr('href'));
 		$this->assertEquals(2, $crawler->filter('.select_all_button')->count());
 		$this->assertEquals(2, $crawler->filter('.clear_all_button')->count());
 		$this->assertEquals(0, $crawler->filter('.recover_button')->count());
