@@ -1230,7 +1230,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 
 		$this->assertEquals(1, $crawler->filter('#js_function')->count());
 		$this->assertEquals(0, $crawler->filter('#js_conversation')->count());
-		$this->assertEquals(16, $crawler->filter('div.move_to')->attr('id'));
+		$this->assertEquals(16, $crawler->filter('div.move_to')->attr('data-id_folder'));
 		$this->assertEquals(1, $crawler->filter('#renamefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletealldialog')->count());
@@ -1321,7 +1321,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 
 		$this->assertEquals(1, $crawler->filter('#js_function')->count());
 		$this->assertEquals(0, $crawler->filter('#js_conversation')->count());
-		$this->assertEquals(16, $crawler->filter('div.move_to')->attr('id'));
+		$this->assertEquals(16, $crawler->filter('div.move_to')->attr('data-id_folder'));
 		$this->assertEquals(1, $crawler->filter('#renamefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletealldialog')->count());
@@ -1411,7 +1411,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 
 		$this->assertEquals(1, $crawler->filter('#js_function')->count());
 		$this->assertEquals(0, $crawler->filter('#js_conversation')->count());
-		$this->assertEquals(16, $crawler->filter('div.move_to')->attr('id'));
+		$this->assertEquals(16, $crawler->filter('div.move_to')->attr('data-id_folder'));
 		$this->assertEquals(1, $crawler->filter('#renamefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletealldialog')->count());
@@ -1502,7 +1502,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 
 		$this->assertEquals(1, $crawler->filter('#js_function')->count());
 		$this->assertEquals(0, $crawler->filter('#js_conversation')->count());
-		$this->assertEquals(16, $crawler->filter('div.move_to')->attr('id'));
+		$this->assertEquals(16, $crawler->filter('div.move_to')->attr('data-id_folder'));
 		$this->assertEquals(1, $crawler->filter('#renamefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletealldialog')->count());
@@ -1590,7 +1590,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 		$this->assertEquals(1, $crawler->filter('#js_function')->count());
 		$this->assertEquals(0, $crawler->filter('#js_conversation')->count());
 		$this->assertEquals(2, $crawler->filter('div.move_to')->count());
-		$this->assertEquals(11, $crawler->filter('div.move_to')->attr('id'));
+		$this->assertEquals(11, $crawler->filter('div.move_to')->attr('data-id_folder'));
 		$this->assertEquals(1, $crawler->filter('#renamefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletealldialog')->count());
@@ -1677,7 +1677,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 
 		$this->assertEquals(1, $crawler->filter('#js_function')->count());
 		$this->assertEquals(0, $crawler->filter('#js_conversation')->count());
-		$this->assertEquals(11, $crawler->filter('div.move_to')->attr('id'));
+		$this->assertEquals(11, $crawler->filter('div.move_to')->attr('data-id_folder'));
 		$this->assertEquals(1, $crawler->filter('#renamefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletealldialog')->count());
@@ -1766,7 +1766,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 		$this->assertEquals(1, $crawler->filter('#js_function')->count());
 		$this->assertEquals(0, $crawler->filter('#js_conversation')->count());
 		$this->assertEquals(2, $crawler->filter('div.move_to')->count());
-		$this->assertEquals(15, $crawler->filter('div.move_to')->attr('id'));
+		$this->assertEquals(15, $crawler->filter('div.move_to')->attr('data-id_folder'));
 		$this->assertEquals(1, $crawler->filter('#renamefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletefolderdialog')->count());
 		$this->assertEquals(1, $crawler->filter('#deletealldialog')->count());
