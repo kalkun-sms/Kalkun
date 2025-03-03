@@ -1,6 +1,7 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
+    ->in('application')
     //->notPath('file.php')
     ->notPath('libraries/abstract.plugins.php')
     ->exclude('libraries/b8/')
@@ -13,7 +14,6 @@ $finder = PhpCsFixer\Finder::create()
     ->exclude('plugins/sms_to_twitter/libraries/')
     ->exclude('plugins/sms_to_xmpp/libraries/abhinavsingh-JAXL-5829c3b/')
     ->exclude('plugins/soap/libraries/')
-    ->exclude('tests/mocks/libraries/')
     ->exclude('third_party/')
     ->notPath('config/autoload.php')
     ->notPath('config/config.php')
@@ -33,6 +33,16 @@ $finder = PhpCsFixer\Finder::create()
     ->notPath('config/user_agents.php')
     ->notPath('models/Plugins_model.php')
     ->notPath('helpers/plugin_helper.php')
-    ->in('application')
-    //->in(__DIR__)
 ;
+
+$finder_tests = PhpCsFixer\Finder::create()
+    ->in('tests')
+    ->notPath('mocks/autoloader.php')
+    ->exclude('mocks/libraries/')
+    ->notName('Bootstrap.php')
+    ->notName('DbTestCase.php')
+    ->notName('TestCase.php')
+    ->notName('UnitTestCase.php')
+;
+
+$finder->append($finder_tests);

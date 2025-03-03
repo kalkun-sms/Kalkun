@@ -3,6 +3,7 @@
     <description>CodeIgniter3 coding standard for Kalkun as described at https://codeigniter.com/userguide3/general/styleguide.html</description>
 
     <file>../../application</file>
+    <file>../../tests</file>
 
     <exclude-pattern>libraries/abstract.plugins.php</exclude-pattern>
     <exclude-pattern>libraries/b8</exclude-pattern>
@@ -16,6 +17,11 @@
     <exclude-pattern>plugins/sms_to_xmpp/libraries/</exclude-pattern>
     <exclude-pattern>plugins/soap/libraries</exclude-pattern>
     <exclude-pattern>tests/mocks/libraries</exclude-pattern>
+    <exclude-pattern>tests/mocks/autoloader.php</exclude-pattern>
+    <exclude-pattern>tests/Bootstrap.php</exclude-pattern>
+    <exclude-pattern>tests/DbTestCase.php</exclude-pattern>
+    <exclude-pattern>tests/TestCase.php</exclude-pattern>
+    <exclude-pattern>tests/UnitTestCase.php</exclude-pattern>
     <exclude-pattern>third_party</exclude-pattern>
     <exclude-pattern>plugins/sms_credit/views</exclude-pattern>
     <exclude-pattern>plugins/sms_to_xmpp/views</exclude-pattern>
@@ -28,9 +34,7 @@
     <exclude-pattern>plugins/sms_to_twitter/views</exclude-pattern>
     <exclude-pattern>plugins/blacklist_number/views</exclude-pattern>
     <exclude-pattern>plugins/soap/views</exclude-pattern>
-    <exclude-pattern>tests</exclude-pattern>
     <exclude-pattern>views</exclude-pattern>
-
     <rule ref="CodeIgniter">
         <exclude name="CodeIgniter.Files.ClosingLocationComment"/>
         <exclude name="CodeIgniter.Files.ClosingFileComment"/>
