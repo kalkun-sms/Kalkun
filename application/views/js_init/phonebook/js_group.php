@@ -5,7 +5,7 @@
 		$('#addpbkgroup, a.editpbkgroup').on('click', null, function() {
 			if ($(this).hasClass('editpbkgroup')) {
 				var id = $(this).parents("tr:first").attr("id");
-				var public = $(this).parents("tr:first").attr("public");
+				var public = $(this).parents("tr:first").attr("data-public");
 				var dialog_title = <?php echo tr_js('Manage group'); ?>;
 				var groupname = $(this).parents("div:eq(1)").find("span.groupname").text();
 				$('input#group_name').val(groupname);
