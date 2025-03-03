@@ -74,7 +74,7 @@
 
 <!-- Add STOP dialog -->
 <div id="stop-dialog" title="<?php echo tr('Add STOP record'); ?>" class="dialog">
-	<p id="validateTips"><?php echo tr('All form fields are required.'); ?></p>
+	<p class="validateTips"><?php echo tr('All form fields are required.'); ?></p>
 	<?php echo form_open('plugin/stop_manager', array('id' => 'addStopForm', 'class' => 'addstopform')); ?>
 	<fieldset>
 		<label for="destination_number"><?php echo tr('Phone number'); ?></label>

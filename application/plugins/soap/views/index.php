@@ -10,7 +10,7 @@ $this->load->view('js_remote_access');
 ?>
 <!-- Add Remote Access dialog -->
 <div id="remoteaccess-dialog" title="Add Remote Access" class="dialog">
-	<p id="validateTips">All form fields are required.</p>
+	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/soap', array('class' => 'addremoteaccessform')); ?>
 	<fieldset>
 		<label for="access_name">Access Name</label>
@@ -27,7 +27,7 @@ $this->load->view('js_remote_access');
 
 <!-- Edit Remote access dialog -->
 <div id="editremoteaccess-dialog" title="Edit Remote Access" class="dialog">
-	<p id="validateTips">All form fields are required.</p>
+	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/soap', array('class' => 'editremoteaccessform')); ?>
 	<fieldset>
 		<input type="hidden" name="editid_remote_access" id="editid_remote_access" />
@@ -112,7 +112,7 @@ $this->load->view('js_remote_access');
 <!-- NOTIFICATION -->
 <!-- Add Remote Access dialog -->
 <div id="notification-dialog" title="Add Notification" class="dialog">
-	<p id="validateTips">All form fields are required.</p>
+	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/soap', array('class' => 'addnotificationform')); ?>
 	<fieldset>
 		<label for="notifynumber">Number</label>

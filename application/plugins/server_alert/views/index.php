@@ -3,7 +3,7 @@
 
 <!-- Add Alert dialog -->
 <div id="alert-dialog" title="Add Server Alert" class="dialog">
-	<p id="validateTips">All form fields are required.</p>
+	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/server_alert', array('class' => 'addserveralertform')); ?>
 	<fieldset>
 		<label for="alert_name">Alert Name</label>
@@ -29,7 +29,7 @@
 
 <!-- Edit Alert dialog -->
 <div id="editalert-dialog" title="Edit Server Alert" class="dialog">
-	<p id="validateTips">All form fields are required.</p>
+	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/server_alert', array('class' => 'editserveralertform')); ?>
 	<fieldset>
 		<input type="hidden" name="editid_server_alert" id="editid_server_alert" />
