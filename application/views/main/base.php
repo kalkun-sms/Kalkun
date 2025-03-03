@@ -6,7 +6,7 @@
 
 	<div class="detail" style="float: left">
 		<center>
-			<div class="base_bg rounded"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></div>
+			<div class="base_bg rounded"><img src="<?php echo $this->config->item('img_path');?>logo.png" alt="Kalkun logo" /></div>
 			<h1><?php echo tr('PHP Frontend for gammu-smsd'); ?></h1>
 		</center>
 		<table>

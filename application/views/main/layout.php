@@ -14,7 +14,7 @@ echo doctype('html5');?>
 	<div id="main_container">
 		<div id="header">
 			<div id="header_left">
-				<div id="logo"><a href="javascript:void(0);"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></a></div>
+				<div id="logo"><a href="javascript:void(0);"><img src="<?php echo $this->config->item('img_path');?>logo.png" alt="Kalkun logo" /></a></div>
 
 			</div>
 			<div id="header_right">
