@@ -157,9 +157,9 @@ if ($tmp['source'] === 'sentitems'):
 	endif; ?>
 
 		<div class="detail_area hidden <?php echo htmlentities($number, ENT_QUOTES); ?>">
-			<table cellspacing="0" cellpadding="0" border="0">
+			<table>
 				<tr>
-					<td width="50px"><?php  if ($tmp['source'] === 'inbox')
+					<td><?php  if ($tmp['source'] === 'inbox')
 	{
 		echo tr('From');
 	}
@@ -167,7 +167,7 @@ if ($tmp['source'] === 'sentitems'):
 	{
 		echo tr('To');
 	} ?></td>
-					<td width="10px"> : </td>
+					<td> : </td>
 					<td><?php echo htmlentities($number, ENT_QUOTES); ?></td>
 				</tr>
 
