@@ -4,6 +4,7 @@ set -e
 
 TESTSDIR="tests/"
 ENABLE_MONKEY_PATCHING=false
+PHPUNIT_OUTPUT_TO_STDERR=false
 
 mkdir -p "${TESTSDIR}"
 php vendor/kenjis/ci-phpunit-test/install.php -t "${TESTSDIR}" --from-composer
@@ -23,6 +24,20 @@ sed -i "/define('FCPATH'/ s#'/../..'#'/..'#" "${TESTSDIR}"/Bootstrap.php
 for dir in controllers models views libraries helpers hooks views/errors; do
   sed -i "s#>../$dir<#>../application/$dir<#" "${TESTSDIR}/phpunit.xml"
 done
+
+if [ "$PHPUNIT_OUTPUT_TO_STDERR" = "true" ]; then
+  # Workaround for phpunit < 10
+  # On CI with PHP <= 8.0, which runs tests with phpunit 9 we have this error on tests that use session_start()
+  #   ErrorException: session_start(): Session cannot be started after headers have already been sent
+  # To solve this:
+  #  (1) Either run phpunit with --stderr on these versions (this is set in phpunit.xml file)
+  #      See: https://github.com/sebastianbergmann/phpunit/issues/1416#issuecomment-53951936
+  #  (2) Don't call session_start() at all when on CLI (which is always the case for tests). This is the
+  #      present solution.
+  if ! vendor/bin/phpunit --atleast-version 10; then
+    sed -i 's/bootstrap=/stderr="true" bootstrap=/' "${TESTSDIR}"phpunit.xml
+  fi
+fi
 
 # Uncomment the monkey patcher function. This will search the line matching "Enabling Monkey Patching"
 # then search the next "/*", delete that line, search the next "*/" and delete the line, write, and quit.
