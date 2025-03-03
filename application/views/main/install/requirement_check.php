@@ -2,7 +2,7 @@
 <h2><?php echo tr('Requirements check'); ?></h2>
 <p>This page checks if your system is compatible with Kalkun.</p>
 
-<table border="0" cellspacing="0" cellpadding="0" class="simpletable">
+<table class="simpletable">
 	<tr>
 		<th>Component</th>
 		<th>Required</th>
@@ -163,7 +163,7 @@
 		?>
 		</td>
 	</tr>
-	<?php endif; ?></td>
+	<?php endif; ?>
 
 </table>
 
@@ -193,19 +193,17 @@
 <div>
 	<p>Your system is compatible with Kalkun.</p>
 	<p>&nbsp;</p>
-	<p>
-		<?php
+	<?php
 	echo form_open('install', 'style="display:inline"');
 	echo form_hidden('idiom', $idiom);
 	echo form_submit('submit', '‹ '.tr_raw('Previous'), 'class="button"');
 	echo form_close();
 ?>
-		<?php
+	<?php
 	echo form_open('install/database_setup', 'style="display:inline"');
 	echo form_hidden('idiom', $idiom);
 	echo form_submit('submit', tr_raw('Next').' ›', 'class="button"');
 	echo form_close();
 ?>
-	</p>
 </div>
 <?php endif; ?>
