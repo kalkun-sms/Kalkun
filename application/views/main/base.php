@@ -5,10 +5,10 @@
 	</div>
 
 	<div class="detail" style="float: left">
-		<center>
-			<div class="base_bg rounded"><img src="<?php echo $this->config->item('img_path');?>logo.png" alt="Kalkun logo" /></div>
-			<h1><?php echo tr('PHP Frontend for gammu-smsd'); ?></h1>
-		</center>
+		<div style="text-align: center">
+			<div class="base_bg rounded" style="text-align: center;"><img src="<?php echo $this->config->item('img_path');?>logo.png" alt="Kalkun logo" /></div>
+			<h1 style><?php echo tr('PHP Frontend for gammu-smsd'); ?></h1>
+		</div>
 		<table>
 			<tr valign="top">
 				<td><b><?php echo tr('Authors'); ?>:</b></td>
@@ -37,9 +37,9 @@
 			</tr>
 		</table>
 		<br />
-		<!--center>
+		<!--div style="text-align: center">
 			<a class="underline_link" href="https://kalkun.sourceforge.io/contribute.php"><b>~ DONATE THIS PROJECT ~</b></a>
-		</center-->
+		</div-->
 		<hr style="border-style: solid; border-color: #86C0D2;" />
 		<p>If you find an issue, please report it on the <a class="base_color underline_link" href="https://github.com/kalkun-sms/Kalkun/issues" target="_blank">issue page of the project</a> and add the information below:</p>
 		<p>
@@ -89,9 +89,9 @@
 
 
 	<div class="detail" style="float: left">
-		<center>
+		<div style="text-align: center">
 			<h1><?php echo tr('Keyboard shortcuts'); ?></h1>
-		</center>
+		</div>
 
 		<table>
 			<tr valign="top">
