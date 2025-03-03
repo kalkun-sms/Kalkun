@@ -4,7 +4,7 @@ echo '<p><i>'.tr('No group detected, add one first.').'</i></p>';
 else: ?>
 <table>
 	<?php foreach ($group->result() as $tmp): ?>
-	<tr id="<?php echo $tmp->ID;?>" public="<?php echo $tmp->is_public;?>">
+	<tr id="<?php echo $tmp->ID;?>" data-public="<?php echo $tmp->is_public;?>">
 		<td>
 			<div class="two_column_container contact_list hover_show">
 				<div class="left_column">
