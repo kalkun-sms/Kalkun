@@ -55,7 +55,20 @@
 		<a href="javascript:void(0);" id="addalertbutton" class="nicebutton">&#43; Add Server Alert</a>
 	</div>
 
-	<table class="nice-table" cellpadding="0" cellspacing="0">
+	<table class="nice-table">
+		<tr style="display: none">
+			<!-- this is a hack to pass validation https://stackoverflow.com/a/52175495 -->
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
 		<tr>
 			<th class="nice-table-left">No.</th>
 			<th>Alert Name</th>
@@ -64,13 +77,13 @@
 			<th class="hidden">Connect Timeout</th>
 			<th><?php echo tr('Phone number'); ?></th>
 			<th class="hidden">Respond Message</th>
-			<th align="center" class="nice-table-right" colspan="3">Control</th>
+			<th style="text-align: center" class="nice-table-right" colspan="3">Control</th>
 		</tr>
 
 		<?php
 		if ($alert->num_rows() === 0)
 		{
-			echo '<tr><td colspan="8" style="border-left: 1px solid #000; border-right: 1px solid #000;">No alert found.</td></tr>';
+			echo '<tr><td colspan="10" style="border-left: 1px solid #000; border-right: 1px solid #000;">No alert found.</td></tr>';
 		}
 		else
 		{
@@ -85,12 +98,12 @@
 			<td class="phone_number"><?php echo htmlentities(phone_format_human($tmp->phone_number), ENT_QUOTES); ?></td>
 			<td class="respond_message hidden"><?php echo htmlentities($tmp->respond_message, ENT_QUOTES); ?></td>
 			<?php if ($tmp->status === 'false'):?>
-			<td><a href="javascript:void(0);" class="release"><img class="ui-icon ui-icon-locked" title="<?php echo tr('Release state'); ?>" /></a></td>
+			<td><a href="javascript:void(0);" class="release"><span class="ui-icon ui-icon-locked" title="<?php echo tr('Release state'); ?>"></span></a></td>
 			<?php
 				else: echo '<td>&nbsp;</td>';
 			endif; ?>
-			<td><a href="javascript:void(0);" class="edit"><img class="ui-icon ui-icon-pencil" title="<?php echo tr('Edit'); ?>" /></a></td>
-			<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><img class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>" /></a></td>
+			<td><a href="javascript:void(0);" class="edit"><span class="ui-icon ui-icon-pencil" title="<?php echo tr('Edit'); ?>"></span></a></td>
+			<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><span class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>"></span></a></td>
 		</tr>
 
 		<?php
@@ -99,7 +112,7 @@
 		}
 		?>
 		<tr>
-			<th colspan="8" class="nice-table-footer">
+			<th colspan="10" class="nice-table-footer">
 				<div class="simplepaging"><?php echo $this->pagination->create_links();?></div>
 			</th>
 		</tr>

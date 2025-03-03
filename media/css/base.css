@@ -840,6 +840,8 @@ label.error {
 /* Table */
 .nice-table {
 	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 .nice-table th {
@@ -1260,4 +1262,18 @@ table.settings td:first-child {
 }
 table.settings tr {
 	vertical-align: top;
+}
+
+table.sms_to_email th,
+table.sms_to_email td {
+	padding: 5px;
+}
+table.sms_to_email {
+	width: 100%;
+}
+table.sms_to_email tr {
+	vertical-align: top;
+}
+table.sms_to_email td:first-child {
+	width: 175px;
 }
