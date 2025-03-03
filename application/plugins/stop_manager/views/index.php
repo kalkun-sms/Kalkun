@@ -56,7 +56,7 @@
 		?>
 			<tr>
 				<th colspan="6" class="nice-table-footer">
-					<div id="simplepaging">
+					<div class="simplepaging">
 						<?php if (is_null($this->input->post('search_name')))
 		{
 			echo $this->pagination->create_links();
