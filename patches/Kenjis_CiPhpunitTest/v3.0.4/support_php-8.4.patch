@@ -1,0 +1,66 @@
+Description: Fixes deprecation warning
+ Implicitly marking parameter $params as nullable is deprecated, the explicit nullable type must be used instead
+ We use a syntax that is also valid for php 5.6
+
+--- a/application/tests/_ci_phpunit_test/CIPHPUnitTest.php
++++ b/application/tests/_ci_phpunit_test/CIPHPUnitTest.php
+@@ -26,7 +26,7 @@
+ 	 *
+ 	 * @codeCoverageIgnore
+ 	 */
+-	public static function init(array $autoload_dirs = null)
++	public static function init($autoload_dirs = null)
+ 	{
+ 		self::defineConstants();
+ 
+--- a/application/tests/_ci_phpunit_test/CIPHPUnitTestAutoloader.php
++++ b/application/tests/_ci_phpunit_test/CIPHPUnitTestAutoloader.php
+@@ -30,8 +30,8 @@
+ 	 * @param array $dirs directories to search file
+ 	 */
+ 	public function __construct(
+-		CIPHPUnitTestFileCache $cache = null,
+-		array $dirs = null
++		$cache = null,
++		$dirs = null
+ 	)
+ 	{
+ 		$this->cache = $cache;
+--- a/application/tests/_ci_phpunit_test/patcher/MonkeyPatch.php
++++ b/application/tests/_ci_phpunit_test/patcher/MonkeyPatch.php
+@@ -93,7 +93,7 @@
+ 	 * @param array $params        parameters
+ 	 */
+ 	public static function verifyInvokedMultipleTimes(
+-		$class_method, $times, array $params = null
++		$class_method, $times, $params = null
+ 	)
+ 	{
+ 		$classname = self::getClassname($class_method);
+@@ -106,7 +106,7 @@
+ 	 * @param string $class_method class::method or function name
+ 	 * @param array $params        parameters
+ 	 */
+-	public static function verifyInvoked($class_method, array $params = null)
++	public static function verifyInvoked($class_method, $params = null)
+ 	{
+ 		$classname = self::getClassname($class_method);
+ 		$classname::setExpectedInvocations(
+@@ -118,7 +118,7 @@
+ 	 * @param string $class_method class::method or function name
+ 	 * @param array $params        parameters
+ 	 */
+-	public static function verifyInvokedOnce($class_method, array $params = null)
++	public static function verifyInvokedOnce($class_method, $params = null)
+ 	{
+ 		$classname = self::getClassname($class_method);
+ 		$classname::setExpectedInvocations(
+@@ -130,7 +130,7 @@
+ 	 * @param string $class_method class::method or function name
+ 	 * @param array $params        parameters
+ 	 */
+-	public static function verifyNeverInvoked($class_method, array $params = null)
++	public static function verifyNeverInvoked($class_method, $params = null)
+ 	{
+ 		$classname = self::getClassname($class_method);
+ 		$classname::setExpectedInvocations(
