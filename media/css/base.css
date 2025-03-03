@@ -1222,3 +1222,13 @@ input#groups {
 .shortcuts td.section {
 	text-align: center;
 }
+
+.sysinfo td:first-child {
+	width: 125px;
+}
+.sysinfo td:nth-child(2) {
+	width: 25px;
+}
+.sysinfo tr {
+	vertical-align: top;
+}
