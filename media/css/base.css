@@ -529,7 +529,7 @@ textarea {
 
 
 /* Dashboard */
-#dash_box_titlebar {
+.dash_box_titlebar {
 	padding: 5px 10px 3px 10px;
 	margin: 0px;
 	font-weight: bold;
@@ -537,18 +537,18 @@ textarea {
 	border-bottom: none;
 }
 
-#dash_box {
+.dash_box {
 	margin: 0px;
 	border: 1px solid #78A7B5;
 	border-top: none;
 	padding: 10px;
 }
 
-#dash_box p {
+.dash_box p {
 	line-height: 10px;
 }
 
-#dash_box p span {
+.dash_box p span {
 	display: inline-block;
 	width: 100px;
 }
