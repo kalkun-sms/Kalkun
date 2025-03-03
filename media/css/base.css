@@ -1197,19 +1197,19 @@ input#groups {
 	display: table;
 }
 
-.bttn-group button {
-	padding: 3px 8px;
+.bttn-group div {
+	padding: 1px 8px;
 	background: linear-gradient(to bottom, white, rgba(222, 222, 222, 1));
 	border: 1px outset #F0F0F0;
 	float: left;
 	font-family: inherit;
 }
 
-.bttn-group button:last-child {
+.bttn-group div:last-child {
 	margin-right: 0.7ex;
 }
 
-.bttn-group button a {
+.bttn-group div a {
 	text-decoration: none;
 	font-size: 11px;
 	color: #000;
