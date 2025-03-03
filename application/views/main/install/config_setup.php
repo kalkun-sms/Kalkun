@@ -2,9 +2,9 @@
 <p>This is the last step of the installation process.</p>
 <p>Check each item and update it if required.</p>
 
-<h4 align="center" style="padding-bottom: 5px; border-bottom: 1px solid #999">Kalkun configuration</h4>
+<h4 class="section">Kalkun configuration</h4>
 <table class="formtable" style="width: 100%">
-	<tr valign="top">
+	<tr>
 		<td>Encryption key</td>
 		<td>
 			<?php 	if ( ! $uses_default_encryption_key): ?>
@@ -17,7 +17,7 @@
 		</td>
 	</tr>
 
-	<tr valign="top">
+	<tr>
 		<td>Path to gammu</td>
 		<td>
 			<?php 	if (file_exists($config_gammu_path)): ?>
@@ -32,7 +32,7 @@
 			<?php endif; ?>
 		</td>
 	</tr>
-	<tr valign="top">
+	<tr>
 		<td>Path to gammu-smsd-inject</td>
 		<td>
 			<?php 	if (file_exists($config_gammu_sms_inject)): ?>
@@ -47,7 +47,7 @@
 			<?php endif; ?>
 		</td>
 	</tr>
-	<tr valign="top">
+	<tr>
 		<td>Path to gammu config file</td>
 		<td>
 			<?php 	if (file_exists($config_gammu_config)): ?>
@@ -65,7 +65,7 @@
 
 </table>
 
-<h4 align="center" style="padding-bottom: 5px; border-bottom: 1px solid #999">Daemon script configuration</h4>
+<h4 class="section">Daemon script configuration</h4>
 
 <p>Configuring the daemon scripts of Kalkun is mandatory to see the incoming messages in your inbox. See <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#configure-daemon--outbox_queue-scripts" target="_blank"><strong>instructions on the wiki</strong></a>.</p>
 
@@ -74,7 +74,7 @@
 <p>The checks below search for the <code>scripts</code> directory either next to the <code>index.php</code> file at the root of Kalkun, or one level above it.</p>
 
 <table class="formtable" style="width: 100%">
-	<tr valign="top">
+	<tr>
 		<td>Script path</td>
 		<td>
 			<?php if ($daemon_path !== FALSE): ?>
@@ -88,7 +88,7 @@
 	</tr>
 	<?php if ($daemon_path !== FALSE): ?>
 	<?php if ($is_windows === FALSE): ?>
-	<tr valign="top">
+	<tr>
 		<td>Script is executable</td>
 		<td>
 			<?php if ($daemon_path_is_executable): ?>
@@ -100,7 +100,7 @@
 		</td>
 		<?php endif; ?>
 	</tr>
-	<tr valign="top">
+	<tr>
 		<td>Path to PHP command</td>
 		<td>
 			<?php if ($daemon_php_path_exists): ?>
@@ -114,7 +114,7 @@
 			<?php endif; ?>
 		</td>
 	</tr>
-	<tr valign="top">
+	<tr>
 		<td>Path to PHP file</td>
 		<td>
 			<?php if ($daemon_daemon_path_exists): ?>
@@ -128,7 +128,7 @@
 			<?php endif; ?>
 		</td>
 	</tr>
-	<tr valign="top">
+	<tr>
 		<td>Kalkun URL</td>
 		<td>
 			<?php if ($daemon_url_matches_config): ?>
@@ -146,9 +146,9 @@
 
 </table>
 
-<h4 align="center" style="padding-bottom: 5px; border-bottom: 1px solid #999">Outbox queue script configuration</h4>
+<h4 class="section">Outbox queue script configuration</h4>
 <table class="formtable" style="width: 100%">
-	<tr valign="top">
+	<tr>
 		<td>Script path</td>
 		<td>
 			<?php if ($outbox_queue_path !== FALSE): ?>
@@ -162,7 +162,7 @@
 	</tr>
 	<?php if ($outbox_queue_path !== FALSE): ?>
 	<?php if ($is_windows === FALSE): ?>
-	<tr valign="top">
+	<tr>
 		<td>Script is executable</td>
 		<td>
 			<?php if ($outbox_queue_path_is_executable): ?>
@@ -173,7 +173,7 @@
 			<?php endif; ?>
 		</td>
 		<?php endif; ?>
-	<tr valign="top">
+	<tr>
 		<td>Path to PHP command</td>
 		<td>
 			<?php if ($outbox_queue_php_path_exists): ?>
@@ -187,7 +187,7 @@
 			<?php endif; ?>
 		</td>
 	</tr>
-	<tr valign="top">
+	<tr>
 		<td>Path to PHP file</td>
 		<td>
 			<?php if ($outbox_queue_daemon_path_exists): ?>
@@ -201,7 +201,7 @@
 			<?php endif; ?>
 		</td>
 	</tr>
-	<tr valign="top">
+	<tr>
 		<td>Kalkun URL</td>
 		<td>
 			<?php if ($outbox_queue_url_matches_config): ?>
@@ -219,9 +219,9 @@
 
 </table>
 
-<h4 align="center" style="padding-bottom: 5px; border-bottom: 1px solid #999">Gammu-smsd configuration</h4>
+<h4 class="section">Gammu-smsd configuration</h4>
 <table class="formtable" style="width: 100%">
-	<tr valign="top">
+	<tr>
 		<td>Gammu-smsd configuration</td>
 		<td><strong class="orange"><?php echo 'Unknown state'; ?></strong>
 			<br /><small>In the configuration file of gammu-smsd, you have to set the <code>RunOnReceive</code> directive and set its value to the path of the daemon script. <code>RunOnReceive</code> must be in the <code>[smsd]</code> section of the configuration file.
@@ -232,9 +232,9 @@
 
 </table>
 
-<h4 align="center" style="padding-bottom: 5px; border-bottom: 1px solid #999">HTTP server configuration</h4>
+<h4 class="section">HTTP server configuration</h4>
 <table class="formtable" style="width: 100%">
-	<tr valign="top">
+	<tr>
 		<td>CI_ENV environment variable</td>
 		<td>
 			<?php	if ($CI_ENV === 'production'): ?>
@@ -256,10 +256,10 @@
 </table>
 
 
-<h4 align="center" style="padding-bottom: 5px; border-bottom: 1px solid #999">Kalkun settings</h4>
+<h4 class="section">Kalkun settings</h4>
 <p>You may change additional settings in the configuration file of kalkun.
 <table class="formtable" style="width: 100%">
-	<tr valign="top">
+	<tr>
 		<td>Location</td>
 		<td>
 			<code><?php echo realpath(APPPATH.'config/kalkun_settings.php'); ?></code>
@@ -269,20 +269,20 @@
 <p>Find some suggestions of parameters you can change on the <a href="https://github.com/kalkun-sms/Kalkun/wiki/Configuration" target="_blank"><strong>configuration page of the wiki</strong></a>.</p>
 
 
-<h4 align="center" style="padding-bottom: 5px; border-bottom: 1px solid #999"><a name="install_file">Disable installation wizard</a></h4>
+<h4 class="section"><a name="install_file">Disable installation wizard</a></h4>
 <p>There is a <code>install</code> file located at the root of Kalkun directory. As long as it is present, you can only access the installation wizard. As soon as this file is removed, the installation wizard can't be accessed anymore.</p>
 <p>If the present configuration of Kalkun, as displayed, is satisfactory, you can now remove the <code>install</code> file located at the root of Kalkun directory.</p>
 
 <table class="formtable" style="width: 100%">
 	<?php if (file_exists($install_realpath)): ?>
-	<tr valign="top">
+	<tr>
 		<td>Location</td>
 		<td>
 			<code><?php echo $install_realpath; ?></code>
 		</td>
 	</tr>
 	<?php endif; ?>
-	<tr valign="top">
+	<tr>
 		<td>Status</td>
 		<td>
 			<?php if (file_exists($install_realpath)): ?>
@@ -296,7 +296,7 @@
 		</td>
 	</tr>
 	<?php if ( ! $needs_manual_install_file_deletion && ($this->input->post('remove_install_file') !== 'remove')): ?>
-	<tr valign="top">
+	<tr>
 		<td colspan="2">
 			<?php
 		echo form_open('install/config_setup#install_file', 'style="display:block; text-align:center"');
@@ -311,7 +311,7 @@
 </table>
 
 
-<h4 align="center" style="padding-bottom: 5px; border-bottom: 1px solid #999">Default credentials</h4>
+<h4 class="section">Default credentials</h4>
 
 <p>If this is your first setup, please note the default credentials.</p>
 <ul>
