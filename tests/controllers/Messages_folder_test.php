@@ -1303,8 +1303,8 @@ class Messages_folder_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(2, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(0, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$this->assertValidHtml($output);
 	}
@@ -1374,8 +1374,8 @@ class Messages_folder_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(2, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(0, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$this->assertValidHtml($output);
 	}
@@ -1446,8 +1446,8 @@ class Messages_folder_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(0, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(0, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$this->assertValidHtml($output);
 	}
@@ -1518,8 +1518,8 @@ class Messages_folder_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(0, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(0, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$this->assertValidHtml($output);
 	}
@@ -1590,8 +1590,8 @@ class Messages_folder_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(0, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(0, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$this->assertValidHtml($output);
 	}
@@ -1662,8 +1662,8 @@ class Messages_folder_test extends KalkunTestCase {
 		$this->assertEquals(2, $crawler->filter('.refresh_button')->count());
 		$this->assertEquals(0, $crawler->filter('.process_incoming_msgs_button')->count());
 		$this->assertEquals(0, $crawler->filter('.resend_bulk')->count());
-		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div#paging > span#current')));
-		$this->assertEquals(0, $crawler->filter('div#paging > span#current')->nextAll()->count());
+		$this->assertEquals($last_page, $this->crawler_text($crawler->filter('div.paging > span.current_page')));
+		$this->assertEquals(0, $crawler->filter('div.paging > span.current_page')->nextAll()->count());
 
 		$this->assertValidHtml($output);
 	}
