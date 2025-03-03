@@ -35,7 +35,7 @@
 						<div class="right_column">
 							<span class="pbk_menu">
 								<a class="delete_user simplelink" href="javascript:void(0);"><?php echo tr('Delete'); ?></a>
-								<img src="<?php echo $this->config->item('img_path')?>circle.gif" />
+								<img src="<?php echo $this->config->item('img_path')?>circle.gif" alt="dot" />
 								<a class="edit_user simplelink" href="javascript:void(0);"><?php echo tr('Edit'); ?></a>
 							</span>
 						</div>
