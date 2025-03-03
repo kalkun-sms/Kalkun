@@ -221,22 +221,22 @@ if ($tmp['source'] === 'sentitems'):
 				<li><a class="detail_button" href="javascript:void(0);"><?php echo tr('Show details'); ?></a></li>
 
 				<?php if ($tmp['source'] === 'inbox'): ?>
-				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" /></li>
+				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" alt="dot" /></li>
 				<li><a href="javascript:void(0);" class="reply_button"><?php echo tr('Reply'); ?></a></li>
 				<?php endif; ?>
 
 				<?php if ($type !== 'outbox'): ?>
-				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" /></li>
+				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" alt="dot" /></li>
 				<li><a href="javascript:void(0);" class="forward_button"><?php echo tr('Forward'); ?></a></li>
 				<?php endif; ?>
 
 				<?php if ( ! $on_pbk): ?>
-				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" /></li>
+				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" alt="dot" /></li>
 				<li><a href="javascript:void(0);" class="add_to_pbk"><?php echo tr('Add contact'); ?></a></li>
 				<?php endif; ?>
 
 				<?php if ($tmp['source'] === 'sentitems'): ?>
-				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" /></li>
+				<li><img src="<?php echo $this->config->item('img_path'); ?>circle.gif" alt="dot" /></li>
 				<li><a href="javascript:void(0);" class="resend"><?php echo tr('Resend'); ?></a></li>
 				<?php endif; ?>
 			</ul>
