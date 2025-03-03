@@ -61,7 +61,8 @@
                 "Revert & fix regression in 0.9.18": "patches/Econea_Nusoap/v0.9.18/0002-revert_fix_in_0.9.18.patch"
             },
             "kenjis/ci-phpunit-test": {
-                "Add support for PHP 8.2": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.2.patch"
+                "Add support for PHP 8.2": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.2.patch",
+                "Add support for PHP 8.4": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.4.patch"
             }
         }
     },
