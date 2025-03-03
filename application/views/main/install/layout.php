@@ -39,8 +39,7 @@ echo doctype('html5');?>
 </head>
 
 <body>
-	<center>
-		<div id="logo_only"><img src="<?php echo $this->config->item('img_path');?>logo.png"> </div>
+		<div id="logo_only"><img src="<?php echo $this->config->item('img_path');?>logo.png" alt="Kalkun logo"> </div>
 		<div id="arrow">&nbsp;</div>
 		<div id="container">
 			<div id="left-container"><?php $this->load->view($main);?></div>
@@ -55,7 +54,6 @@ echo doctype('html5');?>
 			</div>
 		</div>
 		<div id="footer">Powered by Kalkun <?php echo $this->config->item('kalkun_version');?></div>
-	</center>
 </body>
 
 </html>
