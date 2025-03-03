@@ -22,23 +22,23 @@ endforeach;
 	<?php if ($this->session->userdata('level') === 'admin'): ?>
 	<div class="dash_box_titlebar"><?php echo tr('System information');?></div>
 	<div class="dash_box">
-		<table>
+		<table class="sysinfo">
 			<tr>
-				<td width="125px"><?php echo tr('Operating system');?></td>
-				<td width="25px">:</td>
+				<td><?php echo tr('Operating system');?></td>
+				<td>:</td>
 				<td><?php echo  filter_data(PHP_OS); ?></td>
 			</tr>
-			<tr valign="top">
+			<tr>
 				<td><?php echo tr('Gammu version');?></td>
 				<td>:</td>
 				<td><?php echo  filter_data(htmlentities($this->Kalkun_model->get_gammu_info('gammu_version')->row('Client') !== NULL ? $this->Kalkun_model->get_gammu_info('gammu_version')->row('Client') : ''), ENT_QUOTES); ?></td>
 			</tr>
-			<tr valign="top">
+			<tr>
 				<td><?php echo tr('Gammu DB schema');?></td>
 				<td>:</td>
 				<td><?php echo  filter_data(htmlentities($this->Kalkun_model->get_gammu_info('db_version')->row('Version')), ENT_QUOTES); ?></td>
 			</tr>
-			<tr valign="top">
+			<tr>
 				<td><?php echo tr('Modem IMEI');?></td>
 				<td>:</td>
 				<td><?php echo  filter_data(htmlentities($this->Kalkun_model->get_gammu_info('phone_imei')->row('IMEI') !== NULL ? $this->Kalkun_model->get_gammu_info('phone_imei')->row('IMEI') : ''), ENT_QUOTES); ?></td>
