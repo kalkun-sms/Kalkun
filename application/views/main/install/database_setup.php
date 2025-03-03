@@ -1,8 +1,8 @@
 <h2><?php echo tr('Database setup'); ?></h2>
 <p>This step sets your database up for Kalkun.</p>
-<h4 align="center" style="padding-bottom: 5px; border-bottom: 1px solid #999">Database backend engine and gammu database version.</h4>
+<h4 class="section">Database backend engine and gammu database version.</h4>
 <table class="formtable">
-	<tr valign="top">
+	<tr>
 		<td>Database engine</td>
 		<td>
 			<strong><?php echo $db_property['human']; ?></strong>
@@ -10,7 +10,7 @@
 		</td>
 	</tr>
 	<?php if ($exception === NULL): ?>
-	<tr valign="top">
+	<tr>
 		<td>Gammu DB schema</td>
 		<td>
 			<?php if ($has_smsd_database): ?>
@@ -23,13 +23,13 @@
 	</tr>
 
 	<?php if ($has_smsd_database): ?>
-	<tr valign="top">
+	<tr>
 		<td>Gammu DB version</td>
 		<td><strong><?php echo htmlentities($this->Kalkun_model->get_gammu_info('db_version')->row('Version'), ENT_QUOTES); ?></strong>
 			<br /><small>As per the version stored in gammu database.</small>
 		</td>
 	</tr>
-	<tr valign="top">
+	<tr>
 		<td>Gammu phonebook table</td>
 		<td>
 			<?php 	if ($has_table_pbk): ?>
@@ -41,7 +41,7 @@
 		</td>
 	</tr>
 
-	<tr valign="top">
+	<tr>
 		<td>Kalkun DB</td>
 		<?php	if ($has_gammu_database): ?>
 		<td><strong class="green"><?php echo tr('Found'); ?></strong></td>
@@ -51,7 +51,7 @@
 	</tr>
 
 	<?php	if ($has_gammu_database): ?>
-	<tr valign="top">
+	<tr>
 		<td>Kalkun DB version</td>
 		<?php switch ($type):
 				case 'upgrade_not_supported':
@@ -73,7 +73,7 @@
 
 	<?php endif; ?>
 	<?php else: /* $exception !== NULL */ ?>
-	<tr valign="top">
+	<tr>
 		<td colspan="2">
 			<p class="red">There was a problem when trying to load the database.</p>
 			<p>Reported error is:</p>
@@ -85,7 +85,7 @@
 </table>
 <p>&nbsp;</p>
 
-<div align="center">
+<div style="margin-left: auto; margin-right: auto; width: fit-content;">
 	<?php if ($exception !== NULL || ! $has_smsd_database): ?>
 	<?php
 	echo form_open('install/database_setup');
@@ -117,8 +117,7 @@ endif; ?>
 
 <p>&nbsp;</p>
 <div>
-	<p>
-		<?php
+	<?php
 	echo form_open('install/requirement_check', 'style="display:inline"');
 	echo form_hidden('idiom', $idiom);
 	echo form_submit('submit', '‹ '.tr_raw('Previous'), 'class="button"');
@@ -130,5 +129,4 @@ endif; ?>
 		echo form_submit('submit', tr_raw('Continue').' ›', 'class="button"');
 		echo form_close();
 	endif; ?>
-	</p>
 </div>

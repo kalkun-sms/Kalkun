@@ -144,10 +144,12 @@ a {
 	background-color: #F5F5F5;
 	border: 1px solid #CCC;
 	padding: 10px;
+	width: 100%;
 }
 
 .formtable td {
 	padding: 5px;
+	vertical-align: top;
 }
 
 .formtable select {
@@ -169,4 +171,10 @@ a {
 .red {
 	color: red;
 	font-weight: bold;
+}
+
+h4.section {
+	text-align: center !important;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #999;
 }
