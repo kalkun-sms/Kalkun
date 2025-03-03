@@ -30,29 +30,29 @@
 	});
 
 </script>
-<table width="100%" cellpadding="5">
-	<tr valign="top">
-		<td width="175px"><?php echo tr('Name'); ?></td>
+<table class="settings">
+	<tr>
+		<td><?php echo tr('Name'); ?></td>
 		<td>
 			<input type="text" name="realname" value="<?php echo htmlentities($settings->row('realname'), ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
-	<tr valign="top">
+	<tr>
 		<td><?php echo tr('Username'); ?></td>
 		<td>
 			<input type="text" name="username" value="<?php echo htmlentities($settings->row('username'), ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
-	<tr valign="top">
+	<tr>
 		<td><?php echo tr('Telephone number'); ?></td>
 		<td>
 			<input type="text" id="phone_number" name="phone_number" value="<?php echo htmlentities($settings->row('phone_number'), ENT_QUOTES);?>" />
 		</td>
 	</tr>
 
-	<tr valign="top">
+	<tr>
 		<td><?php echo tr('Signature'); ?><br /><small><?php echo tr('Max. 50 characters'); ?></small></td>
 		<td>
 			<?php list($sig_option, $sig) = explode(';', $settings->row('signature'));?>

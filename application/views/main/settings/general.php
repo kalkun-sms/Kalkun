@@ -1,6 +1,6 @@
-<table width="100%" cellpadding="5">
-	<tr valign="top">
-		<td width="175px"><?php echo tr('Language'); ?></td>
+<table class="settings">
+	<tr>
+		<td><?php echo tr('Language'); ?></td>
 		<td>
 			<?php
 $lang = $this->lang->kalkun_supported_languages();
@@ -10,7 +10,7 @@ echo form_dropdown('language', $lang, $lang_act);
 		</td>
 	</tr>
 
-	<tr valign="top">
+	<tr>
 		<td><?php echo tr('Country calling code'); ?></td>
 		<td>
 			<?php
@@ -35,7 +35,7 @@ echo form_dropdown('dial_code', $country_calling_codes, $dial_code_act);
 		</td>
 	</tr>
 
-	<tr valign="top">
+	<tr>
 		<td><?php echo tr('Conversation sort'); ?></td>
 		<td>
 			<?php
@@ -46,7 +46,7 @@ echo form_dropdown('conversation_sort', $conv, $conv_act);
 		</td>
 	</tr>
 
-	<tr valign="top">
+	<tr>
 		<td><?php echo tr('Data per page'); ?></td>
 		<td>
 			<?php
@@ -58,7 +58,7 @@ echo form_dropdown('paging', $paging, $paging_act);
 		</td>
 	</tr>
 
-	<tr valign="top">
+	<tr>
 		<td><?php echo tr('Permanent delete'); ?></td>
 		<td>
 			<?php $permanent_act = $this->Kalkun_model->get_setting()->row('permanent_delete');?>
@@ -75,7 +75,7 @@ echo form_dropdown('paging', $paging, $paging_act);
 		</td>
 	</tr>
 
-	<tr valign="top">
+	<tr>
 		<td><?php echo tr('Delivery Report'); ?></td>
 		<td>
 			<?php
