@@ -16,28 +16,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *	INDIA NCPR(DND) Registry Check
 *	In order to avoid sending sms to NCPR registered phone numbers
 **/
-function DNDcheck($mobileno)
+if ( ! function_exists('DNDcheck'))
 {
-	$mobileno = substr($mobileno, -10, 10);
-	$url = 'http://www.nccptrai.gov.in/nccpregistry/saveSearchSub.misc';
-	$postString = 'phoneno=' . $mobileno;
-	$request = curl_init($url);
-	curl_setopt($request, CURLOPT_HEADER, 0);
-	//curl_setopt($request , CURLOPT_PROXY , '10.3.100.211:8080' );
-	curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($request, CURLOPT_POST, 1);
-	curl_setopt($request, CURLOPT_POSTFIELDS, $postString);
-	curl_setopt($request, CURLOPT_SSL_VERIFYPEER, FALSE);
-	$response = curl_exec($request);
-	curl_close ($request);
-
-	$httpcode = curl_getinfo($request, CURLINFO_HTTP_CODE);
-	if ($httpcode !== 200)
+	function DNDcheck($mobileno)
 	{
-		show_error('Failure while querying URL for DND check. URL reported error code: ' . $httpcode, 500);
-	}
+		$mobileno = substr($mobileno, -10, 10);
+		$url = 'http://www.nccptrai.gov.in/nccpregistry/saveSearchSub.misc';
+		$postString = 'phoneno=' . $mobileno;
+		$request = curl_init($url);
+		curl_setopt($request, CURLOPT_HEADER, 0);
+		//curl_setopt($request , CURLOPT_PROXY , '10.3.100.211:8080' );
+		curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($request, CURLOPT_POST, 1);
+		curl_setopt($request, CURLOPT_POSTFIELDS, $postString);
+		curl_setopt($request, CURLOPT_SSL_VERIFYPEER, FALSE);
+		$response = curl_exec($request);
+		curl_close ($request);
 
-	return (is_int(strpos(strtolower(strip_tags($response)), 'number is not')) ? FALSE : TRUE);
+		$httpcode = curl_getinfo($request, CURLINFO_HTTP_CODE);
+		if ($httpcode !== 200)
+		{
+			show_error('Failure while querying URL for DND check. URL reported error code: ' . $httpcode, 500);
+		}
+
+		return (is_int(strpos(strtolower(strip_tags($response)), 'number is not')) ? FALSE : TRUE);
+	}
 }
 
 function filter_data($data)
