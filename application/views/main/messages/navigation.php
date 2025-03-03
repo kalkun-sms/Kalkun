@@ -33,7 +33,7 @@
 		endif;
 	?>
 	<div class="bttn-group">
-		<div><?php echo anchor($anchor_url, $anchor_text, array('class' => 'button', 'id' => 'back_threadlist'));?></div>
+		<div><?php echo anchor($anchor_url, $anchor_text, array('class' => 'button back_threadlist'));?></div>
 	</div>
 
 	<?php endif;?>
