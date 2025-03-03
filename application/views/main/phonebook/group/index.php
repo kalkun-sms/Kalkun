@@ -15,7 +15,7 @@
 ?>
 	<input type="hidden" name="pbkgroup_id_user" value="<?php echo $this->session->userdata('id_user');?>" />
 	<input type="hidden" name="pbkgroup_id" class="pbkgroup_id" value="" />
-	<label for="name"><?php echo tr('Group name');?></label>
+	<label for="group_name"><?php echo tr('Group name');?></label>
 	<input type="text" name="group_name" id="group_name" class="text ui-widget-content ui-corner-all" />
 	<input type="checkbox" name="is_public" id="is_public" style="display: inline" />
 	<label for="is_public" style="display: inline"><?php echo tr('Set as public group');?></label>
