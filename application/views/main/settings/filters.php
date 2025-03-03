@@ -1,5 +1,5 @@
 <?php $this->load->view('js_init/js_filters');?>
-<div align="center">
+<div style="text-align: center">
 	<a href="javascript:void(0);" id="addnewfilter"><?php echo tr('Create a new filter');?></a>
 </div>
 
@@ -46,7 +46,7 @@
 	<label for="has_the_words"><?php echo tr('Has the words');?></label>
 	<input type="text" name="has_the_words" id="has_the_words" class="text ui-widget-content ui-corner-all" />
 
-	<label for="move_to"><?php echo tr('Move to');?></label>
+	<label for="id_folder"><?php echo tr('Move to');?></label>
 	<select name="id_folder" id="id_folder" style="width: 98%">
 		<?php foreach ($my_folders->result() as $my_folder): ?>
 		<option value="<?php echo $my_folder->id_folder; ?>"><?php echo htmlentities($my_folder->name, ENT_QUOTES); ?></option>
