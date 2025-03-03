@@ -3,6 +3,6 @@
 
 	</div>
 	<div class="right_column">
-		<div id="simplepaging" class="paging_grey"><?php echo $pagination_links;?></div>
+		<div class="paging_grey simplepaging"><?php echo $pagination_links;?></div>
 	</div>
 </div>

@@ -100,7 +100,7 @@
 		?>
 		<tr>
 			<th colspan="8" class="nice-table-footer">
-				<div id="simplepaging"><?php echo $this->pagination->create_links();?></div>
+				<div class="simplepaging"><?php echo $this->pagination->create_links();?></div>
 			</th>
 		</tr>
 

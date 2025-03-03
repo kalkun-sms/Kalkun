@@ -88,7 +88,7 @@ $this->load->view('js_remote_access');
 		?>
 		<tr>
 			<th colspan="8" class="nice-table-footer">
-				<div id="simplepaging"><?php echo $this->pagination->create_links();?></div>
+				<div class="simplepaging"><?php echo $this->pagination->create_links();?></div>
 			</th>
 		</tr>
 
@@ -147,7 +147,7 @@ $this->load->view('js_remote_access');
 		?>
 		<tr>
 			<th colspan="8" class="nice-table-footer">
-				<div id="simplepaging"></div>
+				<div class="simplepaging"></div>
 			</th>
 		</tr>
 	</table>
