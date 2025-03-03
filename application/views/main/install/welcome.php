@@ -13,14 +13,12 @@
 
 <p><?php echo tr('Installation steps'); ?></p>
 
-<p>
 <ol>
 	<li><?php echo tr('This welcome screen'); ?></li>
 	<li><?php echo tr('Requirements check'); ?></li>
 	<li><?php echo tr('Database installation or upgrade'); ?></li>
 	<li><?php echo tr('Final configuration steps'); ?></li>
 </ol>
-</p>
 
 <p>&nbsp;</p>
 
