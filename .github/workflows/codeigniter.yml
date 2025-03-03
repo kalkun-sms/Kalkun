@@ -65,14 +65,6 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extensions: ctype, curl, hash, intl, json, mbstring, session
           coverage: xdebug #optional
-      - name: Setup MySQL
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
-          collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
-          mysql version: '5.7' # Optional, default value is "latest". The version of the MySQL
-          mysql database: 'kalkun' # Optional, default value is "test". The specified database which will be create
-          mysql root password: password # Required if "mysql user" is empty, default is empty. The root superuser password
       - name: Get composer cache directory
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
@@ -88,17 +80,8 @@ jobs:
         run: |
           composer update
           composer install --no-progress --prefer-dist --optimize-autoloader
-      - name: Verify mysql connection
-        run: |
-          while ! mysqladmin ping -h"127.0.0.1" -P"3306" --silent; do
-            sleep 1
-          done
-      - name: Download Gammu DB Schema
-        uses: wei/wget@v1
-        with:
-          args: -O gammu.sql https://raw.githubusercontent.com/gammu/gammu/master/docs/sql/mysql.sql
-      - name: Import Gammu DB Schema
-        run: mysql -h"127.0.0.1" -P"3306" -uroot -ppassword kalkun < gammu.sql
+      - name: Start MySQL & PostgreSQL + create DB users
+        run: ./utils/db_create_user.sh
       - name: Install/Update ci-phpunit-test
         run: ./utils/prepare_tests_for_phpunit.sh
       - name: Test with phpunit
