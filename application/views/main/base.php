@@ -1,7 +1,7 @@
 <!-- About dialog -->
 <div id="about" title="<?php echo tr('About {0}', NULL, 'Kalkun');?>" class="dialog">
 	<div class="mascot" style="float: left;">
-		<img src="<?php echo $this->config->item('img_path');?>mascot.png" />
+		<img src="<?php echo $this->config->item('img_path');?>mascot.png" alt="Kalkun mascot" />
 	</div>
 
 	<div class="detail" style="float: left">
