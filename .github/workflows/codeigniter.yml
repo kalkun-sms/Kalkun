@@ -106,6 +106,7 @@ jobs:
         run: |
           sudo apt-get -y install tidy
           find ../vnu -name vnu.jar -exec mv '{}' utils \;
+          ./utils/start_vnu_http_server.sh
       - name: Install/Update ci-phpunit-test
         run: ./utils/prepare_tests_for_phpunit.sh
       - name: Test with phpunit
