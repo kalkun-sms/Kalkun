@@ -1,3 +1,6 @@
+-- SPDX-FileCopyrightText: 2009 - 2015 Michal Cihar <michal@cihar.com>
+-- SPDX-License-Identifier: GPL-2.0-only
+
 CREATE TABLE daemons (
   Start TEXT NOT NULL,
   Info TEXT NOT NULL

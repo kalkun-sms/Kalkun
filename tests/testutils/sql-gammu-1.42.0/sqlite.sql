@@ -1,3 +1,6 @@
+-- SPDX-FileCopyrightText: 2009 - 2019 Michal Cihar <michal@cihar.com>
+-- SPDX-License-Identifier: GPL-2.0-only
+
 CREATE TABLE gammu (
   Version INTEGER NOT NULL DEFAULT '0' PRIMARY KEY
 );

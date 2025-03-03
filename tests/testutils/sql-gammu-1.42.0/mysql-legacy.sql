@@ -1,4 +1,7 @@
--- 
+-- SPDX-FileCopyrightText: 2009 - 2019 Michal Cihar <michal@cihar.com>
+-- SPDX-License-Identifier: GPL-2.0-only
+
+--
 -- Database for Gammu SMSD
 -- 
 -- In case you get errors about not supported charset, please
