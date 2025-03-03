@@ -279,7 +279,6 @@ if ($sig_option === 'true' && $val_type !== 'resend')
 <br />
 <?php  echo form_close();?>
 
-<div id="iframe" style="width:0px; height:0px; visibility:none;"></div>
 <div id="canned_response_container"> </div>
 <?php
 if ($this->config->item('sms_advertise'))
