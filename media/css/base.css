@@ -704,6 +704,18 @@ textarea {
 	border-right: none;
 }
 
+.sms_search_form table,
+.sms_search_form th,
+.sms_search_form td {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: none;
+}
+
+.sms_search_form td {
+	padding: 0;
+}
+
 .search_form {
 	color: #FFF;
 	float: left;
