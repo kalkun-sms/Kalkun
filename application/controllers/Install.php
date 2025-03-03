@@ -217,6 +217,7 @@ class Install extends CI_Controller {
 	function config_setup()
 	{
 		$this->load->helper(array('form'));
+		$this->load->library('Install_info');
 
 		// install file
 		if (file_exists(FCPATH.'install') && is_writable(dirname(FCPATH.'install')))
@@ -235,22 +236,22 @@ class Install extends CI_Controller {
 
 
 		// Daemon & Oubox queue scripts
-		$data['is_windows'] = $this->_is_windows();
-		$data['daemon_path'] = $this->_daemon_get_path('daemon');
+		$data['is_windows'] = $this->install_info->is_windows();
+		$data['daemon_path'] = $this->install_info->get_daemon_path('daemon');
 		$data['daemon_path_is_executable'] = is_executable($data['daemon_path']);
-		$data['daemon_php_path'] = $this->_daemon_get_var_path('daemon', 'PHP');
-		$data['daemon_php_path_exists'] = $this->_daemon_var_path_exists($data['daemon_php_path']);
-		$data['daemon_daemon_path'] = $this->_daemon_get_var_path('daemon', 'DAEMON');
-		$data['daemon_daemon_path_exists'] = $this->_daemon_var_path_exists($data['daemon_daemon_path']);
-		$data['daemon_url'] = $this->_daemon_get_url($data['daemon_daemon_path']);
+		$data['daemon_php_path'] = $this->install_info->get_daemon_var_path('daemon', 'PHP');
+		$data['daemon_php_path_exists'] = $this->install_info->daemon_var_path_exists($data['daemon_php_path']);
+		$data['daemon_daemon_path'] = $this->install_info->get_daemon_var_path('daemon', 'DAEMON');
+		$data['daemon_daemon_path_exists'] = $this->install_info->daemon_var_path_exists($data['daemon_daemon_path']);
+		$data['daemon_url'] = $this->install_info->get_daemon_url($data['daemon_daemon_path']);
 		$data['daemon_url_matches_config'] = (trim($data['daemon_url'], '/') === trim($this->config->item('base_url'), '/')) ? TRUE : FALSE;
-		$data['outbox_queue_path'] = $this->_daemon_get_path('outbox_queue');
+		$data['outbox_queue_path'] = $this->install_info->get_daemon_path('outbox_queue');
 		$data['outbox_queue_path_is_executable'] = is_executable($data['outbox_queue_path']);
-		$data['outbox_queue_php_path'] = $this->_daemon_get_var_path('outbox_queue', 'PHP');
-		$data['outbox_queue_php_path_exists'] = $this->_daemon_var_path_exists($data['outbox_queue_php_path']);
-		$data['outbox_queue_daemon_path'] = $this->_daemon_get_var_path('outbox_queue', 'DAEMON');
-		$data['outbox_queue_daemon_path_exists'] = $this->_daemon_var_path_exists($data['outbox_queue_daemon_path']);
-		$data['outbox_queue_url'] = $this->_daemon_get_url($data['outbox_queue_daemon_path']);
+		$data['outbox_queue_php_path'] = $this->install_info->get_daemon_var_path('outbox_queue', 'PHP');
+		$data['outbox_queue_php_path_exists'] = $this->install_info->daemon_var_path_exists($data['outbox_queue_php_path']);
+		$data['outbox_queue_daemon_path'] = $this->install_info->get_daemon_var_path('outbox_queue', 'DAEMON');
+		$data['outbox_queue_daemon_path_exists'] = $this->install_info->daemon_var_path_exists($data['outbox_queue_daemon_path']);
+		$data['outbox_queue_url'] = $this->install_info->get_daemon_url($data['outbox_queue_daemon_path']);
 		$data['outbox_queue_url_matches_config'] = (trim($data['outbox_queue_url'], '/') === trim($this->config->item('base_url'), '/')) ? TRUE : FALSE;
 
 		// Gammu-smsd
@@ -264,8 +265,8 @@ class Install extends CI_Controller {
 		$data['uses_default_encryption_key'] = $this->_uses_default_encryption_key();
 
 		// htaccess for CI_ENV
-		$data['htaccess_location'] = $this->_htaccess_CI_ENV_path();
-		$data['CI_ENV'] = $this->_get_CI_ENV();
+		$data['htaccess_location'] = $this->install_info->get_htaccess_CI_ENV_path();
+		$data['CI_ENV'] = $this->install_info->get_CI_ENV();
 
 		$data['main'] = 'main/install/config_setup';
 		$data['idiom'] = $this->idiom;
@@ -489,165 +490,5 @@ class Install extends CI_Controller {
 		}
 
 		return FALSE;
-	}
-
-	function _get_CI_ENV()
-	{
-		return isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : '';
-	}
-
-	function _htaccess_CI_ENV_path()
-	{
-		$htaccess_paths = [
-			FCPATH.'.htaccess',
-			'/etc/apache2/conf-available/kalkun.conf',
-			'/etc/apache2/apache2.conf'
-		];
-
-		foreach ($htaccess_paths as $path)
-		{
-			if ( ! is_readable($path))
-			{
-				continue;
-			}
-
-			$contents = file($path);
-
-			if ($contents === FALSE)
-			{
-				continue;
-			}
-
-			$CI_ENV = $this->_get_CI_ENV();
-			if ($CI_ENV === '')
-			{
-				$pattern = '^\s*((?i)SetEnv)\s+CI_ENV$';
-			}
-			else
-			{
-				$pattern = '^\s*((?i)SetEnv)\s+CI_ENV\s+'.$CI_ENV.'\s*$';
-			}
-			$matches = preg_grep('/'.$pattern.'/', $contents);
-
-			if ($matches === FALSE || count($matches) === 0)
-			{
-				continue;
-			}
-
-			return realpath($path);
-		}
-
-		return '';
-	}
-
-	function _daemon_get_path($file)
-	{
-		if ($this->_is_windows())
-		{
-			$extension = '.bat';
-		}
-		else
-		{
-			$extension = '.sh';
-		}
-
-		$daemon_path = [
-			FCPATH.'scripts/'.$file.$extension,
-			FCPATH.'../scripts/'.$file.$extension
-		];
-
-		foreach ($daemon_path as $path)
-		{
-			if ( ! is_readable($path))
-			{
-				continue;
-			}
-			return realpath($path);
-		}
-
-		return FALSE;
-	}
-
-	function _daemon_get_var_path($file, $var)
-	{
-		$path = $this->_daemon_get_path($file);
-
-		if ( ! $path)
-		{
-			return FALSE;
-		}
-
-		if ( ! is_readable($path))
-		{
-			return FALSE;
-		}
-
-		$contents = file_get_contents($path);
-
-		if ($contents === FALSE)
-		{
-			return FALSE;
-		}
-
-		$pattern = '/\b'.$var.'=(.*)(?:\s#.*)?$/mU';
-		$ret = preg_match($pattern, $contents, $matches);
-
-		if ($ret === FALSE || count($matches) === 0)
-		{
-			return FALSE;
-		}
-
-		return trim(trim($matches[1]), '"');
-	}
-
-
-	function _daemon_var_path_exists($path)
-	{
-		if ($path === FALSE)
-		{
-			return FALSE;
-		}
-
-		if (is_readable($path))
-		{
-			return TRUE;
-		}
-
-		return FALSE;
-	}
-
-	function _daemon_get_url($path)
-	{
-		if ( ! $path)
-		{
-			return FALSE;
-		}
-
-		if ( ! is_readable($path))
-		{
-			return FALSE;
-		}
-
-		$contents = file_get_contents($path);
-
-		if ($contents === FALSE)
-		{
-			return FALSE;
-		}
-
-		$pattern = '/^\s*\$url\s*=\s*[\'"](.*)[\'"].*$/mU';
-		$ret = preg_match($pattern, $contents, $matches);
-
-		if ($ret === FALSE || count($matches) === 0)
-		{
-			return FALSE;
-		}
-
-		return trim(trim($matches[1]), '"');
-	}
-
-	function _is_windows()
-	{
-		return strcasecmp(substr(PHP_OS, 0, 3), 'WIN') === 0;
 	}
 }
