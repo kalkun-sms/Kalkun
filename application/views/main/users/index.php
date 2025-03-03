@@ -1,4 +1,3 @@
-<?php $this->load->view('js_init/users/js_users');?>
 <!-- Delete User Confirmation -->
 <div class="dialog" id="confirm_delete_user_dialog" title="<?php echo tr('Delete users');?>">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
