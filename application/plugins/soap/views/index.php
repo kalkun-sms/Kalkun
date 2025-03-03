@@ -138,7 +138,7 @@ $this->load->view('js_remote_access');
 			<th align="center" class="nice-table-right" colspan="2">Control</th>
 		</tr>
 		<?php if (count($notification) === 0): ?>
-		<tr><td colspan="4" style="border-left: 1px solid #000; border-right: 1px solid #000;">No Notification found.</td></tr>';
+		<tr><td colspan="4" style="border-left: 1px solid #000; border-right: 1px solid #000;">No Notification found.</td></tr>
 		<?php else: ?>
 		<tr id="notification">
 			<td class="nice-table-left"><?php echo htmlentities($notification['number'], ENT_QUOTES); ?></td>
