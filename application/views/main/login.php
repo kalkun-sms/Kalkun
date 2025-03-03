@@ -32,7 +32,7 @@ echo doctype('html5');?>
 			<?php endif; ?>
 		</div>
 
-		<div id="login_logo"><a href="<?php echo site_url().'?l='.$idiom ?>"><img src="<?php echo $this->config->item('img_path');?>logo.png" /></a></div>
+		<div id="login_logo"><a href="<?php echo site_url().'?l='.$idiom ?>"><img src="<?php echo $this->config->item('img_path');?>logo.png" alt="Kalkun logo" /></a></div>
 		<div>
 			<?php
 				echo form_open('');
