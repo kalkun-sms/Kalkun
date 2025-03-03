@@ -110,7 +110,7 @@ jobs:
       - name: Install/Update ci-phpunit-test
         run: ./utils/prepare_tests_for_phpunit.sh
       - name: Test with phpunit
-        run: HTML=4 vendor/bin/phpunit --coverage-text -c tests
+        run: HTML=5 vendor/bin/phpunit --coverage-text -c tests
   check-code:
     strategy:
       matrix:
