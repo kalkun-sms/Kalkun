@@ -33,21 +33,21 @@
 		endif;
 	?>
 	<div class="bttn-group">
-		<button><?php echo anchor($anchor_url, $anchor_text, array('class' => 'button', 'id' => 'back_threadlist'));?></button>
+		<div><?php echo anchor($anchor_url, $anchor_text, array('class' => 'button', 'id' => 'back_threadlist'));?></div>
 	</div>
 
 	<?php endif;?>
 	<div class="bttn-group">
-		<button><a href="javascript:void(0);" class="select_all_button button"><?php echo tr('Select all');?></a></button>
-		<button><a href="javascript:void(0);" class="clear_all_button button"><?php echo tr('Deselect all');?></a></button>
+		<div><a href="javascript:void(0);" class="select_all_button button"><?php echo tr('Select all');?></a></div>
+		<div><a href="javascript:void(0);" class="clear_all_button button"><?php echo tr('Deselect all');?></a></div>
 	</div>
 
 	<div class="bttn-group">
 		<?php if ($this->uri->segment(2) === 'conversation' && $this->uri->segment(4) === 'inbox') :
 			if ($this->uri->segment(6) !== '6') : ?>
-		<button><a href="javascript:void(0);" class="spam_button button"><?php echo tr('Report spam');?></a></button>
+		<div><a href="javascript:void(0);" class="spam_button button"><?php echo tr('Report spam');?></a></div>
 		<?php   else : ?>
-		<button><a href="javascript:void(0);" class="ham_button button"><?php echo tr('Not spam');?></a></button>
+		<div><a href="javascript:void(0);" class="ham_button button"><?php echo tr('Not spam');?></a></div>
 		<?php   endif;
 		endif;?>
 	</div>
@@ -59,25 +59,25 @@
 	else:?>
 
 		<?php if ($this->uri->segment(4) === '5' or $this->uri->segment(6) === '5') : ?>
-		<button><a href="javascript:void(0);" class="recover_button button"><?php echo tr('Recover');?></a></button>
+		<div><a href="javascript:void(0);" class="recover_button button"><?php echo tr('Recover');?></a></div>
 		<?php endif; ?>
-		<button><a class="move_to_button button" href="javascript:void(0);"><?php echo tr('Move to');?></a></button>
+		<div><a class="move_to_button button" href="javascript:void(0);"><?php echo tr('Move to');?></a></div>
 		<?php endif; ?>
-		<button><a class="global_delete button" href="javascript:void(0);">
+		<div><a class="global_delete button" href="javascript:void(0);">
 				<?php
 	if ($this->uri->segment(4) === '5' or $this->uri->segment(6) === '5' or $this->uri->segment(4) === '6' or $this->uri->segment(6) === '6'):
 		echo tr('Delete permanently');
 	else:
 		echo tr('Delete');
 	endif;
-	?></a></button>
+	?></a></div>
 	</div>
 	<?php if ($this->uri->segment(2) !== 'search'): ?>
 
 	<div class="bttn-group">
-		<button><a href="javascript:void(0);" class="refresh_button button"><?php echo tr('Refresh');?></a></button>
+		<div><a href="javascript:void(0);" class="refresh_button button"><?php echo tr('Refresh');?></a></div>
 		<?php if (($this->uri->segment(3) === 'inbox') || ($this->uri->segment(4) === 'inbox')): ?>
-		<button><a href="javascript:void(0);" class="process_incoming_msgs_button button"><?php echo tr('Process incoming messages');?></a></button>
+		<div><a href="javascript:void(0);" class="process_incoming_msgs_button button"><?php echo tr('Process incoming messages');?></a></div>
 		<?php endif; ?>
 	</div>
 	<?php endif; ?>
@@ -85,7 +85,7 @@
 	<div class="bttn-group">
 		<?php if ($this->uri->segment(2) === 'conversation' && $this->uri->segment(4) === 'sentitems'): ?>
 
-		<button><a href="javascript:void(0);" class="resend_bulk button"><?php echo tr('Resend');?></a></button>
+		<div><a href="javascript:void(0);" class="resend_bulk button"><?php echo tr('Resend');?></a></div>
 		<?php endif; ?>
 	</div>
 
