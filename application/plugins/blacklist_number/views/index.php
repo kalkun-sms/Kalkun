@@ -35,6 +35,14 @@
 	</div>
 
 	<table class="nice-table">
+		<tr style="display: none">
+			<!-- this is a hack to pass validation https://stackoverflow.com/a/52175495 -->
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
 		<tr>
 			<th class="nice-table-left">No.</th>
 			<th><?php echo tr('Phone number'); ?></th>
