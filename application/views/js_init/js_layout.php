@@ -244,7 +244,7 @@
 						$('.ui-dialog-buttonpane :button').each(function() {
 							if ($(this).text() == <?php echo tr_js('Send message'); ?>) {
 								var sending_html = <?php echo tr_js('Sending'); ?>;
-								sending_html += " <img src=\"<?php echo $this->config->item('img_path').'processing.gif' ?>\" height=\"12\" style=\"margin:0px; padding:0px;\">";
+								sending_html += " <img src=\"<?php echo $this->config->item('img_path').'processing.gif' ?>\" height=\"12\" style=\"margin:0px; padding:0px;\" alt=\"wheel\">";
 								$(this).html(sending_html);
 							}
 
