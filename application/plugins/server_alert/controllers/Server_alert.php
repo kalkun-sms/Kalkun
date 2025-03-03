@@ -48,7 +48,7 @@ class Server_alert extends Plugin_controller {
 		$config['base_url'] = site_url('plugin/server_alert/index');
 		$config['total_rows'] = $this->server_alert_model->get('count');
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-		$config['cur_tag_open'] = '<span id="current">';
+		$config['cur_tag_open'] = '<span class="current_page">';
 		$config['cur_tag_close'] = '</span>';
 		$config['uri_segment'] = 4;
 		$this->pagination->initialize($config);

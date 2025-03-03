@@ -48,7 +48,7 @@ class Blacklist_number extends Plugin_controller {
 		$config['base_url'] = site_url('plugin/blacklist_number/index');
 		$config['total_rows'] = $this->blacklist_number_model->get('count');
 		$config['per_page'] = $this->Kalkun_model->get_setting()->row('paging');
-		$config['cur_tag_open'] = '<span id="current">';
+		$config['cur_tag_open'] = '<span class="current_page">';
 		$config['cur_tag_close'] = '</span>';
 		$config['uri_segment'] = 4;
 		$this->pagination->initialize($config);

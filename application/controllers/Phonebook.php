@@ -201,7 +201,7 @@ class Phonebook extends MY_Controller {
 		$config['full_tag_close'] = '</ul>';
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = '<li><span id="current">';
+		$config['cur_tag_open'] = '<li><span class="current_page">';
 		$config['cur_tag_close'] = '</span></li>';
 		$config['prev_tag_open'] = '<li>';
 		$config['prev_tag_close'] = '</li>';

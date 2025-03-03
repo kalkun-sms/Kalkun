@@ -91,7 +91,7 @@
 
 	<?php if ($pagination_links !== ''): ?>
 	<div class="paging">
-		<div id="paging"><?php  echo $pagination_links;?></div>
+		<div class="paging"><?php  echo $pagination_links;?></div>
 	</div>
 	<?php endif; ?>
 
