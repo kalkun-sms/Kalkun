@@ -33,23 +33,23 @@
 
 </script>
 
-<table width="100%" cellpadding="5">
-	<tr valign="top">
-		<td width="175px" valign="top"><?php echo tr('Current password');?></td>
+<table class="settings">
+	<tr>
+		<td><?php echo tr('Current password');?></td>
 		<td>
 			<input type="password" id="current_password" name="current_password" />
 			<div class="note hidden"><a href="javascript:void(0);"><?php echo tr('Forgot your password?');?></a></div>
 		</td>
 	</tr>
 
-	<tr valign="top">
+	<tr>
 		<td><?php echo tr('New password');?></td>
 		<td><input type="password" id="new_password" name="new_password" /><br />
 			<small><?php echo tr('Must be at least 6 characters long');?></small>
 		</td>
 	</tr>
 
-	<tr valign="top">
+	<tr>
 		<td><?php echo tr('Confirm password');?></td>
 		<td><input type="password" id="confirm_password" name="confirm_password" /></td>
 	</tr>

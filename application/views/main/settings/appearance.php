@@ -1,6 +1,6 @@
-<table width="100%" cellpadding="5">
-	<tr valign="top">
-		<td width="175px"><?php echo tr('Theme'); ?></td>
+<table class="settings">
+	<tr>
+		<td><?php echo tr('Theme'); ?></td>
 		<td>
 			<?php
 $theme = array('blue' => 'Blue', 'dark' => 'Dark', 'green' => 'Green');
@@ -10,7 +10,7 @@ echo form_dropdown('theme', $theme, $theme_act);
 		</td>
 	</tr>
 
-	<tr valign="top">
+	<tr>
 		<td><?php echo tr('Background image'); ?></td>
 		<td>
 			<?php list($bg_act_option, $bg_act) = explode(';', $settings->row('bg_image'));?>

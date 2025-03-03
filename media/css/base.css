@@ -1247,3 +1247,17 @@ input#groups {
 .detail_area td:nth-child(2) {
 	width: 10px;
 }
+
+table.settings {
+	width: 100%;
+}
+table.settings th,
+table.settings td {
+	padding: 5px;
+}
+table.settings td:first-child {
+	width: 175px;
+}
+table.settings tr {
+	vertical-align: top;
+}
