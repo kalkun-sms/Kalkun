@@ -3,7 +3,7 @@
 
 <!-- Add Whitelist dialog -->
 <div id="whitelist-dialog" title="Add Whitelist Number" class="dialog">
-	<p id="validateTips">All form fields are required.</p>
+	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/whitelist_number', array('class' => 'addwhitelistnumberform', 'id' => 'addwhitelistnumberform')); ?>
 	<fieldset>
 		<label for="phone_number">Match pattern as required by PHP's preg_match()</label>
@@ -15,7 +15,7 @@
 
 <!-- Edit Whitelist dialog -->
 <div id="editwhitelist-dialog" title="Edit Whitelist Number" class="dialog">
-	<p id="validateTips">All form fields are required.</p>
+	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/whitelist_number', array('class' => 'editwhitelistnumberform', 'id' => 'editwhitelistnumberform')); ?>
 	<fieldset>
 		<input type="hidden" name="editid_whitelist" id="editid_whitelist" />

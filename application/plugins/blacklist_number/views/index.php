@@ -2,7 +2,7 @@
 
 <!-- Add Blacklist dialog -->
 <div id="blacklist-dialog" title="Add Blacklist Number" class="dialog">
-	<p id="validateTips">All form fields are required.</p>
+	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/blacklist_number', array('class' => 'addblacklistnumberform')); ?>
 	<fieldset>
 		<label for="phone_number"><?php echo tr('Phone number'); ?></label>
@@ -16,7 +16,7 @@
 
 <!-- Edit Blacklist dialog -->
 <div id="editblacklist-dialog" title="Edit Blacklist Number" class="dialog">
-	<p id="validateTips">All form fields are required.</p>
+	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/blacklist_number', array('class' => 'editblacklistnumberform')); ?>
 	<fieldset>
 		<input type="hidden" name="editid_blacklist_number" id="editid_blacklist_number" />

@@ -2,7 +2,7 @@
 
 <!-- User dialog -->
 <div id="dialog" class="dialog" style="display: block">
-	<p id="validateTips"><?php echo tr('All form fields are required.'); ?></p>
+	<p class="validateTips"><?php echo tr('All form fields are required.'); ?></p>
 	<?php echo form_open('phonebook/add_user_process', array('id' => 'addUser'));?>
 	<fieldset>
 		<label for="realname"><?php echo tr('Name'); ?></label>

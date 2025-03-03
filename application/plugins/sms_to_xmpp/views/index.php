@@ -2,7 +2,7 @@
 
 <!-- Add Account dialog -->
 <div id="xmpp-dialog" title="Add XMPP Account" class="dialog">
-	<p id="validateTips">All form fields are required.</p>
+	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/sms_to_xmpp/add', array('class' => 'addxmppform')); ?>
 	<fieldset>
 		<label for="xmpp_host">XMPP Host</label>

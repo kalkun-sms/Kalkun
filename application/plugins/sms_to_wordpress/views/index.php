@@ -2,7 +2,7 @@
 
 <!-- Add Wordpress dialog -->
 <div id="wp-dialog" title="Add Wordpress Blog" class="dialog">
-	<p id="validateTips">All form fields are required.</p>
+	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/sms_to_wordpress/add', array('class' => 'addwpblogform')); ?>
 	<fieldset>
 		<label for="wp_url">Wordpress URL</label>
