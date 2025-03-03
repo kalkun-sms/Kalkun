@@ -11,9 +11,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | https://github.com/kalkun-sms/Kalkun/wiki/Developing#Version-numbering-guidelines
 |
 */
-$config['kalkun_version'] = '0.8.3';
+$config['kalkun_version'] = '0.8.4-beta-1-dev';
 $config['kalkun_codename'] = '-';
-$config['kalkun_release_date'] = '2025-03-03';
+$config['kalkun_release_date'] = '-';
 
 /*
 |--------------------------------------------------------------------------
