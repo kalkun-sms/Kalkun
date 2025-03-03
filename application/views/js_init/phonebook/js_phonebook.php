@@ -169,7 +169,7 @@
 		// Compose SMS
 		$('#pbk_list').on('click', '.sendmessage', function() {
 			var header = $(this).parents('div:eq(1)');
-			var param1 = header.children('.left_column').children('#pbkname').children('#pbknumber').text();
+			var param1 = header.children('.left_column').children('.pbkname').children('.pbknumber').text();
 			compose_message('pbk_contact', false, '#message', param1);
 			return false;
 		});

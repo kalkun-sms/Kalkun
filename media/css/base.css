@@ -1113,12 +1113,12 @@ label.error {
 	text-decoration: underline;
 }
 
-#pbkname a {
+.pbkname a {
 	color: #000;
 	text-decoration: none;
 }
 
-#pbkname a:hover {
+.pbkname a:hover {
 	color: #000;
 	text-decoration: underline;
 }
