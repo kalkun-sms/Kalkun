@@ -21,6 +21,8 @@ else: ?>
 						<?php endif;?>
 						<a class="sendmessage simplelink" href="javascript:void(0);"><?php echo tr('Send message');?></a>
 					</span>
+				</div>
+			</div>
 		</td>
 	</tr>
 	<?php endforeach;?>
