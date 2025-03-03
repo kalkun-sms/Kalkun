@@ -45,7 +45,7 @@ echo doctype('html5');?>
 			<?php echo form_open('login');
 				echo form_hidden('r_url', $this->input->get('r_url'));
 ?>
-			<table id="login" cellpadding="3" cellspacing="2" border="0" class="rounded">
+			<table id="login" class="rounded">
 				<tr>
 					<td><i><?php echo tr('Please enter your username and password'); ?></i></td>
 				</tr>
@@ -60,11 +60,11 @@ echo doctype('html5');?>
 						<div style="float: left">
 							<input type="checkbox" id="remember_me" name="remember_me" /><label for="remember_me"><?php echo tr('Remember me'); ?></label>
 						</div>
-						<div align="center" style="float: right; padding-right: 3px"><input type="submit" id="submit" value="<?php echo tr('Log in') ?>" /></div>
+						<div style="float: right; padding-right: 3px"><input type="submit" id="submit" value="<?php echo tr('Log in') ?>" /></div>
 					</td>
 				</tr>
 				<tr>
-					<td align="center"><a style="color: #fff" href="<?php echo site_url('login/forgot_password')."?l={$idiom}"; ?>"><?php echo tr('Forgot your password?'); ?></a></td>
+					<td style="text-align: center"><a style="color: #fff" href="<?php echo site_url('login/forgot_password')."?l={$idiom}"; ?>"><?php echo tr('Forgot your password?'); ?></a></td>
 				</tr>
 			</table>
 			<?php echo form_hidden('idiom', $idiom); ?>
