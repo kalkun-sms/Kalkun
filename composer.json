@@ -14,7 +14,7 @@
         "ext-session": "*",
         "codeigniter/framework": "=3.1.13",
         "paragonie/random_compat": ">=2",
-        "giggsey/libphonenumber-for-php": "^8.12",
+        "giggsey/libphonenumber-for-php": "^8.12 || ^9",
         "league/csv": "^8.2 || ^9.5",
         "datto/json-rpc-http": "^4.0 || ^5.0",
         "kissifrot/php-ixr": "1.8.*",
