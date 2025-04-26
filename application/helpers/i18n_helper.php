@@ -78,3 +78,17 @@ function tr_js($label, $context = NULL, ...$params)
 	$CI->load->helper('kalkun');
 	return json_protect($label);
 }
+
+/**
+ *
+ * Return the string as is.
+ * This function is only used as helper for check_translation.php
+ * so that it identified that this string has to be translated
+ *
+ * @param type $label
+ * @return type
+ */
+function tr_no_op($label)
+{
+	return $label;
+}
