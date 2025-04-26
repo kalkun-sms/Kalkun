@@ -374,6 +374,10 @@ class Kalkun extends MY_Controller {
 		{
 			$result = 'true';
 		}
+		else
+		{
+			$result = tr_raw($result);
+		}
 
 		$this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode($result));
@@ -398,7 +402,7 @@ class Kalkun extends MY_Controller {
 			if ($result !== TRUE)
 			{
 				$this->output->set_content_type('application/json');
-				$this->output->set_output(json_encode($result.' ('.trim($val).')'));
+				$this->output->set_output(json_encode(tr_raw($result).' ('.trim($val).')'));
 				return;
 			}
 		}

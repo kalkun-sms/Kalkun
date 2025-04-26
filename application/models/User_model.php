@@ -168,7 +168,7 @@ class User_model extends CI_Model {
 
 		if ($result !== TRUE)
 		{
-			show_error($result, 400);
+			show_error(tr($result), 400);
 		}
 	}
 }
