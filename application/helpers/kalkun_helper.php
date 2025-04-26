@@ -536,9 +536,9 @@ function get_gammu_coding($utf8_string)
  * @return json object:
  *
  */
-function json_protect($înput)
+function json_protect($input)
 {
-	return json_encode($înput, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE);
+	return json_encode($input, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE);
 }
 
 function stable_usort(array &$array, callable $compare)
