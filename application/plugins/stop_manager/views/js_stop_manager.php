@@ -47,6 +47,7 @@
 
 		// validation
 		$("#addStopForm").validate({
+			escapeHtml: true,
 			rules: {
 				destination_number: {
 					required: true,

@@ -3,6 +3,7 @@
 
 		// validation
 		$(".addserveralertform").validate({
+			escapeHtml: true,
 			rules: {
 				alert_name: {
 					required: true

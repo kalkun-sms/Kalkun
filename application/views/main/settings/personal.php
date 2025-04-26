@@ -3,6 +3,7 @@
 	$(document).ready(function() {
 		// validation
 		$("#settingsForm").validate({
+			escapeHtml: true,
 			rules: {
 				phone_number: {
 					required: true,

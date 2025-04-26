@@ -73,6 +73,7 @@
 
 		// validation
 		$("#addwhitelistnumberform").validate({
+			escapeHtml: true,
 			rules: {
 				match: {
 					required: true,
@@ -94,6 +95,7 @@
 			}
 		});
 		$("#editwhitelistnumberform").validate({
+			escapeHtml: true,
 			rules: {
 				editmatch: {
 					required: true,

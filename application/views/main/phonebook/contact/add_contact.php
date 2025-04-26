@@ -69,6 +69,7 @@
 		});
 
 		$('#addContact').validate({
+			escapeHtml: true,
 			rules: {
 				name: {
 					required: true
