@@ -1599,7 +1599,7 @@ class Messages extends MY_Controller {
 
 		if ($result !== TRUE)
 		{
-			show_error($result, 400);
+			show_error(tr($result), 400);
 		}
 	}
 }

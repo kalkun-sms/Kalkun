@@ -455,7 +455,7 @@ function is_phone_number_valid($phone, $input_region = NULL)
 		}
 		else
 		{
-			$result = tr('Please specify a valid mobile phone number');
+			$result = tr_no_op('Please specify a valid mobile phone number');
 		}
 	}
 	catch (Exception $e)
