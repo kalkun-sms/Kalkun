@@ -68,19 +68,33 @@
 			$(this).autocomplete("search");
 		});
 
-		$('#addContact').validate();
-
-		jQuery.validator.classRuleSettings.phone = {
-			remote: {
-				url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
-				type: "get",
-				data: {
-					phone: function() {
-						return $("#number").val();
+		$('#addContact').validate({
+			rules: {
+				name: {
+					required: true
+				},
+				number: {
+					required: true,
+					remote: {
+						url: "<?php echo site_url('kalkun/phone_number_validation'); ?>",
+						type: "get",
+						data: {
+							phone: function() {
+								return $("#number").val();
+							}
+						}
 					}
 				},
 			},
-		};
+			messages: {
+				name: {
+					required: <?php echo tr_js('Field required.'); ?>
+				},
+				number: {
+					required: <?php echo tr_js('Field required.'); ?>,
+				},
+			}
+		});
 	});
 
 </script>
