@@ -14,6 +14,7 @@
 
 		// validation
 		$("#addUser").validate({
+			escapeHtml: true,
 			rules: {
 				realname: {
 					required: true

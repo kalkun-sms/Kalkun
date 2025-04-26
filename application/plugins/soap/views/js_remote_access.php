@@ -10,6 +10,7 @@
 
 		// validation
 		$(".addremoteaccessform").validate({
+			escapeHtml: true,
 			rules: {
 				access_name: {
 					required: true
@@ -25,6 +26,7 @@
 		});
 
 		$(".addnotificationform").validate({
+			escapeHtml: true,
 			rules: {
 				notifynumber: {
 					required: true,

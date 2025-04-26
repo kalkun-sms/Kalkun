@@ -193,6 +193,7 @@
 
 		// validation
 		$("#composeForm").validate({
+			escapeHtml: true,
 			ignore: '', // By default, jquery validation ignores hidden fields. Set this to the empty string to not ignore hidden fields (needed for personvalue which is hidden by tagsInput).
 			rules: {
 				personvalue: {
