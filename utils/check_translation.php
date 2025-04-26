@@ -210,9 +210,9 @@ function get_tr_labels($ast)
 		$fn_name = $f->name->toCodeString();
 		//var_dump($fn_name);
 
-		if ($fn_name === 'tr' || $fn_name === 'tr_addcslashes' || $fn_name === 'tr_js' || $fn_name === 'tr_raw')
+		if ($fn_name === 'tr' || $fn_name === 'tr_addcslashes' || $fn_name === 'tr_js' || $fn_name === 'tr_raw' || $fn_name === 'tr_no_op')
 		{
-			if ($fn_name === 'tr' || $fn_name === 'tr_js' || $fn_name === 'tr_raw')
+			if ($fn_name === 'tr' || $fn_name === 'tr_js' || $fn_name === 'tr_raw' || $fn_name === 'tr_no_op')
 			{
 				$tr_args = $f->args;
 			}
