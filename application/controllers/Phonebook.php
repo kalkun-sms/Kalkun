@@ -409,7 +409,7 @@ class Phonebook extends MY_Controller {
 
 		if ($result !== TRUE)
 		{
-			show_error(tr($result), 400);
+			show_error(tr($result[0], $result[1]), 400);
 		}
 	}
 
