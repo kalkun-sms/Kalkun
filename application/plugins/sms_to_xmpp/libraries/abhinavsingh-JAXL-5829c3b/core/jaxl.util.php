@@ -153,7 +153,7 @@ function my_mt_rand($min = null, $max = null) {
         
         public static function generateNonce() {
             $str = '';
-            my_mt_srand((double) microtime()*10000000);
+            my_mt_srand((float) microtime()*10000000);
             for($i=0; $i<32; $i++)
                 $str .= chr(my_mt_rand(0, 255));
             return $str;
