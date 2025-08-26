@@ -13,6 +13,8 @@ require_once __DIR__.'/../testutils/ConfigFile.php';
 require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 class Messages_test extends KalkunTestCase {
 
 	public function setUp() : void
@@ -31,6 +33,7 @@ class Messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_report_spam_POST_spam($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -71,6 +74,7 @@ class Messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_report_spam_POST_missing_id($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -101,6 +105,7 @@ class Messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_report_spam_POST_jam($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -132,6 +137,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_report_spam_POST_ham($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -174,6 +180,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_report_spam_POST_spam_then_ham($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -230,6 +237,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_query_GET($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -258,6 +266,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_query_POST_basic($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -286,6 +295,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_query_POST_advanced_filled($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -330,6 +340,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_query_POST_advanced_empty($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -368,6 +379,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_search_basic($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -405,6 +417,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_search_basic_multipart($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -443,6 +456,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_search_advanced($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -486,6 +500,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_search_no_result($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -529,6 +544,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_move_message($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -538,6 +554,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_delete_messages($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -547,6 +564,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_delete_all($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -556,6 +574,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_invalid($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -587,6 +606,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_normal($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -638,6 +658,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_normal_sms_bomber($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -681,6 +702,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_normal_with_signature($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -720,6 +742,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_normal_ncpr($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -763,6 +786,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_normal_sms_advertise($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -807,6 +831,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_reply($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -852,6 +877,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_forward_inbox($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -904,6 +930,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_forward_sentitems($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -955,6 +982,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_member($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -994,6 +1022,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_pbk_contact($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1039,6 +1068,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_pbk_groups($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1090,6 +1120,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_all_contacts($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1130,7 +1161,8 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
-	/*public function test_compose_resend_inbox($db_engine)
+	/*#[DataProvider('database_Provider')]
+	public function test_compose_resend_inbox($db_engine)
 	{
 		// This is not possible in the GUI. Resend is only possible on 'sentitems' messages.
 	}*/
@@ -1139,6 +1171,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_resend_sentitems($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1192,6 +1225,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_prefill($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1243,6 +1277,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_canned_response_list_no_result($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1279,6 +1314,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_canned_response_list($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1320,6 +1356,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_canned_response_get($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1357,6 +1394,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_canned_response_save_insert($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1395,6 +1433,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_canned_response_save_update($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1443,6 +1482,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_canned_response_delete($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1481,6 +1521,7 @@ class Messages_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_canned_response_invalid($db_engine)
 	{
 		$dbsetup = new DBSetup([

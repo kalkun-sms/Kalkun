@@ -12,6 +12,8 @@
 require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 class Login_test extends KalkunTestCase {
 
 	public function setUp() : void
@@ -29,6 +31,7 @@ class Login_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_login_GET_form($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -45,6 +48,7 @@ class Login_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_login_POST_success($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -59,6 +63,7 @@ class Login_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_login_POST_failure($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -74,6 +79,7 @@ class Login_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_logout($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -112,6 +118,7 @@ class Login_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_forgot_password_GET_form($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -128,6 +135,7 @@ class Login_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_forgot_password_POST_username($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -145,6 +153,7 @@ class Login_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_forgot_password_POST_phone($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -162,6 +171,7 @@ class Login_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_password_reset_POST_valid_token_new_password($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -183,6 +193,7 @@ class Login_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_password_reset_GET_form_valid_token($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -202,6 +213,7 @@ class Login_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_password_reset_POST_invalid_token_new_password($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -218,6 +230,7 @@ class Login_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_password_reset_GET_form_expired_token($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -240,6 +253,7 @@ class Login_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_password_reset_GET_form_invalid_token($db_engine)
 	{
 		$dbsetup = new DBSetup([

@@ -12,6 +12,8 @@
 require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 class Gammu_model_get_conversation_test extends KalkunTestCase {
 
 	public function setUp() : void
@@ -29,6 +31,7 @@ class Gammu_model_get_conversation_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_conversation_invalid_type($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -90,6 +93,7 @@ class Gammu_model_get_conversation_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_conversation_wrong_user($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -157,6 +161,7 @@ class Gammu_model_get_conversation_test extends KalkunTestCase {
 	/**
 	 * @dataProvider get_conversation_inbox_no_limit_no_offset_Provider
 	 */
+	#[DataProvider('get_conversation_inbox_no_limit_no_offset_Provider')]
 	public function test_get_conversation_inbox_no_limit_no_offset($db_engine, $in_trash)
 	{
 		$dbsetup = new DBSetup([
@@ -241,6 +246,7 @@ class Gammu_model_get_conversation_test extends KalkunTestCase {
 	/**
 	 * @dataProvider get_conversation_inbox_no_limit_no_offset_Provider
 	 */
+	#[DataProvider('get_conversation_inbox_no_limit_no_offset_Provider')]
 	public function test_get_conversation_inbox_multipart_no_limit_no_offset($db_engine, $in_trash)
 	{
 		$dbsetup = new DBSetup([
@@ -327,6 +333,7 @@ class Gammu_model_get_conversation_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_conversation_inbox_limit_15_offset_15($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -398,6 +405,7 @@ class Gammu_model_get_conversation_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_conversation_inbox_folder11_no_limit_no_offset($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -472,6 +480,7 @@ class Gammu_model_get_conversation_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_conversation_outbox_no_limit_no_offset($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -537,6 +546,7 @@ class Gammu_model_get_conversation_test extends KalkunTestCase {
 	/**
 	 * @dataProvider get_conversation_inbox_no_limit_no_offset_Provider
 	 */
+	#[DataProvider('get_conversation_inbox_no_limit_no_offset_Provider')]
 	public function test_get_conversation_sentitems_no_limit_no_offset($db_engine, $in_trash)
 	{
 		$dbsetup = new DBSetup([
@@ -621,6 +631,7 @@ class Gammu_model_get_conversation_test extends KalkunTestCase {
 	/**
 	 * @dataProvider get_conversation_inbox_no_limit_no_offset_Provider
 	 */
+	#[DataProvider('get_conversation_inbox_no_limit_no_offset_Provider')]
 	public function test_get_conversation_sentitems_multipart_no_limit_no_offset($db_engine, $in_trash)
 	{
 		$dbsetup = new DBSetup([

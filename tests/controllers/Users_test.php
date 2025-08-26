@@ -13,6 +13,8 @@ require_once __DIR__.'/../testutils/ConfigFile.php';
 require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 class Users_test extends KalkunTestCase {
 
 	public function setUp() : void
@@ -31,6 +33,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index_non_admin($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -62,6 +65,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index_GET($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -93,6 +97,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index_GET_no_user_in_db($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -130,6 +135,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index_GET_ajax($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -161,6 +167,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index_POST_search_name_found($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -198,6 +205,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index_POST_search_name_nomatch($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -232,6 +240,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_add_user($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -264,6 +273,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_add_user_normal($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -295,6 +305,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_add_user_edit($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -326,6 +337,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_add_user_process_new_user($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -364,6 +376,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_add_user_process_edit_user($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -408,6 +421,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_add_user_process_edit_user_demomode_forbid_username_change($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -456,6 +470,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_add_user_process_edit_user_demomode_forbid_level_change($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -504,6 +519,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_add_user_process_edit_user_demomode_forbid_username_level_change($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -552,6 +568,7 @@ class Users_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_delete_user($db_engine)
 	{
 		$dbsetup = new DBSetup([

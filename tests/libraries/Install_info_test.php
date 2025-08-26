@@ -13,6 +13,8 @@
 require_once APPPATH . 'libraries/Install_info.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 class Install_info_test extends KalkunTestCase {
 
 	private $install_info;
@@ -35,6 +37,7 @@ class Install_info_test extends KalkunTestCase {
 	/**
 	 * @dataProvider get_daemon_path_Provider
 	 */
+	#[DataProvider('get_daemon_path_Provider')]
 	public function test_get_daemon_path($file, $is_windows, $extension)
 	{
 		// Create a stub for the SomeClass class.
@@ -74,6 +77,7 @@ class Install_info_test extends KalkunTestCase {
 	/**
 	 * @dataProvider get_daemon_url_Provider
 	 */
+	#[DataProvider('get_daemon_url_Provider')]
 	public function test_get_daemon_url($path, $expected)
 	{
 		$this->install_info = new Install_info();
@@ -101,6 +105,7 @@ class Install_info_test extends KalkunTestCase {
 	/**
 	 * @dataProvider get_daemon_var_path_Provider
 	 */
+	#[DataProvider('get_daemon_var_path_Provider')]
 	public function test_get_daemon_var_path($file, $var, $expected)
 	{
 		// Create a stub for the SomeClass class.
@@ -144,6 +149,7 @@ class Install_info_test extends KalkunTestCase {
 	/**
 	 * @dataProvider contains_CI_ENV_Provider
 	 */
+	#[DataProvider('contains_CI_ENV_Provider')]
 	public function test_contains_CI_ENV($CI_ENV, $data, $expected)
 	{
 		// Create a stub for the SomeClass class.

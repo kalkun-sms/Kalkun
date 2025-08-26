@@ -14,6 +14,8 @@ require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 require_once __DIR__.'/../controllers/Pluginss_test.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 class Sms_to_wordpress_test extends KalkunTestCase
 {
 	public function setUp() : void
@@ -38,6 +40,7 @@ class Sms_to_wordpress_test extends KalkunTestCase
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index($db_engine)
 	{
 		$dbsetup = new DBSetup([

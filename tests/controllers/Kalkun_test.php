@@ -15,6 +15,7 @@ require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
 use Symfony\Component\DomCrawler\Crawler;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class Kalkun_test extends KalkunTestCase {
 
@@ -34,6 +35,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_add_folder_POST_no_source_url($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -61,6 +63,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_add_folder_POST_with_source_url($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -90,6 +93,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_delete_filter_ajaxGET($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -119,6 +123,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_delete_filter_ajaxGET_none($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -146,6 +151,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_delete_folder_GET_none($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -179,6 +185,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_delete_folder_GET($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -213,6 +220,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_csrf_hash($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -241,6 +249,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_statistic_GET_none($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -269,6 +278,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_statistic_GET_days($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -297,6 +307,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_statistic_GET_weeks($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -325,6 +336,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_statistic_GET_months($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -353,6 +365,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_statistic_GET_invalid($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -382,6 +395,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_statistic_GET_days_nonadmin($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -410,6 +424,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -440,6 +455,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index_outgoing_disabled($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -471,6 +487,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_notification($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -500,6 +517,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_notification_ajax($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -544,6 +562,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider phone_number_validation_Provider
 	 */
+	#[DataProvider('phone_number_validation_Provider')]
 	public function test_phone_number_validation($db_engine, $method, $phone, $region, $expected)
 	{
 		$dbsetup = new DBSetup([
@@ -593,6 +612,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider phone_number_validation_multiple_Provider
 	 */
+	#[DataProvider('phone_number_validation_multiple_Provider')]
 	public function test_phone_number_validation_multiple($db_engine, $method, $phone, $region, $expected)
 	{
 		$dbsetup = new DBSetup([
@@ -630,6 +650,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_rename_folder_POST($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -659,6 +680,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_invalid($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -686,6 +708,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_none($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -713,6 +736,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_general($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -742,6 +766,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_personal($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -771,6 +796,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_appearance($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -800,6 +826,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_password($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -829,6 +856,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_save_general($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -869,6 +897,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_save_personal($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -908,6 +937,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_save_personal_change_kalkun_username($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -947,6 +977,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_save_personal_change_kalkun_username_demo_mode($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -989,6 +1020,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_save_personal_change_to_existing_username($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1028,6 +1060,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_save_appearance($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1064,6 +1097,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_save_password($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1101,6 +1135,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_save_password_wrong_current_password($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1138,6 +1173,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_save_password_demo_mode($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1178,6 +1214,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_save_filters_insert($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1217,6 +1254,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_save_filters_update($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1269,6 +1307,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_settings_filters($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1298,6 +1337,7 @@ class Kalkun_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_unread_count($db_engine)
 	{
 		$dbsetup = new DBSetup([

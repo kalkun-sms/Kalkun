@@ -13,6 +13,8 @@ require_once __DIR__.'/../testutils/ConfigFile.php';
 require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 class Phonebook_test extends KalkunTestCase {
 
 	public function setUp() : void
@@ -37,6 +39,7 @@ class Phonebook_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -62,6 +65,7 @@ class Phonebook_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index_search_name($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -87,6 +91,7 @@ class Phonebook_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index_public($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -112,6 +117,7 @@ class Phonebook_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_group($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -137,6 +143,7 @@ class Phonebook_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_group_public($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -162,6 +169,7 @@ class Phonebook_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_group_contacts($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -187,6 +195,7 @@ class Phonebook_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_add_contact($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);

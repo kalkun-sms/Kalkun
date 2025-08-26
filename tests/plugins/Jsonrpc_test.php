@@ -14,6 +14,11 @@ require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 require_once __DIR__.'/../controllers/Pluginss_test.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RequiresPhpunit;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
+
 class Jsonrpc_test extends KalkunTestCase {
 
 	public function setUp() : void
@@ -38,6 +43,7 @@ class Jsonrpc_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_send_sms_client($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -108,7 +114,8 @@ class Jsonrpc_test extends KalkunTestCase {
 	 *
 	 * This test would require json-rpc-http to read from php://input
 	 */
-	/*	public function test_send_sms_empty_data($db_engine)
+	/*#[DataProvider('database_Provider')]
+		public function test_send_sms_empty_data($db_engine)
 		{
 		}
 	*/
@@ -124,6 +131,10 @@ class Jsonrpc_test extends KalkunTestCase {
 	 * Passing the same data to unserialize() with recent PHP (8.x) also triggers the issue. So the problem
 	 * may be somewhere in phpunit in the management of the data.
 	 */
+	#[DataProvider('database_Provider')]
+	#[RunInSeparateProcess]
+	#[PreserveGlobalState(FALSE)]
+	#[RequiresPhpunit('>= 6')]
 	public function test_send_sms_empty_data($db_engine)
 	{
 		$dbsetup = new DBSetup([

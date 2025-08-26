@@ -12,6 +12,8 @@
 require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 class Pluginss_test extends KalkunTestCase {
 
 	public function setUp() : void
@@ -61,6 +63,7 @@ class Pluginss_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -90,6 +93,7 @@ class Pluginss_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index_non_admin($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -122,6 +126,7 @@ class Pluginss_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index_available($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -151,6 +156,7 @@ class Pluginss_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index_installed_no_plugins_present($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -203,6 +209,7 @@ class Pluginss_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_available_no_plugins_present($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -255,6 +262,7 @@ class Pluginss_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_plugin_controller_has_index_FALSE_because_noplugin($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -281,6 +289,7 @@ class Pluginss_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_plugin_controller_has_index_FALSE_because_nocontroller($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -307,6 +316,7 @@ class Pluginss_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_plugin_controller_has_index_FALSE_because_noindex($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -333,6 +343,7 @@ class Pluginss_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_plugin_controller_has_index_TRUE($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -384,6 +395,7 @@ class Pluginss_test extends KalkunTestCase {
 	/**
 	 * @dataProvider plugin_Provider
 	 */
+	#[DataProvider('plugin_Provider')]
 	public function test_install($db_engine, $plugin, $plugin_label)
 	{
 		$dbsetup = new DBSetup([
@@ -419,6 +431,7 @@ class Pluginss_test extends KalkunTestCase {
 	/**
 	 * @dataProvider plugin_Provider
 	 */
+	#[DataProvider('plugin_Provider')]
 	public function test_install_then_uninstall($db_engine, $plugin, $plugin_label)
 	{
 		$dbsetup = new DBSetup([
@@ -462,6 +475,7 @@ class Pluginss_test extends KalkunTestCase {
 	/**
 	 * @dataProvider plugin_Provider
 	 */
+	#[DataProvider('plugin_Provider')]
 	public function test_uninstall_without_install($db_engine, $plugin, $plugin_label)
 	{
 		$dbsetup = new DBSetup([
@@ -497,6 +511,7 @@ class Pluginss_test extends KalkunTestCase {
 	/**
 	 * @dataProvider plugin_Provider
 	 */
+	#[DataProvider('plugin_Provider')]
 	public function test_install_then_remove_dir($db_engine, $plugin, $plugin_label)
 	{
 		$dbsetup = new DBSetup([

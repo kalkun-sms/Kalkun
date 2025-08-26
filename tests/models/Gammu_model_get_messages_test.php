@@ -12,6 +12,8 @@
 require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 class Gammu_model_get_messages_test extends KalkunTestCase {
 
 	public function setUp() : void
@@ -36,6 +38,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_invalid($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -57,6 +60,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_wrong_user($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -90,6 +94,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_notProcessed($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -154,6 +159,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_inbox_no_limit_no_offset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -204,6 +210,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_inbox_trash_no_limit_no_offset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -254,6 +261,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_inbox_no_limit_no_offset_order_asc($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -303,6 +311,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_inbox_multipart_no_limit_no_offset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -351,6 +360,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_inbox_limit_2_offset_2($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -402,6 +412,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_inbox_folder11_no_limit_no_offset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -451,6 +462,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_outbox_no_limit_no_offset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -498,6 +510,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_sentitems_no_limit_no_offset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -545,6 +558,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_sentitems_multipart_no_limit_no_offset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -589,6 +603,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_outbox($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -597,6 +612,7 @@ class Gammu_model_get_messages_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages_sentitems($db_engine)
 	{
 		$this->markTestIncomplete();
