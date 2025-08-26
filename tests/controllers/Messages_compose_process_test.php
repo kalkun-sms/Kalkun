@@ -14,6 +14,10 @@ require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/GammuSmsdConfigFile.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
+
 class Messages_compose_process_test extends KalkunTestCase {
 
 	public function setUp() : void
@@ -74,6 +78,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_sendoption1_contact_group($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -215,6 +220,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_sendoption1_user($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -332,6 +338,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_sendoption3($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -431,6 +438,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_sendoption4($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -531,6 +539,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_reply($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -626,6 +635,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_resend($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -737,6 +747,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_resend_delete_orig($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -852,6 +863,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider compose_process_member_Provider
 	 *
 	 */
+	#[DataProvider('compose_process_member_Provider')]
 	public function test_compose_process_member($db_engine, $user_level)
 	{
 		$dbsetup = new DBSetup([
@@ -976,6 +988,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_pbk_groups($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1117,6 +1130,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_all_contacts($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1258,6 +1272,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_send_at_date($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1358,6 +1373,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_send_delay($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1458,6 +1474,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_flash($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1557,6 +1574,7 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_waplink($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1672,6 +1690,9 @@ class Messages_compose_process_test extends KalkunTestCase {
 	 * @preserveGlobalState disabled
 	 *
 	 */
+	#[DataProvider('database_Provider')]
+	#[RunInSeparateProcess]
+	#[PreserveGlobalState(FALSE)]
 	public function test_compose_process_ncpr($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1805,6 +1826,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_append_username($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1910,6 +1932,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_append_username_resend($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -2021,6 +2044,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_sms_advertise($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -2126,6 +2150,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_sms_advertise_resend($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -2243,6 +2268,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_disable_outgoing($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -2326,6 +2352,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_hook_message_outgoing($db_engine)
 	{
 		// Used by blacklist_number & whitelist_number
@@ -2436,6 +2463,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_hook_message_outgoing_all($db_engine)
 	{
 		// Used by sms_credit
@@ -2525,6 +2553,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_hook_message_outgoing_dest_data($db_engine)
 	{
 		// Used by stop_manager
@@ -2613,6 +2642,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_replace_fields($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -2728,6 +2758,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_nothing_to_send($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -2815,6 +2846,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_sms_bomber_disabled($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -2896,6 +2928,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_sms_bomber_enabled($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -2982,6 +3015,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_max_sms_by_minute($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -3087,6 +3121,7 @@ function DNDcheck($mobileno)
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_compose_process_multi_modem($db_engine)
 	{
 		$dbsetup = new DBSetup([

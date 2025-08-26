@@ -14,6 +14,10 @@ require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 require_once __DIR__.'/../controllers/Pluginss_test.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
+
 class Soap_test extends KalkunTestCase {
 
 	public function setUp() : void
@@ -38,6 +42,7 @@ class Soap_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_index($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -72,6 +77,9 @@ class Soap_test extends KalkunTestCase {
 	 * @preserveGlobalState disabled
 	 *
 	 */
+	#[DataProvider('database_Provider')]
+	#[RunInSeparateProcess]
+	#[PreserveGlobalState(FALSE)]
 	public function test_api($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -109,6 +117,9 @@ class Soap_test extends KalkunTestCase {
 	 * @preserveGlobalState disabled
 	 *
 	 */
+	#[DataProvider('database_Provider')]
+	#[RunInSeparateProcess]
+	#[PreserveGlobalState(FALSE)]
 	public function test_api_wsdl($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -143,6 +154,9 @@ class Soap_test extends KalkunTestCase {
 	 * @preserveGlobalState disabled
 	 *
 	 */
+	#[DataProvider('database_Provider')]
+	#[RunInSeparateProcess]
+	#[PreserveGlobalState(FALSE)]
 	public function test_api_getApiVersion($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -176,6 +190,9 @@ class Soap_test extends KalkunTestCase {
 	 * @preserveGlobalState disabled
 	 *
 	 */
+	#[DataProvider('database_Provider')]
+	#[RunInSeparateProcess]
+	#[PreserveGlobalState(FALSE)]
 	public function test_api_index_login($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -237,6 +254,9 @@ xmlns:ns9011="urn:Api">
 	 * @preserveGlobalState disabled
 	 *
 	 */
+	#[DataProvider('database_Provider')]
+	#[RunInSeparateProcess]
+	#[PreserveGlobalState(FALSE)]
 	public function test_api_index_version($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -286,6 +306,9 @@ xmlns:ns9011="urn:Api">
 	 * @preserveGlobalState disabled
 	 *
 	 */
+	#[DataProvider('database_Provider')]
+	#[RunInSeparateProcess]
+	#[PreserveGlobalState(FALSE)]
 	public function test_api_index_sendMessage($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -339,6 +362,9 @@ xmlns:ns9011="urn:Api">
 	 * @preserveGlobalState disabled
 	 *
 	 */
+	#[DataProvider('database_Provider')]
+	#[RunInSeparateProcess]
+	#[PreserveGlobalState(FALSE)]
 	public function test_api_index_sendFlashMessage($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -392,6 +418,9 @@ xmlns:ns9011="urn:Api">
 	 * @preserveGlobalState disabled
 	 *
 	 */
+	#[DataProvider('database_Provider')]
+	#[RunInSeparateProcess]
+	#[PreserveGlobalState(FALSE)]
 	public function test_api_index_logout($db_engine)
 	{
 		$dbsetup = new DBSetup([

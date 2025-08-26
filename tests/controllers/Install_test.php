@@ -13,6 +13,8 @@ require_once __DIR__.'/../testutils/ConfigFile.php';
 require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 class Install_test extends KalkunTestCase {
 
 	public function setUp() : void
@@ -128,6 +130,7 @@ class Install_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_setup_run_db_setupProvider
 	 */
+	#[DataProvider('database_setup_run_db_setupProvider')]
 	public function test_database_setup_GET($db_engine, $config)
 	{
 		$dbsetup = new DBSetup([
@@ -146,6 +149,7 @@ class Install_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_database_setup_GET_with_db_exception($db_engine)
 	{
 		$db = 'kalkun_testing_missing_db';
@@ -210,6 +214,7 @@ class Install_test extends KalkunTestCase {
 	 * This test requires to remove the "static" from CI3's DB_driver.php, line "static $preg_ec = array();"
 	 * Otherwise, escaping for the DB query would fail in some cases (when switching DB engine).
 	 */
+	#[DataProvider('database_setup_run_db_setupProvider')]
 	public function test_database_setup_POST_run_db_setup($db_engine, $config)
 	{
 		$dbsetup = new DBSetup([
@@ -234,6 +239,7 @@ class Install_test extends KalkunTestCase {
 	/**
 	 * @dataProvider uses_default_encryption_keyProvider
 	 */
+	#[DataProvider('uses_default_encryption_keyProvider')]
 	public function test_uses_default_encryption_key($enc_key, $expected)
 	{
 		$configFile = new ConfigFile(APPPATH . 'config/testing/config.php');

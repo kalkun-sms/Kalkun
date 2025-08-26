@@ -15,6 +15,7 @@ require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
 use Symfony\Component\DomCrawler\Crawler;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class Messages_my_folder_test extends KalkunTestCase {
 
@@ -41,6 +42,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_invalid($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -67,6 +69,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_inbox_no_message_in_folder($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -96,6 +99,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_inbox_trash_no_message_in_folder($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -125,6 +129,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_inbox_byConversation_single_unread_contactInPbk($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -184,6 +189,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_inbox_byConversation_single_read_contactNotInPbk($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -234,6 +240,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_inbox_notByConversation_single_unread_contactInPbk($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -294,6 +301,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_inbox_notByConversation_single_read_contactNotInPbk($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -345,7 +353,8 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
-	/*public function test_my_folder_ajaxGET_by_conversation_sort_asc($db_engine)
+	/*#[DataProvider('database_Provider')]
+	public function test_my_folder_ajaxGET_by_conversation_sort_asc($db_engine)
 	{
 		// For now when conversation grouping is enabled, messages are always sorted DESC
 		// and the sorting setting of the user is not honored.
@@ -356,6 +365,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_inbox_byConversation_sortDesc($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -412,6 +422,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_inbox_byConversation_sortDesc_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -470,6 +481,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_inbox_notByConversation_sortDesc($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -528,6 +540,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_inbox_notByConversation_sortDesc_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -587,6 +600,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_inbox_notByConversation_sortAsc($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -644,6 +658,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_inbox_notByConversation_sortAsc_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -702,6 +717,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_sentitems_no_message_in_folder($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -731,6 +747,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_sentitems_byConversation_single_contactInPbk($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -781,6 +798,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_sentitems_byConversation_single_contactNotInPbk($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -831,7 +849,8 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
-	/*public function test_my_folder_ajaxGET_by_conversation_sort_asc($db_engine)
+	/*#[DataProvider('database_Provider')]
+	public function test_my_folder_ajaxGET_by_conversation_sort_asc($db_engine)
 	{
 		// For now when conversation grouping is enabled, messages are always sorted DESC
 		// and the sorting setting of the user is not honored.
@@ -842,6 +861,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_sentitems_byConversation_sortDesc($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -899,6 +919,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_sentitems_byConversation_sortDesc_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -957,6 +978,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_sentitems_notByConversation_sortDesc($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1015,6 +1037,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_sentitems_notByConversation_sortDesc_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1074,6 +1097,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_sentitems_notByConversation_sortAsc($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1131,6 +1155,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_ajaxGET_sentitems_notByConversation_sortAsc_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1189,6 +1214,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_GET_inbox_byConversation_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1276,6 +1302,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_GET_inbox_notByConversation_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1366,6 +1393,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_GET_sentitems_byConversation_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1457,6 +1485,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_GET_sentitems_notByConversation_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1548,6 +1577,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_GET_inbox_trash_byConversation_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1636,6 +1666,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_GET_sentitems_trash_byConversation_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1724,6 +1755,7 @@ class Messages_my_folder_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_my_folder_GET_inbox_spam_byConversation_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);

@@ -13,6 +13,9 @@ require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/GammuSmsdConfigFile.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+
 class Gammu_model_test extends KalkunTestCase {
 
 	public function setUp() : void
@@ -52,6 +55,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider split_multipart_unicode_Provider
 	 */
+	#[DataProvider('split_multipart_unicode_Provider')]
 	public function test_split_multipart_unicode($input, $expected)
 	{
 		$output = $this->obj->split_multipart_unicode($input, 67);
@@ -81,6 +85,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider utf16_code_units_count_Provider
 	 */
+	#[DataProvider('utf16_code_units_count_Provider')]
 	public function test_utf16_code_units_count($input, $expected)
 	{
 		$output = $this->obj->utf16_code_units_count($input);
@@ -127,6 +132,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider string_split_Provider
 	 */
+	#[DataProvider('string_split_Provider')]
 	public function test__string_split($input, $expected)
 	{
 		$output = $this->obj->_string_split($input);
@@ -161,6 +167,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider is_special_char_Provider
 	 */
+	#[DataProvider('is_special_char_Provider')]
 	public function test__is_special_char($input, $expected)
 	{
 		foreach ($input as $char)
@@ -186,6 +193,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider get_message_length_Provider
 	 */
+	#[DataProvider('get_message_length_Provider')]
 	public function test__get_message_length($input, $coding, $expected)
 	{
 		$output = $this->obj->_get_message_length($input, $coding, $expected);
@@ -236,6 +244,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider get_message_multipart_Provider
 	 */
+	#[DataProvider('get_message_multipart_Provider')]
 	public function test__get_message_multipart($input, $coding, $expected)
 	{
 		$output = $this->obj->_get_message_multipart($input, $coding, 67);
@@ -288,6 +297,8 @@ class Gammu_model_test extends KalkunTestCase {
 	 * @dataProvider _send_wap_link_Provider
 	 * @group gammu-smsd-inject
 	 */
+	#[DataProvider('_send_wap_link_Provider')]
+	#[Group('gammu-smsd-inject')]
 	public function test__send_wap_link($db_engine, $data, $expected)
 	{
 		$dbsetup = new DBSetup([
@@ -383,6 +394,8 @@ class Gammu_model_test extends KalkunTestCase {
 	 * @dataProvider _send_wap_link_failing_Provider
 	 * @group gammu-smsd-inject
 	 */
+	#[DataProvider('_send_wap_link_failing_Provider')]
+	#[Group('gammu-smsd-inject')]
 	public function test__send_wap_link_failing_check_log($db_engine, $data)
 	{
 		$dbsetup = new DBSetup([
@@ -417,6 +430,8 @@ class Gammu_model_test extends KalkunTestCase {
 	 * @dataProvider _send_wap_link_failing_Provider
 	 * @group gammu-smsd-inject
 	 */
+	#[DataProvider('_send_wap_link_failing_Provider')]
+	#[Group('gammu-smsd-inject')]
 	public function test__send_wap_link_failing_check_exception_thrown($db_engine, $data)
 	{
 		$dbsetup = new DBSetup([
@@ -443,6 +458,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_send_messages_waplink($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -524,6 +540,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider send_messages_failing_because_empty_Provider
 	 */
+	#[DataProvider('send_messages_failing_because_empty_Provider')]
 	public function test_send_messages_failing_because_empty($db_engine, $data)
 	{
 		$dbsetup = new DBSetup([
@@ -540,6 +557,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_send_messages_single_unicode($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -603,6 +621,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_send_messages_single_gsm7bit($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -665,6 +684,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_send_messages_multipart_unicode($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -749,6 +769,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_send_messages_multipart_gsm7bit($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -833,6 +854,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_send_messages_flash($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -895,6 +917,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_send_messages_override_defaults($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -1002,6 +1025,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider _send_message_route_Provider
 	 */
+	#[DataProvider('_send_message_route_Provider')]
 	public function test__send_message_route($db_engine, $tmp_data)
 	{
 		$dbsetup = new DBSetup([
@@ -1095,6 +1119,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider _send_message_multipart_Provider
 	 */
+	#[DataProvider('_send_message_multipart_Provider')]
 	public function test__send_message_multipart($db_engine, $outboxid, $message, $pos, $part, $coding, $class, $UDH)
 	{
 		$dbsetup = new DBSetup([
@@ -1119,6 +1144,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_search_messages($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1127,6 +1153,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_messages($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1135,6 +1162,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_modem_list($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1154,6 +1182,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_conversation($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1162,6 +1191,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_move_messages($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1170,6 +1200,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_delete_messages($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1178,6 +1209,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_multipart($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1186,6 +1218,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_update_read($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1194,6 +1227,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_insert_user_sentitems($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1202,6 +1236,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_get_user_outbox($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1210,6 +1245,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_delete_user_outbox($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1218,6 +1254,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_update_processed($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1226,6 +1263,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_update_owner($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1234,6 +1272,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_copy_message($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1242,6 +1281,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_canned_response($db_engine)
 	{
 		$this->markTestIncomplete();
@@ -1250,6 +1290,7 @@ class Gammu_model_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_process_outbox_queue($db_engine)
 	{
 		$this->markTestIncomplete();

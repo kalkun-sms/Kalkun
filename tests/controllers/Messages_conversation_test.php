@@ -15,6 +15,7 @@ require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
 use Symfony\Component\DomCrawler\Crawler;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class Messages_conversation_test extends KalkunTestCase {
 
@@ -42,6 +43,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_ajaxGET_folder_invalid($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -72,6 +74,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider folderAndMyFolder_inboxAndSentitems_Provider
 	 *
 	 */
+	#[DataProvider('folderAndMyFolder_inboxAndSentitems_Provider')]
 	public function test_conversation_ajaxGET_folder_inboxAndSentitems_no_message($db_engine, $folder, $id_folder)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -237,6 +240,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider folderAndMyFolder_inboxAndSentitems_Provider
 	 *
 	 */
+	#[DataProvider('folderAndMyFolder_inboxAndSentitems_Provider')]
 	public function test_conversation_ajaxGET_folder_inboxAndSentitems_multipart_sortAsc_contactNotInPbk($db_engine, $folder, $id_folder)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -380,6 +384,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider folderAndMyFolder_inboxAndSentitems_Provider
 	 *
 	 */
+	#[DataProvider('folderAndMyFolder_inboxAndSentitems_Provider')]
 	public function test_conversation_ajaxGET_folder_inboxAndSentitems_multipart_sortAsc_contactNotInPbk_withOffset($db_engine, $folder, $id_folder)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -531,6 +536,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider folderAndMyFolder_inboxAndSentitems_Provider
 	 *
 	 */
+	#[DataProvider('folderAndMyFolder_inboxAndSentitems_Provider')]
 	public function test_conversation_ajaxGET_folder_inboxAndSentitems_multipart_sortAsc_contactInPbk($db_engine, $folder, $id_folder)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -673,6 +679,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider folderAndMyFolder_inboxAndSentitems_Provider
 	 *
 	 */
+	#[DataProvider('folderAndMyFolder_inboxAndSentitems_Provider')]
 	public function test_conversation_ajaxGET_folder_inboxAndSentitems_multipart_sortDesc_contactNotInPbk($db_engine, $folder, $id_folder)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -817,6 +824,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider folderAndMyFolder_inboxAndSentitems_Provider
 	 *
 	 */
+	#[DataProvider('folderAndMyFolder_inboxAndSentitems_Provider')]
 	public function test_conversation_ajaxGET_folder_inboxAndSentitems_multipart_sortDesc_contactNotInPbk_withOffset($db_engine, $folder, $id_folder)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -969,6 +977,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_ajaxGET_folder_sentitems_sendingError_no_message($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1002,6 +1011,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_ajaxGET_folder_sentitems_sendingError($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1097,6 +1107,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_ajaxGET_folder_outbox_multipart_sortAsc_contactNotInPbk($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1188,6 +1199,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_ajaxGET_folder_outbox_multipart_sortAsc_contactNotInPbk_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1286,6 +1298,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_ajaxGET_folder_outbox_multipart_sortDesc_contactNotInPbk($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1377,6 +1390,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_ajaxGET_folder_outbox_multipart_sortDesc_contactNotInPbk_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1475,7 +1489,8 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
-	/*public function test_conversation_ajaxGET_my_folder_folder($db_engine)
+	/*#[DataProvider('database_Provider')]
+	public function test_conversation_ajaxGET_my_folder_folder($db_engine)
 	{
 		$this->markTestSkipped('Covered by test_conversation_ajaxGET_folder_inboxAndSentitems*');
 	}*/
@@ -1484,7 +1499,8 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
-	/*public function test_conversation_ajaxGET_my_folder_trash($db_engine)
+	/*#[DataProvider('database_Provider')]
+	public function test_conversation_ajaxGET_my_folder_trash($db_engine)
 	{
 		$this->markTestSkipped('Covered by test_conversation_ajaxGET_folder_inboxAndSentitems*');
 	}*/
@@ -1493,7 +1509,8 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
-	/*public function test_conversation_ajaxGET_my_folder_spam($db_engine)
+	/*#[DataProvider('database_Provider')]
+	public function test_conversation_ajaxGET_my_folder_spam($db_engine)
 	{
 		$this->markTestSkipped('Covered by test_conversation_ajaxGET_folder_inboxAndSentitems*');
 	}*/
@@ -1502,6 +1519,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_ajaxGET_folder_other($db_engine)
 	{
 		// This one is used when in the phonebook, there is a link to see the conversation with the contact
@@ -1616,6 +1634,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_ajaxGET_folder_other_withOffset($db_engine)
 	{
 		// This one is used when in the phonebook, there is a link to see the conversation with the contact
@@ -1737,6 +1756,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_GET_folder_inbox_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1823,6 +1843,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_GET_folder_outbox_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1909,6 +1930,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_GET_folder_sentitems_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -1995,6 +2017,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_GET_folder_spam_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -2081,6 +2104,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_GET_folder_trashInbox_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -2167,6 +2191,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_GET_folder_trashSentitems_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -2254,6 +2279,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_GET_folder_my_folderInbox_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -2340,6 +2366,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_GET_folder_my_folderSentitems_withOffset($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);
@@ -2426,6 +2453,7 @@ class Messages_conversation_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 *
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_conversation_GET_folder_phonebook($db_engine)
 	{
 		$this->reloadCIwithEngine($db_engine);

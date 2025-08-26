@@ -13,6 +13,8 @@ require_once __DIR__.'/../testutils/ConfigFile.php';
 require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 class Daemon_test extends KalkunTestCase {
 
 	public function setUp() : void
@@ -31,6 +33,7 @@ class Daemon_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_message_routine($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -53,6 +56,7 @@ class Daemon_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_message_routine_multipart($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -83,6 +87,7 @@ class Daemon_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_message_routine_spam($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -120,6 +125,7 @@ class Daemon_test extends KalkunTestCase {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_message_routine_hook_before_ownership_break($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -180,6 +186,7 @@ class Tester'.$plugin_suffix.'_plugin extends CI3_plugin_system {
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_message_routine_hook_after_ownership_break($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -262,6 +269,7 @@ class Tester'.$plugin_suffix.'_plugin extends CI3_plugin_system {
 	 * of php. The reason might be that the DB returns no message in outbox because of
 	 * the filter on the outbox table  "'SendingDateTime <=" See Nongammu_model::process_outbox_queue
 	 */
+	#[DataProvider('gateway_engine_Provider')]
 	public function test_outbox_routine($db_engine, $gateway)
 	{
 		$dbsetup = new DBSetup([
@@ -296,6 +304,7 @@ $config[\'gateway\'] = '.var_export($gateway, TRUE).';
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_server_alert_daemon_trigger_alert($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -325,6 +334,7 @@ $config[\'gateway\'] = '.var_export($gateway, TRUE).';
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_run_user_filters($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -350,6 +360,7 @@ $config[\'gateway\'] = '.var_export($gateway, TRUE).';
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_run_user_filters_no_matching_filter($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -378,6 +389,7 @@ $config[\'gateway\'] = '.var_export($gateway, TRUE).';
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_run_user_filters_no_matching_filter2($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -406,6 +418,7 @@ $config[\'gateway\'] = '.var_export($gateway, TRUE).';
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_set_ownership_for_user_by_message_text($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -446,6 +459,7 @@ $config[\'gateway\'] = '.var_export($gateway, TRUE).';
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_set_ownership_for_user_by_phonenumber($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -492,6 +506,7 @@ $config[\'inbox_routing_user_phonenumber\'] = TRUE;
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_set_ownership_for_user_by_user_phonebook($db_engine)
 	{
 		$dbsetup = new DBSetup([
@@ -543,6 +558,7 @@ $config[\'inbox_routing_use_phonebook\'] = TRUE;
 	/**
 	 * @dataProvider database_Provider
 	 */
+	#[DataProvider('database_Provider')]
 	public function test_set_ownership_no_username_match_custom_inbox_owner($db_engine)
 	{
 		$dbsetup = new DBSetup([
