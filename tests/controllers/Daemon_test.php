@@ -17,11 +17,26 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 class Daemon_test extends KalkunTestCase {
 
+	private $restore_error_handler_after_exception = FALSE;
+
 	public function setUp() : void
 	{
 		if (file_exists(FCPATH . 'install'))
 		{
 			unlink(FCPATH . 'install');
+		}
+	}
+
+	public function tearDown() : void
+	{
+		if ($this->restore_error_handler_after_exception === TRUE)
+		{
+			// Unsure why two are required.
+			// Maybe because we have to remove
+			//  1. the error_handler from MY_Hooks::kalkun_set_error_handler()
+			//  2. the error_handler from CIPHPUnitTestCase::enableStrictErrorCheck()
+			restore_error_handler();
+			restore_error_handler();
 		}
 	}
 
@@ -291,6 +306,10 @@ $config[\'gateway\'] = '.var_export($gateway, TRUE).';
 			// Since we provide invalid gateway parameter (URL...), file_get_contents will throw an exception.
 			$this->expectException(WarningException::class);
 			$this->_expectExceptionMessageMatches('/file_get_contents.*Failed to open stream:/i');
+
+			// Prevent: "Test code or tested code did not remove its own error handlers" (since PHPUnit 11)
+			// As suggested in https://github.com/laravel/framework/issues/49502#issuecomment-2222592953
+			$this->restore_error_handler_after_exception = TRUE;
 
 			// Prevent: "Test code or tested code did not close its own output buffers"
 			ob_end_flush();
