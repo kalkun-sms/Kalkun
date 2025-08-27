@@ -1,0 +1,22 @@
+{
+    "require-dev": {
+        "cweagans/composer-patches": "~1.0",
+        "kenjis/ci-phpunit-test": ">=1",
+        "symfony/dom-crawler": "*",
+        "symfony/css-selector": "*"
+    },
+    "extra": {
+        "patches": {
+            "kenjis/ci-phpunit-test": {
+                "Add support for PHP 8.2": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.2.patch",
+                "Add support for PHP 8.4": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.4.patch"
+            }
+        }
+    },
+    "config": {
+        "vendor-dir": "vendor-test_deps",
+        "allow-plugins": {
+            "cweagans/composer-patches": true
+        }
+    }
+}

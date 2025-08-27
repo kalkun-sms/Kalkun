@@ -5,12 +5,13 @@ set -e
 TESTSDIR="tests/"
 ENABLE_MONKEY_PATCHING=false
 PHPUNIT_OUTPUT_TO_STDERR=false
+PHPUNIT="vendor-phpunit/bin/phpunit"
 
 mkdir -p "${TESTSDIR}"
-php vendor/kenjis/ci-phpunit-test/install.php -t "${TESTSDIR}" --from-composer
+php vendor-test_deps/kenjis/ci-phpunit-test/install.php -t "${TESTSDIR}" --from-composer
 # Workaround a bug in phpunit < 7 where the absence of "${TESTSDIR}"_ci_phpunit_test/ makes it fail
 # with strpos(): Empty needle in vendor/phpunit/php-file-iterator/src/Iterator.php
-if ! vendor/bin/phpunit --atleast-version 7; then
+if ! "$PHPUNIT" --atleast-version 7; then
   mkdir -vp "${TESTSDIR}"_ci_phpunit_test
   # Below the alternative is to remove the culprit line from phpunit.xml
   #sed -i -e "/<exclude>.\/_ci_phpunit_test\/<\/exclude>/ d" "${TESTSDIR}"phpunit.xml
@@ -20,6 +21,9 @@ fi
 sed -i "s#'../../vendor/codeigniter/framework/system'#'../vendor/codeigniter/framework/system'#" "${TESTSDIR}"/Bootstrap.php
 sed -i "s#'../../application'#'../application'#" "${TESTSDIR}"/Bootstrap.php
 sed -i "/define('FCPATH'/ s#'/../..'#'/..'#" "${TESTSDIR}"/Bootstrap.php
+
+# Fix path to kenjis/ci-phpunit-test
+sed -i "s#'vendor', 'kenjis',#'vendor-test_deps', 'kenjis',#" "${TESTSDIR}"/Bootstrap.php
 
 for dir in controllers models views libraries helpers hooks views/errors; do
   sed -i "s#>../$dir<#>../application/$dir<#" "${TESTSDIR}/phpunit.xml"
@@ -34,7 +38,7 @@ if [ "$PHPUNIT_OUTPUT_TO_STDERR" = "true" ]; then
   #      See: https://github.com/sebastianbergmann/phpunit/issues/1416#issuecomment-53951936
   #  (2) Don't call session_start() at all when on CLI (which is always the case for tests). This is the
   #      present solution.
-  if ! vendor/bin/phpunit --atleast-version 10; then
+  if ! "$PHPUNIT" --atleast-version 10; then
     sed -i 's/bootstrap=/stderr="true" bootstrap=/' "${TESTSDIR}"phpunit.xml
   fi
 fi
@@ -63,7 +67,7 @@ sed -i -e 's|<directory suffix=".php">../application/views/errors</directory>|<d
 
 # the void return type of setUp() methods in phpunit (required since phpunit8) isn't supported
 # with phpunit <= 6. For these, we remove the ": void" part of the tests
-if [ "$(composer show phpunit/phpunit | grep "^versions : " | rev | cut -d " " -f 1 | rev | cut -d . -f 1)" -le 6 ]; then
+if [ "$(COMPOSER=composer-phpunit.json composer show phpunit/phpunit | grep "^versions : " | rev | cut -d " " -f 1 | rev | cut -d . -f 1)" -le 6 ]; then
   for func in setUp tearDown setUpBeforeClass tearDownAfterClass; do
     sed -i "/ function $func()/ s/:\s*void$//" "${TESTSDIR}"*/*_test.php "${TESTSDIR}"testutils/KalkunTestCase.php
   done

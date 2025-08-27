@@ -74,12 +74,16 @@ jobs:
           path: ${{ steps.composer-cache.outputs.dir }}
           # Use composer.json for key, if composer.lock is not committed.
           # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock', 'composer-phpunit.lock', 'composer-test_deps.lock') }}
           restore-keys: ${{ runner.os }}-composer-
       - name: Install composer dependencies
         run: |
           composer update
           composer install --no-progress --prefer-dist --optimize-autoloader
+          COMPOSER=composer-phpunit.json composer update
+          COMPOSER=composer-phpunit.json composer install --no-progress --prefer-dist --optimize-autoloader
+          COMPOSER=composer-test_deps.json composer update
+          COMPOSER=composer-test_deps.json composer install --no-progress --prefer-dist --optimize-autoloader
       - name: Install system dependencies
         run: sudo apt-get update && sudo apt-get -y install libdbd-sqlite3 gammu-smsd
       - name: Start MySQL & PostgreSQL + create DB users
@@ -110,7 +114,7 @@ jobs:
       - name: Install/Update ci-phpunit-test
         run: ./utils/prepare_tests_for_phpunit.sh
       - name: Test with phpunit
-        run: HTML=5 vendor/bin/phpunit --coverage-text -c tests
+        run: HTML=5 vendor-phpunit/bin/phpunit --coverage-text -c tests
   check-code:
     strategy:
       matrix:

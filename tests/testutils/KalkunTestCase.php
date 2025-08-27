@@ -9,6 +9,7 @@
  * @link https://kalkun.sourceforge.io/
  */
 
+require_once __DIR__.'/../../vendor-test_deps/autoload.php';
 require_once __DIR__.'/../testutils/Html4Validator.php';
 require_once __DIR__.'/../testutils/Html5Validator.php';
 

@@ -9,6 +9,7 @@
  * @link https://kalkun.sourceforge.io/
  */
 
+require_once __DIR__.'/../../vendor-test_deps/autoload.php';
 require_once __DIR__.'/../testutils/ConfigFile.php';
 require_once __DIR__.'/../testutils/DBSetup.php';
 require_once __DIR__.'/../testutils/KalkunTestCase.php';

@@ -6,6 +6,8 @@ application/config/database.php
 .DS_Store
 
 /vendor/
+/vendor-phpunit/
+/vendor-test_deps/
 .php-cs-fixer.cache
 /dist
 
