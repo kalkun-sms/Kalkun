@@ -65,6 +65,11 @@ rm "${TESTSDIR}"controllers/Welcome_test.php
 # See: https://github.com/kenjis/ci-phpunit-test/issues/412
 sed -i -e 's|<directory suffix=".php">../application/views/errors</directory>|<directory suffix=".php">../application/views</directory>|' "${TESTSDIR}"phpunit.xml
 
+if "$PHPUNIT" --atleast-version 10 > /dev/null; then
+  echo "Migrate configuration file (phpunit.xml to current PHPUnit version)"
+  "$PHPUNIT" --migrate-configuration -c tests/
+fi
+
 # the void return type of setUp() methods in phpunit (required since phpunit8) isn't supported
 # with phpunit <= 6. For these, we remove the ": void" part of the tests
 if [ "$(COMPOSER=composer-phpunit.json composer show phpunit/phpunit | grep "^versions : " | rev | cut -d " " -f 1 | rev | cut -d . -f 1)" -le 6 ]; then
