@@ -1,0 +1,8 @@
+{
+    "config": {
+        "vendor-dir": "vendor-phpunit"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=4"
+    }
+}
