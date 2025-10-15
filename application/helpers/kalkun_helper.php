@@ -31,7 +31,10 @@ if ( ! function_exists('DNDcheck'))
 		curl_setopt($request, CURLOPT_POSTFIELDS, $postString);
 		curl_setopt($request, CURLOPT_SSL_VERIFYPEER, FALSE);
 		$response = curl_exec($request);
-		curl_close ($request);
+		if ( ! is_php('8.0'))
+		{
+			curl_close ($request);
+		}
 
 		$httpcode = curl_getinfo($request, CURLINFO_HTTP_CODE);
 		if ($httpcode !== 200)

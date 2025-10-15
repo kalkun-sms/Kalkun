@@ -154,7 +154,10 @@ class Way2sms_model extends Gammu_model {
 		curl_setopt($curl, CURLOPT_REFERER, $refurl);
 		$text = curl_exec($curl);
 
-		curl_close($curl);
+		if ( ! is_php('8.0'))
+		{
+			curl_close ($curl);
+		}
 		return $result;
 	}
 }

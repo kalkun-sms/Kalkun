@@ -80,7 +80,10 @@ class Connekt_model extends Nongammu_model {
 		$response = curl_exec($curl);
 		$httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-		curl_close($curl);
+		if ( ! is_php('8.0'))
+		{
+			curl_close ($curl);
+		}
 
 		$is_succes = ($httpcode >= 200 && $httpcode < 300) ? TRUE : FALSE;
 		if ($is_succes)
