@@ -504,7 +504,7 @@ class Phonebook_model extends CI_Model {
 		$this->load->model('Kalkun_model');
 		$country_code = $this->Kalkun_model->get_setting($param['id_user'])->row('country_code');
 		$phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
-		$dial_code = '+'.$phoneNumberUtil->getCountryCodeForRegion($country_code);
+		$dial_code = '+'.$phoneNumberUtil->getCountryCodeForRegion(strval($country_code));
 		$number_local = str_replace($dial_code, '0', $param['number']);
 		$number_inter = $dial_code.substr($param['number'], 1);
 		return array($param['number'], $number_local, $number_inter);
