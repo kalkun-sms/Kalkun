@@ -50,10 +50,7 @@
                 "Fix PHP8.4 deprecation": "patches/Datto_JsonRpcHttp/v5.0.6/0004-fix-deprecation-error-on-PHP-8.4.patch"
             },
             "econea/nusoap": {
-            },
-            "kenjis/ci-phpunit-test": {
-                "Add support for PHP 8.2": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.2.patch",
-                "Add support for PHP 8.4": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.4.patch"
+                "Add support for PHP 8.5": "patches/Econea_Nusoap/v0.9.20/support_php-8.5.patch"
             }
         }
     },

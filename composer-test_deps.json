@@ -9,7 +9,8 @@
         "patches": {
             "kenjis/ci-phpunit-test": {
                 "Add support for PHP 8.2": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.2.patch",
-                "Add support for PHP 8.4": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.4.patch"
+                "Add support for PHP 8.4": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.4.patch",
+                "Add support for PHP 8.5": "patches/Kenjis_CiPhpunitTest/v3.0.4/support_php-8.5.patch"
             }
         }
     },
