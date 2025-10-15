@@ -457,7 +457,10 @@ password=' . $this->password);
 
 			$testcase->resetInstance();
 			$reflection = new \ReflectionProperty('KalkunTestCase', 'CI');
-			$reflection->setAccessible(TRUE);
+			if ( ! is_php('8.1'))
+			{
+				$reflection->setAccessible(TRUE);
+			}
 			$CI = $reflection->getValue($testcase);
 			$CI->load->database();
 			DBSetup::$current_setup[$engine]->execute($CI);

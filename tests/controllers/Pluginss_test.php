@@ -39,19 +39,30 @@ class Pluginss_test extends KalkunTestCase {
 		Plugins_lib_kalkun::$run_actions = [];
 
 		$reflection = new \ReflectionProperty('Plugins_lib_kalkun', 'PM');
-		$reflection->setAccessible(TRUE);
+		if ( ! is_php('8.1'))
+		{
+			$reflection->setAccessible(TRUE);
+		}
 		$reflection->setValue(NULL, NULL);
 
 		$reflection = new \ReflectionProperty('Plugins_lib_kalkun', 'plugin_path');
-		$reflection->setAccessible(TRUE);
+		if ( ! is_php('8.1'))
+		{
+			$reflection->setAccessible(TRUE);
+		}
 		$reflection->setValue(NULL, NULL);
 
 		$reflection = new \ReflectionProperty('Plugins_lib_kalkun', 'messages');
-		$reflection->setAccessible(TRUE);
+		if ( ! is_php('8.1'))
+		{
+			$reflection->setAccessible(TRUE);
+		}
 		$reflection->setValue(NULL, NULL);
 
 		/*$reflection = new \ReflectionProperty('Plugins_lib_kalkun', 'CI');
-		$reflection->setAccessible(TRUE);
+		if ( ! is_php('8.1')) {
+			$reflection->setAccessible(TRUE);
+		}
 		$reflection->setValue(NULL, NULL);*/
 	}
 
