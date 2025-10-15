@@ -1,0 +1,26 @@
+RuntimeException: Method ReflectionProperty::setAccessible() is deprecated since 8.5, as it has no effect on line 39 in file /home/runner/work/Kalkun/Kalkun/vendor/kenjis/ci-phpunit-test/application/tests/_ci_phpunit_test/CIPHPUnitTestReflection.php
+
+--- a/application/tests/_ci_phpunit_test/CIPHPUnitTestReflection.php
++++ b/application/tests/_ci_phpunit_test/CIPHPUnitTestReflection.php
+@@ -18,7 +18,9 @@
+ 	public static function getPrivateMethodInvoker($obj, $method)
+ 	{
+ 		$ref_method = new ReflectionMethod($obj, $method);
+-		$ref_method->setAccessible(true);
++		if ( ! is_php('8.1')) {
++			$ref_method->setAccessible(true);
++		}
+ 		$obj = (gettype($obj) === 'object') ? $obj : null;
+ 
+ 		return function () use ($obj, $ref_method) {
+@@ -36,7 +38,9 @@
+ 		}
+ 
+ 		$ref_property = $ref_class->getProperty($property);
+-		$ref_property->setAccessible(true);
++		if ( ! is_php('8.1')) {
++			$ref_property->setAccessible(true);
++		}
+ 
+ 		return $ref_property;
+ 	}

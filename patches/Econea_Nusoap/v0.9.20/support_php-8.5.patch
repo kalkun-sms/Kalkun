@@ -1,0 +1,55 @@
+RuntimeException: Non-canonical cast (double) is deprecated, use the (float) cast instead on line 7281 in file /home/runner/work/Kalkun/Kalkun/vendor/econea/nusoap/src/nusoap.php
+RuntimeException: Non-canonical cast (boolean) is deprecated, use the (bool) cast instead on line 7287 in file /home/runner/work/Kalkun/Kalkun/vendor/econea/nusoap/src/nusoap.php
+RuntimeException: Function xml_parser_free() is deprecated since 8.5, as it has no effect since PHP 8.0 on line 6916 in file /home/runner/work/Kalkun/Kalkun/vendor/econea/nusoap/src/nusoap.php
+
+--- a/src/nusoap.php
++++ b/src/nusoap.php
+@@ -1263,7 +1263,7 @@
+                 $this->setError($errstr);
+             }
+ 
+-            xml_parser_free($this->parser);
++            (PHP_VERSION_ID < 80000) && xml_parser_free($this->parser);
+             unset($this->parser);
+         } else {
+             $this->debug('no xml passed to parseString()!!');
+@@ -5010,12 +5010,12 @@
+             $this->debug($errstr);
+             $this->debug("XML payload:\n" . $wsdl_string);
+             $this->setError($errstr);
+-            xml_parser_free($this->parser);
++            (PHP_VERSION_ID < 80000) && xml_parser_free($this->parser);
+             unset($this->parser);
+             return false;
+         }
+         // free the parser
+-        xml_parser_free($this->parser);
++        (PHP_VERSION_ID < 80000) && xml_parser_free($this->parser);
+         unset($this->parser);
+         $this->debug('Parsing WSDL done');
+         // catch wsdl parse errors
+@@ -6913,7 +6913,7 @@
+                     }
+                 }
+             }
+-            xml_parser_free($this->parser);
++            (PHP_VERSION_ID < 80000) && xml_parser_free($this->parser);
+             unset($this->parser);
+         } else {
+             $this->debug('xml was empty, didn\'t parse!');
+@@ -7278,13 +7278,13 @@
+             return (int) $value;
+         }
+         if ($type == 'float' || $type == 'double' || $type == 'decimal') {
+-            return (double) $value;
++            return (float) $value;
+         }
+         if ($type == 'boolean') {
+             if (strtolower($value) == 'false' || strtolower($value) == 'f') {
+                 return false;
+             }
+-            return (boolean) $value;
++            return (bool) $value;
+         }
+         if ($type == 'base64' || $type == 'base64Binary') {
+             $this->debug('Decode base64 value');
