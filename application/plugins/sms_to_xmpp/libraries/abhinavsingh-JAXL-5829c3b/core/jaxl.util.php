@@ -96,7 +96,10 @@ function my_mt_rand($min = null, $max = null) {
             $rs['errmsg'] = curl_error($ch);
             $rs['header'] = curl_getinfo($ch);
             
-            curl_close($ch);
+            if ( ! is_php('8.0'))
+            {
+                curl_close($ch);
+            }
             return $rs;
         }
         

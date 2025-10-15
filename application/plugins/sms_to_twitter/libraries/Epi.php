@@ -154,7 +154,10 @@ class EpiCurl
     }
     if($isAsynchronous)
       curl_multi_remove_handle($this->mc, $done['handle']);
-    curl_close($done['handle']);
+    if ( ! is_php('8.0'))
+    {
+      curl_close($done['handle']);
+    }
   }
 
   private function startTimer($key)

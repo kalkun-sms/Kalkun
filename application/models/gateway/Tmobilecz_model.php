@@ -243,7 +243,10 @@ class Tmobilecz_model extends Nongammu_model {
 		};
 		log_message('debug', 'TMCZ> SMS sent successfully.');
 
-		curl_close($curl);
+		if ( ! is_php('8.0'))
+		{
+			curl_close ($curl);
+		}
 		//$result[] = array('phone' => $p, 'msg' => urldecode($msg), 'result' => $res);
 		return $result;
 	}
