@@ -292,7 +292,15 @@ class Phonebook extends MY_Controller {
 		$filePath = $_FILES['csvfile']['tmp_name'];
 
 		//load the CSV document from a file path
-		$csv = League\Csv\Reader::createFromPath($filePath, 'r');
+		if (method_exists('League\Csv\Reader', 'from'))
+		{
+			$csv = League\Csv\Reader::from($filePath, 'r');
+		}
+		else
+		{
+			// Method League\Csv\Reader::createFromPath() is deprecated since league/csv:9.27.0, use League\Csv\AbstractCsv::from()
+			$csv = League\Csv\Reader::createFromPath($filePath, 'r');
+		}
 		if (method_exists($csv, 'setHeaderOffset'))
 		{
 			// setHeaderOffset and following methods appeared with CSV League 9.x

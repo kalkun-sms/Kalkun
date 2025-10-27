@@ -261,7 +261,15 @@ class Messages extends MY_Controller {
 		{
 			$filePath = $_FILES['import_file']['tmp_name'];
 			//load the CSV document from a file path
-			$reader = League\Csv\Reader::createFromPath($filePath, 'r');
+			if (method_exists('League\Csv\Reader', 'from'))
+			{
+				$reader = League\Csv\Reader::from($filePath, 'r');
+			}
+			else
+			{
+				// Method League\Csv\Reader::createFromPath() is deprecated since league/csv:9.27.0, use League\Csv\AbstractCsv::from()
+				$reader = League\Csv\Reader::createFromPath($filePath, 'r');
+			}
 			if (method_exists($reader, 'setHeaderOffset'))
 			{
 				// setHeaderOffset and following methods appeared with CSV League 9.x
