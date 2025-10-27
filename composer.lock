@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fc8012044e1d3d1780259bf91c50e0b",
+    "content-hash": "761d7ce7817a5990fadbed3112bd8713",
     "packages": [
         {
             "name": "codeigniter/framework",
@@ -206,16 +206,16 @@
         },
         {
             "name": "econea/nusoap",
-            "version": "v0.9.17",
+            "version": "v0.9.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contributte/nusoap.git",
-                "reference": "ac2322f37808ecb1a2b84ed469cba9c51648eb8d"
+                "reference": "802484f443cf16495eb085f04351076456077f99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contributte/nusoap/zipball/ac2322f37808ecb1a2b84ed469cba9c51648eb8d",
-                "reference": "ac2322f37808ecb1a2b84ed469cba9c51648eb8d",
+                "url": "https://api.github.com/repos/contributte/nusoap/zipball/802484f443cf16495eb085f04351076456077f99",
+                "reference": "802484f443cf16495eb085f04351076456077f99",
                 "shasum": ""
             },
             "require": {
@@ -262,7 +262,7 @@
             ],
             "support": {
                 "issues": "https://github.com/contributte/nusoap/issues",
-                "source": "https://github.com/contributte/nusoap/tree/v0.9.17"
+                "source": "https://github.com/contributte/nusoap/tree/v0.9.20"
             },
             "funding": [
                 {
@@ -274,7 +274,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-25T09:08:59+00:00"
+            "time": "2025-07-15T07:09:21+00:00"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
