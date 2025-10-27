@@ -95,7 +95,7 @@ jobs:
       - uses: robinraju/release-downloader@v1
         with:
           repository: 'validator/validator'
-          latest: true
+          latest: false
           tag: '20.6.30'
           fileName: 'vnu.jar_20.6.30.zip'
           tarBall: false
