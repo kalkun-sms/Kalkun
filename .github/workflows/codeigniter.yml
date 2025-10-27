@@ -81,7 +81,7 @@ jobs:
           composer update
           composer install --no-progress --prefer-dist --optimize-autoloader
       - name: Install system dependencies
-        run: sudo apt-get -y install libdbd-sqlite3 gammu-smsd
+        run: sudo apt-get update && sudo apt-get -y install libdbd-sqlite3 gammu-smsd
       - name: Start MySQL & PostgreSQL + create DB users
         run: ./utils/db_create_user.sh
       - name: Check availability of java, otherwise install it
