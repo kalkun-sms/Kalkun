@@ -108,7 +108,7 @@ class Messages_conversation_test extends KalkunTestCase {
 		if ($parts_count > 1)
 		{
 			$parts = $parts_count . ' part messages';
-			$this->assertEquals($parts, $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+			$this->assertEquals($parts, $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 			return $index;
 		}
 		return $index - 1;
@@ -120,59 +120,59 @@ class Messages_conversation_test extends KalkunTestCase {
 		switch ($source)
 		{
 			case 'inbox':
-				$this->assertEquals('From', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				$this->assertEquals($data['number'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				$this->assertEquals('From', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				$this->assertEquals($data['number'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				$index++;
-				//$this->assertEquals('Inserted', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				//$this->assertEquals($data['inserted'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				//$this->assertEquals('Inserted', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				//$this->assertEquals($data['inserted'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				//$index ++;
-				$this->assertEquals('Date', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				$this->assertEquals($data['date'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				$this->assertEquals('Date', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				$this->assertEquals($data['date'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				$index++;
-				$this->assertEquals('SMSC', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				$this->assertEquals($data['smsc'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				$this->assertEquals('SMSC', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				$this->assertEquals($data['smsc'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				$index++;
 				$index = $this->assertDetailAreaPartsCounter($crawler_item, $index, $data['parts']);
 				$index++;
-				//$this->assertEquals('Status', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				//$this->assertEquals($data['status'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				//$this->assertEquals('Status', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				//$this->assertEquals($data['status'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				break;
 			case 'outbox':
-				$this->assertEquals('To', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				$this->assertEquals($data['number'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				$this->assertEquals('To', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				$this->assertEquals($data['number'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				$index++;
-				$this->assertEquals('Inserted', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				$this->assertDateEqualsWithDelta($data['inserted'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()), 3600);
+				$this->assertEquals('Inserted', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				$this->assertDateEqualsWithDelta($data['inserted'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()), 3600);
 				$index++;
-				$this->assertEquals('Date', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				$this->assertEquals($data['date'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				$this->assertEquals('Date', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				$this->assertEquals($data['date'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				$index++;
-				//$this->assertEquals('SMSC', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				//$this->assertEquals($data['smsc'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				//$this->assertEquals('SMSC', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				//$this->assertEquals($data['smsc'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				//$index ++;
 				//$index = $this->assertDetailAreaPartsCounter($crawler_item, $index, $data['parts']);
 				//$index ++;
-				//$this->assertEquals('Status', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				//$this->assertEquals($data['status'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				//$this->assertEquals('Status', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				//$this->assertEquals($data['status'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				//$index ++;
 				break;
 			case 'sentitems':
-				$this->assertEquals('To', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				$this->assertEquals($data['number'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				$this->assertEquals('To', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				$this->assertEquals($data['number'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				$index++;
-				//$this->assertEquals('Inserted', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				//$this->assertEquals($data['inserted'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				//$this->assertEquals('Inserted', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				//$this->assertEquals($data['inserted'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				//$index ++;
-				$this->assertEquals('Date', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				$this->assertEquals($data['date'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				$this->assertEquals('Date', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				$this->assertEquals($data['date'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				$index++;
-				$this->assertEquals('SMSC', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				$this->assertEquals($data['smsc'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				$this->assertEquals('SMSC', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				$this->assertEquals($data['smsc'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				$index++;
 				$index = $this->assertDetailAreaPartsCounter($crawler_item, $index, $data['parts']);
 				$index++;
-				$this->assertEquals('Status', $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->first()));
-				$this->assertEquals($data['status'], $this->crawler_text($crawler_item->filter('div.detail_area > table > tr')->eq($index)->filter('td')->last()));
+				$this->assertEquals('Status', $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->first()));
+				$this->assertEquals($data['status'], $this->crawler_text($crawler_item->filter('div.detail_area > table tr')->eq($index)->filter('td')->last()));
 				$index++;
 				break;
 			default:
