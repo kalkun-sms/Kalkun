@@ -11,7 +11,7 @@ on:
 jobs:
   debian:
     name: Debian package
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     env:
       KEY_ID: ${{ vars.KALKUN_GITHUB_WORKFLOW_PACKAGER_KEY_FINGERPRINT }}
       DPUT_CF: /home/runner/dput.cf
@@ -28,6 +28,9 @@ jobs:
 
           # For sphinxcontrib-phpdomain source build dependency
           sudo apt-get install -y dh-python
+
+          # For node-jquery-validation source build dependency
+          sudo apt-get install -y dh-nodejs # Only available since ubuntu >= 24.04
 
           # For backportpackage
           sudo apt-get install -y ubuntu-dev-tools
@@ -100,6 +103,8 @@ jobs:
 
           REPOS_TO_BUILD+=("https://salsa.debian.org/bastif/sphinxcontrib-phpdomain")
           REPOS_TO_BUILD+=("https://salsa.debian.org/php-team/pear/php-codeigniter-framework")
+
+          REPOS_TO_BUILD+=("https://salsa.debian.org/js-team/node-jquery-validation")
 
           for repo in "${REPOS_TO_BUILD[@]}"; do
             ./utils/upload_kalkun_deps_to_ppa.sh -r "$repo" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}"

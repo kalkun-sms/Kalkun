@@ -246,6 +246,10 @@ else
 fi
 
 if [ "a$CI" == "atrue" ]; then
+  # Set /usr/bin at the beginning of PATH, otherwise, github actions uses /usr/local/bin/grunt instead of /usr/bin/grunt
+  # Which would make the build of 'node-jquery-validation' fail with 'Fatal error: Unable to find local grunt.'
+  export PATH=/usr/bin:$PATH
+
   # Build binary package
   export DEB_BUILD_PROFILES="nocheck"
   export DEB_BUILD_OPTIONS="nocheck"
@@ -321,6 +325,32 @@ for suite in "${distribs[@]}"; do
     if [ "$(dpkg-parsechangelog -S Source)" = "kalkun" ]; then
       perl -pi -e 's/(php-random-compat)\s*\(.*?\)/\1/' debian/control
     fi
+
+    git add debian/control debian/rules
+    if ! git diff --cached --quiet --exit-code; then
+      git commit -m "Fix Build-Depends in d/control & d/rules to work on $suite"
+    fi
+
+    if [ "${DCH_DISTRIB,,}" != "unreleased" ] && [ "$(dpkg-parsechangelog -S Source)" != "kalkun" ] ; then
+      dch --local "~" ""
+    else
+      dch --local "~~${suite}" ""
+    fi
+
+    dch "Fix Build-Depends in d/control & d/rules to work on $suite"
+    git add debian/changelog
+    git commit -m "update changelog"
+
+    git checkout -f
+    dpkg-buildpackage -d -S --sign-key="$KEY_ID"
+  fi
+
+  # Apply some changes when suite is 'jammy' & package is 'node-jquery-validation'
+  if [ "$suite" = "jammy" ] && [ "$(dpkg-parsechangelog -S Source)" = "node-jquery-validation" ]; then
+    git checkout -b "bpp_$suite"
+
+    perl -pi -e 's/(.*dh-nodejs.*)/#\1/' debian/control
+    perl -pi -e 's/(.*dh_nodejs_autodocs.*)/#\1/' debian/rules
 
     git add debian/control debian/rules
     if ! git diff --cached --quiet --exit-code; then
