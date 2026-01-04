@@ -102,7 +102,7 @@ vendor="${vendor,,}"
 package="$(basename "$repo")"
 
 workdir="$(mktemp -d "/tmp/workdir_${package}.XXX")" || exit 1
-trap "rm -fr -- '$workdir'" EXIT
+trap "if [ ! -v DEBUG ]; then rm -fr -- '$workdir'; fi" EXIT
 
 echo
 echo -e "${MAGENTA}${UNDERLINE}${BOLD}Starting script $(basename -- "${BASH_SOURCE[0]}")${RESET}"
