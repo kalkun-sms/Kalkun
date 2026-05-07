@@ -124,7 +124,7 @@ class Jsonrpc_test extends KalkunTestCase {
 	 * @dataProvider database_Provider
 	 * @runInSeparateProcess
 	 * @preserveGlobalState disabled
-	 * @requires PHPUnit >= 6
+	 * @requires PHPUnit >= 6.0.0
 	 *
 	 * With PHP unit 5.7.27 on PHP 5.6 test errors out like this
 	 * exception 'ErrorException' with message 'unserialize(): Error at offset 0 of 75 bytes' in /home/runner/work/Kalkun/Kalkun/vendor/phpunit/phpunit/src/Util/PHP.php:290
@@ -134,7 +134,7 @@ class Jsonrpc_test extends KalkunTestCase {
 	#[DataProvider('database_Provider')]
 	#[RunInSeparateProcess]
 	#[PreserveGlobalState(FALSE)]
-	#[RequiresPhpunit('>= 6')]
+	#[RequiresPhpunit('>= 6.0.0')]
 	public function test_send_sms_empty_data($db_engine)
 	{
 		$dbsetup = new DBSetup([
