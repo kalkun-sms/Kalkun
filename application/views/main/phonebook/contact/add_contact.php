@@ -104,7 +104,7 @@
 	<p class="validateTips"><?php echo tr('All form fields are required.'); ?></p>
 	<?php echo form_open('phonebook/add_contact_process', array('id' => 'addContact'));?>
 	<fieldset>
-		<input type="hidden" name="pbk_id_user" id="pbk_id_user" value="<?php echo $this->session->userdata('id_user');?>" />
+		<input type="hidden" name="pbk_id_user" id="pbk_id_user" value="<?php echo $this->session->userdata('id_user');?>">
 		<label for="name"><?php echo tr('Name'); ?></label>
 		<input type="text" name="name" id="name" value="<?php if (isset($contact))
 	{
@@ -133,15 +133,15 @@
 
 		<label for="groups"><?php echo tr('Groups'); ?></label>
 		<?php if (isset($contact)): ?>
-		<input name="groups" id="groups" value="<?php echo htmlentities($this->Phonebook_model->get_groups($contact->row('id_pbk'), $this->session->userdata('id_user'))->GroupNames, ENT_QUOTES); ?>" type="text" />
+		<input name="groups" id="groups" value="<?php echo htmlentities($this->Phonebook_model->get_groups($contact->row('id_pbk'), $this->session->userdata('id_user'))->GroupNames, ENT_QUOTES); ?>" type="text">
 		<?php elseif ( ! empty($group_id)):?>
-		<input name="groups" id="groups" value="<?php echo htmlentities($this->Phonebook_model->group_name($group_id, $this->session->userdata('id_user')), ENT_QUOTES); ?>" type="text" />
+		<input name="groups" id="groups" value="<?php echo htmlentities($this->Phonebook_model->group_name($group_id, $this->session->userdata('id_user')), ENT_QUOTES); ?>" type="text">
 		<?php else : ?>
-		<input name="groups" id="groups" value="" type="text" />
+		<input name="groups" id="groups" value="" type="text">
 		<?php endif;?>
 
 		<?php if (isset($contact)): ?>
-		<input type="hidden" name="editid_pbk" id="editid_pbk" value="<?php echo $contact->row('id_pbk');?>" />
+		<input type="hidden" name="editid_pbk" id="editid_pbk" value="<?php echo $contact->row('id_pbk');?>">
 		<?php endif;?>
 	</fieldset>
 	<?php echo form_close();?>

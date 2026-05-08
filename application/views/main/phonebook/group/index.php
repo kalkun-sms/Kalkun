@@ -13,11 +13,11 @@
 	$this->load->helper('form');
 	echo form_open('phonebook/add_group', array('class' => 'addgroupform'));
 ?>
-	<input type="hidden" name="pbkgroup_id_user" value="<?php echo $this->session->userdata('id_user');?>" />
-	<input type="hidden" name="pbkgroup_id" class="pbkgroup_id" value="" />
+	<input type="hidden" name="pbkgroup_id_user" value="<?php echo $this->session->userdata('id_user');?>">
+	<input type="hidden" name="pbkgroup_id" class="pbkgroup_id" value="">
 	<label for="group_name"><?php echo tr('Group name');?></label>
-	<input type="text" name="group_name" id="group_name" class="text ui-widget-content ui-corner-all" />
-	<input type="checkbox" name="is_public" id="is_public" style="display: inline" />
+	<input type="text" name="group_name" id="group_name" class="text ui-widget-content ui-corner-all">
+	<input type="checkbox" name="is_public" id="is_public" style="display: inline">
 	<label for="is_public" style="display: inline"><?php echo tr('Set as public group');?></label>
 	<?php echo form_close(); ?>
 </div>

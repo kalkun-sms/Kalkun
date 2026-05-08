@@ -9,7 +9,7 @@ else: ?>
 			<div class="two_column_container contact_list hover_show">
 				<div class="left_column">
 					<div class="pbkname">
-						<input type="checkbox" class="select_group" />
+						<input type="checkbox" class="select_group">
 						<span class="groupname" style="font-weight: bold;"><?php echo anchor('phonebook/group_contacts/'.$tmp->ID, htmlentities($tmp->GroupName, ENT_QUOTES), 'title="'.htmlentities($tmp->GroupName, ENT_QUOTES) .'"');?></span>
 					</div>
 				</div>

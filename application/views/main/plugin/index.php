@@ -3,7 +3,7 @@
 		<div id="window_title_left"><?php echo htmlentities($title, ENT_QUOTES); ?></div>
 		<div id="window_title_right">
 			<?php /* echo form_open('pluginss', array('class' => 'search_form'));
-		echo '<input type="text" name="search_name" size="20" class="search_name" value="" />';
+		echo '<input type="text" name="search_name" size="20" class="search_name" value="">';
 		echo form_close(); */?>
 			&nbsp;
 			<a href="<?php echo site_url('pluginss/index/installed');?>" class="nicebutton"><?php echo tr('Installed', 'Plural'); ?></a>

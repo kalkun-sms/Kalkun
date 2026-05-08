@@ -6,7 +6,7 @@
 		<div id="window_title_left"><?php echo tr('Stop Manager records'); ?></div>
 		<div id="window_title_right">
 			<?php echo form_open('plugin/stop_manager', array('class' => 'search_form')); ?>
-			<input type="text" name="search_name" size="20" class="search_name" placeholder="<?php echo tr('Search'); ?>" value="<?php echo htmlentities($search_name, ENT_QUOTES);?>" />
+			<input type="text" name="search_name" size="20" class="search_name" placeholder="<?php echo tr('Search'); ?>" value="<?php echo htmlentities($search_name, ENT_QUOTES);?>">
 			<?php echo form_close(); ?>
 			&nbsp;
 			<a href="<?php echo current_url();?>" class="nicebutton"><?php echo tr('Reset search'); ?></a>
@@ -78,11 +78,11 @@
 	<?php echo form_open('plugin/stop_manager', array('id' => 'addStopForm', 'class' => 'addstopform')); ?>
 	<fieldset>
 		<label for="destination_number"><?php echo tr('Phone number'); ?></label>
-		<input type="text" name="destination_number" id="destination_number" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="destination_number" id="destination_number" class="text ui-widget-content ui-corner-all">
 		<label for="stop_type"><?php echo tr('Type'); ?></label>
-		<input type="text" name="stop_type" id="stop_type" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="stop_type" id="stop_type" class="text ui-widget-content ui-corner-all">
 		<label for="stop_message"><?php echo tr('Original opt-out SMS'); ?></label>
-		<input type="text" name="stop_message" id="stop_message" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="stop_message" id="stop_message" class="text ui-widget-content ui-corner-all">
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>

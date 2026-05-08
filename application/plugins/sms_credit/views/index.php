@@ -60,15 +60,15 @@
 	<?php echo form_open('plugin/sms_credit/add_users', array('id' => 'addUser'));?>
 	<fieldset>
 		<label for="realname"><?php echo tr('Name'); ?></label>
-		<input type="text" name="realname" id="realname" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="realname" id="realname" class="text ui-widget-content ui-corner-all">
 		<label for="phone_number"><?php echo tr('Phone number'); ?></label>
-		<input type="text" name="phone_number" id="phone_number" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="phone_number" id="phone_number" class="text ui-widget-content ui-corner-all">
 		<label for="username"><?php echo tr('Username'); ?></label>
-		<input type="text" name="username" id="username" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="username" id="username" class="text ui-widget-content ui-corner-all">
 		<label for="password"><?php echo tr('Password'); ?></label>
-		<input type="password" name="password" id="password" class="text ui-widget-content ui-corner-all" />
+		<input type="password" name="password" id="password" class="text ui-widget-content ui-corner-all">
 		<label for="confirm_password"><?php echo tr('Confirm password'); ?></label>
-		<input type="password" name="confirm_password" id="confirm_password" class="text ui-widget-content ui-corner-all" />
+		<input type="password" name="confirm_password" id="confirm_password" class="text ui-widget-content ui-corner-all">
 		<label for="level"><?php echo tr('Role'); ?></label>
 		<?php
 $level = array('admin' => tr('Administrator'), 'user' => tr('User', 'credentials'));
@@ -90,10 +90,10 @@ echo form_dropdown('package', $package, '', $option);
 		<br><br>
 
 		<label for="package_start"><?php echo tr('Start date'); ?></label>
-		<input type="text" style="display: inline; width: 80%" name="package_start" id="package_start" class="text datepicker ui-widget-content ui-corner-all" />
+		<input type="text" style="display: inline; width: 80%" name="package_start" id="package_start" class="text datepicker ui-widget-content ui-corner-all">
 
 		<label for="package_end"><?php echo tr('End date'); ?></label>
-		<input type="text" style="display: inline; width: 80%" name="package_end" id="package_end" class="text datepicker ui-widget-content ui-corner-all" />
+		<input type="text" style="display: inline; width: 80%" name="package_end" id="package_end" class="text datepicker ui-widget-content ui-corner-all">
 	</fieldset>
 	<?php echo form_close();?>
 </div>
@@ -116,12 +116,12 @@ echo form_dropdown('package', $package, '', $option);
 		<br><br>
 
 		<label for="edit_package_start"><?php echo tr('Start date'); ?></label>
-		<input type="text" style="display: inline; width: 80%" name="package_start" id="edit_package_start" class="text datepicker ui-widget-content ui-corner-all" />
+		<input type="text" style="display: inline; width: 80%" name="package_start" id="edit_package_start" class="text datepicker ui-widget-content ui-corner-all">
 
 		<label for="edit_package_end"><?php echo tr('End date'); ?></label>
-		<input type="text" style="display: inline; width: 80%" name="package_end" id="edit_package_end" class="text datepicker ui-widget-content ui-corner-all" />
+		<input type="text" style="display: inline; width: 80%" name="package_end" id="edit_package_end" class="text datepicker ui-widget-content ui-corner-all">
 
-		<input type="hidden" name="id_user" id="id_user" />
+		<input type="hidden" name="id_user" id="id_user">
 	</fieldset>
 	<?php echo form_close();?>
 </div>

@@ -98,9 +98,9 @@
 <div class="messagelist conversation messagelist_conversation">
 	<div class="message_container <?php echo htmlentities($tmp['source'], ENT_QUOTES); ?>">
 		<div class="message_header" style="color: #444; height: 20px; overflow: hidden">
-			<input type="hidden" name="item_source<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" id="item_source<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" value="<?php echo htmlentities($tmp['source'], ENT_QUOTES); ?>" />
-			<input type="hidden" class="item_number" name="item_number<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" id="item_number<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" value="<?php echo htmlentities($number, ENT_QUOTES); ?>" />
-			<input type="checkbox" id="<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" class="select_message nicecheckbox" value="<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" style="border: none;" />
+			<input type="hidden" name="item_source<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" id="item_source<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" value="<?php echo htmlentities($tmp['source'], ENT_QUOTES); ?>">
+			<input type="hidden" class="item_number" name="item_number<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" id="item_number<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" value="<?php echo htmlentities($number, ENT_QUOTES); ?>">
+			<input type="checkbox" id="<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" class="select_message nicecheckbox" value="<?php echo htmlentities($tmp['ID'], ENT_QUOTES); ?>" style="border: none;">
 			<span class="message_toggle" style="cursor: pointer">
 				<span <?php  if ($tmp['source'] === 'inbox' && $tmp['readed'] === 'false')
 	{

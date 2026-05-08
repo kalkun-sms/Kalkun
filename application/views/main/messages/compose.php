@@ -22,8 +22,8 @@ else:
 echo htmlentities($phone, ENT_QUOTES);
 endif;
 ?>
-			<input type="hidden" name="sendoption" value="reply" />
-			<input type="hidden" name="reply_value" value="<?php echo htmlentities($phone, ENT_QUOTES);?>" />
+			<input type="hidden" name="sendoption" value="reply">
+			<input type="hidden" name="reply_value" value="<?php echo htmlentities($phone, ENT_QUOTES);?>">
 		</td>
 	</tr>
 
@@ -40,16 +40,16 @@ else:
 echo htmlentities($phone, ENT_QUOTES);
 endif;
 ?>
-			<input type="hidden" name="sendoption" value="resend" />
-			<input type="hidden" name="resend_value" value="<?php echo htmlentities($phone, ENT_QUOTES);?>" />
-			<input type="hidden" name="orig_msg_id" value="<?php echo htmlentities($orig_msg_id, ENT_QUOTES);?>" />
+			<input type="hidden" name="sendoption" value="resend">
+			<input type="hidden" name="resend_value" value="<?php echo htmlentities($phone, ENT_QUOTES);?>">
+			<input type="hidden" name="orig_msg_id" value="<?php echo htmlentities($orig_msg_id, ENT_QUOTES);?>">
 		</td>
 	</tr>
 
 	<?php /* Member */ elseif ($val_type === 'member'):?>
 	<tr>
 		<td class="form_label label"><?php echo tr('Send to'); ?>:</td>
-		<td><?php echo tr('Member');?><input type="hidden" name="sendoption" value="member" /></td>
+		<td><?php echo tr('Member');?><input type="hidden" name="sendoption" value="member"></td>
 	</tr>
 
 	<?php /* Phonebook contact */ elseif ($val_type === 'pbk_contact'):?>
@@ -64,8 +64,8 @@ else:
 echo htmlentities($dest, ENT_QUOTES);
 endif;
 ?>
-			<input type="hidden" name="sendoption" value="reply" />
-			<input type="hidden" name="reply_value" value="<?php echo htmlentities($dest, ENT_QUOTES);?>" />
+			<input type="hidden" name="sendoption" value="reply">
+			<input type="hidden" name="reply_value" value="<?php echo htmlentities($dest, ENT_QUOTES);?>">
 		</td>
 	</tr>
 
@@ -74,8 +74,8 @@ endif;
 		<td class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
 			<?php echo htmlentities($this->Phonebook_model->get_phonebook(array('option' => 'groupname', 'id' => $dest))->row('GroupName'), ENT_QUOTES);?>
-			<input type="hidden" name="sendoption" value="pbk_groups" />
-			<input type="hidden" name="id_pbk" value="<?php echo htmlentities($dest, ENT_QUOTES);?>" />
+			<input type="hidden" name="sendoption" value="pbk_groups">
+			<input type="hidden" name="id_pbk" value="<?php echo htmlentities($dest, ENT_QUOTES);?>">
 		</td>
 	</tr>
 
@@ -84,7 +84,7 @@ endif;
 		<td class="form_label label"><?php echo tr('Send to'); ?>:</td>
 		<td>
 			<?php echo tr('All contacts'); ?>
-			<input type="hidden" name="sendoption" value="all_contacts" />
+			<input type="hidden" name="sendoption" value="all_contacts">
 		</td>
 	</tr>
 
@@ -105,15 +105,15 @@ else
 		<td>
 			<div class="form_option">
 				<div class="opt">
-					<input type="radio" id="sendoption1" name="sendoption" value="sendoption1" class="left_aligned" style="border: none;" <?php if ($val_type !== 'prefill'): ?> checked="checked" <?php endif; ?> />
+					<input type="radio" id="sendoption1" name="sendoption" value="sendoption1" class="left_aligned" style="border: none;" <?php if ($val_type !== 'prefill'): ?> checked="checked" <?php endif; ?>>
 					<label for="sendoption1"><?php echo tr('Phonebook');?></label>
 				</div>
 				<div class="opt">
-					<input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;" <?php if ($val_type === 'prefill'): ?> checked="checked" <?php endif; ?> />
+					<input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;" <?php if ($val_type === 'prefill'): ?> checked="checked" <?php endif; ?>>
 					<label for="sendoption3"><?php echo tr('Input manually');?> </label>
 				</div>
 				<div class="opt">
-					<input type="radio" id="sendoption4" name="sendoption" value="sendoption4" style="border: none;" />
+					<input type="radio" id="sendoption4" name="sendoption" value="sendoption4" style="border: none;">
 					<label for="sendoption4"><?php echo tr('Import from file');?></label>
 				</div>
 			</div>
@@ -125,16 +125,16 @@ else
 		<td>
 			<div id="person">
 				<textarea id="personvalue_tags" style="width: 95%;" name="personvalue_tags"></textarea>
-				<input id="personvalue" style="width: 95%;" name="personvalue" type="hidden" />
-				<input id="personvalue_json" style="width: 95%;" name="personvalue_json" type="hidden" />
+				<input id="personvalue" style="width: 95%;" name="personvalue" type="hidden">
+				<input id="personvalue_json" style="width: 95%;" name="personvalue_json" type="hidden">
 			</div>
 
 			<div id="manually" class="hidden">
-				<input style="width: 95%;" type="text" name="manualvalue" id="manualvalue" <?php if ($val_type === 'prefill'): ?> value="<?php echo htmlentities($dest, ENT_QUOTES); ?>" <?php endif; ?> />
+				<input style="width: 95%;" type="text" name="manualvalue" id="manualvalue" <?php if ($val_type === 'prefill'): ?> value="<?php echo htmlentities($dest, ENT_QUOTES); ?>" <?php endif; ?>>
 			</div>
 
-			<div id="import" class="hidden"><input type="file" name="import_file" id="import_file" class="text ui-widget-content ui-corner-all" /></div>
-			<input type="hidden" id="import_value_count" name="import_value_count" />
+			<div id="import" class="hidden"><input type="file" name="import_file" id="import_file" class="text ui-widget-content ui-corner-all"></div>
+			<input type="hidden" id="import_value_count" name="import_value_count">
 		</td>
 	</tr>
 	<?php endif; ?>
@@ -142,11 +142,11 @@ else
 	<tr>
 		<td class="label"><?php echo tr('Send date').':';?></td>
 		<td>
-			<input class="left_aligned" type="radio" id="option1" name="senddateoption" value="option1" checked="checked" style="border: none;" />
+			<input class="left_aligned" type="radio" id="option1" name="senddateoption" value="option1" checked="checked" style="border: none;">
 			<label for="option1"><?php  echo tr('Now');?></label>
-			<input type="radio" id="option2" name="senddateoption" value="option2" style="border: none;" />
+			<input type="radio" id="option2" name="senddateoption" value="option2" style="border: none;">
 			<label for="option2"><?php  echo tr('At date and time');?></label>
-			<input type="radio" id="option3" name="senddateoption" value="option3" style="border: none;" />
+			<input type="radio" id="option3" name="senddateoption" value="option3" style="border: none;">
 			<label for="option3"><?php  echo tr('After a delay');?></label>
 		</td>
 	</tr>
@@ -156,7 +156,7 @@ else
 		<td>
 			<div id="nowoption"></div>
 			<div id="dateoption" class="hidden">
-				<input type="text" name="datevalue" id="datevalue" class="datepicker" readonly="readonly" />
+				<input type="text" name="datevalue" id="datevalue" class="datepicker" readonly="readonly">
 				<?php echo '&nbsp;&nbsp;';?>
 				<select name="hour"><?php echo get_hour();?></select> :
 				<select name="minute"><?php echo get_minute();?></select>
@@ -192,23 +192,23 @@ else
 	<?php if ($this->config->item('sms_bomber')): ?>
 	<tr style="vertical-align: top;">
 		<td class="label"><?php echo tr('Amount').':';?></td>
-		<td><input type="text" style="width: 25px" name="sms_loop" id="sms_loop" value="1" />&nbsp; <?php echo tr('times', 'repetition'); ?>
+		<td><input type="text" style="width: 25px" name="sms_loop" id="sms_loop" value="1">&nbsp; <?php echo tr('times', 'repetition'); ?>
 		</td>
 	</tr>
 	<?php else: ?>
 	<tr style="display:none">
-		<td colspan="2"><input type="hidden" name="sms_loop" id="sms_loop" value="1" /></td>
+		<td colspan="2"><input type="hidden" name="sms_loop" id="sms_loop" value="1"></td>
 	</tr>
 	<?php endif;?>
 
 	<tr>
 		<td class="label"><?php echo tr('SMS type');?></td>
 		<td>
-			<input class="left_aligned" type="radio" id="stype1" name="smstype" value="normal" checked="checked" style="border: none;" />
+			<input class="left_aligned" type="radio" id="stype1" name="smstype" value="normal" checked="checked" style="border: none;">
 			<label for="stype1"><?php echo tr('Normal');?></label>
-			<input type="radio" id="stype2" name="smstype" value="flash" style="border: none;" />
+			<input type="radio" id="stype2" name="smstype" value="flash" style="border: none;">
 			<label for="stype2"><?php echo tr('Flash');?><?php //echo tr('Send as Flash SMS');?></label>
-			<input type="radio" id="stype3" name="smstype" value="waplink" style="border: none;" />
+			<input type="radio" id="stype3" name="smstype" value="waplink" style="border: none;">
 			<label for="stype3"><?php echo tr('WAP push link');?></label>
 			<div style="float: right; text-align: right; padding-right: 10px;"><a href="javascript:void(0)" id="canned_response"> <?php echo tr('Canned responses');?>...</a></div>
 
@@ -217,13 +217,13 @@ else
 
 	<tr style="display: none;" id="url-display">
 		<td class="label"><?php echo tr('URL');?></td>
-		<td><input type="text" style="width: 97%;" name="url" value="" /></td>
+		<td><input type="text" style="width: 97%;" name="url" value=""></td>
 	</tr>
 
 	<tr style="vertical-align: top;">
 		<td class="label"><?php echo tr('Message').':';?></td>
 		<td>
-			<?php if ($val_type === 'forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo htmlentities($msg_id, ENT_QUOTES);?>" /> <?php endif;?>
+			<?php if ($val_type === 'forward' AND isset($msg_id)):?> <input type="hidden" name="msg_id" value="<?php echo htmlentities($msg_id, ENT_QUOTES);?>"> <?php endif;?>
 			<textarea class="word_count" style="width: 400px; line-height: 16px; min-height: 50px;" id="message" name="message">
 <?php
 if ($val_type === 'forward' || $val_type === 'resend' || $val_type === 'prefill')
@@ -240,7 +240,7 @@ if ($sig_option === 'true' && $val_type !== 'resend')
 				<div style="float: left"><span class="counter"></span></div>
 				<div style="float: right; padding-right: 5px;">
 					<?php if ($this->config->item('ncpr')): ?>
-					<input class="left_aligned" type="checkbox" value="ncpr" id="ncpr" name="ncpr" style="border: none;" />
+					<input class="left_aligned" type="checkbox" value="ncpr" id="ncpr" name="ncpr" style="border: none;">
 					<label for="ncpr"><?php echo tr('Check DND');?> </label>
 					<?php endif; ?>
 				</div>
@@ -251,7 +251,7 @@ if ($sig_option === 'true' && $val_type !== 'resend')
 		<td class="label"><?php echo tr('Select field').':'; ?></td>
 		<td>
 			<div style="border: 1px solid #AAA; padding: 5px; width: 96%;">
-				<input type="button" id="field_button" class="hidden field_button" value="Name" />
+				<input type="button" id="field_button" class="hidden field_button" value="Name">
 			</div>
 		</td>
 	</tr>
@@ -260,7 +260,7 @@ if ($sig_option === 'true' && $val_type !== 'resend')
 		<td class="label">&nbsp;</td>
 		<td>
 			<div>
-				<input type="checkbox" id="resend_delete_original" name="resend_delete_original" />
+				<input type="checkbox" id="resend_delete_original" name="resend_delete_original">
 				<label for="resend_delete_original"><?php echo tr('Delete the original message (prevents duplicates).') ?></label>
 			</div>
 		</td>

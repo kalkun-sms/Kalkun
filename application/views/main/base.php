@@ -78,9 +78,9 @@
 	echo form_open('kalkun/add_folder', array('class' => 'addfolderform'));
 ?>
 	<label for="folder_name"><?php echo tr('Folder name');?></label>
-	<input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user');?>" />
-	<input type="hidden" name="source_url" value="<?php echo htmlentities($this->uri->uri_string(), ENT_QUOTES);?>" />
-	<input type="text" name="folder_name" id="folder_name" class="text ui-widget-content ui-corner-all" />
+	<input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_user');?>">
+	<input type="hidden" name="source_url" value="<?php echo htmlentities($this->uri->uri_string(), ENT_QUOTES);?>">
+	<input type="text" name="folder_name" id="folder_name" class="text ui-widget-content ui-corner-all">
 	<?php echo form_close(); ?>
 </div>
 
@@ -229,11 +229,11 @@
 	<table style="width: 100%;">
 		<tr>
 			<td class="align_right"><label for="a_search_from_to"><b><?php echo tr('Phone number');?></b></label></td>
-			<td colspan="3"><input style="width: 95%" type="text" id="a_search_from_to" name="a_search_from_to" /></td>
+			<td colspan="3"><input style="width: 95%" type="text" id="a_search_from_to" name="a_search_from_to"></td>
 		</tr>
 		<tr>
 			<td class="align_right"><label for="a_search_query"><b><?php echo tr('Content');?></b></label></td>
-			<td colspan="3"><input style="width: 95%" type="text" id="a_search_query" name="a_search_query" /></td>
+			<td colspan="3"><input style="width: 95%" type="text" id="a_search_query" name="a_search_query"></td>
 		</tr>
 		<tr>
 			<td class="align_right"><label for="a_search_on"><b><?php echo tr('Folder');?></b></label></td>
@@ -255,9 +255,9 @@
 		</tr>
 		<tr>
 			<td class="align_right"><label for="a_search_date_from"><b><?php echo tr('Date from');?></b></label></td>
-			<td><input type="text" id="a_search_date_from" name="a_search_date_from" /></td>
+			<td><input type="text" id="a_search_date_from" name="a_search_date_from"></td>
 			<td><label for="a_search_date_to"><b><?php echo tr('Date to');?></b></label></td>
-			<td><input type="text" id="a_search_date_to" name="a_search_date_to" /></td>
+			<td><input type="text" id="a_search_date_to" name="a_search_date_to"></td>
 		</tr>
 		<tr>
 			<td class="align_right"><label for="a_search_sentitems_status"><b><?php echo tr('Status');?></b></label></td>

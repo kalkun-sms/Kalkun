@@ -16,7 +16,7 @@ else: ?>
 			<div class="two_column_container contact_list hover_show" style="display: inline-block;">
 				<div class="left_column">
 					<div class="pbkname">
-						<input type="checkbox" class="select_contact" />&nbsp;<span style="font-weight: bold;"><?php echo htmlentities($tmp->Name, ENT_QUOTES); ?></span>
+						<input type="checkbox" class="select_contact">&nbsp;<span style="font-weight: bold;"><?php echo htmlentities($tmp->Name, ENT_QUOTES); ?></span>
 						<div class="pbknumber" style="padding: 2px 0 5px 24px;"><?php echo htmlentities($tmp->Number, ENT_QUOTES);?></div>
 					</div>
 				</div>

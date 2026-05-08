@@ -11,7 +11,7 @@
 		<div id="window_title_left"><?php echo tr('Users');?></div>
 		<div id="window_title_right">
 			<?php echo form_open('users', array('class' => 'search_form')); ?>
-			<input type="text" name="search_name" size="20" class="search_name" value="" />
+			<input type="text" name="search_name" size="20" class="search_name" value="">
 			<?php echo form_close(); ?>
 			&nbsp;
 			<a href="javascript:void(0);" id="addpbkcontact" class="addpbkcontact nicebutton">&#43; <?php echo tr('Add user');?></a>

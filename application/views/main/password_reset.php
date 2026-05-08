@@ -49,14 +49,14 @@ echo doctype('html5');?>
 					<td><i><?php echo tr('Enter your new password'); ?></i></td>
 				</tr>
 				<tr>
-					<td><label><?php echo tr('New password'); ?></label><input type="password" name="new_password" id="new_password" minlength="6" style="width:95%" /></td>
+					<td><label><?php echo tr('New password'); ?></label><input type="password" name="new_password" id="new_password" minlength="6" style="width:95%"></td>
 				</tr>
 				<tr>
-					<td><label><?php echo tr('Confirm password'); ?></label><input type="password" name="password" minlength="6" style="width:95%" /></td>
+					<td><label><?php echo tr('Confirm password'); ?></label><input type="password" name="password" minlength="6" style="width:95%"></td>
 				</tr>
 				<tr>
 					<td>
-						<div style="float: right; padding-right: 3px"><input type="submit" id="submit" value="<?php echo tr('Submit', 'form')?>" /></div>
+						<div style="float: right; padding-right: 3px"><input type="submit" id="submit" value="<?php echo tr('Submit', 'form')?>"></div>
 					</td>
 				</tr>
 			</table>

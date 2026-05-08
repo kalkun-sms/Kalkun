@@ -99,7 +99,7 @@ else
 	} ?>">
 	<div class="message_container">
 		<div class="message_header" style="color: #444; height: 20px; overflow: hidden">
-			<input type="checkbox" id="<?php echo htmlentities($checkbox_value, ENT_QUOTES); ?>" class="select_conversation nicecheckbox" value="<?php echo htmlentities($checkbox_value, ENT_QUOTES); ?>" style="border: none;" />
+			<input type="checkbox" id="<?php echo htmlentities($checkbox_value, ENT_QUOTES); ?>" class="select_conversation nicecheckbox" value="<?php echo htmlentities($checkbox_value, ENT_QUOTES); ?>" style="border: none;">
 			<span class="message_toggle" style="cursor: pointer;" onclick="document.location.href='<?php echo site_url(); ?>/messages/conversation/<?php echo $folder; ?>/<?php echo $type; ?>/<?php echo rawurlencode($number); ?>/<?php if ($folder === 'my_folder')
 	{
 		echo $this->uri->segment(4);

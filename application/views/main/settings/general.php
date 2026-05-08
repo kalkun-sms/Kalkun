@@ -87,4 +87,4 @@ echo form_dropdown('delivery_report', $report, $report_act);
 	</tr>
 
 </table>
-<input type="hidden" name="option" value="general" />
+<input type="hidden" name="option" value="general">

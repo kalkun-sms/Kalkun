@@ -23,9 +23,9 @@
 
 		<?php if ( ! isset($users)): ?>
 		<label for="password"><?php echo tr('Password'); ?></label>
-		<input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+		<input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
 		<label for="confirm_password"><?php echo tr('Confirm password'); ?></label>
-		<input type="password" name="confirm_password" id="confirm_password" value="" class="text ui-widget-content ui-corner-all" />
+		<input type="password" name="confirm_password" id="confirm_password" value="" class="text ui-widget-content ui-corner-all">
 		<?php endif;?>
 
 		<label for="level"><?php echo tr('Role'); ?></label>
@@ -37,7 +37,7 @@ echo form_dropdown('level', $level, $level_act, $option);
 ?>
 
 		<?php if (isset($users)): ?>
-		<input type="hidden" name="id_user" id="id_user" value="<?php echo $users->row('id_user');?>" />
+		<input type="hidden" name="id_user" id="id_user" value="<?php echo $users->row('id_user');?>">
 		<?php endif;?>
 	</fieldset>
 	<?php echo form_close();?>
