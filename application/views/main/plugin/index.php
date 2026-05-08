@@ -45,7 +45,7 @@ if (count($plugins) > 0)
 				</small></div>
 			<p><?php echo htmlentities($plugin->description, ENT_QUOTES); ?></p>
 		</article>
-		<hr />
+		<hr>
 		<?php
 	}
 }
