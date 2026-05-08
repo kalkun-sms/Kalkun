@@ -29,7 +29,7 @@
 		<?php endif;?>
 
 		<?php if ( ! empty($xmpp)):?>
-		<h4>XMPP Account:</h4>
+		<p><strong>XMPP Account:</strong></p>
 		<p><?php echo htmlentities($xmpp['xmpp_username'], ENT_QUOTES);?></p>
 		<?php endif;?>
 	</div>

@@ -553,6 +553,17 @@ textarea {
 	width: 100px;
 }
 
+.dash_box h1 {
+	/* default style of h4 */
+	display: block;
+	font-size: 1em;
+	margin-top: 1.33em;
+	margin-bottom: 1.33em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+
 #dash_box_two_column {
 	width: 550px;
 	overflow: hidden;
