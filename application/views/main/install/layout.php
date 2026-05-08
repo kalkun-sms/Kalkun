@@ -44,7 +44,7 @@ echo doctype('html5');?>
 	<div id="container">
 		<div id="left-container"><?php $this->load->view($main);?></div>
 		<div id="right-container">
-			<h3 style="padding-left: 20px"><?php echo tr('Installation steps'); ?></h3>
+			<h2 style="padding-left: 20px"><?php echo tr('Installation steps'); ?></h2>
 			<ul>
 				<li id="step1"><?php echo tr('Welcome screen'); ?></li>
 				<li id="step2"><?php echo tr('Requirements check'); ?></li>
