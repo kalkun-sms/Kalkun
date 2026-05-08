@@ -46,33 +46,36 @@ $this->load->view('js_remote_access');
 </div>
 
 <div id="space_area">
-	<h3 style="float: left">Remote Access</h3>
-	<div style="float: right">
-		<a href="javascript:void(0);" title="Add Remote access" id="addremotebutton" class="simplebutton">Add Remote Access</a>
-	</div>
+	<article class="plugin">
+		<header>
+			<h1 style="float: left">Remote Access</h1>
+			<div style="float: right">
+				<a href="javascript:void(0);" title="Add Remote access" id="addremotebutton" class="simplebutton">Add Remote Access</a>
+			</div>
+		</header>
 
-	<table class="nice-table">
-		<tr style="display: none">
-			<!-- this is a hack to pass validation https://stackoverflow.com/a/52175495 -->
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-		</tr>
-		<tr>
-			<th class="nice-table-left">No.</th>
-			<th>Access Name</th>
-			<th>IP Address</th>
-			<th>Remote Token</th>
-			<th>Active</th>
-			<th style="text-align: center" class="nice-table-right" colspan="3">Control</th>
-		</tr>
+		<table class="nice-table">
+			<tr style="display: none">
+				<!-- this is a hack to pass validation https://stackoverflow.com/a/52175495 -->
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr>
+				<th class="nice-table-left">No.</th>
+				<th>Access Name</th>
+				<th>IP Address</th>
+				<th>Remote Token</th>
+				<th>Active</th>
+				<th style="text-align: center" class="nice-table-right" colspan="3">Control</th>
+			</tr>
 
-		<?php
+			<?php
 		if ($remote_access->num_rows() === 0)
 		{
 			echo '<tr><td colspan="8" style="border-left: 1px solid #000; border-right: 1px solid #000;">No remote access found.</td></tr>';
@@ -81,30 +84,31 @@ $this->load->view('js_remote_access');
 		{
 			foreach ($remote_access->result() as $tmp):
 			?>
-		<tr id="<?php echo htmlentities($tmp->id_remote_access, ENT_QUOTES); ?>">
-			<td class="nice-table-left"><?php echo htmlentities($number, ENT_QUOTES); ?></td>
-			<td class="access_name"><?php echo htmlentities($tmp->access_name, ENT_QUOTES); ?></td>
-			<td class="ip_address"><?php echo htmlentities($tmp->ip_address, ENT_QUOTES); ?></td>
-			<td class="token"><?php echo htmlentities($tmp->token, ENT_QUOTES); ?></td>
-			<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status === 'false') ? '' : 'checked="checked"'?> disabled="disabled" /></td>
-			<td>&nbsp;</td>
-			<td><a href="javascript:void(0);" class="edit"><span class="ui-icon ui-icon-pencil" title="<?php echo tr('Edit'); ?>"></span></a></td>
-			<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><span class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>"></span></a></td>
-		</tr>
+			<tr id="<?php echo htmlentities($tmp->id_remote_access, ENT_QUOTES); ?>">
+				<td class="nice-table-left"><?php echo htmlentities($number, ENT_QUOTES); ?></td>
+				<td class="access_name"><?php echo htmlentities($tmp->access_name, ENT_QUOTES); ?></td>
+				<td class="ip_address"><?php echo htmlentities($tmp->ip_address, ENT_QUOTES); ?></td>
+				<td class="token"><?php echo htmlentities($tmp->token, ENT_QUOTES); ?></td>
+				<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status === 'false') ? '' : 'checked="checked"'?> disabled="disabled" /></td>
+				<td>&nbsp;</td>
+				<td><a href="javascript:void(0);" class="edit"><span class="ui-icon ui-icon-pencil" title="<?php echo tr('Edit'); ?>"></span></a></td>
+				<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><span class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>"></span></a></td>
+			</tr>
 
-		<?php
+			<?php
 			$number++;
 			endforeach;
 		}
 		?>
-		<tr>
-			<th colspan="8" class="nice-table-footer">
-				<div class="simplepaging"><?php echo $this->pagination->create_links();?></div>
-			</th>
-		</tr>
+			<tr>
+				<th colspan="8" class="nice-table-footer">
+					<div class="simplepaging"><?php echo $this->pagination->create_links();?></div>
+				</th>
+			</tr>
 
-	</table>
-	<br />
+		</table>
+		<br />
+	</article>
 </div>
 
 
@@ -126,33 +130,37 @@ $this->load->view('js_remote_access');
 
 <!--  VIEW  -->
 <!--div id="space_area">
-	<h3 style="float: left">Notification</h3>
-	<div style="float: right">
-		<a href="javascript:void(0);" title="Add Notification" id="addnotificationbutton" class="simplebutton">Add Notification</a>
-	</div>
+	<article class="plugin">
+		<header>
+			<h1 style="float: left">Notification</h1>
+			<div style="float: right">
+				<a href="javascript:void(0);" title="Add Notification" id="addnotificationbutton" class="simplebutton">Add Notification</a>
+			</div>
+		</header>
 
-	<table class="nice-table" cellpadding="0" cellspacing="0">
-		<tr>
-			<th class="nice-table-left">Number</th>
-			<th>Notification Value</th>
-			<th align="center" class="nice-table-right" colspan="2">Control</th>
-		</tr>
-		<?php if (count($notification) === 0): ?>
-		<tr><td colspan="4" style="border-left: 1px solid #000; border-right: 1px solid #000;">No Notification found.</td></tr>
-		<?php else: ?>
-		<tr id="notification">
-			<td class="nice-table-left"><?php echo htmlentities($notification['number'], ENT_QUOTES); ?></td>
-			<td class="notificationvalue"><?php echo htmlentities($notification['value'], ENT_QUOTES); ?></td>
-			<td><a href="javascript:void(0);" class="edit"><span class="ui-icon ui-icon-pencil" title="Edit"></span></a></td>
-			<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/delete_notification/"><span class="ui-icon ui-icon-close" title="Delete"></span></a></td>
-		</tr>
+		<table class="nice-table" cellpadding="0" cellspacing="0">
+			<tr>
+				<th class="nice-table-left">Number</th>
+				<th>Notification Value</th>
+				<th align="center" class="nice-table-right" colspan="2">Control</th>
+			</tr>
+			<?php if (count($notification) === 0): ?>
+			<tr><td colspan="4" style="border-left: 1px solid #000; border-right: 1px solid #000;">No Notification found.</td></tr>
+			<?php else: ?>
+			<tr id="notification">
+				<td class="nice-table-left"><?php echo htmlentities($notification['number'], ENT_QUOTES); ?></td>
+				<td class="notificationvalue"><?php echo htmlentities($notification['value'], ENT_QUOTES); ?></td>
+				<td><a href="javascript:void(0);" class="edit"><span class="ui-icon ui-icon-pencil" title="Edit"></span></a></td>
+				<td class="nice-table-right"><a href="<?php echo site_url(); ?>/plugin/delete_notification/"><span class="ui-icon ui-icon-close" title="Delete"></span></a></td>
+			</tr>
 
-		<?php endif; ?>
-		<tr>
-			<th colspan="4" class="nice-table-footer">
-				<div class="simplepaging"></div>
-			</th>
-		</tr>
-	</table>
-	<br />
+			<?php endif; ?>
+			<tr>
+				<th colspan="4" class="nice-table-footer">
+					<div class="simplepaging"></div>
+				</th>
+			</tr>
+		</table>
+		<br />
+	</article>
 </div-->

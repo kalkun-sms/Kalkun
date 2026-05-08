@@ -17,29 +17,34 @@ if (count($plugins) > 0)
 {
 	foreach ($plugins as $plugin)
 	{
-		if ($type === 'installed'
-			&& file_exists(APPPATH . 'plugins/'.$plugin->system_name.'/controllers/'.ucfirst($plugin->system_name).'.php')
-			&& $plugin->controller_has_index === TRUE)
+		?>
+		<article class="plugin">
+			<header>
+				<?php if ($type === 'installed'
+					&& file_exists(APPPATH . 'plugins/'.$plugin->system_name.'/controllers/'.ucfirst($plugin->system_name).'.php')
+					&& $plugin->controller_has_index === TRUE)
 		{
-			echo '<div style="float: left"><h3>'.anchor('plugin/'.rawurlencode($plugin->system_name), htmlentities($plugin->name, ENT_QUOTES)).'</h3></div>';
+			echo '<div style="float: left"><h1>'.anchor('plugin/'.rawurlencode($plugin->system_name), htmlentities($plugin->name, ENT_QUOTES)).'</h1></div>';
 		}
 		else
 		{
-			echo '<div style="float: left"><h3 style="color: #000">'.htmlentities($plugin->name, ENT_QUOTES).'</h3></div>';
+			echo '<div style="float: left"><h1 style="color: #000">'.htmlentities($plugin->name, ENT_QUOTES).'</h1></div>';
 		} ?>
-		<div style="float: right; margin-top: 15px;">
-			<?php if ($type === 'installed'):?>
-			<a href="<?php echo site_url('pluginss/uninstall/'.rawurlencode($plugin->system_name)); ?>" class="nicebutton"><?php echo tr('Uninstall'); ?></a>
-			<?php else:?>
-			<a href="<?php echo site_url('pluginss/install/'.rawurlencode($plugin->system_name)); ?>" class="nicebutton"><?php echo tr('Install'); ?></a>
-			<?php endif; ?>
-		</div>
+				<div style="float: right; margin-top: 15px;">
+					<?php if ($type === 'installed'):?>
+					<a href="<?php echo site_url('pluginss/uninstall/'.rawurlencode($plugin->system_name)); ?>" class="nicebutton"><?php echo tr('Uninstall'); ?></a>
+					<?php else:?>
+					<a href="<?php echo site_url('pluginss/install/'.rawurlencode($plugin->system_name)); ?>" class="nicebutton"><?php echo tr('Install'); ?></a>
+					<?php endif; ?>
+				</div>
+			</header>
 
-		<div class="clear"><small>
-				<strong><?php echo tr('Version'); ?>:</strong> <?php echo htmlentities($plugin->version, ENT_QUOTES); ?>&nbsp;&nbsp;
-				<strong><?php echo tr('Author'); ?>:</strong> <?php echo anchor(htmlentities($plugin->author_uri, ENT_QUOTES), htmlentities($plugin->author, ENT_QUOTES)); ?>
-			</small></div>
-		<p><?php echo htmlentities($plugin->description, ENT_QUOTES); ?></p>
+			<div class="clear"><small>
+					<strong><?php echo tr('Version'); ?>:</strong> <?php echo htmlentities($plugin->version, ENT_QUOTES); ?>&nbsp;&nbsp;
+					<strong><?php echo tr('Author'); ?>:</strong> <?php echo anchor(htmlentities($plugin->author_uri, ENT_QUOTES), htmlentities($plugin->author, ENT_QUOTES)); ?>
+				</small></div>
+			<p><?php echo htmlentities($plugin->description, ENT_QUOTES); ?></p>
+		</article>
 		<hr />
 		<?php
 	}
