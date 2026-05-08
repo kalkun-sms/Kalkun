@@ -173,7 +173,29 @@ a {
 	font-weight: bold;
 }
 
-h4.section {
+/* apply style of h2 to h1 */
+h1 {
+	/* default style of h2 */
+	display: block;
+	font-size: 1.5em;
+	margin-top: 0.83em;
+	margin-bottom: 0.83em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+
+/* apply style of h4 to h2.section */
+h2.section {
+	/* default style of h4 */
+	display: block;
+	font-size: 1em;
+	margin-top: 1.33em;
+	margin-bottom: 1.33em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+	/* specific addition for .section */
 	text-align: center !important;
 	padding-bottom: 5px;
 	border-bottom: 1px solid #999;

@@ -1,8 +1,8 @@
-<h2><?php echo tr('Final configuration steps'); ?></h2>
+<h1><?php echo tr('Final configuration steps'); ?></h1>
 <p>This is the last step of the installation process.</p>
 <p>Check each item and update it if required.</p>
 
-<h4 class="section">Kalkun configuration</h4>
+<h2 class="section">Kalkun configuration</h2>
 <table class="formtable" style="width: 100%">
 	<tr>
 		<td>Encryption key</td>
@@ -65,7 +65,7 @@
 
 </table>
 
-<h4 class="section">Daemon script configuration</h4>
+<h2 class="section">Daemon script configuration</h2>
 
 <p>Configuring the daemon scripts of Kalkun is mandatory to see the incoming messages in your inbox. See <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#configure-daemon--outbox_queue-scripts" target="_blank"><strong>instructions on the wiki</strong></a>.</p>
 
@@ -146,7 +146,7 @@
 
 </table>
 
-<h4 class="section">Outbox queue script configuration</h4>
+<h2 class="section">Outbox queue script configuration</h2>
 <table class="formtable" style="width: 100%">
 	<tr>
 		<td>Script path</td>
@@ -219,7 +219,7 @@
 
 </table>
 
-<h4 class="section">Gammu-smsd configuration</h4>
+<h2 class="section">Gammu-smsd configuration</h2>
 <table class="formtable" style="width: 100%">
 	<tr>
 		<td>Gammu-smsd configuration</td>
@@ -232,7 +232,7 @@
 
 </table>
 
-<h4 class="section">HTTP server configuration</h4>
+<h2 class="section">HTTP server configuration</h2>
 <table class="formtable" style="width: 100%">
 	<tr>
 		<td>CI_ENV environment variable</td>
@@ -256,7 +256,7 @@
 </table>
 
 
-<h4 class="section">Kalkun settings</h4>
+<h2 class="section">Kalkun settings</h2>
 <p>You may change additional settings in the configuration file of kalkun.
 <table class="formtable" style="width: 100%">
 	<tr>
@@ -269,7 +269,7 @@
 <p>Find some suggestions of parameters you can change on the <a href="https://github.com/kalkun-sms/Kalkun/wiki/Configuration" target="_blank"><strong>configuration page of the wiki</strong></a>.</p>
 
 
-<h4 class="section"><a id="install_file">Disable installation wizard</a></h4>
+<h2 class="section"><a id="install_file">Disable installation wizard</a></h2>
 <p>There is a <code>install</code> file located at the root of Kalkun directory. As long as it is present, you can only access the installation wizard. As soon as this file is removed, the installation wizard can't be accessed anymore.</p>
 <p>If the present configuration of Kalkun, as displayed, is satisfactory, you can now remove the <code>install</code> file located at the root of Kalkun directory.</p>
 
@@ -311,7 +311,7 @@
 </table>
 
 
-<h4 class="section">Default credentials</h4>
+<h2 class="section">Default credentials</h2>
 
 <p>If this is your first setup, please note the default credentials.</p>
 <ul>
