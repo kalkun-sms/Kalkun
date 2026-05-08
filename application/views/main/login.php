@@ -50,17 +50,17 @@ echo doctype('html5');?>
 					<td><i><?php echo tr('Please enter your username and password'); ?></i></td>
 				</tr>
 				<tr>
-					<td><label><?php echo tr('Username'); ?></label><input type="text" name="username" id="username" style="width:95%" /></td>
+					<td><label><?php echo tr('Username'); ?></label><input type="text" name="username" id="username" style="width:95%"></td>
 				</tr>
 				<tr>
-					<td><label><?php echo tr('Password'); ?></label><input type="password" name="password" style="width:95%" /></td>
+					<td><label><?php echo tr('Password'); ?></label><input type="password" name="password" style="width:95%"></td>
 				</tr>
 				<tr>
 					<td>
 						<div style="float: left">
-							<input type="checkbox" id="remember_me" name="remember_me" /><label for="remember_me"><?php echo tr('Remember me'); ?></label>
+							<input type="checkbox" id="remember_me" name="remember_me"><label for="remember_me"><?php echo tr('Remember me'); ?></label>
 						</div>
-						<div style="float: right; padding-right: 3px"><input type="submit" id="submit" value="<?php echo tr('Log in') ?>" /></div>
+						<div style="float: right; padding-right: 3px"><input type="submit" id="submit" value="<?php echo tr('Log in') ?>"></div>
 					</td>
 				</tr>
 				<tr>

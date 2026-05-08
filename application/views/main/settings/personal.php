@@ -34,21 +34,21 @@
 	<tr>
 		<td><?php echo tr('Name'); ?></td>
 		<td>
-			<input type="text" name="realname" value="<?php echo htmlentities($settings->row('realname'), ENT_QUOTES);?>" />
+			<input type="text" name="realname" value="<?php echo htmlentities($settings->row('realname'), ENT_QUOTES);?>">
 		</td>
 	</tr>
 
 	<tr>
 		<td><?php echo tr('Username'); ?></td>
 		<td>
-			<input type="text" name="username" value="<?php echo htmlentities($settings->row('username'), ENT_QUOTES);?>" />
+			<input type="text" name="username" value="<?php echo htmlentities($settings->row('username'), ENT_QUOTES);?>">
 		</td>
 	</tr>
 
 	<tr>
 		<td><?php echo tr('Telephone number'); ?></td>
 		<td>
-			<input type="text" id="phone_number" name="phone_number" value="<?php echo htmlentities($settings->row('phone_number'), ENT_QUOTES);?>" />
+			<input type="text" id="phone_number" name="phone_number" value="<?php echo htmlentities($settings->row('phone_number'), ENT_QUOTES);?>">
 		</td>
 	</tr>
 
@@ -71,4 +71,4 @@
 		</td>
 	</tr>
 </table>
-<input type="hidden" name="option" value="personal" />
+<input type="hidden" name="option" value="personal">

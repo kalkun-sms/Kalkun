@@ -1012,7 +1012,7 @@ class Messages_test extends KalkunTestCase {
 		];
 		$output = $this->request('GET', 'messages/compose', $data);
 
-		$expected = '<td>Member<input type="hidden" name="sendoption" value="member" /></td>';
+		$expected = '<td>Member<input type="hidden" name="sendoption" value="member"></td>';
 		$this->_assertStringContainsString($expected, $output);
 
 		$this->assertValidHtmlSnippet($output);
@@ -1150,7 +1150,7 @@ class Messages_test extends KalkunTestCase {
 		];
 		$output = $this->request('GET', 'messages/compose', $data);
 
-		$expected = '<input type="hidden" name="sendoption" value="all_contacts" />';
+		$expected = '<input type="hidden" name="sendoption" value="all_contacts">';
 		$this->_assertStringContainsString($expected, $output);
 
 		$this->assertValidHtmlSnippet($output);
@@ -1261,7 +1261,7 @@ class Messages_test extends KalkunTestCase {
 
 		$expected = [
 			'<input type="radio" id="sendoption3" name="sendoption" value="sendoption3" style="border: none;"  checked="checked"',
-			'<input type="radio" id="sendoption1" name="sendoption" value="sendoption1" class="left_aligned" style="border: none;"  />',
+			'<input type="radio" id="sendoption1" name="sendoption" value="sendoption1" class="left_aligned" style="border: none;" >',
 			'name="manualvalue" id="manualvalue"  value="' . htmlentities($phone, ENT_QUOTES) . '"',
 			'id="message" name="message">' . "\n" . htmlentities($message, ENT_QUOTES),
 		];

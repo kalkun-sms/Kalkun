@@ -381,7 +381,7 @@
 				resend_conf_label = resend_conf_label.replace('{0}', count);
 				resend_conf = `<p>${resend_conf_label}</p>`;
 				delete_dup_label = <?php echo tr_js('Delete copy (prevents duplicates).'); ?>;
-				delete_dup = `<input type="checkbox" id="delete_dup" /> <label for="delete_dup">${delete_dup_label}</label>`;
+				delete_dup = `<input type="checkbox" id="delete_dup"> <label for="delete_dup">${delete_dup_label}</label>`;
 				$("#compose_sms_container").html(resend_conf + delete_dup);
 				$("#compose_sms_container").dialog({
 					//title: 'Resend SMS',

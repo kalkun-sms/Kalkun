@@ -27,4 +27,4 @@ echo form_dropdown('theme', $theme, $theme_act);
 		</td>
 	</tr>
 </table>
-<input type="hidden" name="option" value="appearance" />
+<input type="hidden" name="option" value="appearance">

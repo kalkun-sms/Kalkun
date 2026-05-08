@@ -6,9 +6,9 @@
 	<?php echo form_open('plugin/blacklist_number', array('class' => 'addblacklistnumberform')); ?>
 	<fieldset>
 		<label for="phone_number"><?php echo tr('Phone number'); ?></label>
-		<input type="text" name="phone_number" id="phone_number" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="phone_number" id="phone_number" class="text ui-widget-content ui-corner-all">
 		<label for="reason">Reason For Blacklisted</label>
-		<input type="text" name="reason" id="reason" value="" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="reason" id="reason" value="" class="text ui-widget-content ui-corner-all">
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>
@@ -19,11 +19,11 @@
 	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/blacklist_number', array('class' => 'editblacklistnumberform')); ?>
 	<fieldset>
-		<input type="hidden" name="editid_blacklist_number" id="editid_blacklist_number" />
+		<input type="hidden" name="editid_blacklist_number" id="editid_blacklist_number">
 		<label for="editphone_number"><?php echo tr('Phone number'); ?></label>
-		<input type="text" name="editphone_number" id="editphone_number" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="editphone_number" id="editphone_number" class="text ui-widget-content ui-corner-all">
 		<label for="editreason">Reason For Blacklisted</label>
-		<input type="text" name="editreason" id="editreason" value="" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="editreason" id="editreason" value="" class="text ui-widget-content ui-corner-all">
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>

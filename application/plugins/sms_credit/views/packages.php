@@ -53,11 +53,11 @@
 	<p class="validateTips"><?php echo tr('All form fields are required.'); ?></p>
 	<?php echo form_open('plugin/sms_credit/add_packages', array('id' => 'addpackagesform')); ?>
 	<fieldset>
-		<input type="hidden" name="id_package" id="id_package" class="text ui-widget-content ui-corner-all" />
+		<input type="hidden" name="id_package" id="id_package" class="text ui-widget-content ui-corner-all">
 		<label for="package_name"><?php echo tr('Package name'); ?></label>
-		<input type="text" name="package_name" id="package_name" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="package_name" id="package_name" class="text ui-widget-content ui-corner-all">
 		<label for="sms_amount"><?php echo tr('SMS Amount'); ?></label>
-		<input type="text" name="sms_amount" id="sms_amount" value="" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="sms_amount" id="sms_amount" value="" class="text ui-widget-content ui-corner-all">
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>

@@ -48,17 +48,17 @@ echo doctype('html5');?>
 					<td><span style="font-size: larger"><?php echo tr('Forgot your password?'); ?></span></td>
 				</tr>
 				<tr>
-					<td><label><?php echo tr('Username'); ?></label><input type="text" name="username" id="username" style="width:95%" /></td>
+					<td><label><?php echo tr('Username'); ?></label><input type="text" name="username" id="username" style="width:95%"></td>
 				</tr>
 				<tr>
 					<td>-- <?php echo strtoupper(tr('or')); ?> --</td>
 				</tr>
 				<tr>
-					<td><label><?php echo tr('Phone number'); ?></label><input type="text" name="phone" style="width:95%" /></td>
+					<td><label><?php echo tr('Phone number'); ?></label><input type="text" name="phone" style="width:95%"></td>
 				</tr>
 				<tr>
 					<td>
-						<div style="float: right; padding-right: 3px"><input type="submit" id="submit" value="<?php echo tr('Submit', 'form') ?>" /></div>
+						<div style="float: right; padding-right: 3px"><input type="submit" id="submit" value="<?php echo tr('Submit', 'form') ?>"></div>
 					</td>
 				</tr>
 			</table>

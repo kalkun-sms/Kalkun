@@ -14,12 +14,12 @@ $this->load->view('js_remote_access');
 	<?php echo form_open('plugin/soap', array('class' => 'addremoteaccessform')); ?>
 	<fieldset>
 		<label for="access_name">Access Name</label>
-		<input type="text" name="access_name" id="access_name" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="access_name" id="access_name" class="text ui-widget-content ui-corner-all">
 		<label for="ip_address">IP Address</label>
-		<input type="text" name="ip_address" id="ip_address" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="ip_address" id="ip_address" class="text ui-widget-content ui-corner-all">
 		<!-- 
 		<label for="token">Remote Token</label>		
-		<input type="text" name="token" id="token" class="text ui-widget-content ui-corner-all" />	
+		<input type="text" name="token" id="token" class="text ui-widget-content ui-corner-all">	
 		-->
 	</fieldset>
 	<?php echo form_close(); ?>
@@ -30,17 +30,17 @@ $this->load->view('js_remote_access');
 	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/soap', array('class' => 'editremoteaccessform')); ?>
 	<fieldset>
-		<input type="hidden" name="editid_remote_access" id="editid_remote_access" />
+		<input type="hidden" name="editid_remote_access" id="editid_remote_access">
 		<label for="editaccess_name">Access Name</label>
-		<input type="text" name="editaccess_name" id="editaccess_name" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="editaccess_name" id="editaccess_name" class="text ui-widget-content ui-corner-all">
 		<label for="editip_address">Remote Host</label>
-		<input type="text" name="editip_address" id="editip_address" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="editip_address" id="editip_address" class="text ui-widget-content ui-corner-all">
 		<div style="margin-bottom:12px">
-			<input type="checkbox" name="editstatus" id="editstatus" style="display: inline" />
+			<input type="checkbox" name="editstatus" id="editstatus" style="display: inline">
 			<label for="editstatus" style="display: inline">Active</label>
 		</div>
 		<label for="edittoken">Remote Token</label>
-		<input type="text" name="edittoken" id="edittoken" size="30" class="text ui-widget-content ui-corner-all" readonly="readonly" />
+		<input type="text" name="edittoken" id="edittoken" size="30" class="text ui-widget-content ui-corner-all" readonly="readonly">
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>
@@ -89,7 +89,7 @@ $this->load->view('js_remote_access');
 				<td class="access_name"><?php echo htmlentities($tmp->access_name, ENT_QUOTES); ?></td>
 				<td class="ip_address"><?php echo htmlentities($tmp->ip_address, ENT_QUOTES); ?></td>
 				<td class="token"><?php echo htmlentities($tmp->token, ENT_QUOTES); ?></td>
-				<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status === 'false') ? '' : 'checked="checked"'?> disabled="disabled" /></td>
+				<td class="status"><input type="checkbox" class="statusbox" <?php echo ($tmp->status === 'false') ? '' : 'checked="checked"'?> disabled="disabled"></td>
 				<td>&nbsp;</td>
 				<td><a href="javascript:void(0);" class="edit"><span class="ui-icon ui-icon-pencil" title="<?php echo tr('Edit'); ?>"></span></a></td>
 				<td class="nice-table-right"><a href="javascript:void(0);" class="delete"><span class="ui-icon ui-icon-close" title="<?php echo tr('Delete'); ?>"></span></a></td>
@@ -120,10 +120,10 @@ $this->load->view('js_remote_access');
 	<?php echo form_open('plugin/soap', array('class' => 'addnotificationform')); ?>
 	<fieldset>
 		<label for="notifynumber">Number</label>
-		<input type="text" name="notifynumber" id="notifynumber" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="notifynumber" id="notifynumber" class="text ui-widget-content ui-corner-all">
 		<label for="notifyvalue">Value</label>
-		<input type="text" name="notifyvalue" id="notifyvalue" class="text ui-widget-content ui-corner-all" />
-		<input type="hidden" name="notifiy" id="notifiy" value="on" />
+		<input type="text" name="notifyvalue" id="notifyvalue" class="text ui-widget-content ui-corner-all">
+		<input type="hidden" name="notifiy" id="notifiy" value="on">
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>

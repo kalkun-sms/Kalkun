@@ -7,7 +7,7 @@
 	<?php echo form_open('plugin/whitelist_number', array('class' => 'addwhitelistnumberform', 'id' => 'addwhitelistnumberform')); ?>
 	<fieldset>
 		<label for="phone_number">Match pattern as required by PHP's preg_match()</label>
-		<input type="text" name="match" id="phone_number" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="match" id="phone_number" class="text ui-widget-content ui-corner-all">
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>
@@ -18,9 +18,9 @@
 	<p class="validateTips">All form fields are required.</p>
 	<?php echo form_open('plugin/whitelist_number', array('class' => 'editwhitelistnumberform', 'id' => 'editwhitelistnumberform')); ?>
 	<fieldset>
-		<input type="hidden" name="editid_whitelist" id="editid_whitelist" />
+		<input type="hidden" name="editid_whitelist" id="editid_whitelist">
 		<label for="editphone_number">Match pattern as required by PHP's preg_match()</label>
-		<input type="text" name="editmatch" id="editphone_number" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="editmatch" id="editphone_number" class="text ui-widget-content ui-corner-all">
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>

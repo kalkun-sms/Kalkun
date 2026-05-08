@@ -8,7 +8,7 @@ echo form_open('phonebook', array('class' => 'sms_search_form')); ?>
 {
 	echo htmlentities($search_string, ENT_QUOTES);
 }?>" class="ui-corner-left" /></td>
-		<td><input type="submit" value="<?php echo tr('Search contacts'); ?>" /></td>
+		<td><input type="submit" value="<?php echo tr('Search contacts'); ?>"></td>
 	</tr>
 </table>
 <?php echo form_close();
@@ -20,7 +20,7 @@ echo form_open('messages/query', array('class' => 'sms_search_form')); ?>
 {
 	echo htmlentities(urldecode($search_string), ENT_QUOTES);
 }?>" class="ui-corner-left" /></td>
-		<td><input type="submit" value="<?php echo tr('Search messages');?>" /></td>
+		<td><input type="submit" value="<?php echo tr('Search messages');?>"></td>
 		<td style="vertical-align: middle">
 			<div style="margin-left: 5px"><small><a style="text-decoration: underline" id="a_search" href="javascript:void(0);"><?php echo tr('Advanced search');?></a></small></div>
 		</td>

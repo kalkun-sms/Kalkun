@@ -6,15 +6,15 @@
 	<?php echo form_open('plugin/sms_to_xmpp/add', array('class' => 'addxmppform')); ?>
 	<fieldset>
 		<label for="xmpp_host">XMPP Host</label>
-		<input type="text" name="xmpp_host" id="xmpp_host" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="xmpp_host" id="xmpp_host" class="text ui-widget-content ui-corner-all">
 		<label for="xmpp_port">XMPP Port</label>
-		<input type="text" name="xmpp_port" id="xmpp_port" value="" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="xmpp_port" id="xmpp_port" value="" class="text ui-widget-content ui-corner-all">
 		<label for="xmpp_username">XMPP Username</label>
-		<input type="text" name="xmpp_username" id="xmpp_username" value="" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="xmpp_username" id="xmpp_username" value="" class="text ui-widget-content ui-corner-all">
 		<label for="xmpp_password">XMPP Password</label>
-		<input type="password" name="xmpp_password" id="xmpp_password" value="" class="text ui-widget-content ui-corner-all" />
+		<input type="password" name="xmpp_password" id="xmpp_password" value="" class="text ui-widget-content ui-corner-all">
 		<label for="xmpp_server">XMPP Server</label>
-		<input type="text" name="xmpp_server" id="xmpp_server" value="" class="text ui-widget-content ui-corner-all" />
+		<input type="text" name="xmpp_server" id="xmpp_server" value="" class="text ui-widget-content ui-corner-all">
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>
