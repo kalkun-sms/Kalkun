@@ -269,7 +269,7 @@
 <p>Find some suggestions of parameters you can change on the <a href="https://github.com/kalkun-sms/Kalkun/wiki/Configuration" target="_blank"><strong>configuration page of the wiki</strong></a>.</p>
 
 
-<h4 class="section"><a name="install_file">Disable installation wizard</a></h4>
+<h4 class="section"><a id="install_file">Disable installation wizard</a></h4>
 <p>There is a <code>install</code> file located at the root of Kalkun directory. As long as it is present, you can only access the installation wizard. As soon as this file is removed, the installation wizard can't be accessed anymore.</p>
 <p>If the present configuration of Kalkun, as displayed, is satisfactory, you can now remove the <code>install</code> file located at the root of Kalkun directory.</p>
 
