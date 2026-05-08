@@ -100,16 +100,16 @@ jobs:
         with:
           repository: 'validator/validator'
           latest: false
-          tag: '20.6.30'
-          fileName: 'vnu.jar_20.6.30.zip'
+          releaseId: 'latest'
+          fileName: 'vnu.jar'
           tarBall: false
           zipBall: false
-          out-file-path: '../vnu'
-          extract: true
+          out-file-path: 'utils'
       - name: Install tidy, v.Nu (Nu Html Checker)
         run: |
           sudo apt-get -y install tidy
-          find ../vnu -name vnu.jar -exec mv '{}' utils \;
+          echo -n "vnu.jar version: "
+          java -jar utils/vnu.jar --version
           ./utils/start_vnu_http_server.sh
       - name: Install/Update ci-phpunit-test
         run: ./utils/prepare_tests_for_phpunit.sh
