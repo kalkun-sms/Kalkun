@@ -11,11 +11,11 @@
 <!-- Add contact wizard dialog -->
 <div id="pbk_add_wizard_dialog" title="<?php echo tr('Select add contact method');?>" class="dialog">
 	<div>
-		<p><a href="javascript:void(0);" id="addpbkcontact" class="addpbkcontact"><span style="font-size: larger"><strong><?php echo tr('Manual input');?></strong></span><br />
+		<p><a href="javascript:void(0);" id="addpbkcontact" class="addpbkcontact"><span style="font-size: larger"><strong><?php echo tr('Manual input');?></strong></span><br>
 				<?php echo tr('Manually add contact using contact form');?>
 			</a></p>
 
-		<p><a href="javascript:void(0);" id="importpbk"><span style="font-size: larger"><strong><?php echo tr('From CSV file');?></strong></span><br />
+		<p><a href="javascript:void(0);" id="importpbk"><span style="font-size: larger"><strong><?php echo tr('From CSV file');?></strong></span><br>
 				<?php echo tr('Import contact from CSV format file');?>
 			</a></p>
 	</div>

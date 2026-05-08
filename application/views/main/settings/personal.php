@@ -53,19 +53,19 @@
 	</tr>
 
 	<tr>
-		<td><?php echo tr('Signature'); ?><br /><small><?php echo tr('Max. 50 characters'); ?></small></td>
+		<td><?php echo tr('Signature'); ?><br><small><?php echo tr('Max. 50 characters'); ?></small></td>
 		<td>
 			<?php list($sig_option, $sig) = explode(';', $settings->row('signature'));?>
 			<input type="radio" id="signature_off" name="signatureoption" value="false" <?php if ($sig_option === 'false')
 {
 	echo 'checked="checked"';
 } ?> />
-			<label for="signature_off"><?php echo tr('Disable'); ?></label><br />
+			<label for="signature_off"><?php echo tr('Disable'); ?></label><br>
 			<input type="radio" id="signature_on" name="signatureoption" value="true" <?php if ($sig_option === 'true')
 {
 	echo 'checked="checked"';
 } ?> />
-			<label for="signature_on"><?php echo tr('Enable'); ?></label><br />
+			<label for="signature_on"><?php echo tr('Enable'); ?></label><br>
 			<textarea name="signature" rows="5" cols="40"><?php echo htmlentities($sig, ENT_QUOTES); ?></textarea>
 			<div class="note"><?php echo tr('Signature is added at the end of the message.'); ?></div>
 		</td>

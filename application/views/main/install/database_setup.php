@@ -6,7 +6,7 @@
 		<td>Database engine</td>
 		<td>
 			<strong><?php echo $db_property['human']; ?></strong>
-			<br /><small>As per your database configuration.</small>
+			<br><small>As per your database configuration.</small>
 		</td>
 	</tr>
 	<?php if ($exception === NULL): ?>
@@ -16,7 +16,7 @@
 			<?php if ($has_smsd_database): ?>
 			<strong class="green"><?php echo tr('Found'); ?></strong>
 			<?php else: ?>
-			<strong class="red"><?php echo tr('Missing'); ?></strong><br />
+			<strong class="red"><?php echo tr('Missing'); ?></strong><br>
 			<small>Please create the Gammu tables of the database first. Refer to Gammu's documentation.</small>
 			<?php endif; ?>
 		</td>
@@ -26,7 +26,7 @@
 	<tr>
 		<td>Gammu DB version</td>
 		<td><strong><?php echo htmlentities($this->Kalkun_model->get_gammu_info('db_version')->row('Version'), ENT_QUOTES); ?></strong>
-			<br /><small>As per the version stored in gammu database.</small>
+			<br><small>As per the version stored in gammu database.</small>
 		</td>
 	</tr>
 	<tr>
@@ -35,7 +35,7 @@
 			<?php 	if ($has_table_pbk): ?>
 			<strong class="green"><?php echo tr('Found'); ?></strong>
 			<?php 	else: ?>
-			<strong class="orange"><?php echo tr('Missing'); ?></strong><br />
+			<strong class="orange"><?php echo tr('Missing'); ?></strong><br>
 			<small>Click 'Run Database Setup' below to install it.</small>
 			<?php	 endif; ?>
 		</td>
@@ -46,7 +46,7 @@
 		<?php	if ($has_gammu_database): ?>
 		<td><strong class="green"><?php echo tr('Found'); ?></strong></td>
 		<?php	else: ?>
-		<td><strong class="orange"><?php echo tr('Missing'); ?></strong><br /><small>Click 'Run Database Setup' below to install it.</small></td>
+		<td><strong class="orange"><?php echo tr('Missing'); ?></strong><br><small>Click 'Run Database Setup' below to install it.</small></td>
 		<?php	endif; ?>
 	</tr>
 
@@ -66,7 +66,7 @@
 			endswitch; ?>
 		<td>
 			<strong class="<?php echo ($message !== '') ? 'orange' : ''; ?>"><?php echo $detected_db_version; ?></strong>
-			<br /><small><?php echo $message ?></small>
+			<br><small><?php echo $message ?></small>
 		</td>
 	</tr>
 	<?php	endif; ?>

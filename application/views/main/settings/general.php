@@ -66,7 +66,7 @@ echo form_dropdown('paging', $paging, $paging_act);
 {
 	echo 'checked="checked"';
 } ?> />
-			<label for="permanent_delete_false"><?php echo tr('Disable'); ?></label> <small><?php echo ' - '.tr('Always move to trash first'); ?></small><br />
+			<label for="permanent_delete_false"><?php echo tr('Disable'); ?></label> <small><?php echo ' - '.tr('Always move to trash first'); ?></small><br>
 			<input type="radio" id="permanent_delete_true" name="permanent_delete" value="true" <?php if ($permanent_act === 'true')
 {
 	echo 'checked="checked"';

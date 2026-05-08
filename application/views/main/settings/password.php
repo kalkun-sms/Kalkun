@@ -44,7 +44,7 @@
 
 	<tr>
 		<td><?php echo tr('New password');?></td>
-		<td><input type="password" id="new_password" name="new_password" /><br />
+		<td><input type="password" id="new_password" name="new_password" /><br>
 			<small><?php echo tr('Must be at least 6 characters long');?></small>
 		</td>
 	</tr>

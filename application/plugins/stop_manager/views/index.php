@@ -67,7 +67,7 @@
 			</tr>
 
 		</table>
-		<br />
+		<br>
 	</div>
 </div>
 

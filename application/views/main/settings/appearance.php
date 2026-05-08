@@ -18,7 +18,7 @@ echo form_dropdown('theme', $theme, $theme_act);
 {
 	echo 'checked="checked"';
 } ?> />
-			<label for="bg_off"><?php echo tr('Disable'); ?></label> <br />
+			<label for="bg_off"><?php echo tr('Disable'); ?></label> <br>
 			<input type="radio" id="bg_on" name="bg_image_option" value="true" <?php if ($bg_act_option === 'true')
 {
 	echo 'checked="checked"';

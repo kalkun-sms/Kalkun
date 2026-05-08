@@ -267,7 +267,7 @@ if ($sig_option === 'true' && $val_type !== 'resend')
 	</tr>
 	<?php endif; ?>
 </table>
-<br />
+<br>
 <?php  echo form_close();?>
 
 <div id="canned_response_container"> </div>

@@ -149,7 +149,7 @@
 
 	<?php if (extension_loaded('session') && $this->config->item('sess_driver') === 'files'): ?>
 	<tr>
-		<td colspan="3" class="bottom">Session save path: <code><?php echo $sess_save_path; ?></code><br />
+		<td colspan="3" class="bottom">Session save path: <code><?php echo $sess_save_path; ?></code><br>
 			<?php if ( ! is_writable($sess_save_path)): ?>
 			→ Set a correct value for '<code>sess_save_path</code>' in the '<code>config.php</code>' file.
 			<?php endif; ?></td>
