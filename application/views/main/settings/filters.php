@@ -23,7 +23,7 @@
 	<div class="right_column">
 		<span>
 			<a href="javascript:void(0);" class="editfilter simplelink"><?php echo tr('Edit');?></a>
-			<img src="<?php echo $this->config->item('img_path');?>circle.gif" alt="dot" />
+			<img src="<?php echo $this->config->item('img_path');?>circle.gif" alt="dot">
 			<a href="javascript:void(0);" class="deletefilter simplelink"><?php echo tr('Delete');?></a>
 		</span>
 	</div>

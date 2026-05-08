@@ -35,7 +35,7 @@
 						<div class="right_column">
 							<span class="pbk_menu">
 								<a class="deletepackagesbutton simplelink" href="javascript:void(0);"><?php echo tr('Delete'); ?></a>
-								<img src="<?php echo $this->config->item('img_path')?>circle.gif" alt="dot" />
+								<img src="<?php echo $this->config->item('img_path')?>circle.gif" alt="dot">
 								<a class="editpackagesbutton simplelink" href="javascript:void(0);"><?php echo tr('Edit'); ?></a>
 							</span>
 						</div>
