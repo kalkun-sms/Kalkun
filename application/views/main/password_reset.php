@@ -18,7 +18,7 @@ echo doctype('html5');?>
 		});
 
 	</script>
-	<style type="text/css">
+	<style>
 		@import url("<?php echo $this->config->item('css_path');?>blue.css");
 
 	</style>

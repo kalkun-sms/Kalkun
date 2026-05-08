@@ -4,7 +4,7 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="shortcut icon" href="<?php echo  $this->config->item('img_path');?>icon.ico" type="image/x-icon">
 <link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>base.css">
-<style type="text/css">
+<style>
 	@import url("<?php echo $this->config->item('css_path');?>blue.css");
 
 </style>
