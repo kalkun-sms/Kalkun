@@ -9,8 +9,8 @@ echo doctype('html5');?>
 	<meta name="generator" content="Geany 0.13">
 	<link rel="shortcut icon" href="<?php echo $this->config->item('img_path');?>icon.ico" type="image/x-icon">
 	<link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>install.css">
-	<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-3.7.1.min.js"></script>
-	<script language="javascript">
+	<script src="<?php echo $this->config->item('js_path');?>jquery-3.7.1.min.js"></script>
+	<script>
 		$(document).ready(function() {
 			var left = $('div#left-container').height();
 			var right = $('div#right-container').height();

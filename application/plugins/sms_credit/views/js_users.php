@@ -1,5 +1,5 @@
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
-<script type="text/javascript">
+<script src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
+<script>
 	$(document).ready(function() {
 
 		var img_path = '<?php echo  $this->config->item('img_path');?>';
@@ -80,7 +80,7 @@
 
 </script>
 
-<script language="javascript">
+<script>
 	$(document).ready(function() {
 
 		// Add User

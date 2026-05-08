@@ -1,4 +1,4 @@
-<script type="text/javascript" id="js_filters">
+<script id="js_filters">
 	$(document).ready(function() {
 
 		$('#addnewfilter, .editfilter').on("click", function() {
