@@ -1,5 +1,5 @@
 <?php $error = 0; ?>
-<h2><?php echo tr('Requirements check'); ?></h2>
+<h1><?php echo tr('Requirements check'); ?></h1>
 <p>This page checks if your system is compatible with Kalkun.</p>
 
 <table class="simpletable">

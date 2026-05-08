@@ -1,6 +1,6 @@
-<h2><?php echo tr('Database setup'); ?></h2>
+<h1><?php echo tr('Database setup'); ?></h1>
 <p>This step sets your database up for Kalkun.</p>
-<h4 class="section">Database backend engine and gammu database version.</h4>
+<h2 class="section">Database backend engine and gammu database version.</h2>
 <table class="formtable">
 	<tr>
 		<td>Database engine</td>
@@ -106,7 +106,7 @@ endif; ?>
 </div>
 
 <?php if ($this->input->post('action') === 'run_db_setup'): ?>
-<h4><?php echo tr('Database setup'); ?></h4>
+<h2 class="section"><?php echo tr('Database setup'); ?></h2>
 <?php  if ($error === 0): ?>
 <p><?php echo tr('Status'); ?>: <span class="green"><?php echo tr('Successful'); ?></span></p>
 <?php else: ?>

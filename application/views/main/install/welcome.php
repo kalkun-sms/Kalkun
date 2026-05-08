@@ -1,4 +1,4 @@
-<h2 style="float: left"><?php echo tr('Kalkun installation assistant'); ?></h2>
+<h1 style="float: left"><?php echo tr('Kalkun installation assistant'); ?></h1>
 <div style="float: right">
 	<?php
 	echo form_open('');

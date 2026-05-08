@@ -28,7 +28,7 @@ class Install_test extends KalkunTestCase {
 	public function test_index()
 	{
 		$output = $this->request('GET', 'install');
-		$this->_assertStringContainsString('<h2 style="float: left">Kalkun installation assistant</h2>', $output);
+		$this->_assertStringContainsString('<h1 style="float: left">Kalkun installation assistant</h1>', $output);
 		$this->assertValidHtml($output);
 	}
 
@@ -51,7 +51,7 @@ class Install_test extends KalkunTestCase {
 	public function test_config_setup_GET()
 	{
 		$output = $this->request('GET', 'install/config_setup');
-		$this->_assertStringContainsString('<h2>Final configuration steps</h2>', $output);
+		$this->_assertStringContainsString('<h1>Final configuration steps</h1>', $output);
 
 		$this->assertValidHtml($output);
 	}
@@ -59,7 +59,7 @@ class Install_test extends KalkunTestCase {
 	public function test_config_setup_POST_remove_install_file()
 	{
 		$output = $this->request('POST', 'install/config_setup', ['remove_install_file' => 'remove']);
-		$this->_assertStringContainsString('<h2>Final configuration steps</h2>', $output);
+		$this->_assertStringContainsString('<h1>Final configuration steps</h1>', $output);
 
 		$this->assertValidHtml($output);
 	}
@@ -86,7 +86,7 @@ class Install_test extends KalkunTestCase {
 	{
 		$output = $this->request('GET', 'install/requirement_check');
 
-		$expected = '<h2>Requirements check</h2>';
+		$expected = '<h1>Requirements check</h1>';
 		$this->_assertStringContainsString($expected, $output);
 
 		$expected = '<input type="submit" name="submit" value="Next ›"  class="button" />';
@@ -115,7 +115,7 @@ class Install_test extends KalkunTestCase {
 
 		$output = $this->request('GET', 'install/requirement_check');
 
-		$expected = '<h2>Requirements check</h2>';
+		$expected = '<h1>Requirements check</h1>';
 		$this->_assertStringContainsString($expected, $output);
 
 		$expected = '<p>Unfortunately, your system does not meet the minimum requirements to run Kalkun. Please update your system to meet the above requirements. Then click on button to check again.</p>';
