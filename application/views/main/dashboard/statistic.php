@@ -90,7 +90,7 @@ $trash = $trash_inbox + $trash_sentitems;
 ?>
 
 <div style="float: left; width: 200px;">
-	<h4><?php echo tr('Folders');?>: </h4>
+	<h1><?php echo tr('Folders');?>: </h1>
 	<p><span><?php echo tr('Inbox');?>:</span> <?php echo $inbox;?></p>
 	<p><span><?php echo tr('Outbox');?>:</span> <?php echo $outbox;?></p>
 	<p><span><?php echo tr('Sent items');?>:</span> <?php echo $sentitems;?></p>
@@ -98,7 +98,7 @@ $trash = $trash_inbox + $trash_sentitems;
 </div>
 
 <div style="float: left; width: 250px;">
-	<h4><?php echo tr('My folders');?>: </h4>
+	<h1><?php echo tr('My folders');?>: </h1>
 	<?php
 foreach ($this->Kalkun_model->get_folders('all')->result() as $val):
 $folder_count_inbox = $this->Message_model->get_messages(array('type' => 'inbox', 'id_folder' => $val->id_folder, 'uid' => $this->session->userdata('id_user')))->num_rows();
@@ -110,7 +110,7 @@ endforeach;
 </div>
 
 <div style="float: left; width: 200px;">
-	<h4><?php echo tr('Phonebook');?>: </h4>
+	<h1><?php echo tr('Phonebook');?>: </h1>
 	<p><span><?php echo tr('Contact');?>: </span>
 		<?php echo  $this->Phonebook_model->get_phonebook(array('option' => 'all'))->num_rows();?></p>
 	<p><span><?php echo tr('Groups');?>: </span>

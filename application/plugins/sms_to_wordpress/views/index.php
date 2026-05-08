@@ -25,7 +25,7 @@
 		<?php endif;?>
 
 		<?php if ( ! empty($wp)):?>
-		<h4>Blog URL:</h4>
+		<p><strong>Blog URL:</strong></p>
 		<p><?php echo htmlentities($wp['wp_url'], ENT_QUOTES);?></p>
 		<?php endif;?>
 	</div>
