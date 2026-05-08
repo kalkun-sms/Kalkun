@@ -5,10 +5,10 @@ echo doctype('html5');?>
 
 <head>
 	<title>Kalkun &rsaquo; <?php echo tr('Installation'); ?></title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-	<meta name="generator" content="Geany 0.13" />
-	<link rel="shortcut icon" href="<?php echo $this->config->item('img_path');?>icon.ico" type="image/x-icon" />
-	<link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>install.css" />
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<meta name="generator" content="Geany 0.13">
+	<link rel="shortcut icon" href="<?php echo $this->config->item('img_path');?>icon.ico" type="image/x-icon">
+	<link type="text/css" rel="stylesheet" href="<?php echo $this->config->item('css_path');?>install.css">
 	<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-3.7.1.min.js"></script>
 	<script language="javascript">
 		$(document).ready(function() {

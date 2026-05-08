@@ -1,5 +1,5 @@
 <!-- Contact dialog -->
-<link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquery.tagsinput-revisited.min.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquery.tagsinput-revisited.min.css">
 <script type="text/javascript">
 	$.when(
 		$.cachedScript("<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"),
