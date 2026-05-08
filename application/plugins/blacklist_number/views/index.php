@@ -82,6 +82,6 @@
 			</tr>
 
 		</table>
-		<br />
+		<br>
 	</article>
 </div>

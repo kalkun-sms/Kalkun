@@ -10,14 +10,14 @@ foreach ($alerts as $msg):
 endforeach;
 ?>
 	</div>
-	<br />
+	<br>
 	<?php endif; ?>
 
 	<div class="dash_box_titlebar"><?php echo tr('Statistics');?></div>
 	<div class="dash_box">
 		<?php $this->load->view('main/dashboard/statistic');?>
 	</div>
-	<br />
+	<br>
 
 	<?php if ($this->session->userdata('level') === 'admin'): ?>
 	<div class="dash_box_titlebar"><?php echo tr('System information');?></div>

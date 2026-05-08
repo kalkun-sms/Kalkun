@@ -75,7 +75,7 @@ $level = array('admin' => tr('Administrator'), 'user' => tr('User', 'credentials
 $option = 'class="text ui-widget-content ui-corner-all" id="level"';
 echo form_dropdown('level', $level, 'user', $option);
 ?>
-		<br /><br />
+		<br><br>
 
 		<label for="package"><?php echo tr('Package'); ?></label>
 		<?php
@@ -87,7 +87,7 @@ foreach ($packages->result_array() as $row)
 $option = 'class="text ui-widget-content ui-corner-all" id="package"';
 echo form_dropdown('package', $package, '', $option);
 ?>
-		<br /><br />
+		<br><br>
 
 		<label for="package_start"><?php echo tr('Start date'); ?></label>
 		<input type="text" style="display: inline; width: 80%" name="package_start" id="package_start" class="text datepicker ui-widget-content ui-corner-all" />
@@ -113,7 +113,7 @@ foreach ($packages->result_array() as $row)
 $option = 'id="edit_id_package" class="text ui-widget-content ui-corner-all"';
 echo form_dropdown('package', $package, '', $option);
 ?>
-		<br /><br />
+		<br><br>
 
 		<label for="edit_package_start"><?php echo tr('Start date'); ?></label>
 		<input type="text" style="display: inline; width: 80%" name="package_start" id="edit_package_start" class="text datepicker ui-widget-content ui-corner-all" />

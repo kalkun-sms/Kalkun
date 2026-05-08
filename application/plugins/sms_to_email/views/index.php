@@ -31,7 +31,7 @@ echo form_dropdown('email_forward', $email_forward, $email_forward_act);
 				</td>
 			</tr>
 		</table>
-		<br />
+		<br>
 		<input type="hidden" name="mode" value="<?php echo htmlentities($mode, ENT_QUOTES);?>" />
 		<div style="text-align: center"><input type="submit" id="submit" value="<?php echo tr('Save'); ?>" /></div>
 		<?php echo form_close();?>

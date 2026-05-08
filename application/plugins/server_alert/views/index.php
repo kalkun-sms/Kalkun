@@ -10,18 +10,18 @@
 		<input type="text" name="alert_name" id="alert_name" class="text ui-widget-content ui-corner-all" />
 		<label for="ip_address">Host</label>
 		<input type="text" name="ip_address" id="ip_address" class="text ui-widget-content ui-corner-all" />
-		<div class="note">(Can be IP address or Hostname)</div><br />
+		<div class="note">(Can be IP address or Hostname)</div><br>
 		<label for="port_number">Service Port</label>
 		<input type="text" name="port_number" id="port_number" class="text ui-widget-content ui-corner-all" />
 		<label for="timeout">Connect Timeout</label>
 		<input type="text" name="timeout" id="timeout" value="30" class="text ui-widget-content ui-corner-all" />
-		<div class="note">(In seconds, default value is 30 seconds, increase this for busy server)</div><br />
+		<div class="note">(In seconds, default value is 30 seconds, increase this for busy server)</div><br>
 		<label for="phone_number"><?php echo tr('Phone number'); ?></label>
 		<input type="text" name="phone_number" id="phone_number" class="text ui-widget-content ui-corner-all" />
-		<div class="note">(Person in charge to receive the alert message)</div><br />
+		<div class="note">(Person in charge to receive the alert message)</div><br>
 		<label for="respond_message">Respond Message</label>
 		<textarea style="width: 96%" name="respond_message" id="respond_message" class="text ui-widget-content ui-corner-all" maxlength=100></textarea>
-		<div class="note">(Maximum 100 character)</div><br />
+		<div class="note">(Maximum 100 character)</div><br>
 	</fieldset>
 	<?php echo form_close(); ?>
 </div>
@@ -121,7 +121,7 @@
 			</tr>
 
 		</table>
-		<br />
+		<br>
 		<?php echo '<div class="note">Total Time Interval : '.htmlentities($time_interval, ENT_QUOTES).' seconds</div>'; ?>
 	</article>
 </div>

@@ -10,9 +10,9 @@
 			<?php 	if ( ! $uses_default_encryption_key): ?>
 			<strong class="green"><?php echo 'Different from kalkun\'s default'; ?></strong>
 			<?php 	else: ?>
-			<strong class="orange"><?php echo 'Security risk'; ?></strong><br />
+			<strong class="orange"><?php echo 'Security risk'; ?></strong><br>
 			<small>You are using the default encryption_key shipped by Kalkun.
-				<br />To improve security, it's highly recommended to change the <code>encryption_key</code>. Change its value in <code><?php echo realpath(APPPATH.'config/config.php'); ?></code>. <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#change-the-default-encryption-key" target="_blank"><strong>See wiki</strong></a> for details.</small>
+				<br>To improve security, it's highly recommended to change the <code>encryption_key</code>. Change its value in <code><?php echo realpath(APPPATH.'config/config.php'); ?></code>. <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#change-the-default-encryption-key" target="_blank"><strong>See wiki</strong></a> for details.</small>
 			<?php	 endif; ?>
 		</td>
 	</tr>
@@ -25,10 +25,10 @@
 			<?php 	else: ?>
 			<strong class="red"><?php echo 'Missing'; ?></strong>
 			<?php endif; ?>
-			<br /><small><code><?php echo htmlentities($config_gammu_path, ENT_QUOTES); ?></code></small>
+			<br><small><code><?php echo htmlentities($config_gammu_path, ENT_QUOTES); ?></code></small>
 			<?php 	if ( ! file_exists($config_gammu_path)): ?>
-			<br /><small>As per <code><?php echo realpath(FCPATH.'application/config/kalkun_settings.php') ?></code>.</small>
-			<br /><small>This is mandatory to send Wap links.</small>
+			<br><small>As per <code><?php echo realpath(FCPATH.'application/config/kalkun_settings.php') ?></code>.</small>
+			<br><small>This is mandatory to send Wap links.</small>
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -40,10 +40,10 @@
 			<?php 	else: ?>
 			<strong class="red"><?php echo 'Missing'; ?></strong>
 			<?php endif; ?>
-			<br /><small><code><?php echo htmlentities($config_gammu_sms_inject, ENT_QUOTES); ?></code></small>
+			<br><small><code><?php echo htmlentities($config_gammu_sms_inject, ENT_QUOTES); ?></code></small>
 			<?php 	if ( ! file_exists($config_gammu_path)): ?>
-			<br /><small>As per <code><?php echo realpath(FCPATH.'application/config/kalkun_settings.php') ?></code>.</small>
-			<br /><small>This is mandatory to send Wap links.</small>
+			<br><small>As per <code><?php echo realpath(FCPATH.'application/config/kalkun_settings.php') ?></code>.</small>
+			<br><small>This is mandatory to send Wap links.</small>
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -55,10 +55,10 @@
 			<?php 	else: ?>
 			<strong class="red"><?php echo 'Missing'; ?></strong>
 			<?php endif; ?>
-			<br /><small><code><?php echo htmlentities($config_gammu_config, ENT_QUOTES); ?></code></small>
+			<br><small><code><?php echo htmlentities($config_gammu_config, ENT_QUOTES); ?></code></small>
 			<?php 	if ( ! file_exists($config_gammu_path)): ?>
-			<br /><small>As per <code><?php echo realpath(FCPATH.'application/config/kalkun_settings.php') ?></code>.</small>
-			<br /><small>This is mandatory to send Wap links.</small>
+			<br><small>As per <code><?php echo realpath(FCPATH.'application/config/kalkun_settings.php') ?></code>.</small>
+			<br><small>This is mandatory to send Wap links.</small>
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -79,10 +79,10 @@
 		<td>
 			<?php if ($daemon_path !== FALSE): ?>
 			<strong class="green"><?php echo tr('Found'); ?></strong>
-			<br /><small><code><?php echo htmlentities($daemon_path, ENT_QUOTES); ?></code></small>
+			<br><small><code><?php echo htmlentities($daemon_path, ENT_QUOTES); ?></code></small>
 			<?php else: ?>
 			<strong class="red"><?php echo 'Not found'; ?></strong>
-			<br /><small>You probably installed the file at a non standard location. Configure as per the <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#configure-daemon--outbox_queue-scripts" target="_blank">guidance on the wiki</a>.</small>
+			<br><small>You probably installed the file at a non standard location. Configure as per the <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#configure-daemon--outbox_queue-scripts" target="_blank">guidance on the wiki</a>.</small>
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -95,7 +95,7 @@
 			<strong class="green"><?php echo tr('Yes'); ?></strong>
 			<?php else: ?>
 			<strong class="red"><?php echo tr('No'); ?></strong>
-			<br /><small>The script has to be marked as executable for proper functionning.</small>
+			<br><small>The script has to be marked as executable for proper functionning.</small>
 			<?php endif; ?>
 		</td>
 		<?php endif; ?>
@@ -108,9 +108,9 @@
 			<?php else: ?>
 			<strong class="red"><?php echo 'Doesn\'t exist'; ?></strong>
 			<?php endif; ?>
-			<br /><small><code><?php echo htmlentities($daemon_php_path, ENT_QUOTES); ?></code></small>
+			<br><small><code><?php echo htmlentities($daemon_php_path, ENT_QUOTES); ?></code></small>
 			<?php if ( ! $daemon_php_path_exists): ?>
-			<br /><small>Path to PHP command is not correct. Fix it and refresh the page to check again.</small>
+			<br><small>Path to PHP command is not correct. Fix it and refresh the page to check again.</small>
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -122,9 +122,9 @@
 			<?php else: ?>
 			<strong class="red"><?php echo 'Doesn\'t exist'; ?></strong>
 			<?php endif; ?>
-			<br /><small><code><?php echo htmlentities($daemon_daemon_path, ENT_QUOTES); ?></code></small>
+			<br><small><code><?php echo htmlentities($daemon_daemon_path, ENT_QUOTES); ?></code></small>
 			<?php if ( ! $daemon_daemon_path_exists): ?>
-			<br /><small>Path to PHP file is not correct. Fix it and refresh the page to check again.</small>
+			<br><small>Path to PHP file is not correct. Fix it and refresh the page to check again.</small>
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -136,9 +136,9 @@
 			<?php else: ?>
 			<strong class="red"><?php echo 'Doesn\'t match the current URL of kalkun'; ?></strong>
 			<?php endif; ?>
-			<br /><small><code><?php echo htmlentities($daemon_url, ENT_QUOTES); ?></code></small>
+			<br><small><code><?php echo htmlentities($daemon_url, ENT_QUOTES); ?></code></small>
 			<?php if ( ! $daemon_url_matches_config): ?>
-			<br /><small>URL in the PHP file doesn't match the URL of this kalkun instance. Fix it and refresh the page to check again.</small>
+			<br><small>URL in the PHP file doesn't match the URL of this kalkun instance. Fix it and refresh the page to check again.</small>
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -153,10 +153,10 @@
 		<td>
 			<?php if ($outbox_queue_path !== FALSE): ?>
 			<strong class="green"><?php echo tr('Found'); ?></strong>
-			<br /><small><code><?php echo htmlentities($outbox_queue_path, ENT_QUOTES); ?></code></small>
+			<br><small><code><?php echo htmlentities($outbox_queue_path, ENT_QUOTES); ?></code></small>
 			<?php else: ?>
 			<strong class="red"><?php echo 'Not found'; ?></strong>
-			<br /><small>You probably installed the file at a non standard location. Configure as per the <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#configure-daemon--outbox_queue-scripts" target="_blank">guidance on the wiki</a>.</small>
+			<br><small>You probably installed the file at a non standard location. Configure as per the <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#configure-daemon--outbox_queue-scripts" target="_blank">guidance on the wiki</a>.</small>
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -169,7 +169,7 @@
 			<strong class="green"><?php echo tr('Yes'); ?></strong>
 			<?php else: ?>
 			<strong class="red"><?php echo tr('No'); ?></strong>
-			<br /><small>The script has to be marked as executable for proper functionning.</small>
+			<br><small>The script has to be marked as executable for proper functionning.</small>
 			<?php endif; ?>
 		</td>
 		<?php endif; ?>
@@ -181,9 +181,9 @@
 			<?php else: ?>
 			<strong class="red"><?php echo 'Doesn\'t exist'; ?></strong>
 			<?php endif; ?>
-			<br /><small><code><?php echo htmlentities($outbox_queue_php_path, ENT_QUOTES); ?></code></small>
+			<br><small><code><?php echo htmlentities($outbox_queue_php_path, ENT_QUOTES); ?></code></small>
 			<?php if ( ! $outbox_queue_php_path_exists): ?>
-			<br /><small>Path to PHP command is not correct. Fix it and refresh the page to check again.</small>
+			<br><small>Path to PHP command is not correct. Fix it and refresh the page to check again.</small>
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -195,9 +195,9 @@
 			<?php else: ?>
 			<strong class="red"><?php echo 'Doesn\'t exist'; ?></strong>
 			<?php endif; ?>
-			<br /><small><code><?php echo htmlentities($outbox_queue_daemon_path, ENT_QUOTES); ?></code></small>
+			<br><small><code><?php echo htmlentities($outbox_queue_daemon_path, ENT_QUOTES); ?></code></small>
 			<?php if ( ! $outbox_queue_daemon_path_exists): ?>
-			<br /><small>Path to PHP file is not correct. Fix it and refresh the page to check again.</small>
+			<br><small>Path to PHP file is not correct. Fix it and refresh the page to check again.</small>
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -209,9 +209,9 @@
 			<?php else: ?>
 			<strong class="red"><?php echo 'Doesn\'t match the current URL of kalkun'; ?></strong>
 			<?php endif; ?>
-			<br /><small><code><?php echo htmlentities($outbox_queue_url, ENT_QUOTES); ?></code></small>
+			<br><small><code><?php echo htmlentities($outbox_queue_url, ENT_QUOTES); ?></code></small>
 			<?php if ( ! $outbox_queue_url_matches_config): ?>
-			<br /><small>URL in the PHP file doesn't match the URL of this kalkun instance. Fix it and refresh the page to check again.</small>
+			<br><small>URL in the PHP file doesn't match the URL of this kalkun instance. Fix it and refresh the page to check again.</small>
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -224,8 +224,8 @@
 	<tr>
 		<td>Gammu-smsd configuration</td>
 		<td><strong class="orange"><?php echo 'Unknown state'; ?></strong>
-			<br /><small>In the configuration file of gammu-smsd, you have to set the <code>RunOnReceive</code> directive and set its value to the path of the daemon script. <code>RunOnReceive</code> must be in the <code>[smsd]</code> section of the configuration file.
-				<br />The wiki explains <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#configure-gammu-smsd" target="_blank">how to configure gammu-smsd</a> more in details.
+			<br><small>In the configuration file of gammu-smsd, you have to set the <code>RunOnReceive</code> directive and set its value to the path of the daemon script. <code>RunOnReceive</code> must be in the <code>[smsd]</code> section of the configuration file.
+				<br>The wiki explains <a href="https://github.com/kalkun-sms/Kalkun/wiki/Installation#configure-gammu-smsd" target="_blank">how to configure gammu-smsd</a> more in details.
 			</small>
 		</td>
 	</tr>
@@ -239,12 +239,12 @@
 		<td>
 			<?php	if ($CI_ENV === 'production'): ?>
 			Value: <code><?php echo htmlentities($CI_ENV, ENT_QUOTES); ?></code>. <strong class="green">OK</strong>
-			<br /><small>Codeigniter will not report any errors. This can lead to blank screens in case of bugs. If this happens to you, set it to <code>development</code> and the error messages will be displayed. However, setting it to <code>development</code> decreases the security of your setup.</small>
+			<br><small>Codeigniter will not report any errors. This can lead to blank screens in case of bugs. If this happens to you, set it to <code>development</code> and the error messages will be displayed. However, setting it to <code>development</code> decreases the security of your setup.</small>
 			<?php	else: ?>
 			Value: <code><?php echo ($CI_ENV === '') ? 'Unset' : htmlentities($CI_ENV, ENT_QUOTES); ?></code>. <strong class="orange">Security risk</strong>
-			<br /><small>To improve security, it's recommended to set the CI_ENV variable in the configuration of your web server to <code>production</code>. However, when set to <code>production</code>, codeigniter will not report any errors. This can lead to blank screens in case of bugs.</small>
+			<br><small>To improve security, it's recommended to set the CI_ENV variable in the configuration of your web server to <code>production</code>. However, when set to <code>production</code>, codeigniter will not report any errors. This can lead to blank screens in case of bugs.</small>
 			<?php	endif; ?>
-			<br /><small>
+			<br><small>
 				<?php	if ($htaccess_location !== ''): ?>
 				This configuration is set in the <code><?php echo htmlentities($htaccess_location, ENT_QUOTES); ?></code> file.
 				<?php	else: ?>
@@ -288,7 +288,7 @@
 			<?php if (file_exists($install_realpath)): ?>
 			<strong class="red">Present</strong>
 			<?php if ($needs_manual_install_file_deletion || $this->input->post('remove_install_file') === 'remove'): ?>
-			<br /><small>You must remove the file manually.</small>
+			<br><small>You must remove the file manually.</small>
 			<?php endif; ?>
 			<?php else: ?>
 			<strong class="green"><?php echo 'Removed'; ?></strong>

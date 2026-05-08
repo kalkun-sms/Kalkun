@@ -36,7 +36,7 @@
 				<td><a class="base_color underline_link" href="https://kalkun.sourceforge.io/" target="_blank">https://kalkun.sourceforge.io/</a></td>
 			</tr>
 		</table>
-		<br />
+		<br>
 		<!--div style="text-align: center">
 			<a class="underline_link" href="https://kalkun.sourceforge.io/contribute.php"><b>~ DONATE THIS PROJECT ~</b></a>
 		</div-->
@@ -45,24 +45,24 @@
 		<p>
 			<b>* Kalkun version:</b>
 			`<?php echo $this->config->item('kalkun_version');?> [Lang: <?php echo htmlentities(strval($this->Kalkun_model->get_setting()->row('language')), ENT_QUOTES);?>] [CountryCode: <?php echo htmlentities(strval($this->Kalkun_model->get_setting()->row('country_code')), ENT_QUOTES);?>]`
-			<br /><b>* Operating system:</b>
+			<br><b>* Operating system:</b>
 			`<?php echo htmlentities(php_uname(), ENT_QUOTES); ?>`
-			<br /><b>* PHP Version:</b>
+			<br><b>* PHP Version:</b>
 			`<?php echo htmlentities(phpversion(), ENT_QUOTES); ?>`
-			<br /><b>* DB Backend:</b>
+			<br><b>* DB Backend:</b>
 			`<?php
 				$this->load->helper('kalkun_helper');
 				$db_name_human = get_database_property($this->db->platform())['human'];
 				echo $db_name_human, ' ', $this->db->version(), ' (', $this->db->platform(), ')'; ?>`
-			<br /><b>* Gammu version:</b>
+			<br><b>* Gammu version:</b>
 			`<?php echo  filter_data(htmlentities(strval($this->Kalkun_model->get_gammu_info('gammu_version')->row('Client'))), ENT_QUOTES); ?>`
-			<br /><b>* Gammu DB schema:</b>
+			<br><b>* Gammu DB schema:</b>
 			`<?php echo  filter_data(htmlentities($this->Kalkun_model->get_gammu_info('db_version')->row('Version')), ENT_QUOTES); ?>`
-			<br /><b>* Browser:</b>
+			<br><b>* Browser:</b>
 			`<?php
 					$this->load->library('user_agent');
 					echo htmlentities($this->agent->browser(), ENT_QUOTES), ' ', htmlentities($this->agent->version(), ENT_QUOTES) ; ?>`
-			<br /><b>* Plugins:</b>
+			<br><b>* Plugins:</b>
 			`<?php
 					$this->load->library('Plugins_lib_kalkun');
 					echo htmlentities(implode(', ', array_keys($this->plugins_lib_kalkun->get_enabled_plugins())), ENT_QUOTES);
@@ -119,7 +119,7 @@
 						</tr>
 
 						<tr>
-							<td colspan="2" class="section"><br /><strong><?php echo tr('Navigation'); ?></strong></td>
+							<td colspan="2" class="section"><br><strong><?php echo tr('Navigation'); ?></strong></td>
 						</tr>
 						<tr>
 							<td class="align_right">u:</td>
@@ -138,7 +138,7 @@
 							<td><?php echo tr('Open'); ?></td>
 						</tr>
 						<tr>
-							<td colspan="2" class="section"><br /><strong><?php echo tr('Selection'); ?></strong></td>
+							<td colspan="2" class="section"><br><strong><?php echo tr('Selection'); ?></strong></td>
 						</tr>
 						<tr>
 							<td class="align_right">x:</td>
@@ -189,7 +189,7 @@
 						</tr>
 
 						<tr>
-							<td colspan="2" class="section"> <br /><strong><?php echo tr('Application'); ?></strong>
+							<td colspan="2" class="section"> <br><strong><?php echo tr('Application'); ?></strong>
 							</td>
 						</tr>
 						<tr>
@@ -214,7 +214,7 @@
 			</tr>
 		</table>
 
-		<br />
+		<br>
 
 	</div>
 </div>

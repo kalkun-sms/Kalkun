@@ -107,7 +107,7 @@ $this->load->view('js_remote_access');
 			</tr>
 
 		</table>
-		<br />
+		<br>
 	</article>
 </div>
 
@@ -161,6 +161,6 @@ $this->load->view('js_remote_access');
 				</th>
 			</tr>
 		</table>
-		<br />
+		<br>
 	</article>
 </div-->
