@@ -1,6 +1,6 @@
 <?php $this->load->helper('html');?>
-<link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquery.tagsinput-revisited.min.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>compose.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>jquery-plugin/jquery.tagsinput-revisited.min.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $this->config->item('css_path');?>compose.css">
 
 <?php $this->load->view('js_init/message/js_compose'); ?>
 
