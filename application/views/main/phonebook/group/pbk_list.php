@@ -17,7 +17,7 @@ else: ?>
 					<span class="pbk_menu no-touch-hidden">
 						<?php if (isset($public_group) && ! $public_group):?>
 						<a class="editpbkgroup simplelink" href="javascript:void(0);"><?php echo tr('Edit');?></a>
-						<img src="<?php echo $this->config->item('img_path')?>circle.gif" alt="dot" />
+						<img src="<?php echo $this->config->item('img_path')?>circle.gif" alt="dot">
 						<?php endif;?>
 						<a class="sendmessage simplelink" href="javascript:void(0);"><?php echo tr('Send message');?></a>
 					</span>

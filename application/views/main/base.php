@@ -1,12 +1,12 @@
 <!-- About dialog -->
 <div id="about" title="<?php echo tr('About {0}', NULL, 'Kalkun');?>" class="dialog">
 	<div class="mascot" style="float: left;">
-		<img src="<?php echo $this->config->item('img_path');?>mascot.png" alt="Kalkun mascot" />
+		<img src="<?php echo $this->config->item('img_path');?>mascot.png" alt="Kalkun mascot">
 	</div>
 
 	<div class="detail" style="float: left">
 		<div style="text-align: center">
-			<div class="base_bg rounded" style="text-align: center;"><img src="<?php echo $this->config->item('img_path');?>logo.png" alt="Kalkun logo" /></div>
+			<div class="base_bg rounded" style="text-align: center;"><img src="<?php echo $this->config->item('img_path');?>logo.png" alt="Kalkun logo"></div>
 			<h1><?php echo tr('PHP Frontend for gammu-smsd'); ?></h1>
 		</div>
 		<table>
