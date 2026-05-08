@@ -1,4 +1,4 @@
-<script language="javascript" id="js_users">
+<script id="js_users">
 	$(document).ready(function() {
 
 		var inbox_master = '<?php echo $this->config->item('inbox_owner_id')[0];?>';

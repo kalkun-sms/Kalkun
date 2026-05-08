@@ -11,8 +11,8 @@ echo doctype('html5');?>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php echo link_tag($this->config->item('img_path').'icon.ico', 'shortcut icon', 'image/ico');?>
 	<?php echo link_tag($this->config->item('css_path').'base.css');?>
-	<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-3.7.1.min.js"></script>
-	<script language="javascript">
+	<script src="<?php echo $this->config->item('js_path');?>jquery-3.7.1.min.js"></script>
+	<script>
 		$(document).ready(function() {
 			$("#new_password").trigger('focus');
 		});

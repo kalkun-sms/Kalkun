@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script>
 	$(document).ready(function() {
 		// Get current page for styling/css	
 		$("#window_sub_header").find("a[href='" + window.location.href + "']").each(function() {

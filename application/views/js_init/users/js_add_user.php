@@ -1,5 +1,5 @@
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
-<script type="text/javascript" id="js_add_user">
+<script src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
+<script id="js_add_user">
 	$(document).ready(function() {
 
 		// validation

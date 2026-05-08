@@ -1,7 +1,7 @@
 <?php $this->load->view('js_init/js_dashboard');?>
 
 <!--base href="<?= $this->config->item('base_url') ?>" /-->
-<script type="text/javascript" src="<?php echo $this->config->item('js_path');?>chart.umd.js"></script>
+<script src="<?php echo $this->config->item('js_path');?>chart.umd.js"></script>
 
 <div style="text-align: right;">
 	<a href="<?php echo site_url('kalkun/get_statistic/days');?>" class="stats-toggle"><?php echo tr('date_day');?></a>&nbsp; &nbsp;

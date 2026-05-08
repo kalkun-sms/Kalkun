@@ -1,4 +1,4 @@
-<script language="javascript" src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
+<script src="<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"></script>
 <?php $this->load->view('js_whitelist_number');?>
 
 <!-- Add Whitelist dialog -->

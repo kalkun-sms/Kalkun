@@ -1,4 +1,4 @@
-<script language="javascript" id="js_group">
+<script id="js_group">
 	$(document).ready(function() {
 
 		// Add group

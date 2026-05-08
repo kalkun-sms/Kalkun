@@ -5,7 +5,7 @@
  *	@License: GNU General Public License
 */
 ?>
-<script type="text/javascript">
+<script>
 	$(document).ready(function() {
 
 		// validation

@@ -1,4 +1,4 @@
-<script type="text/javascript" id="js_compose">
+<script id="js_compose">
 	$.when(
 		$.cachedScript("<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.validate.min.js"),
 		$.cachedScript("<?php echo $this->config->item('js_path');?>jquery-plugin/jquery.form.min.js"),
