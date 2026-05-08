@@ -160,7 +160,7 @@ class Pluginss_test extends KalkunTestCase {
 
 		$output = $this->request('GET', 'pluginss/index/available');
 		$this->_assertStringContainsString('<div id="window_title_left">Plugins - Available</div>', $output);
-		$this->_assertStringContainsString('<h3 style="color: #000">Blacklist Number</h3>', $output);
+		$this->_assertStringContainsString('<h1 style="color: #000">Blacklist Number</h1>', $output);
 		$this->assertValidHtml($output);
 	}
 
@@ -436,7 +436,7 @@ class Pluginss_test extends KalkunTestCase {
 
 		$output = $this->request('GET', 'pluginss/index/available');
 		$this->_assertStringContainsString('<div id="window_title_left">Plugins - Available</div>', $output);
-		$this->assertThat($output, $this->logicalNot($this->stringContains('<h3 style="color: #000">'.$plugin_label.'</h3>')));
+		$this->assertThat($output, $this->logicalNot($this->stringContains('<h1 style="color: #000">'.$plugin_label.'</h1>')));
 	}
 
 	/**
@@ -480,7 +480,7 @@ class Pluginss_test extends KalkunTestCase {
 
 		$output = $this->request('GET', 'pluginss/index/available');
 		$this->_assertStringContainsString('<div id="window_title_left">Plugins - Available</div>', $output);
-		$this->_assertStringContainsString('<h3 style="color: #000">'.$plugin_label.'</h3>', $output);
+		$this->_assertStringContainsString('<h1 style="color: #000">'.$plugin_label.'</h1>', $output);
 	}
 
 	/**
@@ -516,7 +516,7 @@ class Pluginss_test extends KalkunTestCase {
 
 		$output = $this->request('GET', 'pluginss/index/available');
 		$this->_assertStringContainsString('<div id="window_title_left">Plugins - Available</div>', $output);
-		$this->_assertStringContainsString('<h3 style="color: #000">'.$plugin_label.'</h3>', $output);
+		$this->_assertStringContainsString('<h1 style="color: #000">'.$plugin_label.'</h1>', $output);
 	}
 
 	/**
@@ -554,7 +554,7 @@ class Pluginss_test extends KalkunTestCase {
 
 		$output = $this->request('GET', 'pluginss/index/available');
 		$this->_assertStringContainsString('<div id="window_title_left">Plugins - Available</div>', $output);
-		$this->assertThat($output, $this->logicalNot($this->stringContains('<h3 style="color: #000">' . $plugin_label . '</h3>')));
+		$this->assertThat($output, $this->logicalNot($this->stringContains('<h1 style="color: #000">' . $plugin_label . '</h1>')));
 
 		self::reset_plugins_lib_static_members(); //otherwise the lib static members wouldn't reflect the current state of the plugins on filesystem
 
@@ -572,7 +572,7 @@ class Pluginss_test extends KalkunTestCase {
 
 			// Check that the plugin is not listed in the available plugins
 			$output = $this->request('GET', 'pluginss/index/available');
-			$this->assertThat($output, $this->logicalNot($this->stringContains('<h3 style="color: #000">' . $plugin_label . '</h3>')));
+			$this->assertThat($output, $this->logicalNot($this->stringContains('<h1 style="color: #000">' . $plugin_label . '</h1>')));
 		}
 		catch (Exception $e)
 		{

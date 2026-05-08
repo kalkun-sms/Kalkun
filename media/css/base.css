@@ -1288,3 +1288,14 @@ table.sms_to_email tr {
 table.sms_to_email td:first-child {
 	width: 175px;
 }
+
+article.plugin h1 {
+	/* Apply default value for h3 */
+	display: block;
+	font-size: 1.17em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
