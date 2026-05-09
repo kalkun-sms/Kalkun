@@ -129,14 +129,14 @@ jobs:
           echo "my_home=$HOME" >> $GITHUB_ENV
       - name: Archive artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Debian packages (source & binary)
           path: ~/Kalkun_${{ github.ref_name }}_debianBundle/*
           if-no-files-found: ignore
       - name: Archive artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Debian packages (source & binary) tarball
           path: ~/Kalkun_${{ github.ref_name }}_debianBundle.tar
@@ -209,7 +209,7 @@ jobs:
           ls dist
       - name: Archive artifacts (all prebuilt packages)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Prebuilt packages (all)
           path: 'dist/'
@@ -226,7 +226,7 @@ jobs:
     steps:
       - name: Download artifact of 'prebuilt packages'
         if: always()
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: Prebuilt packages (all)
           path: 'dist/'
@@ -235,7 +235,7 @@ jobs:
         working-directory: 'dist'
       - name: Archive artifacts for ${{ matrix.version }}
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Prebuilt package for PHP ${{ matrix.version }}
           path: 'dist/*forPHP${{ matrix.version }}.[tz]*'
@@ -248,13 +248,13 @@ jobs:
     steps:
       - name: Download artifact of 'prebuilt packages'
         if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: Prebuilt packages (all)
           path: 'dist/'
       - name: Download artifact of 'Debian packages'
         if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: Debian packages (source & binary) tarball
           path: 'dist/'
@@ -284,11 +284,11 @@ jobs:
     name: Delete temporary artifact
     runs-on: ubuntu-latest
     steps:
-      - uses: geekyeggo/delete-artifact@v2
+      - uses: geekyeggo/delete-artifact@v6
         with:
           name: Prebuilt packages (all)
           failOnError: false
-      - uses: geekyeggo/delete-artifact@v2
+      - uses: geekyeggo/delete-artifact@v6
         with:
           name: Debian packages (source & binary) tarball
           failOnError: false
