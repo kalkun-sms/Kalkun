@@ -167,7 +167,7 @@ jobs:
           utils/fix_code_style.sh git-diff
       - name: Archive artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Code style issues to fix
           path: 'code_style_check*'
@@ -211,7 +211,7 @@ jobs:
           ./utils/check_translation.php all > pipe
       - name: Archive artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Translation check output
           path: 'translation_check_output.*'
