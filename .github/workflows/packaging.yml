@@ -17,7 +17,7 @@ jobs:
       DPUT_CF: /home/runner/dput.cf
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Install required packages
         run: |
           sudo apt-get update
@@ -187,7 +187,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Composer (php-actions)
         uses: php-actions/composer@v6
         with:
