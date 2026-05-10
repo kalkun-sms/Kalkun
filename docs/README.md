@@ -73,3 +73,4 @@ See the [documentation on the Wiki](https://github.com/kalkun-sms/Kalkun/wiki)
 
 ### License
 Kalkun is licensed under [GPL-2.0-or-later](https://spdx.org/licenses/GPL-2.0-or-later.html).
+
