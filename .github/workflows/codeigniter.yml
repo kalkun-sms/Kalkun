@@ -28,11 +28,11 @@ jobs:
           # Set array that will store the PHP versions for which we create a package.
           PHP_VERSIONS=()
 
-          # Get all released php versions above 5.6 (in the format X.Y)
+          # Get all released php versions above 8.2 (in the format X.Y)
           for upstream_ver in $(curl https://www.php.net/releases/?json | jq -r '.[].version' | cut -f -2 -d .); do
             major=$(cut -f 1 -d . <<< "$upstream_ver")
             for minor in {0..20}; do
-              if dpkg --compare-versions ${major}.$minor le $upstream_ver &&  dpkg --compare-versions ${major}.$minor ge 5.6; then
+              if dpkg --compare-versions ${major}.$minor le $upstream_ver &&  dpkg --compare-versions ${major}.$minor ge 8.2; then
                 PHP_VERSIONS+=("${major}.$minor")
               fi
             done
