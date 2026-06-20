@@ -55,9 +55,14 @@ jobs:
           echo "allow-preset-passphrase" >> ~/.gnupg/gpg-agent.conf
           gpg-connect-agent reloadagent /bye
           echo "$PUB_KEY_PASS" | /usr/lib/gnupg/gpg-preset-passphrase --preset "$KEYGRIP"
+
+          # List keys
+          apt-key list
       - name: Configure dput
         run: |
           sed "s/%LAUNCHPAD_USER_NAME%/${{ vars.LAUNCHPAD_USER_NAME }}/" utils/launchpad/dput.cf.in > $DPUT_CF
+          echo "Content of $DPUT_CF"
+          cat "$DPUT_CF"
       - name: Set env
         run: |
           echo "DEBEMAIL=packager@kalkun.invalid" >> $GITHUB_ENV
