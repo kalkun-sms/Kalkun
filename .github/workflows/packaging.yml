@@ -38,6 +38,9 @@ jobs:
           # For ts
           sudo apt-get install -y moreutils
 
+          # Use dput-ng (as an alternative to dput)
+          #sudo apt-get install -y dput-ng
+
           cd ~
       - name: Import GPG key & related stuff
         env:
