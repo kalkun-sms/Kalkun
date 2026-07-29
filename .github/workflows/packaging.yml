@@ -35,6 +35,9 @@ jobs:
           # For backportpackage
           sudo apt-get install -y ubuntu-dev-tools
 
+          # For ts
+          sudo apt-get install -y moreutils
+
           cd ~
       - name: Import GPG key & related stuff
         env:
@@ -112,14 +115,20 @@ jobs:
           REPOS_TO_BUILD+=("https://salsa.debian.org/js-team/node-jquery-validation")
 
           for repo in "${REPOS_TO_BUILD[@]}"; do
+            set -o pipefail
+            #./utils/upload_kalkun_deps_to_ppa.sh -r "$repo" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}" | ts "%.s %Y-%m-%dT%H:%M:%.S%z"
             ./utils/upload_kalkun_deps_to_ppa.sh -r "$repo" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}"
+            set +o pipefail
           done
 
       - name: Build kalkun
         run: |
           set -x
 
+          set -o pipefail
+          #./utils/upload_kalkun_deps_to_ppa.sh -r "kalkun" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}" | ts "%.s %Y-%m-%dT%H:%M:%.S%z"
           ./utils/upload_kalkun_deps_to_ppa.sh -r "kalkun" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}"
+          set +o pipefail
 
       - name: Copy source & binary packages, and dependencies
         if: always()
