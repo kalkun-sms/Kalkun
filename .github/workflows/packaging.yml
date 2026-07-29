@@ -5,7 +5,7 @@ on:
       - master
       - devel
       - 'release-**'
-      - 'feature-008-debian'
+      - 'feature-008-debian*'
     tags:
       - 'v*'
 jobs:
