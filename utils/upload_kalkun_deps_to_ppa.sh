@@ -391,7 +391,16 @@ for suite in "${distribs[@]}"; do
     exit 1
   fi
 
-  dput -c "$DPUT_CF" "${DPUT_UPLOAD_SERVER}" "$workdir_bpp"/*_source.changes
+  if [ -v VERBOSE ]; then
+    echo "Content of $workdir_bpp/"*_source.changes
+    ls "$workdir_bpp"/*_source.changes
+    cat -n "$workdir_bpp"/*_source.changes
+    gpg --verbose --verify "$workdir_bpp"/*_source.changes
+    DPUT_ARGS=()
+    DPUT_ARGS+=(--debug)
+    DPUT_ARGS+=(--debug)
+  fi
+  dput "${DPUT_ARGS[@]}" -c "$DPUT_CF" "${DPUT_UPLOAD_SERVER}" "$workdir_bpp"/*_source.changes
 
 done
 set +x

@@ -116,7 +116,7 @@ jobs:
 
           for repo in "${REPOS_TO_BUILD[@]}"; do
             set -o pipefail
-            #./utils/upload_kalkun_deps_to_ppa.sh -r "$repo" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}" | ts "%.s %Y-%m-%dT%H:%M:%.S%z"
+            #VERBOSE= ./utils/upload_kalkun_deps_to_ppa.sh -r "$repo" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}" | ts "%.s %Y-%m-%dT%H:%M:%.S%z"
             ./utils/upload_kalkun_deps_to_ppa.sh -r "$repo" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}"
             set +o pipefail
           done
@@ -126,7 +126,7 @@ jobs:
           set -x
 
           set -o pipefail
-          #./utils/upload_kalkun_deps_to_ppa.sh -r "kalkun" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}" | ts "%.s %Y-%m-%dT%H:%M:%.S%z"
+          #VERBOSE= ./utils/upload_kalkun_deps_to_ppa.sh -r "kalkun" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}" | ts "%.s %Y-%m-%dT%H:%M:%.S%z"
           ./utils/upload_kalkun_deps_to_ppa.sh -r "kalkun" -d "$(ubuntu-distro-info --supported)" -h "${DPUT_UPLOAD_SERVER}"
           set +o pipefail
 
