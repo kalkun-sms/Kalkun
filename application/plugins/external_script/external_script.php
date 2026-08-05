@@ -88,7 +88,10 @@ class External_script_plugin extends CI3_plugin_system {
 				}
 
 				// execute it
-				exec(escapeshellcmd($intepreter_path . ' ' . $script_path . ' ' . $parameter));
+				$cmd = escapeshellarg($intepreter_path);
+				$cmd .= ' ' . escapeshellarg($script_path);
+				$cmd .= $parameter; // Content is already escaped
+				exec($cmd);
 			}
 		}
 	}

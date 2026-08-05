@@ -72,8 +72,15 @@ class Sms_to_xmpp_plugin extends CI3_plugin_system {
 					log_message('error', 'sms_to_xmpp: problem during decryption.');
 					show_error('sms_to_xmpp: problem during decryption.', 500, '500 Internal Server Error');
 				}
-				exec($config['php_path'] . ' ' . $config['php_script'] . ' ' . $xmpp['xmpp_username'] . ' '
-						. $xampp_pass . ' ' . $xmpp['xmpp_host'] . ' ' . $xmpp['xmpp_server'] . ' ' . $to . ' ' . $xmpp_message);
+				$cmd = escapeshellarg($config['php_path']);
+				$cmd .= ' ' . escapeshellarg($config['php_script']);
+				$cmd .= ' ' . escapeshellarg($xmpp['xmpp_username']);
+				$cmd .= ' ' . escapeshellarg($xampp_pass);
+				$cmd .= ' ' . escapeshellarg($xmpp['xmpp_host']);
+				$cmd .= ' ' . escapeshellarg($xmpp['xmpp_server']);
+				$cmd .= ' ' . escapeshellarg($to);
+				$cmd .= ' ' . escapeshellarg($xmpp_message);
+				exec($cmd);
 			}
 		}
 	}
