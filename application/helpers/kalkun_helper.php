@@ -428,9 +428,10 @@ function phone_format_human($phone, $input_region = NULL)
 /**
  * Check phone number validity
  *
- * returns TRUE if valid, otherwise a String containing
- * an error message.
+ * @param string $phone phonenumber
+ * @param string $input_region region
  *
+ * @return TRUE|array TRUE if number is valid, otherwise an array containing the error message, and the context for the translation of the message.
  */
 function is_phone_number_valid($phone, $input_region = NULL)
 {
@@ -461,14 +462,31 @@ function is_phone_number_valid($phone, $input_region = NULL)
 		}
 		else
 		{
-			$result = tr_no_op('Please specify a valid mobile phone number');
+			$result = [tr_no_op('Please specify a valid mobile phone number'), NULL];
 		}
+	}
+	catch (\libphonenumber\NumberParseException $e)
+	{
+		$result = [$e->getMessage(), 'NumberParseException'];
 	}
 	catch (Exception $e)
 	{
-		$result = $e->getMessage();
+		$result = [$e->getMessage(), NULL];
 	}
 	return $result;
+
+	// These are only for detection by check_translation.php script
+	// The labels are coming from libphonenumber
+	tr_no_op('The string supplied was too long to parse.', 'NumberParseException');
+	tr_no_op('The string supplied did not seem to be a phone number.', 'NumberParseException');
+	tr_no_op('Missing or invalid default region.', 'NumberParseException');
+	tr_no_op('Could not interpret numbers after plus-sign.', 'NumberParseException');
+	tr_no_op('The string supplied is too short to be a phone number.', 'NumberParseException');
+	tr_no_op('The string supplied is too long to be a phone number.', 'NumberParseException');
+	tr_no_op('The phone-context valid is invalid.', 'NumberParseException');
+	tr_no_op('The phone-context value is invalid.', 'NumberParseException');
+	tr_no_op('Phone number had an IDD, but after this was not long enough to be a viable phone number.', 'NumberParseException');
+	tr_no_op('Country calling code supplied was not recognised.', 'NumberParseException');
 }
 
 

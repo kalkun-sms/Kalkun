@@ -70,6 +70,7 @@ class MY_Controller  extends CI_Controller {
 			$lang = $this->Kalkun_model->get_setting()->row('language');
 			$this->lang->load('kalkun', $lang);
 			$this->lang->load('date', $lang);
+			$this->lang->load('libphonenumber', $lang);
 
 			// Message routine
 			$this->_message_routine();
