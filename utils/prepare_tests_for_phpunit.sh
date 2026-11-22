@@ -5,7 +5,7 @@ set -e
 TESTSDIR="tests/"
 ENABLE_MONKEY_PATCHING=false
 PHPUNIT_OUTPUT_TO_STDERR=false
-PHPUNIT="vendor-phpunit/bin/phpunit"
+PHPUNIT="vendor-test_deps/bin/phpunit"
 
 mkdir -p "${TESTSDIR}"
 php vendor-test_deps/kenjis/ci-phpunit-test/install.php -t "${TESTSDIR}" --from-composer
