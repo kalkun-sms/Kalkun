@@ -3,7 +3,8 @@
         "cweagans/composer-patches": "~1.0",
         "kenjis/ci-phpunit-test": ">=1",
         "symfony/dom-crawler": "*",
-        "symfony/css-selector": "*"
+        "symfony/css-selector": "*",
+        "phpunit/phpunit": ">=4"
     },
     "extra": {
         "patches": {
